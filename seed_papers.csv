@@ -1,0 +1,52 @@
+title,authors,year,track,category,arxiv_id,url_or_doi,id_confidence,notes
+"Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",Greshake et al.,2023,A,seed,2302.12173,,reported,Foundational indirect prompt injection paper
+"InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents",Zhan et al.,2024,A,seed,2403.02691,,reported,ReAct-agent benchmark
+"AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",Debenedetti et al.,2024,A,seed,2406.13352,,reported,Realistic attack/defense environment
+"PoisonedRAG: Knowledge Poisoning Attacks to Retrieval-Augmented Generation of Large Language Models",Zou et al.,2024,A,seed,2402.07867,,confirmed,Confirmed via 2412.16708 reference list
+"AgentPoison: Red-teaming LLM Agents via Poisoned Memory or Knowledge Bases",Chen et al.,2024,A,seed,2407.12784,,reported,Memory/RAG backdoor via optimized triggers
+"MCPTox",Wang et al.,2026,A,seed,2508.14925,,reported,45 real MCP servers 353 tools benchmarked; AAAI 2026
+"MCP-SafetyBench",Zong et al.,2026,A,seed,2512.15163,,reported,ICLR 2026
+"MCP Security Bench (MSB)",Zhang et al.,2026,A,seed,2510.15994,,reported,ICLR 2026
+"MemoryGraft",Srivastava and He,2025,A,seed,2512.16962,,reported,
+"Hidden in Memory (sleeper memory poisoning)",Pulipaka et al.,2026,A,seed,2605.15338,,reported,Two-phase dormant memory poisoning
+"Skill-Inject",Schmotz et al.,2026,A,seed,2602.20156,,reported,Skill file attacks
+"Supply-chain poisoning of coding-agent skill ecosystems",Qu et al.,2026,A,seed,2604.03081,,reported,
+"Oracle Poisoning (knowledge-graph corruption)",Unknown,2026,A,seed,2605.09822,,reported,
+"MELON defense",Zhu et al.,2025,A,seed,2502.05174,,reported,Masked re-execution tool-output comparison defense
+"Depth-dependent indirect prompt injection study",Rashidi,2026,A,seed,2605.30686,,reported,Injection depth as dominant variable in attack success
+"Poisoning Retrieval Corpora by Injecting Adversarial Passages",Zhong et al.,2023,A,seed,2310.19156,,confirmed,Confirmed via 2412.16708 reference list
+"Phantom: General Trigger Attacks on Retrieval Augmented Language Generation",Chaudhari et al.,2024,A,seed,2405.20485,,confirmed,RAG backdoor
+"TrojanRAG",Cheng et al.,2024,A,seed,2405.13401,,confirmed,
+"Pandora: Jailbreak GPTs by Retrieval Augmented Generation Poisoning",Deng et al.,2024,A,seed,2402.08416,,confirmed,
+"BadRAG",Xue et al.,2024,A,seed,2406.00083,,confirmed,Trigger-activated adversarial passages
+"ConfusedPilot: Confused Deputy Risks in RAG-based LLMs",RoyChowdhury et al.,2024,A,seed,2408.04870,,confirmed,
+"Corpus poisoning via approximate greedy gradient descent",Su et al.,2024,A,seed,2406.05087,,confirmed,
+"Certifiably Robust RAG Against Retrieval Corruption",Xiang et al.,2024,A,seed,2405.15556,,confirmed,Defense - isolate-then-aggregate
+"Backdoor Attacks on Dense Passage Retrievers for Disseminating Misinformation",Long et al.,2024,A,seed,2402.13532,,confirmed,
+"Lost in the Middle: How Language Models Use Long Contexts",Liu et al.,2023,B,seed,2307.03172,,confirmed,Foundational context-rot / positional degradation paper
+"Large Language Models Can Be Easily Distracted by Irrelevant Context",Shi et al.,2023,B,seed,2302.00093,,confirmed,
+"RULER: What's the Real Context Size of Your Long-Context Language Models?",Hsieh et al.,2024,B,seed,2404.06654,,confirmed,
+"NoLiMa: Long-Context Evaluation Beyond Literal Matching",Modarressi et al.,2025,B,seed,2502.05167,,confirmed,
+"Context Length Alone Hurts LLM Performance Despite Perfect Retrieval",Du et al.,2025,B,seed,2510.05381,,confirmed,
+"Drift No More? Context Equilibria in Multi-Turn LLM Interactions",Dongre et al.,2025,B,seed,2510.07777,,confirmed,
+"LLMs Get Lost in Multi-Turn Conversation",Laban et al.,2025,B,seed,2505.06120,,confirmed,
+"MultiChallenge: A Realistic Multi-Turn Conversation Evaluation Benchmark",Sirdeshmukh et al.,2025,B,seed,2501.17399,,confirmed,
+"Context Rot: How Increasing Input Tokens Impacts LLM Performance",Hong et al. (Chroma),2025,B,seed,,https://research.trychroma.com/context-rot,confirmed,Chroma technical report no arXiv ID
+"Diagnosing and Mitigating Context Rot in Long-Horizon Search",Xia et al.,2026,B,seed,2606.29718,,confirmed,Full text fetched this session
+"AttnComp",Unknown,2025,B,seed,2509.17486,,reported,Context compression against irrelevant retrieval noise
+"Alcuna: Large Language Models Meet New Knowledge",Yin et al.,2023,B,seed,2310.14820,,confirmed,Confirmed via 2412.16708 reference list
+"Self-RAG: Learning to Retrieve Generate and Critique through Self-Reflection",Asai et al.,2023,B,seed,2310.11511,,confirmed,
+"Corrective Retrieval Augmented Generation",Yan et al.,2024,B,seed,2401.15884,,confirmed,
+"Astute RAG: Overcoming Imperfect Retrieval Augmentation and Knowledge Conflicts",Wang et al.,2024,B,seed,2410.07176,,confirmed,
+"Towards More Robust Retrieval-Augmented Generation: Evaluating RAG Under Adversarial Poisoning Attacks",Su et al.,2024,Both,seed,2412.16708,,confirmed,Full text fetched this session - explicitly bridges adversarial and non-adversarial context types
+"SoK: Security and Safety in the Model Context Protocol Ecosystem",Unknown,2025,A,competitor_sok,2512.08290,,reported,Distinguishes adversarial vs epistemic safety
+"A Systematic Survey of Security Threats and Defenses in LLM-Based AI Agents: A Layered Attack Surface Framework",Unknown,2026,A,competitor_sok,2604.23338,,reported,LASM - 7-layer x 4-temporality grid
+"A Survey on the Security of Long-Term Memory in LLM Agents: Toward Mnemonic Sovereignty",Unknown,2026,A,competitor_sok,2604.16548,,reported,Memory-lifecycle framework
+"A Lifecycle and Application-Stack Survey of Large Language Model Vulnerabilities",Unknown,2026,A,competitor_sok,2606.31639,,reported,Broadest scope broad umbrella
+"Taxonomy and Consistency Analysis of Safety Benchmarks for AI Agents",Unknown,2026,A,competitor_sok,2605.16282,,reported,Benchmark meta-analysis not attack taxonomy
+"SoK: The Attack Surface of Agentic AI - Tools and Autonomy",Dehghantanha and Homayoun,2026,A,competitor_sok,2603.22928,,confirmed,Full text fetched this session - goals x vectors x paths metrics framework
+"The Landscape of Prompt Injection Threats in LLM Agents: From Taxonomy to Analysis",Unknown,2026,A,competitor_sok,2602.10453,,confirmed,Full text fetched this session - text/model/execution defense taxonomy - closest structural overlap found
+"A Systematic Literature Review on LLM Defenses Against Prompt Injection and Jailbreaking: Expanding NIST Taxonomy",Unknown,2026,A,competitor_sok,2601.22240,,reported,88 studies reviewed
+"Prompt Injection Attacks on Agentic Coding Assistants: Vulnerabilities in Skills Tools and Protocol Ecosystems",Unknown,2026,A,competitor_sok,2601.17548,,reported,3D taxonomy vectors/modalities/propagation 78 studies
+"Prompt Injection Attacks in Large Language Models and AI Agent Systems: A Comprehensive Review",Unknown,2026,A,competitor_sok,,MDPI Information journal DOI,reported,45 sources synthesized no arXiv ID
+"From Prompt Injections to Protocol Exploits",Ferrag et al.,2025,A,competitor_sok,,ICT Express journal,reported,Unified threat model 30+ techniques catalogued

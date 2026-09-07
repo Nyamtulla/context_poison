@@ -1,0 +1,120 @@
+defense_row,defense_name,matched_mechanism_name,match_justification,match_confidence
+815,CMI (Causal Memory Intervention),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+817,SD-RAG (Selective Disclosure RAG),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+821,EquiMem,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+824,CaMeL,Indirect Prompt Injection (IPI),"Empirically evaluated on AgentDojo (77% task completion with security guarantees vs 84% undefended); worked example shows an attacker embedding a prompt injection in retrieved data manipulating a tool-call argument, which CaMeL's capability-based policy blocks.",high
+825,"SkillSec-Eval defenses (hybrid admission validation, retrieval validation layer, metadata sanitizer, LifecycleGuard taint-tracking, continuous re-validation)",,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+827,SecurePrompt,,no baselines/key_result/technical_summary data available in workbook for this entry,low
+828,SpARE (Sparse Auto-Encoder Representation Engineering),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+831,SecureRag,,no baselines/key_result/technical_summary data available in workbook for this entry,low
+832,RE-IAG (Reasoning-Evidence Interactive Augmented Graph),,no baselines/key_result/technical_summary data available in workbook for this entry,low
+833,SCR & CR-DPO (Situated Faithfulness),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+835,AttriMem,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+837,Program-Guided (PG) Runtime / Compile-then-Page SOP compiler,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+839,STRACE (Structural Trajectory Analysis and Causal Extraction),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+840,Ensemble QSP (hierarchical memory architecture),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+841,PraMem (Practice-derived Experiential Memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+842,WM-SAR (World-Model Subgraph Amplification Repair),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+845,IHDec (Instruction Hierarchy-steered Decoding),Indirect Prompt Injection (IPI),"Tested on a 'Safety Defense (adversarial prompt injection) benchmark' with extract/hijack tasks, improving over vanilla Llama by up to 39.0pp and over ISE by up to 31.5pp.",high
+847,LRE (Learned Relevance Eviction),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+848,SING (Synthetic Intention Graph),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+849,ContextRL,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+851,HORMA (Hierarchical Organize-and-Retrieve Memory Agent),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+852,KG-CFR (Knowledge-Grounded Counterfactual Reasoning),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+853,ActiveMem,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+854,LCLM (Latent Context Language Models),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+856,RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation),Contextual Belief Management (CBM) failure,"Paper defines and operationalizes CBM failure with FSR/FUR/FIR diagnostic metrics; vanilla models empirically fail on 97-99% of trajectories, which the RL belief-state reward training and steering methods are evaluated against.",high
+857,Meta-Team (collaborative self-evolution),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+859,MemTrace (memory evolution graph tracing + closed-loop correction),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+862,Dual-Process Memory Architecture (episodic-semantic memory for scientific agents),"UNNAMED: ""cognitive event horizon"" (context-saturation threshold beyond which accuracy collapses)","Paper explicitly identifies a 'cognitive event horizon' at ~2,000 messages (~40,000 tokens) where Full-Context accuracy begins degrading well before the physical 128k-token limit, and evaluates the Dual-Process architecture against this collapse.",high
+863,RS-Claw (hierarchical skill trees for remote-sensing agents),lost in the middle,"Baseline 'Flat' tool registration is described as causing 'lost in the middle attention defocus and tool hallucination,' and RS-Claw's empirical gains over Flat are attributed partly to mitigating this, though not measured via a dedicated LITM metric.",low
+864,CKG-RAG,,no baselines/key_result/technical_summary data available in workbook for this entry,low
+866,PRISM (Pareto-Efficient Retrieval over Intent-Aware Structured Memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+867,VideoSEAL (decoupled planner-inspector),evidence misalignment (agentic long-video QA),Paper explicitly defines and diagnoses 'evidence misalignment' in agentic long-video QA (via temporal/semantic groundedness metrics) and evaluates VideoSEAL against it on LVBench/LongVideoBench/MLVU.,high
+868,HAGE (RL-driven weighted graph evolution),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+872,TESSERA (neuro-symbolic MCTS with KG constraints),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+874,TACT (Think-Act Calibration via activation Steering),agent drift (overthinking / overacting),"Paper explicitly targets and measures 'agent drift' (overthinking/overacting) over long agentic coding trajectories, and TACT's three variants are evaluated for reducing it across three benchmarks.",high
+876,Smart Indexing (metadata-aware chunking for legal RAG),,no baselines/key_result/technical_summary data available in workbook for this entry,low
+877,Gated Coordination (Partitioned Information Architecture + Cost-Sensitive Gated Escalation),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+879,GenericAgent (GA) - contextual information density maximization,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+881,TSUBASA (evolving memory + context distillation),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+883,MemMachine (ground-truth-preserving memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+884,Oblivion (decay-driven memory control),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+887,"D-Mem (Dual-Process Memory System, Quality Gating)",,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+889,Ebbinghaus Forgetting Curve Memory Enhancement Framework,,no baselines/key_result/technical_summary data available in workbook for this entry,low
+891,Structurally Aligned Subtask-Level Memory,UNNAMED: granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse),Paper explicitly identifies a 'granularity mismatch' problem where instance-level memory (reproduced as the ReasoningBank baseline) causes both irrelevant-guidance retrieval and missed cross-task reuse -- near-exact match to the registry description -- and empirically compares against it.,high
+893,Hippocampus (Dynamic Wavelet Matrix memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+894,AriadneMem,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+896,EHR-RAG,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+898,TEP (Textual Equilibrium Propagation),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+899,MetaMem (self-evolving meta-memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+900,Governed Execution (modular prompt orchestration for RAG-grounded call-center agents),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+901,CodeDelegator (role separation via Delegator/Coder agents + EPSS),context pollution (role conflation in single-agent code-as-action agents),"Paper explicitly targets 'context pollution' in code-as-action agents (e.g. CodeAct) with direct empirical evidence (context length negatively correlates with success in a preliminary study), which CodeDelegator's role separation addresses.",high
+902,STITCH (Structured Intent Tracking in Contextual History),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+903,CoM (Chain-of-Memory) - Dynamic Memory Chain Evolution + Adaptive Truncation,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+904,Focus (slime-mold-inspired active context compression),lost in the middle,"Technical summary cites 'Lost in the Middle'-style distraction/context-poisoning from standard Append-Only agents as the motivating problem that Focus's compression targets and reduces, though not measured via a dedicated LITM-specific metric.",low
+905,StackPlanner,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+906,MAGMA (Multi-Graph Agentic Memory Architecture),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+907,EverMemOS,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+910,Rhea (Role-aware Heuristic Episodic Attention),"cumulative contextual decay (attention pollution, dilution, and drift)","Paper's own term for the phenomenon it mitigates ('cumulative contextual decay' from attention pollution, dilution, and drift), empirically demonstrated by the Vanilla baseline's collapse from 8.54 to 6.32 accuracy on Long-MT-Bench+ as conversations extend.",high
+911,Chain-of-Memory (CoM) - verifiable retrieval + causal tracing,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+913,EMem / EMem-G (event-centric elementary discourse unit memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+914,ENGRAM (typed memory + dense retrieval),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+915,TAG (Tagging-Augmented Generation),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+916,ReCAP (Recursive Context-Aware Reasoning and Planning),context drift,"Paper explicitly identifies that sequential prompting methods (CoT, ReAct) 'suffer context drift as early high-level plans fall out of the context window on long trajectories,' demonstrated empirically via the ReAct baseline comparison.",high
+918,State-Update Multi-turn Dialogue Strategy,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+921,Memory-R1,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+922,SafeSieve,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+925,"RADIANT (DPO-ECD, Entity-Context Divergence alignment)",lost in the middle,"Paper runs a dedicated experiment testing on 10 paraphrases of the same context specifically 'to probe the lost in the middle effect,' showing RADIANT-trained models overcome degradation from information-organization variation.",high
+926,Knowledgeable-R1,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+928,RAG-Modulo,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+929,ITEM (Integrated Term Enhancement Methodology),,no baselines/key_result/technical_summary data available in workbook for this entry,low
+932,HMAS-2 (Hybrid Multi-Agent System with feedback re-planning),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+933,Memory Sandbox (user-controlled memory objects),,no baselines/key_result/technical_summary data available in workbook for this entry,low
+934,Synapse (trajectory-as-exemplar prompting + exemplar memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+935,LOOC (Leave-One-Out Compression),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+936,Cognitive Scaffold,,no baselines/key_result/technical_summary data available in workbook for this entry,low
+938,MEMORA (Embodied Action Memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+939,InftyThink with Cross-Chain Memory (semantic lemma retrieval),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+940,TRIM-KV,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+941,FocusAgent / DefenseFocusAgent,Indirect Prompt Injection (IPI),Explicitly tested against DoomArena banner and popup prompt-injection attacks on WebArena Reddit; DefenseFocusAgent reduces ASR from 32.4%/90.4% to under 3% while preserving task success.,high
+943,JUICE (Just Run Twice),superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict),"Paper coins the term 'superposition of contextual information and parametric memory' (CP superposition) and empirically demonstrates it via causal head-ablation analysis across clean/substitution-conflict/coherent-conflict inputs, which JUICE's dual-run design is evaluated against.",high
+944,SUGAR (Semantic Uncertainty Guided Adaptive Retrieval),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+948,"Still (amortized KV cache compaction, Perceiver-based)",,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+949,AutoMEM,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+950,Sleep paradigm (Memory Consolidation + Dreaming),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+951,P-RoPE / MiniWin (Periodic RoPE),position exhaustion,Paper explicitly designs P-RoPE to 'eliminate position exhaustion' (the perplexity spike when sequence length exceeds the trained position range) and evaluates on NIAH tasks beyond the training length.,high
+954,UNNAMED: Tree-based + hierarchical storage combined memory method (Memory in LLM Era unified framework),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+959,Fine-Mem (Chunk-level Step Reward + Evidence-Anchored Reward Attribution),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+960,FlashMem,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+965,Free()LM (Free-Module LoRA adapter),"UNNAMED: ""malloc-only"" context accumulation causing reasoning degeneration in extended CoT","Paper diagnoses a 'malloc-only' architectural flaw and empirically shows degeneration rising sharply past ~16k thinking tokens (84% of context-limited instances trapped in repetitive loops) and total collapse by 48k tokens, which Free()LM is evaluated against.",high
+967,Multi2 (hierarchical multi-agent decision-making),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+968,LLMON (LLM Object Notation),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+969,MEMO (Memory-augmented MOdel context optimization),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+972,SPRA (Scaffold-Preserving Representation Alignment),scaffolding collapse,"Paper explicitly defines 'scaffolding collapse' as the trajectory-level pedagogical failure mode it addresses, and evaluates SPRA against five red-teaming attack strategies causing collapse rates up to 68%.",high
+976,GCAD (Gated Cropped Attention-Delta steering),KV-cache contamination,"Paper explicitly identifies and names 'KV-cache contamination' as the specific failure mode of persona-vector steering across turns, and evaluates GCAD's improvement in coherence drift (-18.6 to -1.9) against it.",high
+978,PAACE (Plan-Aware Automated Context Engineering),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+979,CheckRLM,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+980,RAPS-DA (Regime-Aware Peer Specialization),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+981,AtlasVA (self-evolving visual skill memory),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+983,SABER (Self-Aware Belief Estimator for RAG),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+984,MAGIC-Video (multimodal memory graph + narrative chain),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+986,LightMem,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+987,L2A (Learning To Attend),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+989,HMT (Hierarchical Memory Tree),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+990,ERA (Evidence-based Reliability Alignment),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+991,A-RAG (hierarchical retrieval interfaces),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+992,CoCoA (Confidence- and Context-Aware Adaptive Decoding),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+994,KScope-guided Constrained Context Summarization,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+995,"GenDiE (Generate, Discriminate, Evolve)",,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+996,ReflectVLM (test-time reflection framework),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+997,UniKnow / LM-UniKnow,,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+998,ReMEmbR (Retrieval-augmented Memory for Embodied Robots),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+999,ACD (Adaptive Contrastive Decoding),distraction by irrelevant context,"ACD is evaluated on a 'SubsetNoisy' split specifically testing noisy/irrelevant retrieved content, where baselines are shown to be 'distracted by irrelevant retrieved content'; ACD's own performance is reported on this split.",low
+1000,RAT (Retrieval Augmented Thoughts),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+1002,Dynamic Contrastive Decoding (DCD) for cross-modality knowledge conflict,cross-modality parametric knowledge conflict,"Paper explicitly defines and systematically studies 'cross-modality parametric knowledge conflict' in LVLMs with conflict-rate measurements on ViQuAE (20-28% across model sizes), which Dynamic Contrastive Decoding is evaluated against.",high
+1004,COMBO (Compatibility-Oriented knowledge Merging),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+1006,UNNAMED: Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG),,no baselines/key_result/technical_summary data available in workbook for this entry,low
+1007,XoT (explanation-based thinking framework),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+1008,CK-PLUG (Controllable Knowledge Plug-in),,no registry mechanisms found in baselines_compared/key_result/technical_summary,low
+1009,UNNAMED: Explanation-based secondary detection signal for log-injection evasion,UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification),"Paper systematically evaluates adversarial prompt injection attacks that bias LLM-based log interpretation toward benign/malicious-as-benign misclassification, matching the registry mechanism's description closely.",high

@@ -1,0 +1,21 @@
+# secrets — never commit real API keys/contact emails
+.env
+
+# source PDFs and raw API cache: large (~3GB combined), regenerable from the
+# arxiv_id/doi/url fields already in data/context_sok.db and the Excel exports,
+# and PDFs carry their own redistribution terms — not part of the distilled
+# knowledge deliverable. Re-fetch via scripts/ + config.yaml if ever needed.
+data/papers/
+data/cache/
+data/*.log
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# OS cruft
+.DS_Store
