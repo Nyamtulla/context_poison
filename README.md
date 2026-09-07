@@ -111,6 +111,13 @@ Nine tabs, covering the whole project in one place — no cloud dependency:
 - **Citation network** — the citation graph with cross-track edges
   highlighted in red, making the RQ2 finding visually obvious.
 
+**Restart after changing anything under `src/`.** Streamlit re-executes
+`dashboard.py` on every rerun but does *not* re-import already-loaded modules,
+so edits to `src/registry_source.py` are invisible to a running server — which
+shows up as either an `AttributeError` for a newly added function or, worse,
+silently stale numbers. Refreshing the browser does not help; stop the process
+and start it again.
+
 The sidebar's paper filters apply to the last two tabs; the registry tabs
 carry their own. Papers come from the editable Excel source, registries from
 `data/registries/` via `src/registry_source.py` (shared with the MCP server,
