@@ -17,7 +17,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from src import confidence, db, excel_source, excel_sync
+from src import confidence, db, excel_source, excel_sync, registry_source
 from src.config import load_config
 from src.labels import TRACK_DISPLAY_NAMES
 
@@ -347,12 +347,342 @@ def network_tab(df: pd.DataFrame, edges: pd.DataFrame) -> None:
             render_metadata_panel(match.iloc[0])
 
 
+# ===================================================================
+# RQ3/RQ4/RQ5 registry views. These read the finished registries (via
+# src/registry_source.py, shared with the MCP server), NOT the editable
+# paper spreadsheet - so the sidebar's paper filters deliberately don't
+# apply here; each tab carries its own filters instead.
+# ===================================================================
+
+REGISTRY_TRACK_COLORS = {"Security": "#e07a5f", "ML/AI": "#3d5a80", "Both": "#8ac926"}
+
+
+@st.cache_data(ttl=30)
+def load_registries(mtimes: tuple) -> dict:
+    # `mtimes` isn't read in the body - it's the cache key, so editing any
+    # registry file busts the cache immediately instead of waiting out the ttl.
+    return registry_source.load_all()
+
+
+@st.cache_data(ttl=30)
+def load_rq_summaries(mtimes: tuple) -> dict:
+    return {rq: registry_source.load_rq_summary(rq) for rq in registry_source.RQ_FILES}
+
+
+def _registry_mtimes() -> tuple:
+    paths = [registry_source.RQ3_JSON, registry_source.RQ4_JSON, registry_source.RQ5_JSON]
+    paths += [fname for fname, _ in registry_source.RQ_FILES.values()]
+    out = []
+    for rel in paths:
+        p = registry_source.REPO_ROOT / rel
+        out.append(p.stat().st_mtime if p.exists() else 0.0)
+    return tuple(out)
+
+
+def _multiselect_filter(df: pd.DataFrame, column: str, label: str, container, key: str) -> pd.DataFrame:
+    """Filter on one column, offering only values actually present, each with
+    its count - and treat 'nothing selected' as 'no filter' rather than
+    'show nothing', which is what people actually mean when they clear a box."""
+    if column not in df.columns:
+        return df
+    counts = df[column].fillna("(unspecified)").value_counts()
+    chosen = container.multiselect(
+        label, counts.index.tolist(), format_func=lambda v: f"{v} ({counts.get(v, 0)})", key=key
+    )
+    if not chosen:
+        return df
+    return df[df[column].fillna("(unspecified)").isin(chosen)]
+
+
+def _bar(counts: pd.Series, title: str, color: str = "#3d5a80", horizontal: bool = True) -> go.Figure:
+    fig = go.Figure()
+    if horizontal:
+        fig.add_trace(go.Bar(y=counts.index.astype(str), x=counts.values, orientation="h", marker_color=color))
+        fig.update_layout(yaxis=dict(autorange="reversed"), xaxis_title="Papers / entries")
+    else:
+        fig.add_trace(go.Bar(x=counts.index.astype(str), y=counts.values, marker_color=color))
+    fig.update_layout(
+        title=title, height=max(260, 28 * len(counts) + 90),
+        margin=dict(l=10, r=10, t=45, b=10), showlegend=False,
+    )
+    return fig
+
+
+def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
+    s = reg["stats"]
+    st.markdown("#### Everything this project has produced, in one place")
+    st.caption(
+        "Counts below are the finished RQ3/RQ4/RQ5 registries — independent of the "
+        "sidebar paper filters, which only affect the Timeline and Citation network tabs."
+    )
+
+    c = st.columns(4)
+    c[0].metric("Papers screened", n_papers)
+    c[1].metric("Named mechanisms (RQ3)", s["n_mechanisms"])
+    c[2].metric("Confirmed defenses (RQ4)", s["n_defenses"])
+    c[3].metric("Confirmed test pairs (RQ5)", s["n_pairs"])
+
+    c = st.columns(4)
+    pct_def = 100 * s["n_defenses_matched"] / s["n_defenses_total"]
+    pct_mech = 100 * s["n_mechs_covered"] / s["n_mechs_total"]
+    n_cross = sum(1 for p in reg["pairs"] if p["cross_track"])
+    c[0].metric("Defenses matched to a named mechanism", f"{pct_def:.1f}%",
+                help=f"{s['n_defenses_matched']} of {s['n_defenses_total']}. The rest weren't confirmed "
+                     "tested against anything in the RQ3 registry — see the Coverage matrix tab.")
+    c[1].metric("Mechanisms with ≥1 defense tested", f"{pct_mech:.1f}%",
+                help=f"{s['n_mechs_covered']} of {s['n_mechs_total']}")
+    c[2].metric("Mechanisms never defended", s["n_mechs_uncovered"],
+                help="Zero confirmed defenses tested against them")
+    c[3].metric("Cross-track test pairs", n_cross,
+                help="Pairs where the defense's track differs from the mechanism's track — "
+                     "i.e. someone actually tested across the adversarial/incidental divide.")
+
+    st.divider()
+    st.markdown("#### What each research question found")
+    for rq, (fname, blurb) in registry_source.RQ_FILES.items():
+        text = summaries.get(rq, "")
+        with st.expander(f"**{rq}** — {blurb}", expanded=(rq == "RQ7")):
+            if text:
+                st.markdown(text)
+                st.caption(f"Full write-up: `{fname}`")
+            else:
+                st.info(f"No headline section found in `{fname}`.")
+
+
+def mechanisms_tab(reg: dict) -> None:
+    st.markdown("#### Every identified poisoning source / attack mechanism (RQ3)")
+    st.caption(
+        "Both tracks: deliberate attack techniques (Security) and incidental degradation "
+        "mechanisms (ML/AI). 'Defenses tested' counts confirmed RQ5 matches, not claims."
+    )
+    df = pd.DataFrame(reg["mechanisms"])
+
+    f = st.columns(4)
+    out = _multiselect_filter(df, "track", "Track", f[0], "mech_track")
+    out = _multiselect_filter(out, "channel", "Channel", f[1], "mech_channel")
+    out = _multiselect_filter(out, "consequence", "Consequence", f[2], "mech_conseq")
+    coverage = f[3].selectbox("Defense coverage", ["All", "Has ≥1 defense tested", "Never defended"], key="mech_cov")
+    if coverage == "Has ≥1 defense tested":
+        out = out[out["has_any_defense"]]
+    elif coverage == "Never defended":
+        out = out[~out["has_any_defense"]]
+    kw = st.text_input("Search mechanism name / notes", key="mech_kw")
+    if kw:
+        k = kw.lower()
+        out = out[out["mechanism_name"].fillna("").str.lower().str.contains(k)
+                  | out["notes"].fillna("").str.lower().str.contains(k)]
+
+    m = st.columns(3)
+    m[0].metric("Mechanisms shown", f"{len(out)} / {len(df)}")
+    m[1].metric("Of those, never defended", int((~out["has_any_defense"]).sum()) if len(out) else 0)
+    m[2].metric("Total defenses tested against them", int(out["n_defenses_tested"].sum()) if len(out) else 0)
+
+    if out.empty:
+        st.info("No mechanisms match these filters.")
+        return
+
+    left, right = st.columns(2)
+    with left:
+        st.plotly_chart(_bar(out["channel"].fillna("(unspecified)").value_counts(),
+                             "Mechanisms by channel", "#e07a5f"), width="stretch", key="mech_channel_chart")
+    with right:
+        top = out.nlargest(12, "n_defenses_tested")[["mechanism_name", "n_defenses_tested"]]
+        top = top[top["n_defenses_tested"] > 0].set_index("mechanism_name")["n_defenses_tested"]
+        if len(top):
+            st.plotly_chart(_bar(top, "Most-tested-against mechanisms", "#3d5a80"),
+                            width="stretch", key="mech_top_chart")
+        else:
+            st.info("None of the mechanisms in this view has any defense tested against it.")
+
+    display = out[["mechanism_name", "track", "channel", "consequence",
+                   "n_defenses_tested", "source_paper_title"]].sort_values(
+        "n_defenses_tested", ascending=False)
+    st.dataframe(display, width="stretch", hide_index=True, height=380)
+
+    st.markdown("**Inspect one mechanism**")
+    pick = st.selectbox("Mechanism", out["mechanism_name"].tolist(), key="mech_pick")
+    row = out[out["mechanism_name"] == pick].iloc[0]
+    d = st.columns(4)
+    d[0].metric("Track", row["track"] or "—")
+    d[1].metric("Channel", row["channel"] or "—")
+    d[2].metric("Consequence", row["consequence"] or "—")
+    d[3].metric("Defenses tested", int(row["n_defenses_tested"]))
+    if row["notes"]:
+        st.markdown(f"> {row['notes']}")
+    st.caption(f"First named in: {row['source_paper_title']}")
+    if row["defenses_tested"]:
+        st.markdown("**Defenses confirmed tested against it:** " + ", ".join(row["defenses_tested"]))
+    else:
+        st.warning("No defense in the RQ4 registry was confirmed tested against this mechanism.")
+
+
+def defenses_tab(reg: dict) -> None:
+    st.markdown("#### Every identified defense (RQ4)")
+    st.caption(
+        "`validated_against` is the threat model the defense's *own paper* tested it against — "
+        "the RQ6 case studies exist because that's almost never both."
+    )
+    df = pd.DataFrame(reg["defenses"])
+
+    f = st.columns(4)
+    out = _multiselect_filter(df, "track", "Track", f[0], "def_track")
+    out = _multiselect_filter(out, "intervention_point", "Intervention point", f[1], "def_point")
+    out = _multiselect_filter(out, "validated_against", "Validated against", f[2], "def_valid")
+    match = f[3].selectbox("Mechanism match", ["All", "Matched to a named mechanism", "No confirmed match"], key="def_match")
+    if match == "Matched to a named mechanism":
+        out = out[out["has_confirmed_match"]]
+    elif match == "No confirmed match":
+        out = out[~out["has_confirmed_match"]]
+    kw = st.text_input("Search defense name / notes", key="def_kw")
+    if kw:
+        k = kw.lower()
+        out = out[out["defense_name"].fillna("").str.lower().str.contains(k)
+                  | out["notes"].fillna("").str.lower().str.contains(k)]
+
+    m = st.columns(3)
+    m[0].metric("Defenses shown", f"{len(out)} / {len(df)}")
+    m[1].metric("With a confirmed mechanism match", int(out["has_confirmed_match"].sum()) if len(out) else 0)
+    m[2].metric("Tested against 2+ mechanisms", int((out["n_mechanisms_tested"] >= 2).sum()) if len(out) else 0)
+
+    if out.empty:
+        st.info("No defenses match these filters.")
+        return
+
+    left, right = st.columns(2)
+    with left:
+        st.plotly_chart(_bar(out["intervention_point"].fillna("(unspecified)").value_counts(),
+                             "Defenses by intervention point", "#8ac926"),
+                        width="stretch", key="def_point_chart")
+    with right:
+        st.plotly_chart(_bar(out["validated_against"].fillna("(unspecified)").value_counts(),
+                             "Defenses by threat model validated against", "#e07a5f"),
+                        width="stretch", key="def_valid_chart")
+
+    display = out[["defense_name", "track", "intervention_point", "validated_against",
+                   "channel", "consequence", "n_mechanisms_tested", "source_paper_title"]].sort_values(
+        "n_mechanisms_tested", ascending=False)
+    st.dataframe(display, width="stretch", hide_index=True, height=380)
+
+    st.markdown("**Inspect one defense**")
+    pick = st.selectbox("Defense", out["defense_name"].tolist(), key="def_pick")
+    row = out[out["defense_name"] == pick].iloc[0]
+    d = st.columns(4)
+    d[0].metric("Track", row["track"] or "—")
+    d[1].metric("Intervention point", row["intervention_point"] or "—")
+    d[2].metric("Validated against", row["validated_against"] or "—")
+    d[3].metric("Mechanisms tested", int(row["n_mechanisms_tested"]))
+    if row["notes"]:
+        st.markdown(f"> {row['notes']}")
+    st.caption(f"From: {row['source_paper_title']}")
+    if row["mechanisms_tested"]:
+        st.markdown("**Confirmed tested against:** " + ", ".join(row["mechanisms_tested"]))
+    else:
+        st.warning(
+            "No confirmed match to any RQ3-named mechanism. That means its paper's own "
+            "results text didn't name a technique the registry recognizes — not necessarily "
+            "that it was never evaluated. See the Coverage matrix tab."
+        )
+
+
+def coverage_tab(reg: dict) -> None:
+    s = reg["stats"]
+    pairs = pd.DataFrame(reg["pairs"])
+    st.markdown("#### Which defenses were actually tested against which attacks (RQ5)")
+
+    n_cross = int(pairs["cross_track"].sum())
+    m = st.columns(4)
+    m[0].metric("Confirmed (defense, mechanism) pairs", s["n_pairs"])
+    m[1].metric("Defenses tested vs. exactly 1 mechanism",
+                s["mechs_per_defense_distribution"].get("1", 0),
+                help="vs. 2 mechanisms: "
+                     f"{s['mechs_per_defense_distribution'].get('2', 0)}. None were tested against 3+.")
+    m[2].metric("Mechanisms never defended", s["n_mechs_uncovered"],
+                delta=f"-{100 * s['n_mechs_uncovered'] / s['n_mechs_total']:.1f}% of registry",
+                delta_color="inverse")
+    m[3].metric("Cross-track pairs", n_cross,
+                help="A Security-track defense tested against an ML/AI-track mechanism, or vice "
+                     "versa. This is the number RQ6 and RQ7 are ultimately about.")
+
+    if n_cross <= 5:
+        st.warning(
+            f"**Only {n_cross} of {s['n_pairs']} confirmed test pairs cross the adversarial/incidental "
+            "divide.** Defenses are essentially never evaluated against the other track's mechanisms — "
+            "which is exactly the gap the RQ6 case studies were built to probe."
+        )
+
+    st.divider()
+    st.markdown("##### Where the testing effort concentrates")
+    heat_src = pairs.copy()
+    heat_src["intervention_point"] = heat_src["defense_intervention_point"].fillna("(unspecified)")
+    top_mechs = heat_src["mechanism_name"].value_counts().head(15).index.tolist()
+    heat = heat_src[heat_src["mechanism_name"].isin(top_mechs)]
+    matrix = heat.pivot_table(index="mechanism_name", columns="intervention_point",
+                              values="defense_name", aggfunc="count", fill_value=0)
+    matrix = matrix.reindex(top_mechs)
+    fig = go.Figure(go.Heatmap(
+        z=matrix.values, x=matrix.columns.tolist(), y=matrix.index.tolist(),
+        colorscale="Blues", text=matrix.values, texttemplate="%{text}",
+        hovertemplate="%{y}<br>%{x}: %{z} defenses<extra></extra>", showscale=False,
+    ))
+    fig.update_layout(height=max(320, 30 * len(matrix) + 120), margin=dict(l=10, r=10, t=30, b=10),
+                      yaxis=dict(autorange="reversed"), xaxis_title="Defense intervention point")
+    st.plotly_chart(fig, width="stretch", key="coverage_heatmap")
+    st.caption("Top 15 mechanisms by number of defenses tested against them. Every other mechanism "
+               "in the registry has 2 or fewer — or, for 116 of them, none at all.")
+
+    st.divider()
+    st.markdown("##### All confirmed test pairs")
+    f = st.columns(3)
+    out = _multiselect_filter(pairs, "defense_intervention_point", "Intervention point", f[0], "cov_point")
+    out = _multiselect_filter(out, "mechanism_track", "Mechanism track", f[1], "cov_mtrack")
+    only_cross = f[2].checkbox("Cross-track pairs only", key="cov_cross")
+    if only_cross:
+        out = out[out["cross_track"]]
+    st.dataframe(
+        out[["defense_name", "mechanism_name", "defense_intervention_point",
+             "defense_validated_against", "mechanism_track", "cross_track", "justification"]],
+        width="stretch", hide_index=True, height=340,
+    )
+    st.caption(f"{len(out)} of {len(pairs)} pairs shown. `justification` is the extracting "
+               "agent's rationale for the match, kept for auditability.")
+
+    st.divider()
+    st.markdown(f"##### The {s['n_mechs_uncovered']} mechanisms nothing has ever been tested against")
+    mech_df = pd.DataFrame(reg["mechanisms"])
+    uncovered = mech_df[~mech_df["has_any_defense"]][
+        ["mechanism_name", "track", "channel", "consequence", "source_paper_title"]]
+    g = st.columns(2)
+    unc = _multiselect_filter(uncovered, "track", "Track", g[0], "unc_track")
+    unc = _multiselect_filter(unc, "channel", "Channel", g[1], "unc_channel")
+    st.dataframe(unc, width="stretch", hide_index=True, height=340)
+    st.caption(f"{len(unc)} of {len(uncovered)} shown — a ready-made 'what's left to defend' list.")
+
+
+def findings_tab(summaries: dict) -> None:
+    st.markdown("#### The two research questions that produced new evidence")
+    st.caption(
+        "RQ6 reconstructed and ran real released defense code against both threat models; "
+        "RQ7 synthesizes RQ2/RQ5/RQ6 into ranked open problems. Both write-ups are rendered "
+        "in full below."
+    )
+    for rq in ("RQ6", "RQ7"):
+        fname, blurb = registry_source.RQ_FILES[rq]
+        st.markdown(f"### {rq} — {blurb}")
+        if summaries.get(rq):
+            st.markdown(summaries[rq])
+        path = registry_source.REPO_ROOT / fname
+        if path.exists():
+            with st.expander(f"Read the full `{fname}`"):
+                st.markdown(path.read_text())
+        st.divider()
+
+
 def main() -> None:
     config = get_config()
     db_path = str(config.path("db_path"))
     excel_path = config.path("excel_source")
 
-    st.title("Context Integrity SoK — Paper Explorer")
+    st.title("Context Integrity SoK — Project Explorer")
 
     bootstrapped = ensure_excel_source(excel_path, db_path, config.hop_depth)
     if bootstrapped:
@@ -388,7 +718,11 @@ def main() -> None:
             f"({sc['already_synced']} already synced), {sc['edges_added']} citation edges added."
         )
 
-    st.sidebar.header("Filters")
+    st.sidebar.header("Paper filters")
+    st.sidebar.caption(
+        "These apply to the Timeline and Citation network tabs only — the registry tabs "
+        "(mechanisms, defenses, coverage) have their own filters."
+    )
     if st.sidebar.button("🔗 Sync new papers into DB"):
         conn = db.connect(db_path)
         db.init_db(conn)
@@ -428,10 +762,39 @@ def main() -> None:
     filtered = apply_filters(df, tracks, year_range, venues, hops, screens, keyword)
     st.sidebar.caption(f"{len(filtered)} / {len(df)} papers shown")
 
-    tab1, tab2 = st.tabs(["Timeline", "Citation network"])
-    with tab1:
+    try:
+        mtimes = _registry_mtimes()
+        reg = load_registries(mtimes)
+        summaries = load_rq_summaries(mtimes)
+    except (FileNotFoundError, KeyError, ValueError) as exc:
+        reg, summaries = None, {}
+        st.warning(
+            f"Registry data couldn't be loaded ({exc}). The paper tabs still work; "
+            "rebuild the registries with `scripts/build_registry.py` and "
+            "`scripts/build_coverage_matrix.py` to restore the rest."
+        )
+
+    tabs = st.tabs([
+        "Overview", "Attacks & mechanisms", "Defenses", "Coverage matrix",
+        "RQ6 / RQ7 findings", "Paper timeline", "Citation network",
+    ])
+    with tabs[0]:
+        if reg:
+            overview_tab(reg, summaries, len(df))
+    with tabs[1]:
+        if reg:
+            mechanisms_tab(reg)
+    with tabs[2]:
+        if reg:
+            defenses_tab(reg)
+    with tabs[3]:
+        if reg:
+            coverage_tab(reg)
+    with tabs[4]:
+        findings_tab(summaries)
+    with tabs[5]:
         timeline_tab(filtered)
-    with tab2:
+    with tabs[6]:
         network_tab(filtered, edges)
 
 

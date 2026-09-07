@@ -10,6 +10,10 @@ Runs entirely offline against files already committed in this repo
 (`data/exports/`, `data/registries/`, the `rq*.md` writeups). No API key,
 no network access, and no write access to the repo.
 
+The registry joins come from `src/registry_source.py`, shared with the
+Streamlit dashboard — so the MCP tools and the dashboard tabs can never
+report different numbers for the same thing.
+
 ## Setup
 
 ```bash
@@ -55,7 +59,7 @@ with wherever you cloned this repo.
   text for each match.
 - `list_uncovered_mechanisms(...)` — the 116 mechanisms nothing has ever
   been tested against; a ready-made gap list.
-- `get_rq_summary("RQ1"..."RQ6")` — the plain-language headline finding for
+- `get_rq_summary("RQ1"..."RQ7")` — the plain-language headline finding for
   any research question, pulled straight from the corresponding writeup.
 
 In practice: just ask your Claude something like *"what mechanisms has
