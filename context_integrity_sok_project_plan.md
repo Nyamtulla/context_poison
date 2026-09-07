@@ -213,6 +213,28 @@ Simplified from the original combined design (2026-08-17) now that registry cons
 
 ---
 
+## 8.5 Open Problems Synthesis (RQ7)
+
+Added 2026-09-06. RQ7 was the one research question with no protocol section of its own, since it was scoped from the start as a synthesis pass rather than a data-collection step. Recording the method used, for the same replicability reasons as every other RQ.
+
+**Constraint:** RQ7 performs no new extraction and makes no new judgment about individual papers. Every claim is either a restatement of an earlier RQ's finding or a cross-cutting statistic computed mechanically over the registries those RQs already built. Where RQ7 interprets beyond what the data forces, it says so inline.
+
+**Steps:**
+1. Re-read the three empirical threads RQ7 is defined over (RQ2, RQ5, RQ6) plus the structural context (RQ1, RQ3, RQ4), and identify claims that no single RQ could make on its own.
+2. Compute the cross-cutting statistics those claims need — `scripts/rq7_synthesis.py`, writing `data/registries/rq7_synthesis_stats.json`. The load-bearing new computation is **track-crossing in the RQ5 coverage matrix**: for each confirmed (defense, mechanism) pair, is the defense from the same research community as the mechanism it was tested against? This is what connects RQ2's citation-disconnect finding to RQ5's coverage finding — it measures whether the two communities *evaluate* against each other's problems, not merely whether they *cite* each other.
+3. State each open problem as: evidence → why it is open rather than merely unfortunate → what would resolve it, with a falsifiable prediction wherever the evidence supports one. Reject anything that reduces to "more research is needed."
+4. Rank the resulting problems by expected value (impact weighted by cost to settle), since RQ7's literal question is "where should the field invest next."
+
+**Status (2026-09-06):** done — `rq7_open_problems.md`.
+
+**Headline:** **98.9% of the 190 confirmed defense×mechanism test pairs stay inside a single track; only 2 cross, and only 1 is a genuine cross-community test.** The evaluation disconnect is roughly an order of magnitude more severe than RQ2's citation disconnect (10.8%/9.2%). Combined with RQ6's finding that 6 of 7 runnable defenses showed *some* protection against the threat model they were never tested on, the synthesis claim is that **the field is underclaiming coverage it already has, and its binding constraint is coordination rather than capability** — four of the seven ranked priorities require no new science, only changed evaluation and reporting conventions.
+
+**Two findings worth flagging back into the paper's other sections:**
+- **Execution-stage defenses rest on an untested security assumption** (OP5): they derive their guarantee from the model reliably satisfying a rigid output-format contract, but instruction-following under adversarial context is exactly the faculty context poisoning attacks. RQ6 observed these defenses collapse under mere capability *insufficiency* with no attacker present; nobody has tested an attacker inducing that collapse deliberately. Stated as an argument, not a demonstration.
+- **`temporal_persistence` was specified in Section 3's coding scheme but never actually coded** — the column does not exist in the corpus (OP7). This matters more than a missing column normally would, since OWASP ASI06 (cited in the paper's own introduction) is specifically *Memory and Context Poisoning*, and persistence is the property distinguishing context poisoning from ordinary prompt injection. Recorded as a disclosed gap; closing it is a bounded task over the 183-mechanism registry rather than all 886 papers.
+
+---
+
 ## 9. Paper Structure (updated 2026-08-17)
 
 1. Introduction — OWASP ASI06 (Memory and Context Poisoning) as evidence of industry urgency; state RQ1–7 up front (RQ7/open-problems presented last since it synthesizes RQ2, RQ5, and RQ6).
@@ -267,6 +289,7 @@ This restructuring adds roughly a week versus the previous (already-revised) 9-w
 - [x] Case study execution, first 3 — RobustRAG and FaithfulRAG complete with paired transfer results; IPIGuard concluded as a model-reliability finding (RQ6 Steps 3-5)
 - [x] Case study execution, extended queue — 7 additional real candidates run to completion (CaMeL, SCR, CK-PLUG, DataFilter, PISanitizer) or ruled out with cause on the remaining pool; see Section 8 and `rq6_case_study_selection.md` for the full per-candidate record
 - [x] RQ6 results write-up — `rq6_case_studies.md`: 9 case studies, 3 generalization patterns (full/partial/inert) split cleanly by intervention point (ingestion 3/4 full, reasoning mixed, execution 0/2 runnable)
+- [x] RQ7 open-problems synthesis (Section 8.5) — `rq7_open_problems.md`: 7 open problems with falsifiable resolutions, ranked by expected value; new cross-cutting finding that only 1.1% of confirmed test pairs cross the track boundary (`scripts/rq7_synthesis.py`)
 - [ ] Differentiation table vs. 5 closest SoKs (drafted)
 - [ ] Full manuscript draft
 - [ ] Supplementary materials for replicability (release search log + coded dataset publicly — this is increasingly expected for SoKs and directly supports the "systematic and replicable" goal)
@@ -282,4 +305,5 @@ This restructuring adds roughly a week versus the previous (already-revised) 9-w
 - **Corpus screening drift (RQ1 and downstream):** a search-cluster-driven overinclusion problem was found and corrected on 2026-08-17 (`rescreening_log.md`, 118 of 1,008 papers excluded) using full-text data not available at original screening time. The correction targeted the highest-risk profile (direct-input channel, no defense proposed) corpus-wide, not an exhaustive re-check of every paper — the same drift pattern could exist elsewhere in the corpus at lower density and was not exhaustively ruled out.
 - **Taxonomy label reliability (RQ1):** `channel`, `consequence`, `defense_intervention_point`, and `track` were coded from title+abstract in the original batch pass, not re-validated against the full-text data captured afterward, even though the re-screening correction proved abstract-only judgments can be meaningfully wrong. The cube is directionally reliable (its empty-cell rate held steady before/after the re-screening correction, which only affected inclusion, not label values) but not label-by-label verified against full text.
 - **Pollution mechanism/defense entity resolution (RQ3–RQ5):** the registries and coverage matrix depend on correctly recognizing that different papers' phrasing refers to the same mechanism or defense technique. Mechanical keyword matching risks both false merges (two distinct mechanisms conflated under a shared generic name) and false splits (the same mechanism under different phrasings counted as two registry entries) — needs at least a spot-checked pass before being reported as a paper finding, same lesson as the corpus re-screening pass. This risk is somewhat higher now that RQ3 spans both tracks, since Track A and Track B use different vocabularies for structurally similar phenomena (e.g. a Track A "context manipulation via injected distractor content" and a Track B "distraction by irrelevant context" may or may not warrant separate registry entries — a genuine judgment call, not just a naming-variant problem).
+- **Uncoded extraction field (`temporal_persistence`):** Section 3's coding scheme specifies a temporal-persistence field (one-shot / session-persistent / cross-session-dormant / self-propagating); it was never actually coded and the column does not exist in the corpus (found 2026-09-06 during RQ7). The corpus therefore cannot distinguish a one-shot hijack from a cross-session dormant backdoor — a distinction OWASP ASI06 (this paper's own framing device for industry urgency) treats as central. Either code it over the 183-mechanism registry before submission, or drop the field from Section 3 and state the limitation; do not leave the scheme claiming a field the dataset doesn't have.
 - **Case-study generalizability (RQ6):** selecting case studies from RQ5's coverage gaps (rather than a broader/random sample of defenses) means the case studies are, by construction, chosen because they looked like promising generalization tests — this is appropriate for RQ6's question ("do these specific under-tested defenses transfer") but the resulting findings should not be read as a claim about defenses in general, only about the specific defenses tested.

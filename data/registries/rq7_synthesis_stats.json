@@ -1,0 +1,243 @@
+{
+  "cross_track_testing": {
+    "pair_counts": {
+      "Security defense x Security mechanism": 113,
+      "ML/AI defense x ML/AI mechanism": 75,
+      "Both defense x ML/AI mechanism": 1,
+      "ML/AI defense x Security mechanism": 1
+    },
+    "total_pairs": 190,
+    "same_track": 188,
+    "same_track_share": 0.9894736842105263,
+    "cross_track": 2,
+    "cross_track_share": 0.010526315789473684,
+    "genuine_cross_track_pairs": [
+      {
+        "defense": "MAGE (Memory As Guardrail Enforcement)",
+        "defense_track": "ML/AI",
+        "validated_against": "adversarial",
+        "mechanism": "Indirect Prompt Injection (IPI)",
+        "mechanism_track": "Security"
+      }
+    ],
+    "unresolved": 0
+  },
+  "coverage_gaps": {
+    "n_uncovered": 116,
+    "by_track": {
+      "Security": {
+        "total": 129,
+        "covered": 30,
+        "uncovered": 99,
+        "coverage_rate": 0.23255813953488372
+      },
+      "ML/AI": {
+        "total": 54,
+        "covered": 37,
+        "uncovered": 17,
+        "coverage_rate": 0.6851851851851852
+      }
+    },
+    "by_channel": {
+      "tool-output": {
+        "total": 62,
+        "covered": 17,
+        "uncovered": 45,
+        "coverage_rate": 0.27419354838709675
+      },
+      "direct-input": {
+        "total": 43,
+        "covered": 21,
+        "uncovered": 22,
+        "coverage_rate": 0.4883720930232558
+      },
+      "RAG": {
+        "total": 26,
+        "covered": 8,
+        "uncovered": 18,
+        "coverage_rate": 0.3076923076923077
+      },
+      "memory": {
+        "total": 13,
+        "covered": 9,
+        "uncovered": 4,
+        "coverage_rate": 0.6923076923076923
+      },
+      "tool-metadata": {
+        "total": 12,
+        "covered": 4,
+        "uncovered": 8,
+        "coverage_rate": 0.3333333333333333
+      },
+      "cross-modal": {
+        "total": 11,
+        "covered": 2,
+        "uncovered": 9,
+        "coverage_rate": 0.18181818181818182
+      },
+      "multi-agent": {
+        "total": 9,
+        "covered": 4,
+        "uncovered": 5,
+        "coverage_rate": 0.4444444444444444
+      },
+      "skill": {
+        "total": 4,
+        "covered": 2,
+        "uncovered": 2,
+        "coverage_rate": 0.5
+      },
+      "supply-chain": {
+        "total": 3,
+        "covered": 0,
+        "uncovered": 3,
+        "coverage_rate": 0.0
+      }
+    },
+    "by_consequence": {
+      "goal-hijack": {
+        "total": 100,
+        "covered": 22,
+        "uncovered": 78,
+        "coverage_rate": 0.22
+      },
+      "reasoning-corruption": {
+        "total": 40,
+        "covered": 25,
+        "uncovered": 15,
+        "coverage_rate": 0.625
+      },
+      "silent-corruption": {
+        "total": 20,
+        "covered": 14,
+        "uncovered": 6,
+        "coverage_rate": 0.7
+      },
+      "persistence-backdoor": {
+        "total": 12,
+        "covered": 5,
+        "uncovered": 7,
+        "coverage_rate": 0.4166666666666667
+      },
+      "data-exfiltration": {
+        "total": 9,
+        "covered": 1,
+        "uncovered": 8,
+        "coverage_rate": 0.1111111111111111
+      },
+      "resource-abuse": {
+        "total": 2,
+        "covered": 0,
+        "uncovered": 2,
+        "coverage_rate": 0.0
+      }
+    }
+  },
+  "dual_validation": {
+    "n": 14,
+    "by_intervention_point": {
+      "none": 3,
+      "ingestion": 4,
+      "execution": 3,
+      "reasoning": 4
+    },
+    "by_track": {
+      "Security": 10,
+      "ML/AI": 4
+    },
+    "names": [
+      {
+        "name": "Safety-guided Chain-of-Thought (SCoT)",
+        "track": "Security",
+        "intervention_point": "none",
+        "channel": "tool-output"
+      },
+      {
+        "name": "ShadowPlay",
+        "track": "Security",
+        "intervention_point": "ingestion",
+        "channel": "tool-output"
+      },
+      {
+        "name": "SafeClaw-R",
+        "track": "Security",
+        "intervention_point": "execution",
+        "channel": "multi-agent"
+      },
+      {
+        "name": "Constraint Pinning",
+        "track": "ML/AI",
+        "intervention_point": "ingestion",
+        "channel": "direct-input"
+      },
+      {
+        "name": "UNNAMED: security-aware RAG framework (evidence-based abstention + prompt-injection defense + multi-source agreement verification + trust-weighted retrieval)",
+        "track": "Security",
+        "intervention_point": "reasoning",
+        "channel": "RAG"
+      },
+      {
+        "name": "Trust-Aware Orchestration Architecture (hard gates + advisory filters + deterministic syntax recovery)",
+        "track": "Security",
+        "intervention_point": "execution",
+        "channel": "tool-output"
+      },
+      {
+        "name": "+ModTool (memory correction tool for MemEvoBench)",
+        "track": "ML/AI",
+        "intervention_point": "none",
+        "channel": "memory"
+      },
+      {
+        "name": "AgentSight (eBPF boundary tracing)",
+        "track": "Security",
+        "intervention_point": "execution",
+        "channel": "tool-output"
+      },
+      {
+        "name": "CMI (Causal Memory Intervention)",
+        "track": "ML/AI",
+        "intervention_point": "reasoning",
+        "channel": "memory"
+      },
+      {
+        "name": "IHDec (Instruction Hierarchy-steered Decoding)",
+        "track": "Security",
+        "intervention_point": "reasoning",
+        "channel": "tool-output"
+      },
+      {
+        "name": "Governed Execution (modular prompt orchestration for RAG-grounded call-center agents)",
+        "track": "Security",
+        "intervention_point": "none",
+        "channel": "RAG"
+      },
+      {
+        "name": "SafeSieve",
+        "track": "Security",
+        "intervention_point": "ingestion",
+        "channel": "multi-agent"
+      },
+      {
+        "name": "FocusAgent / DefenseFocusAgent",
+        "track": "Security",
+        "intervention_point": "ingestion",
+        "channel": "tool-output"
+      },
+      {
+        "name": "RAPS-DA (Regime-Aware Peer Specialization)",
+        "track": "ML/AI",
+        "intervention_point": "reasoning",
+        "channel": "RAG"
+      }
+    ]
+  },
+  "injection_dispersion": {
+    "umbrella_mechanism": "Indirect Prompt Injection (IPI)",
+    "defenses_tested_against_umbrella": 76,
+    "share_of_all_pairs": 0.4,
+    "named_injection_variants": 35,
+    "named_injection_variants_covered": 9,
+    "named_injection_variants_uncovered": 26
+  }
+}
