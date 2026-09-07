@@ -37,9 +37,14 @@ RQ_FILES = {
     "RQ3": ("rq3_pollution_census.md", "Pollution census — how many distinct poisoning mechanisms are named"),
     "RQ4": ("rq4_defense_census.md", "Defense census — how many defenses, validated against which threat model"),
     "RQ5": ("rq5_coverage_matrix.md", "Coverage matrix — which defenses were tested against which mechanisms"),
+    "RQ5b": ("rq5b_coverage_recovery_and_transfer.md",
+             "Coverage recovery + transfer validation — is the gap real, and what fills it"),
     "RQ6": ("rq6_case_studies.md", "Defense generalization — 9 reconstructed case studies"),
     "RQ7": ("rq7_open_problems.md", "Open problems — ranked research priorities"),
 }
+
+STAGE2_JSON = "data/registries/stage2_transfer_predictions.json"
+STAGE3_JSON = "data/registries/stage3_badrag_robustrag_results.json"
 
 
 def _root(root: str | Path | None = None) -> Path:
@@ -216,9 +221,42 @@ def load_all(root=None, include_supplementary: bool = True) -> dict:
     }
 
 
+def load_transfer_predictions(root=None) -> list[dict]:
+    """Stage 2 ranked transfer hypotheses (empty if not yet generated)."""
+    path = _root(root) / STAGE2_JSON
+    return json.loads(path.read_text()) if path.exists() else []
+
+
+def load_stage3_result(root=None) -> dict:
+    """Stage 3 validated transfer test (empty if not yet run)."""
+    path = _root(root) / STAGE3_JSON
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
+def paper_link(p: dict) -> tuple[str, str]:
+    """Best external link for a paper, as (url, label). Prefers arXiv (lands on
+    the paper itself), then DOI, then whatever URL the pipeline recorded -
+    which is usually a Semantic Scholar landing page. Local PDF paths are
+    deliberately NOT used: they're server-side paths a browser can't open, and
+    the PDFs aren't in the repo anyway."""
+    arxiv = (p.get("arxiv_id") or "").strip()
+    if arxiv:
+        return f"https://arxiv.org/abs/{arxiv}", "arXiv"
+    doi = (p.get("doi") or "").strip()
+    if doi:
+        return f"https://doi.org/{doi}", "DOI"
+    url = (p.get("url") or "").strip()
+    if url:
+        return url, "S2"
+    return "", ""
+
+
 def load_rq_summary(rq: str, root=None) -> str:
     """The '## Headline result' section of one RQ's write-up, verbatim."""
-    entry = RQ_FILES.get(rq.strip().upper())
+    # Case-insensitive without uppercasing the key itself - "RQ5b".upper() is
+    # "RQ5B", which matches no entry.
+    wanted = rq.strip().casefold()
+    entry = next((v for k, v in RQ_FILES.items() if k.casefold() == wanted), None)
     if not entry:
         return ""
     path = _root(root) / entry[0]
