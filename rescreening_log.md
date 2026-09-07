@@ -95,3 +95,67 @@ independently-authored survey papers on the same topic — not merged.
 RQ1 and RQ2's published numbers were updated accordingly
 (`rq1_taxonomy_analysis.md`, `cross_citation_analysis.md`); RQ2's B→A rate
 moved from 7.5% to 9.2% as a result.
+
+## Addendum 2 (2026-09-07) — full audit of the 122 excluded rows
+
+Triggered by a direct question: if ~25.9k records were discarded upstream,
+what makes the 122 excluded at the *coding* stage a different category, and
+is anything relevant sitting in them? Every one of the 122 was re-examined.
+
+**Result: 4 duplicate artifacts, 0 genuine false negatives.**
+
+**The 4th duplicate, and a documentation inconsistency this exposed.**
+Addendum 1 above records 3 duplicate pairs and a resulting corpus of 887.
+`rq3_pollution_census.md` records **4**, naming "a position-bias mechanism
+paper" as the fourth. The data agrees with the census (886 Include today, not
+887), so the fourth exclusion happened during RQ3 registry construction and
+was never back-ported into this log. Confirmed here:
+
+| | Included | Excluded (shadow record) |
+|---|---|---|
+| Title | Mitigate Position Bias in Large Language Models via Scaling a Single Dimension | Mitigate Position Bias in LLMs via Scaling a Single Hidden States Channel |
+| paper_id | `arxiv:2406.02536` | `6e5fce29cbd9db7f` |
+| arXiv ID | 2406.02536 | none |
+
+Same paper, retitled between arXiv versions — the same profile as the other
+three (one resolved entry with an arXiv ID and full data, one bare S2 record
+without). **The duplicate count is 4, not 3**; Addendum 1's "887" should read
+886. All four excluded rows are shadow records, so none represents a paper
+missing from the analysis.
+
+**No genuine false negatives.** Screening the remaining 118 for
+contamination-relevant terms in title+abstract flagged 11 for manual reading.
+All were correctly excluded on the stated criteria: `Cordyceps` is
+fine-tuning-time data poisoning (explicitly out of scope — this project is
+about runtime context); the prompt-injection-vulnerability papers are
+measurement-only, which the RQ3 registry bar rejects even for *included*
+papers (that same rule excluded 480 of 890 included papers); `KCIF` is a
+benchmark. The other 107 carry no contamination signal at all — agent
+capability, RL training, planning, and robotics papers that matched on
+"agent" or "long-horizon", the same drift Addendum 1 documents.
+
+**Why the 122 are a different category from the ~24.9k.** They are the only
+papers excluded *after being read and coded in depth* (channel, consequence,
+intervention point, evidence grade, extraction fields). Everything upstream
+was cut by rules on title/abstract, at three earlier stages: the FR-7
+auto-screen (recall-oriented by design), then the precision filter in
+`src/confidence.py` (auto_include + names a known method/author signature
+term + >=1 citation), which reduced the ~14.9k hop-0/1 working set to 1,008.
+This is the standard systematic-review funnel: earlier stages are reported as
+counts, the final full-coding stage is reported item-by-item with reasons —
+which is what this log is for.
+
+Nothing was deleted at any stage. All 25,922 records remain in
+`data/context_sok.db`, and the cut is a pure reproducible filter
+(`confidence.high_confidence_ids`), re-runnable at different thresholds, so
+the boundary is auditable rather than asserted.
+
+**The honest exposure is upstream, not here.** `src/confidence.py` is, by its
+own docstring, "a project-owner decision to substitute a stricter automated
+cut for part of the manual screening pass" — a keyword-signature and citation
+filter standing in for two-coder manual screening at a volume where manual
+screening was not feasible. That, not the 122, is the screening decision most
+open to challenge, and it should be stated plainly in threats to validity.
+This audit constrains its downstream effect: at the final stage the boundary
+introduced no false negatives, and the headline coverage gap (61.2% of
+mechanisms undefended) is unchanged by anything found in the 122.
