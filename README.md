@@ -18,6 +18,8 @@ and produce a structured paper database plus a local dashboard. See
   `rq6_case_study_selection.md` (the full working log behind it), and RQ7
   synthesizes RQ2/RQ5/RQ6 into ranked research priorities
   (`scripts/rq7_synthesis.py` recomputes its cross-cutting statistics).
+- **`rq5b_coverage_recovery_and_transfer.md`** — coverage recovery + the first
+  transfer prediction validated by execution (RobustRAG vs. BadRAG).
 - **`mcp_server/`** — an MCP server that exposes the same data (papers,
   mechanisms, defenses, coverage matrix, and per-RQ headline findings) as
   tools your own Claude can query conversationally. See
@@ -82,10 +84,16 @@ python cli.py smoke-test       # network-light wiring check
 streamlit run dashboard.py
 ```
 
-Seven tabs, covering the whole project in one place — no cloud dependency:
+Nine tabs, covering the whole project in one place — no cloud dependency:
 
 - **Overview** — headline counts plus what every research question (RQ1–RQ7)
   found, each expandable.
+- **Paper index** — searchable index of all 1,008 curated papers with a
+  clickable link to each (arXiv → DOI → Semantic Scholar, whichever exists).
+  Search by title, author, or venue. If a search misses, it automatically
+  checks the wider ~26k discovery pool, so you can tell "we coded this" from
+  "we saw it but screened it out" from "genuinely new to us." Exports the
+  current view as CSV.
 - **Attacks & mechanisms** — all 183 named poisoning sources (RQ3),
   filterable by track/channel/consequence/coverage, with per-mechanism
   drill-down into which defenses were tested against it.
@@ -93,9 +101,12 @@ Seven tabs, covering the whole project in one place — no cloud dependency:
   and the threat model their own paper validated them against.
 - **Coverage matrix** — the RQ5 defense×mechanism matches, a heatmap of
   where testing effort concentrates, every confirmed pair with its match
-  rationale, and the 116 mechanisms nothing has ever been tested against.
-- **RQ6 / RQ7 findings** — the two write-ups that produced new evidence,
-  rendered in full.
+  rationale and provenance, and the mechanisms nothing has been tested
+  against.
+- **Transfer predictions** — RQ5b Stage 2's ranked hypotheses (which existing
+  defense should work on which untested mechanism) plus the Stage 3 result
+  that has been validated by execution.
+- **RQ findings** — the RQ5b/RQ6/RQ7 write-ups rendered in full.
 - **Paper timeline** — papers by year, colored by track, sized by citations.
 - **Citation network** — the citation graph with cross-track edges
   highlighted in red, making the RQ2 finding visually obvious.

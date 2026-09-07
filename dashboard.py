@@ -408,6 +408,213 @@ def _bar(counts: pd.Series, title: str, color: str = "#3d5a80", horizontal: bool
     return fig
 
 
+@st.cache_data(ttl=60)
+def load_paper_index(mtime: float) -> pd.DataFrame:
+    """The curated corpus, shaped for lookup rather than analysis."""
+    rows = []
+    for p in registry_source.load_papers():
+        url, label = registry_source.paper_link(p)
+        rows.append({
+            "Title": p.get("title"),
+            "Year": p.get("year"),
+            "Authors": p.get("authors"),
+            "Venue": p.get("venue"),
+            "Track": p.get("track"),
+            "Screening": p.get("screening"),
+            "Citations": p.get("citation_count"),
+            "Link": url,
+            "Source": label,
+            "arxiv_id": p.get("arxiv_id"),
+            "doi": p.get("doi"),
+            "paper_id": p.get("paper_id"),
+            "Channel": p.get("channel"),
+            "Consequence": p.get("consequence"),
+            "abstract": p.get("abstract"),
+        })
+    return pd.DataFrame(rows)
+
+
+@st.cache_data(ttl=60)
+def search_discovery_pool(query: str, db_path: str, limit: int = 25) -> pd.DataFrame:
+    """Search the full ~26k discovered-paper pool in the DB - the papers the
+    search/snowball found but that never made it into the curated corpus.
+    Answers 'have I seen this paper at all?' rather than 'did we code it?'."""
+    if not query or len(query.strip()) < 3:
+        return pd.DataFrame()
+    conn = db.connect(db_path)
+    db.init_db(conn)
+    like = f"%{query.strip()}%"
+    rows = conn.execute(
+        "select paper_id, title, year, venue, arxiv_id, doi, url, citation_count, "
+        "screen_auto, track_auto, discovered_via from papers "
+        "where title like ? order by citation_count desc nulls last limit ?",
+        (like, limit),
+    ).fetchall()
+    conn.close()
+    out = []
+    for r in rows:
+        d = dict(r)
+        url, label = registry_source.paper_link(d)
+        out.append({
+            "Title": d.get("title"), "Year": d.get("year"), "Venue": d.get("venue"),
+            "Citations": d.get("citation_count"), "Auto-screen": d.get("screen_auto"),
+            "Auto-track": d.get("track_auto"), "Found via": d.get("discovered_via"),
+            "Link": url, "Source": label,
+        })
+    return pd.DataFrame(out)
+
+
+def paper_index_tab(db_path: str) -> None:
+    st.markdown("#### Paper index — is this paper already in the corpus?")
+    st.caption(
+        "Search the curated corpus by title, author, or venue. If nothing matches, "
+        "the wider discovery pool (~26k papers the search and snowball turned up) is "
+        "checked too, so you can tell 'we coded this' from 'we saw it but screened it "
+        "out' from 'genuinely new to us'."
+    )
+
+    df = load_paper_index(
+        (registry_source.REPO_ROOT / registry_source.PAPERS_XLSX).stat().st_mtime)
+
+    query = st.text_input("Search by title, author, or venue",
+                          placeholder="e.g. PoisonedRAG, Greshake, lost in the middle",
+                          key="paper_search")
+
+    f = st.columns(4)
+    out = _multiselect_filter(df, "Track", "Track", f[0], "pi_track")
+    out = _multiselect_filter(out, "Screening", "Screening", f[1], "pi_screen")
+    years = [int(y) for y in df["Year"].dropna().unique()]
+    yr = f[2].slider("Year", min(years), max(years), (min(years), max(years)), key="pi_year")
+    sort_by = f[3].selectbox("Sort by", ["Citations", "Year", "Title"], key="pi_sort")
+
+    out = out[out["Year"].between(yr[0], yr[1]) | out["Year"].isna()]
+    if query:
+        q = query.strip().lower()
+        mask = (out["Title"].fillna("").str.lower().str.contains(q, regex=False)
+                | out["Authors"].fillna("").str.lower().str.contains(q, regex=False)
+                | out["Venue"].fillna("").str.lower().str.contains(q, regex=False))
+        out = out[mask]
+
+    out = out.sort_values(sort_by, ascending=(sort_by == "Title"),
+                          na_position="last")
+
+    m = st.columns(3)
+    m[0].metric("Papers shown", f"{len(out)} / {len(df)}")
+    m[1].metric("With a working link", int((out["Link"] != "").sum()) if len(out) else 0)
+    m[2].metric("Included in analysis",
+                int((out["Screening"] == "Include").sum()) if len(out) else 0)
+
+    if query and out.empty:
+        st.warning(f"**No paper matching “{query}” in the curated corpus.** "
+                   "Checking the wider discovery pool below.")
+    elif query:
+        st.success(f"**Found {len(out)} match(es) in the curated corpus** — "
+                   "these are papers we have coded and analysed.")
+
+    if not out.empty:
+        st.dataframe(
+            out[["Title", "Year", "Authors", "Venue", "Track", "Screening",
+                 "Citations", "Link", "Source"]],
+            width="stretch", hide_index=True, height=420,
+            column_config={
+                "Link": st.column_config.LinkColumn("Open paper", display_text="open ↗"),
+                "Title": st.column_config.TextColumn("Title", width="large"),
+                "Authors": st.column_config.TextColumn("Authors", width="medium"),
+            },
+        )
+        st.download_button("Download this view as CSV",
+                           out.drop(columns=["abstract"]).to_csv(index=False),
+                           file_name="context_sok_paper_index.csv", mime="text/csv")
+
+    # Only consult the ~26k pool when the curated corpus came up empty - it is
+    # the "have we seen this at all" fallback, not the primary index.
+    if query and out.empty:
+        pool = search_discovery_pool(query, db_path)
+        if pool.empty:
+            st.error(
+                f"**Not found anywhere** — “{query}” isn't in the curated corpus or the "
+                "discovery pool. If it's relevant, it's a genuinely new paper to add."
+            )
+        else:
+            st.info(
+                f"**{len(pool)} match(es) in the discovery pool but NOT in the curated "
+                "corpus.** These were found by search or snowball and either screened out "
+                "or never coded — worth a look before treating the paper as new."
+            )
+            st.dataframe(
+                pool, width="stretch", hide_index=True, height=300,
+                column_config={"Link": st.column_config.LinkColumn("Open paper",
+                                                                   display_text="open ↗")},
+            )
+
+    if query and not out.empty:
+        with st.expander("Abstract of the top match"):
+            top = out.iloc[0]
+            st.markdown(f"**{top['Title']}**")
+            st.caption(f"{top['Authors']} · {top['Venue']} · {top['Year']}")
+            st.write(top["abstract"] or "_No abstract on record._")
+
+
+def transfer_tab(reg: dict) -> None:
+    preds = registry_source.load_transfer_predictions()
+    stage3 = registry_source.load_stage3_result()
+    st.markdown("#### Transfer predictions — which defense should work on what nobody tested")
+    if not preds:
+        st.info("No predictions yet. Run `scripts/stage2_transfer_predictions.py`.")
+        return
+    st.caption(
+        "RQ6 found that generalization tracked where a defense intervenes. These use that "
+        "as a predictor: similarity between an untested mechanism and what a defense WAS "
+        "tested on, weighted by that intervention point's observed transfer rate. "
+        "**These are hypotheses to test, not findings.**"
+    )
+
+    testable = [p for p in preds if p["testable_now"]]
+    m = st.columns(3)
+    m[0].metric("Uncovered mechanisms with a hypothesis", len(preds))
+    m[1].metric("Testable now (candidate has code)", len(testable))
+    m[2].metric("Validated by execution so far", 1 if stage3 else 0)
+
+    if stage3:
+        s = stage3.get("summary", {})
+        st.success(
+            "**Stage 3 validated the top prediction: RobustRAG defeats BadRAG.** "
+            "BadRAG's denial-of-service payload drops undefended accuracy to "
+            f"{100*s.get('badrag_dos',{}).get('undefended_acc',0):.1f}% with a "
+            f"{100*s.get('badrag_dos',{}).get('undefended_refusal_rate',0):.1f}% refusal rate; "
+            f"RobustRAG restores {100*s.get('badrag_dos',{}).get('defended_acc',0):.1f}% "
+            f"(clean defended ceiling {100*s.get('clean',{}).get('defended_acc',0):.1f}%) and cuts "
+            f"refusals to {100*s.get('badrag_dos',{}).get('defended_refusal_rate',0):.1f}%. "
+            "RobustRAG had never been evaluated against BadRAG."
+        )
+        with st.expander("Stage 3 full numbers"):
+            st.dataframe(pd.DataFrame(s).T, width="stretch")
+            st.caption("BadRAG's sentiment payload is reported as untested, not defeated — "
+                       "it never landed on RealtimeQA's short-answer format.")
+
+    rows = []
+    for p in preds:
+        for c in p["candidates"][:1]:
+            rows.append({
+                "Priority": p["priority"], "Untested mechanism": p["mechanism"],
+                "Cites": p["mechanism_citations"], "Channel": p["channel"],
+                "Consequence": p["consequence"], "Suggested defense": c["defense"],
+                "Intervention": c["defense_intervention_point"],
+                "Similar to": c["transfers_from"], "Similarity": c["similarity"],
+                "Score": c["score"], "Code": "yes" if c["code_released"] else "no",
+            })
+    pdf = pd.DataFrame(rows)
+    g = st.columns(3)
+    only_code = g[0].checkbox("Only where the defense has released code", key="tr_code")
+    out = pdf[pdf["Code"] == "yes"] if only_code else pdf
+    out = _multiselect_filter(out, "Intervention", "Intervention point", g[1], "tr_point")
+    out = _multiselect_filter(out, "Consequence", "Consequence", g[2], "tr_conseq")
+    st.dataframe(out.sort_values("Priority", ascending=False), width="stretch",
+                 hide_index=True, height=420)
+    st.caption(f"{len(out)} of {len(pdf)} hypotheses shown, ranked by predicted transfer "
+               "weighted by how much the field cites the untested mechanism.")
+
+
 def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
     s = reg["stats"]
     st.markdown("#### Everything this project has produced, in one place")
@@ -591,7 +798,9 @@ def coverage_tab(reg: dict) -> None:
 
     n_cross = int(pairs["cross_track"].sum())
     m = st.columns(4)
-    m[0].metric("Confirmed (defense, mechanism) pairs", s["n_pairs"])
+    m[0].metric("Confirmed (defense, mechanism) pairs", s["n_pairs"],
+                delta=(f"+{s['n_pairs_supplementary']} recovered"
+                       if s.get("n_pairs_supplementary") else None))
     m[1].metric("Defenses tested vs. exactly 1 mechanism",
                 s["mechs_per_defense_distribution"].get("1", 0),
                 help="vs. 2 mechanisms: "
@@ -608,6 +817,16 @@ def coverage_tab(reg: dict) -> None:
             f"**Only {n_cross} of {s['n_pairs']} confirmed test pairs cross the adversarial/incidental "
             "divide.** Defenses are essentially never evaluated against the other track's mechanisms — "
             "which is exactly the gap the RQ6 case studies were built to probe."
+        )
+    if s.get("n_pairs_supplementary"):
+        st.info(
+            f"**RQ5b recovery pass:** an exhaustive citation + full-text sweep over the "
+            f"mechanisms RQ5 recorded as never-defended recovered only "
+            f"**{s['n_pairs_supplementary']}** additional evaluated pairs "
+            f"({s['n_mechs_covered_rq5_original']} → {s['n_mechs_covered']} mechanisms covered). "
+            "The gap is real, not an extraction artifact. Recovered pairs are tagged "
+            "`stage1_supplementary` in the `source` column below; RQ5's original numbers "
+            "remain reproducible."
         )
 
     st.divider()
@@ -640,7 +859,8 @@ def coverage_tab(reg: dict) -> None:
         out = out[out["cross_track"]]
     st.dataframe(
         out[["defense_name", "mechanism_name", "defense_intervention_point",
-             "defense_validated_against", "mechanism_track", "cross_track", "justification"]],
+             "defense_validated_against", "mechanism_track", "cross_track",
+             "source", "justification"]],
         width="stretch", hide_index=True, height=340,
     )
     st.caption(f"{len(out)} of {len(pairs)} pairs shown. `justification` is the extracting "
@@ -659,13 +879,14 @@ def coverage_tab(reg: dict) -> None:
 
 
 def findings_tab(summaries: dict) -> None:
-    st.markdown("#### The two research questions that produced new evidence")
+    st.markdown("#### The research questions that produced new evidence")
     st.caption(
-        "RQ6 reconstructed and ran real released defense code against both threat models; "
-        "RQ7 synthesizes RQ2/RQ5/RQ6 into ranked open problems. Both write-ups are rendered "
-        "in full below."
+        "RQ5b recovered coverage the original extraction missed and validated the first "
+        "transfer prediction by execution; RQ6 reconstructed and ran real released defense "
+        "code against both threat models; RQ7 synthesizes them into ranked open problems. "
+        "All three write-ups are rendered in full below."
     )
-    for rq in ("RQ6", "RQ7"):
+    for rq in ("RQ5b", "RQ6", "RQ7"):
         fname, blurb = registry_source.RQ_FILES[rq]
         st.markdown(f"### {rq} — {blurb}")
         if summaries.get(rq):
@@ -775,26 +996,32 @@ def main() -> None:
         )
 
     tabs = st.tabs([
-        "Overview", "Attacks & mechanisms", "Defenses", "Coverage matrix",
-        "RQ6 / RQ7 findings", "Paper timeline", "Citation network",
+        "Overview", "Paper index", "Attacks & mechanisms", "Defenses",
+        "Coverage matrix", "Transfer predictions", "RQ findings",
+        "Paper timeline", "Citation network",
     ])
     with tabs[0]:
         if reg:
             overview_tab(reg, summaries, len(df))
     with tabs[1]:
-        if reg:
-            mechanisms_tab(reg)
+        paper_index_tab(db_path)
     with tabs[2]:
         if reg:
-            defenses_tab(reg)
+            mechanisms_tab(reg)
     with tabs[3]:
         if reg:
-            coverage_tab(reg)
+            defenses_tab(reg)
     with tabs[4]:
-        findings_tab(summaries)
+        if reg:
+            coverage_tab(reg)
     with tabs[5]:
-        timeline_tab(filtered)
+        if reg:
+            transfer_tab(reg)
     with tabs[6]:
+        findings_tab(summaries)
+    with tabs[7]:
+        timeline_tab(filtered)
+    with tabs[8]:
         network_tab(filtered, edges)
 
 
