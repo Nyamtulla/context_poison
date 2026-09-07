@@ -6,6 +6,21 @@ inclusion/exclusion criteria, snowball forward and backward from the seed list,
 and produce a structured paper database plus a local dashboard. See
 `SRS_paper_screening_tool.md` for the full spec this implements.
 
+## Deliverables (start here if you're new to the project)
+
+- **`context_sok_master_workbook.xlsx`** — the single-file reference: every
+  paper, mechanism, defense, and confirmed defense×mechanism test pair, plus
+  a Summary sheet answering the two most common "wait, what does this
+  number mean" questions.
+- **`context_sok_results_presentation.pptx`** — the results deck (RQ1–RQ6).
+- **`rq1_taxonomy_analysis.md` … `rq6_case_studies.md`** — the narrative
+  write-up for each research question; RQ6 additionally has
+  `rq6_case_study_selection.md` (the full working log behind it).
+- **`mcp_server/`** — an MCP server that exposes the same data (papers,
+  mechanisms, defenses, coverage matrix, and per-RQ headline findings) as
+  tools your own Claude can query conversationally. See
+  `mcp_server/README.md` to set it up.
+
 ## Re-screening and RQ1–RQ5 analysis
 
 After the one-time search/snowball/full-text-extraction pass, the corpus is
