@@ -99,7 +99,7 @@ moved from 7.5% to 9.2% as a result.
 ## Addendum 2 (2026-09-07) — full audit of the 122 excluded rows
 
 Triggered by a direct question: if ~25.9k records were discarded upstream,
-what makes the 122 excluded at the *coding* stage a different category, and
+what makes the 122 excluded at the *extraction* stage a different category, and
 is anything relevant sitting in them? Every one of the 122 was re-examined.
 
 **Result: 4 duplicate artifacts, 0 genuine false negatives.**
@@ -135,14 +135,16 @@ capability, RL training, planning, and robotics papers that matched on
 "agent" or "long-horizon", the same drift Addendum 1 documents.
 
 **Why the 122 are a different category from the ~24.9k.** They are the only
-papers excluded *after being read and coded in depth* (channel, consequence,
-intervention point, evidence grade, extraction fields). Everything upstream
-was cut by rules on title/abstract, at three earlier stages: the FR-7
+papers excluded *after* the extraction pass: all 122 were coded against the
+Section 3 scheme (channel, consequence, intervention point, evidence grade),
+and 110 of them additionally had full-text extraction (technical summary, key
+result, baselines compared, stated limitations). Everything upstream was cut
+by rules on title/abstract, at three earlier stages: the FR-7
 auto-screen (recall-oriented by design), then the precision filter in
 `src/confidence.py` (auto_include + names a known method/author signature
 term + >=1 citation), which reduced the ~14.9k hop-0/1 working set to 1,008.
 This is the standard systematic-review funnel: earlier stages are reported as
-counts, the final full-coding stage is reported item-by-item with reasons —
+counts, the final extraction stage is reported item-by-item with reasons —
 which is what this log is for.
 
 Nothing was deleted at any stage. All 25,922 records remain in
@@ -159,3 +161,52 @@ open to challenge, and it should be stated plainly in threats to validity.
 This audit constrains its downstream effect: at the final stage the boundary
 introduced no false negatives, and the headline coverage gap (61.2% of
 mechanisms undefended) is unchanged by anything found in the 122.
+
+## Addendum 3 (2026-09-07) — the corpus has two extraction tiers, and it matters
+
+Checking the previous addendum's own wording surfaced something not
+documented anywhere: **the 1,008 papers did not all receive the same
+treatment.** Two distinct passes were applied, and conflating them is an
+overclaim waiting for a reviewer.
+
+| Pass | Papers | What it produced |
+|---|---:|---|
+| Categorical coding (plan Section 3 scheme) | **1,008** (100%) | channel, consequence, intent, defense_intervention_point, evidence_grade |
+| Full-text extraction | **880** (87%) | technical_summary, key_result, baselines_compared, stated_limitations, models_evaluated, datasets_benchmarks |
+
+The 128 papers without full-text extraction are exactly those with no local
+PDF; they were coded from title and abstract. Among the 886 included papers
+the split is 770 full-text / 116 categorical-only.
+
+**Terminology consequence.** Because two passes exist, no single verb is
+accurate for the whole corpus. Use PRISMA's umbrella term **data extraction**
+(already the first half of the plan's Section 3 title, and unambiguous in a CS
+venue where "coding" also means writing software); reserve **coding** for the
+categorical scheme, which genuinely applies to all 1,008; and say **full-text
+extraction** only of the 880. **Do not write "we read all 1,008 papers in
+full" — that is true of 880.**
+
+**Methodological consequence, and this one is substantive.** RQ5 matched
+defenses to mechanisms by reading each defense paper's own
+`baselines_compared` / `key_result` / `technical_summary`. For the 54 defenses
+whose papers never got full-text extraction, those fields are empty — so
+those defenses could not be matched *by construction*, regardless of what
+their papers actually did:
+
+| Defense papers | Matched to >=1 named mechanism |
+|---|---:|
+| With full-text extraction (425) | 170 (**40.0%**) |
+| Without (54) | 1 (**1.9%**) |
+
+A 20x gap. **53 of the 308 unmatched defenses (17%) are unmatched because
+there was no text to match against, not because the defense was never
+evaluated.** The honest framing of RQ5's headline is therefore that 35.7% of
+*all* defenses have a confirmed mechanism match, but **40.0% of the defenses
+that were actually eligible for matching** do — and the remaining gap is a
+measurable artifact of PDF availability, not evidence about the field.
+
+This should be stated in threats to validity, and RQ5's coverage figures
+should carry the 40.0% denominator alongside the 35.7% one. Closing it is a
+bounded task: fetch the 128 missing PDFs and re-run extraction on them, which
+would also let the 11 mechanisms and 54 defenses currently sourced from
+abstract-only records be re-derived from full text.
