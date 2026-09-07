@@ -1,0 +1,89 @@
+{
+ "generated": "2026-09-06",
+ "method": "Stage 1 citation-grounded + full-text recovery pass over mechanisms RQ5 recorded as never-defended. Two candidate generators were run: (a) citation-based - defense papers citing the paper that introduced an uncovered mechanism (147 candidates); (b) full-text - the mechanism's name appearing in a defense paper's body text with the bibliography stripped (35 candidates). Every candidate was adjudicated by reading the surrounding text. Bar: 'evaluated' only, per the project's precision-first standard; 'claimed' and 'related-work-only' are recorded but do NOT count as coverage.",
+ "confirmed_pairs": [
+  {
+   "defense": "RETA (Reasoning-Enabled Task Alignment)",
+   "defense_paper_title": "Defending against Adaptive Prompt Injection Attacks via Reasoning-enabled Task Alignment",
+   "mechanism": "RL-Hammer",
+   "verdict": "evaluated",
+   "evidence": "Named in the adaptive-evaluation setup ('Adaptive evaluation uses TAP, Strategy, Genetic Search, AutoInject, RL-Hammer, and PISmith'), given per-attacker hyperparameters in Appendix C.1 ('RL-Hammer: GRPO LoRA attacker'), and appears as a results row. Also used in the motivating study.",
+   "found_by": "citation + fulltext"
+  },
+  {
+   "defense": "RETA (Reasoning-Enabled Task Alignment)",
+   "defense_paper_title": "Defending against Adaptive Prompt Injection Attacks via Reasoning-enabled Task Alignment",
+   "mechanism": "PISmith",
+   "verdict": "evaluated",
+   "evidence": "Named in the same adaptive-evaluation setup sentence; Appendix C.1 gives its configuration ('PISmith: GRPO full fine-tuned attacker'); appears as a results row.",
+   "found_by": "citation + fulltext"
+  },
+  {
+   "defense": "RETA (Reasoning-Enabled Task Alignment)",
+   "defense_paper_title": "Defending against Adaptive Prompt Injection Attacks via Reasoning-enabled Task Alignment",
+   "mechanism": "AutoInject",
+   "verdict": "evaluated",
+   "evidence": "Named in the same adaptive-evaluation setup sentence; Appendix C.1 gives its configuration ('AutoInject: GRPO-trained suffix attacker'); appears as a results row.",
+   "found_by": "fulltext only - the citation generator MISSED this pair, which is why full-text is treated as the primary signal"
+  },
+  {
+   "defense": "SnapGuard (visual stability indicator + action-oriented textual signal recovery)",
+   "defense_paper_title": "SnapGuard",
+   "mechanism": "WebInject",
+   "verdict": "evaluated",
+   "evidence": "'We consider eight representative prompt injection attacks in our evaluation, including EIA, WebInject, Pop-up, WASP...' and WebInject appears as a column in Table 1's performance comparison.",
+   "found_by": "fulltext"
+  }
+ ],
+ "rejected_notable": [
+  {
+   "defense": "CodeDelegator",
+   "mechanism": "Context Pollution (evolutionary search history bias)",
+   "verdict": "phrase-collision",
+   "note": "CodeDelegator's own title is 'Mitigating Context Pollution via Role Separation' but it means accumulated planning/debugging traces crowding the window - a different phenomenon from the registry entry, which is evolutionary-search history bias. Same words, different mechanism."
+  },
+  {
+   "defense": "Free()LM (Free-Module LoRA adapter)",
+   "mechanism": "Context Pollution (evolutionary search history bias)",
+   "verdict": "phrase-collision",
+   "note": "Uses 'context pollution' generically for long-trajectory degradation."
+  },
+  {
+   "defense": "AegisAgent",
+   "mechanism": "Context Pollution (evolutionary search history bias)",
+   "verdict": "phrase-collision",
+   "note": "'Context Pollution' is a row in the paper's own synthetic attack taxonomy, not the registry mechanism."
+  },
+  {
+   "defense": "Authenticated Prompts / Authenticated Context",
+   "mechanism": "context poisoning (self-induced, non-adversarial)",
+   "verdict": "phrase-collision",
+   "note": "Generic use inside the paper's own attack-category taxonomy."
+  },
+  {
+   "defense": "Salience Normalization (SN-1)",
+   "mechanism": "BadRAG",
+   "verdict": "method-borrowing-not-evaluation",
+   "note": "'following the conditional evaluation protocol of PoisonedRAG and BadRAG' - adopts BadRAG's evaluation protocol, does not evaluate against the BadRAG attack. Precision-first bar excludes this."
+  },
+  {
+   "defense": "UNNAMED: Layered defense (input filtering + prompt hardening)",
+   "mechanism": "ObliInjection",
+   "verdict": "comparison-not-evaluation",
+   "note": "'connecting to findings in ObliInjection' - compares its own result to ObliInjection's published finding rather than running the attack."
+  }
+ ],
+ "method_findings": {
+  "citation_candidates_generated": 147,
+  "citation_candidates_evaluated_verdict": 3,
+  "fulltext_body_candidates": 35,
+  "fulltext_candidates_evaluated_verdict": 4,
+  "confirmed_new_pairs": 4,
+  "mechanisms_moved_to_covered": ["RL-Hammer", "PISmith", "AutoInject", "WebInject"],
+  "uncovered_before": 116,
+  "uncovered_after": 112,
+  "citation_control_recall": "Citation matching re-found only 19 of 67 (28%) known-covered mechanisms, so it is a complementary signal, not a superset - defense papers routinely evaluate an attack via a bundled benchmark (AgentDojo, InjecAgent) without citing the original attack paper.",
+  "dominant_pattern": "Of 147 citation candidates, the overwhelming majority mention the mechanism only in the bibliography or a related-work sentence. Defense papers cite attack papers as related work, not as evaluation targets - which is direct evidence for RQ7's invention-outpaces-evaluation finding rather than a measurement artifact explaining it away.",
+  "permanent_floor": "20 of the 116 uncovered mechanisms are UNNAMED (a descriptive label assigned during extraction, never a term the literature uses), so they cannot be recovered by any name-based search. This is a hard floor on what this method can measure."
+ }
+}

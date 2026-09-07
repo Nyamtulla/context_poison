@@ -1,0 +1,673 @@
+[
+ {
+  "defense": "GT-MCP (Game-Theoretic Multi-Agent Control)",
+  "defense_paper_id": "03ebfea35124ed27f7f954332794209a96fff7c5",
+  "defense_paper_title": "Game-Theoretic Multi-Agent Control for Robust Contextual Reasoning in LLMs",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "adversarial",
+  "mechanism": "context poisoning (self-induced, non-adversarial)",
+  "matched_variant": "context poisoning",
+  "n_body_mentions": 4,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "ation (< \u22121) occurring only in 0.4% of cases, and no injection attempt succeeds at the controller level. The selected outputs maintain stable win rates above 98%, and computational overhead remains predictable (latency per token = 1.63 \u00d7 10\u22123 s). Index Terms\u2014Large language models, prompt injection, context poisoning, multi-agent, game-theoretic security. I. Introduction Large Language Models (LLMs) are increasingly being deployed as interactive reasoning systems that operate in evolving contexts rather than on isolated prompts [1]\u2013[3]. Modern LLM-based applications combine user instructions, retrieved knowled",
+    "eval_hint": false
+   },
+   {
+    "context": "ness. Section VI discusses the findings, Section VII outlines limitations and future directions, and Section VIII concludes the paper. II. Related Work This section reviews prior work along four directions and identifies the remaining gap in trajectory-level context control. A. Prompt Injection and Context Poisoning Prompt injection has evolved from single-turn jailbreaks toward stateful failures in which injected instructions persist inside long-lived contexts, retrieved passages, and tool outputs. Early optimization-based jailbreak work shows that short adversarial strings can reliably disrupt aligned behavi",
+    "eval_hint": false
+   },
+   {
+    "context": "s-agent agreement, and temporal consistency rather than superficial lexical filtering. Consequently, GT-MCP treats prompt injection as a long-horizon context-stabilization problem rather than a singlestep classification problem. D. Adversarial Game Formulation GT-MCP formulates prompt injection and context poisoning as a repeated interaction between a controller and an adaptive attacker. The attacker may influence the observed context through malicious user prompts, poisoned retrieved content, manipulated tool outputs, and compromised candidate generations. However, the attacker cannot directly overwrite the v",
+    "eval_hint": false
+   },
+   {
+    "context": "t 498 2 99.6 0.4 0.00 27.63 -0.18 -23.46 Category Near-zero drift Nonzero drift Min Utility Heal (%) -2.10 -24.93 0.0 100.0 compatible with the validated context and are detected as highrisk updates requiring recovery. This separation is important for long-horizon security because gradual context poisoning typically relies on small, unsupported fragments persisting across multiple turns. In GT-MCP, such fragments fail to accumulate because unsupported updates are either assigned low trust before selection and removed through recovery after selection. Controller intervention remains minimal and locali",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "InftyThink with Cross-Chain Memory (semantic lemma retrieval)",
+  "defense_paper_id": "2570b96ef56f7949fc84292cd3bd02e453e65fb9",
+  "defense_paper_title": "Directional Attractors in LLM Reasoning: How Similarity Retrieval Steers Iterative Summarization Based Reasoning",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "trolled. These limitations open several avenues for future work. The predictability of break attractors suggests that a \"smarter\" retrieval mechanism could be developed to filter out lemmas likely to cause breaks. Exploring alternative retrieval criteria beyond cosine similarity could also mitigate context pollution in heterogeneous domains. The finding that the final outcome can be predicted with high accuracy from the initial tokens could also be further explored for cheaper training methods of LLMs in the future. 7 Conclusion In this work, we introduced InftyThink with CrossChain Memory, a framework that",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "RETA (Reasoning-Enabled Task Alignment)",
+  "defense_paper_id": "32c8b781ae70c35d67c337fbd4e674236b6545c4",
+  "defense_paper_title": "Defending against Adaptive Prompt Injection Attacks via Reasoning-enabled Task Alignment",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "adversarial",
+  "mechanism": "RL-Hammer",
+  "matched_variant": "RL-Hammer",
+  "n_body_mentions": 6,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "rrent task is finished before resetting the instruction context, and task-framing instructions, which recast the injected objective as workflow metadata such as a Task Objective: or TODO: item. A natural fix is to augment Padv with adaptive adversarial examples generated by an RL adversary, such as RL-Hammer [40], which optimizes an attack reward \ud835\udc45adv . For each attacked context (\ud835\udc56 ) \ud835\udc3b\ud835\udc61 , RL-Hammer samples \ud835\udc3e candidate injections \ud835\udc51 adv \u223c \ud835\udf0badv (\u00b7 | \ud835\udc3b\ud835\udc61 ) for \ud835\udc56 = 1, . . . , \ud835\udc3e, executes the corresponding trajectories \ud835\udf0f (\ud835\udc56 ) , and scores each injection by whether it preserves user-task completion while induc",
+    "eval_hint": false
+   },
+   {
+    "context": "ns, which recast the injected objective as workflow metadata such as a Task Objective: or TODO: item. A natural fix is to augment Padv with adaptive adversarial examples generated by an RL adversary, such as RL-Hammer [40], which optimizes an attack reward \ud835\udc45adv . For each attacked context (\ud835\udc56 ) \ud835\udc3b\ud835\udc61 , RL-Hammer samples \ud835\udc3e candidate injections \ud835\udc51 adv \u223c \ud835\udf0badv (\u00b7 | \ud835\udc3b\ud835\udc61 ) for \ud835\udc56 = 1, . . . , \ud835\udc3e, executes the corresponding trajectories \ud835\udf0f (\ud835\udc56 ) , and scores each injection by whether it preserves user-task completion while inducing adversary-task completion: Our pilot experiment shows this failure. We expand the basel",
+    "eval_hint": false
+   },
+   {
+    "context": "nding trajectories \ud835\udf0f (\ud835\udc56 ) , and scores each injection by whether it preserves user-task completion while inducing adversary-task completion: Our pilot experiment shows this failure. We expand the baseline adversarial training corpus of static attacks with adaptive adversarial examples generated by RL-Hammer against a Qwen3-4B model. Figure 2 shows that this augmented training reduces ASR on the training distribution but fails to improve robustness against held-out attack strategies. On the unseen InjecAgent attack family within AgentDojo, ASR increases from 25.7% to 30.7%. The generated adaptive adver",
+    "eval_hint": true
+   },
+   {
+    "context": "s do not automatically produce useful defender training data. Red-teaming lets the attacker search during training, To validate whether a dictionary-learning-based diversity reward guides red-teaming toward wider attack-strategy coverage, we compare red-team runs with and without the reward in the RL-Hammer setting from Failure Mode II. Each run is divided into 50-step phases; in each phase, generated adversarial examples train 6 a fresh defender checkpoint, and held-out ChatInject ASR measures that checkpoint on attacks not used in the phase. Because the rolling training dictionary changes across p",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "RETA (Reasoning-Enabled Task Alignment)",
+  "defense_paper_id": "32c8b781ae70c35d67c337fbd4e674236b6545c4",
+  "defense_paper_title": "Defending against Adaptive Prompt Injection Attacks via Reasoning-enabled Task Alignment",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "adversarial",
+  "mechanism": "PISmith",
+  "matched_variant": "PISmith",
+  "n_body_mentions": 1,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "plit. Held-out static evaluation uses disjoint attack families with higher undefended ASR, IgnorePrev., InjecAgent, ImportantMsgs., ToolKnow., and ChatInject [5], ranging from 25.2% to 46.2%. Adaptive evaluation uses TAP [31], Strategy [16], Genetic Search [33], AutoInject [10], RL-Hammer [40], and PISmith [42]. Adaptive attack hyperparameters in Appendix C.1. Baselines. We evaluate Qwen3-4B and Llama-3.1-8B with no defense and with the defenses introduced in \u00a73.1. For training-based defenses, this means MetaSecAlign, as justified in \u00a72.4. Implementation. RETA uses GDPO for both stages. Stage I redte",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "RETA (Reasoning-Enabled Task Alignment)",
+  "defense_paper_id": "32c8b781ae70c35d67c337fbd4e674236b6545c4",
+  "defense_paper_title": "Defending against Adaptive Prompt Injection Attacks via Reasoning-enabled Task Alignment",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "adversarial",
+  "mechanism": "AutoInject",
+  "matched_variant": "AutoInject",
+  "n_body_mentions": 1,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "es from 6.19% to 17.4% in the pilot split. Held-out static evaluation uses disjoint attack families with higher undefended ASR, IgnorePrev., InjecAgent, ImportantMsgs., ToolKnow., and ChatInject [5], ranging from 25.2% to 46.2%. Adaptive evaluation uses TAP [31], Strategy [16], Genetic Search [33], AutoInject [10], RL-Hammer [40], and PISmith [42]. Adaptive attack hyperparameters in Appendix C.1. Baselines. We evaluate Qwen3-4B and Llama-3.1-8B with no defense and with the defenses introduced in \u00a73.1. For training-based defenses, this means MetaSecAlign, as justified in \u00a72.4. Implementation. RETA uses G",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "ADE-PRF (ADE Predictive Reliability Framework)",
+  "defense_paper_id": "35812b4a3fba1211b4e6177c3c27c931d83859f0",
+  "defense_paper_title": "Agent Delivery Engineering Predictive Reliability Framework",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "incidental",
+  "mechanism": "POISE",
+  "matched_variant": "POISE",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "al window for proactive decision-making; and longterm validation in production environments preliminarily confirms the framework\u2019s robustness and practicality under real-world workloads. As Failure Boundary Parametric Modeling and Cross-Framework Generalization Validation advance, this framework is poised to become a standardized reliability infrastructure for production deployment of LLM-based multi-agent systems. Red Hat (Intuitive Judgment): Setting aside the quantitative evidence, our intuitive assessment is that the most consequential finding of this work is not the MAE or direction accuracy p",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "GoalAnchorCheck (D1) / CrossAgentConsensus (D2)",
+  "defense_paper_id": "36dd2ed29b677eff1f4689a18040d3fae5c4278a",
+  "defense_paper_title": "PlanFlip: Attacking Multi-Agent LLM Systems via Planning-Phase Prompt Injection",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "adversarial",
+  "mechanism": "Prompt Infection",
+  "matched_variant": "Prompt Infection",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "rrupts all n sub-tasks at once via cascade amplification. Pasquini et al. [2025] further show that adaptive adversaries can circumvent existing defenses for indirect prompt injection, underscoring the need for structurally robust mechanisms rather than heuristic filters. Lee and Oh [2024] introduce Prompt Infection, where malicious prompts selfreplicate across interconnected agents; our work differs by targeting the planning phase specifically, before any tool call occurs. Evtimov et al. [2026] study user-mediated attacks on planning and web-use agents, complementing our black-box inference-time threat model.",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "GoalAnchorCheck (D1) / CrossAgentConsensus (D2)",
+  "defense_paper_id": "36dd2ed29b677eff1f4689a18040d3fae5c4278a",
+  "defense_paper_title": "PlanFlip: Attacking Multi-Agent LLM Systems via Planning-Phase Prompt Injection",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "adversarial",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "0.68\u20130.69 under A3, and blind-spot models show ASR = 0.04 with Stealth = 0.96. D1+D2 provide additive gains on overt models. Comparing A1 vs. A3: Qwen-Plus ASR drops from 0.69 to 0.62; GPT-5 from 0.68 to 0.55. D1 is most effective against PF-1 (goal substitution, \u2206ASR = 0.15\u20130.20); D2 against PF-3 (context pollution, \u2206ASR = 0.10\u20130.15). Either-DR reaches 0.90\u20131.00 on overt models, confirming D1 and D2 are complementary. The correlated blind spot is robust to defense configuration. GPT-4o yields ASR = 0.04, Stealth = 0.96 under both A1 and A3, confirming the blind spot is a structural property of backbone \u03b8, not",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "Gated Coordination (Partitioned Information Architecture + Cost-Sensitive Gated Escalation)",
+  "defense_paper_id": "3e8fdaeca758a97fb2f91e29a065c16754c77ef6",
+  "defense_paper_title": "Gated Coordination for Efficient Multi-Agent Collaboration in Minecraft Game",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "f Partitioned Architecture. We first remove the partitioned architecture (\"w/o Partition\"). This merges private reasoning and public coordination into a shared context window. As a result, the average number of messages (Msgs) surges, and the TSR noticeably drops. This empirically demonstrates that context pollution and hallucination are severe bottlenecks in standard, unpartitioned multi-agent MLLMs [19, 34]. Effectiveness of Multi-tiered Gating. We also evaluate our gating mechanism by incrementally adding its components. This progressive setup reveals a steady trajectory of performance improvements: mechan",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "RS-Claw (hierarchical skill trees for remote-sensing agents)",
+  "defense_paper_id": "4b4b030b311447a05517b0d4d1dfbf25bfa5a4e2",
+  "defense_paper_title": "RS-Claw: Progressive Active Tool Exploration via Hierarchical Skill Trees for Remote Sensing Agents",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "our method compresses the context load from a global O(N ) information overhead down to a local O(K) information overhead, where K \u226a N and is dynamically determined by the policy. More importantly, this mechanism can reduce the influx of irrelevant information into the context, thereby alleviating context pollution and token consumption caused by full-set registration. Consequently, the abstract active tool exploration process proposed in Section IIIA is concretely implemented at runtime as a policy that progressively accumulates tool-related observations along the hierarchical skill tree and synchronously ex",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "Free()LM (Free-Module LoRA adapter)",
+  "defense_paper_id": "4bc97dba841ff291ef59c77dc8b2b053366d79ff",
+  "defense_paper_title": "Free(): Learning to Forget in Malloc-Only Reasoning Models",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "00 0 0.0 Figure 4 Performance vs. Reasoning Length on HLE. While standard Qwen3-235B-A22B suffers from Degradation on trajectories longer than 80k tokens, Free()LM exhibits a striking rebound in accuracy. On these cases, the Free-Module reduces the context length by \u223c45%, effectively mitigating context pollution. 3.3 Cross-Model Generalization Following the superior performance of Free()LM, we investigate a critical question: is the capability of a trained Free-Module model-specific, or does it generalize across different architectures? To explore this, we first apply the Free-Module trained on Qwen3-8B",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "DRIP",
+  "defense_paper_id": "65d9d85b86ce1b8c3dd01a446ebf28d99fd26bdd",
+  "defense_paper_title": "DRIP: Defending Prompt Injection via Token-wise Representation Editing and Residual Instruction Fusion",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "adversarial",
+  "mechanism": "ToolHijacker",
+  "matched_variant": "ToolHijacker",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": ". Other works treat detection as a classification problem, using LLM-based judges (SelfDefend [57]), lightweight classifiers (Prompt-Guard [50], JailGuard [70]), or adversarially optimized detectors (DataSentinel [38]). A growing body of benchmarks\u2014including PINT [49], GenTel-Safe [33], BIPIA [67], ToolHijacker [47], and JailbreakBench [7]\u2014provides standardized test suites for evaluation. While detection-based defenses can flag suspicious prompts, they operate outside the generation process and offer no guarantee of safe behavior at inference. As such, they serve as a valuable complement to finetuning-bas",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "PACT (Provenance-Aware Capability Contracts)",
+  "defense_paper_id": "66e778a70b120bbffced9a13e2a7fcdb243ddc7d",
+  "defense_paper_title": "The Granularity Mismatch in Agent Security: Argument-Level Provenance Solves Enforcement and Isolates the LLM Reasoning Bottleneck",
+  "defense_intervention_point": "execution",
+  "defense_validated_against": "adversarial",
+  "mechanism": "AutoInject",
+  "matched_variant": "AutoInject",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "w provenance is interpreted: a source is checked against the semantic role of the argument it is about to bind. 3 Adaptive attacks and browser-specific enforcement. Recent attack work studies adaptive promptinjection payloads, including optimization-based or reinforcement-learning attacks such as AutoInject [1], universal adversarial suffixes [35], and adaptive attacks that target IPI defenses [25]. These attacks strengthen the case for structural enforcement: if provenance is preserved correctly, changing the surface form of an injected string should not allow it to bind a target or command argument.",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "Plan-Then-Execute (PTE) architecture for web agents",
+  "defense_paper_id": "7217d28e7b7e43e1f38a156612e61b19e487087c",
+  "defense_paper_title": "Web Agents Should Adopt the Plan-Then-Execute Paradigm",
+  "defense_intervention_point": "execution",
+  "defense_validated_against": "adversarial",
+  "mechanism": "WebInject",
+  "matched_variant": "WebInject",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "Related Work Indirect prompt injection in LLMs was articulated early by Greshake et al. [12], and was later benchmarked more systematically by BIPIA [34] and InjecAgent [35]. More recent benchmarks study tool-using and web-facing agents in increasingly realistic settings [8, 37, 10, 16, 38, 40]. WebInject [29], for instance, shows that realistic HTML-based or image-based attacks are effective against web agents. One line of work attempts to harden the reactive loop itself. Model-centric defenses [27, 4, 5, 23] train models to better separate trusted instructions from lower-trust content. Other works",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "AegisAgent",
+  "defense_paper_id": "7ecde12a9c503955ec0cdb38f892df3664fc95f1",
+  "defense_paper_title": "AegisAgent: An Autonomous Defense Agent Against Prompt Injection Attacks in LLM-HARs",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "adversarial",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "Verifier w/o Robust Reasoner 80 60 40 Attack Name HS (1\u20135) Avg. Signal Attacks Noise Injection Drift Attack 3.5 3.6 3.55 Text Attacks Synonym Bias Adversarial Rewriting 2.6 2.8 2.70 Prompt Attacks Prompt Concatenation Task Injection Role Confusion CoT Interference Multi-Task Blending Context Pollution Label Mixing Unrelated Text Noise 2.9 3.0 3.0 3.1 3.1 3.0 2.9 3.0 3.00 Hybrid Attacks Few-shot Poisoning Semantic Drift Hybrid Combo 3.8 4.0 4.1 3.97 20 0 MotionGPT IMUGPT-2.0 LLaSA HARGPT ContextGPT Figure 6: Detection accuracy of different variants: full system, without Input Sanitize",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "CodeDelegator (role separation via Delegator/Coder agents + EPSS)",
+  "defense_paper_id": "894af73fb679f95ea1a36eb6bad300bfb80566fa",
+  "defense_paper_title": "CodeDelegator: Mitigating Context Pollution via Role Separation in Code-as-Action Agents",
+  "defense_intervention_point": "execution",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 14,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "CodeDelegator: Mitigating Context Pollution via Role Separation in Code-as-Action Agents Tianxiang Fei* , Cheng Chen* , Yue Pan* , Mao Zheng, Mingyang Song Large Language Model Department, Tencent {alvinfei, cianchen, nobitapan, moonzheng, nickmysong}@tencent.com arXiv:2601.14914v1 [cs.CL] 21 Jan 2026 Abstract Recent advances in large lang",
+    "eval_hint": false
+   },
+   {
+    "context": "stract Recent advances in large language models (LLMs) allow agents to represent actions as executable code, offering greater expressivity than traditional tool-calling. However, realworld tasks often demand both strategic planning and detailed implementation. Using a single agent for both leads to context pollution from debugging traces and intermediate failures, impairing long-horizon performance. We propose C ODE D ELEGATOR, a multi-agent framework that separates planning from implementation via role specialization. A persistent Delegator maintains strategic oversight by decomposing tasks, writing specifica",
+    "eval_hint": false
+   },
+   {
+    "context": "dow, where later tokens progressively overshadow earlier content (Liu et al., 2024). Moreover, planning requires abstract reasoning, while implementation demands fine-grained attention to detail. When interleaved, planning steps and debugging traces accumulate in shared context. We refer to this as context pollution: the progressive dilution of Figure 2: CodeDelegator in action: The persistent Delegator orchestrates a pricing analysis task by delegating sub-tasks to ephemeral Coders. Coder #1 (Data Collection) has completed and been discarded; Coder #2 (Data Cleaning) is actively debugging in an isolated con",
+    "eval_hint": true
+   },
+   {
+    "context": "ting sub-tasks to ephemeral Coders. Coder #1 (Data Collection) has completed and been discarded; Coder #2 (Data Cleaning) is actively debugging in an isolated context. Each Coder\u2019s execution traces (errors, retries) remain confined and never propagate to the Delegator\u2019s planning context, preventing context pollution. task-relevant information that degrades both planning and implementation capabilities. (Fig. 1(b)). To address this tension, we propose C OD E D ELEGATOR , which decouples strategic planning from code implementation through role separation (Fig. 2). A Delegator maintains strategic focus: decompos",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "Authenticated Prompts / Authenticated Context (cryptographic provenance + policy algebra)",
+  "defense_paper_id": "94981b50dd04908681311e4a3ff3a833b297ea3d",
+  "defense_paper_title": "Protecting Context and Prompts: Deterministic Security for Non-Deterministic AI",
+  "defense_intervention_point": "execution",
+  "defense_validated_against": "adversarial",
+  "mechanism": "Prompt Infection",
+  "matched_variant": "Prompt Infection",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "llbacks and policy languages for constraining agent behavior in autonomous agents like AutoGPT [30] and BabyAGI [22]. CVE-2024-8309 [14] exposed a critical vulnerability in LangChain\u2019s GraphCypherQAChain enabling full database compromise through prompt injection. Multi-agent systems face LLM-to-LLM prompt infection where malicious instructions propagate between agents [18]. Policies lack cryptographic binding\u2014compromised LLMs generate syntactically valid but semantically malicious calls. Frameworks provide no formal guarantees about policy composition during derivation. Training-Based Approaches. Constitution",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "Authenticated Prompts / Authenticated Context (cryptographic provenance + policy algebra)",
+  "defense_paper_id": "94981b50dd04908681311e4a3ff3a833b297ea3d",
+  "defense_paper_title": "Protecting Context and Prompts: Deterministic Security for Non-Deterministic AI",
+  "defense_intervention_point": "execution",
+  "defense_validated_against": "adversarial",
+  "mechanism": "context poisoning (self-induced, non-adversarial)",
+  "matched_variant": "context poisoning",
+  "n_body_mentions": 5,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "true \u21d4 All prompts authentic These properties hold mathematically\u2014breaking them requires breaking the underlying cryptographic primitives, not clever prompt engineering. The security model shifts from probabilistic intent detection to deterministic authority verification. 4 Authenticated Context Context Poisoning. With prompts secured, the attack surface shifts to context\u2014the agent\u2019s cumulative application-level state (distinct from the model\u2019s context window) including conversation history, intermediate results, and workflow dependencies. Context represents evolving memory spanning multi-turn interactions",
+    "eval_hint": false
+   },
+   {
+    "context": "that agents process [12]. Obfuscation evades pattern matching through encoding, concatenation, or Unicode tricks\u2014attackers assume we rely on keyword filters. Semantic Drift rephrases attacks to avoid triggers while preserving malicious intent\u2014exploiting natural language\u2019s infinite paraphrase space. Context Poisoning manipulates multi-turn conversation state to bias future decisions\u2014a persistent attack on agent memory. Tool Chaining combines individually benign operations toward forbidden goals\u2014the policy composition challenge. Replay reuses stale authenticated prompts or contexts across sessions\u2014testing freshn",
+    "eval_hint": false
+   },
+   {
+    "context": "hallenge. Replay reuses stale authenticated prompts or contexts across sessions\u2014testing freshness guarantees. Each category targets a specific weakness in traditional defenses: injection tests signature verification, obfuscation tests distributed enforcement, semantic drift tests intent validation, context poisoning tests tamper-evident state, tool chaining tests policy algebra, and replay tests sequence numbers. Achieving 100% detection across all categories demonstrates that our layered approach addresses the complete attack surface\u2014not just obvious injections but sophisticated attempts to exploit non-determ",
+    "eval_hint": false
+   },
+   {
+    "context": "chain Transitive denial Monotonic sequence In Figure 1, we present four representative attack-defense scenarios demonstrating how our mechanisms compose to prevent sophisticated attacks. Multi-Stage Injection shows how cryptographic layers stack multiplicatively (covers Injection and Obfuscation). Context Poisoning demonstrates tamper-evident state protection. Tool Chaining validates policy algebra theorems. Replay confirms freshness guarantees. Semantic Drift is addressed through root text preservation and intent validation (Layer 5), validated separately in the detection results. Byzantine Resistance at the",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "SD-RAG (Selective Disclosure RAG)",
+  "defense_paper_id": "970b68c0d7422d9d8efda0006bfb57d6abd7244a",
+  "defense_paper_title": "SD-RAG: A Prompt-Injection-Resilient Framework for Selective Disclosure in Retrieval-Augmented Generation",
+  "defense_intervention_point": "ingestion",
+  "defense_validated_against": "adversarial",
+  "mechanism": "ConfusedPilot",
+  "matched_variant": "ConfusedPilot",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": ", encompassing vulnerability to prompt injection, potential data leakage, and the disclosure of sensitive information during retrieval and generation. Recent research has highlighted several security vulnerabilities in RAG pipelines. Corpus poisoning attacks, as demonstrated by PoisonedRAG [23] and ConfusedPilot [18], involve injecting malicious documents into the knowledge base, compromising the model\u2019s answers and system integrity. Graph-based RAG pipelines, while more resilient, remain vulnerable to black-box attacks that manipulate inferred graph structures (GragPoison [10]). Additionally, RAG systems",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "SnapGuard (visual stability indicator + action-oriented textual signal recovery)",
+  "defense_paper_id": "994df45a6c2816c3ce73e7a5ccec10db6642aeb6",
+  "defense_paper_title": "SnapGuard: Lightweight Prompt Injection Detection for Screenshot-Based Web Agents",
+  "defense_intervention_point": "ingestion",
+  "defense_validated_against": "adversarial",
+  "mechanism": "WebInject",
+  "matched_variant": "WebInject",
+  "n_body_mentions": 5,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "ox settings. WASP [13] assumes attackers acting as benign users who publish seemingly normal posts on platforms such as Reddit or GitHub, implicitly embedding malicious instructions that are later consumed by web agents as task context. Other studies assume attackers who control the website itself. WebInject [40] introduces imperceptible pixel-level perturbations into rendered webpages to directly induce attackerspecified actions, while classic pop-up attacks [51] embed malicious dialog windows that guide agents into executing unintended operations. Beyond visual manipulation, several works focus on in",
+    "eval_hint": false
+   },
+   {
+    "context": "] for text embedding extraction. Both methods train a logistic regression classifier for final detection. LLaVA-1.5-7B-FT denotes a fine-tuned variant of LLaVA-1.5 trained on the benchmark data. Attack. We consider eight representative prompt injection attacks in our evaluation, including EIA [16], WebInject [40], Pop-up [51], WASP [13], VWA-emb and VWA-shot [45], VPI-BU and VPI-CU [5]. Among them, VWA-emb and VWA-shot correspond to embeddedimage and screenshot-based attacks in Visual Web Arena, respectively. VPI-BU and VPI-CU denote browser use and computer use of Visual Prompt Injection, where attack",
+    "eval_hint": true
+   },
+   {
+    "context": "nal memory overhead. In contrast, large multimodal defenses Conference ACMMM \u201926, April 03\u201305, 2026, Woodstock, NY Trovato et al. Table 1: Performance comparison between SnapGuard and five image-based detection methods. Method Benign (FPR \u2193) Malicious (TPR \u2191) Avg. Cost Embed Screenshot EIA WebInject Pop-up WASP VWA-emb VWA-shot VPI-BU VPI-CU FPR \u2193 TPR \u2191 F1 \u2191 Time (s) Mem (MB) Embedding-I JailGuard LLaVA-1.5-7B LLaVA-1.5-7B-FT GPT-4o-prompt SnapGuard 0.21 0.54 0.00 0.02 0.00 0.04 0.30 0.02 0.00 0.07 0.00 0.14 0.44 0.05 0.00 0.14 0.80 0.80 0.71 0.02 0.00 0.03 0.00 0.53 0.47 0.05 0.00 0.21 0",
+    "eval_hint": true
+   },
+   {
+    "context": "0.44 0.08 0.00 0.13 0.55 0.66 0.52 0.12 0.00 0.23 0.71 0.75 0.04 6.12 0.19 0.18 14.50 1.81 591.00 13840.00 13875.00 13594.00 -0.00 Table 2: Performance comparison between SnapGuard and five text-based detection methods. Method Benign (FPR \u2193) Malicious (TPR \u2191) Avg. Cost Embed Screenshot EIA WebInject Pop-up WASP VWA-emb VWA-shot VPI-BU VPI-CU FPR \u2193 TPR \u2191 F1 \u2191 Time (s) Mem (MB) 0.00 0.03 0.00 0.02 0.00 0.14 0.00 0.02 0.55 0.02 0.39 0.80 0.00 0.01 0.00 0.00 0.00 0.53 0.00 0.08 0.00 0.08 0.00 0.70 0.00 0.02 0.00 0.02 0.38 0.71 such as GPT-4o-prompt incur substantially higher inference cost, w",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "Salience Normalization (SN-1)",
+  "defense_paper_id": "ac4d3cc1cd6289702d7ab3cb54bda5e17506224d",
+  "defense_paper_title": "Salience Induction against Multi-Hop RAG Agents: Threat and Defense",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "adversarial",
+  "mechanism": "TrojanRAG",
+  "matched_variant": "TrojanRAG",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "y evolve with future training. 9 Related Work Adversarial attacks on RAG. Content poisoning\u2014injecting false passages\u2014is the dominant RAG attack paradigm. PoisonedRAG [41] demonstrates that as few as five adversarial passages suffice for >90% attack success; BadRAG [33] targets retrieval ranking; TrojanRAG [5] and BadChain [32] embed backdoor triggers; Phantom [3] generalizes backdoor attacks to RAG; and Shafran and Shmatikov [22] demonstrate denial-of-service via blocker documents (USENIX Security 2025). All rely on false or adversarial content and are susceptible to fact-verification defenses [31].",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "Salience Normalization (SN-1)",
+  "defense_paper_id": "ac4d3cc1cd6289702d7ab3cb54bda5e17506224d",
+  "defense_paper_title": "Salience Induction against Multi-Hop RAG Agents: Threat and Defense",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "adversarial",
+  "mechanism": "BadRAG",
+  "matched_variant": "BadRAG",
+  "n_body_mentions": 2,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "untargeted ASR across both domains. 7.3 RQ1b: End-to-End Retrieval Validation The 83.3% headline relies on an oracle title/alias retrieval router (\u00a77.1) so that the binding decision is isolated from retrieval-ranking effects, following the conditional evaluation protocol of PoisonedRAG [41] and BadRAG [33]. However, Salience-Editing operators\u2014in particular Promote, Bridge, and Emphasize\u2014 change the surface form of the document and could in principle reduce its retrieval score, weakening the conditional assumption. We therefore re-run the full attack with BGE-m3 [4] as a dense retriever over the",
+    "eval_hint": true
+   },
+   {
+    "context": "er models whose salience sensitivity may evolve with future training. 9 Related Work Adversarial attacks on RAG. Content poisoning\u2014injecting false passages\u2014is the dominant RAG attack paradigm. PoisonedRAG [41] demonstrates that as few as five adversarial passages suffice for >90% attack success; BadRAG [33] targets retrieval ranking; TrojanRAG [5] and BadChain [32] embed backdoor triggers; Phantom [3] generalizes backdoor attacks to RAG; and Shafran and Shmatikov [22] demonstrate denial-of-service via blocker documents (USENIX Security 2025). All rely on false or adversarial content and are susce",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "Yunque DeepResearch - Dynamic Context Management module specifically",
+  "defense_paper_id": "arxiv:2601.19578",
+  "defense_paper_title": "Yunque DeepResearch Technical Report",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "the agent from an automated Acting Mode to a high-level Reflective Mode. In this state, the system executes a three-stage recovery protocol: \u2022 Anomaly Diagnosis: The agent is prompted to critically analyze the execution history to pinpoint the root cause of failure. \u2022 Trajectory Pruning: To prevent context pollution, the system explicitly prunes the recent invalid interaction traces from the context window. This ensures that the agent\u2019s future decisions are not biased by the failed attempts. \u2022 Re-generation: The agent synthesizes an alternative output\u2014such as a revised plan or a corrected conclusion\u2014effectivel",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "UNNAMED: Representation Engineering-based Probing for IPI detection",
+  "defense_paper_id": "b02c2db7580b600815a486dce0766df5e2987a7c",
+  "defense_paper_title": "Your Agent is More Brittle Than You Think: Uncovering Indirect Injection Vulnerabilities in Agentic LLMs",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "adversarial",
+  "mechanism": "SkillJect",
+  "matched_variant": "SkillJect",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "iew. However, these expanded action spaces introduce severe vulnerabilities and critical challenges for system safety (Zhou et al., 2026; Chiang et al., 2025). Enabling models to interact freely with third-party environments exponentially expands the attack surface. For instance, recent works like SkillJect (Jia et al., 2026) demonstrate how automated pipelines can create poisoned agentic skills through iterative adversarial refinement. While single-turn text jailbreaks are extensively studied, the resilience of multi-agent systems against indirect and stealthy threats hidden within external environme",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "RouteGuard",
+  "defense_paper_id": "b24fa85ac644bac1ae250e9af9737a58f17fd08f",
+  "defense_paper_title": "RouteGuard: Internal-Signal Detection of Skill Poisoning in LLM Agents",
+  "defense_intervention_point": "ingestion",
+  "defense_validated_against": "adversarial",
+  "mechanism": "SkillJect",
+  "matched_variant": "SkillJect",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "tector for skillpoisoning carriers. Skill-Poisoning Attacks and Benchmarks SKILL-INJECT is the closest benchmark predecessor because it formalizes skill-file poisoning and demonstrates that poisoned skills can alter downstream agent behavior (Schmotz et al., 2026). Other attack-side works such as SkillJect-style generators and supply-chain poisoning papers broaden the attack family by generating stealthier or more template-driven payloads. These papers motivate the threat and contribute attack diversity, but they are not themselves detection methods. Their value for the current paper is therefore exp",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "UNNAMED: Fraud-detection-inspired trajectory-feature detector (XGBoost, 42-dim features)",
+  "defense_paper_id": "b6df37b96a984387de22ad1ecbf0a66a20ada084",
+  "defense_paper_title": "A Low-Latency Fraud Detection Layer for Detecting Adversarial Interaction Patterns in LLM-Powered Agents",
+  "defense_intervention_point": "ingestion",
+  "defense_validated_against": "adversarial",
+  "mechanism": "context poisoning (self-induced, non-adversarial)",
+  "matched_variant": "context poisoning",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "risks. A major class of attacks is prompt injection, in which adversarial content attempts to override system instructions or manipulate downstream behavior. Related risks include jailbreaks, indirect prompt injection from retrieved documents, malicious tool suggestions, instruction collisions, and context poisoning [23]. 2.2 Existing Defense Strategies The majority of existing work on LLMs security has focused on defensive strategies, primarily operating at the content or model level: (1) prompt-level defense [42], which attempts to classify or sanitize suspicious inputs before they are processed; (2) outp",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "Hippocampus (Dynamic Wavelet Matrix memory)",
+  "defense_paper_id": "bd8a21437a217f0c0bed6d852138edd425005d8c",
+  "defense_paper_title": "Hippocampus: An Efficient and Scalable Memory Module for Agentic AI",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "incidental",
+  "mechanism": "POISE",
+  "matched_variant": "POISE",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "an supervision. Early prototypes such as AutoGPT (Chen et al., 2023) and BabyAGI (Nakajima, 2023) demonstrated that coupling the LLMs with goal-driven loops unlocks emergent capabilities far beyond static prompting. As agentic AI transitions from research novelty to production infrastructure, it is poised to reshape productivity tools, DevOps workflows (Ali & Puri, 2024), and knowledge systems (Zhu et al., 2024). Memory is a core component of agentic AI systems. While perception and planning enable agents to respond to immediate stimuli, memory allows them to accumulate experience, maintain coheren",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "HMT (Hierarchical Memory Tree)",
+  "defense_paper_id": "bddff0e7853344b7f8e2bccc7e9145630b6e8b3e",
+  "defense_paper_title": "Enhancing Web Agents with a Hierarchical Memory Tree",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 6,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "tails. For example, the agent may attempt to click a button with an ID that does not exist on the new site. We refer to this phenomenon I. I NTRODUCTION as intention-execution entanglement. This entanglement leads Web agents are interactive systems designed to fulfill user- to workflow mismatch and context pollution, where the agent specified goals on websites by perceiving the page state retrieves actions that are functionally correct for the source and executing interface actions such as clicking, typing, and task but sequentially invalid on the target page (e.g., skipping selecting. Unlike traditional autom",
+    "eval_hint": false
+   },
+   {
+    "context": "& transferable semantic descriptions Select Stage \"Search Flights\" Instruction: \"Update profile name\" [(Obs_1, Act_1: click #avatar-icon-sm), (Obs_2, Act_2: type #field-username \u201c..\"), \u2026] Observation Actor Re-grounding via Semantic Matching Successful Planning & Grounding Workflow Mismatch & Context Pollution Error: Planned step wrong & element grounding error. Success: Planned step correct & grounding success. Fig. 1. Comparison between Flat Memory and Hierarchical Memory Tree (HMT). (a) Flat memory methods retrieve interaction trajectories mixed with original workflows and source-specific implement",
+    "eval_hint": false
+   },
+   {
+    "context": "ss: Planned step correct & grounding success. Fig. 1. Comparison between Flat Memory and Hierarchical Memory Tree (HMT). (a) Flat memory methods retrieve interaction trajectories mixed with original workflows and source-specific implementation details w/o subgoals, leading to workflow mismatch and context pollution when applied to unseen websites. (b) HMT decouples intent from execution using a tree structure. It retrieves stage-aligned subgoals and abstract element descriptions, enabling the agent to plan the correct step and ground actions on the target interface effectively. states rather than just the in",
+    "eval_hint": false
+   },
+   {
+    "context": "also structurally decouple the action pattern memory structure that stores trajectories as linear sequences. from its specific realization on the target webpage. While effective in fixed environments, this rigid format risks entangling high-level intent with site-specific action details, leading to context pollution when applied to new environments. III. M ETHOD This challenge mirrors problems in long-term user behavior modeling and cold-start recommendation, where recent literaThis section presents HMT, a hierarchical memory frameture suggests solutions like offline trajectory clustering [30] and work designe",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "AuthGraph",
+  "defense_paper_id": "c0db3464d66135d7b7399346d6a90cf1467911b2",
+  "defense_paper_title": "Aligning Provenance with Authorization: A Dual-Graph Defense for LLM Agents",
+  "defense_intervention_point": "execution",
+  "defense_validated_against": "adversarial",
+  "mechanism": "Prompt Infection",
+  "matched_variant": "Prompt Infection",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "imultaneously for defense in depth. 2.2 Attacks and Benchmarks Indirect prompt injection was first systematically described by Greshake et al. [7], subsequently evolving into sophisticated variants including universal prompt injection [15], neural exec [16], adaptive attacks [26], and multi-agent prompt infection [11]. Wang et al.\u2019s SoK [21] classifies 78 attack and defense papers, identifying that current defenses are insufficient in reasoning integrity verification, the precise gap that AUTH G RAPH directly addresses. The community has established benchmarks including AgentDojo [4] for standardized multi-",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "UNNAMED: Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection",
+  "defense_paper_id": "c14b66c10e7d4416e4e98b31baf020270cddb294",
+  "defense_paper_title": "Context Contamination in LLM Analysis of Network Security Logs: Poison with Passive Prompt Injection and Mitigation Evaluation",
+  "defense_intervention_point": "none",
+  "defense_validated_against": "adversarial",
+  "mechanism": "ObliInjection",
+  "matched_variant": "ObliInjection",
+  "n_body_mentions": 1,
+  "any_eval_hint": true,
+  "contexts": [
+   {
+    "context": "fragments span multiple batches, our retrieval phase uses BM25 + dense (bge-large) hybrid retrieval over a 50K-entry corpus, top-k=50 with recency weighting, mirroring RAGLog/LogGPT. Preliminary experiments with shuffled retrieval show Context Stitching ASR drops to 34.2% (connecting to findings in ObliInjection Wang et al. (2025a)), reinforcing retrieval ordering as a partial mitigation rather than a refutation of the threat. Additionally, to test prompt sensitivity, we ran three system-prompt variants (terse, detailed, and role-play SOC analyst); headline ASR varied within only \u00b13.1 percentage points. 7",
+    "eval_hint": true
+   }
+  ]
+ },
+ {
+  "defense": "Laser (structured action protocol + context register)",
+  "defense_paper_id": "c39c4cadbf0f6bbf509848c9a8de7bf0c7d6785b",
+  "defense_paper_title": "Laser: Governing Long-Horizon Agentic Search via Structured Protocol and Context Register",
+  "defense_intervention_point": "ingestion",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "sk structures. Without a rigorous structural guide, the reasoning process is prone to degenerating into unstructured loops or premature conclusions. Second, the accumulation of raw interaction logs (e.g.retrieved knowledge and intermediate reasoning) rapidly consumes the context window, leading to \u201ccontext pollution\u201d where critical infor- mation is obscured by noise, ultimately degrading both reasoning quality and scalability. To address these challenges, we introduce Laser, a novel framework designed to govern Longhorizon Agentic search by introducing a Structured protocol that regularizes the reasoning pro",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "ARGUS",
+  "defense_paper_id": "cc7a9701833cf982f6cc28957b604357e53248b8",
+  "defense_paper_title": "ARGUS: Defending LLM Agents Against Context-Aware Prompt Injection",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "adversarial",
+  "mechanism": "HOUYI",
+  "matched_variant": "HOUYI",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "nd later jailbreaks strengthen attacks through universal triggers [58], optimized suffixes [59], genetic search [60], blackbox optimization [61], and benchmarks such as JailbreakBench [62]. Indirect prompt injection moves payloads into external data that the model consumes later [11], as studied in HouYi [63] and broader taxonomies and benchmarks [12]. Defenses transform or annotate inputs [12, 27, 64], train models to separate instructions from data [18, 65, 66], or add guard models and detectors [67\u201369]. These approaches are useful when the main question is whether a prompt or document contains a",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "AgentVisor",
+  "defense_paper_id": "cf32c4016c102fac6ce1fef1e93539bc3de781cd",
+  "defense_paper_title": "AgentVisor: Defending LLM Agents Against Prompt Injection via Semantic Virtualization",
+  "defense_intervention_point": "execution",
+  "defense_validated_against": "adversarial",
+  "mechanism": "CrossInject",
+  "matched_variant": "Cross Inject",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "to trigger self-correction, maintaining high utility. Our contributions are summarized as follows: 2025; Liu et al., 2024a) utilize gradient approximation (Zou et al., 2023) to generate adversarial tokens. However, these methods are computationally expensive and often exhibit poor transferability across injection scenarios. In contrast, nonoptimization-based methods (Willison; Liu et al., 2024b; Debenedetti et al., 2024) rely on manually crafted semantic triggers such as Ignore (Perez and Ribeiro, 2022) or Escape (Breitenbach et al., 2023) to manipulate agent behavior. Crucially, these handcrafted techni",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "RhinoInsight",
+  "defense_paper_id": "ef67e45338e8ed20907ff2eaae7a56ec38bf287d",
+  "defense_paper_title": "RhinoInsight: Improving Deep Research through Control Mechanisms for Model Behavior and Context",
+  "defense_intervention_point": "reasoning",
+  "defense_validated_against": "incidental",
+  "mechanism": "Context Pollution (evolutionary search history bias)",
+  "matched_variant": "Context Pollution",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "at\u22121 , ot\u22121 , (10) where G retains only the question q and current subgoals, a compressed memory slice relevant to the subgoals, and minimal information about the previous action and observation. Decision-making at step t is conditioned on Wt : \u03c4t , a\u0303t , at \u223c \u03c0 (\u00b7 | Wt ). (11) This design reduces context pollution while preserving consistency with key evidence and progress signals, enabling reliable reasoning and execution for structured report generation. Drafting & Extracting Evidence Writing is prepared when the controller deems the task complete or the horizon is reached. Let \u03c3t = stop(Ot , Mt ) \u2208 {0, 1}",
+    "eval_hint": false
+   }
+  ]
+ },
+ {
+  "defense": "Focus (slime-mold-inspired active context compression)",
+  "defense_paper_id": "fa6afa1b821c74ea098f81cd38de5abd04874143",
+  "defense_paper_title": "Active Context Compression: Autonomous Memory Management in LLM Agents",
+  "defense_intervention_point": "ingestion",
+  "defense_validated_against": "incidental",
+  "mechanism": "context poisoning (self-induced, non-adversarial)",
+  "matched_variant": "context poisoning",
+  "n_body_mentions": 1,
+  "any_eval_hint": false,
+  "contexts": [
+   {
+    "context": "g this capacity naively presents three critical challenges: 1) Cost: In an iterative loop, re-processing a growing history for every new inference step leads to quadratic cost accumulation. 2) Latency: Time-to-first-token degrades linearly with context length, making interactive agents sluggish. 3) Context Poisoning: Long contexts filled with trial-anderror logs, failed tests, and verbose tool outputs can distract the model, leading to the \u201cLost in the Middle\u201d phenomenon [1]. II. R ELATED W ORK Memory-Augmented Agents. Several approaches address context limitations through external memory. MemGPT [2] implement",
+    "eval_hint": false
+   }
+  ]
+ }
+]

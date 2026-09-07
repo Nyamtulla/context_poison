@@ -26,6 +26,10 @@ RQ3_JSON = "data/registries/rq3_pollution_registry.json"
 RQ4_JSON = "data/registries/rq4_defense_registry.json"
 RQ5_JSON = "data/registries/rq5_coverage_matrix.json"
 RQ5_RAW_GLOB = "data/registries/raw/rq5_batch*.csv"
+# Pairs recovered after RQ5 by the Stage 1 citation + full-text pass. Kept in a
+# separate file, and tagged with `source` on every pair, so RQ5's originally
+# published numbers stay recoverable rather than being silently overwritten.
+RQ5_SUPP_JSON = "data/registries/rq5_supplementary_pairs.json"
 
 RQ_FILES = {
     "RQ1": ("rq1_taxonomy_analysis.md", "Taxonomy — which channel × intent × consequence cells have been studied"),
@@ -78,16 +82,48 @@ def load_raw_registries(root=None):
 
 # ------------------------------------------------------------ enriched loads
 
-def load_all(root=None) -> dict:
+def load_supplementary(root=None) -> list[dict]:
+    """Stage 1 recovered pairs (empty list if the file isn't present)."""
+    path = _root(root) / RQ5_SUPP_JSON
+    if not path.exists():
+        return []
+    return json.loads(path.read_text()).get("confirmed_pairs", [])
+
+
+def load_all(root=None, include_supplementary: bool = True) -> dict:
     """The whole picture, joined: mechanisms carry the defenses tested against
     them, defenses carry the mechanisms they were tested against, and every
-    confirmed pair carries both sides' metadata plus the match rationale."""
+    confirmed pair carries both sides' metadata plus the match rationale.
+
+    Set include_supplementary=False to reproduce RQ5's originally published
+    numbers exactly, without the Stage 1 recovery pass."""
     mechs, defs, cov = load_raw_registries(root)
     justif = _load_justifications(root)
 
-    mech_to_defenses = cov["mech_to_defenses"]     # mechanism name -> [defense rows]
-    defense_to_mechs = cov["defense_to_mechs"]     # defense row (str) -> [mechanism names]
+    mech_to_defenses = {k: list(v) for k, v in cov["mech_to_defenses"].items()}
+    defense_to_mechs = {k: list(v) for k, v in cov["defense_to_mechs"].items()}
     uncovered = set(cov["uncovered_mechanisms"])
+
+    supp = load_supplementary(root) if include_supplementary else []
+    supp_pairs = []
+    if supp:
+        row_by_defense = {d.get("defense_name"): str(d["row"]) for d in defs}
+        for p in supp:
+            row = row_by_defense.get(p["defense"])
+            if row is None:
+                # Loud, not silent: a supplementary pair naming a defense that
+                # isn't in the RQ4 registry means the two files have drifted
+                # (usually a name typed slightly differently). Dropping it
+                # quietly would lose an adjudicated result with no trace.
+                raise ValueError(
+                    f"supplementary pair names defense {p['defense']!r}, which is not in the "
+                    f"RQ4 registry - fix the name in {RQ5_SUPP_JSON} to match exactly")
+            mech_to_defenses.setdefault(p["mechanism"], []).append(int(row))
+            defense_to_mechs.setdefault(row, []).append(p["mechanism"])
+            uncovered.discard(p["mechanism"])
+            supp_pairs.append({"defense_row": int(row), "defense_name": p["defense"],
+                               "mechanism_name": p["mechanism"], "confidence": "high",
+                               "justification": p.get("evidence", ""), "source": "stage1_supplementary"})
 
     defs_by_row = {str(d["row"]): d for d in defs}
     mechs_by_name = {(m.get("technique_name") or m.get("name")): m for m in mechs}
@@ -135,7 +171,7 @@ def load_all(root=None) -> dict:
         })
 
     pairs = []
-    for match in cov["matches"]:
+    for match in list(cov["matches"]) + supp_pairs:
         row = str(match["defense_row"])
         d = defs_by_row.get(row, {})
         mech = mechs_by_name.get(match["mechanism_name"], {})
@@ -151,8 +187,10 @@ def load_all(root=None) -> dict:
             "mechanism_consequence": mech.get("consequence"),
             "cross_track": bool(d.get("track") and mech.get("track")
                                 and d.get("track") != mech.get("track")),
-            "justification": justif.get((row, match["mechanism_name"]), ""),
+            "justification": match.get("justification")
+                             or justif.get((row, match["mechanism_name"]), ""),
             "defense_paper_title": d.get("title"),
+            "source": match.get("source", "rq5"),
         })
 
     return {
@@ -163,10 +201,13 @@ def load_all(root=None) -> dict:
         "stats": {
             "n_mechanisms": len(mechs),
             "n_defenses": len(defs),
-            "n_pairs": cov["n_matched_pairs"],
-            "n_defenses_matched": cov["n_defenses_matched"],
+            "n_pairs": len(pairs),
+            "n_pairs_rq5_original": cov["n_matched_pairs"],
+            "n_pairs_supplementary": len(supp_pairs),
+            "n_defenses_matched": sum(1 for x in defenses if x["has_confirmed_match"]),
             "n_defenses_total": cov["n_defenses_total"],
-            "n_mechs_covered": cov["n_mechs_covered"],
+            "n_mechs_covered": sum(1 for x in mechanisms if x["has_any_defense"]),
+            "n_mechs_covered_rq5_original": cov["n_mechs_covered"],
             "n_mechs_total": cov["n_mechs_total"],
             "n_mechs_uncovered": len(uncovered),
             "mechs_per_defense_distribution": cov.get("mechs_per_defense_distribution", {}),
