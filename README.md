@@ -13,9 +13,11 @@ and produce a structured paper database plus a local dashboard. See
   a Summary sheet answering the two most common "wait, what does this
   number mean" questions.
 - **`context_sok_results_presentation.pptx`** — the results deck (RQ1–RQ6).
-- **`rq1_taxonomy_analysis.md` … `rq6_case_studies.md`** — the narrative
+- **`rq1_taxonomy_analysis.md` … `rq7_open_problems.md`** — the narrative
   write-up for each research question; RQ6 additionally has
-  `rq6_case_study_selection.md` (the full working log behind it).
+  `rq6_case_study_selection.md` (the full working log behind it), and RQ7
+  synthesizes RQ2/RQ5/RQ6 into ranked research priorities
+  (`scripts/rq7_synthesis.py` recomputes its cross-cutting statistics).
 - **`mcp_server/`** — an MCP server that exposes the same data (papers,
   mechanisms, defenses, coverage matrix, and per-RQ headline findings) as
   tools your own Claude can query conversationally. See
@@ -80,12 +82,29 @@ python cli.py smoke-test       # network-light wiring check
 streamlit run dashboard.py
 ```
 
-Reads `data/context_sok.db` directly — no cloud dependency. Timeline tab
-plots papers by year, colored by track, sized by citation count. Network tab
-draws the citation graph with cross-track edges highlighted in red — this is
-the view meant to make the RQ2 cross-citation finding (from the parent
-project plan) visually obvious. Click any point/node to open its metadata
-panel.
+Seven tabs, covering the whole project in one place — no cloud dependency:
+
+- **Overview** — headline counts plus what every research question (RQ1–RQ7)
+  found, each expandable.
+- **Attacks & mechanisms** — all 183 named poisoning sources (RQ3),
+  filterable by track/channel/consequence/coverage, with per-mechanism
+  drill-down into which defenses were tested against it.
+- **Defenses** — all 479 defenses (RQ4), filterable by intervention point
+  and the threat model their own paper validated them against.
+- **Coverage matrix** — the RQ5 defense×mechanism matches, a heatmap of
+  where testing effort concentrates, every confirmed pair with its match
+  rationale, and the 116 mechanisms nothing has ever been tested against.
+- **RQ6 / RQ7 findings** — the two write-ups that produced new evidence,
+  rendered in full.
+- **Paper timeline** — papers by year, colored by track, sized by citations.
+- **Citation network** — the citation graph with cross-track edges
+  highlighted in red, making the RQ2 finding visually obvious.
+
+The sidebar's paper filters apply to the last two tabs; the registry tabs
+carry their own. Papers come from the editable Excel source, registries from
+`data/registries/` via `src/registry_source.py` (shared with the MCP server,
+so both always report the same numbers), citation edges from the DB. Click
+any point/node in the paper tabs to open its metadata panel.
 
 ## Tests
 

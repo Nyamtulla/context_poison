@@ -11,58 +11,33 @@ All data is read from files already committed in this repo (data/exports/,
 data/registries/, and the rq*.md writeups) — nothing is fetched over the
 network and no API key is required to run this server.
 """
-import json
-import csv
-import glob
-import re
+import sys
 from pathlib import Path
 
 from mcp.server.mcpserver import MCPServer
-from openpyxl import load_workbook
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+# The joins that turn the three registry JSONs into "a mechanism, with the
+# defenses tested against it" live in src/registry_source.py, shared with
+# dashboard.py, so the two views of this data can't drift apart.
+from src import registry_source  # noqa: E402
 
 # ================================================================ DATA LOADING
 
-def _load_papers():
-    wb = load_workbook(ROOT / "data/exports/paper_dashboard_source.xlsx", read_only=True)
-    ws = wb["Papers"]
-    rows = list(ws.iter_rows(values_only=True))
-    header = list(rows[0])
-    return [dict(zip(header, r)) for r in rows[1:]]
-
-
-def _load_registries():
-    mechs = json.load(open(ROOT / "data/registries/rq3_pollution_registry.json"))
-    defs = json.load(open(ROOT / "data/registries/rq4_defense_registry.json"))
-    cov = json.load(open(ROOT / "data/registries/rq5_coverage_matrix.json"))
-    justif = {}
-    for fp in sorted(glob.glob(str(ROOT / "data/registries/raw/rq5_batch*.csv"))):
-        with open(fp, newline="") as f:
-            for row in csv.DictReader(f):
-                key = (str(row.get("defense_row", "")).strip(), row.get("matched_mechanism_name", "").strip())
-                justif[key] = row.get("match_justification", "")
-    return mechs, defs, cov, justif
-
-
-PAPERS = _load_papers()
+PAPERS = registry_source.load_papers()
 PAPERS_BY_ID = {p["paper_id"]: p for p in PAPERS}
-MECHS, DEFS, COV, JUSTIF = _load_registries()
-MECH_TO_DEFENSES = COV["mech_to_defenses"]       # mechanism_name -> [defense rows]
-DEFENSE_TO_MECHS = COV["defense_to_mechs"]       # defense row (str) -> [mechanism names]
-UNCOVERED_NAMES = set(COV["uncovered_mechanisms"])
-MECHS_BY_NAME = {(m.get("technique_name") or m.get("name")): m for m in MECHS}
-DEFS_BY_ROW = {str(d["row"]): d for d in DEFS}
-DEFS_BY_NAME = {d.get("defense_name"): d for d in DEFS}
 
-RQ_FILES = {
-    "RQ1": ROOT / "rq1_taxonomy_analysis.md",
-    "RQ2": ROOT / "cross_citation_analysis.md",
-    "RQ3": ROOT / "rq3_pollution_census.md",
-    "RQ4": ROOT / "rq4_defense_census.md",
-    "RQ5": ROOT / "rq5_coverage_matrix.md",
-    "RQ6": ROOT / "rq6_case_studies.md",
-}
+_REG = registry_source.load_all()
+MECHANISMS = _REG["mechanisms"]
+DEFENSES = _REG["defenses"]
+PAIRS = _REG["pairs"]
+STATS = _REG["stats"]
+UNCOVERED_NAMES = set(_REG["uncovered_mechanism_names"])
+MECHS_BY_NAME = {m["mechanism_name"]: m for m in MECHANISMS}
+DEFS_BY_NAME = {d["defense_name"]: d for d in DEFENSES}
+RQ_FILES = registry_source.RQ_FILES
 
 
 def _match(text, needle):
@@ -95,14 +70,15 @@ def get_stats() -> dict:
     (defense, mechanism) tested pairs. Good first call to orient yourself."""
     return {
         "papers_in_corpus": len(PAPERS),
-        "named_mechanisms_rq3": len(MECHS),
-        "confirmed_defenses_rq4": len(DEFS),
-        "confirmed_defense_mechanism_pairs_rq5": COV["n_matched_pairs"],
-        "defenses_with_confirmed_mechanism_match": COV["n_defenses_matched"],
-        "defenses_with_confirmed_mechanism_match_pct": round(100 * COV["n_defenses_matched"] / COV["n_defenses_total"], 1),
-        "mechanisms_with_at_least_one_defense": COV["n_mechs_covered"],
-        "mechanisms_with_zero_defenses": len(UNCOVERED_NAMES),
-        "mechanisms_with_zero_defenses_pct": round(100 * len(UNCOVERED_NAMES) / COV["n_mechs_total"], 1),
+        "named_mechanisms_rq3": STATS["n_mechanisms"],
+        "confirmed_defenses_rq4": STATS["n_defenses"],
+        "confirmed_defense_mechanism_pairs_rq5": STATS["n_pairs"],
+        "defenses_with_confirmed_mechanism_match": STATS["n_defenses_matched"],
+        "defenses_with_confirmed_mechanism_match_pct": round(100 * STATS["n_defenses_matched"] / STATS["n_defenses_total"], 1),
+        "mechanisms_with_at_least_one_defense": STATS["n_mechs_covered"],
+        "mechanisms_with_zero_defenses": STATS["n_mechs_uncovered"],
+        "mechanisms_with_zero_defenses_pct": round(100 * STATS["n_mechs_uncovered"] / STATS["n_mechs_total"], 1),
+        "cross_track_pairs": sum(1 for p in PAIRS if p["cross_track"]),
     }
 
 
@@ -152,28 +128,25 @@ def list_mechanisms(query: str = "", track: str = "", channel: str = "", consequ
     mechanisms). Set covered_only=True for mechanisms with >=1 confirmed
     defense tested against them, or False for the 116 with zero coverage."""
     out = []
-    for m in MECHS:
-        nm = m.get("technique_name") or m.get("name")
+    for m in MECHANISMS:
         if track and str(m.get("track", "")).strip().lower() != track.strip().lower():
             continue
         if channel and str(m.get("channel", "")).strip().lower() != channel.strip().lower():
             continue
         if consequence and str(m.get("consequence", "")).strip().lower() != consequence.strip().lower():
             continue
-        is_covered = nm not in UNCOVERED_NAMES
-        if covered_only is not None and is_covered != covered_only:
+        if covered_only is not None and m["has_any_defense"] != covered_only:
             continue
-        if query and not any(_match(m.get(f), query) for f in ("technique_name", "name", "notes")):
+        if query and not any(_match(m.get(f), query) for f in ("mechanism_name", "notes")):
             continue
-        defenders = MECH_TO_DEFENSES.get(nm, [])
         out.append({
-            "mechanism_name": nm,
+            "mechanism_name": m["mechanism_name"],
             "track": m.get("track"),
             "channel": m.get("channel"),
             "consequence": m.get("consequence"),
-            "n_defenses_tested_against": len(defenders),
-            "source_paper_id": m.get("paper_id"),
-            "source_paper_title": m.get("title"),
+            "n_defenses_tested_against": m["n_defenses_tested"],
+            "source_paper_id": m.get("source_paper_id"),
+            "source_paper_title": m.get("source_paper_title"),
             "notes": m.get("notes"),
         })
         if len(out) >= limit:
@@ -192,19 +165,18 @@ def list_defenses(query: str = "", track: str = "", channel: str = "", consequen
     lists the 309 defenses NOT confirmed tested against any RQ3-named
     mechanism (see get_stats / RQ5 for why that isn't the same as "untested")."""
     out = []
-    for d in DEFS:
+    for d in DEFENSES:
         if track and str(d.get("track", "")).strip().lower() != track.strip().lower():
             continue
         if channel and str(d.get("channel", "")).strip().lower() != channel.strip().lower():
             continue
         if consequence and str(d.get("consequence", "")).strip().lower() != consequence.strip().lower():
             continue
-        if defense_intervention_point and str(d.get("defense_intervention_point", "")).strip().lower() != defense_intervention_point.strip().lower():
+        if defense_intervention_point and str(d.get("intervention_point", "")).strip().lower() != defense_intervention_point.strip().lower():
             continue
         if validated_against and str(d.get("validated_against", "")).strip().lower() != validated_against.strip().lower():
             continue
-        mechs_tested = DEFENSE_TO_MECHS.get(str(d["row"]), [])
-        if has_mechanism_match is not None and (len(mechs_tested) > 0) != has_mechanism_match:
+        if has_mechanism_match is not None and d["has_confirmed_match"] != has_mechanism_match:
             continue
         if query and not any(_match(d.get(f), query) for f in ("defense_name", "notes")):
             continue
@@ -213,12 +185,12 @@ def list_defenses(query: str = "", track: str = "", channel: str = "", consequen
             "track": d.get("track"),
             "channel": d.get("channel"),
             "consequence": d.get("consequence"),
-            "defense_intervention_point": d.get("defense_intervention_point"),
+            "defense_intervention_point": d.get("intervention_point"),
             "validated_against": d.get("validated_against"),
-            "n_mechanisms_tested_against": len(mechs_tested),
-            "mechanisms_tested_against": mechs_tested,
-            "source_paper_id": d.get("paper_id"),
-            "source_paper_title": d.get("title"),
+            "n_mechanisms_tested_against": d["n_mechanisms_tested"],
+            "mechanisms_tested_against": d["mechanisms_tested"],
+            "source_paper_id": d.get("source_paper_id"),
+            "source_paper_title": d.get("source_paper_title"),
             "notes": d.get("notes"),
         })
         if len(out) >= limit:
@@ -233,16 +205,16 @@ def get_coverage_for_mechanism(mechanism_name: str) -> dict:
     justification text for each match."""
     if mechanism_name not in MECHS_BY_NAME:
         return {"error": f"no mechanism named {mechanism_name!r} — call list_mechanisms(query=...) to find the exact name"}
-    rows = MECH_TO_DEFENSES.get(mechanism_name, [])
-    defenders = []
-    for row in rows:
-        d = DEFS_BY_ROW.get(str(row), {})
-        defenders.append({
-            "defense_name": d.get("defense_name"),
-            "defense_intervention_point": d.get("defense_intervention_point"),
-            "validated_against": d.get("validated_against"),
-            "justification": JUSTIF.get((str(row), mechanism_name), ""),
-        })
+    defenders = [
+        {
+            "defense_name": p["defense_name"],
+            "defense_intervention_point": p.get("defense_intervention_point"),
+            "validated_against": p.get("defense_validated_against"),
+            "cross_track": p["cross_track"],
+            "justification": p.get("justification", ""),
+        }
+        for p in PAIRS if p["mechanism_name"] == mechanism_name
+    ]
     return {"mechanism_name": mechanism_name, "n_defenses": len(defenders), "defenses": defenders}
 
 
@@ -250,11 +222,17 @@ def get_coverage_for_mechanism(mechanism_name: str) -> dict:
 def get_coverage_for_defense(defense_name: str) -> dict:
     """All mechanisms one named defense (exact name, as returned by
     list_defenses) was confirmed tested against, with justification text."""
-    d = DEFS_BY_NAME.get(defense_name)
-    if not d:
+    if defense_name not in DEFS_BY_NAME:
         return {"error": f"no defense named {defense_name!r} — call list_defenses(query=...) to find the exact name"}
-    mechs = DEFENSE_TO_MECHS.get(str(d["row"]), [])
-    tested = [{"mechanism_name": m, "justification": JUSTIF.get((str(d["row"]), m), "")} for m in mechs]
+    tested = [
+        {
+            "mechanism_name": p["mechanism_name"],
+            "mechanism_track": p.get("mechanism_track"),
+            "cross_track": p["cross_track"],
+            "justification": p.get("justification", ""),
+        }
+        for p in PAIRS if p["defense_name"] == defense_name
+    ]
     return {"defense_name": defense_name, "n_mechanisms": len(tested), "mechanisms": tested}
 
 
@@ -275,7 +253,7 @@ def list_uncovered_mechanisms(track: str = "", channel: str = "", limit: int = 2
             "track": m.get("track"),
             "channel": m.get("channel"),
             "consequence": m.get("consequence"),
-            "source_paper_title": m.get("title"),
+            "source_paper_title": m.get("source_paper_title"),
         })
         if len(out) >= limit:
             break
@@ -287,14 +265,11 @@ def get_rq_summary(rq: str) -> str:
     """Plain-language headline finding for one research question. `rq` is
     one of RQ1 (taxonomy), RQ2 (citation network), RQ3 (pollution census),
     RQ4 (defense census), RQ5 (coverage matrix), RQ6 (defense
-    generalization case studies)."""
-    key = rq.strip().upper()
-    fp = RQ_FILES.get(key)
-    if not fp or not fp.exists():
+    generalization case studies), RQ7 (ranked open problems)."""
+    text = registry_source.load_rq_summary(rq)
+    if not text:
         return f"Unknown or missing RQ: {rq!r}. Valid values: {', '.join(RQ_FILES)}"
-    text = fp.read_text()
-    m = re.search(r"^## Headline result\s*\n(.*?)(?=\n## |\Z)", text, re.S | re.M)
-    return m.group(1).strip() if m else text[:2000]
+    return text
 
 
 if __name__ == "__main__":
