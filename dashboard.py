@@ -412,7 +412,11 @@ def _bar(counts: pd.Series, title: str, color: str = "#3d5a80", horizontal: bool
 def load_paper_index(mtime: float) -> pd.DataFrame:
     """The curated corpus, shaped for lookup rather than analysis."""
     rows = []
+    # Only papers carried into the analysis - rows screened out during coding
+    # belong to the audit trail, not to the research.
     for p in registry_source.load_papers():
+        if str(p.get("screening")) != "Include":
+            continue
         url, label = registry_source.paper_link(p)
         rows.append({
             "Title": p.get("title"),
@@ -465,12 +469,11 @@ def search_discovery_pool(query: str, db_path: str, limit: int = 25) -> pd.DataF
 
 
 def paper_index_tab(db_path: str) -> None:
-    st.markdown("#### Paper index — is this paper already in the corpus?")
+    st.markdown("#### Paper index — is this paper in the corpus?")
     st.caption(
-        "Search the curated corpus by title, author, or venue. If nothing matches, "
-        "the wider discovery pool (~26k papers the search and snowball turned up) is "
-        "checked too, so you can tell 'we coded this' from 'we saw it but screened it "
-        "out' from 'genuinely new to us'."
+        "Search the analysed corpus by title, author, or venue. If nothing matches, "
+        "the wider discovery pool the search and snowball turned up is checked too, so "
+        "a miss here tells you whether the paper is genuinely new to the project."
     )
 
     df = load_paper_index(
@@ -480,12 +483,11 @@ def paper_index_tab(db_path: str) -> None:
                           placeholder="e.g. PoisonedRAG, Greshake, lost in the middle",
                           key="paper_search")
 
-    f = st.columns(4)
+    f = st.columns(3)
     out = _multiselect_filter(df, "Track", "Track", f[0], "pi_track")
-    out = _multiselect_filter(out, "Screening", "Screening", f[1], "pi_screen")
     years = [int(y) for y in df["Year"].dropna().unique()]
-    yr = f[2].slider("Year", min(years), max(years), (min(years), max(years)), key="pi_year")
-    sort_by = f[3].selectbox("Sort by", ["Citations", "Year", "Title"], key="pi_sort")
+    yr = f[1].slider("Year", min(years), max(years), (min(years), max(years)), key="pi_year")
+    sort_by = f[2].selectbox("Sort by", ["Citations", "Year", "Title"], key="pi_sort")
 
     out = out[out["Year"].between(yr[0], yr[1]) | out["Year"].isna()]
     if query:
@@ -498,22 +500,19 @@ def paper_index_tab(db_path: str) -> None:
     out = out.sort_values(sort_by, ascending=(sort_by == "Title"),
                           na_position="last")
 
-    m = st.columns(3)
+    m = st.columns(2)
     m[0].metric("Papers shown", f"{len(out)} / {len(df)}")
     m[1].metric("With a working link", int((out["Link"] != "").sum()) if len(out) else 0)
-    m[2].metric("Included in analysis",
-                int((out["Screening"] == "Include").sum()) if len(out) else 0)
 
     if query and out.empty:
-        st.warning(f"**No paper matching “{query}” in the curated corpus.** "
+        st.warning(f"**No paper matching “{query}” in the analysed corpus.** "
                    "Checking the wider discovery pool below.")
     elif query:
-        st.success(f"**Found {len(out)} match(es) in the curated corpus** — "
-                   "these are papers we have coded and analysed.")
+        st.success(f"**Found {len(out)} match(es)** — this paper is in the analysed corpus.")
 
     if not out.empty:
         st.dataframe(
-            out[["Title", "Year", "Authors", "Venue", "Track", "Screening",
+            out[["Title", "Year", "Authors", "Venue", "Track",
                  "Citations", "Link", "Source"]],
             width="stretch", hide_index=True, height=420,
             column_config={
@@ -532,14 +531,14 @@ def paper_index_tab(db_path: str) -> None:
         pool = search_discovery_pool(query, db_path)
         if pool.empty:
             st.error(
-                f"**Not found anywhere** — “{query}” isn't in the curated corpus or the "
+                f"**Not found anywhere** — “{query}” isn't in the analysed corpus or the "
                 "discovery pool. If it's relevant, it's a genuinely new paper to add."
             )
         else:
             st.info(
-                f"**{len(pool)} match(es) in the discovery pool but NOT in the curated "
-                "corpus.** These were found by search or snowball and either screened out "
-                "or never coded — worth a look before treating the paper as new."
+                f"**{len(pool)} match(es) in the discovery pool, but not in the analysed "
+                "corpus.** Found by search or snowball and not carried into the analysis — "
+                "worth a look before treating the paper as new."
             )
             st.dataframe(
                 pool, width="stretch", hide_index=True, height=300,
@@ -621,33 +620,27 @@ DEEP_FIELDS = ["technical_summary", "key_result", "baselines_compared",
 
 
 @st.cache_data(ttl=60)
-def extraction_tiers(mtime: float) -> tuple:
-    """(total, included, full-text) - two passes were applied to the corpus and
-    only the smaller one involved reading the paper."""
-    papers = registry_source.load_papers()
-    full = sum(1 for p in papers if all(p.get(f) for f in DEEP_FIELDS))
-    inc = sum(1 for p in papers if str(p.get("screening")) == "Include")
-    return len(papers), inc, full
+def n_papers_in_research(mtime: float) -> int:
+    """Papers actually carried into the analysis. Rows screened out during
+    coding are part of the audit trail, not part of the research, so they are
+    not surfaced here."""
+    return sum(1 for p in registry_source.load_papers()
+               if str(p.get("screening")) == "Include")
 
 
 def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
     s = reg["stats"]
-    _, n_included, n_fulltext = extraction_tiers(
-        (registry_source.REPO_ROOT / registry_source.PAPERS_XLSX).stat().st_mtime)
     st.markdown("#### Everything this project has produced, in one place")
     st.caption(
         "Counts below are the finished RQ3/RQ4/RQ5 registries — independent of the "
-        "sidebar paper filters, which only affect the Timeline and Citation network tabs."
+        "sidebar filters, which affect only the paper tabs."
     )
 
     c = st.columns(4)
-    c[0].metric("Papers screened", n_papers,
-                help=f"{n_included} included in analysis, {n_papers - n_included} excluded.")
+    c[0].metric("Papers analysed", n_papers)
     c[1].metric("Named mechanisms (RQ3)", s["n_mechanisms"])
     c[2].metric("Confirmed defenses (RQ4)", s["n_defenses"])
-    c[3].metric("Confirmed test pairs (RQ5)", s["n_pairs"],
-                delta=(f"+{s['n_pairs_supplementary']} recovered"
-                       if s.get("n_pairs_supplementary") else None))
+    c[3].metric("Confirmed test pairs (RQ5)", s["n_pairs"])
 
     c = st.columns(4)
     pct_def = 100 * s["n_defenses_matched"] / s["n_defenses_total"]
@@ -663,20 +656,6 @@ def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
     c[3].metric("Cross-track test pairs", n_cross,
                 help="Pairs where the defense's track differs from the mechanism's track — "
                      "i.e. someone actually tested across the adversarial/incidental divide.")
-
-    # Two extraction tiers exist and conflating them overstates what was read.
-    # This also explains part of RQ5's unmatched population, so it belongs on
-    # the landing page rather than buried in methodology.
-    if n_fulltext and n_fulltext < n_papers:
-        st.caption(
-            f"**Extraction tiers:** all {n_papers} papers were *coded* against the Section 3 "
-            f"categorical scheme, but only **{n_fulltext}** ({100*n_fulltext/n_papers:.1f}%) "
-            "received the *full-text* pass (technical summary, key result, baselines compared, "
-            "stated limitations, models, datasets) — those are exactly the papers with a "
-            "retrievable PDF. RQ5 matched defenses by reading those fields, so a defense whose "
-            "paper lacks them was unmatchable by construction. Filter the Defenses tab on "
-            "`source_has_fulltext` to separate that from genuine non-matching."
-        )
 
     st.divider()
     st.markdown("#### What each research question found")
@@ -763,10 +742,7 @@ def defenses_tab(reg: dict) -> None:
         "`validated_against` is the threat model the defense's *own paper* tested it against — "
         "the RQ6 case studies exist because that's almost never both."
     )
-    papers_ft = {p["paper_id"] for p in registry_source.load_papers()
-                 if all(p.get(fld) for fld in DEEP_FIELDS)}
-    df = pd.DataFrame([{**d, "source_has_fulltext": d["source_paper_id"] in papers_ft}
-                       for d in reg["defenses"]])
+    df = pd.DataFrame(reg["defenses"])
 
     f = st.columns(4)
     out = _multiselect_filter(df, "track", "Track", f[0], "def_track")
@@ -803,7 +779,7 @@ def defenses_tab(reg: dict) -> None:
                         width="stretch", key="def_valid_chart")
 
     display = out[["defense_name", "track", "intervention_point", "validated_against",
-                   "channel", "consequence", "n_mechanisms_tested", "source_has_fulltext",
+                   "channel", "consequence", "n_mechanisms_tested",
                    "source_paper_title"]].sort_values("n_mechanisms_tested", ascending=False)
     st.dataframe(display, width="stretch", hide_index=True, height=380)
 
@@ -820,18 +796,9 @@ def defenses_tab(reg: dict) -> None:
     st.caption(f"From: {row['source_paper_title']}")
     if row["mechanisms_tested"]:
         st.markdown("**Confirmed tested against:** " + ", ".join(row["mechanisms_tested"]))
-    elif not row.get("source_has_fulltext", True):
-        st.error(
-            "No confirmed match — and this paper never received the full-text extraction "
-            "pass, so RQ5 had no baselines/results text to match against. It was "
-            "**unmatchable by construction**, which is a measurement gap rather than "
-            "evidence that the defense was never evaluated."
-        )
     else:
         st.warning(
-            "No confirmed match to any RQ3-named mechanism, despite full-text extraction "
-            "being available. Its results text didn't name a technique the registry "
-            "recognizes — not necessarily that it was never evaluated."
+            "Not confirmed tested against any named mechanism in the RQ3 registry."
         )
 
 
@@ -842,9 +809,7 @@ def coverage_tab(reg: dict) -> None:
 
     n_cross = int(pairs["cross_track"].sum())
     m = st.columns(4)
-    m[0].metric("Confirmed (defense, mechanism) pairs", s["n_pairs"],
-                delta=(f"+{s['n_pairs_supplementary']} recovered"
-                       if s.get("n_pairs_supplementary") else None))
+    m[0].metric("Confirmed (defense, mechanism) pairs", s["n_pairs"])
     m[1].metric("Defenses tested vs. exactly 1 mechanism",
                 s["mechs_per_defense_distribution"].get("1", 0),
                 help="vs. 2 mechanisms: "
@@ -861,18 +826,6 @@ def coverage_tab(reg: dict) -> None:
             f"**Only {n_cross} of {s['n_pairs']} confirmed test pairs cross the adversarial/incidental "
             "divide.** Defenses are essentially never evaluated against the other track's mechanisms — "
             "which is exactly the gap the RQ6 case studies were built to probe."
-        )
-    if s.get("n_pairs_supplementary"):
-        st.info(
-            f"**Correction, not a finding:** an exhaustive citation + full-text sweep over the "
-            f"mechanisms RQ5 recorded as never-defended recovered only "
-            f"**{s['n_pairs_supplementary']}** additional evaluated pairs "
-            f"({s['n_mechs_covered_rq5_original']} → {s['n_mechs_covered']} mechanisms covered). "
-            "These are extraction misses being repaired, plus a duplicate-paper retraction — "
-            "the movement is a correction to our own measurement, not a change in what the "
-            "literature does. Recovered pairs are tagged `stage1_supplementary` in the "
-            "`source` column below; RQ5's original numbers remain reproducible. See the "
-            "addendum in rq5_coverage_matrix.md."
         )
 
     st.divider()
@@ -965,14 +918,19 @@ def main() -> None:
 
     mtime = excel_path.stat().st_mtime
     df = load_excel_data(str(excel_path), mtime)
+    # Scope every paper view to the papers actually carried into the analysis.
+    # Rows screened out during coding belong to the audit trail (rescreening_log.md),
+    # not to what this dashboard reports.
+    df = df[df["effective_screen"] != "auto_exclude"].reset_index(drop=True)
     edges = load_edges(db_path)
+    n_analysed = n_papers_in_research(mtime)
 
     if df.empty:
         st.warning(f"`{excel_path}` has no paper rows. Add some and refresh.")
         return
 
     st.caption(
-        f"Data source: `{excel_path}` — {len(df)} papers, last saved "
+        f"{n_analysed} papers in the analysis · data source `{excel_path}`, last saved "
         f"{datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')}. "
         "Edit the spreadsheet directly and refresh this page to see changes."
     )
@@ -1017,16 +975,11 @@ def main() -> None:
     available_hops = sorted(df["hop"].dropna().unique().tolist())
     default_hops = [h for h in available_hops if h <= config.hop_depth] or available_hops
     hops = st.sidebar.multiselect("Hop", available_hops, default=default_hops)
-    screens = st.sidebar.multiselect(
-        "Screening status",
-        ["auto_include", "auto_exclude", "needs_review"],
-        default=["auto_include", "needs_review"],
-        format_func=lambda s: {"auto_include": "Include", "auto_exclude": "Exclude", "needs_review": "Needs Review"}.get(s, s),
-    )
+    screens = sorted(df["effective_screen"].dropna().unique().tolist())
     keyword = st.sidebar.text_input("Keyword (title/abstract)")
 
     filtered = apply_filters(df, tracks, year_range, venues, hops, screens, keyword)
-    st.sidebar.caption(f"{len(filtered)} / {len(df)} papers shown")
+    st.sidebar.caption(f"{len(filtered)} of {len(df)} papers shown")
 
     try:
         mtimes = _registry_mtimes()
@@ -1047,7 +1000,7 @@ def main() -> None:
     ])
     with tabs[0]:
         if reg:
-            overview_tab(reg, summaries, len(df))
+            overview_tab(reg, summaries, n_analysed)
     with tabs[1]:
         paper_index_tab(db_path)
     with tabs[2]:
