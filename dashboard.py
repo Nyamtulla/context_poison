@@ -394,6 +394,70 @@ def _multiselect_filter(df: pd.DataFrame, column: str, label: str, container, ke
     return df[df[column].fillna("(unspecified)").isin(chosen)]
 
 
+def _stacked_by_track(df: pd.DataFrame, cat_col: str, title: str,
+                      track_col: str = "track") -> go.Figure:
+    """Horizontal bars split by track, so an aggregate like 'reasoning: 189
+    defenses' shows its Security / ML-AI composition rather than hiding it.
+    Categories are ordered by total; each segment is labelled with its own
+    count and the hover carries the category total."""
+    d = df.copy()
+    d[cat_col] = d[cat_col].fillna("(unspecified)")
+    d[track_col] = d[track_col].fillna("(unspecified)")
+    totals = d[cat_col].value_counts()
+    order = totals.index.tolist()
+    tab = d.groupby([cat_col, track_col]).size().unstack(fill_value=0).reindex(order)
+
+    fig = go.Figure()
+    # Fixed track order so colours stay stable across tabs and reruns.
+    for track in [t for t in ("Security", "ML/AI", "Both") if t in tab.columns] + \
+                 [t for t in tab.columns if t not in ("Security", "ML/AI", "Both")]:
+        vals = tab[track].values
+        fig.add_trace(go.Bar(
+            y=tab.index.astype(str), x=vals, orientation="h", name=str(track),
+            marker_color=REGISTRY_TRACK_COLORS.get(track, "#adb5bd"),
+            text=[str(v) if v else "" for v in vals], textposition="inside",
+            insidetextanchor="middle", textfont=dict(size=11, color="white"),
+            customdata=[totals.get(c, 0) for c in tab.index],
+            hovertemplate="%{y}<br>" + str(track) + ": %{x}<br>total: %{customdata}<extra></extra>",
+        ))
+    fig.update_layout(
+        barmode="stack", title=title,
+        height=max(260, 30 * len(tab) + 110),
+        margin=dict(l=10, r=10, t=45, b=10),
+        yaxis=dict(autorange="reversed"), xaxis_title="Entries",
+        legend_title_text="Track",
+        legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="right", x=1),
+    )
+    return fig
+
+
+def _bar_colored_by_track(df: pd.DataFrame, label_col: str, value_col: str,
+                          title: str, track_col: str = "track") -> go.Figure:
+    """One bar per row (each row has a single track), coloured by that track -
+    stacking would be degenerate here, but the colour still carries the split."""
+    fig = go.Figure()
+    for track in [t for t in ("Security", "ML/AI", "Both") if t in set(df[track_col])]:
+        sub = df[df[track_col] == track]
+        if sub.empty:
+            continue
+        fig.add_trace(go.Bar(
+            y=sub[label_col].astype(str), x=sub[value_col], orientation="h",
+            name=str(track), marker_color=REGISTRY_TRACK_COLORS.get(track, "#adb5bd"),
+            text=sub[value_col], textposition="outside",
+            hovertemplate="%{y}<br>" + str(track) + ": %{x}<extra></extra>",
+        ))
+    fig.update_layout(
+        barmode="stack", title=title, height=max(260, 30 * len(df) + 110),
+        margin=dict(l=10, r=10, t=45, b=10),
+        yaxis=dict(autorange="reversed",
+                   categoryorder="array",
+                   categoryarray=df[label_col].astype(str).tolist()[::-1]),
+        xaxis_title="Defenses tested against it", legend_title_text="Track",
+        legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="right", x=1),
+    )
+    return fig
+
+
 def _bar(counts: pd.Series, title: str, color: str = "#3d5a80", horizontal: bool = True) -> go.Figure:
     fig = go.Figure()
     if horizontal:
@@ -703,14 +767,17 @@ def mechanisms_tab(reg: dict) -> None:
 
     left, right = st.columns(2)
     with left:
-        st.plotly_chart(_bar(out["channel"].fillna("(unspecified)").value_counts(),
-                             "Mechanisms by channel", "#e07a5f"), width="stretch", key="mech_channel_chart")
+        st.plotly_chart(_stacked_by_track(out, "channel", "Mechanisms by channel"),
+                        width="stretch", key="mech_channel_chart")
     with right:
-        top = out.nlargest(12, "n_defenses_tested")[["mechanism_name", "n_defenses_tested"]]
-        top = top[top["n_defenses_tested"] > 0].set_index("mechanism_name")["n_defenses_tested"]
+        top = out.nlargest(12, "n_defenses_tested")[
+            ["mechanism_name", "n_defenses_tested", "track"]]
+        top = top[top["n_defenses_tested"] > 0]
         if len(top):
-            st.plotly_chart(_bar(top, "Most-tested-against mechanisms", "#3d5a80"),
-                            width="stretch", key="mech_top_chart")
+            st.plotly_chart(
+                _bar_colored_by_track(top, "mechanism_name", "n_defenses_tested",
+                                      "Most-tested-against mechanisms"),
+                width="stretch", key="mech_top_chart")
         else:
             st.info("None of the mechanisms in this view has any defense tested against it.")
 
@@ -770,12 +837,12 @@ def defenses_tab(reg: dict) -> None:
 
     left, right = st.columns(2)
     with left:
-        st.plotly_chart(_bar(out["intervention_point"].fillna("(unspecified)").value_counts(),
-                             "Defenses by intervention point", "#8ac926"),
+        st.plotly_chart(_stacked_by_track(out, "intervention_point",
+                                          "Defenses by intervention point"),
                         width="stretch", key="def_point_chart")
     with right:
-        st.plotly_chart(_bar(out["validated_against"].fillna("(unspecified)").value_counts(),
-                             "Defenses by threat model validated against", "#e07a5f"),
+        st.plotly_chart(_stacked_by_track(out, "validated_against",
+                                          "Defenses by threat model validated against"),
                         width="stretch", key="def_valid_chart")
 
     display = out[["defense_name", "track", "intervention_point", "validated_against",
