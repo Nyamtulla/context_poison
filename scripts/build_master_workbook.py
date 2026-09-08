@@ -173,7 +173,7 @@ r = kv_block(r, "Headline counts", [
     f"Named pollution mechanisms (RQ3): {STATS['n_mechanisms']}",
     f"Confirmed defenses (RQ4): {STATS['n_defenses']}",
     f"Confirmed (defense × mechanism) tested pairs (RQ5): {STATS['n_pairs']}"
-    + (f"  ({STATS['n_pairs_rq5_original']} original + {STATS['n_pairs_supplementary']} recovered by the RQ5b pass)"
+    + (f"  ({STATS['n_pairs_rq5_original']} original + {STATS['n_pairs_supplementary']} recovered by the correction pass)"
        if STATS.get('n_pairs_supplementary') else ""),
     f"Defenses with >=1 confirmed mechanism match: {STATS['n_defenses_matched']} of {STATS['n_defenses_total']} ({STATS['n_defenses_matched']/STATS['n_defenses_total']:.1%})",
     f"Mechanisms with >=1 defense tested against them: {STATS['n_mechs_covered']} of {STATS['n_mechanisms']} ({STATS['n_mechs_covered']/STATS['n_mechanisms']:.1%})",
@@ -202,10 +202,10 @@ r = kv_block(r, "Q: Is the 88% concentration on Indirect Prompt Injection (IPI) 
     "Bottom line for the advisor: this is a genuine field-level finding, not a sampling artifact — IPI is simply the most benchmarked, most 'branded' attack in this literature (AgentDojo, InjecAgent, the original Greshake et al. paper), so it is what most defense papers reach for when they need something to test against.",
 ])
 r = kv_block(r, "Corrections applied since the figures were first published", [
-    f"RQ5b recovery pass: an exhaustive citation + full-text sweep over never-defended mechanisms recovered {STATS.get('n_pairs_supplementary', 0)} additional EVALUATED pairs. The gap is real, not an extraction artifact.",
+    f"Recovery pass: an exhaustive citation + full-text sweep over never-defended mechanisms recovered {STATS.get('n_pairs_supplementary', 0)} additional EVALUATED pairs. These are extraction misses being repaired - a correction to our measurement, NOT a finding about the literature.",
     f"Duplicate retraction: rows 51/57/59 were all arXiv 2505.05849 (AgentFuzzer renamed AgentVigil). Row 59 was still Include and had contributed a second RQ3 entry for one technique, so mechanisms went {REG_PUB['stats']['n_mechanisms']} -> {STATS['n_mechanisms']} and the phantom sat in the UNCOVERED list.",
     f"As-published figures remain exactly reproducible: registry_source.load_all(include_supplementary=False, include_corrections=False) returns {REG_PUB['stats']['n_mechanisms']} mechanisms / {REG_PUB['stats']['n_mechs_uncovered']} uncovered / {REG_PUB['stats']['n_pairs']} pairs.",
-    "Pairs recovered by RQ5b are tagged source='stage1_supplementary' in the Coverage Matrix sheet; everything else is source='rq5'.",
+    "Recovered pairs are tagged source='stage1_supplementary' in the Coverage Matrix sheet; everything else is source='rq5'. Full audit in rq5_coverage_matrix.md (Addendum, 2026-09-07).",
 ])
 r = kv_block(r, "How to use this workbook", [
     "Papers — every screened paper with all coded fields, plus has_fulltext marking which received the full-text extraction pass.",

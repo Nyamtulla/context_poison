@@ -140,3 +140,75 @@ dropped rather than guessed. Final count: 190 confirmed pairs.
   studies will need to establish outcome for their specific selected pairs,
   since a "tested" cell here doesn't distinguish a defense that worked from
   one that was tested and failed.
+
+## Addendum (2026-09-07) — robustness of the gap, and two corrections
+
+This section is **methodology, not findings**. It records an audit of whether
+the coverage gap above survives scrutiny, plus two corrections to the numbers
+originally published. Nothing here is evidence about the field; it is evidence
+about our own measurement, and it is reported so the headline figures can be
+trusted rather than to add a result.
+
+### Two corrections to the published numbers
+
+1. **Recovery pass (+4 pairs).** RQ5 matched defenses to mechanisms by reading
+   each defense paper's own `baselines_compared` / `key_result` /
+   `technical_summary`. An exhaustive re-check over the never-defended
+   mechanisms — citation-based candidates (147) plus a full-text scan with
+   bibliographies stripped (35) — found **4** pairs the original pass had
+   missed: RETA vs. RL-Hammer, PISmith and AutoInject, and SnapGuard vs.
+   WebInject. These are extraction misses being repaired.
+2. **Duplicate retraction (−1 mechanism).** Rows 51/57/59 are all arXiv
+   2505.05849, one paper renamed across versions (AgentFuzzer → AgentVigil).
+   Row 59 was still `Include` and had contributed a *second* RQ3 entry for the
+   same technique. Retracting it moves mechanisms 183 → 182, and because the
+   phantom sat in the uncovered list, uncovered moves 116 → 111.
+
+**Net effect: 63.4% → 61.0% of mechanisms never defended.** That movement is
+entirely accounted for by the two corrections above. It is *not* a change in
+what the literature does, and it should not be reported as one.
+
+As-published figures remain exactly reproducible:
+`registry_source.load_all(include_supplementary=False, include_corrections=False)`
+returns 183 mechanisms / 116 uncovered / 190 pairs.
+
+### Does the gap survive the audit?
+
+Yes, and that is the useful part. Of 147 citation-derived candidates, only 3
+survived the "actually evaluated" bar; of 35 full-text candidates, 4. **The
+overwhelming majority of candidates mention the mechanism only in the
+bibliography or a single related-work sentence** — defense papers cite attack
+papers as related work, not as evaluation targets. So the gap is a property of
+the literature, not an artifact of our extraction being too strict.
+
+Three method notes worth carrying into threats to validity:
+
+- **Citation matching is complementary, not superior.** As a control it
+  re-found only **19 of 67 (28%)** known-covered mechanisms, because defenses
+  routinely evaluate an attack through a bundled benchmark (AgentDojo,
+  InjecAgent) without citing the original attack paper. It also *missed*
+  RETA ← AutoInject, which the full-text scan caught. Neither signal dominates.
+- **Generic-phrase mechanism names produce false positives.** Three defenses
+  (CodeDelegator, Free()LM, AegisAgent) use "context pollution" to mean
+  something other than the registry's `Context Pollution (evolutionary search
+  history bias)`; CodeDelegator's paper is literally *titled* "Mitigating
+  Context Pollution." A registry with common-noun entries is an
+  entity-resolution hazard.
+- **A permanent floor.** 20 of the uncovered mechanisms are `UNNAMED:` entries
+  — descriptive labels assigned during extraction, never terms the literature
+  uses — so no name-based method can ever recover them.
+
+### PDF availability is a second, separable cause
+
+Part of the unmatched-defense population is unmatchable by construction: for a
+defense paper that never received the full-text extraction pass, the fields
+RQ5 reads are empty. Measured after the extraction backfill:
+
+| Defense papers | Matched to ≥1 mechanism |
+|---|---:|
+| With full-text extraction | 37.2% |
+| Without | 4.5% |
+
+Report **both denominators**: 35.7% of *all* defenses have a confirmed match,
+but 37.2% of those *eligible* for matching do. See `rescreening_log.md`
+Addendum 3 for the full analysis.

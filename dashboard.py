@@ -559,6 +559,7 @@ def transfer_tab(reg: dict) -> None:
     preds = registry_source.load_transfer_predictions()
     stage3 = registry_source.load_stage3_result()
     st.markdown("#### Transfer predictions — which defense should work on what nobody tested")
+    st.caption("RQ6 continued: its intervention-point finding used as a predictor.")
     if not preds:
         st.info("No predictions yet. Run `scripts/stage2_transfer_predictions.py`.")
         return
@@ -578,7 +579,7 @@ def transfer_tab(reg: dict) -> None:
     if stage3:
         s = stage3.get("summary", {})
         st.success(
-            "**Stage 3 validated the top prediction: RobustRAG defeats BadRAG.** "
+            "**Validated by execution — RobustRAG defeats BadRAG.** "
             "BadRAG's denial-of-service payload drops undefended accuracy to "
             f"{100*s.get('badrag_dos',{}).get('undefended_acc',0):.1f}% with a "
             f"{100*s.get('badrag_dos',{}).get('undefended_refusal_rate',0):.1f}% refusal rate; "
@@ -863,13 +864,15 @@ def coverage_tab(reg: dict) -> None:
         )
     if s.get("n_pairs_supplementary"):
         st.info(
-            f"**RQ5b recovery pass:** an exhaustive citation + full-text sweep over the "
+            f"**Correction, not a finding:** an exhaustive citation + full-text sweep over the "
             f"mechanisms RQ5 recorded as never-defended recovered only "
             f"**{s['n_pairs_supplementary']}** additional evaluated pairs "
             f"({s['n_mechs_covered_rq5_original']} → {s['n_mechs_covered']} mechanisms covered). "
-            "The gap is real, not an extraction artifact. Recovered pairs are tagged "
-            "`stage1_supplementary` in the `source` column below; RQ5's original numbers "
-            "remain reproducible."
+            "These are extraction misses being repaired, plus a duplicate-paper retraction — "
+            "the movement is a correction to our own measurement, not a change in what the "
+            "literature does. Recovered pairs are tagged `stage1_supplementary` in the "
+            "`source` column below; RQ5's original numbers remain reproducible. See the "
+            "addendum in rq5_coverage_matrix.md."
         )
 
     st.divider()
@@ -924,12 +927,11 @@ def coverage_tab(reg: dict) -> None:
 def findings_tab(summaries: dict) -> None:
     st.markdown("#### The research questions that produced new evidence")
     st.caption(
-        "RQ5b recovered coverage the original extraction missed and validated the first "
-        "transfer prediction by execution; RQ6 reconstructed and ran real released defense "
-        "code against both threat models; RQ7 synthesizes them into ranked open problems. "
-        "All three write-ups are rendered in full below."
+        "RQ6 reconstructed and ran real released defense code against both threat models, "
+        "then turned that finding into transfer predictions and validated one by execution; "
+        "RQ7 synthesizes them into ranked open problems. Rendered in full below."
     )
-    for rq in ("RQ5b", "RQ6", "RQ7"):
+    for rq in ("RQ6", "RQ6-transfer", "RQ7"):
         fname, blurb = registry_source.RQ_FILES[rq]
         st.markdown(f"### {rq} — {blurb}")
         if summaries.get(rq):
