@@ -971,6 +971,14 @@ def findings_tab(summaries: dict) -> None:
 # ===================================================================
 
 CUBE_INTENTS = ["Security", "ML/AI", "Both"]
+# The plan's Section 3 calls this axis INTENT (adversarial / incidental / both),
+# but the corpus stores it in the `track` column as Security / ML-AI / Both.
+# Label panels with both names so the axis is identifiable either way.
+INTENT_LABELS = {
+    "Security": "ADVERSARIAL<br><sup>Security track</sup>",
+    "ML/AI": "INCIDENTAL<br><sup>ML/AI track</sup>",
+    "Both": "BOTH<br><sup>bridges the two</sup>",
+}
 
 
 @st.cache_data(ttl=60)
@@ -1030,16 +1038,28 @@ def taxonomy_tab() -> None:
     m[2].metric("Empty cells", empty)
     m[3].metric("Share of the cube empty", f"{100*empty/total:.1f}%")
 
+    st.info(
+        "**How to read this.** The cube has three axes, and each one appears in a "
+        "different place:\n\n"
+        "- **INTENT** → the three panels. Adversarial (Security track), incidental "
+        "(ML/AI track), or both. This is the axis you'd have to rotate a 3D cube to see.\n"
+        "- **CHANNEL** → the rows. *Where* contaminated content enters the context "
+        "window: tool output, RAG, memory, a skill file, and so on.\n"
+        "- **CONSEQUENCE** → the columns. *What goes wrong* as a result: the agent's "
+        "goal is hijacked, data is exfiltrated, reasoning is corrupted, and so on.\n\n"
+        "Each cell is one channel x intent x consequence combination. The number in a "
+        "cell is how many papers study it; **grey means no paper studies that "
+        "combination at all** — those grey cells are the finding."
+    )
     st.caption(
-        "The cube is shown as one panel per intent rather than in 3D - a rotatable cube "
-        "hides cells behind other cells, which defeats the point when the finding *is* "
-        "which cells are empty. Grey means no paper studies that combination."
+        "Shown as three panels rather than a rotatable 3D cube: in 3D, cells hide behind "
+        "other cells, which defeats the purpose when what matters is which cells are empty."
     )
 
     from plotly.subplots import make_subplots
     fig = make_subplots(rows=1, cols=len(CUBE_INTENTS),
-                        subplot_titles=[f"{t}" for t in CUBE_INTENTS],
-                        shared_yaxes=True, horizontal_spacing=0.045)
+                        subplot_titles=[INTENT_LABELS[t] for t in CUBE_INTENTS],
+                        shared_yaxes=True, horizontal_spacing=0.05)
     zmax = max(cells.values()) if cells else 1
     for i, intent in enumerate(CUBE_INTENTS, start=1):
         z, text = [], []
@@ -1055,17 +1075,29 @@ def taxonomy_tab() -> None:
             textfont=dict(size=10),
             colorscale="Blues", zmin=0, zmax=zmax, showscale=(i == len(CUBE_INTENTS)),
             colorbar=dict(title="papers", thickness=12) if i == len(CUBE_INTENTS) else None,
-            hovertemplate=(intent + "<br>%{y} x %{x}<br>%{z} papers<extra></extra>"),
+            hovertemplate=("intent: " + intent + "<br>channel: %{y}"
+                           "<br>consequence: %{x}<br>%{z} papers<extra></extra>"),
             xgap=2, ygap=2,
         ), row=1, col=i)
     fig.update_layout(
-        height=420, margin=dict(l=10, r=10, t=50, b=90),
+        height=470, margin=dict(l=10, r=10, t=70, b=115),
         plot_bgcolor="#e9ecef",   # shows through wherever a cell is empty
+        annotations=list(fig.layout.annotations) + [
+            dict(text="<b>CONSEQUENCE</b> — what goes wrong", showarrow=False,
+                 xref="paper", yref="paper", x=0.5, y=-0.30, font=dict(size=12)),
+        ],
     )
     fig.update_xaxes(tickangle=-40, tickfont=dict(size=10))
+    fig.update_yaxes(title_text="<b>CHANNEL</b> — where it enters",
+                     title_font=dict(size=12), row=1, col=1)
     st.plotly_chart(fig, width="stretch", key="rq1_cube")
 
-    st.markdown("##### Where the emptiness is, by channel")
+    st.markdown("##### Which channels are least studied")
+    st.caption(
+        "Each channel has 18 cells (3 intents x 6 consequences). This counts how many "
+        "of those 18 have at least one paper — so a long grey bar means that entry "
+        "point into the context window is barely studied, whatever the consequence."
+    )
     rows = []
     for ch in channels:
         filled_ch = sum(1 for intent in CUBE_INTENTS for co in conseq
