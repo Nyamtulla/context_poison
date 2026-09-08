@@ -41,9 +41,11 @@ RQ_FILES = {
     "RQ3": ("rq3_pollution_census.md", "Pollution census — how many distinct poisoning mechanisms are named"),
     "RQ4": ("rq4_defense_census.md", "Defense census — how many defenses, validated against which threat model"),
     "RQ5": ("rq5_coverage_matrix.md", "Coverage matrix — which defenses were tested against which mechanisms"),
-    "RQ5b": ("rq5b_coverage_recovery_and_transfer.md",
-             "Coverage recovery + transfer validation — is the gap real, and what fills it"),
     "RQ6": ("rq6_case_studies.md", "Defense generalization — 9 reconstructed case studies"),
+    # Companion to RQ6 rather than a research question of its own: turns RQ6's
+    # intervention-point finding into a predictor and validates one prediction.
+    "RQ6-transfer": ("rq6_transfer_predictions.md",
+                     "Transfer predictions and their validation (RQ6 continued)"),
     "RQ7": ("rq7_open_problems.md", "Open problems — ranked research priorities"),
 }
 

@@ -18,8 +18,11 @@ and produce a structured paper database plus a local dashboard. See
   `rq6_case_study_selection.md` (the full working log behind it), and RQ7
   synthesizes RQ2/RQ5/RQ6 into ranked research priorities
   (`scripts/rq7_synthesis.py` recomputes its cross-cutting statistics).
-- **`rq5b_coverage_recovery_and_transfer.md`** — coverage recovery + the first
-  transfer prediction validated by execution (RobustRAG vs. BadRAG).
+- **`rq6_transfer_predictions.md`** — RQ6 continued: its intervention-point
+  finding used as a predictor, plus the first prediction validated by
+  execution (RobustRAG vs. BadRAG). The audit of whether RQ5's coverage gap is
+  real lives in `rq5_coverage_matrix.md` instead, since that pass corrected our
+  own measurement rather than finding anything about the literature.
 - **`mcp_server/`** — an MCP server that exposes the same data (papers,
   mechanisms, defenses, coverage matrix, and per-RQ headline findings) as
   tools your own Claude can query conversationally. See
@@ -103,10 +106,10 @@ Nine tabs, covering the whole project in one place — no cloud dependency:
   where testing effort concentrates, every confirmed pair with its match
   rationale and provenance, and the mechanisms nothing has been tested
   against.
-- **Transfer predictions** — RQ5b Stage 2's ranked hypotheses (which existing
-  defense should work on which untested mechanism) plus the Stage 3 result
-  that has been validated by execution.
-- **RQ findings** — the RQ5b/RQ6/RQ7 write-ups rendered in full.
+- **Transfer predictions** — RQ6 continued: ranked hypotheses for which
+  existing defense should work on which untested mechanism, plus the one
+  result validated by execution.
+- **RQ findings** — the RQ6, RQ6-transfer and RQ7 write-ups rendered in full.
 - **Paper timeline** — papers by year, colored by track, sized by citations.
 - **Citation network** — the citation graph with cross-track edges
   highlighted in red, making the RQ2 finding visually obvious.
