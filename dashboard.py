@@ -615,8 +615,24 @@ def transfer_tab(reg: dict) -> None:
                "weighted by how much the field cites the untested mechanism.")
 
 
+DEEP_FIELDS = ["technical_summary", "key_result", "baselines_compared",
+               "stated_limitations", "models_evaluated", "datasets_benchmarks"]
+
+
+@st.cache_data(ttl=60)
+def extraction_tiers(mtime: float) -> tuple:
+    """(total, included, full-text) - two passes were applied to the corpus and
+    only the smaller one involved reading the paper."""
+    papers = registry_source.load_papers()
+    full = sum(1 for p in papers if all(p.get(f) for f in DEEP_FIELDS))
+    inc = sum(1 for p in papers if str(p.get("screening")) == "Include")
+    return len(papers), inc, full
+
+
 def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
     s = reg["stats"]
+    _, n_included, n_fulltext = extraction_tiers(
+        (registry_source.REPO_ROOT / registry_source.PAPERS_XLSX).stat().st_mtime)
     st.markdown("#### Everything this project has produced, in one place")
     st.caption(
         "Counts below are the finished RQ3/RQ4/RQ5 registries — independent of the "
@@ -624,10 +640,13 @@ def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
     )
 
     c = st.columns(4)
-    c[0].metric("Papers screened", n_papers)
+    c[0].metric("Papers screened", n_papers,
+                help=f"{n_included} included in analysis, {n_papers - n_included} excluded.")
     c[1].metric("Named mechanisms (RQ3)", s["n_mechanisms"])
     c[2].metric("Confirmed defenses (RQ4)", s["n_defenses"])
-    c[3].metric("Confirmed test pairs (RQ5)", s["n_pairs"])
+    c[3].metric("Confirmed test pairs (RQ5)", s["n_pairs"],
+                delta=(f"+{s['n_pairs_supplementary']} recovered"
+                       if s.get("n_pairs_supplementary") else None))
 
     c = st.columns(4)
     pct_def = 100 * s["n_defenses_matched"] / s["n_defenses_total"]
@@ -643,6 +662,20 @@ def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
     c[3].metric("Cross-track test pairs", n_cross,
                 help="Pairs where the defense's track differs from the mechanism's track — "
                      "i.e. someone actually tested across the adversarial/incidental divide.")
+
+    # Two extraction tiers exist and conflating them overstates what was read.
+    # This also explains part of RQ5's unmatched population, so it belongs on
+    # the landing page rather than buried in methodology.
+    if n_fulltext and n_fulltext < n_papers:
+        st.caption(
+            f"**Extraction tiers:** all {n_papers} papers were *coded* against the Section 3 "
+            f"categorical scheme, but only **{n_fulltext}** ({100*n_fulltext/n_papers:.1f}%) "
+            "received the *full-text* pass (technical summary, key result, baselines compared, "
+            "stated limitations, models, datasets) — those are exactly the papers with a "
+            "retrievable PDF. RQ5 matched defenses by reading those fields, so a defense whose "
+            "paper lacks them was unmatchable by construction. Filter the Defenses tab on "
+            "`source_has_fulltext` to separate that from genuine non-matching."
+        )
 
     st.divider()
     st.markdown("#### What each research question found")
@@ -729,7 +762,10 @@ def defenses_tab(reg: dict) -> None:
         "`validated_against` is the threat model the defense's *own paper* tested it against — "
         "the RQ6 case studies exist because that's almost never both."
     )
-    df = pd.DataFrame(reg["defenses"])
+    papers_ft = {p["paper_id"] for p in registry_source.load_papers()
+                 if all(p.get(fld) for fld in DEEP_FIELDS)}
+    df = pd.DataFrame([{**d, "source_has_fulltext": d["source_paper_id"] in papers_ft}
+                       for d in reg["defenses"]])
 
     f = st.columns(4)
     out = _multiselect_filter(df, "track", "Track", f[0], "def_track")
@@ -766,8 +802,8 @@ def defenses_tab(reg: dict) -> None:
                         width="stretch", key="def_valid_chart")
 
     display = out[["defense_name", "track", "intervention_point", "validated_against",
-                   "channel", "consequence", "n_mechanisms_tested", "source_paper_title"]].sort_values(
-        "n_mechanisms_tested", ascending=False)
+                   "channel", "consequence", "n_mechanisms_tested", "source_has_fulltext",
+                   "source_paper_title"]].sort_values("n_mechanisms_tested", ascending=False)
     st.dataframe(display, width="stretch", hide_index=True, height=380)
 
     st.markdown("**Inspect one defense**")
@@ -783,11 +819,18 @@ def defenses_tab(reg: dict) -> None:
     st.caption(f"From: {row['source_paper_title']}")
     if row["mechanisms_tested"]:
         st.markdown("**Confirmed tested against:** " + ", ".join(row["mechanisms_tested"]))
+    elif not row.get("source_has_fulltext", True):
+        st.error(
+            "No confirmed match — and this paper never received the full-text extraction "
+            "pass, so RQ5 had no baselines/results text to match against. It was "
+            "**unmatchable by construction**, which is a measurement gap rather than "
+            "evidence that the defense was never evaluated."
+        )
     else:
         st.warning(
-            "No confirmed match to any RQ3-named mechanism. That means its paper's own "
-            "results text didn't name a technique the registry recognizes — not necessarily "
-            "that it was never evaluated. See the Coverage matrix tab."
+            "No confirmed match to any RQ3-named mechanism, despite full-text extraction "
+            "being available. Its results text didn't name a technique the registry "
+            "recognizes — not necessarily that it was never evaluated."
         )
 
 
