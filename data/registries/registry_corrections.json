@@ -1,0 +1,16 @@
+{
+ "generated": "2026-09-07",
+ "purpose": "Registry entries retracted after publication of the RQ3/RQ4 numbers, with cause. Kept as a separate applied-on-load file (not edited into the registry JSONs) so the originally published figures stay exactly reproducible via load_all(include_corrections=False).",
+ "retracted_mechanisms": [
+  {
+   "mechanism_name": "UNNAMED: AgentFuzzer (generic black-box fuzzing for IPI)",
+   "source_paper_id": "239a42e72cea398b972726e0907df5314f631bd3",
+   "excel_row": 59,
+   "reason": "duplicate-paper double-count",
+   "evidence": "Rows 51, 57 and 59 are all arXiv 2505.05849, the same paper under three titles as it was renamed across versions (AgentFuzzer -> AgentVigil). Row 57 was already excluded by the 2026-08-17 dedup pass; row 59 was missed and remained screening=Include, so the paper contributed TWO RQ3 mechanism entries: 'AgentVigil' (row 51) and this one. Confirmed by downloading the row-59 PDF, which is arXiv 2505.05849v4 titled 'AgentVigil: Generic Black-Box Red-teaming for Indirect Prompt Injection against LLM Agents'.",
+   "canonical_entry": "AgentVigil",
+   "effect": "RQ3 mechanisms 183 -> 182. The retracted entry was uncovered while the canonical 'AgentVigil' is covered by 1 defense, so uncovered mechanisms 112 -> 111 and the never-defended share 61.2% -> 61.0%. Covered count unchanged at 71."
+  }
+ ],
+ "retracted_defenses": []
+}

@@ -210,3 +210,48 @@ should carry the 40.0% denominator alongside the 35.7% one. Closing it is a
 bounded task: fetch the 128 missing PDFs and re-run extraction on them, which
 would also let the 11 mechanisms and 54 defenses currently sourced from
 abstract-only records be re-derived from full text.
+
+## Addendum 4 (2026-09-07) — a fifth duplicate, still counted as Include
+
+Found while extracting full text from newly-fetched PDFs: the PDF downloaded
+for row 59 ("AGENTFUZZER: Generic Black-Box Fuzzing for Indirect Prompt
+Injection against LLM Agents") is arXiv 2505.05849v4, titled *AgentVigil:
+Generic Black-Box Red-teaming...*. **Rows 51, 57 and 59 are all the same
+paper**, renamed across arXiv versions (AgentFuzzer → AgentVigil):
+
+| Row | Screening | arXiv | Cites | Title as stored |
+|---|---|---|---:|---|
+| 51 | Include | 2505.05849 | 39 | AgentVigil: Generic Black-Box Red-teaming... |
+| 57 | Exclude (deduped 2026-08-17) | none | 24 | AGENTVIGIL: Automatic Black-Box Red-teaming... |
+| 59 | **Include** — missed | none | 3 | AGENTFUZZER: Generic Black-Box Fuzzing... |
+
+Addendum 1's pass caught the 51/57 pair but not 51/59, because the rename
+pushed title similarity to 81 — below the threshold used. This one mattered
+more than the others: **it was still Include**, so the paper contributed *two*
+RQ3 mechanism entries — `AgentVigil` (row 51) and `UNNAMED: AgentFuzzer
+(generic black-box fuzzing for IPI)` (row 59) — a double-count of one
+technique under two names.
+
+**Effect.** Row 59 is now Exclude (corpus 886 → 885 Include). The duplicate
+mechanism is retracted: RQ3 **183 → 182**. Because the phantom was *uncovered*
+while canonical `AgentVigil` is covered by one defense, uncovered mechanisms
+go **112 → 111** and the never-defended share **61.2% → 61.0%**; covered stays
+71. So one of the "never defended" mechanisms was never a distinct mechanism.
+
+**Sweep for others.** All 886 included papers were then checked pairwise:
+zero same-arXiv-ID duplicate groups, and only two fuzzy title pairs at or
+above 80 — this one, and the "Enhancing Security in LLMs" / "The Comprehensive
+Review on Prompt Injection Attacks" pair that Addendum 1 already adjudicated
+as two genuinely distinct surveys. **The included corpus is otherwise clean.**
+
+**Reproducibility.** The retraction lives in
+`data/registries/registry_corrections.json` and is applied at load time, not
+edited into the registry JSONs. The published numbers remain exactly
+recoverable: `registry_source.load_all(include_supplementary=False,
+include_corrections=False)` still returns 183 mechanisms / 116 uncovered /
+63.4% / 190 pairs.
+
+**Method note for the paper.** Title-similarity dedup has a blind spot for
+papers renamed between preprint versions. The reliable signal is the arXiv ID
+*inside the PDF*, which only becomes available once the PDF is fetched — which
+is why this surfaced during the PDF backfill rather than during screening.

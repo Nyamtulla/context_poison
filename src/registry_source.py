@@ -30,6 +30,10 @@ RQ5_RAW_GLOB = "data/registries/raw/rq5_batch*.csv"
 # separate file, and tagged with `source` on every pair, so RQ5's originally
 # published numbers stay recoverable rather than being silently overwritten.
 RQ5_SUPP_JSON = "data/registries/rq5_supplementary_pairs.json"
+# Registry entries retracted after publication (e.g. duplicate-paper
+# double-counts). Applied on load rather than edited into the registry JSONs,
+# so the published figures stay reproducible with include_corrections=False.
+CORRECTIONS_JSON = "data/registries/registry_corrections.json"
 
 RQ_FILES = {
     "RQ1": ("rq1_taxonomy_analysis.md", "Taxonomy — which channel × intent × consequence cells have been studied"),
@@ -95,14 +99,40 @@ def load_supplementary(root=None) -> list[dict]:
     return json.loads(path.read_text()).get("confirmed_pairs", [])
 
 
-def load_all(root=None, include_supplementary: bool = True) -> dict:
+def load_corrections(root=None) -> dict:
+    path = _root(root) / CORRECTIONS_JSON
+    if not path.exists():
+        return {"retracted_mechanisms": [], "retracted_defenses": []}
+    return json.loads(path.read_text())
+
+
+def load_all(root=None, include_supplementary: bool = True,
+             include_corrections: bool = True) -> dict:
     """The whole picture, joined: mechanisms carry the defenses tested against
     them, defenses carry the mechanisms they were tested against, and every
     confirmed pair carries both sides' metadata plus the match rationale.
 
     Set include_supplementary=False to reproduce RQ5's originally published
-    numbers exactly, without the Stage 1 recovery pass."""
+    numbers exactly, without the Stage 1 recovery pass; include_corrections=False
+    additionally restores entries later retracted as duplicates."""
     mechs, defs, cov = load_raw_registries(root)
+
+    if include_corrections:
+        corr = load_corrections(root)
+        drop_m = {c["mechanism_name"] for c in corr.get("retracted_mechanisms", [])}
+        drop_d = {c["defense_name"] for c in corr.get("retracted_defenses", [])}
+        if drop_m:
+            mechs = [m for m in mechs
+                     if (m.get("technique_name") or m.get("name")) not in drop_m]
+            cov["uncovered_mechanisms"] = [u for u in cov["uncovered_mechanisms"]
+                                           if u not in drop_m]
+            cov["mech_to_defenses"] = {k: v for k, v in cov["mech_to_defenses"].items()
+                                       if k not in drop_m}
+            cov["matches"] = [x for x in cov["matches"]
+                              if x["mechanism_name"] not in drop_m]
+        if drop_d:
+            defs = [d for d in defs if d.get("defense_name") not in drop_d]
+            cov["matches"] = [x for x in cov["matches"] if x["defense_name"] not in drop_d]
     justif = _load_justifications(root)
 
     mech_to_defenses = {k: list(v) for k, v in cov["mech_to_defenses"].items()}
