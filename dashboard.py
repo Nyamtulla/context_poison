@@ -963,6 +963,189 @@ def findings_tab(summaries: dict) -> None:
         st.divider()
 
 
+
+# ===================================================================
+# RQ1 (taxonomy cube) and RQ2 (cross-citation) visuals. Both compute
+# from the live corpus rather than from the write-ups, so they track
+# corpus changes instead of going stale.
+# ===================================================================
+
+CUBE_INTENTS = ["Security", "ML/AI", "Both"]
+
+
+@st.cache_data(ttl=60)
+def taxonomy_cube(mtime: float):
+    """The channel x intent x consequence cube, as a dict keyed by
+    (intent, channel, consequence) plus the axis orders."""
+    papers = [p for p in registry_source.load_papers()
+              if str(p.get("screening")) == "Include"]
+    cells = {}
+    for p in papers:
+        ch, co, tr = p.get("channel"), p.get("consequence"), p.get("track")
+        if ch and co and tr:
+            cells[(tr, ch, co)] = cells.get((tr, ch, co), 0) + 1
+    channels = sorted({p["channel"] for p in papers if p.get("channel")},
+                      key=lambda c: -sum(v for (t, ch, co), v in cells.items() if ch == c))
+    conseq = sorted({p["consequence"] for p in papers if p.get("consequence")},
+                    key=lambda c: -sum(v for (t, ch, co), v in cells.items() if co == c))
+    return cells, channels, conseq
+
+
+@st.cache_data(ttl=60)
+def cross_citation_stats(mtime: float):
+    """RQ2: cross-track citation, overall / by year / by evidence grade."""
+    papers = [p for p in registry_source.load_papers()
+              if str(p.get("screening")) == "Include"]
+    A = [p for p in papers if p.get("track") == "Security"]
+    B = [p for p in papers if p.get("track") == "ML/AI"]
+    def rate(group, field):
+        hit = sum(1 for p in group if p.get(field) == "Y")
+        return hit, len(group), (100 * hit / len(group) if group else 0.0)
+    overall = {"A->B": rate(A, "cites_track_b"), "B->A": rate(B, "cites_track_a")}
+    years = sorted({p["year"] for p in papers if p.get("year")})
+    by_year = {y: {"A->B": rate([p for p in A if p.get("year") == y], "cites_track_b"),
+                   "B->A": rate([p for p in B if p.get("year") == y], "cites_track_a")}
+               for y in years}
+    grades = sorted({p["evidence_grade"] for p in papers if p.get("evidence_grade")})
+    by_grade = {g: {"A->B": rate([p for p in A if p.get("evidence_grade") == g], "cites_track_b"),
+                    "B->A": rate([p for p in B if p.get("evidence_grade") == g], "cites_track_a")}
+                for g in grades}
+    # within-track citation, for the 2x2 direction matrix
+    same = {"A->A": rate(A, "cites_track_a"), "B->B": rate(B, "cites_track_b")}
+    return overall, by_year, by_grade, same, len(A), len(B)
+
+
+def taxonomy_tab() -> None:
+    st.markdown("#### RQ1 — the channel x intent x consequence cube")
+    cells, channels, conseq = taxonomy_cube(
+        (registry_source.REPO_ROOT / registry_source.PAPERS_XLSX).stat().st_mtime)
+    total = len(channels) * len(conseq) * len(CUBE_INTENTS)
+    filled = len(cells)
+    empty = total - filled
+
+    m = st.columns(4)
+    m[0].metric("Cells in the cube", total,
+                help=f"{len(channels)} channels x {len(CUBE_INTENTS)} intents x {len(conseq)} consequences")
+    m[1].metric("Cells with at least one paper", filled)
+    m[2].metric("Empty cells", empty)
+    m[3].metric("Share of the cube empty", f"{100*empty/total:.1f}%")
+
+    st.caption(
+        "The cube is shown as one panel per intent rather than in 3D - a rotatable cube "
+        "hides cells behind other cells, which defeats the point when the finding *is* "
+        "which cells are empty. Grey means no paper studies that combination."
+    )
+
+    from plotly.subplots import make_subplots
+    fig = make_subplots(rows=1, cols=len(CUBE_INTENTS),
+                        subplot_titles=[f"{t}" for t in CUBE_INTENTS],
+                        shared_yaxes=True, horizontal_spacing=0.045)
+    zmax = max(cells.values()) if cells else 1
+    for i, intent in enumerate(CUBE_INTENTS, start=1):
+        z, text = [], []
+        for ch in channels:
+            zrow, trow = [], []
+            for co in conseq:
+                v = cells.get((intent, ch, co), 0)
+                zrow.append(v if v else None)      # None renders as the empty colour
+                trow.append(str(v) if v else "")
+            z.append(zrow); text.append(trow)
+        fig.add_trace(go.Heatmap(
+            z=z, x=conseq, y=channels, text=text, texttemplate="%{text}",
+            textfont=dict(size=10),
+            colorscale="Blues", zmin=0, zmax=zmax, showscale=(i == len(CUBE_INTENTS)),
+            colorbar=dict(title="papers", thickness=12) if i == len(CUBE_INTENTS) else None,
+            hovertemplate=(intent + "<br>%{y} x %{x}<br>%{z} papers<extra></extra>"),
+            xgap=2, ygap=2,
+        ), row=1, col=i)
+    fig.update_layout(
+        height=420, margin=dict(l=10, r=10, t=50, b=90),
+        plot_bgcolor="#e9ecef",   # shows through wherever a cell is empty
+    )
+    fig.update_xaxes(tickangle=-40, tickfont=dict(size=10))
+    st.plotly_chart(fig, width="stretch", key="rq1_cube")
+
+    st.markdown("##### Where the emptiness is, by channel")
+    rows = []
+    for ch in channels:
+        filled_ch = sum(1 for intent in CUBE_INTENTS for co in conseq
+                        if (intent, ch, co) in cells)
+        n_cells = len(CUBE_INTENTS) * len(conseq)
+        rows.append({"Channel": ch, "Cells filled": filled_ch,
+                     "Cells empty": n_cells - filled_ch,
+                     "Empty %": round(100 * (n_cells - filled_ch) / n_cells, 1),
+                     "Papers": sum(v for (t, c, co), v in cells.items() if c == ch)})
+    cdf = pd.DataFrame(rows).sort_values("Empty %", ascending=False)
+    left, right = st.columns([3, 2])
+    with left:
+        f2 = go.Figure()
+        f2.add_trace(go.Bar(y=cdf["Channel"], x=cdf["Cells filled"], orientation="h",
+                            name="studied", marker_color="#3d5a80", text=cdf["Cells filled"],
+                            textposition="inside", textfont=dict(color="white", size=10)))
+        f2.add_trace(go.Bar(y=cdf["Channel"], x=cdf["Cells empty"], orientation="h",
+                            name="empty", marker_color="#dee2e6", text=cdf["Cells empty"],
+                            textposition="inside", textfont=dict(color="#495057", size=10)))
+        f2.update_layout(barmode="stack", height=max(260, 30 * len(cdf) + 110),
+                         margin=dict(l=10, r=10, t=40, b=10),
+                         yaxis=dict(autorange="reversed"),
+                         xaxis_title=f"cells (of {len(CUBE_INTENTS)*len(conseq)} per channel)",
+                         legend=dict(orientation="h", yanchor="bottom", y=1.0,
+                                     xanchor="right", x=1))
+        st.plotly_chart(f2, width="stretch", key="rq1_channel_fill")
+    with right:
+        st.dataframe(cdf, width="stretch", hide_index=True, height=380)
+
+
+def cross_citation_section() -> None:
+    overall, by_year, by_grade, same, nA, nB = cross_citation_stats(
+        (registry_source.REPO_ROOT / registry_source.PAPERS_XLSX).stat().st_mtime)
+    st.markdown("##### RQ2 — how often does either track cite the other?")
+    ab_h, ab_n, ab_p = overall["A->B"]
+    ba_h, ba_n, ba_p = overall["B->A"]
+    m = st.columns(3)
+    m[0].metric("Security papers citing ML/AI work", f"{ab_p:.1f}%", help=f"{ab_h} of {ab_n}")
+    m[1].metric("ML/AI papers citing Security work", f"{ba_p:.1f}%", help=f"{ba_h} of {ba_n}")
+    m[2].metric("Papers bridging both", nA + nB and
+                f"{100*(ab_h+ba_h)/(nA+nB):.1f}%", help=f"{ab_h+ba_h} of {nA+nB}")
+
+    left, right = st.columns(2)
+    with left:
+        yrs = sorted(by_year)
+        f = go.Figure()
+        for key, colour, label in (("A->B", REGISTRY_TRACK_COLORS["Security"], "Security -> cites ML/AI"),
+                                   ("B->A", REGISTRY_TRACK_COLORS["ML/AI"], "ML/AI -> cites Security")):
+            f.add_trace(go.Scatter(
+                x=yrs, y=[by_year[y][key][2] for y in yrs], mode="lines+markers+text",
+                name=label, line=dict(color=colour, width=2.5), marker=dict(size=9),
+                text=[f"{by_year[y][key][2]:.0f}%" for y in yrs], textposition="top center",
+                textfont=dict(size=10),
+                customdata=[[by_year[y][key][0], by_year[y][key][1]] for y in yrs],
+                hovertemplate="%{x}<br>%{customdata[0]} of %{customdata[1]} papers<extra></extra>"))
+        f.update_layout(title="Cross-citation rate by year", height=340,
+                        margin=dict(l=10, r=10, t=45, b=10),
+                        yaxis_title="% of track citing the other", xaxis_title="Year",
+                        legend=dict(orientation="h", yanchor="bottom", y=1.0,
+                                    xanchor="right", x=1))
+        st.plotly_chart(f, width="stretch", key="rq2_by_year")
+    with right:
+        gs = sorted(by_grade)
+        f = go.Figure()
+        for key, colour, label in (("A->B", REGISTRY_TRACK_COLORS["Security"], "Security -> cites ML/AI"),
+                                   ("B->A", REGISTRY_TRACK_COLORS["ML/AI"], "ML/AI -> cites Security")):
+            f.add_trace(go.Bar(
+                x=gs, y=[by_grade[g][key][2] for g in gs], name=label, marker_color=colour,
+                text=[f"{by_grade[g][key][2]:.0f}%" for g in gs], textposition="outside",
+                customdata=[[by_grade[g][key][0], by_grade[g][key][1]] for g in gs],
+                hovertemplate="grade %{x}<br>%{customdata[0]} of %{customdata[1]}<extra></extra>"))
+        f.update_layout(barmode="group", title="Cross-citation rate by evidence grade",
+                        height=340, margin=dict(l=10, r=10, t=45, b=10),
+                        yaxis_title="% citing the other track", xaxis_title="Evidence grade",
+                        legend=dict(orientation="h", yanchor="bottom", y=1.0,
+                                    xanchor="right", x=1))
+        st.plotly_chart(f, width="stretch", key="rq2_by_grade")
+    st.divider()
+
+
 def main() -> None:
     config = get_config()
     db_path = str(config.path("db_path"))
@@ -1061,7 +1244,7 @@ def main() -> None:
         )
 
     tabs = st.tabs([
-        "Overview", "Paper index", "Attacks & mechanisms", "Defenses",
+        "Overview", "Paper index", "Taxonomy (RQ1)", "Attacks & mechanisms", "Defenses",
         "Coverage matrix", "Transfer predictions", "RQ findings",
         "Paper timeline", "Citation network",
     ])
@@ -1071,22 +1254,25 @@ def main() -> None:
     with tabs[1]:
         paper_index_tab(db_path)
     with tabs[2]:
-        if reg:
-            mechanisms_tab(reg)
+        taxonomy_tab()
     with tabs[3]:
         if reg:
-            defenses_tab(reg)
+            mechanisms_tab(reg)
     with tabs[4]:
         if reg:
-            coverage_tab(reg)
+            defenses_tab(reg)
     with tabs[5]:
         if reg:
-            transfer_tab(reg)
+            coverage_tab(reg)
     with tabs[6]:
-        findings_tab(summaries)
+        if reg:
+            transfer_tab(reg)
     with tabs[7]:
-        timeline_tab(filtered)
+        findings_tab(summaries)
     with tabs[8]:
+        timeline_tab(filtered)
+    with tabs[9]:
+        cross_citation_section()
         network_tab(filtered, edges)
 
 
