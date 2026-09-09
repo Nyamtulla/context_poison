@@ -49,10 +49,21 @@ Three independent measurements converge on this:
    **6 showed some protection nobody had claimed or measured.**
 
 Taken together: the field is very likely *underclaiming* the coverage it
-already has, while leaving 116 of 183 named pollution mechanisms with no
+already has, while leaving 97 of 182 named pollution mechanisms with no
 defense ever tested against them. The bottleneck is evaluation practice —
 what gets tested, and against whose problem — rather than a shortage of
 defensive ideas.
+
+**Amended 2026-09-09.** A reverse scan — attack papers read for defense names,
+the direction RQ5 structurally could not search — recovered 37 evaluated pairs
+and moved this figure from 116 of 183 to 97 of 182 (see `rq5_coverage_matrix.md`,
+"Reading the corpus in the other direction"). It also sharpens point 3 above
+rather than softening it. **24 of those 37 pairs record the defense failing,
+degraded or broken.** So the field is underclaiming coverage in one direction
+and overclaiming robustness in the other: cross-threat-model protection that
+exists and is never measured, alongside same-threat-model protection that has
+been measured to fail and is never reported back. Both are failures of where
+evaluation results are allowed to travel.
 
 For an advisor-facing one-liner: *we found that the security community and
 the reliability community have independently built defenses against what is
@@ -95,8 +106,10 @@ the same number regardless of who authored the corruption is not solving two
 problems. It is solving one.
 
 **The disconnect therefore has a measurable cost**, and it is not primarily
-about citations: it is 116 undefended mechanisms and an unknown quantity of
-protection that exists but has never been demonstrated.
+about citations: it is 97 undefended mechanisms and an unknown quantity of
+protection that exists but has never been demonstrated — plus a second,
+opposite quantity of protection that has been *dis*proved in an attack paper
+and never propagated back to how the defense is described.
 
 ---
 

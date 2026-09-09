@@ -708,13 +708,13 @@ def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
 
     c = st.columns(4)
     pct_def = 100 * s["n_defenses_matched"] / s["n_defenses_total"]
-    pct_mech = 100 * s["n_mechs_covered"] / s["n_mechs_total"]
+    pct_mech = 100 * s["n_mechs_covered"] / s["n_mechanisms"]
     n_cross = sum(1 for p in reg["pairs"] if p["cross_track"])
     c[0].metric("Defenses matched to a named mechanism", f"{pct_def:.1f}%",
                 help=f"{s['n_defenses_matched']} of {s['n_defenses_total']}. The rest weren't confirmed "
                      "tested against anything in the RQ3 registry — see the Coverage matrix tab.")
     c[1].metric("Mechanisms with ≥1 defense tested", f"{pct_mech:.1f}%",
-                help=f"{s['n_mechs_covered']} of {s['n_mechs_total']}")
+                help=f"{s['n_mechs_covered']} of {s['n_mechanisms']}")
     c[2].metric("Mechanisms never defended", s["n_mechs_uncovered"],
                 help="Zero confirmed defenses tested against them")
     c[3].metric("Cross-track test pairs", n_cross,
@@ -882,7 +882,7 @@ def coverage_tab(reg: dict) -> None:
                 help="vs. 2 mechanisms: "
                      f"{s['mechs_per_defense_distribution'].get('2', 0)}. None were tested against 3+.")
     m[2].metric("Mechanisms never defended", s["n_mechs_uncovered"],
-                delta=f"-{100 * s['n_mechs_uncovered'] / s['n_mechs_total']:.1f}% of registry",
+                delta=f"-{100 * s['n_mechs_uncovered'] / s['n_mechanisms']:.1f}% of registry",
                 delta_color="inverse")
     m[3].metric("Cross-track pairs", n_cross,
                 help="A Security-track defense tested against an ML/AI-track mechanism, or vice "
@@ -913,7 +913,7 @@ def coverage_tab(reg: dict) -> None:
                       yaxis=dict(autorange="reversed"), xaxis_title="Defense intervention point")
     st.plotly_chart(fig, width="stretch", key="coverage_heatmap")
     st.caption("Top 15 mechanisms by number of defenses tested against them. Every other mechanism "
-               "in the registry has 2 or fewer — or, for 116 of them, none at all.")
+               f"in the registry has 2 or fewer — or, for {s['n_mechs_uncovered']} of them, none at all.")
 
     st.divider()
     st.markdown("##### All confirmed test pairs")

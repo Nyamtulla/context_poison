@@ -67,6 +67,34 @@ Verified not degenerate: underlying texts are all distinct; detector output
 is 100% internally consistent per condition while cleanly flipping between
 conditions.
 
+**Qualified 2026-09-09 — what "full generalization" here does and does not
+mean.** This reconstruction uses the CombineAttacker injection from
+DataSentinel's own evaluation suite, and against that it is clean. Reading the
+corpus in the reverse direction (attack papers scanned for defense names —
+`rq5_coverage_matrix.md`, "Reading the corpus in the other direction") turned
+up four published evaluations of DataSentinel that RQ5 could not see, and it
+loses all four:
+
+| attack | reported against DataSentinel |
+|---|---|
+| DataFlip | detection rate to **0%**, highest 24.0% across seven task pairs |
+| ObliInjection | **FNR 79.6%** at FPR 0.2% — misses four in five contaminated segments |
+| ToolHijacker | detects some gradient-generated tool documents, "**miss the majority**" |
+| PISmith | sits on the low-robustness arm of the utility–robustness frontier |
+
+DataFlip is the sharpest, because it is adaptive *against this exact
+mechanism*: it embeds an IF statement in the injected task that recognises the
+canary instruction and returns the secret key, so known-answer detection
+reports "not contaminated" by construction.
+
+All four attacks postdate DataSentinel, so none could appear in its own paper,
+and none appear in RQ5 because RQ5 read defense papers. The result above is
+unchanged and the reconstruction stands — but it should be read as **"holds
+against the attacks that existed when it was written,"** not as evidence of
+robustness to adaptive attack. The intervention-point finding that this case
+study feeds into is unaffected: ingestion-point defenses do generalize across
+*channels*; that is a different axis from generalizing across *adaptivity*.
+
 ### DataFilter (ingestion) — sanitizer
 
 Real, released, full (non-gated) fine-tuned Llama-3.1-8B checkpoint. Strips

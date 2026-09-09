@@ -30,6 +30,11 @@ RQ5_RAW_GLOB = "data/registries/raw/rq5_batch*.csv"
 # separate file, and tagged with `source` on every pair, so RQ5's originally
 # published numbers stay recoverable rather than being silently overwritten.
 RQ5_SUPP_JSON = "data/registries/rq5_supplementary_pairs.json"
+# Pairs recovered by scanning ATTACK papers for defense names - the reverse of
+# RQ5's direction. RQ5 read defense papers looking for mechanism names, which
+# structurally cannot find a defense evaluated inside an attack paper published
+# after it. Same file shape and the same precision-first bar as RQ5_SUPP_JSON.
+ATTACK_EVAL_JSON = "data/registries/attack_paper_evaluations.json"
 # Registry entries retracted after publication (e.g. duplicate-paper
 # double-counts). Applied on load rather than edited into the registry JSONs,
 # so the published figures stay reproducible with include_corrections=False.
@@ -93,12 +98,20 @@ def load_raw_registries(root=None):
 
 # ------------------------------------------------------------ enriched loads
 
-def load_supplementary(root=None) -> list[dict]:
-    """Stage 1 recovered pairs (empty list if the file isn't present)."""
-    path = _root(root) / RQ5_SUPP_JSON
+def _confirmed_pairs(path: Path, tag: str) -> list[dict]:
     if not path.exists():
         return []
-    return json.loads(path.read_text()).get("confirmed_pairs", [])
+    return [{**p, "_source_tag": tag}
+            for p in json.loads(path.read_text()).get("confirmed_pairs", [])]
+
+
+def load_supplementary(root=None) -> list[dict]:
+    """Every pair recovered after RQ5's own pass, from both recovery
+    directions: Stage 1 (defense papers -> mechanism names) and the reverse
+    scan (attack papers -> defense names). Empty list if neither file exists."""
+    r = _root(root)
+    return (_confirmed_pairs(r / RQ5_SUPP_JSON, "stage1_supplementary")
+            + _confirmed_pairs(r / ATTACK_EVAL_JSON, "attack_paper_scan"))
 
 
 def load_corrections(root=None) -> dict:
@@ -153,14 +166,16 @@ def load_all(root=None, include_supplementary: bool = True,
                 # (usually a name typed slightly differently). Dropping it
                 # quietly would lose an adjudicated result with no trace.
                 raise ValueError(
-                    f"supplementary pair names defense {p['defense']!r}, which is not in the "
-                    f"RQ4 registry - fix the name in {RQ5_SUPP_JSON} to match exactly")
+                    f"recovered pair names defense {p['defense']!r}, which is not in the "
+                    f"RQ4 registry - fix the name in the {p['_source_tag']} file to match exactly")
             mech_to_defenses.setdefault(p["mechanism"], []).append(int(row))
             defense_to_mechs.setdefault(row, []).append(p["mechanism"])
             uncovered.discard(p["mechanism"])
             supp_pairs.append({"defense_row": int(row), "defense_name": p["defense"],
                                "mechanism_name": p["mechanism"], "confidence": "high",
-                               "justification": p.get("evidence", ""), "source": "stage1_supplementary"})
+                               "justification": p.get("evidence", ""),
+                               "outcome": p.get("outcome", ""),
+                               "source": p["_source_tag"]})
 
     defs_by_row = {str(d["row"]): d for d in defs}
     mechs_by_name = {(m.get("technique_name") or m.get("name")): m for m in mechs}
@@ -228,6 +243,7 @@ def load_all(root=None, include_supplementary: bool = True,
                              or justif.get((row, match["mechanism_name"]), ""),
             "defense_paper_title": d.get("title"),
             "source": match.get("source", "rq5"),
+            "outcome": match.get("outcome", ""),
         })
 
     return {
@@ -241,6 +257,8 @@ def load_all(root=None, include_supplementary: bool = True,
             "n_pairs": len(pairs),
             "n_pairs_rq5_original": cov["n_matched_pairs"],
             "n_pairs_supplementary": len(supp_pairs),
+            "n_pairs_attack_paper_scan": sum(1 for x in supp_pairs
+                                             if x["source"] == "attack_paper_scan"),
             "n_defenses_matched": sum(1 for x in defenses if x["has_confirmed_match"]),
             "n_defenses_total": cov["n_defenses_total"],
             "n_mechs_covered": sum(1 for x in mechanisms if x["has_any_defense"]),
