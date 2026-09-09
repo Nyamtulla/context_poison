@@ -19,11 +19,12 @@ plan anticipated, and the shape of the sparsity is itself the finding.**
   named registry mechanism; the rest (64.5%) either weren't evaluated against
   anything the registry recognizes as a distinct named technique, or weren't
   evaluated at all.
-- **67 of 183 mechanisms (36.6%)** have at least one defense tested against
-  them; **116 (63.4%) have zero** — a coverage gap almost identical in size
-  to the empty-cell rate found in RQ1 (63.6%), a striking (and likely
-  not coincidental) parallel between "has this combination been studied"
-  and "has this specific mechanism ever been defended against."
+- **85 of 182 mechanisms (46.7%)** have at least one defense tested against
+  them; **97 (53.3%) have zero.** As originally published this read 67 of 183
+  (36.6%) with 116 uncovered; the difference is one retracted duplicate plus
+  41 pairs recovered by two later scans, the larger of which read *attack*
+  papers rather than defense papers — see "Reading the corpus in the other
+  direction" below, which is a finding in its own right.
 - **Among the 170 matched defenses, 150 (88.2%) were tested against exactly
   one mechanism; only 20 (11.8%) were tested against two; none were tested
   against three or more.** The plan's original hypothesis — that the
@@ -33,7 +34,7 @@ plan anticipated, and the shape of the sparsity is itself the finding.**
   category to speak of at this granularity.** Cross-mechanism testing tops
   out at 2, not "many." The field's default mode is narrow, single-mechanism
   validation, not incremental silo-vs-generalist variation.
-- Raw matrix density (190 confirmed pairs / 87,657 possible mechanism×defense
+- Raw matrix density (231 confirmed pairs / 87,178 possible mechanism×defense
   cells = 0.22%) is not a meaningful number on its own — most cells aren't
   applicable at all (a memory-channel mechanism has no reason to be tested
   against a supply-chain-channel defense) — the two percentages above
@@ -178,8 +179,13 @@ Yes, and that is the useful part. Of 147 citation-derived candidates, only 3
 survived the "actually evaluated" bar; of 35 full-text candidates, 4. **The
 overwhelming majority of candidates mention the mechanism only in the
 bibliography or a single related-work sentence** — defense papers cite attack
-papers as related work, not as evaluation targets. So the gap is a property of
-the literature, not an artifact of our extraction being too strict.
+papers as related work, not as evaluation targets.
+
+That is real, but it does **not** license the conclusion we first drew from it.
+This audit searched defense papers, which is the same direction RQ5 searched,
+so it could only ever test whether we read those papers carefully enough — not
+whether we were reading the right papers. The next section runs the scan the
+other way and finds that we were not.
 
 Three method notes worth carrying into threats to validity:
 
@@ -212,3 +218,102 @@ RQ5 reads are empty. Measured after the extraction backfill:
 Report **both denominators**: 35.7% of *all* defenses have a confirmed match,
 but 37.2% of those *eligible* for matching do. See `rescreening_log.md`
 Addendum 3 for the full analysis.
+
+## Reading the corpus in the other direction (2026-09-09)
+
+This section **is** a finding about the literature, not about our measurement.
+
+RQ5 and the audit above both established coverage by reading defense papers and
+looking for mechanism names. That direction has a blind spot with a definite
+shape: **a defense paper cannot report losing to an attack that did not exist
+when it was written.** The moment a defense is beaten, the evidence appears in
+the *attacking* paper, and no amount of care applied to the defense side of the
+corpus will surface it.
+
+So we ran the scan the other way — every mechanism's source paper searched for
+every named defense in the RQ4 registry
+(`scripts/reverse_scan_attack_papers.py`). Two passes: the first over the 111
+then-uncovered mechanisms, the second over all 182, because the blind spot
+applies to covered mechanisms exactly as much as to uncovered ones. 171 raw
+candidates, each adjudicated by reading the surrounding text at the same
+precision-first bar (the paper must actually run the defense and report a
+result). **37 confirmed pairs**, recorded with their quoted evidence in
+`data/registries/attack_paper_evaluations.json`.
+
+### What it changes
+
+| | as published | after both recovery directions |
+|---|---|---|
+| mechanisms with ≥1 defense tested | 67 / 183 (36.6%) | **85 / 182 (46.7%)** |
+| mechanisms never defended | 116 | **97** |
+| confirmed pairs | 190 | **231** |
+
+Fourteen mechanisms move from uncovered to covered. But the more important half
+of the result is on the mechanisms that were *already* covered: 16 further
+evaluations that RQ5 structurally could not see, and their verdicts run
+overwhelmingly one way.
+
+### The verdict pattern
+
+**24 of the 37 recovered pairs record the defense failing, degraded, evaded or
+broken.** The remaining 13 are recorded as `evaluated` with no directional
+verdict — almost all of them ML/AI-track context-management systems compared as
+baselines, where the framing is comparison rather than attack. Among the
+Security-track pairs the negative verdict is close to universal.
+
+That is near-tautological — an attack paper evaluates a defense in order to
+beat it — and that is exactly why the direction matters. **The
+literature's record of defenses succeeding lives in defense papers; its record
+of the same defenses failing lives in attack papers; and a coverage matrix
+built from one side reports only the successes.**
+
+The clearest case is DataSentinel, which RQ6 reconstructed and rated *full
+generalization*:
+
+| attack | published against DataSentinel |
+|---|---|
+| DataFlip | detection to **0%** (max 24%) |
+| ObliInjection | **FNR 79.6%** — misses four in five contaminated segments |
+| ToolHijacker | detects some, "**miss the majority**" |
+| PISmith | on the low-robustness arm of the utility–robustness frontier |
+
+All four postdate DataSentinel. RQ6's own reconstruction — a clean pass against
+the CombineAttacker injection from DataSentinel's evaluation suite — is
+unaffected and stands; what changes is what it licenses. It shows the defense
+holds against the attacks that existed when it was written. See
+`rq6_case_studies.md`, where the verdict is now qualified accordingly.
+
+### Method limits, stated plainly
+
+- **The RQ4 registry bounds recall.** Only defenses whose own paper is in the
+  corpus have a name to search for. The Relinking paper evaluates eleven
+  defenses; four of them (Llama Prompt Guard 2, ShieldGemma, PromptLocate,
+  SecAlign) are not RQ4 entries, so those pairs are invisible to this scan
+  and are *not* counted above.
+- **Five mechanism papers have no retrievable full text**, so their attack
+  side was never read.
+- **The evaluation-language filter ranks, it does not gate.** Two of the 37
+  (Relinking × AttnTrace, Relinking × CaMeL) carried no hint — the paper says
+  "Evaluation protocol" and "Defense Placement", which the regex does not
+  cover. They were caught by hand-reviewing high-mention candidates without a
+  hint. Candidates below that review threshold may still hide real pairs.
+- **Backronyms are an entity-resolution hazard from this side too.** SHIFT,
+  TRACE, DRIFT, ITEM, PARSE, ACC, END, ARC, TAG and TOA all matched ordinary
+  words, metric abbreviations, dataset names or PDF-extraction artifacts; 85
+  of the first run's 133 candidates were this one failure mode. Acronyms are
+  now matched case-sensitively and URL-internal matches suppressed.
+- **One pass-1 rejection was overturned.** SkillJect × ClawGuard was called
+  related-work-only on too short an excerpt; the fuller passage reports
+  measured scanner accuracies. Both the original call and the reversal are
+  recorded in the registry file.
+
+### Consequence for RQ7
+
+RQ7 currently frames the problem as invention outpacing evaluation. That
+survives, but it is now too generous to the field in one respect and too harsh
+in another. Too harsh: defenses are evaluated against new attacks more often
+than the defense-side scan could show. Too generous: **when that evaluation
+happens, the defense usually loses, and the result is published somewhere the
+defense literature does not cite.** The gap is not only that defenses go
+untested — it is that they are tested, fail, and the failure never propagates
+back into how the defense is described.

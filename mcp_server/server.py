@@ -77,7 +77,7 @@ def get_stats() -> dict:
         "defenses_with_confirmed_mechanism_match_pct": round(100 * STATS["n_defenses_matched"] / STATS["n_defenses_total"], 1),
         "mechanisms_with_at_least_one_defense": STATS["n_mechs_covered"],
         "mechanisms_with_zero_defenses": STATS["n_mechs_uncovered"],
-        "mechanisms_with_zero_defenses_pct": round(100 * STATS["n_mechs_uncovered"] / STATS["n_mechs_total"], 1),
+        "mechanisms_with_zero_defenses_pct": round(100 * STATS["n_mechs_uncovered"] / STATS["n_mechanisms"], 1),
         "cross_track_pairs": sum(1 for p in PAIRS if p["cross_track"]),
     }
 
@@ -126,7 +126,7 @@ def list_mechanisms(query: str = "", track: str = "", channel: str = "", consequ
     """List named pollution/attack mechanisms from the RQ3 registry (183
     total: both deliberate attack techniques and incidental degradation
     mechanisms). Set covered_only=True for mechanisms with >=1 confirmed
-    defense tested against them, or False for the 116 with zero coverage."""
+    defense tested against them, or False for those with zero coverage."""
     out = []
     for m in MECHANISMS:
         if track and str(m.get("track", "")).strip().lower() != track.strip().lower():
@@ -238,7 +238,7 @@ def get_coverage_for_defense(defense_name: str) -> dict:
 
 @mcp.tool()
 def list_uncovered_mechanisms(track: str = "", channel: str = "", limit: int = 200) -> list[dict]:
-    """The 116 named mechanisms with ZERO confirmed defenses tested against
+    """The named mechanisms with ZERO confirmed defenses tested against
     them — a direct 'what's left to defend' list, useful for scoping new
     defense work or a related-work gap statement."""
     out = []
