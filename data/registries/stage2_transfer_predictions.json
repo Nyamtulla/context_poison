@@ -2288,58 +2288,6 @@
   "priority": 2.25
  },
  {
-  "mechanism": "UNNAMED: AgentFuzzer (generic black-box fuzzing for IPI)",
-  "mechanism_track": "Security",
-  "channel": "tool-output",
-  "consequence": "goal-hijack",
-  "mechanism_citations": 3,
-  "mechanism_year": 2025,
-  "mechanism_paper": "AGENTFUZZER: Generic Black-Box Fuzzing for Indirect Prompt Injection against LLM Agents",
-  "named": false,
-  "n_candidates": 113,
-  "best_score": 0.75,
-  "testable_now": true,
-  "candidates": [
-   {
-    "defense": "DataSentinel",
-    "defense_intervention_point": "ingestion",
-    "defense_validated_against": "adversarial",
-    "transfers_from": "Indirect Prompt Injection (IPI)",
-    "similarity": 1.0,
-    "intervention_prior": 0.75,
-    "score": 0.75,
-    "code_released": true,
-    "cross_track": false,
-    "defense_paper_title": "DataSentinel: A Game-Theoretic Detection of Prompt Injection Attacks"
-   },
-   {
-    "defense": "InstructDetector",
-    "defense_intervention_point": "ingestion",
-    "defense_validated_against": "adversarial",
-    "transfers_from": "Indirect Prompt Injection (IPI)",
-    "similarity": 1.0,
-    "intervention_prior": 0.75,
-    "score": 0.75,
-    "code_released": false,
-    "cross_track": false,
-    "defense_paper_title": "Defending against Indirect Prompt Injection by Instruction Detection"
-   },
-   {
-    "defense": "AgentSentry",
-    "defense_intervention_point": "ingestion",
-    "defense_validated_against": "adversarial",
-    "transfers_from": "Indirect Prompt Injection (IPI)",
-    "similarity": 1.0,
-    "intervention_prior": 0.75,
-    "score": 0.75,
-    "code_released": false,
-    "cross_track": false,
-    "defense_paper_title": "AgentSentry: Mitigating Indirect Prompt Injection in LLM Agents via Temporal Causal Diagnostics and Context Purification"
-   }
-  ],
-  "priority": 2.05
- },
- {
   "mechanism": "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI",
   "mechanism_track": "Security",
   "channel": "tool-output",
