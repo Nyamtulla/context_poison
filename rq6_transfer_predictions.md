@@ -215,3 +215,75 @@ recorded here as the next step rather than approximated.
 Artifacts: `data/registries/transfer_test_results_datasentinel.json`,
 `scripts/transfer_scenarios.py` (payload constructions and the full exclusion
 list), `scripts/run_transfer_tests.py`, `scripts/attack_efficacy_standalone.py`.
+
+## DataSentinel in an agent harness (2026-09-10)
+
+The text-classification run left 19 of 26 mechanisms inconclusive because
+DataSentinel's own harness models a sentiment-classification victim while the
+mechanisms attack agents. AgentDojo supplies the agent victim, and DataSentinel
+is now a pipeline element in it — the authors' released LoRA, called through
+their own unmodified `detect()`, sitting where AgentDojo puts its own detector.
+
+Banking suite, Qwen2.5-7B-Instruct, 8 user tasks × 3 injection tasks = 24 pairs
+per condition.
+
+| attack | undefended ASR | defended ASR |
+|---|---:|---:|
+| `important_instructions` (AgentDojo's own) | 20.8% | **20.8%** |
+| memory-persistence framing | 4.2% | **4.2%** |
+| Agent Data Injection (ADI) | 4.2% | **4.2%** |
+| VATS error-path | 8.3% | **8.3%** |
+| Plan Injection | 4.2% | 0.0% |
+
+**DataSentinel changes nothing.** Four of five conditions are identical to the
+decimal.
+
+### That was checked before it was believed
+
+Identical defended and undefended numbers are also exactly what a *disconnected*
+pipeline element produces, so the claim was tested rather than assumed, twice:
+
+1. Instrumenting `detect()` during a run: **4 calls on real tool outputs (793,
+   712, 69, 67 characters), 0 flagged.** The element is in the loop.
+2. Running the detector directly over the injections themselves — 5 attacks × 4
+   user tasks × 3 injection tasks: **0 of 60 flagged.**
+
+The same detector flags the paper's own CombineAttacker injection at 100%, and
+its sidecar refuses to start unless that control reproduces. So the defended
+pipeline is not failing to stop attacks; it is not seeing them. **It is inert on
+agent-channel text.**
+
+The fifth row is not a counter-example. `Plan Injection` reads 4.2% → 0.0%, and
+the driver's rule labels that "defense holds". It is one hijack out of 24
+flipping, in a pair of passes where the detector flagged nothing at all — so the
+defense cannot be the cause. What it actually shows is that these runs are
+**not deterministic**, which means single-event differences at this sample size
+are noise, and the driver's verdict rule is too eager. Both are recorded in
+`data/registries/agentdojo_datasentinel_results.json`.
+
+### Why, and what it costs RQ6
+
+DataSentinel detects *behaviourally*: it wraps the data in an instruction to
+repeat a secret key and treats failure to repeat it as contamination. That asks
+"does this text hijack a bare classification prompt right now?" An injection
+aimed at an agent mid-task — one that needs a tool, a plan, or a later turn to
+do anything — does not hijack that prompt, and so reads as clean.
+
+This is the sharpest form of the confound flagged when the AgentDojo work
+started. RQ6's headline is that generalization tracks intervention point, with
+ingestion defenses generalizing almost uniformly (3 of 4). But the ingestion
+defenses are exactly the ones whose harnesses model a text-classification
+victim, and the execution defenses — the agent-shaped ones — could not be
+evaluated at all. Asked the agent-shaped question with its own released weights,
+the ingestion defense that RQ6 rated *full generalization* does not fire once in
+60 attempts.
+
+**The intervention-point finding is not withdrawn.** Every RQ6 number stands as
+measured. What changes is its scope: it describes generalization *across threat
+models within a text-substrate evaluation*, not generalization across the
+substrates the corpus's mechanisms actually attack. `rq6_case_studies.md` should
+carry that qualification alongside the DataSentinel one already added.
+
+Still outstanding: RobustRAG is wired in but not yet run here. Its port is a
+no-op on single-item tool outputs by construction, so a run must report
+`skipped_single_item` or its numbers cannot be read at all.
