@@ -256,10 +256,14 @@ overwhelmingly one way.
 ### The verdict pattern
 
 **24 of the 37 recovered pairs record the defense failing, degraded, evaded or
-broken.** The remaining 13 are recorded as `evaluated` with no directional
-verdict — almost all of them ML/AI-track context-management systems compared as
-baselines, where the framing is comparison rather than attack. Among the
-Security-track pairs the negative verdict is close to universal.
+broken, and every one of those 24 is on a Security-track mechanism.** The
+remaining 13 are recorded as `evaluated` with no directional verdict: 4 ML/AI
+context-management systems compared as baselines (where the framing is
+comparison, not attack) and 9 Security-track pairs where the attack paper runs
+the defense inside a benchmark matrix without singling out a per-defense
+result. So among Security-track pairs the split is 24 negative to 9 neutral,
+and **positive verdicts are absent entirely** — not one recovered pair reports
+a defense holding.
 
 That is near-tautological — an attack paper evaluates a defense in order to
 beat it — and that is exactly why the direction matters. **The
