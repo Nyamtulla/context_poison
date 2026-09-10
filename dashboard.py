@@ -884,6 +884,80 @@ def _is_negative(outcome: str) -> bool:
     return any(w in (outcome or "").lower() for w in NEGATIVE_OUTCOME_WORDS)
 
 
+def outcome_ledger_section() -> None:
+    """Per-defense outcomes, kept split by which side of the corpus reported them.
+
+    The two sides disagree by construction - a defense paper reports a pair
+    because its defense won, an attack paper because it lost - so this never
+    shows a combined win rate. What it shows is the disagreement itself, which
+    is only visible for defenses that appear on both sides.
+    """
+    led = registry_source.outcome_ledger()
+    contested, defenses = led["contested"], led["defenses"]
+    if not contested:
+        return
+
+    st.markdown("##### The same defense, judged by each side")
+    st.caption(
+        "A defense's own paper reports it working; a later attack paper reports the same "
+        "defense failing. Both are in this corpus. These are the defenses where we hold "
+        "evidence from both sides, so the two can be set against each other — for every "
+        "other defense we have only one side's account."
+    )
+
+    df = (pd.DataFrame(contested).T
+            .rename(columns={"wins_claimed_by_own_paper": "Wins claimed by its own paper",
+                             "evaluated_by_attack_papers": "Times a later attack ran it",
+                             "lost_to_attacks": "Times it lost"})
+            .sort_values(["Times it lost", "Times a later attack ran it"], ascending=False))
+    n_lost = int((df["Times it lost"] > 0).sum())
+    k = st.columns(3)
+    k[0].metric("Defenses with evidence from both sides", f"{len(df)} of {len(defenses)}")
+    k[1].metric("…that lose in the attack paper", n_lost)
+    k[2].metric("…that hold up", len(df) - n_lost)
+
+    fig = go.Figure()
+    fig.add_bar(y=df.index.tolist(), x=df["Wins claimed by its own paper"].tolist(),
+                orientation="h", name="wins claimed by its own paper", marker_color="#3d5a80")
+    fig.add_bar(y=df.index.tolist(), x=(-df["Times it lost"]).tolist(),
+                orientation="h", name="losses reported by later attacks", marker_color="#c1121f")
+    fig.update_layout(barmode="relative", height=max(300, 34 * len(df) + 110),
+                      margin=dict(l=10, r=10, t=10, b=10),
+                      xaxis_title="← reported losses    |    reported wins →",
+                      yaxis=dict(autorange="reversed"),
+                      legend=dict(orientation="h", y=1.1, x=0))
+    st.plotly_chart(fig, width="stretch", key="outcome_ledger")
+    st.dataframe(df, width="stretch")
+    st.caption(
+        f"**{n_lost} of {len(df)} defenses that appear on both sides lose in the attack "
+        "paper while their own paper claims a win.** This is not evidence that the "
+        "defense papers are wrong — both results can hold, against different attacks, at "
+        "different times. It is evidence that a single 'was this defended' cell cannot "
+        "carry the answer, and that which side of the corpus you read decides what you "
+        "conclude."
+    )
+
+    with st.expander("Why there is no combined win rate here"):
+        st.markdown(
+            "Because it would be meaningless. Of 231 confirmed pairs, 194 come from "
+            "defense papers and 37 from attack papers. A defense paper reports a pair "
+            "*because its defense won*; an attack paper reports the same pair *because "
+            "the defense lost*. So the defense-paper rows are 193 claimed wins and the "
+            "attack-paper rows are 24 reported losses and zero wins — and neither number "
+            "measures how often defenses work.\n\n"
+            "RQ5's original extraction recorded only whether a pair was *tested*; there "
+            "was no outcome field, and adding one by reading defense papers would produce "
+            "an all-wins ledger just as adding one from attack papers produces an "
+            "all-losses ledger. What the table above does instead is keep the two apart "
+            "and show where they collide.\n\n"
+            "The effect sizes are the part that travels: `pair_outcomes.json` carries the "
+            "reported numbers per pair (ASR reductions, detection rates, TPR/FPR) for "
+            "137 of the 194 defense-paper pairs and 8 of the 37 attack-paper pairs, so "
+            "pairs can be compared on magnitude rather than on a binary."
+        )
+    st.divider()
+
+
 def provenance_section(pairs: pd.DataFrame) -> None:
     """Where the confirmed pairs came from, and what the recovered ones found.
 
@@ -962,6 +1036,8 @@ def provenance_section(pairs: pd.DataFrame) -> None:
             "generalization* by the RQ6 reconstruction, which ran it against the injection "
             "from its own evaluation suite. Every later attack that tested it beat it."
         )
+
+    outcome_ledger_section()
 
     st.markdown("**Every recovered pair, with the evidence it was confirmed on**")
     r = st.columns(2)

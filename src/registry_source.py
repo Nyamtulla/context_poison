@@ -54,6 +54,11 @@ RQ_FILES = {
     "RQ7": ("rq7_open_problems.md", "Open problems — ranked research priorities"),
 }
 
+# Per-pair reported outcome, tagged with WHICH SIDE of the corpus reported it.
+# Kept separate from the pairs themselves because the two sides disagree by
+# construction and must never be collapsed into a single win rate.
+PAIR_OUTCOMES_JSON = "data/registries/pair_outcomes.json"
+
 STAGE2_JSON = "data/registries/stage2_transfer_predictions.json"
 STAGE3_JSON = "data/registries/stage3_badrag_robustrag_results.json"
 
@@ -269,6 +274,50 @@ def load_all(root=None, include_supplementary: bool = True,
             "top_mechanisms": cov.get("top_mechanisms", []),
         },
     }
+
+
+def load_pair_outcomes(root=None) -> list[dict]:
+    """One row per confirmed pair: what outcome was reported, and by whom.
+
+    `reported_by` is the load-bearing field. A defense paper reports a pair
+    because its defense won; an attack paper reports the same pair because the
+    defense lost. Averaging across both produces a number that means nothing,
+    so callers are expected to split on it rather than aggregate over it.
+    """
+    path = _root(root) / PAIR_OUTCOMES_JSON
+    return json.loads(path.read_text()) if path.exists() else []
+
+
+def outcome_ledger(root=None) -> dict:
+    """Per-defense and per-mechanism tallies, kept split by reporting side.
+
+    Returns `defenses` and `mechanisms` maps plus `contested`: the defenses for
+    which the corpus contains BOTH a win claimed by their own paper and an
+    evaluation by a later attack paper. That subset is where the two halves of
+    the literature can actually be compared against each other.
+    """
+    rows = load_pair_outcomes(root)
+    defenses: dict[str, dict] = {}
+    mechanisms: dict[str, dict] = {}
+    for r in rows:
+        d = defenses.setdefault(r["defense_name"],
+                                {"wins_claimed_by_own_paper": 0,
+                                 "evaluated_by_attack_papers": 0, "lost_to_attacks": 0})
+        m = mechanisms.setdefault(r["mechanism_name"],
+                                  {"defenses_claiming_to_stop_it": 0,
+                                   "defenses_it_was_run_against": 0, "defenses_it_beat": 0})
+        if r["reported_by"] == "defense_paper":
+            d["wins_claimed_by_own_paper"] += 1
+            m["defenses_claiming_to_stop_it"] += 1
+        else:
+            d["evaluated_by_attack_papers"] += 1
+            m["defenses_it_was_run_against"] += 1
+            if r["reported_verdict"] == "defense_loses_reported":
+                d["lost_to_attacks"] += 1
+                m["defenses_it_beat"] += 1
+    contested = {k: v for k, v in defenses.items()
+                 if v["wins_claimed_by_own_paper"] and v["evaluated_by_attack_papers"]}
+    return {"defenses": defenses, "mechanisms": mechanisms, "contested": contested}
 
 
 def load_transfer_predictions(root=None) -> list[dict]:
