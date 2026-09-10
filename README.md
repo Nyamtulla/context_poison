@@ -87,25 +87,35 @@ python cli.py smoke-test       # network-light wiring check
 streamlit run dashboard.py
 ```
 
-Nine tabs, covering the whole project in one place — no cloud dependency:
+Ten tabs, covering the whole project in one place — no cloud dependency:
 
 - **Overview** — headline counts plus what every research question (RQ1–RQ7)
   found, each expandable.
-- **Paper index** — searchable index of all 1,008 curated papers with a
-  clickable link to each (arXiv → DOI → Semantic Scholar, whichever exists).
-  Search by title, author, or venue. If a search misses, it automatically
-  checks the wider ~26k discovery pool, so you can tell "we coded this" from
-  "we saw it but screened it out" from "genuinely new to us." Exports the
-  current view as CSV.
-- **Attacks & mechanisms** — all 183 named poisoning sources (RQ3),
+- **Taxonomy (RQ1)** — the channel × intent × consequence cube rendered as
+  faceted heatmaps, one panel per intent, so the empty cells are visible
+  rather than asserted.
+- **Paper index** — searchable index of the 885 papers carried into the
+  analysis, with a clickable link to each (arXiv → DOI → Semantic Scholar,
+  whichever exists). Search by title, author, or venue. If a search misses, it
+  automatically checks the wider ~26k discovery pool, so you can tell "we
+  analysed this" from "we saw it but screened it out" from "genuinely new to
+  us." Exports the current view as CSV. (The 1,008-row curated corpus and the
+  123 rows screened out of it are the audit trail, in
+  `context_sok_master_workbook.xlsx` and `rescreening_log.md`.)
+- **Attacks & mechanisms** — all 182 named poisoning sources (RQ3), split by
+  track,
   filterable by track/channel/consequence/coverage, with per-mechanism
   drill-down into which defenses were tested against it.
-- **Defenses** — all 479 defenses (RQ4), filterable by intervention point
-  and the threat model their own paper validated them against.
+- **Defenses** — all 479 defenses (RQ4), split by track, filterable by
+  intervention point and the threat model their own paper validated them
+  against.
 - **Coverage matrix** — the RQ5 defense×mechanism matches, a heatmap of
   where testing effort concentrates, every confirmed pair with its match
-  rationale and provenance, and the mechanisms nothing has been tested
-  against.
+  rationale, and the mechanisms nothing has been tested against. Includes a
+  **provenance view**: which pairs came from reading defense papers (RQ5's
+  direction) versus reading attack papers for defense names (the reverse
+  scan), and what the recovered pairs found — 24 of 37 record the defense
+  failing, none record it holding.
 - **Transfer predictions** — RQ6 continued: ranked hypotheses for which
   existing defense should work on which untested mechanism, plus the one
   result validated by execution.

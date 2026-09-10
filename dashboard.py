@@ -869,6 +869,118 @@ def defenses_tab(reg: dict) -> None:
         )
 
 
+SOURCE_LABELS = {
+    "rq5": "RQ5 — defense papers read for mechanism names",
+    "stage1_supplementary": "Recovery pass — defense papers, full text + citations",
+    "attack_paper_scan": "Reverse scan — attack papers read for defense names",
+}
+# The outcome strings recorded during adjudication. Anything not in this set is
+# a pair the attack paper ran but reported no directional verdict for.
+NEGATIVE_OUTCOME_WORDS = ("fail", "broken", "degraded", "insufficient",
+                          "exploited", "evaded", "assumption")
+
+
+def _is_negative(outcome: str) -> bool:
+    return any(w in (outcome or "").lower() for w in NEGATIVE_OUTCOME_WORDS)
+
+
+def provenance_section(pairs: pd.DataFrame) -> None:
+    """Where the confirmed pairs came from, and what the recovered ones found.
+
+    This exists because the coverage numbers above are not all evidence of the
+    same kind. RQ5 established them by reading defense papers for mechanism
+    names, which cannot surface a defense evaluated inside an attack paper
+    published after it — and that is where a defense's failures get reported.
+    Scanning the other direction recovered pairs whose verdicts run one way.
+    """
+    st.markdown("##### Where these pairs came from")
+    st.caption(
+        "A defense paper cannot report losing to an attack that did not exist when it was "
+        "written. RQ5 read defense papers, so those results were structurally invisible to "
+        "it; the reverse scan reads every mechanism's own paper for defense names instead."
+    )
+
+    counts = pairs["source"].value_counts()
+    order = [k for k in SOURCE_LABELS if k in counts.index]
+    fig = go.Figure(go.Bar(
+        x=[int(counts[k]) for k in order],
+        y=[SOURCE_LABELS[k] for k in order],
+        orientation="h",
+        marker_color=["#3d5a80" if k == "rq5" else "#ee6c4d" for k in order],
+        text=[int(counts[k]) for k in order], textposition="outside",
+    ))
+    fig.update_layout(height=190, margin=dict(l=10, r=40, t=10, b=10),
+                      xaxis_title="confirmed pairs", showlegend=False)
+    st.plotly_chart(fig, width="stretch", key="provenance_sources")
+
+    rec = pairs[pairs["source"] == "attack_paper_scan"].copy()
+    if rec.empty:
+        return
+    rec["verdict"] = rec["outcome"].apply(
+        lambda o: "defense failed, degraded or was broken" if _is_negative(o)
+        else "run, but no directional verdict reported")
+
+    st.markdown("##### What the reverse scan found")
+    v = st.columns(3)
+    n_neg = int(rec["verdict"].str.startswith("defense failed").sum())
+    v[0].metric("Pairs recovered from attack papers", len(rec))
+    v[1].metric("…where the defense lost", n_neg,
+                help="Recorded as failing, degraded, evaded or broken.")
+    v[2].metric("…where the defense held", 0,
+                help="Not one recovered pair reports a defense holding. An attack paper "
+                     "evaluates a defense in order to beat it — which is precisely why "
+                     "reading only defense papers gives a one-sided view.")
+    st.info(
+        f"**{n_neg} of {len(rec)} recovered pairs record the defense failing, degraded, "
+        "evaded or broken, and none record it holding.** The literature's record of "
+        "defenses succeeding lives in defense papers; its record of the same defenses "
+        "failing lives in attack papers. A coverage matrix built from one side reports "
+        "only the successes."
+    )
+
+    hits = (rec.groupby("defense_name")
+               .agg(evaluations=("mechanism_name", "count"),
+                    lost=("verdict", lambda c: int(c.str.startswith("defense failed").sum())))
+               .sort_values(["lost", "evaluations"], ascending=False))
+    repeat = hits[hits["evaluations"] > 1]
+    if not repeat.empty:
+        st.markdown("**Defenses evaluated more than once by later attacks**")
+        fig = go.Figure()
+        fig.add_bar(y=repeat.index.tolist(), x=repeat["lost"].tolist(), orientation="h",
+                    name="defense lost", marker_color="#c1121f")
+        fig.add_bar(y=repeat.index.tolist(),
+                    x=(repeat["evaluations"] - repeat["lost"]).tolist(), orientation="h",
+                    name="no directional verdict", marker_color="#adb5bd")
+        fig.update_layout(barmode="stack", height=max(220, 34 * len(repeat) + 90),
+                          margin=dict(l=10, r=10, t=10, b=10),
+                          xaxis_title="evaluations found in attack papers",
+                          yaxis=dict(autorange="reversed"),
+                          legend=dict(orientation="h", y=1.12, x=0))
+        st.plotly_chart(fig, width="stretch", key="provenance_repeat")
+        st.caption(
+            "Read this against the Transfer predictions tab: DataSentinel is rated *full "
+            "generalization* by the RQ6 reconstruction, which ran it against the injection "
+            "from its own evaluation suite. Every later attack that tested it beat it."
+        )
+
+    st.markdown("**Every recovered pair, with the evidence it was confirmed on**")
+    r = st.columns(2)
+    show = _multiselect_filter(rec, "verdict", "Verdict", r[0], "prov_verdict")
+    show = _multiselect_filter(show, "mechanism_track", "Mechanism track", r[1], "prov_track")
+    st.dataframe(
+        show[["defense_name", "mechanism_name", "outcome", "mechanism_track", "justification"]]
+            .rename(columns={"justification": "evidence"}),
+        width="stretch", hide_index=True, height=320,
+    )
+    st.caption(
+        f"{len(show)} of {len(rec)} shown. Every pair was adjudicated by reading the "
+        "surrounding text: the attack paper must actually run the defense and report a "
+        "result. Related-work mentions, benchmark-protocol borrowing and explicit "
+        "scope exclusions were all rejected — see `rq5_coverage_matrix.md` for the "
+        "rejected categories and the scan's recall limits."
+    )
+
+
 def coverage_tab(reg: dict) -> None:
     s = reg["stats"]
     pairs = pd.DataFrame(reg["pairs"])
@@ -931,6 +1043,9 @@ def coverage_tab(reg: dict) -> None:
     )
     st.caption(f"{len(out)} of {len(pairs)} pairs shown. `justification` is the extracting "
                "agent's rationale for the match, kept for auditability.")
+
+    st.divider()
+    provenance_section(pairs)
 
     st.divider()
     st.markdown(f"##### The {s['n_mechs_uncovered']} mechanisms nothing has ever been tested against")

@@ -123,7 +123,7 @@ def get_paper(paper_id: str) -> dict:
 @mcp.tool()
 def list_mechanisms(query: str = "", track: str = "", channel: str = "", consequence: str = "",
                      covered_only: bool | None = None, limit: int = 50) -> list[dict]:
-    """List named pollution/attack mechanisms from the RQ3 registry (183
+    """List named pollution/attack mechanisms from the RQ3 registry (182
     total: both deliberate attack techniques and incidental degradation
     mechanisms). Set covered_only=True for mechanisms with >=1 confirmed
     defense tested against them, or False for those with zero coverage."""
