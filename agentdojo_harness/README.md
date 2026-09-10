@@ -74,8 +74,69 @@ same failure mode RQ6 was built to catch, and it shows up immediately here.
 
 ## Defenses available in-harness
 
-`tool_filter`, `transformers_pi_detector`, `repeat_user_prompt`,
-`spotlighting_with_delimiting`, `reflection`, `ipiguard`. DataSentinel and
-RobustRAG are **not** AgentDojo pipeline elements; wiring either in as a
-detector element is the next piece of work, and is what would let the same
-mechanism set be run against them here.
+AgentDojo's own six: `tool_filter`, `transformers_pi_detector`,
+`repeat_user_prompt`, `spotlighting_with_delimiting`, `reflection`, `ipiguard`.
+
+Plus this project's two, added in `corpus_defenses.py` and selectable as
+`--defense datasentinel` / `--defense robustrag`. They sit in the tools-execution
+loop at exactly the point AgentDojo puts its own `transformers_pi_detector`, so
+the only difference between those pipelines is which detector is in the loop.
+
+**They are not equally faithful, and the results must not be reported as if they
+were.**
+
+| | fidelity | what is actually running |
+|---|---|---|
+| `datasentinel` | **genuine reconstruction** | the authors' released LoRA checkpoint, called through their own unmodified `detect()` |
+| `robustrag` | **a port** | the authors' keyword extraction and `min(beta, alpha*k)` filtering, applied to a substrate they did not design for |
+
+### Why sidecars
+
+Both defenses run as small local HTTP services rather than imports:
+`datasentinel_service.py` (:1112) and `robustrag_service.py` (:1113). DataSentinel
+needs `peft`, `bitsandbytes` and transformers 4.42; RobustRAG needs spaCy and
+`en_core_web_sm`; the AgentDojo venv has transformers 4.46 and none of the rest.
+Installing into any of these environments risks the reconstructions that
+currently work — and those working reconstructions *are* RQ6's evidence base. A
+process boundary keeps all three intact and changes nothing about either defense.
+
+Each service refuses to start unless its controls reproduce: DataSentinel must
+read clean=0 and the paper's own CombineAttacker=1; RobustRAG must keep five
+corroborating items and drop an injected outlier.
+
+### What RobustRAG's port does and does not preserve
+
+RobustRAG answers a question over *k* independently retrieved passages, and its
+certifiable-robustness guarantee rests on those passages being interchangeable
+evidence for one question. An agent trajectory violates that: tool outputs are
+sequential and dependent, so isolating them destroys the task rather than
+protecting it.
+
+What does satisfy the assumption is a **single tool output returning k
+independent items** — a search over emails, files or messages. That is where
+this element applies, filtering items whose content is not corroborated across
+the others. Consequences to state whenever reporting from it:
+
+- **no certificate.** Certified robustness is not being measured.
+- it is a filter over multi-item outputs, not an answer aggregator.
+- on single-item tool outputs it is a **no-op by construction**, and those runs
+  must never be read as the defense holding. The element counts
+  `skipped_single_item` so this is checkable rather than assumed.
+
+### First result, and how it was verified
+
+On banking / Qwen2.5-7B / 3 user tasks, `important_instructions` reads
+**66.7% undefended → 66.7% defended** with DataSentinel in the loop. The defense
+does not fire on AgentDojo's canonical IPI attack at all.
+
+That claim was checked before being believed, because identical defended and
+undefended numbers are exactly what a *disconnected* element also produces.
+Instrumenting `detect()` shows **4 calls on real tool outputs (793, 712, 69 and
+67 characters), 0 flagged** — the element is in the loop and genuinely misses.
+
+The mechanism is the same one the text-classification run surfaced: DataSentinel
+detects by wrapping data in a canary instruction and checking whether the model
+still repeats a secret key. An injection aimed at an *agent mid-task* does not
+stop a bare classification prompt from repeating that key, so it reads as clean.
+**Its published generalization was established on a text-classification victim,
+and against agent-shaped attacks in this harness it does not fire.**
