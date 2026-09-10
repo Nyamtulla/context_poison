@@ -287,3 +287,63 @@ carry that qualification alongside the DataSentinel one already added.
 Still outstanding: RobustRAG is wired in but not yet run here. Its port is a
 no-op on single-item tool outputs by construction, so a run must report
 `skipped_single_item` or its numbers cannot be read at all.
+
+## RobustRAG in the agent harness (2026-09-10)
+
+RobustRAG was run on **workspace** rather than banking, deliberately: its port
+only applies to a tool output that returns several independent items, and
+workspace's search tools do that while banking's mostly do not.
+
+Qwen2.5-7B-Instruct, 8 user tasks × 3 injection tasks = 24 pairs per condition.
+
+| attack | undefended ASR | defended ASR | utility | element applied / skipped |
+|---|---:|---:|---|---:|
+| `important_instructions` | 4.2% | 8.3% | 83.3% → **66.7%** | 27 / 22 |
+| memory-persistence | 4.2% | 4.2% | 70.8% → 70.8% | 15 / 27 |
+| ADI | 0.0% | 0.0% | 79.2% → 79.2% | 15 / 25 |
+| Plan Injection | 0.0% | 0.0% | 75.0% → **70.8%** | 15 / 27 |
+
+### The defense did run
+
+The first thing to check was whether the port was a no-op, since it is one by
+construction on single-item outputs. It was not: **the element fired on 27 of 49
+tool outputs in the control condition** and 15 of ~42 in each of the others.
+Roughly a third to a half of workspace tool outputs are multi-item and were
+actually filtered. That is the substrate the port was built for, working.
+
+### The security numbers are not interpretable, and that is the result
+
+**The positive control lands at 4.2% undefended ASR — one hijack in 24.** With a
+control that weak, no defended number can be distinguished from noise. The
+control's 4.2% → 8.3% is one event becoming two; the two 0.0% rows are
+inconclusive by the run's own definition.
+
+This is a suite-selection problem with an awkward shape, and it is worth stating
+because it constrains the whole programme:
+
+- **banking** gives a usable control (20.8% ASR) but its tool outputs are mostly
+  single-item, so RobustRAG's port is inert there for structural reasons.
+- **workspace** gives RobustRAG a real substrate, but `important_instructions`
+  barely lands on it with this model.
+
+**The suite where the attack works is the suite where this defense does not
+apply, and vice versa.** Fixing that needs either a stronger agent model (so
+workspace ASR rises out of the noise) or many more pairs; it is not fixable by
+re-running the same configuration.
+
+### What *is* interpretable: the utility cost
+
+Utility is measured on every pair regardless of whether the attack lands, so it
+has signal where ASR does not. RobustRAG's filtering **costs utility**: 83.3% →
+66.7% on the control (−16.6 points) and 75.0% → 70.8% on Plan Injection. It is
+discarding legitimate content along with anything injected — expected for a
+filter that keeps only items corroborated across the others, since a genuinely
+unique search result looks exactly like an uncorroborated one.
+
+That cost is real and measured. Whether it buys any security in an agent setting
+is, on this evidence, **unknown** — and reporting it as "defense fails" (which
+the driver's rule does for the control row) would be reading noise as a finding.
+
+Artifacts: `data/registries/agentdojo_robustrag_results.json`. Note the element
+counters are cumulative across conditions; the `*_this_condition` fields are the
+per-condition deltas.
