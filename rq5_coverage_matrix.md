@@ -321,3 +321,74 @@ happens, the defense usually loses, and the result is published somewhere the
 defense literature does not cite.** The gap is not only that defenses go
 untested — it is that they are tested, fail, and the failure never propagates
 back into how the defense is described.
+
+## The outcome table: what was reported, and by whom (2026-09-10)
+
+RQ5's extraction recorded whether a (defense, mechanism) pair was *tested*. It
+never recorded what happened, and the write-up flagged that at the time: a
+"tested" cell does not distinguish a defense that worked from one that was
+tested and failed.
+
+Filling that gap naively produces a ledger that is worse than no ledger,
+because the two halves of the corpus disagree by construction:
+
+- a **defense paper** reports a pair because its defense won;
+- an **attack paper** reports the same pair because the defense lost.
+
+Extracting outcomes from the 194 defense-paper pairs yields 193 claimed wins.
+Extracting them from the 37 attack-paper pairs yields 24 reported losses and
+**zero** wins. Neither number measures how often defenses work. Averaging them
+would measure nothing at all.
+
+`data/registries/pair_outcomes.json` (built by `scripts/build_pair_outcomes.py`)
+therefore records one row per pair with `reported_by` as the load-bearing
+field, and never collapses the two.
+
+### What the table can support
+
+**Effect sizes, which travel regardless of who reported them.** Reported
+numbers are mined per pair — ASR reductions, detection rates, TPR/FPR — for
+137 of the 194 defense-paper pairs and 8 of the 37 attack-paper pairs, so pairs
+can be compared on magnitude rather than on a binary. CommandSans "reduces ASR
+from 46.4% to 4.6%" and DataSentinel's 79.6% FNR under ObliInjection are
+commensurable in a way that "tested" and "tested" are not.
+
+**The disagreement, where both sides exist.** 15 of the 177 defenses in the
+matrix have evidence from both a defense paper and a later attack paper.
+**11 of those 15 lose in the attack paper while their own paper claims a win.**
+
+| defense | wins claimed by its own paper | later attacks that ran it | lost |
+|---|---:|---:|---:|
+| DataSentinel | 1 | 4 | **4** |
+| MELON | 1 | 4 | 3 |
+| DataFilter | 1 | 3 | 3 |
+| Progent | 1 | 3 | 2 |
+| PromptArmor | 2 | 2 | 2 |
+| CaMeL | 1 | 4 | 1 |
+
+This is not evidence that the defense papers are wrong. Both results can hold,
+against different attacks, at different times — which is exactly the point.
+**A single "was this defended" cell cannot carry the answer, and which half of
+the corpus you read decides what you conclude.**
+
+### What the table deliberately does not do
+
+An earlier version of this script tried to classify the defense papers'
+verdicts with a win/loss lexicon. On inspection it was wrong often enough to be
+worse than useless: it fired on language describing the *attack* ("degrade",
+"bypass") and read those as the defense losing, and its text window was usually
+the paper's title block, because for a generic mechanism name like "Indirect
+Prompt Injection (IPI)" the first occurrence in a defense paper's body IS the
+title. Those numbers were discarded, not published.
+
+What replaced it is the structural statement rather than a measurement: every
+defense-paper row is `defense_wins_claimed`, which says where the claim comes
+from, not that we verified it. Where a paper's own limitations section names
+the mechanism (9 pairs), the text is attached for the reader to weigh — a flag,
+not a verdict, since some of those mentions are pointed (TriShieldRAG's "~13%
+residual attack success rate ... not a complete elimination") and others are
+incidental.
+
+**The honest independent verdict remains the reconstruction standard**: run the
+released code and measure. That is what RQ6 did for 9 pairs. Everything in this
+table is a report of someone else's result, labelled with whose.
