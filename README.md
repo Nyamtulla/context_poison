@@ -87,10 +87,15 @@ python cli.py smoke-test       # network-light wiring check
 streamlit run dashboard.py
 ```
 
-Ten tabs, covering the whole project in one place — no cloud dependency:
+Eleven tabs, covering the whole project in one place — no cloud dependency:
 
 - **Overview** — headline counts plus what every research question (RQ1–RQ7)
   found, each expandable.
+- **Scope & gaps** — what the project measures on and how much is still
+  unmeasured: the three axes (3 stages, 9 channels, 6 consequences) with counts
+  on both the mechanism and defense side, and the narrowing from all 87,178
+  mechanism×defense cells down to the 915 a transfer experiment can actually be
+  run against today. Start here to understand the shape of the project.
 - **Taxonomy (RQ1)** — the channel × intent × consequence cube rendered as
   faceted heatmaps, one panel per intent, so the empty cells are visible
   rather than asserted.

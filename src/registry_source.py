@@ -332,6 +332,113 @@ def load_stage3_result(root=None) -> dict:
     return json.loads(path.read_text()) if path.exists() else {}
 
 
+# Which defense stages can plausibly act on which channel. Used to separate the
+# cells of the mechanism x defense grid that are worth testing from the ones
+# that are meaningless - a supply-chain defense has no business being evaluated
+# against a cross-modal attack, and counting those cells as "gaps" would inflate
+# the untested space with pairs nobody should ever run.
+STAGE_FITS_CHANNEL = {
+    "RAG": {"ingestion", "reasoning"},
+    "direct-input": {"ingestion", "reasoning"},
+    "tool-output": {"ingestion", "execution"},
+    "tool-metadata": {"ingestion", "execution"},
+    "memory": {"ingestion", "reasoning", "execution"},
+    "multi-agent": {"execution", "ingestion"},
+    "skill": {"ingestion", "execution"},
+    "supply-chain": {"execution", "ingestion"},
+    "cross-modal": {"ingestion"},
+}
+
+#: Defenses with a working reconstruction in this project, and their stage.
+#: These are the only defenses a transfer test can actually be run against
+#: today, so they bound the testable gap rather than the theoretical one.
+RECONSTRUCTED_DEFENSES = {
+    "DataSentinel": "ingestion",
+    "RobustRAG": "ingestion",
+    "DataFilter": "ingestion",
+    "PISanitizer": "ingestion",
+    "IPIGuard": "execution",
+    "CaMeL": "execution",
+}
+
+
+def taxonomy_dimensions(root=None) -> dict:
+    """The axes the project measures on, with counts on each side.
+
+    Returned per-axis rather than as one flat table because the mechanism and
+    defense sides are differently shaped: channels are declared by both, stages
+    only by defenses, consequences only by mechanisms.
+    """
+    from collections import Counter
+    reg = load_all(root)
+    M, D = reg["mechanisms"], reg["defenses"]
+
+    def norm(v):
+        return (v or "").strip() or None
+
+    stages = Counter(norm(d["intervention_point"]) for d in D)
+    ch_m = Counter(norm(m["channel"]) for m in M)
+    ch_d = Counter(norm(d["channel"]) for d in D)
+    cons = Counter(norm(m["consequence"]) for m in M)
+    channels = sorted({c for c in set(ch_m) | set(ch_d) if c},
+                      key=lambda c: -(ch_m.get(c, 0) + ch_d.get(c, 0)))
+    return {
+        "n_mechanisms": len(M),
+        "n_defenses": len(D),
+        "stages": [{"stage": k, "n_defenses": v} for k, v in stages.most_common()
+                   if k and k.lower() != "none"],
+        "stage_unspecified": sum(v for k, v in stages.items()
+                                 if not k or k.lower() == "none"),
+        "channels": [{"channel": c, "n_mechanisms": ch_m.get(c, 0),
+                      "n_defenses": ch_d.get(c, 0)} for c in channels],
+        "consequences": [{"consequence": k, "n_mechanisms": v}
+                         for k, v in cons.most_common() if k],
+        "tracks": {
+            "mechanisms": dict(Counter(m["track"] for m in M)),
+            "defenses": dict(Counter(d["track"] for d in D)),
+        },
+    }
+
+
+def gap_scope(root=None) -> dict:
+    """How large the untested space is, at four narrowing levels.
+
+    The headline "0.26% of the grid is filled" is true and useless on its own,
+    because most of the grid should never be tested. Each level below removes a
+    class of cell that is not worth running, so the last number is the one an
+    experimental campaign can actually be planned against.
+    """
+    reg = load_all(root)
+    M, D = reg["mechanisms"], reg["defenses"]
+    filled = {(p["defense_name"], p["mechanism_name"]) for p in reg["pairs"]}
+
+    # Level 3: the defense is already validated somewhere (so a transfer claim
+    # is meaningful) and its stage fits the mechanism's channel.
+    validated = [d for d in D if d["n_mechanisms_tested"] > 0]
+    compatible = runnable = 0
+    per_defense: dict[str, int] = {}
+    for d in validated:
+        stage = (d["intervention_point"] or "").strip().lower()
+        if not stage or stage == "none":
+            continue
+        for m in M:
+            if (d["defense_name"], m["mechanism_name"]) in filled:
+                continue
+            if stage in STAGE_FITS_CHANNEL.get((m["channel"] or "").strip(), set()):
+                compatible += 1
+                if RECONSTRUCTED_DEFENSES.get(d["defense_name"]) == stage:
+                    runnable += 1
+                    per_defense[d["defense_name"]] = per_defense.get(d["defense_name"], 0) + 1
+    return {
+        "grid_cells": len(M) * len(D),
+        "filled": len(filled),
+        "compatible_untested": compatible,
+        "runnable_untested": runnable,
+        "runnable_by_defense": dict(sorted(per_defense.items(), key=lambda kv: -kv[1])),
+        "reconstructed_defenses": RECONSTRUCTED_DEFENSES,
+    }
+
+
 def paper_link(p: dict) -> tuple[str, str]:
     """Best external link for a paper, as (url, label). Prefers arXiv (lands on
     the paper itself), then DOI, then whatever URL the pipeline recorded -

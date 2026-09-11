@@ -1173,6 +1173,122 @@ INTENT_LABELS = {
 
 
 @st.cache_data(ttl=60)
+def scope_tab() -> None:
+    """What the project measures on, and how much of it is still unmeasured.
+
+    Exists because the headline "0.26% of the grid is tested" is true and
+    misleading: most of that grid is pairs nobody should ever run. This tab
+    shows the narrowing from the raw grid down to the cells an experiment can
+    actually be planned against.
+    """
+    dims = registry_source.taxonomy_dimensions()
+    gap = registry_source.gap_scope()
+
+    st.markdown("#### What this project measures")
+    c = st.columns(5)
+    c[0].metric("Mechanisms (RQ3)", dims["n_mechanisms"])
+    c[1].metric("Defenses (RQ4)", dims["n_defenses"])
+    c[2].metric("Stages", len(dims["stages"]))
+    c[3].metric("Channels", len(dims["channels"]))
+    c[4].metric("Consequences", len(dims["consequences"]))
+
+    st.divider()
+    st.markdown("##### The three axes")
+    a = st.columns([1, 1.5, 1])
+
+    with a[0]:
+        st.markdown("**Stage** — where a defense intervenes")
+        st.dataframe(pd.DataFrame(dims["stages"]).rename(
+            columns={"stage": "Stage", "n_defenses": "Defenses"}),
+            hide_index=True, width="stretch")
+        st.caption(
+            f"A further **{dims['stage_unspecified']} defenses** never say where they "
+            "intervene. They cannot be placed on this axis, so no transfer prediction "
+            "can be made for them — a limitation of the literature, not of the coding."
+        )
+
+    with a[1]:
+        st.markdown("**Channel** — how contaminated context arrives")
+        ch = pd.DataFrame(dims["channels"])
+        fig = go.Figure()
+        fig.add_bar(y=ch["channel"], x=ch["n_mechanisms"], orientation="h",
+                    name="mechanisms", marker_color="#c1121f")
+        fig.add_bar(y=ch["channel"], x=ch["n_defenses"], orientation="h",
+                    name="defenses", marker_color="#3d5a80")
+        fig.update_layout(barmode="group", height=max(300, 34 * len(ch) + 90),
+                          margin=dict(l=10, r=10, t=10, b=10),
+                          yaxis=dict(autorange="reversed"),
+                          legend=dict(orientation="h", y=1.1, x=0),
+                          xaxis_title="count")
+        st.plotly_chart(fig, width="stretch", key="scope_channels")
+        st.caption(
+            "Read the imbalances. **memory** has 73 defenses against 13 mechanisms — many "
+            "defenses claiming a channel with few attacks tried against them. "
+            "**tool-metadata, skill and supply-chain** are nearly bare on both sides: they "
+            "are the newest channels (MCP, agent skills) and have almost no coverage yet."
+        )
+
+    with a[2]:
+        st.markdown("**Consequence** — what goes wrong")
+        st.dataframe(pd.DataFrame(dims["consequences"]).rename(
+            columns={"consequence": "Consequence", "n_mechanisms": "Mechanisms"}),
+            hide_index=True, width="stretch")
+        st.caption("Mechanism-side only; defenses rarely state a target consequence.")
+
+    st.divider()
+    st.markdown("##### How much is actually untested")
+    st.caption(
+        "Every row removes a class of cell that is not worth running, so the last "
+        "number is the one an experimental campaign can be planned against."
+    )
+
+    n_m, n_d = dims["n_mechanisms"], dims["n_defenses"]
+    funnel = pd.DataFrame([
+        {"Level": f"Every possible pair ({n_m} x {n_d})", "Cells": gap["grid_cells"],
+         "Why this is not the answer": "Most pairs are meaningless — a supply-chain defense "
+         "has no reason to be tested on a cross-modal attack."},
+        {"Level": "Confirmed tested (filled cells)", "Cells": gap["filled"],
+         "Why this is not the answer": "What the field has actually done. 0.26% of the grid, "
+         "but the denominator above is the wrong one."},
+        {"Level": "Compatible and untested", "Cells": gap["compatible_untested"],
+         "Why this is not the answer": "Defense already validated somewhere, and its stage "
+         "fits the mechanism's channel. The real gap — but far too large to run."},
+        {"Level": "Runnable today", "Cells": gap["runnable_untested"],
+         "Why this is not the answer": "Restricted to defenses this project has a working "
+         "reconstruction for. This is the campaign space."},
+    ])
+    st.dataframe(funnel, hide_index=True, width="stretch",
+                 column_config={"Cells": st.column_config.NumberColumn(format="%d")})
+
+    st.markdown("**The runnable space, by defense**")
+    rb = pd.DataFrame([{"Defense": k, "Stage": gap["reconstructed_defenses"][k],
+                        "Untested compatible pairs": v}
+                       for k, v in gap["runnable_by_defense"].items()])
+    r = st.columns([1.4, 1])
+    with r[0]:
+        st.dataframe(rb, hide_index=True, width="stretch")
+    with r[1]:
+        fig = go.Figure(go.Bar(
+            x=rb["Untested compatible pairs"], y=rb["Defense"], orientation="h",
+            marker_color=["#3d5a80" if s == "ingestion" else "#ee6c4d" for s in rb["Stage"]],
+            text=rb["Untested compatible pairs"], textposition="outside"))
+        fig.update_layout(height=max(240, 34 * len(rb) + 80),
+                          margin=dict(l=10, r=40, t=10, b=10),
+                          yaxis=dict(autorange="reversed"),
+                          xaxis_title="untested pairs (blue = ingestion, orange = execution)")
+        st.plotly_chart(fig, width="stretch", key="scope_runnable")
+
+    st.info(
+        "**The gap in our own tooling.** `reasoning` is the largest stage in the "
+        f"literature ({dims['stages'][0]['n_defenses']} defenses) but there is no "
+        "reasoning-stage defense in the runnable set above — every reconstruction we "
+        "have is ingestion or execution. RQ6 also found reasoning defenses were the "
+        "mixed bag, with full, partial and inert outcomes all appearing across three "
+        "defenses. So the least predictable region is also the one we currently cannot "
+        "test, and closing that needs a new reconstruction, not more runs."
+    )
+
+
 def taxonomy_cube(mtime: float):
     """The channel x intent x consequence cube, as a dict keyed by
     (intent, channel, consequence) plus the axis orders."""
@@ -1467,34 +1583,37 @@ def main() -> None:
         )
 
     tabs = st.tabs([
-        "Overview", "Paper index", "Taxonomy (RQ1)", "Attacks & mechanisms", "Defenses",
-        "Coverage matrix", "Transfer predictions", "RQ findings",
-        "Paper timeline", "Citation network",
+        "Overview", "Scope & gaps", "Paper index", "Taxonomy (RQ1)",
+        "Attacks & mechanisms", "Defenses", "Coverage matrix", "Transfer predictions",
+        "RQ findings", "Paper timeline", "Citation network",
     ])
     with tabs[0]:
         if reg:
             overview_tab(reg, summaries, n_analysed)
     with tabs[1]:
-        paper_index_tab(db_path)
-    with tabs[2]:
-        taxonomy_tab()
-    with tabs[3]:
         if reg:
-            mechanisms_tab(reg)
+            scope_tab()
+    with tabs[2]:
+        paper_index_tab(db_path)
+    with tabs[3]:
+        taxonomy_tab()
     with tabs[4]:
         if reg:
-            defenses_tab(reg)
+            mechanisms_tab(reg)
     with tabs[5]:
         if reg:
-            coverage_tab(reg)
+            defenses_tab(reg)
     with tabs[6]:
         if reg:
-            transfer_tab(reg)
+            coverage_tab(reg)
     with tabs[7]:
-        findings_tab(summaries)
+        if reg:
+            transfer_tab(reg)
     with tabs[8]:
-        timeline_tab(filtered)
+        findings_tab(summaries)
     with tabs[9]:
+        timeline_tab(filtered)
+    with tabs[10]:
         cross_citation_section()
         network_tab(filtered, edges)
 
