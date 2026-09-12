@@ -35,10 +35,23 @@ RQ5_SUPP_JSON = "data/registries/rq5_supplementary_pairs.json"
 # structurally cannot find a defense evaluated inside an attack paper published
 # after it. Same file shape and the same precision-first bar as RQ5_SUPP_JSON.
 ATTACK_EVAL_JSON = "data/registries/attack_paper_evaluations.json"
+# Pairs recovered by resolving "evaluated on benchmark B" into "evaluated against
+# attack A", granted only where the defense paper named the attack.
+BENCHMARK_RESOLVED_JSON = "data/registries/benchmark_resolved_pairs.json"
 # Registry entries retracted after publication (e.g. duplicate-paper
 # double-counts). Applied on load rather than edited into the registry JSONs,
 # so the published figures stay reproducible with include_corrections=False.
 CORRECTIONS_JSON = "data/registries/registry_corrections.json"
+# Mechanisms contributed by the three benchmark papers in the corpus. RQ3's
+# extraction returned zero from AgentDojo, InjecAgent and ASB - it asked whether
+# the paper proposed a named attack technique, and a benchmark paper read as
+# proposing a benchmark. Applied on load rather than merged into the RQ3 JSON so
+# include_benchmark_mechanisms=False still reproduces RQ3 exactly as published.
+BENCHMARK_MECHS_JSON = "data/registries/rq3_benchmark_mechanisms.json"
+# Which (defense, benchmark-attack) pairs the resolution pass confirmed, i.e. the
+# defense paper named the specific attack inside the benchmark rather than only
+# the benchmark. Benchmark-level-only evaluations are deliberately NOT here.
+BENCHMARK_PAIRS_JSON = "data/registries/benchmark_resolution.json"
 
 RQ_FILES = {
     "RQ1": ("rq1_taxonomy_analysis.md", "Taxonomy — which channel × intent × consequence cells have been studied"),
@@ -116,7 +129,8 @@ def load_supplementary(root=None) -> list[dict]:
     scan (attack papers -> defense names). Empty list if neither file exists."""
     r = _root(root)
     return (_confirmed_pairs(r / RQ5_SUPP_JSON, "stage1_supplementary")
-            + _confirmed_pairs(r / ATTACK_EVAL_JSON, "attack_paper_scan"))
+            + _confirmed_pairs(r / ATTACK_EVAL_JSON, "attack_paper_scan")
+            + _confirmed_pairs(r / BENCHMARK_RESOLVED_JSON, "benchmark_resolution"))
 
 
 def load_corrections(root=None) -> dict:
@@ -126,8 +140,16 @@ def load_corrections(root=None) -> dict:
     return json.loads(path.read_text())
 
 
+def load_benchmark_mechanisms(root=None) -> list[dict]:
+    path = _root(root) / BENCHMARK_MECHS_JSON
+    if not path.exists():
+        return []
+    return json.loads(path.read_text()).get("mechanisms", [])
+
+
 def load_all(root=None, include_supplementary: bool = True,
-             include_corrections: bool = True) -> dict:
+             include_corrections: bool = True,
+             include_benchmark_mechanisms: bool = True) -> dict:
     """The whole picture, joined: mechanisms carry the defenses tested against
     them, defenses carry the mechanisms they were tested against, and every
     confirmed pair carries both sides' metadata plus the match rationale.
@@ -136,6 +158,21 @@ def load_all(root=None, include_supplementary: bool = True,
     numbers exactly, without the Stage 1 recovery pass; include_corrections=False
     additionally restores entries later retracted as duplicates."""
     mechs, defs, cov = load_raw_registries(root)
+
+    if include_benchmark_mechanisms:
+        bm = load_benchmark_mechanisms(root)
+        have = {(m.get("technique_name") or m.get("name")) for m in mechs}
+        next_row = max((int(m["row"]) for m in mechs if str(m.get("row", "")).isdigit()),
+                       default=0) + 1
+        for i, m in enumerate(bm):
+            if m["technique_name"] in have:
+                continue
+            mechs.append({**m, "row": next_row + i, "name": m["technique_name"],
+                          "source": "benchmark_paper"})
+        # A benchmark mechanism starts life uncovered like any other; the pairs
+        # that cover it come from the resolution file below.
+        cov["uncovered_mechanisms"] = list(cov["uncovered_mechanisms"]) + [
+            m["technique_name"] for m in bm if m["technique_name"] not in have]
 
     if include_corrections:
         corr = load_corrections(root)
