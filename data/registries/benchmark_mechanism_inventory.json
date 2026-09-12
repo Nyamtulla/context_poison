@@ -1,0 +1,72 @@
+{
+ "generated": "2026-09-11",
+ "purpose": "What attack techniques each evaluation benchmark actually contains. Needed because RQ3 extracted ZERO mechanisms from the benchmark papers (AgentDojo, InjecAgent, ASB) even though all three are Include in the corpus - the extraction asked 'does this paper propose a named attack technique' and a benchmark paper was judged as proposing a benchmark instead. The consequence was that ~121 defense evaluations pointed at benchmarks the registry treated as containing nothing.",
+ "caution": "A defense 'evaluated on AgentDojo' is almost never evaluated against all of AgentDojo's attacks - most papers use important_instructions alone. Resolving benchmark -> all constituent mechanisms would MANUFACTURE coverage. These inventories say what a benchmark could supply; the per-paper resolution must still name which attack was used, and where the paper does not say, coverage stays at benchmark level and NOT at mechanism level.",
+ "benchmarks": {
+  "AgentDojo": {
+   "in_corpus": true,
+   "paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+   "mechanisms_contributed_to_rq3": 0,
+   "source": "enumerated from the released code's attack registry, not from prose",
+   "n_attacks_registered": 23,
+   "n_attack_families": 14,
+   "n_injection_tasks": 27,
+   "suites": {"workspace": 6, "travel": 7, "banking": 9, "slack": 5},
+   "attack_families": [
+    {"name": "important_instructions", "variants": 7, "note": "the default in most papers; an authority-framed instruction block addressed to the model by name"},
+    {"name": "ignore_previous", "variants": 2, "note": "classic instruction-override"},
+    {"name": "direct", "variants": 2, "note": "the injection task stated plainly, no framing"},
+    {"name": "system_message", "variants": 1, "note": "payload prefixed as ###(system_message)"},
+    {"name": "tool_knowledge", "variants": 2, "note": "payload exploiting knowledge of available tools"},
+    {"name": "agentic", "variants": 1, "note": "attacker is itself an agent"},
+    {"name": "neural_exec", "variants": 1, "note": "ALREADY in the RQ3 registry as 'Neural Exec'"},
+    {"name": "injecagent", "variants": 1, "note": "reimplements InjecAgent's attack string"},
+    {"name": "dos", "variants": 1, "note": "resource-abuse family; stops the agent rather than redirecting it"},
+    {"name": "captcha_dos", "variants": 1},
+    {"name": "felony_dos", "variants": 1},
+    {"name": "offensive_email_dos", "variants": 1},
+    {"name": "swearwords_dos", "variants": 1},
+    {"name": "manual", "variants": 1, "note": "human-in-the-loop, not an automated technique"}
+   ]
+  },
+  "InjecAgent": {
+   "in_corpus": true,
+   "paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+   "mechanisms_contributed_to_rq3": 0,
+   "source": "the paper's own attack taxonomy",
+   "attack_families": [
+    {"name": "Direct Harm", "note": "injection causes a harmful tool call directly (~510 cases)"},
+    {"name": "Data Stealing", "note": "injection exfiltrates user data (~544 cases)"}
+   ],
+   "note": "Two broad intent classes rather than distinct delivery techniques; the delivery is a fixed injected instruction string."
+  },
+  "ASB (Agent Security Bench)": {
+   "in_corpus": true,
+   "paper": "Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents",
+   "mechanisms_contributed_to_rq3": 0,
+   "source": "the paper's own attack templates, as referenced by defenses that evaluate on it",
+   "attack_families": [
+    {"name": "DPI (Direct Prompt Injection)"},
+    {"name": "OPI (Observation Prompt Injection)"},
+    {"name": "Memory Poisoning"},
+    {"name": "Plan-of-Thought (PoT) Backdoor"},
+    {"name": "Mixed attack"}
+   ]
+  },
+  "OpenPromptInjection": {
+   "in_corpus": false,
+   "paper": "Formalizing and Benchmarking Prompt Injection Attacks and Defenses (Liu et al.) - NOT in the corpus",
+   "source": "enumerated from the released code's attackers/ directory",
+   "attack_families": [
+    {"name": "Naive"}, {"name": "Escape Characters"}, {"name": "Context Ignoring"},
+    {"name": "Fake Completion"}, {"name": "Combined"}
+   ],
+   "note": "Used by DataSentinel and by this project's own RQ6 reconstruction. Out of registry scope because its paper is not in the corpus - which is itself a screening question worth raising."
+  },
+  "BIPIA": {
+   "in_corpus": false,
+   "paper": "Benchmarking and Defending Against Indirect Prompt Injection Attacks on LLMs - NOT in the corpus",
+   "note": "14 defenses evaluate on it. Its absence from the corpus means those evaluations cannot be resolved at all."
+  }
+ }
+}
