@@ -1,0 +1,5101 @@
+{
+ "generated": "2026-09-11",
+ "resolution": [
+  {
+   "row": "15",
+   "defense_name": "MELON (Masked re-Execution and TooL comparisON)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "23",
+   "defense_name": "RobustRAG",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "28",
+   "defense_name": "Retrieve-then-Solve",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "32",
+   "defense_name": "UNNAMED: Rot-aware rejection-sampling filter for long-horizon search",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "33",
+   "defense_name": "AttnComp (Attention-guided Context Compression)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "35",
+   "defense_name": "Self-RAG",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "36",
+   "defense_name": "Corrective Retrieval Augmented Generation (CRAG)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "37",
+   "defense_name": "Astute RAG",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "52",
+   "defense_name": "IPIGuard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "53",
+   "defense_name": "InstructDetector",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "54",
+   "defense_name": "Task Shield",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::important_instructions",
+    "AgentDojo::injecagent"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "56",
+   "defense_name": "Rennervate",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "58",
+   "defense_name": "IntentGuard",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "60",
+   "defense_name": "AgentSentry",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::important_instructions",
+    "AgentDojo::tool_knowledge"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "61",
+   "defense_name": "UNNAMED: Digital forensic analysis framework for post-hoc IPI attack identification from agent execution logs",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "62",
+   "defense_name": "ClawGuard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "63",
+   "defense_name": "AttriGuard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::tool_knowledge"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "65",
+   "defense_name": "Tool Result Parsing (ParseData/CheckTool)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "70",
+   "defense_name": "UNNAMED: Embedding-based semantic context analysis detector for IPI",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "71",
+   "defense_name": "ICON (Inference-Time Correction)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "72",
+   "defense_name": "PlanGuard",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "InjecAgent::Data Stealing",
+    "InjecAgent::Direct Harm"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "73",
+   "defense_name": "Cognitive Firewall",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "80",
+   "defense_name": "CodeSentinel",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "83",
+   "defense_name": "MIPIAD",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "85",
+   "defense_name": "DualView",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "92",
+   "defense_name": "AgentVisor",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::direct"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "93",
+   "defense_name": "ReasAlign",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "94",
+   "defense_name": "UNNAMED: Hybrid multi-layered real-time PI detection framework",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::direct"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "95",
+   "defense_name": "RETA (Reasoning-Enabled Task Alignment)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "98",
+   "defense_name": "UNNAMED: Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "103",
+   "defense_name": "TRACER-AI",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "104",
+   "defense_name": "IDE-Sanitizer",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "109",
+   "defense_name": "UNNAMED: Context-Aware Interception Framework for PI detection/mitigation",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "110",
+   "defense_name": "prompt-shield (Seven Cross-Domain Detection Techniques)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "112",
+   "defense_name": "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "113",
+   "defense_name": "UNNAMED: Representation Engineering-based Probing for IPI detection",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::injecagent"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "114",
+   "defense_name": "Secure Prompt Engineering Patterns (SPEP)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "116",
+   "defense_name": "VIGIL",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "120",
+   "defense_name": "Progent",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "123",
+   "defense_name": "AgenTRIM",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::important_instructions",
+    "AgentDojo::tool_knowledge"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "124",
+   "defense_name": "AgentSys",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "ASB (Agent Security Bench)::OPI (Observation Prompt Injection)",
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "125",
+   "defense_name": "NeuroTaint",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "126",
+   "defense_name": "OpenClaw PRISM",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "130",
+   "defense_name": "Safety-guided Chain-of-Thought (SCoT)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "134",
+   "defense_name": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "InjecAgent::Data Stealing",
+    "InjecAgent::Direct Harm"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "138",
+   "defense_name": "UNNAMED: Policy Enforcement Point (PEP) for MCP tool-call boundary",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "139",
+   "defense_name": "MAScope",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "140",
+   "defense_name": "ContractGuard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "142",
+   "defense_name": "AuthGraph",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "143",
+   "defense_name": "Aura",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "144",
+   "defense_name": "PACT (Provenance-Aware Capability Contracts)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "InjecAgent::Data Stealing",
+    "InjecAgent::Direct Harm"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "147",
+   "defense_name": "Cognitive Control Architecture (CCA)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "148",
+   "defense_name": "CachePrune",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "150",
+   "defense_name": "UNNAMED: Authorization framework for autonomous LLM agent threat mitigation",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "151",
+   "defense_name": "Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "152",
+   "defense_name": "RouteGuard",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "156",
+   "defense_name": "PIIGuard",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "157",
+   "defense_name": "OpenClaw-SRT (Semantic Routing & Trust)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "158",
+   "defense_name": "AgentShield",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "159",
+   "defense_name": "AgentRedGuard",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "161",
+   "defense_name": "DE-FIVE",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "164",
+   "defense_name": "UNNAMED: Fraud-detection-inspired trajectory-feature detector (XGBoost, 42-dim features)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "165",
+   "defense_name": "ProjGuard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "166",
+   "defense_name": "Unified Security Orchestration Framework (USOF)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "167",
+   "defense_name": "UNNAMED: Trust Context Separation for privileged AI agent systems",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "168",
+   "defense_name": "PromptArmor",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::tool_knowledge"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "170",
+   "defense_name": "DataSentinel",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "171",
+   "defense_name": "SecAlign++ / Meta-SecAlign",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "172",
+   "defense_name": "RTBAS (Robust Tool-Based Agent System)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "178",
+   "defense_name": "DataFilter",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::important_instructions",
+    "AgentDojo::tool_knowledge"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "179",
+   "defense_name": "AgentArmor",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "ASB (Agent Security Bench)::OPI (Observation Prompt Injection)",
+    "AgentDojo::ignore_previous",
+    "AgentDojo::important_instructions",
+    "AgentDojo::tool_knowledge"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "183",
+   "defense_name": "Robustness via Referencing (instruction-referencing defense)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "185",
+   "defense_name": "Polymorphic Prompt Assembling (PPA)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "188",
+   "defense_name": "UNNAMED: Multi-agent PI defense pipeline (Chain-of-Agents / Coordinator-based)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "191",
+   "defense_name": "PISanitizer",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "195",
+   "defense_name": "SecInfer",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::neural_exec",
+    "InjecAgent::Data Stealing",
+    "InjecAgent::Direct Harm"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "196",
+   "defense_name": "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "197",
+   "defense_name": "UNNAMED: Embedding-based traditional-ML classifiers for PI detection",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "198",
+   "defense_name": "PromptSleuth",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "199",
+   "defense_name": "PIShield",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "200",
+   "defense_name": "Type-directed privilege separation",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "201",
+   "defense_name": "UNNAMED: Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "202",
+   "defense_name": "Meticulous Thought Defender",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "203",
+   "defense_name": "ShadowPlay",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "204",
+   "defense_name": "UNNAMED: Four-layer guardrail system for offensive-security AI agents",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "206",
+   "defense_name": "Cross-Agent Multimodal Provenance-Aware Defense Framework",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "210",
+   "defense_name": "LLM Firewall (Validator Agent)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "212",
+   "defense_name": "DRIP",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "216",
+   "defense_name": "SHIELD",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "217",
+   "defense_name": "AttnTrace",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "219",
+   "defense_name": "UNNAMED: Three-tier compositional runtime-verification fabric (MonPoly/RTLola-based) for LLM-assisted ISR swarms",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "220",
+   "defense_name": "UNNAMED: Scientist Persona + Provenance Audit mitigations against indirect data poisoning",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "225",
+   "defense_name": "CommandSans",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "226",
+   "defense_name": "ARLAS (Adversarial Reinforcement Learning for Agent Safety)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "228",
+   "defense_name": "ACE (Abstract-Concrete-Execute)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "InjecAgent::Data Stealing",
+    "InjecAgent::Direct Harm"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "232",
+   "defense_name": "Tool-Guard",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "233",
+   "defense_name": "UNNAMED: layered MCP descriptor defense (descriptor integrity verification + pre-context semantic vetting + runtime guardrails)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "240",
+   "defense_name": "SMCP (Secure Model Context Protocol)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "245",
+   "defense_name": "MCP-Scanner",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "246",
+   "defense_name": "LGA (Layered Governance Architecture)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "247",
+   "defense_name": "ShieldNet",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "249",
+   "defense_name": "ChannelGuard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "251",
+   "defense_name": "ControlNet (ControlNET)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "252",
+   "defense_name": "FilterRAG / ML-FilterRAG",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "254",
+   "defense_name": "RAG-H",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "255",
+   "defense_name": "Salience Normalization (SN-1)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "256",
+   "defense_name": "UNNAMED: policy-first Hybrid RAG architecture (pre-reranking access control + BM25/dense fusion via RRF + evidence-pack citation-grounded generation)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "258",
+   "defense_name": "MedRAGShield",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "269",
+   "defense_name": "BiRD (Bidirectional Ranking Defense)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "270",
+   "defense_name": "TriShieldRAG",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "271",
+   "defense_name": "UNNAMED: two-plane OPA-based governance architecture for secure RAG (provenance + ABAC + policy-as-code across ingestion/indexing/retrieval/generation)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "276",
+   "defense_name": "ReliabilityRAG",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "277",
+   "defense_name": "BlindGuard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "278",
+   "defense_name": "TracLLM",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "284",
+   "defense_name": "UNNAMED: self-healing memory architecture (cosine-similarity drift detection + cross-agent consensus repair)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "288",
+   "defense_name": "TraceCaps",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "289",
+   "defense_name": "SkillVetBench (LLM-as-Judge)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "290",
+   "defense_name": "MemLineage",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "293",
+   "defense_name": "SecureGov-Agent",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "297",
+   "defense_name": "SUPERVISOR",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "298",
+   "defense_name": "MCP-Guard",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "303",
+   "defense_name": "GT-MCP (Game-Theoretic Multi-Agent Control)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "308",
+   "defense_name": "Skills Architecture (vs. MCP)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "313",
+   "defense_name": "SkillScan",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "315",
+   "defense_name": "GoalAnchorCheck (D1) / CrossAgentConsensus (D2)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "316",
+   "defense_name": "Forensic LLM-Trace",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "317",
+   "defense_name": "AegisAgent",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "318",
+   "defense_name": "G-Safeguard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "319",
+   "defense_name": "Maris",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "322",
+   "defense_name": "TIVS-O agentic defense pipeline (Front-End Agent + Guard-Sanitizer + Policy Enforcer with semantic caching)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "323",
+   "defense_name": "UNNAMED: ICL-based multi-LLM agent harmfulness-detection framework",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "325",
+   "defense_name": "SafeClaw-R",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "331",
+   "defense_name": "UNNAMED: step-level fine-tuned industrial tool-call guardrail",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "332",
+   "defense_name": "UNNAMED: multi-agent privacy firewall (browser extension + MITM proxy + PII-detection pipeline)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "336",
+   "defense_name": "Agentic JWT (A-JWT)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "338",
+   "defense_name": "SafeAgent",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "ASB (Agent Security Bench)::DPI (Direct Prompt Injection)",
+    "ASB (Agent Security Bench)::Memory Poisoning"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "342",
+   "defense_name": "ARSM-Agent",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "343",
+   "defense_name": "UNNAMED: off-the-shelf LLM behavioral overseer (non-verbal interaction-trace adversarial-intent detection)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "346",
+   "defense_name": "UNNAMED: WAB Wasm-sandboxed capability-based authority mechanism (allowlisted API with explicit grant/revocation)",
+   "track": "Both",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "347",
+   "defense_name": "UNNAMED: Cross-Agent Multimodal Provenance-Aware Defense Framework (text/visual sanitizer agents + output validator + provenance ledger)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "348",
+   "defense_name": "SentinelAgent",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "351",
+   "defense_name": "Agent Privilege Separation (Reader/Actor two-agent isolation + JSON formatting)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "353",
+   "defense_name": "Defe-Prompt",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "356",
+   "defense_name": "DASGuard",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "364",
+   "defense_name": "ARGUS",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "366",
+   "defense_name": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "367",
+   "defense_name": "UNNAMED: six composable agent design patterns (e.g. Action-Selector) for prompt-injection-resistant architecture",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "368",
+   "defense_name": "FASA (zero-trust, full-lifecycle defense philosophy)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "369",
+   "defense_name": "AgentSandbox",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "371",
+   "defense_name": "Hybrid monitor scaffold (Monitor Red Teaming / MRT framework)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "374",
+   "defense_name": "UNNAMED: DPO-based faithfulness-improvement training for GUI agents against environmental distraction",
+   "track": "Both",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "375",
+   "defense_name": "ceLLMate",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "380",
+   "defense_name": "lambda-RLM",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "381",
+   "defense_name": "RhinoInsight",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "383",
+   "defense_name": "ARC (Active and Reflection-driven Context management)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "384",
+   "defense_name": "G-MemLLM",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "386",
+   "defense_name": "CoThinker",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "387",
+   "defense_name": "FinLongDocAgent",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "388",
+   "defense_name": "ClinQueryAgent (Retrieval Agent sub-agent delegation)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "389",
+   "defense_name": "UNNAMED: detailed external checklist restatement (vs generic self-check) for long-context skill-following",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "393",
+   "defense_name": "LongCrafter",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "394",
+   "defense_name": "SSRP (Self-Synthesizing Reasoning Protocols)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "ASB (Agent Security Bench)::Memory Poisoning"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "395",
+   "defense_name": "ActiveContext (ContextCurator + TaskExecutor)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "399",
+   "defense_name": "DualGraph",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "400",
+   "defense_name": "GDWM (Gated Differentiable Working Memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "401",
+   "defense_name": "Aeon",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "402",
+   "defense_name": "Dynamic Context Selection (classifier-based adaptive k-selection + reranking)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "404",
+   "defense_name": "GUI-PRA (Process Reward Agent)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "405",
+   "defense_name": "LDAR (Learning Distraction-Aware Retrieval)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "406",
+   "defense_name": "Tree of Agents (TOA)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "409",
+   "defense_name": "LLM+DPP (Principled Content Selection pipeline)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "410",
+   "defense_name": "QwenLong-CPRS",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "412",
+   "defense_name": "MAL-RAG (Multiple Abstraction Level RAG)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "413",
+   "defense_name": "KV-Fusion",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "414",
+   "defense_name": "LongRAG",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "415",
+   "defense_name": "QUITO-X",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "417",
+   "defense_name": "Scale Positional Hidden States (single-dimension scaling)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "418",
+   "defense_name": "LongAgent",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "420",
+   "defense_name": "COMPASS (Context-Organized Multi-Agent Planning and Strategy System)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "422",
+   "defense_name": "END (Early Noise Dropping)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "423",
+   "defense_name": "Differential Transformer (DIFF Transformer)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "424",
+   "defense_name": "ActQKV (Activation-aware Probe-Query)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "426",
+   "defense_name": "TRACE (Trajectory Risk-Aware Compression)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "427",
+   "defense_name": "Context-Folding (FoldGRPO)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "428",
+   "defense_name": "SUPO (summarization-based context management for RL)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "429",
+   "defense_name": "UNNAMED: hierarchical pixel-agent grid with spatial curriculum and selective oracle",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "430",
+   "defense_name": "AdaCoM (Adaptive Context Management)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "434",
+   "defense_name": "AgentSwing",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "435",
+   "defense_name": "APEMO (Affect-aware Peak-End Modulation for Orchestration)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "436",
+   "defense_name": "MSCE (Memory-Skill Co-Evolution)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "438",
+   "defense_name": "GRACE (Graph-Regularized Agentic Context Evolution)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "439",
+   "defense_name": "CoCortex",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "440",
+   "defense_name": "ADE-PRF (ADE Predictive Reliability Framework)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "445",
+   "defense_name": "TARV (Trust-Aware Runtime Verification)",
+   "track": "ML/AI",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "447",
+   "defense_name": "STAR-P\u00f3lyaMath",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "458",
+   "defense_name": "UNNAMED: pre-research and post-research verification defenses (verification-enhanced prompting + search-enabled verifier agent) for Deep Research agents",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "460",
+   "defense_name": "HiAgent",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "461",
+   "defense_name": "Planning with Schemas (PwS)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "463",
+   "defense_name": "OCR-Memory (Optical Context Retrieval Memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "329",
+   "defense_name": "Agent Capability Registry",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "357",
+   "defense_name": "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "480",
+   "defense_name": "Mobile-Agent-RAG (Manager-RAG / Operator-RAG dual-level retrieval augmentation)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "482",
+   "defense_name": "ACON (Agent Context Optimization)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "484",
+   "defense_name": "AgentFold (folding - granular condensation / deep consolidation context management)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "488",
+   "defense_name": "MemAct (Memory-as-Action) with Dynamic Context Policy Optimization",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "496",
+   "defense_name": "SAM (State-Adaptive Memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "498",
+   "defense_name": "ColorBrowserAgent (knowledge-aligned progressive summarization + human-in-the-loop knowledge adaptation)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "499",
+   "defense_name": "Agent-BRACE (Agent Belief state Representation via Abstraction and Confidence Estimation)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "500",
+   "defense_name": "HiMAP-Travel (day-level context isolation + transactional monitor + bargaining protocol)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "501",
+   "defense_name": "HIPIF (Hierarchical Planning and Information Folding)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "502",
+   "defense_name": "ROMA (Recursive Open Meta-Agents) with GEPA+",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "505",
+   "defense_name": "Prometheus (memory-centric context engine with working memory over a repository knowledge graph)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "506",
+   "defense_name": "AgentProg (program-guided context management with Execution Tree and global belief state)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "512",
+   "defense_name": "ID-RAG (Identity Retrieval-Augmented Generation)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "514",
+   "defense_name": "MEM1",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "515",
+   "defense_name": "FoldAct",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "518",
+   "defense_name": "CES (Coordinator-Executor-State Tracker), specifically the State Tracker context-compression module",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "522",
+   "defense_name": "Laser (structured action protocol + context register)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "523",
+   "defense_name": "ReSum / ReSum-GRPO",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "534",
+   "defense_name": "SearchSwarm (delegation-intelligence harness/training for main-agent-to-subagent task decomposition)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "535",
+   "defense_name": "Agent-level affective subsystem (VAD state dynamics)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "536",
+   "defense_name": "Constraint Pinning",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "538",
+   "defense_name": "AMA-Agent (causality-graph construction + tool-augmented retrieval)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "545",
+   "defense_name": "Memex / MemexRL (indexed experience memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "551",
+   "defense_name": "Hierarchical Cognitive Caching (HCC), in ML-Master 2.0",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "553",
+   "defense_name": "MemWeaver (graph memory + experience memory + passage memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "557",
+   "defense_name": "CWL (Context Window Lifecycle)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "558",
+   "defense_name": "TDP (Task-Decoupled Planning)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "561",
+   "defense_name": "Memory-R2 (LoGo-GRPO training) with shared-parameter fact extractor / memory manager",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "562",
+   "defense_name": "MAGE (Memory As Guardrail Enforcement)",
+   "track": "ML/AI",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "564",
+   "defense_name": "M2 (Dynamic Trajectory Summarization + Insight Retrieval Augmentation)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "566",
+   "defense_name": "FS-Researcher (file-system-based dual-agent: Context Builder + Report Writer)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "567",
+   "defense_name": "UI-Copilot (memory decoupling + Tool-Integrated Policy Optimization / TIPO)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "570",
+   "defense_name": "MMPO (Metacognitive Memory Policy Optimization) with Belief Entropy",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "573",
+   "defense_name": "Slipstream (asynchronous, judge-validated trajectory-grounded compaction)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "575",
+   "defense_name": "Autopilot (gated finite-state-machine execution firewall)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "577",
+   "defense_name": "Environment Maps (Contexts/Actions/Workflows/Tacit Knowledge graph)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "581",
+   "defense_name": "StructAgent (unified causal state + verifier-backed state transitions)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "583",
+   "defense_name": "TaskWeave (Formulate-Partition-Diagnose-Align cycle + dependency-aware trace memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "584",
+   "defense_name": "FGHM (Failure-Gated Hierarchical Memory) with Failure Critic and LTM Pollution Rate (LPR) metric",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "586",
+   "defense_name": "MAGE (Memory as Agent-Guided Exploration) - hierarchical state tree with Grow/Compress/Maintain/Revise",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "589",
+   "defense_name": "PACEvolve - Hierarchical Context Management (HCM) component specifically",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "590",
+   "defense_name": "Memanto (typed semantic memory + automated conflict resolution + temporal versioning)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "592",
+   "defense_name": "SDO (Signal-Driven Observation)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "596",
+   "defense_name": "ToolScope (Perceive tool within Global Navigator / Agentic Executor / Response Synthesizer)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "609",
+   "defense_name": "BACM / BACM-RL (Budget-Aware Context Management)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "611",
+   "defense_name": "TokenPilot (Ingestion-Aware Compaction + Lifecycle-Aware Eviction)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "612",
+   "defense_name": "GCC (Git-Context-Controller)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "613",
+   "defense_name": "AgeMem (Agentic Memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "614",
+   "defense_name": "ARC (Addressable Recall Compaction)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "615",
+   "defense_name": "PRO-LONG (programmatic memory framework)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "616",
+   "defense_name": "Self-GC (Self-Governing Context)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "617",
+   "defense_name": "VISTA (Visible Internal State for Tool Agents)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "618",
+   "defense_name": "icat-agent (decentralized event-based multi-agent scaffold)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "619",
+   "defense_name": "MemGUI-Agent / ConAct (Context-as-Action)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "620",
+   "defense_name": "TokenMizer (typed knowledge-graph session memory)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "621",
+   "defense_name": "EvoDS - Adaptive Context Compression (ACC) component specifically",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "623",
+   "defense_name": "Context-Agent (dynamic discourse tree)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "624",
+   "defense_name": "Mem0^R (unified conversational + repository memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "625",
+   "defense_name": "Recursive Models (recursive self-invocation with isolated subtask contexts)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "626",
+   "defense_name": "Neural Paging / Page Controller",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "630",
+   "defense_name": "Yunque DeepResearch - Dynamic Context Management module specifically",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "634",
+   "defense_name": "Hybrid context management + deterministic programmatic safety checks / domain allowlisting / action restriction / least-privilege scoping (production browser-agent architecture)",
+   "track": "Both",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "636",
+   "defense_name": "AFM (Adaptive Focus Memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "637",
+   "defense_name": "Parallel Compaction",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "638",
+   "defense_name": "CompactionRL",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "639",
+   "defense_name": "UMA (Unified Memory Agent)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "640",
+   "defense_name": "PlugMem (knowledge-centric memory graph)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "641",
+   "defense_name": "MemoBrain",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "643",
+   "defense_name": "MGA (Memory-Driven GUI Agent) - Observer + Structured Memory",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "644",
+   "defense_name": "Engram (Archive + Research Digest)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "645",
+   "defense_name": "LWM-Planner (Fact Extraction and Compression / FEC)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "647",
+   "defense_name": "PRIMA (context-boundary discipline + reference-material sandboxing + poisoned-output rejection)",
+   "track": "ML/AI",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "648",
+   "defense_name": "MemFlow (Router Agent + tiered Memory Agent + Validator Agent)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "650",
+   "defense_name": "Taxonomy-Aware / Pipeline conflict-type-aware response generation (from the CONFLICTS benchmark)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "651",
+   "defense_name": "BordaRAG (Borda Voting-based document selection)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "652",
+   "defense_name": "CDD (Context-Driven Decomposition)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "653",
+   "defense_name": "SHIFT (gate-modulated activation steering)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "654",
+   "defense_name": "TCR (Transparent Conflict Resolution)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "655",
+   "defense_name": "FaithfulRAG (fact-level conflict modeling + Self-Think)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "656",
+   "defense_name": "KCM (Knowledge Conflict Mitigation)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "657",
+   "defense_name": "Micro-Act (hierarchical action-space decomposition)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "658",
+   "defense_name": "CARE-RAG (Conflict-Aware and Reliable Evidence for RAG)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "659",
+   "defense_name": "TruthfulRAG (knowledge-graph-based factual conflict resolution)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "660",
+   "defense_name": "PH3 (Pruning Head via PatH PatcHing)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "661",
+   "defense_name": "DyPRAG (Dynamic Parametric RAG)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "662",
+   "defense_name": "CRVA-TGRAG (Conflict Resolution in Vulnerability Analysis via Teacher-Guided RAG)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "663",
+   "defense_name": "Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "664",
+   "defense_name": "MACR (multi-agent conflict resolution)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "665",
+   "defense_name": "ConflictRAG (two-stage detection + Entropy-TOPSIS credibility + CARS metric)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "666",
+   "defense_name": "CD2 (Conflict-Disentangle Contrastive Decoding)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "667",
+   "defense_name": "ParamMute (Parametric Knowledge Muting through FFN Suppression)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "668",
+   "defense_name": "Swin-VIB (variational information bottleneck pipeline)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "669",
+   "defense_name": "Cross-Validation Re-ranking (inter-context conflict-aware re-ranking)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "670",
+   "defense_name": "KnowPO (Knowledge-aware Preference Optimization)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "673",
+   "defense_name": "RPO (Retrieval Preference Optimization)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "675",
+   "defense_name": "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "676",
+   "defense_name": "APPA (Agentic Permissions Policy Algebra)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "677",
+   "defense_name": "UNNAMED: Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "678",
+   "defense_name": "Twin Agent (Explore Agent / Safe Agent residual-hint privilege separation)",
+   "track": "Both",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "679",
+   "defense_name": "PromptSentinel-X",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "680",
+   "defense_name": "UNNAMED: Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "682",
+   "defense_name": "CXI (Context-to-Execution Integrity)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "683",
+   "defense_name": "aiAuthZ (identity-bound off-host authorization gateway)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "684",
+   "defense_name": "Pattern D: Inference-boundary redaction proxy (PII extraction/tokenization before model inference)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "686",
+   "defense_name": "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "687",
+   "defense_name": "GIF (Geometric Information Flow)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "690",
+   "defense_name": "KBRA (Keyed Binding Reassembly Audit)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "691",
+   "defense_name": "AgenticOS (Ghost Kernel / Logic Shutter / Agent Capsule / Semantic Boundary Gateway)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "692",
+   "defense_name": "PARSE (Provenance-Aware Retrieval Sanitization)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "695",
+   "defense_name": "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "697",
+   "defense_name": "SecureClaw (dual-boundary: effect-sink authorization + read-boundary plaintext confinement)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "698",
+   "defense_name": "PRISM (activation-conditioned instruction-set interpreter)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "703",
+   "defense_name": "AgentSecBench Combined defense stack (filtering + projection + redaction + delimiter annotation)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "704",
+   "defense_name": "DCP (Device Context Protocol)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::important_instructions",
+    "AgentDojo::tool_knowledge"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "706",
+   "defense_name": "UNNAMED: Hybrid SIEM + One-Class SVM prompt-injection detection framework",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "707",
+   "defense_name": "MemAudit (counterfactual memory influence score + memory consistency graph)",
+   "track": "ML/AI",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "708",
+   "defense_name": "Contiguity-gate defense (for guardrail sliding-window aggregation)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "710",
+   "defense_name": "ESLD (External Surrogate Latent Defense)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "713",
+   "defense_name": "Write-gate sanitization (pre-summarization redaction/rewrite) for memory laundering",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "714",
+   "defense_name": "Plan-Then-Execute (PTE) architecture for web agents",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "716",
+   "defense_name": "FATE (on-policy self-evolving repair framework) with Pareto-Front Policy Optimization (PFPO)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "718",
+   "defense_name": "sign-c (server-side signing of execution-bearing response fields)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "ASB (Agent Security Bench)::DPI (Direct Prompt Injection)",
+    "ASB (Agent Security Bench)::OPI (Observation Prompt Injection)"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "721",
+   "defense_name": "ADEMA (checkpoint-resumable persistence + segment-level memory condensation + epistemic bookkeeping)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "722",
+   "defense_name": "SnapGuard (visual stability indicator + action-oriented textual signal recovery)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "725",
+   "defense_name": "UNNAMED: deterministic post-audit verifier layer added to a compositional safety system",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "726",
+   "defense_name": "Token-Level Round-Robin (RR) Collaboration / RRMaj",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "731",
+   "defense_name": "UNNAMED: domain-specific multi-layer safeguard pipeline (pattern filters + structural validation + contextual sandboxing + session-level behavioral checks)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "733",
+   "defense_name": "Agent Sentry (structural classifier + allowlist + LLM judge)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "734",
+   "defense_name": "PCFI (Prompt Control-Flow Integrity)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "737",
+   "defense_name": "IH-Challenge (RL training dataset with online adversarial example generation)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "738",
+   "defense_name": "MOSAIC (plan-check-act/refuse post-training framework)",
+   "track": "Both",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "ASB (Agent Security Bench)::DPI (Direct Prompt Injection)"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "742",
+   "defense_name": "LLMbda / Randori (dynamic information-flow-control lambda calculus with verified interpreter)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "744",
+   "defense_name": "UNNAMED: security-aware RAG framework (evidence-based abstention + prompt-injection defense + multi-source agreement verification + trust-weighted retrieval)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "746",
+   "defense_name": "Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "747",
+   "defense_name": "AlignSentinel (three-class instruction-hierarchy-aware attention-based classifier)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::direct"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "748",
+   "defense_name": "Authenticated Prompts / Authenticated Context (cryptographic provenance + policy algebra)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "752",
+   "defense_name": "InjectDefuser",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "753",
+   "defense_name": "RedVisor",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "754",
+   "defense_name": "UNNAMED: Randomized/Adversarial Suffix Augmentation Training for task-drift probes",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "762",
+   "defense_name": "UNNAMED: Uncertainty-based Random Forest attack detector (chimera/Xmera)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "763",
+   "defense_name": "SIC (Soft Instruction Control)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::ignore_previous",
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "765",
+   "defense_name": "BinaryShield",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "766",
+   "defense_name": "LeakSealer",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "770",
+   "defense_name": "Sentinel (qualifire/prompt-injection-sentinel)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "771",
+   "defense_name": "AIR (Augmented Intermediate Representations)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "777",
+   "defense_name": "Mantis",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "779",
+   "defense_name": "ISE (Instructional Segment Embedding)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "782",
+   "defense_name": "TaskTracker (activation-delta task-drift detection)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "784",
+   "defense_name": "SmoothVLM",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "788",
+   "defense_name": "Jatmo",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "791",
+   "defense_name": "Discern-and-Answer",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "792",
+   "defense_name": "Trust-Aware Orchestration Architecture (hard gates + advisory filters + deterministic syntax recovery)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "798",
+   "defense_name": "+ModTool (memory correction tool for MemEvoBench)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "801",
+   "defense_name": "AgentWatcher",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [
+    "AgentDojo::important_instructions"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "802",
+   "defense_name": "MAT-based Assurance Framework (Message-Action Traces + governance layer: capability limits + action mediation)",
+   "track": "ML/AI",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "804",
+   "defense_name": "AprielGuard",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "807",
+   "defense_name": "AgentSight (eBPF boundary tracing)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "InjecAgent"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "808",
+   "defense_name": "User-Tool Aligned Safety RL Framework",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "InjecAgent",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "813",
+   "defense_name": "ToolSafe (TS-Guard + TS-Flow)",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "named_attacks_within_benchmark": [
+    "ASB (Agent Security Bench)::DPI (Direct Prompt Injection)"
+   ],
+   "resolution_level": "mechanism_level"
+  },
+  {
+   "row": "815",
+   "defense_name": "CMI (Causal Memory Intervention)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "817",
+   "defense_name": "SD-RAG (Selective Disclosure RAG)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "821",
+   "defense_name": "EquiMem",
+   "track": "ML/AI",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "824",
+   "defense_name": "CaMeL",
+   "track": "Security",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "825",
+   "defense_name": "SkillSec-Eval defenses (hybrid admission validation, retrieval validation layer, metadata sanitizer, LifecycleGuard taint-tracking, continuous re-validation)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [
+    "AgentDojo"
+   ],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "benchmark_level"
+  },
+  {
+   "row": "827",
+   "defense_name": "SecurePrompt",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "828",
+   "defense_name": "SpARE (Sparse Auto-Encoder Representation Engineering)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "831",
+   "defense_name": "SecureRag",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "832",
+   "defense_name": "RE-IAG (Reasoning-Evidence Interactive Augmented Graph)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "833",
+   "defense_name": "SCR & CR-DPO (Situated Faithfulness)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "835",
+   "defense_name": "AttriMem",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "837",
+   "defense_name": "Program-Guided (PG) Runtime / Compile-then-Page SOP compiler",
+   "track": "ML/AI",
+   "stage": "execution",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "839",
+   "defense_name": "STRACE (Structural Trajectory Analysis and Causal Extraction)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "840",
+   "defense_name": "Ensemble QSP (hierarchical memory architecture)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "841",
+   "defense_name": "PraMem (Practice-derived Experiential Memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "842",
+   "defense_name": "WM-SAR (World-Model Subgraph Amplification Repair)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "845",
+   "defense_name": "IHDec (Instruction Hierarchy-steered Decoding)",
+   "track": "Security",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "847",
+   "defense_name": "LRE (Learned Relevance Eviction)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "848",
+   "defense_name": "SING (Synthetic Intention Graph)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "849",
+   "defense_name": "ContextRL",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "851",
+   "defense_name": "HORMA (Hierarchical Organize-and-Retrieve Memory Agent)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "852",
+   "defense_name": "KG-CFR (Knowledge-Grounded Counterfactual Reasoning)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "853",
+   "defense_name": "ActiveMem",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "854",
+   "defense_name": "LCLM (Latent Context Language Models)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "856",
+   "defense_name": "RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "857",
+   "defense_name": "Meta-Team (collaborative self-evolution)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "859",
+   "defense_name": "MemTrace (memory evolution graph tracing + closed-loop correction)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "862",
+   "defense_name": "Dual-Process Memory Architecture (episodic-semantic memory for scientific agents)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "863",
+   "defense_name": "RS-Claw (hierarchical skill trees for remote-sensing agents)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "864",
+   "defense_name": "CKG-RAG",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "866",
+   "defense_name": "PRISM (Pareto-Efficient Retrieval over Intent-Aware Structured Memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "867",
+   "defense_name": "VideoSEAL (decoupled planner-inspector)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "868",
+   "defense_name": "HAGE (RL-driven weighted graph evolution)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "872",
+   "defense_name": "TESSERA (neuro-symbolic MCTS with KG constraints)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "874",
+   "defense_name": "TACT (Think-Act Calibration via activation Steering)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "876",
+   "defense_name": "Smart Indexing (metadata-aware chunking for legal RAG)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "877",
+   "defense_name": "Gated Coordination (Partitioned Information Architecture + Cost-Sensitive Gated Escalation)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "879",
+   "defense_name": "GenericAgent (GA) - contextual information density maximization",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "881",
+   "defense_name": "TSUBASA (evolving memory + context distillation)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "883",
+   "defense_name": "MemMachine (ground-truth-preserving memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "884",
+   "defense_name": "Oblivion (decay-driven memory control)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "887",
+   "defense_name": "D-Mem (Dual-Process Memory System, Quality Gating)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "889",
+   "defense_name": "Ebbinghaus Forgetting Curve Memory Enhancement Framework",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "891",
+   "defense_name": "Structurally Aligned Subtask-Level Memory",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "893",
+   "defense_name": "Hippocampus (Dynamic Wavelet Matrix memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "894",
+   "defense_name": "AriadneMem",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "896",
+   "defense_name": "EHR-RAG",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "898",
+   "defense_name": "TEP (Textual Equilibrium Propagation)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "899",
+   "defense_name": "MetaMem (self-evolving meta-memory)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "900",
+   "defense_name": "Governed Execution (modular prompt orchestration for RAG-grounded call-center agents)",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "901",
+   "defense_name": "CodeDelegator (role separation via Delegator/Coder agents + EPSS)",
+   "track": "ML/AI",
+   "stage": "execution",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "902",
+   "defense_name": "STITCH (Structured Intent Tracking in Contextual History)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "903",
+   "defense_name": "CoM (Chain-of-Memory) - Dynamic Memory Chain Evolution + Adaptive Truncation",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "904",
+   "defense_name": "Focus (slime-mold-inspired active context compression)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "905",
+   "defense_name": "StackPlanner",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "906",
+   "defense_name": "MAGMA (Multi-Graph Agentic Memory Architecture)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "907",
+   "defense_name": "EverMemOS",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "910",
+   "defense_name": "Rhea (Role-aware Heuristic Episodic Attention)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "911",
+   "defense_name": "Chain-of-Memory (CoM) - verifiable retrieval + causal tracing",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "913",
+   "defense_name": "EMem / EMem-G (event-centric elementary discourse unit memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "914",
+   "defense_name": "ENGRAM (typed memory + dense retrieval)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "915",
+   "defense_name": "TAG (Tagging-Augmented Generation)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "916",
+   "defense_name": "ReCAP (Recursive Context-Aware Reasoning and Planning)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "918",
+   "defense_name": "State-Update Multi-turn Dialogue Strategy",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "921",
+   "defense_name": "Memory-R1",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "922",
+   "defense_name": "SafeSieve",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "925",
+   "defense_name": "RADIANT (DPO-ECD, Entity-Context Divergence alignment)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "926",
+   "defense_name": "Knowledgeable-R1",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "928",
+   "defense_name": "RAG-Modulo",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "929",
+   "defense_name": "ITEM (Integrated Term Enhancement Methodology)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "932",
+   "defense_name": "HMAS-2 (Hybrid Multi-Agent System with feedback re-planning)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "933",
+   "defense_name": "Memory Sandbox (user-controlled memory objects)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "934",
+   "defense_name": "Synapse (trajectory-as-exemplar prompting + exemplar memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "935",
+   "defense_name": "LOOC (Leave-One-Out Compression)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "936",
+   "defense_name": "Cognitive Scaffold",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "938",
+   "defense_name": "MEMORA (Embodied Action Memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "939",
+   "defense_name": "InftyThink with Cross-Chain Memory (semantic lemma retrieval)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "940",
+   "defense_name": "TRIM-KV",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "941",
+   "defense_name": "FocusAgent / DefenseFocusAgent",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "943",
+   "defense_name": "JUICE (Just Run Twice)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "944",
+   "defense_name": "SUGAR (Semantic Uncertainty Guided Adaptive Retrieval)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "948",
+   "defense_name": "Still (amortized KV cache compaction, Perceiver-based)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "949",
+   "defense_name": "AutoMEM",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "950",
+   "defense_name": "Sleep paradigm (Memory Consolidation + Dreaming)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "951",
+   "defense_name": "P-RoPE / MiniWin (Periodic RoPE)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "954",
+   "defense_name": "UNNAMED: Tree-based + hierarchical storage combined memory method (Memory in LLM Era unified framework)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "959",
+   "defense_name": "Fine-Mem (Chunk-level Step Reward + Evidence-Anchored Reward Attribution)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "960",
+   "defense_name": "FlashMem",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "965",
+   "defense_name": "Free()LM (Free-Module LoRA adapter)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "967",
+   "defense_name": "Multi2 (hierarchical multi-agent decision-making)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "968",
+   "defense_name": "LLMON (LLM Object Notation)",
+   "track": "Security",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "969",
+   "defense_name": "MEMO (Memory-augmented MOdel context optimization)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "972",
+   "defense_name": "SPRA (Scaffold-Preserving Representation Alignment)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "976",
+   "defense_name": "GCAD (Gated Cropped Attention-Delta steering)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "978",
+   "defense_name": "PAACE (Plan-Aware Automated Context Engineering)",
+   "track": "ML/AI",
+   "stage": "ingestion",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "979",
+   "defense_name": "CheckRLM",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "980",
+   "defense_name": "RAPS-DA (Regime-Aware Peer Specialization)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "981",
+   "defense_name": "AtlasVA (self-evolving visual skill memory)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "983",
+   "defense_name": "SABER (Self-Aware Belief Estimator for RAG)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "984",
+   "defense_name": "MAGIC-Video (multimodal memory graph + narrative chain)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "986",
+   "defense_name": "LightMem",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "987",
+   "defense_name": "L2A (Learning To Attend)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "989",
+   "defense_name": "HMT (Hierarchical Memory Tree)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "990",
+   "defense_name": "ERA (Evidence-based Reliability Alignment)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "991",
+   "defense_name": "A-RAG (hierarchical retrieval interfaces)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "992",
+   "defense_name": "CoCoA (Confidence- and Context-Aware Adaptive Decoding)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "994",
+   "defense_name": "KScope-guided Constrained Context Summarization",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "995",
+   "defense_name": "GenDiE (Generate, Discriminate, Evolve)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "996",
+   "defense_name": "ReflectVLM (test-time reflection framework)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "997",
+   "defense_name": "UniKnow / LM-UniKnow",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "998",
+   "defense_name": "ReMEmbR (Retrieval-augmented Memory for Embodied Robots)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "999",
+   "defense_name": "ACD (Adaptive Contrastive Decoding)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "1000",
+   "defense_name": "RAT (Retrieval Augmented Thoughts)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "1002",
+   "defense_name": "Dynamic Contrastive Decoding (DCD) for cross-modality knowledge conflict",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "1004",
+   "defense_name": "COMBO (Compatibility-Oriented knowledge Merging)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "1006",
+   "defense_name": "UNNAMED: Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG)",
+   "track": "ML/AI",
+   "stage": "none",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "1007",
+   "defense_name": "XoT (explanation-based thinking framework)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "1008",
+   "defense_name": "CK-PLUG (Controllable Knowledge Plug-in)",
+   "track": "ML/AI",
+   "stage": "reasoning",
+   "registry_matched": false,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  },
+  {
+   "row": "1009",
+   "defense_name": "UNNAMED: Explanation-based secondary detection signal for log-injection evasion",
+   "track": "Security",
+   "stage": "none",
+   "registry_matched": true,
+   "benchmarks_used": [],
+   "named_attacks_within_benchmark": [],
+   "resolution_level": "unresolved"
+  }
+ ]
+}
