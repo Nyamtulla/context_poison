@@ -392,3 +392,96 @@ incidental.
 **The honest independent verdict remains the reconstruction standard**: run the
 released code and measure. That is what RQ6 did for 9 pairs. Everything in this
 table is a report of someone else's result, labelled with whose.
+
+## Benchmark papers as mechanism sources (2026-09-11)
+
+### The coding artefact
+
+`AgentDojo`, `InjecAgent` and `Agent Security Bench` are all `Include` in the
+corpus. RQ3 extracted **zero mechanisms from all three.**
+
+The reason is defensible in isolation: the extraction asked whether a paper
+proposes *a named attack technique*, and a benchmark paper reads as proposing
+*a benchmark*. The consequence is not defensible. 67 defenses report evaluating
+on AgentDojo, 37 on InjecAgent, 17 on ASB — and every one of those evaluations
+pointed at something the registry treated as containing nothing. The registry
+did not contain `important_instructions`, which 15 defense papers name by name:
+more uptake than most entries in it have.
+
+### What was added
+
+Fourteen mechanisms, in `data/registries/rq3_benchmark_mechanisms.json`, applied
+on load so `include_benchmark_mechanisms=False` still reproduces RQ3 exactly as
+published. They meet RQ3's own criterion — a named, defined attack technique from
+an in-corpus paper.
+
+Scoped deliberately tighter than the raw inventories:
+
+- **Variants collapsed.** AgentDojo registers 23 attacks, but `important_instructions`
+  alone has 7 parameterisations (with/without user name, model name, wrong
+  names). Each *family* is one mechanism; counting 23 would fill the registry
+  with configuration flags.
+- **DoS family collapsed.** `captcha_dos`, `felony_dos`, `offensive_email_dos` and
+  `swearwords_dos` differ only in payload content; the mechanism — induce the
+  agent's own refusal so it stops — is identical.
+- **`manual` excluded.** It asks a human for the injection at runtime: a harness
+  affordance, not a technique.
+- **`injecagent` excluded from AgentDojo.** It reimplements InjecAgent's string,
+  credited to InjecAgent's own entries.
+- **`neural_exec` excluded.** Already in the registry from its own paper.
+
+### The resolution, and what it refuses to do
+
+A defense "evaluated on AgentDojo" is almost never evaluated against all 23
+attacks — most use `important_instructions` alone. Expanding benchmark → every
+constituent attack would manufacture coverage on a large scale.
+
+So a pair is granted **only where the defense paper names the attack it ran**:
+
+| | defenses |
+|---|---:|
+| names the specific attack → real pair | 34 |
+| names only the benchmark → **not** counted as coverage | 49 |
+| no inventoried benchmark | 396 |
+
+58 pairs across 34 defenses and 10 mechanisms. The 396 are mostly ML/AI papers
+evaluating on LoCoMo, LongBench and BrowseComp, which are not attack benchmarks
+at all.
+
+### Effect on every published figure
+
+| | as published | now |
+|---|---:|---:|
+| mechanisms | 183 | **196** |
+| confirmed pairs | 190 | **289** |
+| mechanisms with ≥1 defense tested | 67 (36.6%) | **94 (48.0%)** |
+| mechanisms never defended | 116 | **102** |
+| defenses matched to a mechanism | 170 | **188** of 479 |
+
+Pair provenance is now four-way: 190 RQ5, 4 Stage 1 recovery, 37 attack-paper
+reverse scan, 58 benchmark resolution. Every one is reproducible from its own
+file and each can be switched off independently.
+
+### What this does and does not mean
+
+It does **not** mean the field tests more than we thought in any deep sense. The
+same three benchmarks account for most of it, so the concentration RQ5 found is
+sharper, not weaker: coverage rose to 48% while the number of *distinct* things
+being tested against barely moved. **A large share of agent-defense evaluation is
+three benchmarks and one attack template inside one of them.**
+
+It does mean our measurement was wrong in a way that flattered the gap, and the
+correction runs against our own headline. Worth stating plainly rather than
+burying: RQ5's original 63.4%-never-defended figure was inflated by a coding
+decision about benchmark papers, and 116 → 102 of that movement is ours, not the
+literature's.
+
+Two limits that cannot be fixed this way:
+
+- **BIPIA and OpenPromptInjection are not in the corpus.** 14 defenses evaluate on
+  BIPIA; DataSentinel and our own RQ6 reconstruction use OpenPromptInjection.
+  Those evaluations cannot be resolved at all, and the absence is a screening
+  question rather than an extraction one.
+- **49 defenses name only the benchmark.** They are genuinely unresolvable without
+  reading each paper's experimental section for an attack name that may not be
+  there.

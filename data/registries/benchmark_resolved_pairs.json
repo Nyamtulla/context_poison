@@ -1,0 +1,354 @@
+{
+ "generated": "2026-09-11",
+ "purpose": "(defense, benchmark-attack) pairs where the defense paper NAMED the specific attack it ran inside a benchmark. Granted only at mechanism level; papers that name only the benchmark are excluded, because expanding those to every constituent attack would manufacture coverage.",
+ "confirmed_pairs": [
+  {
+   "defense": "IPIGuard",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "IPIGuard",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "Task Shield",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "Task Shield",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentSentry",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentSentry",
+   "mechanism": "AgentDojo: tool-knowledge injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'tool_knowledge' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AttriGuard",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AttriGuard",
+   "mechanism": "AgentDojo: tool-knowledge injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'tool_knowledge' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "PlanGuard",
+   "mechanism": "InjecAgent: Data Stealing injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Data Stealing' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "PlanGuard",
+   "mechanism": "InjecAgent: Direct Harm injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Direct Harm' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentVisor",
+   "mechanism": "AgentDojo: direct injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'direct' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "UNNAMED: Hybrid multi-layered real-time PI detection framework",
+   "mechanism": "AgentDojo: direct injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'direct' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "UNNAMED: Representation Engineering-based Probing for IPI detection",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgenTRIM",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgenTRIM",
+   "mechanism": "AgentDojo: tool-knowledge injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'tool_knowledge' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentSys",
+   "mechanism": "ASB: Observation Prompt Injection (OPI)",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'OPI (Observation Prompt Injection)' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentSys",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
+   "mechanism": "InjecAgent: Data Stealing injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Data Stealing' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
+   "mechanism": "InjecAgent: Direct Harm injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Direct Harm' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "PACT (Provenance-Aware Capability Contracts)",
+   "mechanism": "InjecAgent: Data Stealing injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Data Stealing' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "PACT (Provenance-Aware Capability Contracts)",
+   "mechanism": "InjecAgent: Direct Harm injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Direct Harm' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "Cognitive Control Architecture (CCA)",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "PromptArmor",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "PromptArmor",
+   "mechanism": "AgentDojo: tool-knowledge injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'tool_knowledge' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "DataFilter",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "DataFilter",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "DataFilter",
+   "mechanism": "AgentDojo: tool-knowledge injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'tool_knowledge' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentArmor",
+   "mechanism": "ASB: Observation Prompt Injection (OPI)",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'OPI (Observation Prompt Injection)' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentArmor",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentArmor",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentArmor",
+   "mechanism": "AgentDojo: tool-knowledge injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'tool_knowledge' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "SecInfer",
+   "mechanism": "Neural Exec",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'neural_exec' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "SecInfer",
+   "mechanism": "InjecAgent: Data Stealing injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Data Stealing' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "SecInfer",
+   "mechanism": "InjecAgent: Direct Harm injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Direct Harm' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "ACE (Abstract-Concrete-Execute)",
+   "mechanism": "InjecAgent: Data Stealing injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Data Stealing' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "ACE (Abstract-Concrete-Execute)",
+   "mechanism": "InjecAgent: Direct Harm injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Direct Harm' as the attack it ran inside InjecAgent. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "SafeAgent",
+   "mechanism": "ASB: Direct Prompt Injection (DPI)",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'DPI (Direct Prompt Injection)' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "SafeAgent",
+   "mechanism": "ASB: Memory Poisoning",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Memory Poisoning' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "ARGUS",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "SSRP (Self-Synthesizing Reasoning Protocols)",
+   "mechanism": "ASB: Memory Poisoning",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'Memory Poisoning' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "UNNAMED: Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "Twin Agent (Explore Agent / Safe Agent residual-hint privilege separation)",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "aiAuthZ (identity-bound off-host authorization gateway)",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "DCP (Device Context Protocol)",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "DCP (Device Context Protocol)",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "DCP (Device Context Protocol)",
+   "mechanism": "AgentDojo: tool-knowledge injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'tool_knowledge' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "sign-c (server-side signing of execution-bearing response fields)",
+   "mechanism": "ASB: Direct Prompt Injection (DPI)",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'DPI (Direct Prompt Injection)' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "sign-c (server-side signing of execution-bearing response fields)",
+   "mechanism": "ASB: Observation Prompt Injection (OPI)",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'OPI (Observation Prompt Injection)' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "MOSAIC (plan-check-act/refuse post-training framework)",
+   "mechanism": "ASB: Direct Prompt Injection (DPI)",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'DPI (Direct Prompt Injection)' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AlignSentinel (three-class instruction-hierarchy-aware attention-based classifier)",
+   "mechanism": "AgentDojo: direct injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'direct' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "RedVisor",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "RedVisor",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "SIC (Soft Instruction Control)",
+   "mechanism": "AgentDojo: ignore-previous injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'ignore_previous' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "SIC (Soft Instruction Control)",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "AgentWatcher",
+   "mechanism": "AgentDojo: important-instructions injection",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'important_instructions' as the attack it ran inside AgentDojo. Benchmark-level-only evaluations are deliberately excluded from this file."
+  },
+  {
+   "defense": "ToolSafe (TS-Guard + TS-Flow)",
+   "mechanism": "ASB: Direct Prompt Injection (DPI)",
+   "outcome": "evaluated",
+   "evidence": "The defense paper names 'DPI (Direct Prompt Injection)' as the attack it ran inside ASB (Agent Security Bench). Benchmark-level-only evaluations are deliberately excluded from this file."
+  }
+ ]
+}
