@@ -95,6 +95,60 @@ screening:
     - autonomous
     - "in-context"
     - "context window"
+
+  # Second, independent path to auto_include, added 2026-09-11.
+  #
+  # include_signal_terms above requires agent-era vocabulary. The field's
+  # foundational papers predate that framing and talk about LLM-integrated
+  # *applications*, so they fell to needs_review and were never promoted:
+  # "StruQ: Defending Against Prompt Injection with Structured Queries",
+  # "Formalizing and Benchmarking Prompt Injection Attacks and Defenses", and
+  # "Not What You've Signed Up For: Compromising Real-World LLM-Integrated
+  # Applications with Indirect Prompt Injection" (1,639 citations - the paper
+  # that named indirect prompt injection). See screening_gap_analysis.md.
+  #
+  # A paper naming one of these threats AND an attack-or-defense action is in
+  # scope whether or not it says "agent". BOTH lists must hit - a threat term
+  # alone would admit every survey that mentions prompt injection in passing.
+  threat_terms:
+    - "prompt injection"
+    - "prompt-injection"
+    - "context poisoning"
+    - "knowledge conflict"
+    - "retrieval poisoning"
+    - "retrieval corruption"
+    - "knowledge corruption"
+    - "context contamination"
+  threat_action_terms:
+    - attack
+    - attacks
+    - poison
+    - poisoning
+    - inject
+    - injection
+    - exploit
+    - hijack
+    - backdoor
+    - manipulate
+    - manipulation
+    - defend
+    - defending
+    - defense
+    - defenses
+    - defence
+    - mitigate
+    - mitigating
+    - mitigation
+    - detect
+    - detection
+    - robustness
+    - secure
+    - safeguard
+    - guardrail
+    - sanitize
+    - sanitization
+    - harden
+    - hardening
   # Any of these with none of include_signal_terms present -> auto_exclude (jailbreak-only).
   jailbreak_only_terms:
     - jailbreak

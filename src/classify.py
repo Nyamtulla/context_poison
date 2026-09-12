@@ -47,7 +47,19 @@ def classify_screen(title: str | None, abstract: str | None, config) -> str:
 
     has_include_signal = _any_term_in(screening["include_signal_terms"], text)
 
-    if _any_term_in(screening["jailbreak_only_terms"], text) and not has_include_signal:
+    # Second path to inclusion. `include_signal_terms` demands agent-era
+    # vocabulary, which the field's founding papers do not use - they are about
+    # LLM-integrated *applications* - so they landed in needs_review and were
+    # never promoted into the curated corpus. Requiring BOTH a threat term and
+    # an action term keeps this from admitting every survey that mentions
+    # prompt injection in passing. See screening_gap_analysis.md.
+    has_threat_signal = (
+        _any_term_in(screening.get("threat_terms", []), text)
+        and _any_term_in(screening.get("threat_action_terms", []), text)
+    )
+    in_scope = has_include_signal or has_threat_signal
+
+    if _any_term_in(screening["jailbreak_only_terms"], text) and not in_scope:
         return "auto_exclude"
 
     has_runtime_signal = _any_term_in(screening["runtime_signal_terms"], text)
@@ -57,7 +69,7 @@ def classify_screen(title: str | None, abstract: str | None, config) -> str:
     if not _any_term_in(screening["llm_presence_terms"], text):
         return "auto_exclude"
 
-    if has_include_signal:
+    if in_scope:
         return "auto_include"
 
     return "needs_review"
