@@ -1,0 +1,663 @@
+{
+ "generated": "2026-09-13",
+ "scope": "First 40 of the 164-paper screening-delta queue, coded highest-citation first.",
+ "criteria": "RQ3: does the paper propose a NAMED distinct attack technique or degradation mechanism? RQ4: does it propose a NAMED distinct defense? Surveys, taxonomies, evaluation-only and dataset-only papers contribute neither.",
+ "coded": [
+  {
+   "paper_id": "705e49afd9",
+   "title": "Not What You've Signed Up For",
+   "citations": 1639,
+   "rq3": {
+    "has": true,
+    "name": "Indirect Prompt Injection (IPI)",
+    "channel": "tool-output",
+    "consequence": "goal-hijack",
+    "conf": "high",
+    "note": "ORIGIN paper for IPI - the registry already has the entry, extracted from a later paper. This should become its source. Also names prompt worming (self-propagating IPI) and information-ecosystem contamination as sub-classes."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "f18e5a844c",
+   "title": "The Instruction Hierarchy",
+   "citations": 428,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "Instruction Hierarchy (privileged-instruction training)",
+    "stage": "reasoning",
+    "conf": "high",
+    "note": "Model-level training so the LLM ranks system prompts above untrusted text. Cited as a baseline across the corpus."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "9adddfe5a5",
+   "title": "Formalizing and Benchmarking Prompt Injection",
+   "citations": 410,
+   "rq3": {
+    "has": true,
+    "name": "Combined Attack (Open-Prompt-Injection)",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "high",
+    "note": "Formalizes 5 techniques - Naive, Escape Characters, Context Ignoring, Fake Completion, Combined - and proposes Combined as new. This is the OpenPromptInjection harness DataSentinel and our own RQ6 reconstruction run on; it was flagged as out-of-corpus in benchmark_mechanism_inventory.json and is now in."
+   },
+   "rq4": {
+    "has": false,
+    "note": "Evaluates 10 existing defenses; proposes none."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "f5e7e22036",
+   "title": "StruQ",
+   "citations": 349,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "StruQ (structured queries)",
+    "stage": "ingestion",
+    "conf": "high",
+    "note": "Secure front-end separating prompt and data channels plus a structured instruction-tuned LLM. Named by 7 uncovered mechanisms' papers as the defense they tested against."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "6d465be006",
+   "title": "BIPIA",
+   "citations": 313,
+   "rq3": {
+    "has": true,
+    "name": "BIPIA benchmark attack set",
+    "channel": "tool-output",
+    "consequence": "goal-hijack",
+    "conf": "medium",
+    "note": "Benchmark-contributed, same category as AgentDojo/InjecAgent/ASB. 14 defenses in the corpus evaluate on it."
+   },
+   "rq4": {
+    "has": true,
+    "name": "Boundary awareness + explicit reminder",
+    "stage": "ingestion",
+    "conf": "high",
+    "note": "Two defenses: black-box (explicit reminder) and white-box (boundary awareness)."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "32316f1d08",
+   "title": "Spotlighting",
+   "citations": 228,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "Spotlighting (delimiting / datamarking / encoding)",
+    "stage": "ingestion",
+    "conf": "high",
+    "note": "The provenance-signalling family everyone benchmarks against; named by 9 uncovered mechanisms' papers."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "37665dd5ae",
+   "title": "Virtual Prompt Injection",
+   "citations": 210,
+   "rq3": {
+    "has": true,
+    "name": "Virtual Prompt Injection (VPI)",
+    "channel": "supply-chain",
+    "consequence": "persistence-backdoor",
+    "conf": "low",
+    "note": "FLAG FOR REVIEW. The backdoor is installed by poisoning instruction-tuning data, which the screening criteria exclude as training-time-only. It manifests at runtime with no input injection, so it is genuinely borderline. Recommend excluding to stay consistent with the stated criteria, and recording the call."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "borderline-training-time"
+  },
+  {
+   "paper_id": "e56f14ced9",
+   "title": "Optimization-based PI to LLM-as-a-Judge",
+   "citations": 200,
+   "rq3": {
+    "has": true,
+    "name": "JudgeDeceiver",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "high",
+    "note": "Gradient-optimised injection against LLM-as-a-Judge selection."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "3e1d812a1e",
+   "title": "SecAlign",
+   "citations": 168,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "SecAlign (preference optimization)",
+    "stage": "reasoning",
+    "conf": "high",
+    "note": "The ORIGINAL SecAlign. The corpus already has 'Meta SecAlign', its successor; these are distinct entries. Named by 7 uncovered mechanisms' papers."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "0a6a350653",
+   "title": "Automatic and Universal PI Attacks",
+   "citations": 165,
+   "rq3": {
+    "has": true,
+    "name": "UNNAMED: automatic universal gradient-based prompt injection",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "medium",
+    "note": "Momentum-enhanced gradient method producing universal injection strings; no product name given."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "e25b4bdfc3",
+   "title": "Tensor Trust",
+   "citations": 144,
+   "rq3": {
+    "has": true,
+    "name": "Tensor Trust: prompt extraction / prompt hijacking",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "medium",
+    "note": "Benchmark-contributed. Names two attack classes and supplies 126k human-generated attacks."
+   },
+   "rq4": {
+    "has": false,
+    "note": "46k prompt-based 'defenses' are dataset entries, not a proposed defense."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "2b289e1d13",
+   "title": "Attention Tracker",
+   "citations": 111,
+   "rq3": {
+    "has": true,
+    "name": "distraction effect (attention shift to injected instruction)",
+    "channel": "direct-input",
+    "consequence": "reasoning-corruption",
+    "conf": "medium",
+    "note": "A mechanistic explanation rather than an attack technique; recorded as an ML/AI-style mechanism."
+   },
+   "rq4": {
+    "has": true,
+    "name": "Attention Tracker",
+    "stage": "reasoning",
+    "conf": "high",
+    "note": "Training-free detection from attention patterns on the instruction. Named by uncovered mechanisms' papers as a baseline."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "0894585294",
+   "title": "From Prompt Injections to SQL Injection",
+   "citations": 108,
+   "rq3": {
+    "has": true,
+    "name": "P2SQL injection (prompt-to-SQL)",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "high",
+    "note": "Prompt injection chained into SQL injection through LangChain middleware."
+   },
+   "rq4": {
+    "has": true,
+    "name": "UNNAMED: P2SQL mitigations (DB permission hardening + query rewriting)",
+    "stage": "execution",
+    "conf": "medium"
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "e5e3bf694d",
+   "title": "CyberSecEval 2",
+   "citations": 96,
+   "rq3": {
+    "has": true,
+    "name": "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "low",
+    "note": "Benchmark-contributed and broad; low confidence that it is a distinct mechanism rather than an evaluation suite."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope-low-value"
+  },
+  {
+   "paper_id": "910a4623f7",
+   "title": "Assessing PI Risks in 200+ Custom GPTs",
+   "citations": 92,
+   "rq3": {
+    "has": true,
+    "name": "UNNAMED: system-prompt and uploaded-file extraction from custom GPTs",
+    "channel": "direct-input",
+    "consequence": "data-exfiltration",
+    "conf": "medium"
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "19a45c7046",
+   "title": "System-Level Defense: Information Flow Control",
+   "citations": 89,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "f-secure LLM system (information flow control)",
+    "stage": "execution",
+    "conf": "high",
+    "note": "Already cited BY defenses in the corpus (PACT and NeuroTaint both baseline against 'f-secure'/FIDES). Its own paper was outside the corpus until now."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "f529cec54e",
+   "title": "The Attacker Moves Second",
+   "citations": 88,
+   "rq3": {
+    "has": true,
+    "name": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "high",
+    "note": "HIGH VALUE for the reverse scan - it runs 12 defenses and bypasses most above 90% ASR, against defenses that reported near-zero. Should be re-scanned for (defense, mechanism) pairs once ingested."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "f3de6ea08e",
+   "title": "HackAPrompt",
+   "citations": 84,
+   "rq3": {
+    "has": true,
+    "name": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "low",
+    "note": "Competition dataset plus taxonomy; borderline as a distinct mechanism."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope-low-value"
+  },
+  {
+   "paper_id": "2742c3d77c",
+   "title": "Signed-Prompt",
+   "citations": 81,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "Signed-Prompt",
+    "stage": "ingestion",
+    "conf": "high",
+    "note": "Authorised users sign sensitive instructions so the LLM can tell trusted instruction sources apart."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "0ce1e3ba7c",
+   "title": "Evaluating Instruction-Following Robustness to PI",
+   "citations": 81,
+   "rq3": {
+    "has": false,
+    "note": "Benchmark and measurement only; proposes no new technique."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "evaluation-only"
+  },
+  {
+   "paper_id": "9be0dea0d6",
+   "title": "Demystifying RCE Vulnerabilities in LLM-Integrated Apps",
+   "citations": 72,
+   "rq3": {
+    "has": true,
+    "name": "LLMSmith: prompt-injection-to-RCE exploitation",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "high",
+    "note": "Static call-chain analysis plus prompt-based exploitation reaching remote code execution through LangChain-style utilities."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "20723b734e",
+   "title": "Can Indirect PI Attacks Be Detected and Removed?",
+   "citations": 66,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "UNNAMED: IPI detection + post-detection removal pipeline",
+    "stage": "ingestion",
+    "conf": "medium",
+    "note": "Also contributes a detection/removal benchmark. Directly relevant to the sanitizer family."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "685dd83fb8",
+   "title": "PromptShield",
+   "citations": 62,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "PromptShield (fine-tuned deployable PI detector)",
+    "stage": "ingestion",
+    "conf": "high",
+    "note": "Detector plus a curation benchmark; targets the low-false-positive regime."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "1f1aefa3ae",
+   "title": "The Ethics of Interaction",
+   "citations": 59,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "out-of-scope-position-paper"
+  },
+  {
+   "paper_id": "78fa00a8cd",
+   "title": "An Early Categorization of Prompt Injection Attacks",
+   "citations": 55,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "out-of-scope-survey"
+  },
+  {
+   "paper_id": "7275015644",
+   "title": "Adversarial Attacks of Vision Tasks: A Survey",
+   "citations": 54,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "out-of-scope-survey"
+  },
+  {
+   "paper_id": "287e6e8a55",
+   "title": "PIGuard",
+   "citations": 51,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "PIGuard (Mitigating Over-defense for Free)",
+    "stage": "ingestion",
+    "conf": "high",
+    "note": "NOTE: distinct from IPIGuard, which is already in the registry - an earlier probe of mine conflated them. Contributes the NotInject over-defense dataset."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "348b3999a8",
+   "title": "InjecGuard",
+   "citations": 46,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "InjecGuard",
+    "stage": "ingestion",
+    "conf": "medium",
+    "note": "FLAG: near-identical abstract to PIGuard above, same NotInject dataset and same MOF training strategy, differing only in the reported margin (30.8% vs 30.4%). Almost certainly the same work under two titles - a rename across versions. Treat as ONE defense and retract the duplicate; do not count both."
+   },
+   "scope_verdict": "duplicate-of-PIGuard"
+  },
+  {
+   "paper_id": "46a9f0dc9f",
+   "title": "Red Teaming the Mind of the Machine",
+   "citations": 43,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "out-of-scope-survey"
+  },
+  {
+   "paper_id": "b02a3849d5",
+   "title": "DefensiveTokens",
+   "citations": 42,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "DefensiveToken (test-time optimized special tokens)",
+    "stage": "ingestion",
+    "conf": "high",
+    "note": "Test-time defense with training-time-comparable robustness; already cited as a baseline inside the corpus."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "4d1f37057f",
+   "title": "Goal-Guided Generative Prompt Injection",
+   "citations": 41,
+   "rq3": {
+    "has": true,
+    "name": "G2PIA (goal-guided generative prompt injection)",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "high",
+    "note": "Black-box attack maximising KL divergence between clean and adversarial conditionals."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "654c9a01b9",
+   "title": "COIECD",
+   "citations": 37,
+   "rq3": {
+    "has": true,
+    "name": "knowledge conflict (contextual vs parametric)",
+    "channel": "RAG",
+    "consequence": "reasoning-corruption",
+    "conf": "medium",
+    "note": "Track B. The registry already has related knowledge-conflict entries; check for overlap before adding."
+   },
+   "rq4": {
+    "has": true,
+    "name": "COIECD (contextual information-entropy constraint decoding)",
+    "stage": "reasoning",
+    "conf": "high"
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "85eac6fe1e",
+   "title": "A Critical Evaluation of Defenses against PI",
+   "citations": 37,
+   "rq3": {
+    "has": true,
+    "name": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+    "channel": "direct-input",
+    "consequence": "goal-hijack",
+    "conf": "medium",
+    "note": "HIGH VALUE for the reverse scan - shows existing defenses are less successful than reported, across two dimensions. Re-scan once ingested."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "b746a0a800",
+   "title": "AttackEval",
+   "citations": 33,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "out-of-scope-jailbreak-evaluation"
+  },
+  {
+   "paper_id": "f02fc3e2ab",
+   "title": "Ranking Manipulation for Conversational Search Engines",
+   "citations": 29,
+   "rq3": {
+    "has": true,
+    "name": "UNNAMED: tree-of-attacks ranking manipulation for conversational search",
+    "channel": "RAG",
+    "consequence": "goal-hijack",
+    "conf": "high",
+    "note": "Injection that promotes low-ranked products in an LLM search engine's citation order; transfers across models."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "bb5cd74e28",
+   "title": "PI Against LLM-Integrated Mobile Robotic Systems",
+   "citations": 29,
+   "rq3": {
+    "has": true,
+    "name": "UNNAMED: multi-modal prompt injection against robot navigation",
+    "channel": "cross-modal",
+    "consequence": "goal-hijack",
+    "conf": "medium"
+   },
+   "rq4": {
+    "has": true,
+    "name": "UNNAMED: secure prompt strategies for robotic navigation",
+    "stage": "ingestion",
+    "conf": "low"
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "532f88e78c",
+   "title": "PromptLocate",
+   "citations": 25,
+   "rq3": {
+    "has": false
+   },
+   "rq4": {
+    "has": true,
+    "name": "PromptLocate (injected-prompt localization)",
+    "stage": "ingestion",
+    "conf": "high",
+    "note": "Already cited as a baseline inside the corpus (the Relinking paper's source-sanitizer group). Its own paper was outside the corpus until now."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "d8ba6085c7",
+   "title": "Preemptive Answer Attacks on CoT",
+   "citations": 25,
+   "rq3": {
+    "has": true,
+    "name": "preemptive answer attack (CoT short-circuiting)",
+    "channel": "direct-input",
+    "consequence": "reasoning-corruption",
+    "conf": "high",
+    "note": "The LLM obtains an answer before reasoning, degrading CoT. Cross-track flavour: arises inadvertently OR by injection."
+   },
+   "rq4": {
+    "has": true,
+    "name": "UNNAMED: two preemptive-answer mitigations",
+    "stage": "reasoning",
+    "conf": "low"
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "68132d7cf8",
+   "title": "EchoLeak",
+   "citations": 25,
+   "rq3": {
+    "has": true,
+    "name": "EchoLeak (zero-click IPI, CVE-2025-32711)",
+    "channel": "tool-output",
+    "consequence": "data-exfiltration",
+    "conf": "high",
+    "note": "Real production exploit in M365 Copilot chaining XPIA-classifier evasion, link-redaction bypass, auto-fetched images and a Teams proxy. A rare in-the-wild case."
+   },
+   "rq4": {
+    "has": false,
+    "note": "Proposes engineering mitigations but no named, evaluated defense."
+   },
+   "scope_verdict": "in-scope"
+  },
+  {
+   "paper_id": "2058fa7cb9",
+   "title": "Detecting LLM-generated peer reviews",
+   "citations": 25,
+   "rq3": {
+    "has": false,
+    "note": "Uses IPI as a benign watermarking TOOL, not as an attack studied. Out of scope."
+   },
+   "rq4": {
+    "has": false
+   },
+   "scope_verdict": "out-of-scope-benign-use"
+  }
+ ]
+}
