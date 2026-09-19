@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "context-integrity-sok": {
+      "command": "./mcp_server/.venv/bin/python3",
+      "args": ["mcp_server/server.py"]
+    }
+  }
+}
