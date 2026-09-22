@@ -35,26 +35,42 @@ for that list and the rationale.
 ## Running it
 
 The harness needs a tool-calling model on an OpenAI-compatible endpoint at
-:1111. **Model choice is not free here.** Mistral-7B-Instruct-v0.3 returns 0%
+**:8000** — AgentDojo's `local` provider hardcodes `http://localhost:8000/v1`,
+so the port is not free to choose. Pass `--model local`; the model string is the
+provider, and the weights come from whatever the server is serving. **Model choice is not free here.** Mistral-7B-Instruct-v0.3 returns 0%
 utility across every AgentDojo condition — the agent cannot complete even the
 benign tasks, which makes every security number meaningless. Qwen2.5-7B-Instruct
 works.
 
 ```bash
 python -m vllm.entrypoints.openai.api_server \
-  --model Qwen/Qwen2.5-7B-Instruct --port 1111 --dtype bfloat16 \
+  --model Qwen/Qwen2.5-7B-Instruct --port 8000 --dtype bfloat16 \
   --max-model-len 16384 --gpu-memory-utilization 0.60 \
   --enable-auto-tool-choice --tool-call-parser hermes
 ```
 
 ```bash
 python run_mechanism_transfer.py --suite banking \
-  --model Qwen/Qwen2.5-7B-Instruct --defense tool_filter --n_user 3 --n_inject 1
+  --model local --defense tool_filter --n_user 3 --n_inject 1
 ```
 
-Copies of both files live in the IPIGuard reconstruction checkout's `run/`
-directory, which is where they must sit to import AgentDojo and the existing
-`eval.py` scoring logic.
+`eval.py` here is a small reimplementation of the wrapper that used to live in
+the IPIGuard reconstruction checkout's `run/` directory, so this harness is now
+self-contained and needs no external checkout. It wraps AgentDojo's own
+`TaskSuite.run_task_with_pipeline`; note that AgentDojo returns
+`(utility, security)` and the runners expect `(security, utility)`, so the swap
+happens there, in one place.
+
+Set the environment up with:
+
+```bash
+uv venv .venv --python 3.11
+uv pip install --python .venv/bin/python --torch-backend=cu128 "torch==2.10.0" vllm "agentdojo==0.1.33"
+```
+
+The `--torch-backend=cu128` matters: a bare `vllm` install pulls a CUDA 13 torch,
+which fails on a CUDA 12.x driver with "the NVIDIA driver on your system is too
+old".
 
 ## Always read the control first
 
