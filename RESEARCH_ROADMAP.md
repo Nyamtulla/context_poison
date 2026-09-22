@@ -99,6 +99,40 @@ tool-calling model (A6000/49 GB fits a 14B comfortably); more user×injection ta
 pairs for tighter intervals; suite choice (workspace and banking behave
 differently).
 
+### 2026-09-22: the environment was rebuilt, and a transport bug was masking everything
+
+The reconstruction checkout that held `eval.py` no longer exists, so the harness
+was rebuilt self-contained. Three things were wrong, and the third matters
+beyond this project:
+
+1. **CUDA mismatch.** A bare `vllm` install pulls a CUDA 13 torch; the driver
+   here is 12.2. Pinned to `torch==2.10.0+cu128` / `vllm 0.19.1`.
+2. **Wrong port.** AgentDojo's `local` provider hardcodes `localhost:8000`; the
+   README said 1111. Serving on 8000 rather than patching the library.
+3. **AgentDojo's content blocks are not valid OpenAI schema.** It emits
+   `{"type":"text","content":...}`; the API requires the text under `text`.
+   Every request to a strictly-validating server (vLLM ≥0.19) returned HTTP 400.
+   AgentDojo swallows the error, so the turn produced no output and every task
+   scored `utility=False, security=False`.
+
+**(3) is the cautionary one.** A harness in that state reports **0% ASR and 0%
+utility for every condition** — which reads exactly like "the attack does not
+land here" or "this defense blocks everything." It is a plausible,
+publishable-looking result produced entirely by a transport bug. Fixed by
+`local_llm_compat.py`, which normalises at the transport boundary rather than
+reimplementing AgentDojo's message construction.
+
+What caught it was the **utility floor**, not the ASR. A 0% ASR alone is
+ambiguous; 0% ASR *at 0% utility* is a broken agent, and the floor made that
+distinction mandatory before any defense could be evaluated. After the fix,
+utility on workspace went 0% → 100%.
+
+**This casts doubt on the previously-recorded agent-harness numbers.** The
+DataSentinel run that flagged 0 of 60 injections and the RobustRAG run whose
+control was "too weak to read" were produced on an environment that no longer
+exists and cannot be inspected. They should be treated as unreliable until
+re-run on this harness, and item 3's de-confounding pass supersedes them.
+
 ## 3. De-confound RQ6
 
 **The threat to validity.** "Generalization tracks intervention point" is

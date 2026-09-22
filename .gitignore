@@ -19,3 +19,6 @@ venv/
 
 # OS cruft
 .DS_Store
+
+# rebuilt harness venv (vllm + torch, ~10GB, regenerable -- see agentdojo_harness/README.md)
+agentdojo_harness/.venv/
