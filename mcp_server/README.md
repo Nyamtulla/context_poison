@@ -19,6 +19,11 @@ report different numbers for the same thing.
 
 ## Setup
 
+The server reads `data/context_sok.db`, which is stored in **Git LFS**. If you
+cloned without LFS installed, that file is a 133-byte pointer and the server will
+fail at import. Run `git lfs install && git lfs pull` from the repo root first —
+see the main README's Setup section.
+
 ```bash
 cd mcp_server
 python3 -m venv .venv

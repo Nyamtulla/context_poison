@@ -45,6 +45,33 @@ re-run search or PDF download. Findings and methodology write-ups live in
 
 ## Setup
 
+**Install Git LFS before cloning.** `data/context_sok.db` (~70 MB — the 25,922-record
+discovery pool and 42,123 citation edges) is stored in Git LFS. Without LFS you get a
+133-byte pointer file where the database should be, and every script that opens it
+fails with `sqlite3.DatabaseError: file is not a database`.
+
+```bash
+git lfs install            # once per machine
+git clone git@github.com:Nyamtulla/context_poison.git
+```
+
+Already cloned without it? Recover in place — no need to re-clone:
+
+```bash
+git lfs install
+git lfs pull
+file data/context_sok.db   # should say "SQLite 3.x database", not "ASCII text"
+```
+
+No root on your machine? LFS does not need it — drop the release binary on your PATH:
+
+```bash
+curl -sL https://github.com/git-lfs/git-lfs/releases/download/v3.8.0/git-lfs-linux-amd64-v3.8.0.tar.gz \
+  | tar xz -C /tmp && install -D /tmp/git-lfs-3.8.0/git-lfs ~/.local/bin/git-lfs
+```
+
+Then the Python environment:
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
