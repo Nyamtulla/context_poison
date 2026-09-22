@@ -156,3 +156,47 @@ still repeats a secret key. An injection aimed at an *agent mid-task* does not
 stop a bare classification prompt from repeating that key, so it reads as clean.
 **Its published generalization was established on a text-classification victim,
 and against agent-shaped attacks in this harness it does not fire.**
+
+## If the local model cannot give a readable control
+
+Open 7B/14B models have not cleared the control floor on these suites. Measured
+undefended, `important_instructions`, 32 pairs per suite:
+
+| model | suite | undefended ASR | utility | verdict |
+|---|---|---:|---:|---|
+| Qwen2.5-7B-Instruct | workspace | 6.2% | 31.2% | agent broken |
+| Qwen2.5-7B-Instruct | banking | 15.6% | 37.5% | agent broken |
+
+At those rates a two-proportion test cannot resolve *any* reduction, even a drop
+to zero (`calibrate_control.py` reports the minimum detectable reduction per
+configuration). A defense verdict from such a run is noise with a label on it.
+
+The fallback is an API victim model. AgentDojo has the providers built in; put
+the relevant key in the repo-root `.env` and pass the model directly:
+
+```bash
+python calibrate_control.py --suites workspace --models gpt-4o-2024-05-13 \
+  --n_user 8 --n_inject 4 --strategy spread
+```
+
+`local_llm_compat.py` patches only the `local` provider's transport, so it does
+not affect API runs.
+
+**Budget before running.** One calibration sweep is ~64 agent episodes, each
+several tool-calling turns with a full suite's tool schema in context. The
+transfer study proper is larger. Calibrate on one suite first, confirm the
+control clears the floor, and only then scale — an underpowered API run costs
+money *and* produces nothing usable.
+
+## What gets recorded, and why every pair has a row
+
+`scripts/build_pair_attempt_registry.py` writes `context_sok_pair_attempts.xlsx`:
+one row per candidate (defense, mechanism) pair with its status, and for blocked
+pairs a named blocker plus the reason, alongside a per-pair experiment log.
+
+Blockers are split into STRUCTURAL (the pair cannot produce evidence about the
+attack regardless of hardware — optimizer-output payloads, image/audio carriers,
+attacks with no single payload) and OPERATIONAL (no released defense code, no
+AgentDojo rebuild of the mechanism, or a control too weak to read). Only the
+second kind has a route forward, and saying which is which is the difference
+between an honest limitations section and an invitation to assume the worst.
