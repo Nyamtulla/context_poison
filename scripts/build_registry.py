@@ -43,6 +43,8 @@ REGISTRY_CONFIGS = {
             (RAW_DIR / "rq3_track_a_batch2.csv", "technique_name", "has_technique", "Security"),
             (RAW_DIR / "rq3_track_b_batch1.csv", "mechanism_name", "has_mechanism", "ML/AI"),
             (RAW_DIR / "rq3_track_b_batch2.csv", "mechanism_name", "has_mechanism", "ML/AI"),
+            (RAW_DIR / "rq3_delta_track_a.csv", "technique_name", "has_technique", "Security"),
+            (RAW_DIR / "rq3_delta_track_b.csv", "mechanism_name", "has_mechanism", "ML/AI"),
         ],
     },
     "rq4": {
@@ -53,6 +55,7 @@ REGISTRY_CONFIGS = {
             (RAW_DIR / "rq4_batch2.csv", "defense_name", "has_defense", None),
             (RAW_DIR / "rq4_batch3.csv", "defense_name", "has_defense", None),
             (RAW_DIR / "rq4_batch4.csv", "defense_name", "has_defense", None),
+            (RAW_DIR / "rq4_delta_batch.csv", "defense_name", "has_defense", None),
         ],
     },
 }

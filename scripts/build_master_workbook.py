@@ -100,7 +100,7 @@ DEEP = ["technical_summary", "key_result", "baselines_compared",
 
 def has_fulltext(p):
     """True when the paper received the full-text extraction pass, not only
-    the categorical coding pass. 1,008 papers were coded; fewer were read in
+    the categorical coding pass. 1,033 papers were coded; fewer were read in
     full, and the difference materially affects RQ5 matchability."""
     return all(p.get(f) for f in DEEP)
 
@@ -184,7 +184,7 @@ r = kv_block(r, "Terminology: what was actually done to these papers", [
     "Two distinct passes were applied, and no single verb covers both. Use PRISMA's umbrella term DATA EXTRACTION; reserve CODING for the categorical scheme; say FULL-TEXT EXTRACTION only of the subset that got it.",
     f"CODING (plan Section 3 scheme: channel, consequence, intent, defense_intervention_point, evidence_grade) — applied to all {len(papers)} papers.",
     f"FULL-TEXT EXTRACTION (technical_summary, key_result, baselines_compared, stated_limitations, models_evaluated, datasets_benchmarks) — applied to {N_FULLTEXT} papers, exactly those with a retrievable PDF.",
-    "Do NOT write 'we read all 1,008 papers in full.' Filter the Papers sheet on has_fulltext to see which is which.",
+    "Do NOT write 'we read all 1,033 papers in full.' Filter the Papers sheet on has_fulltext to see which is which.",
 ])
 r = kv_block(r, f"Q: What happened to the other {100-100*STATS['n_defenses_matched']/STATS['n_defenses_total']:.1f}% of defenses ({STATS['n_defenses_total']-STATS['n_defenses_matched']} of {STATS['n_defenses_total']})?", [
     f"They were NOT excluded from the study — every one of the {STATS['n_defenses_total']} is a real, confirmed defense paper in the RQ4 registry. What's missing is a confirmed match to one of RQ3's {STATS['n_mechanisms']} SPECIFICALLY NAMED mechanisms.",

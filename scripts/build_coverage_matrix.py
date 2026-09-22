@@ -30,7 +30,13 @@ RQ3_REGISTRY = REGISTRY_DIR / "rq3_pollution_registry.json"
 OUTPUT_JSON = REGISTRY_DIR / "rq5_coverage_matrix.json"
 OUTPUT_MD = REPO_ROOT / "rq5_coverage_matrix.md"
 
-MATCH_BATCH_FILES = [RAW_DIR / f"rq5_batch{i}.csv" for i in (1, 2, 3, 4)]
+# The original four batches, plus any rq5_delta_batch*.csv produced by a later
+# rebuild (the 2026-09-21 screening-delta pass added one). Globbed rather than
+# enumerated so a future delta batch is picked up without editing this file --
+# a missed batch here fails silently as "fewer pairs", which is exactly the
+# kind of undercount this matrix exists to measure.
+MATCH_BATCH_FILES = ([RAW_DIR / f"rq5_batch{i}.csv" for i in (1, 2, 3, 4)]
+                     + sorted(RAW_DIR.glob("rq5_delta_batch*.csv")))
 FUZZY_RECOVERY_THRESHOLD = 90  # only auto-recover near-exact (likely truncation) mismatches
 
 
@@ -77,7 +83,23 @@ def reconcile_names(matches, registry_names):
             fixed += 1
         else:
             dropped.append(m)
-    return clean, fixed, dropped
+
+    # Deduplicate AFTER reconciliation. Two differently-worded matched names can
+    # legitimately collapse onto the same registry entry -- e.g. a defense
+    # recorded against both "Combined Attack" and "Combined Attack
+    # (Open-Prompt-Injection)" before those were confirmed to be one technique
+    # from one paper. Without this, that defense contributes the same pair twice
+    # and n_matched_pairs silently overstates the matrix, which is the one number
+    # this whole deliverable exists to report honestly.
+    seen, deduped, collapsed = set(), [], 0
+    for m in clean:
+        key = (m["defense_row"], m["mechanism_name"])
+        if key in seen:
+            collapsed += 1
+            continue
+        seen.add(key)
+        deduped.append(m)
+    return deduped, fixed, dropped, collapsed
 
 
 def compute_stats(matches, registry_names, n_defenses_total):
@@ -119,8 +141,11 @@ def main():
     raw = load_raw_matches()
     print(f"Raw matched pairs: {len(raw)}")
 
-    clean, fixed, dropped = reconcile_names(raw, registry_names)
+    clean, fixed, dropped, collapsed = reconcile_names(raw, registry_names)
     print(f"Name reconciliation: {fixed} recovered via fuzzy match, {len(dropped)} dropped (unresolvable)")
+    if collapsed:
+        print(f"  {collapsed} duplicate pair(s) collapsed after reconciliation "
+              f"(two matched names resolving to the same registry entry)")
     if dropped:
         for d in dropped:
             print(f"  dropped: defense row {d['defense_row']} -> '{d['mechanism_name']}' (no confident registry match)")

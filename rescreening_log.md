@@ -255,3 +255,181 @@ include_corrections=False)` still returns 183 mechanisms / 116 uncovered /
 papers renamed between preprint versions. The reliable signal is the arXiv ID
 *inside the PDF*, which only becomes available once the PDF is fetched — which
 is why this surfaced during the PDF backfill rather than during screening.
+
+---
+
+## Addendum 4 — the screening delta lands; abstract-based dedup finds two more duplicates (2026-09-21)
+
+### What happened
+
+The 164 papers recovered by the 2026-09-11 screening rule finished their PDF
+pass and entered the corpus. Of the 36 that needed manual retrieval, the project
+lead obtained **23** (the whole IEEE Xplore block bar one); the remaining **13
+were discarded by decision** as unavailable or not from an acceptable source
+(`MANUAL_DOWNLOADS_screening_delta.md` holds the full list with DOIs).
+
+Every manual PDF was verified before ingest — magic bytes, extractable text
+(18k–168k chars), and the paper's own title present in its own extracted text —
+so no paywall login page or wrong-paper save entered the corpus. Zero failures.
+
+**Corpus: 1,008 → 1,158 rows, 1,033 Include.** (164 recovered − 13 discarded
+− 1 already present as a seed row = 150 appended; then 2 excluded as duplicates,
+below.) Note this lands at 1,158, not the 1,172 the 2026-09-11 commit projected:
+that figure counted all 164 before the 13 discards and the seed-row overlap.
+
+One paper the screening-gap analysis listed as lost — Greshake et al., *Not What
+You've Signed Up For* (1,639 cites) — turned out to be **already in the corpus**
+at row 2, curated in via the seed path. It was missing from the *screening pool*,
+not from the corpus. The append guard caught the overlap.
+
+### A duplicate class the title-similarity pass cannot see
+
+`scripts/dedupe_corpus.py` matches on title similarity. Addendum 2 already
+recorded its blind spot: a paper **renamed between preprint and publication**
+scores below the threshold and survives. That blind spot was still open, so it
+was still costing us.
+
+Added `scripts/dedupe_by_abstract.py` — same idea, but comparing **abstracts**,
+which authors carry over near-verbatim across a rename. Run over all 1,033
+included papers it found **two duplicate pairs, both invisible to title
+matching**:
+
+| abstract sim | title sim | rows | verdict |
+|---:|---:|---|---|
+| 100.0 | 76.5 | 48 / 90 | same paper — **identical DOI** `10.3390/info17010054` |
+| 99.2 | 53.2 | 1035 / 1036 | same paper — InjecGuard (arXiv 2410.22770) renamed to PIGuard (ACL 2025) |
+
+The first pair had been sitting in the original 1,008-paper corpus undetected
+since the first build. The second arrived with the delta.
+
+**Resolution — merge, then exclude, so no data is lost:**
+
+- **Rows 48 / 90.** Kept **row 48**: seed-discovered, has the PDF, and carries
+  the full 15-column extraction that row 90 lacks entirely. But row 90 held the
+  real Semantic Scholar id, the real author list and **42 citations** against
+  row 48's placeholder `Unknown` / `0`. Merged authors and citation_count into
+  row 48 first, then excluded row 90. Neither row contributed a registry entry
+  (both code as survey, `has_technique=N` / `has_defense=N`), so RQ3/RQ4 are
+  unaffected; RQ2 and any citation-weighted view gain a corrected 42.
+- **Rows 1035 / 1036.** Kept **row 1035** (PIGuard, ACL 2025, 51 cites — the
+  peer-reviewed version of record), carrying row 1036's arXiv id across first,
+  then excluded row 1036. Both had been coded as defenses in the 2026-09-13
+  pass, so this prevents the registry double-counting one guardrail model under
+  two names — the same failure mode Addendum 2 caught with AgentFuzzer/AgentVigil.
+
+No `registry_corrections.json` retraction was needed for either: `build_registry.py`
+filters on the Excel's `screening` column at load, so an excluded row never
+contributes an entry in the first place. These were caught *before* the delta
+registry was built, not after publication.
+
+After applying both, the abstract sweep reports the corpus clean on that axis.
+
+### Method note
+
+Two of this project's five confirmed duplicate papers were preprint/publication
+renames that title similarity could not reach. That is now a known, checkable
+failure mode with a dedicated script rather than something rediscovered by
+accident each time. `dedupe_by_abstract.py` should run alongside
+`dedupe_corpus.py` in Phase 1 of the rebuild pipeline.
+
+### The rebuild's numbers (2026-09-21)
+
+Full pipeline re-run after the delta landed: dedup → RQ3/RQ4 registries →
+RQ5 coverage matrix → RQ1/RQ2.
+
+| | before | after |
+|---|---:|---:|
+| corpus rows | 1,008 | 1,158 |
+| included | 885 | 1,030 |
+| RQ3 mechanisms (registry) | 183 | 223 |
+| RQ3 mechanisms (incl. benchmark-supplementary) | 196 | 237 |
+| RQ4 defenses | 479 | 534 |
+| RQ5 confirmed pairs | 289 | 332 |
+| defenses with ≥1 confirmed match | 188 (39.2%) | 213 (39.9%) |
+| mechanisms with ≥1 defense | 94 (48.0%) | 106 (44.7%) |
+| mechanisms with zero defenses | 102 | 131 |
+| RQ1 empty cube cells | 63.6% | 60.5% |
+| RQ2 Track A→B citation rate | 10.8% | 11.8% |
+| RQ2 Track B→A citation rate | 9.2% | 9.1% |
+
+Three findings are worth separating from the bookkeeping.
+
+**1. RQ3's channel gap closed, and the old ranking overstated a gap we had
+manufactured.** `direct-input` rose from 43 (23.5%) to 66 (29.6%) while
+`tool-output` went 62 (33.9%) → 66 (29.6%) — they are now **exactly tied**.
+23 of the 41 new mechanisms are direct-input. The original census's "tool-output
+dominates" reading reflected a corpus selected for agent-era vocabulary, not the
+literature. Written up in `rq3_pollution_census.md`.
+
+**2. RQ4's load-bearing number did not move.** Defenses validated against *both*
+threat models: 2.9% → 2.8%, after adding 55 defenses including StruQ, SecAlign,
+Spotlighting, the Instruction Hierarchy and Attention Tracker. The 97%
+single-threat-model claim survives the largest corpus expansion the project has
+made.
+
+**3. The coverage gap did not close, contradicting this file's own prediction.**
+`screening_gap_analysis.md` (2026-09-11) predicted the gap would shrink once the
+foundational defenses were registry entries. It did not. Of the mechanisms the
+45 new pairs covered, **zero were pre-existing**; all 11 were mechanisms added in
+the same pass. Coverage of the 196 previously-registered mechanisms is unchanged
+at 94 (48.0%).
+
+The mechanism is visible: the recovered defenses evaluate on the attack suites
+their own community shares — BIPIA, Combined Attack, CyberSecEval, HackAPrompt,
+Tensor Trust — all of which entered the registry in the *same* pass. The
+recovered defenses and recovered attacks cover each other and leave the existing
+gap untouched. The overall rate fell (48.0% → 44.7%) because the recovered
+papers named more new attacks than they closed old gaps.
+
+This is a stronger result than the predicted one. The objection "your coverage
+gap is an artifact of your corpus boundaries" has now been tested directly, by
+deliberately importing the literature we believed was missing, and it does not
+hold. RQ7's "invention outpaces evaluation" framing is correspondingly firmer.
+
+### Two pipeline bugs found and fixed during the rebuild
+
+- **`evidence_grade` was being coded against the wrong rubric.** The delta came
+  back 62% grade-B against a 14.6% baseline. The project protocol grades
+  *publication rigor* (peer-reviewed+artifacts / peer-reviewed / credible
+  preprint / gray literature), not evaluation quality; the extraction spec had
+  stated it the other way round. The corpus is unambiguous — all 147 baseline
+  B's are peer-reviewed venue papers, 0 of 707 arXiv papers are B, and both
+  grade-D papers have no venue at all. Encoded the two invariant rules as a
+  normalization step in `scripts/apply_delta_extraction.py` (arXiv → never B;
+  D requires no venue), correcting 50 grades. The B-vs-C split within real
+  venues is left as coded, being a genuine venue-tier judgment.
+- **`build_coverage_matrix.py` double-counted collapsed pairs.** When name
+  reconciliation maps two differently-worded matched names onto one registry
+  entry, the defense contributed the same pair twice and `n_matched_pairs`
+  overstated the matrix — the single number the deliverable exists to report
+  honestly. It reported 235 where 233 were distinct. Now deduplicated after
+  reconciliation, with the collapse count logged.
+
+### A third dedup axis: identifiers
+
+The reverse coverage pass surfaced that `Combined Attack` and `Combined Attack
+(Open-Prompt-Injection)` were one technique from one paper, registered twice.
+Investigating showed why neither existing pass could see it: row 1126 has an
+**empty abstract**, so the abstract sweep skipped it, and the titles differ too
+much for the title sweep.
+
+The signal that does work is the identifier, and nothing was checking it.
+`scripts/dedupe_by_identifier.py` normalises arXiv ids from *both* the
+`arxiv_id` field and DOIs of the form `10.48550/arXiv.NNNN` — rows 1011 and
+1126 are one paper precisely because one's `arxiv_id` equals the other's DOI
+suffix. It found **three** duplicate groups at first run, all preprint/published
+pairs invisible to the other two passes:
+
+| arXiv id | rows | note |
+|---|---|---|
+| 2302.12173 | 2 / 1125 | Greshake et al. — *"Not What You've Signed Up For"* vs *"More than you've asked for"*. **Same paper, not companion papers.** |
+| 2310.12815 | 1011 / 1126 | Liu et al. — USENIX title vs arXiv title |
+| 2506.23260 | 49 / 301 | *"From Prompt Injections to Protocol Exploits"* — already in the original corpus |
+
+All three resolved by merging the better metadata into the keeper, then
+excluding. RQ3 223 after the Combined Attack retraction. All three sweeps
+(title, abstract, identifier) now report the corpus clean.
+
+Five of this project's eight confirmed duplicate papers were preprint/publication
+renames. Run all three passes in Phase 1; the identifier pass is the cheapest and
+catches the most.

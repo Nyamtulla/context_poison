@@ -27,8 +27,8 @@ built goes unmeasured.**
 Three independent measurements converge on this:
 
 1. **The two research communities do not test each other's mechanisms.**
-   Of the 190 confirmed defense×mechanism test pairs in RQ5's matrix,
-   **188 (98.9%) stay inside a single track. Two cross it, and only one is a
+   Of the 232 confirmed defense×mechanism test pairs in RQ5's matrix,
+   **230 (99.1%) stay inside a single track. Two cross it, and only one is a
    genuine cross-community test** (MAGE, an ML/AI-track memory defense,
    evaluated against Indirect Prompt Injection). This is a *new* number, not
    reported by any earlier RQ — and it is roughly an order of magnitude worse
@@ -88,7 +88,7 @@ into what the field actually measures.
 | ML/AI | ML/AI | 75 |
 | ML/AI | Security | 1 |
 | Both | ML/AI | 1 |
-| **Cross-track total** | | **2 of 190 (1.1%)** |
+| **Cross-track total** | | **2 of 232 (0.9%)** |
 
 RQ1 explains why this persists without anyone behaving irrationally: the two
 communities study nearly disjoint *consequences*. Track A's goal-hijack
@@ -115,7 +115,7 @@ and never propagated back to how the defense is described.
 
 ## Open problem 1 — Cross-threat-model evaluation is absent, and the barrier is norms, not feasibility
 
-**Evidence.** 1.1% of test pairs cross tracks; 2.9% of defenses are validated
+**Evidence.** 0.9% of test pairs cross tracks; 2.8% of defenses are validated
 against both threat models; 88.2% of matched defenses are tested against
 exactly one mechanism.
 
@@ -194,7 +194,7 @@ construction.
 ## Open problem 3 — The field's most-tested "mechanism" may be a category label, not a mechanism
 
 **Evidence.** The single registry entry *Indirect Prompt Injection (IPI)*
-absorbs 76 of 190 confirmed test pairs — **40% of all evaluation effort in
+absorbs 76 of 232 confirmed test pairs — **32.6% of all evaluation effort in
 the corpus lands on one entry**. Meanwhile, 35 of the 183 registry mechanisms
 are named injection variants, and **26 of those 35 have zero defenses ever
 tested against them**.
@@ -243,7 +243,7 @@ By consequence, the gap concentrates where severity is arguably highest:
 | reasoning-corruption | 25 / 40 | 62.5% |
 | persistence-backdoor | 5 / 12 | 41.7% |
 | **goal-hijack** | **22 / 100** | **22.0%** |
-| **data-exfiltration** | **1 / 9** | **11.1%** |
+| **data-exfiltration** | **1 / 13** | **7.7%** |
 | resource-abuse | 0 / 2 | 0.0% |
 
 By channel, supply-chain (0 of 3), cross-modal (2 of 11), tool-output (17 of
@@ -431,13 +431,13 @@ self-reported field.
 ## Known limitations
 
 - **RQ7 inherits every limitation of its inputs**, and they compound. The
-  1.1% cross-track figure rests on RQ3/RQ4 track attribution, RQ5's
+  0.9% cross-track figure rests on RQ3/RQ4 track attribution, RQ5's
   entity-resolution matching, and RQ5's deliberate "favor false negatives"
   instruction. That conservative bias means true coverage is more likely
   undercounted than overcounted — but it cuts *toward* the cross-track
   finding being overstated as much as any other cell, so the figure should be
   read as "cross-track testing is rare to the point of near-absence" rather
-  than as a precise 1.1%.
+  than as a precise 0.9%.
 - **The cross-track measure is coarse by construction.** It compares the
   community that produced a defense to the community that named a mechanism.
   A Security-track defense tested against a Security-track mechanism may

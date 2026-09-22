@@ -30,7 +30,32 @@ criteria changed -> re-screen -> rebuild analysis, on the existing corpus.
 
 ```bash
 python3 scripts/dedupe_corpus.py
+python3 scripts/dedupe_by_abstract.py
+python3 scripts/dedupe_by_identifier.py
 ```
+
+Run **all three** -- they catch structurally different things, and each has a
+blind spot the others cover:
+
+| pass | matches on | blind spot |
+|---|---|---|
+| `dedupe_corpus.py` | title similarity | a paper renamed between preprint and publication |
+| `dedupe_by_abstract.py` | abstract similarity | a row with a missing/short abstract |
+| `dedupe_by_identifier.py` | DOI + normalised arXiv id | a paper with neither identifier |
+
+**Run the identifier pass first if you only have time for one** -- it is the
+cheapest and has caught the most. Two papers can share a title or an abstract by
+coincidence; they cannot share a DOI or an arXiv number. It normalises arXiv ids
+out of both the `arxiv_id` field and `10.48550/arXiv.*` DOIs, which is the only
+way the Liu et al. pair (rows 1011/1126) was findable: one row's `arxiv_id`
+equals the other's DOI suffix, one has no abstract at all, and the titles differ
+too much for title matching.
+
+The preprint/publication rename has produced **5 of this project's 8 confirmed
+duplicate papers** (AgentFuzzer/AgentVigil in `rescreening_log.md` Addendum 2;
+InjecGuard/PIGuard, a same-DOI MDPI pair, Greshake et al. and Liu et al. in
+Addendum 4). Title similarity scored all of them in the 50s-70s, well under
+threshold. Skipping these passes means shipping a census that double-counts.
 
 Report-only. Read every candidate pair it surfaces. Most will be false
 positives (two distinct papers with a coincidentally similar title -- this

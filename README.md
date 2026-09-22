@@ -104,7 +104,7 @@ Eleven tabs, covering the whole project in one place — no cloud dependency:
   whichever exists). Search by title, author, or venue. If a search misses, it
   automatically checks the wider ~26k discovery pool, so you can tell "we
   analysed this" from "we saw it but screened it out" from "genuinely new to
-  us." Exports the current view as CSV. (The 1,008-row curated corpus and the
+  us." Exports the current view as CSV. (The 1,158-row curated corpus and the
   123 rows screened out of it are the audit trail, in
   `context_sok_master_workbook.xlsx` and `rescreening_log.md`.)
 - **Attacks & mechanisms** — all 182 named poisoning sources (RQ3), split by

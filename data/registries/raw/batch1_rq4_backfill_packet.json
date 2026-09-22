@@ -1,0 +1,182 @@
+[
+ {
+  "row": 1010,
+  "paper_id": "f18e5a844c37e5342f8f3d409c74c1a9c91d1f8f",
+  "title": "The Instruction Hierarchy",
+  "full_title": "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions",
+  "defense_name": "Instruction Hierarchy (privileged-instruction training)",
+  "stage": "reasoning",
+  "note": "Model-level training so the LLM ranks system prompts above untrusted text. Cited as a baseline across the corpus.",
+  "text": "data/cache/pdf_text/f18e5a844c37e5342f8f3d409c74c1a9c91d1f8f.txt"
+ },
+ {
+  "row": 1012,
+  "paper_id": "f5e7e22036c3fe7d6660eee90642f716c3b303f5",
+  "title": "StruQ",
+  "full_title": "StruQ: Defending Against Prompt Injection with Structured Queries",
+  "defense_name": "StruQ (structured queries)",
+  "stage": "ingestion",
+  "note": "Secure front-end separating prompt and data channels plus a structured instruction-tuned LLM. Named by 7 uncovered mechanisms' papers as the defense they tested against.",
+  "text": "data/cache/pdf_text/f5e7e22036c3fe7d6660eee90642f716c3b303f5.txt"
+ },
+ {
+  "row": 1013,
+  "paper_id": "6d465be006615460d41060f9f5068d51fc1f46b1",
+  "title": "BIPIA",
+  "full_title": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models",
+  "defense_name": "Boundary awareness + explicit reminder",
+  "stage": "ingestion",
+  "note": "Two defenses: black-box (explicit reminder) and white-box (boundary awareness).",
+  "text": "data/cache/pdf_text/6d465be006615460d41060f9f5068d51fc1f46b1.txt"
+ },
+ {
+  "row": 1014,
+  "paper_id": "32316f1d08911b397f52f8644f46f5c129619383",
+  "title": "Spotlighting",
+  "full_title": "Defending Against Indirect Prompt Injection Attacks With Spotlighting",
+  "defense_name": "Spotlighting (delimiting / datamarking / encoding)",
+  "stage": "ingestion",
+  "note": "The provenance-signalling family everyone benchmarks against; named by 9 uncovered mechanisms' papers.",
+  "text": "data/cache/pdf_text/32316f1d08911b397f52f8644f46f5c129619383.txt"
+ },
+ {
+  "row": 1017,
+  "paper_id": "3e1d812a1ef4b02b7d60020cc8aaa596d28373da",
+  "title": "SecAlign",
+  "full_title": "SecAlign: Defending Against Prompt Injection with Preference Optimization",
+  "defense_name": "SecAlign (preference optimization)",
+  "stage": "reasoning",
+  "note": "The ORIGINAL SecAlign. The corpus already has 'Meta SecAlign', its successor; these are distinct entries. Named by 7 uncovered mechanisms' papers.",
+  "text": "data/cache/pdf_text/3e1d812a1ef4b02b7d60020cc8aaa596d28373da.txt"
+ },
+ {
+  "row": 1020,
+  "paper_id": "2b289e1d136edeb6354496518af5230bddc09e61",
+  "title": "Attention Tracker",
+  "full_title": "Attention Tracker: Detecting Prompt Injection Attacks in LLMs",
+  "defense_name": "Attention Tracker",
+  "stage": "reasoning",
+  "note": "Training-free detection from attention patterns on the instruction. Named by uncovered mechanisms' papers as a baseline.",
+  "text": "data/cache/pdf_text/2b289e1d136edeb6354496518af5230bddc09e61.txt"
+ },
+ {
+  "row": 1021,
+  "paper_id": "0894585294c67193ff3190240554677b56fd79a0",
+  "title": "From Prompt Injections to SQL Injection",
+  "full_title": "From Prompt Injections to SQL Injection Attacks: How Protected is Your LLM-Integrated Web Application?",
+  "defense_name": "UNNAMED: P2SQL mitigations (DB permission hardening + query rewriting)",
+  "stage": "execution",
+  "note": "",
+  "text": "data/cache/pdf_text/0894585294c67193ff3190240554677b56fd79a0.txt"
+ },
+ {
+  "row": 1024,
+  "paper_id": "19a45c70463edc755d54f3d5343e44cd571fe226",
+  "title": "System-Level Defense: Information Flow Control",
+  "full_title": "System-Level Defense against Indirect Prompt Injection Attacks: An Information Flow Control Perspective",
+  "defense_name": "f-secure LLM system (information flow control)",
+  "stage": "execution",
+  "note": "Already cited BY defenses in the corpus (PACT and NeuroTaint both baseline against 'f-secure'/FIDES). Its own paper was outside the corpus until now.",
+  "text": "data/cache/pdf_text/19a45c70463edc755d54f3d5343e44cd571fe226.txt"
+ },
+ {
+  "row": 1027,
+  "paper_id": "2742c3d77c4aa6d023b7dfc77984ad10e6aae274",
+  "title": "Signed-Prompt",
+  "full_title": "Signed-Prompt: A New Approach to Prevent Prompt Injection Attacks Against LLM-Integrated Applications",
+  "defense_name": "Signed-Prompt",
+  "stage": "ingestion",
+  "note": "Authorised users sign sensitive instructions so the LLM can tell trusted instruction sources apart.",
+  "text": "data/cache/pdf_text/2742c3d77c4aa6d023b7dfc77984ad10e6aae274.txt"
+ },
+ {
+  "row": 1030,
+  "paper_id": "20723b734e2838c22f921a0fc343d32e1d6d84e7",
+  "title": "Can Indirect PI Attacks Be Detected and Removed?",
+  "full_title": "Can Indirect Prompt Injection Attacks Be Detected and Removed?",
+  "defense_name": "UNNAMED: IPI detection + post-detection removal pipeline",
+  "stage": "ingestion",
+  "note": "Also contributes a detection/removal benchmark. Directly relevant to the sanitizer family.",
+  "text": "data/cache/pdf_text/20723b734e2838c22f921a0fc343d32e1d6d84e7.txt"
+ },
+ {
+  "row": 1031,
+  "paper_id": "685dd83fb88fa7d5546f2624ac5b9fe8a484de13",
+  "title": "PromptShield",
+  "full_title": "PromptShield: Deployable Detection for Prompt Injection Attacks",
+  "defense_name": "PromptShield (fine-tuned deployable PI detector)",
+  "stage": "ingestion",
+  "note": "Detector plus a curation benchmark; targets the low-false-positive regime.",
+  "text": "data/cache/pdf_text/685dd83fb88fa7d5546f2624ac5b9fe8a484de13.txt"
+ },
+ {
+  "row": 1035,
+  "paper_id": "287e6e8a5593ba2169f3cf66e66e5d344a36064d",
+  "title": "PIGuard",
+  "full_title": "PIGuard: Prompt Injection Guardrail via Mitigating Overdefense for Free",
+  "defense_name": "PIGuard (Mitigating Over-defense for Free)",
+  "stage": "ingestion",
+  "note": "NOTE: distinct from IPIGuard, which is already in the registry - an earlier probe of mine conflated them. Contributes the NotInject over-defense dataset.",
+  "text": "data/cache/pdf_text/287e6e8a5593ba2169f3cf66e66e5d344a36064d.txt"
+ },
+ {
+  "row": 1036,
+  "paper_id": "348b3999a8545dd48307caeadbb54b791ed37a7d",
+  "title": "InjecGuard",
+  "full_title": "InjecGuard: Benchmarking and Mitigating Over-defense in Prompt Injection Guardrail Models",
+  "defense_name": "InjecGuard",
+  "stage": "ingestion",
+  "note": "FLAG: near-identical abstract to PIGuard above, same NotInject dataset and same MOF training strategy, differing only in the reported margin (30.8% vs 30.4%). Almost certainly the same work under two titles - a rename across versions. Treat as ONE defense and retract the duplicate; do not count both.",
+  "text": "data/cache/pdf_text/348b3999a8545dd48307caeadbb54b791ed37a7d.txt"
+ },
+ {
+  "row": 1038,
+  "paper_id": "b02a3849d5482d9933468225713ed0c2a4ddc9e2",
+  "title": "DefensiveTokens",
+  "full_title": "Defending Against Prompt Injection With a Few DefensiveTokens",
+  "defense_name": "DefensiveToken (test-time optimized special tokens)",
+  "stage": "ingestion",
+  "note": "Test-time defense with training-time-comparable robustness; already cited as a baseline inside the corpus.",
+  "text": "data/cache/pdf_text/b02a3849d5482d9933468225713ed0c2a4ddc9e2.txt"
+ },
+ {
+  "row": 1040,
+  "paper_id": "654c9a01b995637f5849e8977691ae648160b5ca",
+  "title": "COIECD",
+  "full_title": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "defense_name": "COIECD (contextual information-entropy constraint decoding)",
+  "stage": "reasoning",
+  "note": "",
+  "text": "data/cache/pdf_text/654c9a01b995637f5849e8977691ae648160b5ca.txt"
+ },
+ {
+  "row": 1044,
+  "paper_id": "bb5cd74e28059073b0f50ba42b1dcec41d29af82",
+  "title": "PI Against LLM-Integrated Mobile Robotic Systems",
+  "full_title": "A Study on Prompt Injection Attack Against LLM-Integrated Mobile Robotic Systems",
+  "defense_name": "UNNAMED: secure prompt strategies for robotic navigation",
+  "stage": "ingestion",
+  "note": "",
+  "text": "data/cache/pdf_text/bb5cd74e28059073b0f50ba42b1dcec41d29af82.txt"
+ },
+ {
+  "row": 1045,
+  "paper_id": "532f88e78c96a7efb418c6fedd428b741a73e9af",
+  "title": "PromptLocate",
+  "full_title": "PromptLocate: Localizing Prompt Injection Attacks",
+  "defense_name": "PromptLocate (injected-prompt localization)",
+  "stage": "ingestion",
+  "note": "Already cited as a baseline inside the corpus (the Relinking paper's source-sanitizer group). Its own paper was outside the corpus until now.",
+  "text": "data/cache/pdf_text/532f88e78c96a7efb418c6fedd428b741a73e9af.txt"
+ },
+ {
+  "row": 1046,
+  "paper_id": "d8ba6085c7c32cc367ab7f50d18744de846fcebd",
+  "title": "Preemptive Answer Attacks on CoT",
+  "full_title": "Preemptive Answer \"Attacks\" on Chain-of-Thought Reasoning",
+  "defense_name": "UNNAMED: two preemptive-answer mitigations",
+  "stage": "reasoning",
+  "note": "",
+  "text": "data/cache/pdf_text/d8ba6085c7c32cc367ab7f50d18744de846fcebd.txt"
+ }
+]

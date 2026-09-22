@@ -1,7 +1,9 @@
 # RQ5 — Pollution Mechanism × Defense Coverage Matrix
 
-Generated 2026-08-17, on the finalized RQ3 registry (183 mechanisms) and
-RQ4 registry (479 defenses). Regenerate if either registry changes.
+Regenerated 2026-09-21, on the RQ3 registry (223 entries; 237 including
+benchmark-supplementary mechanisms) and RQ4 registry (534 defenses), after the
+2026-09-11 screening fix and the screening-delta extraction. Regenerate if
+either registry changes.
 
 **RQ5 (as stated in the project plan, Section 1):** Cross-referencing the
 RQ3 and RQ4 registries: which defenses have actually been evaluated against
@@ -15,52 +17,91 @@ silos?
 **The field barely cross-tests at all — the matrix is far sparser than the
 plan anticipated, and the shape of the sparsity is itself the finding.**
 
-- **170 of 479 defenses (35.5%)** were confirmed tested against at least one
-  named registry mechanism; the rest (64.5%) either weren't evaluated against
+- **213 of 534 defenses (39.9%)** were confirmed tested against at least one
+  named registry mechanism; the rest (60.1%) either weren't evaluated against
   anything the registry recognizes as a distinct named technique, or weren't
   evaluated at all.
-- **85 of 182 mechanisms (46.7%)** have at least one defense tested against
-  them; **97 (53.3%) have zero.** As originally published this read 67 of 183
-  (36.6%) with 116 uncovered; the difference is one retracted duplicate plus
-  41 pairs recovered by two later scans, the larger of which read *attack*
-  papers rather than defense papers — see "Reading the corpus in the other
-  direction" below, which is a finding in its own right.
-- **Among the 170 matched defenses, 150 (88.2%) were tested against exactly
-  one mechanism; only 20 (11.8%) were tested against two; none were tested
-  against three or more.** The plan's original hypothesis — that the
-  interesting finding would be a spectrum from "generalist defenses" (tested
-  broadly) to "evaluation silos" (narrow, isolated testing) — undersells
-  what's actually here: **there is essentially no generalist-defense
-  category to speak of at this granularity.** Cross-mechanism testing tops
-  out at 2, not "many." The field's default mode is narrow, single-mechanism
-  validation, not incremental silo-vs-generalist variation.
-- Raw matrix density (231 confirmed pairs / 87,178 possible mechanism×defense
-  cells = 0.22%) is not a meaningful number on its own — most cells aren't
-  applicable at all (a memory-channel mechanism has no reason to be tested
-  against a supply-chain-channel defense) — the two percentages above
-  (35.5% of defenses, 36.6% of mechanisms) are the honest coverage measures.
+- **106 of 237 mechanisms (44.7%)** have at least one defense tested against
+  them; **131 (55.3%) have zero.**
+- **Among the 197 matched defenses, 163 (82.7%) were tested against exactly
+  one mechanism; 32 against two; only 2 against three.** The plan's original
+  hypothesis — a spectrum from "generalist defenses" to "evaluation silos" —
+  undersells what is here: **there is essentially no generalist-defense
+  category at this granularity.** Cross-mechanism testing tops out at three,
+  and only twice. The field's default mode is narrow, single-mechanism
+  validation.
+- Raw matrix density (332 confirmed pairs / 126,558 possible cells = 0.26%) is
+  not meaningful on its own — most cells aren't applicable (a memory-channel
+  mechanism has no reason to be tested against a supply-chain defense). The two
+  percentages above are the honest coverage measures.
+
+### The screening fix did not close the gap — and that is the result
+
+`screening_gap_analysis.md` predicted that recovering the field's foundational
+defense papers would **shrink** the coverage gap: once StruQ, SecAlign,
+Spotlighting, Attention Tracker and the Liu et al. baselines were registry
+entries, the mechanisms that looked "never defended" would turn out to be
+defended after all.
+
+That prediction was **wrong**, and the way it failed is more informative than
+its success would have been.
+
+Recovering 164 papers added 55 defenses and 41 mechanisms, and produced 45 new
+confirmed pairs. Of the mechanisms those pairs newly covered:
+
+| | count |
+|---|---:|
+| **pre-existing mechanisms that became covered** | **0** |
+| delta-added mechanisms that became covered | 11 |
+
+Coverage of the 196 mechanisms registered *before* this pass is **unchanged at
+94 (48.0%)**. Not one of the 102 previously-uncovered mechanisms gained a
+defense, despite the corpus gaining the most-cited and most-benchmarked defenses
+in the field.
+
+The reason is visible in what the recovered defenses were tested *against*.
+StruQ, SecAlign, Spotlighting and their peers evaluate on the attack suites
+their own community shares — BIPIA, Open-Prompt-Injection's Combined Attack,
+CyberSecEval, HackAPrompt, Tensor Trust — every one of which entered the
+registry in the *same* pass, as a new mechanism. The recovered defenses and the
+recovered attacks cover each other, and leave the existing gap untouched.
+
+So the coverage gap is **not an artifact of our corpus boundaries**. It survived
+the most aggressive possible test of that hypothesis: deliberately importing the
+literature that was missing, specifically because we expected it to close the
+gap. The overall coverage rate did not improve — it fell, 48.0% → 44.7%, because
+the recovered papers named more new attacks than they closed old gaps.
+
+This materially strengthens RQ7's framing. "Invention outpaces evaluation" was
+previously vulnerable to the objection that our census simply missed the
+evaluations; that objection has now been tested directly and does not hold.
 
 ## Where the testing effort actually concentrates
 
 | Mechanism | Distinct defenses tested against it |
 |---|---:|
 | Indirect Prompt Injection (IPI) | 76 |
+| AgentDojo: important-instructions injection | 15 |
 | lost in the middle | 13 |
+| Combined Attack (Open-Prompt-Injection) | 13 |
+| BIPIA benchmark attack set | 13 |
+| AgentDojo: ignore-previous injection | 13 |
+| PoisonedRAG | 11 |
 | context rot (agentic/long-horizon search) | 9 |
-| PoisonedRAG | 7 |
-| distraction by irrelevant context | 7 |
-| distraction by irrelevant context (graded by semantic relatedness) | 6 |
-| Cross-Session Stored Prompt Injection (XSPI) | 3 |
-| observation over-ingestion | 3 |
 
-**"Indirect Prompt Injection (IPI)" alone accounts for 76 of 190 total
-matched pairs (40%).** The field's defense-testing effort is overwhelmingly
-concentrated on one generic, umbrella-level mechanism rather than
-distributed across the 183 more specific named techniques the corpus
-actually contains — most of the 128 remaining Track A attack techniques and
-53 remaining Track B mechanisms in the registry that DO have any coverage at
-all get only 1-2 defenses ever tested against them, and the 116 with zero
-coverage never get tested against anything.
+**"Indirect Prompt Injection (IPI)" alone accounts for 76 of 332 matched pairs
+(22.9%); the top three mechanisms take 31.3% between them.** The field's
+defense-testing effort concentrates on one generic, umbrella-level mechanism
+rather than distributing across the 223 more specific named techniques the
+registry contains.
+
+This concentration figure *fell* from 40% to 22.9% in this rebuild, which looks
+like dispersion but is not. The denominator grew (190 → 332 pairs) and the new
+pairs piled onto a handful of shared benchmarks — Combined Attack, BIPIA and the
+two AgentDojo injections now sit just below IPI. The effect is not that testing
+spread out; it is that the field has **a slightly larger set of common targets**,
+still tiny relative to the registry. Six mechanisms absorb 43.1% of all pair-mass and eight absorb
+49.1%; 131 mechanisms absorb none.
 
 ## Reframing "evaluation silos"
 

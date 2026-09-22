@@ -1,51 +1,51 @@
 # RQ1 -- Taxonomy Analysis: channel x intent x consequence
 
-Regenerated 2026-08-18 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (886 included papers). Re-run this script any time screening/coding changes.
+Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (1030 included papers). Re-run this script any time screening/coding changes.
 
 **RQ1:** Across the full landscape of LLM agent context contamination -- memory, RAG, tool output, tool metadata, skills, multi-agent, cross-modal, supply chain -- which channel x intent (adversarial/incidental) x consequence cells have been studied, and which are empty?
 
 ## Headline result
 
-**63.6% of the channel x intent x consequence cube is empty** (103 of 162 cells: 9 channels x 3 intents x 6 consequences).
+**60.5% of the channel x intent x consequence cube is empty** (98 of 162 cells: 9 channels x 3 intents x 6 consequences).
 
 ## Channel totals (both tracks combined)
 
 | Channel | Papers | Share |
 |---|---:|---:|
-| tool-output | 335 | 37.8% |
-| direct-input | 157 | 17.7% |
-| RAG | 125 | 14.1% |
-| memory | 107 | 12.1% |
-| multi-agent | 63 | 7.1% |
-| tool-metadata | 38 | 4.3% |
-| cross-modal | 37 | 4.2% |
-| skill | 18 | 2.0% |
-| supply-chain | 6 | 0.7% |
+| tool-output | 361 | 35.0% |
+| direct-input | 239 | 23.2% |
+| RAG | 143 | 13.9% |
+| memory | 108 | 10.5% |
+| multi-agent | 64 | 6.2% |
+| cross-modal | 49 | 4.8% |
+| tool-metadata | 37 | 3.6% |
+| skill | 18 | 1.7% |
+| supply-chain | 11 | 1.1% |
 
 ## Consequence totals by track (intent)
 
 | Consequence | Security (Track A) | ML/AI (Track B) | Both |
 |---|---:|---:|---:|
-| goal-hijack | 391 | 14 | 8 |
-| data-exfiltration | 26 | 1 | 0 |
-| persistence-backdoor | 19 | 2 | 3 |
-| resource-abuse | 7 | 0 | 0 |
-| silent-corruption | 9 | 73 | 2 |
-| reasoning-corruption | 11 | 313 | 7 |
+| goal-hijack | 494 | 14 | 8 |
+| data-exfiltration | 40 | 1 | 0 |
+| persistence-backdoor | 22 | 2 | 3 |
+| resource-abuse | 8 | 0 | 0 |
+| silent-corruption | 17 | 76 | 2 |
+| reasoning-corruption | 22 | 314 | 7 |
 
 ## Channel x Defense-intervention-point coverage
 
 | Channel | Ingestion | Reasoning | Execution | None |
 |---|---:|---:|---:|---:|
-| memory | 7 | 49 | 3 | 48 |
-| RAG | 22 | 43 | 0 | 60 |
-| tool-output | 43 | 49 | 73 | 170 |
-| tool-metadata | 5 | 1 | 4 | 28 |
+| memory | 7 | 49 | 3 | 49 |
+| RAG | 26 | 49 | 1 | 67 |
+| tool-output | 51 | 54 | 75 | 181 |
+| tool-metadata | 5 | 1 | 4 | 27 |
 | skill | 1 | 0 | 0 | 17 |
-| multi-agent | 3 | 10 | 12 | 38 |
-| cross-modal | 4 | 5 | 0 | 28 |
-| supply-chain | 2 | 0 | 0 | 4 |
-| direct-input | 41 | 53 | 2 | 61 |
+| multi-agent | 3 | 10 | 13 | 38 |
+| cross-modal | 6 | 7 | 0 | 36 |
+| supply-chain | 3 | 0 | 1 | 7 |
+| direct-input | 68 | 64 | 5 | 102 |
 
 ## Full 3D cube
 
@@ -53,22 +53,22 @@ Regenerated 2026-08-18 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 
 | channel | goal-hijack | data-exfiltration | persistence-backdoor | resource-abuse | silent-corruption | reasoning-corruption |
 |---|---:|---:|---:|---:|---:|---:|
-| memory | 3 | 1 | 11 | 0 | 0 | 1 |
-| RAG | 32 | 7 | 2 | 0 | 7 | 3 |
-| tool-output | 251 | 15 | 3 | 6 | 0 | 3 |
-| tool-metadata | 28 | 0 | 0 | 1 | 0 | 1 |
+| memory | 3 | 2 | 11 | 0 | 0 | 1 |
+| RAG | 39 | 10 | 2 | 0 | 9 | 5 |
+| tool-output | 273 | 18 | 3 | 6 | 0 | 4 |
+| tool-metadata | 27 | 0 | 0 | 1 | 0 | 1 |
 | skill | 10 | 0 | 0 | 0 | 0 | 0 |
-| multi-agent | 21 | 3 | 0 | 0 | 0 | 2 |
-| cross-modal | 15 | 0 | 0 | 0 | 0 | 0 |
-| supply-chain | 5 | 0 | 1 | 0 | 0 | 0 |
-| direct-input | 26 | 0 | 2 | 0 | 2 | 1 |
+| multi-agent | 22 | 3 | 0 | 0 | 0 | 2 |
+| cross-modal | 23 | 0 | 0 | 0 | 2 | 2 |
+| supply-chain | 6 | 0 | 4 | 0 | 1 | 0 |
+| direct-input | 91 | 7 | 2 | 1 | 5 | 7 |
 
 ### ML/AI
 
 | channel | goal-hijack | data-exfiltration | persistence-backdoor | resource-abuse | silent-corruption | reasoning-corruption |
 |---|---:|---:|---:|---:|---:|---:|
 | memory | 1 | 1 | 2 | 0 | 5 | 77 |
-| RAG | 1 | 0 | 0 | 0 | 49 | 23 |
+| RAG | 1 | 0 | 0 | 0 | 52 | 24 |
 | tool-output | 9 | 0 | 0 | 0 | 0 | 43 |
 | tool-metadata | 1 | 0 | 0 | 0 | 0 | 5 |
 | skill | 0 | 0 | 0 | 0 | 0 | 6 |
@@ -99,9 +99,9 @@ Regenerated 2026-08-18 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 - **tool-metadata**: 11 of 18 empty
 - **skill**: 14 of 18 empty
 - **multi-agent**: 11 of 18 empty
-- **cross-modal**: 13 of 18 empty
-- **supply-chain**: 16 of 18 empty
-- **direct-input**: 12 of 18 empty
+- **cross-modal**: 11 of 18 empty
+- **supply-chain**: 15 of 18 empty
+- **direct-input**: 10 of 18 empty
 
 ## Methodology / caveats
 
