@@ -144,7 +144,8 @@ def main() -> None:
     from agentdojo.attacks.attack_registry import load_attack
     from agentdojo.models import ModelsEnum
     from agentdojo.task_suite.load_suites import get_suite
-    import local_llm_compat  # noqa: F401  patches AgentDojo's OpenAI content schema
+    import agentdojo_defense_compat  # noqa: F401 - fixes spotlighting's infinite recursion
+import local_llm_compat  # noqa: F401  patches AgentDojo's OpenAI content schema
     import mechanism_attacks  # noqa: F401  registers the corpus mechanism attacks
     from eval import AgentTask
 
