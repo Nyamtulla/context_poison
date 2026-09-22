@@ -148,10 +148,35 @@ def main():
            "results": {}}
     for name in names:
         print(f"\n=== {name} ===", flush=True)
-        print("  [undefended]", flush=True)
-        u = run_condition(undef, suite, name, user_tasks, injection_tasks)
-        print("  [defended]", flush=True)
-        d = run_condition(defended, suite, name, user_tasks, injection_tasks)
+        try:
+            print("  [undefended]", flush=True)
+            u = run_condition(undef, suite, name, user_tasks, injection_tasks)
+            print("  [defended]", flush=True)
+            d = run_condition(defended, suite, name, user_tasks, injection_tasks)
+        except Exception as exc:
+            # One mechanism failing must not cost the rest of the sweep. Record
+            # it as a harness blocker with the reason and move on -- an
+            # unrunnable pair is a result about our tooling, and belongs in the
+            # per-pair record rather than taking twelve other pairs down with it.
+            #
+            # Seen in practice: a payload containing text like
+            #   tool_call: retry(reason="validation", ...)
+            # which AgentDojo tries to parse as YAML when the model echoes it,
+            # raising a scanner error. That is a property of the attack's
+            # framing colliding with the harness's tool-call format, not a
+            # statement about any defense.
+            reason = f"{type(exc).__name__}: {exc}"
+            print(f"  !! harness error, skipping: {reason[:200]}", flush=True)
+            out["results"][name] = {
+                "mechanism": MECHANISM_ATTACKS.get(name, "(AgentDojo baseline attack)"),
+                "undefended": None, "defended": None,
+                "verdict": "harness error - pair not runnable",
+                "blocker": "harness_error",
+                "blocker_detail": reason[:1000],
+            }
+            with open(args.out, "w") as f:
+                json.dump(out, f, indent=1)
+            continue
         out["results"][name] = {
             "mechanism": MECHANISM_ATTACKS.get(name, "(AgentDojo baseline attack)"),
             "undefended": u, "defended": d,
@@ -165,6 +190,9 @@ def main():
 
     print("\n" + "=" * 78)
     for k, v in out["results"].items():
+        if v.get("undefended") is None:
+            print(f"    {'--':>7} -> {'--':>7}  {k:<36} {v['verdict']}")
+            continue
         print(f"  {v['undefended']['asr_pct']:6.1f}% -> {v['defended']['asr_pct']:6.1f}%  "
               f"{k[:34]:36} {v['verdict']}")
     print("wrote", args.out)
