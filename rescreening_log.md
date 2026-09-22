@@ -433,3 +433,72 @@ excluding. RQ3 223 after the Combined Attack retraction. All three sweeps
 Five of this project's eight confirmed duplicate papers were preprint/publication
 renames. Run all three passes in Phase 1; the identifier pass is the cheapest and
 catches the most.
+
+### Addendum 5 — two off-criteria papers excluded (2026-09-22)
+
+The screening-delta extraction flagged three papers as out-of-scope that the
+2026-09-11 threat-term rule had admitted. Checked each against
+`config.yaml`'s actual `include_criteria_text` rather than the extracting
+agent's verdict. **Two fail, one does not.**
+
+**Excluded — row 1093, *Fingerprinting LLMs via Prompt Injection* (ACL 2025,
+4 cites).** Proposes LLMPrint, a model-provenance/IP-protection method that
+uses optimized prompts — which the authors call prompt injection — to
+fingerprint a base model. There is no victim application, no contaminated
+context, and no adversary: the "attacker" is the model owner verifying their
+own IP. Admitted purely on "prompt injection" in the title. Fails "presents an
+attack, defense, benchmark, or empirical measurement of context contamination."
+
+**Excluded — row 1061, *LLMs and Childhood Safety* (arXiv 2025, 16 cites).**
+A systematic literature review of child-LLM interaction risks (bias,
+inappropriate content, emotional manipulation) proposing a conceptual
+protection framework. Its only prompt-injection mention is one item in a list
+of evaluation targets the framework says developers should measure. No
+implementation, no experiments, no measurement of context contamination. This
+is exactly the failure mode `config.yaml`'s own comment on `threat_terms`
+anticipates — "a threat term alone would admit every survey that mentions
+prompt injection in passing" — except here both required lists hit off the
+same passing sentence, so requiring both did not stop it.
+
+**Kept — row 1057, *LongFaith* (ACL 2025, 18 cites).** The extracting agent
+called it "out-of-scope-adjacent" because its knowledge conflicts arise during
+synthetic *training*-data generation rather than at inference. The criteria do
+not support excluding it. The include text explicitly covers
+"context-length/quality degradation," which is precisely what LongFaith
+addresses (long-context reasoning faithfulness, distraction, knowledge
+conflict). Its intervention being training-time is not disqualifying: SecAlign,
+StruQ and the Instruction Hierarchy are all training-time defenses already in
+the RQ4 registry. The exclusion clause targets training-time *poisoning
+attacks* ("this is about runtime context, not pretraining"), not training-time
+defenses against runtime degradation.
+
+**Two more found by the same test.** Reviewing the remaining eleven
+out-of-scope flags against the criteria surfaced two with an identical profile
+to row 1061 — row **1130** (*LLMs for Cybersecurity Intelligence, Threat
+Hunting*, a review of LLMs used *as* security tools) and row **1155**
+(*Integrating Generative AI in Cybersecurity Curricula*, a pedagogical
+framework). Each mentions prompt injection exactly once, in a list of
+challenges or lab topics. Both excluded.
+
+The other nine are **surveys of prompt injection itself** and were kept. They
+present no attack or defense of their own and contribute no registry entry, but
+their subject is squarely context contamination, and the corpus has included
+surveys since its first build. Whether a pure survey satisfies "presents an
+attack, defense, benchmark, or empirical measurement" is a genuine policy
+question that would affect the original 1,008 papers too, not just this delta —
+flagged rather than decided here.
+
+**Effect.** Corpus 1,030 → **1,026 included** (4 exclusions). No excluded paper
+contributed an RQ3 or RQ4 entry, so both registries are unchanged at 223 and
+534, and the RQ5 matrix is unchanged at 332 pairs. RQ1 recomputed over 1,026
+papers; RQ2's Track A→B rate moved 11.8% → 11.7% (70/599), B→A steady at 9.1%.
+No headline number moved.
+
+**Method note.** Both admissions came through the second, threat-term path
+added on 2026-09-11, and neither carries any agent-era signal term. That path
+was designed to recover foundational pre-agent papers and it did that job, but
+it has a known false-positive profile: a paper can satisfy `threat_terms` and
+`threat_action_terms` from a single passing sentence. Requiring both lists
+narrows it but does not close it. The `scope_verdict` field produced during
+extraction is currently the only systematic check on this, and it is applied
+per-paper by an agent rather than by the screening rule itself.

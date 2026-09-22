@@ -1,6 +1,6 @@
 # RQ1 -- Taxonomy Analysis: channel x intent x consequence
 
-Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (1030 included papers). Re-run this script any time screening/coding changes.
+Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (1026 included papers). Re-run this script any time screening/coding changes.
 
 **RQ1:** Across the full landscape of LLM agent context contamination -- memory, RAG, tool output, tool metadata, skills, multi-agent, cross-modal, supply chain -- which channel x intent (adversarial/incidental) x consequence cells have been studied, and which are empty?
 
@@ -12,25 +12,25 @@ Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 
 | Channel | Papers | Share |
 |---|---:|---:|
-| tool-output | 361 | 35.0% |
-| direct-input | 239 | 23.2% |
+| tool-output | 361 | 35.2% |
+| direct-input | 235 | 22.9% |
 | RAG | 143 | 13.9% |
 | memory | 108 | 10.5% |
 | multi-agent | 64 | 6.2% |
 | cross-modal | 49 | 4.8% |
 | tool-metadata | 37 | 3.6% |
-| skill | 18 | 1.7% |
+| skill | 18 | 1.8% |
 | supply-chain | 11 | 1.1% |
 
 ## Consequence totals by track (intent)
 
 | Consequence | Security (Track A) | ML/AI (Track B) | Both |
 |---|---:|---:|---:|
-| goal-hijack | 494 | 14 | 8 |
+| goal-hijack | 491 | 14 | 8 |
 | data-exfiltration | 40 | 1 | 0 |
 | persistence-backdoor | 22 | 2 | 3 |
 | resource-abuse | 8 | 0 | 0 |
-| silent-corruption | 17 | 76 | 2 |
+| silent-corruption | 16 | 76 | 2 |
 | reasoning-corruption | 22 | 314 | 7 |
 
 ## Channel x Defense-intervention-point coverage
@@ -45,7 +45,7 @@ Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 | multi-agent | 3 | 10 | 13 | 38 |
 | cross-modal | 6 | 7 | 0 | 36 |
 | supply-chain | 3 | 0 | 1 | 7 |
-| direct-input | 68 | 64 | 5 | 102 |
+| direct-input | 67 | 64 | 5 | 99 |
 
 ## Full 3D cube
 
@@ -61,7 +61,7 @@ Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 | multi-agent | 22 | 3 | 0 | 0 | 0 | 2 |
 | cross-modal | 23 | 0 | 0 | 0 | 2 | 2 |
 | supply-chain | 6 | 0 | 4 | 0 | 1 | 0 |
-| direct-input | 91 | 7 | 2 | 1 | 5 | 7 |
+| direct-input | 88 | 7 | 2 | 1 | 4 | 7 |
 
 ### ML/AI
 
