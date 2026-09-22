@@ -6,11 +6,11 @@ Regenerated 2026-09-22 by `scripts/rq2_cross_citation.py`.
 
 ## Headline result
 
-Computed over the **entire coded population** (1010 papers classified as Track A/Security or Track B/ML-AI; 20 additional papers classified as "Both"), not a sample:
+Computed over the **entire coded population** (1006 papers classified as Track A/Security or Track B/ML-AI; 20 additional papers classified as "Both"), not a sample:
 
 | Direction | Papers citing >=1 paper from the other track | Total papers in track | Rate |
 |---|---|---|---|
-| Track A (Security) -> cites Track B (ML/AI) | 71 | 603 | **11.8%** |
+| Track A (Security) -> cites Track B (ML/AI) | 70 | 599 | **11.7%** |
 | Track B (ML/AI) -> cites Track A (Security) | 37 | 407 | **9.1%** |
 
 Because this is a full-population count (every paper's citation edges are resolved mechanically from the actual citation graph, not hand-sampled), no confidence interval is reported.
@@ -19,8 +19,8 @@ Because this is a full-population count (every paper's citation edges are resolv
 
 | Grade | Track A citing B | Track B citing A |
 |---|---|---|
-| B | 14/96 = 14.6% | 7/82 = 8.5% |
-| C | 57/506 = 11.3% | 30/324 = 9.3% |
+| B | 14/95 = 14.7% | 7/82 = 8.5% |
+| C | 56/503 = 11.1% | 30/324 = 9.3% |
 | D | 0/1 = 0.0% | 0/1 = 0.0% |
 
 ## Methodology note

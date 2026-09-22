@@ -1,6 +1,6 @@
 # RQ4 — Defense Census
 
-Regenerated 2026-09-21, on the 1,030-paper working corpus (post 2026-09-11
+Regenerated 2026-09-22, on the 1,026-paper working corpus (post 2026-09-11
 screening fix, the screening-delta extraction, and the abstract-based duplicate
 corrections in `rescreening_log.md` Addendum 4). Regenerate if the corpus or
 registry changes.

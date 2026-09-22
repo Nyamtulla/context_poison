@@ -1,6 +1,6 @@
 # RQ3 — Context Pollution Census
 
-Regenerated 2026-09-21, on the 1,030-paper working corpus (post 2026-09-11
+Regenerated 2026-09-22, on the 1,026-paper working corpus (post 2026-09-11
 screening fix, the screening-delta extraction, and the abstract-based duplicate
 corrections in `rescreening_log.md` Addendum 4). Regenerate if the corpus or
 registry changes.
@@ -22,7 +22,7 @@ channels and consequences?
   (lost-in-the-middle, context rot, knowledge conflict, distraction by
   irrelevant context, and 51 others).
 
-341 of the 1,030 included papers contributed **no** registry entry at all —
+337 of the 1,026 included papers contributed **no** registry entry at all —
 they are benchmarks, defenses, surveys, or measurement-only papers applying an
 existing named mechanism rather than characterizing a new one.
 
