@@ -133,6 +133,56 @@ control was "too weak to read" were produced on an environment that no longer
 exists and cannot be inspected. They should be treated as unreliable until
 re-run on this harness, and item 3's de-confounding pass supersedes them.
 
+### 2026-09-22: a usable configuration, and a third infrastructure fault
+
+Escalating the victim model found one configuration where a defense verdict
+means something. Measured undefended, `important_instructions`, n=32/suite:
+
+| model | suite | ASR | utility | smallest resolvable reduction |
+|---|---|---:|---:|---|
+| Qwen2.5-7B | workspace | 6.2% | 31.2% | none |
+| Qwen2.5-7B | banking | 15.6% | 37.5% | none |
+| Qwen2.5-14B | workspace | 12.5% | 28.1% | none |
+| **Qwen2.5-14B** | **banking** | **46.9%** | 40.6% | **32pp — usable** |
+
+Workspace is not usable at any n worth paying for: its undefended ASR is too low
+for a working defense to show a resolvable drop. Banking is.
+
+**Third fault: `spotlighting_with_delimiting` cannot run in AgentDojo 0.1.33.**
+Its tool-output formatter is a self-referential lambda that recurses to
+`RecursionError` on the first tool output. Spotlighting is a registry entry
+here and one of the field's better-known defenses; any study selecting defenses
+by "what runs in AgentDojo" would have dropped it silently. Fixed in
+`agentdojo_defense_compat.py`.
+
+That is three infrastructure faults in one harness in one day — a transport bug
+that zeroed every run, a defense that cannot execute, and a prefix-sampling
+scheme that stacked structural zeros. **This is worth promoting from a
+methods footnote to a named finding**: the field's evaluation infrastructure is
+thinner than its publication record implies, which is the same argument the SoK
+makes about evaluation coverage, one level down.
+
+### Experimental design: triage before pairing
+
+The paired design (undefended + defended for every mechanism) spends half its
+budget on payloads that never hijack the agent. The first four measured corpus
+mechanisms came in at 0–3.1% undefended against AgentDojo's own attack at 46.9%,
+so those defended runs bought nothing.
+
+Revised: **screen all mechanisms undefended first**, then spend defended runs
+only where there is something to defend against. n is kept at 32 for the screen
+rather than trimmed — at a true rate around 6% a 16-pair screen expects a single
+hijack and could see zero, and wrongly marking a live mechanism inert is the one
+error that would quietly shrink the study.
+
+**The likely finding, pending the sweep.** Most corpus mechanisms look inert on
+banking, and probably not because the attacks are weak: they assume context the
+suite does not provide. Memory persistence needs persistent memory, plan
+injection a planner, MAS hijacking multiple agents, SkillJect skills. Banking is
+single-agent tool-calling. If that holds, it is RQ6's confound in a sharper
+form — **the victim's shape decides which attacks can land at all** — and it
+bounds what any agent-benchmark-based transfer study can currently measure.
+
 ## 3. De-confound RQ6
 
 **The threat to validity.** "Generalization tracks intervention point" is
