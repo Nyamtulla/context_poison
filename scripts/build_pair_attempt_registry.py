@@ -75,6 +75,38 @@ def main() -> None:
     except Exception as e:                     # harness deps absent is not fatal here
         print(f"  (could not load mechanism_attacks: {e})")
 
+    # ---- executed runs, if any. Keyed (defense, mechanism) -> outcome.
+    # Written by agentdojo_harness/run_mechanism_transfer.py; every *.json there
+    # matching the shape is ingested, so results appear in the registry as they
+    # are produced rather than needing a separate merge step.
+    executed = {}
+    for rp in sorted((REPO / "agentdojo_harness").glob("*.json")):
+        try:
+            r = json.loads(rp.read_text())
+        except Exception:
+            continue
+        if not isinstance(r, dict) or "results" not in r or "defense" not in r:
+            continue
+        for attack, res in r["results"].items():
+            mech_name = res.get("mechanism", "")
+            key = (r["defense"], mech_name)
+            u, d = res.get("undefended"), res.get("defended")
+            executed[key] = {
+                "suite": r.get("suite", ""), "model": r.get("model", ""),
+                "attack_id": attack,
+                "asr_undefended": (u or {}).get("asr_pct", ""),
+                "asr_defended": (d or {}).get("asr_pct", ""),
+                "utility_undefended": (u or {}).get("utility_pct", ""),
+                "n": (u or {}).get("n", ""),
+                "mdr_pp": res.get("min_detectable_reduction_pp", ""),
+                "verdict": res.get("verdict", ""),
+                "blocker": res.get("blocker", ""),
+                "blocker_detail": res.get("blocker_detail", ""),
+                "source_file": rp.name,
+            }
+    if executed:
+        print(f"  ingested {len(executed)} executed (defense, mechanism) outcome(s)")
+
     # current control state, if calibration has been run
     calib = {}
     cpath = REPO / "agentdojo_harness/control_calibration.json"
@@ -125,7 +157,38 @@ def main() -> None:
                                   "from no defense. Blocked on victim-model capability — an "
                                   "API model would likely clear it.")
 
-            status = "BLOCKED" if blocker else "RUNNABLE"
+            # An actual run supersedes any predicted blocker.
+            ex = None
+            for (dn_k, mech_k), v in executed.items():
+                if mech_k == mech:
+                    ex = v
+                    break
+            if ex:
+                if ex["blocker"] == "harness_error":
+                    blocker, blocker_kind = "harness_error", "OPERATIONAL"
+                    blocker_detail = ("The pair crashed the harness rather than producing a "
+                                      "number. " + str(ex["blocker_detail"])[:400])
+                elif ex["asr_undefended"] == 0:
+                    blocker, blocker_kind = "mechanism_inert_on_suite", "OPERATIONAL"
+                    blocker_detail = (
+                        f"Rebuilt as AgentDojo attack '{ex['attack_id']}' on the "
+                        f"{ex['suite']} suite, this mechanism's framing never hijacked the "
+                        f"agent even UNDEFENDED (ASR 0% over n={ex['n']}). A defense cannot "
+                        "be credited with stopping a payload that does nothing, so the pair "
+                        "yields no evidence. Usually means the mechanism assumes a context "
+                        "the suite does not provide (persistent memory, a planner, multiple "
+                        "agents, skills) rather than that the attack is weak.")
+                elif ex["mdr_pp"] in ("", None):
+                    blocker, blocker_kind = "control_underpowered", "OPERATIONAL"
+                    blocker_detail = (
+                        f"Ran on {ex['suite']} at n={ex['n']} with undefended ASR "
+                        f"{ex['asr_undefended']}%, too low for a two-proportion test to "
+                        "resolve any reduction. Needs a larger n or a stronger control.")
+                else:
+                    blocker = blocker_kind = blocker_detail = ""
+
+            status = ("RUN" if ex and not blocker else
+                      "BLOCKED" if blocker else "RUNNABLE")
             rows.append({
                 "mechanism": mech,
                 "defense": dname,
@@ -147,8 +210,15 @@ def main() -> None:
                 "mechanism_paper": p.get("mechanism_paper", ""),
                 "defense_paper": c.get("defense_paper_title", ""),
                 "agent_harness_id": harnessed.get(mech, ""),
-                "result_asr_undefended": "", "result_asr_defended": "",
-                "result_utility": "", "result_verdict": "", "run_date": "",
+                "result_suite": (ex or {}).get("suite", ""),
+                "result_model": (ex or {}).get("model", ""),
+                "result_n": (ex or {}).get("n", ""),
+                "result_asr_undefended": (ex or {}).get("asr_undefended", ""),
+                "result_asr_defended": (ex or {}).get("asr_defended", ""),
+                "result_utility_undefended": (ex or {}).get("utility_undefended", ""),
+                "result_mdr_pp": (ex or {}).get("mdr_pp", ""),
+                "result_verdict": (ex or {}).get("verdict", ""),
+                "result_source": (ex or {}).get("source_file", ""),
             })
 
             log.append({
@@ -175,7 +245,11 @@ def main() -> None:
                 "blocker": blocker,
                 "blocker_kind": blocker_kind,
                 "blocker_detail": blocker_detail,
-                "result": "not yet run",
+                "result": (
+                    f"{ex['suite']}/{ex['model']} n={ex['n']}: undefended ASR "
+                    f"{ex['asr_undefended']}% -> defended {ex['asr_defended']}% "
+                    f"(utility {ex['utility_undefended']}%, mdr {ex['mdr_pp']}pp). "
+                    f"{ex['verdict']}" if ex else "not yet run"),
             })
 
     # ---- write workbook
@@ -225,7 +299,12 @@ def main() -> None:
                                   "stronger/API victim model" if b == "control_underpowered" else
                                   "build the AgentDojo attack" if b == "no_agent_harness" else
                                   "obtain or request the implementation" if b == "no_released_code" else
-                                  "runnable now" if b == "runnable" else "n/a")}
+                                  "runnable now" if b == "runnable" else
+                                  "none on this suite - the framing is inert here; needs a "
+                                  "suite providing the context it assumes"
+                                  if b == "mechanism_inert_on_suite" else
+                                  "fix the attack/harness format collision"
+                                  if b == "harness_error" else "n/a")}
                for (k, b), n in sorted(bysum.items(), key=lambda x: -x[1])]
     sheet("Blocker summary", summary, widths={"blocker": 26, "route_forward": 52, "blocker_kind": 14})
 
