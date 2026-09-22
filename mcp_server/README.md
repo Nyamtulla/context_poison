@@ -1,10 +1,13 @@
 # Context Integrity SoK — MCP server
 
-Query the distilled output of this project's ~1000-paper systematic review
-(1,008 screened papers, 183 named pollution mechanisms, 479 confirmed
-defenses, 190 confirmed defense×mechanism test pairs) conversationally, from
-your own Claude — no need to open the Excel workbook or the JSON registries
+Query the distilled output of this project's systematic review
+(1,158 screened papers / 1,030 included, 237 named pollution mechanisms, 534
+confirmed defenses, 332 confirmed defense×mechanism test pairs) conversationally,
+from your own Claude — no need to open the Excel workbook or the JSON registries
 by hand.
+
+Counts current as of the 2026-09-21 rebuild. `get_stats` always returns the live
+figures; this paragraph is a snapshot and may lag.
 
 Runs entirely offline against files already committed in this repo
 (`data/exports/`, `data/registries/`, the `rq*.md` writeups). No API key,
@@ -57,7 +60,7 @@ with wherever you cloned this repo.
 - `get_coverage_for_mechanism(name)` / `get_coverage_for_defense(name)` —
   the RQ5 matrix, one entity at a time, with the original justification
   text for each match.
-- `list_uncovered_mechanisms(...)` — the 116 mechanisms nothing has ever
+- `list_uncovered_mechanisms(...)` — the 131 mechanisms nothing has ever
   been tested against; a ready-made gap list.
 - `get_rq_summary("RQ1"..."RQ7")` — the plain-language headline finding for
   any research question, pulled straight from the corresponding writeup.

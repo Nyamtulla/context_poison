@@ -227,7 +227,7 @@ Added 2026-09-06. RQ7 was the one research question with no protocol section of 
 
 **Status (2026-09-06):** done — `rq7_open_problems.md`.
 
-**Headline:** **98.9% of the 190 confirmed defense×mechanism test pairs stay inside a single track; only 2 cross, and only 1 is a genuine cross-community test.** The evaluation disconnect is roughly an order of magnitude more severe than RQ2's citation disconnect (10.8%/9.2%). Combined with RQ6's finding that 6 of 7 runnable defenses showed *some* protection against the threat model they were never tested on, the synthesis claim is that **the field is underclaiming coverage it already has, and its binding constraint is coordination rather than capability** — four of the seven ranked priorities require no new science, only changed evaluation and reporting conventions.
+**Headline:** **99.1% of the 232 confirmed defense×mechanism test pairs stay inside a single track; only 2 cross, and only 1 is a genuine cross-community test.** The evaluation disconnect is roughly an order of magnitude more severe than RQ2's citation disconnect (11.8%/9.1%). Combined with RQ6's finding that 6 of 7 runnable defenses showed *some* protection against the threat model they were never tested on, the synthesis claim is that **the field is underclaiming coverage it already has, and its binding constraint is coordination rather than capability** — four of the seven ranked priorities require no new science, only changed evaluation and reporting conventions.
 
 **Two findings worth flagging back into the paper's other sections:**
 - **Execution-stage defenses rest on an untested security assumption** (OP5): they derive their guarantee from the model reliably satisfying a rigid output-format contract, but instruction-following under adversarial context is exactly the faculty context poisoning attacks. RQ6 observed these defenses collapse under mere capability *insufficiency* with no attacker present; nobody has tested an attacker inducing that collapse deliberately. Stated as an argument, not a demonstration.
@@ -279,12 +279,12 @@ This restructuring adds roughly a week versus the previous (already-revised) 9-w
 - [ ] Review protocol document (this file, versioned)
 - [ ] Search log (exact queries, dates run, hit counts) — required for replicability claims
 - [ ] Screening spreadsheet with PRISMA-style flow counts
-- [x] Coded dataset (the extraction table, Section 3) — 890-paper working corpus after re-screening correction
+- [x] Coded dataset (the extraction table, Section 3) — 1,030-paper working corpus after the 2026-09-11 screening fix, the screening-delta extraction, and eight confirmed duplicate-paper exclusions
 - [x] Channel × Defense Coverage Matrix (pond/inflow-streams deliverable — Section 3) — `rq1_taxonomy_analysis.md`
 - [x] Cross-citation sample + coded results — `cross_citation_analysis.md` (full-population computation, not a sample; manual verification still pending, see Section 12)
-- [x] Context pollution mechanism registry, both tracks (RQ3, Section 5) — `rq3_pollution_census.md`, 183 distinct mechanisms
-- [x] Defense technique registry (RQ4, Section 6) — `rq4_defense_census.md`, 479 distinct defenses; only 2.9% validated against both threat models
-- [x] Pollution mechanism × defense coverage matrix (RQ5, Section 7) — `rq5_coverage_matrix.md`, 35.5% of defenses / 36.6% of mechanisms have any confirmed coverage; 88% of matched defenses tested against only 1 mechanism
+- [x] Context pollution mechanism registry, both tracks (RQ3, Section 5) — `rq3_pollution_census.md`, 223 distinct mechanisms (237 incl. benchmark-supplementary). `direct-input` and `tool-output` are now exactly tied at 66 each — the earlier ranking (62 vs 43) overstated a gap that agent-era screening bias had manufactured
+- [x] Defense technique registry (RQ4, Section 6) — `rq4_defense_census.md`, 534 distinct defenses; only **2.8%** validated against both threat models (was 2.9% at 479 defenses — the figure survived the largest corpus expansion the project has made)
+- [x] Pollution mechanism × defense coverage matrix (RQ5, Section 7) — `rq5_coverage_matrix.md`, 39.9% of defenses / 44.7% of mechanisms have any confirmed coverage; 82.7% of matched defenses tested against only 1 mechanism. **The 2026-09-21 screening fix did not close the gap: zero previously-registered mechanisms gained a defense**, disconfirming `screening_gap_analysis.md`'s prediction and ruling out 'your gap is a corpus-boundary artifact' as an objection
 - [x] Case study selection (RQ6 Steps 1-2, Section 8) — `rq6_case_study_selection.md`: RobustRAG, FaithfulRAG (replacing COMBO), IPIGuard
 - [x] Case study execution, first 3 — RobustRAG and FaithfulRAG complete with paired transfer results; IPIGuard concluded as a model-reliability finding (RQ6 Steps 3-5)
 - [x] Case study execution, extended queue — 7 additional real candidates run to completion (CaMeL, SCR, CK-PLUG, DataFilter, PISanitizer) or ruled out with cause on the remaining pool; see Section 8 and `rq6_case_study_selection.md` for the full per-candidate record

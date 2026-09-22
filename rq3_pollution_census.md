@@ -1,7 +1,9 @@
 # RQ3 — Context Pollution Census
 
-Generated 2026-08-17, on the 886-paper working corpus (post re-screening and
-duplicate-paper corrections). Regenerate if the corpus or registry changes.
+Regenerated 2026-09-21, on the 1,030-paper working corpus (post 2026-09-11
+screening fix, the screening-delta extraction, and the abstract-based duplicate
+corrections in `rescreening_log.md` Addendum 4). Regenerate if the corpus or
+registry changes.
 
 **RQ3 (as stated in the project plan, Section 1):** How many distinct,
 *named* mechanisms by which an LLM agent's context can become poisoned or
@@ -12,117 +14,148 @@ channels and consequences?
 
 ## Headline result
 
-**183 distinct pollution mechanisms** identified across the corpus:
-- **129 (70.5%) are adversarial (Track A)** — named attack techniques
-  (PoisonedRAG, AgentPoison, ToolHijacker, GCG-based corpus poisoning, and
-  126 others).
-- **54 (29.5%) are incidental (Track B)** — named degradation mechanisms
+**223 distinct pollution mechanisms** identified across the corpus:
+- **168 (75.3%) are adversarial (Track A)** — named attack techniques
+  (Indirect Prompt Injection, PoisonedRAG, AgentPoison, ToolHijacker, the
+  Combined Attack, and 163 others).
+- **55 (24.7%) are incidental (Track B)** — named degradation mechanisms
   (lost-in-the-middle, context rot, knowledge conflict, distraction by
-  irrelevant context, and 50 others).
+  irrelevant context, and 51 others).
 
-This 70/30 split is itself worth noting alongside RQ1's channel/consequence
-imbalance: not only do the two tracks study different consequences (RQ1),
-the adversarial literature also names and catalogs more *distinct
-mechanisms* per paper than the incidental literature does — consistent with
-security research's convention of treating each new attack as a discrete,
-citable contribution, versus incidental-degradation research more often
-measuring or mitigating an already-established phenomenon (lost-in-the-middle,
-knowledge conflict) rather than naming new ones. 480 of 890 papers processed
-across both tracks did **not** introduce a registry-worthy mechanism — they
-were benchmarks, defenses, surveys, or measurement-only papers applying an
+341 of the 1,030 included papers contributed **no** registry entry at all —
+they are benchmarks, defenses, surveys, or measurement-only papers applying an
 existing named mechanism rather than characterizing a new one.
+
+### What changed, and why it matters
+
+This is up from **183** mechanisms (129 Track A / 54 Track B) before the
+2026-09-11 screening fix. The delta added **41 mechanisms, 40 of them Track A** —
+and the composition of that delta is the finding, not the count.
+
+The recovered papers are the field's *pre-agent-era* foundations: work on
+LLM-integrated **applications** that predates "agent" vocabulary and was
+therefore filtered out by the original signal-term list
+(`screening_gap_analysis.md`). They skew hard toward `direct-input`: 23 of the
+41 new mechanisms, against 5 for `tool-output`.
+
+That closes what had looked like a decisive gap between the two channels:
+
+| Channel | before | after |
+|---|---:|---:|
+| tool-output | 62 (33.9%) | 66 (29.6%) |
+| direct-input | 43 (23.5%) | **66 (29.6%)** |
+
+They are now **exactly tied**. The earlier reading — "tool-output dominates,
+mostly Track A indirect-injection variants" — **overstated a gap that our own
+screening had manufactured**. The corpus had been selected for agent-era
+vocabulary, and agent-era context poisoning is disproportionately indirect
+(tool-output); the direct-input literature that founded the field was sitting in
+`needs_review` the whole time. Stated plainly: the field names just as many
+distinct ways to poison a model through what the *user* sends it as through what
+its *tools* return, and the first version of this census could not see that.
+
+The Track A/B ratio also moved, 70/30 → 75/25, for the same reason — the
+recovered cohort is almost entirely adversarial (40 of 41).
 
 ## By channel
 
-| Channel | Mechanisms |
-|---|---:|
-| tool-output | 62 |
-| direct-input | 43 |
-| RAG | 26 |
-| memory | 13 |
-| tool-metadata | 12 |
-| cross-modal | 11 |
-| multi-agent | 9 |
-| skill | 4 |
-| supply-chain | 3 |
+| Channel | Mechanisms | Share |
+|---|---:|---:|
+| tool-output | 66 | 29.6% |
+| direct-input | 66 | 29.6% |
+| RAG | 28 | 12.6% |
+| cross-modal | 18 | 8.1% |
+| memory | 14 | 6.3% |
+| tool-metadata | 12 | 5.4% |
+| multi-agent | 9 | 4.0% |
+| supply-chain | 6 | 2.7% |
+| skill | 4 | 1.8% |
 
-Tool-output dominates (mostly Track A indirect-injection variants); this
-tracks RQ1's channel totals directionally but isn't the same metric — RQ1
-counts *papers per channel*, this counts *distinct named mechanisms per
-channel*, so a channel can have many papers but few distinct techniques
-(suggesting a mature, incrementally-studied channel) or few papers but many
-distinct techniques (a channel where each new paper stakes out new ground).
+Note this counts *distinct named mechanisms per channel*, not papers per channel
+(that is RQ1's metric). A channel can carry many papers but few distinct
+techniques — a mature, incrementally-studied channel — or few papers but many
+distinct techniques, where each new paper stakes out new ground.
 
 ## By consequence
 
-| Consequence | Mechanisms |
-|---|---:|
-| goal-hijack | 100 |
-| reasoning-corruption | 40 |
-| silent-corruption | 20 |
-| persistence-backdoor | 12 |
-| data-exfiltration | 9 |
-| resource-abuse | 2 |
+| Consequence | Mechanisms | Share |
+|---|---:|---:|
+| goal-hijack | 126 | 56.5% |
+| reasoning-corruption | 46 | 20.6% |
+| silent-corruption | 21 | 9.4% |
+| persistence-backdoor | 14 | 6.3% |
+| data-exfiltration | 13 | 5.8% |
+| resource-abuse | 3 | 1.3% |
 
-Goal-hijack alone accounts for over half the registry (100/183) — the
-single most "invented" consequence, in the sense of attracting the most
-distinct named techniques, consistent with it being the dominant Track A
-consequence per RQ1.
+Goal-hijack still accounts for over half the registry (126/223, 56.5%) — the
+single most "invented" consequence, in the sense of attracting the most distinct
+named techniques. The screening fix left this finding essentially unchanged
+(it was 54.6% before), which is a useful robustness check: the concentration is
+a property of the field, not of which papers we happened to include.
 
 ## Registry construction notes
 
-- **46 of 183 (25%) are explicit extensions** of a prior named mechanism
-  (tagged `is_extension_of`) — e.g. Approximate Greedy Gradient Descent as
-  an improved GCG/HotFlip search, or a mechanistic explanation of an
-  existing phenomenon like lost-in-the-middle. These are kept as separate
-  registry entries with their lineage noted, not merged into their parent —
-  a judgment call favoring registry granularity over consolidation, since
-  RQ5's coverage matrix benefits from distinguishing "was the *original*
-  technique tested" from "was this *specific variant* tested."
-- **36 of 183 (20%) are unnamed** — the introducing paper didn't coin its own
-  term, so a short descriptive label was assigned during extraction (tagged
-  `UNNAMED:` in the raw data). These are real, distinct mechanisms, just
-  without an established citable name in the literature yet.
-- **4 duplicate paper entries were found and corrected during this
-  construction pass** (not a registry-entity-resolution issue — literal
-  duplicate rows in the corpus itself): PoisonedRAG, AgentVigil, "Multi-Agent
-  Framework for Threat Mitigation," and a position-bias mechanism paper each
-  had a second, no-arXiv-ID corpus entry. See `rescreening_log.md` addendum
-  for detail; RQ1 and RQ2's published numbers were updated accordingly.
+- **46 of 223 (20.6%) are explicit extensions** of a prior named mechanism
+  (tagged `is_extension_of`) — e.g. Approximate Greedy Gradient Descent as an
+  improved GCG/HotFlip search. Kept as separate entries with lineage noted
+  rather than merged, a judgment favoring granularity, since RQ5's coverage
+  matrix benefits from distinguishing "was the *original* technique tested"
+  from "was this *specific variant* tested."
+- **41 of 223 (18.4%) are unnamed** — the introducing paper coined no term, so a
+  short descriptive label was assigned during extraction (tagged `UNNAMED:`).
+  Real, distinct mechanisms without an established citable name yet.
+- **Eight duplicate paper entries have now been found and corrected** across the
+  project's lifetime (literal duplicate corpus rows, not registry
+  entity-resolution). Five of the eight are preprint/publication renames, which
+  title similarity scores in the 50s-70s and cannot catch. Three were found in
+  this rebuild alone by the new identifier pass
+  (`scripts/dedupe_by_identifier.py`), including row 1125 —
+  *"More than you've asked for"* is not Greshake et al.'s companion paper but
+  **the same paper** as row 2 under its preprint title (both arXiv 2302.12173) —
+  and rows 1011/1126, which had registered the Liu et al. Combined Attack twice.
+  Retracting the latter is why this registry is 223 rather than 224. See
+  `rescreening_log.md` Addendum 4.
 
 ## Methodology
 
-Extraction delegated to 4 parallel subagents (2 for the 466 Track A papers,
-2 for the 404 Track B papers), each judging per-paper whether it introduces
-a genuinely new, named mechanism (vs. a benchmark/survey/defense-only/
-measurement-only paper applying an existing one), following explicit
-include/exclude criteria and confidence self-flagging. Raw candidates (186
-before corpus corrections, 183 after) were then deduplicated: exact-name
-matching found zero shared names (technique names are, by construction,
-mostly unique per paper); fuzzy matching (rapidfuzz, threshold 70) surfaced
-7 candidate near-duplicate name pairs, of which 1 (a position-bias mechanism
-paper indexed twice) turned out to be a genuine duplicate *paper*, not a
-naming coincidence — corrected as above — and the remaining 6 were confirmed
-as distinct techniques with superficially similar names (e.g. "IterInject"
-vs. "ChatInject" vs. "AutoInject" — a common naming convention, not the same
-technique).
+The original pass delegated extraction to 4 parallel subagents (2 for the 466
+Track A papers, 2 for the 404 Track B papers), each judging per-paper whether a
+paper introduces a genuinely new, named mechanism versus applying an existing
+one, with explicit include/exclude criteria and confidence self-flagging.
+
+The 2026-09-21 delta pass extended this to the 150 recovered papers using the
+same criteria, recorded in `data/registries/raw/DELTA_EXTRACTION_SPEC.md`, with
+the instruction to favor false negatives over false positives. Deduplication
+then ran as before: exact-name matching (1 merge, above) followed by fuzzy
+matching at threshold 75, which surfaced 4 candidate near-duplicate name pairs.
+All 4 were confirmed distinct on inspection — including `Indirect Prompt
+Injection (IPI)` vs. `Image-based Prompt Injection (IPI)`, which share an
+acronym but are different techniques on different channels (tool-output vs.
+cross-modal).
 
 ## Known limitations
 
-- Registry construction used already-extracted `technical_summary`/
-  `key_result` fields (from the earlier full-text extraction pass), not a
-  fresh full-text read specifically for this task — inherits whatever
-  imprecision exists in those summaries.
+- Registry construction used extracted `technical_summary`/`key_result` fields
+  rather than a fresh full-text read for this specific task, and inherits
+  whatever imprecision exists in those summaries.
 - The include/exclude bar ("does this paper's core contribution deserve a
-  distinct, citable name") is inherently a judgment call, especially for the
-  36 unnamed entries and 46 extension entries. A different coder applying
-  the same criteria might draw the line a few entries differently in either
-  direction — this is flagged in the plan's threats-to-validity section
-  (entity resolution risk) and should be treated as directionally reliable,
-  not a precise ground truth.
-- Fuzzy-match deduplication used a single threshold (70) and only checked
-  registry *names* against each other, not full paper content — it's
-  possible for two mechanisms with very differently-worded names to still be
-  the same underlying phenomenon (this is a real risk the plan already
-  flags for RQ5's harder attack-defense matching step, and applies here too,
-  just not caught by name-similarity alone).
+  distinct, citable name") is a judgment call, especially for the 41 unnamed and
+  46 extension entries. A different coder might draw the line a few entries
+  either way. Treat as directionally reliable, not precise ground truth.
+- The delta pass was coded by a different model than the original pass
+  (Sonnet rather than Opus, after a session limit), against a written spec
+  derived from the original criteria. Its self-flagged low-confidence calls and
+  scope verdicts were reviewed; **no inter-coder reliability check against the
+  original pass was run**, so the two halves of the registry are not verified to
+  share a calibration. One systematic drift was caught and corrected this way —
+  the delta pass initially graded `evidence_grade` on evaluation quality rather
+  than publication venue, which the corpus convention does not do (see
+  `rescreening_log.md` Addendum 4) — which is reason to treat the rest of its
+  calibration as plausible rather than established.
+- Fuzzy-match deduplication checks registry *names* only. Two mechanisms with
+  very differently-worded names could still be the same phenomenon; name
+  similarity alone will not catch it.
+- **13 recovered papers were never retrieved** (paywalled or unavailable) and are
+  therefore absent from this census. The highest-cited is GUARDIAN at 26
+  citations, which proposes a named defense and would plausibly have been an RQ4
+  entry. Full list with DOIs in `MANUAL_DOWNLOADS_screening_delta.md`.

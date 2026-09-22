@@ -1139,17 +1139,277 @@
    "defense_name": "UNNAMED: Explanation-based secondary detection signal for log-injection evasion",
    "mechanism_name": "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)",
    "confidence": "high"
+  },
+  {
+   "defense_row": 1010,
+   "defense_name": "Instruction Hierarchy (privileged-instruction training)",
+   "mechanism_name": "Tensor Trust: prompt extraction / prompt hijacking",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1012,
+   "defense_name": "StruQ (structured queries)",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1012,
+   "defense_name": "StruQ (structured queries)",
+   "mechanism_name": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1012,
+   "defense_name": "StruQ (structured queries)",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 1013,
+   "defense_name": "Boundary awareness + explicit reminder",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1017,
+   "defense_name": "SecAlign (preference optimization)",
+   "mechanism_name": "Neural Exec",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1020,
+   "defense_name": "Attention Tracker",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 1021,
+   "defense_name": "UNNAMED: P2SQL mitigations (DB permission hardening + query rewriting)",
+   "mechanism_name": "P2SQL injection (prompt-to-SQL)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1030,
+   "defense_name": "UNNAMED: IPI detection + post-detection removal pipeline",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1035,
+   "defense_name": "PIGuard (Mitigating Over-defense for Free)",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1040,
+   "defense_name": "COIECD (contextual information-entropy constraint decoding)",
+   "mechanism_name": "knowledge conflict (contextual vs parametric)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1044,
+   "defense_name": "UNNAMED: secure prompt strategies for robotic navigation",
+   "mechanism_name": "UNNAMED: multi-modal prompt injection against robot navigation",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1045,
+   "defense_name": "PromptLocate",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1046,
+   "defense_name": "UNNAMED: two preemptive-answer mitigations",
+   "mechanism_name": "preemptive answer attack (CoT short-circuiting)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1049,
+   "defense_name": "FATH (Formatting AuThentication with Hash-based tags)",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1053,
+   "defense_name": "Mixture of Encodings",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1054,
+   "defense_name": "ASIDE (Architecturally Separated Instruction-Data Embeddings)",
+   "mechanism_name": "Tensor Trust: prompt extraction / prompt hijacking",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1054,
+   "defense_name": "ASIDE (Architecturally Separated Instruction-Data Embeddings)",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1073,
+   "defense_name": "unified Prompt Assembling + State Management + Safety Validation framework",
+   "mechanism_name": "UNNAMED: multi-modal prompt injection against robot navigation",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 1086,
+   "defense_name": "Multi-Layer Defense Framework (preprocessing + statistical + neural detection + behavioral monitoring)",
+   "mechanism_name": "steganographic prompt injection (multi-domain spatial/frequency/neural embedding)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1088,
+   "defense_name": "chain-of-defensive-thought (CoDT)",
+   "mechanism_name": "PoisonedRAG",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 1103,
+   "defense_name": "CaptureGuard",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1109,
+   "defense_name": "SecMCP",
+   "mechanism_name": "PoisonedRAG",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 1123,
+   "defense_name": "SE+CFE (Standard Evaluation + Counterfactual Evaluation)",
+   "mechanism_name": "Blind attacks",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 1157,
+   "defense_name": "Enterprise Secure AI Execution Engine (Zero-Trust AI Security Gateway)",
+   "mechanism_name": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 53,
+   "defense_name": "InstructDetector",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 56,
+   "defense_name": "Rennervate",
+   "mechanism_name": "POUGH",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 71,
+   "defense_name": "ICON (Inference-Time Correction)",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 83,
+   "defense_name": "MIPIAD",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 92,
+   "defense_name": "AgentVisor",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 151,
+   "defense_name": "Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 152,
+   "defense_name": "RouteGuard",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 179,
+   "defense_name": "AgentArmor",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 183,
+   "defense_name": "Robustness via Referencing (instruction-referencing defense)",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 191,
+   "defense_name": "PISanitizer",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 195,
+   "defense_name": "SecInfer",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 196,
+   "defense_name": "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 212,
+   "defense_name": "DRIP",
+   "mechanism_name": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 225,
+   "defense_name": "CommandSans",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 364,
+   "defense_name": "ARGUS",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 737,
+   "defense_name": "IH-Challenge (RL training dataset with online adversarial example generation)",
+   "mechanism_name": "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set",
+   "confidence": "high"
+  },
+  {
+   "defense_row": 746,
+   "defense_name": "Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol",
+   "mechanism_name": "BIPIA benchmark attack set",
+   "confidence": "medium"
+  },
+  {
+   "defense_row": 801,
+   "defense_name": "AgentWatcher",
+   "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+   "confidence": "high"
   }
  ],
- "n_matched_pairs": 190,
- "n_defenses_matched": 170,
- "n_defenses_total": 479,
- "n_mechs_covered": 67,
- "n_mechs_total": 183,
+ "n_matched_pairs": 233,
+ "n_defenses_matched": 197,
+ "n_defenses_total": 534,
+ "n_mechs_covered": 79,
+ "n_mechs_total": 223,
  "uncovered_mechanisms": [
   "AGGD (Approximate Greedy Gradient Descent)",
   "AIShellJack (coding-rule/config-file prompt injection against agentic IDE editors)",
   "ASPI (Ambiguous-State Prompt Injection)",
+  "ASTRA (and ASTRA++)",
+  "Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given)",
   "AdapTools",
   "Adversarial HalluSquatting",
   "Agent Data Injection (ADI)",
@@ -1166,6 +1426,7 @@
   "Branded Whisper Attack / Vault Whisper Attack (from 'Whispers of Wealth')",
   "COMA",
   "Checkpoint-GCG",
+  "Cliopatra",
   "CoT Forgery (Chain-of-Thought Forgery)",
   "Cognitive Overload Attack",
   "ConfusedPilot",
@@ -1175,14 +1436,20 @@
   "DACSI (Document-Authored Control-Signal Impersonation)",
   "DataFlip",
   "Distributional Collapse",
+  "EchoLeak (zero-click IPI, CVE-2025-32711)",
   "FlashRT",
   "Fun-tuning",
+  "G2PIA (goal-guided generative prompt injection)",
+  "Graph-based prompt injection (math-expression-to-graph encoding)",
   "Guidance Injection",
   "HARE (Hybrid Agent Roleplay Exploitation) / Token Economy Poisoning",
   "HOUYI",
   "IKEA (Implicit Knowledge Extraction Attack)",
+  "Image-based Prompt Injection (IPI)",
   "Inter-Agent Trust Exploitation (AI agent privilege escalation)",
   "IterInject",
+  "JudgeDeceiver",
+  "LLMSmith: prompt-injection-to-RCE exploitation",
   "Log-Substrate Prompt Injection",
   "LogJack",
   "LogicPoison",
@@ -1197,6 +1464,7 @@
   "OMNI-LEAK (Orchestrator Multi-Agent Network Induced Data Leakage)",
   "ObliInjection",
   "Oracle Poisoning",
+  "Overflow",
   "PANDORA (RAG Poisoning jailbreak)",
   "PI-Hunter",
   "PI3D",
@@ -1206,13 +1474,16 @@
   "POISE",
   "Parallel-Poisoned Web (fingerprinting + website cloaking against AI web agents)",
   "Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD)",
+  "Physical Prompt Injection Attack (PPIA)",
   "Plan Injection",
+  "PoisonedAlign",
   "PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution)",
   "Prompt Infection",
   "Prompt-Injected Data Extraction",
   "PromptFuzz",
   "PromptFuzz-SC",
   "RL-Hammer",
+  "Reasoning Interruption Attack (adaptive token compression)",
   "Reasoning-Extension Denial-of-Service (DoS)",
   "RefineRAG",
   "Reverse CAPTCHA (invisible Unicode instruction injection)",
@@ -1228,13 +1499,16 @@
   "Targeted Promptware Attacks",
   "ToolHijacker",
   "ToolLeak",
+  "TopicAttack",
   "TrojanRAG",
-  "UNNAMED: AgentFuzzer (generic black-box fuzzing for IPI)",
   "UNNAMED: ChatGPT memory/URL-exfiltration prompt injection bypass",
   "UNNAMED: HTML accessibility-tree universal adversarial trigger injection (TWUI)",
   "UNNAMED: IPC-channel cross-origin injection/exfiltration attacks against agentic browsers",
   "UNNAMED: Prompt Injection 2.0 (hybrid PI + classic web-exploit combination attacks)",
   "UNNAMED: RAG-manipulation attack on multi-agent debate consensus",
+  "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+  "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+  "UNNAMED: automatic universal gradient-based prompt injection",
   "UNNAMED: backdoor-based RAG data extraction attack",
   "UNNAMED: chat-template inference-time backdoor",
   "UNNAMED: diverse RL red-teaming (auto-generated rewards + multi-step RL)",
@@ -1248,25 +1522,38 @@
   "UNNAMED: retriever fine-tuning backdoor attack",
   "UNNAMED: rule-tag semantic reframing template attack ('Breaking the Prompt Wall')",
   "UNNAMED: summary-length invariance under context compaction",
+  "UNNAMED: system-prompt and uploaded-file extraction from custom GPTs",
   "UNNAMED: temporally-distant information inaccessibility in long-horizon agentic reasoning",
+  "UNNAMED: tree-of-attacks ranking manipulation for conversational search",
   "VATS (Error-Path Injection via Implicit Authority)",
   "VeriGrey (grey-box agent fuzzing for IPI)",
+  "Virtual Prompt Injection (VPI)",
+  "VortexPIA",
   "WebInject",
   "ZBEAST",
   "ZombAI",
+  "backdoor-powered prompt injection attack",
   "classifier context rot",
   "context poisoning (self-induced, non-adversarial)",
   "context proprioceptive blindness",
   "context unawareness (failure to identify a small decisive piece of evidence within long/complex context)",
   "contextual misguidance",
+  "distraction effect (attention shift to injected instruction)",
+  "incidental prompt injection",
   "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
   "mechanistic refinement of lost-in-the-middle (threshold-dependent onset at ~50% of context window; effect vanishes near window limits)",
+  "message history forging (direct prompt injection via forged system/assistant roles)",
   "multi-target memory interference",
-  "plan anchor"
+  "plan anchor",
+  "query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing)",
+  "reasoning token overflow (RTO) / practical reasoning interruption attack",
+  "self-interpreting images via adversarial meta-instructions",
+  "situation-driven contextual adversarial prompt attack"
  ],
  "mechs_per_defense_distribution": {
-  "1": 150,
-  "2": 20
+  "1": 163,
+  "2": 32,
+  "3": 2
  },
  "top_mechanisms": [
   [
@@ -1369,17 +1656,39 @@
    ]
   ],
   [
-   "context rot (agentic/long-horizon search)",
+   "BIPIA benchmark attack set",
    [
-    32,
-    387,
-    388,
-    460,
-    484,
-    496,
-    501,
-    506,
-    567
+    53,
+    83,
+    151,
+    152,
+    225,
+    364,
+    746,
+    1012,
+    1013,
+    1035,
+    1053,
+    1054,
+    1103
+   ]
+  ],
+  [
+   "Combined Attack (Open-Prompt-Injection)",
+   [
+    71,
+    92,
+    179,
+    183,
+    191,
+    195,
+    196,
+    801,
+    1012,
+    1020,
+    1030,
+    1045,
+    1049
    ]
   ],
   [
@@ -1391,7 +1700,23 @@
     269,
     270,
     278,
-    318
+    318,
+    1088,
+    1109
+   ]
+  ],
+  [
+   "context rot (agentic/long-horizon search)",
+   [
+    32,
+    387,
+    388,
+    460,
+    484,
+    496,
+    501,
+    506,
+    567
    ]
   ],
   [
@@ -1434,6 +1759,14 @@
    ]
   ],
   [
+   "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+   [
+    212,
+    1012,
+    1157
+   ]
+  ],
+  [
    "UNNAMED: context-length-induced degradation independent of retrieval failure",
    [
     28,
@@ -1448,38 +1781,17 @@
    ]
   ],
   [
+   "Neural Exec",
+   [
+    56,
+    1017
+   ]
+  ],
+  [
    "Cross-Tool Description Poisoning",
    [
     123,
     232
-   ]
-  ],
-  [
-   "Constraint Drift (under long tool traces)",
-   [
-    420,
-    500
-   ]
-  ],
-  [
-   "Governance Decay",
-   [
-    438,
-    536
-   ]
-  ],
-  [
-   "context drift",
-   [
-    498,
-    916
-   ]
-  ],
-  [
-   "memory misevolution",
-   [
-    570,
-    798
    ]
   ]
  ],
@@ -1569,7 +1881,9 @@
    269,
    270,
    278,
-   318
+   318,
+   1088,
+   1109
   ],
   "UNNAMED: context-length-induced degradation independent of retrieval failure": [
    28,
@@ -1608,7 +1922,8 @@
    791
   ],
   "Neural Exec": [
-   56
+   56,
+   1017
   ],
   "ChatInject": [
    62
@@ -1807,6 +2122,70 @@
   ],
   "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)": [
    1009
+  ],
+  "Tensor Trust: prompt extraction / prompt hijacking": [
+   1010,
+   1054
+  ],
+  "BIPIA benchmark attack set": [
+   53,
+   83,
+   151,
+   152,
+   225,
+   364,
+   746,
+   1012,
+   1013,
+   1035,
+   1053,
+   1054,
+   1103
+  ],
+  "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus": [
+   212,
+   1012,
+   1157
+  ],
+  "Combined Attack (Open-Prompt-Injection)": [
+   71,
+   92,
+   179,
+   183,
+   191,
+   195,
+   196,
+   801,
+   1012,
+   1020,
+   1030,
+   1045,
+   1049
+  ],
+  "P2SQL injection (prompt-to-SQL)": [
+   1021
+  ],
+  "knowledge conflict (contextual vs parametric)": [
+   1040
+  ],
+  "UNNAMED: multi-modal prompt injection against robot navigation": [
+   1044,
+   1073
+  ],
+  "preemptive answer attack (CoT short-circuiting)": [
+   1046
+  ],
+  "steganographic prompt injection (multi-domain spatial/frequency/neural embedding)": [
+   1086
+  ],
+  "Blind attacks": [
+   1123
+  ],
+  "POUGH": [
+   56
+  ],
+  "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set": [
+   737
   ]
  },
  "defense_to_mechs": {
@@ -1840,6 +2219,7 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "53": [
+   "BIPIA benchmark attack set",
    "Indirect Prompt Injection (IPI)"
   ],
   "54": [
@@ -1847,7 +2227,8 @@
   ],
   "56": [
    "Indirect Prompt Injection (IPI)",
-   "Neural Exec"
+   "Neural Exec",
+   "POUGH"
   ],
   "58": [
    "Indirect Prompt Injection (IPI)"
@@ -1866,6 +2247,7 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "71": [
+   "Combined Attack (Open-Prompt-Injection)",
    "Indirect Prompt Injection (IPI)"
   ],
   "72": [
@@ -1878,6 +2260,7 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "83": [
+   "BIPIA benchmark attack set",
    "Indirect Prompt Injection (IPI)"
   ],
   "85": [
@@ -1885,6 +2268,7 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "92": [
+   "Combined Attack (Open-Prompt-Injection)",
    "Indirect Prompt Injection (IPI)"
   ],
   "93": [
@@ -1948,6 +2332,7 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "152": [
+   "BIPIA benchmark attack set",
    "Indirect Prompt Injection (IPI)"
   ],
   "158": [
@@ -1976,9 +2361,11 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "179": [
+   "Combined Attack (Open-Prompt-Injection)",
    "Indirect Prompt Injection (IPI)"
   ],
   "183": [
+   "Combined Attack (Open-Prompt-Injection)",
    "Indirect Prompt Injection (IPI)"
   ],
   "185": [
@@ -1989,12 +2376,15 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "191": [
+   "Combined Attack (Open-Prompt-Injection)",
    "Indirect Prompt Injection (IPI)"
   ],
   "195": [
+   "Combined Attack (Open-Prompt-Injection)",
    "Indirect Prompt Injection (IPI)"
   ],
   "196": [
+   "Combined Attack (Open-Prompt-Injection)",
    "Indirect Prompt Injection (IPI)"
   ],
   "197": [
@@ -2020,6 +2410,7 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "212": [
+   "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
    "Indirect Prompt Injection (IPI)"
   ],
   "217": [
@@ -2033,6 +2424,7 @@
    "Indirect Data Poisoning (Distributed Denial of Science)"
   ],
   "225": [
+   "BIPIA benchmark attack set",
    "Indirect Prompt Injection (IPI)"
   ],
   "226": [
@@ -2339,6 +2731,90 @@
   ],
   "1009": [
    "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)"
+  ],
+  "1010": [
+   "Tensor Trust: prompt extraction / prompt hijacking"
+  ],
+  "1012": [
+   "BIPIA benchmark attack set",
+   "Combined Attack (Open-Prompt-Injection)",
+   "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus"
+  ],
+  "1013": [
+   "BIPIA benchmark attack set"
+  ],
+  "1017": [
+   "Neural Exec"
+  ],
+  "1020": [
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  "1021": [
+   "P2SQL injection (prompt-to-SQL)"
+  ],
+  "1030": [
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  "1035": [
+   "BIPIA benchmark attack set"
+  ],
+  "1040": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "1044": [
+   "UNNAMED: multi-modal prompt injection against robot navigation"
+  ],
+  "1045": [
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  "1046": [
+   "preemptive answer attack (CoT short-circuiting)"
+  ],
+  "1049": [
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  "1053": [
+   "BIPIA benchmark attack set"
+  ],
+  "1054": [
+   "BIPIA benchmark attack set",
+   "Tensor Trust: prompt extraction / prompt hijacking"
+  ],
+  "1073": [
+   "UNNAMED: multi-modal prompt injection against robot navigation"
+  ],
+  "1086": [
+   "steganographic prompt injection (multi-domain spatial/frequency/neural embedding)"
+  ],
+  "1088": [
+   "PoisonedRAG"
+  ],
+  "1103": [
+   "BIPIA benchmark attack set"
+  ],
+  "1109": [
+   "PoisonedRAG"
+  ],
+  "1123": [
+   "Blind attacks"
+  ],
+  "1157": [
+   "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus"
+  ],
+  "151": [
+   "BIPIA benchmark attack set"
+  ],
+  "364": [
+   "BIPIA benchmark attack set"
+  ],
+  "737": [
+   "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set"
+  ],
+  "746": [
+   "BIPIA benchmark attack set"
+  ],
+  "801": [
+   "Combined Attack (Open-Prompt-Injection)"
   ]
  }
 }

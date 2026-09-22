@@ -1,7 +1,9 @@
 # RQ4 — Defense Census
 
-Generated 2026-08-17, on the 886-paper working corpus (post re-screening and
-duplicate-paper corrections). Regenerate if the corpus or registry changes.
+Regenerated 2026-09-21, on the 1,030-paper working corpus (post 2026-09-11
+screening fix, the screening-delta extraction, and the abstract-based duplicate
+corrections in `rescreening_log.md` Addendum 4). Regenerate if the corpus or
+registry changes.
 
 **RQ4 (as stated in the project plan, Section 1):** How many distinct
 defense/mitigation techniques have been proposed — across both tracks — as
@@ -11,36 +13,57 @@ validated in its own paper?
 
 ## Headline result
 
-**479 distinct defenses** identified across the corpus:
-- **210 (43.8%) from Track A** (Security) papers.
-- **264 (55.1%) from Track B** (ML/AI) papers.
-- **5 (1.0%) from "Both"-track** papers.
+**534 distinct defenses** identified across the corpus:
+- **263 (49.3%) from Track A** (Security) papers.
+- **266 (49.8%) from Track B** (ML/AI) papers.
+- **5 (0.9%) from "Both"-track** papers.
 
-**The load-bearing number for RQ5/RQ6: of the 479 defenses, only 14 (2.9%)
-were validated by their own paper against both threat models.** 212 (44.3%)
-were validated against adversarial scenarios only; 250 (52.2%) against
+**The load-bearing number for RQ5/RQ6: of the 534 defenses, only 15 (2.8%)
+were validated by their own paper against both threat models.** 263 (49.3%)
+were validated against adversarial scenarios only; 253 (47.4%) against
 incidental scenarios only; 3 report no empirical validation at all. This
 means **97% of proposed defenses have a completely untested cross-track
 generalization question hanging over them** — this is precisely the
-candidate pool RQ6's case studies will draw from (Section 8 of the plan).
+candidate pool RQ6's case studies draw from (Section 8 of the plan).
+
+### What the screening fix changed
+
+Up from **479** defenses before the 2026-09-11 screening fix; the delta added
+**55**. The recovered cohort is the field's foundational defense work — StruQ,
+SecAlign, Spotlighting, the Instruction Hierarchy, Attention Tracker,
+PromptShield, PIGuard, DefensiveTokens, f-secure/IFC, PromptLocate — which had
+been absent purely because those papers predate agent-era vocabulary.
+
+Two things are worth stating precisely, because they cut in opposite directions:
+
+1. **The track balance evened out**, 44/55 Track A/B → 49/50. The original
+   census made the defense literature look ML/AI-leaning; a meaningful part of
+   that was the missing security-side foundations, not a real asymmetry.
+2. **The 97% single-threat-model figure did not move at all** (2.9% → 2.8%
+   validated against both). Adding 55 defenses, including the most-cited and
+   most-benchmarked-against defenses in the field, changed it by one tenth of a
+   percentage point. This is the strongest robustness evidence the project has
+   for its central claim: cross-track validation is not something the
+   foundational work was doing and we had simply failed to capture. It is
+   genuinely not being done.
 
 ## By validated_against
 
 | Validated against | Count | Share |
 |---|---:|---:|
-| incidental only | 250 | 52.2% |
-| adversarial only | 212 | 44.3% |
-| both | 14 | 2.9% |
+| adversarial only | 263 | 49.3% |
+| incidental only | 253 | 47.4% |
+| both | 15 | 2.8% |
 | no evaluation reported | 3 | 0.6% |
 
 ## By defense intervention point
 
 | Intervention point | Defenses |
 |---|---:|
-| reasoning | 189 |
-| ingestion | 120 |
-| none (attack-only/measurement paper, no defense — should be 0 here since these are all has_defense=Y rows; retained for completeness of the raw tag) | 100 |
-| execution | 70 |
+| reasoning | 205 |
+| ingestion | 155 |
+| none (see note) | 100 |
+| execution | 74 |
 
 Note: 100 registry entries carry `defense_intervention_point=none` despite
 being defense-introducing papers — this reflects the *paper's* coded
@@ -54,12 +77,12 @@ look during the paper-writing pass to confirm this isn't a coding gap.
 
 | Channel | Defenses |
 |---|---:|
-| tool-output | 159 |
-| direct-input | 99 |
-| RAG | 78 |
+| tool-output | 175 |
+| direct-input | 127 |
+| RAG | 87 |
 | memory | 73 |
 | multi-agent | 36 |
-| cross-modal | 15 |
+| cross-modal | 17 |
 | tool-metadata | 11 |
 | skill | 6 |
 | supply-chain | 2 |

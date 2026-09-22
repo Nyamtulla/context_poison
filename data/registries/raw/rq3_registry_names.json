@@ -1,0 +1,1346 @@
+[
+ {
+  "mechanism_name": "Indirect Prompt Injection (IPI)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with In"
+ },
+ {
+  "mechanism_name": "PoisonedRAG",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Langu"
+ },
+ {
+  "mechanism_name": "AgentPoison",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "from_paper": "AgentPoison: Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases"
+ },
+ {
+  "mechanism_name": "MemoryGraft",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "from_paper": "MemoryGraft: Persistent Compromise of LLM Agents via Poisoned Experience Retrieval"
+ },
+ {
+  "mechanism_name": "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "from_paper": "Hidden in Memory: Sleeper Memory Poisoning in LLM Agents"
+ },
+ {
+  "mechanism_name": "PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution)",
+  "channel": "supply-chain",
+  "consequence": "goal-hijack",
+  "from_paper": "Supply-Chain Poisoning Attacks Against LLM Coding Agent Skill Ecosystems"
+ },
+ {
+  "mechanism_name": "Oracle Poisoning",
+  "channel": "RAG",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Oracle Poisoning: Corrupting Knowledge Graphs to Weaponise AI Agent Reasoning"
+ },
+ {
+  "mechanism_name": "UNNAMED: gradient-based corpus poisoning (adversarial passage injection)",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "from_paper": "Poisoning Retrieval Corpora by Injecting Adversarial Passages"
+ },
+ {
+  "mechanism_name": "TrojanRAG",
+  "channel": "RAG",
+  "consequence": "persistence-backdoor",
+  "from_paper": "TrojanRAG: Retrieval-Augmented Generation Can Be Backdoor Driver in Large Language Models"
+ },
+ {
+  "mechanism_name": "PANDORA (RAG Poisoning jailbreak)",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "Pandora: Jailbreak GPTs by Retrieval Augmented Generation Poisoning"
+ },
+ {
+  "mechanism_name": "BadRAG",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "BadRAG: Identifying Vulnerabilities in Retrieval Augmented Generation of Large Language Mo"
+ },
+ {
+  "mechanism_name": "ConfusedPilot",
+  "channel": "RAG",
+  "consequence": "data-exfiltration",
+  "from_paper": "ConfusedPilot: Confused Deputy Risks in RAG-based LLMs"
+ },
+ {
+  "mechanism_name": "AGGD (Approximate Greedy Gradient Descent)",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "from_paper": "Corpus Poisoning via Approximate Greedy Gradient Descent"
+ },
+ {
+  "mechanism_name": "AgentVigil",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "AgentVigil: Generic Black-Box Red-teaming for Indirect Prompt Injection against LLM Agents"
+ },
+ {
+  "mechanism_name": "UNNAMED: HTML accessibility-tree universal adversarial trigger injection (TWUI)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Manipulating LLM Web Agents with Indirect Prompt Injection Attack via HTML Accessibility T"
+ },
+ {
+  "mechanism_name": "AdapTools",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "AdapTools: Adaptive Tool-based Indirect Prompt Injection Attacks on Agentic LLMs"
+ },
+ {
+  "mechanism_name": "UNNAMED: retrieval-aware IPI (trigger-fragment decomposition attack)",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "Overcoming the Retrieval Barrier: Indirect Prompt Injection in the Wild for LLM Systems"
+ },
+ {
+  "mechanism_name": "MUZZLE",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "MUZZLE: Adaptive Agentic Red-Teaming of Web Agents Against Indirect Prompt Injection Attac"
+ },
+ {
+  "mechanism_name": "IterInject",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "IterInject: Indirect Prompt Injection Against LLM Agents via Feedback-Guided Iterative Opt"
+ },
+ {
+  "mechanism_name": "LogJack",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "LogJack: Indirect Prompt Injection Through Cloud Logs Against LLM Debugging Agents"
+ },
+ {
+  "mechanism_name": "ChatInject",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "ChatInject: Abusing Chat Templates for Prompt Injection in LLM Agents"
+ },
+ {
+  "mechanism_name": "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "In-Browser LLM-Guided Fuzzing for Real-Time Prompt Injection Testing in Agentic AI Browser"
+ },
+ {
+  "mechanism_name": "Branded Whisper Attack / Vault Whisper Attack (from 'Whispers of Wealth')",
+  "channel": "tool-metadata",
+  "consequence": "resource-abuse",
+  "from_paper": "Whispers of Wealth: Red-Teaming Google's Agent Payments Protocol via Prompt Injection"
+ },
+ {
+  "mechanism_name": "UNNAMED: privacy leakage attack chain (external-content deception + IPI + exfiltration)",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "from_paper": "An Empirical Study of Privacy Leakage Chains via Prompt Injection in Black-Box Chatbot Env"
+ },
+ {
+  "mechanism_name": "MIRAGE (Masked Injection via Residual And Generative Exploitation)",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "MIRAGE: Stealthy Visual Prompt Injection for Vulnerability Detection in Web Agents"
+ },
+ {
+  "mechanism_name": "DACSI (Document-Authored Control-Signal Impersonation)",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "Document-Authored Control-Signal Impersonation: A Low-Cost Indirect Prompt Attack on RAG S"
+ },
+ {
+  "mechanism_name": "PI-Hunter",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "PI-Hunter: Automated Red-Teaming for Exposing and Localizing Prompt Injections"
+ },
+ {
+  "mechanism_name": "TIP (Tree-structured Injection for Payloads) / stealthy update attack",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "Invisible Threats from Model Context Protocol: Generating Stealthy Injection Payload via T"
+ },
+ {
+  "mechanism_name": "Agent Data Injection (ADI)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Agent Data Injection Attacks are Realistic Threats to AI Agents"
+ },
+ {
+  "mechanism_name": "VATS (Error-Path Injection via Implicit Authority)",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "VATS: Exploiting Implicit Authority in Error-Path Injection via Systematic Mutation"
+ },
+ {
+  "mechanism_name": "Targeted Promptware Attacks",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Invitation Is All You Need! Promptware Attacks Against LLM-Powered Assistants in Productio"
+ },
+ {
+  "mechanism_name": "OMNI-LEAK (Orchestrator Multi-Agent Network Induced Data Leakage)",
+  "channel": "multi-agent",
+  "consequence": "data-exfiltration",
+  "from_paper": "OMNI-LEAK: Orchestrator Multi-Agent Network Induced Data Leakage"
+ },
+ {
+  "mechanism_name": "Foot-in-the-Door (FITD) attack",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Breaking ReAct Agents: Foot-in-the-Door Attack Will Get You In"
+ },
+ {
+  "mechanism_name": "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Taxonomy, Evaluation and Exploitation of IPI-Centric LLM Agent Defense Frameworks"
+ },
+ {
+  "mechanism_name": "Agent-as-a-Proxy attack",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Bypassing AI Control Protocols via Agent-as-a-Proxy Attacks"
+ },
+ {
+  "mechanism_name": "Cross-App Context Poisoning (Confused ChatGPT)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Confused ChatGPT: Cross-App Context Poisoning via First-Party APIs"
+ },
+ {
+  "mechanism_name": "AutoDojo (adaptive black-box IPI attack generation)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "AutoDojo: Adaptive Black-Box Attacks Reveal the Limits of IPI Defenses and Task-Specificat"
+ },
+ {
+  "mechanism_name": "ToolHijacker",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "Prompt Injection Attack to Tool Selection in LLM Agents"
+ },
+ {
+  "mechanism_name": "WebInject",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "WebInject: Prompt Injection Attack to Web Agents"
+ },
+ {
+  "mechanism_name": "CrossInject",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "Manipulating Multimodal Agents via Cross-Modal Prompt Injection"
+ },
+ {
+  "mechanism_name": "RL-Hammer",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "RL Is a Hammer and LLMs Are Nails: A Simple Reinforcement Learning Recipe for Strong Promp"
+ },
+ {
+  "mechanism_name": "UNNAMED: Prompt Injection 2.0 (hybrid PI + classic web-exploit combination attacks)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Prompt Injection 2.0: Hybrid AI Threats"
+ },
+ {
+  "mechanism_name": "UNNAMED: data flow-based injection attack for observed-data exfiltration ('Important message' template)",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "from_paper": "Simple Prompt Injection Attacks Can Leak Personal Data Observed by LLM Agents During Task "
+ },
+ {
+  "mechanism_name": "ObliInjection",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "ObliInjection: Order-Oblivious Prompt Injection Attack to LLM Agents with Multi-source Dat"
+ },
+ {
+  "mechanism_name": "Fun-tuning",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Fun-tuning: Characterizing the Vulnerability of Proprietary LLMs to Optimization-Based Pro"
+ },
+ {
+  "mechanism_name": "AIShellJack (coding-rule/config-file prompt injection against agentic IDE editors)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "\"Your AI, My Shell\": Demystifying Prompt Injection Attacks on Agentic AI Coding Editors"
+ },
+ {
+  "mechanism_name": "HOUYI",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Prompt Injection attack against LLM-integrated Applications"
+ },
+ {
+  "mechanism_name": "Mind Mapping Prompt Injection",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "Mind Mapping Prompt Injection: Visual Prompt Injection Attacks in Modern Large Language Mo"
+ },
+ {
+  "mechanism_name": "Neural Exec",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Neural Exec: Learning (and Learning from) Execution Triggers for Prompt Injection Attacks"
+ },
+ {
+  "mechanism_name": "Prompt Infection",
+  "channel": "multi-agent",
+  "consequence": "goal-hijack",
+  "from_paper": "Prompt Infection: LLM-to-LLM Prompt Injection within Multi-agent Systems"
+ },
+ {
+  "mechanism_name": "UNNAMED: PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Cybersecurity AI: Hacking the AI Hackers via Prompt Injection"
+ },
+ {
+  "mechanism_name": "System Prompt Poisoning (SPP)",
+  "channel": "direct-input",
+  "consequence": "persistence-backdoor",
+  "from_paper": "System Prompt Poisoning: Persistent Attacks on Large Language Models Beyond User Injection"
+ },
+ {
+  "mechanism_name": "UNNAMED: rule-tag semantic reframing template attack ('Breaking the Prompt Wall')",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Breaking the Prompt Wall (I): A Real-World Case Study of Attacking ChatGPT via Lightweight"
+ },
+ {
+  "mechanism_name": "AgentTypo",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "AgentTypo: Adaptive Typographic Prompt Injection Attacks against Black-box Multimodal Agen"
+ },
+ {
+  "mechanism_name": "MAD-Spear (Conformity-Driven Prompt Injection Attack)",
+  "channel": "multi-agent",
+  "consequence": "goal-hijack",
+  "from_paper": "MAD-Spear: A Conformity-Driven Prompt Injection Attack on Multi-Agent Debate Systems"
+ },
+ {
+  "mechanism_name": "Indirect Data Poisoning (Distributed Denial of Science)",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "from_paper": "Distributed Denial of Science: How Indirect Data Poisoning of AI Systems Can Industrialize"
+ },
+ {
+  "mechanism_name": "VeriGrey (grey-box agent fuzzing for IPI)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "VeriGrey: Greybox Agent Validation"
+ },
+ {
+  "mechanism_name": "Parallel-Poisoned Web (fingerprinting + website cloaking against AI web agents)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "A Whole New World: Creating a Parallel-Poisoned Web Only AI-Agents Can See"
+ },
+ {
+  "mechanism_name": "MAS hijacking",
+  "channel": "multi-agent",
+  "consequence": "goal-hijack",
+  "from_paper": "Multi-Agent Systems Execute Arbitrary Malicious Code"
+ },
+ {
+  "mechanism_name": "MCP-ITP (Implicit Tool Poisoning)",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "MCP-ITP: An Automated Framework for Implicit Tool Poisoning in MCP"
+ },
+ {
+  "mechanism_name": "Cross-Tool Description Poisoning",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "Think Twice Before You Act: Protecting LLM Agents Against Tool Description Poisoning via I"
+ },
+ {
+  "mechanism_name": "UNNAMED: descriptor-level semantic manipulation attack (MCP tool-selection bias)",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "Semantic Attacks on Tool-Augmented LLMs: Securing the Model Context Protocol Against Descr"
+ },
+ {
+  "mechanism_name": "AutoMalTool",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "Automatic Red Teaming LLM-Based Agents With Model Context Protocol Tools"
+ },
+ {
+  "mechanism_name": "Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD)",
+  "channel": "supply-chain",
+  "consequence": "goal-hijack",
+  "from_paper": "Parasites in the Toolchain: A Large-Scale Analysis of Attacks on the MCP Ecosystem"
+ },
+ {
+  "mechanism_name": "Salience Induction",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "Salience Induction against Multi-Hop RAG Agents: Threat and Defense"
+ },
+ {
+  "mechanism_name": "PIDP-Attack",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "PIDP-Attack: Combining Prompt Injection with Database Poisoning Attacks on Retrieval-Augme"
+ },
+ {
+  "mechanism_name": "RefineRAG",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "RefineRAG: Word-Level Poisoning Attacks via Retriever-Guided Text Refinement"
+ },
+ {
+  "mechanism_name": "UNNAMED: retriever fine-tuning backdoor attack",
+  "channel": "RAG",
+  "consequence": "persistence-backdoor",
+  "from_paper": "Backdoored Retrievers for Prompt Injection Attacks on Retrieval Augmented Generation of La"
+ },
+ {
+  "mechanism_name": "COMA",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "When Compression Becomes an Attack Surface: Black-Box Attacks on Prompt-Compressed LLM Age"
+ },
+ {
+  "mechanism_name": "LogicPoison",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "LogicPoison: Logical Attacks on Graph Retrieval-Augmented Generation"
+ },
+ {
+  "mechanism_name": "IKEA (Implicit Knowledge Extraction Attack)",
+  "channel": "RAG",
+  "consequence": "data-exfiltration",
+  "from_paper": "Silent Leaks: Implicit Knowledge Extraction Attack on RAG Systems through Benign Queries"
+ },
+ {
+  "mechanism_name": "FlashRT",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "FlashRT: Towards Computationally and Memory Efficient Red-Teaming for Prompt Injection and"
+ },
+ {
+  "mechanism_name": "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "from_paper": "From Untrusted Input to Trusted Memory: A Systematic Study of Memory Poisoning Attacks in "
+ },
+ {
+  "mechanism_name": "Inter-Agent Trust Exploitation (AI agent privilege escalation)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "The Dark Side of LLMs: Agent-based Attack Vectors for System-level Compromise"
+ },
+ {
+  "mechanism_name": "ZombAI",
+  "channel": "tool-output",
+  "consequence": "persistence-backdoor",
+  "from_paper": "Security Risk Evaluation of ZombAI Claude: Prompt Injection as a Backdoor for Command and "
+ },
+ {
+  "mechanism_name": "AGENTBAIT",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "When Bots Take the Bait: Exposing and Mitigating the Emerging Social Engineering Attack in"
+ },
+ {
+  "mechanism_name": "Sampling-Based Injection (MCP sampling/createMessage attack)",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "Breaking the Protocol: Security Analysis of the Model Context Protocol Specification and P"
+ },
+ {
+  "mechanism_name": "SkillJect",
+  "channel": "skill",
+  "consequence": "goal-hijack",
+  "from_paper": "SkillJect: Effectively Automating Skill-Based Prompt Injection for Skill-Enabled Agents"
+ },
+ {
+  "mechanism_name": "Guidance Injection",
+  "channel": "direct-input",
+  "consequence": "persistence-backdoor",
+  "from_paper": "Trojan's Whisper: Stealthy Manipulation of OpenClaw through Injected Bootstrapped Guidance"
+ },
+ {
+  "mechanism_name": "POISE",
+  "channel": "skill",
+  "consequence": "goal-hijack",
+  "from_paper": "POISE: Position-Aware Undetectable Skill Injection on LLM Agents"
+ },
+ {
+  "mechanism_name": "PlanFlip",
+  "channel": "multi-agent",
+  "consequence": "goal-hijack",
+  "from_paper": "PlanFlip: Attacking Multi-Agent LLM Systems via Planning-Phase Prompt Injection"
+ },
+ {
+  "mechanism_name": "UNNAMED: RAG-manipulation attack on multi-agent debate consensus",
+  "channel": "RAG",
+  "consequence": "reasoning-corruption",
+  "from_paper": "RAG-Induced Failures in Multi-Agent Large Language Model Debate"
+ },
+ {
+  "mechanism_name": "UNNAMED: subagent inheritance exploitation (4 classes: insecure memory inheritance, absent resource access control, async memory divergence, unauthorized cross-agent termination)",
+  "channel": "multi-agent",
+  "consequence": "goal-hijack",
+  "from_paper": "When Child Inherits: Modeling and Exploiting Subagent Spawn in Multi-Agent Networks"
+ },
+ {
+  "mechanism_name": "HARE (Hybrid Agent Roleplay Exploitation) / Token Economy Poisoning",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Evaluating and Exploiting Security Vulnerabilities in Large Language Models (LLMs) for Off"
+ },
+ {
+  "mechanism_name": "F2A (Feign Agent Attack)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "F2A: An Innovative Approach for Prompt Injection by Utilizing Feign Security Detection Age"
+ },
+ {
+  "mechanism_name": "UNNAMED: skill-file prompt injection (trivial/non-optimized variant)",
+  "channel": "skill",
+  "consequence": "goal-hijack",
+  "from_paper": "Agent Skills Enable a New Class of Realistic and Trivially Simple Prompt Injections"
+ },
+ {
+  "mechanism_name": "AudioHijack",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "Hijacking Large Audio-Language Models via Context-Agnostic and Imperceptible Auditory Prom"
+ },
+ {
+  "mechanism_name": "ClawTrojan multi-step trojan/backdoor attack paradigm",
+  "channel": "tool-output",
+  "consequence": "persistence-backdoor",
+  "from_paper": "From Prompt Injection to Persistent Control: Defending Agentic Harness Against Trojan Back"
+ },
+ {
+  "mechanism_name": "StruPhantom",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "StruPhantom: Evolutionary Injection Attacks on Black-Box Tabular Agents Powered by Large L"
+ },
+ {
+  "mechanism_name": "Silent Egress (implicit prompt injection via URL preview/metadata)",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "from_paper": "Silent Egress: When Implicit Prompt Injection Makes LLM Agents Leak Without a Trace"
+ },
+ {
+  "mechanism_name": "Attractive Metadata Attack (AMA)",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "from_paper": "Attractive Metadata Attack: Inducing LLM Agents to Invoke Malicious Tools"
+ },
+ {
+  "mechanism_name": "Plan Injection",
+  "channel": "memory",
+  "consequence": "goal-hijack",
+  "from_paper": "Context manipulation attacks : Web agents are susceptible to corrupted memory"
+ },
+ {
+  "mechanism_name": "LogInject / Passive Prompt Injection",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Context Contamination in LLM Analysis of Network Security Logs: Poison with Passive Prompt"
+ },
+ {
+  "mechanism_name": "Adversarial HalluSquatting",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Beware of Agentic Botnets: Scalable Untargeted Promptware Attacks via Universal and Transf"
+ },
+ {
+  "mechanism_name": "Relinking",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Safe to Check, Unsafe to Use: Relinking at the Compression Boundary of LLM Agents"
+ },
+ {
+  "mechanism_name": "Reasoning-Extension Denial-of-Service (DoS)",
+  "channel": "tool-output",
+  "consequence": "resource-abuse",
+  "from_paper": "From Shield to Target: Denial-of-Service Attacks on LLM-Based Agent Guardrails"
+ },
+ {
+  "mechanism_name": "Brain-Prompt Injection",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Brain-Prompt Injection: A Route-Safety Audit for BCI-LLM Agents"
+ },
+ {
+  "mechanism_name": "Cross-Session Stored Prompt Injection (XSPI)",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "from_paper": "What If Prompt Injection Never Left? Exploring Cross-Session Stored Prompt Injection in Ag"
+ },
+ {
+  "mechanism_name": "MIRAGE",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "MIRAGE: Context-Aware Prompt Injection against Mobile GUI Agents via User-Generated Conten"
+ },
+ {
+  "mechanism_name": "Log-Substrate Prompt Injection",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Poisoning the Watchtower: Prompt Injection Attacks Against LLM-Augmented Security Operatio"
+ },
+ {
+  "mechanism_name": "Prompt Overflow Attack",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Prompt Overflow: What the Guardrail Inspects Is Not What the Model Infers"
+ },
+ {
+  "mechanism_name": "UNNAMED: IPC-channel cross-origin injection/exfiltration attacks against agentic browsers",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Site Isolation is Dead: How Site Isolation is Broken in Agentic Browsers and Extensions"
+ },
+ {
+  "mechanism_name": "ASPI (Ambiguous-State Prompt Injection)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "ASPI: Seeking Ambiguity Clarification Amplifies Prompt Injection Vulnerability in LLM Agen"
+ },
+ {
+  "mechanism_name": "RTA-PostForge (response-path tampering attack)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Rewriting the Response Path: Silent Tampering and Provider-Signed Defense in BYOK LLM Agen"
+ },
+ {
+  "mechanism_name": "PromptFuzz-SC",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "DeepSeek Robustness Against Semantic-Character Dual-Space Mutated Prompt Injection"
+ },
+ {
+  "mechanism_name": "PISmith",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "PISmith: Reinforcement Learning-based Red Teaming for Prompt Injection Defenses"
+ },
+ {
+  "mechanism_name": "Reverse CAPTCHA (invisible Unicode instruction injection)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Reverse CAPTCHA: Evaluating LLM Susceptibility to Invisible Unicode Instruction Injection"
+ },
+ {
+  "mechanism_name": "CoT Forgery (Chain-of-Thought Forgery)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Prompt Injection as Role Confusion"
+ },
+ {
+  "mechanism_name": "PI3D",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "Extended to Reality: Prompt Injection in 3D Environments"
+ },
+ {
+  "mechanism_name": "AutoInject",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Learning to Inject: Automated Prompt Injection via Reinforcement Learning"
+ },
+ {
+  "mechanism_name": "UNNAMED: multi-probe evasive GCG suffix attack",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Bypassing Prompt Injection Detectors through Evasive Injections"
+ },
+ {
+  "mechanism_name": "PINA",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "PINA: Prompt Injection Attack against Navigation Agents"
+ },
+ {
+  "mechanism_name": "Xmera (chimera MitM framework)",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "from_paper": "Injecting Falsehoods: Adversarial Man-in-the-Middle Attacks Undermining Factual Recall in "
+ },
+ {
+  "mechanism_name": "ToolLeak",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Red-Teaming Coding Agents from a Tool-Invocation Perspective: An Empirical Security Assess"
+ },
+ {
+  "mechanism_name": "DataFlip",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "How Not to Detect Prompt Injections with an LLM"
+ },
+ {
+  "mechanism_name": "Checkpoint-GCG",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Checkpoint-GCG: Auditing and Attacking Fine-Tuning-Based Prompt Injection Defenses"
+ },
+ {
+  "mechanism_name": "Separator Injection Attack",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Separator Injection Attack: Uncovering Dialogue Biases in Large Language Models Caused by "
+ },
+ {
+  "mechanism_name": "UNNAMED: diverse RL red-teaming (auto-generated rewards + multi-step RL)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Diverse and Effective Red Teaming with Auto-generated Rewards and Multi-step Reinforcement"
+ },
+ {
+  "mechanism_name": "AutoRed",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "AutoRed: Automated Attack Scenario Generation Framework for Red Teaming of LLMs"
+ },
+ {
+  "mechanism_name": "Cognitive Overload Attack",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Cognitive Overload Attack:Prompt Injection for Long Context"
+ },
+ {
+  "mechanism_name": "PromptFuzz",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "PromptFuzz: Harnessing Fuzzing Techniques for Robust Testing of Prompt Injection in LLMs"
+ },
+ {
+  "mechanism_name": "UNNAMED: ChatGPT memory/URL-exfiltration prompt injection bypass",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "from_paper": "Exfiltration of personal information from ChatGPT via prompt injection"
+ },
+ {
+  "mechanism_name": "Prompt-Injected Data Extraction",
+  "channel": "RAG",
+  "consequence": "data-exfiltration",
+  "from_paper": "Follow My Instruction and Spill the Beans: Scalable Data Extraction from Retrieval-Augment"
+ },
+ {
+  "mechanism_name": "ZBEAST",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "Zero-Shot Tokenizer Transfer for Targeted Attacks on Retrieval-Augmented Generation"
+ },
+ {
+  "mechanism_name": "SafeSearch",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "SafeSearch: Automated Red-Teaming of LLM-Based Search Agents"
+ },
+ {
+  "mechanism_name": "UNNAMED: chat-template inference-time backdoor",
+  "channel": "supply-chain",
+  "consequence": "persistence-backdoor",
+  "from_paper": "Inference-Time Backdoors via Chat Templates: From LLM Supply Chains to Agentic System Comp"
+ },
+ {
+  "mechanism_name": "UNNAMED: backdoor-based RAG data extraction attack",
+  "channel": "RAG",
+  "consequence": "data-exfiltration",
+  "from_paper": "Data Extraction Attacks in Retrieval-Augmented Generation via Backdoors"
+ },
+ {
+  "mechanism_name": "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Just Testing, Move Along: Evasion of LLM-based System Log Interpretation by Prompt Injecti"
+ },
+ {
+  "mechanism_name": "lost in the middle",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Lost in the Middle: How Language Models Use Long Contexts"
+ },
+ {
+  "mechanism_name": "distraction by irrelevant context",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Large Language Models Can Be Easily Distracted by Irrelevant Context"
+ },
+ {
+  "mechanism_name": "UNNAMED: context-length-induced degradation independent of retrieval failure",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Context Length Alone Hurts LLM Performance Despite Perfect Retrieval"
+ },
+ {
+  "mechanism_name": "context drift",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Drift No More? Context Equilibria in Multi-Turn LLM Interactions"
+ },
+ {
+  "mechanism_name": "UNNAMED: getting lost in multi-turn conversation (premature-answer unreliability under underspecification)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "LLMs Get Lost In Multi-Turn Conversation"
+ },
+ {
+  "mechanism_name": "context rot (agentic/long-horizon search)",
+  "channel": "tool-output",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Diagnosing and Mitigating Context Rot in Long-horizon Search"
+ },
+ {
+  "mechanism_name": "context rot",
+  "channel": "tool-metadata",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Context Rot: Why MCP is Breaking in Production and How the Skills Architecture Fixes It"
+ },
+ {
+  "mechanism_name": "classifier context rot",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Classifier Context Rot: Monitor Performance Degrades with Context Length"
+ },
+ {
+  "mechanism_name": "extraneous cognitive load (context engineering overload)",
+  "channel": "multi-agent",
+  "consequence": "reasoning-corruption",
+  "from_paper": "United Minds or Isolated Agents? Exploring Coordination of LLMs under Cognitive Load Theor"
+ },
+ {
+  "mechanism_name": "UNNAMED: agent-skill requirement decay under long trajectories (skill/requirement fade)",
+  "channel": "skill",
+  "consequence": "reasoning-corruption",
+  "from_paper": "How Agent Skills Fail under Long Contexts: A White-Box Study in Code Auditing"
+ },
+ {
+  "mechanism_name": "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Lost in the Middle: An Emergent Property from Information Retrieval Demands in LLMs"
+ },
+ {
+  "mechanism_name": "Attention Latch",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Reasoning Protocols"
+ },
+ {
+  "mechanism_name": "mechanistic refinement of lost-in-the-middle (threshold-dependent onset at ~50% of context window; effect vanishes near window limits)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Positional Biases Shift as Inputs Approach Context Window Limits"
+ },
+ {
+  "mechanism_name": "mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Mitigate Position Bias in Large Language Models via Scaling a Single Dimension"
+ },
+ {
+  "mechanism_name": "distraction by irrelevant context (graded by semantic relatedness)",
+  "channel": "RAG",
+  "consequence": "reasoning-corruption",
+  "from_paper": "How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?"
+ },
+ {
+  "mechanism_name": "UNNAMED: long-context safety/refusal degradation in agents",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "When Refusals Fail: Unstable Safety Mechanisms in Long-Context LLM Agents"
+ },
+ {
+  "mechanism_name": "cognitive bandwidth bottleneck (action-space scaling)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "The Cognitive Bandwidth Bottleneck: Shifting Long-Horizon Agent from Planning with Actions"
+ },
+ {
+  "mechanism_name": "multi-target memory interference",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "from_paper": "MINTEval: Evaluating Memory under Multi-Target Interference in Long-Horizon Agent Systems"
+ },
+ {
+  "mechanism_name": "plan anchor",
+  "channel": "tool-output",
+  "consequence": "reasoning-corruption",
+  "from_paper": "WebAnchor: Anchoring Agent Planning to Stabilize Long-Horizon Web Reasoning"
+ },
+ {
+  "mechanism_name": "UNNAMED: temporally-distant information inaccessibility in long-horizon agentic reasoning",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "from_paper": "SAM: State-Adaptive Memory for Long-Horizon Reasoning Agent"
+ },
+ {
+  "mechanism_name": "Constraint Drift (under long tool traces)",
+  "channel": "multi-agent",
+  "consequence": "reasoning-corruption",
+  "from_paper": "HiMAP-Travel: Hierarchical Multi-Agent Planning for Long-Horizon Constrained Travel"
+ },
+ {
+  "mechanism_name": "identity drift (persona coherence decay in generative agents)",
+  "channel": "RAG",
+  "consequence": "reasoning-corruption",
+  "from_paper": "ID-RAG: Identity Retrieval-Augmented Generation for Long-Horizon Persona Coherence in Gene"
+ },
+ {
+  "mechanism_name": "UNNAMED: abrupt persona/tone instability from lack of affective state inertia",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Controlling Long-Horizon Behavior in Language Model Agents with Explicit State Dynamics"
+ },
+ {
+  "mechanism_name": "Governance Decay",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "from_paper": "Governance Decay: How Context Compaction Silently Erases Safety Constraints in Long-Horizo"
+ },
+ {
+  "mechanism_name": "UNNAMED: unverified success fabrication in unattended long-horizon agents (agent honesty gap)",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "from_paper": "Goal-Autopilot: A Verifiable Anti-Fabrication Firewall for Unattended Long-Horizon Agents"
+ },
+ {
+  "mechanism_name": "memory pollution (agent long-term memory)",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "from_paper": "Failure-Gated Hierarchical Memory: Preventing Memory Pollution in Long-Horizon LLM Agents "
+ },
+ {
+  "mechanism_name": "Context Pollution (evolutionary search history bias)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "PACEvolve: Enabling Long-Horizon Progress-Aware Consistent Evolution"
+ },
+ {
+  "mechanism_name": "observation over-ingestion",
+  "channel": "tool-output",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Signal-Driven Observation for Long-Horizon Web Agents"
+ },
+ {
+  "mechanism_name": "UNNAMED: plan non-persistence under context eviction (context-time memory volatility)",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "from_paper": "Plans Don't Persist: Why Context Management Is Load Bearing for LLM Agents"
+ },
+ {
+  "mechanism_name": "context proprioceptive blindness",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via State Proprioce"
+ },
+ {
+  "mechanism_name": "context poisoning (self-induced, non-adversarial)",
+  "channel": "multi-agent",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Unlocking Model Potentials Through Adaptive Multi-Agent Scaffolding for Efficient Issue Re"
+ },
+ {
+  "mechanism_name": "Distributional Collapse",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "from_paper": "Not All Needles Are Found: How Fact Distribution and Don't Make It Up Prompts Shape Retrie"
+ },
+ {
+  "mechanism_name": "UNNAMED: summary-length invariance under context compaction",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Parallel Context Compaction for Long-Horizon LLM Agent Serving"
+ },
+ {
+  "mechanism_name": "context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization)",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "from_paper": "Does RAG Know When Retrieval Is Wrong? Diagnosing Context Compliance under Knowledge Confl"
+ },
+ {
+  "mechanism_name": "mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3)",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "from_paper": "Cutting Off the Head Ends the Conflict: A Mechanism for Interpreting and Mitigating Knowle"
+ },
+ {
+  "mechanism_name": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "from_paper": "Tug-of-War between Knowledge: Exploring and Resolving Knowledge Conflicts in Retrieval-Aug"
+ },
+ {
+  "mechanism_name": "memory laundering",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "from_paper": "State Contamination in Memory-Augmented LLM Agents"
+ },
+ {
+  "mechanism_name": "memory misevolution",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "from_paper": "MemEvoBench: Benchmarking Memory MisEvolution in LLM Agents"
+ },
+ {
+  "mechanism_name": "Mandate Salience Decay (MSD)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "FinPersona-Bench: A Benchmark for Longitudinal Psychometric Stability of Autonomous Financ"
+ },
+ {
+  "mechanism_name": "context unawareness (failure to identify a small decisive piece of evidence within long/complex context)",
+  "channel": "cross-modal",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Context-Aware RL for Agentic and Multimodal LLMs"
+ },
+ {
+  "mechanism_name": "Contextual Belief Management (CBM) failure",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "When Should Models Change Their Minds? Contextual Belief Management in Large Language Mode"
+ },
+ {
+  "mechanism_name": "UNNAMED: \"cognitive event horizon\" (context-saturation threshold beyond which accuracy collapses)",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents"
+ },
+ {
+  "mechanism_name": "evidence misalignment (agentic long-video QA)",
+  "channel": "cross-modal",
+  "consequence": "silent-corruption",
+  "from_paper": "VideoSEAL: Mitigating Evidence Misalignment in Agentic Long Video Understanding by Decoupl"
+ },
+ {
+  "mechanism_name": "agent drift (overthinking / overacting)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "TACT: Mitigating Overthinking and Overacting in Coding Agents via Activation Steering"
+ },
+ {
+  "mechanism_name": "UNNAMED: granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse)",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Structurally Aligned Subtask-Level Memory for Software Engineering Agents"
+ },
+ {
+  "mechanism_name": "context pollution (role conflation in single-agent code-as-action agents)",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "from_paper": "CodeDelegator: Mitigating Context Pollution via Role Separation in Code-as-Action Agents"
+ },
+ {
+  "mechanism_name": "cumulative contextual decay (attention pollution, dilution, and drift)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Rhea: Role-aware Heuristic Episodic Attention for Conversational LLMs"
+ },
+ {
+  "mechanism_name": "contextual misguidance",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "from_paper": "Alleviating Contextual Misguidance: Response-Aware Prompt Compression for Long-Context Que"
+ },
+ {
+  "mechanism_name": "superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict)",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "from_paper": "Taming Knowledge Conflicts in Language Models"
+ },
+ {
+  "mechanism_name": "position exhaustion",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Periodic RoPE for Infinite Context LLMs"
+ },
+ {
+  "mechanism_name": "UNNAMED: \"malloc-only\" context accumulation causing reasoning degeneration in extended CoT",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Free(): Learning to Forget in Malloc-Only Reasoning Models"
+ },
+ {
+  "mechanism_name": "scaffolding collapse",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Mitigating Scaffolding Collapse in Socratic Tutors via Representation Alignment"
+ },
+ {
+  "mechanism_name": "KV-cache contamination",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Prompt-Activation Duality: Improving Activation Steering via Attention-Level Interventions"
+ },
+ {
+  "mechanism_name": "cross-modality parametric knowledge conflict",
+  "channel": "cross-modal",
+  "consequence": "silent-corruption",
+  "from_paper": "Unraveling Cross-Modality Knowledge Conflicts in Large Vision-Language Models"
+ },
+ {
+  "mechanism_name": "Combined Attack (Open-Prompt-Injection)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Formalizing and Benchmarking Prompt Injection Attacks and Defenses"
+ },
+ {
+  "mechanism_name": "BIPIA benchmark attack set",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Mod"
+ },
+ {
+  "mechanism_name": "Virtual Prompt Injection (VPI)",
+  "channel": "supply-chain",
+  "consequence": "persistence-backdoor",
+  "from_paper": "Backdooring Instruction-Tuned Large Language Models with Virtual Prompt Injection"
+ },
+ {
+  "mechanism_name": "JudgeDeceiver",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Optimization-based Prompt Injection Attack to LLM-as-a-Judge"
+ },
+ {
+  "mechanism_name": "UNNAMED: automatic universal gradient-based prompt injection",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Automatic and Universal Prompt Injection Attacks against Large Language Models"
+ },
+ {
+  "mechanism_name": "Tensor Trust: prompt extraction / prompt hijacking",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Tensor Trust: Interpretable Prompt Injection Attacks from an Online Game"
+ },
+ {
+  "mechanism_name": "distraction effect (attention shift to injected instruction)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Attention Tracker: Detecting Prompt Injection Attacks in LLMs"
+ },
+ {
+  "mechanism_name": "P2SQL injection (prompt-to-SQL)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "From Prompt Injections to SQL Injection Attacks: How Protected is Your LLM-Integrated Web "
+ },
+ {
+  "mechanism_name": "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "CyberSecEval 2: A Wide-Ranging Cybersecurity Evaluation Suite for Large Language Models"
+ },
+ {
+  "mechanism_name": "UNNAMED: system-prompt and uploaded-file extraction from custom GPTs",
+  "channel": "direct-input",
+  "consequence": "data-exfiltration",
+  "from_paper": "Assessing Prompt Injection Risks in 200+ Custom GPTs"
+ },
+ {
+  "mechanism_name": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "The Attacker Moves Second: Stronger Adaptive Attacks Bypass Defenses Against Llm Jailbreak"
+ },
+ {
+  "mechanism_name": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Ignore This Title and HackAPrompt: Exposing Systemic Vulnerabilities of LLMs through a Glo"
+ },
+ {
+  "mechanism_name": "LLMSmith: prompt-injection-to-RCE exploitation",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Demystifying RCE Vulnerabilities in LLM-Integrated Apps"
+ },
+ {
+  "mechanism_name": "G2PIA (goal-guided generative prompt injection)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Goal-Guided Generative Prompt Injection Attack on Large Language Models"
+ },
+ {
+  "mechanism_name": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "A Critical Evaluation of Defenses against Prompt Injection Attacks: [Dataset/Tool Paper]"
+ },
+ {
+  "mechanism_name": "UNNAMED: tree-of-attacks ranking manipulation for conversational search",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "from_paper": "Ranking Manipulation for Conversational Search Engines"
+ },
+ {
+  "mechanism_name": "UNNAMED: multi-modal prompt injection against robot navigation",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "A Study on Prompt Injection Attack Against LLM-Integrated Mobile Robotic Systems"
+ },
+ {
+  "mechanism_name": "preemptive answer attack (CoT short-circuiting)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Preemptive Answer \"Attacks\" on Chain-of-Thought Reasoning"
+ },
+ {
+  "mechanism_name": "EchoLeak (zero-click IPI, CVE-2025-32711)",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "from_paper": "EchoLeak: The First Real-World Zero-Click Prompt Injection Exploit in a Production LLM Sys"
+ },
+ {
+  "mechanism_name": "TopicAttack",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "TopicAttack: An Indirect Prompt Injection Attack via Topic Transition"
+ },
+ {
+  "mechanism_name": "POUGH",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Efficient Universal Goal Hijacking with Semantics-guided Prompt Organization"
+ },
+ {
+  "mechanism_name": "PoisonedAlign",
+  "channel": "supply-chain",
+  "consequence": "goal-hijack",
+  "from_paper": "Enhancing Prompt Injection Attacks to LLMs via Poisoning Alignment"
+ },
+ {
+  "mechanism_name": "ASTRA (and ASTRA++)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "May I have your Attention? Breaking Fine-Tuning based Prompt Injection Defenses using Arch"
+ },
+ {
+  "mechanism_name": "situation-driven contextual adversarial prompt attack",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Human-Interpretable Adversarial Prompt Attack on Large Language Models with Situational Co"
+ },
+ {
+  "mechanism_name": "query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing)",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "from_paper": "Black-box Optimization of LLM Outputs by Asking for Directions"
+ },
+ {
+  "mechanism_name": "message history forging (direct prompt injection via forged system/assistant roles)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "When AI Meets the Web: Prompt Injection Risks in Third-Party AI Chatbot Plugins"
+ },
+ {
+  "mechanism_name": "reasoning token overflow (RTO) / practical reasoning interruption attack",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Practical Reasoning Interruption Attacks on Reasoning Large Language Models"
+ },
+ {
+  "mechanism_name": "VortexPIA",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "from_paper": "VortexPIA: Indirect Prompt Injection Attack against LLMs for Efficient Extraction of User "
+ },
+ {
+  "mechanism_name": "self-interpreting images via adversarial meta-instructions",
+  "channel": "cross-modal",
+  "consequence": "silent-corruption",
+  "from_paper": "Self-interpreting Adversarial Images"
+ },
+ {
+  "mechanism_name": "Image-based Prompt Injection (IPI)",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "Image-based Prompt Injection: Hijacking Multimodal LLMs through Visually Embedded Adversar"
+ },
+ {
+  "mechanism_name": "steganographic prompt injection (multi-domain spatial/frequency/neural embedding)",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "Invisible Injections: Exploiting Vision-Language Models Through Steganographic Prompt Embe"
+ },
+ {
+  "mechanism_name": "Reasoning Interruption Attack (adaptive token compression)",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Token-Efficient Prompt Injection Attack: Provoking Cessation in LLM Reasoning via Adaptive"
+ },
+ {
+  "mechanism_name": "Physical Prompt Injection Attack (PPIA)",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "Physical Prompt Injection Attacks on Large Vision-Language Models"
+ },
+ {
+  "mechanism_name": "backdoor-powered prompt injection attack",
+  "channel": "supply-chain",
+  "consequence": "persistence-backdoor",
+  "from_paper": "Backdoor-Powered Prompt Injection Attacks Nullify Defense Methods"
+ },
+ {
+  "mechanism_name": "Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given)",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Transferable Direct Prompt Injection via Activation-Guided MCMC Sampling"
+ },
+ {
+  "mechanism_name": "Overflow",
+  "channel": "direct-input",
+  "consequence": "resource-abuse",
+  "from_paper": "BenchOverflow: Measuring Overflow in Large Language Models via Plain-Text Prompts"
+ },
+ {
+  "mechanism_name": "Blind attacks",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Counterfactual Evaluation for Blind Attack Detection in LLM-based Evaluation Systems"
+ },
+ {
+  "mechanism_name": "Cliopatra",
+  "channel": "memory",
+  "consequence": "data-exfiltration",
+  "from_paper": "CLIOPATRA: Extracting Private Information from LLM Insights"
+ },
+ {
+  "mechanism_name": "Combined Attack",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "from_paper": "Prompt Injection Attacks and Defenses in LLM-Integrated Applications"
+ },
+ {
+  "mechanism_name": "incidental prompt injection",
+  "channel": "cross-modal",
+  "consequence": "reasoning-corruption",
+  "from_paper": "A pen mark is all you need - Incidental prompt injection attacks on Vision Language Models"
+ },
+ {
+  "mechanism_name": "Graph-based prompt injection (math-expression-to-graph encoding)",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "from_paper": "Graph-Based Prompt Injection Attacks Against Large Language Models"
+ },
+ {
+  "mechanism_name": "knowledge conflict (contextual vs parametric)",
+  "channel": "RAG",
+  "consequence": "reasoning-corruption",
+  "from_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Inf"
+ }
+]
