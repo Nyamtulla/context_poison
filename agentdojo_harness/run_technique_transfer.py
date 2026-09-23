@@ -41,7 +41,8 @@ load_dotenv()
 
 import agentdojo_defense_compat  # noqa: F401 - fixes spotlighting's infinite recursion
 import local_llm_compat          # noqa: F401 - fixes AgentDojo's OpenAI content schema
-import mechanism_attacks         # noqa: F401 - registers corpus mechanism attacks
+import mechanism_attacks         # noqa: F401 - registers v1 corpus mechanism attacks
+import mechanism_attacks_v2      # noqa: F401 - registers v2 comparable-strength rebuilds
 import technique_defenses as TD
 
 from agentdojo.agent_pipeline.agent_pipeline import AgentPipeline, PipelineConfig
@@ -54,6 +55,14 @@ from eval import AgentTask
 
 # RQ5 coverage, for labelling each attack in-sample vs transfer
 COVERAGE = {
+    # v2 mechanism rebuilds: coverage is that of the registry mechanism they
+    # implement, taken from the RQ5 matrix. ChatInject has no recorded defense
+    # test at all, which is what makes it a transfer target rather than a control.
+    # Exact RQ5 coverage of the registry mechanism each v2 attack implements.
+    # ChatInject is 1 (ClawGuard only), not 0 -- close to untested but not
+    # untested, and labelling it 0 would overstate the transfer claim.
+    "mechv2_chatinject": 1, "mechv2_aspi": 0, "mechv2_adi": 4,
+    "mechv2_crosstool": 3, "mechv2_masquerade": 0,
     "important_instructions": 15, "ignore_previous": 13, "tool_knowledge": 7,
     "direct": 3, "system_message": 0, "dos": 0, "captcha_dos": 0,
     "felony_dos": 0, "offensive_email_dos": 0, "swearwords_dos": 0,
@@ -157,7 +166,9 @@ def main() -> None:
 
     for attack_name in attacks:
         cov = COVERAGE.get(attack_name)
-        tag = "TRANSFER (0 defenses ever tested)" if cov == 0 else f"in-sample ({cov} defenses tested)"
+        tag = ("TRANSFER (0 defenses ever tested)" if cov == 0 else
+               f"near-transfer ({cov} defense(s) tested)" if cov <= 2 else
+               f"in-sample ({cov} defenses tested)")
         print(f"\n########## {attack_name}  --  {tag}")
 
         if attack_name not in undef_cache:
@@ -208,6 +219,7 @@ def main() -> None:
                 "abstracts": cls_.ABSTRACTS, "attack": attack_name,
                 "attack_coverage_defenses_tested": cov,
                 "is_transfer_test": cov == 0,
+                "is_near_transfer": 0 < cov <= 2,
                 "undefended": u, "defended": d,
                 "mdr_pp": m, "drop_pp": round(drop, 1),
                 "verdict": verdict, "error": err,
