@@ -223,9 +223,19 @@ class GoalConsistencyDefense(BasePipelineElement):
         if last.get("role") != "assistant" or not calls:
             return query, runtime, env, messages, extra_args
 
-        described = "; ".join(
-            f"{getattr(c, 'function', None) or c.get('function','?')}"
-            f"({getattr(c, 'args', None) or c.get('args','')})" for c in calls)[:1200]
+        def _describe(c):
+            """Tool calls arrive as FunctionCall objects, not dicts, so `.get`
+            raises. Read attributes first and fall back to mapping access only
+            for genuine mappings."""
+            if hasattr(c, "function"):
+                fn, ar = getattr(c, "function", "?"), getattr(c, "args", "")
+            elif isinstance(c, dict):
+                fn, ar = c.get("function", "?"), c.get("args", "")
+            else:
+                fn, ar = str(c), ""
+            return f"{fn}({ar})"
+
+        described = "; ".join(_describe(c) for c in calls)[:1200]
         verdict = _ask(
             "An AI assistant was given this user request:\n"
             f"  USER REQUEST: {query[:800]}\n\n"
