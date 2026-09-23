@@ -1,0 +1,4068 @@
+{
+ "generated": "2026-09-23",
+ "n_mechanisms": 223,
+ "substrate_primary": {
+  "none_qualitative": 5,
+  "shared_generic_dataset": 61,
+  "own_purpose_built": 98,
+  "live_system": 8,
+  "shared_security_benchmark": 43,
+  "unclear": 8
+ },
+ "reusable_substrate": {
+  "no": 95,
+  "partial": 79,
+  "yes": 49
+ },
+ "not_reusable_pct": 42.6,
+ "distinct_named_substrates": 255,
+ "substrates_used_once": 199,
+ "named_substrate_counts": {
+  "AgentDojo": 26,
+  "HotpotQA": 16,
+  "Natural Questions": 15,
+  "InjecAgent": 11,
+  "MS-MARCO": 10,
+  "GSM8K": 9,
+  "ASB": 7,
+  "MMLU": 7,
+  "StrategyQA": 5,
+  "SST2": 4,
+  "HumanEval": 4,
+  "TriviaQA": 4,
+  "FEVER": 3,
+  "SCIDOCS": 3,
+  "NFCorpus": 3,
+  "AdvBench": 3,
+  "MATH": 3,
+  "MuSiQue": 3,
+  "LongBench": 3,
+  "AlpacaFarm": 3,
+  "Tensor Trust": 3,
+  "SWE-bench Verified": 3,
+  "Open-Prompt-Injection": 3,
+  "MRPC": 3,
+  "Jfleg": 3,
+  "HSOL": 3,
+  "RTE": 3,
+  "SMS Spam": 3,
+  "Gigaword": 3,
+  "Quora": 2,
+  "TREC-COVID": 2,
+  "ArguAna": 2,
+  "SQuAD": 2,
+  "SciFact": 2,
+  "FiQA-2018": 2,
+  "VWA-adv": 2,
+  "BIPIA": 2,
+  "GSM-Ranges": 2,
+  "WebVoyager": 2,
+  "Skill-Inject": 2,
+  "tau2-bench": 2,
+  "AgentHarm": 2,
+  "RULER": 2,
+  "BrowseComp": 2,
+  "BrowseComp-Plus": 2,
+  "PopQA": 2,
+  "WebShop": 2,
+  "ALFWorld": 2,
+  "GAIA": 2,
+  "HLE": 2,
+  "NIAH": 2,
+  "TruthfulQA": 2,
+  "MT-Bench": 2,
+  "Alpaca": 2,
+  "ImageNet": 2,
+  "SQuAD 1.1": 2,
+  "Agent-Driver driving-experience memory": 1,
+  "EHRAgent healthcare-record memory": 1,
+  "PoisonedSkills": 1,
+  "FiQA": 1,
+  "WebQuestions": 1,
+  "SST-2": 1,
+  "AGNews": 1,
+  "BBQ": 1,
+  "AdvBench-V3": 1,
+  "WikiASP": 1,
+  "IPI-3K": 1,
+  "MSMARCO": 1,
+  "DBPedia": 1,
+  "Zoo": 1,
+  "LogJack": 1,
+  "AgentDyn": 1,
+  "MetaTool": 1,
+  "ToolBench": 1,
+  "CoEDIT": 1,
+  "Amazon Reviews": 1,
+  "Multi-News": 1,
+  "Purple Llama CyberSecEval": 1,
+  "AIShellJack": 1,
+  "MCPTox": 1,
+  "BEIR": 1,
+  "2WikiMultihopQA": 1,
+  "HealthCareMagic-100k": 1,
+  "HarryPotterQA": 1,
+  "Pokemon": 1,
+  "NarrativeQA": 1,
+  "GovReport": 1,
+  "Long Code Arena": 1,
+  "SkillsBench": 1,
+  "AgentBench": 1,
+  "AI4Privacy": 1,
+  "LogHub": 1,
+  "OpenHands": 1,
+  "LangGraph": 1,
+  "BrowserGym": 1,
+  "OSWorld": 1,
+  "EEGMMI": 1,
+  "AgentHazard": 1,
+  "GhostEI": 1,
+  "CIC-IDS2017": 1,
+  "UNSW-NB15": 1,
+  "SWE-bench": 1,
+  "APPS": 1,
+  "PIArena": 1,
+  "SQuAD v2": 1,
+  "Dolly Closed QA": 1,
+  "Dolly Info Extraction": 1,
+  "Dolly Summarization": 1,
+  "StrongREJECT": 1,
+  "TaskTracker": 1,
+  "R2R": 1,
+  "MCP-Zero": 1,
+  "DataSentinel setup": 1,
+  "Safety-Tuned Llamas": 1,
+  "Anthropic 'Harmless'": 1,
+  "Forbidden Question": 1,
+  "JailbreakBench": 1,
+  "Language Model Inversion (LMI)": 1,
+  "Lakera": 1,
+  "WikiQA": 1,
+  "GPT Store": 1,
+  "SafeSearch": 1,
+  "SQuAD v1.1": 1,
+  "SORRY-Bench": 1,
+  "Jailbreak-in-the-Wild": 1,
+  "MedQA": 1,
+  "MedMCQA": 1,
+  "PubMedQA": 1,
+  "NaturalQuestions-Open": 1,
+  "synthetic key-value retrieval task": 1,
+  "SVAMP": 1,
+  "DROP": 1,
+  "GSM-IC": 1,
+  "tau-bench": 1,
+  "LiveCodeBench": 1,
+  "Spider": 1,
+  "Berkeley Function Calling Leaderboard": 1,
+  "ToTTo": 1,
+  "WMT19": 1,
+  "xbench-DeepSearch": 1,
+  "ACB-2026": 1,
+  "MonitorBench": 1,
+  "LiveBench": 1,
+  "CommonGen-Hard": 1,
+  "MultiWOZ 2.2": 1,
+  "RuleTaker": 1,
+  "NaturalQuestions multi-document QA": 1,
+  "KV retrieval": 1,
+  "LooGLE": 1,
+  "EntityQuestions": 1,
+  "TextCraft": 1,
+  "SciWorld": 1,
+  "MINTEVAL": 1,
+  "HorizonBench": 1,
+  "BrowseComp_en": 1,
+  "BrowseComp_zh": 1,
+  "XBench-DeepSearch": 1,
+  "BrowseComp-ZH": 1,
+  "WideSearch": 1,
+  "TravelPlanner": 1,
+  "FlexTravelBench": 1,
+  "Concordia": 1,
+  "ConstraintRot": 1,
+  "SWE-bench Lite": 1,
+  "LLM-SR": 1,
+  "KernelBench": 1,
+  "Modded NanoGPT": 1,
+  "LOCA-Bench": 1,
+  "AMA-Bench": 1,
+  "SWE-bench Pro": 1,
+  "La Comedie Humaine": 1,
+  "LoCoMo": 1,
+  "Epi-Scale": 1,
+  "World Capital": 1,
+  "MemEvoBench": 1,
+  "AgentSafetyBench": 1,
+  "FinPersona-Bench": 1,
+  "SWE-Bench Verified": 1,
+  "SWE-Bench Lite": 1,
+  "LiveCodeBench v6": 1,
+  "LongBench v2": 1,
+  "SWE-Gym": 1,
+  "SWE-Smith": 1,
+  "BeliefTrack": 1,
+  "VideoMME": 1,
+  "MLVU": 1,
+  "LongVideoBench": 1,
+  "LVBench": 1,
+  "CG-Bench": 1,
+  "Terminal-Bench 2.0": 1,
+  "CLAW-Eval": 1,
+  "MCPMark": 1,
+  "MT-Eval": 1,
+  "Long-MT-Bench+": 1,
+  "ParaConflict": 1,
+  "Memo-Trap": 1,
+  "NQ-Swap": 1,
+  "C-Eval": 1,
+  "CMMLU": 1,
+  "AIME24&25": 1,
+  "BrUMO25": 1,
+  "HMMT": 1,
+  "BeyondAIME": 1,
+  "IMOAnswerBench": 1,
+  "BBH": 1,
+  "MMLU-Pro": 1,
+  "MMLU-STEM": 1,
+  "GPQA-Diamond": 1,
+  "TutorChat": 1,
+  "ViQuAE": 1,
+  "InfoSeek": 1,
+  "LLMBar": 1,
+  "deepset prompt injection": 1,
+  "Amazon Books Reviews": 1,
+  "CyberSecEval 2": 1,
+  "HarmBench": 1,
+  "OpenPromptInject": 1,
+  "HackAPrompt": 1,
+  "SQuAD2.0": 1,
+  "MMLU-PI": 1,
+  "RAGDOLL": 1,
+  "MathQA": 1,
+  "CommonsenseQA": 1,
+  "Inj-SQuAD": 1,
+  "Inj-TriviaQA": 1,
+  "Quora Question Pairs": 1,
+  "ORCA-DPO": 1,
+  "GPQA": 1,
+  "Dolly": 1,
+  "IMDB top-1000 movies": 1,
+  "PromptBench": 1,
+  "AQuA": 1,
+  "WildGuard": 1,
+  "MATH500": 1,
+  "AIME2024": 1,
+  "AIME2025": 1,
+  "AICrypto": 1,
+  "COCO": 1,
+  "COCO-2017": 1,
+  "Flickr30K": 1,
+  "MS-COCO Captions": 1,
+  "Visual Genome": 1,
+  "StruQ": 1,
+  "CYBERSECEVAL3": 1,
+  "BenchOverflow": 1,
+  "OASST2": 1,
+  "WildChat": 1,
+  "NLICE": 1,
+  "TCGA COAD-READ": 1,
+  "THCA": 1,
+  "OV": 1,
+  "PRAD": 1,
+  "TCIA SLN-Breast": 1,
+  "NaturalQuestions": 1,
+  "Counterfacts": 1
+ },
+ "rows": [
+  {
+   "row": 2,
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "substrate_primary": "none_qualitative",
+   "substrate_all": [
+    "none_qualitative",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'no formal benchmark/dataset used'; evaluation is qualitative demonstrations on synthetic LangChain apps plus live testing on Bing Chat and GitHub Copilot -- neither reproducible by another researcher.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 5,
+   "mechanism": "PoisonedRAG",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Natural Questions",
+    "HotpotQA",
+    "MS-MARCO"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Uses NQ/HotpotQA/MS-MARCO as the corpus (millions of clean texts) but injects only 5 malicious texts per question using the paper's own poisoning method; the corpus is shared, the poisoning construction is bespoke.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 6,
+   "mechanism": "AgentPoison",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "Agent-Driver driving-experience memory",
+    "StrategyQA",
+    "EHRAgent healthcare-record memory"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Reuses memory/knowledge bases from existing published agents (Agent-Driver, EHRAgent) but the paper augments EHRAgent's memory 'to make red-teaming harder' and builds its own StrategyQA-derived KB -- underlying agents are public but the poisoned testbeds are bespoke.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 10,
+   "mechanism": "MemoryGraft",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Custom-curated 110 handcrafted experience seeds and 12 handcrafted evaluation queries built specifically for this paper's DataInterpreter testbed; no pre-existing benchmark named.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 11,
+   "mechanism": "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'two new datasets introduced by this paper' (Memory Injection Dataset, Post-Injection Evaluation Dataset); no indication the datasets are released for reuse.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 13,
+   "mechanism": "PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "PoisonedSkills"
+   ],
+   "reusable_substrate": "no",
+   "why": "PoisonedSkills is 'a new adversarial dataset introduced by this paper', generated via the authors' own LLM-driven seed-mutation-validation pipeline from 81 expert-crafted seeds; no named pre-existing benchmark reused.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 14,
+   "mechanism": "Oracle Poisoning",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text explicitly says 'No public benchmark dataset'; the six attack scenarios are custom-designed and evaluated against a real production 42-million-node knowledge graph belonging to the authors' own organization, which nobody else can access or reproduce.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 17,
+   "mechanism": "UNNAMED: gradient-based corpus poisoning (adversarial passage injection)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Natural Questions",
+    "MS MARCO",
+    "HotpotQA",
+    "FiQA",
+    "Quora",
+    "FEVER",
+    "TREC-COVID",
+    "ArguAna",
+    "SCIDOCS"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Trains/tests the adversarial-passage attack on NQ and MS MARCO and transfers to 7 BEIR domains; the corpus is standard but the gradient-based passage-crafting method is this paper's own construction. (Later reuse of 'Zou et al.'s exact benchmark setup' by row 67 suggests this leans more reusable than a typical bespoke-on-corpus case -- flagged as a borderline call.)",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 18,
+   "mechanism": "TrojanRAG",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Natural Questions",
+    "WebQuestions",
+    "HotpotQA",
+    "MS-MARCO",
+    "SST-2",
+    "AGNews",
+    "BBQ",
+    "AdvBench-V3"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Mostly standard QA/classification corpora (NQ, WebQA, HotpotQA, MS-MARCO, SST-2, AGNews) plus the security benchmark AdvBench-V3 for one scenario, but the backdoor-trigger poisoning construction (TrojanRAG) layered on top is the paper's own.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 19,
+   "mechanism": "PANDORA (RAG Poisoning jailbreak)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No public dataset - custom-built malicious content/document corpora crafted by the authors' for the four policy-violation scenarios.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 20,
+   "mechanism": "BadRAG",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Natural Questions",
+    "MS MARCO",
+    "SQuAD",
+    "WikiASP"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Uses standard open-domain QA corpora (NQ, MS MARCO, SQuAD) and WikiASP, with BadRAG's own trigger-based poisoning and DoS attack construction built on top.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 21,
+   "mechanism": "ConfusedPilot",
+   "substrate_primary": "live_system",
+   "substrate_all": [
+    "live_system",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "HotpotQA"
+   ],
+   "reusable_substrate": "no",
+   "why": "HotpotQA is only used to seed a SharePoint corpus; the actual attack is a qualitative case study against Microsoft Copilot for Microsoft 365, a deployed commercial product nobody else can reproduce identically.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 22,
+   "mechanism": "AGGD (Approximate Greedy Gradient Descent)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Natural Questions",
+    "MS MARCO",
+    "NFCorpus",
+    "Quora",
+    "SCIDOCS",
+    "SciFact",
+    "FiQA-2018"
+   ],
+   "reusable_substrate": "partial",
+   "why": "In-domain attacks trained/tested on NQ and MS MARCO with OOD transfer to 5 BEIR datasets; the AGGD gradient-based passage-crafting method is the paper's own contribution on top of the shared corpora.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 51,
+   "mechanism": "AgentVigil",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "VWA-adv"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Uses AgentDojo and VWA-adv (an existing adversarial extension of VisualWebArena from Wu et al. 2024b, itself reused by other papers e.g. AgentTypo/row 208) in their standard task-suite form; AgentVigil's fuzzing generates new prompts but evaluates on the benchmarks' existing task/attack-target splits.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 55,
+   "mechanism": "UNNAMED: HTML accessibility-tree universal adversarial trigger injection (TWUI)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No pre-existing benchmark dataset is used; the authors construct their own evaluation sets' from five real websites plus custom login-page copies.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 66,
+   "mechanism": "AdapTools",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "IPI-3K",
+    "AgentDojo",
+    "InjectAgent"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Introduces its own new benchmark IPI-3K (3,691 trajectories, 277 attack tools) as the primary evaluation, while also using AgentDojo and InjectAgent directly for transferability -- mixed reusability, own benchmark not yet an established shared resource.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 67,
+   "mechanism": "UNNAMED: retrieval-aware IPI (trigger-fragment decomposition attack)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "MSMARCO",
+    "TREC-COVID",
+    "NFCorpus",
+    "NQ",
+    "HotpotQA",
+    "FiQA-2018",
+    "ArguAna",
+    "DBPedia",
+    "SCIDOCS",
+    "FEVER",
+    "SciFact"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Core retrieval-attack results use 11 BEIR corpora as raw material with the paper's own CEM-based prefix-optimization attack layered on top; end-to-end agentic evaluation uses custom multi-agent workflows the authors built themselves.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 68,
+   "mechanism": "MUZZLE",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "The Zoo"
+   ],
+   "reusable_substrate": "partial",
+   "why": "'The Zoo' is a newly built, open-source Docker-based sandboxed environment (not a pre-existing benchmark) hosting 4 web apps; being open-source it could plausibly be reused by others for different attacks/defenses, but at publication it is this paper's own new construction, not an established shared substrate.",
+   "confidence": "low",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 76,
+   "mechanism": "IterInject",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "live_system"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "InjectAgent"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Core evaluation uses AgentDojo's four task suites and InjectAgent's two attack categories in standard form (a new attack method plugged into the existing task/injection-target structure); a separate additional experiment extends to a sandboxed live deployment of Claude Code, which is not reusable.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 81,
+   "mechanism": "LogJack",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "LogJack"
+   ],
+   "reusable_substrate": "no",
+   "why": "LogJack is the paper's own custom benchmark of 42 payloads provisioned as real AWS resources the authors created; not stated to be released for others to reuse.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 87,
+   "mechanism": "ChatInject",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "InjecAgent",
+    "AgentDojo"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Uses InjecAgent and AgentDojo directly with their standard ASR/Utility metrics; ChatInject is a new attack (chat-template abuse) plugged into the existing benchmark structure without extending it.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 88,
+   "mechanism": "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No pre-existing external benchmark is used; the framework generates its own test corpus'; the paper itself caveats that several headline numbers are 'illustrative/projected/example data' rather than real measurements.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 96,
+   "mechanism": "Branded Whisper Attack / Vault Whisper Attack (from 'Whispers of Wealth')",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No standard benchmark is used; the paper constructs its own controlled experimental system' (a custom AP2 shopping-agent implementation) with a single fixed evaluation task repeated over trials.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 101,
+   "mechanism": "UNNAMED: privacy leakage attack chain (external-content deception + IPI + exfiltration)",
+   "substrate_primary": "live_system",
+   "substrate_all": [
+    "live_system",
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No standardized benchmark is used'; the quantitative comparison and the data-exfiltration proof-of-concept are both run against a deployed ChatGPT environment (production black-box chatbot), not reproducible by others.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 105,
+   "mechanism": "MIRAGE (Masked Injection via Residual And Generative Exploitation)",
+   "substrate_primary": "unclear",
+   "substrate_all": [
+    "unclear"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text explicitly says 'specific benchmark name not given in extracted text' -- insufficient information to determine whether the substrate is shared or bespoke.",
+   "confidence": "low",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 106,
+   "mechanism": "DACSI (Document-Authored Control-Signal Impersonation)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "SQuAD"
+   ],
+   "reusable_substrate": "no",
+   "why": "Primarily a custom multi-experiment evidence chain (E1-E6, M1) built around synthetic canary strings across toy/semi-realistic/embedding-based RAG pipelines; SQuAD is used only as distractors in one sub-experiment, not as the primary substrate.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 115,
+   "mechanism": "PI-Hunter",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "AgentDyn"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Uses AgentDojo and AgentDyn (both described as pre-existing agent-security benchmarks) with their native attack settings and standard defenses (Spotlighting, MELON, PIGuard); PI-Hunter's red-teaming method is evaluated within the existing benchmark structure.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 117,
+   "mechanism": "TIP (Tree-structured Injection for Payloads) / stealthy update attack",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No standard third-party benchmark dataset is used'; evaluation is the paper's own attack-scenario construction plus real-world case studies on live MCP deployments.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 118,
+   "mechanism": "Agent Data Injection (ADI)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_security_benchmark",
+    "live_system"
+   ],
+   "named_substrates": [
+    "AgentDojo"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Primary evaluation is the paper's own probabilistic delimiter injection benchmark spanning several agent data formats; it also extends AgentDojo with its own ADI attacks (bespoke extension) and demonstrates proof-of-concept attacks against six real production agents.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 119,
+   "mechanism": "VATS (Error-Path Injection via Implicit Authority)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No pre-existing benchmark is used; the authors construct their own mutation-tree evaluation framework' (VATS); real-world validation additionally deploys the payloads against live systems.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 127,
+   "mechanism": "Targeted Promptware Attacks",
+   "substrate_primary": "live_system",
+   "substrate_all": [
+    "live_system",
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No standardized benchmark dataset; this is a real-world red-team case study against a production system' -- 14 custom attack scenarios evaluated against live Gemini Web/Mobile/Assistant surfaces.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 133,
+   "mechanism": "OMNI-LEAK (Orchestrator Multi-Agent Network Induced Data Leakage)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states the authors 'construct the first benchmark for orchestrator multi-agent data leakage' -- a custom SQL database and 10 custom-devised attacks; not stated as released for reuse.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 134,
+   "mechanism": "Foot-in-the-Door (FITD) attack",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "InjectAgent"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Built on InjectAgent's Direct Harm and Data Steal attacks (standard benchmark), but FITD adds its own distractor-tool mechanism (8 distractor tools, 4 position/timing configurations) as a bespoke extension layered on top.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 135,
+   "mechanism": "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "InjecAgent",
+    "Agent Security Bench (ASB)"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Uses three existing static IPI benchmarks (AgentDojo, InjecAgent, ASB) for the baseline comparison, but the paper's core contribution is 949 of its own adapted/adjusted IPI payloads used to build three novel adaptive attacks not part of the original benchmarks.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 146,
+   "mechanism": "Agent-as-a-Proxy attack",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Uses AgentDojo v1.2.1's Slack suite and other default suites directly, with AgentDojo's native static injection attacks as the non-adaptive comparison point; Agent-as-a-Proxy is a new attack method evaluated within AgentDojo's existing, unmodified task structure.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 155,
+   "mechanism": "Cross-App Context Poisoning (Confused ChatGPT)",
+   "substrate_primary": "live_system",
+   "substrate_all": [
+    "live_system",
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No pre-existing benchmark'; the empirical measurement is of the live ChatGPT Apps ecosystem itself, and attack validation uses two author-authored apps run against live ChatGPT models in private accounts.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 160,
+   "mechanism": "AutoDojo (adaptive black-box IPI attack generation)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'Built on top of AgentDojo, using its banking, slack, and travel task suites' directly with nine existing SOTA defenses; AutoDojo's adaptive attack is plugged into the standard, unmodified AgentDojo task structure.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 169,
+   "mechanism": "ToolHijacker",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "MetaTool",
+    "ToolBench"
+   ],
+   "reusable_substrate": "partial",
+   "why": "MetaTool and ToolBench are pre-existing tool-selection datasets (not security benchmarks) used as the pool of benign tool documents; ToolHijacker's malicious tool-document crafting and the 10 hand-designed target tasks per dataset are the paper's own construction on top.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 173,
+   "mechanism": "WebInject",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "The 10 webpage datasets (5 real-website categories collected via SingleFile, 5 GPT-4-Turbo-generated synthetic categories) are collected/created by the authors specifically for this paper; no pre-existing benchmark named.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 174,
+   "mechanism": "CrossInject",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "CoEDIT",
+    "SST2"
+   ],
+   "reusable_substrate": "no",
+   "why": "The two victim agents (RecipeMaster, PoetryGenius) are custom-built testbeds; CoEDIT and SST2 are only used as a source of injected-task content, not as the primary evaluation substrate, so the overall setup is not reproducible off the shelf.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 175,
+   "mechanism": "RL-Hammer",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "InjecAgent",
+    "AgentDojo",
+    "AdvBench"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Uses InjecAgent and AgentDojo with standard train/val/test splits, and AdvBench with the same split as a prior paper (Paulus et al. 2024); RL-Hammer's RL-trained attacker is evaluated within these existing benchmark structures.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 176,
+   "mechanism": "UNNAMED: Prompt Injection 2.0 (hybrid PI + classic web-exploit combination attacks)",
+   "substrate_primary": "unclear",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "BIPIA",
+    "AgentDojo"
+   ],
+   "reusable_substrate": "no",
+   "why": "This is a synthesis/survey paper: 'No new model evaluation is conducted by the authors; the paper reviews findings from third-party research it cites' (BIPIA, AgentDojo/CaMeL results). No original evaluation substrate of its own to judge for reusability.",
+   "confidence": "low",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 180,
+   "mechanism": "UNNAMED: data flow-based injection attack for observed-data exfiltration ('Important message' template)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AgentDojo"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Uses AgentDojo's Banking suite but extends it with 32 additional synthetic banking tasks generated via the authors' own multi-LLM role-play pipeline (48 tasks total) -- a bespoke extension of the shared benchmark.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 181,
+   "mechanism": "ObliInjection",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Amazon Reviews",
+    "Multi-News"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Amazon Reviews (review summarization) and Multi-News (news summarization) are standard generic datasets used as raw multi-source material; ObliInjection's order-oblivious injection method and single-segment contamination approach are the paper's own construction on top.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 182,
+   "mechanism": "Fun-tuning",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Purple Llama CyberSecEval (PPL40 subset)"
+   ],
+   "reusable_substrate": "yes",
+   "why": "PPL40 is a 40-example subset of Meta's Purple Llama CyberSecEval indirect-injection benchmark, an established named security benchmark; Fun-tuning's fine-tuning-interface attack is evaluated directly against this existing benchmark subset (with a corrected judge prompt, an evaluation-methodology tweak rather than a benchmark extension).",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 186,
+   "mechanism": "AIShellJack (coding-rule/config-file prompt injection against agentic IDE editors)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AIShellJack"
+   ],
+   "reusable_substrate": "no",
+   "why": "AIShellJack is 'a new automated evaluation framework/benchmark introduced by the paper' (314 payloads across 5 development scenarios); built from public components (atomic-red-team, awesome-cursorrules) but assembled and introduced as this paper's own new benchmark, not stated as released for reuse.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 189,
+   "mechanism": "HOUYI",
+   "substrate_primary": "live_system",
+   "substrate_all": [
+    "live_system",
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No formal public dataset - real-world evaluation against 36 commercial LLM-integrated applications'; HOUYI's 5 hand-designed exploit scenarios are run against live, black-box commercial products.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 190,
+   "mechanism": "Mind Mapping Prompt Injection",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No external benchmark. A purpose-built set of mind map images with embedded malicious structure.' Models are not enumerated in the extracted material, reducing overall detail.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 193,
+   "mechanism": "Neural Exec",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No standard benchmark is used; the authors build custom data universes' (a modular prompt universe and an Alpaca-derived payload universe), compared against 12 handcrafted baseline triggers compiled by the authors.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 194,
+   "mechanism": "Prompt Infection",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No pre-existing benchmark; the authors construct their own dataset' of 120 user instructions with synthetic PDFs/emails, plus a separate custom society-of-agents simulation.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 204,
+   "mechanism": "UNNAMED: PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No external benchmark dataset is used; the authors construct their own proof-of-concept evaluation protocol' of 14 attack variants against the CAI framework.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 205,
+   "mechanism": "System Prompt Poisoning (SPP)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "MATH",
+    "HumanEval"
+   ],
+   "reusable_substrate": "yes",
+   "why": "MATH and HumanEval are standard, unmodified reasoning/code benchmarks with their own accuracy/pass@1 metrics; System Prompt Poisoning only changes the system prompt, not the corpus itself, so another researcher could apply a different system-prompt attack to the same MATH/HumanEval sets and get a directly comparable accuracy-drop number.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 207,
+   "mechanism": "UNNAMED: rule-tag semantic reframing template attack ('Breaking the Prompt Wall')",
+   "substrate_primary": "live_system",
+   "substrate_all": [
+    "live_system",
+    "none_qualitative"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No formal dataset or benchmark is used or introduced; this is a qualitative, hand-constructed case study' of three real-world injections against ChatGPT-4o, o3-mini, and a custom GPT agent.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 208,
+   "mechanism": "AgentTypo",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "VWA-adv"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Evaluated on VWA-Adv, an existing multimodal agent-attack benchmark built on VisualWebArena (77 adversarial tasks) also reused by other papers (e.g. row 51/AgentVigil); AgentTypo-pro is a new attack evaluated within this benchmark's existing task structure.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 214,
+   "mechanism": "MAD-Spear (Conformity-Driven Prompt Injection Attack)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "GSM-Ranges",
+    "MMLU (Logical Fallacies subset)"
+   ],
+   "reusable_substrate": "partial",
+   "why": "GSM-Ranges and the MMLU Logical Fallacies subset are standard reasoning benchmarks, and SoM is an existing published multi-agent-debate framework; MAD-Spear's conformity-driven injected messages are the paper's own bespoke construction layered into the debate rounds.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 220,
+   "mechanism": "Indirect Data Poisoning (Distributed Denial of Science)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text states 'No pre-existing benchmark; the authors construct their own experimental pipeline' across five research topics with unnamed 'pre-existing tabular datasets' poisoned via metadata and uploaded to private repositories -- neither the pipeline nor the specific poisoned datasets are identifiable/reusable by others.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 224,
+   "mechanism": "VeriGrey (grey-box agent fuzzing for IPI)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AgentDojo"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Main quantitative evaluation is AgentDojo's 97 testing campaigns across four suites; two additional case studies (Gemini CLI, OpenClaw/ClawHub) are the paper's own manually-curated skill samples, so the headline numbers come from a reusable shared benchmark.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 227,
+   "mechanism": "Parallel-Poisoned Web (fingerprinting + website cloaking against AI web agents)",
+   "substrate_primary": "none_qualitative",
+   "substrate_all": [
+    "none_qualitative"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "Text explicitly calls this 'a single proof-of-concept experiment' using one author-built internal website; no benchmark or dataset, just a demonstration.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 229,
+   "mechanism": "MAS hijacking",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo"
+   ],
+   "reusable_substrate": "no",
+   "why": "'No standard benchmark dataset is used; the authors construct their own controlled attack scenarios' (Web Redirect, Local File, etc.); AgentDojo/Debenedetti et al. templates are only borrowed as a prior-IPI baseline for comparison, not the evaluation substrate itself.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 231,
+   "mechanism": "MCP-ITP (Implicit Tool Poisoning)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "MCPTox"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Evaluated directly on MCPTox's 548 implicit-tool-poisoning test cases against its original hand-crafted poisoned tools under identical server/tool contexts -- a named, reusable pre-existing benchmark.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 232,
+   "mechanism": "Cross-Tool Description Poisoning",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Evaluated on AgentDojo (4 suites, 97 tasks) and ASB (10 scenarios, 400+ tools), both named pre-existing security benchmarks used as-is with poisoned-tool overlays.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 233,
+   "mechanism": "UNNAMED: descriptor-level semantic manipulation attack (MCP tool-selection bias)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing named benchmark is used; the authors construct their own controlled MCP evaluation testbed' (scenario generator, simulated MCP layer, observability layer).",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 238,
+   "mechanism": "AutoMalTool",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing benchmark; the authors construct their own evaluation using three popular real-world benign MCP server packages,' generating their own task/behavior pairs; MCP-Scan and A.I.G are detection baselines, not a shared attack substrate.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 239,
+   "mechanism": "Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'A self-constructed large-scale census of the real-world MCP ecosystem' plus ten hand-constructed toolchains exploited live in the Cursor IDE -- bespoke census and live exploitation, no named reusable benchmark.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 255,
+   "mechanism": "Salience Induction",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'The authors' own new benchmark, SalientWiki-MH' -- a decoy-annotated Multi-Hop QA set built by this paper from Wikipedia-derived questions; it is a newly introduced bespoke benchmark, not an existing shared one.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 257,
+   "mechanism": "PIDP-Attack",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Natural Questions",
+    "HotpotQA",
+    "MS-MARCO"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Uses three standard open-domain QA corpora (NQ, HotpotQA, MS-MARCO) as raw material with a standard retriever; the prompt-injection + database-poisoning attack construction on top is the paper's own.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 259,
+   "mechanism": "RefineRAG",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Natural Questions",
+    "MS MARCO"
+   ],
+   "reusable_substrate": "partial",
+   "why": "NQ and MS MARCO are standard corpora; the retriever-guided word-level poisoning method (RefineRAG) layered on top is this paper's own construction.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 263,
+   "mechanism": "UNNAMED: retriever fine-tuning backdoor attack",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "BEIR",
+    "Natural Questions",
+    "MS-MARCO",
+    "NFCorpus",
+    "HotpotQA"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Uses BEIR-suite datasets (NQ, MS-MARCO, NFCorpus, HotpotQA) as corpora; the backdoored-retriever fine-tuning and poisoned-passage generation are bespoke to this paper.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 267,
+   "mechanism": "COMA",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing public benchmark dataset is used; instead, the paper evaluates across three constructed tasks' (ATS, QA, SPC) designed specifically for compression-attack evaluation.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 273,
+   "mechanism": "LogicPoison",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "HotpotQA",
+    "2WikiMultihopQA",
+    "MuSiQue"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Three standard multi-hop QA benchmarks are used as corpora; the logical-attack poisoning method and its comparison to PoisonedRAG are the paper's own construction on top.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 275,
+   "mechanism": "IKEA (Implicit Knowledge Extraction Attack)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "HealthCareMagic-100k",
+    "HarryPotterQA",
+    "Pokemon dataset"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Three pre-existing domain knowledge-base datasets supply the RAG corpora; the implicit knowledge-extraction attack pipeline built on top is the paper's own, so numbers are not directly comparable to another paper's use of the same corpora.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 279,
+   "mechanism": "FlashRT",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "LongBench",
+    "MuSiQue",
+    "NarrativeQA",
+    "GovReport",
+    "Natural Questions",
+    "HotpotQA",
+    "MS-MARCO",
+    "Long Code Arena"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Uses LongBench subsets and NQ/HotpotQA/MS-MARCO knowledge databases as raw material; the efficient red-teaming attack (FlashRT) construction on top is the paper's own.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 280,
+   "mechanism": "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'The paper's own novel benchmark, MPBench' -- text explicitly notes existing agent-security benchmarks like AgentDojo 'do not cover this specific attack surface,' confirming no reusable pre-existing substrate.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 294,
+   "mechanism": "Inter-Agent Trust Exploitation (AI agent privilege escalation)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing benchmark; the authors built their own agent evaluation infrastructure using LangChain and LangGraph' with custom adversarial payload variants.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 296,
+   "mechanism": "ZombAI",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No external benchmark. A purpose-built trial set of 90 attack attempts' distributed across six author-defined strategy categories, run against a single sandboxed agent.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 297,
+   "mechanism": "AGENTBAIT",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "WebVoyager"
+   ],
+   "reusable_substrate": "no",
+   "why": "Main attack evaluation runs on the paper's own AGENTBAIT task sets across five scenarios; WebVoyager (an existing benchmark) is only sampled for a separate usability/task-completion side-check, not the attack substrate itself.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 300,
+   "mechanism": "Sampling-Based Injection (MCP sampling/createMessage attack)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "InjecAgent",
+    "AgentDojo"
+   ],
+   "reusable_substrate": "partial",
+   "why": "PROTOAMP is 'a novel framework the authors built by wrapping benchmark tool functions from InjecAgent ... and AgentDojo' plus 137 new protocol-specific attacks -- built on top of shared benchmarks per the spec's 'built on top of AgentDojo is not the same as used AgentDojo' guidance.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 309,
+   "mechanism": "SkillJect",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Skill-Inject"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Main evaluation is the paper's own 100-skill benchmark across four attack categories; a separate direct comparison reuses Skill-Inject's clean skills and malicious scripts under its own setting, giving a partially reusable component alongside the bespoke main benchmark.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 312,
+   "mechanism": "Guidance Injection",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'The paper constructs ORE-Bench' -- a bespoke simulated developer workspace with a fictional persona and 26 author-written malicious skills, introduced by this paper.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 314,
+   "mechanism": "POISE",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Skill-Inject",
+    "SkillsBench"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Primary benchmark is Skill-Inject (Schmotz et al., 2026), a named pre-existing agent-skills injection benchmark, cross-validated on SkillsBench; both are named, obtainable benchmarks rather than this paper's own construction.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 315,
+   "mechanism": "PlanFlip",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing benchmark; the authors' own evaluation harness spans four realistic agentic task scenarios' with 20 cells per model, entirely bespoke.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 328,
+   "mechanism": "UNNAMED: RAG-manipulation attack on multi-agent debate consensus",
+   "substrate_primary": "unclear",
+   "substrate_all": [
+    "unclear"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "datasets_benchmarks, models_evaluated, and key_result are all empty in the extracted text; nothing to judge from.",
+   "confidence": "low",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 329,
+   "mechanism": "UNNAMED: subagent inheritance exploitation (4 classes: insecure memory inheritance, absent resource access control, async memory divergence, unauthorized cross-agent termination)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing benchmark; the study is a framework-level security analysis using custom-built proof-of-concept (PoC) exploits' against real deployments of OpenClaw, Agent Zero, and Hermes -- bespoke scenarios on live frameworks.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 341,
+   "mechanism": "HARE (Hybrid Agent Roleplay Exploitation) / Token Economy Poisoning",
+   "substrate_primary": "unclear",
+   "substrate_all": [
+    "unclear"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "datasets_benchmarks, models_evaluated, and key_result are all empty in the extracted text; nothing to judge from.",
+   "confidence": "low",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 353,
+   "mechanism": "F2A (Feign Agent Attack)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No external benchmark is used; the authors construct 10 original attack prompts' spanning ten author-chosen harm categories.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 354,
+   "mechanism": "UNNAMED: skill-file prompt injection (trivial/non-optimized variant)",
+   "substrate_primary": "none_qualitative",
+   "substrate_all": [
+    "none_qualitative"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No formal benchmark dataset; this is a short vulnerability-disclosure/demonstration paper using a single case study' on one modified real skill file.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 355,
+   "mechanism": "AudioHijack",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing public benchmark is used; the authors construct their own evaluation protocol' spanning 6 misbehavior categories, with additional demos against live commercial voice agents (Mistral AI, Microsoft Azure).",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 356,
+   "mechanism": "ClawTrojan multi-step trojan/backdoor attack paradigm",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "InjecAgent"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Headline results (95.5% step ASR etc.) are on the paper's own ClawTrojan benchmark (339 attack samples/919 steps); AgentDojo and InjecAgent are used only to show near-zero ASR under prior single-step benchmarks, motivating -- not substituting for -- the new bespoke benchmark.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 361,
+   "mechanism": "StruPhantom",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing public benchmark is used; the paper constructs its own evaluation setup' across custom tabular agents and file formats, plus live tests on real commercial platforms Doubao and Coze.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 362,
+   "mechanism": "Silent Egress (implicit prompt injection via URL preview/metadata)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No external benchmark is used. The paper builds its own synthetic, fully local experimental testbed' of malicious web pages across four injection surfaces.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 370,
+   "mechanism": "Attractive Metadata Attack (AMA)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AgentBench",
+    "Agent Security Bench (ASB)",
+    "AI4Privacy"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Ten scenarios are 'built on the AgentBench framework and ... Agent Security Bench (ASB)' with synthetic PII from AI4Privacy; the paper adds its own ten scenarios and metrics on top of these shared frameworks, so it is a built-on-top case rather than a straight reuse -- per spec guidance this is usually 'partial'.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 377,
+   "mechanism": "Plan Injection",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "WebVoyager"
+   ],
+   "reusable_substrate": "partial",
+   "why": "The Plan Injection Benchmark is entirely new/bespoke; WebVoyager-Privacy is explicitly 'an augmentation of the existing WebVoyager benchmark' with the paper's own exfiltration-goal injections layered on top, giving a mixed but overall not-directly-reusable substrate.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 680,
+   "mechanism": "LogInject / Passive Prompt Injection",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "LogHub"
+   ],
+   "reusable_substrate": "partial",
+   "why": "LogInject-1.0 is the paper's own new benchmark; benign samples are drawn from the pre-existing LogHub datasets (HDFS, BGL, OpenStack) plus synthetic generation, with the adversarial log-injection construction being this paper's own.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 681,
+   "mechanism": "Adversarial HalluSquatting",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No standard external benchmark; the authors construct their own experimental probes' with repeated prompting, tested against live real-world platforms (GitHub, ClawHub) and commercial coding assistants.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 690,
+   "mechanism": "Relinking",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)",
+    "InjecAgent",
+    "tau2-bench"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Four named agent-security benchmarks are used 'to construct benchmark-derived evaluation sets with matched clean-split controls and Relink attack instances' -- the benchmarks are the base, but the Relink attack instances layered on top are this paper's own construction, so numbers are not directly comparable to a different attack run on the same raw benchmarks.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 693,
+   "mechanism": "Reasoning-Extension Denial-of-Service (DoS)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "live_system",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "ASB (Agent Security Bench)",
+    "AgentHarm",
+    "OpenHands",
+    "LangGraph",
+    "BrowserGym",
+    "OSWorld"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Three named security benchmarks (AgentDojo, ASB, AgentHarm) plus four real deployed agent frameworks are used as attack surfaces, but the DoS payload-generation/optimization pipeline built on top is the paper's own, plus a custom Flask e-commerce case study.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 695,
+   "mechanism": "Brain-Prompt Injection",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "EEGMMI (EEG Motor Movement/Imagery)"
+   ],
+   "reusable_substrate": "partial",
+   "why": "EEGMMI is a standard pre-existing EEG dataset used as raw signal material; the Route-Safety Audit Contract and BCI-LLM routing attack/defense protocol built on top are this paper's own, and this is an unusual (non-NLP) domain so the mapping onto the spec's categories is less certain.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 699,
+   "mechanism": "Cross-Session Stored Prompt Injection (XSPI)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing external benchmark is used; instead, the paper builds its own sandbox toolkit and evaluation protocol' across persistent-state channels.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 701,
+   "mechanism": "MIRAGE",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AgentHazard",
+    "GhostEI"
+   ],
+   "reusable_substrate": "no",
+   "why": "'A novel 1,111-sample benchmark ... generated by the paper's own MIRAGE pipeline'; AgentHazard and GhostEI are only used as prior baselines for comparison on an overlapping app subset, not the reused substrate.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 705,
+   "mechanism": "Log-Substrate Prompt Injection",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "CIC-IDS2017",
+    "UNSW-NB15"
+   ],
+   "reusable_substrate": "no",
+   "why": "Log generation is 'structured after (schema/scenario references, not direct traffic traces from) CIC-IDS2017 and UNSW-NB15' -- the paper explicitly disclaims reusing the actual datasets, only their schema, so the realized benchmark is bespoke.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 708,
+   "mechanism": "Prompt Overflow Attack",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing external benchmark dataset is used; the paper constructs its own evaluation via systematically generated overlong adversarial prompts.'",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 709,
+   "mechanism": "UNNAMED: IPC-channel cross-origin injection/exfiltration attacks against agentic browsers",
+   "substrate_primary": "unclear",
+   "substrate_all": [
+    "unclear"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "datasets_benchmarks, models_evaluated, and key_result are all empty in the extracted text; nothing to judge from.",
+   "confidence": "low",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 711,
+   "mechanism": "ASPI (Ambiguous-State Prompt Injection)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo"
+   ],
+   "reusable_substrate": "partial",
+   "why": "ASPI is 'a novel benchmark of 728 paired task-attack scenarios built on top of AgentDojo,' reusing AgentDojo's tool implementations/environments/scoring but adding new ambiguity-clarification scenarios -- a built-on-top case, per spec usually 'partial'.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 718,
+   "mechanism": "RTA-PostForge (response-path tampering attack)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "SWE-bench",
+    "APPS",
+    "AgentDojo",
+    "Agent Security Bench (ASB)"
+   ],
+   "reusable_substrate": "partial",
+   "why": "'SWE-bench ... APPS ... AgentDojo ... and Agent Security Bench/ASB ... all reused as standard benchmarks with the paper's own Relay Tampering Attack (RTA) injected as an additional attack condition' -- benchmarks are standard but the RTA forced-edit/hidden-oracle construction on top is bespoke.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 727,
+   "mechanism": "PromptFuzz-SC",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing named benchmark dataset; the paper's own PromptFuzz-SC framework generates adversarial prompts' via its own mutation-operator library and search strategy.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 736,
+   "mechanism": "PISmith",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "PIArena",
+    "SQuAD v2",
+    "Dolly Closed QA",
+    "Dolly Info Extraction",
+    "Dolly Summarization",
+    "Natural Questions",
+    "HotpotQA",
+    "MS-MARCO",
+    "LongBench",
+    "InjecAgent",
+    "AgentDojo"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Evaluated on the 13 named benchmarks of PIArena (itself a standard prompt-injection benchmark suite) plus InjecAgent and AgentDojo in agentic settings -- all named, pre-existing, directly reusable benchmarks.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 740,
+   "mechanism": "Reverse CAPTCHA (invisible Unicode instruction injection)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'Self-constructed 'Reverse CAPTCHA' benchmark: 30 trivia question-answer pairs' each encoded with hidden alternate answers -- entirely the paper's own.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 743,
+   "mechanism": "CoT Forgery (Chain-of-Thought Forgery)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "StrongREJECT"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'Primary evaluation uses StrongREJECT (a harmful-request/jailbreak benchmark)' to measure ASR for CoT Forgery vs. standard injection, a named reusable safety benchmark; a separate bespoke 100-attack agentic exfiltration task and a 1,000-attempt correlation study supplement it but are not the primary substrate.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 750,
+   "mechanism": "PI3D",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No pre-existing public benchmark; the authors construct their own evaluation setup spanning three virtual 3D environments' plus matching real-world physical environments.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 751,
+   "mechanism": "AutoInject",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AgentDojo"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'Evaluated on AgentDojo (Debenedetti et al. 2024), a dynamic benchmark for prompt injection attacks/defenses in LLM agents' across its standard four domains with ground-truth evaluation functions.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 754,
+   "mechanism": "UNNAMED: multi-probe evasive GCG suffix attack",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "TaskTracker"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'The authors recreate the TaskTracker dataset used by Abdelnabi et al.' following the same train/test splits and using the same released linear-probe detectors -- a named prior security benchmark/detector, faithfully reproduced rather than newly built.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 756,
+   "mechanism": "PINA",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "R2R (Room-to-Room)"
+   ],
+   "reusable_substrate": "partial",
+   "why": "R2R is a standard vision-and-language navigation dataset supplying the instruction set; the prompt-injection attack construction and its distribution-analyzer/attack-evaluator pipeline built on top are the paper's own.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 762,
+   "mechanism": "Xmera (chimera MitM framework)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "TriviaQA",
+    "HotpotQA",
+    "Natural Questions"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Base QA sets (TriviaQA/HotpotQA/NQ) are adapted (context stripped) and then, for beta/gamma-chimera, the authors build and release their own 3,000-sample factually-adversarial dataset via GPT-4o generation + entity/context perturbation -- the attack material itself is the paper's own construction on top of shared corpora.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 764,
+   "mechanism": "ToolLeak",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [
+    "MCP-Zero"
+   ],
+   "reusable_substrate": "no",
+   "why": "\"No standard benchmark dataset is used; the paper constructs its own emulated multi-agent testbed... plus live tests against the six real-world coding agent products.\" MCP-Zero is used only as a reference corpus for a defense perplexity baseline, not as the attack substrate.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 768,
+   "mechanism": "DataFlip",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "DataSentinel setup (protocol, not a released benchmark)"
+   ],
+   "reusable_substrate": "no",
+   "why": "The Key Extraction and Prompt Injection datasets are constructed by the authors (\"following the same setup as DataSentinel\" for task types), not drawn from a named, independently obtainable benchmark; DataSentinel is a prior defense method/protocol, not itself a shared benchmark.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 772,
+   "mechanism": "Checkpoint-GCG",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "AlpacaFarm",
+    "Safety-Tuned Llamas (generalization check)"
+   ],
+   "reusable_substrate": "partial",
+   "why": "AlpacaFarm is a named, reusable instruction-following corpus used throughout to build prompt-injection attack samples, but the specific sample splits (50 for auditing, 10 train/198 test for the universal suffix) are this paper's own construction on top of it.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 774,
+   "mechanism": "Separator Injection Attack",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "\"The paper constructs custom OOD dialogue templates and multi-task instruction-following (MIF) task combinations\" and defines its own SIA task targets (Table 5); TAP and MGCG named in the text are baseline attack methods, not benchmarks.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 775,
+   "mechanism": "UNNAMED: diverse RL red-teaming (auto-generated rewards + multi-step RL)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Anthropic 'Harmless' dataset (Bai et al., 2022)"
+   ],
+   "reusable_substrate": "partial",
+   "why": "\"No public benchmark is used; the authors construct two task-specific datasets.\" The injection task is built from auto-generated goals plus internal browsing/function-calling data; the jailbreak task is seeded from the shared Anthropic Harmless dataset but heavily transformed via 3-shot prompting into new (goal, criteria) pairs.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 776,
+   "mechanism": "AutoRed",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "\"No external benchmark surfaced. Attack scenarios are generated by the framework itself.\"",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 778,
+   "mechanism": "Cognitive Overload Attack",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "Forbidden Question Dataset",
+    "JailbreakBench"
+   ],
+   "reusable_substrate": "yes",
+   "why": "\"Two established jailbreak evaluation datasets: the Forbidden Question Dataset and JailbreakBench\" are used directly to measure ASR; another attack's prompts could be substituted against the same two benchmarks for a directly comparable number, though the paper also layers its own CL1-CL11 prompt set and a dual-task protocol on top.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 780,
+   "mechanism": "PromptFuzz",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [
+    "TensorTrust",
+    "Language Model Inversion (LMI) dataset",
+    "Lakera dataset",
+    "MMLU"
+   ],
+   "reusable_substrate": "yes",
+   "why": "The core evaluation (bestASR, ESR, Coverage in Table I) runs on the TensorTrust dataset's 300 sampled defenses, a named, independently obtainable prompt-injection benchmark other attacks are already compared against in this same paper (GPTFuzz-injection, Human Expert, GCG-injection baselines get the same numbers).",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 783,
+   "mechanism": "UNNAMED: ChatGPT memory/URL-exfiltration prompt injection bypass",
+   "substrate_primary": "live_system",
+   "substrate_all": [
+    "live_system",
+    "none_qualitative"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "\"N/A - no dataset or benchmark is used. This is a vulnerability-disclosure/proof-of-concept security paper demonstrating two concrete attack techniques against a live, deployed system (ChatGPT).\"",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 786,
+   "mechanism": "Prompt-Injected Data Extraction",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset",
+    "live_system"
+   ],
+   "named_substrates": [
+    "WikiQA",
+    "GPT Store (production custom GPTs)"
+   ],
+   "reusable_substrate": "partial",
+   "why": "The primary substrate is a custom-collected 1,165-article Wikipedia datastore built by the authors (plus a Harry Potter datastore ablation); WikiQA supplies only the anchor/attack query set for open-source-LM experiments, and the production-system tests hit live GPT Store apps.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 816,
+   "mechanism": "ZBEAST",
+   "substrate_primary": "unclear",
+   "substrate_all": [
+    "unclear"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "datasets_benchmarks, models_evaluated, and key_result are all empty in the source packet; nothing in the extracted text supports a classification.",
+   "confidence": "low",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 818,
+   "mechanism": "SafeSearch",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "SafeSearch benchmark"
+   ],
+   "reusable_substrate": "no",
+   "why": "\"The paper's own SafeSearch benchmark: 300 high-quality test cases... generated automatically via an LLM-assisted pipeline\" -- a new benchmark introduced by this paper; the text does not state it is publicly released for others to run different agents/defenses against.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 826,
+   "mechanism": "UNNAMED: chat-template inference-time backdoor",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "SQuAD v1.1",
+    "AgentDojo",
+    "Agent Security Bench (ASB)",
+    "SORRY-Bench",
+    "Jailbreak-in-the-Wild"
+   ],
+   "reusable_substrate": "yes",
+   "why": "The flagship agentic tool-hijacking results (3,868 episodes) run unmodified on AgentDojo (4 suites/86 tasks/27 injections) and ASB (10 suites/50 tasks/400 injections) -- named, off-the-shelf security benchmarks -- alongside SQuAD and custom forbidden-resource prompt sets used for other sub-experiments.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 829,
+   "mechanism": "UNNAMED: backdoor-based RAG data extraction attack",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "MedQA",
+    "MMLU",
+    "MedMCQA",
+    "PubMedQA"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Four named medical QA benchmarks supply the questions, but the RAG knowledge database (23.9M-article Clinical Guidelines corpus) and the backdoor-poisoning construction on top are the paper's own.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1009,
+   "mechanism": "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "partial",
+   "why": "\"A novel open dataset of 15 real cyber-attack cases... prepared specifically for adversarial string injection, released alongside the code.\" It is the paper's own dataset, but its release with code means the same 15 traces could be reused by others, even though it was purpose-built for this evasion attack style.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 24,
+   "mechanism": "lost in the middle",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "NaturalQuestions-Open",
+    "synthetic key-value retrieval task"
+   ],
+   "reusable_substrate": "partial",
+   "why": "NQ-Open supplies the documents/questions, but the multi-document construction (varying number of distractor documents and gold-document position) is this paper's own design; the fully synthetic KV-retrieval task is entirely own_purpose_built.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2023
+  },
+  {
+   "row": 25,
+   "mechanism": "distraction by irrelevant context",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "GSM8K",
+    "SVAMP",
+    "DROP",
+    "GSM-IC"
+   ],
+   "reusable_substrate": "partial",
+   "why": "GSM-IC is a new dataset this paper derives from GSM8K by inserting one irrelevant sentence per problem; SVAMP and DROP are used similarly as generic bases with the paper's own irrelevant-context construction layered on top.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2023
+  },
+  {
+   "row": 28,
+   "mechanism": "UNNAMED: context-length-induced degradation independent of retrieval failure",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "GSM8K",
+    "MMLU",
+    "HumanEval",
+    "RULER"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Distraction tokens are inserted between evidence and question drawn from GSM8K/MMLU/HumanEval and two RULER QA tasks, but the distraction-insertion methodology (Paul Graham essay tokens, whitespace, attention-masking) and the new Variable Summation task are the paper's own construction.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 29,
+   "mechanism": "context drift",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "tau-bench"
+   ],
+   "reusable_substrate": "partial",
+   "why": "tau-bench (retail/airline, tool-using agent vs. LLM user simulator) is a named, pre-existing agent benchmark used largely as-is for one half of the evaluation, but the primary synthetic 8-turn controllable rewriting task with injected conflicting instructions is the paper's own construction.",
+   "confidence": "low",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 30,
+   "mechanism": "UNNAMED: getting lost in multi-turn conversation (premature-answer unreliability under underspecification)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "HumanEval",
+    "LiveCodeBench",
+    "Spider",
+    "Berkeley Function Calling Leaderboard",
+    "GSM8K",
+    "ToTTo",
+    "WMT19"
+   ],
+   "reusable_substrate": "partial",
+   "why": "The six underlying task sets are named, pre-existing single-turn benchmarks, but the 'sharded instruction' simulation methodology that fragments each task into a multi-turn conversation (90-120 shards/task, FULL/CONCAT/SHARDED conditions) is this paper's own construction on top.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 32,
+   "mechanism": "context rot (agentic/long-horizon search)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "BrowseComp",
+    "BrowseComp-Plus",
+    "xbench-DeepSearch"
+   ],
+   "reusable_substrate": "yes",
+   "why": "All three are named, pre-existing long-horizon agentic search benchmarks used directly (subsampled for cost, not restructured) to measure how models behave as trajectory length grows -- no bespoke attack construction is layered on top, so another method could be run on the same subsets for comparable numbers.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 308,
+   "mechanism": "context rot",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "Agentic Context Benchmark (ACB-2026)"
+   ],
+   "reusable_substrate": "yes",
+   "why": "ACB-2026 is a new benchmark from this paper, but the text states \"the full benchmark suite, reference implementations and analysis code are publicly available for independent replication,\" which makes it a released, off-the-shelf artifact despite being purpose-built.",
+   "confidence": "low",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 379,
+   "mechanism": "classifier context rot",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "MonitorBench"
+   ],
+   "reusable_substrate": "partial",
+   "why": "MonitorBench (Jotautaite et al., 2026) supplies the 148 dangerous-action transcripts, but the Needle Insertion and Padded-MonitorBench constructions (padding with the authors' own 80 Claude Code transcripts up to 800K tokens) are this paper's own additions on top.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 386,
+   "mechanism": "extraneous cognitive load (context engineering overload)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "LiveBench",
+    "CommonGen-Hard"
+   ],
+   "reusable_substrate": "yes",
+   "why": "LiveBench and CommonGen-Hard are named, pre-existing generic benchmarks used directly to score the multi-agent coordination method, without a bespoke attack/perturbation layer built on top.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 389,
+   "mechanism": "UNNAMED: agent-skill requirement decay under long trajectories (skill/requirement fade)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "\"No external benchmark dataset; the study uses a single production-derived, white-box code-audit workflow (internally called 'Stage 4CD')\" with requirements the authors derived and validated themselves.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 391,
+   "mechanism": "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "\"No external/standard benchmark is used; the paper constructs synthetic training tasks from scratch\" (Free Recall, Running Span, Combined, Masked Sequence Completion), training small models from scratch on them.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 394,
+   "mechanism": "Attention Latch",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "MultiWOZ 2.2"
+   ],
+   "reusable_substrate": "partial",
+   "why": "MultiWOZ 2.2 supplies the base dialogue material, but the paper builds its own three stress-testing tiers (Shallow Retrieval, High-Entropy SOP, Semantic Hijacking) and a novel 'Aggregate Pivot Accuracy' metric on top of it.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 407,
+   "mechanism": "mechanistic refinement of lost-in-the-middle (threshold-dependent onset at ~50% of context window; effect vanishes near window limits)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "RuleTaker (simplified/adapted)"
+   ],
+   "reusable_substrate": "no",
+   "why": "The four 'Retrieval-Reasoning Minimal Pair' datasets (MonoRel, PIR, Simplified RuleTaker, BoxTracker) are constructed by the authors specifically to control relative input length and premise position; only RuleTaker echoes a prior dataset name and even that is an authors' simplification.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 417,
+   "mechanism": "mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "NaturalQuestions multi-document QA (Liu et al. 2024 setup)",
+    "KV retrieval (Liu et al. 2024 setup)",
+    "LongBench",
+    "MMLU",
+    "LooGLE"
+   ],
+   "reusable_substrate": "yes",
+   "why": "The paper explicitly reuses the exact Liu et al. 2024 ('Lost in the Middle') NQ and KV-retrieval benchmark setups (\"both from Liu et al. 2024\") plus LongBench, MMLU and LooGLE, applying its own mitigation method on top without altering the underlying benchmark construction -- a clean case of one paper's setup being reused off the shelf by another.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2024
+  },
+  {
+   "row": 419,
+   "mechanism": "distraction by irrelevant context (graded by semantic relatedness)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "PopQA",
+    "EntityQuestions"
+   ],
+   "reusable_substrate": "partial",
+   "why": "PopQA and EntityQuestions supply the QA pairs, but the Contriever-based retrieval of Top-10 irrelevant passages and the custom Misrepresentation/Uncertainty Ratio metrics are the paper's own construction.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2024
+  },
+  {
+   "row": 425,
+   "mechanism": "UNNAMED: long-context safety/refusal degradation in agents",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "AgentHarm"
+   ],
+   "reusable_substrate": "partial",
+   "why": "AgentHarm's 176-sample public test set is the task source, but the controlled context-padding evaluation (four padding types, two insertion positions) built on top is this paper's own extension, so the numbers reflect the padding methodology as much as AgentHarm itself.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 461,
+   "mechanism": "cognitive bandwidth bottleneck (action-space scaling)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "TextCraft",
+    "WebShop",
+    "ALFWorld",
+    "SciWorld"
+   ],
+   "reusable_substrate": "partial",
+   "why": "TextCraft, WebShop, ALFWorld, and SciWorld are named, pre-existing interactive environments used for the main PwA-vs-PwS comparison, but the incremental distractor-action injection stress test on ALFWorld is the paper's own addition.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 465,
+   "mechanism": "multi-target memory interference",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "MINTEVAL",
+    "HorizonBench"
+   ],
+   "reusable_substrate": "no",
+   "why": "MINTEVAL is \"a new analytical benchmark\" introduced by this paper (15.6k QA pairs across four domains); the text does not state it has been publicly released.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 493,
+   "mechanism": "plan anchor",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "BrowseComp_en",
+    "BrowseComp_zh",
+    "XBench-DeepSearch",
+    "GAIA"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Evaluation runs directly on four named, pre-existing web-agent benchmarks with standard Pass@1/Pass@3 metrics; the in-house wiki corpus mentioned is training data, not the evaluation substrate.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 496,
+   "mechanism": "UNNAMED: temporally-distant information inaccessibility in long-horizon agentic reasoning",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "BrowseComp",
+    "BrowseComp-ZH",
+    "WideSearch",
+    "HLE"
+   ],
+   "reusable_substrate": "yes",
+   "why": "All four are named, pre-existing long-horizon agent benchmarks used directly (under a fixed 128K/64K context-management protocol common to all compared methods) with no bespoke attack construction layered on top.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 500,
+   "mechanism": "Constraint Drift (under long tool traces)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "TravelPlanner",
+    "FlexTravelBench"
+   ],
+   "reusable_substrate": "partial",
+   "why": "TravelPlanner is evaluated via its official harness/blind submission servers, a directly comparable off-the-shelf benchmark; FlexTravelBench (a multi-turn extension with 1,185 instances) is less clearly a pre-existing named benchmark versus a paper-specific extension, so the overall substrate is mixed.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 512,
+   "mechanism": "identity drift (persona coherence decay in generative agents)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "Concordia (GABM framework)"
+   ],
+   "reusable_substrate": "no",
+   "why": "\"No pre-existing public benchmark is used; the paper conducts its own mayoral-election social simulation experiments within the Concordia... framework,\" with agent identity grounded in hand-crafted 'Chronicle' knowledge graphs.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 535,
+   "mechanism": "UNNAMED: abrupt persona/tone instability from lack of affective state inertia",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "\"No pre-existing public benchmark is used; the paper constructs a fixed, automated 25-turn multi-turn dialogue protocol... explicitly designed to induce an adversarial phase followed by a reconciliation phase.\"",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 536,
+   "mechanism": "Governance Decay",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "ConstraintRot"
+   ],
+   "reusable_substrate": "no",
+   "why": "ConstraintRot is a new benchmark introduced by this paper (nine self-contained scenarios, deterministic terminal-tool-call grading); no statement that it is publicly released.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 575,
+   "mechanism": "UNNAMED: unverified success fabrication in unattended long-horizon agents (agent honesty gap)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "SWE-bench Lite"
+   ],
+   "reusable_substrate": "partial",
+   "why": "The headline 3,150-cell corpus pairs the authors' own 20 custom Python 'trap tasks' (with held-out programmatic oracles) with 50 SWE-bench Lite tasks; the trap-task design, central to the fabrication-detection methodology, is bespoke.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 584,
+   "mechanism": "memory pollution (agent long-term memory)",
+   "substrate_primary": "unclear",
+   "substrate_all": [
+    "unclear"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "datasets_benchmarks, models_evaluated, and key_result are all empty in the source packet; nothing in the extracted text supports a classification.",
+   "confidence": "low",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 589,
+   "mechanism": "Context Pollution (evolutionary search history bias)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "LLM-SR",
+    "KernelBench",
+    "Modded NanoGPT"
+   ],
+   "reusable_substrate": "yes",
+   "why": "All three are named, pre-existing benchmarks (symbolic regression, GPU kernel optimization, and a community LM-training-speed benchmark) used directly to compare evolutionary code-optimization frameworks (uDSR, LLM-SR, OpenEvolve, CodeEvolve, ShinkaEvolve all scored the same way), with no attack-style construction layered on top.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 592,
+   "mechanism": "observation over-ingestion",
+   "substrate_primary": "none_qualitative",
+   "substrate_all": [
+    "none_qualitative"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "\"No empirical benchmarks are run by this paper... SDO itself is illustrated only via a single hypothetical, hand-traced 'E-Commerce Purchase' case study... not a quantitative evaluation.\" Named benchmarks (WebArena, OSWorld, etc.) appear only in the Related Work survey, not as this paper's evaluation substrate.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 610,
+   "mechanism": "UNNAMED: plan non-persistence under context eviction (context-time memory volatility)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "ALFWorld",
+    "HotpotQA"
+   ],
+   "reusable_substrate": "partial",
+   "why": "ALFWorld and HotpotQA are named, pre-existing task environments, but the core measurement technique (replay pairing: running the same trajectory with/without the plan in history and measuring hidden-state cosine distance; the Ridge probe) is the paper's own mechanistic-analysis methodology layered on top.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 617,
+   "mechanism": "context proprioceptive blindness",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "LOCA-Bench",
+    "BrowseComp-Plus",
+    "GAIA",
+    "AMA-Bench"
+   ],
+   "reusable_substrate": "partial",
+   "why": "LOCA-Bench (the primary, million-token-scale evaluation suite with an 8K-256K pressure sweep) and AMA-Bench read as new artifacts introduced for this paper, while BrowseComp-Plus and GAIA are established, named agent benchmarks used for transfer/comparison; the text does not make clear whether LOCA-Bench/AMA-Bench are released for outside reuse.",
+   "confidence": "low",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 618,
+   "mechanism": "context poisoning (self-induced, non-adversarial)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "SWE-bench Verified",
+    "SWE-bench Pro"
+   ],
+   "reusable_substrate": "yes",
+   "why": "SWE-bench Verified and SWE-bench Pro are widely-used, off-the-shelf coding-agent benchmarks evaluated with the standard resolve-rate metric; the paper's own issue-quality grouping (via its rubric-based checker) is an analysis lens on top, not a change to the underlying task substrate, so other scaffolds/models are directly comparable on the same instances.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 631,
+   "mechanism": "Distributional Collapse",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "Needle-in-a-Haystack (NIAH)",
+    "La Comedie Humaine corpus"
+   ],
+   "reusable_substrate": "partial",
+   "why": "The paper builds \"an extended, model-agnostic Needle-in-a-Haystack (NIAH) benchmark\" on a specific literary corpus, adding its own probabilistic fact-placement distributions (Uniform, Normal, Lorentzian, etc.) -- the general NIAH paradigm is shared, but this specific extended benchmark is the paper's own construction.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 637,
+   "mechanism": "UNNAMED: summary-length invariance under context compaction",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "HotpotQA",
+    "LoCoMo"
+   ],
+   "reusable_substrate": "partial",
+   "why": "HotpotQA and LoCoMo are named, pre-existing datasets, but the paper adapts both \"into a long-horizon agentic-flow setting by feeding documents one at a time and asking each question immediately after\" -- a bespoke sequential-accumulation protocol built on top of the shared data.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 652,
+   "mechanism": "context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Epi-Scale",
+    "HotpotQA",
+    "Natural Questions",
+    "FEVER",
+    "TruthfulQA"
+   ],
+   "reusable_substrate": "partial",
+   "why": "\"Epi-Scale, a new benchmark introduced by the paper\" draws base examples from HotpotQA/NQ/FEVER but instantiates each as clean vs. LLM-generated adversarial-context pairs across four perturbation types -- the perturbation construction is this paper's own, on top of shared source corpora.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 660,
+   "mechanism": "mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "World Capital (Yu et al. 2023)",
+    "Natural Questions"
+   ],
+   "reusable_substrate": "partial",
+   "why": "World Capital is \"built on Yu et al. 2023\" but the paper adds its own World Capital D rewrite and three new relation datasets (Official Language, Country, Continent); NQ is used separately, largely as-is, for the open-domain QA faithfulness check.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2024
+  },
+  {
+   "row": 666,
+   "mechanism": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "Natural Questions",
+    "TriviaQA",
+    "PopQA",
+    "MuSiQue"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Four named QA benchmarks supply the base questions, but the conflict-specific variants (NQ-Conf/TriviaQA-Conf with truthful/irrelevant/misleading evidence, NQ-Inco/TriviaQA-Inco for model-incorrect subsets) are reconstructed by the authors on top of them.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2024
+  },
+  {
+   "row": 713,
+   "mechanism": "memory laundering",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "\"A custom controlled Reddit-style multi-agent simulation environment (paired counterfactual toxic-vs-neutral rollouts) rather than an existing named benchmark.\"",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 798,
+   "mechanism": "memory misevolution",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "MemEvoBench",
+    "AgentSafetyBench",
+    "WebShop"
+   ],
+   "reusable_substrate": "partial",
+   "why": "\"MemEvoBench itself, introduced by this paper\" builds a QA-style scenario from scratch and a Workflow-style scenario over WebShop/ChatApp/Email with 8 risk categories \"adapted from AgentSafetyBench\" -- the risk taxonomy borrows from a named security benchmark but the scenario construction is the paper's own.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 843,
+   "mechanism": "Mandate Salience Decay (MSD)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "FinPersona-Bench"
+   ],
+   "reusable_substrate": "no",
+   "why": "\"FinPersona-Bench, a novel simulation benchmark introduced by the authors\" using a synthetic market engine with a hidden ground-truth fundamental value; no statement of public release.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 849,
+   "mechanism": "context unawareness (failure to identify a small decisive piece of evidence within long/complex context)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "SWE-Bench Verified",
+    "SWE-Bench Lite",
+    "LiveCodeBench v6",
+    "LongBench v2",
+    "Needle-in-a-Haystack (NIAH)",
+    "SWE-Gym",
+    "SWE-Smith"
+   ],
+   "reusable_substrate": "yes",
+   "why": "The 5 long-horizon and 12 multimodal evaluation benchmarks are all named, pre-existing, unmodified benchmarks scored with standard metrics; the contrastive pairs (built from SWE-smith trajectories and via generative image editing) are RL training data, not the evaluation substrate.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 856,
+   "mechanism": "Contextual Belief Management (CBM) failure",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "BeliefTrack",
+    "MMLU",
+    "GSM8K"
+   ],
+   "reusable_substrate": "no",
+   "why": "BeliefTrack is 'a novel closed-world benchmark introduced by the authors' with its own symbolic environments and diagnostic splits; MMLU/GSM8K are only used as general-ability controls, not as the belief-tracking evaluation substrate.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 862,
+   "mechanism": "UNNAMED: \"cognitive event horizon\" (context-saturation threshold beyond which accuracy collapses)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'Custom synthetic capacity-scaling tests', a bespoke 'realistic biomedical-research simulation benchmark', a bespoke pronoun-resolution ablation set, and a bespoke cross-model evaluation protocol -- no pre-existing benchmark is named.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 867,
+   "mechanism": "evidence misalignment (agentic long-video QA)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "VideoMME",
+    "MLVU",
+    "LongVideoBench",
+    "LVBench",
+    "CG-Bench"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'Evaluated on four long-video-understanding (LVU) benchmarks: VideoMME, MLVU, LongVideoBench, and LVBench' -- established public benchmarks used directly with standard accuracy metrics, no bespoke attack construction layered on top.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 874,
+   "mechanism": "agent drift (overthinking / overacting)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "SWE-bench Verified",
+    "Terminal-Bench 2.0",
+    "CLAW-Eval"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Three established agentic coding/terminal benchmarks run through public scaffolds (mini-swe-agent, Harbor/Dockerized harness, upstream OpenClaw scaffold) with standard resolve-rate metrics -- directly reusable off the shelf.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 891,
+   "mechanism": "UNNAMED: granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "SWE-bench Verified"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'SWE-bench Verified ... is the sole evaluation benchmark' run on the standard Mini SWE Agent scaffold with the standard Pass@1 metric -- a clean off-the-shelf reuse.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 901,
+   "mechanism": "context pollution (role conflation in single-agent code-as-action agents)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "tau2-bench",
+    "MCPMark"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Uses tau2-bench (Barres et al., 2025) and MCPMark, both pre-existing named agent-task benchmarks with their own standard metrics (pass^k, pass@1), run directly rather than layering a bespoke attack.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 910,
+   "mechanism": "cumulative contextual decay (attention pollution, dilution, and drift)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "MT-Bench",
+    "MT-Eval",
+    "Long-MT-Bench+"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Three established multi-turn conversation benchmarks (MT-Bench, MT-Eval, Long-MT-Bench+) used directly with standard judge-based scoring; the secondary balanced classifier dataset is only for an internal component ablation.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 935,
+   "mechanism": "contextual misguidance",
+   "substrate_primary": "unclear",
+   "substrate_all": [
+    "unclear"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "partial",
+   "why": "Text says only 'several long-context question-answering benchmarks (not individually named in the extracted material)' -- likely standard long-context QA benchmarks but genuinely unnamed in the available text.",
+   "confidence": "low",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 943,
+   "mechanism": "superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "ParaConflict",
+    "Memo-Trap",
+    "NQ-Swap"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Six of eleven datasets are 'newly curated ... released collectively as ParaConflict' (own construction); the other five reuse established knowledge-conflict benchmarks like Memo-Trap and NQ-Swap directly, so only part of the evaluation is on shared substrate.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2025
+  },
+  {
+   "row": 951,
+   "mechanism": "position exhaustion",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "C-Eval",
+    "CMMLU",
+    "RULER"
+   ],
+   "reusable_substrate": "partial",
+   "why": "C-Eval/CMMLU are run via the standard lm-evaluation-harness (reusable), but the headline long-context result is a NIAH task 'implemented directly on MiniWin' -- a RULER-style probe built bespoke for this tiny custom architecture, not the released RULER benchmark itself.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 965,
+   "mechanism": "UNNAMED: \"malloc-only\" context accumulation causing reasoning degeneration in extended CoT",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "AIME24&25",
+    "BrUMO25",
+    "HMMT",
+    "BeyondAIME",
+    "HLE",
+    "IMOAnswerBench",
+    "BBH",
+    "MMLU-Pro",
+    "MMLU-STEM",
+    "GPQA-Diamond"
+   ],
+   "reusable_substrate": "yes",
+   "why": "A suite of standard, widely-used math/reasoning competition and capability benchmarks run directly with pass@1, no bespoke attack layer -- fully comparable to other papers reporting on the same benchmarks.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 972,
+   "mechanism": "scaffolding collapse",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "TutorChat"
+   ],
+   "reusable_substrate": "no",
+   "why": "'A custom dataset built from TutorChat plus additional sourced problems' with authors' own synthesized collapse trajectories, plus 'a fully independent held-out red-teaming test set ... constructed specifically for adversarial evaluation' -- bespoke throughout.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 976,
+   "mechanism": "KV-cache contamination",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'A custom multi-turn persona-steering evaluation protocol built around 15 persona traits ... using trait-specific evaluation prompts adapted from Chen et al. (2025)'s persona-vector work' -- the overall multi-turn KV-cache protocol is this paper's own construction, only the trait prompts are adapted from prior work.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2026
+  },
+  {
+   "row": 1002,
+   "mechanism": "cross-modality parametric knowledge conflict",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "ViQuAE",
+    "InfoSeek",
+    "TriviaQA"
+   ],
+   "reusable_substrate": "partial",
+   "why": "ViQuAE and InfoSeek are existing KVQA datasets, but 'converted from free-form to multiple-choice format' and down-sampled by this paper, with its own Flip Rate / Conflict Rate metrics built on top -- a close parallel to the spec's own PoisonedRAG/NQ example.",
+   "confidence": "high",
+   "track": "ML/AI",
+   "year": 2024
+  },
+  {
+   "row": 1011,
+   "mechanism": "Combined Attack (Open-Prompt-Injection)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Open-Prompt-Injection",
+    "MRPC",
+    "Jfleg",
+    "HSOL",
+    "RTE",
+    "SST2",
+    "SMS Spam",
+    "Gigaword"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'The assembled attack/defense suite is released as the Open-Prompt-Injection benchmark' -- explicitly named in the spec's shared_security_benchmark list and widely reused by later papers in this same packet.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 1013,
+   "mechanism": "BIPIA benchmark attack set",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "BIPIA"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'Introduces BIPIA' with five application scenarios, structured attack types, and standard metrics (ROUGE, MT-Bench, ASR) -- a released, structured benchmark explicitly named in the spec's list.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 1015,
+   "mechanism": "Virtual Prompt Injection (VPI)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "Alpaca",
+    "HumanEval",
+    "GSM8K"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Poisons Alpaca's existing 52k instruction dataset, but the trigger topics/instructions and ROUGE-based train/test trigger split are 'author-generated' -- an existing corpus with this paper's own poisoning construction layered on top.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 1016,
+   "mechanism": "JudgeDeceiver",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "MT-Bench",
+    "LLMBar"
+   ],
+   "reusable_substrate": "partial",
+   "why": "MT-Bench and LLMBar are established benchmarks, but the paper 'restructures' them 'into two evaluation sets of 10 target questions, 10 target responses and 500 clean responses each' -- a bespoke construction on top of shared corpora.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1018,
+   "mechanism": "UNNAMED: automatic universal gradient-based prompt injection",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "MRPC",
+    "Jfleg",
+    "HSOL",
+    "RTE",
+    "SST2",
+    "SMS Spam",
+    "Gigaword"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'Seven task datasets following Liu et al.' reuses the exact Open-Prompt-Injection seven-task suite and ASR metrics (KEY-E, LM-E) rather than a new construction, though it is not explicitly re-branded as 'Open-Prompt-Injection' in the extracted text.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1019,
+   "mechanism": "Tensor Trust: prompt extraction / prompt hijacking",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Tensor Trust"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Releases the Tensor Trust dataset and derived hijacking/extraction robustness benchmarks (775/569 samples) -- explicitly named in the spec's shared_security_benchmark list and designed for reuse.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 1020,
+   "mechanism": "distraction effect (attention shift to injected instruction)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Open-Prompt-Injection",
+    "deepset prompt injection dataset"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'Open-Prompt-Injection benchmark (Liu et al.) and the test set of the deepset prompt injection dataset' -- two existing, named security benchmarks reused directly with a standard AUROC metric.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1021,
+   "mechanism": "P2SQL injection (prompt-to-SQL)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "Amazon Books Reviews dataset"
+   ],
+   "reusable_substrate": "no",
+   "why": "'No standard benchmark; the authors build a set of seven representative P2SQL attacks ... on a real-world open-source e-commerce application extended with a Langchain chatbot' -- explicit bespoke testbed, even though the underlying review data is a generic public dataset.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 1022,
+   "mechanism": "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "CyberSecEval 2"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Introduces the CyberSecEval 2 suite (prompt-injection, CTF exploitation, code-interpreter-abuse, FRR test sets) -- explicitly named in the spec's shared_security_benchmark list and built for standardized cross-model comparison.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1023,
+   "mechanism": "UNNAMED: system-prompt and uploaded-file extraction from custom GPTs",
+   "substrate_primary": "live_system",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No standard benchmark; the authors assemble their own test set of 216 real deployed custom GPTs ... accessed live through the GPT Store/API' -- live, changing deployed systems plus a bespoke red-teaming study.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 1025,
+   "mechanism": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "HarmBench",
+    "AgentDojo",
+    "OpenPromptInject"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Runs its adaptive attack methodology directly on HarmBench and AgentDojo/OpenPromptInject/adversarial-Davinci -- established named benchmarks explicitly listed in the spec -- alongside a bespoke human red-teaming competition.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1026,
+   "mechanism": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "HackAPrompt"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Releases the HackAPrompt Submissions and Playground datasets from a global competition -- explicitly named in the spec's shared_security_benchmark list.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 1029,
+   "mechanism": "LLMSmith: prompt-injection-to-RCE exploitation",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No academic benchmark; the authors build their own corpus of 11 popular open-source LLM-integrated frameworks ... and 51 real-world deployed LLM-integrated apps' -- bespoke framework corpus plus black-box attacks on live deployed apps.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2023
+  },
+  {
+   "row": 1039,
+   "mechanism": "G2PIA (goal-guided generative prompt injection)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "GSM8K",
+    "MATH",
+    "SQuAD2.0"
+   ],
+   "reusable_substrate": "partial",
+   "why": "'300 randomly sampled examples each from GSM8K, a web-based QA dataset, the MATH dataset, and SQuAD2.0' are standard corpora, but the goal-guided generative attack construction on top is this paper's own.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1041,
+   "mechanism": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "OpenPromptInjection",
+    "MMLU-PI",
+    "AlpacaFarm"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Primary evaluation directly reuses 'OpenPromptInjection (Liu et al. USENIX Sec 2024), 4,900 prompt-response pairs' plus a newly constructed but released MMLU-PI benchmark built from MMLU -- explicitly designed as a reusable, principled re-evaluation protocol.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1043,
+   "mechanism": "UNNAMED: tree-of-attacks ranking manipulation for conversational search",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "RAGDOLL"
+   ],
+   "reusable_substrate": "no",
+   "why": "'RAGDOLL, a new dataset of real consumer product websites the authors collect via an automated LLM-plus-search pipeline' -- a bespoke, newly introduced dataset with no track record of reuse, unlike the security benchmarks explicitly named in the spec.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1044,
+   "mechanism": "UNNAMED: multi-modal prompt injection against robot navigation",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'None - no public benchmark. The authors run their own simulated mission-oriented navigation scenarios in EyeSim VR' -- explicit bespoke simulated testbed.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1046,
+   "mechanism": "preemptive answer attack (CoT short-circuiting)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "GSM8K",
+    "MathQA",
+    "MATH",
+    "HotpotQA",
+    "CommonsenseQA",
+    "StrategyQA"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Six standard reasoning/QA datasets used directly, but the preemptive-answer manipulation (unintentional vs malicious variants) crossed with CoT regimes is this paper's own evaluation design layered on top.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1047,
+   "mechanism": "EchoLeak (zero-click IPI, CVE-2025-32711)",
+   "substrate_primary": "none_qualitative",
+   "substrate_all": [
+    "none_qualitative"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'None - no dataset or benchmark. The paper is a single-incident case study of CVE-2025-32711 built from Aim Labs' public disclosure' -- matches the none_qualitative definition's own example of a disclosure write-up almost verbatim.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1051,
+   "mechanism": "TopicAttack",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Inj-SQuAD",
+    "Inj-TriviaQA",
+    "InjecAgent"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Uses Inj-SQuAD/Inj-TriviaQA 'from Chen et al. 2025b' (already-constructed injected benchmarks from a prior paper) and the InjecAgent 'Direct Harm' subset -- InjecAgent is explicitly named in the spec's shared_security_benchmark list, and both components are reused rather than newly built.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1058,
+   "mechanism": "POUGH",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Alpaca",
+    "AdvBench",
+    "Quora Question Pairs"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Training/test prompts come from Alpaca and generalization is tested on QQP (both generic), with AdvBench used only to source 10 malicious target-response categories rather than reused wholesale -- the suffix-optimization attack itself is this paper's own construction.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1060,
+   "mechanism": "PoisonedAlign",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "ORCA-DPO",
+    "MRPC",
+    "Jfleg",
+    "HSOL",
+    "RTE",
+    "SST2",
+    "SMS Spam",
+    "Gigaword",
+    "MMLU",
+    "GPQA"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Evaluates on '49 target/injected task pairings drawn from 7 task datasets' (the same Open-Prompt-Injection-style suite) using the existing Combined Attack as the inference-time trigger; the poisoning method is novel but the injection-evaluation substrate itself is directly reusable.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1066,
+   "mechanism": "ASTRA (and ASTRA++)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "AlpacaFarm",
+    "Dolly"
+   ],
+   "reusable_substrate": "yes",
+   "why": "'AlpacaFarm evaluation set (208 examples with non-empty context, used in the original StruQ/SecAlign security evaluations)' -- the de facto standard evaluation set for this line of prompt-injection defenses, reused directly rather than newly constructed.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1072,
+   "mechanism": "situation-driven contextual adversarial prompt attack",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "IMDB top-1000 movies dataset",
+    "PromptBench"
+   ],
+   "reusable_substrate": "no",
+   "why": "'Only two crime movies are actually used in the reported attacks' from the IMDB dataset, plus 22 authors' own few-shot demonstration pairs -- an extremely narrow, cherry-picked, bespoke setup despite drawing on a public dataset.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1074,
+   "mechanism": "query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "AgentDojo",
+    "AdvBench",
+    "ImageNet"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Prompt injection uses '56 test samples adapted from AgentDojo' (an adapted subset, not the full released benchmark) while jailbreaks use '50 harmful AdvBench requests as curated by Chao et al.' (a commonly reused curated subset) and vision uses standard ImageNet images -- a mixed picture across three sub-evaluations.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1075,
+   "mechanism": "message history forging (direct prompt injection via forged system/assistant roles)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "live_system"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'None public - an original measurement corpus: 17 third-party chatbot plugins deployed on 10,000+ public websites' plus a bespoke controlled experiment grid (3 tasks x 3 designs x 3 roles x 11 models) -- both the live-plugin measurement and the controlled harness are unreleased and paper-specific.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1076,
+   "mechanism": "reasoning token overflow (RTO) / practical reasoning interruption attack",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "StrategyQA",
+    "GSM8K",
+    "AQuA",
+    "WildGuard"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Benign prompts come from standard StrategyQA/GSM8K/AQuA samples, but 'no injection-specific benchmark' exists -- 'the injected payload is a single fixed 109-token template' that is this paper's own construction.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1082,
+   "mechanism": "VortexPIA",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "live_system"
+   ],
+   "named_substrates": [
+    "MATH500",
+    "AIME2024",
+    "AIME2025",
+    "AICrypto"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Standard math/reasoning benchmarks are used as base task prompts with the VortexPIA injection technique layered on top; two real open-source apps (DeepSearch, LongTermMemory) provide supplementary 'practical validation' rather than the core evaluation substrate.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1084,
+   "mechanism": "self-interpreting images via adversarial meta-instructions",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'Synthetic question-answer dataset built via the public OpenAI API over images ... no third-party benchmark, self-constructed image + Q/A corpus' -- explicit bespoke construction.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1085,
+   "mechanism": "Image-based Prompt Injection (IPI)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "COCO"
+   ],
+   "reusable_substrate": "partial",
+   "why": "'COCO dataset (public), used to source diverse ... images for embedding adversarial text; no attack-specific public benchmark introduced' -- a shared image corpus with this paper's own embedded-text attack construction on top.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1086,
+   "mechanism": "steganographic prompt injection (multi-domain spatial/frequency/neural embedding)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "COCO-2017",
+    "ImageNet",
+    "Flickr30K",
+    "MS-COCO Captions",
+    "Visual Genome"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Base images are drawn from five standard public image datasets (plus a small custom enterprise-document set), but the steganographic embedding and the 200-prompt injection dataset are this paper's own construction on top.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1090,
+   "mechanism": "Reasoning Interruption Attack (adaptive token compression)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "GSM-Ranges"
+   ],
+   "reusable_substrate": "no",
+   "why": "'Self-constructed attack prompt dataset (100 prompts ...) built from standalone arithmetic tasks' is the primary evaluation set; GSM-Ranges is used only as 'a prior-work baseline comparison set', not the core substrate.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1092,
+   "mechanism": "Physical Prompt Injection Attack (PPIA)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'No public benchmark - custom simulated and real-world physical evaluations across tasks including visual question answering, planning, and navigation' -- explicit bespoke physical testbed.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 1096,
+   "mechanism": "backdoor-powered prompt injection attack",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'A custom benchmark of 208 samples across four attack tasks ... built for comprehensive evaluation of the attack' -- explicit bespoke construction.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1100,
+   "mechanism": "Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given)",
+   "substrate_primary": "shared_security_benchmark",
+   "substrate_all": [
+    "shared_security_benchmark"
+   ],
+   "named_substrates": [
+    "Tensor Trust",
+    "StruQ",
+    "CYBERSECEVAL3"
+   ],
+   "reusable_substrate": "yes",
+   "why": "Draws directly on the Tensor Trust attack dataset, 33 human-expert templates from StruQ, and the CYBERSECEVAL3 prompt-injection suite (251 tasks) with a specified 5-train/2-held-out task split -- multiple established named security benchmarks reused directly.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1104,
+   "mechanism": "Overflow",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built",
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "BenchOverflow",
+    "OASST2"
+   ],
+   "reusable_substrate": "partial",
+   "why": "'Introduces BenchOverflow, a dataset of plain-text prompts spanning nine overflow-inducing strategies' -- a newly released, systematically structured benchmark, but with no established track record of reuse yet; OASST2 is used only as the benign control corpus.",
+   "confidence": "low",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 1123,
+   "mechanism": "Blind attacks",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "GSM8K",
+    "HotpotQA",
+    "SQuAD 1.1",
+    "StrategyQA",
+    "TriviaQA",
+    "TruthfulQA"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Six standard QA datasets (100 samples each) with the 'blind attack' (rewording the question as a fake answer) applied on top by this paper -- an existing corpus with a paper-specific manipulation layered on it.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2025
+  },
+  {
+   "row": 1124,
+   "mechanism": "Cliopatra",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "WildChat",
+    "NLICE"
+   ],
+   "reusable_substrate": "partial",
+   "why": "WildChat (existing conversation corpus) is mixed with synthetic medical target chats built from the existing NLICE synthetic patient-record dataset, but the mixing, clustering, and target-chat generation pipeline is this paper's own construction.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2026
+  },
+  {
+   "row": 1135,
+   "mechanism": "incidental prompt injection",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset",
+    "own_purpose_built"
+   ],
+   "named_substrates": [
+    "TCGA COAD-READ",
+    "THCA",
+    "OV",
+    "PRAD",
+    "TCIA SLN-Breast"
+   ],
+   "reusable_substrate": "partial",
+   "why": "Base whole-slide images come from established public repositories (TCGA, TCIA cohorts), but the 'author-constructed scenario suite' -- the pen-mark and watermark incidental-injection scenarios themselves -- is this paper's own addition.",
+   "confidence": "medium",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1148,
+   "mechanism": "Graph-based prompt injection (math-expression-to-graph encoding)",
+   "substrate_primary": "own_purpose_built",
+   "substrate_all": [
+    "own_purpose_built"
+   ],
+   "named_substrates": [],
+   "reusable_substrate": "no",
+   "why": "'30 illegal prompts generated per model ... no external benchmark, self-constructed attack set' -- explicit bespoke construction.",
+   "confidence": "high",
+   "track": "Security",
+   "year": 2024
+  },
+  {
+   "row": 1040,
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "substrate_primary": "shared_generic_dataset",
+   "substrate_all": [
+    "shared_generic_dataset"
+   ],
+   "named_substrates": [
+    "NaturalQuestions",
+    "SQuAD 1.1",
+    "StrategyQA",
+    "Counterfacts"
+   ],
+   "reusable_substrate": "partial",
+   "why": "NQ/SQuAD/StrategyQA are 'split post-hoc into conflicting vs non-conflicting subsets' by this paper's own procedure (not synthetically perturbed), while Counterfacts (Longpre et al. 2021) is a fully pre-built synthetic-conflict benchmark reused directly -- a mixed case leaning partial since the post-hoc split is paper-specific.",
+   "confidence": "medium",
+   "track": "ML/AI",
+   "year": 2024
+  }
+ ]
+}
