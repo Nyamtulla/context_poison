@@ -1,8 +1,21 @@
-# Evaluation fragmentation: what this field tests on
+# The absence of a standard benchmark: what this field evaluates on
 
-Generated 2026-09-23 by `scripts/analyze_substrate_census.py` over
-`data/registries/substrate_census.json`. Covers **all 223 named mechanisms** in
+Generated 2026-09-23 by `scripts/analyze_benchmark_census.py` over
+`data/registries/benchmark_census.json`. Covers **all 223 named mechanisms** in
 the RQ3 registry.
+
+## A note on terminology
+
+This uses **benchmark** throughout, because that is what this literature calls
+it: 1,665 uses across the corpus, against 32 for "testbed" and 30 for
+"substrate" — and every corpus use of *substrate* means an underlying system
+layer (coordination substrate, retrieval substrate, agent substrate), not a
+thing you evaluate on.
+
+"Fragmentation" is likewise avoided. In this literature **fragmented** describes
+splitting an *attack payload* into pieces, which is a different idea entirely.
+The field's own phrase for what this section measures is **"no standard
+benchmark"** (14 direct uses in the corpus).
 
 ## The question
 
@@ -15,8 +28,8 @@ no, because the setup is bespoke to its own attack.
 
 ## Headline result
 
-**The most widely shared evaluation substrate in this field covers 11.7% of
-named attacks. 78% of substrates are used by exactly one paper.**
+**The most widely shared evaluation benchmark in this field covers 11.7% of
+named attacks. 78% of benchmarks are used by exactly one paper.**
 
 | | mechanisms | share |
 |---|---:|---:|
@@ -24,7 +37,7 @@ named attacks. 78% of substrates are used by exactly one paper.**
 | used a standard NLP/QA corpus, own attack on top | 61 | 27.4% |
 | used a shared **security** benchmark | 43 | 19.3% |
 | evaluated against a live product | 8 | 3.6% |
-| no evaluation substrate | 5 | 2.2% |
+| no evaluation benchmark | 5 | 2.2% |
 | unclear from the extracted text | 8 | 3.6% |
 
 Reusability of the setup:
@@ -37,7 +50,7 @@ Reusability of the setup:
 
 ## The concentration is the finding
 
-255 distinct named substrates appear across 223 mechanisms — **more substrates
+255 distinct named benchmarks appear across 223 mechanisms — **more benchmarks
 than attacks**. Of those:
 
 - **199 of 255 (78.0%) are used by exactly one paper.**
@@ -87,7 +100,7 @@ RQ5 found only 2.8% of defenses validated against both threat models, and the
 did not close the gap at all. That was a negative result without an explanation.
 
 This is the explanation. Cross-testing a defense against an attack requires a
-substrate both can run on. For 42.6% of attacks no such substrate exists, and
+benchmark both can run on. For 42.6% of attacks no such benchmark exists, and
 for another 35.4% it exists only partially. The gap is not inattention — it is
 that the comparison is, for most pairs, not currently constructible.
 
@@ -108,8 +121,8 @@ designed to.
   sensitive to this.
 - **Classification bias was set against the hypothesis.** Agents were told
   bespoke is *not* the default and to look for a named pre-existing benchmark
-  first. The fragmentation figure survives a rubric tilted the other way.
-- **"Distinct substrates" counts names after normalisation** (alias collapsing,
+  first. The result survives a rubric tilted the other way.
+- **"Distinct benchmarks" counts names after normalisation** (alias collapsing,
   parenthetical stripping). Residual spelling variants would inflate the 255
   slightly; the 78%-used-once figure is robust to a few merges.
 - **Reuse is judged from the paper's own description**, not from whether anyone
@@ -119,9 +132,9 @@ designed to.
 ## Reproducing
 
 ```bash
-python3 scripts/analyze_substrate_census.py
+python3 scripts/analyze_benchmark_census.py
 ```
 
 Per-mechanism judgments with justifications are in
-`data/registries/substrate_census.json` and the raw agent output in
-`data/registries/raw/substrate_census_out*.jsonl`.
+`data/registries/benchmark_census.json` and the raw agent output in
+`data/registries/raw/benchmark_census_out*.jsonl`.

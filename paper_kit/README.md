@@ -42,14 +42,14 @@ hand-edit.
 - figure `figures/fig7_1_concentration.png` — One umbrella mechanism absorbs most testing; 131 mechanisms absorb none.
 - figure `figures/fig7_2_coverage_channel.png` — Covered vs never-defended mechanisms, by channel.
 
-## 7b. Evaluation fragmentation (new)
+## 7b. Benchmark standardization (new)
 
-- table `S7b_substrate_primary` (6 rows) — What each attack paper evaluated on
+- table `S7b_benchmark_primary` (6 rows) — What each attack paper evaluated on
 - table `S7b_reusability` (3 rows) — Could another researcher reuse that setup?
-- table `S7b_top_substrates` (15 rows) — Most-reused evaluation substrates
-- table `S7b_by_year` (4 rows) — Fragmentation over time
-- figure `figures/fig7b_1_substrates.png` — The most-shared substrate covers 11.7% of attacks; 78% of substrates are used once.
-- figure `figures/fig7b_2_fragmentation_time.png` — Shared-benchmark use roughly halved as the field grew.
+- table `S7b_top_benchmarks` (15 rows) — Most-reused evaluation benchmarks
+- table `S7b_by_year` (4 rows) — Shared-benchmark use over time
+- figure `figures/fig7b_1_benchmarks.png` — The most-shared benchmark covers 11.7% of attacks; 78% of benchmarks are used once.
+- figure `figures/fig7b_2_sharing_over_time.png` — Shared-benchmark use roughly halved as the field grew.
 
 ## 8. Generalization (RQ6 + new runs)
 

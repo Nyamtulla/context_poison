@@ -1,4 +1,4 @@
-# Evaluation-substrate census spec
+# Evaluation-benchmark census spec
 
 For each mechanism in your packet, classify **what its source paper actually
 evaluated on**, and answer one question that the whole census exists to settle:
@@ -6,17 +6,17 @@ evaluated on**, and answer one question that the whole census exists to settle:
 > Could another researcher take this paper's evaluation setup off the shelf and
 > run a *different* attack or defense on it, to produce a comparable number?
 
-That is `reusable_substrate`. It is the crux. A paper can have a large, careful,
+That is `reusable_benchmark`. It is the crux. A paper can have a large, careful,
 well-documented evaluation and still answer NO, because the setup is bespoke to
 its own attack.
 
 ## Input / output
 
-Packet: `data/registries/raw/substrate_census_packet<N>.json` — a JSON array.
+Packet: `data/registries/raw/benchmark_census_packet<N>.json` — a JSON array.
 Each entry has `row` (carry through unchanged), `mechanism`, `track`, `channel`,
 `paper_title`, `year`, `datasets_benchmarks`, `models_evaluated`, `key_result`.
 
-Output: `data/registries/raw/substrate_census_out<N>.jsonl` — ONE JSON object
+Output: `data/registries/raw/benchmark_census_out<N>.jsonl` — ONE JSON object
 per line, **appended after each item**. If the file exists, read it first and
 skip `row`s already present.
 
@@ -27,7 +27,7 @@ rather than guessing.
 ## Fields
 
 - `row`, `mechanism` — copy unchanged.
-- `substrate_primary` — ONE of:
+- `benchmark_primary` — ONE of:
   - `own_purpose_built` — the paper constructed its own benchmark, dataset,
     testbed, simulated environment or scenario set for this attack. Includes
     "the authors construct", "no pre-existing benchmark", "new dataset
@@ -45,18 +45,18 @@ rather than guessing.
   - `none_qualitative` — no dataset: demonstrations, case studies, proofs of
     concept, disclosure write-ups.
   - `unclear` — the text does not say.
-- `substrate_all` — list of every category above that applies (a paper may use a
+- `benchmark_all` — list of every category above that applies (a paper may use a
   shared benchmark AND build its own additions).
-- `named_substrates` — list of the specific benchmarks/datasets named, verbatim
+- `named_benchmarks` — list of the specific benchmarks/datasets named, verbatim
   as the text gives them. Empty list if none.
-- `reusable_substrate` — `"yes"` / `"no"` / `"partial"`.
+- `reusable_benchmark` — `"yes"` / `"no"` / `"partial"`.
   - `yes` — the evaluation runs on something another researcher could obtain and
     reuse to get a comparable number (a shared security benchmark; sometimes a
     standard corpus IF the attack setup is fully specified on top of it).
   - `partial` — a shared corpus or benchmark is used, but the attack
     construction layered on it is bespoke, so numbers are not directly
     comparable across papers.
-  - `no` — bespoke environment, live-system demo, or no evaluation substrate.
+  - `no` — bespoke environment, live-system demo, or no evaluation benchmark.
 - `why` — one or two sentences, quoting or closely paraphrasing the text that
   decides it. This is the audit trail; "seems bespoke" is not acceptable.
 - `confidence` — `high` / `medium` / `low`.
@@ -68,10 +68,10 @@ rather than guessing.
   reusable.
 - **A large dataset is not a shared benchmark.** PoisonedRAG uses Natural
   Questions — millions of passages — but the *poisoning setup* on top is its
-  own, so `shared_generic_dataset` with `reusable_substrate: partial`, not `yes`.
+  own, so `shared_generic_dataset` with `reusable_benchmark: partial`, not `yes`.
 - **"Built on top of AgentDojo" is not the same as "used AgentDojo".** If a paper
   extends a shared benchmark with its own scenarios, record both categories in
-  `substrate_all` and judge `reusable_substrate` on whether the extension is
+  `benchmark_all` and judge `reusable_benchmark` on whether the extension is
   released/specified enough to reuse. Usually `partial`.
 - Evaluating on a live product is `no` for reusability regardless of scale — the
   product changes and nobody else can reproduce the run.
@@ -80,6 +80,6 @@ rather than guessing.
 
 ## Report back
 
-Counts per `substrate_primary`; counts per `reusable_substrate`; the named
-substrates you saw most often; and the 8-10 calls you were least sure about
+Counts per `benchmark_primary`; counts per `reusable_benchmark`; the named
+benchmarks you saw most often; and the 8-10 calls you were least sure about
 (mechanism + call + one line why).

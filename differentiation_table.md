@@ -74,8 +74,8 @@ the repo:
 - **2.8%** of 534 defenses validated against both threat models — and unmoved
   when 55 defenses including the field's foundations were added.
 - **131** named attacks with no defense ever tested against them.
-- **42.6%** of attacks evaluated on a substrate no one else can reuse; the most
-  shared substrate covers **11.7%**; **78%** of substrates are used once.
+- **42.6%** of attacks evaluated on a benchmark no one else can reuse; the most
+  widely used shared benchmark covers **11.7%**; **78%** of benchmarks are used once.
 - **0 of 16** corpus mechanisms reach a readable control on the standard agent
   benchmark.
 

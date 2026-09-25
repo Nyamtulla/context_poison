@@ -181,7 +181,7 @@ def load_facts():
         fp = REPO / "data/registries" / name
         return json.loads(fp.read_text()) if fp.exists() else {}
 
-    cen = _j("substrate_census.json")
+    cen = _j("benchmark_census.json")
     hl = _j("defense_half_life.json")
     tt = _j("technique_transfer_chatinject.json")
 
@@ -479,26 +479,26 @@ def build(prs, F):
         ("That split is partly confounded \u2014 the ingestion harnesses model a text classifier, the execution ones an agent. Stated, not hidden.",
          12, MUTED, False)], 12.5, BODY)
 
-    # 13b — evaluation fragmentation (new) --------------------------------
+    # 13b — benchmark standardization (new) --------------------------------
     cen = F.get("cen") or {}
     if cen:
-        s = start("EVALUATION FRAGMENTATION", ["The field has no common ground to test on"], 28)
+        s = start("BENCHMARK STANDARDIZATION", ["The field has no standard benchmark to test on"], 28)
         stat_disc(s, 0.95, 2.70, 3.10, f"{cen.get('not_reusable_pct', 0)}%",
                   "of attacks evaluated on\nground nobody can reuse", RED)
-        top = list((cen.get("named_substrate_counts") or {}).items())[:1]
+        top = list((cen.get("named_benchmark_counts") or {}).items())[:1]
         share = round(100 * top[0][1] / cen["n_mechanisms"], 1) if top else 0
         stat_disc(s, 4.45, 2.70, 3.10, f"{share}%",
-                  "covered by the most\nshared substrate")
+                  "covered by the most\nshared benchmark")
         tf = _tb(s, 8.20, 3.05, 4.4, 3.2)
         _lines(tf, [
-            (f"{cen.get('distinct_named_substrates', 0)} distinct substrates", 17, WHITE, True),
+            (f"{cen.get('distinct_named_benchmarks', 0)} distinct benchmarks", 17, WHITE, True),
             (f"for {cen['n_mechanisms']} named attacks", 13, BODY, False),
             ("", 8, BODY, False),
-            (f"{cen.get('substrates_used_once', 0)} of them "
-             f"({round(100*cen.get('substrates_used_once',0)/max(1,cen.get('distinct_named_substrates',1)))}%)", 13, GOLD, True),
+            (f"{cen.get('benchmarks_used_once', 0)} of them "
+             f"({round(100*cen.get('benchmarks_used_once',0)/max(1,cen.get('distinct_named_benchmarks',1)))}%)", 13, GOLD, True),
             ("are used by exactly one paper.", 13, GOLD, True),
             ("", 8, BODY, False),
-            ("More substrates than attacks.", 12.5, MUTED, False),
+            ("More benchmarks than attacks.", 12.5, MUTED, False),
             ("Two papers on the same corpus still", 12.5, MUTED, False),
             ("are not comparable.", 12.5, MUTED, False),
         ], 12.5, BODY)

@@ -290,21 +290,21 @@ def build_rest(ctx):
     ax.grid(axis="y", visible=False)
     savefig(fig, "fig7_2_coverage_channel", "Covered vs never-defended mechanisms, by channel.")
 
-    # =================================================== S7b FRAGMENTATION
-    cen = jload("substrate_census.json")
+    # =================================================== S7b BENCHMARK STANDARDIZATION
+    cen = jload("benchmark_census.json")
     if cen:
         n = cen["n_mechanisms"]
-        table("S7b_substrate_primary", "What each attack paper evaluated on",
-              ["substrate", "mechanisms", "share_%"],
+        table("S7b_benchmark_primary", "What each attack paper evaluated on",
+              ["benchmark", "mechanisms", "share_%"],
               [[k, v, round(100*v/n, 1)] for k, v in
-               sorted(cen["substrate_primary"].items(), key=lambda x: -x[1])])
+               sorted(cen["benchmark_primary"].items(), key=lambda x: -x[1])])
         table("S7b_reusability", "Could another researcher reuse that setup?",
               ["verdict", "mechanisms", "share_%"],
               [[k, v, round(100*v/n, 1)] for k, v in
-               sorted(cen["reusable_substrate"].items(), key=lambda x: -x[1])])
-        nsc = list(cen["named_substrate_counts"].items())[:15]
-        table("S7b_top_substrates", "Most-reused evaluation substrates",
-              ["substrate", "mechanisms using it", "share of mechanisms_%"],
+               sorted(cen["reusable_benchmark"].items(), key=lambda x: -x[1])])
+        nsc = list(cen["named_benchmark_counts"].items())[:15]
+        table("S7b_top_benchmarks", "Most-reused evaluation benchmarks",
+              ["benchmark", "mechanisms using it", "share of mechanisms_%"],
               [[k, v, round(100*v/n, 1)] for k, v in nsc])
 
         by_year = collections.defaultdict(list)
@@ -315,18 +315,18 @@ def build_rest(ctx):
         for y in sorted(by_year):
             sub = by_year[y]
             if len(sub) < 5: continue
-            no_ = sum(1 for r in sub if str(r.get("reusable_substrate")).lower() == "no")
-            sh = sum(1 for r in sub if r.get("substrate_primary") == "shared_security_benchmark")
+            no_ = sum(1 for r in sub if str(r.get("reusable_benchmark")).lower() == "no")
+            sh = sum(1 for r in sub if r.get("benchmark_primary") == "shared_security_benchmark")
             yr.append([y, len(sub), round(100*no_/len(sub), 1), round(100*sh/len(sub), 1)])
-        table("S7b_by_year", "Fragmentation over time",
+        table("S7b_by_year", "Shared-benchmark use over time",
               ["year", "mechanisms", "not reusable_%", "on shared security benchmark_%"], yr)
 
         fig, ax = barh([k for k, _ in nsc[:12]], [v for _, v in nsc[:12]],
-                       f"Evaluation substrates: {cen['distinct_named_substrates']} distinct, "
-                       f"{cen['substrates_used_once']} used once",
+                       f"Evaluation benchmarks: {cen['distinct_named_benchmarks']} distinct, "
+                       f"{cen['benchmarks_used_once']} used once",
                        "mechanisms using it")
-        savefig(fig, "fig7b_1_substrates",
-                "The most-shared substrate covers 11.7% of attacks; 78% of substrates are used once.")
+        savefig(fig, "fig7b_1_benchmarks",
+                "The most-shared benchmark covers 11.7% of attacks; 78% of benchmarks are used once.")
 
         if yr:
             fig, ax = plt.subplots(figsize=(6.4, 2.9))
@@ -336,8 +336,8 @@ def build_rest(ctx):
                     label="not reusable")
             ax.set_ylabel("% of mechanisms"); ax.set_ylim(0, 60)
             ax.legend(frameon=False, fontsize=8)
-            ax.set_title("Evaluation fragmentation over time", loc="left", fontweight="bold")
-            savefig(fig, "fig7b_2_fragmentation_time",
+            ax.set_title("Benchmark standardization over time", loc="left", fontweight="bold")
+            savefig(fig, "fig7b_2_sharing_over_time",
                     "Shared-benchmark use roughly halved as the field grew.")
     return ctx
 
@@ -494,18 +494,18 @@ def build_tail(ctx):
            ["mechanisms with no defense ever tested", st["n_mechs_uncovered"]],
            ["cross-track test pairs (%)",
             round(100*sum(1 for p in pairs if p.get("cross_track"))/len(pairs), 1)],
-           ["attacks whose evaluation substrate nobody can reuse (%)",
-            (jload("substrate_census.json") or {}).get("not_reusable_pct", "")],
-           ["distinct evaluation substrates",
-            (jload("substrate_census.json") or {}).get("distinct_named_substrates", "")],
-           ["substrates used by exactly one paper",
-            (jload("substrate_census.json") or {}).get("substrates_used_once", "")]])
+           ["attacks whose evaluation benchmark nobody can reuse (%)",
+            (jload("benchmark_census.json") or {}).get("not_reusable_pct", "")],
+           ["distinct evaluation benchmarks",
+            (jload("benchmark_census.json") or {}).get("distinct_named_benchmarks", "")],
+           ["benchmarks used by exactly one paper",
+            (jload("benchmark_census.json") or {}).get("benchmarks_used_once", "")]])
 
 
 SECTION_MAP = {
     "S3": "3. Methodology", "S4": "4. Taxonomy (RQ1)", "S5": "5. Citation network (RQ2)",
     "S6": "6. Censuses (RQ3, RQ4)", "S7": "7. Coverage matrix (RQ5)",
-    "S7b": "7b. Evaluation fragmentation (new)", "S8": "8. Generalization (RQ6 + new runs)",
+    "S7b": "7b. Benchmark standardization (new)", "S8": "8. Generalization (RQ6 + new runs)",
     "S8b": "8b. Defense half-life (new)", "S9": "9. Differentiation",
     "S10": "10. Open problems (RQ7)",
 }
