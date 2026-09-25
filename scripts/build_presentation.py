@@ -177,7 +177,16 @@ def load_facts():
     top = sorted(mech, key=lambda x: -x["n_defenses_tested"])[:6]
     pair_mass = sum(x["n_defenses_tested"] for x in mech) or 1
 
+    def _j(name):
+        fp = REPO / "data/registries" / name
+        return json.loads(fp.read_text()) if fp.exists() else {}
+
+    cen = _j("substrate_census.json")
+    hl = _j("defense_half_life.json")
+    tt = _j("technique_transfer_chatinject.json")
+
     return {
+        "cen": cen, "hl": hl, "tt": tt,
         "rows": len(rows), "included": len(inc),
         "mech_reg": len(raw3), "mech_all": len(mech),
         "mech_track": cnt(x["track"] for x in raw3),
@@ -469,6 +478,110 @@ def build(prs, F):
          12.5, BODY, False),
         ("That split is partly confounded \u2014 the ingestion harnesses model a text classifier, the execution ones an agent. Stated, not hidden.",
          12, MUTED, False)], 12.5, BODY)
+
+    # 13b — evaluation fragmentation (new) --------------------------------
+    cen = F.get("cen") or {}
+    if cen:
+        s = start("EVALUATION FRAGMENTATION", ["The field has no common ground to test on"], 28)
+        stat_disc(s, 0.95, 2.70, 3.10, f"{cen.get('not_reusable_pct', 0)}%",
+                  "of attacks evaluated on\nground nobody can reuse", RED)
+        top = list((cen.get("named_substrate_counts") or {}).items())[:1]
+        share = round(100 * top[0][1] / cen["n_mechanisms"], 1) if top else 0
+        stat_disc(s, 4.45, 2.70, 3.10, f"{share}%",
+                  "covered by the most\nshared substrate")
+        tf = _tb(s, 8.20, 3.05, 4.4, 3.2)
+        _lines(tf, [
+            (f"{cen.get('distinct_named_substrates', 0)} distinct substrates", 17, WHITE, True),
+            (f"for {cen['n_mechanisms']} named attacks", 13, BODY, False),
+            ("", 8, BODY, False),
+            (f"{cen.get('substrates_used_once', 0)} of them "
+             f"({round(100*cen.get('substrates_used_once',0)/max(1,cen.get('distinct_named_substrates',1)))}%)", 13, GOLD, True),
+            ("are used by exactly one paper.", 13, GOLD, True),
+            ("", 8, BODY, False),
+            ("More substrates than attacks.", 12.5, MUTED, False),
+            ("Two papers on the same corpus still", 12.5, MUTED, False),
+            ("are not comparable.", 12.5, MUTED, False),
+        ], 12.5, BODY)
+
+    # 13c — defense half-life (new) ---------------------------------------
+    hl = F.get("hl") or {}
+    if hl and hl.get("gap_years"):
+        g = hl["gap_years"]
+        within = round(100 * sum(1 for x in g if x <= 1) / len(g))
+        s = start("DEFENSE HALF-LIFE", ["How long does a published defense survive?"], 30)
+        stat_disc(s, 0.95, 2.70, 3.30, f"{within}%", "of published defeats\nland within one year", RED)
+        tf = _tb(s, 5.20, 3.05, 7.3, 3.2)
+        _lines(tf, [
+            (f"{hl.get('n_defeats', 0)} datable defeats, median gap 1 year, maximum 2.", 15, WHITE, True),
+            ("", 8, BODY, False),
+            ("DataSentinel was defeated four separate times by four teams.", 12.5, BODY, False),
+            ("A defense does not get beaten once and settle.", 12.5, BODY, False),
+            ("", 8, BODY, False),
+            ("Read as an UPPER BOUND, not an estimate:", 13, GOLD, True),
+            (f"only {hl.get('share_of_registry_with_recorded_defeat', 0)}% of the registry has any", 12.5, MUTED, False),
+            ("recorded outcome, and the sample is biased toward", 12.5, MUTED, False),
+            ("defenses famous enough to attract attack papers.", 12.5, MUTED, False),
+        ], 12.5, BODY)
+
+    # 13d — transfer result (new) -----------------------------------------
+    tt = F.get("tt") or {}
+    if tt and tt.get("results"):
+        s = start("TRANSFER", ["Detection depends on recognising the attack.",
+                               "Action-checking does not."], 28)
+        panel(s, 0.70, 2.95, 5.75, 2.65)
+        tf = _tb(s, 1.00, 3.20, 5.2, 2.2)
+        _lines(tf, [
+            ("Attack it was built against", 15, GOLD, True),
+            ("", 6, BODY, False),
+            ("Three of four ingestion detectors", 12.5, BODY, False),
+            ("stop it completely.", 12.5, BODY, False),
+            ("The attack announces itself:", 12.5, MUTED, False),
+            ('"an important message from Emma".', 12.5, MUTED, False),
+        ], 12.5, BODY)
+        panel(s, 6.85, 2.95, 5.75, 2.65)
+        tf = _tb(s, 7.15, 3.20, 5.2, 2.2)
+        _lines(tf, [
+            ("Same goal, different disguise", 15, RED, True),
+            ("", 6, BODY, False),
+            ("The same detectors stop working.", 12.5, BODY, False),
+            ("The payload forges a system turn,", 12.5, BODY, False),
+            ("so it reads as configuration,", 12.5, BODY, False),
+            ("not as an injected instruction.", 12.5, BODY, False),
+        ], 12.5, BODY)
+        tf = _tb(s, 0.70, 5.85, 11.9, 1.3)
+        _lines(tf, [
+            ("The execution-stage technique blocked BOTH.", 14.5, WHITE, True),
+            ("It never reads the payload \u2014 it asks whether the action serves the user's request,", 12.5, BODY, False),
+            ("which is invariant to how the instruction was dressed up.", 12.5, BODY, False),
+            ("RQ6 concluded execution defenses generalize least. This says the opposite.", 12.5, GOLD, True),
+        ], 12.5, BODY)
+
+    # 13e — differentiation -----------------------------------------------
+    s = start("DIFFERENTIATION", ["Against the five closest SoKs"], 30)
+    rowsD = [
+        ("papers reviewed", "78", f"{F['included']:,}"),
+        ("attacks catalogued", "37", str(F["mech_reg"])),
+        ("defenses catalogued", "41", str(F["defenses"])),
+        ("attack \u00d7 defense pairs", "\u2014", str(F["pairs"])),
+        ("runs own experiments", "yes", "yes"),
+        ("covers BOTH literatures", "no", "YES"),
+    ]
+    tf = _tb(s, 0.70, 2.45, 11.9, 0.4)
+    _run(tf.paragraphs[0], "closest competitor: The Landscape of Prompt Injection Threats (2602.10453)",
+         12.5, MUTED)
+    for i2, (k, a, b) in enumerate(rowsD):
+        y = 2.95 + i2 * 0.56
+        panel(s, 0.70, y, 11.9, 0.46)
+        tf = _tb(s, 0.95, y + 0.06, 5.2, 0.34); _run(tf.paragraphs[0], k, 13, WHITE, True)
+        tf = _tb(s, 6.30, y + 0.06, 2.6, 0.34); _run(tf.paragraphs[0], a, 13, BODY)
+        tf = _tb(s, 9.40, y + 0.06, 2.9, 0.34)
+        _run(tf.paragraphs[0], b, 13, GOLD, True)
+    tf = _tb(s, 0.70, 6.35, 11.9, 0.9)
+    _lines(tf, [
+        ("They run experiments too \u2014 so that is not the distinction.", 13, WHITE, True),
+        ("Four of the five closest surveys sit on one side of a divide they never mention: the "
+         "314-cite ML survey does not cite security work, and the closest security SoK does not cite degradation work.",
+         12, MUTED, False)], 12, BODY)
 
     # 14 — RQ7 ------------------------------------------------------------
     s = start("RQ7  ·  OPEN PROBLEMS", ["Seven problems, ranked by expected value"], 30)
