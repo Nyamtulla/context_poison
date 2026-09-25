@@ -290,7 +290,7 @@ This restructuring adds roughly a week versus the previous (already-revised) 9-w
 - [x] Case study execution, extended queue — 7 additional real candidates run to completion (CaMeL, SCR, CK-PLUG, DataFilter, PISanitizer) or ruled out with cause on the remaining pool; see Section 8 and `rq6_case_study_selection.md` for the full per-candidate record
 - [x] RQ6 results write-up — `rq6_case_studies.md`: 9 case studies, 3 generalization patterns (full/partial/inert) split cleanly by intervention point (ingestion 3/4 full, reasoning mixed, execution 0/2 runnable)
 - [x] RQ7 open-problems synthesis (Section 8.5) — `rq7_open_problems.md`: 7 open problems with falsifiable resolutions, ranked by expected value; new cross-cutting finding that only 1.1% of confirmed test pairs cross the track boundary (`scripts/rq7_synthesis.py`)
-- [ ] Differentiation table vs. 5 closest SoKs (drafted)
+- [x] Differentiation table vs. 5 closest SoKs — `differentiation_table.md`. All five comparators are inside our own corpus, so the comparison is drawn from the coded dataset rather than from reading impressions. Note 2602.10453 ALSO runs an empirical evaluation (9 defenses x 5 attacks), so "surveys don't run experiments" is not available as a distinction; the defensible claims are the cross-literature protocol, the scale that makes a 223x534 coverage matrix possible, and four measurements no comparator reports.
 - [ ] Full manuscript draft
 - [ ] Supplementary materials for replicability (release search log + coded dataset publicly — this is increasingly expected for SoKs and directly supports the "systematic and replicable" goal)
 
