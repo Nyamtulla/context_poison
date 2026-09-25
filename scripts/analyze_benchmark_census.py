@@ -1,13 +1,13 @@
-"""Quantify evaluation fragmentation across the RQ3 mechanism registry.
+"""Quantify benchmark standardization across the RQ3 mechanism registry.
 
-The census (data/registries/raw/substrate_census_out*.jsonl) records, for every
+The census (data/registries/raw/benchmark_census_out*.jsonl) records, for every
 named attack mechanism, what its source paper evaluated on and whether another
 researcher could reuse that setup to produce a comparable number.
 
 This turns those per-paper judgments into the claim the SoK needs: how much of
 this field's evaluation happens on ground anyone else can stand on.
 
-    python3 scripts/analyze_substrate_census.py
+    python3 scripts/analyze_benchmark_census.py
 """
 from __future__ import annotations
 import collections, json, re, sys
@@ -17,12 +17,12 @@ REPO = Path(__file__).resolve().parent.parent
 RAW = REPO / "data/registries/raw"
 
 
-def norm_substrate(s: str) -> str:
+def norm_benchmark(s: str) -> str:
     """Collapse surface variants so counts are not split across spellings."""
     t = re.sub(r"\s+", " ", (s or "").strip())
     t = re.sub(r"^(the|a|an)\s+", "", t, flags=re.I)
     # Strip a trailing parenthetical gloss: "ASB (Agent Security Bench)" and
-    # "ASB" are the same substrate and must not be counted as two. Keep the
+    # "ASB" are the same benchmark and must not be counted as two. Keep the
     # parenthetical only when it IS the name, e.g. "Agent Security Bench (ASB)"
     # -> prefer the acronym so both spellings collapse together.
     m = re.match(r"^(.*?)\s*\(([^)]{2,40})\)\s*$", t)
@@ -55,7 +55,7 @@ def norm_substrate(s: str) -> str:
 
 def main() -> None:
     rows, seen = [], set()
-    for fp in sorted(RAW.glob("substrate_census_out*.jsonl")):
+    for fp in sorted(RAW.glob("benchmark_census_out*.jsonl")):
         for line in fp.read_text().splitlines():
             if not line.strip():
                 continue
@@ -72,15 +72,15 @@ def main() -> None:
     if not n:
         print("no census rows found"); return
     print("=" * 72)
-    print(f"EVALUATION-SUBSTRATE CENSUS  —  {n} named attack mechanisms")
+    print(f"EVALUATION-BENCHMARK CENSUS  —  {n} named attack mechanisms")
     print("=" * 72)
 
-    prim = collections.Counter(r.get("substrate_primary") for r in rows)
+    prim = collections.Counter(r.get("benchmark_primary") for r in rows)
     print("\nWhat each paper evaluated on (primary):")
     for k, v in prim.most_common():
         print(f"   {v:>4}  {100*v/n:>5.1f}%  {k}")
 
-    reuse = collections.Counter(str(r.get("reusable_substrate")).lower() for r in rows)
+    reuse = collections.Counter(str(r.get("reusable_benchmark")).lower() for r in rows)
     print("\nCould another researcher reuse that setup for a comparable number?")
     for k in ("yes", "partial", "no", "none", "unclear"):
         if reuse.get(k):
@@ -89,23 +89,23 @@ def main() -> None:
     print(f"\n   NOT reusable: {not_reusable}/{n} = {100*not_reusable/n:.1f}%")
     print(f"   reusable or partially so: {n-not_reusable}/{n} = {100*(n-not_reusable)/n:.1f}%")
 
-    # --- the concentration question: how many distinct substrates, how shared?
+    # --- the concentration question: how many distinct benchmarks, how shared?
     named = collections.Counter()
     for r in rows:
-        for s in (r.get("named_substrates") or []):
-            ns = norm_substrate(s)
+        for s in (r.get("named_benchmarks") or []):
+            ns = norm_benchmark(s)
             if ns:
                 named[ns] += 1
-    print(f"\nDistinct named substrates across the whole registry: {len(named)}")
+    print(f"\nDistinct named benchmarks across the whole registry: {len(named)}")
     print("Most-reused:")
     for k, v in named.most_common(15):
         print(f"   {v:>4}  {k}")
     singles = sum(1 for v in named.values() if v == 1)
-    print(f"\n   substrates used by exactly ONE paper: {singles}/{len(named)} "
+    print(f"\n   benchmarks used by exactly ONE paper: {singles}/{len(named)} "
           f"= {100*singles/len(named):.1f}%")
     top = named.most_common(1)
     if top:
-        print(f"   most-shared substrate ({top[0][0]}) appears in {top[0][1]}/{n} "
+        print(f"   most-shared benchmark ({top[0][0]}) appears in {top[0][1]}/{n} "
               f"= {100*top[0][1]/n:.1f}% of mechanisms")
 
     # --- by track and by year
@@ -131,10 +131,10 @@ def main() -> None:
     print("\nBy track:")
     for tr in sorted({r.get("track") for r in rows if r.get("track")}):
         sub = [r for r in rows if r.get("track") == tr]
-        no_ = sum(1 for r in sub if str(r.get("reusable_substrate")).lower() == "no")
+        no_ = sum(1 for r in sub if str(r.get("reusable_benchmark")).lower() == "no")
         print(f"   {tr:<10} n={len(sub):>3}   not reusable {no_:>3} = {100*no_/len(sub):.1f}%")
 
-    print("\nBy year (is fragmentation improving?):")
+    print("\nBy year (is benchmark sharing improving?):")
     by_year = collections.defaultdict(list)
     for r in rows:
         if r.get("year"):
@@ -143,24 +143,24 @@ def main() -> None:
         sub = by_year[y]
         if len(sub) < 5:
             continue
-        no_ = sum(1 for r in sub if str(r.get("reusable_substrate")).lower() == "no")
-        shared = sum(1 for r in sub if r.get("substrate_primary") == "shared_security_benchmark")
+        no_ = sum(1 for r in sub if str(r.get("reusable_benchmark")).lower() == "no")
+        shared = sum(1 for r in sub if r.get("benchmark_primary") == "shared_security_benchmark")
         print(f"   {y}  n={len(sub):>3}   not reusable {100*no_/len(sub):>5.1f}%"
               f"   on a shared security benchmark {100*shared/len(sub):>5.1f}%")
 
     conf = collections.Counter(r.get("confidence") for r in rows)
     print(f"\nConfidence: " + "  ".join(f"{k}={v}" for k, v in conf.most_common()))
 
-    out = REPO / "data/registries/substrate_census.json"
+    out = REPO / "data/registries/benchmark_census.json"
     out.write_text(json.dumps({
         "generated": "2026-09-23",
         "n_mechanisms": n,
-        "substrate_primary": dict(prim),
-        "reusable_substrate": dict(reuse),
+        "benchmark_primary": dict(prim),
+        "reusable_benchmark": dict(reuse),
         "not_reusable_pct": round(100 * not_reusable / n, 1),
-        "distinct_named_substrates": len(named),
-        "substrates_used_once": singles,
-        "named_substrate_counts": dict(named.most_common()),
+        "distinct_named_benchmarks": len(named),
+        "benchmarks_used_once": singles,
+        "named_benchmark_counts": dict(named.most_common()),
         "rows": rows,
     }, indent=1) + "\n")
     print(f"\nWrote {out}")

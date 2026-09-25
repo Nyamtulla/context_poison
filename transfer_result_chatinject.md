@@ -6,7 +6,7 @@ undefended and defended, verdicts gated on minimum detectable reduction.
 
 ## The comparison
 
-Five defense techniques against two attacks on the same substrate — one the
+Five defense techniques against two attacks on the same benchmark — one the
 field has tested heavily, one it has barely touched.
 
 | technique | stage | `important_instructions` (15 defenses tested) | `ChatInject` (1 defense tested) |
