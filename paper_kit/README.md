@@ -55,9 +55,9 @@ hand-edit.
 
 - table `S8_transfer_matrix` (5 rows) — Defense technique x attack, banking/Qwen2.5-14B, n=32, verdicts gated on detectability
 - table `S8_attack_screen_v2` (6 rows) — Attack reconstruction quality: v2 rebuilds vs the harness's own attack
-- table `S8_representability` (17 rows) — Can the standard agent benchmark host the corpus's attacks?
+- table `S8_benchmark coverage` (17 rows) — Can the standard agent benchmark host the corpus's attacks?
 - figure `figures/fig8_1_transfer.png` — Ingestion detectors lose their effect when the attack's framing changes; the execution-stage technique does not.
-- figure `figures/fig8_2_representability.png` — Corpus attacks rebuilt on the standard benchmark, undefended.
+- figure `figures/fig8_2_benchmark coverage.png` — Corpus attacks rebuilt on the standard benchmark, undefended.
 
 ## 8b. Defense half-life (new)
 

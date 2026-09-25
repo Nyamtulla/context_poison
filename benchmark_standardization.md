@@ -102,10 +102,10 @@ did not close the gap at all. That was a negative result without an explanation.
 This is the explanation. Cross-testing a defense against an attack requires a
 benchmark both can run on. For 42.6% of attacks no such benchmark exists, and
 for another 35.4% it exists only partially. The gap is not inattention — it is
-that the comparison is, for most pairs, not currently constructible.
+that the comparison is, for most pairs, not currently runnable.
 
 It also predicts the 0-of-16 result in
-`agent_benchmark_representability.md`: attacks whose papers built bespoke
+`agent_benchmark_coverage.md`: attacks whose papers built bespoke
 environments will not run on someone else's benchmark, because they were never
 designed to.
 

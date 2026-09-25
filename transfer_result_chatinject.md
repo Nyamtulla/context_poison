@@ -94,7 +94,7 @@ are anchored even when a reconstruction underperforms.
 
 ## Limits
 
-- **ChatInject is near-transfer, not transfer.** One defense (ClawGuard) is
+- **ChatInject is transfer, not transfer.** One defense (ClawGuard) is
   recorded against it in RQ5, not zero. The true zero-coverage mechanism, ASPI,
   reached only 18.8% undefended — below resolvability — so the clean transfer
   test is still unrun.

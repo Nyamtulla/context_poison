@@ -5,10 +5,10 @@ Why a v2
 `mechanism_attacks.py` rebuilt 16 mechanisms as short, plain injected
 instructions. Screened undefended on banking with a validated control, **none
 exceeded 6.2% ASR while AgentDojo's own `important_instructions` reached 37.5%**
-(see agent_benchmark_representability.md). Some of that is substrate mismatch --
+(see agent_benchmark_coverage.md). Some of that is benchmark mismatch --
 an attack on agent memory has nothing to grab in a suite with no memory -- but
 not all of it. Three of the failures were AgentDojo-native mechanisms whose own
-papers ran on this very benchmark, which substrate mismatch cannot explain.
+papers ran on this very benchmark, which benchmark mismatch cannot explain.
 
 The remaining explanation is strength. Reading `important_instructions` next to
 the v1 templates shows what the v1s left out. AgentDojo's attack is not a bare
