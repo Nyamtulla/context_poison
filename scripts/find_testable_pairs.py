@@ -1,9 +1,9 @@
-"""Which (defense, mechanism) transfer tests are actually constructible today?
+"""Which (defense, mechanism) transfer tests are actually runnable today?
 
 The benchmark census (benchmark_standardization.md) established that most of this
 field's evaluation happens on ground nobody else stands on. The useful corollary
 is the inverse: **where a shared benchmark DOES exist, a transfer test is
-constructible** -- the attack and the defense can both be run on it, so a
+runnable** -- the attack and the defense can both be run on it, so a
 comparison means something.
 
 This intersects the two sides:
@@ -18,7 +18,7 @@ field could run tomorrow and has not.
 Ranked so the most informative come first: shared benchmark, both sides
 independently validated on it, and no existing pair.
 
-    python3 scripts/find_constructible_pairs.py
+    python3 scripts/find_testable_pairs.py
 """
 from __future__ import annotations
 import collections, json, re, sys
@@ -103,7 +103,7 @@ def main() -> None:
     cands = []
     for s in shared:
         if s not in RUNNABLE_BENCHMARK:
-            continue                       # corpus-sharing is not test-constructible
+            continue                       # corpus-sharing is not test-runnable
         for m in bench_mech[s]:
             for d in bench_def[s]:
                 if (d, m) in tested:
@@ -113,20 +113,20 @@ def main() -> None:
                               "defense_track": def_bench[d]["track"],
                               "defense_paper": def_bench[d]["paper"]})
 
-    print(f"\nCONSTRUCTIBLE UNTESTED PAIRS (shared runnable harness, not in RQ5): {len(cands)}")
+    print(f"\nUNTESTED PAIRS ON A SHARED BENCHMARK (shared runnable harness, not in RQ5): {len(cands)}")
     bysub = collections.Counter(c["benchmark"] for c in cands)
     for s, n in bysub.most_common():
         print(f"   {n:>5}  {s}")
     bystage = collections.Counter(c["defense_stage"] for c in cands)
     print(f"\n   by defense stage: {dict(bystage)}")
 
-    out = REG / "constructible_pairs.json"
+    out = REG / "testable_pairs.json"
     out.write_text(json.dumps({
         "generated": "2026-09-23",
         "note": ("Pairs where a shared RUNNABLE harness exists for both the attack and the "
                  "defense, and RQ5 records no test between them. Corpus-only sharing "
                  "(HotpotQA, NQ, MMLU...) is excluded: two papers using the same corpus "
-                 "still differ in attack construction, so a comparison is not constructible."),
+                 "still differ in attack construction, so a comparison is not runnable."),
         "n_pairs": len(cands),
         "by_benchmark": dict(bysub),
         "pairs": cands,

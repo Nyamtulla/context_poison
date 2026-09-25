@@ -407,7 +407,7 @@ def build_tail(ctx):
 
     tri = jload("mechanism_triage_banking_14b.json")
     if tri:
-        table("S8_representability",
+        table("S8_benchmark coverage",
               "Can the standard agent benchmark host the corpus's attacks?",
               ["attack", "ASR_%", "utility_%", "n", "verdict"],
               [[r["attack"], r["asr_pct"], r["utility_pct"], r["n_pairs"], r["verdict"]]
@@ -420,7 +420,7 @@ def build_tail(ctx):
                        [r["asr_pct"] for r in sorted(ok, key=lambda x: -x["asr_pct"])[:12]],
                        "0 of 16 corpus mechanisms reach a readable control", "undefended ASR (%)",
                        note="Agent utility held at ~44% throughout, so these zeros are real.")
-        savefig(fig, "fig8_2_representability",
+        savefig(fig, "fig8_2_benchmark coverage",
                 "Corpus attacks rebuilt on the standard benchmark, undefended.")
 
     # =================================================== S8b DEFENSE HALF-LIFE

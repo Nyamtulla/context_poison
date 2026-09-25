@@ -53,6 +53,14 @@ from agentdojo.models import ModelsEnum
 from agentdojo.task_suite.load_suites import get_suite
 from eval import AgentTask
 
+# AgentDojo's own defenses, addressable by the same --techniques flag.
+BUILTIN_DEFENSES = {
+    "tool_filter": ("execution", ["AgentDojo tool filtering"]),
+    "transformers_pi_detector": ("ingestion", ["ProtectAI DeBERTa PI detector"]),
+    "spotlighting_with_delimiting": ("ingestion", ["Spotlighting (Hines et al.)"]),
+    "repeat_user_prompt": ("reasoning", ["sandwich / repeat-instruction baseline"]),
+}
+
 # RQ5 coverage, for labelling each attack in-sample vs transfer
 COVERAGE = {
     # v2 mechanism rebuilds: coverage is that of the registry mechanism they
@@ -114,6 +122,16 @@ def build_pipeline(model_str, technique_key):
     llm = base.elements[2]
     sysmsg, initq = SystemMessage(cfg.system_message), InitQuery()
 
+    # AgentDojo ships four real defenses of its own, including Spotlighting,
+    # which is an RQ4 registry entry. Running them alongside our reimplemented
+    # techniques widens the matrix at no extra implementation cost, and gives a
+    # reference point: if our technique implementations behave wildly differently
+    # from the harness's own, that is a signal about our implementations.
+    if technique_key in BUILTIN_DEFENSES:
+        cfg2 = PipelineConfig(llm=ModelsEnum(model_str), defense=technique_key,
+                              system_message_name=None, system_message=None)
+        return AgentPipeline.from_config(cfg2)
+
     cls_ = TD.TECHNIQUES[technique_key]
     element = cls_()
     if cls_.INTERVENTION_POINT == "execution":
@@ -167,7 +185,7 @@ def main() -> None:
     for attack_name in attacks:
         cov = COVERAGE.get(attack_name)
         tag = ("TRANSFER (0 defenses ever tested)" if cov == 0 else
-               f"near-transfer ({cov} defense(s) tested)" if cov <= 2 else
+               f"transfer ({cov} defense(s) tested)" if cov <= 2 else
                f"in-sample ({cov} defenses tested)")
         print(f"\n########## {attack_name}  --  {tag}")
 
@@ -186,8 +204,13 @@ def main() -> None:
         for tkey in techs:
             if (tkey, attack_name) in done:
                 continue
-            cls_ = TD.TECHNIQUES[tkey]
-            print(f"  [{tkey}] ({cls_.INTERVENTION_POINT})", flush=True)
+            if tkey in BUILTIN_DEFENSES:
+                stage, abstracts = BUILTIN_DEFENSES[tkey]
+                tname = tkey
+            else:
+                cls_ = TD.TECHNIQUES[tkey]
+                stage, abstracts, tname = cls_.INTERVENTION_POINT, cls_.ABSTRACTS, cls_.NAME
+            print(f"  [{tkey}] ({stage})", flush=True)
             t0 = time.time()
             try:
                 d = run_condition(build_pipeline(args.model, tkey), suite, attack_name,
@@ -214,12 +237,13 @@ def main() -> None:
                 verdict = "TECHNIQUE FAILS"
 
             state["results"].append({
-                "technique": tkey, "technique_name": cls_.NAME,
-                "intervention_point": cls_.INTERVENTION_POINT,
-                "abstracts": cls_.ABSTRACTS, "attack": attack_name,
+                "technique": tkey, "technique_name": tname,
+                "intervention_point": stage,
+                "abstracts": abstracts, "attack": attack_name,
+                "is_builtin": tkey in BUILTIN_DEFENSES,
                 "attack_coverage_defenses_tested": cov,
                 "is_transfer_test": cov == 0,
-                "is_near_transfer": 0 < cov <= 2,
+                "has_prior_coverage": 0 < cov <= 2,
                 "undefended": u, "defended": d,
                 "mdr_pp": m, "drop_pp": round(drop, 1),
                 "verdict": verdict, "error": err,

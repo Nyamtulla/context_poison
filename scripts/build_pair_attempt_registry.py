@@ -212,7 +212,7 @@ def main() -> None:
                         f"{sc['utility_undefended']}% (so the agent was working) and AgentDojo's "
                         "own attack reached 37.5% on the same victim. The mechanism assumes "
                         "context this suite does not provide. See "
-                        "agent_benchmark_representability.md.")
+                        "agent_benchmark_coverage.md.")
 
             if ex:
                 if ex["blocker"] == "harness_error":

@@ -1,4 +1,4 @@
-# What agent benchmarks can currently represent
+# Benchmark coverage: which attacks can the standard agent benchmark host?
 
 Generated 2026-09-22 from `agentdojo_harness/mechanism_triage_banking_14b.json`.
 Companion to `rq6_case_studies.md` and `RESEARCH_ROADMAP.md` item 2.
