@@ -4,7 +4,7 @@ Every table and figure the manuscript needs, generated from the live
 registries by `scripts/build_paper_kit.py`. Re-run after new data; do not
 hand-edit.
 
-- **25 tables** in `paper_kit.xlsx` (one sheet each, INDEX sheet lists them)
+- **27 tables** in `paper_kit.xlsx` (one sheet each, INDEX sheet lists them)
 - **13 figures** in `figures/` as PNG and PDF
 
 ## 3. Methodology
@@ -53,10 +53,12 @@ hand-edit.
 
 ## 8. Generalization (RQ6 + new runs)
 
-- table `S8_transfer_matrix` (5 rows) — Defense technique x attack, banking/Qwen2.5-14B, n=32, verdicts gated on detectability
+- table `S8_defenses_not_runnable` (1 rows) — Defenses that could not be run at all, with the reason
+- table `S8_transfer_matrix` (8 rows) — Defense technique x attack, banking/Qwen2.5-14B, n=32, verdicts gated on detectability
+- table `S8_attack_screen_all` (21 rows) — All 21 attacks screened undefended; only 7 reach a resolvable control
 - table `S8_attack_screen_v2` (6 rows) — Attack reconstruction quality: v2 rebuilds vs the harness's own attack
-- table `S8_benchmark coverage` (17 rows) — Can the standard agent benchmark host the corpus's attacks?
-- figure `figures/fig8_1_transfer.png` — Ingestion detectors lose their effect when the attack's framing changes; the execution-stage technique does not.
+- table `S8_benchmark_coverage` (17 rows) — Can the standard agent benchmark host the corpus's attacks?
+- figure `figures/fig8_1_transfer.png` — Only the execution-stage technique holds across all seven attacks; the two best detectors hold on six and fail on the one designed not to look like an attack.
 - figure `figures/fig8_2_benchmark coverage.png` — Corpus attacks rebuilt on the standard benchmark, undefended.
 
 ## 8b. Defense half-life (new)

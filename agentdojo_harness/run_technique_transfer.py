@@ -183,8 +183,16 @@ def main() -> None:
     print(f"{len(techs)} technique(s) x {len(attacks)} attack(s), n={len(users)*len(injects)} per condition\n")
 
     for attack_name in attacks:
+        # Unmapped attacks (e.g. the important_instructions ablations) have no
+        # RQ5 coverage of their own -- they are variants of a mapped attack, not
+        # separate registry mechanisms. Inherit the base attack's coverage rather
+        # than guessing, and never let None reach a comparison.
         cov = COVERAGE.get(attack_name)
-        tag = ("TRANSFER (0 defenses ever tested)" if cov == 0 else
+        if cov is None:
+            base = attack_name.split("_no_")[0].split("_wrong_")[0]
+            cov = COVERAGE.get(base)
+        tag = ("coverage unknown" if cov is None else
+               "TRANSFER (0 defenses ever tested)" if cov == 0 else
                f"transfer ({cov} defense(s) tested)" if cov <= 2 else
                f"in-sample ({cov} defenses tested)")
         print(f"\n########## {attack_name}  --  {tag}")
@@ -243,7 +251,7 @@ def main() -> None:
                 "is_builtin": tkey in BUILTIN_DEFENSES,
                 "attack_coverage_defenses_tested": cov,
                 "is_transfer_test": cov == 0,
-                "has_prior_coverage": 0 < cov <= 2,
+                "has_prior_coverage": bool(cov) and cov <= 2,
                 "undefended": u, "defended": d,
                 "mdr_pp": m, "drop_pp": round(drop, 1),
                 "verdict": verdict, "error": err,
