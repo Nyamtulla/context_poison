@@ -346,9 +346,26 @@ def build_tail(ctx):
     (i, rows, inc, reg, st, mech, defs_, pairs, raw3, raw4, CH, CO) = ctx
 
     # =================================================== S8 GENERALIZATION (RQ6 + new runs)
-    tt = jload("technique_transfer_chatinject.json")
+    # full 8x7 matrix supersedes the 5x2 pilot; fall back if absent
+    tt = jload("technique_transfer_full_banking.json") or jload("technique_transfer_chatinject.json")
     if tt:
-        rowsT = tt["results"]
+        # Drop techniques that never produced a measurement. tool_filter requires
+        # an OpenAI model and errored in every cell; rendering it as a row of
+        # "no resolvable effect" would say it was tested and did nothing, when it
+        # could not run at all. That conflation is the same one the utility floor
+        # exists to prevent, and it does not belong in the headline figure.
+        errored = {r["technique"] for r in tt["results"] if r.get("error")}
+        measured = {r["technique"] for r in tt["results"] if not r.get("error")}
+        never_ran = errored - measured
+        rowsT = [r for r in tt["results"]
+                 if r["technique"] not in never_ran and not r.get("error")]
+        if never_ran:
+            table("S8_defenses_not_runnable",
+                  "Defenses that could not be run at all, with the reason",
+                  ["defense", "reason"],
+                  [[t, next(r.get("error", "") for r in tt["results"]
+                            if r["technique"] == t and r.get("error"))]
+                   for t in sorted(never_ran)])
         atts = sorted({r["attack"] for r in rowsT})
         techs = sorted({r["technique"] for r in rowsT},
                        key=lambda t: (rowsT[[x["technique"] for x in rowsT].index(t)]["intervention_point"], t))
@@ -366,35 +383,52 @@ def build_tail(ctx):
               "Defense technique x attack, banking/Qwen2.5-14B, n=32, verdicts gated on detectability",
               ["technique", "stage"] + atts, grid)
 
-        fig, ax = plt.subplots(figsize=(7.6, 3.4))
-        w = 0.38
-        xs = range(len(techs))
-        colmap = {atts[0]: GOLD, atts[-1]: TEAL}
-        for k, a in enumerate(atts):
-            vals, undef = [], 0
-            for t in techs:
-                r = next((x for x in rowsT if x["technique"] == t and x["attack"] == a), None)
-                vals.append(r["defended"]["asr_pct"] if r else 0)
-                if r: undef = r["undefended"]["asr_pct"]
-            ax.bar([x + k*w for x in xs], vals, width=w, color=colmap[a], label=f"{a} (defended)")
-            # the undefended rate is the thing every bar should be compared against --
-            # without it, a zero bar is ambiguous between "defense worked" and "nothing ran"
-            ax.axhline(undef, color=colmap[a], ls="--", lw=1.2, alpha=0.85)
-            ax.annotate(f"undefended {undef}%", xy=(len(techs)-0.55, undef),
-                        fontsize=7, color=colmap[a], va="bottom")
-        ax.set_xticks([x + w/2 for x in xs])
-        ax.set_xticklabels([t.replace("_", "\n") for t in techs], fontsize=7.5)
-        ax.set_ylabel("attack success rate (%)  — lower is better")
-        ax.set_ylim(0, max(50, ax.get_ylim()[1]))
-        ax.legend(frameon=False, fontsize=7.5, loc="upper center",
-                  bbox_to_anchor=(0.5, -0.13), ncol=2)
-        ax.set_title("Transfer: same defenses, two attacks differing only in framing",
+        # A matrix this size reads as a heatmap, not a bar chart: the question is
+        # which CELLS hold, and a reader should be able to scan a row (does this
+        # defense generalise?) and a column (does this attack defeat everything?)
+        # without counting bars.
+        VMAP = {"technique holds": 3, "technique reduces": 2,
+                "no resolvable": 1, "TECHNIQUE FAILS": 0}
+        def score(v):
+            for k, n in VMAP.items():
+                if v.startswith(k):
+                    return n
+            return 1
+        M = [[score(next((x for x in rowsT if x["technique"] == t and x["attack"] == a),
+                         {"verdict": "no resolvable"})["verdict"]) for a in atts] for t in techs]
+        from matplotlib.colors import ListedColormap
+        cmap = ListedColormap([RED, "#9AA7B2", AMBER, TEAL])
+        fig, ax = plt.subplots(figsize=(9.6, 0.42*len(techs)+2.0))
+        ax.grid(False)
+        ax.imshow(M, cmap=cmap, vmin=0, vmax=3, aspect="auto")
+        short = [a.replace("important_instructions", "II").replace("mechv2_", "") for a in atts]
+        ax.set_xticks(range(len(atts)))
+        ax.set_xticklabels(short, fontsize=7, rotation=28, ha="right")
+        ax.set_yticks(range(len(techs)))
+        ax.set_yticklabels([f"{t}  ({next(y['intervention_point'] for y in rowsT if y['technique']==t)[:4]})"
+                            for t in techs], fontsize=7.5)
+        LBL = {3: "HOLD", 2: "red.", 1: "--", 0: "FAIL"}
+        for r_ in range(len(techs)):
+            for c_ in range(len(atts)):
+                ax.text(c_, r_, LBL[M[r_][c_]], ha="center", va="center", fontsize=7,
+                        color="white" if M[r_][c_] in (0, 3) else NAVY)
+        ax.set_title("Defense x attack: which defenses survive a change of framing?",
                      loc="left", fontweight="bold")
-        ax.annotate("Dashed line = attack with NO defense. A bar at the line means the defense did nothing.",
-                    xy=(0, -0.34), xycoords="axes fraction", fontsize=7.5, color=GREY)
+        ax.annotate("HOLD = drove attack success to zero, resolvably  |  red. = resolvable reduction  |  "
+                    "-- = drop too small to resolve at n=32  |  FAIL = no reduction",
+                    xy=(0, -0.30), xycoords="axes fraction", fontsize=7, color=GREY)
         savefig(fig, "fig8_1_transfer",
-                "Ingestion detectors lose their effect when the attack's framing changes; "
-                "the execution-stage technique does not.")
+                "Only the execution-stage technique holds across all seven attacks; the two best "
+                "detectors hold on six and fail on the one designed not to look like an attack.")
+
+    scr_full = jload("full_attack_screen_banking.json")
+    if scr_full:
+        table("S8_attack_screen_all",
+              "All 21 attacks screened undefended; only 7 reach a resolvable control",
+              ["attack", "ASR_%", "CI95_low", "CI95_high", "utility_%", "verdict"],
+              [[r["attack"], r["asr_pct"], r["asr_ci95"][0], r["asr_ci95"][1],
+                r["utility_pct"], r["verdict"]]
+               for r in sorted(scr_full["results"], key=lambda x: -x["asr_pct"])])
 
     scr = jload("v2_attack_screen_banking.json")
     if scr:
@@ -407,7 +441,7 @@ def build_tail(ctx):
 
     tri = jload("mechanism_triage_banking_14b.json")
     if tri:
-        table("S8_benchmark coverage",
+        table("S8_benchmark_coverage",
               "Can the standard agent benchmark host the corpus's attacks?",
               ["attack", "ASR_%", "utility_%", "n", "verdict"],
               [[r["attack"], r["asr_pct"], r["utility_pct"], r["n_pairs"], r["verdict"]]
