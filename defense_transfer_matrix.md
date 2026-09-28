@@ -1,7 +1,7 @@
 # The full defense × attack matrix
 
 Generated 2026-09-25 from `data/registries/technique_transfer_full_banking.json`.
-8 defenses × 7 attacks = **56 conditions, 1,440 agent episodes**. Banking suite,
+8 defenses × 7 attacks = **56 scored conditions, 3,584 agent episodes** (each condition runs 32 undefended + 32 defended). Banking suite,
 Qwen2.5-14B-Instruct, n=32 per condition, every condition run undefended and
 defended, verdicts gated on the minimum detectable reduction at n=32.
 
