@@ -9,7 +9,7 @@ from the registries; nothing is hand-copied.
 |---|---|---:|
 | **attack** | one named technique in the RQ3 registry | **223** (+14 benchmark-only = 237) |
 | **defense** | one named technique in the RQ4 registry | **534** |
-| **pair** | one (defense, attack) combination where *somebody* ran the defense against the attack and reported a result | 332 from literature + 56 run by us |
+| **pair** | one (defense, attack) combination where *somebody* ran the defense against the attack and reported a result | 349 from literature + 56 run by us |
 
 The RQ3 registry file is named `rq3_pollution_registry.json` and older docs call
 its entries "mechanisms". That was to cover both tracks at once, because 55 of
@@ -24,15 +24,15 @@ The ratio is not 534:223. The two tracks barely overlap, so split it:
 
 | | defenses | targets | ratio | targets with ≥1 defense |
 |---|---:|---:|---:|---:|
-| **Adversarial** (Security) | 263 | 182 attacks | **1.4 : 1** | 66 / 182 = **36.3%** |
+| **Adversarial** (Security) | 263 | 182 attacks | **1.4 : 1** | 78 / 182 = **42.9%** |
 | **Incidental** (ML/AI) | 253 | 55 failure modes | **4.6 : 1** | 40 / 55 = **72.7%** |
 | Both threat models | 15 | — | — | — |
 | No `validated_against` recorded | 3 | — | — | — |
 
 Two different problems sit inside one headline number:
 
-- The **security side** has roughly one defense per attack, and two thirds of
-  attacks have nothing tested against them.
+- The **security side** has roughly one defense per attack, and well over half
+  of attacks have nothing tested against them.
 - The **ML/AI side** has 4.6 defenses per failure mode. Context-management
   techniques (reranking, compression, summarization, chunking) are counted as
   defenses because they are proposed as remedies for context degradation, but
@@ -42,7 +42,7 @@ So "534 defenses" is not 534 defenses against prompt injection. It is
 **263 adversarial defenses + 253 context-management techniques**, and averaging
 across them is what makes the number look absurd.
 
-## Where the 332 literature pairs come from
+## Where the 349 literature pairs come from
 
 None of these are our experiments. Every one is a result a *paper* reported.
 
@@ -52,7 +52,7 @@ None of these are our experiments. Every one is a result a *paper* reported.
 | Benchmark-named resolution — defense named the specific attack inside a suite | defense → attack | 58 |
 | **Attack-paper reverse scan** — read attack papers, look for defense names | **attack → defense** | **37** |
 | Citation/full-text recovery pass | defense → attack | 4 |
-| | | **332** |
+| | | **349** |
 
 ## How many defenses each attack has faced
 
@@ -60,20 +60,20 @@ Universe = 237 (223 registry + 14 benchmark-only).
 
 | defenses tested against it | attacks | note |
 |---|---:|---|
-| **0** | **131** (55.3%) | never defended by anyone |
-| 1 | 65 | a single paper, usually the defense's own |
-| 2 | 14 | |
-| 3–5 | 16 | |
+| **0** | **119** (50.2%) | never defended by anyone |
+| 1 | 74 | a single paper, usually the defense's own |
+| 2 | 16 | |
+| 3–5 | 17 | |
 | 6–10 | 4 | |
-| **11+** | **7** | these 7 absorb **154 of 332 pairs (46.4%)** |
+| **11+** | **7** | these 7 absorb **154 of 349 pairs (44.1%)** |
 
 The 7: Indirect Prompt Injection (76), AgentDojo important-instructions (15),
 AgentDojo ignore-previous (13), lost in the middle (13), BIPIA attack set (13),
 Combined Attack (13), PoisonedRAG (11).
 
-And from the defense side, of 534 defenses: **322 have no confirmed pair at
-all**, 148 were tested against exactly 1 attack, 33 against 2, 21 against 3,
-11 against 4 or more. Maximum is 7 (DataFilter).
+And from the defense side, of 534 defenses: **320 have no confirmed pair at
+all**, 145 were tested against exactly 1 attack, 34 against 2, 23 against 3,
+13 against 4 or more. Maximum is 8 (SecAlign).
 
 *(One matched name, `PromptLocate`, appears in pairs but not in the 534 registry
 — a known single-entry entity-resolution stray, not a counting error.)*
@@ -111,34 +111,38 @@ By defense, out of 7 attacks each:
 `is_transfer_test` is **False for all 56**. 48 of the 56 conditions test attacks
 that already have 15 defenses tested against them in the literature; the other 8
 test ChatInject, which has 1. **We have not yet run a single condition against an
-attack with zero literature coverage** — the 131-attack gap is exactly the part
+attack with zero literature coverage** — the 119-attack gap is exactly the part
 our harness has not touched, because those attacks cannot be hosted in AgentDojo
 banking without being reimplemented first. Do not describe the matrix as
 "closing the coverage gap". It measures whether defense *techniques* generalise;
-it does not add coverage to the 131.
+it does not add coverage to the 119.
+
+ASPI was the project's designated zero-coverage transfer target. Pass 3 found
+its own paper evaluating two adapted lightweight defenses against it (residual
+ASR 27.0%), so **it is not zero-coverage and should not be used as that test.**
 
 ## The attack-paper direction — and why "never defended" is a claim about the record, not about reality
 
 An attack paper that wants to show its attack works will run it against existing
 defenses. Those runs are pairs, and a defense paper published earlier
-structurally cannot contain them. Scanning attack papers recovered **37 pairs
+structurally cannot contain them. Scanning attack papers recovered **54 pairs
 RQ5's direction could never have found**, and they do not read like the defense
 literature:
 
 | what the attack paper reported | pairs |
 |---|---:|
-| defense fails / broken / largely fails / exploited | 15 |
-| defense degraded, evaded, or insufficient under adaptation | 8 |
-| defense partially effective | 1 |
-| evaluated, no directional verdict | 12 |
-| (of the 37, 24 record the defense losing in some form) | |
+| defense fails / broken / largely fails / exploited | 29 |
+| defense degraded, evaded, or insufficient under adaptation | 10 |
+| defense partially effective | 2 |
+| evaluated, no directional verdict | 13 |
+| (of the 54, **40** record the defense losing in some form) | |
 
-Put the two directions side by side across all 231 outcome-bearing pairs:
+Put the two directions side by side:
 
 | reported by | pairs | defense wins claimed | defense loses reported |
 |---|---:|---:|---:|
 | defense papers | 194 | 193 | 0 |
-| **attack papers** | **37** | **0** | **24** |
+| **attack papers** | **54** | **0** | **40** |
 
 Defense papers report their defense winning essentially always. Attack papers
 report it losing essentially always. Neither number measures how often defenses
@@ -146,11 +150,35 @@ work; the pair of numbers measures publication incentive. **This is why the
 project's standard is to re-run the defense ourselves rather than cite either
 side's claim.**
 
-### Open gap — the reverse scan is stale
+### Pass 3 — the stale scan, now closed
 
-`attack_paper_evaluations.json` was generated 2026-09-09 over **182 attacks**.
-The registry is now **223**. **41 attacks have never been reverse-scanned**,
-so some of the 131 "never defended" entries may already have been defeated in an
-attack paper we have not read from that direction. Re-running
-`scripts/reverse_scan_attack_papers.py` over the full 223 is the cheapest
-outstanding correctness fix in the project — it is AST/text only, no GPU, no API.
+`attack_paper_evaluations.json` was generated 2026-09-09 over **182 attacks**;
+the registry had since grown to **223**, so 41 attacks had never been scanned
+from the attack-paper direction. Re-run on 2026-09-28 over all 237:
+
+- All **37/37** previously confirmed pairs were re-found — the scanner's sanity
+  check.
+- 257 raw hits, 220 new candidates, 108 with evaluation language, **40** of
+  those on attacks recorded as never-defended with a non-generic defense name.
+- Those 40 were adjudicated at the same precision-first bar:
+  **17 confirmed, 19 rejected, 4 pending full text.**
+
+| rejection reason | pairs |
+|---|---:|
+| related-work mention only | 9 |
+| generic-phrase false positive (`LLM-as-Judge`, `Long Agent`, `Active Context`) | 7 |
+| explicitly disclaimed as out of scope | 2 |
+| the paper's own component matched its own name | 1 |
+
+**Net effect: 131 → 119 never-defended attacks (55.3% → 50.2%).** Twelve attacks
+move out of the gap, and every one of them moves because an *attack* paper
+showed a defense losing — not because a defense paper claimed a win.
+
+The 4 pending are all from *Taxonomy, Evaluation and Exploitation of IPI-Centric
+LLM Agent Defense Frameworks* (LlamaFirewall, PromptArmor, SecAlign, Progent).
+That paper certainly evaluates all four; what the context windows do not settle
+is whether its own three new attacks were run against them, or only the
+AgentDojo/ASB/InjecAgent template attacks. Resolving it needs the full text.
+
+Full adjudication record, including every rejection and its reason, is in
+`data/registries/attack_paper_evaluations_pass3.json`.
