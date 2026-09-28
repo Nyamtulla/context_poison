@@ -50,7 +50,8 @@ None of these are our experiments. Every one is a result a *paper* reported.
 |---|---|---:|
 | RQ5 base — read defense papers, look for attack names | defense → attack | 233 |
 | Benchmark-named resolution — defense named the specific attack inside a suite | defense → attack | 58 |
-| **Attack-paper reverse scan** — read attack papers, look for defense names | **attack → defense** | **37** |
+| **Attack-paper reverse scan, pass 1–2** (2026-09-09) — read attack papers, look for defense names | **attack → defense** | **37** |
+| **Attack-paper reverse scan, pass 3** (2026-09-28) — same, over the attacks added since | **attack → defense** | **17** |
 | Citation/full-text recovery pass | defense → attack | 4 |
 | | | **349** |
 
