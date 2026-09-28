@@ -37,7 +37,10 @@ def composite_pairs():
         provenance["benchmark-named resolution"] += 1
     for p in load("attack_paper_evaluations.json")["confirmed_pairs"]:
         pairs.add((p["defense"], p["mechanism"]))
-        provenance["ATTACK-paper reverse scan"] += 1
+        provenance["ATTACK-paper reverse scan (pass 1-2)"] += 1
+    for p in load("attack_paper_evaluations_pass3.json")["confirmed_pairs"]:
+        pairs.add((p["defense"], p["mechanism"]))
+        provenance["ATTACK-paper reverse scan (pass 3)"] += 1
     return pairs, provenance
 
 
@@ -118,10 +121,14 @@ def main():
     transfer = sum(1 for r in scored if r.get("is_transfer_test"))
     print(f"  conditions against a zero-coverage attack: {transfer}")
 
-    print("\n== staleness check ==")
-    scanned = load("attack_paper_evaluations.json")["passes"]["pass2"]["scope"]
+    print("\n== reverse-scan freshness ==")
+    p3 = load("attack_paper_evaluations_pass3.json")
     n_reg = len(load("rq3_pollution_registry.json"))
-    print(f"  reverse scan scope: {scanned}; registry is now {n_reg}")
+    rej = sum(len(v) for v in p3["rejected"].values())
+    print(f"  pass 3 ({p3['generated']}) covered the full registry ({n_reg} + "
+          f"benchmark-only)")
+    print(f"  {p3['candidates_adjudicated']} adjudicated -> "
+          f"{len(p3['confirmed_pairs'])} confirmed, {rej} rejected/pending")
 
 
 if __name__ == "__main__":

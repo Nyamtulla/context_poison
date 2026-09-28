@@ -1,0 +1,237 @@
+{
+ "generated": "2026-09-28",
+ "purpose": "Second reverse scan (attack papers -> defense names), run because the 2026-09-09 pass covered only 182 of what is now 223 registry attacks. Adjudicated at the project's precision-first bar: the attack paper must actually RUN the defense and report a result. Related-work mentions, explicit scope disclaimers, generic-phrase matches and the paper's own components are rejected.",
+ "scan_file": "data/registries/reverse_scan_hits_2026-09-28.json",
+ "candidates_adjudicated": 40,
+ "note": "Queue = candidates with evaluation language, on an attack currently recorded as never-defended, with a non-weak defense name. The 2026-09-09 confirmed pairs were all re-found by this scan (37/37), which is the sanity check on the scanner.",
+ "confirmed_pairs": [
+  {
+   "mechanism": "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
+   "defense": "Spotlighting (delimiting / datamarking / encoding)",
+   "outcome": "defense partially effective",
+   "evidence": "'Extreme Spotlighting wraps external content in <untrusted_content_markers> tags and adds a strict reminder not to form memories from tagged content (Appendix J.3). Hardening + Spotlighting combines naive prompt hardening with content spotlighting (Appendix J.4).' ... 'Table 3 shows that prompt-based defenses are effective but uneven.' The paper also builds AC+, an adaptive variant generated with access to the defended prompt format.",
+   "source_paper": "Hidden in Memory: Sleeper Memory Poisoning in LLM Agents"
+  },
+  {
+   "mechanism": "DACSI (Document-Authored Control-Signal Impersonation)",
+   "defense": "Spotlighting (delimiting / datamarking / encoding)",
+   "outcome": "defense insufficient",
+   "evidence": "'...-style untrusted-document delimiting, StruQ-style trusted-instruction/untrusted-data structure, and explicit system-document channel separation under the same synthetic-canary metric. On DeepSeek V4 Pro, attack-condition mean UDR falls from 20.67% under the original rendering to 13.17%...' Measured, and the leak is reduced but not closed.",
+   "source_paper": "Document-Authored Control-Signal Impersonation: A Low-Cost Indirect Prompt Attack on RAG Safety"
+  },
+  {
+   "mechanism": "COMA",
+   "defense": "SecAlign (preference optimization)",
+   "outcome": "defense fails",
+   "evidence": "'Table 7: Comparison of mitigation mechanisms under prompt compression. We report defense success rate (DSR) ...' 'For prevention-based defenses, we test robustness-oriented [backends]' ... 'Overall, existing defenses degrade substantially under compression. ... prevention-based backends remain similarly weak.'",
+   "source_paper": "When Compression Becomes an Attack Surface: Black-Box Attacks on Prompt-Compressed LLM Agents"
+  },
+  {
+   "mechanism": "FlashRT",
+   "defense": "SecAlign (preference optimization)",
+   "outcome": "defense fails",
+   "evidence": "'Red-teaming for state-of-the-art prompt injection defense (Meta SecAlign): We demonstrate our method's improved eff[ectiveness]' - SecAlign is the named target of the red-teaming run.",
+   "source_paper": "FlashRT: Towards Computationally and Memory Efficient Red-Teaming for Prompt Injection"
+  },
+  {
+   "mechanism": "ASPI (Ambiguous-State Prompt Injection)",
+   "defense": "PromptGuard",
+   "outcome": "defense insufficient",
+   "evidence": "'We adapt and evaluate two lightweight defenses for clarification-time attacks rather than applying the [stock versions]' ... 'These ASPI-adapted defenses reduce attack success but do not eliminate the clarification-state vulnerability. Residual attack success persists even under defense (e.g., 27.0%...)'",
+   "source_paper": "ASPI: Seeking Ambiguity Clarification Amplifies Prompt Injection Vulnerability in LLM Agents",
+   "note": "ASPI was the project's designated zero-coverage transfer target. It is not zero-coverage."
+  },
+  {
+   "mechanism": "Checkpoint-GCG",
+   "defense": "SecAlign (preference optimization)",
+   "outcome": "defense broken",
+   "evidence": "The paper is titled 'Auditing and Attacking Fine-Tuning-Based Prompt Injection Defenses' and names SecAlign 34 times as the attacked defense, attacking intermediate fine-tuning checkpoints. Source released.",
+   "source_paper": "Checkpoint-GCG: Auditing and Attacking Fine-Tuning-Based Prompt Injection Defenses"
+  },
+  {
+   "mechanism": "UNNAMED: chat-template inference-time backdoor",
+   "defense": "Spotlighting (delimiting / datamarking / encoding)",
+   "outcome": "defense fails",
+   "evidence": "'...injected at the first inference step, bypassing any filtering applied to environment content.' '(b) Defense bypass: Overall ASR ...' The backdoor sits at the prompt-construction layer, below where delimiting is applied.",
+   "source_paper": "Inference-Time Backdoors via Chat Templates: From LLM Supply Chains to Agentic System Compromise"
+  },
+  {
+   "mechanism": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+   "defense": "Spotlighting (delimiting / datamarking / encoding)",
+   "outcome": "defense broken",
+   "evidence": "'we focus on Spotlighting (Hines et al., 2024), Prompt Sandwiching (Schulhoff, 2024), and RPO' ... '[reported] attack success rates as low as 1%. However, when we applied our search-based adaptive attack, the ASR is above 95% for both defenses.'",
+   "source_paper": "The Attacker Moves Second: Stronger Adaptive Attacks Bypass Defenses Against LLM Jailbreaks and Prompt Injections"
+  },
+  {
+   "mechanism": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+   "defense": "PromptGuard",
+   "outcome": "defense broken",
+   "evidence": "'Our search-based adaptive attack (with the detector's confidence score and detection flag fed back to the attacker) achieves ASR of > 90% against Protect AI, PromptGuard, and Model Armor.'",
+   "source_paper": "The Attacker Moves Second: Stronger Adaptive Attacks Bypass Defenses Against LLM Jailbreaks and Prompt Injections"
+  },
+  {
+   "mechanism": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+   "defense": "Instruction Hierarchy (privileged-instruction training)",
+   "outcome": "defense fails",
+   "evidence": "'...even the existing Combined Attack achieves ASVs of 0.68 and 0.75 on these benchmarks. These findings contradict previous claims, indicating that Instruction Hierarchy is not effective when evaluating on diverse injected prompts.'",
+   "source_paper": "A Critical Evaluation of Defenses against Prompt Injection Attacks"
+  },
+  {
+   "mechanism": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+   "defense": "Attention Tracker",
+   "outcome": "defense fails",
+   "evidence": "'5.3 PromptGuard and Attention Tracker. Claims about the success of detection-based defenses shouldn't be drawn solely based on AUC: We obtained the open-source model parameters [and re-ran them].'",
+   "source_paper": "A Critical Evaluation of Defenses against Prompt Injection Attacks"
+  },
+  {
+   "mechanism": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+   "defense": "PromptGuard",
+   "outcome": "defense fails",
+   "evidence": "Same section 5.3; PromptGuard is re-run from released parameters rather than cited.",
+   "source_paper": "A Critical Evaluation of Defenses against Prompt Injection Attacks"
+  },
+  {
+   "mechanism": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+   "defense": "SecAlign (preference optimization)",
+   "outcome": "defense fails",
+   "evidence": "'we evaluate several recent prevention and detection methods using our approach and find that they are not as successful as previously reported. For instance, LLMs fine-tuned by StruQ and SecAlign suffer substantial losses in general-purpose utility, while StruQ, SecAlign, and Instruction Hierarchy remain vulnerable to even existing prompt injection attacks and more vulnerable to adaptive attacks - contrary to the claims made in these works.'",
+   "source_paper": "A Critical Evaluation of Defenses against Prompt Injection Attacks"
+  },
+  {
+   "mechanism": "TopicAttack",
+   "defense": "SecAlign (preference optimization)",
+   "outcome": "defense fails",
+   "evidence": "'Table 1: The ASR results of attack methods against different defense methods on small-size models, evaluated with Inj-SQuAD.' Defense columns are None / Sandwich / Spotlight / StruQ / SecAlign across three models.",
+   "source_paper": "TopicAttack: An Indirect Prompt Injection Attack via Topic Transition"
+  },
+  {
+   "mechanism": "ASTRA (and ASTRA++)",
+   "defense": "SecAlign (preference optimization)",
+   "outcome": "defense broken",
+   "evidence": "'we construct a novel attention-based attack algorithm ... and apply it to three recent whitebox defenses ... show that the defenses do not provide the claimed security properties.' Target models named: SecAlign Meta-Llama-3-8B-Instruct and SecAlign++.",
+   "source_paper": "May I have your Attention? Breaking Fine-Tuning based Prompt Injection Defenses using Architecture-Aware Attacks"
+  },
+  {
+   "mechanism": "backdoor-powered prompt injection attack",
+   "defense": "Instruction Hierarchy (privileged-instruction training)",
+   "outcome": "defense broken",
+   "evidence": "'Recently, various instruction hierarchy defense strategies are proposed ... In this paper, we explore more vicious attacks that nullify the prompt injection defense.' 'Our experiments demonstrate that backdoor-powered prompt injection attacks are more harmful ..., nullifying existing prompt injection [defenses].' Defense abbreviations 'Sand', 'Ins', 'Rem', 'Align' are the evaluated conditions.",
+   "source_paper": "Backdoor-Powered Prompt Injection Attacks Nullify Defense Methods"
+  },
+  {
+   "mechanism": "backdoor-powered prompt injection attack",
+   "defense": "SecAlign (preference optimization)",
+   "outcome": "defense broken",
+   "evidence": "The paper post-trains StruQ and SecAlign models itself ('Align' condition) and reports the backdoor nullifying them.",
+   "source_paper": "Backdoor-Powered Prompt Injection Attacks Nullify Defense Methods"
+  }
+ ],
+ "rejected": {
+  "explicitly_disclaimed": [
+   {
+    "mechanism": "UNNAMED: retrieval-aware IPI (trigger-fragment decomposition attack)",
+    "defense": "DataSentinel",
+    "note": "'our evaluation targets proprietary, closed-source LLMs where modifying model parameters is infeasible, [so] defenses that require fine-tuning [are out of scope]'"
+   },
+   {
+    "mechanism": "UNNAMED: retrieval-aware IPI (trigger-fragment decomposition attack)",
+    "defense": "SecAlign (preference optimization)",
+    "note": "same scope disclaimer"
+   }
+  ],
+  "related_work_only": [
+   {
+    "mechanism": "DACSI (Document-Authored Control-Signal Impersonation)",
+    "defense": "Instruction Hierarchy (privileged-instruction training)"
+   },
+   {
+    "mechanism": "Checkpoint-GCG",
+    "defense": "Instruction Hierarchy (privileged-instruction training)"
+   },
+   {
+    "mechanism": "UNNAMED: chat-template inference-time backdoor",
+    "defense": "Instruction Hierarchy (privileged-instruction training)"
+   },
+   {
+    "mechanism": "CoT Forgery (Chain-of-Thought Forgery)",
+    "defense": "Instruction Hierarchy (privileged-instruction training)"
+   },
+   {
+    "mechanism": "ASTRA (and ASTRA++)",
+    "defense": "Instruction Hierarchy (privileged-instruction training)"
+   },
+   {
+    "mechanism": "Cross-App Context Poisoning (Confused ChatGPT)",
+    "defense": "Instruction Hierarchy (privileged-instruction training)",
+    "note": "the paper analyses message-role priority as the attack surface; it does not run the IH defense"
+   },
+   {
+    "mechanism": "System Prompt Poisoning (SPP)",
+    "defense": "Instruction Hierarchy (privileged-instruction training)",
+    "note": "the defense actually tested is Explicit Reminder, which is a different registry entry"
+   },
+   {
+    "mechanism": "classifier context rot",
+    "defense": "LongAgent",
+    "note": "generic 'Long Agent' match inside a citation"
+   },
+   {
+    "mechanism": "AudioHijack",
+    "defense": "UniGuardian",
+    "note": "the paper builds its own logits-divergence detector; UniGuardian is not run"
+   }
+  ],
+  "generic_phrase_false_positive": [
+   {
+    "mechanism": "VATS (Error-Path Injection via Implicit Authority)",
+    "defense": "SkillVetBench (LLM-as-Judge)",
+    "note": "'LLM-as-Judge' matched the paper's own scoring methodology"
+   },
+   {
+    "mechanism": "POISE",
+    "defense": "SkillVetBench (LLM-as-Judge)",
+    "note": "the paper does run a judge-based scanner (SkillTester five-dimension audit + four LLM judges), but that is not SkillVetBench. Recorded because it is a near-miss worth a manual look."
+   },
+   {
+    "mechanism": "ASPI (Ambiguous-State Prompt Injection)",
+    "defense": "SkillVetBench (LLM-as-Judge)"
+   },
+   {
+    "mechanism": "UNNAMED: summary-length invariance under context compaction",
+    "defense": "SkillVetBench (LLM-as-Judge)"
+   },
+   {
+    "mechanism": "UNNAMED: summary-length invariance under context compaction",
+    "defense": "ActiveContext (ContextCurator + TaskExecutor)"
+   },
+   {
+    "mechanism": "Overflow",
+    "defense": "SkillVetBench (LLM-as-Judge)"
+   },
+   {
+    "mechanism": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+    "defense": "PIGuard (Mitigating Over-defense for Free)",
+    "note": "the detector list names Protect AI, PromptGuard and Model Armor; PIGuard itself is not shown being run"
+   }
+  ],
+  "own_component_false_positive": [
+   {
+    "mechanism": "context poisoning (self-induced, non-adversarial)",
+    "defense": "LLM Firewall (Validator Agent)",
+    "note": "'Validator' is a component of the paper's own icat-agent scaffold"
+   }
+  ],
+  "needs_full_text_check": [
+   {
+    "mechanism": "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI",
+    "defenses": [
+     "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
+     "PromptArmor",
+     "SecAlign (preference optimization)",
+     "Progent"
+    ],
+    "note": "'Taxonomy, Evaluation and Exploitation of IPI-Centric LLM Agent Defense Frameworks' definitely evaluates all four (Figure 3, AgentDojo/ASB/InjecAgent). What the context windows do NOT establish is whether the paper's own three new attacks were run against them, or only the template attacks from those benchmarks. Precision-first: not counted. 4 pairs pending."
+   }
+  ]
+ }
+}
