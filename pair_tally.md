@@ -132,18 +132,18 @@ literature:
 
 | what the attack paper reported | pairs |
 |---|---:|
-| defense fails / broken / largely fails / exploited | 29 |
-| defense degraded, evaded, or insufficient under adaptation | 10 |
-| defense partially effective | 2 |
-| evaluated, no directional verdict | 13 |
-| (of the 54, **40** record the defense losing in some form) | |
+| **defense broken** — fails, largely fails, exploited, evaded, assumption broken | **38** |
+| defense reduced the attack but did not stop it | 3 |
+| ran it, reported no directional result | 13 |
+| **defense won** | **0** |
 
-Put the two directions side by side:
+Put the two directions side by side. These are the `pair` table's own counts,
+so they always match the database:
 
-| reported by | pairs | defense wins claimed | defense loses reported |
-|---|---:|---:|---:|
-| defense papers | 194 | 193 | 0 |
-| **attack papers** | **54** | **0** | **40** |
+| reported by | pairs | defense wins | defense broken | reduced only | no result given |
+|---|---:|---:|---:|---:|---:|
+| defense papers | 295 | **193** | 0 | 0 | 102 |
+| **attack papers** | **54** | **0** | **38** | 3 | 13 |
 
 Defense papers report their defense winning essentially always. Attack papers
 report it losing essentially always. Neither number measures how often defenses
@@ -173,7 +173,24 @@ from the attack-paper direction. Re-run on 2026-09-28 over all 237:
 
 **Net effect: 131 → 119 never-defended attacks (55.3% → 50.2%).** Twelve attacks
 move out of the gap, and every one of them moves because an *attack* paper
-showed a defense losing — not because a defense paper claimed a win.
+showed a defense losing or only partly working — not because a defense paper
+claimed a win.
+
+## Querying all of this
+
+Everything above lives in `data/paper_explorer.db`, built by
+`scripts/build_paper_db.py`: one row per paper with its role and full metadata,
+the 237 attacks, the 534 defenses, the 349 literature pairs (each tagged with
+who reported it), and our own 56 runs in a **separate** table. Three views —
+`v_paper_card`, `v_defense_scorecard`, `v_attack_scorecard` — do the rollups.
+
+    python3 scripts/paper_db.py paper   "DataSentinel"
+    python3 scripts/paper_db.py defense "SecAlign (preference"
+    python3 scripts/paper_db.py attack  "PoisonedRAG"
+    python3 scripts/paper_db.py top
+
+`data/exports/paper_explorer.html` is the same database as one self-contained
+page — open it in a browser, no server needed.
 
 The 4 pending are all from *Taxonomy, Evaluation and Exploitation of IPI-Centric
 LLM Agent Defense Frameworks* (LlamaFirewall, PromptArmor, SecAlign, Progent).
