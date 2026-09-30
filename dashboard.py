@@ -641,6 +641,20 @@ DIRECTION_LABEL = {
 }
 
 
+def _counts_to_int(df: pd.DataFrame, columns) -> pd.DataFrame:
+    """Make count columns real integers, treating a missing count as zero.
+
+    The scorecard views LEFT JOIN `pair`, so a technique nobody has ever
+    tested yields COUNT = 0 but SUM = NULL. That arrives here as NaN, and
+    `nan or 0` is nan rather than 0 because nan is truthy - which crashed
+    st.metric for all 322 defenses with no recorded pair.
+    """
+    for c in columns:
+        if c in df.columns:
+            df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0).astype(int)
+    return df
+
+
 @st.cache_data(ttl=300)
 def load_explorer(mtime: float) -> dict:
     """Everything the scorecard needs, in one read.
@@ -656,10 +670,14 @@ def load_explorer(mtime: float) -> dict:
             [dict(r) for r in conn.execute("SELECT * FROM paper")]),
         "pairs": pd.DataFrame(
             [dict(r) for r in conn.execute("SELECT * FROM pair")]),
-        "defense_score": pd.DataFrame(
+        "defense_score": _counts_to_int(pd.DataFrame(
             [dict(r) for r in conn.execute("SELECT * FROM v_defense_scorecard")]),
-        "attack_score": pd.DataFrame(
+            ("attacks_tested", "self_reported_win", "refuted", "partial",
+             "undetermined", "tested_by_attack_paper")),
+        "attack_score": _counts_to_int(pd.DataFrame(
             [dict(r) for r in conn.execute("SELECT * FROM v_attack_scorecard")]),
+            ("defenses_tested", "defenses_broken", "defenses_partial",
+             "defenses_held_claimed", "undetermined")),
         "runs": pd.DataFrame(
             [dict(r) for r in conn.execute("SELECT * FROM our_run")]),
     }
@@ -721,7 +739,7 @@ def _technique_card(name: str, kind: str, score: pd.Series,
         other = "defense_name"
     cols = st.columns(len(cells))
     for col, (label, value) in zip(cols, cells):
-        col.metric(label, int(value or 0))
+        col.metric(label, int(value))
 
     _pair_table(pairs, other)
 
@@ -796,7 +814,8 @@ def paper_scorecard_tab() -> None:
     k = st.columns(4)
     k[0].metric("Evidence grade", row["evidence_grade"] or "—")
     k[1].metric("Artifacts released", row["artifacts_released"] or "—")
-    k[2].metric("Citations", int(row["citation_count"] or 0))
+    k[2].metric("Citations", int(pd.to_numeric(
+        row["citation_count"], errors="coerce") or 0))
     k[3].metric("Channel", row["channel"] or "—")
 
     dfs = data["defense_score"][data["defense_score"]["paper_id"] == pid]
