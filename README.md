@@ -110,11 +110,27 @@ python cli.py smoke-test       # network-light wiring check
 
 ## Dashboard
 
+There are two, sharing one database.
+
+**The question, first.** How context goes bad, what causes each way, and what
+is aimed at it:
+
+```bash
+streamlit run context_dashboard.py
+```
+
+Four tabs: the six ways context goes bad · one way in depth (its deliberate and
+incidental causes, entry routes, defenses, and what has actually been run) ·
+how bad content gets in · the per-paper scorecard.
+
+**The corpus workbench.** The project as it was built — papers, registries,
+RQ1–RQ7:
+
 ```bash
 streamlit run dashboard.py
 ```
 
-Eleven tabs, covering the whole project in one place — no cloud dependency:
+Twelve tabs, covering the whole project in one place — no cloud dependency:
 
 - **Overview** — headline counts plus what every research question (RQ1–RQ7)
   found, each expandable.
