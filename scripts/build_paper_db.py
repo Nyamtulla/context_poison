@@ -22,6 +22,10 @@ claims in this project already:
    papers reported. `our_run` is what we executed. They are never unioned.
 
 Run: python3 scripts/build_paper_db.py
+     python3 scripts/classify_untested_defenses.py   # adds `untested_defense`
+
+The second script is a separate step because it reads the scorecard views this
+one creates. A rebuild drops its table, so always run both.
 """
 from __future__ import annotations
 
