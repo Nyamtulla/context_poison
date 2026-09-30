@@ -641,6 +641,20 @@ DIRECTION_LABEL = {
 }
 
 
+def _optional_table(conn, name: str) -> pd.DataFrame:
+    """Read a table that may not exist yet.
+
+    `untested_defense` is built by a second script after this database, so a
+    freshly rebuilt db legitimately lacks it. Missing means the panel is
+    skipped, not that the tab breaks.
+    """
+    try:
+        return pd.DataFrame([dict(r) for r in
+                             conn.execute(f"SELECT * FROM {name}")])
+    except Exception:
+        return pd.DataFrame()
+
+
 def _counts_to_int(df: pd.DataFrame, columns) -> pd.DataFrame:
     """Make count columns real integers, treating a missing count as zero.
 
@@ -680,6 +694,7 @@ def load_explorer(mtime: float) -> dict:
              "defenses_held_claimed", "undetermined")),
         "runs": pd.DataFrame(
             [dict(r) for r in conn.execute("SELECT * FROM our_run")]),
+        "untested": _optional_table(conn, "untested_defense"),
     }
     conn.close()
     return out
@@ -713,8 +728,94 @@ def _pair_table(pairs: pd.DataFrame, other_col: str) -> None:
                     f"{str(r['evidence'])[:900]}")
 
 
+CLASSIFICATION_BLURB = {
+    "names_registry_attack": (
+        "Names an attack that **is** in our registry",
+        "Its own paper names these attacks, but no confirmed (defense, attack) "
+        "pair exists for them. These are candidate missed pairs — a name in the "
+        "text is not proof the defense was run against it, so each needs the "
+        "same adjudication the reverse scan used."),
+    "names_benchmark": (
+        "Evaluated on a named benchmark suite",
+        "It ran adversarial inputs, but named only the suite, not the attacks "
+        "inside it. Expanding a suite to its constituent attacks would "
+        "manufacture coverage, so this stays unresolved on purpose."),
+    "self_constructed": (
+        "Built and ran its own attacks",
+        "It was tested adversarially against attacks the authors constructed. "
+        "Nobody else named them, so there is no shared entity to match on."),
+    "threat_named_only": (
+        "States an adversarial threat in general terms",
+        "It says what it defends, but names no specific attack and no suite."),
+    "non_adversarial": (
+        "Not an adversarial defense",
+        "It addresses incidental context degradation. \"Which attack was it "
+        "tested against\" is the wrong question for this paper."),
+    "unclassified": (
+        "Could not be classified from the coded text",
+        "Its threat model and evaluation fields did not yield a threat label, "
+        "an attack name, or a benchmark. Needs a human read."),
+}
+
+
+def _untested_defense_panel(name: str, untested: pd.DataFrame | None) -> None:
+    """What this defense defends, when no pair was ever confirmed for it.
+
+    Showing five zeros here would say the paper defends nothing, which is
+    false for all 320 defenses in this state - 268 of them state a formal
+    threat model. The zero is a naming gap in our registry, not an evaluation
+    gap in the paper, and this panel says which.
+    """
+    if untested is None or untested.empty:
+        st.info(
+            "No confirmed pair for this defense. Run "
+            "`python3 scripts/classify_untested_defenses.py` to see what it "
+            "says it defends against.")
+        return
+    hit = untested[untested["defense"] == name]
+    if hit.empty:
+        st.info("No confirmed pair, and no classification recorded.")
+        return
+    r = hit.iloc[0]
+    title, why = CLASSIFICATION_BLURB.get(
+        r["classification"], ("Unclassified", ""))
+
+    st.warning(
+        "**No (defense, attack) pair has ever been confirmed for this "
+        "defense.** That is a gap in our attack registry's naming, not a "
+        "claim that the paper defends nothing.", icon=":material/info:")
+    st.markdown(f"**{title}**")
+    if why:
+        st.caption(why)
+
+    if r["defends_against"]:
+        st.markdown("**It says it defends against:** "
+                    + ", ".join(f"`{t}`" for t in r["defends_against"].split(" | ")))
+    if r["names_registry_attacks"]:
+        st.markdown("**Registry attacks named in its own text — candidate "
+                    "missed pairs:**")
+        for a in r["names_registry_attacks"].split(" | "):
+            st.markdown(f"- {a}")
+    if r["names_benchmarks"]:
+        st.markdown("**Benchmarks it evaluated on:** "
+                    + ", ".join(f"`{b}`" for b in r["names_benchmarks"].split(" | ")))
+
+    peers = int(r["taxonomy_cell_peers"] or 0)
+    if peers:
+        with st.expander(
+                f"{peers} registry attacks sit in the same taxonomy cell — "
+                "none has been run against this defense"):
+            st.caption(
+                "A weak relation, shown for orientation only. Sharing a "
+                "(channel, consequence) cell is not the same threat, and this "
+                "is never counted as coverage.")
+            for a in str(r["taxonomy_cell_peer_examples"]).split(" | ")[:8]:
+                st.markdown(f"- {a}")
+
+
 def _technique_card(name: str, kind: str, score: pd.Series,
-                    pairs: pd.DataFrame) -> None:
+                    pairs: pd.DataFrame,
+                    untested: pd.DataFrame | None = None) -> None:
     colour = ROLE_COLOR["attack" if kind == "attack" else "defense"]
     st.markdown(
         f"<div style='font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
@@ -722,6 +823,10 @@ def _technique_card(name: str, kind: str, score: pd.Series,
         f"{'Attack introduced' if kind == 'attack' else 'Defense introduced'}</div>",
         unsafe_allow_html=True)
     st.markdown(f"##### {name}")
+
+    if kind == "defense" and int(score["attacks_tested"]) == 0:
+        _untested_defense_panel(name, untested)
+        return
 
     if kind == "defense":
         cells = [("Attacks tested against it", score["attacks_tested"]),
@@ -824,7 +929,8 @@ def paper_scorecard_tab() -> None:
     for _, s in dfs.iterrows():
         st.divider()
         _technique_card(s["defense"], "defense", s,
-                        pairs[pairs["defense_name"] == s["defense"]])
+                        pairs[pairs["defense_name"] == s["defense"]],
+                        data["untested"])
     for _, s in atk.iterrows():
         st.divider()
         _technique_card(s["attack"], "attack", s,
