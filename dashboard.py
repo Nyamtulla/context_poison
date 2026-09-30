@@ -618,6 +618,233 @@ def paper_index_tab(db_path: str) -> None:
             st.write(top["abstract"] or "_No abstract on record._")
 
 
+# ---------------------------------------------------------------------------
+# Paper scorecard (data/paper_explorer.db)
+# ---------------------------------------------------------------------------
+# Separate from the registry tabs on purpose. Those answer "what does the
+# field look like"; this answers "I am holding one paper - what did it claim,
+# and what happened to it afterwards".
+
+EXPLORER_DB = "data/paper_explorer.db"
+
+ROLE_COLOR = {"attack": "#a4402c", "defense": "#2f5d7c",
+              "both": "#6b4b8a", "neither": "#8d8880"}
+OUTCOME_LABEL = {
+    "holds": "defense held",
+    "loses": "DEFENSE BROKEN",
+    "partial": "reduced, not stopped",
+    "undetermined": "ran it, no result given",
+}
+DIRECTION_LABEL = {
+    "defense_paper": "the defense paper's own claim",
+    "attack_paper": "reported by the ATTACK paper",
+}
+
+
+@st.cache_data(ttl=300)
+def load_explorer(mtime: float) -> dict:
+    """Everything the scorecard needs, in one read.
+
+    Keyed on the file's mtime so rebuilding the db with
+    `scripts/build_paper_db.py` invalidates the cache on the next refresh.
+    """
+    import sqlite3
+    conn = sqlite3.connect(registry_source.REPO_ROOT / EXPLORER_DB)
+    conn.row_factory = sqlite3.Row
+    out = {
+        "papers": pd.DataFrame(
+            [dict(r) for r in conn.execute("SELECT * FROM paper")]),
+        "pairs": pd.DataFrame(
+            [dict(r) for r in conn.execute("SELECT * FROM pair")]),
+        "defense_score": pd.DataFrame(
+            [dict(r) for r in conn.execute("SELECT * FROM v_defense_scorecard")]),
+        "attack_score": pd.DataFrame(
+            [dict(r) for r in conn.execute("SELECT * FROM v_attack_scorecard")]),
+        "runs": pd.DataFrame(
+            [dict(r) for r in conn.execute("SELECT * FROM our_run")]),
+    }
+    conn.close()
+    return out
+
+
+def _pair_table(pairs: pd.DataFrame, other_col: str) -> None:
+    """Render one technique's pairs, worst news first.
+
+    Sorted so a broken defense is the first thing read, because that is the
+    result a reader would otherwise have to hunt for - the defense papers'
+    claimed wins are the majority of every list.
+    """
+    if pairs.empty:
+        st.caption("No pair recorded in either direction.")
+        return
+    order = {"loses": 0, "partial": 1, "holds": 2, "undetermined": 3}
+    pairs = pairs.assign(_o=pairs["outcome"].map(order)).sort_values("_o")
+    shown = pd.DataFrame({
+        "": pairs[other_col],
+        "Result": pairs["outcome"].map(OUTCOME_LABEL),
+        "Who reported it": pairs["direction"].map(DIRECTION_LABEL),
+        "In": pairs["reported_by_title"].fillna(""),
+    })
+    st.dataframe(shown, width="stretch", hide_index=True)
+    with_ev = pairs[pairs["evidence"].notna() & (pairs["evidence"] != "")]
+    if not with_ev.empty:
+        with st.expander(f"Quoted evidence ({len(with_ev)})"):
+            for _, r in with_ev.iterrows():
+                st.markdown(
+                    f"**{r[other_col]}** — _{OUTCOME_LABEL[r['outcome']]}_  \n"
+                    f"{str(r['evidence'])[:900]}")
+
+
+def _technique_card(name: str, kind: str, score: pd.Series,
+                    pairs: pd.DataFrame) -> None:
+    colour = ROLE_COLOR["attack" if kind == "attack" else "defense"]
+    st.markdown(
+        f"<div style='font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
+        f"font-weight:700;color:{colour}'>"
+        f"{'Attack introduced' if kind == 'attack' else 'Defense introduced'}</div>",
+        unsafe_allow_html=True)
+    st.markdown(f"##### {name}")
+
+    if kind == "defense":
+        cells = [("Attacks tested against it", score["attacks_tested"]),
+                 ("Its own paper says it stopped", score["self_reported_win"]),
+                 ("An attack paper broke it", score["refuted"]),
+                 ("Reduced, not stopped", score["partial"]),
+                 ("Ran, no result given", score["undetermined"])]
+        other = "attack_name"
+    else:
+        cells = [("Defenses run against it", score["defenses_tested"]),
+                 ("It broke", score["defenses_broken"]),
+                 ("It only weakened", score["defenses_partial"]),
+                 ("Held, per that defense's paper", score["defenses_held_claimed"]),
+                 ("Ran, no result given", score["undetermined"])]
+        other = "defense_name"
+    cols = st.columns(len(cells))
+    for col, (label, value) in zip(cols, cells):
+        col.metric(label, int(value or 0))
+
+    _pair_table(pairs, other)
+
+
+def paper_scorecard_tab() -> None:
+    path = registry_source.REPO_ROOT / EXPLORER_DB
+    if not path.exists():
+        st.warning(
+            "No `data/paper_explorer.db` yet. Build it with "
+            "`python3 scripts/build_paper_db.py`.")
+        return
+    data = load_explorer(path.stat().st_mtime)
+    papers, pairs = data["papers"], data["pairs"]
+
+    st.markdown("#### Paper scorecard — what did this paper claim, and what happened next?")
+    st.caption(
+        "Pick a paper and see its role, the technique it introduced, and how that "
+        "technique fared against the other side. Counts are never combined across "
+        "directions: a defense paper claiming a win and an attack paper reporting "
+        "that same defense broken are different kinds of evidence."
+    )
+
+    c1, c2 = st.columns([3, 2])
+    query = c1.text_input("Search title, author, venue, or technique name",
+                          key="scorecard_q")
+    roles = c2.multiselect("Role", ["attack", "defense", "both", "neither"],
+                           default=["attack", "defense", "both"],
+                           key="scorecard_roles")
+
+    sub = papers[papers["role"].isin(roles)] if roles else papers
+    if query and len(query.strip()) >= 2:
+        q = query.strip().lower()
+        tech_hits = set(
+            pairs.loc[pairs["defense_name"].str.lower().str.contains(q, na=False),
+                      "defense_name"]) | set(
+            pairs.loc[pairs["attack_name"].str.lower().str.contains(q, na=False),
+                      "attack_name"])
+        by_tech = set(
+            data["defense_score"].loc[
+                data["defense_score"]["defense"].isin(tech_hits), "paper_id"]) | set(
+            data["attack_score"].loc[
+                data["attack_score"]["attack"].isin(tech_hits), "paper_id"])
+        hay = (sub["title"].fillna("") + " " + sub["authors"].fillna("") + " "
+               + sub["venue"].fillna("")).str.lower()
+        sub = sub[hay.str.contains(q, regex=False) | sub["paper_id"].isin(by_tech)]
+
+    st.caption(f"{len(sub)} of {len(papers)} papers match.")
+    if sub.empty:
+        st.info("Nothing matches. Try fewer words, or widen the role filter.")
+        return
+
+    sub = sub.sort_values(["year", "title"], ascending=[False, True])
+    labels = {
+        r["paper_id"]: f"[{r['role']}] {r['title']}  ({r['year'] or '—'})"
+        for _, r in sub.iterrows()
+    }
+    pid = st.selectbox("Paper", list(labels), format_func=lambda k: labels[k],
+                       key="scorecard_pick")
+    row = papers[papers["paper_id"] == pid].iloc[0]
+
+    st.divider()
+    st.markdown(f"### {row['title']}")
+    st.markdown(
+        f"<span style='color:{ROLE_COLOR[row['role']]};font-weight:700;"
+        f"text-transform:uppercase;letter-spacing:.05em;font-size:12px'>"
+        f"{row['role']} paper</span>", unsafe_allow_html=True)
+    st.caption(f"{row['authors'] or 'unknown authors'} · {row['year'] or '—'} · "
+               f"{row['venue'] or 'no venue'} · {row['track'] or ''}")
+    if row["url"]:
+        st.markdown(f"[Open the paper]({row['url']})")
+
+    k = st.columns(4)
+    k[0].metric("Evidence grade", row["evidence_grade"] or "—")
+    k[1].metric("Artifacts released", row["artifacts_released"] or "—")
+    k[2].metric("Citations", int(row["citation_count"] or 0))
+    k[3].metric("Channel", row["channel"] or "—")
+
+    dfs = data["defense_score"][data["defense_score"]["paper_id"] == pid]
+    atk = data["attack_score"][data["attack_score"]["paper_id"] == pid]
+
+    for _, s in dfs.iterrows():
+        st.divider()
+        _technique_card(s["defense"], "defense", s,
+                        pairs[pairs["defense_name"] == s["defense"]])
+    for _, s in atk.iterrows():
+        st.divider()
+        _technique_card(s["attack"], "attack", s,
+                        pairs[pairs["attack_name"] == s["attack"]])
+
+    if dfs.empty and atk.empty:
+        st.info(
+            "This paper is in the corpus but introduced neither a named attack nor a "
+            "named defense — background, a survey, or a technique that did not meet "
+            "the registry's naming bar.")
+
+    ours = data["runs"][data["runs"]["attack"].isin(atk["attack"].tolist())]
+    if not ours.empty:
+        st.divider()
+        st.markdown("##### We ran this attack ourselves")
+        st.caption(
+            "Kept separate from the counts above, which are what *papers* reported. "
+            "These are our own executed episodes.")
+        st.dataframe(
+            ours[["technique_name", "attack", "n", "undefended_asr",
+                  "defended_asr", "drop_pp", "mdr_pp", "verdict"]],
+            width="stretch", hide_index=True)
+
+    with st.expander("What the numbers do and do not mean"):
+        st.markdown(
+            "- **\"Its own paper says it stopped\"** is a claim, not a verified "
+            "result. Across the corpus, defense papers report 193 wins and 0 losses.\n"
+            "- **\"An attack paper broke it\"** is the other direction: 38 reported "
+            "losses and 0 wins. A defense paper written before an attack existed "
+            "cannot report losing to it, which is why this column exists at all.\n"
+            "- **\"Ran, no result given\"** covers pairs where we can confirm the "
+            "run happened but no directional outcome was reported — 115 of the 349 "
+            "pairs. Tested is not the same as worked, and these are never counted "
+            "as either.\n"
+            "- Rebuild with `python3 scripts/build_paper_db.py` after any registry "
+            "change, then refresh this page."
+        )
+
+
 def transfer_tab(reg: dict) -> None:
     preds = registry_source.load_transfer_predictions()
     stage3 = registry_source.load_stage3_result()
@@ -939,12 +1166,16 @@ def outcome_ledger_section() -> None:
 
     with st.expander("Why there is no combined win rate here"):
         st.markdown(
-            "Because it would be meaningless. Of 231 confirmed pairs, 194 come from "
-            "defense papers and 37 from attack papers. A defense paper reports a pair "
-            "*because its defense won*; an attack paper reports the same pair *because "
-            "the defense lost*. So the defense-paper rows are 193 claimed wins and the "
-            "attack-paper rows are 24 reported losses and zero wins — and neither number "
-            "measures how often defenses work.\n\n"
+            "Because it would be meaningless. A defense paper reports a pair *because "
+            "its defense won*; an attack paper reports the same pair *because the "
+            "defense lost*. Across the full pair set, the defense-paper rows are 193 "
+            "claimed wins and zero losses, and the attack-paper rows are 38 reported "
+            "losses and zero wins — neither number measures how often defenses work.\n\n"
+            "This ledger is built from `pair_outcomes.json`, which adjudicates 231 of "
+            "the 349 pairs. The 2026-09-28 reverse-scan pass added 17 more that are not "
+            "in it yet; those appear in full on the **Paper scorecard** tab, which reads "
+            "`paper_explorer.db` directly. So the counts here are a subset, not a "
+            "different answer.\n\n"
             "RQ5's original extraction recorded only whether a pair was *tested*; there "
             "was no outcome field, and adding one by reading defense papers would produce "
             "an all-wins ledger just as adding one from attack papers produces an "
@@ -1583,9 +1814,9 @@ def main() -> None:
         )
 
     tabs = st.tabs([
-        "Overview", "Scope & gaps", "Paper index", "Taxonomy (RQ1)",
-        "Attacks & mechanisms", "Defenses", "Coverage matrix", "Transfer predictions",
-        "RQ findings", "Paper timeline", "Citation network",
+        "Overview", "Scope & gaps", "Paper index", "Paper scorecard",
+        "Taxonomy (RQ1)", "Attacks & mechanisms", "Defenses", "Coverage matrix",
+        "Transfer predictions", "RQ findings", "Paper timeline", "Citation network",
     ])
     with tabs[0]:
         if reg:
@@ -1596,24 +1827,26 @@ def main() -> None:
     with tabs[2]:
         paper_index_tab(db_path)
     with tabs[3]:
-        taxonomy_tab()
+        paper_scorecard_tab()
     with tabs[4]:
-        if reg:
-            mechanisms_tab(reg)
+        taxonomy_tab()
     with tabs[5]:
         if reg:
-            defenses_tab(reg)
+            mechanisms_tab(reg)
     with tabs[6]:
         if reg:
-            coverage_tab(reg)
+            defenses_tab(reg)
     with tabs[7]:
         if reg:
-            transfer_tab(reg)
+            coverage_tab(reg)
     with tabs[8]:
-        findings_tab(summaries)
+        if reg:
+            transfer_tab(reg)
     with tabs[9]:
-        timeline_tab(filtered)
+        findings_tab(summaries)
     with tabs[10]:
+        timeline_tab(filtered)
+    with tabs[11]:
         cross_citation_section()
         network_tab(filtered, edges)
 
