@@ -1,0 +1,99 @@
+{
+ "generated": "2026-10-02",
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "dataset": "faitheval_data",
+ "generation": "wo_cot",
+ "n": 400,
+ "chunk_words": 20,
+ "mdr_pp_at_n": 9.9,
+ "results": [
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "vanilla",
+   "n": 400,
+   "acc": 76.75,
+   "exact_match": 76.75,
+   "f1": 82.93408907269205,
+   "ci_low": 72.36773296414411,
+   "ci_high": 80.62335928873443
+  },
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "faithfulrag",
+   "n": 400,
+   "acc": 71.75,
+   "exact_match": 71.75,
+   "f1": 79.69598440560131,
+   "ci_low": 67.14724243048535,
+   "ci_high": 75.93897276578039
+  },
+  {
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "vanilla",
+   "n": 400,
+   "acc": 79.5,
+   "exact_match": 79.5,
+   "f1": 85.3691913886767,
+   "ci_low": 75.27205845100454,
+   "ci_high": 83.16671618301108
+  },
+  {
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "faithfulrag",
+   "n": 400,
+   "acc": 76.75,
+   "exact_match": 76.75,
+   "f1": 84.1619097813951,
+   "ci_low": 72.36773296414411,
+   "ci_high": 80.62335928873443
+  },
+  {
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "vanilla",
+   "n": 400,
+   "acc": 75.0,
+   "exact_match": 74.75,
+   "f1": 82.54732273230725,
+   "ci_low": 70.53228670583574,
+   "ci_high": 78.99209857722835
+  },
+  {
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "faithfulrag",
+   "n": 400,
+   "acc": 67.5,
+   "exact_match": 67.25,
+   "f1": 77.16374797373251,
+   "ci_low": 62.76239644031284,
+   "ci_high": 71.90467325783202
+  },
+  {
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "vanilla",
+   "n": 400,
+   "acc": 7.25,
+   "exact_match": 7.0,
+   "f1": 30.495663738136667,
+   "ci_low": 5.095051839806298,
+   "ci_high": 10.218249326154139
+  },
+  {
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "faithfulrag",
+   "n": 400,
+   "acc": 7.5,
+   "exact_match": 7.25,
+   "f1": 30.728780621253556,
+   "ci_low": 5.30377439185364,
+   "ci_high": 10.50477062693744
+  }
+ ]
+}
