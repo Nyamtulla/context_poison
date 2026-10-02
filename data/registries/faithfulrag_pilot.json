@@ -1,0 +1,98 @@
+{
+ "generated": "2026-10-02",
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "dataset": "squad_negative",
+ "n": 20,
+ "chunk_words": 20,
+ "mdr_pp_at_n": 44.3,
+ "results": [
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "vanilla",
+   "n": 20,
+   "acc": 85.0,
+   "exact_match": 85.0,
+   "f1": 86.66666666666666,
+   "ci_low": 63.95811352026538,
+   "ci_high": 94.7631254115966
+  },
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "faithfulrag",
+   "n": 20,
+   "acc": 75.0,
+   "exact_match": 75.0,
+   "f1": 76.66666666666667,
+   "ci_low": 53.12991223284828,
+   "ci_high": 88.81382986133886
+  },
+  {
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "vanilla",
+   "n": 20,
+   "acc": 70.0,
+   "exact_match": 70.0,
+   "f1": 71.66666666666667,
+   "ci_low": 48.10271815959312,
+   "ci_high": 85.45227551575657
+  },
+  {
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "faithfulrag",
+   "n": 20,
+   "acc": 75.0,
+   "exact_match": 75.0,
+   "f1": 76.66666666666667,
+   "ci_low": 53.12991223284828,
+   "ci_high": 88.81382986133886
+  },
+  {
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "vanilla",
+   "n": 20,
+   "acc": 60.0,
+   "exact_match": 60.0,
+   "f1": 65.83333333333334,
+   "ci_low": 38.65815007168088,
+   "ci_high": 78.11934676599397
+  },
+  {
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "faithfulrag",
+   "n": 20,
+   "acc": 50.0,
+   "exact_match": 50.0,
+   "f1": 53.333333333333336,
+   "ci_low": 29.929800815870234,
+   "ci_high": 70.07019918412976
+  },
+  {
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "vanilla",
+   "n": 20,
+   "acc": 10.0,
+   "exact_match": 10.0,
+   "f1": 15.0,
+   "ci_low": 2.786648120626878,
+   "ci_high": 30.10336452867371
+  },
+  {
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "faithfulrag",
+   "n": 20,
+   "acc": 15.0,
+   "exact_match": 15.0,
+   "f1": 20.0,
+   "ci_low": 5.236874588403396,
+   "ci_high": 36.041886479734615
+  }
+ ]
+}
