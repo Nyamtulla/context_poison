@@ -1,0 +1,33 @@
+{
+ "generated": "2026-10-02",
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "dataset": "faitheval_data",
+ "generation": "wo_cot",
+ "n": 20,
+ "chunk_words": 20,
+ "mdr_pp_at_n": 44.3,
+ "results": [
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "vanilla",
+   "n": 20,
+   "acc": 80.0,
+   "exact_match": 80.0,
+   "f1": 91.33333333333333,
+   "ci_low": 58.39825676933227,
+   "ci_high": 91.9342337436923
+  },
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "faithfulrag",
+   "n": 20,
+   "acc": 85.0,
+   "exact_match": 85.0,
+   "f1": 92.16666666666666,
+   "ci_low": 63.95811352026538,
+   "ci_high": 94.7631254115966
+  }
+ ]
+}

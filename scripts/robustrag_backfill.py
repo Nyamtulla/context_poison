@@ -44,8 +44,9 @@ from src.dataset_utils import DataUtils          # noqa: E402
 from src.defense import KeywordAgg               # noqa: E402
 from src.models import create_model              # noqa: E402
 
-from corpus_poisoning_vs_robustrag import (      # noqa: E402
-    CorpusPoison, adversarial_text, min_detectable_change, wilson)
+from corpus_poisoning_vs_robustrag import CorpusPoison   # noqa: E402
+from transfer_stats import (                     # noqa: E402
+    adversarial_text, min_detectable_change, wilson)
 
 
 class BackfillKeywordAgg(KeywordAgg):

@@ -44,27 +44,15 @@ import sys
 REPO = pathlib.Path(__file__).resolve().parent.parent
 RRAG = REPO / "third_party" / "RobustRAG"
 sys.path.insert(0, str(RRAG))
+sys.path.insert(0, str(REPO / "scripts"))
 
 from src.attack import Attack, Poison            # noqa: E402
 from src.dataset_utils import DataUtils          # noqa: E402
 from src.defense import KeywordAgg               # noqa: E402
 from src.models import create_model              # noqa: E402
 
-ADV_PASSAGE_FILE = REPO / "data" / "registries" / "corpus_poisoning_adv_passage_k1.json"
-
-
-def adversarial_text() -> str:
-    """The attack's own optimised passage, rendered to text.
-
-    The attack optimises token ids, so rendering to a string and letting the
-    LLM re-tokenise it does not round-trip exactly. That only matters for
-    retrieval, which is already measured separately and is not re-derived
-    here - this script starts from the passage being in the context, which
-    the retrieval measurement established.
-    """
-    tokens = json.loads(ADV_PASSAGE_FILE.read_text())["dummy"]
-    return " ".join(tokens).replace(" ##", "")
-
+from transfer_stats import (                     # noqa: E402
+    adversarial_text, min_detectable_change, wilson)
 
 class CorpusPoison(Attack):
     """Put the adversarial passage into N slots of the retrieved context.
@@ -89,27 +77,6 @@ class CorpusPoison(Attack):
                 content[i] = self.passage
             new_item["topk_content"] = content
         return new_item
-
-
-def wilson(k: int, n: int) -> tuple[float, float]:
-    if n == 0:
-        return (0.0, 0.0)
-    p, z = k / n, 1.959963985
-    d = 1 + z * z / n
-    c = (p + z * z / (2 * n)) / d
-    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
-    return (max(0.0, c - h), min(1.0, c + h))
-
-
-def min_detectable_change(n: int, p: float) -> float:
-    """Smallest accuracy change resolvable at n, alpha=.05, power=.80.
-
-    Same gate the AgentDojo matrix uses. Without it a defense that does
-    nothing and a defense we cannot measure look identical.
-    """
-    z_a, z_b = 1.959963985, 0.8416212336
-    p = min(max(p, 0.01), 0.99)
-    return (z_a + z_b) * math.sqrt(2 * p * (1 - p) / n) * 100
 
 
 def run(label, items, llm, defense, attack, data_utils, defended):
