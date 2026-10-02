@@ -1,0 +1,130 @@
+{
+ "generated": "2026-10-01",
+ "model": "mistral7b",
+ "dataset": "open_nq",
+ "n": 500,
+ "top_k": 10,
+ "mdr_pp_at_n": 8.9,
+ "results": [
+  {
+   "label": "undefended",
+   "n": 500,
+   "correct": 303,
+   "acc": 60.6,
+   "ci_low": 56.25178092968994,
+   "ci_high": 64.78658305244987,
+   "defended": false,
+   "condition": "clean (no attack)"
+  },
+  {
+   "label": "RobustRAG",
+   "n": 500,
+   "correct": 286,
+   "acc": 57.199999999999996,
+   "ci_low": 52.82438503526228,
+   "ci_high": 61.46582446204023,
+   "defended": true,
+   "condition": "clean (no attack)"
+  },
+  {
+   "label": "undefended",
+   "n": 500,
+   "correct": 227,
+   "acc": 45.4,
+   "ci_low": 41.08757266638959,
+   "ci_high": 49.782571265889366,
+   "defended": false,
+   "condition": "PoisonedRAG [control]"
+  },
+  {
+   "label": "RobustRAG",
+   "n": 500,
+   "correct": 282,
+   "acc": 56.39999999999999,
+   "ci_low": 52.02096875336644,
+   "ci_high": 60.68143968868023,
+   "defended": true,
+   "condition": "PoisonedRAG [control]"
+  },
+  {
+   "label": "undefended",
+   "n": 500,
+   "correct": 297,
+   "acc": 59.4,
+   "ci_low": 55.03970661169676,
+   "ci_high": 63.61695578755929,
+   "defended": false,
+   "condition": "corpus poisoning, insert 1"
+  },
+  {
+   "label": "RobustRAG",
+   "n": 500,
+   "correct": 285,
+   "acc": 56.99999999999999,
+   "ci_low": 52.62342399154238,
+   "ci_high": 61.269835241946154,
+   "defended": true,
+   "condition": "corpus poisoning, insert 1"
+  },
+  {
+   "label": "undefended",
+   "n": 500,
+   "correct": 289,
+   "acc": 57.8,
+   "ci_low": 53.42769778586462,
+   "ci_high": 62.053362502879764,
+   "defended": false,
+   "condition": "corpus poisoning, displace 1"
+  },
+  {
+   "label": "RobustRAG",
+   "n": 500,
+   "correct": 276,
+   "acc": 55.2,
+   "ci_low": 50.817973800031794,
+   "ci_high": 59.50273305913114,
+   "defended": true,
+   "condition": "corpus poisoning, displace 1"
+  },
+  {
+   "label": "undefended",
+   "n": 500,
+   "correct": 270,
+   "acc": 54.0,
+   "ci_low": 49.61751552827848,
+   "ci_high": 58.3214897480007,
+   "defended": false,
+   "condition": "corpus poisoning, displace 5"
+  },
+  {
+   "label": "RobustRAG",
+   "n": 500,
+   "correct": 251,
+   "acc": 50.2,
+   "ci_low": 45.83263632196879,
+   "ci_high": 54.56431394184518,
+   "defended": true,
+   "condition": "corpus poisoning, displace 5"
+  },
+  {
+   "label": "undefended",
+   "n": 500,
+   "correct": 17,
+   "acc": 3.4000000000000004,
+   "ci_low": 2.1334519806228784,
+   "ci_high": 5.377136550724755,
+   "defended": false,
+   "condition": "corpus poisoning, displace 10"
+  },
+  {
+   "label": "RobustRAG",
+   "n": 500,
+   "correct": 23,
+   "acc": 4.6,
+   "ci_low": 3.084510836794313,
+   "ci_high": 6.807779277437072,
+   "defended": true,
+   "condition": "corpus poisoning, displace 10"
+  }
+ ]
+}
