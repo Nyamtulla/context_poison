@@ -1,0 +1,67 @@
+{
+ "generated": "2026-10-01",
+ "model": "mistral7b",
+ "dataset": "open_nq",
+ "n": 500,
+ "top_k": 10,
+ "pool_size": 30,
+ "mdr_pp_at_n": 8.9,
+ "defense": "KeywordAgg + abstention backfill",
+ "results": [
+  {
+   "label": "RobustRAG+backfill",
+   "n": 500,
+   "correct": 288,
+   "acc": 57.599999999999994,
+   "ci_low": 53.22652180333862,
+   "ci_high": 61.8575882215918,
+   "probes_per_item": 17.35,
+   "kept_per_item": 9.694,
+   "condition": "clean (no attack)"
+  },
+  {
+   "label": "RobustRAG+backfill",
+   "n": 500,
+   "correct": 287,
+   "acc": 57.4,
+   "ci_low": 53.02541759681214,
+   "ci_high": 61.661742164304314,
+   "probes_per_item": 17.374,
+   "kept_per_item": 9.748,
+   "condition": "PoisonedRAG [control]"
+  },
+  {
+   "label": "RobustRAG+backfill",
+   "n": 500,
+   "correct": 278,
+   "acc": 55.60000000000001,
+   "ci_low": 51.21868930394221,
+   "ci_high": 59.89591808284863,
+   "probes_per_item": 20.39,
+   "kept_per_item": 9.64,
+   "condition": "corpus poisoning, displace 1"
+  },
+  {
+   "label": "RobustRAG+backfill",
+   "n": 500,
+   "correct": 263,
+   "acc": 52.6,
+   "ci_low": 48.22016483592495,
+   "ci_high": 56.94018859365653,
+   "probes_per_item": 21.65,
+   "kept_per_item": 9.388,
+   "condition": "corpus poisoning, displace 5"
+  },
+  {
+   "label": "RobustRAG+backfill",
+   "n": 500,
+   "correct": 226,
+   "acc": 45.2,
+   "ci_low": 40.89073377993381,
+   "ci_high": 49.58245988853118,
+   "probes_per_item": 25.47,
+   "kept_per_item": 9.01,
+   "condition": "corpus poisoning, displace 10"
+  }
+ ]
+}
