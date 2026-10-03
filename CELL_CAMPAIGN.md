@@ -22,7 +22,8 @@ NQ), injected at 10 / 50 / 100 % of the context.
 |---|---|---|---|---:|---:|
 | **ParamMute** | NeurIPS 2025 | **fires** (+9.3 pp ctx, −12.4 pp mr) | **HARMFUL — 13.5 pp more damage than undefended** | 1409 | 5.3 pp |
 | FaithfulRAG | ACL 2025 | **fails** (−5.0 pp, below threshold) | not reportable | 400 | 9.9 pp |
-| CK-PLUG | arXiv 2025 | mechanism engages, no net benefit (mr −10.7 pp, ctx −5.0 pp) | *full run, n=800* | | 7.0 pp |
+| **CK-PLUG** | arXiv 2025 | **fires** (−10.1 pp mr) | **HARMFUL — −14.9 / −15.1 / −9.9 pp under attack, all resolvable; 0.2 % at saturation vs 10.1 % undefended** | 800 | 7.0 pp |
+| **SpARE** | NAACL 2024 | shape right, under-powered at n=150 | *n=500 running* — steers separate **+14.0 pp** clean, invert to **−13.3 pp** at saturation | 150 | 16.2 pp |
 
 ## Roadblocks
 
@@ -79,6 +80,25 @@ what made FaithfulRAG unreadable.
 8. **COMBO** (EMNLP 2023) — RQ6 previously found no released checkpoint.
 9. **DCD** (arXiv 2024) — cross-modal VLM; different channel, likely out of scope.
 10. **VideoSEAL** (arXiv 2026) — video; out of scope.
+
+## What three defenses now show
+
+| | ParamMute | CK-PLUG | SpARE |
+|---|---|---|---|
+| venue | NeurIPS 2025 | arXiv 2025 | NAACL 2024 |
+| mechanism | FFN activation suppression | logit-distribution fusion | SAE feature steering |
+| clean-data effect | **+9.3 pp** | −4.5 pp (ns) | +14.0 pp (ns at this n) |
+| under attack | −4.2 pp; **13.5 pp more total damage** | **−9.9 to −15.1 pp** | −13.3 pp (ns at this n) |
+| mechanism under attack | works **harder** | works **harder** | — |
+
+Three papers, three venues, three different layers of the stack — FFN
+activations, decode-time logits, sparse-autoencoder features — **no shared
+code between them**, and the same inversion. ParamMute and CK-PLUG are
+established above threshold; SpARE shows the shape as a literal sign flip and
+is being re-run for power.
+
+One defense doing this is a paper with a problem. Three independent ones is a
+property of the strategy they share.
 
 ## The prediction being tested
 
