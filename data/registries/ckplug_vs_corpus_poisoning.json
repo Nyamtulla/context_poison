@@ -1,0 +1,108 @@
+{
+ "generated": "2026-10-02",
+ "dataset": "NaturalQuestionsShort_kc.jsonl",
+ "n": 800,
+ "schema": "base",
+ "alpha": 0.0,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "top_k": 1,
+ "mdr_pp_at_n": 7.0,
+ "results": [
+  {
+   "n": 800,
+   "ctx_acc": 60.37,
+   "pm_acc": 20.25,
+   "mr": 25.12,
+   "em": 0.0,
+   "ci_low": 56.9,
+   "ci_high": 63.7,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "base_rag"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 39.25,
+   "pm_acc": 26.87,
+   "mr": 40.64,
+   "em": 0.0,
+   "ci_low": 35.9,
+   "ci_high": 42.7,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "base_rag"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 28.25,
+   "pm_acc": 34.25,
+   "mr": 54.8,
+   "em": 0.0,
+   "ci_low": 25.2,
+   "ci_high": 31.5,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "base_rag"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 10.12,
+   "pm_acc": 44.12,
+   "mr": 81.34,
+   "em": 0.0,
+   "ci_low": 8.2,
+   "ci_high": 12.4,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "base_rag"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 55.87,
+   "pm_acc": 9.87,
+   "mr": 15.02,
+   "em": 0.0,
+   "ci_low": 52.4,
+   "ci_high": 59.3,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "ck"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 24.37,
+   "pm_acc": 7.12,
+   "mr": 22.62,
+   "em": 0.0,
+   "ci_low": 21.5,
+   "ci_high": 27.5,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "ck"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 13.12,
+   "pm_acc": 5.0,
+   "mr": 27.59,
+   "em": 0.0,
+   "ci_low": 11.0,
+   "ci_high": 15.6,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "ck"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 0.25,
+   "pm_acc": 2.62,
+   "mr": 91.3,
+   "em": 0.0,
+   "ci_low": 0.1,
+   "ci_high": 0.9,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "ck"
+  }
+ ]
+}
