@@ -22,13 +22,33 @@ NQ), injected at 10 / 50 / 100 % of the context.
 |---|---|---|---|---:|---:|
 | **ParamMute** | NeurIPS 2025 | **fires** (+9.3 pp ctx, −12.4 pp mr) | **HARMFUL — 13.5 pp more damage than undefended** | 1409 | 5.3 pp |
 | FaithfulRAG | ACL 2025 | **fails** (−5.0 pp, below threshold) | not reportable | 400 | 9.9 pp |
-| CK-PLUG | arXiv 2025 | *in progress* | | | |
+| CK-PLUG | arXiv 2025 | mechanism engages, no net benefit (mr −10.7 pp, ctx −5.0 pp) | *full run, n=800* | | 7.0 pp |
 
 ## Roadblocks
 
 | defense | blocker |
 |---|---|
 | FaithfulRAG | CoT paths need OpenAI JSON mode; stripping the flag makes them run and score 0.0 %. Only the ablated `wo_cot` runs on open weights, and its control does not fire. |
+| JUICE | Viable but four-stage: NQ-Swap download → `generate_dataset_split.py` → `dataset.py` per model → head selection → intervention. The repo ships only a README pointing at the HF dataset, and `head_size_N/test.json` must be built. Needs `nnsight`. |
+| SABER | Viable; no-GPU smoke test passes cleanly (700 labelled rows, 7 unit tests, every entry point). Requires training the belief probe — label → extract hidden states → multipath generation → train → evaluate. No released checkpoint. |
+
+## What setting these up keeps turning into: a reproducibility finding
+
+None of this is cherry-picked; it is every obstacle hit, in order, across five
+repos from this one cell.
+
+| defect | repos |
+|---|---|
+| **Dead `vllm` import** blocking startup — `from vllm import LLM, SamplingParams`, name never used anywhere in the package | FaithfulRAG, CK-PLUG |
+| **Eval script contradicts the module's own default**, injecting sampling noise larger than the measured effect (`top_k` 1 → 100; identical conditions drifted 58–63 %) | CK-PLUG |
+| **Undocumented sign convention on the main knob.** `alpha * parametric + (1-alpha) * context`, with the script defaulting to a 50/50 mix — running the default tests the opposite of the paper's direction | CK-PLUG |
+| **Headline configuration silently needs a commercial API.** Open-weight path is an ablation the paper never reports separately | FaithfulRAG |
+| **Deprecated API in the shipped code** (`temperature=0.0` into `generate`; `batch_encode_plus`) | FaithfulRAG, corpus-poisoning |
+| **Ships a full fork of `transformers`** that must be installed in place of the real one | ParamMute, CK-PLUG |
+
+Five of six are silent: the code runs and produces numbers that are wrong or
+noisy rather than failing. Every one was found by insisting the control fire
+before reading a result.
 
 ## Queue
 
