@@ -63,6 +63,25 @@ Five of six are silent: the code runs and produces numbers that are wrong or
 noisy rather than failing. Every one was found by insisting the control fire
 before reading a result.
 
+## Why the four measured defenses are directly comparable
+
+Not an assumption — checked. ParamMute's `eval_CoConflictQA.py` and CK-PLUG's
+`eval_NQ.py` were diffed function by function:
+
+| | |
+|---|---|
+| `normalize_answer` | **byte-identical** between the two repos |
+| `_acc_score` (ParamMute) vs `recall_score` (CK-PLUG) | same construction, different name: normalised gold ⊆ normalised prediction |
+| `_exact_match_score` vs `exact_match_score` | identical |
+| `mr` | both compute `pm / (ctx + pm)` |
+
+The two papers arrived at the same scorer independently because it descends
+from SQuAD. SpARE and SHIFT ship no scorer at all — SpARE's `demo.py` only
+prints answers, SHIFT's eval has placeholder paths — so that same rubric was
+supplied to both, which is why all four sit on one scale and share one
+`mdr` gate. **No evaluation rubric was altered; one was propagated to the two
+repos that lacked any.**
+
 ## Final triage — every candidate in the cell
 
 Twelve incidental-validated defenses had a resolvable public repo. All twelve
