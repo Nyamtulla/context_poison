@@ -30,7 +30,7 @@ NQ), injected at 10 / 50 / 100 % of the context.
 |---|---|
 | FaithfulRAG | CoT paths need OpenAI JSON mode; stripping the flag makes them run and score 0.0 %. Only the ablated `wo_cot` runs on open weights, and its control does not fire. |
 | JUICE | Viable but four-stage: NQ-Swap download → `generate_dataset_split.py` → `dataset.py` per model → head selection → intervention. The repo ships only a README pointing at the HF dataset, and `head_size_N/test.json` must be built. Needs `nnsight`. |
-| SABER | Viable; no-GPU smoke test passes cleanly (700 labelled rows, 7 unit tests, every entry point). Requires training the belief probe — label → extract hidden states → multipath generation → train → evaluate. No released checkpoint. |
+| **SABER** | **BLOCKED at stage 3 of 6.** Stages 1–3a completed (PK/CK labelling, self-prior extraction, K=3 trace generation for all 7 datasets). Stage 3b needs `prompts/multipath_prompts.yaml` with keys `prompt_1_reasoning_ck`, `prompt_1_reasoning_pk`, `prompt_2_judgment` — **the file is not in the repo**. It is not gitignored; the repo is a single anonymised commit and it was dropped. Those three templates *are* the self-evaluation method, so writing them myself would be inventing SABER, not reproducing it. Five further defects hit on the way, below. |
 
 ## What setting these up keeps turning into: a reproducibility finding
 
@@ -45,6 +45,16 @@ repos from this one cell.
 | **Headline configuration silently needs a commercial API.** Open-weight path is an ablation the paper never reports separately | FaithfulRAG |
 | **Deprecated API in the shipped code** (`temperature=0.0` into `generate`; `batch_encode_plus`) | FaithfulRAG, corpus-poisoning |
 | **Ships a full fork of `transformers`** that must be installed in place of the real one | ParamMute, CK-PLUG |
+| **Missing module-level constant** — `saber.config` never defines `HF_CACHE_DIR`, which two extract modules import at line 34/48 and use as `cache_dir`. Every GPU stage dies on import | SABER |
+| **Shipped run scripts do not match their modules' CLIs** — `01` passes `--in-jsonl/--out-jsonl`, `02` passes `--split-file/--out`; the modules take `--datasets/--out-dir`. The documented end-to-end command cannot run | SABER |
+| **Code reads the wrong key from its own shipped data** — `multipath_vllm_gen` does `manifest["datasets"].items()`, but in `saber_split.json` `datasets` is a list of names and the qids live under `partition` | SABER |
+| **A required prompt file is absent from the repository** | SABER |
+| **CUDA 13 wheels resolved by default** on a CUDA 12.2 driver, so `torch.cuda.is_available()` is False until pinned | JUICE, SABER |
+
+The smoke test is worth singling out. SABER ships a genuinely good one — it
+passes cleanly, reports **ALL SMOKE CHECKS PASSED**, and the pipeline then
+fails on the very next command. It `--help`s four entry points, none of them in
+the `extract` package where all five defects live.
 
 Five of six are silent: the code runs and produces numbers that are wrong or
 noisy rather than failing. Every one was found by insisting the control fire
