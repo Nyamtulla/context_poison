@@ -56,8 +56,23 @@ PROMPT_TEMPLATE = (
 )
 
 
+# SHIFT's checkpoint ships weights, config and the modified modeling code,
+# but no tokenizer files at all. Llama-3.1-8B-Instruct's own tokenizer is the
+# right one - the checkpoint is a fine-tune of it and the vocabulary is
+# unchanged - so it is loaded from the ungated mirror of the base model.
+TOKENIZER_SRC = "NousResearch/Meta-Llama-3.1-8B-Instruct"
+
+
 def load_model(path: str, gate: bool):
-    tok = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
+    # Their modeling_llama.py does `from configuration_llama import ...` - an
+    # absolute import of a sibling file. transformers' check_imports sees a
+    # bare module name, decides it is a missing PyPI package, and raises
+    # "Run `pip install configuration_llama`". Putting the checkpoint
+    # directory on sys.path makes the sibling resolve as what it is.
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+    tok = AutoTokenizer.from_pretrained(TOKENIZER_SRC, trust_remote_code=True)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     cfg = AutoConfig.from_pretrained(path, trust_remote_code=True)

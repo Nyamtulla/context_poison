@@ -1,0 +1,32 @@
+{
+ "generated": "2026-10-03",
+ "dataset": "NaturalQuestionsShort_kc.jsonl",
+ "n": 150,
+ "model": "ITcoder/SHIFT/Llama3.1-8B-Instruct",
+ "scorer": "shared normalize+substring rubric",
+ "mdr_pp_at_n": 16.2,
+ "results": [
+  {
+   "n": 150,
+   "ctx_acc": 68.0,
+   "pm_acc": 12.0,
+   "mr": 15.0,
+   "ci_low": 60.2,
+   "ci_high": 74.9,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "gate_off"
+  },
+  {
+   "n": 150,
+   "ctx_acc": 69.33,
+   "pm_acc": 14.0,
+   "mr": 16.8,
+   "ci_low": 61.5,
+   "ci_high": 76.2,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "shift"
+  }
+ ]
+}
