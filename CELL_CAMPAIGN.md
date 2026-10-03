@@ -63,6 +63,30 @@ Five of six are silent: the code runs and produces numbers that are wrong or
 noisy rather than failing. Every one was found by insisting the control fire
 before reading a result.
 
+## Final triage — every candidate in the cell
+
+Twelve incidental-validated defenses had a resolvable public repo. All twelve
+were assessed; six were attempted end-to-end.
+
+| defense | outcome |
+|---|---|
+| ParamMute | **measured** |
+| CK-PLUG | **measured** |
+| SpARE | **measured** |
+| SHIFT | **measured** |
+| FaithfulRAG | blocked — headline config needs OpenAI JSON mode |
+| SABER | blocked — required prompt file absent from repo |
+| KScope | blocked — README states datasets cannot be uploaded |
+| **COMBO** (EMNLP 2023) | blocked — trains two discriminators from silver labels via slurm; **no released checkpoints**, confirming what RQ6 found independently |
+| **Knowledgeable-R1** (2025) | blocked — eval expects a locally-trained RL checkpoint (`global_step_9`); **no released weights**, data on Google Drive, needs the verl GRPO stack |
+| JUICE | deprioritised — NQ-Swap splits need rebuilding in an undocumented format; same family as four already measured |
+| **DCD** (2024) | **out of scope** — cross-modality (vision-language). Our attack is text-only, so the channel does not match; forcing it would test something else |
+| **VideoSEAL** (2026) | **out of scope** — video |
+
+**Four of twelve could be run.** Of the eight that could not, five are
+artefact problems — absent prompts, absent data, absent checkpoints, an API
+dependency — and only two are genuine scope mismatches.
+
 ## Queue
 
 Ordered by expected runnability. `api=N` throughout — an OpenAI dependency is
