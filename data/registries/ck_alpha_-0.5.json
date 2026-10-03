@@ -1,0 +1,35 @@
+{
+ "generated": "2026-10-02",
+ "dataset": "NaturalQuestionsShort_kc.jsonl",
+ "n": 100,
+ "schema": "base",
+ "alpha": -0.5,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "mdr_pp_at_n": 19.8,
+ "results": [
+  {
+   "n": 100,
+   "ctx_acc": 58.0,
+   "pm_acc": 15.0,
+   "mr": 20.55,
+   "em": 0.0,
+   "ci_low": 48.2,
+   "ci_high": 67.2,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "base_rag"
+  },
+  {
+   "n": 100,
+   "ctx_acc": 50.0,
+   "pm_acc": 10.0,
+   "mr": 16.67,
+   "em": 0.0,
+   "ci_low": 40.4,
+   "ci_high": 59.6,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "ck"
+  }
+ ]
+}
