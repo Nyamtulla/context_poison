@@ -1,0 +1,98 @@
+{
+ "generated": "2026-10-02",
+ "dataset": "NaturalQuestionsShort_kc.jsonl",
+ "n": 500,
+ "model": "NousResearch/Meta-Llama-3-8B",
+ "scorer": "shared normalize+substring rubric",
+ "mdr_pp_at_n": 8.9,
+ "results": [
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "steer_to_use_context",
+   "n": 500,
+   "ctx_acc": 53.8,
+   "pm_acc": 9.0,
+   "mr": 14.33,
+   "ci_low": 49.4,
+   "ci_high": 58.1
+  },
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "steer_to_use_parameter",
+   "n": 500,
+   "ctx_acc": 39.6,
+   "pm_acc": 16.2,
+   "mr": 29.03,
+   "ci_low": 35.4,
+   "ci_high": 44.0
+  },
+  {
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "steer_to_use_context",
+   "n": 500,
+   "ctx_acc": 33.0,
+   "pm_acc": 10.4,
+   "mr": 23.96,
+   "ci_low": 29.0,
+   "ci_high": 37.2
+  },
+  {
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "steer_to_use_parameter",
+   "n": 500,
+   "ctx_acc": 28.8,
+   "pm_acc": 19.4,
+   "mr": 40.25,
+   "ci_low": 25.0,
+   "ci_high": 32.9
+  },
+  {
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "steer_to_use_context",
+   "n": 500,
+   "ctx_acc": 15.4,
+   "pm_acc": 7.2,
+   "mr": 31.86,
+   "ci_low": 12.5,
+   "ci_high": 18.8
+  },
+  {
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "steer_to_use_parameter",
+   "n": 500,
+   "ctx_acc": 22.6,
+   "pm_acc": 23.6,
+   "mr": 51.08,
+   "ci_low": 19.2,
+   "ci_high": 26.5
+  },
+  {
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "steer_to_use_context",
+   "n": 500,
+   "ctx_acc": 1.8,
+   "pm_acc": 7.0,
+   "mr": 79.55,
+   "ci_low": 0.9,
+   "ci_high": 3.4
+  },
+  {
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "steer_to_use_parameter",
+   "n": 500,
+   "ctx_acc": 12.0,
+   "pm_acc": 29.0,
+   "mr": 70.73,
+   "ci_low": 9.4,
+   "ci_high": 15.1
+  }
+ ]
+}
