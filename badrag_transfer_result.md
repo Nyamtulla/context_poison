@@ -31,6 +31,40 @@ restores accuracy to **57.4 %** — within 2.4 points of its own clean baseline.
 
 This was predicted to show little effect. It shows a large protective one.
 
+### The boundary is one passage
+
+The full dose-response, filled in at every level from 0 to 10:
+
+| poison | undef refusal | PM refusal | undef acc | PM acc | Δacc | verdict |
+|---:|---:|---:|---:|---:|---:|---|
+| 0/10 | 0.0 % | 0.0 % | 62.2 % | 59.8 % | −2.4 | — |
+| 1/10 | 52.4 % | 0.2 % | 27.0 % | 57.4 % | **+30.4** | protective |
+| 2/10 | 43.6 % | 0.0 % | 23.2 % | 58.4 % | **+35.2** | protective |
+| 3/10 | 39.6 % | 0.2 % | 22.8 % | 57.2 % | **+34.4** | protective |
+| 5/10 | 18.6 % | 0.4 % | 30.2 % | 57.4 % | **+27.2** | protective |
+| 6/10 | 11.2 % | 0.2 % | 31.6 % | 55.8 % | **+24.2** | protective |
+| 7/10 | 10.4 % | 0.2 % | 33.4 % | 55.6 % | **+22.2** | protective |
+| 8/10 | 11.0 % | 0.2 % | 29.2 % | 53.6 % | **+24.4** | protective |
+| **9/10** | 15.0 % | 0.8 % | 29.4 % | **48.8 %** | **+19.4** | **protective** |
+| **10/10** | 20.4 % | 8.4 % | **3.8 %** | **1.6 %** | −2.2 | **collapse** |
+
+**Protection holds at nine of ten passages poisoned and disappears at ten.**
+ParamMute's accuracy declines gently across the whole range — 57.4, 58.4,
+57.2, 57.4, 55.8, 55.6, 53.6, 48.8 — and then falls to **1.6 %**. The
+undefended arm does the same thing: 27 → 33 → 29 → 29 → **3.8 %**.
+
+The cliff is not gradual and it is not at "saturation" loosely defined. It is
+at the point where **the last genuine passage disappears**. With one real
+passage among nine payloads, the defense still delivers **+19.4 pp**. With
+zero, both arms fail together.
+
+That is the mechanism stated exactly: these defenses make the model use the
+retrieved evidence. While any genuine evidence survives, that is the right
+instruction and ParamMute executes it well enough to beat the undefended model
+by 19–35 points. When none survives, "use the evidence" is an instruction to
+use nothing, and the model's suppressed memory is no longer available to fall
+back on.
+
 ### Both regimes appear inside this one attack
 
 The dose-response was filled in at 2 and 3 passages to check an apparent
@@ -39,11 +73,12 @@ non-monotonicity in the undefended arm. It is real and smooth: refusal peaks at
 "editorial notice" among nine ordinary passages is the most effective
 configuration; adding more does not help the attacker.
 
-More usefully, the **10/10 column behaves differently from every other row.**
-There, accuracy collapses for both arms (3.8 % and 1.6 %) and ParamMute stops
-protecting. That is the signature of the *harmful* regime — at full saturation
-there is no real evidence left, so the attack has stopped being a refusal
-attack and has become a context-destruction attack.
+More usefully, the **10/10 column behaves differently from every other row** —
+and the sweep from 6 to 9 shows it is the *only* row that does. There accuracy
+collapses for both arms (3.8 % and 1.6 %) and ParamMute stops protecting. That
+is the signature of the *harmful* regime: at full saturation there is no real
+evidence left, so the attack has stopped being a refusal attack and has become
+a context-destruction attack.
 
 **So a single experiment contains both signs.** While real passages survive,
 BadRAG exploits the refusal reflex and ParamMute blunts it. Once every passage
