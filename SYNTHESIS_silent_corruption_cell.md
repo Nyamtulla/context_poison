@@ -1,8 +1,14 @@
-# Defenses for accidental context failure are harmful under deliberate attack
+# Defenses for accidental context failure remove the model's priors — for better and for worse
 
 **A complete pass over the silent-corruption cell.** Every incidental-validated
-defense with public code, run against one reconstructed deliberate attack,
-2026-09-30 → 2026-10-03.
+defense with public code, run against three structurally different deliberate
+attacks, 2026-09-30 → 2026-10-05.
+
+> **Revised 2026-10-05.** The first version of this document concluded that
+> these defenses are harmful under attack. That was true of the two attacks
+> tested at the time and is **too broad**. A third attack reversed the sign,
+> and the corrected claim is in §3. The earlier numbers are unchanged; the
+> interpretation is narrower.
 
 ---
 
@@ -56,16 +62,36 @@ honest, and each becomes a resolvable penalty once an attacker controls it.
 
 ---
 
-## 3. The mechanism is the vulnerability
+## 3. The mechanism is neither a vulnerability nor a defense — it is a trade
 
-This is not a story about defenses that stop working. **Every one of them
-keeps working, and that is the problem.**
+These defenses share one strategy: *suppress reliance on parametric memory so
+the model follows retrieved context.* The decisive finding is that **the
+model's parametric behaviour contains two things the defense cannot tell
+apart**:
 
-All three share a strategy: *increase reliance on retrieved context at the
-expense of parametric memory.* Each measures its own success as a fall in the
-memorization ratio `mr = pm / (ctx + pm)`.
+- **factual knowledge** — what the model would answer from memory
+- **a learned refusal reflex** — the alignment behaviour that declines to answer
 
-Under attack, **`mr` falls further than on clean data, in all three**:
+Suppressing memory mutes both. Whether that helps depends entirely on **which
+of the two the attacker is aiming at.**
+
+| attack | what the payload exploits | ParamMute's effect |
+|---|---|---|
+| corpus poisoning (removes signal) | the factual fallback | **harmful** — 13.5 pp more total damage |
+| PoisonedRAG at saturation (every passage a lie) | the factual fallback | **harmful** — ASR 68.4 % → **88.8 %** |
+| **BadRAG DoS (induces refusal)** | **the refusal reflex** | **protective** — refusal 52.4 % → **0.2 %**, accuracy 27.0 % → **57.4 %** |
+
+### Why the harmful cases are harmful
+
+Under corpus poisoning and saturated PoisonedRAG the retrieved context is
+unusable. The undefended model notices and retreats to memory: its own
+memorization ratio climbs 30.6 % → **89.8 %**, and that retreat still salvages
+**32 % accuracy when every passage is a lie.** It is crude, unreliable, and a
+real defense. These techniques exist to prevent it.
+
+Consistent with that, `mr` falls *further* under attack than on clean data in
+all three defenses — they suppress the fallback harder the more corrupted the
+context becomes:
 
 | | clean | 10 % poisoned | 50 % poisoned |
 |---|---:|---:|---:|
@@ -73,21 +99,19 @@ Under attack, **`mr` falls further than on clean data, in all three**:
 | CK-PLUG | −10.1 pp | **−18.0 pp** | **−27.2 pp** |
 | SpARE | −14.7 pp | **−16.3 pp** | **−19.2 pp** |
 
-The defenses suppress the model's fallback *harder* the more corrupted the
-context becomes. They are succeeding at their stated objective precisely when
-that objective is wrong.
+### Why the protective case is protective
 
-The undefended model shows what is being suppressed. Its own `mr` climbs from
-30.6 % to **89.8 %** as poisoning saturates: left alone, the model
-increasingly ignores the garbage and answers from memory. That retreat is
-crude, unreliable, and **a real defense** — and these techniques exist to
-prevent it.
+BadRAG's payload asserts nothing false and removes nothing. It claims the topic
+is contested and harmful, and the model's own alignment fires. ParamMute mutes
+that reflex along with everything else parametric, so the payload has nothing
+to trigger. Same intervention, opposite valence.
 
-> **"Trust the context more" is a defense against context being wrong and an
-> amplifier for context being hostile, and the two cannot be separated because
-> they are the same intervention.**
+> **The honest claim is a design trade, not a verdict: suppressing parametric
+> memory costs the model its factual fallback and removes its refusal reflex.
+> Attacks that destroy the evidence are amplified. Attacks that weaponise the
+> model's own alignment are blunted.**
 
----
+This predicts where to look next, which the earlier blanket claim did not.
 
 ## 4. What the attack is, and why the numbers are trustworthy
 
@@ -181,22 +205,44 @@ have produced plausible, wrong numbers rather than errors.
 
 ---
 
+## 6b. Second and third attacks: the same defenses, different signs
+
+| | ParamMute | CK-PLUG |
+|---|---|---|
+| PoisonedRAG, 1–5 poisoned | no resolvable effect | control fails (−22.6 pp clean) |
+| PoisonedRAG, 10/10 | **ASR +20.4 pp**, accuracy −26.4 pp | control fails |
+| BadRAG DoS | **refusal −52.2 pp, accuracy +30.4 pp** | control fails |
+
+CK-PLUG's control fires on CoConflictQA (−10.1 pp `mr`) and **fails** on
+`open_nq` (−22.6 pp accuracy with no attack at all). Same defense, same
+settings, two datasets, opposite verdicts on whether it works. That is
+reported as a limit on CK-PLUG's generality, not as a transfer result.
+
+Registry status of every cell above: **untested**. RobustRAG is the only
+defense in this cell the literature records against PoisonedRAG; ParamMute,
+CK-PLUG, SpARE, SHIFT, FaithfulRAG and TCR are recorded against nothing.
+
 ## 7. What this means for the SoK
 
 RQ5 records **163 of 197 matched defenses tested against exactly one attack**.
 This campaign is what one cell of that registry looks like when a second,
 independently reconstructed attack is put in front of it.
 
-The result is stronger than the thesis required. The claim was that defenses
-for incidental context failure would **not transfer** to deliberate attack.
-What three independent defenses show is that they **transfer negatively**:
-measured against no defense at all, they make the system worse, and they do it
-by working correctly.
+The claim was that defenses for incidental context failure would **not
+transfer** to deliberate attack. What the experiments show is more specific and
+more useful than either "no transfer" or "negative transfer".
 
-The scope of that claim is bounded by the mechanism, which also makes it
-predictive. Any defense whose strategy is *increase context reliance* inherits
-it. In this cell that is most of them — and FaithfulRAG, Knowledgeable-R1 and
-COMBO, none of which could be run, are all in the same family.
+**Transfer is not a property of the defense. It is a property of the pair.**
+The same intervention, unchanged, is harmful against two attacks and
+protective against a third — and which one you get is decided by whether the
+attacker targets the model's factual fallback or its refusal reflex.
+
+That is precisely what a registry recording **163 of 197 defenses against
+exactly one attack** cannot tell you. A single confirmed pair does not
+under-measure a defense; it measures something that does not generalise at
+all. Any defense in this family — FaithfulRAG, Knowledgeable-R1, COMBO among
+them — inherits the same conditional behaviour, and none of their papers could
+have detected it, because each tested one attack.
 
 ---
 
@@ -208,6 +254,8 @@ COMBO, none of which could be run, are all in the same family.
 | ParamMute | `parammute_transfer_result.md` |
 | CK-PLUG | `ckplug_transfer_result.md` |
 | SpARE | `spare_transfer_result.md` |
+| PoisonedRAG (2nd attack) | `data/registries/poisonedrag_*.json` |
+| BadRAG DoS (3rd attack) | `badrag_transfer_result.md` |
 | SHIFT | `shift_transfer_attempt.md` |
 | FaithfulRAG | `faithfulrag_transfer_attempt.md` |
 | campaign log, defect table, full triage | `CELL_CAMPAIGN.md` |
