@@ -14,8 +14,15 @@ measured as refusal rate.
 |---:|---:|---:|---:|---:|---:|---:|
 | 0/10 | 0.0 % | 0.0 % | +0.0 | 62.2 % | 59.8 % | −2.4 |
 | **1/10** | **52.4 %** | **0.2 %** | **−52.2 pp** | 27.0 % | **57.4 %** | **+30.4 pp** |
+| **2/10** | 43.6 % | **0.0 %** | **−43.6 pp** | 23.2 % | **58.4 %** | **+35.2 pp** |
+| **3/10** | 39.6 % | 0.2 % | **−39.4 pp** | 22.8 % | **57.2 %** | **+34.4 pp** |
 | **5/10** | 18.6 % | 0.4 % | **−18.2 pp** | 30.2 % | **57.4 %** | **+27.2 pp** |
 | 10/10 | 20.4 % | 8.4 % | **−12.0 pp** | 3.8 % | 1.6 % | −2.2 |
+
+Across the whole realistic range (1–5 poisoned passages) the undefended model
+averages **25.8 %** accuracy and ParamMute averages **57.6 %** — within 2.2
+points of its own clean baseline of 59.8 %. The defense is **flat**: it does
+not degrade as more poison is added.
 
 With a single poisoned passage the undefended model refuses **52.4 %** of the
 time and keeps only 27.0 % accuracy. ParamMute drops refusal to **0.2 %** and
@@ -23,6 +30,26 @@ restores accuracy to **57.4 %** — within 2.4 points of its own clean baseline.
 **The attack is almost completely neutralised.**
 
 This was predicted to show little effect. It shows a large protective one.
+
+### Both regimes appear inside this one attack
+
+The dose-response was filled in at 2 and 3 passages to check an apparent
+non-monotonicity in the undefended arm. It is real and smooth: refusal peaks at
+**one** poisoned passage and falls away — 52.4 → 43.6 → 39.6 → 18.6 %. One
+"editorial notice" among nine ordinary passages is the most effective
+configuration; adding more does not help the attacker.
+
+More usefully, the **10/10 column behaves differently from every other row.**
+There, accuracy collapses for both arms (3.8 % and 1.6 %) and ParamMute stops
+protecting. That is the signature of the *harmful* regime — at full saturation
+there is no real evidence left, so the attack has stopped being a refusal
+attack and has become a context-destruction attack.
+
+**So a single experiment contains both signs.** While real passages survive,
+BadRAG exploits the refusal reflex and ParamMute blunts it. Once every passage
+is a payload, the context is destroyed and ParamMute is back in the regime
+where it removes a fallback the model needed. The boundary is not the attack's
+name; it is whether usable evidence remains.
 
 ## Why — and it is the same mechanism as the harm
 
