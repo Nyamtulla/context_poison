@@ -35,7 +35,7 @@ RRAG = REPO / "third_party" / "RobustRAG"
 sys.path.insert(0, str(RRAG))
 sys.path.insert(0, str(REPO / "scripts"))
 
-from src.defense import KeywordAgg, MajorityVoting  # noqa: E402  (their code)
+from src.defense import DecodingAgg, KeywordAgg    # noqa: E402  (their code)
 from src.models import create_model                # noqa: E402  (their code)
 
 from transfer_stats import min_detectable_change, wilson        # noqa: E402
@@ -81,11 +81,17 @@ def main():
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--model", type=str, default="mistral7b")
-    ap.add_argument("--method", default="keyword", choices=["keyword", "voting"],
-                    help="RobustRAG ships several aggregation variants. Running "
-                         "more than one tests whether the family's behaviour is "
-                         "the PRINCIPLE (isolate-then-aggregate) or one "
-                         "implementation of it.")
+    ap.add_argument("--method", default="keyword", choices=["keyword", "decoding"],
+                    help="RobustRAG ships three aggregation variants. Running a "
+                         "second tests whether the family's behaviour is the "
+                         "PRINCIPLE (isolate-then-aggregate) or one "
+                         "implementation. `voting` is deliberately absent: its "
+                         "query() calls wrap_prompt(as_multi_choice=True) and "
+                         "only works on multiple-choice data, so it cannot run "
+                         "on open-ended open_nq at all.")
+    ap.add_argument("--eta", type=float, default=0.0,
+                    help="DecodingAgg confidence threshold; their main.py default")
+    ap.add_argument("--subsample_iter", type=int, default=1)
     ap.add_argument("--poison_counts", type=int, nargs="+",
                     default=[0, 1, 5, 9, 10])
     ap.add_argument("--out", type=str, default=None)
@@ -97,7 +103,7 @@ def main():
 
     llm = create_model(args.model)
     defense = (KeywordAgg(llm) if args.method == "keyword"
-               else MajorityVoting(llm))
+               else DecodingAgg(llm, args))
 
     results = []
     for defended in (False, True):

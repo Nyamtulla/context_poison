@@ -30,6 +30,15 @@ Flat, then a cliff. This is the one-passage boundary found earlier on
 ParamMute × BadRAG DoS, now reproduced on a **second defense** and a **second
 attack**, with the same shape and nearly the same magnitude.
 
+> **Scope, added 2026-10-06.** The cliff shape is attack-dependent, not
+> universal. Crossover runs at poison 6/7/8 confirm it for refusal induction
+> and leave it standing for tone steering, but against **lie insertion**
+> (PoisonedRAG) ParamMute's harm is already resolvable at **8/10**, and the
+> curve is a ramp rather than a step. See `collapse_boundary.md`. The ~32-point
+> magnitude at saturation is unaffected; what changes is how early the damage
+> becomes visible, and that depends on whether the attack adds content or
+> removes it.
+
 ## What it means
 
 The attack's *mechanism* decides what happens while genuine evidence survives.
