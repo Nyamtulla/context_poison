@@ -1,25 +1,41 @@
 # The saturation penalty belongs to one defense family, not to RAG defense
 
-**Nine cells, four attack mechanisms, four defenses, two families.** 2026-10-06.
+**Twelve cells, four attack mechanisms, four defenses, two families.** 2026-10-06.
+
+> **Revised after phase 2.** The first version read RobustRAG's single
+> PoisonedRAG cell as the family *gaining* accuracy at saturation. With all
+> three RobustRAG cells in, it is **neutral**, not positive. The dissociation
+> stands and is stated correctly below; the over-read is corrected.
 
 ## The result
 
 At full saturation — every retrieved passage replaced by attacker payload —
-the two defense families do opposite things.
+the two families behave categorically differently.
 
-| defense | family | attack | Δaccuracy | Δattack-success |
-|---|---|---|---:|---:|
-| **RobustRAG** | **isolate-then-aggregate** | PoisonedRAG | **+4.0 pp** | **−15.3 pp** |
-| CK-PLUG | context-reliance | BadRAG sentiment | −40.0 pp | **+95.0 pp** |
-| ParamMute | context-reliance | BadRAG sentiment | −31.8 pp | +25.4 pp |
-| SpARE | context-reliance | BadRAG DoS | −31.7 pp | +0.0 pp |
-| CK-PLUG | context-reliance | PoisonedRAG | −27.6 pp | −4.6 pp |
-| SpARE | context-reliance | PoisonedRAG | −21.0 pp | **+44.7 pp** |
-| CK-PLUG | context-reliance | BadRAG DoS | −3.6 pp | −21.2 pp |
-| ParamMute | context-reliance | BadRAG DoS | −2.2 pp | −12.0 pp |
+| defense | family | attack | Δaccuracy | Δattack-success | resolvable |
+|---|---|---|---:|---:|---|
+| RobustRAG | **aggregate** | PoisonedRAG | +4.0 | **−15.3** | ASR |
+| RobustRAG | **aggregate** | BadRAG sentiment | −4.3 | +0.3 | — |
+| RobustRAG | **aggregate** | BadRAG DoS | −5.7 | +5.3 | — |
+| CK-PLUG | context-reliance | BadRAG sentiment | **−40.0** | **+95.0** | both |
+| ParamMute | context-reliance | BadRAG sentiment | **−31.8** | **+25.4** | both |
+| SpARE | context-reliance | BadRAG DoS | **−31.7** | +0.0 | acc |
+| CK-PLUG | context-reliance | PoisonedRAG | **−27.6** | −4.6 | acc |
+| SpARE | context-reliance | PoisonedRAG | **−21.0** | **+44.7** | both |
+| CK-PLUG | context-reliance | BadRAG DoS | −3.6 | **−21.2** | ASR |
+| ParamMute | context-reliance | BadRAG DoS | −2.2 | **−12.0** | ASR |
 
-**Every context-reliance defense loses accuracy at saturation. The aggregation
-defense gains it, and cuts attack success by 15.3 pp while doing so.**
+**RobustRAG never loses resolvable accuracy at saturation** — its three cells
+span −5.7 to +4.0 pp and none clears threshold. **Five of seven
+context-reliance cells do**, by 21 to 40 points.
+
+The accurate statement is therefore *neutral versus collapsing*, not *gaining
+versus collapsing*:
+
+| | accuracy at 10/10 |
+|---|---|
+| aggregate | −5.7 to +4.0 pp, **none resolvable** |
+| context-reliance | −2.2 to −40.0 pp, **five of seven resolvable** |
 
 ## Why this is the finding the campaign was for
 
@@ -32,10 +48,10 @@ The open question was its scope. Is the saturation penalty a property of
 **RAG defenses generally** — anything acting after retrieval inherits it — or
 specifically of **suppressing parametric memory**?
 
-RobustRAG answers it. It is a post-retrieval defense, it faces the identical
-attack on the identical data, and at saturation it **does not collapse**. It
-answers over each passage in isolation and aggregates, and it never touches
-parametric memory.
+RobustRAG answers it. It is a post-retrieval defense, it faces identical
+attacks on identical data, and across all three it **does not collapse** —
+while five of seven context-reliance cells do. It answers over each passage in
+isolation and aggregates, and it never touches parametric memory.
 
 > **The ~32-point penalty is the cost of suppressing parametric memory. It is
 > not the cost of defending RAG.**
@@ -45,9 +61,24 @@ contribution:
 
 - **Do not suppress parametric memory.** It is the model's only recourse when
   the evidence set is empty, and it is worth ~32 points.
-- **Aggregating over passages does not have this failure mode.** RobustRAG is
-  neutral-to-positive at every poison level and strongest exactly where the
-  other family is weakest.
+- **Aggregating over passages does not have this failure mode.** RobustRAG
+  never loses resolvable accuracy at saturation, and it is strongest just
+  below it — **+12.3 pp at 9/10 against BadRAG DoS**, which clears threshold.
+
+### And it is immune to the tone attack
+
+The sharpest single contrast in the matrix. Negative-framing rate under
+BadRAG Selective-Fact:
+
+| poison | undefended | RobustRAG | ParamMute | CK-PLUG |
+|---:|---:|---:|---:|---:|
+| 1/10 | 0.0 % | **0.0 %** | — | **78.2 %** |
+| 10/10 | 4.0 % | **0.3 %** | 28.8 % | **99.0 %** |
+
+RobustRAG does not adopt the attacker's framing at any poison level. The
+reason is structural: it answers each passage separately and aggregates, so a
+single slanted passage is one outvoted opinion rather than the frame for the
+whole answer.
 
 ## The second finding: tone steering needs no saturation
 
@@ -92,9 +123,11 @@ stating plainly:
 
 - `10/10` is an artificial corner. Across the realistic range these defenses
   are robust, and that should not be lost in the headline.
-- One aggregation defense, one attack for it so far. RobustRAG × BadRAG-DoS
-  and × sentiment are queued; the family claim rests on one cell until they
-  land.
+- **One aggregation defense, three attacks.** The family claim rests on
+  RobustRAG alone; a second aggregation defense would test whether this is the
+  family or the implementation.
+- RobustRAG's ASR rises slightly under BadRAG DoS (+5.3 pp at 10/10, not
+  resolvable). It is neutral there, not protective.
 - CK-PLUG's accuracy control fails on `open_nq` (−22.8 pp at poison 0), so its
   accuracy column is not attributable. Its framing column is, for the reason
   above.
