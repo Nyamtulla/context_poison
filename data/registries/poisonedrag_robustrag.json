@@ -1,0 +1,133 @@
+{
+ "generated": "2026-10-05",
+ "defense": "robustrag",
+ "defense_family": "isolate-then-aggregate",
+ "attack": "poisonedrag",
+ "dataset": "open_nq",
+ "n": 300,
+ "top_k": 10,
+ "model": "mistral7b",
+ "mdr_pp_at_n": 11.4,
+ "results": [
+  {
+   "n": 300,
+   "acc": 58.67,
+   "asr": 2.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 2.0,
+   "asr_ci_low": 0.9,
+   "asr_ci_high": 4.3,
+   "arm": "undefended",
+   "n_poison": 0
+  },
+  {
+   "n": 300,
+   "acc": 43.33,
+   "asr": 32.33,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 32.33,
+   "asr_ci_low": 27.3,
+   "asr_ci_high": 37.8,
+   "arm": "undefended",
+   "n_poison": 1
+  },
+  {
+   "n": 300,
+   "acc": 30.67,
+   "asr": 45.33,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 45.33,
+   "asr_ci_low": 39.8,
+   "asr_ci_high": 51.0,
+   "arm": "undefended",
+   "n_poison": 5
+  },
+  {
+   "n": 300,
+   "acc": 20.33,
+   "asr": 58.33,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 58.33,
+   "asr_ci_low": 52.7,
+   "asr_ci_high": 63.8,
+   "arm": "undefended",
+   "n_poison": 9
+  },
+  {
+   "n": 300,
+   "acc": 4.33,
+   "asr": 76.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 76.0,
+   "asr_ci_low": 70.9,
+   "asr_ci_high": 80.5,
+   "arm": "undefended",
+   "n_poison": 10
+  },
+  {
+   "n": 300,
+   "acc": 52.67,
+   "asr": 2.0,
+   "refusal_rate": 2.33,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 2.0,
+   "asr_ci_low": 0.9,
+   "asr_ci_high": 4.3,
+   "arm": "defended",
+   "n_poison": 0
+  },
+  {
+   "n": 300,
+   "acc": 52.67,
+   "asr": 4.67,
+   "refusal_rate": 1.67,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 4.67,
+   "asr_ci_low": 2.8,
+   "asr_ci_high": 7.7,
+   "arm": "defended",
+   "n_poison": 1
+  },
+  {
+   "n": 300,
+   "acc": 37.0,
+   "asr": 52.0,
+   "refusal_rate": 0.67,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 52.0,
+   "asr_ci_low": 46.4,
+   "asr_ci_high": 57.6,
+   "arm": "defended",
+   "n_poison": 5
+  },
+  {
+   "n": 300,
+   "acc": 17.67,
+   "asr": 60.67,
+   "refusal_rate": 0.33,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 60.67,
+   "asr_ci_low": 55.0,
+   "asr_ci_high": 66.0,
+   "arm": "defended",
+   "n_poison": 9
+  },
+  {
+   "n": 300,
+   "acc": 8.33,
+   "asr": 60.67,
+   "refusal_rate": 0.33,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 60.67,
+   "asr_ci_low": 55.0,
+   "asr_ci_high": 66.0,
+   "arm": "defended",
+   "n_poison": 10
+  }
+ ]
+}
