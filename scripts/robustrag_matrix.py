@@ -35,7 +35,7 @@ RRAG = REPO / "third_party" / "RobustRAG"
 sys.path.insert(0, str(RRAG))
 sys.path.insert(0, str(REPO / "scripts"))
 
-from src.defense import KeywordAgg                 # noqa: E402  (their code)
+from src.defense import KeywordAgg, MajorityVoting  # noqa: E402  (their code)
 from src.models import create_model                # noqa: E402  (their code)
 
 from transfer_stats import min_detectable_change, wilson        # noqa: E402
@@ -81,21 +81,29 @@ def main():
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--model", type=str, default="mistral7b")
+    ap.add_argument("--method", default="keyword", choices=["keyword", "voting"],
+                    help="RobustRAG ships several aggregation variants. Running "
+                         "more than one tests whether the family's behaviour is "
+                         "the PRINCIPLE (isolate-then-aggregate) or one "
+                         "implementation of it.")
     ap.add_argument("--poison_counts", type=int, nargs="+",
                     default=[0, 1, 5, 9, 10])
     ap.add_argument("--out", type=str, default=None)
     args = ap.parse_args()
 
     data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: args.n]
-    out_path = args.out or f"data/registries/{args.attack}_robustrag.json"
+    suffix = "" if args.method == "keyword" else f"_{args.method}"
+    out_path = args.out or f"data/registries/{args.attack}_robustrag{suffix}.json"
 
     llm = create_model(args.model)
-    defense = KeywordAgg(llm)
+    defense = (KeywordAgg(llm) if args.method == "keyword"
+               else MajorityVoting(llm))
 
     results = []
     for defended in (False, True):
         label = "defended" if defended else "undefended"
-        print(f"\n===== RobustRAG — {label} ({args.attack}) =====", flush=True)
+        print(f"\n===== RobustRAG/{args.method} — {label} ({args.attack}) =====",
+              flush=True)
         for npz in args.poison_counts:
             r = run_condition(defense, data, args.top_k, npz, args.attack, defended)
             r.update(arm=label, n_poison=npz)
@@ -104,8 +112,10 @@ def main():
                   f"ASR {r['asr']:5.1f}%   95% CI [{r['asr_ci_low']}, {r['asr_ci_high']}]",
                   flush=True)
 
-    payload = {"generated": "2026-10-05", "defense": "robustrag",
+    payload = {"generated": "2026-10-06",
+               "defense": f"robustrag-{args.method}",
                "defense_family": "isolate-then-aggregate",
+               "aggregation_method": args.method,
                "attack": args.attack, "dataset": "open_nq", "n": len(data),
                "top_k": args.top_k, "model": args.model,
                "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
