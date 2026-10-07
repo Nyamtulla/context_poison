@@ -162,6 +162,13 @@ CITE_KEYS = {
     "badrag":     "BadRAG: Identifying Vulnerabilities",
     "robustrag":  "Certifiably Robust RAG against Retrieval Corruption",
     "parammute":  "ParamMute: Suppressing Knowledge-Critical FFNs",
+    # where our review protocol comes from. We did not read Kitchenham or the
+    # PRISMA statement directly; we took the method from survey papers inside
+    # our own corpus that follow them, so those are what we cite.
+    "slr_prisma":     "A Systematic Literature Review of Prompt Injection Attacks in LLM-Integrated",
+    "slr_prisma_dual": "A Systematic Review of Prompt Injection Attacks on Large Language Models",
+    "slr_kitchenham": "Prompt Injection Attacks on Large Language Models: A Survey of Attack Methods",
+    "sok_landscape":  "The Landscape of Prompt Injection Threats",
 }
 
 
@@ -174,10 +181,13 @@ def _format_citation(row):
     a reader to a different paper. A malformed id is dropped and the venue
     carries the reference instead.
     """
-    first = (row["authors"] or "").split(";")[0].strip()
+    import html
+    first = html.unescape((row["authors"] or "").split(";")[0].strip())
     surname = first.split()[-1] if first else "Unknown"
     bits = [f"{surname} et al."]
-    venue = (row["venue"] or "").strip()
+    # venues arrive HTML-escaped ("Computers, Materials &amp; Continua"); left
+    # alone python-pptx escapes the ampersand again and the slide shows &amp;
+    venue = html.unescape((row["venue"] or "").strip())
     if venue and venue.lower() not in ("none", "arxiv"):
         bits.append(f"{venue} {row['year']}")
     else:
@@ -601,22 +611,29 @@ def build(prs, F):
     # 3 — methodology -----------------------------------------------------
     s = start("METHODOLOGY", ["We follow a standard review protocol,",
                               "and we run it across two literatures"])
+    tf = _tb(s, 0.70, 2.66, 11.9, 0.6)
+    _lines(tf, [
+        ("We did not invent the protocol. Four surveys in our own corpus use it, and we follow them.",
+         13, WHITE, True),
+        ("They apply the PRISMA reporting guidelines, or the Kitchenham review guidelines. We apply the same steps to two literatures at once.",
+         12, MUTED, False)], 12, BODY, space_after=2)
     blocks = [
-        ("Search", "We searched two tracks at\nthe same time. One track is\nadversarial. One track is\nincidental. We found\n25,922 records."),
+        ("Search", "We search two tracks at\nonce. One is adversarial.\nOne is incidental.\nWe found 25,922 records."),
         ("Screen", "Fixed rules decide in or out.\nA program applies them to\nthe title and abstract.\nA person reads every\nunclear case. Next slide."),
         ("Extract", "We read the full text of\n1,097 papers. We code 32\nfields for each paper.\nChannel and consequence\nuse closed lists."),
         ("Synthesize", "We join the registries into\nthe coverage matrix. It\nshows which defense met\nwhich attack. Then we run\nthe code ourselves."),
     ]
     for i, (t, b) in enumerate(blocks):
         x = 0.70 + i * 3.05
-        panel(s, x, 3.00, 2.85, 2.95)
-        tf = _tb(s, x + 0.25, 3.25, 2.4, 0.4)
+        panel(s, x, 3.38, 2.85, 2.60)
+        tf = _tb(s, x + 0.25, 3.58, 2.4, 0.4)
         _run(tf.paragraphs[0], t, 17, GOLD, True, TITLE_FONT)
-        tf = _tb(s, x + 0.25, 3.75, 2.4, 2.1)
+        tf = _tb(s, x + 0.25, 4.04, 2.45, 1.9)
         _lines(tf, b.split("\n"), 11.5, BODY, space_after=1)
-    sources(s, "Review protocol: Kitchenham & Charters, EBSE-2007-01",
-            "Reporting: PRISMA 2020, Page et al., BMJ 2021;372:n71",
-            "Both adapted, not followed to the letter")
+    sources(s, f"Protocol adopted from surveys in our own corpus: {F['C']['slr_prisma']} (PRISMA)",
+            f"{F['C']['slr_prisma_dual']} (PRISMA, dual screening)",
+            f"{F['C']['slr_kitchenham']} (Kitchenham guidelines)",
+            f"{F['C']['sok_landscape']} (SoK on a systematic review)", y=6.92, size=7.5)
 
 
     # 3b — the screening rules, written out --------------------------------
