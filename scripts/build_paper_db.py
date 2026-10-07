@@ -250,6 +250,16 @@ REGISTRY_FIXUPS = {
 # Taken from scripts/poisonedrag_transfer.py, not from the model card: both
 # runners load the NousResearch mirror, which is the ungated copy of the same
 # weights. Recording "meta-llama/..." here would misname what was executed.
+# Each runner names the model its own way - RobustRAG by its registry key, the
+# others by repo path. Two of these are the same weights, which is the whole
+# point of the model-controlled rerun, so they have to resolve to one string or
+# the comparison is unreadable in the database.
+MODEL_CANON = {
+    "mistral7b":    "mistralai/Mistral-7B-Instruct-v0.2",
+    "llama8b-nous": "NousResearch/Meta-Llama-3-8B-Instruct",
+    "llama8b":      "meta-llama/Meta-Llama-3-8B-Instruct",
+}
+
 DEFAULT_MODEL = {"parammute": "NousResearch/Meta-Llama-3-8B-Instruct",
                  "ckplug":    "NousResearch/Meta-Llama-3-8B-Instruct"}
 
@@ -301,16 +311,22 @@ def load_rag_transfer_runs():
         if not defense or not attack:
             continue
         defense = DEFENSE_ALIAS.get(defense, defense)
-        cell = cells.setdefault((defense, attack), {
-            "arms": {}, "dataset": d.get("dataset"),
-            "model": d.get("model") or DEFAULT_MODEL.get(defense),
+        # The model belongs in the key. The same defense and attack run on a
+        # different model is a different cell, not more doses of the same one -
+        # merging them would let a model-controlled rerun silently overwrite
+        # the original arms and leave a curve stitched from two models.
+        model = d.get("model") or DEFAULT_MODEL.get(defense)
+        model = MODEL_CANON.get(model, model)
+        cell = cells.setdefault((defense, attack, model), {
+            "arms": {}, "dataset": d.get("dataset"), "model": model,
             "n": d.get("n"), "mdr": d.get("mdr_pp_at_n")})
         amap = ARM_MAP.get(defense, {})
         for r in results:
             cell["arms"][(amap.get(r["arm"], r["arm"]), r["n_poison"])] = r
 
     rows = []
-    for (defense, attack), cell in sorted(cells.items()):
+    for (defense, attack, _model), cell in sorted(
+            cells.items(), key=lambda kv: tuple(str(x) for x in kv[0])):
         name, family = DEFENSE_META.get(defense, (defense, "unclassified"))
         arms, mdr = cell["arms"], cell["mdr"]
 
