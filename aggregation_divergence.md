@@ -117,6 +117,13 @@ to preserve and the gap closes.
 9 of 10) against refusal induction, by 14 to 20 points. That is not a corner
 case; it is most of the contaminated range.
 
+> **Scope, added 2026-10-07.** The model-controlled rerun shows this
+> divergence is confined to Mistral-7B. On Llama-3-8B-Instruct the two
+> implementations agree closely against the same attack — 85.0 % and 85.3 %
+> refusal — and both fail. The accuracy numbers below are unchanged and the
+> mechanism still predicts them, but the dominant variable across the matrix is
+> the model, not the implementation. See `model_dependence.md`.
+
 ## Why this matters beyond one cell
 
 SoKs generalise from implementations to families, because families are what a

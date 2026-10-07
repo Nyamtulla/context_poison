@@ -40,8 +40,17 @@ the two families behave categorically differently.
 
 | | accuracy at 10/10 | attributable cells | resolvable harm |
 |---|---|---:|---:|
-| **aggregate** | −5.7 to +4.0 pp | 5 of 5 | **0** |
+| **aggregate** | −5.7 to +4.0 pp | 10 of 10 | **0** |
 | **context-reliance** | −2.2 to −31.8 pp | 5 of 8 | **4** |
+
+> **Updated 2026-10-07.** The aggregation row now covers ten cells across two
+> models and two implementations, and none loses readable accuracy. The
+> accuracy dissociation is stronger than when it was first written.
+>
+> **But accuracy is not the whole account.** On Llama-3-8B-Instruct the same
+> aggregation cells raise *attack success* under refusal induction from 0.0 %
+> to 87.3 %, in both implementations. The family that never loses accuracy is
+> the family that breaks that attack wide open. See `model_dependence.md`.
 
 The dissociation survives the correction and is **sharper** than before:
 **4 of 5 against 0 of 5**, on cells whose controls all fired.
