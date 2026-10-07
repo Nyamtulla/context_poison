@@ -1,6 +1,7 @@
 # The saturation penalty belongs to one defense family, not to RAG defense
 
-**Twelve cells, four attack mechanisms, four defenses, two families.** 2026-10-06.
+**Thirteen cells, three attack mechanisms, five defense implementations,
+two families.** 2026-10-06.
 
 > **Revised after phase 2.** The first version read RobustRAG's single
 > PoisonedRAG cell as the family *gaining* accuracy at saturation. With all
@@ -12,30 +13,42 @@
 At full saturation — every retrieved passage replaced by attacker payload —
 the two families behave categorically differently.
 
-| defense | family | attack | Δaccuracy | Δattack-success | resolvable |
+| defense | family | attack | Δaccuracy | Δattack-success | accuracy attributable? |
 |---|---|---|---:|---:|---|
-| RobustRAG | **aggregate** | PoisonedRAG | +4.0 | **−15.3** | ASR |
-| RobustRAG | **aggregate** | BadRAG sentiment | −4.3 | +0.3 | — |
-| RobustRAG | **aggregate** | BadRAG DoS | −5.7 | +5.3 | — |
-| CK-PLUG | context-reliance | BadRAG sentiment | **−40.0** | **+95.0** | both |
-| ParamMute | context-reliance | BadRAG sentiment | **−31.8** | **+25.4** | both |
-| SpARE | context-reliance | BadRAG DoS | **−31.7** | +0.0 | acc |
-| CK-PLUG | context-reliance | PoisonedRAG | **−27.6** | −4.6 | acc |
-| SpARE | context-reliance | PoisonedRAG | **−21.0** | **+44.7** | both |
-| CK-PLUG | context-reliance | BadRAG DoS | −3.6 | **−21.2** | ASR |
-| ParamMute | context-reliance | BadRAG DoS | −2.2 | **−12.0** | ASR |
+| RobustRAG / KeywordAgg | **aggregate** | PoisonedRAG | +4.0 | **−15.3** | yes — not resolvable |
+| RobustRAG / KeywordAgg | **aggregate** | BadRAG sentiment | −4.3 | +0.3 | yes — not resolvable |
+| RobustRAG / KeywordAgg | **aggregate** | BadRAG DoS | −5.7 | +5.3 | yes — not resolvable |
+| RobustRAG / DecodingAgg | **aggregate** | PoisonedRAG | −2.0 | **−38.7** | yes — not resolvable |
+| RobustRAG / DecodingAgg | **aggregate** | BadRAG sentiment | −4.0 | +0.3 | yes — not resolvable |
+| ParamMute | context-reliance | BadRAG sentiment | **−31.8** | **+25.4** | **yes — harm** |
+| ParamMute | context-reliance | PoisonedRAG | **−26.4** | **+20.4** | **yes — harm** |
+| SpARE | context-reliance | BadRAG DoS | **−31.7** | +0.0 | **yes — harm** |
+| SpARE | context-reliance | PoisonedRAG | **−21.0** | **+44.7** | **yes — harm** |
+| ParamMute | context-reliance | BadRAG DoS | −2.2 | **−12.0** | yes — not resolvable |
+| CK-PLUG | context-reliance | BadRAG sentiment | −40.0 | **+95.0** | **no — control failed** |
+| CK-PLUG | context-reliance | PoisonedRAG | −27.6 | −4.6 | **no — control failed** |
+| CK-PLUG | context-reliance | BadRAG DoS | −3.6 | **−21.2** | **no — control failed** |
 
-**RobustRAG never loses resolvable accuracy at saturation** — its three cells
-span −5.7 to +4.0 pp and none clears threshold. **Five of seven
-context-reliance cells do**, by 21 to 40 points.
+> **Revised again 2026-10-06, downward.** The earlier count — *five of seven
+> context-reliance cells* — included CK-PLUG rows. CK-PLUG's own control fails
+> on `open_nq` (−22.6 pp between arms at poison 0, against an 8.9 pp
+> threshold), so its accuracy column is not attributable to the attack, and
+> this document said so in its own Limits section while still counting those
+> rows. Applying control-fires-first consistently removes all three. The table
+> above is now generated from `data/paper_explorer.db`, which applies the rule
+> mechanically, so the two cannot drift apart again.
 
-The accurate statement is therefore *neutral versus collapsing*, not *gaining
-versus collapsing*:
+| | accuracy at 10/10 | attributable cells | resolvable harm |
+|---|---|---:|---:|
+| **aggregate** | −5.7 to +4.0 pp | 5 of 5 | **0** |
+| **context-reliance** | −2.2 to −31.8 pp | 5 of 8 | **4** |
 
-| | accuracy at 10/10 |
-|---|---|
-| aggregate | −5.7 to +4.0 pp, **none resolvable** |
-| context-reliance | −2.2 to −40.0 pp, **five of seven resolvable** |
+The dissociation survives the correction and is **sharper** than before:
+**4 of 5 against 0 of 5**, on cells whose controls all fired.
+
+CK-PLUG's *attack-success* column still counts, for the reason given in Limits:
+that metric carries its own control, since both arms produce 0.0 % negative
+framing at poison 0.
 
 ## Why this is the finding the campaign was for
 
@@ -123,9 +136,16 @@ stating plainly:
 
 - `10/10` is an artificial corner. Across the realistic range these defenses
   are robust, and that should not be lost in the headline.
-- **One aggregation defense, three attacks.** The family claim rests on
-  RobustRAG alone; a second aggregation defense would test whether this is the
-  family or the implementation.
+- **One aggregation codebase, two implementations.** KeywordAgg and
+  DecodingAgg share no decision logic — one votes on extracted keywords, the
+  other compares per-passage decoding distributions — and both behave the same
+  way, which is why the claim is stated at the level of the principle. They do
+  still come from one paper's repository. A third aggregation defense from a
+  different group would be the next real test.
+- **MajorityVoting, RobustRAG's third variant, is not testable here.** Its
+  `query()` calls `wrap_prompt(as_multi_choice=True)` and only runs on
+  multiple-choice data, so it cannot be evaluated on open-ended `open_nq`. It
+  is excluded for that reason, not because it failed.
 - RobustRAG's ASR rises slightly under BadRAG DoS (+5.3 pp at 10/10, not
   resolvable). It is neutral there, not protective.
 - CK-PLUG's accuracy control fails on `open_nq` (−22.8 pp at poison 0), so its

@@ -136,10 +136,14 @@ CREATE TABLE our_run (
     technique TEXT, technique_name TEXT, intervention_point TEXT,
     attack TEXT, suite TEXT, model TEXT,
     n INTEGER,
+    n_poison INTEGER,        -- dose, NULL for the single-dose IPI suite
     undefended_asr REAL, defended_asr REAL,
     undefended_utility REAL, defended_utility REAL,
     drop_pp REAL, mdr_pp REAL,
-    verdict TEXT
+    verdict TEXT,            -- what happened to attack success
+    utility_verdict TEXT,    -- what happened to accuracy, control permitting
+    baseline_kind TEXT,      -- 'vanilla' | 'counter_intervention'
+    campaign TEXT            -- 'ipi_banking' | 'rag_transfer'
 );
 
 CREATE INDEX idx_pair_def ON pair(defense_name);
@@ -202,6 +206,138 @@ SELECT pa.paper_id, pa.title, pa.year, pa.venue, pa.track, pa.role,
           WHERE a.paper_id = pa.paper_id AND p.outcome = 'holds')  AS its_attack_defenses_held
 FROM paper pa;
 """
+
+
+# ---------------------------------------------------------------------------
+# The RAG transfer campaign
+# ---------------------------------------------------------------------------
+# Every cell we ran against a RAG defense writes a dose-response registry:
+# both arms (undefended / defended) at several poison levels. Those were living
+# only as JSON and as prose in the result documents, so the database said we had
+# run 56 episodes when the transfer campaign is far larger. This loads them.
+#
+# Two disciplines are enforced here rather than left to the reader:
+#
+#   control-fires-first - if the two arms already differ by more than the
+#   minimum detectable change at poison 0, the defense is changing accuracy for
+#   reasons that have nothing to do with the attack, and no accuracy delta in
+#   that cell is attributable. Those rows get `control_failed`, not a verdict.
+#
+#   mdr gating - a delta smaller than the minimum detectable change at that n is
+#   not a result, whatever its sign. It gets `not_resolvable`.
+
+DEFENSE_META = {
+    # registry name -> (display name, family)
+    "parammute":          ("ParamMute", "context-reliance"),
+    "ckplug":             ("CK-PLUG", "context-reliance"),
+    "spare":              ("SpARE", "context-reliance"),
+    "robustrag":          ("RobustRAG / KeywordAgg", "isolate-then-aggregate"),
+    "robustrag-decoding": ("RobustRAG / DecodingAgg", "isolate-then-aggregate"),
+}
+
+# Two early registries predate the fields they needed. The values are not
+# guesses: they are the run configuration recorded in the result documents.
+REGISTRY_FIXUPS = {
+    "poisonedrag_parammute":       {"attack": "poisonedrag"},
+    "poisonedrag_parammute_pilot": {"attack": "poisonedrag"},
+}
+DEFAULT_MODEL = {"parammute": "meta-llama/Meta-Llama-3-8B-Instruct",
+                 "ckplug":    "meta-llama/Meta-Llama-3-8B-Instruct"}
+
+# Registries name their arms after the defense. Mapping them to a common pair is
+# bookkeeping for most defenses - but not for SpARE, whose two arms are *both*
+# steered, in opposite directions, because `generate_two_answers` returns both
+# from one model on one prompt. Its comparison is internal and has no unsteered
+# model in it, so the row is flagged `counter_intervention` rather than being
+# silently read as defended-versus-vanilla.
+ARM_MAP = {
+    "spare":     {"steer_to_use_context": "defended",
+                  "steer_to_use_parameter": "undefended"},
+    "ckplug":    {"ck": "defended", "base_rag": "undefended"},
+    "parammute": {"parammute": "defended", "base": "undefended"},
+    "shift":     {"shift": "defended", "gate_off": "undefended"},
+    "faithfulrag": {"faithfulrag": "defended", "vanilla": "undefended"},
+}
+COUNTER_INTERVENTION_BASELINE = {"spare"}
+
+
+def load_rag_transfer_runs():
+    """Read every dose-response registry into flat (undefended, defended) rows.
+
+    Registries are grouped into cells by (defense, attack) before anything is
+    judged. A cell is often split across files - a base run sampling poison
+    0/1/5/9/10 plus a `_crossover` run filling 6/7/8 - and the crossover file
+    carries no poison 0 arm. Judging files separately would leave those doses
+    with no control to fire first, which is how the 8/10 onset went unnoticed.
+    """
+    cells = {}
+    for path in sorted(REG.glob("*.json")):
+        if path.stem.endswith("_pilot"):
+            continue              # superseded by the full-n run of the same cell
+        try:
+            d = json.loads(path.read_text())
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+        if not isinstance(d, dict):
+            continue              # some registries are a bare list of records
+        results = d.get("results")
+        if not isinstance(results, list) or not results:
+            continue
+        if not (isinstance(results[0], dict)
+                and "arm" in results[0] and "n_poison" in results[0]):
+            continue              # not a dose-response registry
+
+        d.update(REGISTRY_FIXUPS.get(path.stem, {}))
+        defense, attack = d.get("defense"), d.get("attack")
+        if not defense or not attack:
+            continue
+        cell = cells.setdefault((defense, attack), {
+            "arms": {}, "dataset": d.get("dataset"),
+            "model": d.get("model") or DEFAULT_MODEL.get(defense),
+            "n": d.get("n"), "mdr": d.get("mdr_pp_at_n")})
+        amap = ARM_MAP.get(defense, {})
+        for r in results:
+            cell["arms"][(amap.get(r["arm"], r["arm"]), r["n_poison"])] = r
+
+    rows = []
+    for (defense, attack), cell in sorted(cells.items()):
+        name, family = DEFENSE_META.get(defense, (defense, "unclassified"))
+        arms, mdr = cell["arms"], cell["mdr"]
+
+        # control-fires-first, evaluated once per cell
+        zero_u, zero_d = arms.get(("undefended", 0)), arms.get(("defended", 0))
+        control_ok = None
+        if zero_u and zero_d and mdr:
+            control_ok = abs(zero_d["acc"] - zero_u["acc"]) < mdr
+
+        for level in sorted({k[1] for k in arms}):
+            u, v = arms.get(("undefended", level)), arms.get(("defended", level))
+            if not (u and v):
+                continue
+            d_asr = v["asr"] - u["asr"]
+            d_acc = v["acc"] - u["acc"]
+            if mdr is None:
+                verdict = utility = "ungated"
+            else:
+                verdict = ("reduces_attack_success" if d_asr <= -mdr else
+                           "increases_attack_success" if d_asr >= mdr else
+                           "not_resolvable")
+                if control_ok is False:
+                    utility = "control_failed"
+                elif control_ok is None:
+                    utility = "no_control_arm"
+                else:
+                    utility = ("harms_accuracy" if d_acc <= -mdr else
+                               "helps_accuracy" if d_acc >= mdr else
+                               "not_resolvable")
+            rows.append((defense, name, family, attack,
+                         cell["dataset"], cell["model"], cell["n"], level,
+                         u["asr"], v["asr"], u["acc"], v["acc"],
+                         d_asr, mdr, verdict, utility,
+                         "counter_intervention"
+                         if defense in COUNTER_INTERVENTION_BASELINE
+                         else "vanilla"))
+    return rows
 
 
 def main():
@@ -316,8 +452,17 @@ def main():
     con.executemany(
         "INSERT INTO our_run (technique, technique_name, intervention_point, "
         "attack, suite, model, n, undefended_asr, defended_asr, "
-        "undefended_utility, defended_utility, drop_pp, mdr_pp, verdict) "
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", runs)
+        "undefended_utility, defended_utility, drop_pp, mdr_pp, verdict, "
+        "campaign) "
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,'ipi_banking')", runs)
+
+    con.executemany(
+        "INSERT INTO our_run (technique, technique_name, intervention_point, "
+        "attack, suite, model, n, n_poison, undefended_asr, defended_asr, "
+        "undefended_utility, defended_utility, drop_pp, mdr_pp, verdict, "
+        "utility_verdict, baseline_kind, campaign) "
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'rag_transfer')",
+        load_rag_transfer_runs())
 
     # ---- role ---------------------------------------------------------
     con.executescript("""
