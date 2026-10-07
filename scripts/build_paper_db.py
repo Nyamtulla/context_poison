@@ -247,8 +247,11 @@ REGISTRY_FIXUPS = {
     "poisonedrag_parammute":       {"attack": "poisonedrag"},
     "poisonedrag_parammute_pilot": {"attack": "poisonedrag"},
 }
-DEFAULT_MODEL = {"parammute": "meta-llama/Meta-Llama-3-8B-Instruct",
-                 "ckplug":    "meta-llama/Meta-Llama-3-8B-Instruct"}
+# Taken from scripts/poisonedrag_transfer.py, not from the model card: both
+# runners load the NousResearch mirror, which is the ungated copy of the same
+# weights. Recording "meta-llama/..." here would misname what was executed.
+DEFAULT_MODEL = {"parammute": "NousResearch/Meta-Llama-3-8B-Instruct",
+                 "ckplug":    "NousResearch/Meta-Llama-3-8B-Instruct"}
 
 # Registries name their arms after the defense. Mapping them to a common pair is
 # bookkeeping for most defenses - but not for SpARE, whose two arms are *both*

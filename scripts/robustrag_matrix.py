@@ -36,7 +36,9 @@ sys.path.insert(0, str(RRAG))
 sys.path.insert(0, str(REPO / "scripts"))
 
 from src.defense import DecodingAgg, KeywordAgg    # noqa: E402  (their code)
-from src.models import create_model                # noqa: E402  (their code)
+from src import models as rr_models               # noqa: E402  (their code)
+from src.models import create_model, HFModel      # noqa: E402  (their code)
+from src.prompt_template import LLAMA_TMPL        # noqa: E402  (their code)
 
 from transfer_stats import min_detectable_change, wilson        # noqa: E402
 from spare_vs_corpus_poisoning import acc_score                 # noqa: E402
@@ -101,7 +103,21 @@ def main():
     suffix = "" if args.method == "keyword" else f"_{args.method}"
     out_path = args.out or f"data/registries/{args.attack}_robustrag{suffix}.json"
 
-    llm = create_model(args.model)
+    # `llama8b` in their registry points at the gated meta-llama repo. The
+    # other half of this matrix (ParamMute, CK-PLUG) runs the NousResearch
+    # mirror - the same weights, ungated - so the cross-family comparison is
+    # only model-controlled if RobustRAG loads that same copy. Their
+    # create_model is used unchanged for every other model name.
+    if args.model == "llama8b-nous":
+        nous = "NousResearch/Meta-Llama-3-8B-Instruct"
+        # Their CONTEXT_MAX_TOKENS is keyed by repo path, so the mirror needs
+        # an entry. Copied from their own meta-llama entry for the same
+        # weights - not a new value, the same 8192 context they use.
+        rr_models.CONTEXT_MAX_TOKENS.setdefault(
+            nous, rr_models.CONTEXT_MAX_TOKENS["meta-llama/Meta-Llama-3-8B-Instruct"])
+        llm = HFModel(nous, LLAMA_TMPL)
+    else:
+        llm = create_model(args.model)
     defense = (KeywordAgg(llm) if args.method == "keyword"
                else DecodingAgg(llm, args))
 
