@@ -84,6 +84,7 @@ def load(mtime: float) -> dict:
         "pairs": q("SELECT * FROM pair"),
         "papers": q("SELECT paper_id, title, year, venue, track, role FROM paper"),
         "untested": scorecard.optional_table(con, "untested_defense"),
+        "runs": q("SELECT * FROM our_run WHERE campaign = 'rag_transfer'"),
     }
     con.close()
     # `track` is the project's intent proxy throughout - the RQ1 cube uses it
@@ -343,6 +344,125 @@ def routes_tab(d: dict) -> None:
             f"{r['defenses per cause']} per cause.")
 
 
+# Plain wording for the verdicts the database stores. The database keeps the
+# machine-readable strings; nothing downstream re-derives what they mean.
+UTILITY_LABEL = {
+    "harms_accuracy":  "costs accuracy",
+    "helps_accuracy":  "gains accuracy",
+    "not_resolvable":  "no readable change",
+    "control_failed":  "not attributable — control failed",
+    "no_control_arm":  "no control arm",
+    "ungated":         "ungated",
+}
+ASR_LABEL = {
+    "reduces_attack_success":   "blunts the attack",
+    "increases_attack_success": "makes the attack worse",
+    "not_resolvable":           "no readable change",
+    "ungated":                  "ungated",
+}
+ATTACK_LABEL = {
+    "poisonedrag":      "Lie insertion (PoisonedRAG)",
+    "badrag_dos":       "Refusal induction (BadRAG DoS)",
+    "badrag_sentiment": "Tone steering (BadRAG Selective-Fact)",
+    "corpus_poisoning": "Signal removal (corpus poisoning)",
+}
+
+
+def our_runs_tab(d: dict) -> None:
+    """What happens when a defense meets an attack nobody paired it with.
+
+    Everything else in this dashboard reports what papers claimed. This tab
+    reports what we executed - which is a different kind of evidence and is
+    kept in a different table for that reason.
+    """
+    runs = d["runs"]
+    st.subheader("What we ran ourselves")
+    if runs.empty:
+        st.info("No transfer runs in the database yet. Build it with "
+                "`python3 scripts/build_paper_db.py`.")
+        return
+
+    cells = runs.groupby(["technique_name", "attack"], as_index=False).size()
+    st.caption(
+        f"{len(cells)} defense × attack cells, {len(runs)} dose levels, using "
+        "each defense's own released code and each attack's own scorer. None "
+        "of these pairs is reported anywhere in the literature — that is why "
+        "they were chosen. Two rules gate every reading: a defense that cannot "
+        "reproduce its own benefit on clean data yields no accuracy verdict, "
+        "and a change smaller than the run's detection threshold is not a "
+        "result whatever its sign."
+    )
+
+    sat = runs[runs["n_poison"] == 10].copy()
+    if not sat.empty:
+        st.markdown("#### At saturation — the attacker owns every passage")
+        sat["Δ accuracy"] = sat["defended_utility"] - sat["undefended_utility"]
+        shown = pd.DataFrame({
+            "Defense": sat["technique_name"],
+            "Family": sat["intervention_point"],
+            "Attack": sat["attack"].map(ATTACK_LABEL).fillna(sat["attack"]),
+            "Δ accuracy": sat["Δ accuracy"].round(1),
+            "Δ attack success": sat["drop_pp"].round(1),
+            "Accuracy reading": sat["utility_verdict"].map(UTILITY_LABEL),
+            "Attack reading": sat["verdict"].map(ASR_LABEL),
+        }).sort_values(["Family", "Defense", "Attack"])
+        st.dataframe(shown, use_container_width=True, hide_index=True)
+
+        attributable = sat[sat["utility_verdict"] != "control_failed"]
+        for fam, grp in attributable.groupby("intervention_point"):
+            harm = int((grp["utility_verdict"] == "harms_accuracy").sum())
+            st.caption(f"**{fam}** — {harm} of {len(grp)} attributable cells "
+                       f"lose readable accuracy at saturation.")
+
+    st.markdown("#### Dose response")
+    st.caption("Saturation is an artificial corner. The shape of the curve "
+               "below it is what tells you whether a defense degrades "
+               "gracefully or falls off a step.")
+    pick = st.selectbox(
+        "Cell", sorted({f"{r.technique_name} vs "
+                        f"{ATTACK_LABEL.get(r.attack, r.attack)}"
+                        for r in runs.itertuples()}))
+    name, _, atk = pick.partition(" vs ")
+    cell = runs[(runs["technique_name"] == name)
+                & (runs["attack"].map(lambda a: ATTACK_LABEL.get(a, a)) == atk)]
+    cell = cell.sort_values("n_poison")
+    if cell.empty:
+        return
+
+    mdr = float(cell["mdr_pp"].iloc[0] or 0)
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=cell["n_poison"], y=cell["undefended_utility"],
+                             name="undefended", mode="lines+markers",
+                             line=dict(color=MUTED, dash="dot")))
+    fig.add_trace(go.Scatter(x=cell["n_poison"], y=cell["defended_utility"],
+                             name="defended", mode="lines+markers",
+                             line=dict(color=ADVERSARIAL)))
+    fig.update_layout(height=340, xaxis_title="poisoned passages (of 10)",
+                      yaxis_title="accuracy %", margin=dict(t=20, b=10))
+    st.plotly_chart(fig, use_container_width=True)
+
+    table = pd.DataFrame({
+        "Poisoned": cell["n_poison"].astype(str) + "/10",
+        "Undefended": cell["undefended_utility"].round(1),
+        "Defended": cell["defended_utility"].round(1),
+        "Δ": (cell["defended_utility"] - cell["undefended_utility"]).round(1),
+        "Readable?": [
+            "yes" if mdr and abs(v) >= mdr else "below threshold"
+            for v in cell["defended_utility"] - cell["undefended_utility"]],
+    })
+    st.dataframe(table, use_container_width=True, hide_index=True)
+    base = cell[cell["n_poison"] == 0]
+    if not base.empty and base["utility_verdict"].iloc[0] == "control_failed":
+        st.warning(
+            "This defense's two arms already differ by more than the detection "
+            "threshold on clean data, so nothing in its accuracy column is "
+            "attributable to the attack. Its attack-success column is still "
+            "readable where the metric carries its own control."
+        )
+    elif mdr:
+        st.caption(f"Detection threshold for this run: {mdr} pp.")
+
+
 def main() -> None:
     st.title("How does an agent's context go bad?")
     if not DB.exists():
@@ -357,7 +477,7 @@ def main() -> None:
         "question. The corpus workbench with the RQ tabs is `dashboard.py`."
     )
     tabs = st.tabs(["The six ways", "One way in depth", "How it gets in",
-                    "Paper scorecard"])
+                    "What we ran", "Paper scorecard"])
     with tabs[0]:
         map_tab(d)
     with tabs[1]:
@@ -365,6 +485,8 @@ def main() -> None:
     with tabs[2]:
         routes_tab(d)
     with tabs[3]:
+        our_runs_tab(d)
+    with tabs[4]:
         scorecard.paper_scorecard_tab()
 
 
