@@ -226,6 +226,12 @@ FROM paper pa;
 #   mdr gating - a delta smaller than the minimum detectable change at that n is
 #   not a result, whatever its sign. It gets `not_resolvable`.
 
+# The runner's `defense` field changed name mid-campaign: the first RobustRAG
+# cells wrote "robustrag", later ones write "robustrag-keyword" for the same
+# defense. Left alone that splits one cell in two, and the half without a
+# poison-0 arm then has no control to fire. Canonicalise before grouping.
+DEFENSE_ALIAS = {"robustrag-keyword": "robustrag"}
+
 DEFENSE_META = {
     # registry name -> (display name, family)
     "parammute":          ("ParamMute", "context-reliance"),
@@ -291,6 +297,7 @@ def load_rag_transfer_runs():
         defense, attack = d.get("defense"), d.get("attack")
         if not defense or not attack:
             continue
+        defense = DEFENSE_ALIAS.get(defense, defense)
         cell = cells.setdefault((defense, attack), {
             "arms": {}, "dataset": d.get("dataset"),
             "model": d.get("model") or DEFAULT_MODEL.get(defense),
