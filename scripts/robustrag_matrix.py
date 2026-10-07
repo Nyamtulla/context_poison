@@ -36,7 +36,9 @@ sys.path.insert(0, str(RRAG))
 sys.path.insert(0, str(REPO / "scripts"))
 
 from src.defense import DecodingAgg, KeywordAgg    # noqa: E402  (their code)
+import torch                                      # noqa: E402
 from src import models as rr_models               # noqa: E402  (their code)
+from src.helper import StopOnTokens               # noqa: E402  (their code)
 from src.models import create_model, HFModel      # noqa: E402  (their code)
 from src.prompt_template import LLAMA_TMPL        # noqa: E402  (their code)
 
@@ -44,6 +46,38 @@ from transfer_stats import min_detectable_change, wilson        # noqa: E402
 from spare_vs_corpus_poisoning import acc_score                 # noqa: E402
 from poisonedrag_transfer import (                              # noqa: E402
     build_poisoned, is_negative, is_refusal)
+
+
+# ---------------------------------------------------------------------------
+# A tokenizer-dependent crash in RobustRAG's own stopping criteria
+# ---------------------------------------------------------------------------
+# DecodingAgg builds its stop sequences with
+#     tokenizer(x, add_special_tokens=False)   for x in ["\n#", ..., "\n\n"]
+# and then compares `input_ids[0][-len(stop)+1:]` against `stop[0][1:]`, which
+# hard-codes an assumption that every stop string tokenizes to at least two
+# tokens. Mistral's tokenizer splits the leading newline, so it does. Llama-3
+# merges whitespace and encodes "\n\n" as a SINGLE token, so `stop[0][1:]` is
+# empty, the slice becomes `input_ids[0][0:]`, and the comparison dies with
+#     size of tensor a (803) must match the size of tensor b (0)
+# The defense is therefore unrunnable on Llama-3 as shipped. Their own comment
+# on the stop list reads "seems to work fine".
+#
+# The fix keeps their semantics exactly where their assumption holds - two or
+# more tokens, strip the first, compare the rest - and compares the whole stop
+# sequence when there is only one token to compare. That is strictly tighter
+# matching, never looser, and it changes nothing on Mistral.
+def _stop_on_tokens_call(self, input_ids, scores, **kwargs):
+    for stop_ids in self.stop_token_ids:
+        seq = stop_ids[0]
+        want = seq[1:] if len(seq) > 1 else seq
+        if len(want) == 0 or len(input_ids[0]) < len(want):
+            continue
+        if torch.eq(input_ids[0][-len(want):], want).all():
+            return True
+    return False
+
+
+StopOnTokens.__call__ = _stop_on_tokens_call
 
 
 def run_condition(defense, data, top_k, n_poison, attack, defended):
