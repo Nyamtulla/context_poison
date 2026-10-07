@@ -23,7 +23,17 @@ NQ), injected at 10 / 50 / 100 % of the context.
 | **ParamMute** | NeurIPS 2025 | **fires** (+9.3 pp ctx, −12.4 pp mr) | **HARMFUL — 13.5 pp more damage than undefended** | 1409 | 5.3 pp |
 | FaithfulRAG | ACL 2025 | **fails** (−5.0 pp, below threshold) | not reportable | 400 | 9.9 pp |
 | **CK-PLUG** | arXiv 2025 | **fires** (−10.1 pp mr) | **HARMFUL — −14.9 / −15.1 / −9.9 pp under attack, all resolvable; 0.2 % at saturation vs 10.1 % undefended** | 800 | 7.0 pp |
-| **SpARE** | NAACL 2024 | shape right, under-powered at n=150 | *n=500 running* — steers separate **+14.0 pp** clean, invert to **−13.3 pp** at saturation | 150 | 16.2 pp |
+| **SpARE** | NAACL 2024 | **fires** (+14.2 pp ctx, −14.7 pp mr) | **HARMFUL — sign flip resolvable at both ends: +14.2 pp clean → −10.2 pp at saturation** | 500 | 8.9 pp |
+
+The SpARE row is the cleanest result in the cell, because its control and its
+conviction are the same measurement. Steering toward the context is worth
+**+14.2 pp** when the context is honest and costs **−10.2 pp** when it is
+attacked, and both endpoints clear the 8.9 pp threshold. One caveat belongs
+with it: SpARE has no unsteered arm. `generate_two_answers` returns both
+steering directions from one model on one prompt, so the comparison is
+context-steer against parameter-steer, not defense against vanilla. That is the
+authors' own design and it is the right internal control, but it is a different
+baseline from the other three rows and the database records it as such.
 
 ## Roadblocks
 
