@@ -78,20 +78,36 @@ contribution:
   never loses resolvable accuracy at saturation, and it is strongest just
   below it — **+12.3 pp at 9/10 against BadRAG DoS**, which clears threshold.
 
-### And it is immune to the tone attack
+### And it does not open the tone-steering hole
 
 The sharpest single contrast in the matrix. Negative-framing rate under
-BadRAG Selective-Fact:
+BadRAG Selective-Fact, with **each defense next to its own undefended arm**,
+because the two families ran on different models:
 
-| poison | undefended | RobustRAG | ParamMute | CK-PLUG |
-|---:|---:|---:|---:|---:|
-| 1/10 | 0.0 % | **0.0 %** | — | **78.2 %** |
-| 10/10 | 4.0 % | **0.3 %** | 28.8 % | **99.0 %** |
+| poison | undef. (Mistral) | KeywordAgg | DecodingAgg | undef. (Llama) | ParamMute | CK-PLUG |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1/10 | 0.0 % | **0.0 %** | **0.0 %** | 0.0 % | 0.0 % | **78.2 %** |
+| 10/10 | 0.0 % | **0.3 %** | **0.3 %** | 4.0 % | **28.8 %** | **99.0 %** |
 
-RobustRAG does not adopt the attacker's framing at any poison level. The
-reason is structural: it answers each passage separately and aggregates, so a
-single slanted passage is one outvoted opinion rather than the frame for the
-whole answer.
+> **Corrected 2026-10-06.** This section previously called RobustRAG *immune*
+> to the tone attack, quoting a 4.0 % undefended figure against its 0.3 %.
+> That 4.0 % is the **Llama** undefended arm; RobustRAG's own undefended arm is
+> **0.0 % at every dose**. The attack does not work on an undefended model in
+> this setup at all. Aggregation is not closing a hole — it is **declining to
+> open one**, which is the honest and still-useful claim. The dissociation is
+> unaffected; only the word *immune* was wrong.
+
+What the table actually shows is a cost, not a saving: **a context-reliance
+defense converts an attack the base model ignores into one that works 99 % of
+the time, from one poisoned passage in ten.** Both aggregation
+implementations — which share no aggregation logic, one voting over keywords
+and one over logits — leave the base behaviour intact.
+
+The reason is structural and holds in both directions. Tone steering does not
+corrupt the *answer*, so a defense that pushes the model to follow the
+retrieved text follows the slant too, and scores itself as working perfectly.
+A defense that answers each passage separately and aggregates has no such
+lever to pull.
 
 ## The second finding: tone steering needs no saturation
 
