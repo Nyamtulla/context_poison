@@ -185,8 +185,15 @@ def load_facts():
     hl = _j("defense_half_life.json")
     tt = _j("technique_transfer_chatinject.json")
 
+    # The RQ5 JSON stops at the 22 Sept state: 332 pairs, 131 mechanisms
+    # uncovered. The 28 Sept reverse-scan pass added 17 more pairs and went
+    # only into paper_explorer.db, so the deck and the dashboards disagreed by
+    # 17. The database is the later of the two and every other view already
+    # reads it, so the coverage figures come from there.
+    db = _db()
+
     return {
-        "cen": cen, "hl": hl, "tt": tt,
+        "cen": cen, "hl": hl, "tt": tt, **db,
         "rows": len(rows), "included": len(inc),
         "mech_reg": len(raw3), "mech_all": len(mech),
         "mech_track": cnt(x["track"] for x in raw3),
@@ -197,10 +204,10 @@ def load_facts():
         "def_dip": cnt(x["defense_intervention_point"] for x in raw4),
         "def_both": n_both, "def_both_pct": 100 * n_both / len(raw4),
         "va": va,
-        "pairs": st["n_pairs"], "dmatch": st["n_defenses_matched"],
+        "pairs": db["db_pairs"], "dmatch": st["n_defenses_matched"],
         "dmatch_pct": 100 * st["n_defenses_matched"] / st["n_defenses_total"],
-        "mcov": st["n_mechs_covered"], "munc": st["n_mechs_uncovered"],
-        "mcov_pct": 100 * st["n_mechs_covered"] / len(mech),
+        "mcov": db["db_covered"], "munc": db["db_uncovered"],
+        "mcov_pct": 100 * db["db_covered"] / len(mech),
         "per_def": st["mechs_per_defense_distribution"],
         "top_mech": [(x["mechanism_name"], x["n_defenses_tested"]) for x in top],
         "pair_mass": pair_mass,
@@ -211,6 +218,81 @@ def load_facts():
 
 
 # ---------------------------------------------------------------------- slides
+
+def _db():
+    """Coverage and transfer figures, read from data/paper_explorer.db.
+
+    Kept in one place so a slide never computes a number itself. Every value
+    here is also what context_dashboard.py shows, which is the point.
+    """
+    import sqlite3
+    con = sqlite3.connect(REPO / "data" / "paper_explorer.db")
+    q = lambda sql, *a: con.execute(sql, a).fetchall()
+    one = lambda sql, *a: q(sql, *a)[0][0]
+
+    n_attacks = one("SELECT COUNT(*) FROM attack")
+    covered = one("SELECT COUNT(DISTINCT attack_name) FROM pair")
+
+    # same-literature share: both ends of the pair must resolve to one track
+    tracked = q("""SELECT a.track, d.track FROM pair p
+                   JOIN attack a ON a.name = p.attack_name
+                   JOIN defense d ON d.name = p.defense_name""")
+    same = sum(1 for at, dt in tracked if at == dt)
+
+    # the transfer matrix
+    cells = one("""SELECT COUNT(*) FROM (SELECT DISTINCT technique_name, attack, model
+                   FROM our_run WHERE campaign='rag_transfer')""")
+    doses = one("SELECT COUNT(*) FROM our_run WHERE campaign='rag_transfer'")
+
+    def fam(point):
+        rows = q("""SELECT utility_verdict FROM our_run
+                    WHERE campaign='rag_transfer' AND n_poison=10
+                      AND intervention_point=?""", point)
+        usable = [r[0] for r in rows if r[0] != "control_failed"]
+        return usable.count("harms_accuracy"), len(usable)
+
+    def asr(defense, attack, poison=10, model=None):
+        sql = ("""SELECT undefended_asr, defended_asr FROM our_run
+                  WHERE campaign='rag_transfer' AND technique_name=? AND attack=?
+                    AND n_poison=?""")
+        args = [defense, attack, poison]
+        if model:
+            sql += " AND model LIKE ?"
+            args.append(f"%{model}%")
+        r = q(sql, *args)
+        return r[0] if r else (None, None)
+
+    def dacc(defense, poison):
+        r = q("""SELECT defended_utility - undefended_utility FROM our_run
+                 WHERE campaign='rag_transfer' AND technique_name=?
+                   AND attack='badrag_dos' AND n_poison=? AND model LIKE '%Mistral%'""",
+              defense, poison)
+        return round(r[0][0], 1) if r else None
+
+    out = {
+        "db_pairs": one("SELECT COUNT(*) FROM pair"),
+        "db_covered": covered,
+        "db_uncovered": n_attacks - covered,
+        "db_same_pct": round(100 * same / len(tracked), 1),
+        "db_cross_pct": round(100 * (len(tracked) - same) / len(tracked), 1),
+        "db_cross_n": len(tracked) - same,
+        "tx_cells": cells, "tx_doses": doses,
+        "tx_ctx_harm": fam("context-reliance"),
+        "tx_agg_harm": fam("isolate-then-aggregate"),
+        # one poisoned passage and ten, because the two tell different stories:
+        # at one passage the undefended model is at 0.0% and the defense is not
+        "tx_ckplug_tone1": asr("CK-PLUG", "badrag_sentiment", 1),
+        "tx_ckplug_tone10": asr("CK-PLUG", "badrag_sentiment", 10),
+        "tx_parammute_tone10": asr("ParamMute", "badrag_sentiment", 10),
+        "tx_kw_dos_llama": asr("RobustRAG / KeywordAgg", "badrag_dos", 9, "Llama"),
+        "tx_kw_dos_mistral": asr("RobustRAG / KeywordAgg", "badrag_dos", 9, "Mistral"),
+        "tx_gap": [(p, dacc("RobustRAG / KeywordAgg", p),
+                    dacc("RobustRAG / DecodingAgg", p)) for p in (1, 5, 6, 7, 8, 9, 10)],
+    }
+    con.close()
+    return out
+
+
 def build(prs, F):
     n = 0
 
@@ -241,15 +323,16 @@ def build(prs, F):
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
         _run(p, ln, 40, WHITE, True, TITLE_FONT); p.space_after = Pt(2)
     tf = _tb(s, 0.90, 4.05, 8.5, 0.6)
-    _run(tf.paragraphs[0], "A Systematization of Knowledge — RQ1–RQ7 complete", 16, BODY)
+    _run(tf.paragraphs[0], "A Systematization of Knowledge. RQ1 to RQ7 are complete.", 16, BODY)
     tf = _tb(s, 0.90, 6.55, 9.0, 0.4)
     _run(tf.paragraphs[0],
          f"{F['rows']:,} papers screened · {F['included']:,} included · "
-         f"{F['mech_all']} mechanisms · {F['defenses']} defenses", 13, MUTED)
+         f"{F['mech_all']} mechanisms · {F['defenses']} defenses · "
+         f"{F['tx_cells']} cells we ran ourselves", 13, MUTED)
     page_no(s, n)
 
     # 2 — roadmap ---------------------------------------------------------
-    s = start("THE ROADMAP", ["Seven questions, one corpus"])
+    s = start("THE ROADMAP", ["Seven questions, then the experiments"])
     items = [
         ("RQ1", "Taxonomy", f"{F['empty_pct']}% of the cube is empty"),
         ("RQ2", "Cross-citation", f"{F['ab'][2]}% / {F['ba'][2]}% between tracks"),
@@ -258,9 +341,10 @@ def build(prs, F):
         ("RQ5", "Coverage matrix", f"{F['munc']} mechanisms never defended"),
         ("RQ6", "Generalization", "9 reconstructed case studies"),
         ("RQ7", "Open problems", "7 ranked, falsifiable"),
+        ("NEW", "Transfer matrix", f"{F['tx_cells']} cells that no paper reports"),
     ]
     for i, (rq, name, res) in enumerate(items):
-        y = 2.45 + i * 0.63
+        y = 2.30 + i * 0.58
         panel(s, 0.70, y, 11.9, 0.52)
         tf = _tb(s, 0.95, y + 0.08, 1.1, 0.35); _run(tf.paragraphs[0], rq, 14, GOLD, True, TITLE_FONT)
         tf = _tb(s, 2.05, y + 0.09, 3.4, 0.35); _run(tf.paragraphs[0], name, 13.5, WHITE, True)
@@ -270,10 +354,10 @@ def build(prs, F):
     s = start("METHODOLOGY", ["Kitchenham SLR + PRISMA-lite screening,",
                               "run across two literatures instead of one"])
     blocks = [
-        ("Search", "Two tracks searched in parallel:\nadversarial poisoning and\nincidental degradation.\n25,922 records discovered."),
-        ("Screen", "Fixed inclusion criteria in\nconfig.yaml, applied by rule,\nnot by hand. Every change\nlogged in rescreening_log.md."),
-        ("Extract", "Full text read for 1,097 papers.\n32 coded fields per paper,\nclosed vocabularies for\nchannel and consequence."),
-        ("Synthesize", "Registries joined into the\ncoverage matrix, then\nreconstructed empirically\nfor RQ6."),
+        ("Search", "We searched two tracks at\nthe same time. One track is\nadversarial. One track is\nincidental. We found\n25,922 records."),
+        ("Screen", "The rules are in config.yaml.\nA program applies them.\nWe do not screen by hand.\nrescreening_log.md records\neach change."),
+        ("Extract", "We read the full text of\n1,097 papers. We code 32\nfields for each paper.\nChannel and consequence\nuse closed lists."),
+        ("Synthesize", "We join the registries into\nthe coverage matrix. Then\nwe run the defense code\nourselves. We do not use\nthe numbers in the papers."),
     ]
     for i, (t, b) in enumerate(blocks):
         x = 0.70 + i * 3.05
@@ -289,15 +373,14 @@ def build(prs, F):
     right = [
         (f"{F['rows']:,} rows screened; {F['rows'] - F['included']:,} excluded with cause", 14, WHITE, True),
         ("", 6, BODY, False),
-        ("Every exclusion is recorded in rescreening_log.md —", 12.5, BODY, False),
-        ("duplicates, off-criteria admissions, and screening", 12.5, BODY, False),
-        ("corrections, with the reasoning for each.", 12.5, BODY, False),
+        ("rescreening_log.md records each exclusion.", 12.5, BODY, False),
+        ("It gives a reason for each one.", 12.5, BODY, False),
         ("", 8, BODY, False),
-        ("The corpus grew 1,008 → 1,158 in Sept 2026 after a", 12.5, MUTED, False),
-        ("screening bug was found: the signal-term list required", 12.5, MUTED, False),
-        ("agent-era vocabulary, so the papers that founded the", 12.5, MUTED, False),
-        ("field — which say \"LLM-integrated application\", never", 12.5, MUTED, False),
-        ("\"agent\" — had been silently dropped.", 12.5, MUTED, False),
+        ("In September 2026 we found a defect in the rules.", 12.5, MUTED, False),
+        ("The rules looked for the word \"agent\". The first", 12.5, MUTED, False),
+        ("papers in this field do not use it. They say", 12.5, MUTED, False),
+        ("\"LLM-integrated application\". The rules dropped", 12.5, MUTED, False),
+        ("them. The corpus went from 1,008 to 1,158.", 12.5, MUTED, False),
     ]
     tf = _tb(s, 5.20, 3.05, 7.3, 3.2)
     _lines(tf, right, 12.5, BODY, space_after=2)
@@ -311,9 +394,9 @@ def build(prs, F):
         (f"{F['empty_n']} of {F['cube_n']} cells", 18, WHITE, True),
         ("9 channels × 3 intents × 6 consequences", 12.5, MUTED, False),
         ("", 8, BODY, False),
-        ("Down from 63.6% before the screening fix.", 12.5, BODY, False),
-        ("Recovering 150 foundational papers filled", 12.5, BODY, False),
-        ("five cells — and left 98 untouched.", 12.5, BODY, False),
+        ("Before the fix, 63.6% was empty.", 12.5, BODY, False),
+        ("The 150 new papers filled five cells.", 12.5, BODY, False),
+        ("They left 98 cells empty.", 12.5, BODY, False),
     ], 12.5, BODY)
 
     # 6 — RQ1 channels ----------------------------------------------------
@@ -324,7 +407,7 @@ def build(prs, F):
                 GOLD if i < 2 else TEAL, f"{v}")
     tf = _tb(s, 0.70, 6.85, 11.9, 0.4)
     _run(tf.paragraphs[0],
-         "Named mechanisms per channel (RQ3 registry). direct-input and tool-output are now exactly tied.",
+         "Named mechanisms for each channel. direct-input and tool-output are equal.",
          12, MUTED)
 
     # 7 — RQ2 -------------------------------------------------------------
@@ -344,8 +427,8 @@ def build(prs, F):
         _run(pp, f"{pct}%", 40, col, True, TITLE_FONT)
     tf = _tb(s, 0.70, 6.10, 11.9, 1.0)
     _lines(tf, [
-        ("Roughly nine in ten papers never cite across the divide.", 14, WHITE, True),
-        ("Unchanged after the corpus grew by 150 papers \u2014 the disconnect is structural, not a sampling artifact.",
+        ("Nine of ten papers do not cite the other track.", 14, WHITE, True),
+        ("The corpus grew by 150 papers. The rates did not change. The split is structural.",
          12.5, MUTED, False)], 12.5, BODY)
 
     # 8 — RQ3 -------------------------------------------------------------
@@ -356,13 +439,13 @@ def build(prs, F):
     _lines(tf, [
         (f"{t.get('Security',0)} adversarial  ·  {t.get('ML/AI',0)} incidental", 17, WHITE, True),
         ("", 8, BODY, False),
-        ("Up from 183 before the screening fix. The 41 recovered", 12.5, BODY, False),
-        ("mechanisms are 40 adversarial and skew hard to", 12.5, BODY, False),
-        ("direct-input \u2014 23 of 41.", 12.5, BODY, False),
+        ("Before the fix we had 183. We added 41.", 12.5, BODY, False),
+        ("40 of the new ones are adversarial.", 12.5, BODY, False),
+        ("23 of them use the direct-input channel.", 12.5, BODY, False),
         ("", 8, BODY, False),
-        ("That closed what had looked like a decisive channel gap.", 13, GOLD, True),
-        ("The old \"tool-output dominates\" reading overstated a gap", 12.5, MUTED, False),
-        ("our own screening had manufactured.", 12.5, MUTED, False),
+        ("This closed a channel gap that looked real.", 13, GOLD, True),
+        ("Our own screening made that gap.", 12.5, MUTED, False),
+        ("The field did not.", 12.5, MUTED, False),
     ], 12.5, BODY)
     c = F["mech_conseq"]
     tf = _tb(s, 0.70, 6.55, 11.9, 0.5)
@@ -372,18 +455,19 @@ def build(prs, F):
     # 9 — RQ4 -------------------------------------------------------------
     s = start("RQ4  ·  DEFENSE CENSUS", ["And how many defenses answer them?"], 30)
     stat_disc(s, 0.95, 2.55, 3.15, str(F["defenses"]), "named defenses")
-    stat_disc(s, 4.55, 2.55, 3.15, f"{F['def_both_pct']:.1f}%", "tested on both\nthreat models", RED)
+    stat_disc(s, 4.55, 2.55, 3.15, f"{F['def_both_pct']:.1f}%", "answer both\nthreat models", RED)
     tf = _tb(s, 8.35, 2.95, 4.3, 3.2)
     _lines(tf, [
         (f"Only {F['def_both']} of {F['defenses']} defenses", 15, WHITE, True),
-        ("were validated against both", 15, WHITE, True),
-        ("adversarial and incidental", 15, WHITE, True),
-        ("context corruption.", 15, WHITE, True),
+        ("answer both threat models:", 15, WHITE, True),
+        ("adversarial corruption and", 15, WHITE, True),
+        ("incidental corruption.", 15, WHITE, True),
         ("", 10, BODY, False),
-        ("This figure did not move when", 12.5, GOLD, False),
-        ("55 defenses were added \u2014 including", 12.5, GOLD, False),
-        ("StruQ, SecAlign, Spotlighting and", 12.5, GOLD, False),
-        ("the Instruction Hierarchy.", 12.5, GOLD, False),
+        ("We added 55 defenses. These", 12.5, GOLD, False),
+        ("include StruQ, SecAlign,", 12.5, GOLD, False),
+        ("Spotlighting and the", 12.5, GOLD, False),
+        ("Instruction Hierarchy.", 12.5, GOLD, False),
+        ("The number did not move.", 12.5, GOLD, False),
         ("", 8, BODY, False),
         ("2.9% \u2192 2.8%.", 13, WHITE, True),
     ], 12.5, BODY)
@@ -391,7 +475,7 @@ def build(prs, F):
     # 10 — RQ5 headline ---------------------------------------------------
     s = start("RQ5  ·  COVERAGE MATRIX", ["Which defenses were ever tested",
                                           "against which attacks?"])
-    stat_disc(s, 0.95, 2.80, 3.05, f"{F['dmatch_pct']:.0f}%", "of defenses have\nany confirmed test")
+    stat_disc(s, 0.95, 2.80, 3.05, f"{F['dmatch_pct']:.0f}%", "of defenses have\none test or more")
     stat_disc(s, 4.45, 2.80, 3.05, str(F["munc"]), "mechanisms never\ndefended", RED)
     tf = _tb(s, 8.20, 3.15, 4.4, 3.2)
     _lines(tf, [
@@ -399,12 +483,10 @@ def build(prs, F):
         (f"{F['dmatch']} of {F['defenses']} defenses matched", 12.5, BODY, False),
         (f"{F['mcov']} of {F['mech_all']} mechanisms covered", 12.5, BODY, False),
         ("", 10, BODY, False),
-        ("Of the matched defenses,", 12.5, MUTED, False),
-        (f"{F['per_def'].get('1',0)} were tested against", 12.5, MUTED, False),
-        ("exactly one mechanism.", 12.5, MUTED, False),
+        (f"{F['per_def'].get('1',0)} of them have one test only.", 12.5, MUTED, False),
         ("", 8, BODY, False),
-        ("There is no generalist-defense", 13, GOLD, True),
-        ("category to speak of.", 13, GOLD, True),
+        ("There are almost no", 13, GOLD, True),
+        ("general defenses.", 13, GOLD, True),
     ], 12.5, BODY)
 
     # 11 — RQ5 concentration ----------------------------------------------
@@ -418,9 +500,9 @@ def build(prs, F):
     top6 = 100 * sum(v for _, v in F["top_mech"]) / F["pair_mass"]
     tf = _tb(s, 0.70, 6.25, 11.9, 0.9)
     _lines(tf, [
-        (f"One umbrella mechanism absorbs {share:.1f}% of all test pairs; these six take {top6:.1f}%.",
+        (f"One mechanism takes {share:.1f}% of all pairs. These six take {top6:.1f}%.",
          14, WHITE, True),
-        (f"The other {F['munc']} mechanisms absorb none.", 12.5, MUTED, False)], 12.5, BODY)
+        (f"The other {F['munc']} mechanisms get no test at all.", 12.5, MUTED, False)], 12.5, BODY)
 
     # 12 — RQ5 the null result (new) --------------------------------------
     s = start("RQ5  ·  THE TEST THAT FAILED", ["We predicted the gap would close.",
@@ -430,28 +512,30 @@ def build(prs, F):
     _lines(tf, [
         ("The prediction", 15, GOLD, True),
         ("", 6, BODY, False),
-        ("Recovering the field's foundational", 12.5, BODY, False),
-        ("defenses \u2014 StruQ, SecAlign, Spotlighting,", 12.5, BODY, False),
-        ("Attention Tracker, the Liu et al. baselines \u2014", 12.5, BODY, False),
-        ("should reveal that mechanisms which look", 12.5, BODY, False),
-        ("\"never defended\" were defended after all.", 12.5, BODY, False),
+        ("We predicted this. The first", 12.5, BODY, False),
+        ("defenses of the field will cover the", 12.5, BODY, False),
+        ("mechanisms that look open. StruQ,", 12.5, BODY, False),
+        ("SecAlign, Spotlighting, Attention", 12.5, BODY, False),
+        ("Tracker and the Liu baselines will", 12.5, BODY, False),
+        ("close the gap.", 12.5, BODY, False),
     ], 12.5, BODY)
     panel(s, 6.85, 2.95, 5.75, 3.15)
     tf = _tb(s, 7.15, 3.20, 5.2, 2.7)
     _lines(tf, [
         ("What happened", 15, RED, True),
         ("", 6, BODY, False),
-        ("164 papers recovered. 55 defenses and", 12.5, BODY, False),
-        ("41 mechanisms added. 45 new pairs.", 12.5, BODY, False),
+        ("We added 164 papers. We added 55", 12.5, BODY, False),
+        ("defenses and 41 mechanisms. We got", 12.5, BODY, False),
+        ("45 new pairs.", 12.5, BODY, False),
         ("", 6, BODY, False),
-        ("Pre-existing mechanisms newly covered:", 12.5, WHITE, True),
+        ("Old mechanisms now covered:", 12.5, WHITE, True),
         ("zero.", 26, RED, True),
-        ("Coverage of the original 196 is unchanged.", 12.5, MUTED, False),
+        ("The first 196 mechanisms did not move.", 12.5, MUTED, False),
     ], 12.5, BODY)
     tf = _tb(s, 0.70, 6.35, 11.9, 0.9)
     _lines(tf, [
-        ("The recovered defenses and the recovered attacks cover each other.", 14, WHITE, True),
-        ("\"Your gap is an artifact of your corpus boundaries\" has now been tested directly, and does not hold.",
+        ("The new defenses and the new attacks cover each other. They cover nothing else.", 14, WHITE, True),
+        ("A reviewer can say that our corpus limits make the gap. We tested that claim. It is not correct.",
          12.5, GOLD, False)], 12.5, BODY)
 
     # 13 — RQ6 ------------------------------------------------------------
@@ -472,11 +556,11 @@ def build(prs, F):
         _lines(tf, [note], 12, MUTED, space_after=1)
     tf = _tb(s, 0.70, 5.70, 11.9, 1.3)
     _lines(tf, [
-        ("9 case studies, each rebuilt from the defense's own released code or weights \u2014 never from its paper's numbers.",
+        ("We rebuilt 9 defenses from their released code or weights. We did not use the numbers in the papers.",
          13.5, WHITE, True),
-        ("Generalization tracks intervention point: ingestion defenses mostly hold, execution defenses mostly do not.",
+        ("The result follows the intervention point. Ingestion defenses usually hold. Execution defenses usually do not.",
          12.5, BODY, False),
-        ("That split is partly confounded \u2014 the ingestion harnesses model a text classifier, the execution ones an agent. Stated, not hidden.",
+        ("A confound applies. The ingestion harness is a text classifier. The execution harness is an agent. We state it.",
          12, MUTED, False)], 12.5, BODY)
 
     # 13b — benchmark standardization (new) --------------------------------
@@ -484,11 +568,11 @@ def build(prs, F):
     if cen:
         s = start("BENCHMARK STANDARDIZATION", ["The field has no standard benchmark to test on"], 28)
         stat_disc(s, 0.95, 2.70, 3.10, f"{cen.get('not_reusable_pct', 0)}%",
-                  "of attacks evaluated on\nground nobody can reuse", RED)
+                  "of attacks use data\nnobody else can reuse", RED)
         top = list((cen.get("named_benchmark_counts") or {}).items())[:1]
         share = round(100 * top[0][1] / cen["n_mechanisms"], 1) if top else 0
         stat_disc(s, 4.45, 2.70, 3.10, f"{share}%",
-                  "covered by the most\nshared benchmark")
+                  "use the most common\nbenchmark")
         tf = _tb(s, 8.20, 3.05, 4.4, 3.2)
         _lines(tf, [
             (f"{cen.get('distinct_named_benchmarks', 0)} distinct benchmarks", 17, WHITE, True),
@@ -498,9 +582,10 @@ def build(prs, F):
              f"({round(100*cen.get('benchmarks_used_once',0)/max(1,cen.get('distinct_named_benchmarks',1)))}%)", 13, GOLD, True),
             ("are used by exactly one paper.", 13, GOLD, True),
             ("", 8, BODY, False),
-            ("More benchmarks than attacks.", 12.5, MUTED, False),
-            ("Two papers on the same corpus still", 12.5, MUTED, False),
-            ("are not comparable.", 12.5, MUTED, False),
+            ("There are more benchmarks", 12.5, MUTED, False),
+            ("than attacks. Two papers can", 12.5, MUTED, False),
+            ("use one corpus and still", 12.5, MUTED, False),
+            ("not compare.", 12.5, MUTED, False),
         ], 12.5, BODY)
 
     # 13c — defense half-life (new) ---------------------------------------
@@ -514,13 +599,13 @@ def build(prs, F):
         _lines(tf, [
             (f"{hl.get('n_defeats', 0)} datable defeats, median gap 1 year, maximum 2.", 15, WHITE, True),
             ("", 8, BODY, False),
-            ("DataSentinel was defeated four separate times by four teams.", 12.5, BODY, False),
-            ("A defense does not get beaten once and settle.", 12.5, BODY, False),
+            ("Four teams defeated DataSentinel four separate times.", 12.5, BODY, False),
+            ("A defense does not stop after one defeat.", 12.5, BODY, False),
             ("", 8, BODY, False),
-            ("Read as an UPPER BOUND, not an estimate:", 13, GOLD, True),
-            (f"only {hl.get('share_of_registry_with_recorded_defeat', 0)}% of the registry has any", 12.5, MUTED, False),
-            ("recorded outcome, and the sample is biased toward", 12.5, MUTED, False),
-            ("defenses famous enough to attract attack papers.", 12.5, MUTED, False),
+            ("Read this as an upper limit.", 13, GOLD, True),
+            (f"Only {hl.get('share_of_registry_with_recorded_defeat', 0)}% of the registry has a recorded", 12.5, MUTED, False),
+            ("outcome. The sample prefers defenses that are", 12.5, MUTED, False),
+            ("well known. Attack papers go after those first.", 12.5, MUTED, False),
         ], 12.5, BODY)
 
     # 13d — transfer result (new) -----------------------------------------
@@ -556,7 +641,131 @@ def build(prs, F):
             ("RQ6 concluded execution defenses generalize least. This says the opposite.", 12.5, GOLD, True),
         ], 12.5, BODY)
 
-    # 13e — differentiation -----------------------------------------------
+
+    # 13e — the transfer matrix: what we ran ------------------------------
+    s = start("TRANSFER MATRIX", ["We run the defense code against attacks",
+                                  "that no paper has tested it on"], 28)
+    stat_disc(s, 0.95, 2.70, 3.05, str(F["tx_cells"]), "defense x attack\nx model cells")
+    stat_disc(s, 4.45, 2.70, 3.05, str(F["tx_doses"]), "measured\nconditions")
+    tf = _tb(s, 8.20, 3.00, 4.4, 3.3)
+    _lines(tf, [
+        ("No paper reports these pairs.", 14, WHITE, True),
+        ("That is why we chose them.", 14, WHITE, True),
+        ("", 8, BODY, False),
+        ("4 attacks. 5 defenses.", 12.5, BODY, False),
+        ("3 models. 2 defense families.", 12.5, BODY, False),
+        ("", 8, BODY, False),
+        ("We change the attack dose from", 12.5, MUTED, False),
+        ("0 to 10 bad passages of 10.", 12.5, MUTED, False),
+        ("Each cell is a curve.", 12.5, MUTED, False),
+    ], 12.5, BODY)
+    tf = _tb(s, 0.70, 6.45, 11.9, 0.9)
+    _lines(tf, [
+        ("Three rules control every result.", 13.5, GOLD, True),
+        ("The control must fire first. A change below the detection limit is not a result. "
+         "We do not change the authors' scoring code.", 12.5, MUTED, False)], 12.5, BODY)
+
+    # 13f — result 1: family dissociation ---------------------------------
+    ch, ct = F["tx_ctx_harm"]; ah, at_ = F["tx_agg_harm"]
+    s = start("RESULT 1", ["At full attack dose, one defense family",
+                           "fails and the other does not"], 28)
+    for i, (name, mech, harm, tot, col) in enumerate([
+            ("Context-reliance", "It holds down memory so the model\nfollows the retrieved text.\nParamMute, CK-PLUG, SpARE",
+             ch, ct, RED),
+            ("Isolate-then-aggregate", "It answers each passage alone,\nthen joins the answers.\nRobustRAG KeywordAgg, DecodingAgg",
+             ah, at_, TEAL)]):
+        x = 0.70 + i * 6.10
+        panel(s, x, 2.80, 5.80, 2.65)
+        tf = _tb(s, x + 0.30, 3.00, 5.2, 0.4)
+        _run(tf.paragraphs[0], name, 15.5, WHITE, True)
+        tf = _tb(s, x + 0.30, 3.45, 5.2, 1.1)
+        _lines(tf, mech.split("\n"), 12, MUTED, space_after=1)
+        tf = _tb(s, x + 0.30, 4.62, 5.2, 0.7)
+        _run(tf.paragraphs[0], f"{harm} of {tot}", 30, col, True, TITLE_FONT)
+        tf = _tb(s, x + 2.40, 4.78, 3.2, 0.5)
+        _lines(tf, ["usable cells lose", "accuracy we can measure"], 11.5, BODY, space_after=0)
+    tf = _tb(s, 0.70, 5.70, 11.9, 1.4)
+    _lines(tf, [
+        ("The loss is the same size every time: -31.7 and -31.8 points, on two defenses, two attacks and two models.",
+         13.5, WHITE, True),
+        ("Against a false passage the loss starts at 8 bad passages of 10. It does not wait for 10 of 10.",
+         12.5, BODY, False),
+        ("Design rule: do not hold down the model's own memory. It is the only thing left when the evidence goes.",
+         13, GOLD, True)], 12.5, BODY)
+
+    # 13g — result 2: the defense opens the hole --------------------------
+    c1u, c1d = F["tx_ckplug_tone1"]; c10u, c10d = F["tx_ckplug_tone10"]
+    pmu, pmd = F["tx_parammute_tone10"]
+    klu, kld = F["tx_kw_dos_llama"]; kmu, kmd = F["tx_kw_dos_mistral"]
+    s = start("RESULT 2", ["Some defenses make the attack work.",
+                           "Without them it stays near zero."], 28)
+    hdr = [("Defense", 0.95, 3.4), ("Attack", 4.45, 2.5), ("No defense", 7.05, 2.0),
+           ("With defense", 9.25, 2.0), ("Dose", 11.35, 1.2)]
+    for lbl, x, w in hdr:
+        tf = _tb(s, x, 2.70, w, 0.35)
+        _run(tf.paragraphs[0], lbl, 12, GOLD, True)
+    rows = [("CK-PLUG", "Tone steering", c1u, c1d, "1 of 10", RED),
+            ("CK-PLUG", "Tone steering", c10u, c10d, "10 of 10", RED),
+            ("ParamMute", "Tone steering", pmu, pmd, "10 of 10", RED),
+            ("RobustRAG KeywordAgg, Llama-3", "Refusal", klu, kld, "9 of 10", RED),
+            ("RobustRAG KeywordAgg, Mistral", "Refusal", kmu, kmd, "9 of 10", TEAL)]
+    for i, (d_, a_, u_, v_, dose, col) in enumerate(rows):
+        y = 3.12 + i * 0.58
+        panel(s, 0.70, y, 11.9, 0.48)
+        for text, x, w, size, color, bold in [
+                (d_, 0.95, 3.4, 12.5, WHITE, False), (a_, 4.45, 2.5, 12.5, BODY, False),
+                (f"{u_:.1f} %", 7.05, 2.0, 12.5, BODY, False),
+                (f"{v_:.1f} %", 9.25, 2.0, 13.5, col, True),
+                (dose, 11.35, 1.2, 12, MUTED, False)]:
+            tf = _tb(s, x, y + 0.08, w, 0.34)
+            _run(tf.paragraphs[0], text, size, color, bold)
+    tf = _tb(s, 0.70, 6.20, 11.9, 1.1)
+    _lines(tf, [
+        ("With no defense the attack stays at or near zero at every dose. It works only through the defense.", 13.5, WHITE, True),
+        ("Tone steering does not change the answer. A defense that pushes the model to follow the text follows the tone too.",
+         12.5, BODY, False),
+        ("The last row is the warning: the same defense helps on one model and does harm on another.", 12.5, GOLD, True)],
+        12.5, BODY)
+
+    # 13h — result 3: implementation beats family -------------------------
+    s = start("RESULT 3", ["Two versions of one defense give",
+                           "opposite answers"], 28)
+    tf = _tb(s, 0.70, 2.55, 11.9, 0.4)
+    _run(tf.paragraphs[0],
+         "RobustRAG ships both. They share the isolation step. They differ only in how they join the answers.",
+         12.5, MUTED)
+    cols = [("Bad passages of 10", 0.95, 3.1)] + [
+        (str(poison), 4.35 + i * 1.18, 1.05) for i, (poison, _, _) in enumerate(F["tx_gap"])]
+    for lbl, x, w in cols:
+        tf = _tb(s, x, 3.05, w, 0.35)
+        pp = tf.paragraphs[0]
+        if lbl != "Bad passages of 10":
+            pp.alignment = PP_ALIGN.CENTER
+        _run(pp, lbl, 12.5, GOLD, True)
+    series = [("KeywordAgg", [k for _, k, _ in F["tx_gap"]], TEAL),
+              ("DecodingAgg", [d for _, _, d in F["tx_gap"]], RED),
+              ("Difference", [round(abs(k - d), 1) for _, k, d in F["tx_gap"]], WHITE)]
+    for r, (name, vals, col) in enumerate(series):
+        y = 3.52 + r * 0.60
+        panel(s, 0.70, y, 11.9, 0.50)
+        tf = _tb(s, 0.95, y + 0.08, 3.1, 0.35)
+        _run(tf.paragraphs[0], name, 12.5, WHITE, r == 2)
+        for i, v in enumerate(vals):
+            tf = _tb(s, 4.35 + i * 1.18, y + 0.08, 1.05, 0.35)
+            pp = tf.paragraphs[0]; pp.alignment = PP_ALIGN.CENTER
+            txt = f"{v:+.1f}" if r < 2 else f"{v:.1f}"
+            _run(pp, txt, 12.5, col, r == 2)
+    tf = _tb(s, 0.70, 5.55, 11.9, 1.5)
+    _lines(tf, [
+        ("At 9 bad passages of 10, one version helps and the other does harm. They are 29.6 points apart.",
+         13.5, WHITE, True),
+        ("We wrote the cause down before we ran the test. A keyword filter throws away a passage with no answer in it, "
+         "so one good passage still carries the answer. An average of the outputs lets nine bad ones drown it.",
+         12.5, BODY, False),
+        ("So the difference must grow as good passages go, and must vanish when none are left. It does both.",
+         13, GOLD, True)], 12.5, BODY)
+
+    # 13i — differentiation -----------------------------------------------
     s = start("DIFFERENTIATION", ["Against the five closest SoKs"], 30)
     rowsD = [
         ("papers reviewed", "78", f"{F['included']:,}"),
@@ -578,21 +787,21 @@ def build(prs, F):
         _run(tf.paragraphs[0], b, 13, GOLD, True)
     tf = _tb(s, 0.70, 6.35, 11.9, 0.9)
     _lines(tf, [
-        ("They run experiments too \u2014 so that is not the distinction.", 13, WHITE, True),
-        ("Four of the five closest surveys sit on one side of a divide they never mention: the "
-         "314-cite ML survey does not cite security work, and the closest security SoK does not cite degradation work.",
+        ("They also run experiments. That is not the difference.", 13, WHITE, True),
+        ("Four of the five closest surveys stay on one side of the divide. They do not mention it. "
+         "The large ML survey does not cite security work. The closest security SoK does not cite degradation work.",
          12, MUTED, False)], 12, BODY)
 
     # 14 — RQ7 ------------------------------------------------------------
     s = start("RQ7  ·  OPEN PROBLEMS", ["Seven problems, ranked by expected value"], 30)
     probs = [
-        ("1", "Cross-track evaluation is not happening", "0.9% of test pairs cross the divide"),
+        ("1", "The tracks do not test each other", f"{F['db_cross_pct']}% of pairs cross the divide"),
         ("2", "The uncovered tail", f"{F['munc']} mechanisms have no tested defense"),
         ("3", "Single-mechanism validation is the norm", f"{F['per_def'].get('1',0)} defenses tested against exactly one"),
-        ("4", "Defenses are tested only against contemporaries", "attack papers hold the later record"),
+        ("4", "Defenses meet only their contemporaries", "attack papers hold the later record"),
         ("5", "Intervention point predicts generalization", "testable, and partly confounded today"),
-        ("6", "Benchmarks stand in for mechanisms", "one umbrella entry absorbs 22.9% of pairs"),
-        ("7", "Reporting conventions, not capability", "four of seven need no new science"),
+        ("6", "Benchmarks stand in for mechanisms", "one entry takes 22.9% of the pairs"),
+        ("7", "The problem is convention, not ability", "four of seven need no new science"),
     ]
     for i, (num, title, ev) in enumerate(probs):
         y = 2.55 + i * 0.63
@@ -605,24 +814,27 @@ def build(prs, F):
         _run(tf.paragraphs[0], ev, 12.5, BODY)
 
     # 15 — synthesis ------------------------------------------------------
-    s = start("SYNTHESIS", ["The field is underclaiming coverage it already has"], 28)
-    tf = _tb(s, 0.70, 2.65, 11.9, 1.1)
+    s = start("SYNTHESIS", ["The field claims less coverage than it has.",
+                            "Some of what it has does harm."], 26)
+    tf = _tb(s, 0.70, 2.55, 11.9, 1.2)
     _lines(tf, [
-        ("Two literatures study the same pond and barely read each other (RQ2).", 14, BODY, False),
-        ("They name 223 ways to poison a context and 534 ways to defend one \u2014 and almost never test the two against each other (RQ5).",
+        ("Two literatures study the same problem. They do not read each other.", 14, BODY, False),
+        (f"They name {F['mech_reg']} ways to poison a context and {F['defenses']} defenses. They almost never test one against the other.",
          14, BODY, False)], 14, BODY, space_after=5)
     panel(s, 0.70, 4.05, 11.9, 1.55)
     tf = _tb(s, 1.05, 4.28, 11.2, 1.15)
     _lines(tf, [
-        ("The binding constraint is coordination, not capability.", 17, GOLD, True),
-        ("RQ6 found 6 of 7 runnable defenses showed some protection against the threat model they were never tested on.",
-         13, WHITE, False),
-        ("The generalization is already there. The evaluation convention that would surface it is not.", 13, WHITE, False),
+        ("The first limit is coordination. It is not ability.", 17, GOLD, True),
+        ("RQ6 ran 7 defenses. 6 of them gave some protection against a threat model they never saw.", 13, WHITE, False),
+        ("The protection is there. The test convention that would show it is not.", 13, WHITE, False),
     ], 13, BODY, space_after=3)
-    tf = _tb(s, 0.70, 5.90, 11.9, 1.0)
+    tf = _tb(s, 0.70, 5.80, 11.9, 1.4)
     _lines(tf, [
-        ("And the gap is not ours. We imported the literature we thought was missing, specifically to close it. It did not close.",
-         13, MUTED, False)], 13, MUTED)
+        ("The gap is not ours. We added the literature we thought was missing, to close it. It did not close.",
+         13, MUTED, False),
+        ("But coverage is not the whole result. When we ran the code, some defenses did not simply fail.",
+         13, WHITE, True),
+        ("They made an attack work that stays near zero on a model with no defense at all.", 13, RED, True)], 13, MUTED)
 
     # 16 — reproducibility ------------------------------------------------
     s = start("REPRODUCIBILITY", ["Every number on these slides regenerates from the repo"], 26)
@@ -632,7 +844,8 @@ def build(prs, F):
         ("scripts/", "dedupe \u2192 registries \u2192 coverage matrix \u2192 RQ1/RQ2/RQ7"),
         ("context_sok_master_workbook.xlsx", "papers, mechanisms, defenses, pairs, gaps"),
         ("mcp_server/", "the same data, queryable conversationally"),
-        ("scripts/build_presentation.py", "this deck, built from the live registries"),
+        ("data/paper_explorer.db", "coverage and transfer figures, one source"),
+        ("scripts/build_presentation.py", "this deck, built from the live data"),
     ]
     for i, (a, b) in enumerate(rows_):
         y = 2.70 + i * 0.68
@@ -643,17 +856,17 @@ def build(prs, F):
         _run(tf.paragraphs[0], b, 12.5, BODY)
     tf = _tb(s, 0.70, 6.90, 11.9, 0.4)
     _run(tf.paragraphs[0],
-         "RQ6 numbers come from running each defense's released code or weights \u2014 never from the paper's reported figures.",
+         "We run each defense from its released code or weights. We never use the figures a paper reports about itself.",
          12, MUTED)
 
     # 17 — what's next ----------------------------------------------------
     s = start("WHAT'S NEXT", ["From findings to manuscript"], 30)
     nxt = [
-        ("Resolve the RQ6 confound", "port the ingestion defenses into an agent harness so intervention point is tested, not inferred"),
-        ("Close the transfer program", "three-stage coverage recovery; first prediction already validated by execution"),
-        ("Decide the survey question", "whether a pure survey satisfies the include criteria \u2014 affects the original corpus too"),
-        ("Differentiation table", "against the five closest SoKs"),
-        ("Manuscript draft", "RQ1\u2013RQ7 complete; threats-to-validity already written"),
+        ("Finish the model control", "run the second aggregation version on the other family's model; the first half shows the protection does not repeat"),
+        ("Add a third attack", "AGGD, so the matrix does not rest on four attack mechanisms"),
+        ("Find an outside defense", "the aggregation family comes from one repository; a second group's code would test the rule"),
+        ("Close the 99 near-misses", "defense papers that name an attack in our registry but never test it"),
+        ("Manuscript draft", "RQ1 to RQ7 are complete. The threats to validity are written."),
     ]
     for i, (t, b) in enumerate(nxt):
         y = 2.55 + i * 0.90
