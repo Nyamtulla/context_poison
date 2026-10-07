@@ -162,8 +162,10 @@ def facts():
         "agg": fam("isolate-then-aggregate"),
         "ck1": asr("CK-PLUG", "badrag_sentiment", 1),
         "ck10": asr("CK-PLUG", "badrag_sentiment", 10),
-        "kw_llama": asr("RobustRAG / KeywordAgg", "badrag_dos", 9, "Llama"),
-        "kw_mistral": asr("RobustRAG / KeywordAgg", "badrag_dos", 9, "Mistral"),
+        "pm10": asr("ParamMute", "badrag_sentiment", 10),
+        "agg_dos": [(m, i, asr(f"RobustRAG / {i}", "badrag_dos", 9, m))
+                    for m in ("Mistral", "Llama")
+                    for i in ("KeywordAgg", "DecodingAgg")],
         "gap": [(p, dacc("RobustRAG / KeywordAgg", p),
                  dacc("RobustRAG / DecodingAgg", p)) for p in (1, 5, 6, 7, 8, 9, 10)],
         "chan": list(con.execute(
@@ -378,63 +380,58 @@ def build(F):
          f"PoisonedRAG {short(C['zou'])}", f"BadRAG {short(C['badrag'])}", "Measurements: this work")
 
     # 12 -----------------------------------------------------------------
-    ck1u, ck1d = F["ck1"]; ck10u, ck10d = F["ck10"]
-    klu, kld = F["kw_llama"]; kmu, kmd = F["kw_mistral"]
     sl = S("Result 2", "Some defenses make an attack work that otherwise does nothing")
-    hdr = [("Defense", M, 4.3), ("Attack", M + 4.4, 2.3), ("No defense", M + 6.9, 1.6),
-           ("With the defense", M + 8.7, 2.0), ("Poisoned", M + 10.9, 1.2)]
+    ck1u, ck1d = F["ck1"]; ck10u, ck10d = F["ck10"]; pmu, pmd = F["pm10"]
+    hdr = [("Defense", M, 3.2), ("Attack", M + 3.3, 2.6), ("No defense", M + 6.1, 1.8),
+           ("With the defense", M + 8.1, 2.2), ("Poisoned", M + 10.5, 1.4)]
     for lbl, x, w in hdr:
-        put(tb(sl, x, 2.48, w, 0.3), lbl, 11.5, GREY, bold=True, first=True, after=0)
+        put(tb(sl, x, 2.30, w, 0.3), lbl, 11.5, GREY, bold=True, first=True, after=0)
     data = [("CK-PLUG", "tone steering", f"{ck1u:.1f} %", f"{ck1d:.1f} %", "1 of 10"),
             ("CK-PLUG", "tone steering", f"{ck10u:.1f} %", f"{ck10d:.1f} %", "10 of 10"),
-            ("RobustRAG, on Llama-3", "refusal", f"{klu:.1f} %", f"{kld:.1f} %", "9 of 10"),
-            ("RobustRAG, on Mistral", "refusal", f"{kmu:.1f} %", f"{kmd:.1f} %", "9 of 10")]
+            ("ParamMute", "tone steering", f"{pmu:.1f} %", f"{pmd:.1f} %", "10 of 10")]
     for i, r in enumerate(data):
-        y = 2.86 + i * 0.52
-        for (txt, (lbl, x, w)) in zip(r, hdr):
+        y = 2.68 + i * 0.52
+        for txt, (lbl, x, w) in zip(r, hdr):
             bold = lbl == "With the defense"
             put(tb(sl, x, y, w, 0.34), txt, 13.5, INK if bold else MID,
                 bold=bold, first=True, after=0)
     body(sl, [
         ("With no defense the attack stays at or near zero. It only works once the defense is switched on.", True),
-        "Tone steering does not change the answer, so a defense that pushes the model to follow the "
-        "retrieved text follows the slant as well, and scores itself as working.",
-        ("The last two rows are the same defense and the same attack on two models. It protects on one "
-         "and does harm on the other. The model is part of the threat model.", True),
-    ], 5.15)
-    cite(sl, f"BadRAG {C['badrag']}", f"RobustRAG {C['robustrag']}", "Measurements: this work")
+        "One poisoned passage out of ten is enough. The undefended model ignores it completely.",
+        "The reason is uncomfortable. Tone steering does not change the answer, so a defense that pushes "
+        "the model to follow the retrieved text follows the slant as well, and scores itself as working "
+        "perfectly. The attack and the defense want the same thing.",
+        ("A defense can be the reason an attack succeeds. That is a security finding, not a performance note.", True),
+    ], 4.50)
+    cite(sl, f"BadRAG {short(C['badrag'])}", f"ParamMute {short(C['parammute'])}",
+         "Measurements: this work")
 
     # 13 -----------------------------------------------------------------
-    sl = S("Result 3", "Two versions of one defense give opposite answers")
-    put(tb(sl, M, 2.45, W, 0.4),
-        "Both ship in the same paper. They isolate the same way. They differ only in how they join the answers.",
-        14, MID, first=True, after=0)
-    cols = [p for p, _, _ in F["gap"]]
-    put(tb(sl, M, 2.95, 3.6, 0.3), "Poisoned passages of 10", 12, GREY, bold=True, first=True, after=0)
-    for i, p_ in enumerate(cols):
-        put(tb(sl, M + 3.9 + i * 1.13, 2.95, 1.0, 0.3, align=PP_ALIGN.CENTER),
-            str(p_), 12, GREY, bold=True, first=True, after=0)
-    series = [("Keyword filter", [k for _, k, _ in F["gap"]], False),
-              ("Averaged output", [d for _, _, d in F["gap"]], False),
-              ("Difference", [round(abs(k - d), 1) for _, k, d in F["gap"]], True)]
-    for r, (name, vals, bold) in enumerate(series):
-        y = 3.38 + r * 0.46
-        put(tb(sl, M, y, 3.6, 0.32), name, 13.5, INK if bold else MID, bold=bold, first=True, after=0)
-        for i, v in enumerate(vals):
-            txt = f"{v:+.1f}" if not bold else f"{v:.1f}"
-            put(tb(sl, M + 3.9 + i * 1.13, y, 1.0, 0.32, align=PP_ALIGN.CENTER),
-                txt, 13.5, INK if bold else MID, bold=bold, first=True, after=0)
-    put(tb(sl, M, 4.80, W, 0.3), "change in accuracy, in points, against the undefended model",
-        11.5, GREY, first=True, after=0)
+    sl = S("Result 3", "One defense, two models, opposite results")
+    put(tb(sl, M, 2.00, W, 0.4),
+        "One defense family, two versions of it, two models. Nine poisoned passages of ten. "
+        "The number is how often the agent refuses to answer.", 14, MID, first=True, after=0)
+    hdr = [("Model", M, 3.6), ("Version of the defense", M + 3.7, 3.4),
+           ("No defense", M + 7.3, 2.0), ("With the defense", M + 9.5, 2.3)]
+    for lbl, x, w in hdr:
+        put(tb(sl, x, 2.62, w, 0.3), lbl, 11.5, GREY, bold=True, first=True, after=0)
+    for i, (m, impl, (u, d)) in enumerate(F["agg_dos"]):
+        y = 3.00 + i * 0.50
+        name = "Mistral-7B" if m == "Mistral" else "Llama-3-8B"
+        for txt, (lbl, x, w) in zip((name, impl, f"{u:.1f} %", f"{d:.1f} %"), hdr):
+            bold = lbl == "With the defense"
+            put(tb(sl, x, y, w, 0.34), txt, 13.5, INK if bold else MID,
+                bold=bold, first=True, after=0)
     body(sl, [
-        ("At nine poisoned passages of ten, one version helps and the other does harm. "
-         "They are 29.6 points apart.", True),
-        "We wrote the cause down before we ran the test. A keyword filter throws away a passage that "
-        "carries no answer, so one honest passage still carries it. An average lets nine bad passages drown it.",
-        ("The difference should therefore grow as honest passages are removed, and vanish when none "
-         "are left. It does both.", True),
-    ], 5.02, gap=8)
-    cite(sl, f"Both versions ship in {C['robustrag']}", f"BadRAG {C['badrag']}", "Measurements: this work")
+        ("The undefended model never refuses. Not once, on either model, at any dose.", True),
+        "The cause is the defense's own design. It answers from each passage alone, so a passage that "
+        "says \u201crefuse\u201d gets an unopposed hearing. The undefended model reads all ten passages "
+        "together, where nine honest ones drown it out.",
+        ("It is the same property that makes this family resist tone steering. One trade, not two "
+         "results, and the model decides which way it falls.", True),
+    ], 5.10, gap=9)
+    cite(sl, f"RobustRAG, both versions {short(C['robustrag'])}", f"BadRAG {short(C['badrag'])}",
+         "Measurements: this work")
 
     # 14 -----------------------------------------------------------------
     sl = S("Why this is worth finishing", "A survey found the gap. Running the code showed what is in it.")
