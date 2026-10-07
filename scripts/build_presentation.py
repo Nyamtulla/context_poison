@@ -1070,43 +1070,37 @@ def build(prs, F):
             f"RobustRAG {F['C']['robustrag']}", f"ParamMute {F['C']['parammute']}",
             "all numbers: our runs")
 
-    # 13h — result 3: implementation beats family -------------------------
-    s = start("RESULT 3", ["Two versions of one defense give",
-                           "opposite answers"], 28)
-    tf = _tb(s, 0.70, 2.55, 11.9, 0.4)
+    # 13h — result 3: the model is the larger variable ------------------
+    s = start("RESULT 3", ["One defense, two models, opposite results"], 28)
+    tf = _tb(s, 0.70, 2.28, 11.9, 0.45)
     _run(tf.paragraphs[0],
-         "RobustRAG ships both. They share the isolation step. They differ only in how they join the answers.",
-         12.5, MUTED)
-    cols = [("Bad passages of 10", 0.95, 3.1)] + [
-        (str(poison), 4.35 + i * 1.18, 1.05) for i, (poison, _, _) in enumerate(F["tx_gap"])]
-    for lbl, x, w in cols:
-        tf = _tb(s, x, 3.05, w, 0.35)
-        pp = tf.paragraphs[0]
-        if lbl != "Bad passages of 10":
-            pp.alignment = PP_ALIGN.CENTER
-        _run(pp, lbl, 12.5, GOLD, True)
-    series = [("KeywordAgg", [k for _, k, _ in F["tx_gap"]], TEAL),
-              ("DecodingAgg", [d for _, _, d in F["tx_gap"]], RED),
-              ("Difference", [round(abs(k - d), 1) for _, k, d in F["tx_gap"]], WHITE)]
-    for r, (name, vals, col) in enumerate(series):
-        y = 3.52 + r * 0.60
-        panel(s, 0.70, y, 11.9, 0.50)
-        tf = _tb(s, 0.95, y + 0.08, 3.1, 0.35)
-        _run(tf.paragraphs[0], name, 12.5, WHITE, r == 2)
-        for i, v in enumerate(vals):
-            tf = _tb(s, 4.35 + i * 1.18, y + 0.08, 1.05, 0.35)
-            pp = tf.paragraphs[0]; pp.alignment = PP_ALIGN.CENTER
-            txt = f"{v:+.1f}" if r < 2 else f"{v:.1f}"
-            _run(pp, txt, 12.5, col, r == 2)
-    tf = _tb(s, 0.70, 5.55, 11.9, 1.5)
+         "Refusal rate under BadRAG DoS at 9 poisoned passages of 10. "
+         "The undefended arm never refuses, on either model, at any dose.", 13.5, WHITE, True)
+    hdr = [("Model", 0.95, 3.3), ("Version of the defense", 4.35, 3.4),
+           ("No defense", 8.00, 2.0), ("With the defense", 10.20, 2.4)]
+    for lbl, x, w in hdr:
+        tf = _tb(s, x, 2.82, w, 0.3)
+        _run(tf.paragraphs[0], lbl, 11.5, GOLD, True)
+    rowsR = [("Mistral-7B-Instruct", "KeywordAgg", "0.0 %", "5.7 %", TEAL),
+             ("Mistral-7B-Instruct", "DecodingAgg", "0.0 %", "3.7 %", TEAL),
+             ("Llama-3-8B-Instruct", "KeywordAgg", "0.0 %", "85.0 %", RED),
+             ("Llama-3-8B-Instruct", "DecodingAgg", "0.0 %", "85.3 %", RED)]
+    for i, (m, impl, u, d, col) in enumerate(rowsR):
+        y = 3.22 + i * 0.56
+        panel(s, 0.70, y, 11.9, 0.46)
+        for txt, (lbl, x, w) in zip((m, impl, u, d), hdr):
+            last = lbl == "With the defense"
+            tf = _tb(s, x, y + 0.07, w, 0.32)
+            _run(tf.paragraphs[0], txt, 13.5, col if last else (WHITE if x < 4 else BODY), last)
+    tf = _tb(s, 0.70, 5.62, 11.9, 1.5)
     _lines(tf, [
-        ("At 9 bad passages of 10, one version helps and the other does harm. They are 29.6 points apart.",
-         13.5, WHITE, True),
-        ("We wrote the cause down before we ran the test. A keyword filter throws away a passage with no answer in it, "
-         "so one good passage still carries the answer. An average of the outputs lets nine bad ones drown it.",
-         12.5, BODY, False),
-        ("So the difference must grow as good passages go, and must vanish when none are left. It does both.",
-         13, GOLD, True)], 12.5, BODY)
+        ("On Mistral the two versions differ from each other by 29.6 points in accuracy at this dose, and "
+         "the hard-filter against soft-average mechanism predicts that curve. On Llama-3 they agree, and "
+         "both fail.", 13, BODY, False),
+        ("The model is the larger variable. Isolation removes the dilution that protects an undefended "
+         "model. That is why this family resists tone steering, and why it collapses here. One trade, "
+         "not two results.", 13, GOLD, True),
+    ], 13, BODY, space_after=6)
     sources(s, f"KeywordAgg and DecodingAgg both ship in {F['C']['robustrag']}",
             f"BadRAG DoS {F['C']['badrag']}", "all numbers: our runs")
 
