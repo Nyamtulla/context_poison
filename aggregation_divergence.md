@@ -1,6 +1,7 @@
 # Two implementations of one principle, and a 29.7-point disagreement
 
-**RobustRAG KeywordAgg vs DecodingAgg, BadRAG DoS, n=300.** 2026-10-06.
+**RobustRAG KeywordAgg vs DecodingAgg, three attacks, n=300.**
+Predictions committed 2026-10-06, tested 2026-10-07.
 
 ## The finding
 
@@ -74,8 +75,47 @@ written, and its result is recorded below whatever it says.**
 
 ## Result of the prediction test
 
-*Pending — `badrag_dos_robustrag_crossover.json` and
-`badrag_dos_robustrag_decoding_crossover.json`, poison 6/7/8, n=300.*
+Run after the predictions above were committed. Poison 6/7/8, n=300, both
+methods, nothing else changed.
+
+| poison | honest passages | KeywordAgg Δacc | DecodingAgg Δacc | gap |
+|---:|---:|---:|---:|---:|
+| 1/10 | 9 | +7.3 | +8.7 | 1.4 |
+| 5/10 | 5 | +4.0 | −9.0 | 13.0 |
+| 6/10 | 4 | +4.0 | **−14.0** ✱ | 18.0 |
+| 7/10 | 3 | +5.7 | **−18.3** ✱ | 24.0 |
+| 8/10 | 2 | +6.7 | **−20.3** ✱ | 27.0 |
+| 9/10 | 1 | **+12.3** ✱ | **−17.3** ✱ | **29.6** |
+| 10/10 | 0 | −5.7 | −4.0 | 1.7 |
+
+✱ clears 11.4 pp at n=300.
+
+**The gap is monotone in the size of the honest minority.** 1.4 → 13.0 → 18.0
+→ 24.0 → 27.0 → 29.6, widening every step as honest passages are removed — and
+then collapsing to 1.7 at the moment the last one disappears.
+
+| prediction | outcome |
+|---|---|
+| 1. gap persists at 8/10 and 7/10, KeywordAgg still protective | **confirmed, with one qualification** — gap 27.0 and 24.0; KeywordAgg is positive at every level (+4.0 to +6.7) but only clears threshold at 9/10, so "protective" is the right direction and a resolvable claim only at 9/10 |
+| 2. gap narrows as the honest fraction grows | **confirmed** — monotone across all six levels |
+| 3. vanishes at 10/10 | confirmed (1.7 pp) |
+| 4. smallest for PoisonedRAG | confirmed (9.3 pp at 9/10, not resolvable) |
+
+The mechanism was stated before the data existed and the data is monotone in
+the predicted direction, which is a stronger form of evidence than the
+original 29.7-point observation on its own.
+
+**Hard filtering preserves an honest minority; soft averaging dilutes it.** A
+DoS passage contributes no surviving keywords, so KeywordAgg discards it and
+one honest passage in ten still carries the answer. DecodingAgg averages all
+ten distributions, and nine junk distributions do not drop out of an average.
+The fewer honest passages remain, the more that distinction is worth —
+exactly up to the point where there are none, where both methods have nothing
+to preserve and the gap closes.
+
+**DecodingAgg is resolvably harmful at four consecutive doses** (6, 7, 8 and
+9 of 10) against refusal induction, by 14 to 20 points. That is not a corner
+case; it is most of the contaminated range.
 
 ## Why this matters beyond one cell
 
@@ -93,8 +133,11 @@ second implementation agrees.
 
 ## Limits
 
-- One divergent cell out of fifteen. The disagreement is specific, not
-  general, and the two implementations agree everywhere else.
+- The disagreement is specific to refusal induction below saturation. The two
+  implementations agree within noise on every PoisonedRAG and tone-steering
+  level, and at both ends of the DoS curve. It is six divergent levels out of
+  twenty-one, all in one contiguous band, which is what the mechanism predicts
+  and not a scatter of outliers.
 - Both arms are RobustRAG's own released code with its own defaults
   (`eta=0.0`, `subsample_iter=1`); no hyperparameter search was run on either,
   and DecodingAgg has knobs KeywordAgg does not.
