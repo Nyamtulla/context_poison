@@ -98,20 +98,17 @@ def page_no(slide, n):
 
 
 def stat_disc(slide, x, y, d, big, caption, color=GOLD):
-    """The deck's signature element: a navy disc with one number on it."""
-    sh = slide.shapes.add_shape(MSO_SHAPE.OVAL, Inches(x), Inches(y), Inches(d), Inches(d))
-    sh.fill.solid()
-    sh.fill.fore_color.rgb = PANEL
-    sh.line.fill.background()
-    sh.shadow.inherit = False
-    tf = _tb(slide, x + 0.05, y + d / 2 - 0.55, d - 0.1, 1.0)
-    p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
-    _run(p, big, 54 if len(big) <= 5 else 40, color, True, TITLE_FONT)
-    tf2 = _tb(slide, x + 0.05, y + d / 2 + 0.25, d - 0.1, 0.70)
+    """One number and its label. The disc this used to draw was decoration.
+
+    The name and signature are unchanged so every call site still works; `d`
+    is now read as the width of the block, not the diameter of a circle.
+    """
+    tf = _tb(slide, x, y + 0.30, d, 0.95)
+    _run(tf.paragraphs[0], big, 50 if len(big) <= 5 else 38, color, True, TITLE_FONT)
+    tf2 = _tb(slide, x, y + 1.28, d, 0.75)
     for j, ln in enumerate(caption.split("\n")):
         pp = tf2.paragraphs[0] if j == 0 else tf2.add_paragraph()
-        pp.alignment = PP_ALIGN.CENTER      # each line centres independently;
-        _run(pp, ln, 14, BODY)              # a \n inside one run does not
+        _run(pp, ln, 13, BODY)
         pp.space_after = Pt(0)
 
 
@@ -120,12 +117,12 @@ def bar_row(slide, x, y, w, label, value, vmax, color, note="", lw=3.1):
     tf = _tb(slide, x, y - 0.04, lw, 0.3)
     _run(tf.paragraphs[0], label, 12, BODY)
     track_x, track_w = x + lw, w - lw - 1.0
-    tr = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(track_x), Inches(y),
+    tr = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(track_x), Inches(y),
                                 Inches(track_w), Inches(0.22))
     tr.fill.solid(); tr.fill.fore_color.rgb = PANEL
     tr.line.fill.background(); tr.shadow.inherit = False
     frac = 0 if not vmax else max(0.006, value / vmax)
-    bar = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(track_x), Inches(y),
+    bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(track_x), Inches(y),
                                  Inches(track_w * frac), Inches(0.22))
     bar.fill.solid(); bar.fill.fore_color.rgb = color
     bar.line.fill.background(); bar.shadow.inherit = False
@@ -134,7 +131,7 @@ def bar_row(slide, x, y, w, label, value, vmax, color, note="", lw=3.1):
 
 
 def panel(slide, x, y, w, h, fill=PANEL):
-    sh = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y),
+    sh = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(x), Inches(y),
                                 Inches(w), Inches(h))
     sh.fill.solid(); sh.fill.fore_color.rgb = fill
     sh.line.fill.background(); sh.shadow.inherit = False
@@ -308,13 +305,6 @@ def build(prs, F):
     # 1 — title -----------------------------------------------------------
     n += 1
     s = new_slide(prs)
-    for i, d in enumerate([9.5, 7.6, 5.7, 3.8, 1.9]):
-        o = s.shapes.add_shape(MSO_SHAPE.OVAL, Inches(4.45 + i * 0.95),
-                               Inches(1.25 + i * 0.95), Inches(d), Inches(d))
-        o.fill.background()
-        o.line.color.rgb = PANEL
-        o.line.width = Pt(1.25)
-        o.shadow.inherit = False
     tf = _tb(s, 0.90, 1.35, 8.0, 0.35)
     _run(tf.paragraphs[0], "CONTEXT INTEGRITY SOK  ·  RESULTS REVIEW", 12.5, GOLD, True)
     tf = _tb(s, 0.90, 1.85, 9.6, 2.3)
@@ -334,6 +324,7 @@ def build(prs, F):
     # 2 — roadmap ---------------------------------------------------------
     s = start("THE ROADMAP", ["Seven questions, then the experiments"])
     items = [
+        ("BASE", "What we measure", "3 axes: channel, intent, consequence"),
         ("RQ1", "Taxonomy", f"{F['empty_pct']}% of the cube is empty"),
         ("RQ2", "Cross-citation", f"{F['ab'][2]}% / {F['ba'][2]}% between tracks"),
         ("RQ3", "Pollution census", f"{F['mech_reg']} named mechanisms"),
@@ -344,20 +335,169 @@ def build(prs, F):
         ("NEW", "Transfer matrix", f"{F['tx_cells']} cells that no paper reports"),
     ]
     for i, (rq, name, res) in enumerate(items):
-        y = 2.30 + i * 0.58
+        y = 2.22 + i * 0.545
         panel(s, 0.70, y, 11.9, 0.52)
         tf = _tb(s, 0.95, y + 0.08, 1.1, 0.35); _run(tf.paragraphs[0], rq, 14, GOLD, True, TITLE_FONT)
         tf = _tb(s, 2.05, y + 0.09, 3.4, 0.35); _run(tf.paragraphs[0], name, 13.5, WHITE, True)
         tf = _tb(s, 5.6, y + 0.09, 6.7, 0.35); _run(tf.paragraphs[0], res, 13, BODY)
+
+
+    # 2b — what the problem is -------------------------------------------
+    s = start("THE PROBLEM", ["An agent believes its context window"], 30)
+    tf = _tb(s, 0.70, 2.35, 11.9, 2.0)
+    _lines(tf, [
+        ("An LLM agent reads one block of text and then acts. We call this block the context window.", 15, WHITE, True),
+        ("The block holds many things at once. It holds the user's question. It holds pages that a tool "
+         "returned. It holds documents that a search step found. It holds notes from an earlier session.", 14, BODY, False),
+        ("The model cannot tell these apart. Everything in the block looks the same to it.", 15, GOLD, True),
+        ("So any text that reaches the block can change what the agent does. The text does not need to "
+         "come from the user. It only needs to arrive.", 14, BODY, False),
+    ], 14, BODY, space_after=7)
+    panel(s, 0.70, 4.75, 11.9, 1.55)
+    tf = _tb(s, 1.05, 4.98, 11.2, 1.2)
+    _lines(tf, [
+        ("The guiding picture: the context window is a pond.", 15, GOLD, True),
+        ("Water comes in through a fixed set of streams. Clean water and dirty water mix in the same pond. "
+         "Everything downstream drinks the mixture.", 13, WHITE, False),
+        ("We ask two questions. How many streams are there? What guards the mouth of each one?", 13, WHITE, False),
+    ], 13, BODY, space_after=4)
+    tf = _tb(s, 0.70, 6.50, 11.9, 0.5)
+    _run(tf.paragraphs[0],
+         "We do not study training data. We study what enters the context at run time.", 12.5, MUTED)
+
+    # 2c — the three axes -------------------------------------------------
+    s = start("THE TAXONOMY", ["We describe every case with three questions"], 28)
+    axes = [
+        ("CHANNEL", "How did it get in?",
+         "The stream it came through.\nAn email that a tool read is\none channel. A document that\na search returned is another.",
+         "9 values"),
+        ("INTENT", "Did someone mean it?",
+         "Adversarial means a person put\nit there to cause the effect.\nIncidental means no one did.\nThe text is just long or stale.",
+         "3 values"),
+        ("CONSEQUENCE", "What went wrong?",
+         "The effect on the agent after\nthe text is in the window.\nA wrong answer and a stolen\nfile are different effects.",
+         "6 values"),
+    ]
+    for i, (name, q, body, n_) in enumerate(axes):
+        x = 0.70 + i * 4.06
+        panel(s, x, 2.55, 3.85, 3.15)
+        tf = _tb(s, x + 0.28, 2.78, 3.3, 0.4)
+        _run(tf.paragraphs[0], name, 16, GOLD, True, TITLE_FONT)
+        tf = _tb(s, x + 0.28, 3.22, 3.3, 0.4)
+        _run(tf.paragraphs[0], q, 14, WHITE, True)
+        tf = _tb(s, x + 0.28, 3.70, 3.4, 1.6)
+        _lines(tf, body.split("\n"), 12.5, BODY, space_after=1)
+        tf = _tb(s, x + 0.28, 5.28, 3.3, 0.3)
+        _run(tf.paragraphs[0], n_, 12, MUTED)
+    tf = _tb(s, 0.70, 6.00, 11.9, 1.2)
+    _lines(tf, [
+        (f"9 channels x 3 intents x 6 consequences = {F['cube_n']} cells. We call this the cube.", 15, WHITE, True),
+        ("One paper can fill more than one cell. An empty cell means that nobody has studied that combination.", 13, BODY, False),
+        ("The cube is the spine of the paper. It shows what the field knows and what it has never looked at.", 13, GOLD, True)],
+        13, BODY, space_after=4)
+
+    # 2d — the nine channels ----------------------------------------------
+    s = start("AXIS 1  ·  CHANNEL", ["The nine ways text reaches the window"], 28, top=1.28)
+    chan = [
+        ("tool-output", "What a tool gives back: a web page, an email, a file the agent opened."),
+        ("direct-input", "The prompt itself. The user's text, or the system prompt above it."),
+        ("RAG", "A document that a search step pulled out of a corpus."),
+        ("cross-modal", "Text carried inside an image, audio or video, not in a text field."),
+        ("memory", "Something the agent stored on an earlier run and reads again now."),
+        ("tool-metadata", "The description of a tool, not its output. The text that says what the tool does."),
+        ("multi-agent", "A message from another agent in the same system."),
+        ("supply-chain", "A package, template or prompt file the agent inherits before it starts."),
+        ("skill", "A stored procedure the agent loads and follows."),
+    ]
+    counts = F["mech_channel"]
+    tf = _tb(s, 0.95, 2.18, 2.3, 0.3); _run(tf.paragraphs[0], "CHANNEL", 11.5, GOLD, True)
+    tf = _tb(s, 3.40, 2.18, 7.6, 0.3); _run(tf.paragraphs[0], "WHAT IT MEANS", 11.5, GOLD, True)
+    tf = _tb(s, 11.60, 2.18, 1.0, 0.3); _run(tf.paragraphs[0], "ATTACKS", 11.5, GOLD, True)
+    for i, (name, meaning) in enumerate(chan):
+        y = 2.56 + i * 0.47
+        panel(s, 0.70, y, 11.9, 0.40)
+        tf = _tb(s, 0.95, y + 0.06, 2.3, 0.3); _run(tf.paragraphs[0], name, 12, WHITE, True)
+        tf = _tb(s, 3.40, y + 0.06, 8.0, 0.3); _run(tf.paragraphs[0], meaning, 12, BODY)
+        tf = _tb(s, 11.60, y + 0.06, 1.0, 0.3)
+        _run(tf.paragraphs[0], str(counts.get(name, 0)), 12, GOLD, True)
+    tf = _tb(s, 0.70, 6.90, 11.9, 0.4)
+    _run(tf.paragraphs[0],
+         "The right column counts the named attacks we found for that channel. A defense sits on a channel too.",
+         12, MUTED)
+
+    # 2e — the six consequences -------------------------------------------
+    s = start("AXIS 3  ·  CONSEQUENCE", ["The six ways the agent then fails"], 28)
+    cons = [
+        ("goal-hijack", "The agent does another person's task instead of yours. Text in the window gives an order and the agent obeys."),
+        ("reasoning-corruption", "Every word in the window is true. The window is too long or too cluttered, and the model stops using it well."),
+        ("silent-corruption", "The agent answers from false or stale content. Nobody gave it a new task. It simply believes a wrong thing."),
+        ("persistence-backdoor", "The bad content is written to memory or to a store. It fires on a later run, maybe for another user."),
+        ("data-exfiltration", "The agent sends out what it can read. It uses a tool call, a link or a message to move the data."),
+        ("resource-abuse", "No data moves and no goal changes. The agent burns time or refuses to answer at all."),
+    ]
+    ccount = F["mech_conseq"]
+    tf = _tb(s, 0.95, 2.45, 2.9, 0.3); _run(tf.paragraphs[0], "CONSEQUENCE", 11.5, GOLD, True)
+    tf = _tb(s, 4.05, 2.45, 7.0, 0.3); _run(tf.paragraphs[0], "WHAT IT MEANS", 11.5, GOLD, True)
+    tf = _tb(s, 11.60, 2.45, 1.0, 0.3); _run(tf.paragraphs[0], "ATTACKS", 11.5, GOLD, True)
+    for i, (name, meaning) in enumerate(cons):
+        y = 2.84 + i * 0.66
+        panel(s, 0.70, y, 11.9, 0.58)
+        tf = _tb(s, 0.95, y + 0.14, 2.9, 0.3); _run(tf.paragraphs[0], name, 12, WHITE, True)
+        tf = _tb(s, 4.05, y + 0.04, 7.4, 0.52)
+        _lines(tf, [meaning], 11.5, BODY, space_after=0)
+        tf = _tb(s, 11.60, y + 0.14, 1.0, 0.3)
+        _run(tf.paragraphs[0], str(ccount.get(name, 0)), 12, GOLD, True)
+    tf = _tb(s, 0.70, 6.85, 11.9, 0.45)
+    _lines(tf, [
+        ("The second row is the ML/AI track. The other five are mostly the security track. That split is the point of the paper.",
+         12.5, MUTED, False)], 12.5, MUTED)
+
+    # 2f — intent and intervention point ----------------------------------
+    s = start("AXIS 2  ·  INTENT", ["And where a defense can stand"], 28)
+    tf = _tb(s, 0.70, 2.35, 5.75, 0.3)
+    _run(tf.paragraphs[0], "INTENT: DID SOMEONE MEAN IT?", 12, GOLD, True)
+    for i, (k, v) in enumerate([
+            ("adversarial", "A person placed the text to get this effect. This is the security track."),
+            ("incidental", "Nobody placed it. The window is long, stale or badly ordered. This is the ML/AI track."),
+            ("both", "The paper treats the case in both ways.")]):
+        y = 2.72 + i * 1.02
+        panel(s, 0.70, y, 5.75, 0.92)
+        tf = _tb(s, 1.00, y + 0.12, 5.2, 0.3); _run(tf.paragraphs[0], k, 13, WHITE, True)
+        tf = _tb(s, 1.00, y + 0.42, 5.2, 0.45)
+        _lines(tf, [v], 11.5, BODY, space_after=0)
+    tf = _tb(s, 6.85, 2.35, 5.75, 0.3)
+    _run(tf.paragraphs[0], "INTERVENTION POINT: WHERE THE DEFENSE ACTS", 12, GOLD, True)
+    ip = F["def_dip"]
+    for i, (k, v) in enumerate([
+            ("ingestion", "It checks the text as it arrives, before the model reads it."),
+            ("reasoning", "It changes how the model uses text that is already in the window."),
+            ("execution", "It checks the action the agent wants to take, after the model decides.")]):
+        y = 2.72 + i * 1.02
+        panel(s, 6.85, y, 5.75, 0.92)
+        tf = _tb(s, 7.15, y + 0.12, 4.0, 0.3); _run(tf.paragraphs[0], k, 13, WHITE, True)
+        tf = _tb(s, 11.30, y + 0.12, 1.1, 0.3)
+        _run(tf.paragraphs[0], f"{ip.get(k, 0)}", 13, GOLD, True)
+        tf = _tb(s, 7.15, y + 0.42, 5.2, 0.45)
+        _lines(tf, [v], 11.5, BODY, space_after=0)
+    tf = _tb(s, 0.70, 5.95, 11.9, 1.2)
+    _lines(tf, [
+        ("Intent is the axis that splits the two literatures. The same failure gets two names and two sets of defenses.",
+         14, WHITE, True),
+        ("A tool returns a page with a hidden order. A tool returns a page that is simply ten times too long. "
+         "Both reach the window through the same channel. One has an author. One does not.", 12.5, BODY, False),
+        (f"The counts on the right are defenses, not attacks. {F['def_dip'].get('none', 0)} more defenses "
+         "carry no intervention point: they act after the event, such as forensics, or we never coded them.",
+         12.5, MUTED, False)],
+        12.5, BODY, space_after=4)
 
     # 3 — methodology -----------------------------------------------------
     s = start("METHODOLOGY", ["Kitchenham SLR + PRISMA-lite screening,",
                               "run across two literatures instead of one"])
     blocks = [
         ("Search", "We searched two tracks at\nthe same time. One track is\nadversarial. One track is\nincidental. We found\n25,922 records."),
-        ("Screen", "The rules are in config.yaml.\nA program applies them.\nWe do not screen by hand.\nrescreening_log.md records\neach change."),
+        ("Screen", "Fixed rules decide in or out.\nA program applies them to\nthe title and abstract.\nA person reads every\nunclear case. Next slide."),
         ("Extract", "We read the full text of\n1,097 papers. We code 32\nfields for each paper.\nChannel and consequence\nuse closed lists."),
-        ("Synthesize", "We join the registries into\nthe coverage matrix. Then\nwe run the defense code\nourselves. We do not use\nthe numbers in the papers."),
+        ("Synthesize", "We join the registries into\nthe coverage matrix. It\nshows which defense met\nwhich attack. Then we run\nthe code ourselves."),
     ]
     for i, (t, b) in enumerate(blocks):
         x = 0.70 + i * 3.05
@@ -366,6 +506,38 @@ def build(prs, F):
         _run(tf.paragraphs[0], t, 17, GOLD, True, TITLE_FONT)
         tf = _tb(s, x + 0.25, 3.75, 2.4, 2.1)
         _lines(tf, b.split("\n"), 11.5, BODY, space_after=1)
+
+
+    # 3b — the screening rules, written out --------------------------------
+    s = start("SCREENING", ["The rules that put a paper in or out"], 30)
+    panel(s, 0.70, 2.35, 5.75, 2.55)
+    tf = _tb(s, 1.00, 2.56, 5.2, 0.3)
+    _run(tf.paragraphs[0], "A PAPER GOES IN IF ALL THREE HOLD", 12, TEAL, True)
+    _lines(_tb(s, 1.00, 2.92, 5.2, 1.9), [
+        ("1.  It is peer reviewed, or it is an arXiv preprint from 2023 to 2026.", 12, BODY, False),
+        ("2.  It is about LLM agents. The agent uses tools, or retrieval, or memory, or several steps.", 12, BODY, False),
+        ("3.  It gives an attack, a defense, a benchmark, or a measurement. The subject is context "
+         "contamination, or loss of quality as the context grows.", 12, BODY, False),
+    ], 12, BODY, space_after=6)
+    panel(s, 6.85, 2.35, 5.75, 2.55)
+    tf = _tb(s, 7.15, 2.56, 5.2, 0.3)
+    _run(tf.paragraphs[0], "A PAPER GOES OUT IF ANY ONE HOLDS", 12, RED, True)
+    _lines(_tb(s, 7.15, 2.92, 5.2, 1.9), [
+        ("1.  It is only about jailbreaks. There is no agent and no tool.", 12, BODY, False),
+        ("2.  It poisons training data only. We study the context at run time, not the training set.", 12, BODY, False),
+        ("3.  The system is not an LLM.", 12, BODY, False),
+    ], 12, BODY, space_after=6)
+    tf = _tb(s, 0.70, 5.10, 11.9, 1.9)
+    _lines(tf, [
+        ("A program applies these rules to the title and the abstract. It looks for words from fixed lists.", 14, WHITE, True),
+        ("The agent list holds words such as agent, tool use, RAG, memory, multi-step, context window.", 12.5, BODY, False),
+        ("The threat list holds prompt injection, context poisoning, knowledge conflict, retrieval poisoning. "
+         "A threat word counts only with an action word next to it, such as attack, poison, detect or mitigate.", 12.5, BODY, False),
+        ("A person reads every paper that the program cannot decide. The program never removes a paper on its own.",
+         12.5, GOLD, True),
+        (f"Result: {F['rows']:,} papers screened. {F['included']:,} in. {F['rows'] - F['included']:,} out, each with a written reason.",
+         13.5, WHITE, True),
+    ], 12.5, BODY, space_after=5)
 
     # 4 — the corpus ------------------------------------------------------
     s = start("THE CORPUS", ["What the numbers are computed over"])
@@ -448,9 +620,15 @@ def build(prs, F):
         ("The field did not.", 12.5, MUTED, False),
     ], 12.5, BODY)
     c = F["mech_conseq"]
-    tf = _tb(s, 0.70, 6.55, 11.9, 0.5)
+    tf = _tb(s, 0.70, 6.40, 11.9, 0.5)
     _run(tf.paragraphs[0],
          "By consequence:  " + "   ·   ".join(f"{k} {v}" for k, v in c.most_common()), 11.5, MUTED)
+    # the deck shows 223 here and 237 elsewhere; say why before anyone asks
+    tf = _tb(s, 0.70, 6.80, 11.9, 0.5)
+    _run(tf.paragraphs[0],
+         f"Two numbers appear in this deck. {F['mech_reg']} mechanisms carry a name. "
+         f"{F['mech_all'] - F['mech_reg']} more are known only by the benchmark that holds them. "
+         f"{F['mech_all']} in total.", 11.5, GOLD)
 
     # 9 — RQ4 -------------------------------------------------------------
     s = start("RQ4  ·  DEFENSE CENSUS", ["And how many defenses answer them?"], 30)
@@ -641,6 +819,35 @@ def build(prs, F):
             ("RQ6 concluded execution defenses generalize least. This says the opposite.", 12.5, GOLD, True),
         ], 12.5, BODY)
 
+
+
+    # 16b — how we decide a number is real ---------------------------------
+    s = start("HOW WE READ A RESULT", ["Three rules. We fixed them before the runs."], 28)
+    panel(s, 0.70, 2.30, 11.9, 1.42)
+    tf = _tb(s, 1.05, 2.48, 11.2, 0.3)
+    _run(tf.paragraphs[0], "RULE 1.  THE CONTROL FIRES FIRST", 13, GOLD, True)
+    _lines(_tb(s, 1.05, 2.80, 11.2, 0.85), [
+        ("A defense must first show its own benefit on its own task, with no attack present. If it cannot, "
+         "we report no transfer result from it.", 12.5, BODY, False),
+        ("CK-PLUG fails this test on our data. Its two arms differ by 22.6 points before any attack runs. "
+         "So we do not read its accuracy column at all.", 12.5, MUTED, False)], 12.5, BODY, space_after=3)
+    panel(s, 0.70, 3.86, 11.9, 1.60)
+    tf = _tb(s, 1.05, 4.04, 11.2, 0.3)
+    _run(tf.paragraphs[0], "RULE 2.  THE CHANGE MUST BE LARGE ENOUGH TO SEE", 13, GOLD, True)
+    _lines(_tb(s, 1.05, 4.36, 11.2, 1.05), [
+        ("Before a run we compute the smallest change that the sample size can detect. We use a two-proportion "
+         "power test, alpha 0.05, power 0.80.", 12.5, BODY, False),
+        ("With 300 items that limit is 11.4 points. With 500 items it is 8.9 points.", 12.5, WHITE, True),
+        ("A change below the limit is not a result. We write \"not resolvable\". We do not write \"no effect\".",
+         12.5, MUTED, False)], 12.5, BODY, space_after=3)
+    panel(s, 0.70, 5.60, 11.9, 1.30)
+    tf = _tb(s, 1.05, 5.78, 11.2, 0.3)
+    _run(tf.paragraphs[0], "RULE 3.  WE USE THE AUTHORS' OWN SCORING CODE", 13, GOLD, True)
+    _lines(_tb(s, 1.05, 6.10, 11.2, 0.75), [
+        ("We import the scoring function from each paper and run it without edits. We may change the harness "
+         "around it. We never change how a result is scored.", 12.5, BODY, False),
+        ("We compared the scorers of two defenses line by line to confirm they match.", 12.5, MUTED, False)],
+        12.5, BODY, space_after=3)
 
     # 13e — the transfer matrix: what we ran ------------------------------
     s = start("TRANSFER MATRIX", ["We run the defense code against attacks",
