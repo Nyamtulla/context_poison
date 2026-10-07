@@ -138,7 +138,99 @@ def panel(slide, x, y, w, h, fill=PANEL):
     return sh
 
 
+
+# ------------------------------------------------------------------ citations
+# Every claim a slide takes from the literature names its source in small type
+# at the foot of that slide. The text is built from the corpus record itself,
+# so a citation cannot drift away from the paper the project actually read.
+CITE_KEYS = {
+    "greshake":   "Not What You've Signed Up For",
+    "liu_middle": "Lost in the Middle: How Language Models",
+    "shi":        "Easily Distracted by Irrelevant Context",
+    "zou":        "PoisonedRAG: Knowledge Corruption",
+    "houyi":      "Prompt Injection attack against LLM-integrated",
+    "agentpoison": "AgentPoison: Red-teaming",
+    "infection":  "Prompt Infection: LLM-to-LLM",
+    "webinject":  "WebInject: Prompt Injection Attack to Web Agents",
+    "chatinject": "ChatInject: Abusing Chat Templates",
+    "mcptox":     "MCPTox: A Benchmark for Tool Poisoning",
+    "skillject":  "SkillJect: Effectively Automating",
+    "supplychain": "Supply-Chain Poisoning Attacks Against LLM Coding",
+    "kconflict":  "Adaptive Chameleon or Stubborn Sloth",
+    "kc_survey":  "Knowledge Conflicts for LLMs: A Survey",
+    "exfil":      "Follow My Instruction and Spill the Beans",
+    "badrag":     "BadRAG: Identifying Vulnerabilities",
+    "robustrag":  "Certifiably Robust RAG against Retrieval Corruption",
+    "parammute":  "ParamMute: Suppressing Knowledge-Critical FFNs",
+}
+
+
+def _format_citation(row):
+    """`First-author et al., Venue Year, arXiv:ID` - ID only when it is valid.
+
+    arXiv ids have been YYMM.NNNNN since 2015, and every paper in this corpus
+    is 2023 or later, so the suffix must be five digits. Several records hold a
+    truncated id - 2305.133, 2402.1784 - and printing one on a slide would send
+    a reader to a different paper. A malformed id is dropped and the venue
+    carries the reference instead.
+    """
+    first = (row["authors"] or "").split(";")[0].strip()
+    surname = first.split()[-1] if first else "Unknown"
+    bits = [f"{surname} et al."]
+    venue = (row["venue"] or "").strip()
+    if venue and venue.lower() not in ("none", "arxiv"):
+        bits.append(f"{venue} {row['year']}")
+    else:
+        bits.append(str(row["year"]))
+    aid = (row["arxiv_id"] or "").strip()
+    if re.fullmatch(r"\d{4}\.\d{5}(v\d+)?", aid):
+        bits.append(f"arXiv:{aid}")
+    return ", ".join(bits)
+
+
+def load_citations():
+    import sqlite3
+    con = sqlite3.connect(REPO / "data" / "paper_explorer.db")
+    con.row_factory = sqlite3.Row
+    out = {}
+    for key, frag in CITE_KEYS.items():
+        r = con.execute("""SELECT authors, year, venue, arxiv_id FROM paper
+                           WHERE title LIKE ? ORDER BY citation_count DESC LIMIT 1""",
+                        (f"%{frag}%",)).fetchone()
+        out[key] = _format_citation(r) if r else None
+    con.close()
+    missing = [k for k, v in out.items() if not v]
+    if missing:
+        raise SystemExit(f"citation keys not found in the corpus: {missing}")
+    return out
+
+
+def sources(slide, *parts, y=7.02, size=8.5):
+    """The small-type source line at the foot of a slide.
+
+    `y` and `size` move for the dense slides, where nine references need three
+    lines and would otherwise run off the bottom edge.
+    """
+    tf = _tb(slide, 0.70, y, 11.8, 7.46 - y)
+    _run(tf.paragraphs[0], "Sources:  " + "   ·   ".join(parts), size, GREY)
+
+
 # ------------------------------------------------------------------- live data
+def sources_channels(slide, F):
+    """Nine references, grouped so they wrap predictably into three lines."""
+    C = F["C"]
+    rows = [
+        f"tool-output {C['greshake']}   ·   direct-input {C['houyi']}   ·   RAG {C['zou']}",
+        f"memory {C['agentpoison']}   ·   cross-modal {C['webinject']}   ·   tool-metadata {C['mcptox']}",
+        f"multi-agent {C['infection']}   ·   supply-chain {C['supplychain']}   ·   skill {C['skillject']}",
+    ]
+    tf = _tb(slide, 0.70, 6.82, 11.8, 0.62)
+    for i, r in enumerate(rows):
+        pp = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        _run(pp, ("Sources:  " if i == 0 else "              ") + r, 7.5, GREY)
+        pp.space_after = Pt(0)
+
+
 def load_facts():
     """Every number the deck shows, read at build time."""
     import openpyxl, collections
@@ -190,7 +282,7 @@ def load_facts():
     db = _db()
 
     return {
-        "cen": cen, "hl": hl, "tt": tt, **db,
+        "cen": cen, "hl": hl, "tt": tt, **db, "C": load_citations(),
         "rows": len(rows), "included": len(inc),
         "mech_reg": len(raw3), "mech_all": len(mech),
         "mech_track": cnt(x["track"] for x in raw3),
@@ -321,27 +413,6 @@ def build(prs, F):
          f"{F['tx_cells']} cells we ran ourselves", 13, MUTED)
     page_no(s, n)
 
-    # 2 — roadmap ---------------------------------------------------------
-    s = start("THE ROADMAP", ["Seven questions, then the experiments"])
-    items = [
-        ("BASE", "What we measure", "3 axes: channel, intent, consequence"),
-        ("RQ1", "Taxonomy", f"{F['empty_pct']}% of the cube is empty"),
-        ("RQ2", "Cross-citation", f"{F['ab'][2]}% / {F['ba'][2]}% between tracks"),
-        ("RQ3", "Pollution census", f"{F['mech_reg']} named mechanisms"),
-        ("RQ4", "Defense census", f"{F['defenses']} named defenses"),
-        ("RQ5", "Coverage matrix", f"{F['munc']} mechanisms never defended"),
-        ("RQ6", "Generalization", "9 reconstructed case studies"),
-        ("RQ7", "Open problems", "7 ranked, falsifiable"),
-        ("NEW", "Transfer matrix", f"{F['tx_cells']} cells that no paper reports"),
-    ]
-    for i, (rq, name, res) in enumerate(items):
-        y = 2.22 + i * 0.545
-        panel(s, 0.70, y, 11.9, 0.52)
-        tf = _tb(s, 0.95, y + 0.08, 1.1, 0.35); _run(tf.paragraphs[0], rq, 14, GOLD, True, TITLE_FONT)
-        tf = _tb(s, 2.05, y + 0.09, 3.4, 0.35); _run(tf.paragraphs[0], name, 13.5, WHITE, True)
-        tf = _tb(s, 5.6, y + 0.09, 6.7, 0.35); _run(tf.paragraphs[0], res, 13, BODY)
-
-
     # 2b — what the problem is -------------------------------------------
     s = start("THE PROBLEM", ["An agent believes its context window"], 30)
     tf = _tb(s, 0.70, 2.35, 11.9, 2.0)
@@ -361,9 +432,12 @@ def build(prs, F):
          "Everything downstream drinks the mixture.", 13, WHITE, False),
         ("We ask two questions. How many streams are there? What guards the mouth of each one?", 13, WHITE, False),
     ], 13, BODY, space_after=4)
-    tf = _tb(s, 0.70, 6.50, 11.9, 0.5)
+    tf = _tb(s, 0.70, 6.45, 11.9, 0.5)
     _run(tf.paragraphs[0],
          "We do not study training data. We study what enters the context at run time.", 12.5, MUTED)
+    sources(s, f"Context text acts on the agent: {F['C']['greshake']}",
+            f"Long context degrades use: {F['C']['liu_middle']}",
+            "Pond framing: this work")
 
     # 2c — the three axes -------------------------------------------------
     s = start("THE TAXONOMY", ["We describe every case with three questions"], 28)
@@ -395,6 +469,9 @@ def build(prs, F):
         ("One paper can fill more than one cell. An empty cell means that nobody has studied that combination.", 13, BODY, False),
         ("The cube is the spine of the paper. It shows what the field knows and what it has never looked at.", 13, GOLD, True)],
         13, BODY, space_after=4)
+    sources(s, "Axes and cube: this work",
+            f"Adversarial end: {F['C']['greshake']}",
+            f"Incidental end: {F['C']['liu_middle']}")
 
     # 2d — the nine channels ----------------------------------------------
     s = start("AXIS 1  ·  CHANNEL", ["The nine ways text reaches the window"], 28, top=1.28)
@@ -414,16 +491,17 @@ def build(prs, F):
     tf = _tb(s, 3.40, 2.18, 7.6, 0.3); _run(tf.paragraphs[0], "WHAT IT MEANS", 11.5, GOLD, True)
     tf = _tb(s, 11.60, 2.18, 1.0, 0.3); _run(tf.paragraphs[0], "ATTACKS", 11.5, GOLD, True)
     for i, (name, meaning) in enumerate(chan):
-        y = 2.56 + i * 0.47
+        y = 2.48 + i * 0.44
         panel(s, 0.70, y, 11.9, 0.40)
         tf = _tb(s, 0.95, y + 0.06, 2.3, 0.3); _run(tf.paragraphs[0], name, 12, WHITE, True)
         tf = _tb(s, 3.40, y + 0.06, 8.0, 0.3); _run(tf.paragraphs[0], meaning, 12, BODY)
         tf = _tb(s, 11.60, y + 0.06, 1.0, 0.3)
         _run(tf.paragraphs[0], str(counts.get(name, 0)), 12, GOLD, True)
-    tf = _tb(s, 0.70, 6.90, 11.9, 0.4)
+    tf = _tb(s, 0.70, 6.48, 11.9, 0.4)
     _run(tf.paragraphs[0],
          "The right column counts the named attacks we found for that channel. A defense sits on a channel too.",
          12, MUTED)
+    sources_channels(s, F)
 
     # 2e — the six consequences -------------------------------------------
     s = start("AXIS 3  ·  CONSEQUENCE", ["The six ways the agent then fails"], 28)
@@ -440,17 +518,22 @@ def build(prs, F):
     tf = _tb(s, 4.05, 2.45, 7.0, 0.3); _run(tf.paragraphs[0], "WHAT IT MEANS", 11.5, GOLD, True)
     tf = _tb(s, 11.60, 2.45, 1.0, 0.3); _run(tf.paragraphs[0], "ATTACKS", 11.5, GOLD, True)
     for i, (name, meaning) in enumerate(cons):
-        y = 2.84 + i * 0.66
+        y = 2.76 + i * 0.63
         panel(s, 0.70, y, 11.9, 0.58)
         tf = _tb(s, 0.95, y + 0.14, 2.9, 0.3); _run(tf.paragraphs[0], name, 12, WHITE, True)
         tf = _tb(s, 4.05, y + 0.04, 7.4, 0.52)
         _lines(tf, [meaning], 11.5, BODY, space_after=0)
         tf = _tb(s, 11.60, y + 0.14, 1.0, 0.3)
         _run(tf.paragraphs[0], str(ccount.get(name, 0)), 12, GOLD, True)
-    tf = _tb(s, 0.70, 6.85, 11.9, 0.45)
+    tf = _tb(s, 0.70, 6.58, 11.9, 0.45)
     _lines(tf, [
         ("The second row is the ML/AI track. The other five are mostly the security track. That split is the point of the paper.",
          12.5, MUTED, False)], 12.5, MUTED)
+    sources(s, y=6.92, size=7.5, *[f"goal-hijack {F['C']['greshake']}",
+            f"reasoning-corruption {F['C']['liu_middle']}; {F['C']['shi']}",
+            f"silent-corruption {F['C']['kconflict']}",
+            f"persistence-backdoor {F['C']['agentpoison']}",
+            f"data-exfiltration {F['C']['exfil']}", f"resource-abuse {F['C']['badrag']}"])
 
     # 2f — intent and intervention point ----------------------------------
     s = start("AXIS 2  ·  INTENT", ["And where a defense can stand"], 28)
@@ -489,10 +572,35 @@ def build(prs, F):
          "carry no intervention point: they act after the event, such as forensics, or we never coded them.",
          12.5, MUTED, False)],
         12.5, BODY, space_after=4)
+    sources(s, f"adversarial track {F['C']['greshake']}",
+            f"incidental track {F['C']['liu_middle']}",
+            f"knowledge conflict {F['C']['kc_survey']}",
+            "intervention points: this work")
+
+    # 7 — roadmap, after the background ---------------------------------------------------------
+    s = start("THE ROADMAP", ["Seven questions, then the experiments"])
+    items = [
+        ("BASE", "What we measure", "3 axes: channel, intent, consequence"),
+        ("RQ1", "Taxonomy", f"{F['empty_pct']}% of the cube is empty"),
+        ("RQ2", "Cross-citation", f"{F['ab'][2]}% / {F['ba'][2]}% between tracks"),
+        ("RQ3", "Pollution census", f"{F['mech_reg']} named mechanisms"),
+        ("RQ4", "Defense census", f"{F['defenses']} named defenses"),
+        ("RQ5", "Coverage matrix", f"{F['munc']} mechanisms never defended"),
+        ("RQ6", "Generalization", "9 reconstructed case studies"),
+        ("RQ7", "Open problems", "7 ranked, falsifiable"),
+        ("NEW", "Transfer matrix", f"{F['tx_cells']} cells that no paper reports"),
+    ]
+    for i, (rq, name, res) in enumerate(items):
+        y = 2.22 + i * 0.545
+        panel(s, 0.70, y, 11.9, 0.52)
+        tf = _tb(s, 0.95, y + 0.08, 1.1, 0.35); _run(tf.paragraphs[0], rq, 14, GOLD, True, TITLE_FONT)
+        tf = _tb(s, 2.05, y + 0.09, 3.4, 0.35); _run(tf.paragraphs[0], name, 13.5, WHITE, True)
+        tf = _tb(s, 5.6, y + 0.09, 6.7, 0.35); _run(tf.paragraphs[0], res, 13, BODY)
+
 
     # 3 — methodology -----------------------------------------------------
-    s = start("METHODOLOGY", ["Kitchenham SLR + PRISMA-lite screening,",
-                              "run across two literatures instead of one"])
+    s = start("METHODOLOGY", ["We follow a standard review protocol,",
+                              "and we run it across two literatures"])
     blocks = [
         ("Search", "We searched two tracks at\nthe same time. One track is\nadversarial. One track is\nincidental. We found\n25,922 records."),
         ("Screen", "Fixed rules decide in or out.\nA program applies them to\nthe title and abstract.\nA person reads every\nunclear case. Next slide."),
@@ -506,6 +614,9 @@ def build(prs, F):
         _run(tf.paragraphs[0], t, 17, GOLD, True, TITLE_FONT)
         tf = _tb(s, x + 0.25, 3.75, 2.4, 2.1)
         _lines(tf, b.split("\n"), 11.5, BODY, space_after=1)
+    sources(s, "Review protocol: Kitchenham & Charters, EBSE-2007-01",
+            "Reporting: PRISMA 2020, Page et al., BMJ 2021;372:n71",
+            "Both adapted, not followed to the letter")
 
 
     # 3b — the screening rules, written out --------------------------------
@@ -866,7 +977,9 @@ def build(prs, F):
         ("0 to 10 bad passages of 10.", 12.5, MUTED, False),
         ("Each cell is a curve.", 12.5, MUTED, False),
     ], 12.5, BODY)
-    tf = _tb(s, 0.70, 6.45, 11.9, 0.9)
+    sources(s, f"PoisonedRAG {F['C']['zou']}", f"BadRAG {F['C']['badrag']}",
+            f"RobustRAG {F['C']['robustrag']}", f"ParamMute {F['C']['parammute']}")
+    tf = _tb(s, 0.70, 6.35, 11.9, 0.9)
     _lines(tf, [
         ("Three rules control every result.", 13.5, GOLD, True),
         ("The control must fire first. A change below the detection limit is not a result. "
@@ -899,6 +1012,9 @@ def build(prs, F):
          12.5, BODY, False),
         ("Design rule: do not hold down the model's own memory. It is the only thing left when the evidence goes.",
          13, GOLD, True)], 12.5, BODY)
+    sources(s, f"ParamMute {F['C']['parammute']}", f"RobustRAG {F['C']['robustrag']}",
+            f"PoisonedRAG {F['C']['zou']}", f"BadRAG {F['C']['badrag']}",
+            "all numbers: our runs")
 
     # 13g — result 2: the defense opens the hole --------------------------
     c1u, c1d = F["tx_ckplug_tone1"]; c10u, c10d = F["tx_ckplug_tone10"]
@@ -933,6 +1049,9 @@ def build(prs, F):
          12.5, BODY, False),
         ("The last row is the warning: the same defense helps on one model and does harm on another.", 12.5, GOLD, True)],
         12.5, BODY)
+    sources(s, f"BadRAG Selective-Fact and DoS {F['C']['badrag']}",
+            f"RobustRAG {F['C']['robustrag']}", f"ParamMute {F['C']['parammute']}",
+            "all numbers: our runs")
 
     # 13h — result 3: implementation beats family -------------------------
     s = start("RESULT 3", ["Two versions of one defense give",
@@ -971,6 +1090,8 @@ def build(prs, F):
          12.5, BODY, False),
         ("So the difference must grow as good passages go, and must vanish when none are left. It does both.",
          13, GOLD, True)], 12.5, BODY)
+    sources(s, f"KeywordAgg and DecodingAgg both ship in {F['C']['robustrag']}",
+            f"BadRAG DoS {F['C']['badrag']}", "all numbers: our runs")
 
     # 13i — differentiation -----------------------------------------------
     s = start("DIFFERENTIATION", ["Against the five closest SoKs"], 30)
