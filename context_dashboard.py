@@ -82,7 +82,11 @@ def load(mtime: float) -> dict:
         "attacks": q("SELECT * FROM attack"),
         "defenses": q("SELECT * FROM defense"),
         "pairs": q("SELECT * FROM pair"),
-        "papers": q("SELECT paper_id, title, year, venue, track, role FROM paper"),
+        # Include only. Loading the raw table counted the 132 rows that were
+        # screened out, so this dashboard reported 1,158 papers where every
+        # other view in the project reports 1,026.
+        "papers": q("SELECT paper_id, title, year, venue, track, role FROM paper "
+                    "WHERE screening = 'Include'"),
         "untested": scorecard.optional_table(con, "untested_defense"),
         "runs": q("SELECT * FROM our_run WHERE campaign = 'rag_transfer'"),
     }
@@ -311,7 +315,11 @@ def routes_tab(d: dict) -> None:
     st.caption(
         "The entry route, crossed with what goes wrong once it is in. Reading "
         "a row tells you what a single route can lead to; reading a column "
-        "tells you every way into one kind of failure."
+        "tells you every way into one kind of failure.\n\n"
+        "**Unit: named causes in the registry, not papers.** The RQ1 cube in "
+        "the corpus workbench counts *papers* for the same two axes, so its "
+        "numbers are larger — 287 papers sit in tool-output x goal-hijack "
+        "against 61 named causes. Neither is wrong; they count different things."
     )
     grid = (a.groupby(["channel", "consequence"]).size()
             .unstack(fill_value=0).reindex(columns=WAY_ORDER, fill_value=0))

@@ -459,12 +459,12 @@ def build(F):
         (f"{F['def_sec']} defenses", "built to stop an adversary"),
         (f"{F['def_ml']} fixes", "built to stop the accident"),
         (f"{F['pairs']} pairs", "every case where a paper tested one defense against one attack"),
-    ], 2.25, [3.0, 8.7], size=14.5, pitch=0.50)
+    ], 2.20, [3.0, 8.7], size=14.5, pitch=0.48)
     bullets(sl, [
         ("No prior survey holds both literatures. The closest reviews 78 papers, 37 attacks and "
          "41 defenses, and stays on the security side.", True),
         "That map is the instrument. Everything that follows is read off it.",
-    ], 5.05)
+    ], 5.60)
     cite(sl, f"Closest prior survey: {C['sok_landscape']}",
          f"Review protocol follows {C['slr_prisma']} and {C['slr_kitchenham']}")
 
@@ -514,8 +514,7 @@ def build(F):
         ("machine learning", f"incidental mechanism  ({F['atk_ml']} named)", f"{F['und_ml']}"),
     ], 2.14, [3.0, 6.4, 2.3], size=14, pitch=0.46, align_right=(2,))
     bullets(sl, [
-        ("That does not mean an attack is unproven. Each paper shows it working, against a system "
-         "with no defense switched on.", True),
+        ("Each paper proves its attack works, against a system with no defense switched on.", True),
         "What those papers compare against is other attacks, not defenses:",
     ], 3.40, size=14, gap=8)
     table(sl, ["Attack", "Its paper compares against"], [
@@ -534,8 +533,8 @@ def build(F):
     # 9c — and what a defense with no attack actually is -------------------
     sl = S("Finding 2, the other side", "320 protections never run against any cause")
     bullets(sl, [
-        (f"{F['unt_sec']} of {F['def_sec']} defenses and {F['unt_ml']} of {F['def_ml']} fixes were "
-         "never tested against a named cause. We read all 320 to see what they were answering.", True),
+        (f"{F['unt_sec']} of {F['def_sec']} defenses and {F['unt_ml']} of {F['def_ml']} fixes have no "
+         "tested pair. Reading all 320 shows what each one answers.", True),
     ], 2.12, size=14, gap=6)
     table(sl, ["What we found", "Count", "Mostly from", "What it means"], [
         ("A fix for an accidental failure", "126", "ML side",
@@ -551,9 +550,9 @@ def build(F):
         ("Could not tell", "21", "security", "not enough extracted text to decide"),
     ], 3.06, [3.7, 1.0, 1.5, 5.5], size=12.5, pitch=0.44, align_right=(1,))
     bullets(sl, [
-        ("The 320 are not one thing. 124 of the first 126 come from the machine learning side: "
-         "they are fixes for accidents, and calling them untested defenses is unfair to them.", True),
-        "The 99 that name a cause and stop short of testing it are the real gap, and the lead we follow next.",
+        ("126 of them answer an accidental failure and never set out to stop an adversary. "
+         "99 name a cause that is on our map and stop short of testing against it.", True),
+        "Those 99 are the gap, and the lead we follow next.",
     ], 6.02, size=13, gap=5)
 
     # 10 — the gap, named ------------------------------------------------
@@ -577,9 +576,8 @@ def build(F):
     worst = max(zip(F["pool"], F["pool_tested"]), key=lambda z: z[1][1])
     body(sl, [
         ("Every row is zero. Not one of these pairs has been tested by anybody.", True),
-        f"These cells are not ignored. {worst[0][0]} and {worst[0][1]} alone holds {worst[1][1]} "
-        "tested pairs. But each one is a defense against an attack, or a fix against an accident. "
-        "Nothing crosses.",
+        f"{worst[0][0]} and {worst[0][1]} alone holds {worst[1][1]} tested pairs, every one a "
+        "defense against an attack or a fix against an accident. None crosses.",
         "The RAG row is 3 attacks against 42 fixes. 126 possible tests. None run.",
     ], 6.02, gap=6, size=13.5)
 
@@ -594,18 +592,17 @@ def build(F):
         ("PoisonedRAG", "inserts a false answer"),
         ("BadRAG DoS", "makes the agent refuse"),
         ("BadRAG Selective-Fact", "changes only the tone of a correct answer"),
-    ], 2.60, [3.4, 8.3], size=13, pitch=0.44)
+    ], 2.44, [3.4, 8.3], size=13, pitch=0.42)
     table(sl, ["Defense codebases we opened", "Outcome"], [
         ("4 of 9", "run, and give a usable measurement"),
         ("1 of 9", "runs, but cannot reproduce its own published benefit"),
         ("4 of 9", "do not run: missing data, a missing prompt file, a checkpoint with no tokenizer"),
-    ], 4.68, [3.4, 8.3], size=13, pitch=0.44)
+    ], 4.72, [3.4, 8.3], size=13, pitch=0.42)
 
     body(sl, [
         ("Nine defense codebases attempted. Four produced a measurement.", True),
-        "That is not a complaint about other people's repositories. It sets the size of what "
-        "this work can honestly cover, and it is a result the field should know.",
-    ], 5.40, gap=8)
+        "This sets the size of what the work can cover, and it is a finding in its own right.",
+    ], 6.42, gap=7, size=14)
 
     # 12 — how pairs are chosen --------------------------------------------
     sl = S("How we choose a pair", "The map tells us which pairs can even be run")
