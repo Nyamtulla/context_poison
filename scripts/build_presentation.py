@@ -162,6 +162,7 @@ CITE_KEYS = {
     "badrag":     "BadRAG: Identifying Vulnerabilities",
     "robustrag":  "Certifiably Robust RAG against Retrieval Corruption",
     "parammute":  "ParamMute: Suppressing Knowledge-Critical FFNs",
+    "corpuspoison": "Poisoning Retrieval Corpora by Injecting Adversarial Passages",
     # where our review protocol comes from. We did not read Kitchenham or the
     # PRISMA statement directly; we took the method from survey papers inside
     # our own corpus that follow them, so those are what we cite.

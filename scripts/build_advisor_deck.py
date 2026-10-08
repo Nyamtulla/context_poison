@@ -423,6 +423,40 @@ def build(F):
          f"Review protocol follows {C['slr_prisma']} and {C['slr_kitchenham']}")
 
     # 8 ------------------------------------------------------------------
+    sl = S("What the map is", "One row for every attack and every defense")
+    body(sl, [
+        ("The map is not a picture. It is a table. One row for each named attack, one row for "
+         "each named defense, 771 rows in all.", True),
+        "Every row carries the same three tags: the route the text came in by, what goes wrong, "
+        "and whether a person caused it. The tags are read out of the paper's full text, not its "
+        "title, and they come from fixed lists, so two papers describing the same thing land in "
+        "the same place.",
+    ], 2.12, size=14, gap=8)
+
+    put(tb(sl, M, 3.70, 5.5, 0.32), "A row on the attack side", 14, INK, bold=True, first=True, after=0)
+    rows(sl, [
+        ("Name", "corpus poisoning"),
+        ("Route in", "RAG"),
+        ("What goes wrong", "silent-corruption"),
+        ("Caused by a person?", "yes"),
+    ], 4.06, pitch=0.40, lw=2.3, size=13, x=M, w=5.5)
+
+    put(tb(sl, M + 6.3, 3.70, 5.5, 0.32), "A row on the defense side", 14, INK, bold=True, first=True, after=0)
+    rows(sl, [
+        ("Name", "ParamMute"),
+        ("Route in", "RAG"),
+        ("What goes wrong", "silent-corruption"),
+        ("Built for", "the accidental version"),
+    ], 4.06, pitch=0.40, lw=2.3, size=13, x=M + 6.3, w=5.5)
+
+    body(sl, [
+        ("Same route. Same failure. So the two rows sit in the same cell of the map, and the "
+         "defense has a claim to answer that attack.", True),
+        "Nobody had ever run them against each other. We did.",
+    ], 5.86, size=14, gap=8)
+    cite(sl, f"corpus poisoning {short(C['corpuspoison'])}",
+         f"ParamMute {short(C['parammute'])}")
+
     sl = S("Finding 1", "The two communities do not read each other")
     rows(sl, [
         ("11.7 %", "of security papers cite at least one machine learning paper"),
