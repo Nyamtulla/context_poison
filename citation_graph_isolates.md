@@ -93,3 +93,40 @@ Fetch the missing 198 reference lists and rebuild `citation_edges`. That is an
 API pass, not a re-reading: the papers are already analysed. It would not
 change any reported number, but it would stop the graph from showing a
 disconnection that is partly our own data collection.
+
+
+---
+
+## Addendum, 2026-10-08: the API pass, and what it could not fix
+
+Re-fetched reference lists for the 197 corpus papers that had no outbound edge,
+using the project's existing Semantic Scholar client. 196 fetched, 1 failed.
+
+| | before | after |
+|---|---:|---:|
+| edge store rows | 42,123 | **45,861** |
+| edges with both ends inside the corpus | 2,089 | **2,310** |
+| corpus papers with a reference list | 828 | **962** |
+| papers drawing as isolated | 191 | **118** |
+| — reference list unavailable | 171 | **64** |
+| — genuinely isolated, references in hand | 20 | **54** |
+
+**73 papers stopped being isolated.** The graph now shows 221 more in-corpus
+links than it did, and the disconnection it displays is that much less our own
+making.
+
+Two things the pass established that guessing would have got wrong.
+
+**The remaining 64 are not a backlog.** Semantic Scholar returned no reference
+list for them at all — 60 of the 64 are 2025 or 2026, and 31 are arXiv
+preprints with no venue. The data does not exist upstream yet. Re-running this
+will not help; only time will. That belongs in the threats to validity, not on
+a to-do list.
+
+**The count of genuinely isolated papers went up, not down — from 20 to 54.**
+That is the pass working, not failing. Those papers moved out of "we have no
+idea what they cite" and into "we know what they cite, and none of it is in
+this corpus". It is a worse-looking number and a better-founded one.
+
+Nothing reported anywhere moved. `cites_track_a` and `cites_track_b` are
+full-text codings and were not touched, so RQ2 still reads 11.7 % and 9.1 %.
