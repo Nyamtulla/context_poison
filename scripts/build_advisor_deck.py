@@ -281,6 +281,21 @@ def facts():
         "cons": dict(con.execute(
             "SELECT consequence, COUNT(*) FROM attack GROUP BY 1")),
         "both_tm": one("SELECT COUNT(*) FROM defense WHERE validated_against='both'"),
+        # the two sides name their objects differently, and the deck follows
+        # them: attack / defense on the security side, incidental mechanism /
+        # fix on the machine learning side
+        "atk_sec": one("SELECT COUNT(*) FROM attack WHERE track='Security'"),
+        "atk_ml": one("SELECT COUNT(*) FROM attack WHERE track='ML/AI'"),
+        "def_sec": one("SELECT COUNT(*) FROM defense WHERE track='Security'"),
+        "def_ml": one("SELECT COUNT(*) FROM defense WHERE track='ML/AI'"),
+        "und_sec": one("""SELECT COUNT(*) FROM attack a WHERE a.track='Security'
+                          AND NOT EXISTS (SELECT 1 FROM pair p WHERE p.attack_name=a.name)"""),
+        "und_ml": one("""SELECT COUNT(*) FROM attack a WHERE a.track='ML/AI'
+                         AND NOT EXISTS (SELECT 1 FROM pair p WHERE p.attack_name=a.name)"""),
+        "unt_sec": one("""SELECT COUNT(*) FROM defense d WHERE d.track='Security'
+                          AND NOT EXISTS (SELECT 1 FROM pair p WHERE p.defense_name=d.name)"""),
+        "unt_ml": one("""SELECT COUNT(*) FROM defense d WHERE d.track='ML/AI'
+                         AND NOT EXISTS (SELECT 1 FROM pair p WHERE p.defense_name=d.name)"""),
         # candidate pools: a cell where the security side has attacks and the
         # ML/AI side has defenses is a transfer test waiting to be run
         "pool_total": one("""
@@ -354,25 +369,24 @@ def build(F):
          f"Long context degrades how the model uses it: {C['liu_middle']}")
 
     # 3 ------------------------------------------------------------------
-    sl = S("The split", "Two communities. One failure. No contact.")
-    put(tb(sl, M, 2.10, 5.7, 0.35), "The security literature", 15, INK, bold=True, first=True, after=6)
-    body(sl, [
-        "It treats the text as an attack. Someone wrote it to take the agent over.",
-        "Indirect prompt injection. Poisoned retrieval. Poisoned memory.",
-    ], 2.50, size=14, w=5.5, gap=9)
-    put(tb(sl, M + 6.4, 2.10, 5.7, 0.35), "The machine learning literature", 15, INK, bold=True, first=True, after=6)
-    body(sl, [
-        "It treats the same corruption as an accident. Nobody wrote it to cause harm.",
-        "Lost in the middle. Distraction by irrelevant text. Knowledge conflict.",
-    ], 2.50, size=14, w=5.5, x=M + 6.4, gap=9)
-    body(sl, [
-        ("Both build defenses. Each side tests its defenses on its own failures.", True),
-        "A tool returns a page with a hidden order. A tool returns a page that is ten times too long. "
-        "Both arrive through the same route. Both end in the same window. One has an author and one "
-        "does not, and that is the only difference.",
-        ("Our question: does that difference justify two separate sets of defenses?", True),
-    ], 4.05)
-    cite(sl, f"Security end: {C['greshake']}", f"ML end: {C['liu_middle']}; {C['shi']}",
+    sl = S("The split", "Two communities, two vocabularies, one failure")
+    table(sl, ["", "The security side", "The machine learning side"], [
+        ("What corrupts the context",
+         f"an attack  ({F['atk_sec']})", f"an incidental mechanism  ({F['atk_ml']})"),
+        ("What the field builds against it",
+         f"a defense  ({F['def_sec']})", f"a fix  ({F['def_ml']})"),
+        ("Who put it there", "a person, on purpose", "nobody"),
+        ("Examples", "indirect prompt injection, poisoned retrieval",
+         "lost in the middle, knowledge conflict"),
+    ], 2.20, [3.6, 4.1, 4.0], size=13.5, pitch=0.52)
+    bullets(sl, [
+        ("We keep both sets of words, because the two sides are not doing the same thing. "
+         "A fix was never built to stop an adversary.", True),
+        "A tool returns a page with a hidden order. A tool returns a page that is ten times too "
+        "long. Both arrive by the same route and end in the same window. One has an author.",
+        ("Our question: does that difference justify two separate sets of protection?", True),
+    ], 4.90)
+    cite(sl, f"Security side: {C['greshake']}", f"ML side: {C['liu_middle']}; {C['shi']}",
          f"Knowledge conflict: {C['kc_survey']}")
 
     # 4 ------------------------------------------------------------------
@@ -437,15 +451,17 @@ def build(F):
     sl = S("What we built", "A map of every attack and every defense in the field")
     table(sl, ["Count", "What it is"], [
         (f"{F['papers']:,} papers", "read in full and coded, drawn from about 26,000 candidates"),
-        (f"{F['attacks']} attacks", "distinct named ways to corrupt a context window"),
-        (f"{F['defenses']} defenses", "distinct named ways the field protects against them"),
+        (f"{F['atk_sec']} attacks", "deliberate ways to corrupt a context window"),
+        (f"{F['atk_ml']} mechanisms", "the same corruption arriving by accident"),
+        (f"{F['def_sec']} defenses", "built to stop an adversary"),
+        (f"{F['def_ml']} fixes", "built to stop the accident"),
         (f"{F['pairs']} pairs", "every case where a paper tested one defense against one attack"),
-    ], 2.25, [3.0, 8.7], size=15, pitch=0.58)
+    ], 2.25, [3.0, 8.7], size=14.5, pitch=0.50)
     bullets(sl, [
         ("No prior survey holds both literatures. The closest reviews 78 papers, 37 attacks and "
          "41 defenses, and stays on the security side.", True),
         "That map is the instrument. Everything that follows is read off it.",
-    ], 4.95)
+    ], 5.05)
     cite(sl, f"Closest prior survey: {C['sok_landscape']}",
          f"Review protocol follows {C['slr_prisma']} and {C['slr_kitchenham']}")
 
@@ -489,45 +505,53 @@ def build(F):
     ], 5.05)
 
     # 9b — what a never-defended attack actually is ------------------------
-    sl = S("Finding 2", f"{F['undefended']} attacks that no defense has been run against")
+    sl = S("Finding 2", "Causes that nothing has ever been run against")
+    table(sl, ["Side", "Cause", "Never answered"], [
+        ("security", f"attack  ({F['atk_sec']} named)", f"{F['und_sec']}"),
+        ("machine learning", f"incidental mechanism  ({F['atk_ml']} named)", f"{F['und_ml']}"),
+    ], 2.14, [3.0, 6.4, 2.3], size=14, pitch=0.46, align_right=(2,))
     bullets(sl, [
-        (f"Of {F['attacks']} named attacks, {F['undefended']} have no tested defense at all.", True),
-        "That does not mean the attack is unproven. Each paper shows the attack working. It shows "
-        "it working against a system with no defense switched on.",
+        ("That does not mean an attack is unproven. Each paper shows it working, against a system "
+         "with no defense switched on.", True),
         "What those papers compare against is other attacks, not defenses:",
-    ], 2.12, size=14, gap=8)
+    ], 3.40, size=14, gap=8)
     table(sl, ["Attack", "Its paper compares against"], [
         ("HOUYI", "three earlier prompt injection techniques"),
         ("JudgeDeceiver", "six manual prompt injection attacks"),
         ("ASB: Plan-of-Thought backdoor", "five injection variants and five other attacks"),
         ("Virtual Prompt Injection", "clean training data and one concurrent poisoning method"),
-    ], 3.74, [4.3, 7.4], size=13, pitch=0.44)
+    ], 4.42, [4.3, 7.4], size=13, pitch=0.44)
     bullets(sl, [
         ("Each paper asks whether its attack beats the last attack. Whether any published defense "
          "stops it is never asked.", True),
-    ], 5.90, size=14)
+    ], 6.42, size=14)
     cite(sl, f"HOUYI {short(C['houyi'])}", "JudgeDeceiver Shi et al., ACM CCS 2024",
          "ASB Zhang et al., ICLR 2024", "VPI Yan et al., NAACL 2023")
 
     # 9c — and what a defense with no attack actually is -------------------
-    sl = S("Finding 2, the other side", "320 defenses with no attack behind them")
+    sl = S("Finding 2, the other side", "320 protections never run against any cause")
     bullets(sl, [
-        (f"Of {F['defenses']} defenses, 320 were never tested against any attack we can name. "
-         "We read all 320 to find out what they were defending.", True),
+        (f"{F['unt_sec']} of {F['def_sec']} defenses and {F['unt_ml']} of {F['def_ml']} fixes were "
+         "never tested against a named cause. We read all 320 to see what they were answering.", True),
     ], 2.12, size=14, gap=6)
-    table(sl, ["What we found", "Count", "What it means"], [
-        ("No threat model at all", "126", "reliability or efficiency work; no adversary is claimed"),
-        ("Names an attack, never tests it", "99", "the attack is on our map; the experiment is missing"),
-        ("Threat described in prose only", "41", "an adversary is named; no experiment follows"),
-        ("Tests an attack it invented", "22", "evaluated only against the authors' own construction"),
-        ("Names a benchmark, not a mechanism", "11", "reports a score, not a defense outcome"),
-        ("Could not tell", "21", "not enough extracted text to decide"),
-    ], 3.12, [4.5, 1.3, 5.9], size=13, pitch=0.44, align_right=(1,))
+    table(sl, ["What we found", "Count", "Mostly from", "What it means"], [
+        ("A fix for an accidental failure", "126", "ML side",
+         "it answers a real failure; it never claimed to stop an adversary"),
+        ("Names a cause, never tests it", "99", "both",
+         "the cause is on our map; the experiment is missing"),
+        ("Threat described in prose only", "41", "security",
+         "an adversary is named; no experiment follows"),
+        ("Tests an attack it invented", "22", "security",
+         "evaluated only against the authors' own construction"),
+        ("Names a benchmark, not a cause", "11", "security",
+         "reports a score, not a protection outcome"),
+        ("Could not tell", "21", "security", "not enough extracted text to decide"),
+    ], 3.06, [3.7, 1.0, 1.5, 5.5], size=12.5, pitch=0.44, align_right=(1,))
     bullets(sl, [
-        ("The 320 are not all alike. 126 never claimed to stop an attack. 99 named one and stopped "
-         "short of testing it.", True),
-        "Those 99 are the strongest lead in the corpus, and they are where we go next.",
-    ], 6.16, size=13.5, gap=6)
+        ("The 320 are not one thing. 124 of the first 126 come from the machine learning side: "
+         "they are fixes for accidents, and calling them untested defenses is unfair to them.", True),
+        "The 99 that name a cause and stop short of testing it are the real gap, and the lead we follow next.",
+    ], 6.02, size=13, gap=5)
 
     # 10 — the gap, named ------------------------------------------------
     sl = S("The gap, in detail", "Where an untested pair is waiting")
