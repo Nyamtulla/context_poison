@@ -316,22 +316,50 @@ def routes_tab(d: dict) -> None:
         "The entry route, crossed with what goes wrong once it is in. Reading "
         "a row tells you what a single route can lead to; reading a column "
         "tells you every way into one kind of failure.\n\n"
-        "**Unit: named causes in the registry, not papers.** The RQ1 cube in "
-        "the corpus workbench counts *papers* for the same two axes, so its "
-        "numbers are larger — 287 papers sit in tool-output x goal-hijack "
+        "**Each cell counts named causes in the registry, not papers.** The RQ1 "
+        "cube in the corpus workbench counts *papers* on the same two axes, so "
+        "its numbers are larger — 287 papers sit in tool-output x goal-hijack "
         "against 61 named causes. Neither is wrong; they count different things."
     )
-    grid = (a.groupby(["channel", "consequence"]).size()
-            .unstack(fill_value=0).reindex(columns=WAY_ORDER, fill_value=0))
-    grid = grid.loc[grid.sum(axis=1).sort_values(ascending=False).index]
-    fig = go.Figure(go.Heatmap(
-        z=grid.values, x=grid.columns, y=grid.index,
-        colorscale="Oranges", text=grid.values,
-        texttemplate="%{text}", showscale=False))
-    fig.update_layout(height=40 * len(grid) + 150,
-                      margin=dict(l=10, r=10, t=10, b=10),
-                      xaxis_title="what goes wrong", yaxis_title="how it gets in")
+    # Split by track rather than summed. A single number here merged the two
+    # literatures: direct-input x reasoning-corruption read 28, which is 4
+    # attacks and 24 incidental mechanisms, and nobody could tell from the
+    # cell. The RQ1 cube already separates its panels this way.
+    from plotly.subplots import make_subplots
+    panels = [("Security", "Attacks — someone put it there"),
+              ("ML/AI", "Incidental mechanisms — nobody did")]
+    order = (a.groupby("channel").size().sort_values(ascending=False).index.tolist())
+    fig = make_subplots(rows=1, cols=2, subplot_titles=[t for _, t in panels],
+                        shared_yaxes=True, horizontal_spacing=0.06)
+    sub_all = {tr: (a.loc[a["track"] == tr]
+                    .groupby(["channel", "consequence"]).size()
+                    .unstack(fill_value=0)
+                    .reindex(index=order, columns=WAY_ORDER, fill_value=0))
+               for tr, _ in panels}
+    zmax = max((g.values.max() for g in sub_all.values() if g.size), default=1)
+    for i, (tr, _) in enumerate(panels, start=1):
+        g = sub_all[tr]
+        text = [["" if v == 0 else str(v) for v in row] for row in g.values]
+        z = [[None if v == 0 else v for v in row] for row in g.values]
+        fig.add_trace(go.Heatmap(
+            z=z, x=list(g.columns), y=list(g.index), text=text,
+            texttemplate="%{text}", textfont=dict(size=11),
+            colorscale="Oranges" if tr == "Security" else "Blues",
+            zmin=0, zmax=zmax, showscale=False, xgap=2, ygap=2,
+            hovertemplate=(f"{tr}<br>how it gets in: %{{y}}"
+                           "<br>what goes wrong: %{x}<br>%{z} named causes"
+                           "<extra></extra>")), row=1, col=i)
+    fig.update_layout(height=40 * len(order) + 190,
+                      margin=dict(l=10, r=10, t=56, b=10))
+    fig.update_xaxes(title_text="what goes wrong")
+    fig.update_yaxes(title_text="how it gets in", row=1, col=1)
     st.plotly_chart(fig, width="stretch", key="routes")
+    st.caption(
+        "A blank cell means no paper names a cause of that kind on that route. "
+        "The two panels do not mirror each other, and that is the point: the "
+        "security side owns tool-output and direct-input, the ML/AI side owns "
+        "reasoning-corruption, and almost nothing is studied on both sides."
+    )
 
     st.markdown("##### Protection per route, split by which side built it")
     cmp = pd.DataFrame({
