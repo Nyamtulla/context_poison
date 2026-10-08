@@ -701,11 +701,25 @@ def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
         "sidebar filters, which affect only the paper tabs."
     )
 
+    # The two sides do not build the same kind of thing. A merged count hides
+    # that roughly half the "defenses" were never meant to stop an adversary,
+    # which is what made "320 defenses were never tested" read as an
+    # accusation rather than a description.
+    atk_sec = sum(1 for m in reg["mechanisms"] if m["track"] == "Security")
+    atk_ml = sum(1 for m in reg["mechanisms"] if m["track"] == "ML/AI")
+    def_sec = sum(1 for d in reg["defenses"] if d["track"] == "Security")
+    def_ml = sum(1 for d in reg["defenses"] if d["track"] == "ML/AI")
+
     c = st.columns(4)
     c[0].metric("Papers analysed", n_papers)
-    c[1].metric("Named mechanisms (RQ3)", s["n_mechanisms"])
-    c[2].metric("Confirmed defenses (RQ4)", s["n_defenses"])
+    c[1].metric("Named causes (RQ3)", s["n_mechanisms"],
+                help=f"{atk_sec} attacks on the security side, {atk_ml} "
+                     "incidental mechanisms on the ML/AI side.")
+    c[2].metric("Protections (RQ4)", s["n_defenses"],
+                help=f"{def_sec} defenses built against an adversary, {def_ml} "
+                     "fixes built for a failure nobody caused.")
     c[3].metric("Confirmed test pairs (RQ5)", s["n_pairs"])
+    scorecard.vocabulary_note()
 
     c = st.columns(4)
     pct_def = 100 * s["n_defenses_matched"] / s["n_defenses_total"]
@@ -716,8 +730,10 @@ def overview_tab(reg: dict, summaries: dict, n_papers: int) -> None:
                      "tested against anything in the RQ3 registry — see the Coverage matrix tab.")
     c[1].metric("Mechanisms with ≥1 defense tested", f"{pct_mech:.1f}%",
                 help=f"{s['n_mechs_covered']} of {s['n_mechanisms']}")
-    c[2].metric("Mechanisms never defended", s["n_mechs_uncovered"],
-                help="Zero confirmed defenses tested against them")
+    c[2].metric("Causes never answered", s["n_mechs_uncovered"],
+                help="Nothing has been run against them. Split by side on the "
+                     "Coverage matrix tab — most are attacks, not incidental "
+                     "mechanisms.")
     c[3].metric("Cross-track test pairs", n_cross,
                 help="Pairs where the defense's track differs from the mechanism's track — "
                      "i.e. someone actually tested across the adversarial/incidental divide.")
