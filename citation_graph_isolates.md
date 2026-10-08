@@ -108,8 +108,12 @@ using the project's existing Semantic Scholar client. 196 fetched, 1 failed.
 | edges with both ends inside the corpus | 2,089 | **2,310** |
 | corpus papers with a reference list | 828 | **962** |
 | papers drawing as isolated | 191 | **118** |
-| — reference list unavailable | 171 | **64** |
-| — genuinely isolated, references in hand | 20 | **54** |
+| — reference list unavailable | 171 | **52** |
+| — genuinely isolated, references in hand | 20 | **66** |
+
+*(Separately, 64 corpus papers have no reference list at all. 52 of them are
+isolated; the other 12 are still connected by inbound edges from papers that
+cite them.)*
 
 **73 papers stopped being isolated.** The graph now shows 221 more in-corpus
 links than it did, and the disconnection it displays is that much less our own
@@ -117,16 +121,61 @@ making.
 
 Two things the pass established that guessing would have got wrong.
 
-**The remaining 64 are not a backlog.** Semantic Scholar returned no reference
-list for them at all — 60 of the 64 are 2025 or 2026, and 31 are arXiv
-preprints with no venue. The data does not exist upstream yet. Re-running this
+**The remaining 52 are not a backlog.** Semantic Scholar returned no reference
+list for them at all — of the 64 corpus papers in that position, 60 are 2025 or
+2026 and 31 are arXiv preprints with no venue. The data does not exist upstream yet. Re-running this
 will not help; only time will. That belongs in the threats to validity, not on
 a to-do list.
 
-**The count of genuinely isolated papers went up, not down — from 20 to 54.**
+**The count of genuinely isolated papers went up, not down — from 20 to 66.**
 That is the pass working, not failing. Those papers moved out of "we have no
 idea what they cite" and into "we know what they cite, and none of it is in
 this corpus". It is a worse-looking number and a better-founded one.
 
 Nothing reported anywhere moved. `cites_track_a` and `cites_track_b` are
 full-text codings and were not touched, so RQ2 still reads 11.7 % and 9.1 %.
+
+
+## Why 66 papers still cite nothing in the corpus
+
+The backfill left 66 papers whose references we hold and whose references reach
+nothing in the 1,026. That is not a data gap any more, so it needs a reason.
+
+Two, in order of size.
+
+**Most of their references were never retrieved.** Of the 1,037 references held
+for these 66 papers, **668 (64 %) point at works that are not in the
+25,922-paper discovery pool at all** — never searched for, never fetched. We
+cannot say whether those works are in the corpus because we have no record of
+them. So even the "genuine" isolation is measured on a third of the evidence.
+
+**What we can see, they cite the wrong literature — for us.** The references
+that do land in the pool are the agent-building canon:
+
+| cited by how many of the 66 | work |
+|---:|---|
+| 10 | Toolformer |
+| 6 | GPT-4 Technical Report |
+| 5 | Self-Refine |
+| 4 | AutoGen · Reflexion · MemGPT · Gorilla · Search-R1 |
+
+None of those is in the analysed corpus, because none of them is about context
+integrity. They are about how to *build* an agent. The isolated papers are
+mostly 2025–2026 agent-architecture and long-horizon-memory work, and they are
+citing the architecture conversation, not the attack-and-defense one.
+
+> **So the honest answer is: they are in our corpus because they match our
+> criteria on content, and they are disconnected because they belong to a
+> neighbouring conversation that our corpus deliberately does not carry.**
+> That is a boundary effect, and it is the expected shape of one. It is not
+> evidence that the corpus is wrong, and it is not evidence that these papers
+> are isolated in the field — only that they are isolated from the slice of
+> the field we kept.
+
+### One caveat about the edge store itself
+
+The original snowball recorded an edge only when it kept the target paper, so
+`citation_edges` was a within-pool graph rather than a reference list. The
+backfill stored every reference the API returned, in-pool or not. The store now
+mixes the two conventions: 39,196 edges point inside the pool and 6,665 point
+outside it. Anything that counts edges globally should say which it wants.
