@@ -18,6 +18,7 @@ from pathlib import Path
 from pptx import Presentation
 from pptx.util import Inches as I, Pt
 from pptx.dml.color import RGBColor as RGB
+from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 
 REPO = Path(__file__).resolve().parent.parent
@@ -77,23 +78,51 @@ def body(sl, items, y, size=15, w=None, x=None, gap=11):
     return tf
 
 
-def rows(sl, data, y, *, pitch=0.47, lw=2.9, size=13, right=None, x=None, w=None):
-    """Plain two- or three-column text rows. No fills, no rules, no boxes.
+def rule(sl, x, y, w, color=RGB(0xCC, 0xCC, 0xCC)):
+    """A hairline. The only mark on this deck that is not a letter."""
+    from pptx.util import Emu
+    ln = sl.shapes.add_shape(MSO_SHAPE.RECTANGLE, I(x), I(y), I(w), Emu(9525))
+    ln.fill.solid(); ln.fill.fore_color.rgb = color
+    ln.line.fill.background(); ln.shadow.inherit = False
+    return ln
 
-    `x` and `w` place the block, so two of these can sit side by side. Without
-    them it spans the page, which is what most slides want.
+
+def table(sl, headers, data, y, colw, *, x=None, size=13, pitch=0.44,
+          align_right=()):
+    """A real table: column headings, one hairline under them, plain rows.
+
+    Replaces the old bold-label-then-sentence layout, which read as a list of
+    captions rather than as data you can scan down a column.
     """
     x0 = M if x is None else x
-    width = W if w is None else w
-    for i, item in enumerate(data):
-        name, meaning = item[0], item[1]
-        yy = y + i * pitch
-        put(tb(sl, x0, yy, lw, 0.34), name, size, INK, bold=True, first=True, after=0)
-        put(tb(sl, x0 + lw, yy, width - lw - (0.9 if right else 0), 0.34),
-            meaning, size, MID, first=True, after=0)
-        if right:
-            put(tb(sl, x0 + width - 0.85, yy, 0.85, 0.34, align=PP_ALIGN.RIGHT),
-                str(item[2]), size, INK, bold=True, first=True, after=0)
+    cx = [x0]
+    for w in colw[:-1]:
+        cx.append(cx[-1] + w)
+    for j, h in enumerate(headers):
+        a = PP_ALIGN.RIGHT if j in align_right else PP_ALIGN.LEFT
+        wj = colw[j] - (0.28 if j in align_right else 0)
+        put(tb(sl, cx[j], y, wj, 0.3, align=a), h.upper(), 10, GREY,
+            bold=True, first=True, after=0)
+    rule(sl, x0, y + 0.30, sum(colw))
+    for i, row in enumerate(data):
+        yy = y + 0.42 + i * pitch
+        for j, cell in enumerate(row):
+            txt, bold = (cell, False) if isinstance(cell, str) else cell
+            a = PP_ALIGN.RIGHT if j in align_right else PP_ALIGN.LEFT
+            wj = colw[j] - (0.28 if j in align_right else 0)
+            put(tb(sl, cx[j], yy, wj, 0.34, align=a), txt, size,
+                INK if bold else MID, bold=bold, first=True, after=0)
+    return y + 0.42 + len(data) * pitch
+
+
+def bullets(sl, items, y, *, x=None, w=None, size=14, gap=9, mark="\u2014  "):
+    """A plain list. The dash keeps items separable without drawing anything."""
+    tf = tb(sl, x if x is not None else M, y, w or W, 7.1 - y)
+    for i, it in enumerate(items):
+        txt, bold = (it, False) if isinstance(it, str) else it
+        put(tf, mark + txt, size, INK if bold else MID, bold=bold,
+            first=(i == 0), after=gap, line=1.12)
+    return tf
 
 
 def short(c):
@@ -348,142 +377,157 @@ def build(F):
 
     # 4 ------------------------------------------------------------------
     sl = S("The framework", "We describe every case with three questions")
-    rows(sl, [
-        ("Channel", "How did the text get in? Which route did it travel?"),
-        ("Intent", "Did a person put it there on purpose, or not?"),
-        ("Consequence", "What went wrong once the text was in the window?"),
-    ], 2.20, pitch=0.60, lw=2.6, size=16)
-    body(sl, [
-        ("9 channels  ×  3 intents  ×  6 consequences  =  162 combinations.", True),
-        "A combination with no paper in it is a question the field has never asked. "
-        "We find that 98 of the 162 are empty.",
-        "The framework is the spine of the work. It tells us what is known, and it tells us where "
-        "to look next.",
-    ], 4.30)
+    table(sl, ["Tag", "The question it answers", "Values"], [
+        ("Channel", "How did the text get in? Which route did it travel?", "9"),
+        ("Intent", "Did a person put it there on purpose, or not?", "3"),
+        ("Consequence", "What went wrong once the text was in the window?", "6"),
+    ], 2.25, [2.6, 7.3, 1.8], size=15, pitch=0.60, align_right=(2,))
+    bullets(sl, [
+        ("9 channels x 3 intents x 6 consequences = 162 combinations.", True),
+        "A combination with no paper in it is a question the field has never asked. 98 of the 162 are empty.",
+        "The framework tells us what is known, and it tells us where to look next.",
+    ], 4.50)
     cite(sl, "Framework: this work", f"Adversarial end: {C['greshake']}",
          f"Incidental end: {C['liu_middle']}")
 
     # 5 ------------------------------------------------------------------
     CH = dict(F["chan"])
     sl = S("Channel", "Nine routes carry text into the window")
-    rows(sl, [
-        ("tool-output", "What a tool gives back: a web page, an email, a file the agent opened.", CH.get("tool-output", 0)),
-        ("direct-input", "The prompt itself. The user's text, or the system prompt above it.", CH.get("direct-input", 0)),
-        ("RAG", "A document a search step pulled out of a corpus.", CH.get("RAG", 0)),
-        ("cross-modal", "Text carried inside an image, audio or video.", CH.get("cross-modal", 0)),
-        ("memory", "Something the agent stored earlier and now reads again.", CH.get("memory", 0)),
-        ("tool-metadata", "The description of a tool, not its output.", CH.get("tool-metadata", 0)),
-        ("multi-agent", "A message from another agent in the same system.", CH.get("multi-agent", 0)),
-        ("supply-chain", "A package or template the agent inherits before it starts.", CH.get("supply-chain", 0)),
-        ("skill", "A stored procedure the agent loads and follows.", CH.get("skill", 0)),
-    ], 2.22, pitch=0.46, lw=2.5, size=13.5, right=True)
-    put(tb(sl, M, 6.44, W, 0.35),
-        "The right column counts the named attacks in that channel.", 12, GREY, first=True, after=0)
+    CH = dict(F["chan"])
+    table(sl, ["Route", "What arrives this way", "Named attacks"], [
+        ("tool-output", "a web page, an email, a file the agent opened", str(CH.get("tool-output", 0))),
+        ("direct-input", "the prompt itself, or the system prompt above it", str(CH.get("direct-input", 0))),
+        ("RAG", "a document a search step pulled from a corpus", str(CH.get("RAG", 0))),
+        ("cross-modal", "text inside an image, audio or video", str(CH.get("cross-modal", 0))),
+        ("memory", "something the agent stored earlier and reads again", str(CH.get("memory", 0))),
+        ("tool-metadata", "the description of a tool, not its output", str(CH.get("tool-metadata", 0))),
+        ("multi-agent", "a message from another agent", str(CH.get("multi-agent", 0))),
+        ("supply-chain", "a package or template inherited before the run", str(CH.get("supply-chain", 0))),
+        ("skill", "a stored procedure the agent loads and follows", str(CH.get("skill", 0))),
+    ], 2.22, [2.6, 7.1, 2.0], size=13, pitch=0.44, align_right=(2,))
     tfc = tb(sl, M, 6.96, W - 0.75, 0.46)
     for i, line in enumerate([
             f"tool-output {short(C['greshake'])}  ·  direct-input {short(C['houyi'])}  ·  RAG {short(C['zou'])}  ·  memory {short(C['agentpoison'])}  ·  cross-modal {short(C['webinject'])}",
             f"tool-metadata {short(C['mcptox'])}  ·  multi-agent {short(C['infection'])}  ·  supply-chain {short(C['supplychain'])}  ·  skill {short(C['skillject'])}"]):
-        put(tfc, line, 8, FAINT, first=(i == 0), after=0, line=1.2)
+        put(tfc, line, 7.5, FAINT, first=(i == 0), after=0, line=1.2)
 
     # 6 ------------------------------------------------------------------
     CO = F["cons"]
     sl = S("Consequence", "Six ways the agent then fails")
-    rows(sl, [
-        ("goal-hijack", "The agent does another person's task. Text in the window gives an order and it obeys.", CO.get("goal-hijack", 0)),
-        ("reasoning-corruption", "Every word is true. The window is too long or too cluttered, and the model stops using it well.", CO.get("reasoning-corruption", 0)),
-        ("silent-corruption", "The agent answers from false content. Nobody gave it a new task. It believes a wrong thing.", CO.get("silent-corruption", 0)),
-        ("persistence-backdoor", "The bad content is stored. It fires on a later run, maybe for another user.", CO.get("persistence-backdoor", 0)),
-        ("data-exfiltration", "The agent sends out what it can read, through a tool call, a link or a message.", CO.get("data-exfiltration", 0)),
-        ("resource-abuse", "No data moves and no goal changes. The agent burns time, or refuses to answer.", CO.get("resource-abuse", 0)),
-    ], 2.22, pitch=0.62, lw=3.3, size=13.5, right=True)
-    put(tb(sl, M, 6.22, W, 0.4),
-        "The second row is the machine learning literature. The other five are the security literature. "
-        "That is the split, in one column.", 12.5, MID, first=True, after=0)
+    CO = F["cons"]
+    table(sl, ["Failure", "What it means", "Named attacks"], [
+        ("goal-hijack", "the agent does another person's task; text in the window gives an order and it obeys", str(CO.get("goal-hijack", 0))),
+        ("reasoning-corruption", "every word is true, but the window is too long or too cluttered to use well", str(CO.get("reasoning-corruption", 0))),
+        ("silent-corruption", "the agent answers from false content; nobody gave it a new task", str(CO.get("silent-corruption", 0))),
+        ("persistence-backdoor", "the bad content is stored and fires on a later run", str(CO.get("persistence-backdoor", 0))),
+        ("data-exfiltration", "the agent sends out what it can read", str(CO.get("data-exfiltration", 0))),
+        ("resource-abuse", "the agent burns time, or refuses to answer at all", str(CO.get("resource-abuse", 0))),
+    ], 2.30, [3.3, 6.4, 2.0], size=13, pitch=0.60, align_right=(2,))
+    put(tb(sl, M, 6.30, W, 0.4),
+        "The second row is the machine learning literature. The other five are the security "
+        "literature. That is the split, in one column.", 13, MID, first=True, after=0)
     cite(sl, f"goal-hijack {short(C['greshake'])}",
          f"reasoning-corruption {short(C['liu_middle'])}; {short(C['shi'])}",
          f"silent-corruption {short(C['kconflict'])}",
          f"persistence-backdoor {short(C['agentpoison'])}",
          f"data-exfiltration {short(C['exfil'])}", f"resource-abuse {short(C['badrag'])}",
-         y=6.96, size=8)
+         y=6.92, size=7.5)
 
     # 7 ------------------------------------------------------------------
     sl = S("What we built", "A map of every attack and every defense in the field")
-    rows(sl, [
+    table(sl, ["Count", "What it is"], [
         (f"{F['papers']:,} papers", "read in full and coded, drawn from about 26,000 candidates"),
         (f"{F['attacks']} attacks", "distinct named ways to corrupt a context window"),
         (f"{F['defenses']} defenses", "distinct named ways the field protects against them"),
         (f"{F['pairs']} pairs", "every case where a paper tested one defense against one attack"),
-    ], 2.20, pitch=0.58, lw=2.9, size=15)
-    body(sl, [
-        ("No prior survey holds both literatures. The closest one reviews 78 papers, 37 attacks and 41 defenses, "
-         "and stays on the security side.", True),
+    ], 2.25, [3.0, 8.7], size=15, pitch=0.58)
+    bullets(sl, [
+        ("No prior survey holds both literatures. The closest reviews 78 papers, 37 attacks and "
+         "41 defenses, and stays on the security side.", True),
         "That map is the instrument. Everything that follows is read off it.",
-    ], 4.70)
+    ], 4.95)
     cite(sl, f"Closest prior survey: {C['sok_landscape']}",
          f"Review protocol follows {C['slr_prisma']} and {C['slr_kitchenham']}")
 
     # 8 ------------------------------------------------------------------
     sl = S("What the map is", "One row for every attack and every defense")
-    body(sl, [
-        ("The map is not a picture. It is a table. One row for each named attack, one row for "
-         "each named defense, 771 rows in all.", True),
-        "Every row carries the same three tags: the route the text came in by, what goes wrong, "
-        "and whether a person caused it. The tags are read out of the paper's full text, not its "
+    bullets(sl, [
+        ("The map is a table, not a picture. One row for each named attack, one row for each "
+         "named defense, 771 rows in all.", True),
+        "Every row carries the same three tags. We read them from the paper's full text, not its "
         "title, and they come from fixed lists, so two papers describing the same thing land in "
         "the same place.",
     ], 2.12, size=14, gap=8)
-
-    put(tb(sl, M, 3.70, 5.5, 0.32), "A row on the attack side", 14, INK, bold=True, first=True, after=0)
-    rows(sl, [
-        ("Name", "corpus poisoning"),
-        ("Route in", "RAG"),
-        ("What goes wrong", "silent-corruption"),
-        ("Caused by a person?", "yes"),
-    ], 4.06, pitch=0.40, lw=2.3, size=13, x=M, w=5.5)
-
-    put(tb(sl, M + 6.3, 3.70, 5.5, 0.32), "A row on the defense side", 14, INK, bold=True, first=True, after=0)
-    rows(sl, [
-        ("Name", "ParamMute"),
-        ("Route in", "RAG"),
-        ("What goes wrong", "silent-corruption"),
-        ("Built for", "the accidental version"),
-    ], 4.06, pitch=0.40, lw=2.3, size=13, x=M + 6.3, w=5.5)
-
-    body(sl, [
-        ("Same route. Same failure. So the two rows sit in the same cell of the map, and the "
-         "defense has a claim to answer that attack.", True),
+    table(sl, ["Field", "An attack row", "A defense row"], [
+        ("Name", "corpus poisoning", "ParamMute"),
+        ("Route in", "RAG", "RAG"),
+        ("What goes wrong", "silent-corruption", "silent-corruption"),
+        ("Caused by a person", "yes", "no - built for the accident"),
+        ("From", "Zhong et al., EMNLP 2023", "Huang et al., NeurIPS 2025"),
+    ], 3.60, [2.9, 4.4, 4.4], size=13, pitch=0.42)
+    bullets(sl, [
+        ("Same route, same failure, so the two rows share a cell and the defense has a claim to "
+         "answer that attack.", True),
         "Nobody had ever run them against each other. We did.",
-    ], 5.86, size=14, gap=8)
+    ], 6.05, size=14, gap=7)
     cite(sl, f"corpus poisoning {short(C['corpuspoison'])}",
          f"ParamMute {short(C['parammute'])}")
 
+    # 9 — the two literatures do not meet --------------------------------
     sl = S("Finding 1", "The two communities do not read each other")
-    rows(sl, [
-        ("11.7 %", "of security papers cite at least one machine learning paper"),
-        ("9.1 %", "of machine learning papers cite at least one security paper"),
-        (f"{F['same_pct']} %", "of all tested pairs stay inside one literature"),
-        ("60.5 %", "of the 162 combinations in the framework have never been studied"),
-    ], 2.20, pitch=0.60, lw=2.2, size=16)
-    body(sl, [
+    table(sl, ["Measure", "Value"], [
+        ("Security papers citing at least one machine learning paper", "11.7 %"),
+        ("Machine learning papers citing at least one security paper", "9.1 %"),
+        ("Tested pairs that stay inside one literature", f"{F['same_pct']} %"),
+        ("Combinations in the framework nobody has studied", "60.5 %"),
+    ], 2.25, [8.4, 3.3], size=15, pitch=0.60, align_right=(1,))
+    bullets(sl, [
         ("Nine of ten papers never cross. Seven pairs in the whole field do.", True),
         "This is not a sample. We resolved every citation edge in the corpus.",
-        ("So every claim of the form “this defense is robust” holds inside one threat model. "
-         "Nobody has checked the other one.", True),
-    ], 4.75)
+        ("So every claim that a defense is robust holds inside one threat model. Nobody has "
+         "checked the other one.", True),
+    ], 5.05)
 
-    # 9 ------------------------------------------------------------------
-    sl = S("Finding 2", "Most defenses have never met most attacks")
-    rows(sl, [
-        (f"{F['undefended']} of {F['attacks']}", "attacks have no tested defense at all"),
-        (f"{F['both_tm']} of {F['defenses']}", "defenses were tested against both threat models. That is 2.8 %."),
-    ], 2.20, pitch=0.62, lw=2.9, size=16)
-    body(sl, [
-        ("A defense paper is not a neutral document. A defense is supposed to defend something.", True),
-        "99 defense papers name an attack that sits in our map, and then never test against it. "
-        "Those are not gaps in the field's knowledge. They are gaps in its evidence.",
-        ("At this point the survey had taken us as far as a survey can go. It can show that a test "
-         "was never run. It cannot say what the test would have found.", True),
-    ], 3.95)
+    # 9b — what a never-defended attack actually is ------------------------
+    sl = S("Finding 2", f"{F['undefended']} attacks that no defense has been run against")
+    bullets(sl, [
+        (f"Of {F['attacks']} named attacks, {F['undefended']} have no tested defense at all.", True),
+        "That does not mean the attack is unproven. Each paper shows the attack working. It shows "
+        "it working against a system with no defense switched on.",
+        "What those papers compare against is other attacks, not defenses:",
+    ], 2.12, size=14, gap=8)
+    table(sl, ["Attack", "Its paper compares against"], [
+        ("HOUYI", "three earlier prompt injection techniques"),
+        ("JudgeDeceiver", "six manual prompt injection attacks"),
+        ("ASB: Plan-of-Thought backdoor", "five injection variants and five other attacks"),
+        ("Virtual Prompt Injection", "clean training data and one concurrent poisoning method"),
+    ], 3.74, [4.3, 7.4], size=13, pitch=0.44)
+    bullets(sl, [
+        ("Each paper asks whether its attack beats the last attack. Whether any published defense "
+         "stops it is never asked.", True),
+    ], 5.90, size=14)
+    cite(sl, f"HOUYI {short(C['houyi'])}", "JudgeDeceiver Shi et al., ACM CCS 2024",
+         "ASB Zhang et al., ICLR 2024", "VPI Yan et al., NAACL 2023")
+
+    # 9c — and what a defense with no attack actually is -------------------
+    sl = S("Finding 2, the other side", "320 defenses with no attack behind them")
+    bullets(sl, [
+        (f"Of {F['defenses']} defenses, 320 were never tested against any attack we can name. "
+         "We read all 320 to find out what they were defending.", True),
+    ], 2.12, size=14, gap=6)
+    table(sl, ["What we found", "Count", "What it means"], [
+        ("No threat model at all", "126", "reliability or efficiency work; no adversary is claimed"),
+        ("Names an attack, never tests it", "99", "the attack is on our map; the experiment is missing"),
+        ("Threat described in prose only", "41", "an adversary is named; no experiment follows"),
+        ("Tests an attack it invented", "22", "evaluated only against the authors' own construction"),
+        ("Names a benchmark, not a mechanism", "11", "reports a score, not a defense outcome"),
+        ("Could not tell", "21", "not enough extracted text to decide"),
+    ], 3.12, [4.5, 1.3, 5.9], size=13, pitch=0.44, align_right=(1,))
+    bullets(sl, [
+        ("The 320 are not all alike. 126 never claimed to stop an attack. 99 named one and stopped "
+         "short of testing it.", True),
+        "Those 99 are the strongest lead in the corpus, and they are where we go next.",
+    ], 6.16, size=13.5, gap=6)
 
     # 10 — the gap, named ------------------------------------------------
     sl = S("The gap, in detail", "Where an untested pair is waiting")
@@ -518,21 +562,17 @@ def build(F):
         "We only report a number if we can run the authors' own code. So the first question "
         "is which code runs at all.", 14, MID, first=True, after=0)
 
-    put(tb(sl, M, 2.66, 5.4, 0.32), "Attacks we rebuilt", 15, INK, bold=True, first=True, after=0)
-    rows(sl, [
-        ("Removes the answer", "corpus poisoning"),
-        ("Inserts a false answer", "PoisonedRAG"),
-        ("Forces a refusal", "BadRAG DoS"),
-        ("Changes only the tone", "BadRAG Selective-Fact"),
-    ], 3.06, pitch=0.46, lw=2.5, size=13, x=M, w=5.4)
-
-    put(tb(sl, M + 6.3, 2.66, 5.4, 0.32), "Defense codebases we opened", 15, INK,
-        bold=True, first=True, after=0)
-    rows(sl, [
-        ("4 run", "and give a usable measurement"),
-        ("1 runs", "but cannot reproduce its own published benefit"),
-        ("4 do not run", "missing data, a missing prompt file, a checkpoint with no tokenizer"),
-    ], 3.06, pitch=0.70, lw=1.7, size=13, x=M + 6.3, w=5.4)
+    table(sl, ["Attacks we rebuilt", "What it does to the answer"], [
+        ("corpus poisoning", "removes the answer from the retrieved set"),
+        ("PoisonedRAG", "inserts a false answer"),
+        ("BadRAG DoS", "makes the agent refuse"),
+        ("BadRAG Selective-Fact", "changes only the tone of a correct answer"),
+    ], 2.60, [3.4, 8.3], size=13, pitch=0.44)
+    table(sl, ["Defense codebases we opened", "Outcome"], [
+        ("4 of 9", "run, and give a usable measurement"),
+        ("1 of 9", "runs, but cannot reproduce its own published benefit"),
+        ("4 of 9", "do not run: missing data, a missing prompt file, a checkpoint with no tokenizer"),
+    ], 4.68, [3.4, 8.3], size=13, pitch=0.44)
 
     body(sl, [
         ("Nine defense codebases attempted. Four produced a measurement.", True),
@@ -549,14 +589,13 @@ def build(F):
         "the same failure on purpose through the same route, then the defense has a claim to "
         "answer. Nobody has made it answer.",
     ], 2.10, gap=9)
-    put(tb(sl, M, 3.48, W, 0.34), "The cell we started in", 15, INK, bold=True, first=True, after=8)
-    rows(sl, [
+    table(sl, ["The cell we started in", ""], [
         ("Route in", "a document returned by a search step"),
         ("What goes wrong", "the agent answers from false content and nothing signals it"),
         ("On the attack side", "3 named attacks, all deliberate"),
         ("On the defense side", "42 named defenses, all built for the accidental version"),
         ("Tested against each other", "none of them, by anyone"),
-    ], 3.88, pitch=0.46, lw=3.6, size=13.5)
+    ], 3.52, [3.7, 8.0], size=13.5, pitch=0.46)
     body(sl, [
         ("The map picked the first experiments, not us. Three of the four defenses we ran sit in "
          "that cell. The fourth answers the same failure arriving by a different route.", True),
@@ -567,12 +606,12 @@ def build(F):
 
     # 13 — what we ran ------------------------------------------------------
     sl = S("What we ran", "The first measurements anyone has taken in that cell")
-    rows(sl, [
+    table(sl, ["What we ran", "Detail"], [
         ("4 attacks", "rebuilt from released code and papers"),
         ("5 defenses", "counting two versions of one of them, all from released code"),
         (f"{len(F['verdicts'])} pairs", "defense against attack, on three models, none of them reported anywhere"),
         (f"{F['doses']} conditions", "each pair run at several attack strengths, not one"),
-    ], 2.15, pitch=0.62, lw=3.0, size=15)
+    ], 2.15, [2.8, 8.9], size=15, pitch=0.62)
     body(sl, [
         ("Two rules decide whether we are allowed to claim anything.", True),
         "A defense must first show its own benefit on its own task. If it cannot, we report "
@@ -587,14 +626,14 @@ def build(F):
     counts = {}
     for _, _, _, v, _ in F["verdicts"]:
         counts[v] = counts.get(v, 0) + 1
-    rows(sl, [
+    table(sl, ["Outcome", "What it means", "Pairs"], [
         ("It stops the attack", "the attack succeeds less often with the defense switched on",
-         counts.get("stops it", 0)),
-        ("It does nothing", "no readable difference either way", counts.get("no effect", 0)),
+         str(counts.get("stops it", 0))),
+        ("It does nothing", "no readable difference either way", str(counts.get("no effect", 0))),
         ("It makes the attack worse", "the attack succeeds MORE often with the defense switched on",
-         counts.get("makes it worse", 0)),
-    ], 2.25, pitch=0.76, lw=4.6, size=15.5, right=True)
-    put(tb(sl, M + W - 3.0, 4.56, 3.0, 0.3), f"out of {len(F['verdicts'])} pairs",
+         str(counts.get("makes it worse", 0))),
+    ], 2.25, [4.4, 6.1, 1.2], size=15.5, pitch=0.76, align_right=(2,))
+    put(tb(sl, M, 4.72, W, 0.3), f"out of {len(F['verdicts'])} pairs measured",
         11.5, GREY, first=True, after=0)
     body(sl, [
         ("A defense helped in four cases out of eighteen. In seven it made the attack work better "
@@ -607,16 +646,14 @@ def build(F):
 
     # 15 — what is next -----------------------------------------------------
     sl = S("Where we are now", "What is finished and what is still running")
-    put(tb(sl, M, 2.10, 5.7, 0.32), "Done", 15, INK, bold=True, first=True, after=6)
-    rows(sl, [
+    table(sl, ["Done", ""], [
         ("1 cell", "worked through: the retrieved document, answering from false content"),
         (f"{len(F['verdicts'])} pairs", "measured, none of them previously tested"),
         ("3 models", "including a controlled repeat of the same pair on a second model"),
-    ], 2.48, pitch=0.62, lw=1.9, size=13, x=M, w=5.6)
-    put(tb(sl, M, 4.40, 5.7, 0.32), "Running now", 15, INK, bold=True, first=True, after=6)
-    rows(sl, [
+    ], 2.20, [1.9, 3.8], size=13, pitch=0.60, x=M)
+    table(sl, ["Running now", ""], [
         ("5 models", "testing why one model breaks and another does not"),
-    ], 4.78, pitch=0.5, lw=1.9, size=13, x=M, w=5.6)
+    ], 4.50, [1.9, 3.8], size=13, pitch=0.50, x=M)
     put(tb(sl, M + 6.6, 2.10, 5.5, 0.32), "Left to do", 15, INK, bold=True, first=True, after=6)
     body(sl, [
         "One more attack in this cell: a third poisoning method with released code.",
