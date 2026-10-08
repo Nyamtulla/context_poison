@@ -139,21 +139,16 @@ def main():
         except Exception as exc:                     # a model that will not load
             print(f"  SKIPPED: {type(exc).__name__}: {str(exc)[:160]}", flush=True)
             results.append({"model": name, "error": f"{type(exc).__name__}: {str(exc)[:200]}"})
+            save()
             continue
         results.append(r)
+        save()
         print(f"  isolated   {r['isolated_refusal']:6.2f}%   (over {r['isolated_n']} passages)")
         print(f"  undefended {r['undefended_refusal']:6.2f}%")
         print(f"  defended   {r['defended_refusal']:6.2f}%   95% CI "
               f"[{r['defended_ci_low']}, {r['defended_ci_high']}]", flush=True)
 
-    path = REPO / args.out
-    path.write_text(json.dumps({
-        "generated": "2026-10-07", "attack": "badrag_dos",
-        "defense": "robustrag-keyword", "dataset": "open_nq",
-        "n": args.n, "n_poison": args.n_poison, "mdr_pp_at_n": mdr,
-        "question": "does the defended refusal rate track the model's refusal "
-                    "rate on a single isolated poisoned passage?",
-        "results": results}, indent=1))
+    save()
     print(f"\nwrote {args.out}  (mdr {mdr} pp)")
 
 

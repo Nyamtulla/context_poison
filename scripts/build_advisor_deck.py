@@ -77,16 +77,22 @@ def body(sl, items, y, size=15, w=None, x=None, gap=11):
     return tf
 
 
-def rows(sl, data, y, *, pitch=0.47, lw=2.9, size=13, right=None):
-    """Plain two- or three-column text rows. No fills, no rules, no boxes."""
+def rows(sl, data, y, *, pitch=0.47, lw=2.9, size=13, right=None, x=None, w=None):
+    """Plain two- or three-column text rows. No fills, no rules, no boxes.
+
+    `x` and `w` place the block, so two of these can sit side by side. Without
+    them it spans the page, which is what most slides want.
+    """
+    x0 = M if x is None else x
+    width = W if w is None else w
     for i, item in enumerate(data):
         name, meaning = item[0], item[1]
         yy = y + i * pitch
-        put(tb(sl, M, yy, lw, 0.34), name, size, INK, bold=True, first=True, after=0)
-        put(tb(sl, M + lw, yy, W - lw - (0.9 if right else 0), 0.34),
+        put(tb(sl, x0, yy, lw, 0.34), name, size, INK, bold=True, first=True, after=0)
+        put(tb(sl, x0 + lw, yy, width - lw - (0.9 if right else 0), 0.34),
             meaning, size, MID, first=True, after=0)
         if right:
-            put(tb(sl, M + W - 0.85, yy, 0.85, 0.34, align=PP_ALIGN.RIGHT),
+            put(tb(sl, x0 + width - 0.85, yy, 0.85, 0.34, align=PP_ALIGN.RIGHT),
                 str(item[2]), size, INK, bold=True, first=True, after=0)
 
 
@@ -104,6 +110,79 @@ def cite(sl, *parts, y=7.00, size=8.5):
 def page(sl, n):
     put(tb(sl, 12.25, 7.02, 0.5, 0.3, align=PP_ALIGN.RIGHT), str(n), 9, FAINT,
         first=True, after=0)
+
+
+def _verdicts(con):
+    """One plain verdict per cell: did the defense stop the attack, or not?
+
+    A cell counts as stopped if attack success falls by more than the run's
+    detection limit at any dose, and as worse if it rises by more than that.
+    Everything else is no readable effect. Worse is checked first, because a
+    defense that helps at one dose and hurts at another is not a defense.
+    """
+    out = []
+    for d, a, m in con.execute("""SELECT DISTINCT technique_name, attack, model
+                                  FROM our_run WHERE campaign='rag_transfer'
+                                  ORDER BY 1,2,3"""):
+        rows = con.execute("""SELECT n_poison, drop_pp, mdr_pp, undefended_asr FROM our_run
+                              WHERE campaign='rag_transfer' AND technique_name=?
+                                AND attack=? AND model=?""", (d, a, m)).fetchall()
+        worse = [r for r in rows if r[1] >= r[2]]
+        better = [r for r in rows if r[1] <= -r[2]]
+        # `inert` means the attack barely works without the defense, so the
+        # defense is not making a bad situation worse - it is creating it
+        inert = False
+        if worse:
+            v = "makes it worse"
+            inert = max(worse, key=lambda r: r[1])[3] < 5
+        elif better:
+            v = "stops it"
+        else:
+            v = "no effect"
+        out.append((d, a, m, v, inert))
+    return out
+
+
+
+CONSEQ = ["goal-hijack", "reasoning-corruption", "silent-corruption",
+          "persistence-backdoor", "data-exfiltration", "resource-abuse"]
+CONSEQ_SHORT = ["hijack", "reasoning", "silent", "backdoor", "exfil", "resource"]
+
+
+def grid(con):
+    """Attacks per channel x consequence, with whether any pair was ever tested.
+
+    Returns [(channel, [(n_attacks, tested), ...])]. `tested` is False where
+    the cell holds at least one attack and no defense has ever been run against
+    any of them - which is the thing the slide is for.
+    """
+    out = []
+    for (ch,) in con.execute("SELECT channel FROM attack GROUP BY 1 ORDER BY COUNT(*) DESC"):
+        row = []
+        for co in CONSEQ:
+            na = con.execute("SELECT COUNT(*) FROM attack WHERE channel=? AND consequence=?",
+                             (ch, co)).fetchone()[0]
+            np_ = con.execute("""SELECT COUNT(*) FROM pair p JOIN attack a ON a.name=p.attack_name
+                                 WHERE a.channel=? AND a.consequence=?""", (ch, co)).fetchone()[0]
+            row.append((na, np_ > 0))
+        out.append((ch, row))
+    return out
+
+
+def cell_detail(con, ch, co):
+    q = lambda t, tr: con.execute(
+        f"SELECT COUNT(*) FROM {t} WHERE channel=? AND consequence=? AND track=?",
+        (ch, co, tr)).fetchone()[0]
+    pairs = con.execute("""SELECT COUNT(*) FROM pair p
+                           JOIN attack a ON a.name=p.attack_name
+                           JOIN defense d ON d.name=p.defense_name
+                           WHERE a.channel=? AND a.consequence=?
+                             AND d.channel=? AND d.consequence=?""",
+                        (ch, co, ch, co)).fetchone()[0]
+    return {"channel": ch, "consequence": co,
+            "atk_sec": q("attack", "Security"), "atk_ml": q("attack", "ML/AI"),
+            "def_sec": q("defense", "Security"), "def_ml": q("defense", "ML/AI"),
+            "pairs": pairs}
 
 
 def facts():
@@ -173,7 +252,38 @@ def facts():
         "cons": dict(con.execute(
             "SELECT consequence, COUNT(*) FROM attack GROUP BY 1")),
         "both_tm": one("SELECT COUNT(*) FROM defense WHERE validated_against='both'"),
+        # candidate pools: a cell where the security side has attacks and the
+        # ML/AI side has defenses is a transfer test waiting to be run
+        "pool_total": one("""
+            WITH a AS (SELECT channel, consequence, COUNT(*) n FROM attack
+                       WHERE track='Security' GROUP BY 1,2),
+                 d AS (SELECT channel, consequence, COUNT(*) n FROM defense
+                       WHERE track='ML/AI' GROUP BY 1,2)
+            SELECT COUNT(*) FROM a JOIN d
+              ON a.channel=d.channel AND a.consequence=d.consequence"""),
+        "pool": con.execute("""
+            WITH a AS (SELECT channel, consequence, COUNT(*) n FROM attack
+                       WHERE track='Security' GROUP BY 1,2),
+                 d AS (SELECT channel, consequence, COUNT(*) n FROM defense
+                       WHERE track='ML/AI' GROUP BY 1,2)
+            SELECT a.channel, a.consequence, a.n, d.n FROM a JOIN d
+              ON a.channel=d.channel AND a.consequence=d.consequence
+            ORDER BY a.n*d.n DESC LIMIT 7""").fetchall(),
+        "pool_tested": None,   # filled below, once `pool` exists
+        "verdicts": _verdicts(con),
     }
+    # How many of each pool cell's pairs cross the divide, and how many pairs
+    # that cell holds in total. The second number matters: a cell can be heavily
+    # tested and still have nothing crossing, and the slide must not blur those.
+    f["pool_tested"] = [
+        (con.execute("""SELECT COUNT(*) FROM pair p
+                        JOIN attack a ON a.name=p.attack_name
+                        JOIN defense d ON d.name=p.defense_name
+                        WHERE a.channel=? AND a.consequence=? AND d.channel=? AND d.consequence=?
+                          AND a.track='Security' AND d.track='ML/AI'""", (ch, co, ch, co)).fetchone()[0],
+         con.execute("""SELECT COUNT(*) FROM pair p JOIN attack a ON a.name=p.attack_name
+                        WHERE a.channel=? AND a.consequence=?""", (ch, co)).fetchone()[0])
+        for ch, co, _, _ in f["pool"]]
     con.close()
     return f
 
@@ -341,111 +451,149 @@ def build(F):
          "was never run. It cannot say what the test would have found.", True),
     ], 3.95)
 
-    # 10 -----------------------------------------------------------------
-    sl = S("What we did next", "We ran the tests the field never ran")
-    body(sl, [
-        ("We took defenses with released code, and attacks with released code, and ran the pairs "
-         "that no paper reports.", True),
-        f"{F['cells']} defense and attack pairs. {F['doses']} measured conditions. Four attacks. Five defenses. Three models.",
-        "We raise the attack dose from zero to ten poisoned passages out of ten, so each pair gives "
-        "a curve and not a single point.",
-    ], 2.15)
-    put(tb(sl, M, 4.10, W, 0.35), "Two rules decide what we are allowed to claim.", 15, INK, bold=True, first=True, after=10)
-    rows(sl, [
-        ("The control first", "A defense must show its own benefit on its own task before we read anything else from it."),
-        ("A size floor", "We fix the smallest change the sample can detect. Below that we report nothing, in either direction."),
-    ], 4.52, pitch=0.70, lw=2.9, size=14)
-    put(tb(sl, M, 6.05, W, 0.4),
-        "Scoring comes from each paper's own code, unchanged.", 13, MID, first=True, after=0)
-    cite(sl, f"PoisonedRAG {short(C['zou'])}", f"BadRAG {short(C['badrag'])}",
-         f"RobustRAG {short(C['robustrag'])}", f"ParamMute {short(C['parammute'])}")
-
-    # 11 -----------------------------------------------------------------
-    ch_h, ch_t = F["ctx"]; ag_h, ag_t = F["agg"]
-    sl = S("Result 1", "One family of defenses fails under pressure. The other does not.")
-    put(tb(sl, M, 2.45, W, 0.4),
-        "When every retrieved passage belongs to the attacker:", 14.5, MID, first=True, after=0)
-    rows(sl, [
-        ("Context-reliance", "It holds down the model's own memory so the model follows the retrieved text.", f"{ch_h} of {ch_t}"),
-        ("Isolate-then-aggregate", "It answers from each passage alone, then joins the answers.", f"{ag_h} of {ag_t}"),
-    ], 2.95, pitch=0.72, lw=3.5, size=15, right=True)
-    put(tb(sl, M + W - 3.4, 4.45, 3.4, 0.3), "readable cases that lose accuracy", 11.5, GREY, first=True, after=0)
-    body(sl, [
-        ("The loss is the same size every time: about 32 points, on two defenses, two attacks and two models.", True),
-        "Against a false passage the loss begins at eight poisoned passages of ten. It does not wait for all ten.",
-        ("The design rule that follows: do not suppress the model's own memory. It is the only thing "
-         "left when the evidence runs out.", True),
-    ], 4.95)
-    cite(sl, f"ParamMute {short(C['parammute'])}", f"RobustRAG {short(C['robustrag'])}",
-         f"PoisonedRAG {short(C['zou'])}", f"BadRAG {short(C['badrag'])}", "Measurements: this work")
-
-    # 12 -----------------------------------------------------------------
-    sl = S("Result 2", "Some defenses make an attack work that otherwise does nothing")
-    ck1u, ck1d = F["ck1"]; ck10u, ck10d = F["ck10"]; pmu, pmd = F["pm10"]
-    hdr = [("Defense", M, 3.2), ("Attack", M + 3.3, 2.6), ("No defense", M + 6.1, 1.8),
-           ("With the defense", M + 8.1, 2.2), ("Poisoned", M + 10.5, 1.4)]
+    # 10 — the gap, named ------------------------------------------------
+    sl = S("The gap, in detail", "Where an untested pair is waiting")
+    put(tb(sl, M, 2.10, W, 0.45),
+        "Each row is one route and one failure. The attacks are the deliberate ones. The defenses "
+        "are the ones built for the same failure happening by accident.", 14, MID, first=True, after=0)
+    hdr = [("Route in", M, 2.7), ("What goes wrong", M + 2.8, 3.3),
+           ("Deliberate\nattacks", M + 6.3, 1.5), ("Accidental\ndefenses", M + 8.0, 1.6),
+           ("Ever tested\nagainst each other", M + 9.8, 2.2)]
     for lbl, x, w in hdr:
-        put(tb(sl, x, 2.30, w, 0.3), lbl, 11.5, GREY, bold=True, first=True, after=0)
-    data = [("CK-PLUG", "tone steering", f"{ck1u:.1f} %", f"{ck1d:.1f} %", "1 of 10"),
-            ("CK-PLUG", "tone steering", f"{ck10u:.1f} %", f"{ck10d:.1f} %", "10 of 10"),
-            ("ParamMute", "tone steering", f"{pmu:.1f} %", f"{pmd:.1f} %", "10 of 10")]
-    for i, r in enumerate(data):
-        y = 2.68 + i * 0.52
-        for txt, (lbl, x, w) in zip(r, hdr):
-            bold = lbl == "With the defense"
-            put(tb(sl, x, y, w, 0.34), txt, 13.5, INK if bold else MID,
-                bold=bold, first=True, after=0)
+        tf = tb(sl, x, 2.64, w, 0.5)
+        for j, ln in enumerate(lbl.split("\n")):
+            put(tf, ln, 11.5, GREY, bold=True, first=(j == 0), after=0, line=1.1)
+    for i, ((ch, co, na, nd), (crossed, _total)) in enumerate(zip(F["pool"], F["pool_tested"])):
+        y = 3.20 + i * 0.40
+        for txt, (lbl, x, w) in zip((ch, co, str(na), str(nd), str(crossed)), hdr):
+            last = lbl.startswith("Ever tested")
+            put(tb(sl, x, y, w, 0.32), txt, 13, INK if last else MID,
+                bold=last, first=True, after=0)
+    worst = max(zip(F["pool"], F["pool_tested"]), key=lambda z: z[1][1])
     body(sl, [
-        ("With no defense the attack stays at or near zero. It only works once the defense is switched on.", True),
-        "One poisoned passage out of ten is enough. The undefended model ignores it completely.",
-        "The reason is uncomfortable. Tone steering does not change the answer, so a defense that pushes "
-        "the model to follow the retrieved text follows the slant as well, and scores itself as working "
-        "perfectly. The attack and the defense want the same thing.",
-        ("A defense can be the reason an attack succeeds. That is a security finding, not a performance note.", True),
-    ], 4.50)
-    cite(sl, f"BadRAG {short(C['badrag'])}", f"ParamMute {short(C['parammute'])}",
-         "Measurements: this work")
+        ("Every row is zero. Not one of these pairs has been tested by anybody.", True),
+        f"These cells are not ignored. {worst[0][0]} and {worst[0][1]} alone holds {worst[1][1]} "
+        "tested pairs. But each one is a security defense against a security attack, or an accident "
+        "defense against an accident. Nothing crosses.",
+        "The RAG row is 3 attacks against 42 defenses. 126 possible tests. None run.",
+    ], 6.02, gap=6, size=13.5)
 
-    # 13 -----------------------------------------------------------------
-    sl = S("Result 3", "One defense, two models, opposite results")
-    put(tb(sl, M, 2.00, W, 0.4),
-        "One defense family, two versions of it, two models. Nine poisoned passages of ten. "
-        "The number is how often the agent refuses to answer.", 14, MID, first=True, after=0)
-    hdr = [("Model", M, 3.6), ("Version of the defense", M + 3.7, 3.4),
-           ("No defense", M + 7.3, 2.0), ("With the defense", M + 9.5, 2.3)]
-    for lbl, x, w in hdr:
-        put(tb(sl, x, 2.62, w, 0.3), lbl, 11.5, GREY, bold=True, first=True, after=0)
-    for i, (m, impl, (u, d)) in enumerate(F["agg_dos"]):
-        y = 3.00 + i * 0.50
-        name = "Mistral-7B" if m == "Mistral" else "Llama-3-8B"
-        for txt, (lbl, x, w) in zip((name, impl, f"{u:.1f} %", f"{d:.1f} %"), hdr):
-            bold = lbl == "With the defense"
-            put(tb(sl, x, y, w, 0.34), txt, 13.5, INK if bold else MID,
-                bold=bold, first=True, after=0)
-    body(sl, [
-        ("The undefended model never refuses. Not once, on either model, at any dose.", True),
-        "The cause is the defense's own design. It answers from each passage alone, so a passage that "
-        "says \u201crefuse\u201d gets an unopposed hearing. The undefended model reads all ten passages "
-        "together, where nine honest ones drown it out.",
-        ("It is the same property that makes this family resist tone steering. One trade, not two "
-         "results, and the model decides which way it falls.", True),
-    ], 5.10, gap=9)
-    cite(sl, f"RobustRAG, both versions {short(C['robustrag'])}", f"BadRAG {short(C['badrag'])}",
-         "Measurements: this work")
+    # 11 — what can be rebuilt ---------------------------------------------
+    sl = S("What we can rebuild", "Released code is not the same as working code")
+    put(tb(sl, M, 2.10, W, 0.4),
+        "We only report a number if we can run the authors' own code. So the first question "
+        "is which code runs at all.", 14, MID, first=True, after=0)
 
-    # 14 -----------------------------------------------------------------
-    sl = S("Why this is worth finishing", "A survey found the gap. Running the code showed what is in it.")
+    put(tb(sl, M, 2.66, 5.4, 0.32), "Attacks we rebuilt", 15, INK, bold=True, first=True, after=0)
     rows(sl, [
-        ("It is new evidence", "16 defense and attack pairs that exist in no paper. The numbers are ours, not quoted."),
-        ("It changes the threat model", "A defense can be the reason an attack works. That is a security claim, not a performance note."),
-        ("It gives a design rule", "Do not suppress the model's own memory. Held across two families and five implementations."),
-        ("It predicted and then held", "We stated the cause before the test. The measurement followed the predicted shape."),
-    ], 2.20, pitch=0.70, lw=3.9, size=14.5)
-    put(tb(sl, M, 5.25, W, 0.35), "What is left", 15, INK, bold=True, first=True, after=8)
+        ("Removes the answer", "corpus poisoning"),
+        ("Inserts a false answer", "PoisonedRAG"),
+        ("Forces a refusal", "BadRAG DoS"),
+        ("Changes only the tone", "BadRAG Selective-Fact"),
+    ], 3.06, pitch=0.46, lw=2.5, size=13, x=M, w=5.4)
+
+    put(tb(sl, M + 6.3, 2.66, 5.4, 0.32), "Defense codebases we opened", 15, INK,
+        bold=True, first=True, after=0)
+    rows(sl, [
+        ("4 run", "and give a usable measurement"),
+        ("1 runs", "but cannot reproduce its own published benefit"),
+        ("4 do not run", "missing data, a missing prompt file, a checkpoint with no tokenizer"),
+    ], 3.06, pitch=0.70, lw=1.7, size=13, x=M + 6.3, w=5.4)
+
     body(sl, [
-        "Finish the model comparison, add a third attack, and find an aggregation defense from another group.",
-        "Then the matrix is closed and the paper is written.",
-    ], 5.61, size=14, gap=7)
+        ("Nine defense codebases attempted. Four produced a measurement.", True),
+        "That is not a complaint about other people's repositories. It sets the size of what "
+        "this work can honestly cover, and it is a result the field should know.",
+    ], 5.40, gap=8)
+
+    # 12 — how pairs are chosen --------------------------------------------
+    sl = S("How we choose a pair", "The map tells us which pairs can even be run")
+    body(sl, [
+        ("A defense and an attack belong together when they sit in the same place on the map: "
+         "the same route in, and the same thing going wrong.", True),
+        "If a defense was built for a failure that happens by accident, and an attack causes "
+        "the same failure on purpose through the same route, then the defense has a claim to "
+        "answer. Nobody has made it answer.",
+    ], 2.10, gap=9)
+    put(tb(sl, M, 3.52, W, 0.34), "The cell we worked in", 15, INK, bold=True, first=True, after=8)
+    rows(sl, [
+        ("Route in", "a document returned by a search step"),
+        ("What goes wrong", "the agent answers from false content and nothing signals it"),
+        ("On the attack side", "3 named attacks, all deliberate"),
+        ("On the defense side", "42 named defenses, all built for the accidental version"),
+        ("Tested against each other", "none of them, by anyone"),
+    ], 3.94, pitch=0.48, lw=3.6, size=13.5)
+    body(sl, [
+        ("Every defense we ran lives in that cell. So does every attack. We did not pick them "
+         "because they looked promising. The map picked them.", True),
+    ], 6.46, gap=6)
+
+    # 13 — what we ran ------------------------------------------------------
+    sl = S("What we ran", "The first measurements anyone has taken in that cell")
+    rows(sl, [
+        ("4 attacks", "rebuilt from released code and papers"),
+        ("5 defenses", "counting two versions of one of them, all from released code"),
+        (f"{len(F['verdicts'])} pairs", "defense against attack, on three models, none of them reported anywhere"),
+        (f"{F['doses']} conditions", "each pair run at several attack strengths, not one"),
+    ], 2.15, pitch=0.62, lw=3.0, size=15)
+    body(sl, [
+        ("Two rules decide whether we are allowed to claim anything.", True),
+        "A defense must first show its own benefit on its own task. If it cannot, we report "
+        "nothing from it.",
+        "We fix in advance the smallest change the sample can detect. Below that we say nothing, "
+        "in either direction.",
+        "Scoring is the authors' own code, unchanged.",
+    ], 4.95, gap=8)
+
+    # 14 — the answer -------------------------------------------------------
+    sl = S("The result", "Does the defense stop the attack?")
+    counts = {}
+    for _, _, _, v, _ in F["verdicts"]:
+        counts[v] = counts.get(v, 0) + 1
+    rows(sl, [
+        ("It stops the attack", "the attack succeeds less often with the defense switched on",
+         counts.get("stops it", 0)),
+        ("It does nothing", "no readable difference either way", counts.get("no effect", 0)),
+        ("It makes the attack worse", "the attack succeeds MORE often with the defense switched on",
+         counts.get("makes it worse", 0)),
+    ], 2.25, pitch=0.76, lw=4.6, size=15.5, right=True)
+    put(tb(sl, M + W - 3.0, 4.56, 3.0, 0.3), f"out of {len(F['verdicts'])} pairs",
+        11.5, GREY, first=True, after=0)
+    body(sl, [
+        ("A defense helped in four cases out of eighteen. In seven it made the attack work better "
+         "than no defense at all.", True),
+        f"In {sum(1 for r in F['verdicts'] if r[4])} of those seven the attack does almost nothing "
+        "to a model with no defense at all. The defense is what makes it work.",
+        ("That is the finding. A defense built for one kind of failure is not neutral against the "
+         "other kind. It can be the reason the attack succeeds.", True),
+    ], 5.05, gap=9)
+
+    # 15 — what is next -----------------------------------------------------
+    sl = S("Where we are now", "What is finished and what is still running")
+    put(tb(sl, M, 2.10, 5.7, 0.32), "Done", 15, INK, bold=True, first=True, after=6)
+    rows(sl, [
+        ("1 cell", "worked through: the retrieved document, answering from false content"),
+        (f"{len(F['verdicts'])} pairs", "measured, none of them previously tested"),
+        ("3 models", "including a controlled repeat of the same pair on a second model"),
+    ], 2.48, pitch=0.56, lw=1.9, size=13)
+    put(tb(sl, M, 4.40, 5.7, 0.32), "Running now", 15, INK, bold=True, first=True, after=6)
+    rows(sl, [
+        ("5 models", "testing why one model breaks and another does not"),
+    ], 4.78, pitch=0.5, lw=1.9, size=13)
+    put(tb(sl, M + 6.6, 2.10, 5.5, 0.32), "Left to do", 15, INK, bold=True, first=True, after=6)
+    body(sl, [
+        "One more attack in this cell: a third poisoning method with released code.",
+        "An aggregation defense from a different research group, to check the rule is not "
+        "one laboratory's habit.",
+        "Then the next cell on the map. The largest untested pool is a different route in, "
+        "with four attacks and seventy-nine defenses facing each other and nothing between them.",
+        "99 defense papers name an attack on our map and never test against it. Those are the "
+        "next candidates after that.",
+    ], 2.48, size=13, w=5.5, x=M + 6.6, gap=10)
+    body(sl, [
+        (f"The cell we finished took four attacks and five defenses. The map holds "
+         f"{F['pool_total'] - 1} more cells with both sides present and nothing tested between them.", True),
+    ], 5.60, gap=6)
 
     return n
 
