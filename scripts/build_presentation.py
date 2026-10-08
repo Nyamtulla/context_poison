@@ -296,6 +296,11 @@ def load_facts():
         "cen": cen, "hl": hl, "tt": tt, **db, "C": load_citations(),
         "rows": len(rows), "included": len(inc),
         "mech_reg": len(raw3), "mech_all": len(mech),
+        # the two sides build different things; see src/registry_source.py
+        "n_attack": sum(1 for m in mech if m.get("kind") == "attack"),
+        "n_incidental": sum(1 for m in mech if m.get("kind") == "incidental mechanism"),
+        "n_defense": sum(1 for d in defs_ if d.get("kind") == "defense"),
+        "n_fix": sum(1 for d in defs_ if d.get("kind") == "fix"),
         "mech_track": cnt(x["track"] for x in raw3),
         "mech_channel": cnt(x["channel"] for x in raw3),
         "mech_conseq": cnt(x["consequence"] for x in raw3),
@@ -551,14 +556,16 @@ def build(prs, F):
     tf = _tb(s, 0.70, 2.35, 5.75, 0.3)
     _run(tf.paragraphs[0], "INTENT: DID SOMEONE MEAN IT?", 12, GOLD, True)
     for i, (k, v) in enumerate([
-            ("adversarial", "A person placed the text to get this effect. This is the security track."),
-            ("incidental", "Nobody placed it. The window is long, stale or badly ordered. This is the ML/AI track."),
+            ("adversarial", f"A person placed the text to get this effect. The security side calls "
+                            f"it an ATTACK ({F['n_attack']}) and builds a DEFENSE ({F['n_defense']})."),
+            ("incidental", f"Nobody placed it. The ML/AI side calls it an INCIDENTAL MECHANISM "
+                           f"({F['n_incidental']}) and builds a FIX ({F['n_fix']})."),
             ("both", "The paper treats the case in both ways.")]):
         y = 2.72 + i * 1.02
         panel(s, 0.70, y, 5.75, 0.92)
         tf = _tb(s, 1.00, y + 0.12, 5.2, 0.3); _run(tf.paragraphs[0], k, 13, WHITE, True)
-        tf = _tb(s, 1.00, y + 0.42, 5.2, 0.45)
-        _lines(tf, [v], 11.5, BODY, space_after=0)
+        tf = _tb(s, 1.00, y + 0.40, 5.2, 0.52)
+        _lines(tf, [v], 11, BODY, space_after=0)
     tf = _tb(s, 6.85, 2.35, 5.75, 0.3)
     _run(tf.paragraphs[0], "INTERVENTION POINT: WHERE THE DEFENSE ACTS", 12, GOLD, True)
     ip = F["def_dip"]
@@ -575,10 +582,10 @@ def build(prs, F):
         _lines(tf, [v], 11.5, BODY, space_after=0)
     tf = _tb(s, 0.70, 5.95, 11.9, 1.2)
     _lines(tf, [
-        ("Intent is the axis that splits the two literatures. The same failure gets two names and two sets of defenses.",
+        ("Intent is the axis that splits the two literatures, and the two sides do not build the same thing.",
          14, WHITE, True),
-        ("A tool returns a page with a hidden order. A tool returns a page that is simply ten times too long. "
-         "Both reach the window through the same channel. One has an author. One does not.", 12.5, BODY, False),
+        ("A fix was never built to stop an adversary, so a fix with no attack pair is not an untested defense. "
+         "It is answering a different question.", 12.5, BODY, False),
         (f"The counts on the right are defenses, not attacks. {F['def_dip'].get('none', 0)} more defenses "
          "carry no intervention point: they act after the event, such as forensics, or we never coded them.",
          12.5, MUTED, False)],
@@ -594,9 +601,9 @@ def build(prs, F):
         ("BASE", "What we measure", "3 axes: channel, intent, consequence"),
         ("RQ1", "Taxonomy", f"{F['empty_pct']}% of the cube is empty"),
         ("RQ2", "Cross-citation", f"{F['ab'][2]}% / {F['ba'][2]}% between tracks"),
-        ("RQ3", "Pollution census", f"{F['mech_reg']} named mechanisms"),
-        ("RQ4", "Defense census", f"{F['defenses']} named defenses"),
-        ("RQ5", "Coverage matrix", f"{F['munc']} mechanisms never defended"),
+        ("RQ3", "Cause census", f"{F['n_attack']} attacks  ·  {F['n_incidental']} incidental mechanisms"),
+        ("RQ4", "Protection census", f"{F['n_defense']} defenses  ·  {F['n_fix']} fixes"),
+        ("RQ5", "Coverage matrix", f"{F['munc']} causes nothing has been run against"),
         ("RQ6", "Generalization", "9 reconstructed case studies"),
         ("RQ7", "Open problems", "7 ranked, falsifiable"),
         ("NEW", "Transfer matrix", f"{F['tx_cells']} cells that no paper reports"),
@@ -733,12 +740,12 @@ def build(prs, F):
          12.5, MUTED, False)], 12.5, BODY)
 
     # 8 — RQ3 -------------------------------------------------------------
-    s = start("RQ3  ·  POLLUTION CENSUS", ["How many distinct ways can a context be poisoned?"], 28)
+    s = start("RQ3  ·  CAUSE CENSUS", ["How many distinct ways can a context be poisoned?"], 28)
     stat_disc(s, 0.95, 2.65, 3.15, str(F["mech_reg"]), "named mechanisms")
     t = F["mech_track"]
     tf = _tb(s, 4.85, 2.95, 7.6, 3.4)
     _lines(tf, [
-        (f"{t.get('Security',0)} adversarial  ·  {t.get('ML/AI',0)} incidental", 17, WHITE, True),
+        (f"{F['n_attack']} attacks  ·  {F['n_incidental']} incidental mechanisms", 17, WHITE, True),
         ("", 8, BODY, False),
         ("Before the fix we had 183. We added 41.", 12.5, BODY, False),
         ("40 of the new ones are adversarial.", 12.5, BODY, False),
@@ -760,12 +767,14 @@ def build(prs, F):
          f"{F['mech_all']} in total.", 11.5, GOLD)
 
     # 9 — RQ4 -------------------------------------------------------------
-    s = start("RQ4  ·  DEFENSE CENSUS", ["And how many defenses answer them?"], 30)
+    s = start("RQ4  ·  PROTECTION CENSUS", ["And how many protections answer them?"], 30)
     stat_disc(s, 0.95, 2.55, 3.15, str(F["defenses"]), "named defenses")
     stat_disc(s, 4.55, 2.55, 3.15, f"{F['def_both_pct']:.1f}%", "answer both\nthreat models", RED)
     tf = _tb(s, 8.35, 2.95, 4.3, 3.2)
     _lines(tf, [
-        (f"Only {F['def_both']} of {F['defenses']} defenses", 15, WHITE, True),
+        (f"{F['n_defense']} defenses  ·  {F['n_fix']} fixes", 15, WHITE, True),
+        ("", 6, BODY, False),
+        (f"Only {F['def_both']} of {F['defenses']}", 15, WHITE, True),
         ("answer both threat models:", 15, WHITE, True),
         ("adversarial corruption and", 15, WHITE, True),
         ("incidental corruption.", 15, WHITE, True),
@@ -1159,7 +1168,8 @@ def build(prs, F):
     tf = _tb(s, 0.70, 2.55, 11.9, 1.2)
     _lines(tf, [
         ("Two literatures study the same problem. They do not read each other.", 14, BODY, False),
-        (f"They name {F['mech_reg']} ways to poison a context and {F['defenses']} defenses. They almost never test one against the other.",
+        (f"The security side names {F['n_attack']} attacks and builds {F['n_defense']} defenses. The ML/AI side names "
+         f"{F['n_incidental']} incidental mechanisms and builds {F['n_fix']} fixes. They almost never test across.",
          14, BODY, False)], 14, BODY, space_after=5)
     panel(s, 0.70, 4.05, 11.9, 1.55)
     tf = _tb(s, 1.05, 4.28, 11.2, 1.15)

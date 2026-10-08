@@ -268,9 +268,12 @@ def facts():
         "doses": one("SELECT COUNT(*) FROM our_run WHERE campaign='rag_transfer'"),
         "ctx": fam("context-reliance"),
         "agg": fam("isolate-then-aggregate"),
-        "ck1": asr("CK-PLUG", "badrag_sentiment", 1),
-        "ck10": asr("CK-PLUG", "badrag_sentiment", 10),
-        "pm10": asr("ParamMute", "badrag_sentiment", 10),
+        # pinned: CK-PLUG was run on both models and an unpinned lookup would
+        # return whichever row came back first
+        "ck1": asr("CK-PLUG", "badrag_sentiment", 1, "Llama"),
+        "ck10": asr("CK-PLUG", "badrag_sentiment", 10, "Llama"),
+        "ck10_mistral": asr("CK-PLUG", "badrag_sentiment", 10, "Mistral"),
+        "pm10": asr("ParamMute", "badrag_sentiment", 10, "Llama"),
         "agg_dos": [(m, i, asr(f"RobustRAG / {i}", "badrag_dos", 9, m))
                     for m in ("Mistral", "Llama")
                     for i in ("KeywordAgg", "DecodingAgg")],
@@ -556,10 +559,10 @@ def build(F):
     # 10 — the gap, named ------------------------------------------------
     sl = S("The gap, in detail", "Where an untested pair is waiting")
     put(tb(sl, M, 2.10, W, 0.45),
-        "Each row is one route and one failure. The attacks are the deliberate ones. The defenses "
-        "are the ones built for the same failure happening by accident.", 14, MID, first=True, after=0)
+        "Each row is one route and one failure. Deliberate attacks on one side, and on the other "
+        "the fixes built for that same failure arriving by accident.", 14, MID, first=True, after=0)
     hdr = [("Route in", M, 2.7), ("What goes wrong", M + 2.8, 3.3),
-           ("Deliberate\nattacks", M + 6.3, 1.5), ("Accidental\ndefenses", M + 8.0, 1.6),
+           ("Attacks", M + 6.3, 1.5), ("Fixes", M + 8.0, 1.6),
            ("Ever tested\nagainst each other", M + 9.8, 2.2)]
     for lbl, x, w in hdr:
         tf = tb(sl, x, 2.64, w, 0.5)
@@ -575,9 +578,9 @@ def build(F):
     body(sl, [
         ("Every row is zero. Not one of these pairs has been tested by anybody.", True),
         f"These cells are not ignored. {worst[0][0]} and {worst[0][1]} alone holds {worst[1][1]} "
-        "tested pairs. But each one is a security defense against a security attack, or an accident "
-        "defense against an accident. Nothing crosses.",
-        "The RAG row is 3 attacks against 42 defenses. 126 possible tests. None run.",
+        "tested pairs. But each one is a defense against an attack, or a fix against an accident. "
+        "Nothing crosses.",
+        "The RAG row is 3 attacks against 42 fixes. 126 possible tests. None run.",
     ], 6.02, gap=6, size=13.5)
 
     # 11 — what can be rebuilt ---------------------------------------------
@@ -617,7 +620,7 @@ def build(F):
         ("Route in", "a document returned by a search step"),
         ("What goes wrong", "the agent answers from false content and nothing signals it"),
         ("On the attack side", "3 named attacks, all deliberate"),
-        ("On the defense side", "42 named defenses, all built for the accidental version"),
+        ("On the fix side", "42 named fixes, all built for the accidental version"),
         ("Tested against each other", "none of them, by anyone"),
     ], 3.52, [3.7, 8.0], size=13.5, pitch=0.46)
     body(sl, [
