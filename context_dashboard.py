@@ -325,23 +325,40 @@ def routes_tab(d: dict) -> None:
                       xaxis_title="what goes wrong", yaxis_title="how it gets in")
     st.plotly_chart(fig, width="stretch", key="routes")
 
-    st.markdown("##### Defense effort per route, against causes per route")
+    st.markdown("##### Protection per route, split by which side built it")
     cmp = pd.DataFrame({
-        "named causes": a["channel"].value_counts(),
-        "defenses proposed": dfn["channel"].value_counts(),
+        "attacks": a.loc[a["track"] == "Security", "channel"].value_counts(),
+        "incidental mechanisms": a.loc[a["track"] == "ML/AI", "channel"].value_counts(),
+        "defenses": dfn.loc[dfn["track"] == "Security", "channel"].value_counts(),
+        "fixes": dfn.loc[dfn["track"] == "ML/AI", "channel"].value_counts(),
     }).fillna(0).astype(int)
-    cmp["defenses per cause"] = (cmp["defenses proposed"]
-                                 / cmp["named causes"].replace(0, pd.NA)).round(2)
-    cmp = cmp.sort_values("named causes", ascending=False)
+    # Defenses per attack, not protections per cause. A fix was not built to
+    # stop an adversary, so counting it as cover for one overstates how
+    # defended a route is - which is exactly what the merged column did.
+    cmp["defenses per attack"] = (cmp["defenses"]
+                                  / cmp["attacks"].replace(0, pd.NA)).round(2)
+    cmp = cmp.sort_values("attacks", ascending=False)
     st.dataframe(cmp, width="stretch")
-    worst = cmp[cmp["named causes"] >= 5].sort_values("defenses per cause")
+
+    worst = cmp[cmp["attacks"] >= 5].sort_values("defenses per attack")
     if not worst.empty:
         r = worst.iloc[0]
         st.caption(
             f"**Thinnest route:** `{worst.index[0]}` carries "
-            f"{int(r['named causes'])} named causes and attracts "
-            f"{int(r['defenses proposed'])} defenses — "
-            f"{r['defenses per cause']} per cause.")
+            f"{int(r['attacks'])} attacks and attracts {int(r['defenses'])} "
+            f"defenses — {r['defenses per attack']} per attack.")
+    # the case the merged column hid
+    hidden = cmp[(cmp["fixes"] >= 3 * cmp["defenses"].clip(lower=1))
+                 & (cmp["attacks"] >= 5)]
+    if not hidden.empty:
+        k = hidden.index[0]
+        h = hidden.iloc[0]
+        st.caption(
+            f"**What a merged count would hide:** `{k}` looks well covered at "
+            f"{int(h['defenses'] + h['fixes'])} protections for "
+            f"{int(h['attacks'] + h['incidental mechanisms'])} causes. Split by "
+            f"side it is {int(h['fixes'])} fixes and only {int(h['defenses'])} "
+            f"defenses, against {int(h['attacks'])} attacks.")
 
 
 # Plain wording for the verdicts the database stores. The database keeps the
@@ -471,11 +488,16 @@ def main() -> None:
         return
     d = load(DB.stat().st_mtime)
     st.caption(
-        f"{len(d['papers'])} papers · {len(d['attacks'])} named causes · "
-        f"{len(d['defenses'])} defenses · {len(d['pairs'])} confirmed pairs. "
+        f"{len(d['papers'])} papers · "
+        f"{(d['attacks']['track'] == 'Security').sum()} attacks and "
+        f"{(d['attacks']['track'] == 'ML/AI').sum()} incidental mechanisms · "
+        f"{(d['defenses']['track'] == 'Security').sum()} defenses and "
+        f"{(d['defenses']['track'] == 'ML/AI').sum()} fixes · "
+        f"{len(d['pairs'])} confirmed pairs. "
         "Context goes bad deliberately and by accident; this reads both as one "
         "question. The corpus workbench with the RQ tabs is `dashboard.py`."
     )
+    scorecard.vocabulary_note()
     tabs = st.tabs(["The six ways", "One way in depth", "How it gets in",
                     "What we ran", "Paper scorecard"])
     with tabs[0]:

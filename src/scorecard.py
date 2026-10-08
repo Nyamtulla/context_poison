@@ -120,13 +120,25 @@ def _pair_table(pairs: pd.DataFrame, other_col: str) -> None:
                     f"{str(r['evidence'])[:900]}")
 
 
+# The two literatures do not build the same kind of thing, and flattening them
+# into one word is what made "320 defenses were never tested" read as an
+# accusation. The security side builds a DEFENSE against an ATTACK that a
+# person planted. The ML/AI side builds a FIX for an INCIDENTAL MECHANISM that
+# nobody planted. 124 of the 126 entries in `non_adversarial` are ML/AI side:
+# they answer a real failure and never claimed to stop an adversary.
+SIDE_WORDS = {
+    "Security": ("attack", "defense"),
+    "ML/AI": ("incidental mechanism", "fix"),
+    "Both": ("cause", "protection"),
+}
+
 CLASSIFICATION_BLURB = {
     "names_registry_attack": (
-        "Names an attack that **is** in our registry",
-        "Its own paper names these attacks, but no confirmed (defense, attack) "
-        "pair exists for them. These are candidate missed pairs — a name in the "
-        "text is not proof the defense was run against it, so each needs the "
-        "same adjudication the reverse scan used."),
+        "Names a cause that **is** in our registry",
+        "Its own paper names these causes, but no confirmed pair exists for "
+        "them. These are candidate missed pairs — a name in the text is not "
+        "proof it was run against them, so each needs the same adjudication "
+        "the reverse scan used."),
     "names_benchmark": (
         "Evaluated on a named benchmark suite",
         "It ran adversarial inputs, but named only the suite, not the attacks "
@@ -140,14 +152,40 @@ CLASSIFICATION_BLURB = {
         "States an adversarial threat in general terms",
         "It says what it defends, but names no specific attack and no suite."),
     "non_adversarial": (
-        "Not an adversarial defense",
-        "It addresses incidental context degradation. \"Which attack was it "
-        "tested against\" is the wrong question for this paper."),
+        "A fix for an incidental failure, not a defense",
+        "It answers context degradation that nobody caused — the ML/AI side of "
+        "the corpus. It never claimed to stop an adversary, so \"which attack "
+        "was it tested against\" is the wrong question to ask of it. Whether a "
+        "fix also works as a defense is exactly what the transfer experiments "
+        "test, and it is not something this paper set out to answer."),
     "unclassified": (
         "Could not be classified from the coded text",
         "Its threat model and evaluation fields did not yield a threat label, "
         "an attack name, or a benchmark. Needs a human read."),
 }
+
+
+def vocabulary_note() -> None:
+    """The two sides name their objects differently, and so do we.
+
+    Worth stating wherever a count mixes them, because "534 defenses" hides
+    that half of them were never meant to stop anybody.
+    """
+    with st.expander("Two sides, two vocabularies — what the words mean here"):
+        st.markdown(
+            "| | security side | ML/AI side |\n"
+            "|---|---|---|\n"
+            "| what corrupts the context | an **attack** (182) | an "
+            "**incidental mechanism** (55) |\n"
+            "| what the field builds against it | a **defense** (263) | a "
+            "**fix** (266) |\n"
+            "| who put it there | a person, on purpose | nobody |")
+        st.caption(
+            "The tables below use `attack` and `defense` as column names "
+            "because that is what the registries are called. Read a row's "
+            "track to know which of the two it really is. A fix with no "
+            "attack pair is not an untested defense — it is answering a "
+            "different question.")
 
 
 def _untested_defense_panel(name: str, untested: pd.DataFrame | None) -> None:
@@ -172,10 +210,17 @@ def _untested_defense_panel(name: str, untested: pd.DataFrame | None) -> None:
     title, why = CLASSIFICATION_BLURB.get(
         r["classification"], ("Unclassified", ""))
 
-    st.warning(
-        "**No (defense, attack) pair has ever been confirmed for this "
-        "defense.** That is a gap in our attack registry's naming, not a "
-        "claim that the paper defends nothing.", icon=":material/info:")
+    if r["classification"] == "non_adversarial":
+        st.info(
+            "**This is a fix, not a defense.** It answers a failure that "
+            "nobody caused, so there is no attack it should have been tested "
+            "against. The empty pair count is correct and is not a gap.",
+            icon=":material/info:")
+    else:
+        st.warning(
+            "**No (defense, attack) pair has ever been confirmed for this "
+            "defense.** That is a gap in our attack registry's naming, not a "
+            "claim that the paper defends nothing.", icon=":material/info:")
     st.markdown(f"**{title}**")
     if why:
         st.caption(why)
@@ -184,7 +229,7 @@ def _untested_defense_panel(name: str, untested: pd.DataFrame | None) -> None:
         st.markdown("**It says it defends against:** "
                     + ", ".join(f"`{t}`" for t in r["defends_against"].split(" | ")))
     if r["names_registry_attacks"]:
-        st.markdown("**Registry attacks named in its own text — candidate "
+        st.markdown("**Registry causes named in its own text — candidate "
                     "missed pairs:**")
         for a in r["names_registry_attacks"].split(" | "):
             st.markdown(f"- {a}")
@@ -258,6 +303,7 @@ def paper_scorecard_tab() -> None:
         "directions: a defense paper claiming a win and an attack paper reporting "
         "that same defense broken are different kinds of evidence."
     )
+    vocabulary_note()
 
     c1, c2 = st.columns([3, 2])
     query = c1.text_input("Search title, author, venue, or technique name",
