@@ -515,18 +515,21 @@ def build(F):
         "the same failure on purpose through the same route, then the defense has a claim to "
         "answer. Nobody has made it answer.",
     ], 2.10, gap=9)
-    put(tb(sl, M, 3.52, W, 0.34), "The cell we worked in", 15, INK, bold=True, first=True, after=8)
+    put(tb(sl, M, 3.48, W, 0.34), "The cell we started in", 15, INK, bold=True, first=True, after=8)
     rows(sl, [
         ("Route in", "a document returned by a search step"),
         ("What goes wrong", "the agent answers from false content and nothing signals it"),
         ("On the attack side", "3 named attacks, all deliberate"),
         ("On the defense side", "42 named defenses, all built for the accidental version"),
         ("Tested against each other", "none of them, by anyone"),
-    ], 3.94, pitch=0.48, lw=3.6, size=13.5)
+    ], 3.88, pitch=0.46, lw=3.6, size=13.5)
     body(sl, [
-        ("Every defense we ran lives in that cell. So does every attack. We did not pick them "
-         "because they looked promising. The map picked them.", True),
-    ], 6.46, gap=6)
+        ("The map picked the first experiments, not us. Three of the four defenses we ran sit in "
+         "that cell. The fourth answers the same failure arriving by a different route.", True),
+        "We then widened the attack set along the same route. Two more attacks also poison a "
+        "retrieved document, and testing those as well is how we checked that a result was about "
+        "the defense and not about one attack.",
+    ], 6.28, gap=6, size=13.5)
 
     # 13 — what we ran ------------------------------------------------------
     sl = S("What we ran", "The first measurements anyone has taken in that cell")
@@ -575,11 +578,11 @@ def build(F):
         ("1 cell", "worked through: the retrieved document, answering from false content"),
         (f"{len(F['verdicts'])} pairs", "measured, none of them previously tested"),
         ("3 models", "including a controlled repeat of the same pair on a second model"),
-    ], 2.48, pitch=0.56, lw=1.9, size=13)
+    ], 2.48, pitch=0.62, lw=1.9, size=13, x=M, w=5.6)
     put(tb(sl, M, 4.40, 5.7, 0.32), "Running now", 15, INK, bold=True, first=True, after=6)
     rows(sl, [
         ("5 models", "testing why one model breaks and another does not"),
-    ], 4.78, pitch=0.5, lw=1.9, size=13)
+    ], 4.78, pitch=0.5, lw=1.9, size=13, x=M, w=5.6)
     put(tb(sl, M + 6.6, 2.10, 5.5, 0.32), "Left to do", 15, INK, bold=True, first=True, after=6)
     body(sl, [
         "One more attack in this cell: a third poisoning method with released code.",
