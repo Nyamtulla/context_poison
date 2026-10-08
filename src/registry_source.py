@@ -147,6 +147,22 @@ def load_benchmark_mechanisms(root=None) -> list[dict]:
     return json.loads(path.read_text()).get("mechanisms", [])
 
 
+# The two sides do not build the same kind of thing. The registries were named
+# `mechanism` and `defense` throughout before that distinction was drawn, and
+# renaming the files would break every consumer at once for no gain. Instead
+# every record carries a `kind` from here on, derived from `track` and nowhere
+# else, so there is one definition and nothing to drift.
+KIND_OF_MECHANISM = {"Security": "attack", "ML/AI": "incidental mechanism"}
+KIND_OF_DEFENSE = {"Security": "defense", "ML/AI": "fix"}
+
+
+def _tag_kind(mechs, defs) -> None:
+    for m in mechs:
+        m["kind"] = KIND_OF_MECHANISM.get(m.get("track"), "cause")
+    for d in defs:
+        d["kind"] = KIND_OF_DEFENSE.get(d.get("track"), "protection")
+
+
 def load_all(root=None, include_supplementary: bool = True,
              include_corrections: bool = True,
              include_benchmark_mechanisms: bool = True) -> dict:
@@ -287,6 +303,9 @@ def load_all(root=None, include_supplementary: bool = True,
             "source": match.get("source", "rq5"),
             "outcome": match.get("outcome", ""),
         })
+
+    # last, so benchmark-sourced mechanisms appended above are tagged too
+    _tag_kind(mechanisms, defenses)
 
     return {
         "mechanisms": mechanisms,

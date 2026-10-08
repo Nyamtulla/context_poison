@@ -107,6 +107,7 @@ CREATE TABLE attack (
     name TEXT PRIMARY KEY,
     paper_id TEXT REFERENCES paper(paper_id),
     channel TEXT, consequence TEXT, track TEXT,
+    kind TEXT,               -- attack (security) | incidental mechanism (ML/AI)
     is_extension_of TEXT, confidence TEXT, notes TEXT,
     benchmark_only INTEGER   -- 1 = exists only inside a benchmark suite
 );
@@ -115,6 +116,7 @@ CREATE TABLE defense (
     name TEXT PRIMARY KEY,
     paper_id TEXT REFERENCES paper(paper_id),
     channel TEXT, consequence TEXT, intervention_point TEXT, track TEXT,
+    kind TEXT,               -- defense (security) | fix (ML/AI)
     validated_against TEXT,  -- adversarial | incidental | both
     is_extension_of TEXT, confidence TEXT, notes TEXT
 );
@@ -400,11 +402,16 @@ def main():
         rows.append((name, str(e["paper_id"]), e.get("channel"),
                      e.get("consequence"), e.get("track"), None,
                      e.get("confidence"), e.get("notes"), 1))
-    con.executemany("INSERT INTO attack VALUES (?,?,?,?,?,?,?,?,?)", rows)
+    con.executemany(
+        "INSERT INTO attack (name, paper_id, channel, consequence, track, "
+        "is_extension_of, confidence, notes, benchmark_only) "
+        "VALUES (?,?,?,?,?,?,?,?,?)", rows)
 
     # ---- defenses -----------------------------------------------------
     con.executemany(
-        "INSERT OR IGNORE INTO defense VALUES (?,?,?,?,?,?,?,?,?,?)",
+        "INSERT OR IGNORE INTO defense (name, paper_id, channel, consequence, "
+        "intervention_point, track, validated_against, is_extension_of, "
+        "confidence, notes) VALUES (?,?,?,?,?,?,?,?,?,?)",
         [(e["name"], str(e["paper_id"]), e.get("channel"), e.get("consequence"),
           e.get("defense_intervention_point"), e.get("track"),
           e.get("validated_against"), e.get("is_extension_of"),
@@ -489,6 +496,29 @@ def main():
         "utility_verdict, baseline_kind, campaign) "
         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'rag_transfer')",
         load_rag_transfer_runs())
+
+    # ---- kind ---------------------------------------------------------
+    # The two literatures do not build the same kind of thing, and the table
+    # names say otherwise for historical reasons. The security side names an
+    # ATTACK that a person planted and builds a DEFENSE against it; the ML/AI
+    # side names an INCIDENTAL MECHANISM that nobody planted and builds a FIX
+    # for it. Merging the words is what made "320 defenses were never tested"
+    # read as an accusation: 124 of the largest bucket are fixes that never
+    # claimed to stop an adversary.
+    #
+    # Derived here rather than stored in the source registries, because it is a
+    # function of `track` and nothing else - one definition, no second copy to
+    # drift. Consumers read `kind` instead of re-deriving it from `track`.
+    con.executescript("""
+        UPDATE attack SET kind = CASE track
+            WHEN 'Security' THEN 'attack'
+            WHEN 'ML/AI'    THEN 'incidental mechanism'
+            ELSE 'cause' END;
+        UPDATE defense SET kind = CASE track
+            WHEN 'Security' THEN 'defense'
+            WHEN 'ML/AI'    THEN 'fix'
+            ELSE 'protection' END;
+    """)
 
     # ---- role ---------------------------------------------------------
     con.executescript("""
