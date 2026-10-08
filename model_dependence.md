@@ -104,3 +104,46 @@ under refusal induction.
   unchanged.
 - The accuracy column on the Llama cells is attributable: both controls fire
   (−8.7 and −6.0 pp at poison 0, against an 11.4 pp threshold).
+
+---
+
+## Addendum, 2026-10-08: the other family moves too, but not as far
+
+The obvious follow-up was whether context-reliance's tone failure is also
+model-dependent. Only CK-PLUG could answer it — ParamMute ships as a merged
+Llama-3-8B checkpoint, so moving it would mean retraining it rather than
+running it.
+
+Negative-framing rate, CK-PLUG, same attack and same data on both models:
+
+| poison | Llama-3-8B undefended | Llama-3-8B CK-PLUG | Mistral-7B undefended | Mistral-7B CK-PLUG |
+|---:|---:|---:|---:|---:|
+| 0/10 | 0.0 % | 0.0 % | 0.0 % | 0.4 % |
+| 1/10 | 0.0 % | **78.2 %** | 0.0 % | **9.8 %** |
+| 10/10 | 4.0 % | **99.0 %** | 1.2 % | **21.6 %** |
+
+Both increases clear the 8.9 pp threshold at n=500. So the two families are
+model-dependent in **different ways**, and the difference matters:
+
+| | Llama-3-8B | Mistral-7B | reading |
+|---|---|---|---|
+| context-reliance, tone steering | +95.0 pp | +20.4 pp | **present on both.** The model scales it, about five times over. |
+| isolate-then-aggregate, refusal | +85.0 pp | +5.7 pp, not resolvable | **present on one.** The model decides whether it happens at all. |
+
+> **The direction of the context-reliance failure is a property of the
+> defense. Its size is a property of the model. The aggregation failure is a
+> property of the pair.**
+
+That is the sharper statement, and it is only available because both families
+were run on both models. Neither cell alone supports it.
+
+A caution that comes with it: CK-PLUG's control fails worse on Mistral than on
+Llama — 59.4 % against 25.4 % at poison 0, a 34-point gap against an 8.9-point
+threshold. Nothing in its accuracy column is attributable on either model. The
+framing column is readable for the usual reason: both arms sit at 0.0 % when no
+passage is poisoned, so the defense does not generate slant on its own.
+
+**Incomplete.** CK-PLUG × PoisonedRAG on Mistral was running when another job
+on the shared GPU took 33 GB and the run died of memory exhaustion partway
+through the undefended arm. That cell is unmeasured and is not counted
+anywhere above.
