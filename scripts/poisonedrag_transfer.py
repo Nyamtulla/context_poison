@@ -150,8 +150,11 @@ def generate_plain(model, tok, prompt, max_new_tokens):
     return tok.decode(out[0, ids.shape[-1]:], skip_special_tokens=True).strip()
 
 
+DEFAULT_BASE = "NousResearch/Meta-Llama-3-8B-Instruct"
+
+
 def run(defense, arm_on, data, top_k, n_poison, max_new_tokens,
-        attack="poisonedrag"):
+        attack="poisonedrag", base_model=DEFAULT_BASE):
     if defense == "parammute":
         model, tok = load_parammute(arm_on)
         gen = lambda p: generate_plain(model, tok, p, max_new_tokens)
@@ -162,8 +165,11 @@ def run(defense, arm_on, data, top_k, n_poison, max_new_tokens,
             st = types.ModuleType("vllm"); st.LLM = st.SamplingParams = None
             sys.modules["vllm"] = st
         from ck import CK
-        model = CK("NousResearch/Meta-Llama-3-8B-Instruct", "cuda", "1",
-                   max_gpu_memory=40)
+        # CK-PLUG takes the base model as an argument, so it is the one
+        # context-reliance defense in this matrix that can move models.
+        # ParamMute cannot: it ships as a merged checkpoint of Llama-3-8B, so
+        # running it elsewhere would mean retraining it, not running it.
+        model = CK(base_model, "cuda", "1", max_gpu_memory=40)
         model.set_stop_words([])
         params = {"repetition_penalty": 1.0, "temperature": 1.0, "top_p": 1.0,
                   "top_k": 1, "max_new_tokens": max_new_tokens, "logprobs": None,
@@ -212,8 +218,16 @@ def main():
                     help="poisonedrag inserts a false answer; badrag_dos "
                          "induces refusal; badrag_sentiment steers tone "
                          "without changing the answer. Scored accordingly.")
+    ap.add_argument("--base_model", default=DEFAULT_BASE,
+                    help="ckplug only. It takes the base model as an argument, "
+                         "so it can be moved to the model the other defense "
+                         "family runs on. parammute cannot: it ships as a "
+                         "merged Llama-3-8B checkpoint, so moving it would mean "
+                         "retraining it rather than running it.")
     ap.add_argument("--out", type=str, default=None)
     args = ap.parse_args()
+    if args.defense == "parammute" and args.base_model != DEFAULT_BASE:
+        ap.error("parammute is a merged checkpoint; --base_model cannot move it")
 
     data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: args.n]
     out_path = args.out or f"data/registries/{args.attack}_{args.defense}.json"
@@ -224,7 +238,7 @@ def main():
         print(f"\n===== {args.defense} — {label} =====", flush=True)
         for npz in args.poison_counts:
             r = run(args.defense, arm_on, data, args.top_k, npz,
-                    args.max_new_tokens, args.attack)
+                    args.max_new_tokens, args.attack, args.base_model)
             r.update(arm=label, n_poison=npz)
             results.append(r)
             print(f"  poison {npz:>2}/{args.top_k}   acc {r['acc']:5.1f}%   "
@@ -233,7 +247,8 @@ def main():
 
     payload = {"generated": "2026-10-03", "defense": args.defense,
                "attack": args.attack,
-               "dataset": "open_nq (PoisonedRAG construction)", "n": len(data),
+               "dataset": "open_nq (PoisonedRAG construction)",
+        "model": args.base_model, "n": len(data),
                "top_k": args.top_k,
                "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
                "registry_status": "untested pair",
