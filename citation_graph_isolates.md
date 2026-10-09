@@ -179,3 +179,53 @@ The original snowball recorded an edge only when it kept the target paper, so
 backfill stored every reference the API returned, in-pool or not. The store now
 mixes the two conventions: 39,196 edges point inside the pool and 6,665 point
 outside it. Anything that counts edges globally should say which it wants.
+
+
+---
+
+## Correction, 2026-10-08: the API was wrong about most of them
+
+The project lead pushed back on two points, and was right on both. A new paper
+still has a reference list, and those references ought to include this corpus.
+So rather than trust the API, every isolated paper was searched **in its own
+full text** for the title of every other paper in the corpus.
+
+| of the 118 isolated papers | |
+|---|---:|
+| **do cite corpus papers in their own text** | **39** |
+| cite none of them | 66 |
+| no full text available to check | 13 |
+
+**39 papers were never isolated.** The edge store simply did not have their
+references. One of them, *DRIP: Defending Prompt Injection via Token-wise
+Representation*, cites **27** papers from this corpus. *PISanitizer* cites 26.
+*Sleeper Memory Poisoning* cites 12. These are central papers in the field,
+drawn as unconnected dots.
+
+And the split falls almost exactly along the line of where the API failed:
+
+| group | cite corpus papers in full text |
+|---|---|
+| no reference list in the API at all | **28 of 42** |
+| reference list held in the API | 11 of 63 |
+
+> **So the earlier reading was half wrong.** "They cite a different
+> conversation" holds for the papers whose references we *do* have, where only
+> 11 of 63 reach the corpus. It does not hold for the papers whose references
+> the API lacked — two thirds of those cite this corpus, often heavily. Those
+> two groups were written up as one, and they are not one.
+
+### What this means for the graph
+
+Title-matching full text recovers edges the Semantic Scholar API does not
+have. The citation graph is built on the weaker of the two sources we hold.
+Rebuilding it from the PDFs would be a different and better graph — it would
+not change `cites_track_a` or `cites_track_b`, which were already read from
+full text, which is exactly why those columns were right when the edge data
+was not.
+
+### The 66 left over
+
+Listed in `isolated_papers_to_verify.md` for manual review: 37 ML/AI, 26
+Security, 3 Both; 33 of them contribute no attack and no defense to any
+registry. They are candidates for exclusion, not an exclusion decision.
