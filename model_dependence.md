@@ -147,3 +147,57 @@ passage is poisoned, so the defense does not generate slant on its own.
 on the shared GPU took 33 GB and the run died of memory exhaustion partway
 through the undefended arm. That cell is unmeasured and is not counted
 anywhere above.
+
+---
+
+## Addendum, 2026-10-10: the direction flips too
+
+The PoisonedRAG half of the CK-PLUG run finally completed, on the third
+attempt. It overturns the statement in the previous addendum.
+
+CK-PLUG against lie insertion, attack success:
+
+| poison | Llama-3 undef. | Llama-3 CK-PLUG | Δ | Mistral undef. | Mistral CK-PLUG | Δ |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1/10 | 23.2 % | 32.6 % | **+9.4** ✱ | 32.8 % | 22.2 % | **−10.6** ✱ |
+| 5/10 | 35.6 % | 36.2 % | +0.6 | 43.0 % | 32.0 % | **−11.0** ✱ |
+| 10/10 | 68.2 % | 63.6 % | −4.6 | 71.4 % | 61.8 % | **−9.6** ✱ |
+
+✱ clears the 8.9 pp threshold at n=500.
+
+**The same defense, against the same attack, on the same data: it makes the
+attack work better on one model and stops it on the other.** On Mistral it is
+protective at every dose. On Llama it is harmful at one poisoned passage and
+not readable after that. At 1/10 the two models are 20 points apart, across
+zero.
+
+> **Correction.** The previous addendum concluded: *"the direction of the
+> context-reliance failure is a property of the defense, its size is a property
+> of the model."* That was drawn from tone steering alone, where CK-PLUG is
+> harmful on both models and only the magnitude moves — 95.0 pp against
+> 20.4 pp. Against lie insertion the sign itself moves. **Direction is not a
+> property of the defense either.**
+
+What survives is weaker and, now, better supported:
+
+| what moves with the model | evidence |
+|---|---|
+| **the size** of a defense's effect | CK-PLUG, tone steering: +95.0 vs +20.4 pp |
+| **whether the effect happens at all** | RobustRAG, refusal: +85.0 vs +5.7 pp, not resolvable |
+| **the sign of the effect** | CK-PLUG, lie insertion: +9.4 vs −10.6 pp |
+
+> **Nothing about a defense's effect on an attack is a property of the defense
+> on its own.** The model is not a nuisance parameter to be averaged over. It
+> is part of the result, and a paper reporting one model has reported one
+> point, not a finding.
+
+The accuracy column stays unreadable on both models — CK-PLUG's control fails
+by 22.6 pp on Llama and 34.0 pp on Mistral. The attack-success column carries
+its own control: with no poisoned passage both arms sit near zero on both
+models, 3.8/2.8 % and 3.0/1.4 %.
+
+**Three attempts.** Two died of CUDA OOM at the same dose when another user's
+job on the shared card grew to 33 GB mid-run — their 33 GB plus our 15 GB
+against a 47.5 GB card. Waiting for free memory before starting does not help
+when the other job expands into whatever is free; what worked was requiring
+30 GB of headroom, enabling expandable segments, and retrying.
