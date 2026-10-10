@@ -132,6 +132,24 @@ def main():
     # p=0.5 is the worst case, the same convention the rest of the matrix uses
     mdr = round(min_detectable_change(args.n, 0.5), 1)
     results = []
+    out_path = REPO / args.out
+
+    def save():
+        """Write after every model, not at the end.
+
+        Two earlier sweeps ran the full measurement and then died here, because
+        this function was called but never defined - about five hours of GPU
+        time that produced no file. Writing incrementally also means a model
+        that crashes the process does not take the finished ones with it.
+        """
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps({
+            "generated": "2026-10-10", "attack": "badrag_dos",
+            "defense": "robustrag-keyword", "dataset": "open_nq",
+            "n": args.n, "n_poison": args.n_poison, "mdr_pp_at_n": mdr,
+            "question": "does the defended refusal rate track the model's "
+                        "refusal rate on a single isolated poisoned passage?",
+            "results": results}, indent=1))
     for name in args.models:
         print(f"\n########## {name} ##########", flush=True)
         try:
