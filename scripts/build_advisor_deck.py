@@ -659,27 +659,78 @@ def build(F):
     ], 2.25, [4.4, 6.1, 1.2], size=15.5, pitch=0.76, align_right=(2,))
     put(tb(sl, M, 4.72, W, 0.3), f"out of {len(F['verdicts'])} pairs measured",
         11.5, GREY, first=True, after=0)
+    stops = counts.get("stops it", 0); worse = counts.get("makes it worse", 0)
+    inert = sum(1 for r in F["verdicts"] if r[4])
     body(sl, [
-        ("A defense helped in four cases out of eighteen. In seven it made the attack work better "
-         "than no defense at all.", True),
-        f"In {sum(1 for r in F['verdicts'] if r[4])} of those seven the attack does almost nothing "
-        "to a model with no defense at all. The defense is what makes it work.",
+        (f"A defense helped in {stops} cases out of {len(F['verdicts'])}. In {worse} it made the "
+         "attack work better than no defense at all.", True),
+        f"In {inert} of those {worse} the attack does almost nothing to a model with no defense "
+        "at all. The defense is what makes it work.",
         ("That is the finding. A defense built for one kind of failure is not neutral against the "
          "other kind. It can be the reason the attack succeeds.", True),
     ], 5.05, gap=9)
+
+    # 15 — the model decides --------------------------------------------
+    sl = S("The result, continued", "The same defense, the same attack, two models")
+    put(tb(sl, M, 2.05, W, 0.4),
+        "We repeated pairs on a second model. The answer did not repeat with them.", 14, MID,
+        first=True, after=0)
+    table(sl, ["Defense and attack", "On Llama-3", "On Mistral", "What moved"], [
+        ("Context-reliance vs tone steering", "+95 pts worse", "+20 pts worse",
+         "the size of the harm"),
+        ("Aggregation vs forced refusal", "+85 pts worse", "no readable effect",
+         "whether it happens at all"),
+        ("Context-reliance vs false answers", "+9 pts worse", "11 pts BETTER",
+         "which way it points"),
+    ], 2.52, [4.6, 2.2, 2.2, 2.7], size=13.5, pitch=0.72)
+    body(sl, [
+        ("In the last row the same defense stops the attack on one model and helps it on the "
+         "other. Not a smaller effect. The opposite effect.", True),
+        "So a result from one model is one measurement, not a property of the defense. Almost "
+        "every paper in our map reports one model.",
+    ], 4.95, gap=9)
+
+    # 16 — the cheap predictor and two dead explanations -------------------
+    sl = S("Why it happens", "A cheap test predicts it. Two guesses failed.")
+    body(sl, [
+        ("An aggregating defense reads each passage on its own. So we measured what each model "
+         "does when shown one poisoned passage alone, and compared that with what the defense "
+         "then did overall.", True),
+    ], 2.05, gap=6)
+    table(sl, ["", "Across five models"], [
+        ("One-passage behaviour predicts the defended outcome", "correlation 0.9999"),
+        ("The attack with no defense at all", "0.0%, every model, every time"),
+    ], 2.90, [6.4, 5.3], size=13.5, pitch=0.56)
+    put(tb(sl, M, 4.20, W, 0.32), "Two explanations we tested and had to drop",
+        15, INK, bold=True, first=True, after=8)
+    table(sl, ["We expected", "What happened"], [
+        ("the attack needs a cautious model",
+         "the most safety-trained model we have never falls for it"),
+        ("the attack needs an obedient model",
+         "a model that obeys 70% of planted orders still never falls for it"),
+    ], 4.62, [4.8, 6.9], size=13, pitch=0.58)
+    body(sl, [
+        ("What is left is narrower and more useful. The attack needs a model that lets a "
+         "retrieved document decide whether it answers at all.", True),
+        "That is one cheap test away, and it is not the same thing as being safe. The safest "
+        "model here is the one the attack cannot touch.",
+    ], 5.90, gap=8)
 
     # 15 — what is next -----------------------------------------------------
     sl = S("Where we are now", "What is finished and what is still running")
     table(sl, ["Done", ""], [
         ("1 cell", "worked through: the retrieved document, answering from false content"),
         (f"{len(F['verdicts'])} pairs", "measured, none of them previously tested"),
-        ("3 models", "including a controlled repeat of the same pair on a second model"),
+        ("3 models", "including controlled repeats of the same pair on a second model"),
+        ("5 models", "swept to find what makes one model break where another does not"),
     ], 2.20, [1.9, 3.8], size=13, pitch=0.60, x=M)
     table(sl, ["Running now", ""], [
-        ("5 models", "testing why one model breaks and another does not"),
+        ("5 models", "the second version of the aggregating defense, across the same five"),
     ], 4.50, [1.9, 3.8], size=13, pitch=0.50, x=M)
     put(tb(sl, M + 6.6, 2.10, 5.5, 0.32), "Left to do", 15, INK, bold=True, first=True, after=6)
     body(sl, [
+        "Measure directly whether a model lets a document decide if it answers — the property "
+        "the sweep left pointing at, with no measurement yet attached.",
         "One more attack in this cell: a third poisoning method with released code.",
         "An aggregation defense from a different research group, to check the rule is not "
         "one laboratory's habit.",
