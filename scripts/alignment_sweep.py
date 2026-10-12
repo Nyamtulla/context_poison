@@ -45,7 +45,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 
 import torch                                       # noqa: E402
 from src import models as rr_models                # noqa: E402  (their code)
-from src.defense import KeywordAgg                 # noqa: E402  (their code)
+from src.defense import DecodingAgg, KeywordAgg    # noqa: E402  (their code)
 from src.models import create_model, HFModel       # noqa: E402  (their code)
 from src.prompt_template import (                  # noqa: E402  (their code)
     LLAMA_TMPL, MISTRAL_TMPL, VICUNA_TMPL)
@@ -74,9 +74,20 @@ def load(name):
     return HFModel(repo, tmpl)
 
 
-def sweep_one(name, data, top_k, n_poison):
+class _DecodingArgs:
+    """DecodingAgg reads its thresholds off an args object, as its main.py does."""
+    eta = 0.0
+    subsample_iter = 1
+
+
+def sweep_one(name, data, top_k, n_poison, method="keyword"):
     llm = load(name)
-    defense = KeywordAgg(llm)
+    # The mechanism was established on KeywordAgg. Running DecodingAgg over the
+    # same five models tests whether "defended tracks the isolated view" is a
+    # property of isolate-then-aggregate or of the keyword implementation. The
+    # isolated column is identical either way - both call the same
+    # wrap_prompt(seperate=True) - so only the aggregated column can differ.
+    defense = KeywordAgg(llm) if method == "keyword" else DecodingAgg(llm, _DecodingArgs())
 
     iso_total = iso_refused = 0
     undef_refused = def_refused = 0
@@ -125,6 +136,7 @@ def main():
     ap.add_argument("--n_poison", type=int, default=9,
                     help="9 of 10 is where the model split is largest and where "
                          "an honest passage still exists for the defense to find")
+    ap.add_argument("--method", default="keyword", choices=["keyword", "decoding"])
     ap.add_argument("--out", default="data/registries/alignment_sweep.json")
     args = ap.parse_args()
 
@@ -145,7 +157,7 @@ def main():
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(json.dumps({
             "generated": "2026-10-10", "attack": "badrag_dos",
-            "defense": "robustrag-keyword", "dataset": "open_nq",
+    "defense": f"robustrag-{args.method}", "dataset": "open_nq",
             "n": args.n, "n_poison": args.n_poison, "mdr_pp_at_n": mdr,
             "question": "does the defended refusal rate track the model's "
                         "refusal rate on a single isolated poisoned passage?",
@@ -153,7 +165,7 @@ def main():
     for name in args.models:
         print(f"\n########## {name} ##########", flush=True)
         try:
-            r = sweep_one(name, data, args.top_k, args.n_poison)
+            r = sweep_one(name, data, args.top_k, args.n_poison, args.method)
         except Exception as exc:                     # a model that will not load
             print(f"  SKIPPED: {type(exc).__name__}: {str(exc)[:160]}", flush=True)
             results.append({"model": name, "error": f"{type(exc).__name__}: {str(exc)[:200]}"})
