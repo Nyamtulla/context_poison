@@ -1,0 +1,108 @@
+{
+ "generated": "2026-10-12",
+ "dataset": "NaturalQuestionsShort_kc.jsonl",
+ "n": 400,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "defense": "coiecd",
+ "max_context_chars": 2000,
+ "mdr_pp_at_n": 9.9,
+ "prediction": "context-reliance family: COIECD should lose ground under corpus poisoning relative to its own base_rag arm, and lose more as the poisoned fraction grows",
+ "results": [
+  {
+   "n": 400,
+   "ctx_acc": 44.0,
+   "pm_acc": 7.75,
+   "mr": 14.98,
+   "em": 42.25,
+   "ci_low": 39.2,
+   "ci_high": 48.9,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "base_rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 43.25,
+   "pm_acc": 7.0,
+   "mr": 13.93,
+   "em": 41.75,
+   "ci_low": 38.5,
+   "ci_high": 48.1,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "coiecd"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 26.5,
+   "pm_acc": 12.0,
+   "mr": 31.17,
+   "em": 24.5,
+   "ci_low": 22.4,
+   "ci_high": 31.0,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "base_rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 27.25,
+   "pm_acc": 8.25,
+   "mr": 23.24,
+   "em": 25.25,
+   "ci_low": 23.1,
+   "ci_high": 31.8,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "coiecd"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 19.0,
+   "pm_acc": 11.75,
+   "mr": 38.21,
+   "em": 16.5,
+   "ci_low": 15.5,
+   "ci_high": 23.1,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "base_rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 18.5,
+   "pm_acc": 7.5,
+   "mr": 28.85,
+   "em": 16.75,
+   "ci_low": 15.0,
+   "ci_high": 22.6,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "coiecd"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 3.75,
+   "pm_acc": 20.25,
+   "mr": 84.37,
+   "em": 3.5,
+   "ci_low": 2.3,
+   "ci_high": 6.1,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "base_rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 2.0,
+   "pm_acc": 13.25,
+   "mr": 86.89,
+   "em": 2.0,
+   "ci_low": 1.0,
+   "ci_high": 3.9,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "coiecd"
+  }
+ ]
+}
