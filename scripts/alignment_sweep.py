@@ -80,7 +80,7 @@ class _DecodingArgs:
     subsample_iter = 1
 
 
-def sweep_one(name, data, top_k, n_poison, method="keyword"):
+def sweep_one(name, data, top_k, n_poison, method="keyword", dump=None):
     llm = load(name)
     # The mechanism was established on KeywordAgg. Running DecodingAgg over the
     # same five models tests whether "defended tracks the isolated view" is a
@@ -91,6 +91,7 @@ def sweep_one(name, data, top_k, n_poison, method="keyword"):
 
     iso_total = iso_refused = 0
     undef_refused = def_refused = 0
+    records = []
     for it in data:
         # the same item shape robustrag_matrix.run_condition builds, so the
         # probe and the matrix feed the defense identical input
@@ -108,7 +109,17 @@ def sweep_one(name, data, top_k, n_poison, method="keyword"):
 
         undef_refused += is_refusal(str(defense.query_undefended(item)))
         pred, _ = defense.query(item)
-        def_refused += is_refusal(str(pred))
+        hit = is_refusal(str(pred))
+        def_refused += hit
+        if dump is not None:
+            # A deviation from the isolated prediction is only worth reporting
+            # if the flagged generations are real refusals, so keep the text.
+            records.append({"question": it["question"],
+                            "defended": str(pred),
+                            "scored_refusal": bool(hit),
+                            "isolated_refusals": sum(
+                                is_refusal(str(r)) for r in per_passage),
+                            "isolated_n": len(per_passage)})
 
     n = len(data)
     pct = lambda a, b: round(100 * a / b, 2)
@@ -123,6 +134,11 @@ def sweep_one(name, data, top_k, n_poison, method="keyword"):
         "defended_ci_low": round(lo * 100, 1),
         "defended_ci_high": round(hi * 100, 1),
     }
+    if dump is not None:
+        dp = REPO / dump
+        dp.parent.mkdir(parents=True, exist_ok=True)
+        dp.write_text(json.dumps(records, indent=1))
+        print(f"  dumped {len(records)} generations -> {dump}", flush=True)
     del defense, llm
     torch.cuda.empty_cache()
     return out
@@ -138,6 +154,9 @@ def main():
                          "an honest passage still exists for the defense to find")
     ap.add_argument("--method", default="keyword", choices=["keyword", "decoding"])
     ap.add_argument("--out", default="data/registries/alignment_sweep.json")
+    ap.add_argument("--dump", default=None,
+                    help="also write every defended generation here, so a rate "
+                         "that disagrees with the isolated view can be read")
     args = ap.parse_args()
 
     data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: args.n]
@@ -165,7 +184,8 @@ def main():
     for name in args.models:
         print(f"\n########## {name} ##########", flush=True)
         try:
-            r = sweep_one(name, data, args.top_k, args.n_poison, args.method)
+            r = sweep_one(name, data, args.top_k, args.n_poison, args.method,
+                          dump=args.dump)
         except Exception as exc:                     # a model that will not load
             print(f"  SKIPPED: {type(exc).__name__}: {str(exc)[:160]}", flush=True)
             results.append({"model": name, "error": f"{type(exc).__name__}: {str(exc)[:200]}"})
