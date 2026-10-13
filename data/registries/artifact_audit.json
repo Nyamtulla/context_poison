@@ -389,7 +389,9 @@
    "size_kb": 2427,
    "pushed_at": "2026-04-10",
    "open_issues": 0,
-   "created_at": "2026-04-10"
+   "created_at": "2026-04-10",
+   "runnable_note": "dataset_only (suspected): Tianzhe26/ConflictQA is a benchmark repository.",
+   "has_method_impl": false
   },
   "TruthfulRAG (knowledge-graph-based factual conflict resolution)": {
    "paper_id": "4e0a7b531728d3baaceec7c96245f1badce52fd6",
@@ -705,5 +707,6 @@
    "candidates": [],
    "state": "none_named"
   }
- }
+ },
+ "caveat": "state=has_code means the remote has refs. It does NOT mean a method implementation ships: two entries are dataset-only, and several others ship code without the trained weights needed to run it. See runnable_note where set."
 }
