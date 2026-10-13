@@ -502,3 +502,79 @@ it has a known false-positive profile: a paper can satisfy `threat_terms` and
 narrows it but does not close it. The `scope_verdict` field produced during
 extraction is currently the only systematic check on this, and it is applied
 per-paper by an agent rather than by the screening rule itself.
+
+---
+
+## 2026-10-13 — 28 exclusions: 25 disconnected, 3 on a full read
+
+Two independent passes, applied together.
+
+**Three excluded after reading the full paper.** The 31 PDFs recovered from the
+missing-PDF worklist were read abstract-to-conclusion against `config.yaml`'s
+criteria. Twenty-seven passed. Three did not:
+
+| paper | why |
+|---|---|
+| Verlog | An RL fine-tuning framework; its customizable memory length is a training-efficiency device, not a study of context failure. Training-time, not runtime. |
+| IEI-TIA | A supervisory agent for robotic sorting. "Trustworthy" means the VLA model's actions are interpretable, not that its context is protected. |
+| LLM-PEA | The LLM is a classifier of phishing emails, not an agent with tool use, RAG or memory. No agentic context channel. |
+
+A fourth — *Evaluating and Exploiting Security Vulnerabilities in LLMs for
+Offensive Penetration Testing* — was **flagged, not excluded**. It is largely
+chat-model red-teaming, but two of its five vectors are agentic. Left in,
+pending a scope call.
+
+**Twenty-five excluded as disconnected.** On the rebuilt citation network
+(`citation_network_rebuild.md`), these papers have **out-degree 0 and in-degree
+0** — they cite nothing in the corpus and nothing in the corpus cites them — by
+the union of the full-text pass and the S2 edge table. All are `role='neither'`
+and contribute no RQ3 or RQ4 entry. None is from 2023.
+
+The in-degree condition is doing real work here and is not decoration.
+Out-degree alone selects **foundational** papers: 36 % of the corpus's 2023
+papers cite nothing in it, including *Not What You've Signed Up For* (in-degree
+432) and *Lost in the Middle* (206), because they came first. Excluding on
+out-degree alone would have removed the origin of both literatures.
+
+### Effect
+
+| | before | after |
+|---|---:|---:|
+| included corpus | 1,026 | **998** |
+| channel × consequence cells occupied | 35 | 35 *(no cell emptied)* |
+| RQ2 Security → ML/AI | 70/599 = 11.7 % | **70/590 = 11.9 %** |
+| RQ2 ML/AI → Security | 37/407 = 9.1 % | **37/390 = 9.5 %** |
+| RQ3 attack registry | 237 | 237 *(unchanged)* |
+| RQ4 defense registry | 534 | 534 *(unchanged)* |
+
+Both cross-citation rates move **up** by a few tenths, because 23 of the 25
+disconnected papers were coded `cites_track_a=N, cites_track_b=N` — removing
+non-citing papers from the denominator raises the rate. The direction is a
+consequence of the selection criterion, not a finding, and should be described
+that way.
+
+No registry row referenced any removed paper, so RQ3, RQ4 and the RQ5 matrix
+are untouched.
+
+### Mechanism
+
+`screening` was flipped `Include → Exclude`; **no row was deleted**, so the
+change is reversible and the papers remain inspectable. The 28 ids are in
+`data/registries/excluded_2026-10-13.json`.
+
+### Stale numbers elsewhere
+
+These documents quote the pre-change figures and are now out of date:
+`rq1_taxonomy_analysis.md`, `rq3_pollution_census.md`, `rq4_defense_census.md`,
+`cross_citation_analysis.md`, `differentiation_table.md`, `rq5_coverage_matrix.md`,
+`rq7_open_problems.md`, `RESEARCH_ROADMAP.md`, `citation_graph_isolates.md`,
+`context_integrity_sok_project_plan.md`, `benchmark_standardization.md`.
+
+They are dated snapshots of what was computed when, so they are left as written
+rather than edited in place; regenerate them with the `rebuild-corpus` pipeline
+before the numbers are quoted anywhere new.
+
+**`citation_graph_isolates.md` needs more than a regeneration.** It was built on
+the S2 edge table, which `citation_network_rebuild.md` shows had 199 isolates
+against the full text's 105 — 98 of its isolates demonstrably do cite the
+corpus. Its conclusions should be re-derived on the union network, not refreshed.
