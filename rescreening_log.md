@@ -700,3 +700,54 @@ venues whose conventions the detector did not know are precisely IEEE and LREC,
 which is to say most of the non-arXiv corpus. **"We could not parse it" is a
 claim about the parser and should be tested against a second method before it
 becomes a deletion.**
+
+---
+
+## 2026-10-13 (fourth pass) — correcting why the last 14 are out
+
+The second pass recorded 26 exclusions as "unreadable" and attached a bias
+warning: that the removal was forced by a pipeline limitation and carried a
+venue and track skew. **Both halves of that are now wrong and are withdrawn.**
+
+- **Ten were the extractor's fault, not the papers'.** They are back (third
+  pass above). The reference-heading detector did not know LREC's
+  "Bibliographical References", IEEE's roman section numbers and small-caps
+  "R EFERENCES", or a non-English heading.
+- **Two more were simply fetchable** from arXiv once the right routes were
+  tried, and are back.
+- **The last fourteen were never wanted.** The project lead reviewed them at
+  download time and deliberately did not obtain them: withdrawn papers, or
+  judged out of scope. The missing PDF is a *consequence* of that decision,
+  not its cause.
+
+So the correct description of the 14 is **relevance exclusions** — an ordinary
+screening decision — and the venue-bias caveat does not apply to them. It did
+apply, correctly, to the ten that were removed by a regular expression, and
+that is precisely why they were restored.
+
+Their basis is the lead's review of title, venue and abstract rather than a
+full read, which is weaker evidence than the 31 papers read end-to-end in
+`verification/downloaded_relevance_pass.md`. Worth one line in the limitations,
+not more: screening on title and abstract is the normal standard, and these
+papers were never in a position to contribute a registry entry — none did.
+
+Recorded in `verification/excluded_not_wanted.json` (formerly
+`still_missing.json`, renamed because the old name asserted the wrong reason),
+together with the retrieval routes already attempted so nobody repeats them.
+
+### State after all four passes
+
+| | |
+|---|---:|
+| included corpus | **984** |
+| PDF coverage | **984 / 984 — 100 %** |
+| reference lists that will not extract | **0** |
+| union citation edges inside the corpus | 6,970 |
+| papers citing ≥1 corpus paper | 936 (95.1 %) |
+| RQ3 attack registry | 235 |
+| RQ4 defense registry | 529 |
+| RQ2 Security → ML/AI | 11.8 % |
+| RQ2 ML/AI → Security | 9.3 % |
+
+From the 1,026 this sequence started at: 28 excluded on disconnection and a
+full read, 14 excluded as not wanted, and the rest restored or retained.
