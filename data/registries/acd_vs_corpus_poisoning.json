@@ -9,7 +9,9 @@
  "mdr_pp_at_n": 9.9,
  "prediction": "acd degrades less than rag because the attack raises contextual entropy and d_alpha discounts it; the claim only survives if acd sits above closedbook on clean context, otherwise it is DyPRAG again",
  "fracs_done": [
-  0.0
+  0.0,
+  0.1,
+  0.5
  ],
  "results": [
   {
@@ -46,6 +48,78 @@
    "ci_high": 68.1,
    "condition": "clean (native incidental conflict)",
    "frac": 0.0,
+   "arm": "acd"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 43.25,
+   "pm_acc": 9.75,
+   "mr": 18.4,
+   "em": 0.0,
+   "ci_low": 38.5,
+   "ci_high": 48.1,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 10.0,
+   "pm_acc": 44.75,
+   "mr": 81.74,
+   "em": 0.0,
+   "ci_low": 7.4,
+   "ci_high": 13.3,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "closedbook"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 40.0,
+   "pm_acc": 24.0,
+   "mr": 37.5,
+   "em": 0.0,
+   "ci_low": 35.3,
+   "ci_high": 44.9,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "acd"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 24.75,
+   "pm_acc": 8.25,
+   "mr": 25.0,
+   "em": 0.0,
+   "ci_low": 20.8,
+   "ci_high": 29.2,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 10.0,
+   "pm_acc": 44.75,
+   "mr": 81.74,
+   "em": 0.0,
+   "ci_low": 7.4,
+   "ci_high": 13.3,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "closedbook"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 28.0,
+   "pm_acc": 30.5,
+   "mr": 52.14,
+   "em": 0.0,
+   "ci_low": 23.8,
+   "ci_high": 32.6,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
    "arm": "acd"
   }
  ]
