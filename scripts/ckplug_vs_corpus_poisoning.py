@@ -24,6 +24,7 @@ Arms, both on the same prompts and decoder:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import pathlib
 import sys
@@ -48,6 +49,21 @@ import eval_NQ as CKEVAL                          # noqa: E402  (their code)
 from ck import CK                                 # noqa: E402  (their code)
 from transfer_stats import (                      # noqa: E402
     adversarial_text, min_detectable_change, wilson)
+
+# ---------------------------------------------------------------------------
+# Second attack, added 2026-10-13.
+#
+# Corpus poisoning plants an OPTIMISED TOKEN SEQUENCE - incoherent junk.
+# `--attack false_evidence` plants CoConflictQA's own `parametric_evidencde`
+# instead: a short, fluent, citation-bearing sentence asserting the wrong
+# answer ("According to IMDB, Season 4 of Chicago Fire consists of 22
+# episodes" where the gold answer is 23). Same items, same chunk-replacement
+# dosing, so the ONLY thing that changes is the payload.
+#
+# The false answer it asserts is the model's OWN prior answer, so context and
+# memory AGREE. That is the harder case for any defense keyed on detecting a
+# conflict between the two.
+# ---------------------------------------------------------------------------
 
 CHUNK_WORDS = 20
 BASE = "NousResearch/Meta-Llama-3-8B-Instruct"
@@ -76,7 +92,9 @@ def run_condition(model, data, passage, frac, schema, mode, alpha, max_new_token
               "top_k": top_k, "max_new_tokens": max_new_tokens, "logprobs": None,
               "mode": mode, "alpha": alpha, "adaptive": False, "select_top": 10}
     for d in data:
-        ctx = poison_context(d["context"], passage, frac)
+        ctx = poison_context(
+            d["context"],
+            passage if passage is not None else d["parametric_evidencde"], frac)
         context_prompt = CKEVAL.qa_to_prompt_baseline(d["question"], ctx, schema)
         base_prompt = "Q:{}\nA:".format(d["question"])
         out = model.generate(base_prompt, context_prompt, **params)
@@ -105,11 +123,37 @@ def main():
     ap.add_argument("--clean_only", action="store_true")
     ap.add_argument("--out", type=str,
                     default="data/registries/ckplug_vs_corpus_poisoning.json")
+    ap.add_argument("--attack", default="corpus_poisoning",
+                    choices=["corpus_poisoning", "false_evidence"],
+                    help="corpus_poisoning plants the attack's optimised token "
+                         "sequence; false_evidence plants a fluent passage "
+                         "asserting the model's own (wrong) prior answer")
     args = ap.parse_args()
 
-    passage = adversarial_text()
+    # Fingerprint what is actually planted and refuse to proceed if a
+    # false_evidence run is somehow planting the corpus-poisoning passage. An
+    # earlier ACD run applied the --attack flag to the output label but not the
+    # payload and produced a complete, plausible result file under the wrong
+    # attack name; only the numbers being identical to one decimal caught it.
+    if args.attack == "false_evidence":
+        passage = None
+        _probe = None
+    else:
+        passage = adversarial_text()
+        _probe = passage
     path = PM / "data" / "CoConflictQA" / "test" / args.data
     data = [json.loads(l) for l in path.read_text().splitlines()][: args.n]
+
+    if args.attack == "false_evidence":
+        miss = [d for d in data if not (d.get("parametric_evidencde") or "").strip()]
+        if miss:
+            raise SystemExit(f"{len(miss)} items lack parametric_evidencde")
+        _probe = data[0]["parametric_evidencde"]
+        assert _probe != adversarial_text(), \
+            "false_evidence is planting the corpus-poisoning passage"
+    payload_fp = hashlib.sha256(_probe.encode()).hexdigest()[:16]
+    print(f"  payload[{args.attack}] fp={payload_fp} sample={_probe[:70]!r}",
+          flush=True)
 
     conditions = [("clean (native incidental conflict)", 0.0)] if args.clean_only else [
         ("clean (native incidental conflict)", 0.0),
@@ -134,6 +178,8 @@ def main():
     out = {"generated": "2026-10-02", "dataset": args.data, "n": len(data),
            "schema": args.schema, "alpha": args.alpha, "model": args.model,
            "top_k": args.top_k,
+           "attack": args.attack, "payload_fingerprint": payload_fp,
+           "payload_sample": _probe[:160],
            "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
            "results": results}
     (REPO / args.out).write_text(json.dumps(out, indent=1))

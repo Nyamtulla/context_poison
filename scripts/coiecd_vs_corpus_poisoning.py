@@ -48,6 +48,7 @@ Two environment fixes were required. Neither touches the method.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import pathlib
 import sys
@@ -75,6 +76,21 @@ import decoding as CO                             # noqa: E402  (COIECD's code)
 from transfer_stats import (                      # noqa: E402
     adversarial_text, min_detectable_change, wilson)
 
+# ---------------------------------------------------------------------------
+# Second attack, added 2026-10-13.
+#
+# Corpus poisoning plants an OPTIMISED TOKEN SEQUENCE - incoherent junk.
+# `--attack false_evidence` plants CoConflictQA's own `parametric_evidencde`
+# instead: a short, fluent, citation-bearing sentence asserting the wrong
+# answer ("According to IMDB, Season 4 of Chicago Fire consists of 22
+# episodes" where the gold answer is 23). Same items, same chunk-replacement
+# dosing, so the ONLY thing that changes is the payload.
+#
+# The false answer it asserts is the model's OWN prior answer, so context and
+# memory AGREE. That is the harder case for any defense keyed on detecting a
+# conflict between the two.
+# ---------------------------------------------------------------------------
+
 CHUNK_WORDS = 20
 BASE = "NousResearch/Meta-Llama-3-8B-Instruct"
 
@@ -95,7 +111,9 @@ def run_condition(model, tokenizer, data, passage, frac, dump=None):
     """One pass yields both arms, because model_answer returns both."""
     preds_def, preds_base, golds, origs = [], [], [], []
     for d in data:
-        ctx = poison_context(d["context"], passage, frac)
+        ctx = poison_context(
+            d["context"],
+            passage if passage is not None else d["parametric_evidencde"], frac)
         gold = d["answers"][0] if isinstance(d["answers"], list) else d["answers"]
         # their protocol: generate exactly as many tokens as the gold answer has
         tgt_len = max(1, len(tokenizer.encode(gold, add_special_tokens=False)))
@@ -141,13 +159,39 @@ def main():
     ap.add_argument("--dump", default=None, help="also write every generation here")
     ap.add_argument("--fracs", type=float, nargs="+", default=None,
                     help="override the poison levels, e.g. --fracs 0.0 1.0")
+    ap.add_argument("--attack", default="corpus_poisoning",
+                    choices=["corpus_poisoning", "false_evidence"],
+                    help="corpus_poisoning plants the attack's optimised token "
+                         "sequence; false_evidence plants a fluent passage "
+                         "asserting the model's own (wrong) prior answer")
     args = ap.parse_args()
 
-    passage = adversarial_text()
+    # Fingerprint what is actually planted and refuse to proceed if a
+    # false_evidence run is somehow planting the corpus-poisoning passage. An
+    # earlier ACD run applied the --attack flag to the output label but not the
+    # payload and produced a complete, plausible result file under the wrong
+    # attack name; only the numbers being identical to one decimal caught it.
+    if args.attack == "false_evidence":
+        passage = None
+        _probe = None
+    else:
+        passage = adversarial_text()
+        _probe = passage
     path = PM / "data" / "CoConflictQA" / "test" / args.data
     rows = [json.loads(l) for l in path.read_text().splitlines()]
     kept = [r for r in rows if len(r["context"]) <= args.max_context_chars]
     data = kept[: args.n]
+
+    if args.attack == "false_evidence":
+        miss = [d for d in data if not (d.get("parametric_evidencde") or "").strip()]
+        if miss:
+            raise SystemExit(f"{len(miss)} items lack parametric_evidencde")
+        _probe = data[0]["parametric_evidencde"]
+        assert _probe != adversarial_text(), \
+            "false_evidence is planting the corpus-poisoning passage"
+    payload_fp = hashlib.sha256(_probe.encode()).hexdigest()[:16]
+    print(f"  payload[{args.attack}] fp={payload_fp} sample={_probe[:70]!r}",
+          flush=True)
     print(f"{len(rows)} items, {len(kept)} within {args.max_context_chars} chars, "
           f"using {len(data)}", flush=True)
 
@@ -190,6 +234,8 @@ def main():
     out = {"generated": "2026-10-12", "dataset": args.data, "n": len(data),
            "model": args.model, "defense": "coiecd",
            "max_context_chars": args.max_context_chars,
+           "attack": args.attack, "payload_fingerprint": payload_fp,
+           "payload_sample": _probe[:160],
            "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
            "prediction": ("context-reliance family: COIECD should lose ground "
                           "under corpus poisoning relative to its own base_rag "
