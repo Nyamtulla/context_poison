@@ -751,3 +751,65 @@ together with the retrieval routes already attempted so nobody repeats them.
 
 From the 1,026 this sequence started at: 28 excluded on disconnection and a
 full read, 14 excluded as not wanted, and the rest restored or retained.
+
+---
+
+## 2026-10-13 (rebuild) — RQ1/RQ2 regenerated on the 984-paper corpus
+
+Criteria in `config.yaml` were **not** changed, so the AI re-screening phase
+was deliberately skipped: it would have re-litigated the 54 screening
+decisions made by hand today rather than testing a new rule.
+
+**Those 54 decisions are now recorded as `screen_human` in `context_sok.db`**
+(42 Exclude, 12 Include). They were made in the Excel and the explorer DB only,
+where `rescreen_corpus.py` cannot see them — it protects a paper from
+re-export by checking `screen_human IS NOT NULL`, so until this was written a
+future re-screen would have handed all 54 back to a subagent to re-judge.
+Protected rows rise 138 → 192.
+
+### Phase 1 — integrity
+
+All three dedupe passes clean:
+
+| pass | result |
+|---|---|
+| identifier (DOI + normalised arXiv) | no duplicate groups |
+| abstract similarity | 981 papers with abstracts ≥200 chars, none near-identical |
+| title similarity | 3 candidates at 81–83, **all false positives** |
+
+The three title pairs are distinct papers with different authors, DOIs and
+venues — two independently written reviews on prompt injection, two unrelated
+surveys, and two unrelated frameworks. Checked individually rather than
+accepted on score, per the skill's warning that most candidates are
+coincidence.
+
+### Phase 3 — RQ1 and RQ2
+
+| | before | after |
+|---|---|---|
+| corpus | 1,026 | **984** |
+| RQ1 empty cells | 60.5 % (98 of 162) | **60.5 % (98 of 162)** — unmoved |
+| RQ2 Security → ML/AI | 11.7 % (70/599) | **11.7 % (68/580)** |
+| RQ2 ML/AI → Security | 9.1 % (37/407) | **9.3 % (36/386)** |
+
+**Nothing moved meaningfully.** Removing 42 papers changed the cross-citation
+rates by 0.0 and 0.2 points and left the empty-cell rate identical. That is the
+useful result: the headline findings do not depend on the papers that were
+removed, which is what you want a corpus change to show.
+
+Channel ranking is unchanged: tool-output 344 (35.0 %), direct-input 230
+(23.4 %), RAG 136 (13.8 %), memory 104 (10.6 %).
+
+### Phase 4 — registry delta
+
+Zero registry rows point at an excluded paper, so nothing needed dropping. No
+newly-included papers, so Phases 5 and 6 did not run and the registries stand
+at 235 attacks / 529 defenses.
+
+One case the skill does not cover was checked explicitly: the 30 papers that
+received full-text extraction today were always *included*, but their registry
+judgments were made from abstracts. Nineteen contribute a registry entry;
+the other eleven are all coded `neither`, and reading the new full-text
+summaries confirms that is right — they are surveys, taxonomies, benchmarks and
+measurement studies, none proposing a *named* technique or defense. So the
+abstract-era registry judgments survived contact with the full text.
