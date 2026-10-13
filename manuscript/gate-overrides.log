@@ -1,0 +1,25 @@
+# drafting-manuscript gate overrides
+
+2026-10-12 — SoK manuscript, target manuscript/sok.qmd
+  Unmet: (1) no knowledge/synthesis tree, (3) no wiki/lint-wiki.py,
+         (4) no <slug>-plan.md with an explicit Draft task,
+         (5) no review_flags mechanism.
+  Reason: the skill assumes a Quarto research-project template with a
+  per-source wiki. This project predates it and stores the equivalent content
+  differently: 28 regenerable result documents in the repo root play the role
+  of stable synthesis pages (each carries measured results, a regeneration
+  script, and a dated revision history including corrections), and the corpus
+  lives in SQLite rather than as per-source pages. Scaffolding a wiki around
+  finished work would not add verification, only indirection.
+  Gate (2) was NOT overridden - it was closed: manuscript/references.bib is
+  generated from the 1158-paper corpus by scripts/build_bibtex.py, and every
+  bibkey the manuscript needs resolves.
+  Stops NOT skipped: STOP 1, 2 and 3 are being honoured.
+
+  Substantive caveat carried into the draft: the corpus coding is an
+  LLM-assisted extraction pass that no human has verified (see
+  CONTRIBUTOR_BRIEF.md). This is the moral equivalent of an open review_flag
+  on every source page, and it constrains what the manuscript may claim. Every
+  count derived from the coding is reported as provisional pending the
+  verification pass, and the Limitations section states this rather than
+  burying it.
