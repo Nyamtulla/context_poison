@@ -813,3 +813,46 @@ the other eleven are all coded `neither`, and reading the new full-text
 summaries confirms that is right — they are surveys, taxonomies, benchmarks and
 measurement studies, none proposing a *named* technique or defense. So the
 abstract-era registry judgments survived contact with the full text.
+
+### RQ3-RQ5 and RQ7 regenerated (same date)
+
+Registries rebuilt from the raw batch CSVs, which `build_registry.py` filters
+against the Excel's `screening` column - so the 42 exclusions propagated
+correctly without hand-editing any registry JSON.
+
+| | before | after |
+|---|---:|---:|
+| RQ3 mechanisms (base) | 223 | **221** |
+| RQ3 with benchmark supplements | 237 | **235** |
+| RQ4 defenses | 529 ← *534* | **529** |
+| RQ5 confirmed pairs | 332 | **332** |
+| RQ5 defenses with ≥1 test | 213/534 = 39.9 % | **213/529 = 40.3 %** |
+| RQ5 mechanisms covered | 106/237 = 44.7 % | **106/235 = 45.1 %** |
+
+**No confirmed defence×mechanism pair was lost.** The excluded papers
+contributed two mechanisms and five defenses but not a single matched pair, so
+RQ5's matrix is byte-identical and its two rates move only because the
+denominators shrank. Every qualitative finding survives: goal-hijack still over
+half the RQ3 registry (56.1 %), the adversarial/incidental split unchanged to
+the decimal (49.3 % / 47.4 %), and 82.7 % of matched defenses still tested
+against exactly one mechanism.
+
+RQ7 recomputed: same-track testing 230/232 = **99.1 %**, cross-track 2 pairs;
+76 defenses (32.6 % of pairs) tested against the single umbrella "Indirect
+Prompt Injection" entry while **38 of 52 named injection variants have zero**;
+supply-chain coverage **0/6**.
+
+**Comparability note.** The published RQ5 rates include the stage-1
+supplementary pairs, the attack-paper scan and benchmark resolution, applied on
+load by `src/registry_source.py`. `build_coverage_matrix.py` prints the *base*
+matrix only — 197/529 defenses and 79/221 mechanisms. Those two are not
+comparable to the published figures and reading the script's output as a drop
+from 44.7 % to 35.7 % would be wrong.
+
+**Fuzzy-duplicate review.** All 11 flagged name pairs (4 RQ3, 7 RQ4) are
+distinct techniques: `IPIGuard`/`PIIGuard` differ on indirect-prompt-injection
+versus personally-identifiable-information, `context drift`/`context rot` are
+separate incidental mechanisms, and two unrelated techniques both abbreviate to
+IPI. `PromptFuzz-SC` extends `PromptFuzz` but is its own paper; its
+`is_extension_of` field is unset and arguably should not be, flagged rather
+than edited since registry edits move published counts.

@@ -1,5 +1,24 @@
 # RQ4 — Defense Census
 
+> ## Regenerated 2026-10-13 — corpus 1,026 → 984
+>
+> | | before | after |
+> |---|---:|---:|
+> | defenses | 534 | **529** |
+> | validated adversarial only | 263 (49.3 %) | **261 (49.3 %)** |
+> | validated incidental only | 253 (47.4 %) | **251 (47.4 %)** |
+> | validated against both | 14 (2.6 %) | **14 (2.6 %)** |
+>
+> Five defenses were lost to paper exclusions. **The adversarial/incidental
+> split is unchanged to the decimal** (49.3 % / 47.4 %), as is the
+> intervention-point distribution: reasoning 205 (38.8 %), ingestion 152
+> (28.7 %), none 100 (18.9 %), execution 72 (13.6 %). Track balance holds at
+> ML/AI 264 (49.9 %) against Security 260 (49.1 %).
+>
+> The 14 defenses validated against *both* threat models remain the scarcest
+> and most important group in the registry — 2.6 % of the field.
+
+
 Regenerated 2026-09-22, on the 1,026-paper working corpus (post 2026-09-11
 screening fix, the screening-delta extraction, and the abstract-based duplicate
 corrections in `rescreening_log.md` Addendum 4). Regenerate if the corpus or

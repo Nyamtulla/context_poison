@@ -1,11 +1,11 @@
 # RQ3 -- Context Pollution Mechanism Registry (auto-generated)
 
-Regenerated 2026-09-22 by `scripts/build_registry.py rq3`.
+Regenerated 2026-10-13 by `scripts/build_registry.py rq3`.
 
-**Registry size: 223 distinct entries.**
+**Registry size: 221 distinct entries.**
 
 By track:
-- Security: 168
+- Security: 166
 - ML/AI: 55
 
 Exact-name duplicate groups found (merged automatically): 0

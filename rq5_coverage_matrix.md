@@ -1,5 +1,26 @@
 # RQ5 — Pollution Mechanism × Defense Coverage Matrix
 
+> ## Regenerated 2026-10-13 — corpus 1,026 → 984
+>
+> | | before | after |
+> |---|---:|---:|
+> | confirmed pairs | 332 | **332** |
+> | defenses with ≥1 confirmed test | 213/534 = 39.9 % | **213/529 = 40.3 %** |
+> | mechanisms with ≥1 tested defense | 106/237 = 44.7 % | **106/235 = 45.1 %** |
+> | matched defenses tested against exactly one mechanism | 163/197 = 82.7 % | **163/197 = 82.7 %** |
+>
+> **Not one confirmed pair was lost.** The 42 excluded papers contributed no
+> matched defence×mechanism pair, so the coverage matrix is identical and the
+> two rates move only because their denominators shrank. The central finding —
+> that there is essentially no generalist defense, with cross-mechanism testing
+> topping out at three mechanisms and only twice — is unchanged.
+>
+> Base matrix without the supplementary passes, for reference: 197/529 defenses
+> matched (37.2 %), 79/221 mechanisms covered (35.7 %), 233 raw pairs. The
+> figures above include the stage-1 supplementary pairs, the attack-paper scan
+> and benchmark resolution, which is the basis the published numbers use.
+
+
 Regenerated 2026-09-21, on the RQ3 registry (223 entries; 237 including
 benchmark-supplementary mechanisms) and RQ4 registry (534 defenses), after the
 2026-09-11 screening fix and the screening-delta extraction. Regenerate if

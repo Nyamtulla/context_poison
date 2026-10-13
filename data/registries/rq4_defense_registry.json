@@ -1824,22 +1824,6 @@
   "name": "TracLLM"
  },
  {
-  "row": 284,
-  "paper_id": "88b9628dee420a94c63fe3f0ec6b01fdc930e8d8",
-  "title": "Self-Healing Memory Architectures for Large Language Model-Based Multi-Agent Collaboration",
-  "has_defense": "Y",
-  "defense_name": "UNNAMED: self-healing memory architecture (cosine-similarity drift detection + cross-agent consensus repair)",
-  "channel": "memory",
-  "consequence": "persistence-backdoor",
-  "defense_intervention_point": "ingestion",
-  "track": "Security",
-  "validated_against": "adversarial",
-  "is_extension_of": "",
-  "confidence": "high",
-  "notes": "Evaluated on 18 collaborative reasoning tasks (10-20 agents) under simulated adversarial prompt injection; reduces task-accuracy decline from 29.5% to 8.3% and corruption persistence from 14.2 to 4.7 rounds",
-  "name": "UNNAMED: self-healing memory architecture (cosine-similarity drift detection + cross-agent consensus repair)"
- },
- {
   "row": 288,
   "paper_id": "b7f22c242732ccba8be3c1f5484af4f5032a0d83",
   "title": "TraceCaps: Inline Provenance and Risk Enforcement for Agentic Software Engineering",
@@ -3086,22 +3070,6 @@
   "confidence": "medium",
   "notes": "Production monitoring/forecasting system aggregating 20 runtime signals into a Trust Margin metric to detect \"false prosperity\" (silent semantic-quality degradation) in long-horizon multi-agent systems; compared vs Kalman-filter-only baseline and traditional APM tooling",
   "name": "ADE-PRF (ADE Predictive Reliability Framework)"
- },
- {
-  "row": 445,
-  "paper_id": "21e45f760e4f375bf0d68e41a4a9b71c46594b62",
-  "title": "Trust-Aware Runtime Verification for Autonomous LLM Agent Systems",
-  "has_defense": "Y",
-  "defense_name": "TARV (Trust-Aware Runtime Verification)",
-  "channel": "tool-output",
-  "consequence": "reasoning-corruption",
-  "defense_intervention_point": "execution",
-  "track": "ML/AI",
-  "validated_against": "incidental",
-  "is_extension_of": "",
-  "confidence": "high",
-  "notes": "Non-intrusive middleware computing multi-dimensional trust signals (action validity, memory consistency, communication coherence) to detect runtime trust violations from stochastic drift and error propagation; high precision/low false-positive rate, reduces cascading failures",
-  "name": "TARV (Trust-Aware Runtime Verification)"
  },
  {
   "row": 447,
@@ -5632,22 +5600,6 @@
   "name": "Discern-and-Answer"
  },
  {
-  "row": 792,
-  "paper_id": "74bf328bb86c119e6282744c2badd79f5bb14f53",
-  "title": "Trust-Aware Orchestration Architecture for LLM-Assisted Workflows in Multi-Tenant Enterprise Systems",
-  "has_defense": "Y",
-  "defense_name": "Trust-Aware Orchestration Architecture (hard gates + advisory filters + deterministic syntax recovery)",
-  "channel": "tool-output",
-  "consequence": "data-exfiltration",
-  "defense_intervention_point": "execution",
-  "track": "Security",
-  "validated_against": "both",
-  "is_extension_of": "",
-  "confidence": "medium",
-  "notes": "technical_summary null; abstract describes orchestration architecture tested vs TensorTrust/AgentDojo (adversarial) and syntax/format errors via deterministic recovery (incidental).",
-  "name": "Trust-Aware Orchestration Architecture (hard gates + advisory filters + deterministic syntax recovery)"
- },
- {
   "row": 798,
   "paper_id": "e7fed24b1353cf82d465d68dbda87c2b7243c60a",
   "title": "MemEvoBench: Benchmarking Memory MisEvolution in LLM Agents",
@@ -5838,22 +5790,6 @@
   "confidence": "high",
   "notes": "Lifecycle-aware skill-security framework with 5 defense components tested vs Sybil/malicious-skill attacks.",
   "name": "SkillSec-Eval defenses (hybrid admission validation, retrieval validation layer, metadata sanitizer, LifecycleGuard taint-tracking, continuous re-validation)"
- },
- {
-  "row": 827,
-  "paper_id": "3f47521e7f448d514a02d341f4cc5d71341cc884",
-  "title": "SecurePrompt \u2013 Detecting and Mitigating Prompt Attacks",
-  "has_defense": "Y",
-  "defense_name": "SecurePrompt",
-  "channel": "tool-output",
-  "consequence": "goal-hijack",
-  "defense_intervention_point": "ingestion",
-  "track": "Security",
-  "validated_against": "adversarial",
-  "is_extension_of": "",
-  "confidence": "low",
-  "notes": "Multi-layer defense architecture (Response layer + Prompt Validation layer); technical_summary null, limited detail (only 'preliminary tests').",
-  "name": "SecurePrompt"
  },
  {
   "row": 828,
@@ -6318,22 +6254,6 @@
   "confidence": "high",
   "notes": "Activation-steering to detect/mitigate 'agent drift' (overthinking/overacting) in coding agents; non-adversarial.",
   "name": "TACT (Think-Act Calibration via activation Steering)"
- },
- {
-  "row": 876,
-  "paper_id": "1bab99ecc468fa9d84f06e405eeacaf9bf86e76f",
-  "title": "Mitigating Context Loss in Legal RAG: A Metadata-Aware Chunking Strategy for Hierarchical Indian Statutes",
-  "has_defense": "Y",
-  "defense_name": "Smart Indexing (metadata-aware chunking for legal RAG)",
-  "channel": "RAG",
-  "consequence": "silent-corruption",
-  "defense_intervention_point": "ingestion",
-  "track": "ML/AI",
-  "validated_against": "incidental",
-  "is_extension_of": "",
-  "confidence": "medium",
-  "notes": "Deterministic metadata-aware chunking/context-injection for hierarchical statutes; technical_summary null.",
-  "name": "Smart Indexing (metadata-aware chunking for legal RAG)"
  },
  {
   "row": 877,

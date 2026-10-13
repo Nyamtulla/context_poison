@@ -1,5 +1,27 @@
 # RQ7 — Open Problems
 
+> ## Regenerated 2026-10-13 — corpus 1,026 → 984
+>
+> Recomputed by `scripts/rq7_synthesis.py` against the rebuilt registries.
+>
+> | | value |
+> |---|---:|
+> | same-track testing (defense and mechanism from the same literature) | **230/232 = 99.1 %** |
+> | cross-track testing | **2 pairs = 0.9 %** |
+> | defenses validated against both threat models | **14** |
+> | defenses tested against the umbrella "Indirect Prompt Injection" entry | **76 = 32.6 % of all pairs** |
+> | named injection variants with zero tested defenses | **38 of 52** |
+>
+> Coverage by channel: memory 9/14 (64.3 %), skill 2/4 (50.0 %), multi-agent
+> 4/9 (44.4 %), tool-metadata 4/12 (33.3 %), cross-modal 4/18 (22.2 %),
+> **supply-chain 0/6 (0.0 %)**.
+>
+> The two findings this RQ rests on are intact and if anything sharper: the two
+> literatures test almost exclusively within themselves (99.1 % same-track),
+> and defensive effort concentrates on a single umbrella category while 38 of
+> 52 named injection variants have never had a defense tested against them.
+
+
 Generated 2026-09-06. Synthesis pass over RQ2 (`cross_citation_analysis.md`),
 RQ5 (`rq5_coverage_matrix.md`) and RQ6 (`rq6_case_studies.md`), with
 supporting structure from RQ1 (`rq1_taxonomy_analysis.md`), RQ3

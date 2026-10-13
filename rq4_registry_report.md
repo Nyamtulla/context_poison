@@ -1,12 +1,12 @@
 # RQ4 -- Defense Technique Registry (auto-generated)
 
-Regenerated 2026-09-22 by `scripts/build_registry.py rq4`.
+Regenerated 2026-10-13 by `scripts/build_registry.py rq4`.
 
-**Registry size: 534 distinct entries.**
+**Registry size: 529 distinct entries.**
 
 By track:
-- ML/AI: 266
-- Security: 263
+- ML/AI: 264
+- Security: 260
 - Both: 5
 
 Exact-name duplicate groups found (merged automatically): 1

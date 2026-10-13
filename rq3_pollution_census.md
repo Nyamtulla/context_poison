@@ -1,5 +1,22 @@
 # RQ3 — Context Pollution Census
 
+> ## Regenerated 2026-10-13 — corpus 1,026 → 984
+>
+> | | before | after |
+> |---|---:|---:|
+> | mechanisms (base registry) | 223 | **221** |
+> | with benchmark-supplementary mechanisms | 237 | **235** |
+> | goal-hijack share | 126/223 = 56.5 % | **124/221 = 56.1 %** |
+>
+> Two mechanisms were lost, both because their source paper was excluded (see
+> `rescreening_log.md`, 2026-10-13). **Every qualitative finding below still
+> holds**: goal-hijack still accounts for over half the registry, and the
+> channel ordering is unchanged — direct-input 66 (29.9 %), tool-output 65
+> (29.4 %), RAG 27 (12.2 %), cross-modal 18, memory 14, tool-metadata 12.
+> Numbers in the body below are the pre-regeneration figures; the table above
+> supersedes them where they differ.
+
+
 Regenerated 2026-09-22, on the 1,026-paper working corpus (post 2026-09-11
 screening fix, the screening-delta extraction, and the abstract-based duplicate
 corrections in `rescreening_log.md` Addendum 4). Regenerate if the corpus or
