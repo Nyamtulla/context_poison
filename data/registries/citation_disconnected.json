@@ -1,7 +1,8 @@
 {
  "generated": "2026-10-13",
- "criterion": "out-degree 0 into the corpus by BOTH the full-text pass and the S2 edge table, AND in-degree 0 by both, AND screening=Include, AND contributes no RQ3/RQ4 registry entry",
- "n": 26,
+ "basis": "union network (full-text v3 + S2)",
+ "criterion": "out-degree 0 AND in-degree 0 in the union network, included, contributes no RQ3/RQ4 registry entry",
+ "n": 25,
  "papers": [
   {
    "paper_id": "1aa0ad840f5b5480cd3a804f0cec50cb7a549e04",
@@ -40,15 +41,6 @@
    "citation_count": 12
   },
   {
-   "paper_id": "205a6068eabc4620c4368a3c4c6dfa7418172129",
-   "title": "CarePilot: A Multi-Agent Framework for Long-Horizon Computer Task Automation in Healthcare",
-   "year": 2026,
-   "venue": "arXiv",
-   "track": "ML/AI",
-   "role": "neither",
-   "citation_count": 5
-  },
-  {
    "paper_id": "37c56b578604d3dea4d86ae9bf1a76cdbff5129e",
    "title": "ASTRIDE: A Security Threat Modeling Platform for Agentic-AI Applications",
    "year": 2025,
@@ -56,6 +48,15 @@
    "track": "Security",
    "role": "neither",
    "citation_count": 4
+  },
+  {
+   "paper_id": "38eadd2a5eaa850911a5e05c16e47434b356d3b7",
+   "title": "Beyond Reactive Safety: Risk-Aware LLM Alignment via Long-Horizon Simulation",
+   "year": 2025,
+   "venue": "ACL",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 3
   },
   {
    "paper_id": "061697ba029e8133a2e9edee03473b075a0e3e0e",
@@ -67,10 +68,10 @@
    "citation_count": 3
   },
   {
-   "paper_id": "38eadd2a5eaa850911a5e05c16e47434b356d3b7",
-   "title": "Beyond Reactive Safety: Risk-Aware LLM Alignment via Long-Horizon Simulation",
-   "year": 2025,
-   "venue": "ACL",
+   "paper_id": "b8edfd4dfd274ba42c77d56d655e785ccac7eb74",
+   "title": "VideoSeek: Long-Horizon Video Agent with Tool-Guided Seeking",
+   "year": 2026,
+   "venue": "arXiv",
    "track": "ML/AI",
    "role": "neither",
    "citation_count": 3
@@ -85,13 +86,13 @@
    "citation_count": 3
   },
   {
-   "paper_id": "b8edfd4dfd274ba42c77d56d655e785ccac7eb74",
-   "title": "VideoSeek: Long-Horizon Video Agent with Tool-Guided Seeking",
-   "year": 2026,
+   "paper_id": "2807699637e2c8607140926412e00276415f21e9",
+   "title": "Cisco Integrated AI Security and Safety Framework Report",
+   "year": 2025,
    "venue": "arXiv",
-   "track": "ML/AI",
+   "track": "Security",
    "role": "neither",
-   "citation_count": 3
+   "citation_count": 2
   },
   {
    "paper_id": "1912a3a2f666dd320875e6b8407454f346f1b004",
@@ -99,15 +100,6 @@
    "year": 2026,
    "venue": "arXiv",
    "track": "ML/AI",
-   "role": "neither",
-   "citation_count": 2
-  },
-  {
-   "paper_id": "2807699637e2c8607140926412e00276415f21e9",
-   "title": "Cisco Integrated AI Security and Safety Framework Report",
-   "year": 2025,
-   "venue": "arXiv",
-   "track": "Security",
    "role": "neither",
    "citation_count": 2
   },
@@ -130,8 +122,35 @@
    "citation_count": 1
   },
   {
-   "paper_id": "91cea1d58c91edb5897dc3659f7320eef2f9f6c5",
-   "title": "SearchArt: Training Long-Horizon Search Agent with Scalable Synthetic and Verified Task",
+   "paper_id": "c65794f324d084f9f166cd9343633495c9d8a93c",
+   "title": "LLM Scalability Risk for Agentic-AI and Model Supply Chain Security",
+   "year": 2026,
+   "venue": "Journal of Computational Information Systems",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "069e9bd355c20013de5224be1324a57a4a14352f",
+   "title": "Poster: Agentic Shell Honeypot Using Structured Logging",
+   "year": 2025,
+   "venue": "ACM CCS",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "11b047630b085273b8fe43856e6098b383d84879",
+   "title": "Distributed Agent System: Fault-Tolerant Collaboration Among Embodied Agents",
+   "year": 2026,
+   "venue": "",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "02b267ecd02e4884ad4206c067c8b9768e01aa51",
+   "title": "ToolVerse: Unlocking Massive Environments and Long-Horizon Tasks for Agentic Reinforcement Learning",
    "year": 2026,
    "venue": "",
    "track": "ML/AI",
@@ -148,19 +167,10 @@
    "citation_count": 0
   },
   {
-   "paper_id": "02b267ecd02e4884ad4206c067c8b9768e01aa51",
-   "title": "ToolVerse: Unlocking Massive Environments and Long-Horizon Tasks for Agentic Reinforcement Learning",
+   "paper_id": "91cea1d58c91edb5897dc3659f7320eef2f9f6c5",
+   "title": "SearchArt: Training Long-Horizon Search Agent with Scalable Synthetic and Verified Task",
    "year": 2026,
    "venue": "",
-   "track": "ML/AI",
-   "role": "neither",
-   "citation_count": 0
-  },
-  {
-   "paper_id": "arxiv:2601.02577",
-   "title": "Orchestral AI: A Framework for Agent Orchestration",
-   "year": 2026,
-   "venue": "arXiv",
    "track": "ML/AI",
    "role": "neither",
    "citation_count": 0
@@ -170,42 +180,6 @@
    "title": "Controlled Benchmarking of Memory Topologies in LLM-Based Multi-Agent Systems: Quality, Efficiency, and Privacy Trade-Offs",
    "year": 2026,
    "venue": "2026 IEEE Ural-Siberian Conference on Biomedical Engineering, Radioelectronics and Information Technology (USBEREIT)",
-   "track": "Both",
-   "role": "neither",
-   "citation_count": 0
-  },
-  {
-   "paper_id": "c65794f324d084f9f166cd9343633495c9d8a93c",
-   "title": "LLM Scalability Risk for Agentic-AI and Model Supply Chain Security",
-   "year": 2026,
-   "venue": "Journal of Computational Information Systems",
-   "track": "Security",
-   "role": "neither",
-   "citation_count": 0
-  },
-  {
-   "paper_id": "arxiv:2604.27960",
-   "title": "LLMs as ASP Programmers: Self-Correction Enables Task-Agnostic Nonmonotonic Reasoning",
-   "year": 2026,
-   "venue": "arXiv",
-   "track": "ML/AI",
-   "role": "neither",
-   "citation_count": 0
-  },
-  {
-   "paper_id": "069e9bd355c20013de5224be1324a57a4a14352f",
-   "title": "Poster: Agentic Shell Honeypot Using Structured Logging",
-   "year": 2025,
-   "venue": "ACM CCS",
-   "track": "Security",
-   "role": "neither",
-   "citation_count": 0
-  },
-  {
-   "paper_id": "9bfaaba28057e228754869c6788e5bccc3bb1015",
-   "title": "A Modular Multi-Agent Coordination Framework for Persistent Autonomous AI Assistants with Tool Orchestration and Long-Horizon Task Management",
-   "year": 2026,
-   "venue": "International Journal of Innovative Science and Research Technology",
    "track": "Both",
    "role": "neither",
    "citation_count": 0
@@ -229,10 +203,28 @@
    "citation_count": 0
   },
   {
-   "paper_id": "11b047630b085273b8fe43856e6098b383d84879",
-   "title": "Distributed Agent System: Fault-Tolerant Collaboration Among Embodied Agents",
+   "paper_id": "arxiv:2604.27960",
+   "title": "LLMs as ASP Programmers: Self-Correction Enables Task-Agnostic Nonmonotonic Reasoning",
    "year": 2026,
-   "venue": "",
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "9bfaaba28057e228754869c6788e5bccc3bb1015",
+   "title": "A Modular Multi-Agent Coordination Framework for Persistent Autonomous AI Assistants with Tool Orchestration and Long-Horizon Task Management",
+   "year": 2026,
+   "venue": "International Journal of Innovative Science and Research Technology",
+   "track": "Both",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "arxiv:2601.02577",
+   "title": "Orchestral AI: A Framework for Agent Orchestration",
+   "year": 2026,
+   "venue": "arXiv",
    "track": "ML/AI",
    "role": "neither",
    "citation_count": 0

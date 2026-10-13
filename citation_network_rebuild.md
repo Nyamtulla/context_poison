@@ -113,3 +113,78 @@ openly rather than by attrition.
 per-paper record, including the 10 papers whose reference section could not be
 read. Those are recorded as `unknown`, never as isolated — collapsing the two
 is precisely how a measurement failure becomes a deletion.
+
+
+---
+
+# v3: identifiers first, and matching that ignores how a PDF breaks text
+
+v1 above matched a 9-word title phrase and found 4,838 edges, but missed 40
+papers Semantic Scholar had edges for. Diagnosing three of them gave three
+different causes, and fixing each in turn produced two more bugs worth
+recording, because each one was found by a number refusing to make sense.
+
+| version | edges | isolates | what changed |
+|---|---:|---:|---|
+| v1 | 4,838 | 160 | 9-word title phrase |
+| v2 | 6,503 | 116 | + arXiv/DOI matching, 6-word phrase, de-hyphenation |
+| **v3** | **6,954** | **105** | space-free matching, unique-prefix selection |
+| **union with S2** | **6,985** | **101** | each edge labelled by source |
+
+**v3 is a strict superset of v1** — zero edges lost — which is the check that
+matters when a rewrite claims to be an improvement.
+
+## What each fix was worth
+
+- **arXiv IDs were being ignored entirely.** A reference list prints
+  `arXiv:2302.12173`, which is an exact identifier, and v1 looked only at
+  titles. Adding identifier matching contributed **3,135 edges**, nearly half
+  the final network. DOIs added 138 more.
+- **The title phrase was too long.** Reference lists truncate titles and PDFs
+  wrap them; a 9-word phrase is brittle where a 6-word one is not.
+- **Matching had to stop caring about whitespace.** v2 "fixed" line-break
+  hyphenation by deleting `-\n`, which turned a wrapped `Game-\nTheoretic` into
+  `GameTheoretic` and stopped it matching the title's `game theoretic`. That
+  silently cost **107 edges v1 had found**, 42 of them to *LLMs Can Be Easily
+  Distracted by Irrelevant Context*. v3 matches on a space-free form, so
+  hyphenation, wrapping and spacing stop mattering together rather than being
+  repaired one at a time.
+- **"Generic opening" had to become measurable.** v2 used a hand-written
+  blocklist of generic title openings and so dropped *Large Language Models Can
+  Be Easily Distracted...* outright. v3 instead picks the **shortest prefix
+  that is unique in the corpus**, so a generic opening is only a problem when
+  it is actually ambiguous.
+- **A paper cannot collide with itself.** The uniqueness check counted a short
+  title's repeated prefixes as collisions — every prefix of *LLMs Get Lost In
+  Multi-Turn Conversation* past its sixth word is the same string — and so
+  marked 14 titles permanently unmatchable, costing 23 further edges.
+  Deduplicating within a paper before counting fixed it.
+
+## The two sources, finally comparable
+
+Over the 1,087 papers whose reference list could be read:
+
+| | S2 edge table | full-text v3 |
+|---|---:|---:|
+| edges in scope | 2,303 | **6,954** |
+| isolates | 199 | **105** |
+| edges the other source lacks | **31** | **4,682** |
+
+**The full-text pass finds 150× more edges than the API has that it lacks.**
+Of S2's 199 isolates, 98 demonstrably cite the corpus; of v3's 105, only 4 have
+an S2 edge. The API was the wrong instrument for this corpus, and the earlier
+isolate analyses inherited that.
+
+The union is the network to use: `data/registries/citation_network_union.json`,
+6,985 edges, each labelled `fulltext` / `s2` / `both`.
+
+## The disconnected list, recomputed
+
+On the union network: **101** papers have out-degree 0, **74** of those also
+have in-degree 0, and **25** of those are included and contribute no registry
+entry. All 25 are `role='neither'`; none is from 2023.
+
+That is one fewer than the earlier estimate, and it is now computed on a
+network that finds 44 % more edges. `data/registries/citation_disconnected.json`.
+
+Removing them takes the corpus **1,023 → 998**.
