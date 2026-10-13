@@ -23,13 +23,13 @@
     "unresolved": 1
   },
   "coverage_gaps": {
-    "n_uncovered": 144,
+    "n_uncovered": 142,
     "by_track": {
       "Security": {
-        "total": 168,
+        "total": 166,
         "covered": 41,
-        "uncovered": 127,
-        "coverage_rate": 0.24404761904761904
+        "uncovered": 125,
+        "coverage_rate": 0.2469879518072289
       },
       "ML/AI": {
         "total": 55,
@@ -39,23 +39,23 @@
       }
     },
     "by_channel": {
-      "tool-output": {
-        "total": 66,
-        "covered": 18,
-        "uncovered": 48,
-        "coverage_rate": 0.2727272727272727
-      },
       "direct-input": {
         "total": 66,
         "covered": 29,
         "uncovered": 37,
         "coverage_rate": 0.4393939393939394
       },
+      "tool-output": {
+        "total": 65,
+        "covered": 18,
+        "uncovered": 47,
+        "coverage_rate": 0.27692307692307694
+      },
       "RAG": {
-        "total": 28,
+        "total": 27,
         "covered": 9,
-        "uncovered": 19,
-        "coverage_rate": 0.32142857142857145
+        "uncovered": 18,
+        "coverage_rate": 0.3333333333333333
       },
       "cross-modal": {
         "total": 18,
@@ -96,10 +96,10 @@
     },
     "by_consequence": {
       "goal-hijack": {
-        "total": 126,
+        "total": 124,
         "covered": 32,
-        "uncovered": 94,
-        "coverage_rate": 0.25396825396825395
+        "uncovered": 92,
+        "coverage_rate": 0.25806451612903225
       },
       "reasoning-corruption": {
         "total": 46,
@@ -134,15 +134,15 @@
     }
   },
   "dual_validation": {
-    "n": 15,
+    "n": 14,
     "by_intervention_point": {
       "none": 3,
       "ingestion": 4,
-      "execution": 3,
+      "execution": 2,
       "reasoning": 5
     },
     "by_track": {
-      "Security": 11,
+      "Security": 10,
       "ML/AI": 4
     },
     "names": [
@@ -175,12 +175,6 @@
         "track": "Security",
         "intervention_point": "reasoning",
         "channel": "RAG"
-      },
-      {
-        "name": "Trust-Aware Orchestration Architecture (hard gates + advisory filters + deterministic syntax recovery)",
-        "track": "Security",
-        "intervention_point": "execution",
-        "channel": "tool-output"
       },
       {
         "name": "+ModTool (memory correction tool for MemEvoBench)",
@@ -242,8 +236,8 @@
     "umbrella_mechanism": "Indirect Prompt Injection (IPI)",
     "defenses_tested_against_umbrella": 76,
     "share_of_all_pairs": 0.3261802575107296,
-    "named_injection_variants": 53,
+    "named_injection_variants": 52,
     "named_injection_variants_covered": 14,
-    "named_injection_variants_uncovered": 39
+    "named_injection_variants_uncovered": 38
   }
 }

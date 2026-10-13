@@ -1414,20 +1414,6 @@
   "track": "Security"
  },
  {
-  "row": 709,
-  "paper_id": "900d5304c3371bcedef4d7280da3bf326032202d",
-  "title": "Site Isolation is Dead: How Site Isolation is Broken in Agentic Browsers and Extensions",
-  "has_technique": "Y",
-  "technique_name": "UNNAMED: IPC-channel cross-origin injection/exfiltration attacks against agentic browsers",
-  "channel": "tool-output",
-  "consequence": "goal-hijack",
-  "is_extension_of": "",
-  "confidence": "high",
-  "notes": "Paper explicitly presents 'two novel end-to-end attacks' exploiting inter-process communication channels in agentic browsers/extensions for prompt injection and data exfiltration across site-isolation boundaries; first systematic study of this class",
-  "name": "UNNAMED: IPC-channel cross-origin injection/exfiltration attacks against agentic browsers",
-  "track": "Security"
- },
- {
   "row": 711,
   "paper_id": "83499754304da8eede7d57b4d17a8104520a391d",
   "title": "ASPI: Seeking Ambiguity Clarification Amplifies Prompt Injection Vulnerability in LLM Agents",
@@ -1719,20 +1705,6 @@
   "confidence": "high",
   "notes": "Formalizes and demonstrates a black-box attack extracting verbatim datastore text from Retrieval-In-Context RAG systems via simple instruction-following exploitation, scaling with model size",
   "name": "Prompt-Injected Data Extraction",
-  "track": "Security"
- },
- {
-  "row": 816,
-  "paper_id": "a3be45ad07ac98246029dc5c0a504f9314eec5b6",
-  "title": "Zero-Shot Tokenizer Transfer for Targeted Attacks on Retrieval-Augmented Generation",
-  "has_technique": "Y",
-  "technique_name": "ZBEAST",
-  "channel": "RAG",
-  "consequence": "goal-hijack",
-  "is_extension_of": "BEAST",
-  "confidence": "high",
-  "notes": "Novel adaptation of Beam Search-Based Adversarial attacks (BEAST) to generate malicious documents for RAG settings via zero-shot tokenizer transfer",
-  "name": "ZBEAST",
   "track": "Security"
  },
  {
