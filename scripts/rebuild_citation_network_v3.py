@@ -33,7 +33,28 @@ OUT = REPO / "data" / "registries" / "citation_network_v3.json"
 
 import pymupdf  # noqa: E402
 
-REF_HEAD = re.compile(r"\n\s*(references|bibliography|works cited)\s*\n", re.I)
+REF_HEAD = re.compile(
+    # A reference section heading, as it actually appears across this corpus.
+    # The naive /\n\s*references\s*\n/ failed on 10 papers that all had
+    # perfectly good reference lists: LREC venues write "Bibliographical
+    # References", IEEE papers carry a roman section number ("VII. REFERENCES")
+    # and extract small-caps as "R EFERENCES", and the corpus has non-English
+    # headings. Each of those is a venue convention, not a broken PDF.
+    r"\n[^\S\n]*"
+    r"(?:(?:[IVXLC]+|\d+)[.)]?[^\S\n]+)?"              # optional section number
+    r"(?:"
+      r"b\s*i\s*b\s*l\s*i\s*o\s*g\s*r\s*a\s*p\s*h\s*i\s*c\s*a\s*l[^\S\n]+"
+      r"r\s*e\s*f\s*e\s*r\s*e\s*n\s*c\s*e\s*s"
+      r"|l\s*a\s*n\s*g\s*u\s*a\s*g\s*e[^\S\n]+r\s*e\s*s\s*o\s*u\s*r\s*c\s*e"
+      r"[^\S\n]+r\s*e\s*f\s*e\s*r\s*e\s*n\s*c\s*e\s*s"
+      r"|r\s*e\s*f\s*e\s*r\s*e\s*n\s*c\s*e\s*s?"
+      r"|r\s*e\s*f\s*e\s*r\s*e\s*n\s*s\s*i"
+      r"|b\s*i\s*b\s*l\s*i\s*o\s*g\s*r\s*a\s*p\s*h\s*y"
+      r"|d\s*a\s*f\s*t\s*a\s*r[^\S\n]+p\s*u\s*s\s*t\s*a\s*k\s*a"
+      r"|l\s*i\s*t\s*e\s*r\s*a\s*t\s*u\s*r\s*e[^\S\n]+c\s*i\s*t\s*e\s*d"
+      r"|w\s*o\s*r\s*k\s*s[^\S\n]+c\s*i\s*t\s*e\s*d"
+    r")"
+    r"[^\S\n]*:?[^\S\n]*\n", re.I)
 ARXIV = re.compile(r"(?:arxiv[:\s/]*|abs/)(\d{4}\.\d{4,5})", re.I)
 DOI = re.compile(r"\b(10\.\d{4,9}/[-._;()/:a-z0-9]+)", re.I)
 MIN_TIGHT_CHARS = 26          # on the space-free form
@@ -98,8 +119,19 @@ def build_phrases(titles):
 
 
 def ref_section(full: str) -> str:
+    """Take the EARLIEST heading that leaves a substantial tail.
+
+    Taking the last one loses the main bibliography in LREC papers, which
+    print "Bibliographical References" and then "Language Resource
+    References" - the second is short and the first holds everything.
+    """
     hits = list(REF_HEAD.finditer(full))
-    return full[hits[-1].end():] if hits else ""
+    if not hits:
+        return ""
+    for m in hits:
+        if len(full) - m.end() >= 300:
+            return full[m.end():]
+    return full[hits[-1].end():]
 
 
 def main() -> None:
