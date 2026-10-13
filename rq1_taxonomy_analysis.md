@@ -1,6 +1,6 @@
 # RQ1 -- Taxonomy Analysis: channel x intent x consequence
 
-Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (1026 included papers). Re-run this script any time screening/coding changes.
+Regenerated 2026-10-13 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (984 included papers). Re-run this script any time screening/coding changes.
 
 **RQ1:** Across the full landscape of LLM agent context contamination -- memory, RAG, tool output, tool metadata, skills, multi-agent, cross-modal, supply chain -- which channel x intent (adversarial/incidental) x consequence cells have been studied, and which are empty?
 
@@ -12,40 +12,40 @@ Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 
 | Channel | Papers | Share |
 |---|---:|---:|
-| tool-output | 361 | 35.2% |
-| direct-input | 235 | 22.9% |
-| RAG | 143 | 13.9% |
-| memory | 108 | 10.5% |
-| multi-agent | 64 | 6.2% |
-| cross-modal | 49 | 4.8% |
-| tool-metadata | 37 | 3.6% |
+| tool-output | 344 | 35.0% |
+| direct-input | 230 | 23.4% |
+| RAG | 136 | 13.8% |
+| memory | 104 | 10.6% |
+| multi-agent | 59 | 6.0% |
+| cross-modal | 46 | 4.7% |
+| tool-metadata | 37 | 3.8% |
 | skill | 18 | 1.8% |
-| supply-chain | 11 | 1.1% |
+| supply-chain | 10 | 1.0% |
 
 ## Consequence totals by track (intent)
 
 | Consequence | Security (Track A) | ML/AI (Track B) | Both |
 |---|---:|---:|---:|
-| goal-hijack | 491 | 14 | 8 |
-| data-exfiltration | 40 | 1 | 0 |
-| persistence-backdoor | 22 | 2 | 3 |
+| goal-hijack | 476 | 14 | 8 |
+| data-exfiltration | 39 | 1 | 0 |
+| persistence-backdoor | 20 | 2 | 3 |
 | resource-abuse | 8 | 0 | 0 |
-| silent-corruption | 16 | 76 | 2 |
-| reasoning-corruption | 22 | 314 | 7 |
+| silent-corruption | 15 | 73 | 1 |
+| reasoning-corruption | 22 | 296 | 6 |
 
 ## Channel x Defense-intervention-point coverage
 
 | Channel | Ingestion | Reasoning | Execution | None |
 |---|---:|---:|---:|---:|
-| memory | 7 | 49 | 3 | 49 |
-| RAG | 26 | 49 | 1 | 67 |
-| tool-output | 51 | 54 | 75 | 181 |
+| memory | 6 | 48 | 3 | 47 |
+| RAG | 25 | 48 | 1 | 62 |
+| tool-output | 49 | 54 | 70 | 171 |
 | tool-metadata | 5 | 1 | 4 | 27 |
 | skill | 1 | 0 | 0 | 17 |
-| multi-agent | 3 | 10 | 13 | 38 |
-| cross-modal | 6 | 7 | 0 | 36 |
-| supply-chain | 3 | 0 | 1 | 7 |
-| direct-input | 67 | 64 | 5 | 99 |
+| multi-agent | 3 | 10 | 13 | 33 |
+| cross-modal | 6 | 7 | 0 | 33 |
+| supply-chain | 3 | 0 | 1 | 6 |
+| direct-input | 66 | 62 | 5 | 97 |
 
 ## Full 3D cube
 
@@ -53,40 +53,40 @@ Regenerated 2026-09-22 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 
 | channel | goal-hijack | data-exfiltration | persistence-backdoor | resource-abuse | silent-corruption | reasoning-corruption |
 |---|---:|---:|---:|---:|---:|---:|
-| memory | 3 | 2 | 11 | 0 | 0 | 1 |
-| RAG | 39 | 10 | 2 | 0 | 9 | 5 |
-| tool-output | 273 | 18 | 3 | 6 | 0 | 4 |
+| memory | 3 | 2 | 9 | 0 | 0 | 1 |
+| RAG | 37 | 10 | 2 | 0 | 8 | 5 |
+| tool-output | 264 | 17 | 3 | 6 | 0 | 4 |
 | tool-metadata | 27 | 0 | 0 | 1 | 0 | 1 |
 | skill | 10 | 0 | 0 | 0 | 0 | 0 |
-| multi-agent | 22 | 3 | 0 | 0 | 0 | 2 |
+| multi-agent | 21 | 3 | 0 | 0 | 0 | 2 |
 | cross-modal | 23 | 0 | 0 | 0 | 2 | 2 |
-| supply-chain | 6 | 0 | 4 | 0 | 1 | 0 |
-| direct-input | 88 | 7 | 2 | 1 | 4 | 7 |
+| supply-chain | 5 | 0 | 4 | 0 | 1 | 0 |
+| direct-input | 86 | 7 | 2 | 1 | 4 | 7 |
 
 ### ML/AI
 
 | channel | goal-hijack | data-exfiltration | persistence-backdoor | resource-abuse | silent-corruption | reasoning-corruption |
 |---|---:|---:|---:|---:|---:|---:|
-| memory | 1 | 1 | 2 | 0 | 5 | 77 |
-| RAG | 1 | 0 | 0 | 0 | 52 | 24 |
-| tool-output | 9 | 0 | 0 | 0 | 0 | 43 |
+| memory | 1 | 1 | 2 | 0 | 5 | 76 |
+| RAG | 1 | 0 | 0 | 0 | 49 | 23 |
+| tool-output | 9 | 0 | 0 | 0 | 0 | 36 |
 | tool-metadata | 1 | 0 | 0 | 0 | 0 | 5 |
 | skill | 0 | 0 | 0 | 0 | 0 | 6 |
-| multi-agent | 1 | 0 | 0 | 0 | 0 | 32 |
-| cross-modal | 1 | 0 | 0 | 0 | 3 | 17 |
+| multi-agent | 1 | 0 | 0 | 0 | 0 | 29 |
+| cross-modal | 1 | 0 | 0 | 0 | 3 | 14 |
 | supply-chain | 0 | 0 | 0 | 0 | 0 | 0 |
-| direct-input | 0 | 0 | 0 | 0 | 16 | 110 |
+| direct-input | 0 | 0 | 0 | 0 | 16 | 107 |
 
 ### Both
 
 | channel | goal-hijack | data-exfiltration | persistence-backdoor | resource-abuse | silent-corruption | reasoning-corruption |
 |---|---:|---:|---:|---:|---:|---:|
-| memory | 0 | 0 | 3 | 0 | 2 | 0 |
+| memory | 0 | 0 | 3 | 0 | 1 | 0 |
 | RAG | 0 | 0 | 0 | 0 | 0 | 1 |
 | tool-output | 5 | 0 | 0 | 0 | 0 | 0 |
 | tool-metadata | 1 | 0 | 0 | 0 | 0 | 1 |
 | skill | 1 | 0 | 0 | 0 | 0 | 1 |
-| multi-agent | 1 | 0 | 0 | 0 | 0 | 3 |
+| multi-agent | 1 | 0 | 0 | 0 | 0 | 2 |
 | cross-modal | 0 | 0 | 0 | 0 | 0 | 1 |
 | supply-chain | 0 | 0 | 0 | 0 | 0 | 0 |
 | direct-input | 0 | 0 | 0 | 0 | 0 | 0 |
