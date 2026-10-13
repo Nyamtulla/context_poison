@@ -11,7 +11,8 @@
  "fracs_done": [
   0.0,
   0.1,
-  0.5
+  0.5,
+  1.0
  ],
  "results": [
   {
@@ -120,6 +121,42 @@
    "ci_high": 32.6,
    "condition": "corpus poisoning, 50% of context",
    "frac": 0.5,
+   "arm": "acd"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 1.25,
+   "pm_acc": 4.25,
+   "mr": 77.27,
+   "em": 0.0,
+   "ci_low": 0.5,
+   "ci_high": 2.9,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 10.0,
+   "pm_acc": 44.75,
+   "mr": 81.74,
+   "em": 0.0,
+   "ci_low": 7.4,
+   "ci_high": 13.3,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "closedbook"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 10.5,
+   "pm_acc": 43.5,
+   "mr": 80.56,
+   "em": 0.0,
+   "ci_low": 7.9,
+   "ci_high": 13.9,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
    "arm": "acd"
   }
  ]
