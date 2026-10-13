@@ -1,0 +1,52 @@
+{
+ "generated": "2026-10-12",
+ "dataset": "NaturalQuestionsShort_kc.jsonl",
+ "n": 400,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "defense": "acd",
+ "n_shots": 5,
+ "max_new_tokens": 32,
+ "mdr_pp_at_n": 9.9,
+ "prediction": "acd degrades less than rag because the attack raises contextual entropy and d_alpha discounts it; the claim only survives if acd sits above closedbook on clean context, otherwise it is DyPRAG again",
+ "fracs_done": [
+  0.0
+ ],
+ "results": [
+  {
+   "n": 400,
+   "ctx_acc": 66.0,
+   "pm_acc": 9.0,
+   "mr": 12.0,
+   "em": 0.0,
+   "ci_low": 61.2,
+   "ci_high": 70.5,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 10.0,
+   "pm_acc": 44.75,
+   "mr": 81.74,
+   "em": 0.0,
+   "ci_low": 7.4,
+   "ci_high": 13.3,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "closedbook"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 63.5,
+   "pm_acc": 16.25,
+   "mr": 20.38,
+   "em": 0.0,
+   "ci_low": 58.7,
+   "ci_high": 68.1,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "acd"
+  }
+ ]
+}
