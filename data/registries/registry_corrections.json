@@ -93,5 +93,5 @@
    "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
   }
  ],
- "note_2026_10_13": "13 registry entries retracted because their source paper was excluded for being unreadable (no PDF, or a PDF whose reference section will not extract). This is a removal for a PIPELINE limitation, not a property of the papers: 21 of the 26 excluded papers are IEEE/paywalled venues against 3 on arXiv, and 20 of 26 are Security track against 59% in the corpus, so the exclusion carries a venue and track bias that must be disclosed wherever the resulting counts are used."
+ "note_2026_10_13": "CORRECTED 2026-10-13. An earlier version of this note described the 2026-10-13 exclusions as a removal forced by a pipeline limitation, and warned that the resulting counts carried a venue and track bias. That was wrong on both points and is withdrawn. Ten of the papers were restored once a venue-aware reference-heading pattern was written (the extractor, not the papers, was at fault), and the remaining fourteen were not fetched because the project lead reviewed them and judged them withdrawn or out of scope. Those are relevance exclusions, which is an ordinary screening decision, not an artifact. The registry entries listed here were retracted with their source papers; retractions for the ten restored papers have been undone."
 }

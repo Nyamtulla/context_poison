@@ -1,7 +1,7 @@
 {
  "generated": "2026-10-13",
  "n": 14,
- "note": "no free route reaches these: arXiv has no copy, OpenAlex lists no open-access PDF, and the DOI resolves to a paywall or landing page. Library access required.",
+ "note": "NOT a fetch failure. These 14 were reviewed by the project lead at download time and deliberately not obtained: withdrawn, or judged out of scope. They are excluded on a relevance decision, and the unavailability of a PDF is a consequence of that decision rather than its cause.",
  "papers": [
   {
    "paper_id": "1bab99ecc468fa9d84f06e405eeacaf9bf86e76f",
@@ -115,5 +115,7 @@
    "doi": "10.19139/soic-2310-5070-3574",
    "arxiv_id": null
   }
- ]
+ ],
+ "basis": "project lead's review of title/venue/abstract at download time",
+ "routes_tried_before_the_decision": "arXiv, OpenAlex best_oa_location and locations, direct DOI - recorded so nobody repeats them"
 }
