@@ -90,6 +90,7 @@ Deviations, both documented rather than silent:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import pathlib
 import sys
@@ -202,14 +203,39 @@ def main():
                     default="data/registries/acd_vs_corpus_poisoning.json")
     args = ap.parse_args()
 
-    adv = adversarial_text()
     rows = [json.loads(l) for l in
             (PM / "data" / "CoConflictQA" / "test" / args.data).read_text().splitlines()]
     kept = [r for r in rows if len(r["context"]) <= args.max_context_chars]
     data = kept[: args.n]
+
+    # `adv` is the single shared payload for corpus_poisoning; for
+    # false_evidence the payload is per-item, so adv stays None and the loop
+    # reads each item's parametric_evidencde.
+    if args.attack == "false_evidence":
+        missing = [d for d in data if not (d.get("parametric_evidencde") or "").strip()]
+        if missing:
+            raise SystemExit(f"{len(missing)} items lack parametric_evidencde")
+        adv = None
+    else:
+        adv = adversarial_text()
     shots = kept[args.n: args.n + args.n_shots]      # never in the eval slice
     assert len(shots) == args.n_shots, "not enough held-out items for few-shots"
     fs = build_fewshots(shots)
+
+    # Guard against exactly the failure this run hit once: the --attack flag
+    # applied to the output label but not to the payload, producing a
+    # corpus-poisoning run filed under a different attack name. Fingerprint the
+    # text actually planted, store it, and refuse to proceed if false_evidence
+    # is somehow planting the shared corpus-poisoning passage.
+    _probe = (adv if adv is not None else data[0]["parametric_evidencde"])
+    payload_fp = hashlib.sha256(_probe.encode()).hexdigest()[:16]
+    if args.attack == "false_evidence":
+        assert adv is None, "false_evidence must use a per-item payload"
+        assert payload_fp != hashlib.sha256(
+            adversarial_text().encode()).hexdigest()[:16], \
+            "false_evidence is planting the corpus-poisoning passage"
+    print(f"  payload[{args.attack}] fp={payload_fp} sample={_probe[:70]!r}",
+          flush=True)
     print(f"{len(rows)} items, using {len(data)}, {len(shots)} few-shots held out",
           flush=True)
 
@@ -270,6 +296,8 @@ def main():
         """
         out = {"generated": "2026-10-12", "dataset": args.data, "n": n,
                "model": args.model, "defense": "acd", "attack": args.attack,
+           "payload_fingerprint": payload_fp,
+           "payload_sample": _probe[:160],
            "n_shots": args.n_shots,
                "max_new_tokens": args.max_new_tokens,
                "mdr_pp_at_n": round(min_detectable_change(n, 0.5), 1),
@@ -288,8 +316,10 @@ def main():
         if frac in done:
             print(f"  skipping frac={frac}, already in {args.out}", flush=True)
             continue
+        label = ("corpus poisoning" if args.attack == "corpus_poisoning"
+                 else "false evidence")
         name = ("clean (native incidental conflict)" if frac <= 0
-                else f"corpus poisoning, {int(frac*100)}% of context")
+                else f"{label}, {int(frac*100)}% of context")
         p_ctx = [make_prompt(fs["with_context"], d["question"],
                              poison_context(d["context"],
                                             adv if adv is not None

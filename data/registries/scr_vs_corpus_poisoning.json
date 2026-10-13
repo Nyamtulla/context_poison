@@ -1,0 +1,162 @@
+{
+ "generated": "2026-10-12",
+ "dataset": "NaturalQuestionsShort_kc.jsonl",
+ "n": 400,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "defense": "scr",
+ "n_shot": 3,
+ "mdr_pp_at_n": 9.9,
+ "prediction": "scr degrades less than rag because the poisoned passage does not read as credible evidence and scr is asked to notice; survives only if scr sits above closedbook on clean context",
+ "fracs_done": [
+  0.0,
+  0.1,
+  0.5,
+  1.0
+ ],
+ "results": [
+  {
+   "n": 400,
+   "ctx_acc": 59.5,
+   "pm_acc": 9.25,
+   "mr": 13.45,
+   "em": 52.0,
+   "ci_low": 54.6,
+   "ci_high": 64.2,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 4.75,
+   "pm_acc": 55.75,
+   "mr": 92.15,
+   "em": 4.5,
+   "ci_low": 3.1,
+   "ci_high": 7.3,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "closedbook"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 46.0,
+   "pm_acc": 22.75,
+   "mr": 33.09,
+   "em": 40.25,
+   "ci_low": 41.2,
+   "ci_high": 50.9,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "scr"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 37.25,
+   "pm_acc": 13.0,
+   "mr": 25.87,
+   "em": 32.5,
+   "ci_low": 32.7,
+   "ci_high": 42.1,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 4.75,
+   "pm_acc": 55.75,
+   "mr": 92.15,
+   "em": 4.5,
+   "ci_low": 3.1,
+   "ci_high": 7.3,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "closedbook"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 24.5,
+   "pm_acc": 33.75,
+   "mr": 57.94,
+   "em": 22.5,
+   "ci_low": 20.5,
+   "ci_high": 28.9,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "scr"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 22.5,
+   "pm_acc": 9.25,
+   "mr": 29.13,
+   "em": 19.5,
+   "ci_low": 18.7,
+   "ci_high": 26.8,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 4.75,
+   "pm_acc": 55.75,
+   "mr": 92.15,
+   "em": 4.5,
+   "ci_low": 3.1,
+   "ci_high": 7.3,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "closedbook"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 15.5,
+   "pm_acc": 35.75,
+   "mr": 69.76,
+   "em": 13.75,
+   "ci_low": 12.3,
+   "ci_high": 19.4,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "scr"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 1.25,
+   "pm_acc": 9.25,
+   "mr": 88.1,
+   "em": 1.0,
+   "ci_low": 0.5,
+   "ci_high": 2.9,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "rag"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 4.75,
+   "pm_acc": 55.75,
+   "mr": 92.15,
+   "em": 4.5,
+   "ci_low": 3.1,
+   "ci_high": 7.3,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "closedbook"
+  },
+  {
+   "n": 400,
+   "ctx_acc": 4.0,
+   "pm_acc": 52.5,
+   "mr": 92.92,
+   "em": 3.75,
+   "ci_low": 2.5,
+   "ci_high": 6.4,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "scr"
+  }
+ ]
+}
