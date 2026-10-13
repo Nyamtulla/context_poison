@@ -643,3 +643,60 @@ in `data/registries/excluded_unreadable_2026-10-13.json`.
 **The cheapest way to undo most of this is to fetch the 16 missing PDFs** —
 they are on `verification/missing_pdf_worklist.xlsx` with links, and most are a
 single IEEE Xplore library session.
+
+---
+
+## 2026-10-13 (third pass) — 10 of the 26 restored. Corpus 972 → 982
+
+The previous entry excluded 10 papers whose "reference section will not
+extract". That was wrong about the papers and right about the extractor.
+
+CD2's PDF was inspected directly. It is an **LREC-COLING** paper, and LREC
+prints **"Bibliographical References"** and **"Language Resource References"**
+rather than "References". The detector required the heading word alone on its
+own line, so it found nothing in a paper with a 12,065-character bibliography.
+
+Checking the other nine found the same class of problem, every one a venue
+convention rather than a broken file:
+
+| cause | papers | example |
+|---|---:|---|
+| LREC heading wording | 1 | `Bibliographical References` (CD2) |
+| roman section number | 3 | `VII. REFERENCES`, `VIII. REFERENCES` |
+| IEEE small-caps extracted with a space | 3 | `R EFERENCES` |
+| non-English heading | 1 | `REFERENSI` (Indonesian) |
+| other heading variants | 2 | — |
+
+**All 10 recover with a venue-aware heading pattern**, yielding 2,555–14,010
+characters of references each. They are restored to the corpus, and their
+registry entries re-inserted from the authoritative RQ3/RQ4 JSONs — which were
+never edited, exactly so this kind of reversal stays possible.
+
+One further fix: the detector took the **last** matching heading. LREC papers
+print two, and the second ("Language Resource References") is short, so taking
+the last discarded the main bibliography. It now takes the earliest heading
+that leaves a substantial tail.
+
+### Effect
+
+| | before | after |
+|---|---:|---:|
+| included corpus | 972 | **982** |
+| RQ3 attack registry | 233 | **235** |
+| RQ4 defense registry | 525 | **528** |
+| reference lists that will not extract | 10 | **0** |
+| corpus papers citing ≥1 corpus paper | — | **934 of 982 (95.1 %)** |
+
+**Every PDF in the corpus now yields a reference list.** The 16 papers still
+excluded are the ones with no PDF at all; those are a fetching problem, listed
+with links in `verification/missing_pdf_worklist.xlsx`, not a parsing one.
+
+### What this says about the earlier pass
+
+Excluding papers for being "unreadable" deleted ten papers because of a
+regular expression. The bias warning recorded in the previous entry — that the
+exclusion was venue-correlated — turns out to have been understating it: the
+venues whose conventions the detector did not know are precisely IEEE and LREC,
+which is to say most of the non-arXiv corpus. **"We could not parse it" is a
+claim about the parser and should be tested against a second method before it
+becomes a deletion.**
