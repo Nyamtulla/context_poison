@@ -1,0 +1,774 @@
+{
+ "generated": "2026-10-12",
+ "seed": 20261012,
+ "n_papers": 100,
+ "n_rows": 1700,
+ "n_dual_coded": 20,
+ "design": [
+  {
+   "stratum": "S1a_no_pdf",
+   "frame": "included",
+   "N_population": 47,
+   "n_sampled": 12,
+   "weight_N_over_n": 3.92,
+   "sampling_fraction_pct": 25.5
+  },
+  {
+   "stratum": "S2_track_both",
+   "frame": "included",
+   "N_population": 19,
+   "n_sampled": 10,
+   "weight_N_over_n": 1.9,
+   "sampling_fraction_pct": 52.6
+  },
+  {
+   "stratum": "S3_excluded",
+   "frame": "excluded",
+   "N_population": 118,
+   "n_sampled": 13,
+   "weight_N_over_n": 9.08,
+   "sampling_fraction_pct": 11.0
+  },
+  {
+   "stratum": "S1b_excl_no_pdf",
+   "frame": "excluded",
+   "N_population": 14,
+   "n_sampled": 2,
+   "weight_N_over_n": 7.0,
+   "sampling_fraction_pct": 14.3
+  },
+  {
+   "stratum": "S4_main",
+   "frame": "included",
+   "N_population": 960,
+   "n_sampled": 63,
+   "weight_N_over_n": 15.24,
+   "sampling_fraction_pct": 6.6
+  }
+ ],
+ "core_fields": [
+  "track",
+  "screening",
+  "role",
+  "channel",
+  "consequence",
+  "cites_track_a",
+  "cites_track_b"
+ ],
+ "secondary_fields": [
+  "defense_intervention_point",
+  "temporal_persistence",
+  "evidence_grade",
+  "artifacts_released"
+ ],
+ "freetext_fields": [
+  "models_evaluated",
+  "datasets_benchmarks",
+  "key_result",
+  "baselines_compared",
+  "threat_model",
+  "stated_limitations"
+ ],
+ "sample": [
+  {
+   "paper_id": "4e0a7b531728d3baaceec7c96245f1badce52fd6",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "TruthfulRAG: Resolving Factual-level Conflicts in Retrieval-Augmented Generation with Knowledge Graphs",
+   "arxiv_id": "2511.10375"
+  },
+  {
+   "paper_id": "4c8f3f6ac4c9e15fa6f179d8c4a195a19a37189d",
+   "stratum": "S3_excluded",
+   "dual_coded": "YES",
+   "title": "On Training Large Language Models for Long-Horizon Tasks: An Empirical Study of Horizon Length",
+   "arxiv_id": "2605.02572"
+  },
+  {
+   "paper_id": "c0600cff00d440b7e7b75b0af4354822d631b306",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Decoupling Thought from Speech: Knowledge-Grounded Counterfactual Reasoning for Resilient Multi-Agent Argumentation",
+   "arxiv_id": "2606.10475"
+  },
+  {
+   "paper_id": "6d2dbf831301cac045221fffc16315fac7d7646e",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent",
+   "arxiv_id": "2509.02444"
+  },
+  {
+   "paper_id": "483d7ee601ee95bfe80e6924560473bf76072173",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Differential Transformer",
+   "arxiv_id": "2410.05258"
+  },
+  {
+   "paper_id": "96501f13d4c7a2da1228220c5723098e54f63a7c",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "YES",
+   "title": "Security-Aware Retrieval-Augmented Generation System for Post-Quantum Cryptography Intelligence",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "a56efef88a8eb94d9c9704f279c254c1bf4a88ab",
+   "stratum": "S3_excluded",
+   "dual_coded": "YES",
+   "title": "Evaluation and Benchmarking of LLM Agents: A Survey",
+   "arxiv_id": "2507.21504"
+  },
+  {
+   "paper_id": "35a7fa6cf6c4063ac233e20670e001b13f632093",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Architecting Secure AI Agents: Perspectives on System-Level Defenses Against Indirect Prompt Injection Attacks",
+   "arxiv_id": "2603.30016"
+  },
+  {
+   "paper_id": "3ba1322e1f7a457c1885df5aecc39c80528313d3",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Cache What Lasts: Token Retention for Memory-Bounded KV Cache in LLMs",
+   "arxiv_id": "2512.03324"
+  },
+  {
+   "paper_id": "0a020d999ee1dff44bf25c782f62f4e53f02347a",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Kajian Konseptual AI Agent On-Chain Berbasis LLM untuk Manajemen Aset DeFi",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "a74a834354664273b3dda00602f211df7563ad6c",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "YES",
+   "title": "Cross-layer contagion of prompt injections in multi-agent swarms: a multiplex microscopic markov chain approach",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "0894585294c67193ff3190240554677b56fd79a0",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "From Prompt Injections to SQL Injection Attacks: How Protected is Your LLM-Integrated Web Application?",
+   "arxiv_id": "2308.0199"
+  },
+  {
+   "paper_id": "341cb79546b7b795e23f0f9b990cbae7b046d36b",
+   "stratum": "S2_track_both",
+   "dual_coded": "YES",
+   "title": "ANX: Protocol-First Design for AI Agent Interaction with a Supporting 3EX Decoupled Architecture",
+   "arxiv_id": "2604.0482"
+  },
+  {
+   "paper_id": "c14b66c10e7d4416e4e98b31baf020270cddb294",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Context Contamination in LLM Analysis of Network Security Logs: Poison with Passive Prompt Injection and Mitigation Evaluation",
+   "arxiv_id": "2607.14493"
+  },
+  {
+   "paper_id": "770232536a768254a161eb00447650efc8f7f729",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Web Agents with World Models: Learning and Leveraging Environment Dynamics in Web Navigation",
+   "arxiv_id": "2410.13232"
+  },
+  {
+   "paper_id": "c8bbbde5345092e81bfd17ad60456cd1f1ca4fdc",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "AprielGuard",
+   "arxiv_id": "2512.20293"
+  },
+  {
+   "paper_id": "arxiv:2607.25066",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Addressable Recall Compaction for Long Context-Window Control in AI Agents",
+   "arxiv_id": "2607.25066"
+  },
+  {
+   "paper_id": "adfa867f286dddcb20b4e989f32d6209ec3559a5",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Trust or Abstain? A Self-Aware RAG Approach",
+   "arxiv_id": "2605.18792"
+  },
+  {
+   "paper_id": "a26a44d8999faf96364718084459e188869dc177",
+   "stratum": "S3_excluded",
+   "dual_coded": "YES",
+   "title": "The Hidden Risks of Large Reasoning Models: A Safety Assessment of R1",
+   "arxiv_id": "2502.12659"
+  },
+  {
+   "paper_id": "19f4bb442c551929118eeddaf92f594602f9e3ec",
+   "stratum": "S4_main",
+   "dual_coded": "YES",
+   "title": "Invitation Is All You Need! Promptware Attacks Against LLM-Powered Assistants in Production Are Practical and Dangerous",
+   "arxiv_id": "2508.12175"
+  },
+  {
+   "paper_id": "arxiv:2603.17639",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "VeriGrey: Greybox Agent Validation",
+   "arxiv_id": "2603.17639"
+  },
+  {
+   "paper_id": "f5080780c07f79cd6711b6eb13aae1859bd5cef9",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "DR-Venus: Towards Frontier Edge-Scale Deep Research Agents with Only 10K Open Data",
+   "arxiv_id": "2604.19859"
+  },
+  {
+   "paper_id": "61a06ad0a80d890b1abe1eafb4535a7018022f1e",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "LLM Agent Honeypot: Monitoring AI Hacking Agents in the Wild",
+   "arxiv_id": "2410.13919"
+  },
+  {
+   "paper_id": "263a7f25698640876b6cab4deafc11989cb7461b",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "PRISM: Recovering Instruction Sets from Language Model Activations",
+   "arxiv_id": "2606.09563"
+  },
+  {
+   "paper_id": "4b39c5af6be0fe1731bd4add77b5f4e1d6340a7f",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "AttnComp: Attention-Guided Adaptive Context Compression for Retrieval-Augmented Generation",
+   "arxiv_id": "2509.17486"
+  },
+  {
+   "paper_id": "9737ce15ad4645bcf943575b482cc9815a93aa65",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "LLMs and Childhood Safety: Identifying Risks and Proposing a Protection Framework for Safe Child-LLM Interaction",
+   "arxiv_id": "2502.11242"
+  },
+  {
+   "paper_id": "f77c949f1b9101854b62aabf0da5ae887df18b8b",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "Verlog: Context-lite Multi-turn Reinforcement Learning framework for Long-Horizon LLM Agents",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "098e604f3b85a07572559811b48a41908b0eb90a",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "The Evolution of Tool Use in LLM Agents: From Single-Tool Call to Multi-Tool Orchestration",
+   "arxiv_id": "2603.22862"
+  },
+  {
+   "paper_id": "arxiv:2607.00692",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Self-GC: Self-Governing Context for Long-Horizon LLM Agents",
+   "arxiv_id": "2607.00692"
+  },
+  {
+   "paper_id": "arxiv:2510.08829",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "CommandSans: Securing AI Agents with Surgical Precision Prompt Sanitization",
+   "arxiv_id": "2510.08829"
+  },
+  {
+   "paper_id": "d3f6f0290d0c43c31a615f928f256792e2d23a60",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Prompt Control-Flow Integrity: A Priority-Aware Runtime Defense Against Prompt Injection in LLM Systems",
+   "arxiv_id": "2603.18433"
+  },
+  {
+   "paper_id": "345f5f86cda5a7e23a1cf4d90b5e284eb1f29680",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "MIRAGE: Context-Aware Prompt Injection against Mobile GUI Agents via User-Generated Content",
+   "arxiv_id": "2605.28116"
+  },
+  {
+   "paper_id": "2992b912c6ffe57c442a37e3baa9f802b7577179",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "MCP-Cosmos: World Model-Augmented Agents for Complex Task Execution in MCP Environments",
+   "arxiv_id": "2605.09131"
+  },
+  {
+   "paper_id": "d9303eb738a56b0e72404d3ad57964c25611a226",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Sentinel: SOTA model to protect against prompt injections",
+   "arxiv_id": "2506.05446"
+  },
+  {
+   "paper_id": "1016706faf88f948ec7321dbd7123ebe81a5b296",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "The Shape of Adversarial Influence: Characterizing LLM Latent Spaces with Persistent Homology",
+   "arxiv_id": "2505.20435"
+  },
+  {
+   "paper_id": "cd49fc2975eba2abc4c5302ec4f43020d0e13e54",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "STEP Planner: Constructing cross-hierarchical subgoal tree as an embodied long-horizon task planner",
+   "arxiv_id": "2506.2103"
+  },
+  {
+   "paper_id": "6d465be006615460d41060f9f5068d51fc1f46b1",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models",
+   "arxiv_id": "2312.14197"
+  },
+  {
+   "paper_id": "2e6274d1f91b2e2290cda4c747abdcdf59ada46c",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "Chain-of-Trigger: An Agentic Backdoor that Paradoxically Enhances Agentic Robustness",
+   "arxiv_id": "2510.08238"
+  },
+  {
+   "paper_id": "40ea97427c4750b1dee547f6c7b433733a80c38c",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Still: Amortized KV Cache Compaction in a Single Forward Pass",
+   "arxiv_id": "2606.07878"
+  },
+  {
+   "paper_id": "7ff05b139253d8c14c10cf4f5b8f832828839065",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "KORMo: Korean Open Reasoning Model for Everyone",
+   "arxiv_id": "2510.09426"
+  },
+  {
+   "paper_id": "c3e90e9c5afbadac2114e97101b695a8c6b9bff5",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "PRISM: Prompt Red-teaming and Injection Simulation for Models \u2013 A Scalable Framework for Evaluating LLM Robustness Against Malicious Prompts",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "ca7830d57999480fd403a94d63eea380dac4d851",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "HIPIF: Hierarchical Planning and Information Folding for Long-Horizon LLM Agent Learning",
+   "arxiv_id": "2606.10507"
+  },
+  {
+   "paper_id": "ae06bb0819ec521d45909b2cbf599ff36ea025e2",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "SoK: Agentic Skills - Beyond Tool Use in LLM Agents",
+   "arxiv_id": "2602.20867"
+  },
+  {
+   "paper_id": "a60e902d31e306c0118cc6f90a1a095142bb650b",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "StruPhantom: Evolutionary Injection Attacks on Black-Box Tabular Agents Powered by Large Language Models",
+   "arxiv_id": "2504.09841"
+  },
+  {
+   "paper_id": "9bfaaba28057e228754869c6788e5bccc3bb1015",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "A Modular Multi-Agent Coordination Framework for Persistent Autonomous AI Assistants with Tool Orchestration and Long-Horizon Task Management",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "98b790d195d775ee82c42fd596d588a792c6eab3",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "You've Changed: Detecting Modification of Black-Box Large Language Models",
+   "arxiv_id": "2504.12335"
+  },
+  {
+   "paper_id": "arxiv:2601.01743",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "AI Agent Systems: Architectures, Applications, and Evaluation",
+   "arxiv_id": "2601.01743"
+  },
+  {
+   "paper_id": "1849c0ea146198831e17f1b3ccde57493b980442",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "The Blind Spot of Agent Safety: How Benign User Instructions Expose Critical Vulnerabilities in Computer-Use Agents",
+   "arxiv_id": "2604.10577"
+  },
+  {
+   "paper_id": "20885362d31a4d213881e2c178ffc6fc0a81fe93",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Backdoor-Powered Prompt Injection Attacks Nullify Defense Methods",
+   "arxiv_id": "2510.03705"
+  },
+  {
+   "paper_id": "60d1a692707848767aba41b5d83205478c191f4d",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "PlanGuard: Defending Agents against Indirect Prompt Injection via Planning-based Consistency Verification",
+   "arxiv_id": "2604.10134"
+  },
+  {
+   "paper_id": "d44e3f722dcb61e16a54a3978f473a6a947a072e",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "When Routine Chats Turn Toxic: Unintended Long-Term State Poisoning in Personalized Agents",
+   "arxiv_id": "2605.06731"
+  },
+  {
+   "paper_id": "148ed0cd52183e01416bf8667917aa6045ef007c",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection",
+   "arxiv_id": "2606.09204"
+  },
+  {
+   "paper_id": "e2f3d24644e25257fc0fa07a5f7adbc4ef52566f",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "The Long-Horizon Task Mirage? Diagnosing Where and Why Agentic Systems Break",
+   "arxiv_id": "2604.11978"
+  },
+  {
+   "paper_id": "eb6cbd2b06a980d8fabc1d7615575498385b35c8",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Prompt Injection Attack to Tool Selection in LLM Agents",
+   "arxiv_id": "2504.19793"
+  },
+  {
+   "paper_id": "0ba8da7bad04313c39bb9cb45d946645b22c6872",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "MUZZLE: Adaptive Agentic Red-Teaming of Web Agents Against Indirect Prompt Injection Attacks",
+   "arxiv_id": "2602.09222"
+  },
+  {
+   "paper_id": "02b267ecd02e4884ad4206c067c8b9768e01aa51",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "ToolVerse: Unlocking Massive Environments and Long-Horizon Tasks for Agentic Reinforcement Learning",
+   "arxiv_id": "2607.1566"
+  },
+  {
+   "paper_id": "02834792c8d9631bbfd28163b2106e0e3cc7d127",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Supply-Chain Poisoning Attacks Against LLM Coding Agent Skill Ecosystems",
+   "arxiv_id": "2604.03081"
+  },
+  {
+   "paper_id": "f7919b582eac5b86c88c697aad354f70f554002d",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "OpenClaw PRISM: A Zero-Fork, Defense-in-Depth Runtime Security Layer for Tool-Augmented LLM Agents",
+   "arxiv_id": "2603.11853"
+  },
+  {
+   "paper_id": "239a42e72cea398b972726e0907df5314f631bd3",
+   "stratum": "S1b_excl_no_pdf",
+   "dual_coded": "",
+   "title": "AGENTFUZZER: Generic Black-Box Fuzzing for Indirect Prompt Injection against LLM Agents",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "b24fa85ac644bac1ae250e9af9737a58f17fd08f",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "RouteGuard: Internal-Signal Detection of Skill Poisoning in LLM Agents",
+   "arxiv_id": "2604.22888"
+  },
+  {
+   "paper_id": "arxiv:2603.19469",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "A Framework for Formalizing LLM Agent Security",
+   "arxiv_id": "2603.19469"
+  },
+  {
+   "paper_id": "812b87876b22260fe046af447c5f40a4ce2906ea",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Tug-of-War between Knowledge: Exploring and Resolving Knowledge Conflicts in Retrieval-Augmented Language Models",
+   "arxiv_id": "2402.14409"
+  },
+  {
+   "paper_id": "a5483bd5ab7b09491e1d296050899e497d17f640",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "The Illusion of Procedural Reasoning: Measuring Long-Horizon FSM Execution in LLMs",
+   "arxiv_id": "2511.14777"
+  },
+  {
+   "paper_id": "arxiv:2606.03841",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "EvoDS: Self-Evolving Autonomous Data Science Agent with Skill Learning and Context Management",
+   "arxiv_id": "2606.03841"
+  },
+  {
+   "paper_id": "0b8b141e8d1300b9b8910aecb4617c66b2127417",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "IDE-Sanitizer: A Prompt-Injection Cryptographic Context Guard for IDE Copilots",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "3502f796c1d15f1355d0838f099178a9415b94b2",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "ConflictRAG: Detecting and Resolving Knowledge Conflicts in Retrieval Augmented Generation",
+   "arxiv_id": "2605.17301"
+  },
+  {
+   "paper_id": "51b7d4fe4eba51f6ac91512ad75894a5a562ac92",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "LOCA-bench: Benchmarking Language Agents Under Controllable and Extreme Context Growth",
+   "arxiv_id": "2602.07962"
+  },
+  {
+   "paper_id": "6c390f6e2c678569f2be80e5c5cb286d34aed235",
+   "stratum": "S1b_excl_no_pdf",
+   "dual_coded": "",
+   "title": "LLMs augmented hierarchical reinforcement learning with action primitives for long-horizon manipulation tasks",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "e2ec43e69a95a4b4db153ca1a07885d1668b8446",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "The Hidden Dangers of Browsing AI Agents",
+   "arxiv_id": "2505.13076"
+  },
+  {
+   "paper_id": "607d050bb4b11be7d9f6a1dfe0625e4939df1f86",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "ToolScope: An Agentic Framework for Vision-Guided and Long-Horizon Tool Use",
+   "arxiv_id": "2510.27363"
+  },
+  {
+   "paper_id": "81eb760ebbe224ae52cd7aea8f7f2865e4134908",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Overcoming the Retrieval Barrier: Indirect Prompt Injection in the Wild for LLM Systems",
+   "arxiv_id": "2601.07072"
+  },
+  {
+   "paper_id": "9aa8ef5683aa8f81d3e0a826c076b45ff0f2d270",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "[Short Paper] Forensic Analysis of Indirect Prompt Injection Attacks on LLM Agents",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "22ed587f931686c4c316af6f020eadc99374352a",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "When Users Change Their Mind: Evaluating Interruptible Agents in Long-Horizon Web Navigation",
+   "arxiv_id": "2604.00892"
+  },
+  {
+   "paper_id": "b345933a16c48404a38f8c1dc2c9ea03968dc0e7",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Activation-aware Probe-Query: Effective Key-Value Retrieval for Long-Context LLMs Inference",
+   "arxiv_id": "2502.13542"
+  },
+  {
+   "paper_id": "1f1aefa3ae39eb0ef7285a2a075acfbf06b66e03",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "The Ethics of Interaction: Mitigating Security Threats in LLMs",
+   "arxiv_id": "2401.12273"
+  },
+  {
+   "paper_id": "f3de6ea08e2464190673c0ec8f78e5ec1cd08642",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Ignore This Title and HackAPrompt: Exposing Systemic Vulnerabilities of LLMs through a Global Scale Prompt Hacking Competition",
+   "arxiv_id": "2311.16119"
+  },
+  {
+   "paper_id": "a89c73e617861763bf122d19a412c5700990d287",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "Analisis Kualitatif Kerentanan AI Agent terhadap Serangan Prompt Injection dan Strategi Mitigasinya",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "a7fb4245b412f0e54ec26d5973f041d52c83c0ad",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "HiAgent: Hierarchical Working Memory Management for Solving Long-Horizon Agent Tasks with Large Language Model",
+   "arxiv_id": "2408.09559"
+  },
+  {
+   "paper_id": "653ca4825ad48531899871aa40c59300b6b97823",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Context Viewer: Turning LLM Contexts into Analyzable Artifacts",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "0f6b86356acc0b2a172096bda2193a6026986628",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Runtime Policy Enforcement for MCP-Based LLM Agents",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "46a9f0dc9f74bef40c2f860e604c338c8092d30e",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Red Teaming the Mind of the Machine: A Systematic Evaluation of Prompt Injection and Jailbreak Vulnerabilities in LLMs",
+   "arxiv_id": "2505.04806"
+  },
+  {
+   "paper_id": "d82996e86627e67d6b2ca0564113e641b7318d47",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "MetaSkill-Evolve: Recursive Self-Improvement of LLM Agents via Two-Timescale Meta-Skill Evolution",
+   "arxiv_id": "2607.05297"
+  },
+  {
+   "paper_id": "30d0bcade8661fe2093bf9629d467d6f8233369e",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Adaptive Evaluation of Out-of-Band Defenses Against Prompt Injection in LLM Agents",
+   "arxiv_id": "2606.26479"
+  },
+  {
+   "paper_id": "0ca1b5ccfc5cc3aeb869f45654dd7fa7fed3e188",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "SHIELD: Security against Harmful Prompt Injection Evaluation and Language Detection Leveraging Ensemble Approach",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "cfae2299cb5d04b29fd4c9474832d58e3591d4e9",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "Taming OpenClaw: Security Analysis and Mitigation of Autonomous LLM Agent Threats",
+   "arxiv_id": "2603.11619"
+  },
+  {
+   "paper_id": "d4cc36f9d0a6674c77c91a3c88dc2c71aa4e6340",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "IEI-TIA: Industrial Embodied Intelligence Trustworthy Interpretable Agent for Robotic Long-Horizon and Repetitive Tasks",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "3481b760e4327407c2511b1e29259a2fe1e0bbab",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "CIBER: A Comprehensive Benchmark for Security Evaluation of Code Interpreter Agents",
+   "arxiv_id": "2602.19547"
+  },
+  {
+   "paper_id": "ef2cc535e75abb13c1680a96195465cccc57777e",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks",
+   "arxiv_id": "2605.15118"
+  },
+  {
+   "paper_id": "dd42a440316cbae44b0ff68fe79914b07799a8ec",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "Securing the Boundary: Trust Context Separation in Privileged AI Agent Systems",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "d4625126aeb5ed92f1fb802a8b6e9224ec70b72b",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "AgentOrchestra: Orchestrating Multi-Agent Intelligence with the Tool-Environment-Agent(TEA) Protocol",
+   "arxiv_id": "2506.12508"
+  },
+  {
+   "paper_id": "700f51087298ba596b7ac6587cb34470ca9b93e8",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "Stabilizing Off-Policy Training for Long-Horizon LLM Agent via Turn-Level Importance Sampling and Clipping-Triggered Normalization",
+   "arxiv_id": "2511.20718"
+  },
+  {
+   "paper_id": "82b30eeb4c7018d9f8bdf5acb5149f180e1bbc70",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "MIPIAD: Multilingual Indirect Prompt Injection Attack Defense with Qwen - TF-IDF Hybrid and Meta-Ensemble Learning",
+   "arxiv_id": "2605.07269"
+  },
+  {
+   "paper_id": "8fbbfece62a5d9dcb4e5bc7478c72b31e3ef80d6",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "Manufacturing Domain QA with Integrated Term Enhanced RAG",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "f851714285c7a6bfb963da98d67f04df0eafbac9",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "A Multi-Agent LLM Defense Pipeline Against Prompt Injection Attacks",
+   "arxiv_id": "2509.14285"
+  },
+  {
+   "paper_id": "f8d41e7fb18fe740bf7404af9a05dbf2d0992a27",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "CachePrune: Teaching LLMs What Not to Follow via KV-Cache Editing",
+   "arxiv_id": "2504.21228"
+  },
+  {
+   "paper_id": "2a1f56382f4e1e7652f62d2c42c75855ea4f90a0",
+   "stratum": "S2_track_both",
+   "dual_coded": "",
+   "title": "Toward Secure LLM Agents: Threat Surfaces, Attacks, Defenses, and Evaluation",
+   "arxiv_id": "2606.10749"
+  },
+  {
+   "paper_id": "290e74d22cb4cc7750f746a523e73a7b16e5dfc0",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Learning When to Attend: Conditional Memory Access for Long-Context LLMs",
+   "arxiv_id": "2603.17484"
+  },
+  {
+   "paper_id": "2e511f5d91f1749659fd4980c586f9161532b156",
+   "stratum": "S1a_no_pdf",
+   "dual_coded": "",
+   "title": "Prompting for LLM Security and RAG: A Survey from Zero-Shot to Automatic Prompt Optimization (APO) and Prompt-Injection Defenses",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "9c44354252aad1d0aeb7dc6b476da5785143b27c",
+   "stratum": "S4_main",
+   "dual_coded": "",
+   "title": "Prompt Attack Detection with LLM-as-a-Judge and Mixture-of-Models",
+   "arxiv_id": "2603.25176"
+  },
+  {
+   "paper_id": "7c0e8d7d52de470b1f0bd3999f27ceb0d8fb9f0c",
+   "stratum": "S3_excluded",
+   "dual_coded": "",
+   "title": "DeepPlanning: Benchmarking Long-Horizon Agentic Planning with Verifiable Constraints",
+   "arxiv_id": "2601.18137"
+  }
+ ]
+}
