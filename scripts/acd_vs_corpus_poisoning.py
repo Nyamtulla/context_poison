@@ -157,6 +157,8 @@ def main():
                     help="same frozen item set as the COIECD and DyPRAG runs")
     ap.add_argument("--fracs", type=float, nargs="+", default=[0.0, 0.1, 0.5, 1.0])
     ap.add_argument("--dump", default=None)
+    ap.add_argument("--no_resume", action="store_true",
+                    help="recompute every dose even if the output file has them")
     ap.add_argument("--out", type=str,
                     default="data/registries/acd_vs_corpus_poisoning.json")
     args = ap.parse_args()
@@ -200,8 +202,51 @@ def main():
                 "mr": round(po / (ps + po + 1e-10) * 100, 2), "em": round(em, 2),
                 "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
 
-    dump, results = ([] if args.dump else None), []
+    # Resume: doses already written survive a crash, so a retry at a smaller
+    # batch size only pays for what is missing. Memory grows with the poison
+    # fraction (the adversarial passage is longer than the chunks it replaces),
+    # so the late doses are the ones that need the small batch, and the early
+    # ones should not be recomputed to get there.
+    results, dump, done = [], ([] if args.dump else None), set()
+    prev = REPO / args.out
+    if prev.exists() and not args.no_resume:
+        old = json.loads(prev.read_text())
+        if old.get("n") == n and old.get("model") == args.model:
+            results = old.get("results", [])
+            done = {r["frac"] for r in results}
+            if dump is not None and (REPO / args.dump).exists():
+                dump = json.loads((REPO / args.dump).read_text())
+            if done:
+                print(f"resuming: doses already done {sorted(done)}", flush=True)
+
+    def save():
+        """Write after every dose, not at the end.
+
+        Two earlier attempts completed the clean and 10% doses and then OOMed
+        on 50% - poisoned contexts are longer than clean ones, so memory grows
+        with the dose - and discarded both finished doses with them. The same
+        failure cost about five hours on the alignment sweep. Writing
+        incrementally also means a dose that dies does not take the rest.
+        """
+        out = {"generated": "2026-10-12", "dataset": args.data, "n": n,
+               "model": args.model, "defense": "acd", "n_shots": args.n_shots,
+               "max_new_tokens": args.max_new_tokens,
+               "mdr_pp_at_n": round(min_detectable_change(n, 0.5), 1),
+               "prediction": ("acd degrades less than rag because the attack "
+                              "raises contextual entropy and d_alpha discounts "
+                              "it; the claim only survives if acd sits above "
+                              "closedbook on clean context, otherwise it is "
+                              "DyPRAG again"),
+               "fracs_done": sorted({r["frac"] for r in results}),
+               "results": results}
+        (REPO / args.out).write_text(json.dumps(out, indent=1))
+        if dump is not None:
+            (REPO / args.dump).write_text(json.dumps(dump, indent=1))
+
     for frac in args.fracs:
+        if frac in done:
+            print(f"  skipping frac={frac}, already in {args.out}", flush=True)
+            continue
         name = ("clean (native incidental conflict)" if frac <= 0
                 else f"corpus poisoning, {int(frac*100)}% of context")
         p_ctx = [make_prompt(fs["with_context"], d["question"],
@@ -220,21 +265,13 @@ def main():
                 dump.append({"frac": frac, "question": d["question"],
                              "gold": d["answers"], "parametric": d["parametric_answer"],
                              "rag": rag[i], "closedbook": closed[i], "acd": acd[i]})
+        save()
 
+    save()
     if dump is not None:
-        (REPO / args.dump).write_text(json.dumps(dump, indent=1))
         print(f"dumped {len(dump)} generations -> {args.dump}", flush=True)
-    out = {"generated": "2026-10-12", "dataset": args.data, "n": n,
-           "model": args.model, "defense": "acd", "n_shots": args.n_shots,
-           "max_new_tokens": args.max_new_tokens,
-           "mdr_pp_at_n": round(min_detectable_change(n, 0.5), 1),
-           "prediction": ("acd degrades less than rag because the attack raises "
-                          "contextual entropy and d_alpha discounts it; the claim "
-                          "only survives if acd sits above closedbook on clean "
-                          "context, otherwise it is DyPRAG again"),
-           "results": results}
-    (REPO / args.out).write_text(json.dumps(out, indent=1))
-    print(f"\nwrote {args.out}  (mdr {out['mdr_pp_at_n']} pp)")
+    print(f"\nwrote {args.out}  (doses done: "
+          f"{sorted({r['frac'] for r in results})})")
 
 
 if __name__ == "__main__":

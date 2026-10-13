@@ -1,0 +1,709 @@
+{
+ "generated": "2026-10-12",
+ "channel": "RAG",
+ "consequence": "silent-corruption",
+ "results": {
+  "RobustRAG": {
+   "paper_id": "3b81eca915a041b12eab31ffa62fca5bdabfbf17",
+   "title": "Certifiably Robust RAG against Retrieval Corruption",
+   "arxiv_id": "2405.15556",
+   "citations": 142,
+   "claim": "Y",
+   "claims_release": true,
+   "url_source": "verified_by_hand",
+   "candidates": [
+    "inspire-group/RobustRAG"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "inspire-group/RobustRAG",
+   "confidence": "low",
+   "size_kb": 2899,
+   "pushed_at": "2024-09-15",
+   "open_issues": 0,
+   "created_at": "2024-07-16"
+  },
+  "CD2 (Conflict-Disentangle Contrastive Decoding)": {
+   "paper_id": "812b87876b22260fe046af447c5f40a4ce2906ea",
+   "title": "Tug-of-War between Knowledge: Exploring and Resolving Knowledge Conflicts in Retrieval-Augmented Language Models",
+   "arxiv_id": "2402.14409",
+   "citations": 117,
+   "claim": "Y",
+   "claims_release": true,
+   "url_source": "arxiv_html_cued",
+   "candidates": [
+    "jinzhuoran/KConflict"
+   ],
+   "state": "empty",
+   "refs": 0,
+   "slug": "jinzhuoran/KConflict",
+   "confidence": "low",
+   "size_kb": 0,
+   "pushed_at": "2024-03-06",
+   "open_issues": 3,
+   "created_at": "2024-03-06"
+  },
+  "PH3 (Pruning Head via PatH PatcHing)": {
+   "paper_id": "4c0a545b1eb73084e3d395435af9cf6649c2b1da",
+   "title": "Cutting Off the Head Ends the Conflict: A Mechanism for Interpreting and Mitigating Knowledge Conflicts in Language Models",
+   "arxiv_id": "2402.18154",
+   "citations": 93,
+   "claim": "N (unconfirmed) \u2014 no code/data release statement was found in the extracted abstract, introduction, method, results, conclusion, or limitations sections. A repository may exist but is not stated in th",
+   "claims_release": false,
+   "url_source": "verified_by_hand",
+   "candidates": [
+    "jinzhuoran/MConflict"
+   ],
+   "state": "empty",
+   "refs": 0,
+   "slug": "jinzhuoran/MConflict",
+   "confidence": "low",
+   "size_kb": 0,
+   "pushed_at": "2024-06-06",
+   "open_issues": 4,
+   "created_at": "2024-06-06"
+  },
+  "Discern-and-Answer": {
+   "paper_id": "66cca7a055ee9278d0439654f474cbfa4135aff0",
+   "title": "Why So Gullible? Enhancing the Robustness of Retrieval-Augmented Models against Counterfactual Noise",
+   "arxiv_id": "2305.01579",
+   "citations": 60,
+   "claim": "Code and dataset released at https://github.com/wjdghks950/Discern-and-Answer, including MacNoise, a new machine-generated (GPT-4/GPT-3.5-turbo-generated) knowledge-conflict benchmark for open-domain ",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "wjdghks950/Discern-and-Answer"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "wjdghks950/Discern-and-Answer",
+   "confidence": "high",
+   "size_kb": 2133,
+   "pushed_at": "2024-06-13",
+   "open_issues": 2,
+   "created_at": "2024-03-09"
+  },
+  "COMBO (Compatibility-Oriented knowledge Merging)": {
+   "paper_id": "a71236be6eaa57af7207288bb1153f067144e02a",
+   "title": "Merging Generated and Retrieved Knowledge for Open-Domain QA",
+   "arxiv_id": "2310.14393",
+   "citations": 57,
+   "claim": "Code is publicly released at https://github.com/yunx-z/COMBO, covering the full COMBO framework including the silver-label mining procedure, the evidentiality and consistency discriminators, and the c",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "yunx-z/COMBO"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "yunx-z/COMBO",
+   "confidence": "high",
+   "size_kb": 397,
+   "pushed_at": "2023-10-08",
+   "open_issues": 3,
+   "created_at": "2023-10-08"
+  },
+  "CK-PLUG (Controllable Knowledge Plug-in)": {
+   "paper_id": "f0b199b7b9939cfd3d8bd69149d5bed7af40e0d2",
+   "title": "Parameters vs. Context: Fine-Grained Control of Knowledge Reliance in Language Models",
+   "arxiv_id": "2503.15888",
+   "citations": 41,
+   "claim": "Code is publicly released at https://github.com/byronBBL/CK-PLUG.",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "byronBBL/CK-PLUG"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "byronBBL/CK-PLUG",
+   "confidence": "high",
+   "size_kb": 24562,
+   "pushed_at": "2025-05-27",
+   "open_issues": 5,
+   "created_at": "2025-03-20"
+  },
+  "COIECD (contextual information-entropy constraint decoding)": {
+   "paper_id": "654c9a01b995637f5849e8977691ae648160b5ca",
+   "title": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+   "arxiv_id": "2402.11893",
+   "citations": 37,
+   "claim": "Y - code at https://github.com/Stacy027/COIECD",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "Stacy027/COIECD"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "Stacy027/COIECD",
+   "confidence": "high",
+   "size_kb": 6927,
+   "pushed_at": "2024-09-29",
+   "open_issues": 2,
+   "created_at": "2023-12-04"
+  },
+  "FaithfulRAG (fact-level conflict modeling + Self-Think)": {
+   "paper_id": "e9fa27d3eab2c682afad207c6c35803a0656b6e6",
+   "title": "FaithfulRAG: Fact-Level Conflict Modeling for Context-Faithful Retrieval-Augmented Generation",
+   "arxiv_id": "2506.08938",
+   "citations": 32,
+   "claim": "Code released at https://github.com/DeepLearnXMU/Faithful-RAG.",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "DeepLearnXMU/Faithful-RAG"
+   ],
+   "state": "has_code",
+   "refs": 3,
+   "slug": "DeepLearnXMU/Faithful-RAG",
+   "confidence": "high",
+   "size_kb": 5256,
+   "pushed_at": "2025-10-26",
+   "open_issues": 1,
+   "created_at": "2025-05-29"
+  },
+  "SCR & CR-DPO (Situated Faithfulness)": {
+   "paper_id": "6eb82be7028ac751e0539f93b84ab15048e41646",
+   "title": "To Trust or Not to Trust? Enhancing Large Language Models' Situated Faithfulness to External Contexts",
+   "arxiv_id": "2410.14675",
+   "citations": 27,
+   "claim": "Both code and data are publicly released, linked in a dedicated 'Replication' section: the RedditQA dataset (and presumably the full evaluation suite) is hosted at huggingface.co/datasets/kkkevinkkk/S",
+   "claims_release": true,
+   "url_source": "verified_by_hand",
+   "candidates": [
+    "kkkevinkkkkk/situated_faithfulness"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "kkkevinkkkkk/situated_faithfulness",
+   "confidence": "low",
+   "size_kb": 174,
+   "pushed_at": "2024-10-17",
+   "open_issues": 0,
+   "created_at": "2024-03-09"
+  },
+  "DyPRAG (Dynamic Parametric RAG)": {
+   "paper_id": "8a2acc213b370c342cff3fa0301935612b403b21",
+   "title": "Dynamic Parametric Retrieval Augmented Generation for Test-time Knowledge Enhancement",
+   "arxiv_id": "2503.23895",
+   "citations": 26,
+   "claim": "Code is publicly released at https://github.com/Trae1ounG/DyPRAG, linked directly under the author list on the title page. No separate dataset release is claimed (the paper uses existing public QA ben",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "Trae1ounG/DyPRAG"
+   ],
+   "state": "has_code",
+   "refs": 4,
+   "slug": "Trae1ounG/DyPRAG",
+   "confidence": "high",
+   "size_kb": 25293,
+   "pushed_at": "2025-08-14",
+   "open_issues": 0,
+   "created_at": "2025-03-26"
+  },
+  "ACD (Adaptive Contrastive Decoding)": {
+   "paper_id": "915539c51252649cf7d09e25dea3af199235ebed",
+   "title": "Adaptive Contrastive Decoding in Retrieval-Augmented Generation for Handling Noisy Contexts",
+   "arxiv_id": "2408.01084",
+   "citations": 22,
+   "claim": "No code or dataset repository link is stated in the extracted text; the paper does not include a GitHub/project-page release statement, only references to prior public datasets and models used.",
+   "claims_release": false,
+   "url_source": "verified_by_hand",
+   "candidates": [
+    "younanna/ACD"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "younanna/ACD",
+   "confidence": "low",
+   "size_kb": 32,
+   "pushed_at": "2025-02-02",
+   "open_issues": 1,
+   "created_at": "2025-01-21"
+  },
+  "Taxonomy-Aware / Pipeline conflict-type-aware response generation (from the CONFLICTS benchmark)": {
+   "paper_id": "a51fcc29f90d3910b348f8f0fee1e2852a7fabf0",
+   "title": "DRAGged into Conflicts: Detecting and Addressing Conflicting Sources in Search-Augmented LLMs",
+   "arxiv_id": "2506.085",
+   "citations": 20,
+   "claim": "The CONFLICTS dataset is publicly released at https://github.com/google-research-datasets/rag_conflicts, containing 458 annotated instances with conflict-type labels, retrieved passages, and (for appl",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "google-research-datasets/rag_conflicts"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "google-research-datasets/rag_conflicts",
+   "confidence": "high",
+   "size_kb": 27298,
+   "pushed_at": "2025-06-11",
+   "open_issues": 1,
+   "created_at": "2025-06-05"
+  },
+  "KnowPO (Knowledge-aware Preference Optimization)": {
+   "paper_id": "fc24091a9b44953c71084449b4fa0eabfb58abb3",
+   "title": "KnowPO: Knowledge-aware Preference Optimization for Controllable Knowledge Selection in Retrieval-Augmented Language Models",
+   "arxiv_id": "2408.03297",
+   "citations": 18,
+   "claim": "The appendix references a table of 'officially released code' (baseline method GitHub repository URLs, Table 6), but no explicit repository link for the authors' own KnowPO implementation/dataset is g",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "CDD (Context-Driven Decomposition)": {
+   "paper_id": "bac834b243ee47e83b60117d529a369dec67514e",
+   "title": "Does RAG Know When Retrieval Is Wrong? Diagnosing Context Compliance under Knowledge Conflict",
+   "arxiv_id": "2605.14473",
+   "citations": 16,
+   "claim": "The authors commit to releasing the Epi-Scale benchmark split (2,250 clean-context + 2,250 adversarial-context records, balanced across HotpotQA, Natural Questions, and FEVER), prompt templates, evalu",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "Knowledgeable-R1": {
+   "paper_id": "ab683c941931da5c6351679cb346e4d1ad5b63f4",
+   "title": "Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement",
+   "arxiv_id": "2506.05154",
+   "citations": 9,
+   "claim": "The authors release source code at https://github.com/lcy80366872/knowledgeable-R1, implemented via the VERL RL training framework, along with complete experimental configurations and a detailed accou",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "lcy80366872/knowledgeable-R1"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "lcy80366872/knowledgeable-R1",
+   "confidence": "high",
+   "size_kb": 411,
+   "pushed_at": "2026-01-27",
+   "open_issues": 2,
+   "created_at": "2025-09-26"
+  },
+  "SUGAR (Semantic Uncertainty Guided Adaptive Retrieval)": {
+   "paper_id": "85dcdc3c6d6674e21a569c158eed8055bed4b19a",
+   "title": "SUGAR: Leveraging Contextual Confidence for Smarter Retrieval",
+   "arxiv_id": "2501.04899",
+   "citations": 9,
+   "claim": "The paper does not state a public code repository link in the reviewed text; no dataset, model checkpoint, or code artifact release is mentioned.",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "ParamMute (Parametric Knowledge Muting through FFN Suppression)": {
+   "paper_id": "cb2afbc72cb0a90be167252faee9df999dc1dbf7",
+   "title": "ParamMute: Suppressing Knowledge-Critical FFNs for Faithful Retrieval-Augmented Generation",
+   "arxiv_id": "2502.15543",
+   "citations": 8,
+   "claim": "The paper states 'All codes are available at https://github.com/OpenBMB/ParamMute', a full public code release confirmed directly in the abstract; this includes the CoFaithfulQA benchmark construction",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "OpenBMB/ParamMute"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "OpenBMB/ParamMute",
+   "confidence": "high",
+   "size_kb": 63546,
+   "pushed_at": "2026-07-07",
+   "open_issues": 0,
+   "created_at": "2025-02-18"
+  },
+  "TCR (Transparent Conflict Resolution)": {
+   "paper_id": "4c78b5e846a9de2f2fcfd854ad52641f1b2ced41",
+   "title": "Seeing through the Conflict: Transparent Knowledge Conflict Handling in Retrieval-Augmented Generation",
+   "arxiv_id": "2601.06842",
+   "citations": 7,
+   "claim": "No artifact release is mentioned anywhere in the paper. There is no GitHub/code link, no dataset-release URL, and no statement of intent to release code, data, or model checkpoints (including the pape",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "ITEM (Integrated Term Enhancement Methodology)": {
+   "paper_id": "8fbbfece62a5d9dcb4e5bc7478c72b31e3ef80d6",
+   "title": "Manufacturing Domain QA with Integrated Term Enhanced RAG",
+   "arxiv_id": null,
+   "citations": 7,
+   "claim": "",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "GenDiE (Generate, Discriminate, Evolve)": {
+   "paper_id": "cbd822d674f38c2da8ec4a979772d288b9ad0756",
+   "title": "Generate, Discriminate, Evolve: Enhancing Context Faithfulness via Fine-Grained Sentence-Level Self-Evolution",
+   "arxiv_id": "2503.01695",
+   "citations": 7,
+   "claim": "No artifact release is mentioned anywhere in the paper. There is no GitHub link, code release, or stated release intent for GenDiE's training pipeline, checkpoints, or constructed self-evolution datas",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "CARE-RAG (Conflict-Aware and Reliable Evidence for RAG)": {
+   "paper_id": "0a06adbce02a4f5db3b3f08f23394e3acfc9a573",
+   "title": "Rethinking All Evidence: Enhancing Trustworthy Retrieval-Augmented Generation via Conflict-Driven Summarization",
+   "arxiv_id": "2507.01281",
+   "citations": 6,
+   "claim": "The paper states in its contributions that the authors 'distill and release a conflict detection model based on LLaMA-3.2-3B, capable of analyzing and identifying potential conflicts among input evide",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "RPO (Retrieval Preference Optimization)": {
+   "paper_id": "fc7143c7bc1830ef998419c1c708de42dd200840",
+   "title": "RPO: Retrieval Preference Optimization for Robust Retrieval-Augmented Generation",
+   "arxiv_id": "2501.13726",
+   "citations": 4,
+   "claim": "No code or dataset release URL is mentioned anywhere in the extracted text; there is no code-availability statement in the abstract, methodology, or conclusion.",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "XoT (explanation-based thinking framework)": {
+   "paper_id": "eeb8cc61135f5d3032da26888d7a2882b6704765",
+   "title": "Exploring Knowledge Conflicts for Faithful LLM Reasoning: Benchmark and Method",
+   "arxiv_id": "2604.11209",
+   "citations": 3,
+   "claim": "Explicitly released: 'The ConflictQA benchmark is available at https://github.com/Tianzhe26/ConflictQA.'",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "Tianzhe26/ConflictQA"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "Tianzhe26/ConflictQA",
+   "confidence": "high",
+   "size_kb": 2427,
+   "pushed_at": "2026-04-10",
+   "open_issues": 0,
+   "created_at": "2026-04-10"
+  },
+  "TruthfulRAG (knowledge-graph-based factual conflict resolution)": {
+   "paper_id": "4e0a7b531728d3baaceec7c96245f1badce52fd6",
+   "title": "TruthfulRAG: Resolving Factual-level Conflicts in Retrieval-Augmented Generation with Knowledge Graphs",
+   "arxiv_id": "2511.10375",
+   "citations": 2,
+   "claim": "No code, dataset, or artifact release URL was found in the extracted text after thorough searching for 'github' and 'code available' patterns; no explicit release statement was located anywhere in the",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)": {
+   "paper_id": "4dc7dca2c5101e68f200b29d733c752ab3e92171",
+   "title": "Beyond Black-Box Interventions: Latent Probing for Faithful Retrieval-Augmented Generation",
+   "arxiv_id": "2510.1246",
+   "citations": 2,
+   "claim": "Code and related resources are released and explicitly linked in the abstract: 'The related resources are available at https://github.com/XMUDeepLIT/ProbeRAG.'",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "XMUDeepLIT/ProbeRAG"
+   ],
+   "state": "has_code",
+   "refs": 4,
+   "slug": "XMUDeepLIT/ProbeRAG",
+   "confidence": "high",
+   "size_kb": 2048,
+   "pushed_at": "2026-04-15",
+   "open_issues": 0,
+   "created_at": "2026-04-15"
+  },
+  "BordaRAG (Borda Voting-based document selection)": {
+   "paper_id": "dc27c98b0f700f4a55fe726e6eae23f90834cd7a",
+   "title": "BordaRAG: Resolving Knowledge Conflict in Retrieval-Augmented Generation via Borda Voting Process",
+   "arxiv_id": null,
+   "citations": 1,
+   "claim": "",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "Micro-Act (hierarchical action-space decomposition)": {
+   "paper_id": "b8ebfcdb3409fd79ba2dba267d7fc2d75c418d7b",
+   "title": "Micro-Act: Mitigating Knowledge Conflict in LLM-based RAG via Actionable Self-Reasoning",
+   "arxiv_id": "2506.05278",
+   "citations": 1,
+   "claim": "Code publicly released at https://github.com/Nan-Huo/Micro-Act, as stated in the abstract ('Code can be found at https://github.com/Nan-Huo/Micro-Act').",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "Nan-Huo/Micro-Act"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "Nan-Huo/Micro-Act",
+   "confidence": "high",
+   "size_kb": 5078,
+   "pushed_at": "2025-07-01",
+   "open_issues": 3,
+   "created_at": "2025-05-30"
+  },
+  "MACR (multi-agent conflict resolution)": {
+   "paper_id": "5fd78361291961cf6e695991615efe1f0ac1cda4",
+   "title": "Navigating Unreliable Parametric and Contextual Knowledge: Explicit Knowledge Conflict Resolution for LLM Inference",
+   "arxiv_id": "2606.20245",
+   "citations": 1,
+   "claim": "No code, dataset, or model release statement, GitHub link, or repository URL was found anywhere in the paper after thorough search; no artifact appears to have been publicly released.",
+   "claims_release": true,
+   "url_source": "none",
+   "candidates": [],
+   "state": "unresolved"
+  },
+  "RADIANT (DPO-ECD, Entity-Context Divergence alignment)": {
+   "paper_id": "719089f4a546d74b4b8ec6bcdac5dfd8dd4391da",
+   "title": "RADIANT: Retrieval AugmenteD entIty-context AligNmenT - Introducing RAG-ability and Entity-Context Divergence",
+   "arxiv_id": "2507.02949",
+   "citations": 1,
+   "claim": "Datasets publicly released on HuggingFace at https://huggingface.co/RADIANT-RAG, as stated explicitly in the abstract. No separate code repository link found in the extracted text.",
+   "claims_release": true,
+   "url_source": "none",
+   "candidates": [],
+   "state": "unresolved"
+  },
+  "SABER (Self-Aware Belief Estimator for RAG)": {
+   "paper_id": "adfa867f286dddcb20b4e989f32d6209ec3559a5",
+   "title": "Trust or Abstain? A Self-Aware RAG Approach",
+   "arxiv_id": "2605.18792",
+   "citations": 1,
+   "claim": "Code released at https://github.com/xizhu1022/SABER, stated in the abstract ('Our code is available at https://github.com/xizhu1022/SABER').",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "xizhu1022/SABER"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "xizhu1022/SABER",
+   "confidence": "high",
+   "size_kb": 1385,
+   "pushed_at": "2026-09-25",
+   "open_issues": 1,
+   "created_at": "2026-05-07"
+  },
+  "UNNAMED: Scientist Persona + Provenance Audit mitigations against indirect data poisoning": {
+   "paper_id": "arxiv:2607.10712",
+   "title": "Distributed Denial of Science: How Indirect Data Poisoning of AI Systems Can Industrialize Scientific Fraud",
+   "arxiv_id": "2607.10712",
+   "citations": 0,
+   "claim": "Code to run experiments, prompts, generated data (agents' scientific reports, analysis codebases, figures, etc.), and the mitigation measures including the provenance audit skill are available at http",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "gyevnarb/indirect-data-poisoning"
+   ],
+   "state": "has_code",
+   "refs": 4,
+   "slug": "gyevnarb/indirect-data-poisoning",
+   "confidence": "high",
+   "size_kb": 3856,
+   "pushed_at": "2026-08-12",
+   "open_issues": 0,
+   "created_at": "2026-06-12"
+  },
+  "UNNAMED: policy-first Hybrid RAG architecture (pre-reranking access control + BM25/dense fusion via RRF + evidence-pack citation-grounded generation)": {
+   "paper_id": "141d242563718b4677b350f6a89fd28172de1845",
+   "title": "Enterprise Search Portals: Hybrid RAG at Scale for Compliance-Sensitive Knowledge Work",
+   "arxiv_id": null,
+   "citations": 0,
+   "claim": "",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "UNNAMED: pre-research and post-research verification defenses (verification-enhanced prompting + search-enabled verifier agent) for Deep Research agents": {
+   "paper_id": "22a9a24c625921d705506f798e91bb978d240ea2",
+   "title": "Is Deep Research Reliable? Misleading Knowledge Induces False Conclusions",
+   "arxiv_id": "2607.20891",
+   "citations": 0,
+   "claim": "Code released at https://github.com/whfeLingYu/MisKnow-Agent and the misleading-knowledge dataset (5,933 quality-controlled instances) released at https://huggingface.co/datasets/whfeLingYu/Misleading",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "whfeLingYu/MisKnow-Agent"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "whfeLingYu/MisKnow-Agent",
+   "confidence": "high",
+   "size_kb": 26525,
+   "pushed_at": "2026-08-04",
+   "open_issues": 0,
+   "created_at": "2026-07-30"
+  },
+  "SHIFT (gate-modulated activation steering)": {
+   "paper_id": "43767015c51be5095a148c3ea666b321e2324100",
+   "title": "SHIFT: Gate-Modulated Activation Steering for Knowledge Conflict Mitigation in Retrieval-Augmented Generation",
+   "arxiv_id": "2606.27786",
+   "citations": 0,
+   "claim": "All datasets and code released at https://github.com/OpenBMB/SHIFT, stated in the abstract; the Ethical Statement's Transparency subsection also states 'The code and datasets will be appropriately rel",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "OpenBMB/SHIFT"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "OpenBMB/SHIFT",
+   "confidence": "high",
+   "size_kb": 5178,
+   "pushed_at": "2026-07-03",
+   "open_issues": 0,
+   "created_at": "2026-06-20"
+  },
+  "CRVA-TGRAG (Conflict Resolution in Vulnerability Analysis via Teacher-Guided RAG)": {
+   "paper_id": "a2de6faaa98252c163c088613a04ad2dceb284a4",
+   "title": "Tug-of-War within A Decade: Conflict Resolution in Vulnerability Analysis via Teacher-Guided Retrieval-Augmented Generations",
+   "arxiv_id": "2604.14172",
+   "citations": 0,
+   "claim": "No code/dataset release URL is stated in the sections reviewed. The Acknowledgments section notes funding information was 'temporarily hidden due to anonymous submission,' and the paper describes cons",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking)": {
+   "paper_id": "01a8565a4529187bf9b51f28f0959f00a4fe8fd5",
+   "title": "Conflict-Aware RAG: Multi-Stage Learning with Conflict Signals for Robust Retrieval-Augmented Generation",
+   "arxiv_id": null,
+   "citations": 0,
+   "claim": "",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "ConflictRAG (two-stage detection + Entropy-TOPSIS credibility + CARS metric)": {
+   "paper_id": "3502f796c1d15f1355d0838f099178a9415b94b2",
+   "title": "ConflictRAG: Detecting and Resolving Knowledge Conflicts in Retrieval Augmented Generation",
+   "arxiv_id": "2605.17301",
+   "citations": 0,
+   "claim": "Code, the NQ-Conflict benchmark, and all prompt templates will be released upon acceptance, stated in the Acknowledgment section; no public link is available yet in this preprint version.",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "Swin-VIB (variational information bottleneck pipeline)": {
+   "paper_id": "8e8f35f80eeba5ffdd55a2a9fde149460f26348b",
+   "title": "Accommodate Knowledge Conflicts in Retrieval-augmented LLMs: Towards Robust Response Generation in the Wild",
+   "arxiv_id": "2504.12982",
+   "citations": 0,
+   "claim": "No code/artifact release URL found in the sections reviewed; the paper does not state a GitHub or HuggingFace link in the abstract, main text, or acknowledgments.",
+   "claims_release": false,
+   "url_source": "arxiv_html_cued",
+   "candidates": [
+    "JiataiWang/Swin-VIB"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "JiataiWang/Swin-VIB",
+   "confidence": "low",
+   "size_kb": 3119,
+   "pushed_at": "2026-01-19",
+   "open_issues": 0,
+   "created_at": "2024-12-12"
+  },
+  "Cross-Validation Re-ranking (inter-context conflict-aware re-ranking)": {
+   "paper_id": "faeeeae11b73d012ddaa942a9d496b3109861f87",
+   "title": "Eliminating Retrieval Knowledge Conflicts: Cross-Validation Re-ranking with Large Language Models",
+   "arxiv_id": null,
+   "citations": 0,
+   "claim": "",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "CKG-RAG": {
+   "paper_id": "fb7d254c08e64bf3d793c837749936a7795bf9b9",
+   "title": "CKG-RAG: Enhancing LLM Reasoning in Medical Domain Using Contextual Knowledge Graphs",
+   "arxiv_id": null,
+   "citations": 0,
+   "claim": "",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "Smart Indexing (metadata-aware chunking for legal RAG)": {
+   "paper_id": "1bab99ecc468fa9d84f06e405eeacaf9bf86e76f",
+   "title": "Mitigating Context Loss in Legal RAG: A Metadata-Aware Chunking Strategy for Hierarchical Indian Statutes",
+   "arxiv_id": null,
+   "citations": 0,
+   "claim": "",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "CheckRLM": {
+   "paper_id": "65c2112eecfbd99ccaac315fdf624ca9c0579b2f",
+   "title": "CheckRLM: Effective Knowledge\u2013Thought Coherence Checking in Retrieval-Augmented Reasoning",
+   "arxiv_id": "2607.02262",
+   "citations": 0,
+   "claim": "Code and data publicly released at https://github.com/AI9Stars/CheckRLM, stated explicitly in the abstract.",
+   "claims_release": true,
+   "url_source": "artifacts_released",
+   "candidates": [
+    "AI9Stars/CheckRLM"
+   ],
+   "state": "has_code",
+   "refs": 2,
+   "slug": "AI9Stars/CheckRLM",
+   "confidence": "high",
+   "size_kb": 5953,
+   "pushed_at": "2026-07-02",
+   "open_issues": 0,
+   "created_at": "2026-04-16"
+  },
+  "RAPS-DA (Regime-Aware Peer Specialization)": {
+   "paper_id": "428e867f59ed171a0f7dad5cf2e034fee793a167",
+   "title": "Regime-Aware Peer Specialization for Robust RAG under Heterogeneous Knowledge Conflicts",
+   "arxiv_id": "2606.30518",
+   "citations": 0,
+   "claim": "No code, model, or dataset release is mentioned anywhere in the paper -- no GitHub/HuggingFace links or reproducibility statement were found for the paper's own artifacts (only the pretrained base mod",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "ERA (Evidence-based Reliability Alignment)": {
+   "paper_id": "d926c21fb1aa15d19dd1dba8a944c76948e41581",
+   "title": "ERA: Evidence-based Reliability Alignment for Honest Retrieval-Augmented Generation",
+   "arxiv_id": "2604.20854",
+   "citations": 0,
+   "claim": "Source code and dataset released via an anonymous double-blind repository at https://anonymous.4open.science/r/ERA-318B, stated explicitly in the Appendix Training Details.",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  },
+  "UNNAMED: Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG)": {
+   "paper_id": "986fc8d841425a81947838425ea292685ef8325a",
+   "title": "Multi-Route Search and Adaptive Fusion for Power QA with Small Language Model Guidance",
+   "arxiv_id": null,
+   "citations": 0,
+   "claim": "",
+   "claims_release": false,
+   "url_source": "none",
+   "candidates": [],
+   "state": "none_named"
+  }
+ }
+}
