@@ -8,19 +8,28 @@ this corpus. Its central claim was right and its numbers were not.
 ## The result, on 998 included papers
 
 Edges are the union of the full-text pass (reference lists read out of the
-PDFs) and the S2 edge table: **6,828 edges inside the corpus.**
+PDFs) and the S2 edge table: **6,949 edges inside the corpus.**
 
 | | papers | share |
 |---|---:|---:|
-| cite at least one corpus paper | **940** | **94.2 %** |
-| reference list read, cite nothing in the corpus | 44 | 4.4 % |
-| no PDF — cannot be measured | 12 | 1.2 % |
+| cite at least one corpus paper | **943** | **94.5 %** |
+| reference list read, cite nothing in the corpus | 48 | 4.8 % |
 | PDF present, reference section unreadable | 2 | 0.2 % |
+| no PDF at all | 5 | 0.5 % |
 
-**The corpus is 94 % connected.** The old document's headline — 191 apparent
-outliers, of which 171 were an edge-store artifact — was directionally right:
-the artifact was real and it was most of the effect. But it was bigger than
-reported. Reading the PDFs reduces the unmeasurable group from **171 to 14**.
+**The corpus is 94.5 % connected, and only 7 papers cannot be placed** — 7 of
+998 have neither a readable reference list nor an edge from either source.
+
+The old document's headline — 191 apparent outliers, of which 171 were an
+edge-store artifact — was directionally right, and understated. Reading the
+PDFs reduces the unplaceable group from **171 to 7**.
+
+> **A counting correction.** An earlier version of this section reported "12 no
+> PDF, 2 unreadable". Those were the subsets that *also* had no S2 edge, not
+> the totals. PDF coverage itself then improved: 28 of the papers listed as
+> having no PDF were ones already downloaded by hand for the relevance pass and
+> never registered into the corpus. Registering them took coverage from 954 to
+> **982 of 998 (98.4 %)** and added 170 edges.
 
 ## The 44 genuine isolates are two different things
 
@@ -45,9 +54,9 @@ because **they came first** — the corpus is largely composed of work that cite
 Calling these "outliers" is an artifact of looking only at out-edges. On the
 graph they are hubs with the arrows pointing the other way.
 
-### 18 cite nothing and are cited by nobody — and all 18 are defenses
+### 22 cite nothing and are cited by nobody — and all are registry contributors
 
-Every one of the 18 contributes an RQ4 registry entry. They are
+Every one contributes an RQ3 or RQ4 registry entry. They are
 *G-MemLLM*, *Adaptive Focus Memory*, *CoCortex*, *Agentic JWT*,
 *Mobile-Agent-RAG* and similar: **2025–2026 long-horizon memory and agent
 defenses**, coded from full text, that engage neither literature and that
@@ -56,7 +65,7 @@ neither literature has engaged.
 They survived the 2026-10-13 exclusion pass precisely because they contribute
 registry entries, and that exemption was the right call — removing them would
 move RQ4's published count. But as a finding about the field they are the
-interesting group: **18 defenses in the registry are citation-disconnected in
+interesting group: **22 registry contributors are citation-disconnected in
 both directions.** That is a measurement of a recent-defense cohort writing
 past the existing literature, not a data-quality problem.
 
@@ -65,17 +74,17 @@ past the existing literature, not a data-quality problem.
 | | 2026-10-08 (S2 edges) | 2026-10-13 (union) |
 |---|---:|---:|
 | corpus | 1,026 | 998 |
-| apparent outliers | 191 | 44 |
-| explained by missing reference data | 171 | **14** |
-| genuinely isolated | 20 | **44** |
+| apparent outliers | 191 | 48 |
+| explained by missing reference data | 171 | **7** |
+| genuinely isolated | 20 | **48** |
 
 Two movements in opposite directions, and both are real:
 
-- **The edge gap shrank from 171 to 14**, because reference lists are now read
+- **The edge gap shrank from 171 to 7**, because reference lists are now read
   from the PDFs rather than fetched from an API whose coverage of this corpus
   was 828 of 1,026. That is the old document's own thesis, confirmed and then
   mostly removed as a confound.
-- **Genuine isolates rose from 20 to 44**, because we can now *judge* 1,087
+- **Genuine isolates rose from 20 to 48**, because we can now *judge* 1,087
   papers instead of 828. More measurement finds more of everything, including
   more real isolation.
 
