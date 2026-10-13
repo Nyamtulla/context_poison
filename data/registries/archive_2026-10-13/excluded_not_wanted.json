@@ -1,0 +1,121 @@
+{
+ "generated": "2026-10-13",
+ "n": 14,
+ "note": "NOT a fetch failure. These 14 were reviewed by the project lead at download time and deliberately not obtained: withdrawn, or judged out of scope. They are excluded on a relevance decision, and the unavailability of a PDF is a consequence of that decision rather than its cause.",
+ "papers": [
+  {
+   "paper_id": "1bab99ecc468fa9d84f06e405eeacaf9bf86e76f",
+   "title": "Mitigating Context Loss in Legal RAG: A Metadata-Aware Chunking Strategy for Hierarchical Indian Statutes",
+   "year": 2026,
+   "venue": "2026 4th International Conference on Knowledge Engineering and Communication Systems (ICKECS)",
+   "doi": "10.1109/ickecs70176.2026.11528014",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "1c8b199b9868dc1275c7a275aff2e2fe3858925d",
+   "title": "Research and Analysis on the Mechanism of Suppressing Large Model Hallucination Based on Modular RAG Architecture",
+   "year": 2026,
+   "venue": "Mathematical Modeling and Algorithm Application",
+   "doi": "10.54097/bp841717",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "21e45f760e4f375bf0d68e41a4a9b71c46594b62",
+   "title": "Trust-Aware Runtime Verification for Autonomous LLM Agent Systems",
+   "year": 2026,
+   "venue": "2026 International Conference on Artificial Intelligence, Systems, and Emerging Technologies (ICAISET)",
+   "doi": "10.1109/icaiset66439.2026.11541707",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "3f47521e7f448d514a02d341f4cc5d71341cc884",
+   "title": "SecurePrompt \u2013 Detecting and Mitigating Prompt Attacks",
+   "year": 2025,
+   "venue": "2025 IEEE 7th International Conference on Cybernetics, Cognition and Machine Learning Applications (ICCCMLA)",
+   "doi": "10.1109/icccmla66092.2025.11581051",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "74bf328bb86c119e6282744c2badd79f5bb14f53",
+   "title": "Trust-Aware Orchestration Architecture for LLM-Assisted Workflows in Multi-Tenant Enterprise Systems",
+   "year": 2026,
+   "venue": "IEEE Access",
+   "doi": "10.1109/access.2026.3706063",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "777c3fb3234532eab31bc6dc9a3388c67f163f81",
+   "title": "An Empirical Evaluation of Prompt Injection Detection and Refusal-Usefulness Tradeoffs Using the deepset/prompt-injections Dataset",
+   "year": 2025,
+   "venue": "Journal of Computing Innovations and Applications",
+   "doi": "10.63575/cia.2025.30205",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "88b9628dee420a94c63fe3f0ec6b01fdc930e8d8",
+   "title": "Self-Healing Memory Architectures for Large Language Model-Based Multi-Agent Collaboration",
+   "year": 2026,
+   "venue": "American journal of artificial intelligence and neural networks",
+   "doi": "10.71465/ajainn3659",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "900d5304c3371bcedef4d7280da3bf326032202d",
+   "title": "Site Isolation is Dead: How Site Isolation is Broken in Agentic Browsers and Extensions",
+   "year": 2026,
+   "venue": "IEEE S&P",
+   "doi": "10.1109/sp63933.2026.00241",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "a3be45ad07ac98246029dc5c0a504f9314eec5b6",
+   "title": "Zero-Shot Tokenizer Transfer for Targeted Attacks on Retrieval-Augmented Generation",
+   "year": 2026,
+   "venue": "International Conference on Applied Informatics and Communication",
+   "doi": "10.1109/icaic67076.2026.11395696",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "a89c73e617861763bf122d19a412c5700990d287",
+   "title": "Analisis Kualitatif Kerentanan AI Agent terhadap Serangan Prompt Injection dan Strategi Mitigasinya",
+   "year": 2026,
+   "venue": "Jurnal Ilmiah Teknik Informatika dan Komunikasi",
+   "doi": "10.55606/juitik.v6i2.2369",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "aef8626298e9cc4baf45000697e61626552fc2e4",
+   "title": "Retrieval Augmentation Reduces Factual Errors in Knowledge-Intensive Language Model Tasks",
+   "year": 2026,
+   "venue": "Computer Life",
+   "doi": "10.54097/8jvwpk07",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "b36a1f6cbc8ffb54b5f694328fa732a1bf1bc617",
+   "title": "Master\u2019s Thesis Network Forensics, 60 credits A Hybrid Defense Against Prompt Injection in LLM Agents",
+   "year": null,
+   "venue": null,
+   "doi": null,
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "bcc321fb567cfe7378d37a260be004f23617f080",
+   "title": "Vulnerabilities and Risk Analysis of Multi-Agentic AI-RAG in Autonomous Vehicle Reinforcement Learning Frameworks: Safety Mitigation in Training, Simulation, and Real-World Testing",
+   "year": 2026,
+   "venue": "European Journal of Artificial Intelligence and Machine Learning",
+   "doi": "10.24018/ejai.2026.5.1.1094",
+   "arxiv_id": null
+  },
+  {
+   "paper_id": "f3dd32f7ab427e5b4998fe451aabb929a324755c",
+   "title": "Cascading Instruction Influence Indirect Prompt Injection in Hierarchical Multi-Agent Systems",
+   "year": 2026,
+   "venue": "Statistics, Optimization &amp; Information Computing",
+   "doi": "10.19139/soic-2310-5070-3574",
+   "arxiv_id": null
+  }
+ ],
+ "basis": "project lead's review of title/venue/abstract at download time",
+ "routes_tried_before_the_decision": "arXiv, OpenAlex best_oa_location and locations, direct DOI - recorded so nobody repeats them"
+}
