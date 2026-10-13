@@ -1,0 +1,241 @@
+{
+ "generated": "2026-10-13",
+ "criterion": "out-degree 0 into the corpus by BOTH the full-text pass and the S2 edge table, AND in-degree 0 by both, AND screening=Include, AND contributes no RQ3/RQ4 registry entry",
+ "n": 26,
+ "papers": [
+  {
+   "paper_id": "1aa0ad840f5b5480cd3a804f0cec50cb7a549e04",
+   "title": "Mem2Ego: Empowering Vision-Language Models with Global-to-Ego Memory for Long-Horizon Embodied Navigation",
+   "year": 2025,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 30
+  },
+  {
+   "paper_id": "25387a97c53a332161e540ef3f94e6bd519163c3",
+   "title": "Coupling Macro Dynamics and Micro States for Long-Horizon Social Simulation",
+   "year": 2026,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 19
+  },
+  {
+   "paper_id": "4202c16e1e53dfd411d6ab9695343a925ec038ae",
+   "title": "VideoCAD: A Dataset and Model for Learning Long-Horizon 3D CAD UI Interactions from Video",
+   "year": 2025,
+   "venue": "",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 12
+  },
+  {
+   "paper_id": "451a78313fb0d6b4a74507a1a171aa3c9b89c0eb",
+   "title": "Large Language Models and Security",
+   "year": 2024,
+   "venue": "IEEE Security and Privacy",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 12
+  },
+  {
+   "paper_id": "205a6068eabc4620c4368a3c4c6dfa7418172129",
+   "title": "CarePilot: A Multi-Agent Framework for Long-Horizon Computer Task Automation in Healthcare",
+   "year": 2026,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 5
+  },
+  {
+   "paper_id": "37c56b578604d3dea4d86ae9bf1a76cdbff5129e",
+   "title": "ASTRIDE: A Security Threat Modeling Platform for Agentic-AI Applications",
+   "year": 2025,
+   "venue": "International Conference on Wireless Communications and Mobile Computing",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 4
+  },
+  {
+   "paper_id": "061697ba029e8133a2e9edee03473b075a0e3e0e",
+   "title": "Fairness Testing in Retrieval-Augmented Generation: How Small Perturbations Reveal Bias in Small Language Models",
+   "year": 2025,
+   "venue": "Brazilian Symposium on Software Quality",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 3
+  },
+  {
+   "paper_id": "38eadd2a5eaa850911a5e05c16e47434b356d3b7",
+   "title": "Beyond Reactive Safety: Risk-Aware LLM Alignment via Long-Horizon Simulation",
+   "year": 2025,
+   "venue": "ACL",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 3
+  },
+  {
+   "paper_id": "3e9dcfc0391a1d39a1365e8ed86fe2a1c9074e09",
+   "title": "SWE-TRACE: Optimizing Long-Horizon SWE Agents Through Rubric Process Reward Models and Heuristic Test-Time Scaling",
+   "year": 2026,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 3
+  },
+  {
+   "paper_id": "b8edfd4dfd274ba42c77d56d655e785ccac7eb74",
+   "title": "VideoSeek: Long-Horizon Video Agent with Tool-Guided Seeking",
+   "year": 2026,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 3
+  },
+  {
+   "paper_id": "1912a3a2f666dd320875e6b8407454f346f1b004",
+   "title": "VSearcher: Long-Horizon Multimodal Search Agent via Reinforcement Learning",
+   "year": 2026,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 2
+  },
+  {
+   "paper_id": "2807699637e2c8607140926412e00276415f21e9",
+   "title": "Cisco Integrated AI Security and Safety Framework Report",
+   "year": 2025,
+   "venue": "arXiv",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 2
+  },
+  {
+   "paper_id": "11d778e096a1716b14afa5915378ad4a25525e77",
+   "title": "Security Posture Evaluation of Model Context Protocol Servers Against Prompt Injection",
+   "year": 2025,
+   "venue": "International Symposium for Design and Technology in Electronic Packaging",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 1
+  },
+  {
+   "paper_id": "b54174d473f1d812411e5991c13e8277152ce3b7",
+   "title": "BENCHMARKING AUTONOMOUS SOFTWARE DEVELOPMENT AGENTS: TASKS, METRICS, AND FAILURE MODES",
+   "year": 2026,
+   "venue": "AI,Computer Science and Information Technology",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 1
+  },
+  {
+   "paper_id": "91cea1d58c91edb5897dc3659f7320eef2f9f6c5",
+   "title": "SearchArt: Training Long-Horizon Search Agent with Scalable Synthetic and Verified Task",
+   "year": 2026,
+   "venue": "",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "arxiv:2604.05190",
+   "title": "Retrieval-Augmented LLMs for Evidence Localization in Clinical Trial Recruitment from Longitudinal EHR Narratives",
+   "year": 2026,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "02b267ecd02e4884ad4206c067c8b9768e01aa51",
+   "title": "ToolVerse: Unlocking Massive Environments and Long-Horizon Tasks for Agentic Reinforcement Learning",
+   "year": 2026,
+   "venue": "",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "arxiv:2601.02577",
+   "title": "Orchestral AI: A Framework for Agent Orchestration",
+   "year": 2026,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "a96ec007ce6b034623afb6778eb67f99350b0c8d",
+   "title": "Controlled Benchmarking of Memory Topologies in LLM-Based Multi-Agent Systems: Quality, Efficiency, and Privacy Trade-Offs",
+   "year": 2026,
+   "venue": "2026 IEEE Ural-Siberian Conference on Biomedical Engineering, Radioelectronics and Information Technology (USBEREIT)",
+   "track": "Both",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "c65794f324d084f9f166cd9343633495c9d8a93c",
+   "title": "LLM Scalability Risk for Agentic-AI and Model Supply Chain Security",
+   "year": 2026,
+   "venue": "Journal of Computational Information Systems",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "arxiv:2604.27960",
+   "title": "LLMs as ASP Programmers: Self-Correction Enables Task-Agnostic Nonmonotonic Reasoning",
+   "year": 2026,
+   "venue": "arXiv",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "069e9bd355c20013de5224be1324a57a4a14352f",
+   "title": "Poster: Agentic Shell Honeypot Using Structured Logging",
+   "year": 2025,
+   "venue": "ACM CCS",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "9bfaaba28057e228754869c6788e5bccc3bb1015",
+   "title": "A Modular Multi-Agent Coordination Framework for Persistent Autonomous AI Assistants with Tool Orchestration and Long-Horizon Task Management",
+   "year": 2026,
+   "venue": "International Journal of Innovative Science and Research Technology",
+   "track": "Both",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "bcef80a2daaa7d61462f6873fcd3b1dd3e0ddd65",
+   "title": "Understanding Memory-related Threats and Vulnerabilities in Large Language Models",
+   "year": 2026,
+   "venue": "Computer fraud & security",
+   "track": "Security",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "fb29863cb5ac9458f84db8430d69727acf115361",
+   "title": "Designing and Verifying Agentic AI Systems through Structural Architecture and State Analysis",
+   "year": 2026,
+   "venue": "International Conference on Information Control Systems & Technologies",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  },
+  {
+   "paper_id": "11b047630b085273b8fe43856e6098b383d84879",
+   "title": "Distributed Agent System: Fault-Tolerant Collaboration Among Embodied Agents",
+   "year": 2026,
+   "venue": "",
+   "track": "ML/AI",
+   "role": "neither",
+   "citation_count": 0
+  }
+ ]
+}
