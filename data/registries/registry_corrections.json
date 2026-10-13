@@ -12,5 +12,86 @@
    "effect": "RQ3 mechanisms 183 -> 182. The retracted entry was uncovered while the canonical 'AgentVigil' is covered by 1 defense, so uncovered mechanisms 112 -> 111 and the never-defended share 61.2% -> 61.0%. Covered count unchanged at 71."
   }
  ],
- "retracted_defenses": []
+ "retracted_defenses": [],
+ "retracted_2026_10_13_unreadable": [
+  {
+   "kind": "attack",
+   "name": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
+   "source_paper_id": "812b87876b22260fe046af447c5f40a4ce2906ea",
+   "reason": "excluded 2026-10-13: PDF present but reference section unextractable"
+  },
+  {
+   "kind": "attack",
+   "name": "UNNAMED: IPC-channel cross-origin injection/exfiltration attacks against agentic browsers",
+   "source_paper_id": "900d5304c3371bcedef4d7280da3bf326032202d",
+   "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
+  },
+  {
+   "kind": "attack",
+   "name": "ZBEAST",
+   "source_paper_id": "a3be45ad07ac98246029dc5c0a504f9314eec5b6",
+   "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
+  },
+  {
+   "kind": "attack",
+   "name": "PINA",
+   "source_paper_id": "ace8ae46e3f9e33fe92bb50fafd6973f2504e127",
+   "reason": "excluded 2026-10-13: PDF present but reference section unextractable"
+  },
+  {
+   "kind": "defense",
+   "name": "UNNAMED: Authorization framework for autonomous LLM agent threat mitigation",
+   "source_paper_id": "156e8e6a9f11d3a3c9136dfc53211b9fb0d51699",
+   "reason": "excluded 2026-10-13: PDF present but reference section unextractable"
+  },
+  {
+   "kind": "defense",
+   "name": "Smart Indexing (metadata-aware chunking for legal RAG)",
+   "source_paper_id": "1bab99ecc468fa9d84f06e405eeacaf9bf86e76f",
+   "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
+  },
+  {
+   "kind": "defense",
+   "name": "TARV (Trust-Aware Runtime Verification)",
+   "source_paper_id": "21e45f760e4f375bf0d68e41a4a9b71c46594b62",
+   "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
+  },
+  {
+   "kind": "defense",
+   "name": "State-Update Multi-turn Dialogue Strategy",
+   "source_paper_id": "2aa22206048ff82676d0428b5c8d0d48cafbda62",
+   "reason": "excluded 2026-10-13: PDF present but reference section unextractable"
+  },
+  {
+   "kind": "defense",
+   "name": "SecurePrompt",
+   "source_paper_id": "3f47521e7f448d514a02d341f4cc5d71341cc884",
+   "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
+  },
+  {
+   "kind": "defense",
+   "name": "ProjGuard",
+   "source_paper_id": "45c41693ece0aebf5d9210aa3a983046ee325c65",
+   "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
+  },
+  {
+   "kind": "defense",
+   "name": "Trust-Aware Orchestration Architecture (hard gates + advisory filters + deterministic syntax recovery)",
+   "source_paper_id": "74bf328bb86c119e6282744c2badd79f5bb14f53",
+   "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
+  },
+  {
+   "kind": "defense",
+   "name": "CD2 (Conflict-Disentangle Contrastive Decoding)",
+   "source_paper_id": "812b87876b22260fe046af447c5f40a4ce2906ea",
+   "reason": "excluded 2026-10-13: PDF present but reference section unextractable"
+  },
+  {
+   "kind": "defense",
+   "name": "UNNAMED: self-healing memory architecture (cosine-similarity drift detection + cross-agent consensus repair)",
+   "source_paper_id": "88b9628dee420a94c63fe3f0ec6b01fdc930e8d8",
+   "reason": "excluded 2026-10-13: no PDF - paper never obtainable, coded from abstract only"
+  }
+ ],
+ "note_2026_10_13": "13 registry entries retracted because their source paper was excluded for being unreadable (no PDF, or a PDF whose reference section will not extract). This is a removal for a PIPELINE limitation, not a property of the papers: 21 of the 26 excluded papers are IEEE/paywalled venues against 3 on arXiv, and 20 of 26 are Security track against 59% in the corpus, so the exclusion carries a venue and track bias that must be disclosed wherever the resulting counts are used."
 }

@@ -578,3 +578,68 @@ before the numbers are quoted anywhere new.
 the S2 edge table, which `citation_network_rebuild.md` shows had 199 isolates
 against the full text's 105 — 98 of its isolates demonstrably do cite the
 corpus. Its conclusions should be re-derived on the union network, not refreshed.
+
+---
+
+## 2026-10-13 (second pass) — 26 excluded as unreadable. Corpus 998 → 972
+
+Papers with **no PDF** (16) or **a PDF whose reference section will not
+extract** (10). Removed from the corpus and from the RQ3/RQ4 registries.
+
+### This one is different, and the difference must travel with the numbers
+
+The earlier passes excluded papers for properties of the papers: out of scope
+on a full read, or disconnected from the literature in both directions. **This
+pass excludes papers for a limitation of our pipeline.** Nothing is wrong with
+these papers; we could not obtain or parse them.
+
+That matters because the limitation is not randomly distributed:
+
+| | excluded 26 | corpus |
+|---|---:|---:|
+| IEEE / other paywalled venue | 21 | — |
+| arXiv | 3 | — |
+| Security track | 20 (77 %) | 59 % |
+
+This is the same paywall gap measured in `verification/missing_pdf_worklist.md`:
+security work publishes in IEEE conferences, ML/AI work goes to arXiv, and our
+fetcher reaches arXiv. **Excluding the unreadable therefore removes a
+venue-correlated and track-correlated slice of the corpus, not a random one**,
+and any count derived from the 972 inherits that. It should be disclosed
+wherever those counts appear, not buried here.
+
+Two of the removed are not marginal papers:
+
+- **Tug-of-War between Knowledge (CD2)** — 117 citations, `role='both'`, the
+  best-cited untested defense in the silent-corruption cell. Its PDF is
+  present; only its reference section fails to parse.
+- **Site Isolation is Dead** — IEEE S&P 2026, `role='attack'`.
+
+### Effect
+
+| | before | after |
+|---|---:|---:|
+| included corpus | 998 | **972** |
+| RQ3 attack registry | 237 | **233** |
+| RQ4 defense registry | 534 | **525** |
+| RQ2 Security → ML/AI | 70/590 = 11.9 % | **68/570 = 11.9 %** |
+| RQ2 ML/AI → Security | 37/390 = 9.5 % | **36/384 = 9.4 %** |
+
+The cross-citation rates barely move, which is the first pass in this sequence
+where that is true — these papers were a representative mix of citing and
+non-citing, unlike the disconnected set.
+
+**13 registry entries were retracted.** They are recorded in
+`data/registries/registry_corrections.json` with cause, following the existing
+applied-on-load convention, so `load_all(include_corrections=False)` still
+reproduces the originally published 237 / 534.
+
+### Reversal
+
+`screening` flipped `Include → Exclude`; no paper row deleted. Registry rows
+*were* deleted, but every one is reconstructable from the corrections file. Ids
+in `data/registries/excluded_unreadable_2026-10-13.json`.
+
+**The cheapest way to undo most of this is to fetch the 16 missing PDFs** —
+they are on `verification/missing_pdf_worklist.xlsx` with links, and most are a
+single IEEE Xplore library session.
