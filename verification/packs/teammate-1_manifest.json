@@ -1,0 +1,130 @@
+{
+ "who": "teammate-1",
+ "selection": "purposive: most-cited Security papers presenting an attack or defense; surveys/SoKs excluded",
+ "generalisable": false,
+ "overlap_with_random_sample": [
+  "6d465be006615460d41060f9f5068d51fc1f46b1"
+ ],
+ "papers": [
+  {
+   "paper_id": "705e49afd92130f2bc1e0d4d0b1f6cb14e88803f",
+   "title": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+   "citations": 1639,
+   "pdf": "Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf"
+  },
+  {
+   "paper_id": "db4cf9f6a653d5c15973e836c800ea47743251ae",
+   "title": "Prompt Injection attack against LLM-integrated Applications",
+   "citations": 836,
+   "pdf": "Prompt Injection attack against LLM-integrated Applications.pdf"
+  },
+  {
+   "paper_id": "c8eee9766f0968e8f1b1be0731bc70b85be0ac97",
+   "title": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents",
+   "citations": 457,
+   "pdf": "InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf"
+  },
+  {
+   "paper_id": "f18e5a844c37e5342f8f3d409c74c1a9c91d1f8f",
+   "title": "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions",
+   "citations": 428,
+   "pdf": "The Instruction Hierarchy - Training LLMs to Prioritize Privileged Instructions.pdf"
+  },
+  {
+   "paper_id": "9adddfe5a596d20b534a29d9937efcd3cb85d3cf",
+   "title": "Formalizing and Benchmarking Prompt Injection Attacks and Defenses",
+   "citations": 410,
+   "pdf": "Formalizing and Benchmarking Prompt Injection Attacks and Defenses.pdf"
+  },
+  {
+   "paper_id": "b6948a9e8b3eec5a56a80c69727154fcd7ececce",
+   "title": "AgentPoison: Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases",
+   "citations": 394,
+   "pdf": "AgentPoison - Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases.pdf"
+  },
+  {
+   "paper_id": "f5e7e22036c3fe7d6660eee90642f716c3b303f5",
+   "title": "StruQ: Defending Against Prompt Injection with Structured Queries",
+   "citations": 349,
+   "pdf": "StruQ - Defending Against Prompt Injection with Structured Queries.pdf"
+  },
+  {
+   "paper_id": "6d465be006615460d41060f9f5068d51fc1f46b1",
+   "title": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models",
+   "citations": 313,
+   "pdf": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models.pdf"
+  },
+  {
+   "paper_id": "5f4efbe3aae1d8f44ceab1da257ae685d6beb00b",
+   "title": "Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents",
+   "citations": 310,
+   "pdf": "Agent Security Bench (ASB) - Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents.pdf"
+  },
+  {
+   "paper_id": "f4e06256ab07727ff4e0465deea83fcf45012354",
+   "title": "PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models",
+   "citations": 253,
+   "pdf": "PoisonedRAG - Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models.pdf"
+  },
+  {
+   "paper_id": "32316f1d08911b397f52f8644f46f5c129619383",
+   "title": "Defending Against Indirect Prompt Injection Attacks With Spotlighting",
+   "citations": 228,
+   "pdf": "Defending Against Indirect Prompt Injection Attacks With Spotlighting.pdf"
+  },
+  {
+   "paper_id": "37665dd5ae7245f087d663785c17eef068578676",
+   "title": "Backdooring Instruction-Tuned Large Language Models with Virtual Prompt Injection",
+   "citations": 210,
+   "pdf": "Backdooring Instruction-Tuned Large Language Models with Virtual Prompt Injection.pdf"
+  },
+  {
+   "paper_id": "e56f14ced9f7ce344ed14bdcb46860ccac72ac83",
+   "title": "Optimization-based Prompt Injection Attack to LLM-as-a-Judge",
+   "citations": 200,
+   "pdf": "Optimization-based Prompt Injection Attack to LLM-as-a-Judge.pdf"
+  },
+  {
+   "paper_id": "f25f0e35058d5a112115f83a6cbb3d3ba16ded42",
+   "title": "Defeating Prompt Injections by Design",
+   "citations": 199,
+   "pdf": "Defeating Prompt Injections by Design.pdf"
+  },
+  {
+   "paper_id": "e3a49a110801fd961db887f8af1239cc79b55a5b",
+   "title": "Poisoning Retrieval Corpora by Injecting Adversarial Passages",
+   "citations": 170,
+   "pdf": "Poisoning Retrieval Corpora by Injecting Adversarial Passages.pdf"
+  },
+  {
+   "paper_id": "3e1d812a1ef4b02b7d60020cc8aaa596d28373da",
+   "title": "SecAlign: Defending Against Prompt Injection with Preference Optimization",
+   "citations": 168,
+   "pdf": "SecAlign - Defending Against Prompt Injection with Preference Optimization.pdf"
+  },
+  {
+   "paper_id": "0a6a350653369dc92fde4cf9992951534ed1f169",
+   "title": "Automatic and Universal Prompt Injection Attacks against Large Language Models",
+   "citations": 165,
+   "pdf": "Automatic and Universal Prompt Injection Attacks against Large Language Models.pdf"
+  },
+  {
+   "paper_id": "e25b4bdfc3f5a8293ea6cd687a0203e446594188",
+   "title": "Tensor Trust: Interpretable Prompt Injection Attacks from an Online Game",
+   "citations": 144,
+   "pdf": "Tensor Trust - Interpretable Prompt Injection Attacks from an Online Game.pdf"
+  },
+  {
+   "paper_id": "3b81eca915a041b12eab31ffa62fca5bdabfbf17",
+   "title": "Certifiably Robust RAG against Retrieval Corruption",
+   "citations": 142,
+   "pdf": "Certifiably Robust RAG against Retrieval Corruption.pdf"
+  },
+  {
+   "paper_id": "cf95279b1da9de1aad9e7c651f5048f69af295ed",
+   "title": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+   "citations": 138,
+   "pdf": "AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf"
+  }
+ ]
+}
