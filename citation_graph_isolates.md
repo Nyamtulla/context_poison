@@ -1,5 +1,113 @@
 # The isolated papers in the citation graph
 
+**Redone 2026-10-13 on the rebuilt network.** The 2026-10-08 version of this
+document is preserved below; it was computed on the Semantic Scholar edge
+table, which `citation_network_rebuild.md` shows was the wrong instrument for
+this corpus. Its central claim was right and its numbers were not.
+
+## The result, on 998 included papers
+
+Edges are the union of the full-text pass (reference lists read out of the
+PDFs) and the S2 edge table: **6,828 edges inside the corpus.**
+
+| | papers | share |
+|---|---:|---:|
+| cite at least one corpus paper | **940** | **94.2 %** |
+| reference list read, cite nothing in the corpus | 44 | 4.4 % |
+| no PDF — cannot be measured | 12 | 1.2 % |
+| PDF present, reference section unreadable | 2 | 0.2 % |
+
+**The corpus is 94 % connected.** The old document's headline — 191 apparent
+outliers, of which 171 were an edge-store artifact — was directionally right:
+the artifact was real and it was most of the effect. But it was bigger than
+reported. Reading the PDFs reduces the unmeasurable group from **171 to 14**.
+
+## The 44 genuine isolates are two different things
+
+A paper that cites nothing in the corpus can be at either end of the
+literature. In-degree separates them, and the split is almost even.
+
+### 26 are sinks: cited by the corpus, citing nothing in it
+
+| in-degree | year | paper |
+|---:|---|---|
+| **449** | 2023 | Not What You've Signed Up For |
+| **194** | 2023 | Lost in the Middle |
+| 85 | 2023 | WebArena |
+| 60 | 2025 | Prompt Injection Attacks on LLM Generated Reviews |
+| 48 | 2023 | LLMs Can Be Easily Distracted by Irrelevant Context |
+| 25 | 2023 | Poisoning Retrieval Corpora by Injecting Adversarial Passages |
+
+These are the most connected papers in the corpus. They cite nothing in it
+because **they came first** — the corpus is largely composed of work that cites
+*them*. Seven of the 26 are from 2023, and they hold the top in-degrees.
+
+Calling these "outliers" is an artifact of looking only at out-edges. On the
+graph they are hubs with the arrows pointing the other way.
+
+### 18 cite nothing and are cited by nobody — and all 18 are defenses
+
+Every one of the 18 contributes an RQ4 registry entry. They are
+*G-MemLLM*, *Adaptive Focus Memory*, *CoCortex*, *Agentic JWT*,
+*Mobile-Agent-RAG* and similar: **2025–2026 long-horizon memory and agent
+defenses**, coded from full text, that engage neither literature and that
+neither literature has engaged.
+
+They survived the 2026-10-13 exclusion pass precisely because they contribute
+registry entries, and that exemption was the right call — removing them would
+move RQ4's published count. But as a finding about the field they are the
+interesting group: **18 defenses in the registry are citation-disconnected in
+both directions.** That is a measurement of a recent-defense cohort writing
+past the existing literature, not a data-quality problem.
+
+## What changed, and why the old numbers were wrong
+
+| | 2026-10-08 (S2 edges) | 2026-10-13 (union) |
+|---|---:|---:|
+| corpus | 1,026 | 998 |
+| apparent outliers | 191 | 44 |
+| explained by missing reference data | 171 | **14** |
+| genuinely isolated | 20 | **44** |
+
+Two movements in opposite directions, and both are real:
+
+- **The edge gap shrank from 171 to 14**, because reference lists are now read
+  from the PDFs rather than fetched from an API whose coverage of this corpus
+  was 828 of 1,026. That is the old document's own thesis, confirmed and then
+  mostly removed as a confound.
+- **Genuine isolates rose from 20 to 44**, because we can now *judge* 1,087
+  papers instead of 828. More measurement finds more of everything, including
+  more real isolation.
+
+The old document's lesson — *"the picture understates the connections, the
+numbers do not"* — survives intact. What it could not do, with 171 papers in an
+unmeasurable bucket, was say which of the remainder were foundational and which
+were disconnected. That distinction is now available and it is the operative
+one.
+
+## The correction the old version already contains, still worth keeping
+
+The 2026-10-08 document records an error I made and corrected: I had assumed
+`cites_track_a` and `cites_track_b` were derived from the edge store, and
+recomputed RQ2 on the 828 papers with fetched references, getting 12.8 % and
+12.6 %. Those columns are **full-text extraction fields**, read from each
+paper's own reference section, so the recomputation answered a question nobody
+asked. The published rates stood.
+
+That remains true and is worth restating here, because this redo makes the
+temptation worse rather than better: we now have a *good* edge network, and it
+would be easy to recompute RQ2 from it. **It would still be a different
+measurement.** The edge network says "does this paper's bibliography contain a
+corpus paper"; `cites_track_a/b` says "does this paper cite the other
+literature at all", corpus membership irrelevant. Comparing them is
+informative; substituting one for the other is not.
+
+---
+
+# Superseded: the 2026-10-08 analysis
+
+# The isolated papers in the citation graph
+
 **Why 191 of 1,026 papers show no link, and whether that is a problem.**
 2026-10-08.
 
