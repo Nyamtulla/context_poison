@@ -1,0 +1,131 @@
+"""Emit every corpus-derived figure in the paper as a LaTeX macro.
+
+The paper must never contain a hand-typed count. Four numbers in the first
+draft were wrong because prose and analysis drifted apart: the bibliography
+size, the no-mechanism paper count, the coded-field count, and the
+single-mechanism testing rate, which mixed two different pair sets. Each had
+been correct when it was typed.
+
+Run this after any corpus rebuild, registry rebuild, or new experiment:
+
+    python3 scripts/gen_paper_numbers.py
+
+It rewrites latex/numbers.tex. The section files reference \\NCorpus and never
+the literal 984, so a rebuild updates the paper everywhere at once.
+
+Experiment effect sizes are NOT macroised. They come from completed runs on
+fixed items and do not move when the corpus is rescreened; macroising them
+would hide which numbers are live and which are settled.
+"""
+import collections
+import json
+import pathlib
+import sys
+
+import openpyxl
+
+REPO = pathlib.Path(__file__).resolve().parent.parent
+R = REPO / "data" / "registries"
+sys.path.insert(0, str(REPO / "scripts"))
+
+
+def load(name):
+    return json.loads((R / name).read_text())
+
+
+def corpus_rows():
+    wb = openpyxl.load_workbook(
+        REPO / "data" / "exports" / "paper_dashboard_source.xlsx", read_only=True)
+    ws = wb["Papers"]
+    rows = list(ws.iter_rows(values_only=True))
+    wb.close()
+    return list(rows[0]), rows[1:]
+
+
+def main():
+    hdr, rows = corpus_rows()
+    si, pi = hdr.index("screening"), hdr.index("paper_id")
+    included = {r[pi] for r in rows if str(r[si]).strip() != "Exclude"}
+    M = {}
+
+    # ---- corpus
+    M["NScreened"] = len(rows)
+    M["NCorpus"] = len(included)
+    M["NExcluded"] = len(rows) - len(included)
+    M["NColumns"] = len(hdr)
+    # coded fields are everything that is not bibliographic metadata
+    META = {"paper_id", "title", "authors", "year", "venue", "citation_count",
+            "doi", "arxiv_id", "url", "pdf_local_path", "discovered_via",
+            "discovered_query", "hop", "seed_category", "abstract"}
+    M["NCodedFields"] = len([h for h in hdr if h not in META])
+
+    # ---- registries
+    r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
+    M["NMechanisms"] = len(r3)
+    tr3 = collections.Counter(e.get("track") for e in r3)
+    M["NMechSecurity"], M["NMechML"] = tr3["Security"], tr3["ML/AI"]
+    cq = collections.Counter(e.get("consequence") for e in r3)
+    M["NGoalHijack"] = cq["goal-hijack"]
+    M["PctGoalHijack"] = f'{100*cq["goal-hijack"]/len(r3):.1f}'
+
+    M["NDefenses"] = len(r4)
+    va = collections.Counter(e.get("validated_against") for e in r4)
+    M["NAdvOnly"], M["NIncOnly"] = va["adversarial"], va["incidental"]
+    M["NBothValidated"], M["NNoValidation"] = va["both"], va[""]
+    M["PctBothValidated"] = f'{100*va["both"]/len(r4):.1f}'
+    M["PctOneThreatModel"] = f'{100*(1-va["both"]/len(r4)):.0f}'
+    tr4 = collections.Counter(e.get("track") for e in r4)
+    M["NDefML"], M["NDefSecurity"], M["NDefBoth"] = tr4["ML/AI"], tr4["Security"], tr4["Both"]
+    ip = collections.Counter(e.get("defense_intervention_point") for e in r4)
+    for k, v in [("Reasoning", "reasoning"), ("Ingestion", "ingestion"),
+                 ("Execution", "execution"), ("NoPoint", "none")]:
+        M["NDef" + k] = ip[v]
+
+    # ---- which papers contribute what
+    mech_p = {e.get("paper_id") for e in r3} & included
+    def_p = {e.get("paper_id") for e in r4} & included
+    M["NPapersMech"], M["NPapersDef"] = len(mech_p), len(def_p)
+    M["NPapersBoth"] = len(mech_p & def_p)
+    M["NPapersNeither"] = len(included - mech_p - def_p)
+
+    # ---- coverage. Everything derives from ONE pair set, the composite in
+    # pair_tally.composite_pairs(). RQ5's published 332 pairs and 106 covered
+    # mechanisms predate reverse-scan pass 3 and are kept only as the labelled
+    # base figures, never recomputed.
+    from pair_tally import composite_pairs, attack_universe
+    cov = load("rq5_coverage_matrix.json")
+    pairs, _ = composite_pairs()
+    uni = set(attack_universe())
+    M["NMechanismsBench"] = len(uni)
+    M["NPairsComposite"] = len(pairs)
+    M["NPairsBase"] = cov["n_matched_pairs"]
+
+    covered = {a for _, a in pairs} & uni
+    M["NMechCovered"] = len(covered)
+    M["NMechUncovered"] = len(uni) - len(covered)
+    M["PctMechUncovered"] = f'{100*M["NMechUncovered"]/len(uni):.1f}'
+    M["PctMechCovered"] = f'{100*len(covered)/len(uni):.1f}'
+
+    per_def = collections.Counter(d for d, _ in pairs)
+    dist = collections.Counter(per_def.values())
+    M["NDefMatchedFull"] = len(per_def)
+    M["PctDefMatched"] = f'{100*len(per_def)/len(r4):.1f}'
+    M["NDefOneFull"] = dist[1]
+    M["PctDefOneFull"] = f'{100*dist[1]/len(per_def):.1f}'
+    M["NDefCeiling"] = max(per_def.values())
+    M["NDefFourPlus"] = sum(v for k, v in dist.items() if k >= 4)
+    # base-matrix figures, as RQ5 published them, for the contrast in S6
+    M["NDefMatchedBase"], M["NDefOneBase"] = 197, 163
+    M["PctDefOneBase"] = f'{100*163/197:.1f}' 
+
+    (REPO / "latex" / "numbers.tex").write_text(
+        "% GENERATED by scripts/gen_paper_numbers.py. Do not edit by hand.\n"
+        "% Re-run after any corpus or registry rebuild.\n\n"
+        + "".join(f"\\newcommand{{\\{k}}}{{{v}}}\n" for k, v in M.items()))
+    print(f"wrote latex/numbers.tex with {len(M)} macros")
+    for k, v in M.items():
+        print(f"  \\{k:24s} {v}")
+
+
+if __name__ == "__main__":
+    main()

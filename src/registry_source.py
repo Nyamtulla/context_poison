@@ -35,6 +35,11 @@ RQ5_SUPP_JSON = "data/registries/rq5_supplementary_pairs.json"
 # structurally cannot find a defense evaluated inside an attack paper published
 # after it. Same file shape and the same precision-first bar as RQ5_SUPP_JSON.
 ATTACK_EVAL_JSON = "data/registries/attack_paper_evaluations.json"
+# Pass 3 of the same reverse scan, run 2026-09-28 over the full registry. It
+# was added to pair_tally.py but not here, so this module and that script
+# disagreed by 17 pairs and 12 covered mechanisms for weeks. Any further pass
+# must be added in BOTH places, or better, only here.
+ATTACK_EVAL_PASS3_JSON = "data/registries/attack_paper_evaluations_pass3.json"
 # Pairs recovered by resolving "evaluated on benchmark B" into "evaluated against
 # attack A", granted only where the defense paper named the attack.
 BENCHMARK_RESOLVED_JSON = "data/registries/benchmark_resolved_pairs.json"
@@ -130,6 +135,7 @@ def load_supplementary(root=None) -> list[dict]:
     r = _root(root)
     return (_confirmed_pairs(r / RQ5_SUPP_JSON, "stage1_supplementary")
             + _confirmed_pairs(r / ATTACK_EVAL_JSON, "attack_paper_scan")
+            + _confirmed_pairs(r / ATTACK_EVAL_PASS3_JSON, "attack_paper_scan")
             + _confirmed_pairs(r / BENCHMARK_RESOLVED_JSON, "benchmark_resolution"))
 
 
