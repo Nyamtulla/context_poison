@@ -26,8 +26,16 @@ from src import registry_source  # noqa: E402
 
 # ================================================================ DATA LOADING
 
-PAPERS = registry_source.load_papers()
-PAPERS_BY_ID = {p["paper_id"]: p for p in PAPERS}
+# The workbook holds every SCREENED row, including the ones screening
+# rejected. The corpus is the included subset, and that is what every count
+# and every search must mean - `papers_in_corpus` previously returned the
+# screened total, which overstated the corpus by the 174 excluded papers.
+PAPERS_SCREENED = registry_source.load_papers()
+PAPERS = [p for p in PAPERS_SCREENED
+          if str(p.get("screening") or "").strip().lower() != "exclude"]
+# lookups still resolve an excluded paper, so "why is this not in the corpus"
+# is answerable; searches do not return them.
+PAPERS_BY_ID = {p["paper_id"]: p for p in PAPERS_SCREENED}
 
 _REG = registry_source.load_all()
 MECHANISMS = _REG["mechanisms"]
@@ -70,6 +78,8 @@ def get_stats() -> dict:
     (defense, mechanism) tested pairs. Good first call to orient yourself."""
     return {
         "papers_in_corpus": len(PAPERS),
+        "papers_screened": len(PAPERS_SCREENED),
+        "papers_excluded_at_screening": len(PAPERS_SCREENED) - len(PAPERS),
         "named_mechanisms_rq3": STATS["n_mechanisms"],
         "confirmed_defenses_rq4": STATS["n_defenses"],
         "confirmed_defense_mechanism_pairs_rq5": STATS["n_pairs"],
@@ -85,7 +95,9 @@ def get_stats() -> dict:
 @mcp.tool()
 def list_papers(query: str = "", track: str = "", channel: str = "", consequence: str = "",
                 defense_intervention_point: str = "", limit: int = 25) -> list[dict]:
-    """Search the full 1008-paper corpus. `query` substring-matches title,
+    """Search the included corpus (excluded papers are not returned; look one
+    up by id with get_paper if you need to see why it was excluded).
+    `query` substring-matches title,
     key_result, and technical_summary (case-insensitive). `track` is
     'Security', 'ML/AI', or 'Both'. Returns compact summaries — use
     get_paper(paper_id) for the full extracted record (key_result,
@@ -265,7 +277,11 @@ def get_rq_summary(rq: str) -> str:
     """Plain-language headline finding for one research question. `rq` is
     one of RQ1 (taxonomy), RQ2 (citation network), RQ3 (pollution census),
     RQ4 (defense census), RQ5 (coverage matrix), RQ6 (defense
-    generalization case studies), RQ7 (ranked open problems)."""
+    generalization - returns both the nine case studies and the transfer
+    program that reopened the question), RQ7 (ranked open problems).
+
+    Where a write-up has been regenerated, the superseding banner is returned
+    above the headline, so the figures are the current ones."""
     text = registry_source.load_rq_summary(rq)
     if not text:
         return f"Unknown or missing RQ: {rq!r}. Valid values: {', '.join(RQ_FILES)}"
