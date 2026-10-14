@@ -275,6 +275,74 @@ def fig_dose():
     save(fig, "fig4_dose_response")
 
 
+
+# ---------------------------------------------------------------- figure 5
+def fig_citation_network():
+    """The two literatures as a graph. Nodes are papers, edges are citations.
+
+    Identity, so categorical slots in fixed order, one per track. Cross-track
+    edges are the claim, so they are drawn last, darker and thicker, over a
+    pale same-track mesh: the figure has to answer "how many strands cross"
+    and that question is unreadable if both edge classes are painted alike.
+
+    Layout is a spring embedding on the union network (full-text pass plus the
+    Semantic Scholar table), restricted to included papers. Isolates are
+    dropped from the drawing and reported in the caption instead, because a
+    ring of unconnected dots carries no information and costs the layout its
+    resolution.
+    """
+    import networkx as nx
+    net = load("citation_network_union.json")
+    hdr, rows = corpus()
+    pi, ti = hdr.index("paper_id"), hdr.index("track")
+    track = {r[pi]: (r[ti] or "").strip() for r in rows}
+    inc = set(track)
+
+    G = nx.Graph()
+    for e in net["edges"]:
+        if e["citing"] in inc and e["cited"] in inc:
+            G.add_edge(e["citing"], e["cited"])
+    G.remove_nodes_from([n for n, d in G.degree() if d == 0])
+
+    COLORS = {"Security": CAT[0], "ML/AI": CAT[1], "Both": CAT[3]}
+    pos = nx.spring_layout(G, seed=11, k=2.6 / max(G.number_of_nodes() ** 0.5, .1),
+                           iterations=90)
+
+    same, cross = [], []
+    for u, v in G.edges():
+        (cross if track.get(u) != track.get(v) else same).append((pos[u], pos[v]))
+
+    fig, ax = plt.subplots(figsize=(FULL * 0.62, 3.5), constrained_layout=True)
+    from matplotlib.collections import LineCollection
+    ax.add_collection(LineCollection(same, colors="#dcdbd6", linewidths=0.22,
+                                     zorder=1))
+    ax.add_collection(LineCollection(cross, colors="#111111", linewidths=0.55,
+                                     alpha=0.85, zorder=3))
+    for tr, col in COLORS.items():
+        ns = [n for n in G if track.get(n) == tr]
+        if not ns:
+            continue
+        ax.scatter([pos[n][0] for n in ns], [pos[n][1] for n in ns], s=5.5,
+                   c=col, linewidths=0, zorder=4,
+                   label=f"{tr} ({len(ns)})")
+    ax.scatter([], [], s=0, label=" ")
+    from matplotlib.lines import Line2D
+    h, l = ax.get_legend_handles_labels()
+    h += [Line2D([], [], color="#dcdbd6", lw=1.2),
+          Line2D([], [], color="#111111", lw=1.4)]
+    l += [f"same-track citation ({len(same)})",
+          f"cross-track citation ({len(cross)})"]
+    ax.legend(h, l, frameon=False, fontsize=6, loc="lower center",
+              bbox_to_anchor=(0.5, -0.13), ncol=3, columnspacing=1.0,
+              handlelength=1.4, handletextpad=0.5)
+    ax.set_axis_off()
+    ax.margins(0.02)
+    print(f"    network: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges, "
+          f"{len(cross)} cross-track ({100*len(cross)/G.number_of_edges():.1f}%)")
+    save(fig, "fig5_citation_network")
+
+
 if __name__ == "__main__":
     fig_cube(); fig_channel_gap(); fig_who_reports(); fig_dose()
+    fig_citation_network()
     print("done")

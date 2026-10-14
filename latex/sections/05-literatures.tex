@@ -20,14 +20,29 @@ discovery pool that resolves to that track.
   security paper.
 \end{itemize}
 
-Because these are population counts rather than sample estimates, no confidence
-interval applies. Roughly nine papers in ten, on both sides, were written
+Figure~\ref{fig:network} shows the same corpus as a graph. Because these are
+population counts rather than sample estimates, no confidence interval
+applies. Roughly nine papers in ten, on both sides, were written
 without reference to the other community's work on the same failure.
 
 The rates are stable across evidence grade, so this is not an artifact of
 preprint quality. Peer-reviewed security papers cite the other track 15.1\% of
 the time against 11.1\% for preprints, and the machine learning side is flat at
 8.6\% against 9.5\%.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_citation_network}
+\caption{The corpus as a citation graph: 934 papers that cite or are cited by
+another included paper, 6,673 edges. Node colour is track. Pale edges are
+citations within one literature, dark edges cross between them. The two
+communities form separate clusters joined by a narrow band. Note that 8.2\% of
+\emph{edges} cross tracks, which is not the same measurement as the per-paper
+rates in the text: a paper counts there if it has at least one cross-track
+citation anywhere in its reference list. The 101 papers with no resolved
+citation link to any other included paper are omitted from the drawing.}
+\label{fig:network}
+\end{figure}
 
 \subsection{Evaluation}
 
