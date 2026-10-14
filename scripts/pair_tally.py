@@ -10,6 +10,7 @@ Run: python3 scripts/pair_tally.py
 import collections
 import json
 import pathlib
+import re
 
 R = pathlib.Path(__file__).resolve().parent.parent / "data" / "registries"
 
@@ -53,6 +54,143 @@ def attack_universe():
         # benchmark-only entries are all adversarial suites
         track.setdefault(b.get("name") or b.get("technique_name"), "Security")
     return track
+
+
+# --- the retrieval cell -------------------------------------------------
+# Resolved by explicit token, longest first, never by fuzzy match: a silent
+# mis-parse here would under-count the campaign, which is exactly how the
+# "70 combinations" figure in CONTRIBUTOR_BRIEF.md went stale. Anything this
+# table cannot classify raises, so a new run must be declared here to be
+# counted.
+# (token, label, literature-lookup key). Two implementations of RobustRAG are
+# distinct runs but one registry entry, so they share a lookup key.
+DEFENSE_TOKENS = [
+    ("robustrag_decoding", "RobustRAG-DecodingAgg", "robustrag"),
+    ("robustrag", "RobustRAG-KeywordAgg", "robustrag"),
+    ("faithfulrag", "FaithfulRAG", "faithfulrag"),
+    ("parammute", "ParamMute", "parammute"),
+    ("ckplug", "CK-PLUG", "ckplug"),
+    ("coiecd", "COIECD", "coiecd"),
+    ("dyprag", "DyPRAG", "dyprag"),
+    ("spare", "SpARE", "spare"),
+    ("shift", "SHIFT", "shift"),
+    ("frag", "FaithfulRAG", "faithfulrag"),
+    ("acd", "ACD", "adaptivecontrastivedecoding"),
+    ("scr", "SCR", "selfguidedconfidencereasoning"),
+    ("ck", "CK-PLUG", "ckplug"),
+]
+# false evidence is our instantiation of the registry's knowledge-conflict
+# mechanism, so that is the name a literature pair would carry.
+ATTACK_TOKENS = [
+    ("badrag_sentiment", "BadRAG sentiment steering", "badrag"),
+    ("badrag_dos", "BadRAG denial-of-service", "badrag"),
+    ("corpus_poisoning", "corpus poisoning", "corpuspoisoning"),
+    ("false_evidence", "false evidence", "knowledgeconflict"),
+    ("poisonedrag", "PoisonedRAG", "poisonedrag"),
+]
+
+
+def _sep(s):
+    """Separators are not load-bearing: robustrag-decoding == robustrag_decoding."""
+    return re.sub(r"[\s./-]+", "_", (s or "").lower())
+
+
+def _tight(s):
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+# model/config variants of the same (defense, attack) pair - counted as runs,
+# not as new pairs
+VARIANTS = ("crossover", "mistral", "llama", "greedy", "pilot", "dose", "alpha")
+
+
+def _token(stem, table):
+    stem = _sep(stem)
+    for tok, label, key in table:
+        if tok in stem:
+            return label, key
+    return None, None
+
+
+def retrieval_runs():
+    """Every scored run in the RAG cell, keyed by (defense, attack).
+
+    A run is a *transfer test* if any row carries a non-zero poison dose
+    (`frac` for chunk-replacement dosing, `n_poison` for passage-count
+    dosing). Everything else is a control: the defense reproducing its own
+    published benefit on clean context, which gates whether a transfer number
+    may be reported at all.
+    """
+    runs, unparsed = [], []
+    for path in sorted(R.glob("*.json")):
+        try:
+            d = json.loads(path.read_text())
+        except Exception:
+            continue
+        if not isinstance(d, dict):
+            continue
+        rows = d.get("results")
+        if not (isinstance(rows, list) and rows
+                and isinstance(rows[0], dict) and "arm" in rows[0]):
+            continue
+        stem = path.stem.lower()
+        # metadata first where present, then the filename
+        defense, dkey = _token(d.get("defense") or "", DEFENSE_TOKENS)
+        if defense is None:
+            defense, dkey = _token(stem, DEFENSE_TOKENS)
+        attack, akey = _token(d.get("attack") or "", ATTACK_TOKENS)
+        if attack is None:
+            attack, akey = _token(stem, ATTACK_TOKENS)
+        if defense is None:
+            unparsed.append(path.name)
+            continue
+
+        doses = {r.get("frac") if r.get("frac") is not None else r.get("n_poison")
+                 for r in rows}
+        attacked = any(x not in (None, 0, 0.0) for x in doses)
+        variant = next((v for v in VARIANTS if v in stem), "")
+        if not attacked:
+            role = "control"
+        elif variant == "pilot":
+            role = "pilot"          # smoke-scale, never a reportable pair
+        else:
+            role = "transfer"
+        if role == "transfer" and attack is None:
+            unparsed.append(f"{path.name} (attack token unresolved)")
+            continue
+        runs.append({
+            "file": path.name, "defense": defense,
+            "attack": attack if attacked else None,
+            "role": role, "variant": variant,
+            "dkey": dkey, "akey": akey if attacked else None,
+            "rows": len(rows),
+            "episodes": sum(r.get("n", 0) for r in rows),
+        })
+    if unparsed:
+        raise SystemExit("pair_tally: unclassified result files, add them to "
+                         "DEFENSE_TOKENS / ATTACK_TOKENS:\n  "
+                         + "\n  ".join(unparsed))
+    return runs
+
+
+def report_retrieval():
+    runs = retrieval_runs()
+    transfer = [r for r in runs if r["role"] == "transfer"]
+    control = [r for r in runs if r["role"] == "control"]
+    pilot = [r for r in runs if r["role"] == "pilot"]
+    pairs = {(r["defense"], r["attack"]) for r in transfer}
+
+    print("\n== what we ran ourselves: the RAG cell ==")
+    print(f"  {len(pairs)} distinct (defense, attack) pairs over "
+          f"{len(transfer)} transfer runs")
+    print(f"  {len(control)} control runs, {len(pilot)} pilots, "
+          f"{len({r['defense'] for r in runs})} defense implementations")
+    print(f"  {sum(r['rows'] for r in runs)} scored arm-conditions, "
+          f"{sum(r['episodes'] for r in runs)} episodes")
+    by_def = collections.defaultdict(set)
+    for d, a in pairs:
+        by_def[d].add(a)
+    for d in sorted(by_def):
+        print(f"    {d:22s} vs {', '.join(sorted(by_def[d]))}")
+    return pairs, transfer, control, runs
 
 
 def main():
@@ -118,8 +256,36 @@ def main():
           f"{len(full['results']) - len(scored)} harness errors excluded")
     print(" ", collections.Counter(r["verdict"].split("(")[0].strip()
                                    for r in scored))
-    transfer = sum(1 for r in scored if r.get("is_transfer_test"))
-    print(f"  conditions against a zero-coverage attack: {transfer}")
+    zero_cov = sum(1 for r in scored if r.get("is_transfer_test"))
+    near = sum(1 for r in scored if r.get("is_near_transfer"))
+    print(f"  conditions against a zero-coverage attack: {zero_cov}")
+    print(f"  conditions on a pair no paper had run: {near}")
+    agent_pairs = {(r["technique_name"], r["attack"]) for r in scored}
+    agent_eps = episodes
+
+    rag_pairs, rag_transfer, rag_control, rag_runs = report_retrieval()
+
+    print("\n== campaign total (both cells) ==")
+    print(f"  {len(agent_pairs) + len(rag_pairs)} distinct (defense, attack) pairs "
+          f"= {len(agent_pairs)} agent + {len(rag_pairs)} RAG")
+    print(f"  {len({r['defense'] for r in rag_runs})} RAG defense implementations, "
+          f"{len({r['technique_name'] for r in scored})} agent techniques")
+    print(f"  {agent_eps + sum(r['episodes'] for r in rag_runs)} episodes "
+          f"= {agent_eps} agent + {sum(r['episodes'] for r in rag_runs)} RAG")
+    lit = [(_tight(d), _tight(a)) for d, a in pairs]
+    keyed = {(r["dkey"], r["akey"]) for r in rag_transfer}
+    already, novel = [], []
+    for dk, ak in sorted(keyed):
+        hit = any(dk in ld and ak in la for ld, la in lit)
+        (already if hit else novel).append((dk, ak))
+    print(f"  at registry-name level these {len(rag_pairs)} RAG pairs collapse to "
+          f"{len(keyed)} (the two RobustRAG implementations share one entry)")
+    print(f"  {len(novel)}/{len(keyed)} are absent from the {len(lit)} pairs "
+          f"the literature reports")
+    if already:
+        print("  NOT novel - the literature already reports these:")
+        for dk, ak in already:
+            print(f"    {dk} x {ak}")
 
     print("\n== reverse-scan freshness ==")
     p3 = load("attack_paper_evaluations_pass3.json")

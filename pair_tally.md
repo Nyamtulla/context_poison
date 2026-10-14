@@ -9,7 +9,7 @@ from the registries; nothing is hand-copied.
 |---|---|---:|
 | **attack** | one named technique in the RQ3 registry | **223** (+14 benchmark-only = 237) |
 | **defense** | one named technique in the RQ4 registry | **534** |
-| **pair** | one (defense, attack) combination where *somebody* ran the defense against the attack and reported a result | 349 from literature + 56 run by us |
+| **pair** | one (defense, attack) combination where *somebody* ran the defense against the attack and reported a result | 349 from literature + 81 run by us (56 agent cell, 25 RAG cell) |
 
 The RQ3 registry file is named `rq3_pollution_registry.json` and older docs call
 its entries "mechanisms". That was to cover both tracks at once, because 55 of
@@ -80,6 +80,28 @@ all**, 145 were tested against exactly 1 attack, 34 against 2, 23 against 3,
 — a known single-entry entity-resolution stray, not a counting error.)*
 
 ## What WE ran, and what happened
+
+Two cells, counted separately because they score different things. Totals:
+**81 distinct (defense, attack) pairs, 156,308 scored episodes.**
+
+### The RAG cell
+
+25 pairs over 37 transfer runs, plus 10 controls and 2 pilots, across 11
+defense implementations: 368 scored arm-conditions and 152,724 episodes. Each
+run carries its own undefended arm over the same items at the same doses, so
+every defended number is read against the control beside it, never across runs.
+
+At registry-name level the 25 pairs collapse to 19, because the two RobustRAG
+implementations (KeywordAgg and DecodingAgg) are one registry entry.
+**17 of those 19 are absent from the 349 pairs the literature reports.** The
+two that are not novel are `COIECD × knowledge conflict` and
+`RobustRAG × PoisonedRAG`, both of which those papers tested themselves.
+
+This is the point of the campaign: the pairs were selected because the defense
+and the attack occupy the same taxonomy cell (same channel, same consequence),
+so the defense ought to apply — and no one had checked.
+
+### The agent cell
 
 56 scored conditions, 3,584 agent episodes, AgentDojo banking suite,
 Qwen2.5-14B-Instruct, n=32 undefended + 32 defended per condition. Verdicts gated
