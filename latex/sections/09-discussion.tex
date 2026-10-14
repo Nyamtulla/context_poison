@@ -63,10 +63,12 @@ method is operating outside its validated threat model. Our measurements say it
 is more likely to increase damage than to reduce it.
 
 A defense that holds against an optimized adversarial passage may fail against
-a fluent sentence that simply asserts a plausible falsehood. The fluent attack
-is cheaper to produce and, in our measurements, more damaging to an undefended
-model. Evaluations built only around optimized payloads will overstate
-protection.
+a fluent sentence that simply asserts a plausible falsehood. In our
+measurements no defense resisted both. The fluent attack is cheaper to produce,
+needing no gradient access and no surrogate retriever, and it is roughly twice
+as damaging to an undefended model at every dose. Evaluations built only around
+optimized payloads will overstate protection, and a defense evaluated on one
+payload class should not be described as robust to context poisoning.
 
 Finally, the channel matters more than the method name. Supply-chain,
 cross-modal and tool-metadata have fewer than one named defense per named

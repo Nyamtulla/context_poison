@@ -18,6 +18,16 @@ liability under deliberate attack, for the reason that is written into its own
 design. The finding has a measured scope condition and a counterexample, so it
 is a design error rather than a law.
 
+A second result cuts across the first. Protection depends on the \emph{form}
+of the planted passage, not only on whether an attacker is present. Running the
+same defenses against an optimized adversarial passage and against a fluent
+sentence that asserts a plausible falsehood gives different answers, and the
+one defense that resists the first falls below a no-retrieval baseline against
+the second. The fluent payload needs no gradient access and no surrogate
+retriever, and it damages an undefended model roughly twice as hard. An
+evaluation built only around optimized payloads overstates how well a system
+holds up.
+
 \paragraph{Future work.}
 Four directions follow directly.
 

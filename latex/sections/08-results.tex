@@ -137,12 +137,91 @@ dose, falling to 15.2\% at 10\% dose against 26.5\% for corpus poisoning. The
 field's attention to optimized adversarial passages is not matched by their
 effectiveness.
 
-For ParamMute the harm reproduces across both payloads: 13.5\pp excess damage
-under corpus poisoning and 12.3\pp under false evidence. Its suppression of the
-wrong parametric answer, however, falls from 42.5\pp to 8.8\pp, because false
-evidence re-supplies that answer through the context path ParamMute does not
-touch. COIECD is inert under both payloads, with no comparison exceeding
-1.8\pp against a 9.9\pp threshold.
+\subsection{Two payloads, three defenses, three outcomes}
+\label{sec:payloads}
+
+ACD is not the only method whose behaviour depends on the form of the planted
+passage. We ran the three context-reliance defenses whose corpus-poisoning
+results are already in Table~\ref{tab:family} against false evidence as well,
+each against its own undefended arm over the same items at the same doses.
+Predictions for all three were committed to version control before any of them
+ran.
+
+\begin{table}[t]
+\caption{The same three defenses against two payload classes. Excess damage is
+the defended arm's clean-to-saturation collapse minus the same collapse in its
+own undefended arm; positive means the defense lost more accuracy than doing
+nothing would have.}
+\label{tab:payloads}
+\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Defense} & \textbf{$n$} & \textbf{Corpus poisoning} &
+\textbf{False evidence} \\
+\midrule
+ParamMute & 1409 & \textbf{+13.5} & \textbf{+12.3} \\
+CK-PLUG   &  800 & \textbf{+5.4}  & +0.4 \\
+COIECD    &  400 & +1.0           & -1.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{ParamMute is harmful against both, and the way it fails is the
+finding.} A defense worth +9.7\pp on honest context costs 12 to 13 points more
+than doing nothing once an adversary writes the context, and it does not matter
+whether the adversary writes gibberish or prose. What does change is how well
+ParamMute does its own job. Its suppression of the wrong parametric answer
+falls from \textbf{-42.5\pp} under corpus poisoning to \textbf{-8.8\pp} under
+false evidence. The reason is structural. Under corpus poisoning the wrong
+answer has one source, the model's memory, so inhibiting memory removes it.
+Under false evidence it has two, memory and the planted passage, and ParamMute
+touches only one of them. \textbf{The attack duplicated the answer into the
+channel the defense does not operate on.}
+
+\textbf{CK-PLUG is harmful against one payload and flat against the other}, and
+the shape matters more than the sign. Under corpus poisoning its cost grows
+with the attack: -4.5\pp on clean context, then -14.9 and -15.1 once poison is
+present. Under false evidence it is a constant offset of about -4.4\pp at every
+dose including the clean one, and no cell clears the 7.0\pp threshold. CK-PLUG
+pays a fixed price for being switched on; corpus poisoning amplifies that price
+and false evidence does not.
+
+\textbf{COIECD is inert against both.} Eight comparisons, largest 1.8\pp
+against a 9.9\pp threshold, no $p$ below 0.20. Its memorisation-rate
+suppression does shrink roughly threefold under false evidence, which is what
+an entropy constraint should do when the planted passage agrees with the prior
+rather than contradicting it, but that signal sits below threshold and we
+record it as directional rather than as a result.
+
+\subsection{A comparison we decline to make}
+
+The three results invite a ranking across payload classes, and we committed in
+advance to treating one as a falsifier: if any defense did \emph{better}
+against false evidence than against corpus poisoning, then "these defenses fail
+because they trust the context" would not be the mechanism. CK-PLUG does, at
++0.4\pp against +5.4\pp.
+
+We do not think that reading survives inspection, and we say so rather than
+quietly dropping the test. The two payloads are not equally strong on the
+undefended arm. False evidence is roughly twice as damaging at every dose: for
+CK-PLUG's undefended arm, 23.0\% against 39.2\% at 10\% dose, and for COIECD's,
+15.2\% against 26.5\%. Excess damage is a difference of two collapses, and when
+the undefended arm has already collapsed there is less room left for a defense
+to make things worse.
+
+\textbf{Excess-damage comparisons across payload classes are therefore
+confounded by attack strength and should not be read as a ranking.} Within a
+payload, against the control measured beside it in the same run, every
+comparison in this section stands. We state the limit because the alternative
+is to report a falsifier as passed when the instrument cannot support it.
+
+One measurement limit belongs here for the same reason. Under false evidence
+the planted passage asserts the same string the model would have recalled, so
+the parametric-answer rate cannot distinguish a model that remembered from one
+that copied. They produce identical output. That is the attack's design rather
+than a flaw in the metric, and it means ParamMute's residual 58.8\% cannot be
+split between the two paths. An arm that plants the \emph{gold} answer instead
+would separate them.
 
 \subsection{Asking the model to judge the document}
 
