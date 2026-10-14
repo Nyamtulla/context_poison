@@ -513,8 +513,41 @@ def paper_link(p: dict) -> tuple[str, str]:
     return "", ""
 
 
+# RQ6 is served from two files. `rq6_case_studies.md` is the original nine
+# reconstructed case studies; the transfer program reopened the question on
+# 2026-09-10 and its results live in `rq6_transfer_predictions.md`. Returning
+# only the first makes RQ6 look closed and understates the project by a whole
+# campaign, so both headlines are returned together.
+RQ_EXTRA_SECTIONS = {
+    "rq6": [("rq6_transfer_predictions.md",
+             "RQ6 continued - the transfer program (reopened 2026-09-10)")],
+}
+
+
+def _headline(path):
+    """A write-up's '## Headline result', preceded by its regeneration banner.
+
+    The banner is the leading blockquote a regeneration writes above the body
+    to supersede the numbers below it. Returning the headline without it
+    serves the pre-regeneration figures as if they were current, which is
+    exactly the drift this module exists to prevent.
+    """
+    text = path.read_text()
+    banner = re.match(r"^#[^\n]*\n+((?:>[^\n]*\n)+)", text)
+    m = re.search(r"^## Headline result\s*\n(.*?)(?=\n## |\Z)", text, re.S | re.M)
+    body = m.group(1).strip() if m else text[:2000]
+    if banner:
+        lines = [ln.lstrip("> ").rstrip() for ln in banner.group(1).splitlines()]
+        return "\n".join(lines).strip() + "\n\n" + body
+    return body
+
+
 def load_rq_summary(rq: str, root=None) -> str:
-    """The '## Headline result' section of one RQ's write-up, verbatim."""
+    """The '## Headline result' section of one RQ's write-up, verbatim.
+
+    Includes the regeneration banner where one exists, and any companion
+    write-up listed in RQ_EXTRA_SECTIONS.
+    """
     # Case-insensitive without uppercasing the key itself - "RQ5b".upper() is
     # "RQ5B", which matches no entry.
     wanted = rq.strip().casefold()
@@ -524,6 +557,9 @@ def load_rq_summary(rq: str, root=None) -> str:
     path = _root(root) / entry[0]
     if not path.exists():
         return ""
-    text = path.read_text()
-    m = re.search(r"^## Headline result\s*\n(.*?)(?=\n## |\Z)", text, re.S | re.M)
-    return m.group(1).strip() if m else text[:2000]
+    parts = [_headline(path)]
+    for fname, label in RQ_EXTRA_SECTIONS.get(wanted, []):
+        extra = _root(root) / fname
+        if extra.exists():
+            parts.append(f"---\n\n## {label}\n\n{_headline(extra)}")
+    return "\n\n".join(parts)
