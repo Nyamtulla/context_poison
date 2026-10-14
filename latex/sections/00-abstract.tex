@@ -4,9 +4,9 @@ each other. Security researchers study context that an attacker changes on
 purpose, such as indirect prompt injection, retrieval poisoning and memory
 backdoors, and they publish attacks and defenses. Machine learning researchers
 study context that becomes wrong on its own, such as retrieval noise, knowledge
-conflict and long-context degradation, and they publish mechanisms and fixes.
-The vocabularies differ. The failure does not. In both cases the model cannot
-tell which part of its context deserves trust.
+conflict, and long-context degradation, and they publish mechanisms and fixes.
+Even though the vocabularies differ, the failure is the same. In both cases
+the model cannot tell which part of its context deserves trust.
 
 We systematize both literatures under one taxonomy of channel, intent and
 consequence, built from 984 papers read in full. The separation between the two
@@ -21,8 +21,8 @@ defense papers and in 0 of 37 pairs reported by attack papers.
 We then do what a survey normally cannot. We run the tests the field skipped.
 Our taxonomy identifies pairs in which a published defense and a published
 attack occupy the same cell, so the defense ought to apply, and no one had
-checked. We executed 81 such pairs across 18 defense implementations and
-156,308 scored episodes, using each author's released code and weights, under
+checked. We executed 82 such pairs across 18 defense implementations and
+162,708 scored episodes, using each author's released code and weights, under
 an attack-works-first control and a fixed detectability threshold. Defenses
 built for accidental context failure often do not survive deliberate attack,
 and the failure is systematic. The mechanism that repairs accidental

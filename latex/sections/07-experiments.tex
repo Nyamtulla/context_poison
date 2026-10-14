@@ -17,11 +17,11 @@ so. Nobody had checked.
 and every attack we run is published. The contribution is the pairing, and the
 pairing is a prediction the taxonomy makes.
 
-Of the 19 pairs we ran in the retrieval cell, counted at registry-name level,
-\textbf{17 are absent from the 332 pairs the literature reports}. The two that
-are not novel are COIECD against knowledge conflict and RobustRAG against
-PoisonedRAG, which those papers tested themselves and which we re-ran as
-controls.
+Of the \NRagPairsKeyed{} pairs we ran in the retrieval cell, counted at
+registry-name level, \textbf{\NRagPairsNovel{} are absent from the
+\NPairsComposite{} pairs the literature reports}. The two that are not novel
+are COIECD against knowledge conflict and RobustRAG against PoisonedRAG, which
+those papers tested themselves and which we re-ran as controls.
 
 \subsection{The reconstruction standard}
 
@@ -79,9 +79,11 @@ The \textbf{agent cell} pairs ingestion-stage and execution-stage defense
 techniques against prompt-injection attacks inside the AgentDojo banking
 suite~\cite{debenedetti-2024-agentdojo}, with a Qwen2.5-14B-Instruct agent.
 
-In total we executed \textbf{81 distinct (defense, attack) pairs across 18
-defense implementations, over 156,308 scored episodes}: 25 pairs and 152,724
-episodes in the retrieval cell, 56 pairs and 3,584 episodes in the agent cell.
+In total we executed \textbf{\NCampaignPairs{} distinct (defense, attack)
+pairs across \NCampaignImpl{} defense implementations, over
+\NCampaignEpisodes{} scored episodes}: \NRagPairs{} pairs and \NRagEpisodes{}
+episodes in the retrieval cell, \NAgentPairs{} pairs and \NAgentEpisodes{}
+episodes in the agent cell.
 The two episode counts are not comparable units. An agent episode is a complete
 multi-step tool-use trajectory. A retrieval episode is one scored answer.
 
