@@ -207,14 +207,16 @@ def main():
     CO.device = "cuda"
     CO.tokenizer = tokenizer
 
+    _lab = ("corpus poisoning" if args.attack == "corpus_poisoning"
+            else "false evidence")
     conditions = [("clean (native incidental conflict)", 0.0)] if args.clean_only else [
         ("clean (native incidental conflict)", 0.0),
-        ("corpus poisoning, 10% of context", 0.1),
-        ("corpus poisoning, 50% of context", 0.5),
-        ("corpus poisoning, 100% of context", 1.0)]
+        (f"{_lab}, 10% of context", 0.1),
+        (f"{_lab}, 50% of context", 0.5),
+        (f"{_lab}, 100% of context", 1.0)]
 
     if args.fracs is not None:
-        conditions = [(f"corpus poisoning, {int(f*100)}% of context" if f > 0
+        conditions = [(f"{_lab}, {int(f*100)}% of context" if f > 0
                        else "clean (native incidental conflict)", f)
                       for f in args.fracs]
 

@@ -155,11 +155,13 @@ def main():
     print(f"  payload[{args.attack}] fp={payload_fp} sample={_probe[:70]!r}",
           flush=True)
 
+    _lab = ("corpus poisoning" if args.attack == "corpus_poisoning"
+            else "false evidence")
     conditions = [("clean (native incidental conflict)", 0.0)] if args.clean_only else [
         ("clean (native incidental conflict)", 0.0),
-        ("corpus poisoning, 10% of context", 0.1),
-        ("corpus poisoning, 50% of context", 0.5),
-        ("corpus poisoning, 100% of context", 1.0)]
+        (f"{_lab}, 10% of context", 0.1),
+        (f"{_lab}, 50% of context", 0.5),
+        (f"{_lab}, 100% of context", 1.0)]
 
     model = CK(args.model, "cuda", "1", max_gpu_memory=40)
     model.set_stop_words([])
