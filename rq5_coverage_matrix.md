@@ -7,13 +7,16 @@
 > | confirmed pairs | 332 | **332** |
 > | defenses with ≥1 confirmed test | 213/534 = 39.9 % | **213/529 = 40.3 %** |
 > | mechanisms with ≥1 tested defense | 106/237 = 44.7 % | **106/235 = 45.1 %** |
-> | matched defenses tested against exactly one mechanism | 163/197 = 82.7 % | **163/197 = 82.7 %** |
+> | matched defenses tested against exactly one mechanism (base matrix) | 163/197 = 82.7 % | **163/197 = 82.7 %** |
+> | matched defenses tested against exactly one mechanism (composite) | | **145/215 = 67.4 %** |
 >
 > **Not one confirmed pair was lost.** The 42 excluded papers contributed no
 > matched defence×mechanism pair, so the coverage matrix is identical and the
-> two rates move only because their denominators shrank. The central finding —
-> that there is essentially no generalist defense, with cross-mechanism testing
-> topping out at three mechanisms and only twice — is unchanged.
+> two rates move only because their denominators shrank. The central finding,
+> that there is essentially no generalist defense, is unchanged **for the base
+> matrix**. See the correction below before quoting it without that
+> qualification: on the composite pair set the ceiling is eight mechanisms,
+> not three.
 >
 > Base matrix without the supplementary passes, for reference: 197/529 defenses
 > matched (37.2 %), 79/221 mechanisms covered (35.7 %), 233 raw pairs. The
@@ -44,13 +47,30 @@ plan anticipated, and the shape of the sparsity is itself the finding.**
   evaluated at all.
 - **106 of 237 mechanisms (44.7%)** have at least one defense tested against
   them; **131 (55.3%) have zero.**
-- **Among the 197 matched defenses, 163 (82.7%) were tested against exactly
-  one mechanism; 32 against two; only 2 against three.** The plan's original
-  hypothesis — a spectrum from "generalist defenses" to "evaluation silos" —
-  undersells what is here: **there is essentially no generalist-defense
-  category at this granularity.** Cross-mechanism testing tops out at three,
-  and only twice. The field's default mode is narrow, single-mechanism
-  validation.
+- **Among the 197 matched defenses in the base matrix, 163 (82.7%) were
+  tested against exactly one mechanism; 32 against two; only 2 against three.**
+  On this evidence, which is what defense papers themselves report, there is
+  essentially no generalist-defense category at this granularity, and the
+  field's default mode is narrow single-mechanism validation.
+
+  **Corrected 2026-10-14.** This bullet previously ended "cross-mechanism
+  testing tops out at three, and only twice", stated without qualification.
+  That is true of the base matrix only. On the **composite** pair set, which
+  adds the supplementary passes and the attack-paper reverse scan, 215 defenses
+  appear in at least one pair, 145 (67.4%) in exactly one, and the ceiling is
+  **eight**, not three: 34 appear in two, 23 in three, and 13 in four or more.
+
+  The two readings reconcile, and the reconciliation is the finding.
+  **46% of the pairs belonging to those 13 broadly-tested defenses were
+  contributed by attack papers rather than by the defenses' own evaluations.**
+  For the single broadest case, SecAlign (8 pairs), **7 of 8 come from attack
+  papers**. Breadth in the composite set is therefore mostly a measure of which
+  defenses attracted attackers, not of which were evaluated widely by their
+  authors, and by `pair_tally.py`'s "who reports what" those are pairs the
+  defense lost (attack papers: 0 wins in 37). AgentArmor (6 pairs, 0 from
+  attack papers) is the clearest genuine counterexample.
+
+  Regenerate both figures with `python3 scripts/pair_tally.py`.
 - Raw matrix density (332 confirmed pairs / 126,558 possible cells = 0.26%) is
   not meaningful on its own — most cells aren't applicable (a memory-channel
   mechanism has no reason to be tested against a supply-chain defense). The two

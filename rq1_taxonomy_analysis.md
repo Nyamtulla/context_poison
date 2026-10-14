@@ -1,6 +1,6 @@
 # RQ1 -- Taxonomy Analysis: channel x intent x consequence
 
-Regenerated 2026-10-13 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (984 included papers). Re-run this script any time screening/coding changes.
+Regenerated 2026-10-14 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (984 included papers). Re-run this script any time screening/coding changes.
 
 **RQ1:** Across the full landscape of LLM agent context contamination -- memory, RAG, tool output, tool metadata, skills, multi-agent, cross-modal, supply chain -- which channel x intent (adversarial/incidental) x consequence cells have been studied, and which are empty?
 

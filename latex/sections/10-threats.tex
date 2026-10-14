@@ -1,0 +1,53 @@
+\section{Threats to validity}
+\label{sec:threats}
+
+\textbf{Extraction error.} The corpus coding was produced by an LLM-assisted
+extraction pass over 984 papers and 17 coded fields. Every count in
+Sections~\ref{sec:taxonomy} to~\ref{sec:coverage} depends on it. We verified it
+with human readers against the original PDFs, in full for the fields that carry
+the headline claims and on a random sample for the rest, and we report
+inter-rater agreement rather than assuming it. Residual error remains possible
+in the sampled fields.
+
+\textbf{Track assignment.} The cross-citation rates depend on classifying every
+cited paper into a track. That classification is automated over the full
+discovery pool. A systematic bias in it would move the rates. We regard the
+direction of the finding as safe, because the gap between 11.7\% citation and
+99.1\% same-track evaluation is far larger than any plausible classification
+error, but the exact rates should be read as estimates.
+
+\textbf{Registry granularity.} What counts as one named mechanism is a
+judgement. "Indirect prompt injection" is one registry entry and absorbs 32.6\%
+of all tested pairs, while 38 of 52 named injection variants have none. A
+coarser registry would make coverage look better and a finer one would make it
+look worse. We chose the granularity the papers themselves use, which is the
+name each paper gives its own contribution.
+
+\textbf{Who-reports-what is observational.} Section~\ref{sec:whoran} reports a
+very strong association between authorship and outcome. It is not a controlled
+comparison. The two sides largely write about different pairs, so the
+association partly reflects selection of which pair to run, which is exactly
+our interpretation, rather than differing conduct on the same pair.
+
+\textbf{The campaign is a sample, not a census.} We ran 81 pairs out of a space
+of thousands. They were selected by the taxonomy rather than at random, biased
+toward pairs where both artifacts run. Defenses whose artifacts do not run are
+absent, and nothing here says whether they transfer.
+
+\textbf{Single dataset per cell.} The retrieval cell runs on CoConflictQA and
+open Natural Questions. The dosing model, which replaces a fraction of context
+with planted passages, is a simplification of a real retrieval pipeline under
+attack. It holds the retriever fixed, so it measures what the generator does
+with poisoned context rather than how hard the context is to poison.
+
+\textbf{Model coverage.} Most retrieval-cell results use Llama-3-8B-Instruct,
+with Mistral-7B-Instruct where a defense required it. Our own model control
+shows this is a real limitation: changing the model changed outcomes. The
+results should be read as holding for models of this class and size, and the
+model control is reported rather than hidden for that reason.
+
+\textbf{Scorer.} We reuse each defense's own evaluation rubric where one
+exists, and a shared recall-based rubric across the retrieval cell. Recall
+against a gold string rewards a model that produces the right tokens for the
+wrong reason. We report the parametric-answer rate and abstention rate
+alongside it so that the failure modes stay visible.

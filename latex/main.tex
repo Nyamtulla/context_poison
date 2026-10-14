@@ -1,0 +1,51 @@
+%% SoK: Context Poisoning in LLM Agents
+%%
+%% Built for acmart (CCS). To switch to USENIX, replace the class line and the
+%% \maketitle block with the usenix2019_v3 template; the section files need no
+%% change. See README.md.
+\documentclass[sigconf,nonacm]{acmart}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{xcolor}
+
+% Numbers in tables line up; percentage points are written "pp" throughout.
+\newcommand{\pp}{\,pp}
+\newcommand{\meth}[1]{\textsf{#1}}
+
+\begin{document}
+
+\title{SoK: Context Poisoning in LLM Agents}
+\subtitle{Adversarial Attacks, Incidental Degradation, and the Failure of
+Defense Transfer}
+
+\author{Anonymous Author(s)}
+\affiliation{\institution{Anonymous Institution}\country{}}
+
+\begin{abstract}
+\input{sections/00-abstract}
+\end{abstract}
+
+\keywords{large language model agents, context poisoning, prompt injection,
+retrieval-augmented generation, knowledge conflict, defense evaluation}
+
+\maketitle
+
+\input{sections/01-introduction}
+\input{sections/02-background}
+\input{sections/03-corpus}
+\input{sections/04-taxonomy}
+\input{sections/05-literatures}
+\input{sections/06-coverage}
+\input{sections/07-experiments}
+\input{sections/08-results}
+\input{sections/09-discussion}
+\input{sections/10-threats}
+\input{sections/11-related}
+\input{sections/12-conclusion}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\end{document}

@@ -1,0 +1,37 @@
+Large language model agents fail when their context window holds content they
+should not trust. Two research communities study this failure and rarely read
+each other. Security researchers study context that an attacker changes on
+purpose, such as indirect prompt injection, retrieval poisoning and memory
+backdoors, and they publish attacks and defenses. Machine learning researchers
+study context that becomes wrong on its own, such as retrieval noise, knowledge
+conflict and long-context degradation, and they publish mechanisms and fixes.
+The vocabularies differ. The failure does not. In both cases the model cannot
+tell which part of its context deserves trust.
+
+We systematize both literatures under one taxonomy of channel, intent and
+consequence, built from 984 papers read in full. The separation between the two
+communities is measurable rather than rhetorical. Only 11.7\% of security
+papers cite the reliability literature and 9.3\% cite in the other direction.
+Of 529 catalogued defenses, 14 were validated against both threat models. Of
+235 named mechanisms, 129 have no defense ever evaluated against them. The
+sharpest asymmetry is in who runs the experiment: across 349 recovered
+(defense, attack) pairs, defenses prevail in 193 of 194 pairs reported by
+defense papers and in 0 of 37 pairs reported by attack papers.
+
+We then do what a survey normally cannot. We run the tests the field skipped.
+Our taxonomy identifies pairs in which a published defense and a published
+attack occupy the same cell, so the defense ought to apply, and no one had
+checked. We executed 81 such pairs across 18 defense implementations and
+156,308 scored episodes, using each author's released code and weights, under
+an attack-works-first control and a fixed detectability threshold. Defenses
+built for accidental context failure often do not survive deliberate attack,
+and the failure is systematic. The mechanism that repairs accidental
+corruption, which is to shift trust from the model's parameters toward the
+retrieved text, is the mechanism an attacker who owns that text exploits. The
+result carries a measured scope condition and one clear counterexample, so the
+trade-off is a design error and not a law.
+
+Finally we report three controls the literature omits, each of which overturned
+a conclusion we would otherwise have published: a no-retrieval baseline, an
+abstention axis, and a model control. We argue they belong in the reporting
+conventions of both communities.
