@@ -30,13 +30,30 @@ preprint quality. Peer-reviewed security papers cite the other track 15.1\% of
 the time against 11.1\% for preprints, and the machine learning side is flat at
 8.6\% against 9.5\%.
 
+\textbf{What carries the cross-track citations makes the rate look better than
+the engagement is.} 549 of the 6,673 resolved edges (8.2\%) cross tracks, and
+they run through 333 papers, but they are concentrated: the ten most-cited
+bridge papers account for 27\% of all cross-track edge endpoints. Those ten are
+not method papers engaging with the other community's methods. They are
+surveys, benchmarks and canonical references: a cross-literature threat survey,
+WebArena, AgentDojo~\cite{debenedetti-2024-agentdojo}, InjecAgent,
+\emph{Lost in the Middle}~\cite{liu-2023-lost}, and
+PoisonedRAG~\cite{zou-2024-poisonedrag}. A security paper that cites
+\emph{Lost in the Middle} in passing is scored as citing the other track, and
+by our measurement it does. It has not thereby engaged with the machine
+learning literature's methods. \textbf{The 11.7\% and 9.3\% are therefore upper bounds on engagement,
+not estimates of it},, which is the second reason the
+evaluation measurement below matters more than the citation one.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig5_citation_network}
 \caption{The corpus as a citation graph: 934 papers that cite or are cited by
 another included paper, 6,673 edges. Node colour is track. Pale edges are
 citations within one literature, dark edges cross between them. The two
-communities form separate clusters joined by a narrow band. Note that 8.2\% of
+communities form separate clusters joined by a narrow band, and the two papers
+below the mass are a third island: a pair of deep-research agent papers that
+cite neither literature. Note that 8.2\% of
 \emph{edges} cross tracks, which is not the same measurement as the per-paper
 rates in the text: a paper counts there if it has at least one cross-track
 citation anywhere in its reference list. The 101 papers with no resolved
