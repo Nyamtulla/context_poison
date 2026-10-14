@@ -1,0 +1,64 @@
+\section{Two literatures, measured}
+\label{sec:literatures}
+
+Section~\ref{sec:taxonomy} shows the two communities working on one problem
+space. This section asks whether they are aware of each other. We measure it
+twice, first by citation and then by evaluation. The second measurement is much
+worse than the first.
+
+\subsection{Citation}
+
+We compute cross-track citation over the whole coded population, 966 papers
+classified into one track plus 18 classified as both, not over a sample. A
+paper counts as citing the other track if it cites any paper anywhere in the
+discovery pool that resolves to that track.
+
+\begin{itemize}
+\item \textbf{11.7\%} of security papers (68 of 580) cite at least one machine
+  learning paper on the same failure.
+\item \textbf{9.3\%} of machine learning papers (36 of 386) cite at least one
+  security paper.
+\end{itemize}
+
+Because these are population counts rather than sample estimates, no confidence
+interval applies. Roughly nine papers in ten, on both sides, were written
+without reference to the other community's work on the same failure.
+
+The rates are stable across evidence grade, so this is not an artifact of
+preprint quality. Peer-reviewed security papers cite the other track 15.1\% of
+the time against 11.1\% for preprints, and the machine learning side is flat at
+8.6\% against 9.5\%.
+
+\subsection{Evaluation}
+
+Citation is a weak test. A paper can cite a neighbouring literature in one line
+of related work and ignore it everywhere else. The stronger test is whether a
+defense is ever \emph{evaluated} against a mechanism from the other track.
+
+Of the confirmed defense-by-mechanism test pairs in our coverage matrix,
+\textbf{230 of 232 (99.1\%) stay inside a single track. Two cross it, and only
+one is a genuine cross-community test.}
+
+This is roughly an order of magnitude worse than the citation gap. The two
+literatures cite each other rarely. They evaluate against each other's problems
+almost never.
+
+\subsection{What the split costs}
+
+Three consequences follow, and all three are visible in the numbers.
+
+\textbf{Named problems go unanswered.} 129 of 235 named mechanisms (54.9\%)
+have no defense ever evaluated against them. Among named injection variants,
+38 of 52 have zero tested defenses, while the single umbrella entry "indirect
+prompt injection" absorbs 76 pairs, which is 32.6\% of all pairs in the matrix.
+The field tests heavily against a category and lightly against its members.
+
+\textbf{Effort concentrates where it is already dense.} The incidental half has
+4.6 defenses per failure mode and the adversarial half has 1.4 per attack, as
+Section~\ref{sec:taxonomy} reports. A community that does not read the other
+one cannot see that it is crowding.
+
+\textbf{Methods are adopted without a worst-case check.} 97\% of defenses were
+validated against one threat model. For the 251 validated only on incidental
+benchmarks, no one has asked what an adversary does to them. That question is
+what Section~\ref{sec:experiments} answers for a sample of them.

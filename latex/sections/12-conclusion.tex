@@ -1,0 +1,48 @@
+\section{Conclusion and future work}
+\label{sec:conclusion}
+
+Two research communities study one failure. An LLM agent reads content it
+should not trust, and it cannot tell which content that is. The security
+community calls the content an attack and builds defenses. The machine learning
+community calls it a mechanism and builds fixes. We placed 984 papers from both
+sides into one taxonomy of channel, intent and consequence, and found that the
+separation is measurable: about one paper in ten cites the other side, 14 of
+529 defenses were validated against both threat models, and 99.1\% of tested
+defense-mechanism pairs stay inside a single track.
+
+We then used the taxonomy to find pairs that should have been run and were not,
+and ran 81 of them on the authors' released artifacts. The central finding is
+that a popular family of fixes, those that repair accidental context failure by
+shifting trust from the model's parameters toward the retrieved text, becomes a
+liability under deliberate attack, for the reason that is written into its own
+design. The finding has a measured scope condition and a counterexample, so it
+is a design error rather than a law.
+
+\paragraph{Future work.}
+Four directions follow directly.
+
+\textbf{Close the supply-chain and cross-modal gaps.} These channels have fewer
+than one named defense per named mechanism and are the routes by which agents
+accept third-party capability. They are the clearest place to build rather than
+to measure.
+
+\textbf{Separate the intervention-point finding from its confound.} Our case
+studies suggest that whether a defense generalizes tracks where in the pipeline
+it intervenes. The ingestion defenses that generalize are also the ones whose
+harnesses model a text-classification victim, while the execution defenses we
+could not evaluate are the agent-shaped ones. Running all three intervention
+points inside one agent harness would resolve this, and that work is in
+progress.
+
+\textbf{Separate recall from copying.} Under false evidence, the planted
+passage asserts the same string the model would have recalled, so our
+parametric-answer metric cannot distinguish a model that remembered from a
+model that copied. An arm that plants the gold answer instead would separate
+them and would sharpen the mechanism claim in Section~\ref{sec:results}.
+
+\textbf{Build the missing evaluation.} The deepest problem this paper documents
+is not any single defense. It is that the field's reported outcomes are
+conditioned on who ran the experiment, and that nothing in current practice
+corrects for it. A shared benchmark that pairs defenses with attacks selected
+by a taxonomy rather than by either author would make transfer a measured
+property rather than an assumed one.

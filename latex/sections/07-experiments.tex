@@ -1,0 +1,107 @@
+\section{Running the missing tests}
+\label{sec:experiments}
+
+\subsection{How pairs were selected}
+
+We did not pick case studies by familiarity. The taxonomy picks them.
+
+A (defense, attack) pair is a candidate when the defense and the attack occupy
+the same taxonomy cell, meaning the content enters through the same channel and
+causes the same consequence, and no paper in the corpus reports having run
+them together. If a defense repairs a failure that arrives through retrieval
+and corrupts answers quietly, and an attack arrives through retrieval and
+corrupts answers quietly, then the defense ought to apply. The taxonomy says
+so. Nobody had checked.
+
+\textbf{We are not proposing new defenses.} Every method we run is published,
+and every attack we run is published. The contribution is the pairing, and the
+pairing is a prediction the taxonomy makes.
+
+Of the 19 pairs we ran in the retrieval cell, counted at registry-name level,
+\textbf{17 are absent from the 332 pairs the literature reports}. The two that
+are not novel are COIECD against knowledge conflict and RobustRAG against
+PoisonedRAG, which those papers tested themselves and which we re-ran as
+controls.
+
+\subsection{The reconstruction standard}
+
+Every number we report comes from running a defense's own released code and
+weights. We never cite a paper's reported numbers as evidence about that
+paper's method. Where a harness had to be adapted to our data, we adapted the
+harness and left the method and the evaluation rubric untouched. Where an
+author's rubric and ours differed, we used the author's.
+
+This standard cost us coverage and we report the cost. Of the defenses we tried
+to run, several could not be evaluated at all, and the reasons are themselves a
+finding. One ships a pipeline whose datasets the authors state they cannot
+release. One requires a four-stage data build whose intermediate format is
+undocumented. Two execution-stage defenses do not run reliably on any
+freely-available open-weight model. We record these as roadblocks rather than
+as failures of the method, and they belong in Section~\ref{sec:discussion}.
+
+\subsection{Three rules fixed before any run}
+
+\textbf{The control fires first.} If a defense cannot reproduce its own
+published benefit on its own benchmark in our harness, we report no transfer
+number from it. A defense that is broken in our hands tells us nothing about
+transfer. One defense failed this gate and is reported as not reportable rather
+than as defeated: FaithfulRAG~\cite{zhang-2025-faithfulrag} needs structured
+output support that open weights do not provide in its harness, and the ablated
+variant that does run cannot reproduce its own benefit.
+
+\textbf{The attack works first.} If the attack does not degrade the undefended
+arm in the same run, the defended arm means nothing. Every result below is
+reported next to an undefended arm measured on the same items at the same doses
+with the same scorer.
+
+\textbf{Effects are gated on a minimum detectable change.} For each run we
+compute the smallest difference detectable at the given sample size with
+$\alpha = .05$ and power $.80$. Differences below it are reported as "no
+resolvable effect", never as "no effect". This matters because several
+published claims in this area rest on differences that a run of their size
+cannot resolve.
+
+Predictions were written into the runner scripts and committed to version
+control \emph{before} each run. Several were wrong, and we say so where they
+were.
+
+\subsection{What we ran}
+
+The campaign covers two cells.
+
+The \textbf{retrieval cell} pairs defenses built for knowledge conflict against
+attacks built to poison a retrieval corpus. The victim model is
+Llama-3-8B-Instruct or Mistral-7B-Instruct, depending on what each defense
+released. The data is CoConflictQA over Natural Questions, and open Natural
+Questions for the attacks that need a retrieval pool.
+
+The \textbf{agent cell} pairs ingestion-stage and execution-stage defense
+techniques against prompt-injection attacks inside the AgentDojo banking
+suite~\cite{debenedetti-2024-agentdojo}, with a Qwen2.5-14B-Instruct agent.
+
+In total we executed \textbf{81 distinct (defense, attack) pairs across 18
+defense implementations, over 156,308 scored episodes}: 25 pairs and 152,724
+episodes in the retrieval cell, 56 pairs and 3,584 episodes in the agent cell.
+The two episode counts are not comparable units. An agent episode is a complete
+multi-step tool-use trajectory. A retrieval episode is one scored answer.
+
+\subsection{Two payload classes}
+
+Within the retrieval cell we use two attacks that differ in one property, which
+turns out to matter.
+
+\textbf{Corpus poisoning}~\cite{zhong-2023-poisoning,su-2024-corpus} optimizes a
+token sequence to be retrieved for many queries. The resulting passage is
+incoherent to a human reader. It attacks by displacing honest documents.
+
+\textbf{False evidence} plants a fluent, well-formed sentence that asserts the
+wrong answer the model itself would have given from memory. It is drawn from
+CoConflictQA and reads like an ordinary encyclopaedia sentence. It attacks by
+agreeing with the model's prior.
+
+Both are dosed identically, replacing 10\%, 50\% and 100\% of the context, with
+a clean arm at 0\%. Because the two payloads differ only in form, a defense
+that behaves differently against them tells us which property it is actually
+keying on. To guard against mislabelling we fingerprint the payload in every
+result file, after an early run was filed under the wrong attack with numbers
+that looked plausible.

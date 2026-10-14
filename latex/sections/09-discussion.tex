@@ -1,0 +1,75 @@
+\section{What the field should change}
+\label{sec:discussion}
+
+\subsection{Three controls that belong in both communities' reporting}
+
+Section~\ref{sec:results} reports three controls that each overturned a
+conclusion we would otherwise have published. None is expensive. None is
+currently standard. We propose all three as reporting requirements.
+
+\textbf{Report a no-retrieval arm.} Any defense that modifies how a model uses
+retrieved context must report what the same model scores with no retrieved
+context at all. Without it, a defense that has stopped reading the document is
+indistinguishable from a defense that has learned to resist a poisoned one.
+This is one extra arm and it costs one extra pass over the data.
+
+\textbf{Report the abstention rate, not only accuracy.} A method that converts
+confident wrong answers into refusals has done something valuable and will
+score as inert on accuracy. In an agent setting, where a wrong answer becomes a
+wrong action, that difference is the whole point. Reporting where the
+probability mass went, rather than only whether it landed on the gold answer,
+costs nothing beyond classifying the generations already produced.
+
+\textbf{Report at least two base models.} Holding defense and attack fixed and
+changing only the model changed an effect's magnitude, its existence, and once
+its sign. A single-model result in this area should be read as a
+model-specific result until shown otherwise.
+
+\subsection{Two conventions that make transfer measurable}
+
+\textbf{State the threat model the evaluation actually covers.} Our defense
+census codes each method by what its own paper evaluated, and 97\% cover one
+threat model. Many of those papers describe their contribution in terms broad
+enough to imply the other. A single required sentence naming the threat model
+the experiments cover would let a reader of the paper, and the maintainer of a
+system, see the gap without reading the appendix.
+
+\textbf{Gate claims on a detectability threshold.} Reporting a difference
+without the smallest difference the experiment could have detected makes "no
+effect" and "we could not tell" look identical. We computed this for every run
+and several of our own results moved from the first category to the second.
+
+\subsection{Artifacts}
+
+The reconstruction standard made artifact quality measurable as a side effect.
+Among the best-cited untested defenses in the cell we studied, two name
+repositories that are empty, two ship code without the trained weights needed
+to run it, and one is executable. Two further execution-stage defenses do not
+run reliably on any freely-available open-weight model.
+
+We note this without blame. Releasing a working artifact is harder than it
+looks and is rarely rewarded. But the coverage gap this paper measures is
+partly an artifact gap. A defense nobody else can run is a defense nobody else
+will test, and 60\% of the defenses in our census have no confirmed test
+against any named mechanism.
+
+\subsection{What this means for someone deploying an agent}
+
+Three practical points follow from the results.
+
+If a system uses a knowledge-conflict method to improve answer quality, and
+that system also retrieves from a corpus an outsider can write to, then the
+method is operating outside its validated threat model. Our measurements say it
+is more likely to increase damage than to reduce it.
+
+A defense that holds against an optimized adversarial passage may fail against
+a fluent sentence that simply asserts a plausible falsehood. The fluent attack
+is cheaper to produce and, in our measurements, more damaging to an undefended
+model. Evaluations built only around optimized payloads will overstate
+protection.
+
+Finally, the channel matters more than the method name. Supply-chain,
+cross-modal and tool-metadata have fewer than one named defense per named
+mechanism. If an agent accepts third-party components or machine-readable tool
+descriptions, that inflow has very little published protection standing at its
+mouth.

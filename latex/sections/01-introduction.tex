@@ -1,0 +1,80 @@
+\section{Introduction}
+
+An LLM agent reads from many places. It reads retrieved documents, the output
+of the tools it calls, the descriptions of the tools themselves, files and
+skills it loads, messages from other agents, and its own stored memory. All of
+this arrives in one context window, and the model treats it as one body of
+text. The model has no reliable way to tell which part of that text is
+trustworthy and which part is not.
+
+Two research communities study what goes wrong when untrustworthy content gets
+in, and they use different words for it.
+
+The security community studies content that an attacker placed there on
+purpose. It names attacks such as indirect prompt injection, retrieval
+poisoning~\cite{zou-2024-poisonedrag,zhong-2023-poisoning} and memory
+backdoors, and it publishes defenses against
+them~\cite{xiang-2024-certifiably,liu-2025-datasentinel,an-2025-ipiguard}.
+Success means the attacker fails to achieve a goal.
+
+The machine learning community studies content that became wrong without any
+attacker. It names mechanisms such as lost-in-the-middle~\cite{liu-2023-lost},
+context rot, and knowledge conflict between a retrieved passage and what the
+model already learned~\cite{xie-2023-adaptive}, and it publishes fixes for
+them~\cite{huang-2025-parammute,bi-2025-parameters,yuan-2024-discerning}.
+Success means accuracy goes up.
+
+The two communities describe the same underlying failure. A passage the model
+should not trust enters the context window and changes the output. Only the
+provenance differs. The model sees tokens either way.
+
+\paragraph{Why the split matters.}
+A vocabulary split would be harmless if it were only a naming difference. It is
+not. A fix designed for the accidental case is evaluated on average-case
+benchmarks, because nothing is adapting to it. A defense designed for the
+adversarial case is evaluated against a worst case, because something is. When
+the two communities do not read each other, a method can be published,
+adopted and cited without anyone asking whether it survives the other
+community's threat model. We show that this has happened, that it has happened
+at scale, and that for one common family of methods the answer is that it does
+not survive, for a reason that is visible in the method's own design.
+
+\paragraph{What an SoK must add.}
+A systematization is judged on whether it gives the community a viewpoint it
+did not have, not on whether it summarizes well. We make four moves beyond
+summary. First, we place both literatures in one taxonomy, so that an attack
+and an incidental mechanism that damage the same thing through the same channel
+land in the same cell. Second, we measure the separation between the
+communities instead of asserting it. Third, we use the taxonomy to find
+(defense, attack) pairs that nobody has run, which is a prediction the
+taxonomy makes and that can be checked. Fourth, we run those pairs on the
+authors' own released code and weights, and report what happened.
+
+The third and fourth moves are the part a survey normally cannot do, and they
+are what turns a coverage gap from an observation into evidence.
+
+\paragraph{Contributions.}
+\begin{itemize}
+\item \textbf{A joint taxonomy} of context poisoning in LLM agents over
+  channel, intent and consequence, applied to 984 papers read in full from
+  both literatures (Section~\ref{sec:taxonomy}). 60.5\% of the taxonomy's
+  cells hold no paper from either side.
+\item \textbf{A census of 235 named mechanisms and 529 named defenses},
+  coded by the threat model each defense was actually validated against in
+  its own paper, not the threat model it claims to address
+  (Section~\ref{sec:taxonomy}).
+\item \textbf{A measurement of the split} between the two literatures: how
+  often they cite each other, and how often they test against each other's
+  problems (Section~\ref{sec:literatures}). Citation is rare. Cross-testing
+  is almost absent.
+\item \textbf{A coverage matrix} of which defenses were tested against which
+  mechanisms, and the finding that the reported outcome of a
+  (defense, attack) pair depends on which side of the field wrote the paper
+  (Section~\ref{sec:coverage}).
+\item \textbf{An execution campaign} of 81 (defense, attack) pairs selected
+  from the taxonomy's untested cells, run on released artifacts under an
+  attack-works-first control and a fixed detectability threshold
+  (Sections~\ref{sec:experiments} and~\ref{sec:results}).
+\item \textbf{Three controls} that the literature omits and that each changed
+  a conclusion in our own work (Section~\ref{sec:discussion}).
+\end{itemize}

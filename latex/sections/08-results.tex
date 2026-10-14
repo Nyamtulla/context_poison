@@ -1,0 +1,225 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{One design rule explains most of what we found}
+
+Stated first, then supported: \textbf{a defense that works by shifting trust
+from the model's parameters toward the retrieved text is correct when the text
+is merely stale and dangerous when an attacker owns it.}
+
+This family is large. It includes
+ParamMute~\cite{huang-2025-parammute}, CK-PLUG~\cite{bi-2025-parameters},
+SpARE~\cite{zhao-2024-steering}, COIECD~\cite{yuan-2024-discerning} and
+SHIFT~\cite{li-2026-shift}. All were published as fixes for knowledge
+conflict, and all were validated against the incidental threat model only. The
+family's shared idea is reasonable for the problem it was built for. When a
+retrieved document disagrees with the model's memory, the document is usually
+newer, so trust the document. The idea becomes a liability the moment the
+document is written by an adversary, because the defense instructs the model to
+trust the one thing the adversary controls.
+
+\begin{table}[t]
+\caption{Context-reliance defenses against corpus poisoning, each read against
+its own undefended arm in the same run. "Clean" is the defense's own published
+benefit. "Saturation" is 100\% poisoned context. Bold clears that run's
+minimum detectable change.}
+\label{tab:family}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\textbf{Defense} & \textbf{$n$} & \textbf{mdr} & \textbf{Clean} &
+\textbf{Saturation} \\
+\midrule
+ParamMute & 1409 & 5.3 & \textbf{+9.3} & \textbf{-4.2} \\
+CK-PLUG   &  800 & 7.0 & \textbf{-10.1}$^{\dagger}$ & \textbf{-9.9} \\
+SpARE     &  500 & 8.9 & \textbf{+14.2} & \textbf{-10.2} \\
+COIECD    &  400 & 9.9 & -0.8 & -1.8 \\
+\bottomrule
+\end{tabular}
+\\[2pt]
+{\footnotesize $^{\dagger}$CK-PLUG's control fires on memorisation rate rather
+than accuracy, so its clean cell reports that metric.}
+\end{table}
+
+SpARE is the cleanest case because its control and its conviction are the same
+measurement. Steering toward the context is worth \textbf{+14.2\pp} when the
+context is honest and costs \textbf{-10.2\pp} when it is attacked. Both ends
+clear the 8.9\pp threshold. The sign flips.
+
+ParamMute shows the same shape on a larger sample. Its benefit on clean context
+is +9.3\pp. At saturation it is 4.2\pp \emph{below} the undefended model, and
+across the full dose range it loses 13.5\pp more accuracy than doing nothing at
+all.
+
+CK-PLUG's behaviour is the most extreme we measured, and it appears on a
+different metric. Under BadRAG sentiment steering~\cite{xue-2024-badrag}, which
+tries to make the model answer in a negative tone, the undefended model adopts
+the attacker's framing 0.0\% of the time at every dose. CK-PLUG adopts it
+78.2\% of the time with a single poisoned passage out of ten, and 99.0\% at
+full dose. The defense does not fail to stop the attack. It carries it.
+
+\subsection{The scope condition}
+
+The rule is not that suppressing parametric memory is always harmful. We can
+state when it is.
+
+\textbf{Suppressing the model's prior knowledge hurts only where that prior
+knowledge held the right answer.} Against BadRAG's denial-of-service variant,
+which makes the model refuse rather than answer wrongly, ParamMute is strongly
+protective. With one poisoned passage in ten the undefended model refuses
+52.4\% of the time and holds 27.0\% accuracy. ParamMute drops refusal to 0.2\%
+and restores accuracy to 57.4\%, within 2.4 points of its own clean baseline.
+Across the realistic range of one to five poisoned passages, the undefended
+model averages 25.8\% accuracy and ParamMute averages 57.6\%.
+
+The mechanism is the same in both cases. ParamMute suppresses the model's
+memory. When memory held the correct answer, that suppression destroys it. When
+the attack works by driving the model into refusal, suppressing memory removes
+the conflict that triggered the refusal. \textbf{One mechanism, two signs,
+selected by whether the memory was right.} We predicted little effect here and
+were wrong, which is why the scope condition is in the paper.
+
+\subsection{The payload class decides, not the attack label}
+
+ACD~\cite{kim-2024-adaptive} was the best result in our campaign. It discounts
+tokens the context makes uncertain, and against corpus poisoning it is the only
+method that both reads a clean document and resists a poisoned one. At
+saturation it is \textbf{+9.2\pp} above the undefended arm ($p < 0.0001$) and
+on clean context it is \textbf{+53.5\pp} above answering with no document at
+all.
+
+We then ran the same defense, same items, same doses, against false evidence.
+
+\begin{table}[t]
+\caption{ACD against two payload classes, $n=400$, mdr 9.9\pp. The defense is
+unchanged. Only the form of the planted passage differs.}
+\label{tab:acd}
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Comparison at saturation} & \textbf{Corpus poisoning} &
+\textbf{False evidence} \\
+\midrule
+vs.\ undefended  & \textbf{+9.2} ($p{<}0.0001$) & +3.0 ($p{=}0.059$) \\
+vs.\ no retrieval & +0.5 ($p{=}0.91$) & \textbf{-4.0} ($p{=}0.0499$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{The protection collapses.} Against the incoherent payload, ACD restores
+the no-retrieval floor exactly. Against the fluent payload it ends up
+resolvably \emph{below} that floor: the defended model does worse than a model
+given no document at all.
+
+The reason is visible in the method. ACD keys on the uncertainty a passage
+induces. An optimized token string is incoherent and raises uncertainty, so ACD
+discounts it. A fluent sentence asserting a plausible wrong answer lowers
+uncertainty, so ACD trusts it more.
+
+This has a practical consequence. \textbf{The cheaper and more natural-looking
+attack is the stronger one.} For COIECD's undefended arm, false evidence cuts
+accuracy roughly twice as far as gradient-optimized corpus poisoning at every
+dose, falling to 15.2\% at 10\% dose against 26.5\% for corpus poisoning. The
+field's attention to optimized adversarial passages is not matched by their
+effectiveness.
+
+For ParamMute the harm reproduces across both payloads: 13.5\pp excess damage
+under corpus poisoning and 12.3\pp under false evidence. Its suppression of the
+wrong parametric answer, however, falls from 42.5\pp to 8.8\pp, because false
+evidence re-supplies that answer through the context path ParamMute does not
+touch. COIECD is inert under both payloads, with no comparison exceeding
+1.8\pp against a 9.9\pp threshold.
+
+\subsection{Asking the model to judge the document}
+
+SCR~\cite{huang-2024-trust} is the only method we ran whose design anticipates
+an adversary. It shows the model its own no-context answer, the document, and
+the answer the document supports, and asks the model to judge which to believe.
+
+It does help at saturation, +2.8\pp over the undefended arm ($p = 0.025$), and
+it does genuinely read the document, scoring 41.2\pp above no-retrieval on
+clean context. \textbf{It pays 13.5 points on clean data to buy that 2.8.} The
+cost is resolvable at every dose below saturation and is roughly five times the
+benefit. A defense deployed permanently and attacked occasionally is a poor
+trade at that exchange rate.
+
+SCR's parametric-answer rate climbs 22.8, 33.8, 35.8, 52.5 across the dose
+range, converging on the closed-book rate of 55.8. Both SCR and ACD slide from
+the document toward memory as the attack grows. SCR simply destroys more
+correct answers on the way.
+
+\subsection{Three controls that changed our own conclusions}
+
+Each of the following would have produced a wrong published claim if we had
+reported the metric the relevant literature reports.
+
+\textbf{A no-retrieval baseline.} DyPRAG~\cite{tan-2025-dynamic} is perfectly
+flat under an attack that destroys the undefended arm, scoring 5.8, 6.0, 5.2
+and 6.0 across the dose range while the undefended arm falls from 63.8\% to
+2.5\%. Read alone, that is the strongest defense result in the campaign. The
+closed-book arm scores 7.5\% and is statistically indistinguishable from it.
+\textbf{DyPRAG is flat because it is not reading the document}, not because it
+is resisting the attack. Only a no-retrieval arm separates immunity from
+inattention, and no paper in this family reports one.
+
+\textbf{An abstention axis.} COIECD is inert on accuracy at every dose. Dumping
+and classifying every generation shows it is not inert at all. On the items
+where the undefended model answered from memory, COIECD converts
+\textbf{32.1\%} of those answers into explicit abstentions, and does so only
+under attack; on clean context the same pairing moves almost nothing. Because
+the parametric answer is wrong by construction in this data, what it suppressed
+were confident wrong answers and what it produced instead was "not mentioned".
+That is a real safety gain, and it is invisible in the accuracy column that
+every paper in this family reports.
+
+\textbf{A model control.} RobustRAG ran on Mistral and the context-reliance
+family ran on Llama, because those are the models each paper released. Re-running
+RobustRAG on the other family's model changes outcomes. The tone-steering
+finding survives unchanged, which strengthens it. A second finding inverts.
+\textbf{Holding defense and attack fixed and changing only the base model
+changes an effect's size, its existence, and in one case its sign.}
+
+\subsection{Principle or implementation}
+
+A single implementation cannot tell you whether you have found a property of a
+design principle or a quirk of one codebase. RobustRAG~\cite{xiang-2024-certifiably}
+ships two aggregation variants that share the isolate-then-aggregate principle
+and share no decision logic downstream of it. One extracts keywords and
+re-prompts; the other averages next-token distributions.
+
+Both show the same behaviour under tone steering, at or below 0.3\% across four
+cells and two models, against CK-PLUG's 99.0\% on the same attack and model.
+\textbf{Aggregation does not open the tone-steering hole. Context-reliance
+does.} That the two independent implementations agree is what licenses stating
+it as a property of the principle.
+
+The caution runs the other way too. Across fifteen dose levels the two
+implementations agree within noise on thirteen. On one they do not. At nine
+poisoned passages in ten, against refusal induction, KeywordAgg is
+\textbf{+12.3\pp} and DecodingAgg is \textbf{-17.3\pp}, a gap of 29.7 points
+with both ends clearing the 11.4\pp threshold at $n=300$. One implementation of
+isolate-then-aggregate is resolvably protective and the other is resolvably
+harmful, on the same attack, at the same dose, inside one codebase.
+
+The gap grows as the honest minority of passages shrinks, from 13.0 points at
+five in ten to 29.7 at nine in ten, and then collapses to 1.7 at ten in ten
+when no honest passage remains and the two implementations have nothing left to
+disagree about. An SoK that reported one number per published method would have
+missed all of this.
+
+\subsection{Defenses that do transfer, and one line that fixes one that does not}
+
+The picture is not uniformly negative, and the exceptions are informative.
+
+RobustRAG stops PoisonedRAG, which its own paper tested, and we reproduce that
+(+11.0\pp). It then fails completely against corpus poisoning at displace-10,
+scoring 4.6\% against the undefended arm's 3.4\%. The reason is not its
+security mechanism. Corpus poisoning displaces every honest passage out of the
+top-$k$ window, so isolate-then-aggregate has nothing honest left to aggregate.
+Backfilling the window to its intended size restores \textbf{45.2\%}, a gain of
+40.6\pp. \textbf{The defense was sound and the retrieval interface was not.}
+
+Across the agent cell, 24 of 56 conditions show the technique holding with
+attack success driven to zero, 4 show a resolvable reduction, 19 show no
+resolvable effect at that sample size, and 9 show no reduction at all.
+Ingestion-stage techniques account for most of the holds.

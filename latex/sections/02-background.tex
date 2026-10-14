@@ -1,0 +1,68 @@
+\section{Background and scope}
+\label{sec:background}
+
+\subsection{What we mean by context poisoning}
+
+We use \emph{context poisoning} for any case where content enters an agent's
+context window, the agent should not have trusted it, and the agent's behaviour
+changes as a result. The definition covers both communities on purpose. It says
+nothing about who put the content there.
+
+This is wider than prompt injection, which is one channel and one intent, and
+wider than knowledge conflict, which is one consequence. It is narrower than
+"LLM safety", because it requires that the damage arrive through the context
+window. We exclude training-time poisoning and model weight attacks, because
+those do not travel through the context. We exclude jailbreaks in which the
+user is the attacker and there is no third-party content, for the same reason.
+
+\subsection{One failure, two vocabularies}
+
+Table~\ref{tab:vocab} sets the two vocabularies side by side. The slots are the
+same. Only the names and the assumed threat model differ.
+
+\begin{table}[t]
+\caption{The same four slots, named twice. The taxonomy in
+Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
+\label{tab:vocab}
+\small
+\begin{tabular}{@{}p{0.26\columnwidth}p{0.31\columnwidth}p{0.31\columnwidth}@{}}
+\toprule
+\textbf{Slot} & \textbf{Security} & \textbf{Machine learning} \\
+\midrule
+The content that gets in & attack, attack technique & mechanism, degradation
+mechanism \\
+Who placed it & an adversary, modelled explicitly & nobody; a property of the
+pipeline \\
+The countermeasure & defense, mitigation & fix, method \\
+What success means & the adversary fails & accuracy rises \\
+Evaluation style & worst case & average case \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The distinction is real in one respect and empty in another. It is real because
+an adaptive adversary re-optimizes against a filter and a stale retrieval index
+does not. A method tuned to the average case has no reason to hold at the worst
+case. It is empty because the model cannot tell the difference. A poisoned
+passage and a stale passage arrive through the same channel, occupy the same
+positions, and corrupt the same reasoning. The provenance differs; the token
+stream does not.
+
+Our taxonomy therefore uses \emph{mechanism} as the neutral term for both, and
+records provenance in a separate \emph{intent} axis. Writing "attack" at the
+top level would have made the incidental half unregisterable, because an attack
+presupposes an attacker.
+
+\subsection{The agent context as a set of inflow channels}
+
+It helps to picture the context window as a body of water fed by a fixed set of
+inflow streams. Whatever enters through any stream mixes into the same body and
+affects everything downstream, whether it was dumped in deliberately or arrived
+as runoff. The question this SoK answers first is simple to state: how many
+streams are there, and for each one, what stands guard at its mouth?
+
+The picture needs one correction. A pond is polluted from outside, but some of
+these channels feed themselves. A poisoned agent's output becomes another
+agent's input, and poisoned memory reactivates in a later session. The
+phenomenon is worse than the picture: contamination can propagate to other
+agents and can re-enter the same agent from storage.

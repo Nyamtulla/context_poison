@@ -105,8 +105,9 @@ defense stops the attack, using a fixed statistical criterion and an
 attack-works-first control, rather than restating numbers from the original
 papers.
 
-The corpus is 984 screened papers drawn from a 25,922-record discovery pool,
-each coded on ~31 fields. The present call is to verify that coding.
+The corpus is 984 papers, screened down from 1,158 manually reviewed and a
+25,922-record discovery pool,
+each carrying 32 columns, 17 of them coded from the full text. The present call is to verify that coding.
 
 ---
 
@@ -130,9 +131,13 @@ in the repository.
 
 **On how the field evaluates**
 
-- **There is essentially no generalist defense.** Of defenses confirmed tested
-  against a named mechanism, 82.7 % were tested against exactly one. Cross-
-  mechanism testing tops out at three mechanisms, and only twice in the corpus.
+- **Defense authors test narrowly.** Counting only what defense papers
+  themselves report, 163 of 197 matched defenses (82.7 %) were tested against
+  exactly one named mechanism, and cross-mechanism testing tops out at three,
+  twice. Adding the attack-paper scan raises the ceiling to eight, but 46 % of
+  the pairs held by the 13 broadly-tested defenses come from attack papers
+  rather than the defenses' own evaluations, so that breadth measures which
+  defenses attracted attackers, not which were evaluated widely.
 - **54.9 % of named mechanisms (129 of 235) have zero defenses evaluated
   against them.**
 - **Scanning the attack papers rather than the defense papers recovers pairs the
@@ -182,7 +187,7 @@ defense ought to apply, and nobody had tested it.
 ## What contributors would do
 
 The corpus of 984 papers was coded by an LLM-assisted extraction pass across
-~31 fields per paper — taxonomy placement (channel, consequence, intent),
+17 coded fields per paper (the other 15 columns are bibliographic metadata) — taxonomy placement (channel, consequence, track),
 track assignment, intervention point, evidence grade, models and datasets
 evaluated, threat model, stated limitations, whether artifacts were released,
 and whether the paper cites the other literature. **None of this coding has been
@@ -198,7 +203,7 @@ reading and a spreadsheet. Prior exposure to retrieval-augmented generation or
 prompt injection helps but is not necessary, and the coding guide defines every
 field with examples.
 
-Because full dual-coding of 984 papers × ~31 fields is not realistic for a
+Because full dual-coding of 984 papers × 17 coded fields is not realistic for a
 small team, verification will be **stratified**: 100 % verification of the
 fields that drive the headline claims (track, channel, consequence, role, and
 the two cross-citation fields), and a random sample of the remaining fields
