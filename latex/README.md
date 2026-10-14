@@ -2,20 +2,6 @@
 
 LaTeX source for *SoK: Context Poisoning in LLM Agents*.
 
-## Building
-
-There is no LaTeX toolchain on the machine this was written on. The source is
-written for Overleaf, which has both required classes installed.
-
-- Upload this folder to Overleaf and set `main.tex` as the main document.
-- Compiler: pdfLaTeX. Run latex, bibtex, latex, latex.
-
-Locally, if you install a toolchain:
-
-```bash
-latexmk -pdf main.tex
-```
-
 ## Switching venue
 
 The source is written for `acmart` in `sigconf` mode, which is the CCS format.
@@ -58,25 +44,6 @@ bibliography. It has one entry per screened paper: 1,158 entries, being the
 not part of the submission. Keeping the rejected papers in it is deliberate,
 because a screening decision has to stay auditable against the paper it was
 made about.
-
-## Working with Overleaf
-
-The source of truth is this directory, inside the main `context_sok` repo, so
-the paper stays next to the scripts that generate its numbers. Co-authors work
-in Overleaf against a second, paper-only repo that mirrors this directory.
-
-### One-time setup (run from the repo root, not from here)
-
-Create an empty GitHub repo first, then:
-
-```bash
-git subtree push --prefix=latex git@github.com:Nyamtulla/context_poison_paper.git main
-```
-
-In Overleaf: New Project, Import from GitHub, pick `context_poison_paper`.
-Overleaf's Git and GitHub integration is a paid feature. On the free tier,
-download the folder as a zip and use Upload Project instead, then export the
-zip back when co-authors have edited.
 
 ### Sending your changes to Overleaf
 
