@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07",
+ "generated": "2026-10-15",
  "purpose": "Registry entries retracted after publication of the RQ3/RQ4 numbers, with cause. Kept as a separate applied-on-load file (not edited into the registry JSONs) so the originally published figures stay exactly reproducible via load_all(include_corrections=False).",
  "retracted_mechanisms": [
   {
@@ -12,7 +12,24 @@
    "effect": "RQ3 mechanisms 183 -> 182. The retracted entry was uncovered while the canonical 'AgentVigil' is covered by 1 defense, so uncovered mechanisms 112 -> 111 and the never-defended share 61.2% -> 61.0%. Covered count unchanged at 71."
   }
  ],
- "retracted_defenses": [],
+ "retracted_defenses": [
+  {
+   "defense_name": "RhinoInsight",
+   "source_paper_id": "ef67e45338e8ed20907ff2eaae7a56ec38bf287d",
+   "excel_row": 381,
+   "reason": "excluded 2026-10-15: out of scope",
+   "evidence": "Deep-research agent paper. It manages context for long-horizon research tasks and never studies context becoming untrustworthy, by attack or by degradation. It entered the corpus on the word 'context' in its abstract. Both this and the other paper retracted in the same pass form the only disconnected component in the citation graph and carry cites_track_a = N and cites_track_b = N: they cite neither literature.",
+   "effect": "corpus 984 -> 982, RQ4 defenses 529 -> 527. Contributes no RQ3 mechanism and appears in no RQ5 pair, so coverage is unchanged."
+  },
+  {
+   "defense_name": "FS-Researcher (file-system-based dual-agent: Context Builder + Report Writer)",
+   "source_paper_id": "9f4a9187b4d4238814ecd25ab3b7597b58d35309",
+   "excel_row": 566,
+   "reason": "excluded 2026-10-15: out of scope",
+   "evidence": "Deep-research agent paper. It manages context for long-horizon research tasks and never studies context becoming untrustworthy, by attack or by degradation. It entered the corpus on the word 'context' in its abstract. Both this and the other paper retracted in the same pass form the only disconnected component in the citation graph and carry cites_track_a = N and cites_track_b = N: they cite neither literature.",
+   "effect": "corpus 984 -> 982, RQ4 defenses 529 -> 527. Contributes no RQ3 mechanism and appears in no RQ5 pair, so coverage is unchanged."
+  }
+ ],
  "retracted_2026_10_13_unreadable": [
   {
    "kind": "attack",

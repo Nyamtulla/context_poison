@@ -1,6 +1,6 @@
 # RQ1 -- Taxonomy Analysis: channel x intent x consequence
 
-Regenerated 2026-10-14 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (984 included papers). Re-run this script any time screening/coding changes.
+Regenerated 2026-10-14 by `scripts/rq1_taxonomy.py` from the current Excel corpus state (982 included papers). Re-run this script any time screening/coding changes.
 
 **RQ1:** Across the full landscape of LLM agent context contamination -- memory, RAG, tool output, tool metadata, skills, multi-agent, cross-modal, supply chain -- which channel x intent (adversarial/incidental) x consequence cells have been studied, and which are empty?
 
@@ -12,8 +12,8 @@ Regenerated 2026-10-14 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 
 | Channel | Papers | Share |
 |---|---:|---:|
-| tool-output | 344 | 35.0% |
-| direct-input | 230 | 23.4% |
+| tool-output | 343 | 34.9% |
+| direct-input | 229 | 23.3% |
 | RAG | 136 | 13.8% |
 | memory | 104 | 10.6% |
 | multi-agent | 59 | 6.0% |
@@ -31,7 +31,7 @@ Regenerated 2026-10-14 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 | persistence-backdoor | 20 | 2 | 3 |
 | resource-abuse | 8 | 0 | 0 |
 | silent-corruption | 15 | 73 | 1 |
-| reasoning-corruption | 22 | 296 | 6 |
+| reasoning-corruption | 22 | 294 | 6 |
 
 ## Channel x Defense-intervention-point coverage
 
@@ -39,13 +39,13 @@ Regenerated 2026-10-14 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 |---|---:|---:|---:|---:|
 | memory | 6 | 48 | 3 | 47 |
 | RAG | 25 | 48 | 1 | 62 |
-| tool-output | 49 | 54 | 70 | 171 |
+| tool-output | 49 | 53 | 70 | 171 |
 | tool-metadata | 5 | 1 | 4 | 27 |
 | skill | 1 | 0 | 0 | 17 |
 | multi-agent | 3 | 10 | 13 | 33 |
 | cross-modal | 6 | 7 | 0 | 33 |
 | supply-chain | 3 | 0 | 1 | 6 |
-| direct-input | 66 | 62 | 5 | 97 |
+| direct-input | 65 | 62 | 5 | 97 |
 
 ## Full 3D cube
 
@@ -69,13 +69,13 @@ Regenerated 2026-10-14 by `scripts/rq1_taxonomy.py` from the current Excel corpu
 |---|---:|---:|---:|---:|---:|---:|
 | memory | 1 | 1 | 2 | 0 | 5 | 76 |
 | RAG | 1 | 0 | 0 | 0 | 49 | 23 |
-| tool-output | 9 | 0 | 0 | 0 | 0 | 36 |
+| tool-output | 9 | 0 | 0 | 0 | 0 | 35 |
 | tool-metadata | 1 | 0 | 0 | 0 | 0 | 5 |
 | skill | 0 | 0 | 0 | 0 | 0 | 6 |
 | multi-agent | 1 | 0 | 0 | 0 | 0 | 29 |
 | cross-modal | 1 | 0 | 0 | 0 | 3 | 14 |
 | supply-chain | 0 | 0 | 0 | 0 | 0 | 0 |
-| direct-input | 0 | 0 | 0 | 0 | 16 | 107 |
+| direct-input | 0 | 0 | 0 | 0 | 16 | 106 |
 
 ### Both
 

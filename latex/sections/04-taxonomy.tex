@@ -68,29 +68,31 @@ has studied least.
 
 \subsection{Census of mechanisms}
 
-The corpus names \textbf{221 distinct mechanisms}, or 235 counting those that
-exist only inside a benchmark suite. 166 are adversarial attacks from the
-security track and 55 are incidental degradation mechanisms from the machine
-learning track.
+The corpus names \textbf{\NMechanisms{} distinct mechanisms}, or
+\NMechanismsBench{} counting those that exist only inside a benchmark suite.
+\NMechSecurity{} are adversarial attacks from the security track and
+\NMechML{} are incidental degradation mechanisms from the machine learning
+track.
 
-By consequence, \meth{goal-hijack} dominates at 124 of 221 (56.1\%), followed
+By consequence, \meth{goal-hijack} dominates at \NGoalHijack{} of \NMechanisms{} (\PctGoalHijack{}\%), followed
 by \meth{reasoning-corruption} at 46 (20.8\%) and \meth{silent-corruption} at
 21 (9.5\%). By channel, \meth{direct-input} (66, 29.9\%) and \meth{tool-output}
 (65, 29.4\%) together hold close to 60\% of all named mechanisms, with
 \meth{RAG} third at 27 (12.2\%).
 
 Mechanism count and paper count differ by a large factor, and the reason is
-structural. 221 of the 984 included papers name a new mechanism and 529 name a
-new defense, with 68 papers doing both. \textbf{302 papers name neither.} Those
+structural. \NPapersMech{} of the \NCorpus{} included papers name a new
+mechanism and \NPapersDef{} name a new defense, with \NPapersBoth{} papers
+doing both. \textbf{\NPapersNeither{} papers name neither.} Those
 are benchmarks, surveys, and measurement papers that apply an existing named
 mechanism rather than introducing one. A corpus of this kind is mostly papers
 that use the field's vocabulary rather than papers that add to it.
 
 \subsection{Census of defenses}
 
-The corpus names \textbf{529 distinct defenses}. The track split is almost
-even: 264 from machine learning papers (49.9\%), 260 from security papers
-(49.1\%) and 5 from papers that sit in both.
+The corpus names \textbf{\NDefenses{} distinct defenses}. The track split is
+almost even: \NDefML{} from machine learning papers, \NDefSecurity{} from
+security papers, and \NDefBoth{} from papers that sit in both.
 
 By intervention point, 205 act at reasoning time (38.8\%), 152 at ingestion
 (28.7\%), 72 at execution (13.6\%), and 100 specify no single point (18.9\%).
@@ -99,13 +101,13 @@ The load-bearing number is what each defense was validated against in its own
 paper:
 
 \begin{itemize}
-\item \textbf{261 (49.3\%)} were validated against adversarial scenarios only.
-\item \textbf{251 (47.4\%)} were validated against incidental scenarios only.
-\item \textbf{14 (2.6\%)} were validated against both.
-\item 3 report no empirical validation.
+\item \textbf{\NAdvOnly{}} were validated against adversarial scenarios only.
+\item \textbf{\NIncOnly{}} were validated against incidental scenarios only.
+\item \textbf{\NBothValidated{} (\PctBothValidated{}\%)} were validated against both.
+\item \NNoValidation{} report no empirical validation.
 \end{itemize}
 
-\textbf{97\% of proposed defenses have an untested cross-threat-model question
+\textbf{\PctOneThreatModel{}\% of proposed defenses have an untested cross-threat-model question
 hanging over them.} This is the pool the experiments in
 Section~\ref{sec:experiments} draw from.
 

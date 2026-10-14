@@ -31,8 +31,8 @@ the time against 11.1\% for preprints, and the machine learning side is flat at
 8.6\% against 9.5\%.
 
 \textbf{What carries the cross-track citations makes the rate look better than
-the engagement is.} 549 of the 6,673 resolved edges (8.2\%) cross tracks, and
-they run through 333 papers, but they are concentrated: the ten most-cited
+the engagement is.} \NNetworkCross{} of the \NNetworkEdges{} resolved edges
+(\PctNetworkCross{}\%) cross tracks, and they run through 333 papers, but they are concentrated: the ten most-cited
 bridge papers account for 27\% of all cross-track edge endpoints. Those ten are
 not method papers engaging with the other community's methods. They are
 surveys, benchmarks and canonical references: a cross-literature threat survey,
@@ -48,16 +48,14 @@ evaluation measurement below matters more than the citation one.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig5_citation_network}
-\caption{The corpus as a citation graph: 934 papers that cite or are cited by
-another included paper, 6,673 edges. Node colour is track. Pale edges are
+\caption{The corpus as a citation graph: \NNetworkNodes{} papers that cite or are cited
+by another included paper, \NNetworkEdges{} edges. Node colour is track. Pale edges are
 citations within one literature, dark edges cross between them. The two
-communities form separate clusters joined by a narrow band, and the two papers
-below the mass are a third island: a pair of deep-research agent papers that
-cite neither literature. Note that 8.2\% of
+communities form separate clusters joined by a narrow band. Note that 8.2\% of
 \emph{edges} cross tracks, which is not the same measurement as the per-paper
 rates in the text: a paper counts there if it has at least one cross-track
-citation anywhere in its reference list. The 101 papers with no resolved
-citation link to any other included paper are omitted from the drawing.}
+citation anywhere in its reference list. Papers with no resolved citation link to any other
+included paper are omitted from the drawing.}
 \label{fig:network}
 \end{figure}
 

@@ -2432,22 +2432,6 @@
   "name": "lambda-RLM"
  },
  {
-  "row": 381,
-  "paper_id": "ef67e45338e8ed20907ff2eaae7a56ec38bf287d",
-  "title": "RhinoInsight: Improving Deep Research through Control Mechanisms for Model Behavior and Context",
-  "has_defense": "Y",
-  "defense_name": "RhinoInsight",
-  "channel": "tool-output",
-  "consequence": "reasoning-corruption",
-  "defense_intervention_point": "reasoning",
-  "track": "ML/AI",
-  "validated_against": "incidental",
-  "is_extension_of": "",
-  "confidence": "high",
-  "notes": "Deep-research agent framework with two control mechanisms combating context rot/error accumulation (non-adversarial); best Overall score on DeepResearch Bench (RACE) and DeepConsult vs frontier LLM+search baselines",
-  "name": "RhinoInsight"
- },
- {
   "row": 383,
   "paper_id": "883670bdd662f19ef5822b20d6136f75e8de1f3b",
   "title": "ARC: Active and Reflection-driven Context Management for Long-Horizon Information Seeking Agents",
@@ -3662,22 +3646,6 @@
   "confidence": "high",
   "notes": "Named dual-memory technique explicitly targeting 'context explosion' and 'lost-in-the-middle' degradation in long-horizon web navigation; ablations isolate Internal vs. External memory contributions. No adversarial evaluation.",
   "name": "M2 (Dynamic Trajectory Summarization + Insight Retrieval Augmentation)"
- },
- {
-  "row": 566,
-  "paper_id": "9f4a9187b4d4238814ecd25ab3b7597b58d35309",
-  "title": "FS-Researcher: Test-Time Scaling for Long-Horizon Research Tasks with File-System-Based Agents",
-  "has_defense": "Y",
-  "defense_name": "FS-Researcher (file-system-based dual-agent: Context Builder + Report Writer)",
-  "channel": "direct-input",
-  "consequence": "reasoning-corruption",
-  "defense_intervention_point": "ingestion",
-  "track": "ML/AI",
-  "validated_against": "incidental",
-  "is_extension_of": "",
-  "confidence": "high",
-  "notes": "Named persistent-workspace/file-system architecture explicitly addressing context-window exhaustion in long-horizon deep research, with ablations isolating the workspace, dual-agent separation, and section-wise writing contributions. Paper's ethics section flags prompt-injection attack-surface risk but does not evaluate it; core method is evaluated only against natural context exhaustion.",
-  "name": "FS-Researcher (file-system-based dual-agent: Context Builder + Report Writer)"
  },
  {
   "row": 567,
