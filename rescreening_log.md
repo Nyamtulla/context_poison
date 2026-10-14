@@ -856,3 +856,46 @@ separate incidental mechanisms, and two unrelated techniques both abbreviate to
 IPI. `PromptFuzz-SC` extends `PromptFuzz` but is its own paper; its
 `is_extension_of` field is unset and arguably should not be, flagged rather
 than edited since registry edits move published counts.
+
+---
+
+## Addendum, 2026-10-15 — two out-of-scope papers removed
+
+**Corpus 984 -> 982. RQ4 defenses 529 -> 527.**
+
+Removed:
+
+| row | paper | track |
+|---|---|---|
+| 381 | RhinoInsight: Improving Deep Research through Control Mechanisms for Model Behavior and Context | ML/AI |
+| 566 | FS-Researcher: Test-Time Scaling for Long-Horizon Research Tasks with File-System-Based Agents | ML/AI |
+
+**Why.** Both are deep-research agent papers, evaluated on DeepResearch Bench.
+They manage context for long-horizon research tasks. Neither studies context
+*becoming untrustworthy*, by attack or by degradation, which is the inclusion
+criterion. They entered the corpus on the word "context" in the abstract, which
+the automated screen reads as a topic signal and which here is not one.
+
+**How they were found.** They were the only disconnected component in the
+citation graph built for the paper's Figure 5: a two-node island, one citing
+the other, connected to nothing else in the corpus. Both carry
+`cites_track_a = N` and `cites_track_b = N`, so they cite neither literature.
+The project lead read both and confirmed they are out of scope.
+
+This is worth recording as a method note. **Graph position surfaced a screening
+error that title and abstract screening had passed**, and it did so because a
+paper that belongs to neither literature cannot connect to either. A
+disconnected component is not automatically wrong (a genuinely novel paper may
+be isolated too, and `citation_graph_isolates.md` records why out-degree alone
+is a bad exclusion rule), but it is a cheap place to look.
+
+**Effect on the numbers.** Neither contributed an RQ3 mechanism and neither
+appears in any RQ5 pair, so coverage, the 349 confirmed pairs and the
+cross-track evaluation rate are all unchanged. The retraction is recorded in
+`data/registries/registry_corrections.json` under `retracted_defenses`, applied
+on load, so the previously published 529 stays reproducible with
+`load_all(include_corrections=False)`.
+
+Regenerated after the change: RQ1 (60.5% empty, unchanged), RQ2 (11.7% / 9.3%,
+unchanged), `latex/numbers.tex`, and all five paper figures. The citation graph
+drops from 934 nodes to 932 and loses its only island.
