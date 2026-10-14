@@ -1,0 +1,83 @@
+\section{Results: controls, implementations and defenses that hold}
+\label{sec:results2}
+
+Section~\ref{sec:results} reports a negative result about one family of
+defenses. This section reports three things that complicate it: controls that
+changed our own conclusions, a test of whether a result belongs to a principle
+or to one codebase, and the defenses that did transfer.
+
+\subsection{Three controls that changed our own conclusions}
+
+Each of the following would have produced a wrong published claim if we had
+reported the metric the relevant literature reports.
+
+\textbf{A no-retrieval baseline.} DyPRAG~\cite{tan-2025-dynamic} is perfectly
+flat under an attack that destroys the undefended arm, scoring 5.8, 6.0, 5.2
+and 6.0 across the dose range while the undefended arm falls from 63.8\% to
+2.5\%. Read alone, that is the strongest defense result in the campaign. The
+closed-book arm scores 7.5\% and is statistically indistinguishable from it.
+\textbf{DyPRAG is flat because it is not reading the document}, not because it
+is resisting the attack. Only a no-retrieval arm separates immunity from
+inattention, and no paper in this family reports one.
+
+\textbf{An abstention axis.} COIECD is inert on accuracy at every dose. Dumping
+and classifying every generation shows it is not inert at all. On the items
+where the undefended model answered from memory, COIECD converts
+\textbf{32.1\%} of those answers into explicit abstentions, and does so only
+under attack; on clean context the same pairing moves almost nothing. Because
+the parametric answer is wrong by construction in this data, what it suppressed
+were confident wrong answers and what it produced instead was "not mentioned".
+That is a real safety gain, and it is invisible in the accuracy column that
+every paper in this family reports.
+
+\textbf{A model control.} RobustRAG ran on Mistral and the context-reliance
+family ran on Llama, because those are the models each paper released. Re-running
+RobustRAG on the other family's model changes outcomes. The tone-steering
+finding survives unchanged, which strengthens it. A second finding inverts.
+\textbf{Holding defense and attack fixed and changing only the base model
+changes an effect's size, its existence, and in one case its sign.}
+
+\subsection{Principle or implementation}
+
+A single implementation cannot tell you whether you have found a property of a
+design principle or a quirk of one codebase. RobustRAG~\cite{xiang-2024-certifiably}
+ships two aggregation variants that share the isolate-then-aggregate principle
+and share no decision logic downstream of it. One extracts keywords and
+re-prompts; the other averages next-token distributions.
+
+Both show the same behaviour under tone steering, at or below 0.3\% across four
+cells and two models, against CK-PLUG's 99.0\% on the same attack and model.
+\textbf{Aggregation does not open the tone-steering hole. Context-reliance
+does.} That the two independent implementations agree is what licenses stating
+it as a property of the principle.
+
+The caution runs the other way too. Across fifteen dose levels the two
+implementations agree within noise on thirteen. On one they do not. At nine
+poisoned passages in ten, against refusal induction, KeywordAgg is
+\textbf{+12.3\pp} and DecodingAgg is \textbf{-17.3\pp}, a gap of 29.7 points
+with both ends clearing the 11.4\pp threshold at $n=300$. One implementation of
+isolate-then-aggregate is resolvably protective and the other is resolvably
+harmful, on the same attack, at the same dose, inside one codebase.
+
+The gap grows as the honest minority of passages shrinks, from 13.0 points at
+five in ten to 29.7 at nine in ten, and then collapses to 1.7 at ten in ten
+when no honest passage remains and the two implementations have nothing left to
+disagree about. An SoK that reported one number per published method would have
+missed all of this.
+
+\subsection{Defenses that do transfer, and one line that fixes one that does not}
+
+The picture is not uniformly negative, and the exceptions are informative.
+
+RobustRAG stops PoisonedRAG, which its own paper tested, and we reproduce that
+(+11.0\pp). It then fails completely against corpus poisoning at displace-10,
+scoring 4.6\% against the undefended arm's 3.4\%. The reason is not its
+security mechanism. Corpus poisoning displaces every honest passage out of the
+top-$k$ window, so isolate-then-aggregate has nothing honest left to aggregate.
+Backfilling the window to its intended size restores \textbf{45.2\%}, a gain of
+40.6\pp. \textbf{The defense was sound and the retrieval interface was not.}
+
+Across the agent cell, 24 of 56 conditions show the technique holding with
+attack success driven to zero, 4 show a resolvable reduction, 19 show no
+resolvable effect at that sample size, and 9 show no reduction at all.
+Ingestion-stage techniques account for most of the holds.
