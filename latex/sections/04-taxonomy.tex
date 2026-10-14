@@ -24,6 +24,20 @@ channel and cause the same damage occupy the same cell, and differ only in the
 intent coordinate. That is what makes the taxonomy a tool for finding missing
 experiments rather than only a filing scheme.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_cube}
+\caption{Papers per channel $\times$ consequence cell, split by track. Hatched
+cells hold no paper. The two literatures work on the same channels and land in
+different columns: the security track concentrates in \meth{goal-hijack} (264
+papers in \meth{tool-output} alone) and the machine learning track in
+\meth{reasoning-corruption}. Neither covers \meth{resource-abuse}, and
+\meth{supply-chain} is thin on both sides. The intent axis is the panel split,
+so the full cube is these two panels plus a third for the 18 papers coded as
+addressing both.}
+\label{fig:cube}
+\end{figure*}
+
 \subsection{The cube is mostly empty}
 
 \textbf{98 of the 162 cells (60.5\%) contain no paper from either literature.}
@@ -123,6 +137,16 @@ tool-metadata  & 12 &  11 & 0.9 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_channel_gap}
+\caption{Named mechanisms against named defenses, by channel, ordered by the
+ratio. Protection does not follow the problem. Channels with a ratio below one
+have more named ways to fail than published ways to defend, and they are the
+channels through which an agent accepts third-party components.}
+\label{fig:channelgap}
+\end{figure}
 
 \textbf{Supply-chain is the clearest gap.} It has six named mechanisms and two
 named defenses. Cross-modal and tool-metadata are close behind at under one

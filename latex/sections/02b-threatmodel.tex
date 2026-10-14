@@ -1,0 +1,63 @@
+\section{Threat model and system model}
+\label{sec:threat}
+
+Security systematizations state a threat model before they taxonomize, and this
+one spans two literatures with different assumptions, so we state both and say
+where each applies.
+
+\subsection{System model}
+
+The subject is an LLM agent: a model that, within one task, repeatedly reads
+content it did not author, decides, and acts. Reading happens through the nine
+channels of Section~\ref{sec:taxonomy}. Acting means emitting text to a user or
+calling a tool whose effects leave the system.
+
+Three properties make this different from a single-turn chatbot and are what
+the taxonomy keys on. Content from many sources shares one context window and
+arrives with no trustworthy provenance marking. The agent's own output can
+become another agent's input, or its own input in a later turn through memory.
+And an action taken on corrupted context is not recoverable by correcting the
+context afterwards.
+
+\subsection{Adversarial threat model}
+
+The adversary controls the content of at least one channel but not the model
+weights, the decoding procedure, or the agent's code. This is the standing
+assumption of the security track and it covers the realistic deployment cases:
+writing a document a retriever may fetch, publishing a tool whose description
+the agent reads, posting content a browsing agent visits, or contributing a
+skill file or package the agent loads.
+
+The adversary knows the defense. They may adapt the payload to it, which is why
+average-case evaluation does not transfer. They do not need to know the user's
+specific query; the attacks we run are query-agnostic by construction.
+
+We exclude three things. Training-time poisoning and weight-level attacks do
+not travel through the context window. A malicious user attacking their own
+agent is out of scope, because no third-party content is involved and the
+trust boundary we study does not exist. Denial of service through resource
+exhaustion is in the taxonomy as \meth{resource-abuse} but has no entries, and
+we make no claims about it.
+
+\subsection{Incidental threat model}
+
+There is no adversary. Content is wrong through ordinary pipeline behaviour: a
+retrieved document is stale, a passage is irrelevant but topically close,
+important text sits in the middle of a long input, or a retrieved fact
+contradicts what the model learned in training. The machine learning track
+assumes this model, evaluates on average-case benchmarks, and is right to,
+because nothing is adapting.
+
+\subsection{Why both, and what connects them}
+
+The two models differ in one assumption, adaptivity, and share everything else:
+the channel, the position in the context window, and the downstream
+consequence. A defense is validated against one of them, and
+Section~\ref{sec:taxonomy} shows that 97\% of published defenses are validated
+against exactly one.
+
+\textbf{The question this paper puts to the field is whether that single
+validation transfers.} It is not an unreasonable thing to assume. A method that
+makes a model robust to a stale document is addressing the same surface an
+attacker writes to. The assumption has simply never been tested at scale, and
+Section~\ref{sec:experiments} tests it.

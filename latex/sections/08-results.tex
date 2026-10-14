@@ -58,6 +58,20 @@ the attacker's framing 0.0\% of the time at every dose. CK-PLUG adopts it
 78.2\% of the time with a single poisoned passage out of ten, and 99.0\% at
 full dose. The defense does not fail to stop the attack. It carries it.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.82\textwidth]{figures/fig4_dose_response}
+\caption{Every retrieval-cell defense against corpus poisoning, measured as the
+defended arm minus its own undefended arm in the same run. Zero means the
+defense changed nothing. Filled markers are resolvable at $p < .05$ by Fisher's
+exact test, hollow are not. Three patterns are visible. SpARE and ParamMute
+start above zero and cross it, which is the sign flip. CK-PLUG and SCR sit
+below zero almost everywhere, costing accuracy before the attack arrives. ACD
+is the only line that rises, and Table~\ref{tab:acd} shows that rise does not
+survive a change of payload.}
+\label{fig:dose}
+\end{figure*}
+
 \subsection{The scope condition}
 
 The rule is not that suppressing parametric memory is always harmful. We can
