@@ -305,25 +305,47 @@ def fig_citation_network():
     G.remove_nodes_from([n for n, d in G.degree() if d == 0])
 
     COLORS = {"Security": CAT[0], "ML/AI": CAT[1], "Both": CAT[3]}
-    pos = nx.spring_layout(G, seed=11, k=2.6 / max(G.number_of_nodes() ** 0.5, .1),
-                           iterations=90)
+    # Spread the clusters. The default k packs 900 nodes into a hairball where
+    # the band of cross-track edges, which is the whole point of the figure,
+    # disappears into the overlap. A larger k plus more iterations separates
+    # the two communities without changing the topology.
+    # Lay out the giant component on its own. A small disconnected island is
+    # flung to the far edge by a spring embedding and takes half the canvas
+    # with it, so it is placed by hand below the mass instead.
+    comps = sorted(nx.connected_components(G), key=len, reverse=True)
+    giant = G.subgraph(comps[0])
+    pos = nx.spring_layout(giant, seed=11,
+                           k=7.0 / max(giant.number_of_nodes() ** 0.5, .1),
+                           iterations=400)
+    xs = [p[0] for p in pos.values()]; ys = [p[1] for p in pos.values()]
+    island = [n for c in comps[1:] for n in c]
+    for i, n in enumerate(island):
+        pos[n] = ((min(xs) + max(xs)) / 2 + (i - (len(island) - 1) / 2) * 0.035,
+                  min(ys) - 0.09)
 
     same, cross = [], []
     for u, v in G.edges():
         (cross if track.get(u) != track.get(v) else same).append((pos[u], pos[v]))
 
-    fig, ax = plt.subplots(figsize=(FULL * 0.62, 3.5), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(FULL * 0.56, 4.05))
+    fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.11)
     from matplotlib.collections import LineCollection
-    ax.add_collection(LineCollection(same, colors="#dcdbd6", linewidths=0.22,
+    # Cross-track edges concentrate between the clusters. Drawn solid they
+    # merge into a black mass that reads as "heavily connected", which is the
+    # opposite of the finding. Thin and semi-transparent, they read as
+    # countable strands and the density still shows.
+    ax.add_collection(LineCollection(same, colors="#e2e1dc", linewidths=0.18,
                                      zorder=1))
-    ax.add_collection(LineCollection(cross, colors="#111111", linewidths=0.55,
-                                     alpha=0.85, zorder=3))
+    ax.add_collection(LineCollection(cross, colors="#1a1a1a", linewidths=0.3,
+                                     alpha=0.45, zorder=3))
     for tr, col in COLORS.items():
         ns = [n for n in G if track.get(n) == tr]
         if not ns:
             continue
-        ax.scatter([pos[n][0] for n in ns], [pos[n][1] for n in ns], s=5.5,
-                   c=col, linewidths=0, zorder=4,
+        # a thin surface ring keeps overlapping markers readable as separate
+        # dots rather than a solid mass
+        ax.scatter([pos[n][0] for n in ns], [pos[n][1] for n in ns], s=7,
+                   c=col, linewidths=0.25, edgecolors="white", zorder=4,
                    label=f"{tr} ({len(ns)})")
     ax.scatter([], [], s=0, label=" ")
     from matplotlib.lines import Line2D
@@ -332,11 +354,20 @@ def fig_citation_network():
           Line2D([], [], color="#111111", lw=1.4)]
     l += [f"same-track citation ({len(same)})",
           f"cross-track citation ({len(cross)})"]
-    ax.legend(h, l, frameon=False, fontsize=6, loc="lower center",
-              bbox_to_anchor=(0.5, -0.13), ncol=3, columnspacing=1.0,
-              handlelength=1.4, handletextpad=0.5)
+    ax.legend(h, l, frameon=False, fontsize=6, loc="upper center",
+              bbox_to_anchor=(0.5, 0.045), ncol=3, columnspacing=1.0,
+              handlelength=1.4, handletextpad=0.5,
+              bbox_transform=fig.transFigure)
+    if island:
+        cx = sum(pos[n][0] for n in island) / len(island)
+        cy = sum(pos[n][1] for n in island) / len(island)
+        ax.annotate("deep-research agents:\ncite neither literature",
+                    (cx, cy), textcoords="offset points", xytext=(13, 0),
+                    fontsize=5.6, color=INK2, ha="left", va="center",
+                    arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.5,
+                                    shrinkA=1, shrinkB=3))
     ax.set_axis_off()
-    ax.margins(0.02)
+    ax.margins(0.04)
     print(f"    network: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges, "
           f"{len(cross)} cross-track ({100*len(cross)/G.number_of_edges():.1f}%)")
     save(fig, "fig5_citation_network")
