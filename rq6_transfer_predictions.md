@@ -16,11 +16,56 @@ literature. What follows is the part that produces new claims.
 
 ## Headline result
 
-**RQ6's intervention-point finding is predictive, and the first prediction
-tested holds.** Every mechanism with no confirmed defense receives a ranked
-transfer hypothesis; the highest-priority testable one was run, and RobustRAG —
-never evaluated against BadRAG — neutralizes BadRAG's denial-of-service
-payload almost completely.
+*Rewritten 2026-10-15. The previous headline described a single validated
+prediction (RobustRAG vs BadRAG, 2026-09-10) and was still being served by the
+MCP server and the dashboard months after the campaign outgrew it. The
+RobustRAG result is unchanged and is now one row among many; it is kept in full
+further down this document.*
+
+**The transfer program has executed 81 (defense, attack) pairs across 18
+defense implementations and 156,308 scored episodes, all on the authors' own
+released code and weights. Its central result is a design rule with a measured
+scope condition and a counterexample.**
+
+> **A defense that works by shifting trust from the model's parameters toward
+> the retrieved text is correct when the text is merely stale and dangerous
+> when an attacker owns it.**
+
+Pairs are not chosen by familiarity. The RQ1 taxonomy chooses them: a defense
+and an attack that occupy the same cell (same channel, same consequence) ought
+to interact, so any such pair that nobody has run is a prediction the taxonomy
+makes. **17 of the 19 retrieval-cell pairs, counted at registry-name level, are
+absent from the 349 pairs the literature reports.**
+
+### What the campaign found
+
+| | result |
+|---|---|
+| **The family fails** | ParamMute (+13.5 pp excess damage), CK-PLUG (+5.4), SpARE (sign flip, +14.2 clean to −10.2 at saturation, both ends resolvable). All were validated against the incidental threat model only. |
+| **The scope condition** | Suppressing parametric memory hurts **only where that memory held the right answer**. Against BadRAG denial-of-service, where the attack works by inducing refusal, ParamMute is strongly protective: refusal 52.4 % → 0.2 %, accuracy +30.4 pp. One mechanism, two signs, selected by whether the memory was right. |
+| **The counterexample** | ACD both reads a clean document (+53.5 pp over no-retrieval) and resists a poisoned one (+9.2 pp over undefended at saturation, p<0.0001). The trade-off is a design error, not a law. |
+| **But payload class decides** | The same ACD falls **below** the no-retrieval floor against fluent false evidence (−4.0 pp, p=0.0499). Its entropy rule keys on incoherence, and a fluent lie lowers uncertainty rather than raising it. See `acd_false_evidence_result.md`. |
+| **Two payloads, three outcomes** | ParamMute is harmful against both payload classes, CK-PLUG against one, COIECD against neither. "Trusts the context" is too coarse a description of the failure. See `false_evidence_result.md`. |
+| **The cheaper attack is stronger** | False evidence needs no gradient access and no surrogate retriever. It damages an undefended model about twice as hard as optimised corpus poisoning at every dose. |
+| **Controls that changed conclusions** | A no-retrieval arm showed DyPRAG's perfect flatness to be inattention, not immunity. An abstention axis showed COIECD converting 32.1 % of confident wrong answers into refusals while scoring inert on accuracy. A model control changed an effect's size, its existence, and once its sign. |
+| **Principle vs implementation** | Two implementations of one published aggregation principle, in one codebase, disagree by 29.7 points at 9/10 poison, both ends resolvable. |
+
+### Status of the original intervention-point finding
+
+The nine case studies in `rq6_case_studies.md` remain the citable statement
+that transfer tracks pipeline position. That finding is **partly confounded**
+and we say so: the ingestion defenses that generalize are also the ones whose
+harnesses model a text-classification victim, while the execution defenses that
+could not be evaluated are the agent-shaped ones. Running all three
+intervention points inside one agent harness is what resolves it, and that work
+is in progress (`agentdojo_harness/`).
+
+### Regenerating
+
+```bash
+python3 scripts/pair_tally.py                  # pair counts, who reports what
+python3 scripts/false_evidence_comparison.py   # the two payload classes
+```
 
 ## Transfer prediction
 

@@ -1,0 +1,111 @@
+{
+ "generated": "2026-10-02",
+ "dataset": "NaturalQuestionsShort_kc.jsonl",
+ "n": 800,
+ "schema": "base",
+ "alpha": 0.0,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "top_k": 1,
+ "attack": "false_evidence",
+ "payload_fingerprint": "3649862167a5310c",
+ "payload_sample": "According to IMDB, Season 4 of Chicago Fire (2014-2015) consists of 22 episodes.",
+ "mdr_pp_at_n": 7.0,
+ "results": [
+  {
+   "n": 800,
+   "ctx_acc": 60.25,
+   "pm_acc": 20.37,
+   "mr": 25.27,
+   "em": 0.0,
+   "ci_low": 56.8,
+   "ci_high": 63.6,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "base_rag"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 23.0,
+   "pm_acc": 62.25,
+   "mr": 73.02,
+   "em": 0.0,
+   "ci_low": 20.2,
+   "ci_high": 26.0,
+   "condition": "false evidence, 10% of context",
+   "frac": 0.1,
+   "arm": "base_rag"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 15.12,
+   "pm_acc": 65.87,
+   "mr": 81.33,
+   "em": 0.0,
+   "ci_low": 12.8,
+   "ci_high": 17.8,
+   "condition": "false evidence, 50% of context",
+   "frac": 0.5,
+   "arm": "base_rag"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 7.25,
+   "pm_acc": 71.5,
+   "mr": 90.79,
+   "em": 0.0,
+   "ci_low": 5.7,
+   "ci_high": 9.3,
+   "condition": "false evidence, 100% of context",
+   "frac": 1.0,
+   "arm": "base_rag"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 55.87,
+   "pm_acc": 9.87,
+   "mr": 15.02,
+   "em": 0.0,
+   "ci_low": 52.4,
+   "ci_high": 59.3,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "ck"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 18.5,
+   "pm_acc": 36.5,
+   "mr": 66.36,
+   "em": 0.0,
+   "ci_low": 16.0,
+   "ci_high": 21.3,
+   "condition": "false evidence, 10% of context",
+   "frac": 0.1,
+   "arm": "ck"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 10.87,
+   "pm_acc": 35.37,
+   "mr": 76.49,
+   "em": 0.0,
+   "ci_low": 8.9,
+   "ci_high": 13.2,
+   "condition": "false evidence, 50% of context",
+   "frac": 0.5,
+   "arm": "ck"
+  },
+  {
+   "n": 800,
+   "ctx_acc": 2.5,
+   "pm_acc": 42.12,
+   "mr": 94.4,
+   "em": 0.0,
+   "ci_low": 1.6,
+   "ci_high": 3.8,
+   "condition": "false evidence, 100% of context",
+   "frac": 1.0,
+   "arm": "ck"
+  }
+ ]
+}
