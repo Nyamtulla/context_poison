@@ -28,8 +28,12 @@ built for accidental context failure often do not survive deliberate attack,
 and the failure is systematic. The mechanism that repairs accidental
 corruption, which is to shift trust from the model's parameters toward the
 retrieved text, is the mechanism an attacker who owns that text exploits. The
-result carries a measured scope condition and one clear counterexample, so the
-trade-off is a design error and not a law.
+result carries a measured scope condition and one counterexample, so the
+trade-off is a design error and not a law. That counterexample is itself
+bounded: the one defense that resists an optimized adversarial passage falls
+below a no-retrieval baseline against a fluent sentence asserting a plausible
+falsehood. No defense we tested resists both payload classes, and the cheaper
+payload is the more damaging one.
 
 Finally we report three controls the literature omits, each of which overturned
 a conclusion we would otherwise have published: a no-retrieval baseline, an
