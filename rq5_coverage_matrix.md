@@ -1,5 +1,23 @@
 # RQ5 — Pollution Mechanism × Defense Coverage Matrix
 
+> ## Corrected 2026-10-14 — reverse-scan pass 3 folded in
+>
+> | | published | **current** |
+> |---|---:|---:|
+> | confirmed pairs | 332 | **349** |
+> | mechanisms with ≥1 tested defense | 106/235 = 45.1 % | **118/235 = 50.2 %** |
+> | mechanisms with zero defenses | 129 = 54.9 % | **117 = 49.8 %** |
+>
+> The published figures predate **reverse-scan pass 3** (2026-09-28), which
+> added 17 pairs and covered **12 mechanisms that previously had no tested
+> defense at all**. `scripts/pair_tally.py` had folded pass 3 in;
+> `src/registry_source.py`, which feeds the MCP server and the dashboard, had
+> not. The two disagreed for weeks. Fixed 2026-10-14 by adding pass 3 to
+> `registry_source.py`, so one loader now serves every consumer.
+>
+> **The claim "more than half of named mechanisms have no defense" no longer
+> holds.** It is 49.8 %, just under half. Anything quoting 54.9 % is stale.
+>
 > ## Regenerated 2026-10-13 — corpus 1,026 → 984
 >
 > | | before | after |

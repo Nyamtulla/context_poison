@@ -36,8 +36,8 @@ The split between the two communities is real, and we can measure it. Only
 about one paper in ten cites the other side. We found and listed 529 defenses,
 and only 14 of them were ever tested against both kinds of problem. The
 attention is also uneven. There are about 4.6 defenses for each accidental
-problem, but only 1.4 defenses for each named attack. More than half of all
-known problems have no defense that was ever tested against them.
+problem, but only 1.4 defenses for each named attack. Just under half of all known
+problems, 117 of 235, have no defense that was ever tested against them.
 
 We found one more thing that surprised us. We collected 349 cases where
 somebody ran a defense against an attack and reported the result. When the
@@ -138,8 +138,10 @@ in the repository.
   the pairs held by the 13 broadly-tested defenses come from attack papers
   rather than the defenses' own evaluations, so that breadth measures which
   defenses attracted attackers, not which were evaluated widely.
-- **54.9 % of named mechanisms (129 of 235) have zero defenses evaluated
-  against them.**
+- **49.8 % of named mechanisms (117 of 235) have zero defenses evaluated
+  against them.** This was 54.9 % until reverse-scan pass 3 was folded into
+  the shared loader on 2026-10-14; pass 3 covered 12 previously-uncovered
+  mechanisms.
 - **Scanning the attack papers rather than the defense papers recovers pairs the
   defense-side scan missed**, which indicates the coverage gap is partly a
   reporting-direction artifact and partly real.

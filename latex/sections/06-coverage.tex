@@ -14,28 +14,30 @@ Reading only defense papers biases the matrix, because a defense paper chooses
 which attacks to run. We therefore added a reverse pass over the \emph{attack}
 papers, which report a defense losing in a way no defense paper will. The
 reverse scan covered the full mechanism registry and recovered 54 pairs that
-the defense-side scan had missed. The final matrix holds \textbf{332 confirmed
-pairs}.\footnote{Three denominators appear in this paper and we keep them
+the defense-side scan had missed, 12 of them against mechanisms that had no
+tested defense at all. The final matrix holds \textbf{\NPairsComposite{}
+confirmed pairs}.\footnote{Three denominators appear in this paper and we keep them
 distinct. 332 is the full matrix, including the supplementary passes and the
 reverse scan. 233 is the base matrix from defense-paper reads alone. 232 is the
 subset for which we could also determine the reporting side and the reported
 outcome, which is the base used in Section~\ref{sec:whoran} and for the
 same-track rate in Section~\ref{sec:literatures}. All three are produced by
-one script from the registries.}
+one script from the registries, and \NPairsComposite{} supersedes the 332
+published in RQ5, which predates reverse-scan pass 3.}
 
 \subsection{The matrix is sparse, and sparse in a specific way}
 
 \begin{itemize}
-\item \textbf{213 of 529 defenses (40.3\%)} have at least one confirmed test
-  against a named mechanism. The other 60\% were either not evaluated against
-  anything our registry recognizes as a distinct named technique, or not
-  evaluated at all.
-\item \textbf{129 of 235 mechanisms (54.9\%) have zero defenses} evaluated
-  against them.
-\item \textbf{215 defenses appear in at least one pair, and 145 of them
-  (67.4\%) appear in exactly one.} Thirty-four appear in two, 23 in three,
-  and 13 in four or more. The most cross-tested defense appears in eight
-  pairs.
+\item \textbf{\NDefMatchedFull{} of \NDefenses{} defenses
+  (\PctDefMatched{}\%)} have at least one confirmed test against a named
+  mechanism. The rest were either not evaluated against anything our registry
+  recognizes as a distinct named technique, or not evaluated at all.
+\item \textbf{\NMechUncovered{} of \NMechanismsBench{} mechanisms
+  (\PctMechUncovered{}\%) have zero defenses} evaluated against them.
+\item \textbf{\NDefMatchedFull{} defenses appear in at least one pair, and
+  \NDefOneFull{} of them (\PctDefOneFull{}\%) appear in exactly one.}
+  Thirty-four appear in two, 23 in three, and \NDefFourPlus{} in four or
+  more. The most cross-tested defense appears in \NDefCeiling{} pairs.
 \end{itemize}
 
 The third point needs care, because the answer depends on which evidence you
@@ -43,14 +45,15 @@ count, and the difference is itself a finding.
 
 \textbf{Counting only what defense papers report, there is essentially no
 generalist defense.} In the base matrix, built from defense-paper reads alone,
-163 of 197 matched defenses (82.7\%) were tested against exactly one mechanism,
+\NDefOneBase{} of \NDefMatchedBase{} matched defenses (\PctDefOneBase{}\%)
+were tested against exactly one mechanism,
 and cross-mechanism testing tops out at three mechanisms, twice, in a corpus of
 984 papers.
 
 \textbf{Adding the attack-paper scan raises the ceiling, but changes what
 breadth means.} On the full pair set the most-tested defense appears against
-eight distinct named attacks, and 13 defenses appear against four or more. Of
-the pairs belonging to those 13, 46\% were contributed by attack papers rather
+\NDefCeiling{} distinct named attacks, and \NDefFourPlus{} defenses appear
+against four or more. Of the pairs belonging to those \NDefFourPlus{}, 46\% were contributed by attack papers rather
 than by the defenses' own evaluations. For the single broadest case, SecAlign,
 seven of its eight pairs come from attack papers. Its breadth is not evidence
 that it was evaluated widely by its authors. It is evidence that attackers
