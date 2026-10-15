@@ -1,14 +1,14 @@
 {
  "generated": "2026-09-30",
  "purpose": "Answer \"defends what?\" for every defense with no confirmed pair.",
- "n_defenses": 320,
+ "n_defenses": 313,
  "classification_counts": {
-  "non_adversarial": 126,
-  "self_constructed": 22,
-  "names_registry_attack": 99,
-  "threat_named_only": 41,
-  "names_benchmark": 11,
-  "unclassified": 21
+  "non_adversarial": 123,
+  "self_constructed": 23,
+  "names_registry_attack": 100,
+  "threat_named_only": 46,
+  "names_benchmark": 10,
+  "unclassified": 11
  },
  "n_missed_pair_candidates": 125,
  "caveat": "names_registry_attack is a CANDIDATE list, not coverage. The name appearing in a defense paper's text does not mean the defense was run against that attack - it may be related work or motivation. Each one needs the same adjudication the reverse scan used before it can become a pair. taxonomy_cell_peers is weaker still: the same (channel, consequence) cell is not the same threat.",
@@ -120,7 +120,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -203,7 +203,7 @@
     "Indirect Prompt Injection (IPI)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -290,7 +290,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -398,7 +398,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -479,7 +479,7 @@
     "LLMail",
     "LLMail-Inject"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -514,7 +514,7 @@
     "AgentDojo",
     "AgentDyn"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -601,7 +601,7 @@
    "names_benchmarks": [
     "InjecAgent"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -685,7 +685,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -718,7 +718,7 @@
     "context poisoning (self-induced, non-adversarial)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -811,7 +811,7 @@
     "context poisoning (self-induced, non-adversarial)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -890,7 +890,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -975,7 +975,7 @@
     "Indirect Prompt Injection (IPI)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -1213,7 +1213,7 @@
    "names_benchmarks": [
     "AgentDojo"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -1583,7 +1583,7 @@
    "names_benchmarks": [
     "OpenPromptInjection"
    ],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -1605,9 +1605,11 @@
    "intervention_point": "ingestion",
    "channel": "RAG",
    "consequence": "silent-corruption",
-   "classification": "non_adversarial",
+   "classification": "names_registry_attack",
    "defends_against": [],
-   "names_registry_attacks": [],
+   "names_registry_attacks": [
+    "knowledge conflict (contextual vs parametric)"
+   ],
    "names_benchmarks": [],
    "taxonomy_cell_peers": 6,
    "taxonomy_cell_peer_examples": [
@@ -1713,7 +1715,7 @@
    "names_benchmarks": [
     "InjecAgent"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -1892,7 +1894,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2118,7 +2120,7 @@
     "memory pollution (agent long-term memory)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2153,7 +2155,7 @@
     "AgentDojo",
     "AgentHarm"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2163,36 +2165,6 @@
     "IterInject",
     "LogJack",
     "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI"
-   ]
-  },
-  {
-   "defense": "FS-Researcher (file-system-based dual-agent: Context Builder + Report Writer)",
-   "paper_id": "9f4a9187b4d4238814ecd25ab3b7597b58d35309",
-   "paper_title": "FS-Researcher: Test-Time Scaling for Long-Horizon Research Tasks with File-System-Based Agents",
-   "year": 2026,
-   "track": "ML/AI",
-   "validated_against": "incidental",
-   "intervention_point": "ingestion",
-   "channel": "direct-input",
-   "consequence": "reasoning-corruption",
-   "classification": "names_registry_attack",
-   "defends_against": [
-    "prompt injection"
-   ],
-   "names_registry_attacks": [
-    "Overflow"
-   ],
-   "names_benchmarks": [],
-   "taxonomy_cell_peers": 28,
-   "taxonomy_cell_peer_examples": [
-    "lost in the middle",
-    "distraction by irrelevant context",
-    "UNNAMED: context-length-induced degradation independent of retrieval failure",
-    "context drift",
-    "UNNAMED: getting lost in multi-turn conversation (premature-answer unreliability under underspecification)",
-    "classifier context rot",
-    "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
-    "Attention Latch"
    ]
   },
   {
@@ -2305,11 +2277,13 @@
    "intervention_point": "none",
    "channel": "tool-output",
    "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
+   "classification": "threat_named_only",
+   "defends_against": [
+    "prompt injection"
+   ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2420,7 +2394,7 @@
    "names_benchmarks": [
     "AgentDojo"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2838,7 +2812,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2868,7 +2842,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2890,11 +2864,16 @@
    "intervention_point": "ingestion",
    "channel": "tool-output",
    "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
-   "names_registry_attacks": [],
+   "classification": "names_registry_attack",
+   "defends_against": [
+    "indirect prompt injection",
+    "prompt injection"
+   ],
+   "names_registry_attacks": [
+    "Indirect Prompt Injection (IPI)"
+   ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2930,7 +2909,7 @@
    "names_benchmarks": [
     "StrongREJECT"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -2953,7 +2932,9 @@
    "channel": "RAG",
    "consequence": "silent-corruption",
    "classification": "non_adversarial",
-   "defends_against": [],
+   "defends_against": [
+    "long-context degradation"
+   ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
    "taxonomy_cell_peers": 6,
@@ -3008,7 +2989,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -3070,7 +3051,7 @@
     "Indirect Prompt Injection (IPI)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -3301,7 +3282,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -3392,7 +3373,7 @@
    "names_benchmarks": [
     "AgentDojo"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -3558,7 +3539,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -3797,7 +3778,7 @@
     "InjecAgent",
     "WASP"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -3976,7 +3957,7 @@
     "Indirect Prompt Injection (IPI)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -4031,7 +4012,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -4395,11 +4376,13 @@
    "intervention_point": "reasoning",
    "channel": "tool-output",
    "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
+   "classification": "threat_named_only",
+   "defends_against": [
+    "prompt injection"
+   ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -4664,7 +4647,7 @@
     "Indirect Prompt Injection (IPI)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -4693,7 +4676,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -4807,7 +4790,7 @@
     "Indirect Prompt Injection (IPI)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -4913,7 +4896,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -4939,7 +4922,7 @@
    "defends_against": [],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -5063,11 +5046,13 @@
    "intervention_point": "execution",
    "channel": "tool-output",
    "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
+   "classification": "threat_named_only",
+   "defends_against": [
+    "prompt injection"
+   ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -5206,7 +5191,7 @@
     "JailbreakBench",
     "StrongREJECT"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -5241,7 +5226,7 @@
     "JailbreakBench",
     "OpenPromptInjection"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -5298,7 +5283,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -5391,7 +5376,7 @@
    "names_benchmarks": [
     "BIPIA"
    ],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -5677,33 +5662,6 @@
    ]
   },
   {
-   "defense": "RhinoInsight",
-   "paper_id": "ef67e45338e8ed20907ff2eaae7a56ec38bf287d",
-   "paper_title": "RhinoInsight: Improving Deep Research through Control Mechanisms for Model Behavior and Context",
-   "year": 2025,
-   "track": "ML/AI",
-   "validated_against": "incidental",
-   "intervention_point": "reasoning",
-   "channel": "tool-output",
-   "consequence": "reasoning-corruption",
-   "classification": "names_registry_attack",
-   "defends_against": [
-    "context degradation",
-    "hallucination"
-   ],
-   "names_registry_attacks": [
-    "context rot",
-    "context rot (agentic/long-horizon search)"
-   ],
-   "names_benchmarks": [],
-   "taxonomy_cell_peers": 3,
-   "taxonomy_cell_peer_examples": [
-    "context rot (agentic/long-horizon search)",
-    "plan anchor",
-    "observation over-ingestion"
-   ]
-  },
-  {
    "defense": "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
    "paper_id": "1f517e201e63cb9a4cd87c289ed41f0cd367d42c",
    "paper_title": "Brain-Prompt Injection: A Route-Safety Audit for BCI-LLM Agents",
@@ -5854,11 +5812,13 @@
    "intervention_point": "ingestion",
    "channel": "tool-output",
    "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
+   "classification": "self_constructed",
+   "defends_against": [
+    "prompt injection"
+   ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -6245,11 +6205,14 @@
    "intervention_point": "reasoning",
    "channel": "tool-output",
    "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
+   "classification": "threat_named_only",
+   "defends_against": [
+    "privilege escalation",
+    "prompt injection"
+   ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -6312,7 +6275,7 @@
     "ASB",
     "AgentDojo"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -6352,32 +6315,6 @@
    ]
   },
   {
-   "defense": "SecurePrompt",
-   "paper_id": "3f47521e7f448d514a02d341f4cc5d71341cc884",
-   "paper_title": "SecurePrompt \u2013 Detecting and Mitigating Prompt Attacks",
-   "year": 2025,
-   "track": "Security",
-   "validated_against": "adversarial",
-   "intervention_point": "ingestion",
-   "channel": "tool-output",
-   "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
-   "names_registry_attacks": [],
-   "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
-   "taxonomy_cell_peer_examples": [
-    "Indirect Prompt Injection (IPI)",
-    "AgentVigil",
-    "UNNAMED: HTML accessibility-tree universal adversarial trigger injection (TWUI)",
-    "AdapTools",
-    "MUZZLE",
-    "IterInject",
-    "LogJack",
-    "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI"
-   ]
-  },
-  {
    "defense": "SecureRag",
    "paper_id": "c157f40ed322da549b9fe31de69b4fb81428d9ce",
    "paper_title": "SecureRag: Preventing Sensitive Information Leakage In Rag Pipelines",
@@ -6387,8 +6324,10 @@
    "intervention_point": "ingestion",
    "channel": "RAG",
    "consequence": "data-exfiltration",
-   "classification": "unclassified",
-   "defends_against": [],
+   "classification": "threat_named_only",
+   "defends_against": [
+    "prompt injection"
+   ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
    "taxonomy_cell_peers": 4,
@@ -6442,7 +6381,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -6500,11 +6439,13 @@
    "consequence": "goal-hijack",
    "classification": "threat_named_only",
    "defends_against": [
-    "hallucination"
+    "adversarial perturbation",
+    "hallucination",
+    "prompt injection"
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -6555,7 +6496,7 @@
    "defends_against": [],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -6672,30 +6613,6 @@
     "classifier context rot",
     "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
     "Attention Latch"
-   ]
-  },
-  {
-   "defense": "Smart Indexing (metadata-aware chunking for legal RAG)",
-   "paper_id": "1bab99ecc468fa9d84f06e405eeacaf9bf86e76f",
-   "paper_title": "Mitigating Context Loss in Legal RAG: A Metadata-Aware Chunking Strategy for Hierarchical Indian Statutes",
-   "year": 2026,
-   "track": "ML/AI",
-   "validated_against": "incidental",
-   "intervention_point": "ingestion",
-   "channel": "RAG",
-   "consequence": "silent-corruption",
-   "classification": "non_adversarial",
-   "defends_against": [],
-   "names_registry_attacks": [],
-   "names_benchmarks": [],
-   "taxonomy_cell_peers": 6,
-   "taxonomy_cell_peer_examples": [
-    "UNNAMED: gradient-based corpus poisoning (adversarial passage injection)",
-    "AGGD (Approximate Greedy Gradient Descent)",
-    "Indirect Data Poisoning (Distributed Denial of Science)",
-    "context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization)",
-    "mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3)",
-    "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs"
    ]
   },
   {
@@ -6940,27 +6857,6 @@
    ]
   },
   {
-   "defense": "TARV (Trust-Aware Runtime Verification)",
-   "paper_id": "21e45f760e4f375bf0d68e41a4a9b71c46594b62",
-   "paper_title": "Trust-Aware Runtime Verification for Autonomous LLM Agent Systems",
-   "year": 2026,
-   "track": "ML/AI",
-   "validated_against": "incidental",
-   "intervention_point": "execution",
-   "channel": "tool-output",
-   "consequence": "reasoning-corruption",
-   "classification": "non_adversarial",
-   "defends_against": [],
-   "names_registry_attacks": [],
-   "names_benchmarks": [],
-   "taxonomy_cell_peers": 3,
-   "taxonomy_cell_peer_examples": [
-    "context rot (agentic/long-horizon search)",
-    "plan anchor",
-    "observation over-ingestion"
-   ]
-  },
-  {
    "defense": "TCR (Transparent Conflict Resolution)",
    "paper_id": "4c78b5e846a9de2f2fcfd854ad52641f1b2ced41",
    "paper_title": "Seeing through the Conflict: Transparent Knowledge Conflict Handling in Retrieval-Augmented Generation",
@@ -7078,7 +6974,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7114,7 +7010,7 @@
     "AgentDyn",
     "InjecAgent"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7337,7 +7233,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7347,33 +7243,6 @@
     "IterInject",
     "LogJack",
     "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI"
-   ]
-  },
-  {
-   "defense": "Trust-Aware Orchestration Architecture (hard gates + advisory filters + deterministic syntax recovery)",
-   "paper_id": "74bf328bb86c119e6282744c2badd79f5bb14f53",
-   "paper_title": "Trust-Aware Orchestration Architecture for LLM-Assisted Workflows in Multi-Tenant Enterprise Systems",
-   "year": 2026,
-   "track": "Security",
-   "validated_against": "both",
-   "intervention_point": "execution",
-   "channel": "tool-output",
-   "consequence": "data-exfiltration",
-   "classification": "names_benchmark",
-   "defends_against": [],
-   "names_registry_attacks": [],
-   "names_benchmarks": [
-    "AgentDojo"
-   ],
-   "taxonomy_cell_peers": 7,
-   "taxonomy_cell_peer_examples": [
-    "UNNAMED: privacy leakage attack chain (external-content deception + IPI + exfiltration)",
-    "UNNAMED: data flow-based injection attack for observed-data exfiltration ('Important message' template)",
-    "Silent Egress (implicit prompt injection via URL preview/metadata)",
-    "UNNAMED: ChatGPT memory/URL-exfiltration prompt injection bypass",
-    "EchoLeak (zero-click IPI, CVE-2025-32711)",
-    "VortexPIA",
-    "InjecAgent: Data Stealing injection"
    ]
   },
   {
@@ -7416,7 +7285,7 @@
    "defends_against": [],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -7476,7 +7345,7 @@
     "Indirect Prompt Injection (IPI)"
    ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7511,7 +7380,7 @@
     "BIPIA",
     "InjecAgent"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7561,11 +7430,16 @@
    "intervention_point": "none",
    "channel": "tool-output",
    "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
-   "names_registry_attacks": [],
+   "classification": "names_registry_attack",
+   "defends_against": [
+    "indirect prompt injection",
+    "prompt injection"
+   ],
+   "names_registry_attacks": [
+    "Indirect Prompt Injection (IPI)"
+   ],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7598,7 +7472,7 @@
    "names_benchmarks": [
     "BIPIA"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7648,7 +7522,7 @@
    "defends_against": [],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7754,11 +7628,13 @@
    "intervention_point": "ingestion",
    "channel": "tool-output",
    "consequence": "goal-hijack",
-   "classification": "unclassified",
-   "defends_against": [],
+   "classification": "threat_named_only",
+   "defends_against": [
+    "jailbreaking"
+   ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7805,7 +7681,7 @@
    "defends_against": [],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -7833,7 +7709,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -8041,11 +7917,12 @@
    "consequence": "goal-hijack",
    "classification": "threat_named_only",
    "defends_against": [
-    "hallucination"
+    "hallucination",
+    "prompt injection"
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -8055,33 +7932,6 @@
     "Salience Induction",
     "PIDP-Attack",
     "RefineRAG"
-   ]
-  },
-  {
-   "defense": "UNNAMED: self-healing memory architecture (cosine-similarity drift detection + cross-agent consensus repair)",
-   "paper_id": "88b9628dee420a94c63fe3f0ec6b01fdc930e8d8",
-   "paper_title": "Self-Healing Memory Architectures for Large Language Model-Based Multi-Agent Collaboration",
-   "year": 2026,
-   "track": "Security",
-   "validated_against": "adversarial",
-   "intervention_point": "ingestion",
-   "channel": "memory",
-   "consequence": "persistence-backdoor",
-   "classification": "threat_named_only",
-   "defends_against": [
-    "prompt injection"
-   ],
-   "names_registry_attacks": [],
-   "names_benchmarks": [],
-   "taxonomy_cell_peers": 7,
-   "taxonomy_cell_peer_examples": [
-    "AgentPoison",
-    "MemoryGraft",
-    "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
-    "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
-    "Cross-Session Stored Prompt Injection (XSPI)",
-    "ASB: Memory Poisoning",
-    "ASB: Plan-of-Thought (PoT) Backdoor"
    ]
   },
   {
@@ -8101,7 +7951,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -8267,7 +8117,7 @@
     "ASB",
     "InjecAgent"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -8349,7 +8199,7 @@
    ],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 11,
+   "taxonomy_cell_peers": 10,
    "taxonomy_cell_peer_examples": [
     "PoisonedRAG",
     "PANDORA (RAG Poisoning jailbreak)",
@@ -8472,7 +8322,7 @@
    "names_benchmarks": [
     "WASP"
    ],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
@@ -8517,7 +8367,7 @@
    "defends_against": [],
    "names_registry_attacks": [],
    "names_benchmarks": [],
-   "taxonomy_cell_peers": 61,
+   "taxonomy_cell_peers": 60,
    "taxonomy_cell_peer_examples": [
     "Indirect Prompt Injection (IPI)",
     "AgentVigil",
