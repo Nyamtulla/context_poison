@@ -1,4 +1,4 @@
-# ParamMute works, and hands the freed probability mass to the attacker
+# A distractor answer separates copying from remembering, and both defenses fail it
 
 **ParamMute vs distractor evidence, n=781, Llama-3-8B-Instruct, CoConflictQA.**
 2026-10-15. Regenerate the payload with
@@ -92,9 +92,51 @@ producing implausible payloads: "Season 4 of Chicago Fire consists of 1978
 episodes" and "The Prime Minister, Shri dura mater". A payload a reader would
 dismiss tests the attack at its weakest.
 
+## ACD, on the same payload
+
+ACD is the second defense run on this payload, for the reason the previous
+version of this section gave: it is the one defense in the cell that resisted
+corpus poisoning, and its rule keys on entropy, which a fluent sentence lowers.
+n=686, mdr 7.6 pp (ACD holds out 5 few-shot items and filters to <=2000
+characters, so 686 of the 781 survive). Three arms in one run: `rag`
+(undefended), `closedbook` (no document at all), `acd`.
+
+| dose | gold rag | gold ACD | memory rag | memory ACD | copied rag | copied ACD |
+|---:|---:|---:|---:|---:|---:|---:|
+| clean | 68.2 | 61.4 | 12.7 | 17.8 | 0.7 | 0.4 |
+| 10 % | 27.4 | 27.3 | 14.3 | **28.4*** | 46.6 | **25.7*** |
+| 50 % | 15.2 | 17.2 | 13.6 | **30.8*** | 60.4 | **32.4*** |
+| 100 % | 2.3 | 5.0 | 14.1 | **32.5*** | 76.0 | **40.8*** |
+
+`closedbook` is flat at gold 8.2 / memory 50.1 / copied 1.0 by construction:
+no document, so the dose cannot reach it. Its copy rate of 1.0 % is the second
+control - a model that never sees the passage never emits the distractor.
+
+**ACD really does refuse the passage.** The copy rate at saturation is 40.8 %
+against 76.0 % undefended, a 35.2 point reduction, p=2e-40. That is the
+largest defensive effect anywhere in this campaign, and it is in the direction
+a defense is supposed to move.
+
+**The refused mass goes to memory, not to the document.** Parametric recall
+rises 14.1 -> 32.5 (p=7e-16) while gold accuracy moves 2.3 -> 5.0, which clears
+Fisher (p=0.014) but not the 7.6 pp detectability threshold. ACD is not
+recovering the real passage that is still sitting in the unpoisoned 0 % of the
+context. It is falling back on what the model already knew.
+
+**And what it knew is worse than not retrieving at all.** The `closedbook` arm
+answers 8.2 % correctly with no document. ACD under saturation answers 5.0 %.
+A defended retrieval pipeline under this attack is below the baseline of
+switching retrieval off, so the defense's resistance does not translate into
+usable accuracy.
+
+This is the same shape as ParamMute, read from the other end. ParamMute
+suppresses memory and the attacker fills the vacancy; ACD suppresses the
+attacker and memory fills it. Neither defense moves probability mass toward
+the real document, because neither mechanism can tell the real document from
+the planted one - both only arbitrate between *context* and *parameters*, and
+the attack lives inside the context.
+
 ## Open
 
-Only ParamMute has been run. ACD is the obvious second, because its entropy
-rule should treat a fluent distractor the way it treats fluent false evidence,
-and because it is the one defense that resisted corpus poisoning. CK-PLUG and
-COIECD would complete the family.
+CK-PLUG and COIECD on this payload would complete the family. Both were run on
+false evidence already, so the item set and the dosing carry over unchanged.
