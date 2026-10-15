@@ -1,0 +1,1150 @@
+{
+ "generated": "2026-10-15",
+ "purpose": "RQ4 entries whose origin could not be established from the PDF by proximity matching in the document head. Each needs a human or full-text read to set origin and, where it is not the paper's own method, to decide whether it belongs in a census of PROPOSED defenses at all.",
+ "n": 127,
+ "entries": [
+  {
+   "defense_name": "Retrieve-then-Solve",
+   "row": 28,
+   "paper_id": "55e0300470bc99172e763f6fd6d3e7935f7d90e0",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Rot-aware rejection-sampling filter for long-horizon search",
+   "row": 32,
+   "paper_id": "579fa5e99937ddf437eda7ae00c3bdf62f32d1e9",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Digital forensic analysis framework for post-hoc IPI attack identification from agent execution logs",
+   "row": 61,
+   "paper_id": "9aa8ef5683aa8f81d3e0a826c076b45ff0f2d270",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Embedding-based semantic context analysis detector for IPI",
+   "row": 70,
+   "paper_id": "dfc9d7ad54c197d239cb473f3ae7a64ab50d0e90",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Hybrid multi-layered real-time PI detection framework",
+   "row": 94,
+   "paper_id": "dd8e3ff740ecd615b37dfb219d98e73a782f71d1",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)",
+   "row": 98,
+   "paper_id": "1a062f96584a9f5c14177ae49fe9bb3ae30b67c1",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Context-Aware Interception Framework for PI detection/mitigation",
+   "row": 109,
+   "paper_id": "440cdee84fc943b8919bcc0fb2308b0729b949ff",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "prompt-shield (Seven Cross-Domain Detection Techniques)",
+   "row": 110,
+   "paper_id": "5350cc42ab4830eb9d386e55f4cc44cc5361d71c",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "tool call or  context chunk that triggered it; it is the closest philosophical sibling to prompt-shield's regex- based detector family.  Concurrent benchmarks. NetInjectBench (Shayoni et al., a"
+  },
+  {
+   "defense_name": "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+   "row": 112,
+   "paper_id": "d54a0c6f9163bbb01306417b426be49fc30db65b",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Representation Engineering-based Probing for IPI detection",
+   "row": 113,
+   "paper_id": "b02c2db7580b600815a486dce0766df5e2987a7c",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Secure Prompt Engineering Patterns (SPEP)",
+   "row": 114,
+   "paper_id": "08e6079c73649ba405826d9ea5da1c18645fcdb6",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "the agent  requests explicit human or policy approval [38].  VI. METHODOLOGY  To evaluate Secure Prompt Engineering Patterns (SPEP) for  protecting cloud-integrated LLM agents, we ran co"
+  },
+  {
+   "defense_name": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
+   "row": 134,
+   "paper_id": "6424243734d098460777049e1f11705d1b5d85c8",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Policy Enforcement Point (PEP) for MCP tool-call boundary",
+   "row": 138,
+   "paper_id": "0f6b86356acc0b2a172096bda2193a6026986628",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Aura",
+   "row": 143,
+   "paper_id": "946e4e64ef25d3e3558c5dc54219fdad9d310d69",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "ents vulnerable to redirection and impersonation attacks such as Task Hijacking [26, 28]. Aura mitigates these risks by treating every agent as a cryptographic principal identified by"
+  },
+  {
+   "defense_name": "UNNAMED: Authorization framework for autonomous LLM agent threat mitigation",
+   "row": 150,
+   "paper_id": "156e8e6a9f11d3a3c9136dfc53211b9fb0d51699",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking",
+   "row": 151,
+   "paper_id": "9ed873be33d372154f71b6197e135fada8dd5e90",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "AgentRedGuard",
+   "row": 159,
+   "paper_id": "6678fff0a53a41ee884dc2eaed3cdfa1e0c522b2",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Fraud-detection-inspired trajectory-feature detector (XGBoost, 42-dim features)",
+   "row": 164,
+   "paper_id": "b6df37b96a984387de22ad1ecbf0a66a20ada084",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Unified Security Orchestration Framework (USOF)",
+   "row": 166,
+   "paper_id": "cce1b13eebe88e5051d329a95616c9df646fb08c",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Trust Context Separation for privileged AI agent systems",
+   "row": 167,
+   "paper_id": "dd42a440316cbae44b0ff68fe79914b07799a8ec",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Robustness via Referencing (instruction-referencing defense)",
+   "row": 183,
+   "paper_id": "712e08695ec807163afbbfd9f442ab027ccc29ac",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Multi-agent PI defense pipeline (Chain-of-Agents / Coordinator-based)",
+   "row": 188,
+   "paper_id": "f851714285c7a6bfb963da98d67f04df0eafbac9",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
+   "row": 196,
+   "paper_id": "9cfaa1cad9f1601bdd75d1de89dd56e18f24ff58",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Embedding-based traditional-ML classifiers for PI detection",
+   "row": 197,
+   "paper_id": "676249718345ab1e716d0a789084c085cab576c7",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)",
+   "row": 201,
+   "paper_id": "20d6d4a901b4b535e46e8a086c6a1f64e13948a4",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Four-layer guardrail system for offensive-security AI agents",
+   "row": 204,
+   "paper_id": "7b9f2477dce1435f698b4dfa605c1551e5b08a4e",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "SHIELD",
+   "row": 216,
+   "paper_id": "0ca1b5ccfc5cc3aeb869f45654dd7fa7fed3e188",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Three-tier compositional runtime-verification fabric (MonPoly/RTLola-based) for LLM-assisted ISR swarms",
+   "row": 219,
+   "paper_id": "arxiv:2607.23532",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Scientist Persona + Provenance Audit mitigations against indirect data poisoning",
+   "row": 220,
+   "paper_id": "arxiv:2607.10712",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: layered MCP descriptor defense (descriptor integrity verification + pre-context semantic vetting + runtime guardrails)",
+   "row": 233,
+   "paper_id": "08cec247465505fc4fb5ac6ab841c2b29a3c0477",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: policy-first Hybrid RAG architecture (pre-reranking access control + BM25/dense fusion via RRF + evidence-pack citation-grounded generation)",
+   "row": 256,
+   "paper_id": "141d242563718b4677b350f6a89fd28172de1845",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "TriShieldRAG",
+   "row": 270,
+   "paper_id": "e46294bf8ab1771768f957d5de69f7c4f7faffca",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "Fig. 1), so that beating any one stage does not defeat the whole. Table II summarizes how TriShieldRAG\u2019s  TABLE I WHY EACH SINGLE-STAGE DEFENSE IN [2] FAILS Defense Why it fails Perplexity fil"
+  },
+  {
+   "defense_name": "UNNAMED: two-plane OPA-based governance architecture for secure RAG (provenance + ABAC + policy-as-code across ingestion/indexing/retrieval/generation)",
+   "row": 271,
+   "paper_id": "b69be7f40b334e01df7527b41acc22b75b8bd727",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Skills Architecture (vs. MCP)",
+   "row": 308,
+   "paper_id": "08511b5e1be93152829e91f34907e586b787a129",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "s (TCR \u00b1 SD) with 95% Confidence Intervals Domain MCP baseline MCP + Truncation RAG + MCP Skills architecture \u0004 (Skills vs. Baseline) Code generation 0.61 \u00b1 0.07 0.67 \u00b1 0.06 0.70 \u00b1 0.07"
+  },
+  {
+   "defense_name": "TIVS-O agentic defense pipeline (Front-End Agent + Guard-Sanitizer + Policy Enforcer with semantic caching)",
+   "row": 322,
+   "paper_id": "f759d9e8f124b49d74005ed5d36c2202bddd0dd7",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "7 41.6% Improvement +67% \u221214.6% \u221259% \u221242% \u2014 Full vs. None The No Memory baseline achieves TIVS-O = \u22120.312 with mean ISR = 0.089, demonstrating that the multi-agent architecture provides"
+  },
+  {
+   "defense_name": "UNNAMED: ICL-based multi-LLM agent harmfulness-detection framework",
+   "row": 323,
+   "paper_id": "c30673d667b2875f2a7563c4755520d6961783f8",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: step-level fine-tuned industrial tool-call guardrail",
+   "row": 331,
+   "paper_id": "1ee66ccebe2e1c1d8f3f3ec74c957ea91dcd2e98",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: multi-agent privacy firewall (browser extension + MITM proxy + PII-detection pipeline)",
+   "row": 332,
+   "paper_id": "574941aa01920e483d384d89061d91ec797b6a37",
+   "track": "Security",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Agentic JWT (A-JWT)",
+   "row": 336,
+   "paper_id": "117cd1d71516457304f87903bac925e5d1222325",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "4]. Meanwhile, Gartner predicts that by 2028, 33% of enterprise applications will include Agentic AI [5]. Function calling (including API calling) driven by LLM instructions is the fundam"
+  },
+  {
+   "defense_name": "ARSM-Agent",
+   "row": 342,
+   "paper_id": "59f623857e6d89dc1d0f2ca4cb433f0017b768db",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "ambiguous",
+   "auto_evidence": "Verification Approach The goal of this experiment is to fully verify the  performance of ARSM-Agent algorithm for medical decision  making, verifying the following basic indicators: decisio"
+  },
+  {
+   "defense_name": "UNNAMED: off-the-shelf LLM behavioral overseer (non-verbal interaction-trace adversarial-intent detection)",
+   "row": 343,
+   "paper_id": "18f0a52f091f3863670ea503bfd320d4bcb902a3",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: WAB Wasm-sandboxed capability-based authority mechanism (allowlisted API with explicit grant/revocation)",
+   "row": 346,
+   "paper_id": "74aec0665c948c64072682901b7e95e7b71286e4",
+   "track": "Both",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Cross-Agent Multimodal Provenance-Aware Defense Framework (text/visual sanitizer agents + output validator + provenance ledger)",
+   "row": 347,
+   "paper_id": "5fd47f3c351347de692aa41262acd331635f5879",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Defe-Prompt",
+   "row": 353,
+   "paper_id": "0b708c14a822691047238cfc50dc15312ee8cef1",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "ambiguous",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: six composable agent design patterns (e.g. Action-Selector) for prompt-injection-resistant architecture",
+   "row": 367,
+   "paper_id": "a02a9e21fc116194570201d84dca7bb2ff85de71",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Hybrid monitor scaffold (Monitor Red Teaming / MRT framework)",
+   "row": 371,
+   "paper_id": "3ffb459ab34a6e766edbbdad32fe2c132ce47580",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "Omniscient Monitor Awareness 0.5 0.6 0.7 0.8 0.9 1.0 AUC Baseline Sequential Hierarchical Hybrid Unaware Aware Omniscient Monitor Awareness 0.5 0.6 0.7 0.8 0.9 1.0 AUC Baseline Sequentia"
+  },
+  {
+   "defense_name": "UNNAMED: DPO-based faithfulness-improvement training for GUI agents against environmental distraction",
+   "row": 374,
+   "paper_id": "ee745d4c5e9ff890731866f54b6b333bb3a4eb57",
+   "track": "Both",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "lambda-RLM",
+   "row": 380,
+   "paper_id": "50c89ae2d4c1fda4b1b425055b9617ebf4feab87",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: detailed external checklist restatement (vs generic self-check) for long-context skill-following",
+   "row": 389,
+   "paper_id": "arxiv:2607.17937",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "LLM+DPP (Principled Content Selection pipeline)",
+   "row": 409,
+   "paper_id": "arxiv:2505.21859",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "ble to process these longer inputs, Zheng et al. (2024) observe that a common use case of LLMs involves the sum- marization of dense information from collections *Work done during sum"
+  },
+  {
+   "defense_name": "KV-Fusion",
+   "row": 413,
+   "paper_id": "arxiv:2501.07523",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "ovements of 21.4%, 6.4%, and 6.6% over baseline models in shuffled settings. Furthermore, KV-Fusion mod- els exhibit robust and stable accuracies even with additional contexts compared to o"
+  },
+  {
+   "defense_name": "QUITO-X",
+   "row": 415,
+   "paper_id": "arxiv:2408.10497",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: hierarchical pixel-agent grid with spatial curriculum and selective oracle",
+   "row": 429,
+   "paper_id": "bd3cce65cef8540936d79a7a80c585c6e94005f8",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "ADE-PRF (ADE Predictive Reliability Framework)",
+   "row": 440,
+   "paper_id": "35812b4a3fba1211b4e6177c3c27c931d83859f0",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: pre-research and post-research verification defenses (verification-enhanced prompting + search-enabled verifier agent) for Deep Research agents",
+   "row": 458,
+   "paper_id": "22a9a24c625921d705506f798e91bb978d240ea2",
+   "track": "ML/AI",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Planning with Schemas (PwS)",
+   "row": 461,
+   "paper_id": "e8da028dac974c26a614f8322b67f86aaa879073",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "SearchSwarm (delegation-intelligence harness/training for main-agent-to-subagent task decomposition)",
+   "row": 534,
+   "paper_id": "25bb43f9e14b7d157a84736ee63352c6227766e0",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "ambiguous",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Constraint Pinning",
+   "row": 536,
+   "paper_id": "f9272681e0e35b2a8d82ae1c862a43d6d825274c",
+   "track": "ML/AI",
+   "validated_against": "both",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "bootstrap 95% CI [31, 43]), while control and Constraint Pinning remain at 0% ([0, 1.4]). Constraint survival predicts violation. The strongest mechanism evidence is whether the rule survive"
+  },
+  {
+   "defense_name": "Hierarchical Cognitive Caching (HCC), in ML-Master 2.0",
+   "row": 551,
+   "paper_id": "960fb2ff6bc20697a0ca16d65e9e95c5b57a118b",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "ambiguous",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "M2 (Dynamic Trajectory Summarization + Insight Retrieval Augmentation)",
+   "row": 564,
+   "paper_id": "5903e7085369d8364ddb739bbf4c10e9b80590c3",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Hybrid context management + deterministic programmatic safety checks / domain allowlisting / action restriction / least-privilege scoping (production browser-agent architecture)",
+   "row": 634,
+   "paper_id": "arxiv:2511.19477",
+   "track": "Both",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Taxonomy-Aware / Pipeline conflict-type-aware response generation (from the CONFLICTS benchmark)",
+   "row": 650,
+   "paper_id": "a51fcc29f90d3910b348f8f0fee1e2852a7fabf0",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "88.6 93.3 Qwen 2.5 72B (Yang et al., 2024) Vanilla 64.2 87.7 90.5 Pipeline 67.5 89.0 88.2 Taxonomy-Aware 68.3 88.2 89.4 Oracle 90.6 87.3 89.3 GPT-4o (Hurst et al., 2024) Vanilla 67.2 87.3 91.2 P"
+  },
+  {
+   "defense_name": "UNNAMED: Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)",
+   "row": 677,
+   "paper_id": "4531b3223fe379c3dc3addb8a466866dee7bd24a",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "PromptSentinel-X",
+   "row": 679,
+   "paper_id": "3fdd6bd75acec6e9e54a439a0f8c878c3656397f",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "diagnostic tool [50]. The present study adopts the same caution for Agentic Web security: PromptSentinel-X is evaluated as a calibrated screening, escalation, and review-triage component, not as"
+  },
+  {
+   "defense_name": "UNNAMED: Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection",
+   "row": 680,
+   "paper_id": "c14b66c10e7d4416e4e98b31baf020270cddb294",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "CXI (Context-to-Execution Integrity)",
+   "row": 682,
+   "paper_id": "eb94638423842764221b08cb7a9343d439c2257e",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "and au- thority is never inferred from text content alone [15,35,43]. 3.2 Policy Model A CXI policy is the trusted authority map for a mediated sink. It declares writable origins, tr"
+  },
+  {
+   "defense_name": "aiAuthZ (identity-bound off-host authorization gateway)",
+   "row": 683,
+   "paper_id": "5ab80084ac08ac0d52cb6b718e61c6f0c47fb913",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "ambiguous",
+   "auto_evidence": "se. 5.4 Comparison with prior systems (RQ3) To answer RQ3, I evaluate the policy logic of aiAuthZ against two reduced configurations on the nine in-scope case studies. The comparison is b"
+  },
+  {
+   "defense_name": "Pattern D: Inference-boundary redaction proxy (PII extraction/tokenization before model inference)",
+   "row": 684,
+   "paper_id": "26768533d0eef5c2f7dadf915f70a45d397a4040",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+   "row": 686,
+   "paper_id": "84c0d6d46fae30b174bc82c099ed732b02802936",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
+   "row": 695,
+   "paper_id": "1f517e201e63cb9a4cd87c289ed41f0cd367d42c",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Hybrid SIEM + One-Class SVM prompt-injection detection framework",
+   "row": 706,
+   "paper_id": "0388c22f0b2a9650d202ab8ccb445fb8af730f1e",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Contiguity-gate defense (for guardrail sliding-window aggregation)",
+   "row": 708,
+   "paper_id": "885424bbfda807e19d566c2e281a7aad31fb75d0",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Write-gate sanitization (pre-summarization redaction/rewrite) for memory laundering",
+   "row": 713,
+   "paper_id": "2d065df525f7619bc44fe5fdf385e1ea9714b822",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Plan-Then-Execute (PTE) architecture for web agents",
+   "row": 714,
+   "paper_id": "7217d28e7b7e43e1f38a156612e61b19e487087c",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "sign-c (server-side signing of execution-bearing response fields)",
+   "row": 718,
+   "paper_id": "3c51e32c6059775328c1620a22dc8e7d602f83cc",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: deterministic post-audit verifier layer added to a compositional safety system",
+   "row": 725,
+   "paper_id": "959f9a894d4eef23ee23895116206875151bb1fc",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: domain-specific multi-layer safeguard pipeline (pattern filters + structural validation + contextual sandboxing + session-level behavioral checks)",
+   "row": 731,
+   "paper_id": "0459c150849163cd801520a87394cc29003a5726",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: security-aware RAG framework (evidence-based abstention + prompt-injection defense + multi-source agreement verification + trust-weighted retrieval)",
+   "row": 744,
+   "paper_id": "96501f13d4c7a2da1228220c5723098e54f63a7c",
+   "track": "Security",
+   "validated_against": "both",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol",
+   "row": 746,
+   "paper_id": "d35916877805d63015cc773eb07f9fc65551317b",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Randomized/Adversarial Suffix Augmentation Training for task-drift probes",
+   "row": 754,
+   "paper_id": "1378649f3d7cfacaba92132e233146885c86e7fc",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Uncertainty-based Random Forest attack detector (chimera/Xmera)",
+   "row": 762,
+   "paper_id": "a497744c319e8465df81a12ccfe60a2bce4017ea",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Sentinel (qualifire/prompt-injection-sentinel)",
+   "row": 770,
+   "paper_id": "d9303eb738a56b0e72404d3ad57964c25611a226",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "[18]. It is built by Quali\ufb01re upon the answerdotai/ModernBERT-large architecture [4, 23]. Sentinel is speci\ufb01cally trained to classify prompts as either benign or indicative of a jailbreak/"
+  },
+  {
+   "defense_name": "TaskTracker (activation-delta task-drift detection)",
+   "row": 782,
+   "paper_id": "b0bd96c49091253c1a893d8f26fe791291a448c8",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Discern-and-Answer",
+   "row": 791,
+   "paper_id": "66cca7a055ee9278d0439654f474cbfa4135aff0",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "+ModTool (memory correction tool for MemEvoBench)",
+   "row": 798,
+   "paper_id": "e7fed24b1353cf82d465d68dbda87c2b7243c60a",
+   "track": "ML/AI",
+   "validated_against": "both",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "MAT-based Assurance Framework (Message-Action Traces + governance layer: capability limits + action mediation)",
+   "row": 802,
+   "paper_id": "e7eee295a7aba7ce0aef3b83a1b964e6bd10169d",
+   "track": "ML/AI",
+   "validated_against": "",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "User-Tool Aligned Safety RL Framework",
+   "row": 808,
+   "paper_id": "a90f9700a2e055b5380ec24f2a32c0ae357c635e",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "ToolSafe (TS-Guard + TS-Flow)",
+   "row": 813,
+   "paper_id": "d68f4ce9fe1184e74e6cb59493f8cb3ec2265f98",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "SecureRag",
+   "row": 831,
+   "paper_id": "c157f40ed322da549b9fe31de69b4fb81428d9ce",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "base  without ever viewing its contents [20], can result from this.  The effectiveness of SecureRag was calculated  using multiple tests. Attacks like prompt injection [3,11],  encoded mali"
+  },
+  {
+   "defense_name": "Program-Guided (PG) Runtime / Compile-then-Page SOP compiler",
+   "row": 837,
+   "paper_id": "62e953c40357cfb93027ef8e55b60eacd76bc963",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation)",
+   "row": 856,
+   "paper_id": "a0f82fcf24f6f280ef4ff950bfdd25430a1556f2",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Dual-Process Memory Architecture (episodic-semantic memory for scientific agents)",
+   "row": 862,
+   "paper_id": "7a39d0ccffe0c30b98a3a4b2c1bb82bb0e8c6026",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "ambiguous",
+   "auto_evidence": "nal coherence. The raw episodic trace is required for linguistic resolution. Importantly, Dual-Process performance (9.20) matched the Full Context baseline (9.13), demonstrating that we can ac"
+  },
+  {
+   "defense_name": "VideoSEAL (decoupled planner-inspector)",
+   "row": 867,
+   "paper_id": "a562f07f3d017e69d2064d92e994687f2b4b2447",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Governed Execution (modular prompt orchestration for RAG-grounded call-center agents)",
+   "row": 900,
+   "paper_id": "a2c32e9b0c807aeb9c147707a96aba15474294ef",
+   "track": "Security",
+   "validated_against": "both",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "HMAS-2 (Hybrid Multi-Agent System with feedback re-planning)",
+   "row": 932,
+   "paper_id": "1ad735714ad2e4ee5b94ce26c976e5ee5c7cde3b",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "ambiguous",
+   "auto_evidence": "eriments in a 3D environment simulated Fig. 6. Success rate vs. robot number for CMAS and HMAS-2 methods in four testing environments. using Pybullet [13], as illustrated in Figure 8. Th"
+  },
+  {
+   "defense_name": "AutoMEM",
+   "row": 949,
+   "paper_id": "ee92a75f7d4e09d5138a6ff437b58dac04043cbe",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "ambiguous",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Tree-based + hierarchical storage combined memory method (Memory in LLM Era unified framework)",
+   "row": 954,
+   "paper_id": "8539c9fe2bc5320a8c1f84e01c709fcca0389e94",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "LLMON (LLM Object Notation)",
+   "row": 968,
+   "paper_id": "6928b524b564275fc7855a953d78677d3e66f092",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "Egypt\u201d). 4.3 LLMON Converters We have created the following converters: \u2022 JSON to Machine LLMON \u2022 Machine LLMON to JSON Figure 9: Workflow from human-authored LLMON markup to the token"
+  },
+  {
+   "defense_name": "PAACE (Plan-Aware Automated Context Engineering)",
+   "row": 978,
+   "paper_id": "44e2dfb31ee6c47d0f756795830c7e7e64f46a0c",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "used this taxonomy to design agent memory stacks (Park et al., 2023; Shinn et al., 2023). PAACE\u2019s decomposition of context into actionable, struc- tural, referential, and justificatory"
+  },
+  {
+   "defense_name": "MAGIC-Video (multimodal memory graph + narrative chain)",
+   "row": 984,
+   "paper_id": "bd685d88d79a24126e21957625006d39e6e492c4",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "t alternates between search and answer. Cross-modal PPR over MMG. Given a search query q, MAGIC-Video runs one cross-modal PPR pass over MMG. Following HippoRAG\u2019s [Guti\u00e9rrez et al., 2024] see"
+  },
+  {
+   "defense_name": "KScope-guided Constrained Context Summarization",
+   "row": 994,
+   "paper_id": "60c9fbcba72112937aba067ead90727f43108634",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "ReflectVLM (test-time reflection framework)",
+   "row": 996,
+   "paper_id": "02be8b42d438f9e4c851157029b9d0de886c60b6",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "RAT (Retrieval Augmented Thoughts)",
+   "row": 1000,
+   "paper_id": "dc256e179d4e8eff48879a40ddc414b15b0b2300",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "Gao et al., 2022). Creative Writing tasks are conducted to evalu- ate the versatility of RAT, including survey, sum- marization etc., highlighting different aspects of open-ended tex"
+  },
+  {
+   "defense_name": "UNNAMED: Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG)",
+   "row": 1006,
+   "paper_id": "986fc8d841425a81947838425ea292685ef8325a",
+   "track": "ML/AI",
+   "validated_against": "incidental",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Explanation-based secondary detection signal for log-injection evasion",
+   "row": 1009,
+   "paper_id": "8ba7f2d66ab1cb40af28d1889ffa21f298fa0c52",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: P2SQL mitigations (DB permission hardening + query rewriting)",
+   "row": 1021,
+   "paper_id": "0894585294c67193ff3190240554677b56fd79a0",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: IPI detection + post-detection removal pipeline",
+   "row": 1030,
+   "paper_id": "20723b734e2838c22f921a0fc343d32e1d6d84e7",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: secure prompt strategies for robotic navigation",
+   "row": 1044,
+   "paper_id": "bb5cd74e28059073b0f50ba42b1dcec41d29af82",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: two preemptive-answer mitigations",
+   "row": 1046,
+   "paper_id": "d8ba6085c7c32cc367ab7f50d18744de846fcebd",
+   "track": "Security",
+   "validated_against": "both",
+   "auto_guess": "needs_read",
+   "auto_evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "unified Prompt Assembling + State Management + Safety Validation framework",
+   "row": 1073,
+   "paper_id": "f8e7615c7c6d95ecf1737d845ee3eb713e297b5f",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "UGCBuster",
+   "row": 1075,
+   "paper_id": "0e3f35c9f300156346dd5ddd75b78f768a21deb8",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Multi-Layer Defense Framework (preprocessing + statistical + neural detection + behavioral monitoring)",
+   "row": 1086,
+   "paper_id": "41b13ebbf1769d140b01590fb073a330f063702e",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "chain-of-defensive-thought (CoDT)",
+   "row": 1088,
+   "paper_id": "c3ec52d8639dbcfedeb727ade7af2dc1bee87708",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "tion (Greshake et al., 2023) and knowledge corruption (Zou et al., 2024). We observe that chain-of-defensive-thought unlocks the ro- bustness of a wide range of large language models against empirical"
+  },
+  {
+   "defense_name": "GPT-OSSafeGuard + structured-representations + GSPO defense pipeline",
+   "row": 1091,
+   "paper_id": "5159fecd2a40e8b77ec7e040ef0211cd48353123",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "data defenses",
+   "row": 1094,
+   "paper_id": "0d889de54cb47863416cd0f2562c32744631de53",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "njust power disparities introduced by large language models: tex- tual data defenses. Our data defenses enable text data owners to insert innocuous-seeming text into their content in a manner t"
+  },
+  {
+   "defense_name": "PhantomLint",
+   "row": 1101,
+   "paper_id": "5717e2bd544b999c678c6199e844f790459f7327",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "it walks the DOM to identify all text nodes, each of whose contents becomes a text block. PhantomLint makes use of the playwright library [22] to render the HTML document as an image. Given a"
+  },
+  {
+   "defense_name": "CaptureGuard",
+   "row": 1103,
+   "paper_id": "39c923bffb4a8c59df0107d1e492ed691041d15b",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "signed to probe model sensitivity to trigger words in safe contexts. 2.4 CaptureGuard For CaptureGuard, we trained three separate DeBERTaV3-base (He et al., 2021) models for the Python, Movies"
+  },
+  {
+   "defense_name": "CASCADE",
+   "row": 1111,
+   "paper_id": "b874b9a07cc89ff9501f87daddb54c9fff48bfa8",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "ent decision actually turns on. \u0130. Abas\u0131kele\u015f-Turgut and E. G\u00fcm\u00fc\u015f: Preprint Page 5 of 23  CASCADE 2. White-box requirements. The strongest reported de- tection performance [23] depends on"
+  },
+  {
+   "defense_name": "SecureCAI",
+   "row": 1115,
+   "paper_id": "3d16be498e90f357318f27bf8c476567a51d4e47",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "Maintenance Table 3 reports clean accuracy on three security analysis tasks. Critically, SecureCAI not only maintains but im- proves clean performance compared to baseline methods. This im"
+  },
+  {
+   "defense_name": "SE+CFE (Standard Evaluation + Counterfactual Evaluation)",
+   "row": 1123,
+   "paper_id": "f18b95663f87743335eee0578212fcb484882eae",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "PromptGuard",
+   "row": 1132,
+   "paper_id": "c3cc8bd227eedf8986bab48779db0c9335d5b633",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "ogy LLMs [13] Not implemented Not implemented Not implemented Not implemented ~\u200941% GPT-4 PromptGuard (Ours) Regex\u2009+\u2009BERT hybrid ChatML-based structured  prompts Output-level task checking Po"
+  },
+  {
+   "defense_name": "SPML-IR specification-based image defense (two-stage input validation + prompt injection detection)",
+   "row": 1138,
+   "paper_id": "b7e425c93a0bfe017098cedecc43760a6f9ef5e8",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "applied_as_is",
+   "auto_evidence": "on, can be deployed with any MLLM-based chatbot. Figure 2 demonstrates an example for the SPML-IR notation for our Parking-Pal chabot. Similar to [31], we can convert an image specificati"
+  },
+  {
+   "defense_name": "Chunk-based hash + embedding prompt injection detection scheme (with optional blockchain audit logging)",
+   "row": 1147,
+   "paper_id": "646f950f41530e196f83033d21dfaefb27dd7b85",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "GNN-based prompt injection detector",
+   "row": 1149,
+   "paper_id": "0a78327b9cc6e3b980e70489d22c96c0d26bca6c",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Windowed HTML content filtering (128/64-token chunking + PromptGuard/DeBERTaV3 classification)",
+   "row": 1150,
+   "paper_id": "7d76841c36a85d550d2211b148d0c593e75f7419",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "Enterprise Secure AI Execution Engine (Zero-Trust AI Security Gateway)",
+   "row": 1157,
+   "paper_id": "1ce4b21dda6721f1c94b63ab1b93144a87a9b0ad",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  },
+  {
+   "defense_name": "ChatTEDU dual-LLM architecture (LLM-1 moderation gatekeeper + LLM-2 response generator)",
+   "row": 1159,
+   "paper_id": "2d3761e670c3597babbbcd9cf7b88327e07e770b",
+   "track": "Security",
+   "validated_against": "adversarial",
+   "auto_guess": "needs_read",
+   "auto_evidence": ""
+  }
+ ]
+}
