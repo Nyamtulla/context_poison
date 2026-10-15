@@ -192,7 +192,8 @@ def main():
                     help="same frozen item set as the COIECD and DyPRAG runs")
     ap.add_argument("--fracs", type=float, nargs="+", default=[0.0, 0.1, 0.5, 1.0])
     ap.add_argument("--attack", default="corpus_poisoning",
-                    choices=["corpus_poisoning", "false_evidence"],
+                    choices=["corpus_poisoning", "false_evidence",
+                             "distractor_evidence"],
                     help="corpus_poisoning plants the attack's optimised token "
                          "sequence; false_evidence plants a fluent passage "
                          "asserting the model's own (wrong) prior answer")
@@ -211,10 +212,22 @@ def main():
     # `adv` is the single shared payload for corpus_poisoning; for
     # false_evidence the payload is per-item, so adv stays None and the loop
     # reads each item's parametric_evidencde.
-    if args.attack == "false_evidence":
-        missing = [d for d in data if not (d.get("parametric_evidencde") or "").strip()]
+    PAY = {"false_evidence": "parametric_evidencde",
+           "distractor_evidence": "distractor_evidencde"}
+    if args.attack in PAY:
+        fld = PAY[args.attack]
+        missing = [d for d in data if not (d.get(fld) or "").strip()]
         if missing:
-            raise SystemExit(f"{len(missing)} items lack parametric_evidencde")
+            raise SystemExit(f"{len(missing)} items lack {fld}")
+        if args.attack == "distractor_evidence":
+            # the arm is worthless unless the three outcomes are disjoint
+            bad = [d for d in data
+                   if str(d["distractor_answer"]).lower()
+                   in {str(a).lower() for a in d["answers"]}
+                   | {str(d["parametric_answer"]).lower()}]
+            if bad:
+                raise SystemExit(f"{len(bad)} items have a distractor equal to "
+                                 "the gold or the parametric answer")
         adv = None
     else:
         adv = adversarial_text()
@@ -227,7 +240,10 @@ def main():
     # corpus-poisoning run filed under a different attack name. Fingerprint the
     # text actually planted, store it, and refuse to proceed if false_evidence
     # is somehow planting the shared corpus-poisoning passage.
-    _probe = (adv if adv is not None else data[0]["parametric_evidencde"])
+    # read the SAME field the loop plants, or the fingerprint certifies a
+    # payload the run never used. This line said parametric_evidencde while
+    # the loop planted distractor_evidencde, and the fingerprint caught it.
+    _probe = (adv if adv is not None else data[0][PAY[args.attack]])
     payload_fp = hashlib.sha256(_probe.encode()).hexdigest()[:16]
     if args.attack == "false_evidence":
         assert adv is None, "false_evidence must use a per-item payload"
@@ -259,11 +275,22 @@ def main():
     p_noctx = [make_prompt(fs["without_context"], d["question"]) for d in data]
     closed = generate(model, tokenizer, gen_cfg, p_noctx, None, "naive", args.batch_size)
 
+    # recall against the PLANTED answer, scored with the same rubric, so the
+    # three outcomes are directly comparable. Only defined for the distractor
+    # arm, where the planted answer differs from both gold and memory.
+    dists = ([d["distractor_answer"] for d in data]
+             if data and data[0].get("distractor_answer") is not None else None)
+
     def score(preds):
         em, ps = CKEVAL.get_score(preds, golds)
         _, po = CKEVAL.get_score(preds, origs)
+        extra = {}
+        if dists is not None:
+            _, pd = CKEVAL.get_score(preds, dists)
+            extra["dist_acc"] = round(pd, 2)
         lo, hi = wilson(round(ps / 100 * n), n)
-        return {"n": n, "ctx_acc": round(ps, 2), "pm_acc": round(po, 2),
+        return {**extra,
+                "n": n, "ctx_acc": round(ps, 2), "pm_acc": round(po, 2),
                 "mr": round(po / (ps + po + 1e-10) * 100, 2), "em": round(em, 2),
                 "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
 
@@ -316,14 +343,15 @@ def main():
         if frac in done:
             print(f"  skipping frac={frac}, already in {args.out}", flush=True)
             continue
-        label = ("corpus poisoning" if args.attack == "corpus_poisoning"
-                 else "false evidence")
+        label = {"corpus_poisoning": "corpus poisoning",
+                 "false_evidence": "false evidence",
+                 "distractor_evidence": "distractor evidence"}[args.attack]
         name = ("clean (native incidental conflict)" if frac <= 0
                 else f"{label}, {int(frac*100)}% of context")
         p_ctx = [make_prompt(fs["with_context"], d["question"],
                              poison_context(d["context"],
                                             adv if adv is not None
-                                            else d["parametric_evidencde"], frac))
+                                            else d[PAY[args.attack]], frac))
                  for d in data]
         rag = generate(model, tokenizer, gen_cfg, p_ctx, None, "naive", args.batch_size)
         acd = generate(model, tokenizer, gen_cfg, p_noctx, p_ctx, "acd", args.batch_size)
@@ -332,7 +360,8 @@ def main():
         for arm in ARMS:
             r = got[arm]; r.update(condition=name, frac=frac, arm=arm)
             results.append(r)
-            print(f"    {arm:<11} ctx_acc {r['ctx_acc']:5.1f}%  pm_acc {r['pm_acc']:5.1f}%"
+            _d = f"  dist {r['dist_acc']:5.1f}%" if "dist_acc" in r else ""
+            print(f"    {arm:<11} ctx_acc {r['ctx_acc']:5.1f}%  pm_acc {r['pm_acc']:5.1f}%{_d}"
                   f"  mr {r['mr']:5.1f}%  em {r['em']:5.1f}%", flush=True)
         if dump is not None:
             for i, d in enumerate(data):

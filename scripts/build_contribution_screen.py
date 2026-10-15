@@ -88,12 +88,16 @@ FIELDS = [
   "One verbatim sentence from the paper supporting `contribution` and `origin`, "
   "with its section. NO QUOTE, NO ENTRY."),
  ("names_registry_technique", "yes / no / unsure",
-  "THE AGENTDOJO QUESTION. Does this paper name a specific attack or failure "
-  "mode that other papers then cite and test against, even if the paper is a "
-  "benchmark, a harness or a survey? AgentDojo is a harness AND it names seven "
-  "injections that 38 confirmed pairs depend on, so the answer for it is yes. "
-  "WebArena is a harness that names none, so no. Answer from the paper's own "
-  "section headings and tables, not from its genre."),
+  "THE AGENTDOJO QUESTION. Narrower than its name: does this paper name a "
+  "specific ATTACK or FAILURE MODE that other papers then cite and test "
+  "against, even though the paper is a benchmark, a harness or a survey? "
+  "AgentDojo is a harness AND it names seven injections that 38 confirmed "
+  "pairs depend on, so yes. WebArena is a harness and names none, so no. "
+  "A paper that names only its own DEFENSE is 'no' here, and that is correct: "
+  "it is already protected by contribution=proposes_defense and can never "
+  "reach the exclusion branch. This column exists only to catch papers that "
+  "propose nothing yet still feed the attack registry. Answer from the "
+  "paper's section headings and tables, never from its genre."),
  ("named_techniques", "free text",
   "If names_registry_technique is yes, list them as the paper names them, "
   "semicolon separated. 'important-instructions injection; ignore-previous "

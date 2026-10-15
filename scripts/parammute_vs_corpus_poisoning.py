@@ -46,6 +46,12 @@ import torch
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 PM = REPO / "third_party" / "ParamMute"
+
+# attack name -> the per-item field holding its planted passage.
+# Module level because run_condition() needs it as well as main();
+# it was local to main() once and the smoke run died on a NameError.
+PAY = {"false_evidence": "parametric_evidencde",
+       "distractor_evidence": "distractor_evidencde"}
 sys.path.insert(0, str(PM / "src" / "3_evaluate"))
 sys.path.insert(0, str(REPO / "scripts"))
 
@@ -109,12 +115,13 @@ def load_model(path: str, inhibit_strength: float):
     return model, tok
 
 
-def run_condition(model, tok, data, passage, frac, schema, max_new_tokens):
+def run_condition(model, tok, data, passage, frac, schema, max_new_tokens,
+                  payload_field=None):
     preds, golds, pms = [], [], []
     for d in data:
         ctx = poison_context(
             d["context"],
-            passage if passage is not None else d["parametric_evidencde"], frac)
+            passage if passage is not None else d[payload_field], frac)
         prompt = PMEVAL.qa_to_prompt_baseline(
             d["question"], ctx, schema=schema, tokenizer=tok,
             IS_INSTRUCTION_PROMPT=False)
@@ -123,9 +130,18 @@ def run_condition(model, tok, data, passage, frac, schema, max_new_tokens):
         golds.append(d["answers"])
         pms.append(d["parametric_answer"])
     pm_acc, acc, rouge, f1, em = PMEVAL.get_score_with_paramatric(pms, preds, golds)
+    # recall against the PLANTED answer, scored with the authors' own
+    # parametric scorer so the three rates are directly comparable
+    dist_acc = None
+    if data and data[0].get("distractor_answer") is not None:
+        dists = [d["distractor_answer"] for d in data]
+        dist_acc, _, _, _, _ = PMEVAL.get_score_with_paramatric(
+            dists, preds, golds)
     n = len(data)
     lo, hi = wilson(round(acc / 100 * n), n)
-    return {"n": n, "ctx_acc": round(acc, 2), "pm_acc": round(pm_acc, 2),
+    extra = {"dist_acc": round(dist_acc, 2)} if dist_acc is not None else {}
+    return {**extra,
+            "n": n, "ctx_acc": round(acc, 2), "pm_acc": round(pm_acc, 2),
             "mr": round(pm_acc / (pm_acc + acc + 1e-5) * 100, 2),
             "em": round(em, 2), "f1": round(f1, 2),
             "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
@@ -141,7 +157,7 @@ def main():
     ap.add_argument("--out", type=str,
                     default="data/registries/parammute_vs_corpus_poisoning.json")
     ap.add_argument("--attack", default="corpus_poisoning",
-                    choices=["corpus_poisoning", "false_evidence"],
+                    choices=["corpus_poisoning", "false_evidence", "distractor_evidence"],
                     help="corpus_poisoning plants the attack's optimised token "
                          "sequence; false_evidence plants a fluent passage "
                          "asserting the model's own (wrong) prior answer")
@@ -152,7 +168,7 @@ def main():
     # earlier ACD run applied the --attack flag to the output label but not the
     # payload and produced a complete, plausible result file under the wrong
     # attack name; only the numbers being identical to one decimal caught it.
-    if args.attack == "false_evidence":
+    if args.attack in ("false_evidence", "distractor_evidence"):
         passage = None
         _probe = None
     else:
@@ -161,19 +177,34 @@ def main():
     path = PM / "data" / "CoConflictQA" / "test" / args.data
     data = [json.loads(l) for l in path.read_text().splitlines()][: args.n]
 
-    if args.attack == "false_evidence":
-        miss = [d for d in data if not (d.get("parametric_evidencde") or "").strip()]
+    if args.attack in PAY:
+        fld = PAY[args.attack]
+        miss = [d for d in data if not (d.get(fld) or "").strip()]
         if miss:
-            raise SystemExit(f"{len(miss)} items lack parametric_evidencde")
-        _probe = data[0]["parametric_evidencde"]
+            raise SystemExit(f"{len(miss)} items lack {fld}")
+        _probe = data[0][fld]
         assert _probe != adversarial_text(), \
-            "false_evidence is planting the corpus-poisoning passage"
+            f"{args.attack} is planting the corpus-poisoning passage"
+        if args.attack == "distractor_evidence":
+            # the whole point is three disjoint outcomes; if they collide the
+            # arm proves nothing, so check rather than assume
+            bad = [d for d in data
+                   if str(d["distractor_answer"]).lower()
+                   in {str(a).lower() for a in d["answers"]}
+                   | {str(d["parametric_answer"]).lower()}]
+            if bad:
+                raise SystemExit(f"{len(bad)} items have a distractor equal to "
+                                 "the gold or the parametric answer")
     payload_fp = hashlib.sha256(_probe.encode()).hexdigest()[:16]
     print(f"  payload[{args.attack}] fp={payload_fp} sample={_probe[:70]!r}",
           flush=True)
 
-    _lab = ("corpus poisoning" if args.attack == "corpus_poisoning"
-            else "false evidence")
+    # one entry per attack. The two-branch version labelled a distractor run
+    # "false evidence", which is the same mislabelling that put an early ACD
+    # run under the wrong attack.
+    _lab = {"corpus_poisoning": "corpus poisoning",
+            "false_evidence": "false evidence",
+            "distractor_evidence": "distractor evidence"}[args.attack]
     conditions = [("clean (native incidental conflict)", 0.0)] if args.clean_only else [
         ("clean (native incidental conflict)", 0.0),
         (f"{_lab}, 10% of context", 0.1),
@@ -187,11 +218,13 @@ def main():
         model, tok = load_model(path_, strength)
         for name, frac in conditions:
             r = run_condition(model, tok, data, passage, frac,
-                              args.schema, args.max_new_tokens)
+                              args.schema, args.max_new_tokens,
+                              payload_field=PAY.get(args.attack))
             r.update(condition=name, frac=frac, arm=arm)
             results.append(r)
+            _d = f"  dist {r['dist_acc']:5.1f}%" if "dist_acc" in r else ""
             print(f"  {name:<36} ctx_acc {r['ctx_acc']:5.1f}%  "
-                  f"pm_acc {r['pm_acc']:5.1f}%  mr {r['mr']:5.1f}%  "
+                  f"pm_acc {r['pm_acc']:5.1f}%{_d}  mr {r['mr']:5.1f}%  "
                   f"em {r['em']:5.1f}%", flush=True)
         del model
         torch.cuda.empty_cache()
