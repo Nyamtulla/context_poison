@@ -82,11 +82,18 @@ def main():
 
     counts = collections.Counter(d["contribution"] for d in done)
     unknown = [d for d in done if d["contribution"] not in VALID]
+    # A paper that proposes or improves a technique is a contributor by
+    # definition and must never be excluded, whatever the other columns say.
+    # names_registry_technique does not protect it, because that column asks
+    # the narrower AgentDojo question and a defense-only paper answers "no".
+    CONTRIBUTES = {"proposes_attack", "proposes_mechanism", "proposes_defense",
+                   "proposes_fix", "improves_existing"}
     excl = [d for d in done
             if d["contribution"] == "out_of_scope"
             and d["belongs_in_corpus"].lower() == "no"
             and d["evidence_quote"]
-            and d["names_registry_technique"].lower() != "yes"]
+            and d["names_registry_technique"].lower() != "yes"
+            and d["contribution"] not in CONTRIBUTES]
     half = [d for d in done
             if (d["contribution"] == "out_of_scope") != (d["belongs_in_corpus"].lower() == "no")]
     noquote = [d for d in done if d["contribution"] == "out_of_scope"
@@ -105,7 +112,11 @@ def main():
         mark = "  <- UNKNOWN VALUE" if k not in VALID else ""
         print(f"  {v:>4}  {k}{mark}")
     print()
+    marked = [d for d in done if "DEFENSE-NAMES:" in (d.get("notes") or "")]
     print(f"  names a technique the registry uses     : {len(contributor)}")
+    if marked:
+        print(f"  tagged DEFENSE-NAMES by the coder       : {len(marked)}"
+              f"  (defense-only papers; 'no' above is correct for them)")
     print(f"  would EXCLUDE from the corpus          : {len(excl)}")
     print(f"  would retract a registry entry (applies): {len(retract)}")
     print()
