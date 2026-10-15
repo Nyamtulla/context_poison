@@ -77,3 +77,71 @@ Phase 2's extraction needs three fields the current registry lacks:
 | `origin` (proposed / extended / applied_as_is / mentioned_only) | `is_extension_of` is populated on 5% of defenses, so the registry cannot tell a method a paper invented from one it applied off the shelf. This is what let two deep-research agent frameworks be counted as fixes. |
 | `evidence_quote` + section | A verbatim span from the evaluation section. No quote, no entry. An introduction sentence is not evidence that a method was built or tested. |
 | `evaluated_against`, kept separate from the claim | RhinoInsight's entry was justified on "combating context rot" while its evaluation is a report-quality score. The registry had nowhere to record that those differ. |
+
+---
+
+## Phase 2b, 2026-10-15: reading the evaluation sections
+
+Regenerate with `python3 scripts/classify_defense_evaluation_section.py`.
+
+Phase 2a established authorship. It could not catch the RhinoInsight problem,
+because RhinoInsight genuinely proposes RhinoInsight. What it fails is the
+evaluation test, and only that one. So this pass locates each paper's own
+evaluation section and looks only inside it. An introduction that says "we
+address context rot" is not evidence that context rot was measured.
+
+### The verified floor
+
+**293 of 527 defenses (55.6%) are confirmed to have been evaluated against an
+adversary**, by one of two independent routes: 214 appear in a confirmed
+coverage pair, and 211 carry an unambiguous adversarial signal inside their own
+evaluation section with the sentence quoted. The two overlap on 132, so each
+route found cases the other missed. **79 defenses have adversarial evaluation
+evidence that the coverage matrix never saw.**
+
+Against the 14 (2.7%) verified in Phase 1 as reporting no baseline at all, and
+220 (41.7%) whose status this project has not established.
+
+So the sentence the numbers support is: **55.6% verifiably evaluated against an
+adversary, 2.7% verifiably not, and 41.7% not yet determined.** Not "60%
+untested".
+
+### The tool is asymmetric and only half of it is usable
+
+A sample of 10 from the 211 positives was clean. Every one quotes real
+adversarial evaluation from inside the evaluation section: attack success rate
+as the reported metric, injection subtypes with sample counts, poisoned
+documents, named attack benchmarks.
+
+The negative class is not usable, and the mismatch cell shows why. Of the 19
+defenses flagged as claiming an adversarial threat model while showing no
+adversarial evaluation, most are the pattern's failures rather than the
+papers': MCP-Guard's section reads "5,258 samples (2,153 adversarial and 3,105
+benign)", ShieldNet runs SC-Inject-Bench, PhantomLint detects hidden prompts in
+documents, TRACE runs three agent safety benchmarks. **No number from the
+negative class is quoted anywhere, and the mismatch list is not a finding.**
+
+### What three passes established about the method
+
+Three deterministic passes were built today. Each needed a hand-check, and each
+hand-check found roughly half the negative class wrong:
+
+| pass | positive class | negative class |
+|---|---|---|
+| Phase 1, coded fields | usable floor (14 no-baseline, all confirmed) | half were misses |
+| Phase 2a, origin from the PDF head | usable (400 with quotes, sample clean) | low precision, kept as a worklist |
+| Phase 2b, evaluation section | usable (211 with quotes, sample clean) | low precision, not published |
+
+**The pattern is consistent and is itself the result.** A regex can confirm
+that something is present in a paper. It cannot establish that something is
+absent, because absence of the phrasing it knows is not absence of the thing.
+Every claim in this project that rests on a negative ("never tested", "no
+defense evaluated against it") needs either a human read or an explicit
+statement that it means "not resolved", never "not done".
+
+### What remains
+
+220 defenses with undetermined evaluation status, plus the 127-entry origin
+worklist. Those need reading, not matching. They are now a bounded job with a
+specific question each: *does the evaluation section show this method run
+against an adversary, yes or no, and quote the line.*
