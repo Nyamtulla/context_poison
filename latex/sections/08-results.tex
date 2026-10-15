@@ -215,13 +215,59 @@ payload, against the control measured beside it in the same run, every
 comparison in this section stands. We state the limit because the alternative
 is to report a falsifier as passed when the instrument cannot support it.
 
-One measurement limit belongs here for the same reason. Under false evidence
-the planted passage asserts the same string the model would have recalled, so
-the parametric-answer rate cannot distinguish a model that remembered from one
-that copied. They produce identical output. That is the attack's design rather
-than a flaw in the metric, and it means ParamMute's residual 58.8\% cannot be
-split between the two paths. An arm that plants the \emph{gold} answer instead
-would separate them.
+\subsection{Separating copying from remembering}
+\label{sec:distractor}
+
+Under false evidence the planted passage asserts the same string the model
+would have recalled, so the parametric-answer rate cannot distinguish a model
+that remembered from one that copied. They produce identical output. That is
+the attack's design rather than a flaw in the metric, and it leaves the central
+claim of this section resting on an ambiguous measurement.
+
+Planting the \emph{gold} answer does not fix it, because gold is already in the
+real context, so an output of gold stays two-ways ambiguous. A third answer
+does. We built a payload that plants a fluent sentence asserting an answer that
+is neither the gold nor the model's prior, by substituting a distractor into
+the item's own evidence sentence so the register is unchanged. Distractors are
+drawn from another item's parametric answer, matched on the question's wh-word
+and on digit count for numerics, so a person replaces a person and a year
+replaces a year. All three answers are checked disjoint per item at build time,
+which gives three disjoint readings of one output: gold means the model read
+the real context, the parametric answer means it recalled from memory, and the
+distractor means it copied the planted passage.
+
+Two controls license the reading. At clean dose the distractor rate is 0.8\%
+undefended and 0.6\% defended, so the answer essentially never appears unless
+it is planted. In the run that carries one, a no-retrieval arm holds at 1.0\%:
+a model with no document never emits it.
+
+\textbf{ParamMute succeeds at its stated job and hands the freed probability
+mass to the attacker.} At saturation it suppresses parametric recall from
+39.0\% to 2.9\%, a 36.1\pp{} reduction, resolvable at every dose. Accuracy
+against the gold answer does not rise with it; it moves 5.4\% to 1.5\%, under
+the 7.1\pp{} threshold. The copy rate rises 43.9\% to 81.4\%, a 37.5\pp{}
+gain that tracks the suppression almost one for one. This also settles the
+measurement limit above: ParamMute's residual parametric rate under false
+evidence was copying, not surviving memory.
+
+\textbf{ACD succeeds at the opposite job and the mass goes to memory instead.}
+ACD cuts the copy rate from 76.0\% to 40.8\% at saturation ($p = 2\times
+10^{-40}$, $n=686$), the largest defensive effect anywhere in this campaign and
+in the direction a defense is supposed to move. The refused mass does not go to
+the real document. Parametric recall rises 14.1\% to 32.5\% while gold
+accuracy moves 2.3\% to 5.0\%, which clears Fisher but not the 7.6\pp{}
+threshold, and sits below the no-retrieval arm's 8.2\%. Resisting the attack
+did not make the pipeline better than switching retrieval off.
+
+\textbf{The two results are one mechanism read from both ends.} ParamMute
+suppresses memory and the attacker fills the vacancy; ACD suppresses the
+attacker and memory fills it. Neither moves probability mass toward the real
+document, because neither mechanism can tell the real document from the planted
+one. Both only arbitrate between \emph{context} and \emph{parameters}, and the
+attack lives inside the context. That is a sharper statement of this section's
+thesis than the excess-damage numbers alone support: the trade-off is not that
+context-reliance defenses trust context too much, it is that the axis they
+arbitrate on does not contain the distinction an attacker violates.
 
 \subsection{Asking the model to judge the document}
 
