@@ -1,0 +1,4657 @@
+{
+ "generated": "2026-10-15",
+ "method": "Did the paper PROPOSE this defense, or apply one that already existed?",
+ "counts": {
+  "proposed": 400,
+  "needs_read": 91,
+  "applied_as_is": 28,
+  "ambiguous": 8
+ },
+ "defenses": [
+  {
+   "defense_name": "MELON (Masked re-Execution and TooL comparisON)",
+   "row": 15,
+   "paper_id": "830cb22483595ec0421398af195842d788e4ea6e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present MELON"
+  },
+  {
+   "defense_name": "RobustRAG",
+   "row": 23,
+   "paper_id": "3b81eca915a041b12eab31ffa62fca5bdabfbf17",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose RobustRAG"
+  },
+  {
+   "defense_name": "Retrieve-then-Solve",
+   "row": 28,
+   "paper_id": "55e0300470bc99172e763f6fd6d3e7935f7d90e0",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Rot-aware rejection-sampling filter for long-horizon search",
+   "row": 32,
+   "paper_id": "579fa5e99937ddf437eda7ae00c3bdf62f32d1e9",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "AttnComp (Attention-guided Context Compression)",
+   "row": 33,
+   "paper_id": "4b39c5af6be0fe1731bd4add77b5f4e1d6340a7f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce AttnComp"
+  },
+  {
+   "defense_name": "Self-RAG",
+   "row": 35,
+   "paper_id": "ddbd8fe782ac98e9c64dd98710687a962195dd9b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce a new framework called Self-Reflective Retrieval-Augmented Gen- eration (SELF-RAG"
+  },
+  {
+   "defense_name": "Corrective Retrieval Augmented Generation (CRAG)",
+   "row": 36,
+   "paper_id": "5bbc2b5aa6c63c6a2cfccf095d6020b063ad47ac",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose the Corrective"
+  },
+  {
+   "defense_name": "Astute RAG",
+   "row": 37,
+   "paper_id": "fe2dd4ac8bb14c622a890482384c9e1136479bf6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose ASTUTE"
+  },
+  {
+   "defense_name": "IPIGuard",
+   "row": 52,
+   "paper_id": "9ddcbbff1e23b7f995fc363ad5123091f8866748",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel defensive task ex- ecution paradigm, called IPIGUARD"
+  },
+  {
+   "defense_name": "InstructDetector",
+   "row": 53,
+   "paper_id": "3835926e08ef43b543ee380600e4f271df589b84",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose InstructDetector"
+  },
+  {
+   "defense_name": "Task Shield",
+   "row": 54,
+   "paper_id": "8af6009a8d55d456213f6819567eb3ace39dd176",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose a novel and orthogonal perspective that reframes agent security from preventing harmful actions to ensuring task"
+  },
+  {
+   "defense_name": "Rennervate",
+   "row": 56,
+   "paper_id": "8974829e4269f5f1800f08603f052b29fa8b26a8",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper presents RENNERVATE"
+  },
+  {
+   "defense_name": "IntentGuard",
+   "row": 58,
+   "paper_id": "b1d370e2a028b951ea000b035a1b7699f8495a0f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present IntentGuard"
+  },
+  {
+   "defense_name": "AgentSentry",
+   "row": 60,
+   "paper_id": "11026bd51ede707c6c42be9c97b9d0d50d55bed5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose AgentSentry"
+  },
+  {
+   "defense_name": "UNNAMED: Digital forensic analysis framework for post-hoc IPI attack identification from agent execution logs",
+   "row": 61,
+   "paper_id": "9aa8ef5683aa8f81d3e0a826c076b45ff0f2d270",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "ClawGuard",
+   "row": 62,
+   "paper_id": "255e24a1097110cf227e73b2c202c95b1e3f657b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose CLAWGUARD"
+  },
+  {
+   "defense_name": "AttriGuard",
+   "row": 63,
+   "paper_id": "5e636dcdae92a44490fb581572a093ab134ae479",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we develop AttriGuard"
+  },
+  {
+   "defense_name": "Tool Result Parsing (ParseData/CheckTool)",
+   "row": 65,
+   "paper_id": "413e41f065d722e4316ebc56747ae5f6f4c53485",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel method that provides LLMs with precise data via tool"
+  },
+  {
+   "defense_name": "UNNAMED: Embedding-based semantic context analysis detector for IPI",
+   "row": 70,
+   "paper_id": "dfc9d7ad54c197d239cb473f3ae7a64ab50d0e90",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "ICON (Inference-Time Correction)",
+   "row": 71,
+   "paper_id": "9a559291c36be0ac35a9db4682d18acc6ccff2d3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose ICON"
+  },
+  {
+   "defense_name": "PlanGuard",
+   "row": 72,
+   "paper_id": "60d1a692707848767aba41b5d83205478c191f4d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose PlanGuard"
+  },
+  {
+   "defense_name": "Cognitive Firewall",
+   "row": 73,
+   "paper_id": "f1bde8917211210507fb6a2030f4c48c5989d464",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present the Cognitive"
+  },
+  {
+   "defense_name": "CodeSentinel",
+   "row": 80,
+   "paper_id": "cf65754b11167535b5118d268bf0ead49e8c5cc3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose CodeSentinel"
+  },
+  {
+   "defense_name": "MIPIAD",
+   "row": 83,
+   "paper_id": "82b30eeb4c7018d9f8bdf5acb5149f180e1bbc70",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present MIPIAD"
+  },
+  {
+   "defense_name": "DualView",
+   "row": 85,
+   "paper_id": "6293d5aa830092dc26f6d093f5b773bb524498dd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present DUALVIEW"
+  },
+  {
+   "defense_name": "AgentVisor",
+   "row": 92,
+   "paper_id": "cf32c4016c102fac6ce1fef1e93539bc3de781cd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose AgentVisor"
+  },
+  {
+   "defense_name": "ReasAlign",
+   "row": 93,
+   "paper_id": "020dd49f07964e638cddcde1325a0d97674be361",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present ReasAlign"
+  },
+  {
+   "defense_name": "UNNAMED: Hybrid multi-layered real-time PI detection framework",
+   "row": 94,
+   "paper_id": "dd8e3ff740ecd615b37dfb219d98e73a782f71d1",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "RETA (Reasoning-Enabled Task Alignment)",
+   "row": 95,
+   "paper_id": "32c8b781ae70c35d67c337fbd4e674236b6545c4",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose RETA"
+  },
+  {
+   "defense_name": "UNNAMED: Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)",
+   "row": 98,
+   "paper_id": "1a062f96584a9f5c14177ae49fe9bb3ae30b67c1",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "TRACER-AI",
+   "row": 103,
+   "paper_id": "dacd135992e586b5a2b27c9134985d56cc4a20fb",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper proposes TRACER-AI"
+  },
+  {
+   "defense_name": "IDE-Sanitizer",
+   "row": 104,
+   "paper_id": "0b8b141e8d1300b9b8910aecb4617c66b2127417",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "this paper proposes IDE-Sanitizer"
+  },
+  {
+   "defense_name": "UNNAMED: Context-Aware Interception Framework for PI detection/mitigation",
+   "row": 109,
+   "paper_id": "440cdee84fc943b8919bcc0fb2308b0729b949ff",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "prompt-shield (Seven Cross-Domain Detection Techniques)",
+   "row": 110,
+   "paper_id": "5350cc42ab4830eb9d386e55f4cc44cc5361d71c",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 4,
+   "evidence": "tool call or  context chunk that triggered it; it is the closest philosophical sibling to prompt-shield's regex- based detector family.  Concurrent benchmarks. NetInjectBench (Shayoni et al., a"
+  },
+  {
+   "defense_name": "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+   "row": 112,
+   "paper_id": "d54a0c6f9163bbb01306417b426be49fc30db65b",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Representation Engineering-based Probing for IPI detection",
+   "row": 113,
+   "paper_id": "b02c2db7580b600815a486dce0766df5e2987a7c",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Secure Prompt Engineering Patterns (SPEP)",
+   "row": 114,
+   "paper_id": "08e6079c73649ba405826d9ea5da1c18645fcdb6",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 4,
+   "evidence": "the agent  requests explicit human or policy approval [38].  VI. METHODOLOGY  To evaluate Secure Prompt Engineering Patterns (SPEP) for  protecting cloud-integrated LLM agents, we ran co"
+  },
+  {
+   "defense_name": "VIGIL",
+   "row": 116,
+   "paper_id": "47a767024e85666d6b379e1f8c204d6a965c2f67",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose VIGIL"
+  },
+  {
+   "defense_name": "Progent",
+   "row": 120,
+   "paper_id": "d38e9870513e8933b0eb5abe51708470105d57a5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Progent"
+  },
+  {
+   "defense_name": "AgenTRIM",
+   "row": 123,
+   "paper_id": "01faaf29f224194719d37bcb522264fdcc07bc24",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose AGENTRIM"
+  },
+  {
+   "defense_name": "AgentSys",
+   "row": 124,
+   "paper_id": "c3eacc54e6be4b8c3629f5847a4598fcf18151ea",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present AGENTSYS"
+  },
+  {
+   "defense_name": "NeuroTaint",
+   "row": 125,
+   "paper_id": "cb388f8a04321f4f20d14efb40704581f4563bcd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present NeuroTaint"
+  },
+  {
+   "defense_name": "OpenClaw PRISM",
+   "row": 126,
+   "paper_id": "f7919b582eac5b86c88c697aad354f70f554002d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present OpenClaw"
+  },
+  {
+   "defense_name": "Safety-guided Chain-of-Thought (SCoT)",
+   "row": 130,
+   "paper_id": "7ff1a721846c7b157214001fd598df4a33fbbfe3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a new prompting method called Safety-guided"
+  },
+  {
+   "defense_name": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
+   "row": 134,
+   "paper_id": "6424243734d098460777049e1f11705d1b5d85c8",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Policy Enforcement Point (PEP) for MCP tool-call boundary",
+   "row": 138,
+   "paper_id": "0f6b86356acc0b2a172096bda2193a6026986628",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "MAScope",
+   "row": 139,
+   "paper_id": "150116ef37b7560697c1c475465bdb3c9bd9b072",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose MAScope"
+  },
+  {
+   "defense_name": "ContractGuard",
+   "row": 140,
+   "paper_id": "d06152bdf0a008155e0f95e54a05aae11fd1f89d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce ContractGuard"
+  },
+  {
+   "defense_name": "AuthGraph",
+   "row": 142,
+   "paper_id": "c0db3464d66135d7b7399346d6a90cf1467911b2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose AUTHGRAPH"
+  },
+  {
+   "defense_name": "Aura",
+   "row": 143,
+   "paper_id": "946e4e64ef25d3e3558c5dc54219fdad9d310d69",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 3,
+   "evidence": "ents vulnerable to redirection and impersonation attacks such as Task Hijacking [26, 28]. Aura mitigates these risks by treating every agent as a cryptographic principal identified by"
+  },
+  {
+   "defense_name": "PACT (Provenance-Aware Capability Contracts)",
+   "row": 144,
+   "paper_id": "66e778a70b120bbffced9a13e2a7fcdb243ddc7d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present PACT"
+  },
+  {
+   "defense_name": "Cognitive Control Architecture (CCA)",
+   "row": 147,
+   "paper_id": "50f0b646d3b863bcbd4d3211e4a8ebf329d3f694",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose the Cognitive"
+  },
+  {
+   "defense_name": "CachePrune",
+   "row": 148,
+   "paper_id": "f8d41e7fb18fe740bf7404af9a05dbf2d0992a27",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose CachePrune"
+  },
+  {
+   "defense_name": "UNNAMED: Authorization framework for autonomous LLM agent threat mitigation",
+   "row": 150,
+   "paper_id": "156e8e6a9f11d3a3c9136dfc53211b9fb0d51699",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking",
+   "row": 151,
+   "paper_id": "9ed873be33d372154f71b6197e135fada8dd5e90",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "RouteGuard",
+   "row": 152,
+   "paper_id": "b24fa85ac644bac1ae250e9af9737a58f17fd08f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose RouteGuard"
+  },
+  {
+   "defense_name": "PIIGuard",
+   "row": 156,
+   "paper_id": "d38977e3fc7f6578d4df019b908b6e36951dfe9b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present PIIGuard"
+  },
+  {
+   "defense_name": "OpenClaw-SRT (Semantic Routing & Trust)",
+   "row": 157,
+   "paper_id": "a00030f261b800f4156c88d01e0173f872962b99",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper proposes OpenClaw-SRT"
+  },
+  {
+   "defense_name": "AgentShield",
+   "row": 158,
+   "paper_id": "9046b05d3d7246b7ec7fd5fc5225a2ebbc9ab1d5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper introduces AgentShield"
+  },
+  {
+   "defense_name": "AgentRedGuard",
+   "row": 159,
+   "paper_id": "6678fff0a53a41ee884dc2eaed3cdfa1e0c522b2",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "DE-FIVE",
+   "row": 161,
+   "paper_id": "2609615b172dcbab3fd10fc0a3a0f2d0c318d484",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce DE-FIVE"
+  },
+  {
+   "defense_name": "UNNAMED: Fraud-detection-inspired trajectory-feature detector (XGBoost, 42-dim features)",
+   "row": 164,
+   "paper_id": "b6df37b96a984387de22ad1ecbf0a66a20ada084",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "ProjGuard",
+   "row": 165,
+   "paper_id": "45c41693ece0aebf5d9210aa3a983046ee325c65",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose ProjGuard"
+  },
+  {
+   "defense_name": "Unified Security Orchestration Framework (USOF)",
+   "row": 166,
+   "paper_id": "cce1b13eebe88e5051d329a95616c9df646fb08c",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "UNNAMED: Trust Context Separation for privileged AI agent systems",
+   "row": 167,
+   "paper_id": "dd42a440316cbae44b0ff68fe79914b07799a8ec",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "PromptArmor",
+   "row": 168,
+   "paper_id": "560fc5db493c20f788c7d0a80e0e3a5c1ca1b200",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present PromptArmor"
+  },
+  {
+   "defense_name": "DataSentinel",
+   "row": 170,
+   "paper_id": "a90068513bf2eae66c81ff80b5060ce115097176",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose DataSentinel"
+  },
+  {
+   "defense_name": "SecAlign++ / Meta-SecAlign",
+   "row": 171,
+   "paper_id": "fc3d1be58cc8fe00f15923493a0b59db2c50004c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we develop META SECALIGN"
+  },
+  {
+   "defense_name": "RTBAS (Robust Tool-Based Agent System)",
+   "row": 172,
+   "paper_id": "a376a054511881325218073b42461048b456b819",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Robust TBAS (RTBAS"
+  },
+  {
+   "defense_name": "DataFilter",
+   "row": 178,
+   "paper_id": "7222e1b74675ebfd85d5f261ef8ab5010111e737",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose DataFilter"
+  },
+  {
+   "defense_name": "AgentArmor",
+   "row": 179,
+   "paper_id": "46a4e8c7d5fb84288c067c9ee769273a591226f2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce AGENTARMOR"
+  },
+  {
+   "defense_name": "Robustness via Referencing (instruction-referencing defense)",
+   "row": 183,
+   "paper_id": "712e08695ec807163afbbfd9f442ab027ccc29ac",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Polymorphic Prompt Assembling (PPA)",
+   "row": 185,
+   "paper_id": "020ad9b3a8022ac6464cc06b2e80c2a267001e77",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel, lightweight defense mechanism called Polymorphic"
+  },
+  {
+   "defense_name": "UNNAMED: Multi-agent PI defense pipeline (Chain-of-Agents / Coordinator-based)",
+   "row": 188,
+   "paper_id": "f851714285c7a6bfb963da98d67f04df0eafbac9",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "PISanitizer",
+   "row": 191,
+   "paper_id": "177137fd3d07855a6fa2e0bdcee3606d0159fa3d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose PISanitizer"
+  },
+  {
+   "defense_name": "SecInfer",
+   "row": 195,
+   "paper_id": "5b3f710d1923323a0113f6db056aa712a04b0f13",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose SecInfer"
+  },
+  {
+   "defense_name": "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
+   "row": 196,
+   "paper_id": "9cfaa1cad9f1601bdd75d1de89dd56e18f24ff58",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Embedding-based traditional-ML classifiers for PI detection",
+   "row": 197,
+   "paper_id": "676249718345ab1e716d0a789084c085cab576c7",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "PromptSleuth",
+   "row": 198,
+   "paper_id": "f16917914c847b8e03594ccedc233e8f88cb3ccd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose PromptSleuth"
+  },
+  {
+   "defense_name": "PIShield",
+   "row": 199,
+   "paper_id": "1db392d42f020925561c0686ec24831fcd78bcae",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose PIShield"
+  },
+  {
+   "defense_name": "Type-directed privilege separation",
+   "row": 200,
+   "paper_id": "f09cf00b20b1f176b4bc90241cd71bda687da2a9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce type-directed"
+  },
+  {
+   "defense_name": "UNNAMED: Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)",
+   "row": 201,
+   "paper_id": "20d6d4a901b4b535e46e8a086c6a1f64e13948a4",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Meticulous Thought Defender",
+   "row": 202,
+   "paper_id": "06fa2b9d40f97bd093aa3d21f42828ed82d8f55e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper proposes a prompt injection attack detection method based on the meticulous"
+  },
+  {
+   "defense_name": "ShadowPlay",
+   "row": 203,
+   "paper_id": "62cd3a8f6ca307517456320009962a71487666f2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper presents ShadowPlay"
+  },
+  {
+   "defense_name": "UNNAMED: Four-layer guardrail system for offensive-security AI agents",
+   "row": 204,
+   "paper_id": "7b9f2477dce1435f698b4dfa605c1551e5b08a4e",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Cross-Agent Multimodal Provenance-Aware Defense Framework",
+   "row": 206,
+   "paper_id": "d775531bf0c45fa89cb41e521e77d920f33fcf82",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "this paper presents a proposal of a Cross-Agent"
+  },
+  {
+   "defense_name": "LLM Firewall (Validator Agent)",
+   "row": 210,
+   "paper_id": "af911725f2032ad6b8cb7d5c01fd7fb6e404e4ef",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "this paper we present the Validator Agent as LLM"
+  },
+  {
+   "defense_name": "DRIP",
+   "row": 212,
+   "paper_id": "65d9d85b86ce1b8c3dd01a446ebf28d99fd26bdd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose DRIP"
+  },
+  {
+   "defense_name": "SHIELD",
+   "row": 216,
+   "paper_id": "0ca1b5ccfc5cc3aeb869f45654dd7fa7fed3e188",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "AttnTrace",
+   "row": 217,
+   "paper_id": "e705134eb7e44fe99ef387209266b6738bb5273b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose AttnTrace"
+  },
+  {
+   "defense_name": "UNNAMED: Three-tier compositional runtime-verification fabric (MonPoly/RTLola-based) for LLM-assisted ISR swarms",
+   "row": 219,
+   "paper_id": "arxiv:2607.23532",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Scientist Persona + Provenance Audit mitigations against indirect data poisoning",
+   "row": 220,
+   "paper_id": "arxiv:2607.10712",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "CommandSans",
+   "row": 225,
+   "paper_id": "arxiv:2510.08829",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present CommandSans"
+  },
+  {
+   "defense_name": "ARLAS (Adversarial Reinforcement Learning for Agent Safety)",
+   "row": 226,
+   "paper_id": "arxiv:2510.05442",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Adversarial Reinforcement Learning for Agent Safety (ARLAS"
+  },
+  {
+   "defense_name": "ACE (Abstract-Concrete-Execute)",
+   "row": 228,
+   "paper_id": "arxiv:2504.20984",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Abstract-Concrete-Execute (ACE"
+  },
+  {
+   "defense_name": "Tool-Guard",
+   "row": 232,
+   "paper_id": "96146fc642ef28da0ad11f620d5d2d6e4719e4b2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Tool-Guard"
+  },
+  {
+   "defense_name": "UNNAMED: layered MCP descriptor defense (descriptor integrity verification + pre-context semantic vetting + runtime guardrails)",
+   "row": 233,
+   "paper_id": "08cec247465505fc4fb5ac6ab841c2b29a3c0477",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "SMCP (Secure Model Context Protocol)",
+   "row": 240,
+   "paper_id": "20627abfd2d5c40b44943308416639776437422c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce the Secure Model Context Protocol (SMCP"
+  },
+  {
+   "defense_name": "MCP-Scanner",
+   "row": 245,
+   "paper_id": "f5fa4852ded771092858856b14f0f59443479be5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce MCP-Scanner"
+  },
+  {
+   "defense_name": "LGA (Layered Governance Architecture)",
+   "row": 246,
+   "paper_id": "da624c880489e9a95dd3a8fb0fa5f541780de209",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose the Layered Governance Architecture (LGA"
+  },
+  {
+   "defense_name": "ShieldNet",
+   "row": 247,
+   "paper_id": "cc8a1ebd5ce98084b9f1fa2768d3a6535caf6fae",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We then propose ShieldNet"
+  },
+  {
+   "defense_name": "ChannelGuard",
+   "row": 249,
+   "paper_id": "95aaa050dbe2b2006d1fca13a3191903acfa654d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present ChannelGuard"
+  },
+  {
+   "defense_name": "ControlNet (ControlNET)",
+   "row": 251,
+   "paper_id": "32f24af87e890011ed3e11194ba53e8dd53afbe0",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose ControlNet"
+  },
+  {
+   "defense_name": "FilterRAG / ML-FilterRAG",
+   "row": 252,
+   "paper_id": "545f3e11c19b0abfe8352a783365e4822ca8a7ce",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose novel defense methods, FilterRAG"
+  },
+  {
+   "defense_name": "RAG-H",
+   "row": 254,
+   "paper_id": "9265b1252bde8bf36ecd4213e17646c04586963d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper introduces RAG-H"
+  },
+  {
+   "defense_name": "Salience Normalization (SN-1)",
+   "row": 255,
+   "paper_id": "ac4d3cc1cd6289702d7ab3cb54bda5e17506224d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Salience"
+  },
+  {
+   "defense_name": "UNNAMED: policy-first Hybrid RAG architecture (pre-reranking access control + BM25/dense fusion via RRF + evidence-pack citation-grounded generation)",
+   "row": 256,
+   "paper_id": "141d242563718b4677b350f6a89fd28172de1845",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "MedRAGShield",
+   "row": 258,
+   "paper_id": "dc05567166d3f4504978a6e1728bbd24a972805c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We design and implement MedRAGShield"
+  },
+  {
+   "defense_name": "BiRD (Bidirectional Ranking Defense)",
+   "row": 269,
+   "paper_id": "c53491dbf5608c75dbb0f59e2c94d0d777ef7bf9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose BiRD"
+  },
+  {
+   "defense_name": "TriShieldRAG",
+   "row": 270,
+   "paper_id": "e46294bf8ab1771768f957d5de69f7c4f7faffca",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 11,
+   "evidence": "Fig. 1), so that beating any one stage does not defeat the whole. Table II summarizes how TriShieldRAG\u2019s  TABLE I WHY EACH SINGLE-STAGE DEFENSE IN [2] FAILS Defense Why it fails Perplexity fil"
+  },
+  {
+   "defense_name": "UNNAMED: two-plane OPA-based governance architecture for secure RAG (provenance + ABAC + policy-as-code across ingestion/indexing/retrieval/generation)",
+   "row": 271,
+   "paper_id": "b69be7f40b334e01df7527b41acc22b75b8bd727",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "ReliabilityRAG",
+   "row": 276,
+   "paper_id": "80c7921964f622abe6c023a2df5d5a824f9c66d9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present empirical results showing ReliabilityRAG"
+  },
+  {
+   "defense_name": "BlindGuard",
+   "row": 277,
+   "paper_id": "f583a040e8324257a993935122c7f1e274bdb20a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose BlindGuard"
+  },
+  {
+   "defense_name": "TracLLM",
+   "row": 278,
+   "paper_id": "e8f42c742f2e6d3f570ec4ae4089309c64a61b24",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we develop TracLLM"
+  },
+  {
+   "defense_name": "TraceCaps",
+   "row": 288,
+   "paper_id": "b7f22c242732ccba8be3c1f5484af4f5032a0d83",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose TraceCaps"
+  },
+  {
+   "defense_name": "SkillVetBench (LLM-as-Judge)",
+   "row": 289,
+   "paper_id": "arxiv:2606.15899",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present SKILLVETBENCH"
+  },
+  {
+   "defense_name": "MemLineage",
+   "row": 290,
+   "paper_id": "arxiv:2605.14421",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce MemLineage"
+  },
+  {
+   "defense_name": "SecureGov-Agent",
+   "row": 293,
+   "paper_id": "e2e5529df48fe6cf893da483360958b32d829724",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose SecureGov-Agent"
+  },
+  {
+   "defense_name": "SUPERVISOR",
+   "row": 297,
+   "paper_id": "4f44017ed6ef809cb60654bd5eff64acff54b17e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose SUPERVISOR"
+  },
+  {
+   "defense_name": "MCP-Guard",
+   "row": 298,
+   "paper_id": "8951ab8938bcc4f92e29a6a9f20ae16878090367",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose MCP-GUARD"
+  },
+  {
+   "defense_name": "GT-MCP (Game-Theoretic Multi-Agent Control)",
+   "row": 303,
+   "paper_id": "03ebfea35124ed27f7f954332794209a96fff7c5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce the Game-Theoretic Secure Model Context Protocol (GT-MCP"
+  },
+  {
+   "defense_name": "Skills Architecture (vs. MCP)",
+   "row": 308,
+   "paper_id": "08511b5e1be93152829e91f34907e586b787a129",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 18,
+   "evidence": "s (TCR \u00b1 SD) with 95% Confidence Intervals Domain MCP baseline MCP + Truncation RAG + MCP Skills architecture \u0004 (Skills vs. Baseline) Code generation 0.61 \u00b1 0.07 0.67 \u00b1 0.06 0.70 \u00b1 0.07"
+  },
+  {
+   "defense_name": "SkillScan",
+   "row": 313,
+   "paper_id": "017083cfa88785e0a5dbddf6b5027caa281bc881",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We build SkillScan"
+  },
+  {
+   "defense_name": "GoalAnchorCheck (D1) / CrossAgentConsensus (D2)",
+   "row": 315,
+   "paper_id": "36dd2ed29b677eff1f4689a18040d3fae5c4278a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose GoalAnchorCheck"
+  },
+  {
+   "defense_name": "Forensic LLM-Trace",
+   "row": 316,
+   "paper_id": "e446aa098e37f3969e1cde7101959575f46fec56",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "this paper  proposes Forensic"
+  },
+  {
+   "defense_name": "AegisAgent",
+   "row": 317,
+   "paper_id": "7ecde12a9c503955ec0cdb38f892df3664fc95f1",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce AegisAgent"
+  },
+  {
+   "defense_name": "G-Safeguard",
+   "row": 318,
+   "paper_id": "4e92cc52b11da0785362c3b98a8821005d326b45",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce G-Safeguard"
+  },
+  {
+   "defense_name": "Maris",
+   "row": 319,
+   "paper_id": "b99bf346a634338688ffe89878505bdc07bfe1c6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Maris"
+  },
+  {
+   "defense_name": "TIVS-O agentic defense pipeline (Front-End Agent + Guard-Sanitizer + Policy Enforcer with semantic caching)",
+   "row": 322,
+   "paper_id": "f759d9e8f124b49d74005ed5d36c2202bddd0dd7",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 13,
+   "evidence": "7 41.6% Improvement +67% \u221214.6% \u221259% \u221242% \u2014 Full vs. None The No Memory baseline achieves TIVS-O = \u22120.312 with mean ISR = 0.089, demonstrating that the multi-agent architecture provides"
+  },
+  {
+   "defense_name": "UNNAMED: ICL-based multi-LLM agent harmfulness-detection framework",
+   "row": 323,
+   "paper_id": "c30673d667b2875f2a7563c4755520d6961783f8",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "SafeClaw-R",
+   "row": 325,
+   "paper_id": "c1cf294d2e6f01055819d5d9bcb086e1a4c9d34b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose SafeClaw-R"
+  },
+  {
+   "defense_name": "UNNAMED: step-level fine-tuned industrial tool-call guardrail",
+   "row": 331,
+   "paper_id": "1ee66ccebe2e1c1d8f3f3ec74c957ea91dcd2e98",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: multi-agent privacy firewall (browser extension + MITM proxy + PII-detection pipeline)",
+   "row": 332,
+   "paper_id": "574941aa01920e483d384d89061d91ec797b6a37",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Agentic JWT (A-JWT)",
+   "row": 336,
+   "paper_id": "117cd1d71516457304f87903bac925e5d1222325",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 14,
+   "evidence": "4]. Meanwhile, Gartner predicts that by 2028, 33% of enterprise applications will include Agentic AI [5]. Function calling (including API calling) driven by LLM instructions is the fundam"
+  },
+  {
+   "defense_name": "SafeAgent",
+   "row": 338,
+   "paper_id": "246757c8ad6b30391c40b4df10e9ca89a5bc5c09",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper presents SafeAgent"
+  },
+  {
+   "defense_name": "ARSM-Agent",
+   "row": 342,
+   "paper_id": "59f623857e6d89dc1d0f2ca4cb433f0017b768db",
+   "origin": "ambiguous",
+   "propose_hits": 0,
+   "prior_hits": 2,
+   "evidence": "Verification Approach The goal of this experiment is to fully verify the  performance of ARSM-Agent algorithm for medical decision  making, verifying the following basic indicators: decisio"
+  },
+  {
+   "defense_name": "UNNAMED: off-the-shelf LLM behavioral overseer (non-verbal interaction-trace adversarial-intent detection)",
+   "row": 343,
+   "paper_id": "18f0a52f091f3863670ea503bfd320d4bcb902a3",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: WAB Wasm-sandboxed capability-based authority mechanism (allowlisted API with explicit grant/revocation)",
+   "row": 346,
+   "paper_id": "74aec0665c948c64072682901b7e95e7b71286e4",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Cross-Agent Multimodal Provenance-Aware Defense Framework (text/visual sanitizer agents + output validator + provenance ledger)",
+   "row": 347,
+   "paper_id": "5fd47f3c351347de692aa41262acd331635f5879",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "SentinelAgent",
+   "row": 348,
+   "paper_id": "99296c88c1470c2f20cf34f2e9708eab4f34fa2c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce a pluggable SentinelAgent"
+  },
+  {
+   "defense_name": "Agent Privilege Separation (Reader/Actor two-agent isolation + JSON formatting)",
+   "row": 351,
+   "paper_id": "ec46ec24c252cfa46a0d4a4128855b91cb7c5f31",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose and ablate a two- mechanism architectural defense: agent"
+  },
+  {
+   "defense_name": "Defe-Prompt",
+   "row": 353,
+   "paper_id": "0b708c14a822691047238cfc50dc15312ee8cef1",
+   "origin": "ambiguous",
+   "propose_hits": 0,
+   "prior_hits": 1,
+   "evidence": ""
+  },
+  {
+   "defense_name": "DASGuard",
+   "row": 356,
+   "paper_id": "ce9d30735c0c27de65e68b228d77381d77f2a28b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose DASGuard"
+  },
+  {
+   "defense_name": "ARGUS",
+   "row": 364,
+   "paper_id": "cc7a9701833cf982f6cc28957b604357e53248b8",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose ARGUS"
+  },
+  {
+   "defense_name": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
+   "row": 366,
+   "paper_id": "07734909a75edc13eb838d9f83b52dcc1ea06e64",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce LlamaFirewall"
+  },
+  {
+   "defense_name": "UNNAMED: six composable agent design patterns (e.g. Action-Selector) for prompt-injection-resistant architecture",
+   "row": 367,
+   "paper_id": "a02a9e21fc116194570201d84dca7bb2ff85de71",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "FASA (zero-trust, full-lifecycle defense philosophy)",
+   "row": 368,
+   "paper_id": "ec338413be097a8f6de120397411e86952c475ca",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce the Full-Lifecycle Agent Security Architecture (FASA"
+  },
+  {
+   "defense_name": "AgentSandbox",
+   "row": 369,
+   "paper_id": "089938febf54aad46e36234f5e1052b5d24339ad",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce AgentSandbox"
+  },
+  {
+   "defense_name": "Hybrid monitor scaffold (Monitor Red Teaming / MRT framework)",
+   "row": 371,
+   "paper_id": "3ffb459ab34a6e766edbbdad32fe2c132ce47580",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 28,
+   "evidence": "Omniscient Monitor Awareness 0.5 0.6 0.7 0.8 0.9 1.0 AUC Baseline Sequential Hierarchical Hybrid Unaware Aware Omniscient Monitor Awareness 0.5 0.6 0.7 0.8 0.9 1.0 AUC Baseline Sequentia"
+  },
+  {
+   "defense_name": "UNNAMED: DPO-based faithfulness-improvement training for GUI agents against environmental distraction",
+   "row": 374,
+   "paper_id": "ee745d4c5e9ff890731866f54b6b333bb3a4eb57",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "ceLLMate",
+   "row": 375,
+   "paper_id": "ee41d78f9c64e448ea885eebbc1a60ec8743d12c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose CELLMATE"
+  },
+  {
+   "defense_name": "lambda-RLM",
+   "row": 380,
+   "paper_id": "50c89ae2d4c1fda4b1b425055b9617ebf4feab87",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "ARC (Active and Reflection-driven Context management)",
+   "row": 383,
+   "paper_id": "883670bdd662f19ef5822b20d6136f75e8de1f3b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose ARC"
+  },
+  {
+   "defense_name": "G-MemLLM",
+   "row": 384,
+   "paper_id": "ba6ab8a23f01c2c3b56672c569a71eb5d65f5be2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose G-MemLLM"
+  },
+  {
+   "defense_name": "CoThinker",
+   "row": 386,
+   "paper_id": "8408df2d1326e6fe8713e680c24e2fd40ea0c7d7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce CoThinker"
+  },
+  {
+   "defense_name": "FinLongDocAgent",
+   "row": 387,
+   "paper_id": "53d7cd998e6ec4794422688c0a2c3e2cd70025d2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce FinLongDocAgent"
+  },
+  {
+   "defense_name": "ClinQueryAgent (Retrieval Agent sub-agent delegation)",
+   "row": 388,
+   "paper_id": "1447859940005bfcdc2156673cf7f1bab455a0cf",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "this paper we introduce CLINQUERYAGENT"
+  },
+  {
+   "defense_name": "UNNAMED: detailed external checklist restatement (vs generic self-check) for long-context skill-following",
+   "row": 389,
+   "paper_id": "arxiv:2607.17937",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "LongCrafter",
+   "row": 393,
+   "paper_id": "arxiv:2607.06160",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose LongCrafter"
+  },
+  {
+   "defense_name": "SSRP (Self-Synthesizing Reasoning Protocols)",
+   "row": 394,
+   "paper_id": "arxiv:2604.24512",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Self-Synthesizing Reasoning Protocols (SSRP"
+  },
+  {
+   "defense_name": "ActiveContext (ContextCurator + TaskExecutor)",
+   "row": 395,
+   "paper_id": "arxiv:2604.11462",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce ActiveContext"
+  },
+  {
+   "defense_name": "DualGraph",
+   "row": 399,
+   "paper_id": "arxiv:2602.13830",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present DualGraph"
+  },
+  {
+   "defense_name": "GDWM (Gated Differentiable Working Memory)",
+   "row": 400,
+   "paper_id": "arxiv:2601.12906",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose GDWM"
+  },
+  {
+   "defense_name": "Aeon",
+   "row": 401,
+   "paper_id": "arxiv:2601.15311",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper presents Aeon"
+  },
+  {
+   "defense_name": "Dynamic Context Selection (classifier-based adaptive k-selection + reranking)",
+   "row": 402,
+   "paper_id": "arxiv:2512.14313",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a context-size classifier that dynamic"
+  },
+  {
+   "defense_name": "GUI-PRA (Process Reward Agent)",
+   "row": 404,
+   "paper_id": "arxiv:2509.23263",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce GUI-PRA"
+  },
+  {
+   "defense_name": "LDAR (Learning Distraction-Aware Retrieval)",
+   "row": 405,
+   "paper_id": "arxiv:2509.21865",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose LDAR"
+  },
+  {
+   "defense_name": "Tree of Agents (TOA)",
+   "row": 406,
+   "paper_id": "arxiv:2509.06436",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Tree"
+  },
+  {
+   "defense_name": "LLM+DPP (Principled Content Selection pipeline)",
+   "row": 409,
+   "paper_id": "arxiv:2505.21859",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 37,
+   "evidence": "ble to process these longer inputs, Zheng et al. (2024) observe that a common use case of LLMs involves the sum- marization of dense information from collections *Work done during sum"
+  },
+  {
+   "defense_name": "QwenLong-CPRS",
+   "row": 410,
+   "paper_id": "arxiv:2505.18092",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel compression system QWENLONG-CPRS"
+  },
+  {
+   "defense_name": "MAL-RAG (Multiple Abstraction Level RAG)",
+   "row": 412,
+   "paper_id": "arxiv:2501.16952",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose the Multiple Abstraction Level Retrieval- Augmented Generation (MAL-RAG"
+  },
+  {
+   "defense_name": "KV-Fusion",
+   "row": 413,
+   "paper_id": "arxiv:2501.07523",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 9,
+   "evidence": "ovements of 21.4%, 6.4%, and 6.6% over baseline models in shuffled settings. Furthermore, KV-Fusion mod- els exhibit robust and stable accuracies even with additional contexts compared to o"
+  },
+  {
+   "defense_name": "LongRAG",
+   "row": 414,
+   "paper_id": "arxiv:2410.18050",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose LongRAG"
+  },
+  {
+   "defense_name": "QUITO-X",
+   "row": 415,
+   "paper_id": "arxiv:2408.10497",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Scale Positional Hidden States (single-dimension scaling)",
+   "row": 417,
+   "paper_id": "arxiv:2406.02536",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a posi- tion bias mitigation method named \u201cscale"
+  },
+  {
+   "defense_name": "LongAgent",
+   "row": 418,
+   "paper_id": "arxiv:2402.11550",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose LONGAGENT"
+  },
+  {
+   "defense_name": "COMPASS (Context-Organized Multi-Agent Planning and Strategy System)",
+   "row": 420,
+   "paper_id": "bed6e0c90748faf13e8e091d1ce420bf0d2256df",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose COMPASS"
+  },
+  {
+   "defense_name": "END (Early Noise Dropping)",
+   "row": 422,
+   "paper_id": "e660c122a8299bb5613ba7a0ace335c197c54371",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Early Noise Drop- ping (END"
+  },
+  {
+   "defense_name": "Differential Transformer (DIFF Transformer)",
+   "row": 423,
+   "paper_id": "483d7ee601ee95bfe80e6924560473bf76072173",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Differential"
+  },
+  {
+   "defense_name": "ActQKV (Activation-aware Probe-Query)",
+   "row": 424,
+   "paper_id": "b345933a16c48404a38f8c1dc2c9ea03968dc0e7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose ActQKV"
+  },
+  {
+   "defense_name": "TRACE (Trajectory Risk-Aware Compression)",
+   "row": 426,
+   "paper_id": "6792cb92e343acbf1ccb5edaf59647eb0b6e88c9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Trajectory Risk-Aware Compres- sion for Long-Horizon Agent Safety (TRACE"
+  },
+  {
+   "defense_name": "Context-Folding (FoldGRPO)",
+   "row": 427,
+   "paper_id": "6ca29e9438224626cafa50f121c22244f35575c0",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Context-Folding"
+  },
+  {
+   "defense_name": "SUPO (summarization-based context management for RL)",
+   "row": 428,
+   "paper_id": "fc329a561cad5ab623241bd512170a1021ae14e0",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we design SUmmarization augmented Policy Optimization (SUPO"
+  },
+  {
+   "defense_name": "UNNAMED: hierarchical pixel-agent grid with spatial curriculum and selective oracle",
+   "row": 429,
+   "paper_id": "bd3cce65cef8540936d79a7a80c585c6e94005f8",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "AdaCoM (Adaptive Context Management)",
+   "row": 430,
+   "paper_id": "dfdcaace7d72005e045d511d37d5a3eb4627420c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Adaptive Context Management (AdaCoM"
+  },
+  {
+   "defense_name": "AgentSwing",
+   "row": 434,
+   "paper_id": "9c8c4c9afa5759716a6bfe1d9ec4c32ba046b7b0",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose AgentSwing"
+  },
+  {
+   "defense_name": "APEMO (Affect-aware Peak-End Modulation for Orchestration)",
+   "row": 435,
+   "paper_id": "7ab5357f7f8079321c8789952ba72bf3f7e53555",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce APEMO"
+  },
+  {
+   "defense_name": "MSCE (Memory-Skill Co-Evolution)",
+   "row": 436,
+   "paper_id": "19291a8feb3169f43b0a295f876390b50f33942d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose MSCE"
+  },
+  {
+   "defense_name": "GRACE (Graph-Regularized Agentic Context Evolution)",
+   "row": 438,
+   "paper_id": "362f97f9734e7dc1c20ac52f21dcbdb4be119c7e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Graph-Regularized Agentic Context Evolution (GRACE"
+  },
+  {
+   "defense_name": "CoCortex",
+   "row": 439,
+   "paper_id": "1217aaf8b6fda0bc84a345feb611ce5b0edddd7a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present COCORTEX"
+  },
+  {
+   "defense_name": "ADE-PRF (ADE Predictive Reliability Framework)",
+   "row": 440,
+   "paper_id": "35812b4a3fba1211b4e6177c3c27c931d83859f0",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "STAR-P\u00f3lyaMath",
+   "row": 447,
+   "paper_id": "230554c21f19584a1375b7537b28300dc22e295d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce STAR-"
+  },
+  {
+   "defense_name": "UNNAMED: pre-research and post-research verification defenses (verification-enhanced prompting + search-enabled verifier agent) for Deep Research agents",
+   "row": 458,
+   "paper_id": "22a9a24c625921d705506f798e91bb978d240ea2",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "HiAgent",
+   "row": 460,
+   "paper_id": "a7fb4245b412f0e54ec26d5973f041d52c83c0ad",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a sophisticated hierarchical working memory management framework HIAGENT"
+  },
+  {
+   "defense_name": "Planning with Schemas (PwS)",
+   "row": 461,
+   "paper_id": "e8da028dac974c26a614f8322b67f86aaa879073",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "OCR-Memory (Optical Context Retrieval Memory)",
+   "row": 463,
+   "paper_id": "7dd622ba79b2a71fc8954f7c829b5f2ed387a22b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Optical Context Retrieval Memory (OCR-Memory"
+  },
+  {
+   "defense_name": "Agent Capability Registry",
+   "row": 329,
+   "paper_id": "b46e67e21542fdd9e0ce0cfa1be6fd5030df2c5b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present a formal model of multi-agent"
+  },
+  {
+   "defense_name": "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
+   "row": 357,
+   "paper_id": "ec9062053726fa4c501b7deb016b2174bd93cc21",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Dynamic Rule-based Isolation Framework for Trustworthy agentic systems (DRIFT"
+  },
+  {
+   "defense_name": "Mobile-Agent-RAG (Manager-RAG / Operator-RAG dual-level retrieval augmentation)",
+   "row": 480,
+   "paper_id": "dec51cfaee7ff30df5a19862fff84f5277c266c5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Mobile-Agent-"
+  },
+  {
+   "defense_name": "ACON (Agent Context Optimization)",
+   "row": 482,
+   "paper_id": "647c7ba851ec85bb01a5c8ab7718606f9ec871c7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Agent Context Optimization (ACON"
+  },
+  {
+   "defense_name": "AgentFold (folding - granular condensation / deep consolidation context management)",
+   "row": 484,
+   "paper_id": "d61dea1dcdf159f226b90287f8899bb9c98d2ef4",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce AgentFold"
+  },
+  {
+   "defense_name": "MemAct (Memory-as-Action) with Dynamic Context Policy Optimization",
+   "row": 488,
+   "paper_id": "5f0f0c762c094bb6e1deba3222331ee51b98d1fc",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Memory-as-Action (MemAct"
+  },
+  {
+   "defense_name": "SAM (State-Adaptive Memory)",
+   "row": 496,
+   "paper_id": "5df5f1166129e67e4eb3b102539766c365c91bb7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose State-Adaptive Memory (SAM"
+  },
+  {
+   "defense_name": "ColorBrowserAgent (knowledge-aligned progressive summarization + human-in-the-loop knowledge adaptation)",
+   "row": 498,
+   "paper_id": "db71c13ab10e6444a1920882361fb1478e459839",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce ColorBrowserAgent"
+  },
+  {
+   "defense_name": "Agent-BRACE (Agent Belief state Representation via Abstraction and Confidence Estimation)",
+   "row": 499,
+   "paper_id": "1b81384dff55bae55127770a53ea0f19220f2526",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Agent-BRACE"
+  },
+  {
+   "defense_name": "HiMAP-Travel (day-level context isolation + transactional monitor + bargaining protocol)",
+   "row": 500,
+   "paper_id": "d9e214309a03bdea6b2ad5e858eb54b8db18141c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose HiMAP-Travel"
+  },
+  {
+   "defense_name": "HIPIF (Hierarchical Planning and Information Folding)",
+   "row": 501,
+   "paper_id": "ca7830d57999480fd403a94d63eea380dac4d851",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Hierarchical Planning and Information Folding (HIPIF"
+  },
+  {
+   "defense_name": "ROMA (Recursive Open Meta-Agents) with GEPA+",
+   "row": 502,
+   "paper_id": "5814e11d1745afb7cbec86027b01792b9addd58c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce ROMA"
+  },
+  {
+   "defense_name": "Prometheus (memory-centric context engine with working memory over a repository knowledge graph)",
+   "row": 505,
+   "paper_id": "a14e146c8ee39a21546e71fd1bf4193b3e178748",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present Prometheus"
+  },
+  {
+   "defense_name": "AgentProg (program-guided context management with Execution Tree and global belief state)",
+   "row": 506,
+   "paper_id": "420c63cc0480a1990a348b741612cbde516b3f30",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose AgentProg"
+  },
+  {
+   "defense_name": "ID-RAG (Identity Retrieval-Augmented Generation)",
+   "row": 512,
+   "paper_id": "35d992fd33278b601ecf1bb977bcc9ab965d490f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "this paper introduces Identity Retrieval-Augmented Generation (ID-RAG"
+  },
+  {
+   "defense_name": "MEM1",
+   "row": 514,
+   "paper_id": "6c5f3dd82ee674d929a8eb4b256ca2045e02ae60",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce MEM1"
+  },
+  {
+   "defense_name": "FoldAct",
+   "row": 515,
+   "paper_id": "a916a577bf89c4151f128e21b9fc30310b412125",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce FoldAct"
+  },
+  {
+   "defense_name": "CES (Coordinator-Executor-State Tracker), specifically the State Tracker context-compression module",
+   "row": 518,
+   "paper_id": "00f053f6a2769351f5102c445b2ee02e9c73226a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We build CES"
+  },
+  {
+   "defense_name": "Laser (structured action protocol + context register)",
+   "row": 522,
+   "paper_id": "c39c4cadbf0f6bbf509848c9a8de7bf0c7d6785b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Laser"
+  },
+  {
+   "defense_name": "ReSum / ReSum-GRPO",
+   "row": 523,
+   "paper_id": "055f039761d570658146e34dbe512d8671493887",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose ReSum"
+  },
+  {
+   "defense_name": "SearchSwarm (delegation-intelligence harness/training for main-agent-to-subagent task decomposition)",
+   "row": 534,
+   "paper_id": "25bb43f9e14b7d157a84736ee63352c6227766e0",
+   "origin": "ambiguous",
+   "propose_hits": 0,
+   "prior_hits": 1,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Agent-level affective subsystem (VAD state dynamics)",
+   "row": 535,
+   "paper_id": "f259b2f9d94edd5254891a7efc05503c6528e0f3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce an agent-level"
+  },
+  {
+   "defense_name": "Constraint Pinning",
+   "row": 536,
+   "paper_id": "f9272681e0e35b2a8d82ae1c862a43d6d825274c",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 3,
+   "evidence": "bootstrap 95% CI [31, 43]), while control and Constraint Pinning remain at 0% ([0, 1.4]). Constraint survival predicts violation. The strongest mechanism evidence is whether the rule survive"
+  },
+  {
+   "defense_name": "AMA-Agent (causality-graph construction + tool-augmented retrieval)",
+   "row": 538,
+   "paper_id": "9fadf4b306ecf6195cd23e59e140afbc95f9334b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We further propose AMA-Agent"
+  },
+  {
+   "defense_name": "Memex / MemexRL (indexed experience memory)",
+   "row": 545,
+   "paper_id": "d1ed5cf8419f2e0d78a3511ae37596427e4efcbc",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Memex"
+  },
+  {
+   "defense_name": "Hierarchical Cognitive Caching (HCC), in ML-Master 2.0",
+   "row": 551,
+   "paper_id": "960fb2ff6bc20697a0ca16d65e9e95c5b57a118b",
+   "origin": "ambiguous",
+   "propose_hits": 0,
+   "prior_hits": 1,
+   "evidence": ""
+  },
+  {
+   "defense_name": "MemWeaver (graph memory + experience memory + passage memory)",
+   "row": 553,
+   "paper_id": "6185f73684109d7f87f92d7f4db44c310b7ddf77",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose MemWeaver"
+  },
+  {
+   "defense_name": "CWL (Context Window Lifecycle)",
+   "row": 557,
+   "paper_id": "7d88571dd0f1a5375ed6a1b397540acc60c4c664",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Context Window Lifecycle (CWL"
+  },
+  {
+   "defense_name": "TDP (Task-Decoupled Planning)",
+   "row": 558,
+   "paper_id": "7ea4430ffe6177a3722373bdc697227a883f3181",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Task-Decoupled Planning (TDP"
+  },
+  {
+   "defense_name": "Memory-R2 (LoGo-GRPO training) with shared-parameter fact extractor / memory manager",
+   "row": 561,
+   "paper_id": "2b570db92dc6c6202e7de5b9834ba87bf701400a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Memory-R2"
+  },
+  {
+   "defense_name": "MAGE (Memory As Guardrail Enforcement)",
+   "row": 562,
+   "paper_id": "39aa2fee90ab6a05748b14aae98d7e5ccde570da",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present MAGE"
+  },
+  {
+   "defense_name": "M2 (Dynamic Trajectory Summarization + Insight Retrieval Augmentation)",
+   "row": 564,
+   "paper_id": "5903e7085369d8364ddb739bbf4c10e9b80590c3",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "UI-Copilot (memory decoupling + Tool-Integrated Policy Optimization / TIPO)",
+   "row": 567,
+   "paper_id": "8d7b4735580cb50efdb1f741504e03af5739fd8f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce UI-Copilot"
+  },
+  {
+   "defense_name": "MMPO (Metacognitive Memory Policy Optimization) with Belief Entropy",
+   "row": 570,
+   "paper_id": "1c704a568f6593fae71bbd56160de6bda2f16be3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Metacognitive Memory Policy Optimization (MMPO"
+  },
+  {
+   "defense_name": "Slipstream (asynchronous, judge-validated trajectory-grounded compaction)",
+   "row": 573,
+   "paper_id": "4faf0b5fdbfe974ae6e2c156371f422a1b6eda67",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We build Slipstream"
+  },
+  {
+   "defense_name": "Autopilot (gated finite-state-machine execution firewall)",
+   "row": 575,
+   "paper_id": "b6f2abdf6b7896e12671af37ab280b17c5ab5c36",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Autopilot"
+  },
+  {
+   "defense_name": "Environment Maps (Contexts/Actions/Workflows/Tacit Knowledge graph)",
+   "row": 577,
+   "paper_id": "8ff9c033934b39ec676e42bc84baa654e2453cc6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper introduces Environment"
+  },
+  {
+   "defense_name": "StructAgent (unified causal state + verifier-backed state transitions)",
+   "row": 581,
+   "paper_id": "3b04534002e0d95801c53ea45b690a9a18ef4cf3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce StructAgent"
+  },
+  {
+   "defense_name": "TaskWeave (Formulate-Partition-Diagnose-Align cycle + dependency-aware trace memory)",
+   "row": 583,
+   "paper_id": "7ab57e87ce8bda74496954d657feb60bdaac2ab2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose TaskWeave"
+  },
+  {
+   "defense_name": "FGHM (Failure-Gated Hierarchical Memory) with Failure Critic and LTM Pollution Rate (LPR) metric",
+   "row": 584,
+   "paper_id": "341883c91dabb788b32dae7d1bd6c6146d266b95",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Failure- Gated Hierarchical Memory (FGHM"
+  },
+  {
+   "defense_name": "MAGE (Memory as Agent-Guided Exploration) - hierarchical state tree with Grow/Compress/Maintain/Revise",
+   "row": 586,
+   "paper_id": "cd0de1b2c55cc95b004f004eab704da1f860ed3f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose MAGE"
+  },
+  {
+   "defense_name": "PACEvolve - Hierarchical Context Management (HCM) component specifically",
+   "row": 589,
+   "paper_id": "230ab088432e2fcc7e34b6148fd08fef30cb2077",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Progress-Aware Consis- tent Evolution (PACEvolve"
+  },
+  {
+   "defense_name": "Memanto (typed semantic memory + automated conflict resolution + temporal versioning)",
+   "row": 590,
+   "paper_id": "14bf6407eeb2d1bbd6c8e443bc1e58138ca75e7b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper introduces Memanto"
+  },
+  {
+   "defense_name": "SDO (Signal-Driven Observation)",
+   "row": 592,
+   "paper_id": "efd0c320f1c24b5beb87a531a4ad1a82f66ec00d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Signal-Driven Observation (SDO"
+  },
+  {
+   "defense_name": "ToolScope (Perceive tool within Global Navigator / Agentic Executor / Response Synthesizer)",
+   "row": 596,
+   "paper_id": "607d050bb4b11be7d9f6a1dfe0625e4939df1f86",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce ToolScope"
+  },
+  {
+   "defense_name": "BACM / BACM-RL (Budget-Aware Context Management)",
+   "row": 609,
+   "paper_id": "659cd790e6634fa2f28ff64fa2e49fa15fab3845",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Budget-Aware Context Management (BACM"
+  },
+  {
+   "defense_name": "TokenPilot (Ingestion-Aware Compaction + Lifecycle-Aware Eviction)",
+   "row": 611,
+   "paper_id": "adfccd1c12f402e56e137fa63c34f2b8126895de",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present TokenPilot"
+  },
+  {
+   "defense_name": "GCC (Git-Context-Controller)",
+   "row": 612,
+   "paper_id": "1e0f16bbdf17ac5955474fe7ff764a006ae87f38",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Git-Context-Controller (GCC"
+  },
+  {
+   "defense_name": "AgeMem (Agentic Memory)",
+   "row": 613,
+   "paper_id": "fddca50008a46c925b288bae079e43ead0bbeb6e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Agentic Memory (AgeMem"
+  },
+  {
+   "defense_name": "ARC (Addressable Recall Compaction)",
+   "row": 614,
+   "paper_id": "arxiv:2607.25066",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose ARC"
+  },
+  {
+   "defense_name": "PRO-LONG (programmatic memory framework)",
+   "row": 615,
+   "paper_id": "arxiv:2607.20064",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose PRO-LONG"
+  },
+  {
+   "defense_name": "Self-GC (Self-Governing Context)",
+   "row": 616,
+   "paper_id": "arxiv:2607.00692",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Self-GC"
+  },
+  {
+   "defense_name": "VISTA (Visible Internal State for Tool Agents)",
+   "row": 617,
+   "paper_id": "arxiv:2606.30005",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce VISTA"
+  },
+  {
+   "defense_name": "icat-agent (decentralized event-based multi-agent scaffold)",
+   "row": 618,
+   "paper_id": "arxiv:2606.25514",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose icat-agent"
+  },
+  {
+   "defense_name": "MemGUI-Agent / ConAct (Context-as-Action)",
+   "row": 619,
+   "paper_id": "arxiv:2606.19926",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce MemGUI-Agent"
+  },
+  {
+   "defense_name": "TokenMizer (typed knowledge-graph session memory)",
+   "row": 620,
+   "paper_id": "arxiv:2606.06337",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present TokenMizer"
+  },
+  {
+   "defense_name": "EvoDS - Adaptive Context Compression (ACC) component specifically",
+   "row": 621,
+   "paper_id": "arxiv:2606.03841",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce EvoDS"
+  },
+  {
+   "defense_name": "Context-Agent (dynamic discourse tree)",
+   "row": 623,
+   "paper_id": "arxiv:2604.05552",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Context-Agent"
+  },
+  {
+   "defense_name": "Mem0^R (unified conversational + repository memory)",
+   "row": 624,
+   "paper_id": "arxiv:2603.06358",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we develop an improved variant of Mem0"
+  },
+  {
+   "defense_name": "Recursive Models (recursive self-invocation with isolated subtask contexts)",
+   "row": 625,
+   "paper_id": "arxiv:2603.02112",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose the simplest realization of this principle, which we call recursive"
+  },
+  {
+   "defense_name": "Neural Paging / Page Controller",
+   "row": 626,
+   "paper_id": "arxiv:2603.02228",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Neural"
+  },
+  {
+   "defense_name": "Yunque DeepResearch - Dynamic Context Management module specifically",
+   "row": 630,
+   "paper_id": "arxiv:2601.19578",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Yunque"
+  },
+  {
+   "defense_name": "Hybrid context management + deterministic programmatic safety checks / domain allowlisting / action restriction / least-privilege scoping (production browser-agent architecture)",
+   "row": 634,
+   "paper_id": "arxiv:2511.19477",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "AFM (Adaptive Focus Memory)",
+   "row": 636,
+   "paper_id": "arxiv:2511.12712",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Adaptive Focus Memory (AFM"
+  },
+  {
+   "defense_name": "Parallel Compaction",
+   "row": 637,
+   "paper_id": "3dd46c0ab602825f50b522ca9f96d22c3c6925b4",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce parallel"
+  },
+  {
+   "defense_name": "CompactionRL",
+   "row": 638,
+   "paper_id": "0288cf2e7781e2087350006f9b7ab312070c9205",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose CompactionRL"
+  },
+  {
+   "defense_name": "UMA (Unified Memory Agent)",
+   "row": 639,
+   "paper_id": "58f06a469e693919434151b1269a01b355cc2b61",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Unified Memory Agent (UMA"
+  },
+  {
+   "defense_name": "PlugMem (knowledge-centric memory graph)",
+   "row": 640,
+   "paper_id": "6ae3fb18300289acc53af5535508500992aa185c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose PLUGMEM"
+  },
+  {
+   "defense_name": "MemoBrain",
+   "row": 641,
+   "paper_id": "b731d8f739b3c3b730b8259ef08be9944737d8ef",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose MemoBrain"
+  },
+  {
+   "defense_name": "MGA (Memory-Driven GUI Agent) - Observer + Structured Memory",
+   "row": 643,
+   "paper_id": "86127ab0e2f1577d0461dac81a8a13e1807da0fa",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose the Memory-Driven GUI Agent (MGA"
+  },
+  {
+   "defense_name": "Engram (Archive + Research Digest)",
+   "row": 644,
+   "paper_id": "d95cb62f6b46d3c6b7b0708cc616d97d245ba980",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Engram"
+  },
+  {
+   "defense_name": "LWM-Planner (Fact Extraction and Compression / FEC)",
+   "row": 645,
+   "paper_id": "93f50fbd4ed8303e86ebb5946339bb103a234ab5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce LWM-Planner"
+  },
+  {
+   "defense_name": "PRIMA (context-boundary discipline + reference-material sandboxing + poisoned-output rejection)",
+   "row": 647,
+   "paper_id": "arxiv:2605.24775",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present PRIMA"
+  },
+  {
+   "defense_name": "MemFlow (Router Agent + tiered Memory Agent + Validator Agent)",
+   "row": 648,
+   "paper_id": "arxiv:2605.03312",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce MemFlow"
+  },
+  {
+   "defense_name": "Taxonomy-Aware / Pipeline conflict-type-aware response generation (from the CONFLICTS benchmark)",
+   "row": 650,
+   "paper_id": "a51fcc29f90d3910b348f8f0fee1e2852a7fabf0",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 4,
+   "evidence": "88.6 93.3 Qwen 2.5 72B (Yang et al., 2024) Vanilla 64.2 87.7 90.5 Pipeline 67.5 89.0 88.2 Taxonomy-Aware 68.3 88.2 89.4 Oracle 90.6 87.3 89.3 GPT-4o (Hurst et al., 2024) Vanilla 67.2 87.3 91.2 P"
+  },
+  {
+   "defense_name": "BordaRAG (Borda Voting-based document selection)",
+   "row": 651,
+   "paper_id": "dc27c98b0f700f4a55fe726e6eae23f90834cd7a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose BordaRAG"
+  },
+  {
+   "defense_name": "CDD (Context-Driven Decomposition)",
+   "row": 652,
+   "paper_id": "bac834b243ee47e83b60117d529a369dec67514e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Context-Driven Decomposition (CDD"
+  },
+  {
+   "defense_name": "SHIFT (gate-modulated activation steering)",
+   "row": 653,
+   "paper_id": "43767015c51be5095a148c3ea666b321e2324100",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Shift"
+  },
+  {
+   "defense_name": "TCR (Transparent Conflict Resolution)",
+   "row": 654,
+   "paper_id": "4c78b5e846a9de2f2fcfd854ad52641f1b2ced41",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce TCR"
+  },
+  {
+   "defense_name": "FaithfulRAG (fact-level conflict modeling + Self-Think)",
+   "row": 655,
+   "paper_id": "e9fa27d3eab2c682afad207c6c35803a0656b6e6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel RAG model (FaithfulRAG"
+  },
+  {
+   "defense_name": "KCM (Knowledge Conflict Mitigation)",
+   "row": 656,
+   "paper_id": "452b4750bfc661f1a78a953f56ebdf2d34369a19",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we design KCM"
+  },
+  {
+   "defense_name": "Micro-Act (hierarchical action-space decomposition)",
+   "row": 657,
+   "paper_id": "b8ebfcdb3409fd79ba2dba267d7fc2d75c418d7b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose MICRO-ACT"
+  },
+  {
+   "defense_name": "CARE-RAG (Conflict-Aware and Reliable Evidence for RAG)",
+   "row": 658,
+   "paper_id": "0a06adbce02a4f5db3b3f08f23394e3acfc9a573",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose CARE-RAG"
+  },
+  {
+   "defense_name": "TruthfulRAG (knowledge-graph-based factual conflict resolution)",
+   "row": 659,
+   "paper_id": "4e0a7b531728d3baaceec7c96245f1badce52fd6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose TruthfulRAG"
+  },
+  {
+   "defense_name": "PH3 (Pruning Head via PatH PatcHing)",
+   "row": 660,
+   "paper_id": "4c0a545b1eb73084e3d395435af9cf6649c2b1da",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel method called Pruning Head via PatH PatcHing (PH3"
+  },
+  {
+   "defense_name": "DyPRAG (Dynamic Parametric RAG)",
+   "row": 661,
+   "paper_id": "8a2acc213b370c342cff3fa0301935612b403b21",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Dynamic Parametric RAG (DyPRAG"
+  },
+  {
+   "defense_name": "CRVA-TGRAG (Conflict Resolution in Vulnerability Analysis via Teacher-Guided RAG)",
+   "row": 662,
+   "paper_id": "a2de6faaa98252c163c088613a04ad2dceb284a4",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose an innovative two- stage framework called CRVA-TGRAG"
+  },
+  {
+   "defense_name": "Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking)",
+   "row": 663,
+   "paper_id": "01a8565a4529187bf9b51f28f0959f00a4fe8fd5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "this paper proposes Conflict-Aware"
+  },
+  {
+   "defense_name": "MACR (multi-agent conflict resolution)",
+   "row": 664,
+   "paper_id": "5fd78361291961cf6e695991615efe1f0ac1cda4",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel framework MACR"
+  },
+  {
+   "defense_name": "ConflictRAG (two-stage detection + Entropy-TOPSIS credibility + CARS metric)",
+   "row": 665,
+   "paper_id": "3502f796c1d15f1355d0838f099178a9415b94b2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present ConflictRAG"
+  },
+  {
+   "defense_name": "CD2 (Conflict-Disentangle Contrastive Decoding)",
+   "row": 666,
+   "paper_id": "812b87876b22260fe046af447c5f40a4ce2906ea",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a method called Conflict-Disentangle Contrastive Decoding (CD2"
+  },
+  {
+   "defense_name": "ParamMute (Parametric Knowledge Muting through FFN Suppression)",
+   "row": 667,
+   "paper_id": "cb2afbc72cb0a90be167252faee9df999dc1dbf7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Parametric Knowledge Muting through FFN Suppression (ParamMute"
+  },
+  {
+   "defense_name": "Swin-VIB (variational information bottleneck pipeline)",
+   "row": 668,
+   "paper_id": "8e8f35f80eeba5ffdd55a2a9fde149460f26348b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Swin-VIB"
+  },
+  {
+   "defense_name": "Cross-Validation Re-ranking (inter-context conflict-aware re-ranking)",
+   "row": 669,
+   "paper_id": "faeeeae11b73d012ddaa942a9d496b3109861f87",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel cross-"
+  },
+  {
+   "defense_name": "KnowPO (Knowledge-aware Preference Optimization)",
+   "row": 670,
+   "paper_id": "fc24091a9b44953c71084449b4fa0eabfb58abb3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a Knowledge-aware Preference Optimization strategy, dubbed KnowPO"
+  },
+  {
+   "defense_name": "RPO (Retrieval Preference Optimization)",
+   "row": 673,
+   "paper_id": "fc7143c7bc1830ef998419c1c708de42dd200840",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce the Retrieval Preference Optimization (RPO"
+  },
+  {
+   "defense_name": "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)",
+   "row": 675,
+   "paper_id": "4dc7dca2c5101e68f200b29d733c752ab3e92171",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose ProbeRAG"
+  },
+  {
+   "defense_name": "APPA (Agentic Permissions Policy Algebra)",
+   "row": 676,
+   "paper_id": "a627218ebc531a61b3f43df433c8034165e32ba9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present APPA"
+  },
+  {
+   "defense_name": "UNNAMED: Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)",
+   "row": 677,
+   "paper_id": "4531b3223fe379c3dc3addb8a466866dee7bd24a",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Twin Agent (Explore Agent / Safe Agent residual-hint privilege separation)",
+   "row": 678,
+   "paper_id": "2d6bf610ce515388984988d3de38d48cd7cf0b70",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We thus propose Twin"
+  },
+  {
+   "defense_name": "PromptSentinel-X",
+   "row": 679,
+   "paper_id": "3fdd6bd75acec6e9e54a439a0f8c878c3656397f",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 10,
+   "evidence": "diagnostic tool [50]. The present study adopts the same caution for Agentic Web security: PromptSentinel-X is evaluated as a calibrated screening, escalation, and review-triage component, not as"
+  },
+  {
+   "defense_name": "UNNAMED: Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection",
+   "row": 680,
+   "paper_id": "c14b66c10e7d4416e4e98b31baf020270cddb294",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "CXI (Context-to-Execution Integrity)",
+   "row": 682,
+   "paper_id": "eb94638423842764221b08cb7a9343d439c2257e",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 9,
+   "evidence": "and au- thority is never inferred from text content alone [15,35,43]. 3.2 Policy Model A CXI policy is the trusted authority map for a mediated sink. It declares writable origins, tr"
+  },
+  {
+   "defense_name": "aiAuthZ (identity-bound off-host authorization gateway)",
+   "row": 683,
+   "paper_id": "5ab80084ac08ac0d52cb6b718e61c6f0c47fb913",
+   "origin": "ambiguous",
+   "propose_hits": 0,
+   "prior_hits": 2,
+   "evidence": "se. 5.4 Comparison with prior systems (RQ3) To answer RQ3, I evaluate the policy logic of aiAuthZ against two reduced configurations on the nine in-scope case studies. The comparison is b"
+  },
+  {
+   "defense_name": "Pattern D: Inference-boundary redaction proxy (PII extraction/tokenization before model inference)",
+   "row": 684,
+   "paper_id": "26768533d0eef5c2f7dadf915f70a45d397a4040",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+   "row": 686,
+   "paper_id": "84c0d6d46fae30b174bc82c099ed732b02802936",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "GIF (Geometric Information Flow)",
+   "row": 687,
+   "paper_id": "00e9cf066a0410970ed3d6ae6d34635f39b6afe1",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Geometric Information Flow (GIF"
+  },
+  {
+   "defense_name": "KBRA (Keyed Binding Reassembly Audit)",
+   "row": 690,
+   "paper_id": "ba326d9ed781485e28aa6285d915026a582b2a20",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We therefore propose Keyed Binding Reassembly Audit (KBRA"
+  },
+  {
+   "defense_name": "AgenticOS (Ghost Kernel / Logic Shutter / Agent Capsule / Semantic Boundary Gateway)",
+   "row": 691,
+   "paper_id": "79abfb22d05311b5c628b1c9fa551a946d1b3f30",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper proposes AgenticOS"
+  },
+  {
+   "defense_name": "PARSE (Provenance-Aware Retrieval Sanitization)",
+   "row": 692,
+   "paper_id": "a60572700b8f268d67cb0e375adee07551c30a29",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce PARSE"
+  },
+  {
+   "defense_name": "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
+   "row": 695,
+   "paper_id": "1f517e201e63cb9a4cd87c289ed41f0cd367d42c",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "SecureClaw (dual-boundary: effect-sink authorization + read-boundary plaintext confinement)",
+   "row": 697,
+   "paper_id": "cb002afee0f72bd9c25d00c192660df2290ae6ad",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present SecureClaw"
+  },
+  {
+   "defense_name": "PRISM (activation-conditioned instruction-set interpreter)",
+   "row": 698,
+   "paper_id": "263a7f25698640876b6cab4deafc11989cb7461b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce PRISM"
+  },
+  {
+   "defense_name": "AgentSecBench Combined defense stack (filtering + projection + redaction + delimiter annotation)",
+   "row": 703,
+   "paper_id": "7761142d2760d74f0870cabe24176356e32198e0",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce AgentSecBench"
+  },
+  {
+   "defense_name": "DCP (Device Context Protocol)",
+   "row": 704,
+   "paper_id": "290ae8cbcc7da908972505e4823b540250b04902",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present the Device Context Protocol (DCP"
+  },
+  {
+   "defense_name": "UNNAMED: Hybrid SIEM + One-Class SVM prompt-injection detection framework",
+   "row": 706,
+   "paper_id": "0388c22f0b2a9650d202ab8ccb445fb8af730f1e",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "MemAudit (counterfactual memory influence score + memory consistency graph)",
+   "row": 707,
+   "paper_id": "5c9ecf0ff560e4ee57ef04ac26d17c2f9dd7346b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose MemAudit"
+  },
+  {
+   "defense_name": "Contiguity-gate defense (for guardrail sliding-window aggregation)",
+   "row": 708,
+   "paper_id": "885424bbfda807e19d566c2e281a7aad31fb75d0",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "ESLD (External Surrogate Latent Defense)",
+   "row": 710,
+   "paper_id": "bd1a5abc01ecfeb7a4723c4cf46b0b37c27273fb",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper proposes ESLD"
+  },
+  {
+   "defense_name": "Write-gate sanitization (pre-summarization redaction/rewrite) for memory laundering",
+   "row": 713,
+   "paper_id": "2d065df525f7619bc44fe5fdf385e1ea9714b822",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Plan-Then-Execute (PTE) architecture for web agents",
+   "row": 714,
+   "paper_id": "7217d28e7b7e43e1f38a156612e61b19e487087c",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "FATE (on-policy self-evolving repair framework) with Pareto-Front Policy Optimization (PFPO)",
+   "row": 716,
+   "paper_id": "621e920e2eee0c7fe8140804493062130587070f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose FATE"
+  },
+  {
+   "defense_name": "sign-c (server-side signing of execution-bearing response fields)",
+   "row": 718,
+   "paper_id": "3c51e32c6059775328c1620a22dc8e7d602f83cc",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "ADEMA (checkpoint-resumable persistence + segment-level memory condensation + epistemic bookkeeping)",
+   "row": 721,
+   "paper_id": "79c76dd0ec900923e3da16162882d2e5fdca5010",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper presents ADEMA"
+  },
+  {
+   "defense_name": "SnapGuard (visual stability indicator + action-oriented textual signal recovery)",
+   "row": 722,
+   "paper_id": "994df45a6c2816c3ce73e7a5ccec10db6642aeb6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose SnapGuard"
+  },
+  {
+   "defense_name": "UNNAMED: deterministic post-audit verifier layer added to a compositional safety system",
+   "row": 725,
+   "paper_id": "959f9a894d4eef23ee23895116206875151bb1fc",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Token-Level Round-Robin (RR) Collaboration / RRMaj",
+   "row": 726,
+   "paper_id": "2322a9616b069e2d0f27e736ff688840194332dd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose the Token-Level"
+  },
+  {
+   "defense_name": "UNNAMED: domain-specific multi-layer safeguard pipeline (pattern filters + structural validation + contextual sandboxing + session-level behavioral checks)",
+   "row": 731,
+   "paper_id": "0459c150849163cd801520a87394cc29003a5726",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Agent Sentry (structural classifier + allowlist + LLM judge)",
+   "row": 733,
+   "paper_id": "5820789dfe6afa80ed0674223576d98bc3297e24",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Agent"
+  },
+  {
+   "defense_name": "PCFI (Prompt Control-Flow Integrity)",
+   "row": 734,
+   "paper_id": "d3f6f0290d0c43c31a615f928f256792e2d23a60",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper proposes Prompt Control-Flow Integrity (PCFI"
+  },
+  {
+   "defense_name": "IH-Challenge (RL training dataset with online adversarial example generation)",
+   "row": 737,
+   "paper_id": "0d1a1ced045bbc21126efb2be0a4064e1ce18f63",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce IH-Challenge"
+  },
+  {
+   "defense_name": "MOSAIC (plan-check-act/refuse post-training framework)",
+   "row": 738,
+   "paper_id": "3d3fe0e811aaad09aed39cbde449c17b83543c4c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce MOSAIC"
+  },
+  {
+   "defense_name": "LLMbda / Randori (dynamic information-flow-control lambda calculus with verified interpreter)",
+   "row": 742,
+   "paper_id": "327f2df80cccd89a10934eef495b06af949b0feb",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present LLMbda"
+  },
+  {
+   "defense_name": "UNNAMED: security-aware RAG framework (evidence-based abstention + prompt-injection defense + multi-source agreement verification + trust-weighted retrieval)",
+   "row": 744,
+   "paper_id": "96501f13d4c7a2da1228220c5723098e54f63a7c",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol",
+   "row": 746,
+   "paper_id": "d35916877805d63015cc773eb07f9fc65551317b",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "AlignSentinel (three-class instruction-hierarchy-aware attention-based classifier)",
+   "row": 747,
+   "paper_id": "4279709b7603081b51a577e22ecb846385a3a008",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce AlignSentinel"
+  },
+  {
+   "defense_name": "Authenticated Prompts / Authenticated Context (cryptographic provenance + policy algebra)",
+   "row": 748,
+   "paper_id": "94981b50dd04908681311e4a3ff3a833b297ea3d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce two novel primitives\u2014authenticated"
+  },
+  {
+   "defense_name": "InjectDefuser",
+   "row": 752,
+   "paper_id": "ee9dca5745032dea194209e3ad73b7ddae721ad7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We then propose InjectDefuser"
+  },
+  {
+   "defense_name": "RedVisor",
+   "row": 753,
+   "paper_id": "ac685a7dc66ac204279935717cd4d7c4576647a5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose RedVisor"
+  },
+  {
+   "defense_name": "UNNAMED: Randomized/Adversarial Suffix Augmentation Training for task-drift probes",
+   "row": 754,
+   "paper_id": "1378649f3d7cfacaba92132e233146885c86e7fc",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "UNNAMED: Uncertainty-based Random Forest attack detector (chimera/Xmera)",
+   "row": 762,
+   "paper_id": "a497744c319e8465df81a12ccfe60a2bce4017ea",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "SIC (Soft Instruction Control)",
+   "row": 763,
+   "paper_id": "a33345c6aca10d3979aa33c612e8ca18363ce53d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Soft Instruction Control (SIC"
+  },
+  {
+   "defense_name": "BinaryShield",
+   "row": 765,
+   "paper_id": "8ad664fac44d06bf3ea70e6e6a8869f348345ebe",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present BinaryShield"
+  },
+  {
+   "defense_name": "LeakSealer",
+   "row": 766,
+   "paper_id": "96a7db0d73412d117e397fe90ddd72ecf098a1c3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose LeakSealer"
+  },
+  {
+   "defense_name": "Sentinel (qualifire/prompt-injection-sentinel)",
+   "row": 770,
+   "paper_id": "d9303eb738a56b0e72404d3ad57964c25611a226",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 10,
+   "evidence": "[18]. It is built by Quali\ufb01re upon the answerdotai/ModernBERT-large architecture [4, 23]. Sentinel is speci\ufb01cally trained to classify prompts as either benign or indicative of a jailbreak/"
+  },
+  {
+   "defense_name": "AIR (Augmented Intermediate Representations)",
+   "row": 771,
+   "paper_id": "b0794049c22fb3d868a907131d0e8c0a6511025e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Augmented Intermediate Representations (AIR"
+  },
+  {
+   "defense_name": "Mantis",
+   "row": 777,
+   "paper_id": "b67a6181fad5c5838945583ccdc7f39187e29332",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Mantis"
+  },
+  {
+   "defense_name": "ISE (Instructional Segment Embedding)",
+   "row": 779,
+   "paper_id": "687acbf39c6b36b0ad776647d5864f329c2989dd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce the Instructional Segment Embedding (ISE"
+  },
+  {
+   "defense_name": "TaskTracker (activation-delta task-drift detection)",
+   "row": 782,
+   "paper_id": "b0bd96c49091253c1a893d8f26fe791291a448c8",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "SmoothVLM",
+   "row": 784,
+   "paper_id": "f41109b24c24ecccf26cda9ceacad9167d197028",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce SmoothVLM"
+  },
+  {
+   "defense_name": "Jatmo",
+   "row": 788,
+   "paper_id": "6a6f6070e765f77422c6d6c14c1e6b41a9ed562a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Jatmo"
+  },
+  {
+   "defense_name": "Discern-and-Answer",
+   "row": 791,
+   "paper_id": "66cca7a055ee9278d0439654f474cbfa4135aff0",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "+ModTool (memory correction tool for MemEvoBench)",
+   "row": 798,
+   "paper_id": "e7fed24b1353cf82d465d68dbda87c2b7243c60a",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "AgentWatcher",
+   "row": 801,
+   "paper_id": "2f1e9fa494e6f838f43d83f38b218cd9d478175c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose AgentWatcher"
+  },
+  {
+   "defense_name": "MAT-based Assurance Framework (Message-Action Traces + governance layer: capability limits + action mediation)",
+   "row": 802,
+   "paper_id": "e7eee295a7aba7ce0aef3b83a1b964e6bd10169d",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "AprielGuard",
+   "row": 804,
+   "paper_id": "c8bbbde5345092e81bfd17ad60456cd1f1ca4fdc",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce AprielGuard"
+  },
+  {
+   "defense_name": "AgentSight (eBPF boundary tracing)",
+   "row": 807,
+   "paper_id": "0e465e7e8502cc8ff9c8272d1cc74ec034353ecb",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce AgentSight"
+  },
+  {
+   "defense_name": "User-Tool Aligned Safety RL Framework",
+   "row": 808,
+   "paper_id": "a90f9700a2e055b5380ec24f2a32c0ae357c635e",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "ToolSafe (TS-Guard + TS-Flow)",
+   "row": 813,
+   "paper_id": "d68f4ce9fe1184e74e6cb59493f8cb3ec2265f98",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "CMI (Causal Memory Intervention)",
+   "row": 815,
+   "paper_id": "90df5be685de81b6b1acde9031629969b9ce2b49",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Causal Memory Intervention (CMI"
+  },
+  {
+   "defense_name": "SD-RAG (Selective Disclosure RAG)",
+   "row": 817,
+   "paper_id": "970b68c0d7422d9d8efda0006bfb57d6abd7244a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel approach to Selective Disclosure in Retrieval- Augmented Generation, called SD-RAG"
+  },
+  {
+   "defense_name": "EquiMem",
+   "row": 821,
+   "paper_id": "1ad06ca131f6e83a0dc16cb42495dd29a98522ad",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose EQUIMEM"
+  },
+  {
+   "defense_name": "CaMeL",
+   "row": 824,
+   "paper_id": "f25f0e35058d5a112115f83a6cbb3d3ba16ded42",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "this paper we propose CaMeL"
+  },
+  {
+   "defense_name": "SkillSec-Eval defenses (hybrid admission validation, retrieval validation layer, metadata sanitizer, LifecycleGuard taint-tracking, continuous re-validation)",
+   "row": 825,
+   "paper_id": "b218404297f0354484180d0c803ff73c368fb718",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present SkillSec-Eval"
+  },
+  {
+   "defense_name": "SpARE (Sparse Auto-Encoder Representation Engineering)",
+   "row": 828,
+   "paper_id": "d2c1b1a8ac40fbd45e8a91504b1a131f99bad02f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose SPARE"
+  },
+  {
+   "defense_name": "SecureRag",
+   "row": 831,
+   "paper_id": "c157f40ed322da549b9fe31de69b4fb81428d9ce",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 3,
+   "evidence": "base  without ever viewing its contents [20], can result from this.  The effectiveness of SecureRag was calculated  using multiple tests. Attacks like prompt injection [3,11],  encoded mali"
+  },
+  {
+   "defense_name": "RE-IAG (Reasoning-Evidence Interactive Augmented Graph)",
+   "row": 832,
+   "paper_id": "6db401bb9e8afddf06290f64b9d0df7a67719ca3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose the Reasoning\u2013Evidence Interactive Augmented Graph (RE-IAG"
+  },
+  {
+   "defense_name": "SCR & CR-DPO (Situated Faithfulness)",
+   "row": 833,
+   "paper_id": "6eb82be7028ac751e0539f93b84ab15048e41646",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose two approaches: Self-Guided Confidence Reasoning (SCR"
+  },
+  {
+   "defense_name": "AttriMem",
+   "row": 835,
+   "paper_id": "be26f36f94f9626fc6d04cacdf9e6c664bf9098d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose AttriMem"
+  },
+  {
+   "defense_name": "Program-Guided (PG) Runtime / Compile-then-Page SOP compiler",
+   "row": 837,
+   "paper_id": "62e953c40357cfb93027ef8e55b60eacd76bc963",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "STRACE (Structural Trajectory Analysis and Causal Extraction)",
+   "row": 839,
+   "paper_id": "b244986a2809a716906dd7b15042c0eba6a58480",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce STRACE"
+  },
+  {
+   "defense_name": "Ensemble QSP (hierarchical memory architecture)",
+   "row": 840,
+   "paper_id": "bef4f8d6f6d71354ded8c081cfbfb2ddb2641b4b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present Ensemble"
+  },
+  {
+   "defense_name": "PraMem (Practice-derived Experiential Memory)",
+   "row": 841,
+   "paper_id": "dbc167afafe9da38ba1831f7ebbb8100a9c2cd91",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose PraMem"
+  },
+  {
+   "defense_name": "WM-SAR (World-Model Subgraph Amplification Repair)",
+   "row": 842,
+   "paper_id": "965c0cae557aed318e6305af2749aabb9b6a7051",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We then propose WM-SAR"
+  },
+  {
+   "defense_name": "IHDec (Instruction Hierarchy-steered Decoding)",
+   "row": 845,
+   "paper_id": "bdf313d3bd456b01a46b994ea9b23a5d05ba4c07",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose IHDec"
+  },
+  {
+   "defense_name": "LRE (Learned Relevance Eviction)",
+   "row": 847,
+   "paper_id": "31adb0c460abf3be3ef65356cb072548cd586ccc",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present LRE"
+  },
+  {
+   "defense_name": "SING (Synthetic Intention Graph)",
+   "row": 848,
+   "paper_id": "7c0c35da97d46615866416c0ef4a9de646f0a321",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose SING"
+  },
+  {
+   "defense_name": "ContextRL",
+   "row": 849,
+   "paper_id": "72b5e6023db3b5af8e8f27f8b4a52bc5f1f32ba7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose CONTEXTRL"
+  },
+  {
+   "defense_name": "HORMA (Hierarchical Organize-and-Retrieve Memory Agent)",
+   "row": 851,
+   "paper_id": "d9703eb15de2fde34b699684a5b7d57788cc987e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present HORMA"
+  },
+  {
+   "defense_name": "KG-CFR (Knowledge-Grounded Counterfactual Reasoning)",
+   "row": 852,
+   "paper_id": "c0600cff00d440b7e7b75b0af4354822d631b306",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a two-step generative architecture Knowledge-Grounded Counterfactual Reasoning (KG-CFR"
+  },
+  {
+   "defense_name": "ActiveMem",
+   "row": 853,
+   "paper_id": "2cb75b828bdc025aba73a33bec6adc3676f3d9ee",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose ActiveMem"
+  },
+  {
+   "defense_name": "LCLM (Latent Context Language Models)",
+   "row": 854,
+   "paper_id": "842bcb12b16c0f6000fcbc88a140de703bb4acc9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Latent Context Language Models (LCLM"
+  },
+  {
+   "defense_name": "RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation)",
+   "row": 856,
+   "paper_id": "a0f82fcf24f6f280ef4ff950bfdd25430a1556f2",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Meta-Team (collaborative self-evolution)",
+   "row": 857,
+   "paper_id": "28eb59cd5d1043063371af07bf6b14d5d839b5b9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Meta-Team"
+  },
+  {
+   "defense_name": "MemTrace (memory evolution graph tracing + closed-loop correction)",
+   "row": 859,
+   "paper_id": "49acf1e90f335385f6f4e5fb384ce47915cdf1c3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose MemTrace"
+  },
+  {
+   "defense_name": "Dual-Process Memory Architecture (episodic-semantic memory for scientific agents)",
+   "row": 862,
+   "paper_id": "7a39d0ccffe0c30b98a3a4b2c1bb82bb0e8c6026",
+   "origin": "ambiguous",
+   "propose_hits": 0,
+   "prior_hits": 2,
+   "evidence": "nal coherence. The raw episodic trace is required for linguistic resolution. Importantly, Dual-Process performance (9.20) matched the Full Context baseline (9.13), demonstrating that we can ac"
+  },
+  {
+   "defense_name": "RS-Claw (hierarchical skill trees for remote-sensing agents)",
+   "row": 863,
+   "paper_id": "4b4b030b311447a05517b0d4d1dfbf25bfa5a4e2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose RS-Claw"
+  },
+  {
+   "defense_name": "CKG-RAG",
+   "row": 864,
+   "paper_id": "fb7d254c08e64bf3d793c837749936a7795bf9b9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we proposed CKG-RAG"
+  },
+  {
+   "defense_name": "PRISM (Pareto-Efficient Retrieval over Intent-Aware Structured Memory)",
+   "row": 866,
+   "paper_id": "7e6bdf1fc5a332732034a9f34de501e2c0fb737a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present PRISM"
+  },
+  {
+   "defense_name": "VideoSEAL (decoupled planner-inspector)",
+   "row": 867,
+   "paper_id": "a562f07f3d017e69d2064d92e994687f2b4b2447",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "HAGE (RL-driven weighted graph evolution)",
+   "row": 868,
+   "paper_id": "95bb7a742af788471295bb3bd6f12d4f6886dfa1",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose HAGE"
+  },
+  {
+   "defense_name": "TESSERA (neuro-symbolic MCTS with KG constraints)",
+   "row": 872,
+   "paper_id": "2f7bf36b85fd4afe2fe42e2df62bf913eef90db4",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We thus present TESSERA"
+  },
+  {
+   "defense_name": "TACT (Think-Act Calibration via activation Steering)",
+   "row": 874,
+   "paper_id": "db7cc2cb222b7bf8e88a73e792bb231ca8c3f44a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce TACT"
+  },
+  {
+   "defense_name": "Gated Coordination (Partitioned Information Architecture + Cost-Sensitive Gated Escalation)",
+   "row": 877,
+   "paper_id": "3e8fdaeca758a97fb2f91e29a065c16754c77ef6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a cost-sensitive gated"
+  },
+  {
+   "defense_name": "GenericAgent (GA) - contextual information density maximization",
+   "row": 879,
+   "paper_id": "fe7d2540488c131d292afcb27f2aeef09bf5298a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present GenericAgent"
+  },
+  {
+   "defense_name": "TSUBASA (evolving memory + context distillation)",
+   "row": 881,
+   "paper_id": "84e59205e4350c9596e4a03583fdfd114112586b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce TSUBASA"
+  },
+  {
+   "defense_name": "MemMachine (ground-truth-preserving memory)",
+   "row": 883,
+   "paper_id": "12f4ff7993bf9d6443339a86ab9b91d8050b93bd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present MemMachine"
+  },
+  {
+   "defense_name": "Oblivion (decay-driven memory control)",
+   "row": 884,
+   "paper_id": "454069505d79f8b20538c78591702ac4dae921df",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce OBLIVION"
+  },
+  {
+   "defense_name": "D-Mem (Dual-Process Memory System, Quality Gating)",
+   "row": 887,
+   "paper_id": "e823593720cbf8dee593c3b863bd5cb385a4b856",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce D-Mem"
+  },
+  {
+   "defense_name": "Ebbinghaus Forgetting Curve Memory Enhancement Framework",
+   "row": 889,
+   "paper_id": "32743a56cf5a28f45d9fdf237450095b1ec9efe9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We have proposed an intelligent cognitive memory enhance- ment framework based on the Ebbinghaus"
+  },
+  {
+   "defense_name": "Structurally Aligned Subtask-Level Memory",
+   "row": 891,
+   "paper_id": "e735128608be493b73022765c49c3f12c4c91591",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Structurally"
+  },
+  {
+   "defense_name": "Hippocampus (Dynamic Wavelet Matrix memory)",
+   "row": 893,
+   "paper_id": "bd8a21437a217f0c0bed6d852138edd425005d8c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce HIPPOCAMPUS"
+  },
+  {
+   "defense_name": "AriadneMem",
+   "row": 894,
+   "paper_id": "37d6bb36fcbac1a681bd5b6c523db14532fc6ea5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose AriadneMem"
+  },
+  {
+   "defense_name": "EHR-RAG",
+   "row": 896,
+   "paper_id": "a19c40320dee38dcd49a45b67e9b9c2f9a8438fd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose EHR-RAG"
+  },
+  {
+   "defense_name": "TEP (Textual Equilibrium Propagation)",
+   "row": 898,
+   "paper_id": "0d6a464d5cb4cbec81e8ea6941585266c34d8c09",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Textual Equilibrium Propagation (TEP"
+  },
+  {
+   "defense_name": "MetaMem (self-evolving meta-memory)",
+   "row": 899,
+   "paper_id": "eb88b424031e79f8e9ef61f2000f2abcd95589d3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose MetaMem"
+  },
+  {
+   "defense_name": "Governed Execution (modular prompt orchestration for RAG-grounded call-center agents)",
+   "row": 900,
+   "paper_id": "a2c32e9b0c807aeb9c147707a96aba15474294ef",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "CodeDelegator (role separation via Delegator/Coder agents + EPSS)",
+   "row": 901,
+   "paper_id": "894af73fb679f95ea1a36eb6bad300bfb80566fa",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose CODEDELEGATOR"
+  },
+  {
+   "defense_name": "STITCH (Structured Intent Tracking in Contextual History)",
+   "row": 902,
+   "paper_id": "9211f5e2e3c9bddd21a3fde10b946b9638352c4b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose STITCH"
+  },
+  {
+   "defense_name": "CoM (Chain-of-Memory) - Dynamic Memory Chain Evolution + Adaptive Truncation",
+   "row": 903,
+   "paper_id": "68a888694cd9264daec2d314671852a6a0208af9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose CoM"
+  },
+  {
+   "defense_name": "Focus (slime-mold-inspired active context compression)",
+   "row": 904,
+   "paper_id": "fa6afa1b821c74ea098f81cd38de5abd04874143",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper proposes Focus"
+  },
+  {
+   "defense_name": "StackPlanner",
+   "row": 905,
+   "paper_id": "eb76537f7195b0bae885bf181b73d2948c0755fd",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose STACKPLANNER"
+  },
+  {
+   "defense_name": "MAGMA (Multi-Graph Agentic Memory Architecture)",
+   "row": 906,
+   "paper_id": "458b97d8adb6f76e57903563a9ff92fef7fce486",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose MAGMA"
+  },
+  {
+   "defense_name": "EverMemOS",
+   "row": 907,
+   "paper_id": "db97b0581b1d60c1ad41428fe9950398bf987b60",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce EverMemOS"
+  },
+  {
+   "defense_name": "Rhea (Role-aware Heuristic Episodic Attention)",
+   "row": 910,
+   "paper_id": "d128557bbd9330a3f0a62eb47e2a47dbb0df849b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Rhea"
+  },
+  {
+   "defense_name": "Chain-of-Memory (CoM) - verifiable retrieval + causal tracing",
+   "row": 911,
+   "paper_id": "d3c9e1b9a6f4847efd8fd382fdb36e6a7536f655",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Chain-of-Memory"
+  },
+  {
+   "defense_name": "EMem / EMem-G (event-centric elementary discourse unit memory)",
+   "row": 913,
+   "paper_id": "67847ce6b93911d8688388201e69cf291d8cfc8d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose two retrieval variants: EMem"
+  },
+  {
+   "defense_name": "ENGRAM (typed memory + dense retrieval)",
+   "row": 914,
+   "paper_id": "39bb5c87b4e4c9f95eab41c9a039a1b129b81677",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present ENGRAM"
+  },
+  {
+   "defense_name": "TAG (Tagging-Augmented Generation)",
+   "row": 915,
+   "paper_id": "1aae24f958ecadab48113d1257352ce229ace391",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Tag"
+  },
+  {
+   "defense_name": "ReCAP (Recursive Context-Aware Reasoning and Planning)",
+   "row": 916,
+   "paper_id": "dc7a4814b8dd0b6d3db3f895b14152c1df6064c9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce ReCAP"
+  },
+  {
+   "defense_name": "State-Update Multi-turn Dialogue Strategy",
+   "row": 918,
+   "paper_id": "2aa22206048ff82676d0428b5c8d0d48cafbda62",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a training-free prompt engineering method, the State-Update"
+  },
+  {
+   "defense_name": "Memory-R1",
+   "row": 921,
+   "paper_id": "9df0947ec8a14c43e69f3b72ece5e9af2b8e8215",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present Memory-R1"
+  },
+  {
+   "defense_name": "SafeSieve",
+   "row": 922,
+   "paper_id": "c98b22964aea62c73cd7e330496b07191425da96",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose SafeSieve"
+  },
+  {
+   "defense_name": "RADIANT (DPO-ECD, Entity-Context Divergence alignment)",
+   "row": 925,
+   "paper_id": "719089f4a546d74b4b8ec6bcdac5dfd8dd4391da",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper introduces RADIANT"
+  },
+  {
+   "defense_name": "Knowledgeable-R1",
+   "row": 926,
+   "paper_id": "ab683c941931da5c6351679cb346e4d1ad5b63f4",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose Knowledgeable-"
+  },
+  {
+   "defense_name": "RAG-Modulo",
+   "row": 928,
+   "paper_id": "e06dda96ce8beac38be7d503faf18bb07051d340",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose RAG-Modulo"
+  },
+  {
+   "defense_name": "ITEM (Integrated Term Enhancement Methodology)",
+   "row": 929,
+   "paper_id": "8fbbfece62a5d9dcb4e5bc7478c72b31e3ef80d6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce the Integrated Term En- hancement Methodology (ITEM"
+  },
+  {
+   "defense_name": "HMAS-2 (Hybrid Multi-Agent System with feedback re-planning)",
+   "row": 932,
+   "paper_id": "1ad735714ad2e4ee5b94ce26c976e5ee5c7cde3b",
+   "origin": "ambiguous",
+   "propose_hits": 0,
+   "prior_hits": 2,
+   "evidence": "eriments in a 3D environment simulated Fig. 6. Success rate vs. robot number for CMAS and HMAS-2 methods in four testing environments. using Pybullet [13], as illustrated in Figure 8. Th"
+  },
+  {
+   "defense_name": "Memory Sandbox (user-controlled memory objects)",
+   "row": 933,
+   "paper_id": "048e0a6fa601f6f87865a054f1dca95b2e28e51d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present Memory"
+  },
+  {
+   "defense_name": "Synapse (trajectory-as-exemplar prompting + exemplar memory)",
+   "row": 934,
+   "paper_id": "eaa7853facb9b49444b48a96192cb4be66b62671",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce SYNAPSE"
+  },
+  {
+   "defense_name": "LOOC (Leave-One-Out Compression)",
+   "row": 935,
+   "paper_id": "1bb6703e03c66fc8591d05cf1d2797a0b01757b7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Leave-One-Out Compression (LOOC"
+  },
+  {
+   "defense_name": "Cognitive Scaffold",
+   "row": 936,
+   "paper_id": "52ce4b28ac27bc2108cdf2b54b67a0cb560475f2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce the Cognitive"
+  },
+  {
+   "defense_name": "MEMORA (Embodied Action Memory)",
+   "row": 938,
+   "paper_id": "0c84a69b9201635a311e18673a2a281568e0fa01",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We present MEMORA"
+  },
+  {
+   "defense_name": "InftyThink with Cross-Chain Memory (semantic lemma retrieval)",
+   "row": 939,
+   "paper_id": "2570b96ef56f7949fc84292cd3bd02e453e65fb9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce InftyThink"
+  },
+  {
+   "defense_name": "TRIM-KV",
+   "row": 940,
+   "paper_id": "3ba1322e1f7a457c1885df5aecc39c80528313d3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose TRIM-KV"
+  },
+  {
+   "defense_name": "FocusAgent / DefenseFocusAgent",
+   "row": 941,
+   "paper_id": "02a48e14375b6fa7dac43d6a3a205a51ae998f17",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce FOCUSAGENT"
+  },
+  {
+   "defense_name": "JUICE (Just Run Twice)",
+   "row": 943,
+   "paper_id": "b7ba9df4eb239708cf48f25be87b5bceeca010e3",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Just Run Twice (JUICE"
+  },
+  {
+   "defense_name": "SUGAR (Semantic Uncertainty Guided Adaptive Retrieval)",
+   "row": 944,
+   "paper_id": "85dcdc3c6d6674e21a569c158eed8055bed4b19a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Semantic Uncertainty Guided Adaptive Retrieval (SUGAR"
+  },
+  {
+   "defense_name": "Still (amortized KV cache compaction, Perceiver-based)",
+   "row": 948,
+   "paper_id": "40ea97427c4750b1dee547f6c7b433733a80c38c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce Still"
+  },
+  {
+   "defense_name": "AutoMEM",
+   "row": 949,
+   "paper_id": "ee92a75f7d4e09d5138a6ff437b58dac04043cbe",
+   "origin": "ambiguous",
+   "propose_hits": 0,
+   "prior_hits": 1,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Sleep paradigm (Memory Consolidation + Dreaming)",
+   "row": 950,
+   "paper_id": "347650ce5f3201f54e13f193e2b614b6a21dec1c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce a \u201cSleep"
+  },
+  {
+   "defense_name": "P-RoPE / MiniWin (Periodic RoPE)",
+   "row": 951,
+   "paper_id": "646defbd740313a62d454d986c1411b03ef6de26",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Periodic RoPE (P-RoPE"
+  },
+  {
+   "defense_name": "UNNAMED: Tree-based + hierarchical storage combined memory method (Memory in LLM Era unified framework)",
+   "row": 954,
+   "paper_id": "8539c9fe2bc5320a8c1f84e01c709fcca0389e94",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Fine-Mem (Chunk-level Step Reward + Evidence-Anchored Reward Attribution)",
+   "row": 959,
+   "paper_id": "904a2c2ec156575c2d5a691fde982f479c0ae2b2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Fine-Mem"
+  },
+  {
+   "defense_name": "FlashMem",
+   "row": 960,
+   "paper_id": "4e368119b5b8e809062d9da09b24941c705f9236",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose FlashMem"
+  },
+  {
+   "defense_name": "Free()LM (Free-Module LoRA adapter)",
+   "row": 965,
+   "paper_id": "4bc97dba841ff291ef59c77dc8b2b053366d79ff",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Free"
+  },
+  {
+   "defense_name": "Multi2 (hierarchical multi-agent decision-making)",
+   "row": 967,
+   "paper_id": "d588dd2028336d8b62cb5bebbecfa105ab5d5d82",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Multi2"
+  },
+  {
+   "defense_name": "LLMON (LLM Object Notation)",
+   "row": 968,
+   "paper_id": "6928b524b564275fc7855a953d78677d3e66f092",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 22,
+   "evidence": "Egypt\u201d). 4.3 LLMON Converters We have created the following converters: \u2022 JSON to Machine LLMON \u2022 Machine LLMON to JSON Figure 9: Workflow from human-authored LLMON markup to the token"
+  },
+  {
+   "defense_name": "MEMO (Memory-augmented MOdel context optimization)",
+   "row": 969,
+   "paper_id": "245d4d3631a31289e11fed0f0e0b0f63b853e2e8",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We therefore propose MEMO"
+  },
+  {
+   "defense_name": "SPRA (Scaffold-Preserving Representation Alignment)",
+   "row": 972,
+   "paper_id": "eba07d3742ba4bb126ccf59e06cf3d1988cbfd8c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose SPRA"
+  },
+  {
+   "defense_name": "GCAD (Gated Cropped Attention-Delta steering)",
+   "row": 976,
+   "paper_id": "4c75b2840ab60724b9a7a7a6d7ab91464271cd5f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Gated Cropped Attention-Delta steering (GCAD"
+  },
+  {
+   "defense_name": "PAACE (Plan-Aware Automated Context Engineering)",
+   "row": 978,
+   "paper_id": "44e2dfb31ee6c47d0f756795830c7e7e64f46a0c",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 7,
+   "evidence": "used this taxonomy to design agent memory stacks (Park et al., 2023; Shinn et al., 2023). PAACE\u2019s decomposition of context into actionable, struc- tural, referential, and justificatory"
+  },
+  {
+   "defense_name": "CheckRLM",
+   "row": 979,
+   "paper_id": "65c2112eecfbd99ccaac315fdf624ca9c0579b2f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose CheckRLM"
+  },
+  {
+   "defense_name": "RAPS-DA (Regime-Aware Peer Specialization)",
+   "row": 980,
+   "paper_id": "428e867f59ed171a0f7dad5cf2e034fee793a167",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose RAPS-DA"
+  },
+  {
+   "defense_name": "AtlasVA (self-evolving visual skill memory)",
+   "row": 981,
+   "paper_id": "adb39e1a63cf38589a23ec01a6dfb35d2e421f0c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose AtlasVA"
+  },
+  {
+   "defense_name": "SABER (Self-Aware Belief Estimator for RAG)",
+   "row": 983,
+   "paper_id": "adfa867f286dddcb20b4e989f32d6209ec3559a5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We then introduce SABER"
+  },
+  {
+   "defense_name": "MAGIC-Video (multimodal memory graph + narrative chain)",
+   "row": 984,
+   "paper_id": "bd685d88d79a24126e21957625006d39e6e492c4",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 14,
+   "evidence": "t alternates between search and answer. Cross-modal PPR over MMG. Given a search query q, MAGIC-Video runs one cross-modal PPR pass over MMG. Following HippoRAG\u2019s [Guti\u00e9rrez et al., 2024] see"
+  },
+  {
+   "defense_name": "LightMem",
+   "row": 986,
+   "paper_id": "a27a5b3c01117bacb4868a964c679a01eb8c5db9",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose LightMem"
+  },
+  {
+   "defense_name": "L2A (Learning To Attend)",
+   "row": 987,
+   "paper_id": "290e74d22cb4cc7750f746a523e73a7b16e5dfc0",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose L2A"
+  },
+  {
+   "defense_name": "HMT (Hierarchical Memory Tree)",
+   "row": 989,
+   "paper_id": "bddff0e7853344b7f8e2bccc7e9145630b6e8b3e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Hierarchical Memory Tree (HMT"
+  },
+  {
+   "defense_name": "ERA (Evidence-based Reliability Alignment)",
+   "row": 990,
+   "paper_id": "d926c21fb1aa15d19dd1dba8a944c76948e41581",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a new framework called ERA"
+  },
+  {
+   "defense_name": "A-RAG (hierarchical retrieval interfaces)",
+   "row": 991,
+   "paper_id": "54fc75b6dbc48dcda85c73a7a2e4c9d7ef037399",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce A-RAG"
+  },
+  {
+   "defense_name": "CoCoA (Confidence- and Context-Aware Adaptive Decoding)",
+   "row": 992,
+   "paper_id": "928c9465abc254954d3360af4a3bc73e407d7e35",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce COCOA"
+  },
+  {
+   "defense_name": "KScope-guided Constrained Context Summarization",
+   "row": 994,
+   "paper_id": "60c9fbcba72112937aba067ead90727f43108634",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "GenDiE (Generate, Discriminate, Evolve)",
+   "row": 995,
+   "paper_id": "cbd822d674f38c2da8ec4a979772d288b9ad0756",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce GenDiE"
+  },
+  {
+   "defense_name": "ReflectVLM (test-time reflection framework)",
+   "row": 996,
+   "paper_id": "02be8b42d438f9e4c851157029b9d0de886c60b6",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "UniKnow / LM-UniKnow",
+   "row": 997,
+   "paper_id": "2149a5de36bd8d1fb9241a571632d77514b6cc2c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce UniKnow"
+  },
+  {
+   "defense_name": "ReMEmbR (Retrieval-augmented Memory for Embodied Robots)",
+   "row": 998,
+   "paper_id": "2058a5f0e4ade9cfc5383c3aade29f9c5efbdd48",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce a Retrieval-augmented Memory for Embodied Robots, or ReMEmbR"
+  },
+  {
+   "defense_name": "ACD (Adaptive Contrastive Decoding)",
+   "row": 999,
+   "paper_id": "915539c51252649cf7d09e25dea3af199235ebed",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose adaptive contrastive decoding (ACD"
+  },
+  {
+   "defense_name": "RAT (Retrieval Augmented Thoughts)",
+   "row": 1000,
+   "paper_id": "dc256e179d4e8eff48879a40ddc414b15b0b2300",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 13,
+   "evidence": "Gao et al., 2022). Creative Writing tasks are conducted to evalu- ate the versatility of RAT, including survey, sum- marization etc., highlighting different aspects of open-ended tex"
+  },
+  {
+   "defense_name": "Dynamic Contrastive Decoding (DCD) for cross-modality knowledge conflict",
+   "row": 1002,
+   "paper_id": "33888b7650d97a21dda39d9c6cefbacb5334dbe0",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we develop a novel dynamic"
+  },
+  {
+   "defense_name": "COMBO (Compatibility-Oriented knowledge Merging)",
+   "row": 1004,
+   "paper_id": "a71236be6eaa57af7207288bb1153f067144e02a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose COMBO"
+  },
+  {
+   "defense_name": "UNNAMED: Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG)",
+   "row": 1006,
+   "paper_id": "986fc8d841425a81947838425ea292685ef8325a",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "XoT (explanation-based thinking framework)",
+   "row": 1007,
+   "paper_id": "eeb8cc61135f5d3032da26888d7a2882b6704765",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we further propose XoT"
+  },
+  {
+   "defense_name": "CK-PLUG (Controllable Knowledge Plug-in)",
+   "row": 1008,
+   "paper_id": "f0b199b7b9939cfd3d8bd69149d5bed7af40e0d2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose CK-PLUG"
+  },
+  {
+   "defense_name": "UNNAMED: Explanation-based secondary detection signal for log-injection evasion",
+   "row": 1009,
+   "paper_id": "8ba7f2d66ab1cb40af28d1889ffa21f298fa0c52",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "Instruction Hierarchy (privileged-instruction training)",
+   "row": 1010,
+   "paper_id": "f18e5a844c37e5342f8f3d409c74c1a9c91d1f8f",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose an instruction"
+  },
+  {
+   "defense_name": "StruQ (structured queries)",
+   "row": 1012,
+   "paper_id": "f5e7e22036c3fe7d6660eee90642f716c3b303f5",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a system (StruQ"
+  },
+  {
+   "defense_name": "Boundary awareness + explicit reminder",
+   "row": 1013,
+   "paper_id": "6d465be006615460d41060f9f5068d51fc1f46b1",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose two novel defense mechanisms\u2014boundary"
+  },
+  {
+   "defense_name": "Spotlighting (delimiting / datamarking / encoding)",
+   "row": 1014,
+   "paper_id": "32316f1d08911b397f52f8644f46f5c129619383",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce a novel approach called spotlighting"
+  },
+  {
+   "defense_name": "SecAlign (preference optimization)",
+   "row": 1017,
+   "paper_id": "3e1d812a1ef4b02b7d60020cc8aaa596d28373da",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a new defense called SecAlign"
+  },
+  {
+   "defense_name": "Attention Tracker",
+   "row": 1020,
+   "paper_id": "2b289e1d136edeb6354496518af5230bddc09e61",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce the concept of the distraction ef- fect, where specific attention"
+  },
+  {
+   "defense_name": "UNNAMED: P2SQL mitigations (DB permission hardening + query rewriting)",
+   "row": 1021,
+   "paper_id": "0894585294c67193ff3190240554677b56fd79a0",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "f-secure LLM system (information flow control)",
+   "row": 1024,
+   "paper_id": "19a45c70463edc755d54f3d5343e44cd571fe226",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we present a system-level de- fense based on the principles of information flow control that we call an f-secure LLM system"
+  },
+  {
+   "defense_name": "Signed-Prompt",
+   "row": 1027,
+   "paper_id": "2742c3d77c4aa6d023b7dfc77984ad10e6aae274",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper introduces the 'Signed-Prompt"
+  },
+  {
+   "defense_name": "UNNAMED: IPI detection + post-detection removal pipeline",
+   "row": 1030,
+   "paper_id": "20723b734e2838c22f921a0fc343d32e1d6d84e7",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "PromptShield (fine-tuned deployable PI detector)",
+   "row": 1031,
+   "paper_id": "685dd83fb88fa7d5546f2624ac5b9fe8a484de13",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce PromptShield"
+  },
+  {
+   "defense_name": "PIGuard (Mitigating Over-defense for Free)",
+   "row": 1035,
+   "paper_id": "287e6e8a5593ba2169f3cf66e66e5d344a36064d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose PIGuard"
+  },
+  {
+   "defense_name": "DefensiveToken (test-time optimized special tokens)",
+   "row": 1038,
+   "paper_id": "b02a3849d5482d9933468225713ed0c2a4ddc9e2",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose DefensiveToken"
+  },
+  {
+   "defense_name": "COIECD (contextual information-entropy constraint decoding)",
+   "row": 1040,
+   "paper_id": "654c9a01b995637f5849e8977691ae648160b5ca",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose an adaptive decoding method, termed as contex- tual information-entropy constraint decoding (COIECD"
+  },
+  {
+   "defense_name": "UNNAMED: secure prompt strategies for robotic navigation",
+   "row": 1044,
+   "paper_id": "bb5cd74e28059073b0f50ba42b1dcec41d29af82",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "PromptLocate (injected-prompt localization)",
+   "row": 1045,
+   "paper_id": "532f88e78c96a7efb418c6fedd428b741a73e9af",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose PromptLocate"
+  },
+  {
+   "defense_name": "UNNAMED: two preemptive-answer mitigations",
+   "row": 1046,
+   "paper_id": "d8ba6085c7c32cc367ab7f50d18744de846fcebd",
+   "origin": "needs_read",
+   "evidence": "entry has no name to search"
+  },
+  {
+   "defense_name": "FATH (Formatting AuThentication with Hash-based tags)",
+   "row": 1049,
+   "paper_id": "ec7ba7668113c5709e729142e75d0251221ff04b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper introduces a novel test-time defense strategy, named Formatting AuThen- tication with Hash-based tags (FATH"
+  },
+  {
+   "defense_name": "Mixture of Encodings",
+   "row": 1053,
+   "paper_id": "33c04fbf16bbcac199462a9f95044fcdfa6161fa",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel de- fense mechanism: mixture"
+  },
+  {
+   "defense_name": "ASIDE (Architecturally Separated Instruction-Data Embeddings)",
+   "row": 1054,
+   "paper_id": "51941fb4d679b102a50b18f1c1a6f70b6b929f59",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a new architectural element, ASIDE"
+  },
+  {
+   "defense_name": "UniGuardian",
+   "row": 1056,
+   "paper_id": "4f8f0eaf47be5a75a9483a8cb312e163b0e3eaab",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose UniGuardian"
+  },
+  {
+   "defense_name": "Prompt Injection as a Defense (against LLM-based PIE)",
+   "row": 1064,
+   "paper_id": "1c8bb4dc619933b7ee170b86eb9e1e3ecb01086d",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose to leverage prompt"
+  },
+  {
+   "defense_name": "GenTel-Shield",
+   "row": 1071,
+   "paper_id": "f50dff7a11f37cb962b06ca27bed3448c48f6eba",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we introduce GenTel-Safe, a unified framework that includes a novel prompt injection attack detection method, GenTel-Shield"
+  },
+  {
+   "defense_name": "unified Prompt Assembling + State Management + Safety Validation framework",
+   "row": 1073,
+   "paper_id": "f8e7615c7c6d95ecf1737d845ee3eb713e297b5f",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "UGCBuster",
+   "row": 1075,
+   "paper_id": "0e3f35c9f300156346dd5ddd75b78f768a21deb8",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "DMPI-PMHFE",
+   "row": 1079,
+   "paper_id": "4ed842227e9a3e44b63d337168284d665ec104a7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose DMPI-PMHFE"
+  },
+  {
+   "defense_name": "Multi-Layer Defense Framework (preprocessing + statistical + neural detection + behavioral monitoring)",
+   "row": 1086,
+   "paper_id": "41b13ebbf1769d140b01590fb073a330f063702e",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Reconstruct to Discriminate (RtD)",
+   "row": 1087,
+   "paper_id": "35d401c58f0f111bf7cbf58634e8e12f3d52d579",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we further propose a novel approach called Reconstruct"
+  },
+  {
+   "defense_name": "chain-of-defensive-thought (CoDT)",
+   "row": 1088,
+   "paper_id": "c3ec52d8639dbcfedeb727ade7af2dc1bee87708",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 3,
+   "evidence": "tion (Greshake et al., 2023) and knowledge corruption (Zou et al., 2024). We observe that chain-of-defensive-thought unlocks the ro- bustness of a wide range of large language models against empirical attac"
+  },
+  {
+   "defense_name": "GPT-OSSafeGuard + structured-representations + GSPO defense pipeline",
+   "row": 1091,
+   "paper_id": "5159fecd2a40e8b77ec7e040ef0211cd48353123",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "data defenses",
+   "row": 1094,
+   "paper_id": "0d889de54cb47863416cd0f2562c32744631de53",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 9,
+   "evidence": "njust power disparities introduced by large language models: tex- tual data defenses. Our data defenses enable text data owners to insert innocuous-seeming text into their content in a manner t"
+  },
+  {
+   "defense_name": "DP-Fusion",
+   "row": 1095,
+   "paper_id": "91c4827ab9b6bfb2a6cf4cd4c2569b6921fe1bd7",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose DP-FUSION"
+  },
+  {
+   "defense_name": "Zero-Shot Embedding Drift Detection (ZEDD)",
+   "row": 1098,
+   "paper_id": "af78d8c99e56cecfed5dec09ca9b54c24f0eed2e",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose Zero-Shot"
+  },
+  {
+   "defense_name": "PhantomLint",
+   "row": 1101,
+   "paper_id": "5717e2bd544b999c678c6199e844f790459f7327",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 5,
+   "evidence": "it walks the DOM to identify all text nodes, each of whose contents becomes a text block. PhantomLint makes use of the playwright library [22] to render the HTML document as an image. Given a"
+  },
+  {
+   "defense_name": "CaptureGuard",
+   "row": 1103,
+   "paper_id": "39c923bffb4a8c59df0107d1e492ed691041d15b",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 4,
+   "evidence": "signed to probe model sensitivity to trigger words in safe contexts. 2.4 CaptureGuard For CaptureGuard, we trained three separate DeBERTaV3-base (He et al., 2021) models for the Python, Movies"
+  },
+  {
+   "defense_name": "SPIN (Self-Supervised Prompt INjection)",
+   "row": 1108,
+   "paper_id": "3a8ae0fe18fd081416b58065c4e618ad28836a4b",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce Self-supervised Prompt INjection (SPIN"
+  },
+  {
+   "defense_name": "SecMCP",
+   "row": 1109,
+   "paper_id": "f3fbee0560840cb3529632500218e2384a0c06af",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose SECMCP"
+  },
+  {
+   "defense_name": "CASCADE",
+   "row": 1111,
+   "paper_id": "b874b9a07cc89ff9501f87daddb54c9fff48bfa8",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 3,
+   "evidence": "ent decision actually turns on. \u0130. Abas\u0131kele\u015f-Turgut and E. G\u00fcm\u00fc\u015f: Preprint Page 5 of 23  CASCADE 2. White-box requirements. The strongest reported de- tection performance [23] depends on"
+  },
+  {
+   "defense_name": "SecureCAI",
+   "row": 1115,
+   "paper_id": "3d16be498e90f357318f27bf8c476567a51d4e47",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 3,
+   "evidence": "Maintenance Table 3 reports clean accuracy on three security analysis tasks. Critically, SecureCAI not only maintains but im- proves clean performance compared to baseline methods. This im"
+  },
+  {
+   "defense_name": "LLM-as-a-Judge (taxonomy-guided structured-reasoning judge) with Mixture-of-Models aggregation",
+   "row": 1117,
+   "paper_id": "9c44354252aad1d0aeb7dc6b476da5785143b27c",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We propose an LLM-as-a-Judge"
+  },
+  {
+   "defense_name": "InstruCoT",
+   "row": 1120,
+   "paper_id": "e0dbb0ec29db851bbd36e75326a0bc3bf2a607cb",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose InstruCoT"
+  },
+  {
+   "defense_name": "KVEraser",
+   "row": 1121,
+   "paper_id": "1759010234718b3ece22e9beb554f55b22b06fbe",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "We introduce KVEraser"
+  },
+  {
+   "defense_name": "SE+CFE (Standard Evaluation + Counterfactual Evaluation)",
+   "row": 1123,
+   "paper_id": "f18b95663f87743335eee0578212fcb484882eae",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "PromptGuard",
+   "row": 1132,
+   "paper_id": "c3cc8bd227eedf8986bab48779db0c9335d5b633",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 3,
+   "evidence": "ogy LLMs [13] Not implemented Not implemented Not implemented Not implemented ~\u200941% GPT-4 PromptGuard (Ours) Regex\u2009+\u2009BERT hybrid ChatML-based structured  prompts Output-level task checking Po"
+  },
+  {
+   "defense_name": "Prompt-Shield Framework (PSF)",
+   "row": 1134,
+   "paper_id": "9be8902fc1bbe28ba09336f492577eb9a030d739",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This study proposes Prompt-Shield"
+  },
+  {
+   "defense_name": "Secure Artificial Intelligence (SAI)",
+   "row": 1136,
+   "paper_id": "d1dfe09d10632c6d52cfdfc83c9f6d91a57570b6",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper introduces a novel  dual-layer defence system termed Secure"
+  },
+  {
+   "defense_name": "SPML-IR specification-based image defense (two-stage input validation + prompt injection detection)",
+   "row": 1138,
+   "paper_id": "b7e425c93a0bfe017098cedecc43760a6f9ef5e8",
+   "origin": "applied_as_is",
+   "propose_hits": 0,
+   "prior_hits": 16,
+   "evidence": "on, can be deployed with any MLLM-based chatbot. Figure 2 demonstrates an example for the SPML-IR notation for our Parking-Pal chabot. Similar to [31], we can convert an image specificati"
+  },
+  {
+   "defense_name": "LPDS (LLM Prompt Detection System)",
+   "row": 1140,
+   "paper_id": "697bb7f0de245cb50e39dd585ac8c2d033cb51b8",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper  presents a comprehensive description of the LLM prompt  detection system (LPDS"
+  },
+  {
+   "defense_name": "Chunk-based hash + embedding prompt injection detection scheme (with optional blockchain audit logging)",
+   "row": 1147,
+   "paper_id": "646f950f41530e196f83033d21dfaefb27dd7b85",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "GNN-based prompt injection detector",
+   "row": 1149,
+   "paper_id": "0a78327b9cc6e3b980e70489d22c96c0d26bca6c",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Windowed HTML content filtering (128/64-token chunking + PromptGuard/DeBERTaV3 classification)",
+   "row": 1150,
+   "paper_id": "7d76841c36a85d550d2211b148d0c593e75f7419",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Hybrid Constitutional Classifier",
+   "row": 1156,
+   "paper_id": "c18ac188e59bc0f7da13a9932c1311bad911ac4a",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "we propose a novel hybrid"
+  },
+  {
+   "defense_name": "Enterprise Secure AI Execution Engine (Zero-Trust AI Security Gateway)",
+   "row": 1157,
+   "paper_id": "1ce4b21dda6721f1c94b63ab1b93144a87a9b0ad",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  },
+  {
+   "defense_name": "Prompt Injection Threat Analysis + LLM Output Risk Monitoring framework",
+   "row": 1158,
+   "paper_id": "b67115f4decad83af468d64e67297d1648590c90",
+   "origin": "proposed",
+   "propose_hits": 1,
+   "prior_hits": 0,
+   "evidence": "This paper proposes a security framework based on LLMs, aiming to conduct an in-depth analysis of the threat posed by prompt"
+  },
+  {
+   "defense_name": "ChatTEDU dual-LLM architecture (LLM-1 moderation gatekeeper + LLM-2 response generator)",
+   "row": 1159,
+   "paper_id": "2d3761e670c3597babbbcd9cf7b88327e07e770b",
+   "origin": "needs_read",
+   "propose_hits": 0,
+   "prior_hits": 0,
+   "evidence": ""
+  }
+ ]
+}
