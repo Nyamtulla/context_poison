@@ -87,6 +87,17 @@ FIELDS = [
  ("evidence_quote", "free text",
   "One verbatim sentence from the paper supporting `contribution` and `origin`, "
   "with its section. NO QUOTE, NO ENTRY."),
+ ("names_registry_technique", "yes / no / unsure",
+  "THE AGENTDOJO QUESTION. Does this paper name a specific attack or failure "
+  "mode that other papers then cite and test against, even if the paper is a "
+  "benchmark, a harness or a survey? AgentDojo is a harness AND it names seven "
+  "injections that 38 confirmed pairs depend on, so the answer for it is yes. "
+  "WebArena is a harness that names none, so no. Answer from the paper's own "
+  "section headings and tables, not from its genre."),
+ ("named_techniques", "free text",
+  "If names_registry_technique is yes, list them as the paper names them, "
+  "semicolon separated. 'important-instructions injection; ignore-previous "
+  "injection'. Blank otherwise."),
  ("belongs_in_corpus", "yes / no / unsure",
   "no ONLY for out_of_scope. A benchmark, a survey and a measurement study all "
   "belong. If unsure, say unsure and explain in notes."),
@@ -123,9 +134,16 @@ def build(no, papers, total_packets):
      ("", False),
      ("WHAT NOT TO DO. Do not mark a paper out_of_scope because it proposes no "
       "technique. Benchmarks, surveys and measurement studies all belong in "
-      "the corpus. AgentDojo proposes no defense and is the harness this "
-      "project's own experiments run on. out_of_scope means the paper is not "
-      "about untrustworthy context at all.", True),
+      "the corpus. out_of_scope means the paper is not about untrustworthy "
+      "context at all.", True),
+     ("", False),
+     ("THE COLUMN THAT MATTERS MOST IS names_registry_technique. A paper can be "
+      "a harness and still name attacks. AgentDojo is an evaluation environment "
+      "AND it names seven injections; 38 of the 349 confirmed "
+      "(defense, attack) pairs in this study depend on them, so it is a "
+      "contributing paper by any rule. WebArena is also a harness and names "
+      "none. Genre does not decide this. Read the paper's section headings and "
+      "tables and answer what it NAMES.", True),
      ("", False),
      ("Where to look, in this order:", True),
      ("   1. the abstract and the contributions list  -> contribution, origin", False),
@@ -165,7 +183,8 @@ def build(no, papers, total_packets):
     ws2 = wb.create_sheet("papers")
     cols = ["#", "title", "year", "venue", "track", "pdf",
             "current registry entry", "current origin (auto)"] + [f for f, _, _ in FIELDS]
-    header(ws2, cols, [5, 56, 7, 16, 10, 40, 40, 18] + [22, 26, 16, 22, 34, 44, 16, 30])
+    header(ws2, cols, [5, 56, 7, 16, 10, 40, 40, 18]
+           + [22, 26, 16, 22, 34, 44, 24, 34, 16, 30])
     for i, p in enumerate(papers, 1):
         r = ws2.max_row + 1
         for j, v in enumerate([i, p["title"], p["year"], p["venue"], p["track"],
