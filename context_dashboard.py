@@ -421,6 +421,53 @@ ATTACK_LABEL = {
 }
 
 
+
+@st.cache_data
+def _retrieval_runs():
+    """Every scored retrieval-cell run, from the registry files themselves.
+
+    `pair_tally.retrieval_runs()` is the same function the paper's numbers are
+    generated from, so the dashboard and the manuscript cannot disagree about
+    the campaign size. It raises on an unclassified result file rather than
+    silently dropping it, which is how the two distractor runs were caught
+    missing from the paper's counts.
+    """
+    import sys
+    sys.path.insert(0, str(registry_source.REPO_ROOT / "scripts"))
+    from pair_tally import retrieval_runs
+    return retrieval_runs()
+
+
+def _campaign_header() -> None:
+    try:
+        runs = _retrieval_runs()
+    except SystemExit as e:
+        st.error(f"Registry files the tally cannot classify:\n\n{e}")
+        return
+    transfer = [r for r in runs if r["role"] == "transfer"]
+    pairs = {(r["defense"], r["attack"]) for r in transfer}
+    st.caption(
+        f"**{len(pairs)} (defense, attack) pairs in the retrieval cell, "
+        f"{sum(r['episodes'] for r in runs):,} scored episodes**, plus the "
+        "agent cell below. Counted from the registry files, which is the same "
+        "source the paper's numbers are generated from."
+    )
+    df = pd.DataFrame([
+        {"Defense": r["defense"],
+         "Attack": r["attack"] or "— (clean control)",
+         "Role": r["role"], "Variant": r["variant"] or "",
+         "Episodes": r["episodes"], "File": r["file"]}
+        for r in runs]).sort_values(["Defense", "Attack", "Role"])
+    with st.expander(f"All {len(runs)} retrieval-cell runs, including controls"):
+        st.caption(
+            "A run is a transfer test only if some arm carries a non-zero "
+            "dose. The rest are controls: the defense reproducing its own "
+            "published benefit on clean context, which gates whether its "
+            "transfer number may be reported at all."
+        )
+        st.dataframe(df, use_container_width=True, hide_index=True)
+
+
 def our_runs_tab(d: dict) -> None:
     """What happens when a defense meets an attack nobody paired it with.
 
@@ -430,12 +477,21 @@ def our_runs_tab(d: dict) -> None:
     """
     runs = d["runs"]
     st.subheader("What we ran ourselves")
+
+    # The campaign total comes from the registries, not from `our_run`. The
+    # table only holds passage-count dosing (`n_poison`), so every run that
+    # doses by fraction of the context - the whole CoConflictQA family, which
+    # is now most of the campaign - is structurally unable to enter it. Reading
+    # the campaign size off the table under-reported it by half for weeks.
+    _campaign_header()
+
     if runs.empty:
         st.info("No transfer runs in the database yet. Build it with "
                 "`python3 scripts/build_paper_db.py`.")
         return
 
     cells = runs.groupby(["technique_name", "attack"], as_index=False).size()
+    st.markdown("#### Passage-count dosing")
     st.caption(
         f"{len(cells)} defense × attack cells, {len(runs)} dose levels, using "
         "each defense's own released code and each attack's own scorer. None "
