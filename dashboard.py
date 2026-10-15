@@ -9,6 +9,7 @@ Citation edges still come from the DB (not something to hand-edit). Run with:
 from __future__ import annotations
 
 import hashlib
+import json
 from datetime import datetime
 from pathlib import Path
 
@@ -71,11 +72,42 @@ def load_excel_data(excel_path: str, mtime: float) -> pd.DataFrame:
 
 @st.cache_data(ttl=30)
 def load_edges(db_path: str) -> pd.DataFrame:
-    conn = db.connect(db_path)
-    db.init_db(conn)  # tolerate a brand-new/empty DB file (e.g. on a fresh machine)
-    rows = [dict(r) for r in db.all_citation_edges(conn)]
-    conn.close()
-    return pd.DataFrame(rows, columns=["citing_paper_id", "cited_paper_id", "direction_discovered"])
+    """Citation edges for the network tab, from the rebuilt union network.
+
+    The `citation_edges` table in the SQLite DB is the Semantic Scholar edge
+    table over the whole discovery pool. It predates the 2026-10-13 rebuild,
+    which read reference lists out of the PDFs because the API's coverage of
+    this corpus was poor: restricted to the included corpus the API table
+    yields 2,284 edges against the rebuild's 6,672, and leaves 87 papers
+    looking isolated against the rebuild's 50. The dashboard drew the API
+    table while the paper drew the rebuild, so one graph reported 236
+    cross-track edges and the other 549.
+
+    `citation_network_union.json` is the union of the full-text pass and the
+    API table, and is what `gen_paper_numbers.py` reads, so the figure in the
+    paper and this tab now come from one source.
+    """
+    path = (registry_source.REPO_ROOT / "data" / "registries"
+            / "citation_network_union.json")
+    if not path.exists():
+        # fall back rather than lose the tab; the caption says which is drawn
+        conn = db.connect(db_path)
+        db.init_db(conn)
+        rows = [dict(r) for r in db.all_citation_edges(conn)]
+        conn.close()
+        df = pd.DataFrame(rows, columns=["citing_paper_id", "cited_paper_id",
+                                         "direction_discovered"])
+        df.attrs["source"] = "Semantic Scholar API table (pre-rebuild fallback)"
+        return df
+    net = json.loads(path.read_text())
+    df = pd.DataFrame([{"citing_paper_id": e["citing"],
+                        "cited_paper_id": e["cited"],
+                        "direction_discovered": e.get("source", "")}
+                       for e in net["edges"]],
+                      columns=["citing_paper_id", "cited_paper_id",
+                               "direction_discovered"])
+    df.attrs["source"] = f"full-text rebuild, union, {net.get('generated', '')}"
+    return df
 
 
 def _jitter(paper_id: str, scale: float = 0.8) -> float:
@@ -271,6 +303,24 @@ def network_tab(df: pd.DataFrame, edges: pd.DataFrame) -> None:
     for _, e in edges_in_view.iterrows():
         G.add_edge(e["citing_paper_id"], e["cited_paper_id"])
 
+    # A paper with no edge inside the view gets no force from the layout and
+    # lands on the circle spring_layout seeds it on, so isolates read as a ring
+    # of outliers rather than as what they are. Figure 5 in the paper drops
+    # them; this offers the same view and says how many went.
+    n_isolated = sum(1 for n, d in G.degree() if d == 0)
+    hide = False
+    if n_isolated:
+        hide = st.checkbox(
+            f"Hide the {n_isolated} papers with no citation link inside this "
+            "view (they draw as a ring, not as a cluster)",
+            value=True, key="network_hide_isolates")
+        if hide:
+            G.remove_nodes_from([n for n, d in G.degree() if d == 0])
+            scoped_df = scoped_df[scoped_df["paper_id"].isin(G.nodes)]
+            if G.number_of_nodes() == 0:
+                st.info("Every paper in this view is isolated; nothing to draw.")
+                return
+
     if G.number_of_nodes() == 0:
         st.info("Nothing to draw yet.")
         return
@@ -330,7 +380,17 @@ def network_tab(df: pd.DataFrame, edges: pd.DataFrame) -> None:
     fig.update_yaxes(visible=False)
     fig.update_layout(height=650, margin=dict(l=10, r=10, t=30, b=10), legend_title_text="Track / edge type")
 
-    st.caption(f"{G.number_of_nodes()} papers · {len(same_x)//3} same-track edges · {len(cross_x)//3} cross-track edges (highlighted)")
+    _src = edges.attrs.get("source", "unknown")
+    _n_cross = len(cross_x) // 3
+    _n_same = len(same_x) // 3
+    _tot = _n_same + _n_cross
+    st.caption(
+        f"{G.number_of_nodes()} papers · {_n_same} same-track edges · "
+        f"{_n_cross} cross-track edges (highlighted)"
+        + (f" · {100 * _n_cross / _tot:.1f}% cross-track" if _tot else "")
+        + f" · edges: {_src}"
+        + (f" · {n_isolated} isolated papers hidden" if n_isolated and hide else "")
+    )
 
     if static_mode:
         st.plotly_chart(fig, width="stretch", key="network_static")
