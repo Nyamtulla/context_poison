@@ -8,15 +8,18 @@ worse than the first.
 
 \subsection{Citation}
 
-We compute cross-track citation over the whole coded population, 966 papers
-classified into one track plus 18 classified as both, not over a sample. A
+We compute cross-track citation over the whole coded population, the
+\NTrackSecurity{} security and \NTrackML{} machine learning papers that
+classify into one track, not over a sample. A
 paper counts as citing the other track if it cites any paper anywhere in the
 discovery pool that resolves to that track.
 
 \begin{itemize}
-\item \textbf{11.7\%} of security papers (68 of 580) cite at least one machine
+\item \textbf{\PctSecCitesML{}\%} of security papers (\NSecCitesML{} of
+  \NTrackSecurity{}) cite at least one machine
   learning paper on the same failure.
-\item \textbf{9.3\%} of machine learning papers (36 of 386) cite at least one
+\item \textbf{\PctMLCitesSec{}\%} of machine learning papers (\NMLCitesSec{} of
+  \NTrackML{}) cite at least one
   security paper.
 \end{itemize}
 
@@ -41,7 +44,7 @@ WebArena, AgentDojo~\cite{debenedetti-2024-agentdojo}, InjecAgent,
 PoisonedRAG~\cite{zou-2024-poisonedrag}. A security paper that cites
 \emph{Lost in the Middle} in passing is scored as citing the other track, and
 by our measurement it does. It has not thereby engaged with the machine
-learning literature's methods. \textbf{The 11.7\% and 9.3\% are therefore upper bounds on engagement,
+learning literature's methods. \textbf{The \PctSecCitesML{}\% and \PctMLCitesSec{}\% are therefore upper bounds on engagement,
 not estimates of it},, which is the second reason the
 evaluation measurement below matters more than the citation one.
 
@@ -89,7 +92,7 @@ The field tests heavily against a category and lightly against its members.
 Section~\ref{sec:taxonomy} reports. A community that does not read the other
 one cannot see that it is crowding.
 
-\textbf{Methods are adopted without a worst-case check.} 97\% of defenses were
-validated against one threat model. For the 251 validated only on incidental
+\textbf{Methods are adopted without a worst-case check.} \PctOneThreatModel{}\% of defenses were
+validated against one threat model. For the \NIncOnly{} validated only on incidental
 benchmarks, no one has asked what an adversary does to them. That question is
 what Section~\ref{sec:experiments} answers for a sample of them.
