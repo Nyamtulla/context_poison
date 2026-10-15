@@ -76,23 +76,42 @@ evaluated adversarially. It is not a (defense, mechanism) pair, because
 expanding a benchmark to all of its constituent attacks would manufacture
 coverage, and we refuse that expansion throughout. It is not untested either.
 
-We therefore audited the \NDefenses{} defenses against a coarser question: did
-anyone run any comparison at all? \textbf{14 defenses (2.7\%) report no
-baseline comparison of any kind.} Each of the 14 was confirmed by hand. Their
-own evaluation sections say so: "No comparison against existing forensic or
-IPI-detection methods is reported", "No empirical baselines. The comparison is
-conceptual", "authors explicitly acknowledge the absence of a baseline method
-comparison". One proposes a defense with no implementation at all.
+We therefore audited the \NDefenses{} defenses directly against their own
+PDFs, asking a coarser question than the matrix asks: was this method run
+against an adversary at all?
+
+\textbf{293 of \NDefenses{} (55.6\%) are confirmed to have been}, by two
+independent routes. 214 appear in a confirmed coverage pair. 211 carry an
+unambiguous adversarial signal inside their own evaluation section, quoted:
+attack success rate as the reported metric, injection subtypes with sample
+counts, poisoned documents, named attack benchmarks. The two routes overlap on
+132, so each found cases the other missed, and \textbf{79 defenses have
+adversarial evaluation evidence the coverage matrix never saw}.
+
+\textbf{14 defenses (2.7\%) report no baseline comparison of any kind.} Each
+was confirmed by hand. Their own papers say so: "No comparison against existing
+forensic or IPI-detection methods is reported", "No empirical baselines. The
+comparison is conceptual", "authors explicitly acknowledge the absence of a
+baseline method comparison". One proposes a defense with no implementation at
+all. The remaining 41.7\% we report as undetermined rather than untested, for
+the reason in the next paragraph.
 
 So the honest statement of the gap is narrower than the matrix alone suggests.
 \textbf{Most defenses were evaluated. What most of them were not evaluated
 against is a second named mechanism, and what almost none were evaluated
 against is the other community's threat model} (Section~\ref{sec:literatures}).
-A keyword audit of the remaining evaluation descriptions is reported in the
-artifact, but we do not quote its middle categories here: hand-checking showed
-roughly half of its flagged cases were classifier misses rather than real
-ones, which is the same claim-versus-evidence error this paper is about and is
-not a basis for a number in a systematization.
+That caution is not incidental. We built three automated passes over these
+papers, and hand-checking each one found the same asymmetry: the positive
+class was reliable and the negative class was about half wrong. A pattern
+confirms that something is present in a paper; it cannot establish that
+something is absent, because absence of the phrasing it knows is not absence
+of the thing. Of 19 defenses one pass flagged as claiming an adversarial
+threat model while showing no adversarial evaluation, most were its own
+failures: one paper's evaluation section reads "5,258 samples (2,153
+adversarial and 3,105 benign)". \textbf{We therefore report no number drawn
+from a negative class}, and we read this as a general caution for
+systematizations in this area: a claim that something was never tested should
+state whether it means "not done" or "not resolved".
 
 \subsection{The result depends on who ran the experiment}
 \label{sec:whoran}
