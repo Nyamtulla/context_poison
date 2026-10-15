@@ -30,3 +30,6 @@ third_party/
 # scripts/build_packets.py in seconds. The workbooks are tracked; the zips
 # (24-55 MB each) exist to hand to reviewers once, not to live in history.
 verification/packets/*.zip
+
+# contribution-screen bundles: copies of gitignored PDFs
+data/exports/contribution_screen/bundles/
