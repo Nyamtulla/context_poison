@@ -52,7 +52,8 @@ def read_packets():
         hdr = [str(c or "") for c in rows[0]]
         idx = {h: i for i, h in enumerate(hdr)}
         need = ("title", "contribution", "belongs_in_corpus", "evidence_quote",
-                "origin", "technique_name", "evaluated_against", "notes")
+                "origin", "technique_name", "evaluated_against", "notes",
+                "names_registry_technique", "named_techniques")
         if any(k not in idx for k in need):
             bad.append((pathlib.Path(p).name, "missing columns")); continue
         for r in rows[1:]:
@@ -84,18 +85,27 @@ def main():
     excl = [d for d in done
             if d["contribution"] == "out_of_scope"
             and d["belongs_in_corpus"].lower() == "no"
-            and d["evidence_quote"]]
+            and d["evidence_quote"]
+            and d["names_registry_technique"].lower() != "yes"]
     half = [d for d in done
             if (d["contribution"] == "out_of_scope") != (d["belongs_in_corpus"].lower() == "no")]
     noquote = [d for d in done if d["contribution"] == "out_of_scope"
                and not d["evidence_quote"]]
     retract = [d for d in done if d["origin"].lower() == "applies"]
+    # a paper that names a technique the registry uses is a contributor even
+    # when its genre says otherwise. AgentDojo is the case this guards.
+    contributor = [d for d in done
+                   if d["names_registry_technique"].lower() == "yes"]
+    conflict = [d for d in contributor
+                if d["contribution"] == "out_of_scope"
+                or d["belongs_in_corpus"].lower() == "no"]
 
     print(f"{len(done)} coded rows across {len({d['_packet'] for d in done})} packets\n")
     for k, v in counts.most_common():
         mark = "  <- UNKNOWN VALUE" if k not in VALID else ""
         print(f"  {v:>4}  {k}{mark}")
     print()
+    print(f"  names a technique the registry uses     : {len(contributor)}")
     print(f"  would EXCLUDE from the corpus          : {len(excl)}")
     print(f"  would retract a registry entry (applies): {len(retract)}")
     print()
@@ -107,6 +117,11 @@ def main():
         for d in half[:6]:
             print(f"      {d['title'][:56]} | {d['contribution']} / "
                   f"belongs={d['belongs_in_corpus']}")
+    if conflict:
+        print(f"\n  {len(conflict)} rows say the paper NAMES a registry technique "
+              f"and also mark it out of scope. Exclusion BLOCKED for these:")
+        for d in conflict[:8]:
+            print(f"      {d['title'][:54]} | names: {d['named_techniques'][:44]}")
     if noquote:
         print(f"  {len(noquote)} out_of_scope rows have NO evidence quote. NOT actioned.")
     if excl:
