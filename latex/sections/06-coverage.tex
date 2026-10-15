@@ -30,8 +30,10 @@ published in RQ5, which predates reverse-scan pass 3.}
 \begin{itemize}
 \item \textbf{\NDefMatchedFull{} of \NDefenses{} defenses
   (\PctDefMatched{}\%)} have at least one confirmed test against a named
-  mechanism. The rest were either not evaluated against anything our registry
-  recognizes as a distinct named technique, or not evaluated at all.
+  mechanism. The rest were not evaluated against anything our registry
+  recognizes as a distinct named technique. \emph{That is not the same as
+  untested}, and the distinction matters enough that we audited it
+  separately: see below.
 \item \textbf{\NMechUncovered{} of \NMechanismsBench{} mechanisms
   (\PctMechUncovered{}\%) have zero defenses} evaluated against them.
 \item \textbf{\NDefMatchedFull{} defenses appear in at least one pair, and
@@ -64,6 +66,33 @@ So the two readings do not conflict. Defense authors test narrowly. The
 defenses that look broadly tested are mostly the ones that attracted attackers.
 Either way, a claim that a method provides broad protection against context
 poisoning is, on the current evidence, untested rather than wrong.
+
+\subsection{How much of the gap is the field, and how much is us}
+
+A coverage matrix measures resolution against a named registry. It is easy to
+read the complement as "never tested", and that reading is wrong. A defense
+paper that runs on AgentDojo without naming which injection it used is
+evaluated adversarially. It is not a (defense, mechanism) pair, because
+expanding a benchmark to all of its constituent attacks would manufacture
+coverage, and we refuse that expansion throughout. It is not untested either.
+
+We therefore audited the \NDefenses{} defenses against a coarser question: did
+anyone run any comparison at all? \textbf{14 defenses (2.7\%) report no
+baseline comparison of any kind.} Each of the 14 was confirmed by hand. Their
+own evaluation sections say so: "No comparison against existing forensic or
+IPI-detection methods is reported", "No empirical baselines. The comparison is
+conceptual", "authors explicitly acknowledge the absence of a baseline method
+comparison". One proposes a defense with no implementation at all.
+
+So the honest statement of the gap is narrower than the matrix alone suggests.
+\textbf{Most defenses were evaluated. What most of them were not evaluated
+against is a second named mechanism, and what almost none were evaluated
+against is the other community's threat model} (Section~\ref{sec:literatures}).
+A keyword audit of the remaining evaluation descriptions is reported in the
+artifact, but we do not quote its middle categories here: hand-checking showed
+roughly half of its flagged cases were classifier misses rather than real
+ones, which is the same claim-versus-evidence error this paper is about and is
+not a basis for a number in a systematization.
 
 \subsection{The result depends on who ran the experiment}
 \label{sec:whoran}
