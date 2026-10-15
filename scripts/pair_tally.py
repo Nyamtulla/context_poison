@@ -79,13 +79,19 @@ DEFENSE_TOKENS = [
     ("scr", "SCR", "selfguidedconfidencereasoning"),
     ("ck", "CK-PLUG", "ckplug"),
 ]
-# false evidence is our instantiation of the registry's knowledge-conflict
-# mechanism, so that is the name a literature pair would carry.
+# false evidence and distractor evidence are both our instantiations of the
+# registry's knowledge-conflict mechanism, so that is the name a literature
+# pair would carry for either. They are separate ATTACK labels because they
+# are separate payloads with separate results: false evidence plants the
+# model's own prior answer, distractor evidence plants a third answer that is
+# neither the gold nor the prior, which is what separates copying from
+# remembering.
 ATTACK_TOKENS = [
     ("badrag_sentiment", "BadRAG sentiment steering", "badrag"),
     ("badrag_dos", "BadRAG denial-of-service", "badrag"),
     ("corpus_poisoning", "corpus poisoning", "corpuspoisoning"),
     ("false_evidence", "false evidence", "knowledgeconflict"),
+    ("distractor_evidence", "distractor evidence", "knowledgeconflict"),
     ("poisonedrag", "PoisonedRAG", "poisonedrag"),
 ]
 
