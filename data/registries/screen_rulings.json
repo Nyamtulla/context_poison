@@ -6,25 +6,35 @@
   "answer": "yes",
   "ruled_by": "project lead",
   "date": "2026-10-16",
-  "consequence": "Papers removed on the grounds that they study long-context behaviour without an adversary are readmitted. Papers removed on subject matter (robot manipulation, GUI agents, multi-agent planning) stay removed."
+  "consequence": "Papers removed on the grounds that they study long-context behaviour without an adversary are readmitted. Papers removed on subject matter (robot manipulation, GUI agents, multi-agent planning) stay removed. Applied to the whole set on 2026-10-16: five papers readmitted, one (Odysseys) removed, so a single test governs every call."
  },
  "keep_despite_screen": [
-  {"title_contains": "Periodic RoPE",
-   "why": "holds the corpus's only 'position exhaustion' mechanism entry; NIAH retrieval collapses 100 -> 2.0% past the trained range"},
-  {"title_contains": "Language Models Need Sleep",
-   "why": "evaluates MK-NIAH/RULER, LongHealth, BABILong to 10M tokens; the screen's note that it never claims a context-degradation failure mode is factually wrong"},
-  {"title_contains": "Learning When to Attend",
-   "why": "evaluated on BABILong distractors and HELMET RAG; extends usable context 32K -> 128K"}
+  {
+   "title_contains": "Periodic RoPE",
+   "why": "holds the corpus's only 'position exhaustion' mechanism entry; NIAH retrieval collapses 100 -> 2.0% past the trained range"
+  },
+  {
+   "title_contains": "Language Models Need Sleep",
+   "why": "evaluates MK-NIAH/RULER, LongHealth, BABILong to 10M tokens; the screen's note that it never claims a context-degradation failure mode is factually wrong"
+  },
+  {
+   "title_contains": "Learning When to Attend",
+   "why": "evaluated on BABILong distractors and HELMET RAG; extends usable context 32K -> 128K"
+  },
+  {
+   "title_contains": "Beyond Needle(s) in the Embodied Haystack",
+   "why": "context-length x needle-depth heatmap, the canonical lost-in-the-middle plot; readmitted under the same ruling on 2026-10-16"
+  },
+  {
+   "title_contains": "Can Retrieval Heads See Images",
+   "why": "8K-128K x 6 needle depths; masking the top-5% retrieval heads collapses MMLongBench-Doc accuracy 48.2 -> 5.7% while random masking does not. A mechanistic account of why evidence in a long window is missed, and the only corpus paper that names the component responsible"
+  }
  ],
- "open_same_ruling": [
-  {"title_contains": "Beyond Needle(s) in the Embodied Haystack",
-   "status": "NOT YET RULED",
-   "why": "context-length x needle-depth heatmap, the canonical lost-in-the-middle plot; the ruling above appears to cover it but the lead has not seen it"},
-  {"title_contains": "Can Retrieval Heads See Images",
-   "status": "NOT YET RULED",
-   "why": "8K-128K x 6 needle depths; masking top-5% retrieval heads collapses accuracy 48.2 -> 5.7%. The audit calls removing it the single biggest substantive loss in the 57"},
-  {"title_contains": "Odysseys",
-   "status": "NOT YET RULED",
-   "why": "currently KEPT, but measures task success over long horizons with no in-window content failure. The ruling may imply it should go, which is the opposite direction from the two above"}
+ "open_same_ruling": [],
+ "remove_despite_screen": [
+  {
+   "title_contains": "Odysseys",
+   "why": "the screen kept it on a genre-precedent test (WebArena-style harnesses belong). Under the lead's ruling the test is whether the paper measures content already in the window being mishandled, and this measures task success and trajectory efficiency only, with no untrusted content and nothing position-dependent. Removed on 2026-10-16 so one test is applied to the whole set."
+  }
  ]
 }
