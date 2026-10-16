@@ -156,6 +156,9 @@ def main():
     ap.add_argument("--allocation", choices=sorted(ALLOC), default="both")
     ap.add_argument("--seed", type=int, default=20261016)
     ap.add_argument("--per_packet", type=int, default=40)
+    ap.add_argument("--audit_slice", type=int, default=30,
+                    help="papers proposing no technique, sampled to catch the "
+                         "benchmark-filed-as-a-defense error")
     args = ap.parse_args()
 
     papers = registry_source.load_papers()
@@ -175,6 +178,14 @@ def main():
 
     frame = [p for p in inc
              if p["paper_id"] not in drop_ids and p["paper_id"] not in pilot]
+    # papers with no registry entry: the audit slice is drawn from these
+    reg = REPO / "data" / "registries"
+    no_technique = {p["paper_id"] for p in inc} - (
+        {e.get("paper_id") for e in
+         json.loads((reg / "rq3_pollution_registry.json").read_text())}
+        | {e.get("paper_id") for e in
+           json.loads((reg / "rq4_defense_registry.json").read_text())})
+
     by_grade = collections.defaultdict(list)
     for p in frame:
         by_grade[(p.get("evidence_grade") or "?").strip()].append(p)
@@ -192,6 +203,22 @@ def main():
         if len(pool) < n:
             raise SystemExit(f"grade {g}: asked for {n}, frame holds {len(pool)}")
         picked += rng.sample(pool, n)
+
+    # A fixed audit slice of papers that propose nothing. The lead's point is
+    # right that validating every survey is waste - they contribute no
+    # technique by definition. But the screen found 30 benchmarks and 19
+    # measurement studies that nonetheless HOLD a defense entry, so this class
+    # does get mis-coded, and a sample with none of them is blind to it.
+    # Fixed size, not proportional: enough to detect the error, cheap enough
+    # not to argue about.
+    chosen = {p["paper_id"] for p in picked}
+    nothing = sorted((p for p in frame
+                      if p["paper_id"] in no_technique and p["paper_id"] not in chosen),
+                     key=lambda p: p["paper_id"])
+    audit = rng.sample(nothing, min(args.audit_slice, len(nothing)))
+    print(f"   + {len(audit)} audit-slice papers that propose no technique "
+          f"(from {len(nothing)} available)")
+    picked += audit
     rng.shuffle(picked)   # so a packet is not all one grade
 
     # Two sets of weights, and the distinction is load-bearing. The sample was
@@ -252,6 +279,14 @@ def main():
                         "project plan but was never assigned. artifacts_released "
                         "is free-text prose, not a flag, so A cannot be "
                         "recovered without a normalisation pass.",
+        "audit_slice_n": len(audit),
+        "audit_slice_note": "papers that propose no technique, sampled at a "
+                            "fixed size rather than proportionally. They are "
+                            "NOT part of the stratified estimate and must be "
+                            "excluded when combining; they exist to catch "
+                            "benchmarks and measurement studies wrongly "
+                            "holding a defense entry.",
+        "audit_slice_ids": [p["paper_id"] for p in audit],
         "n_packets": len(packets),
         "per_packet": args.per_packet,
         "papers": [p["paper_id"] for p in picked],
