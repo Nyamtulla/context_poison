@@ -193,10 +193,14 @@ def main():
     ap.add_argument("--fracs", type=float, nargs="+", default=[0.0, 0.1, 0.5, 1.0])
     ap.add_argument("--attack", default="corpus_poisoning",
                     choices=["corpus_poisoning", "false_evidence",
-                             "distractor_evidence"],
+                             "distractor_evidence", "adaptive_evidence"],
                     help="corpus_poisoning plants the attack's optimised token "
                          "sequence; false_evidence plants a fluent passage "
-                         "asserting the model's own (wrong) prior answer")
+                         "asserting the model's own (wrong) prior answer; "
+                         "distractor_evidence plants a third answer; "
+                         "adaptive_evidence plants the distractor in whichever "
+                         "form minimises ACD's own ent_pos (see "
+                         "scripts/build_adaptive_acd_payload.py)")
     ap.add_argument("--dump", default=None)
     ap.add_argument("--no_resume", action="store_true",
                     help="recompute every dose even if the output file has them")
@@ -213,13 +217,14 @@ def main():
     # false_evidence the payload is per-item, so adv stays None and the loop
     # reads each item's parametric_evidencde.
     PAY = {"false_evidence": "parametric_evidencde",
-           "distractor_evidence": "distractor_evidencde"}
+           "distractor_evidence": "distractor_evidencde",
+           "adaptive_evidence": "adaptive_evidencde"}
     if args.attack in PAY:
         fld = PAY[args.attack]
         missing = [d for d in data if not (d.get(fld) or "").strip()]
         if missing:
             raise SystemExit(f"{len(missing)} items lack {fld}")
-        if args.attack == "distractor_evidence":
+        if args.attack in ("distractor_evidence", "adaptive_evidence"):
             # the arm is worthless unless the three outcomes are disjoint
             bad = [d for d in data
                    if str(d["distractor_answer"]).lower()
@@ -345,7 +350,8 @@ def main():
             continue
         label = {"corpus_poisoning": "corpus poisoning",
                  "false_evidence": "false evidence",
-                 "distractor_evidence": "distractor evidence"}[args.attack]
+                 "distractor_evidence": "distractor evidence",
+                 "adaptive_evidence": "adaptive distractor"}[args.attack]
         name = ("clean (native incidental conflict)" if frac <= 0
                 else f"{label}, {int(frac*100)}% of context")
         p_ctx = [make_prompt(fs["with_context"], d["question"],
