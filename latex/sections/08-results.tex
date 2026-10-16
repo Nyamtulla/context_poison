@@ -269,6 +269,48 @@ thesis than the excess-damage numbers alone support: the trade-off is not that
 context-reliance defenses trust context too much, it is that the axis they
 arbitrate on does not contain the distinction an attacker violates.
 
+\begin{table}[t]
+\centering
+\caption{Four defenses against the distractor payload, at saturation, each
+against its own undefended arm in the same run. $*$ clears both the run's
+detectability threshold and Fisher at $p<0.05$. Three suppress memory and hand
+the mass to the attacker; one does the reverse; none improves accuracy.}
+\label{tab:distractor}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+defense & $n$ & memory & copied & correct \\
+\midrule
+ParamMute & 781 & $-36.1^{*}$ & $+37.5^{*}$ & $-3.8$ \\
+CK-PLUG   & 781 & $-31.6^{*}$ & $+38.8^{*}$ & $-7.2^{*}$ \\
+COIECD    & 400 & $-5.5$      & $+4.8$      & $-0.8$ \\
+ACD       & 686 & $+18.4^{*}$ & $-35.1^{*}$ & $+2.6$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Two more defenses make it a pattern rather than a pair.}
+Table~\ref{tab:distractor} adds CK-PLUG and COIECD on the same payload and the
+same dosing. CK-PLUG behaves as ParamMute does and more sharply: it is the only
+defense in this campaign whose accuracy loss on this payload clears its own
+threshold, and at a 10\% dose it already copies 76.7\% against its undefended
+arm's 38.5\%, double, on one tenth of the context replaced. COIECD moves in the
+same direction at every dose and clears nothing, which is its behaviour on both
+other payloads too.
+
+\textbf{The mass is conserved.} Because the three outcomes are disjoint by
+construction, the deltas can be summed. For the three context-reliance defenses
+the memory loss and the copy gain cancel to within 7\pp{} ($+1.4$, $+7.2$,
+$-0.8$), and for CK-PLUG the residual is exactly its accuracy loss with the
+sign reversed. \textbf{These methods do not create or destroy correctness; they
+relocate it}, out of the model's parameters and into whatever owns the context.
+
+ACD is the exception twice: it moves mass the other way, and $16.8$\pp{} leaves
+the three-way partition altogether, so in that fraction of cases its output is
+none of gold, memory or the distractor. Whether that is abstention or
+degradation is not a question this payload can answer, and we flag it as the
+next measurement on this arm rather than reading it either way.
+
 \subsection{Asking the model to judge the document}
 
 SCR~\cite{huang-2024-trust} is the only method we ran whose design anticipates
