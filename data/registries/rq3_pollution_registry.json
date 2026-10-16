@@ -3257,5 +3257,20 @@
   "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: For each threat model, we design adversarial prompts that remain invisible to human readers yet can steer an LLM\u2019s output toward the author\u2019s desired outcome. (Abstract)",
   "has_technique": "yes",
   "technique_name": "Ignore; Detect; Exploit (hidden prompt injection attacks)"
+ },
+ {
+  "row": null,
+  "paper_id": "75bd9e32591e367259d4f91f7611212e892adb23",
+  "title": "Can Retrieval Heads See Images? Multimodal Retrieval Heads in Long-Context Vision-Language Models",
+  "channel": "cross-modal",
+  "consequence": "reasoning-corruption",
+  "track": "ML/AI",
+  "is_extension_of": "",
+  "confidence": "medium",
+  "name": "multimodal retrieval heads (sparse heads carrying retrieval)",
+  "source": "contribution_screen_2026-10-16",
+  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We introduce a multimodal retrieval head detection method that scores attention from question tokens to textual or visual evidence. (Abstract)",
+  "has_technique": "yes",
+  "technique_name": "multimodal retrieval heads (sparse heads carrying retrieval)"
  }
 ]

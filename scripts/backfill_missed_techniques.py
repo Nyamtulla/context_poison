@@ -67,6 +67,7 @@ TO_DEF = {"proposes_defense", "proposes_fix"}
 # Chain-of-Trigger, ChainFuzzer and Zombie Agent were all filed ML/AI or Both
 # that way. The contribution decides the track, not the paper's label.
 
+RULED_NAMES = []
 TRACK_FOR = {"proposes_attack": "Security", "proposes_mechanism": "ML/AI"}
 
 
@@ -99,6 +100,17 @@ def main():
 
     inc = {p["paper_id"]: p for p in registry_source.load_papers()
            if str(p.get("screening") or "").strip().lower() != "exclude"}
+    # The lead's rulings readmit papers and code contributions the screen left
+    # blank. Reading the spreadsheets raw misses both, so a paper coded
+    # proposes_mechanism by ruling would never get its registry entry. Same
+    # gap that made apply_contribution_screen read the blank packets.
+    sys.path.insert(0, str(REPO / "scripts"))
+    from rederive_screen import load_rows, apply_rulings
+    ruled_rows, _ = apply_rulings(load_rows())
+    ruled = {r["title"].strip().lower(): r for r in ruled_rows}
+    _rl = json.loads((REPO / "data" / "registries" / "screen_rulings.json").read_text())
+    global RULED_NAMES
+    RULED_NAMES = _rl.get("contribution_coded_by_lead_session", {}).get("codes", [])
     r3 = json.loads((REG / "rq3_pollution_registry.json").read_text())
     r4 = json.loads((REG / "rq4_defense_registry.json").read_text())
     have = {e.get("paper_id") for e in r3} | {e.get("paper_id") for e in r4}
@@ -108,7 +120,19 @@ def main():
     for pid, p in inc.items():
         if pid in have:
             continue
-        s = scr.get((p.get("title") or "").strip().lower())
+        key = (p.get("title") or "").strip().lower()
+        s = scr.get(key)
+        # a ruling-supplied contribution wins over the sheet's blank
+        if key in ruled and ruled[key].get("contribution"):
+            s = dict(s or {}, contribution=ruled[key]["contribution"])
+            # the ruling may also supply the name, which beats UNNAMED
+            for c in RULED_NAMES:
+                if c["title_contains"].lower() in key and c.get("technique_name"):
+                    s["technique_name"] = c["technique_name"]
+            s.setdefault("technique_name", "")
+            for f in ("origin", "parent_technique", "evaluated_against",
+                      "evidence_quote", "notes"):
+                s.setdefault(f, "")
         if not s or s["contribution"] not in (TO_MECH | TO_DEF):
             continue
         name = s["technique_name"] or f"UNNAMED: {(p.get('title') or '')[:60]}"

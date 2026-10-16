@@ -174,6 +174,16 @@ def apply_rulings(rows):
                 r["notes"] = (f"LEAD RULING {date}: readmitted; contribution "
                               f"NOT YET CODED. {k['why']} | " + r["notes"])
                 applied.append(("keep", r["title"]))
+    # contributions the lead's session coded after the readmissions, each
+    # traceable to the paper's key_result or its registry entry
+    for k in spec.get("contribution_coded_by_lead_session", {}).get("codes", []):
+        needle = k["title_contains"].lower()
+        for r in rows:
+            if needle in r["title"].lower() and not r["contribution"]:
+                r["contribution"] = k["contribution"]
+                r["notes"] = (f"CODED {date}: {k['contribution']}. "
+                              f"{k['evidence']} | " + r["notes"])
+                applied.append(("code", r["title"]))
     for k in spec.get("remove_despite_screen", []):
         needle = k["title_contains"].lower()
         for r in rows:
