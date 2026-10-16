@@ -26,9 +26,12 @@ import json
 import pathlib
 import re
 
+import sys
+
 import openpyxl
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO))   # so `from src import registry_source` resolves
 BUNDLES = REPO / "data" / "exports" / "contribution_screen" / "bundles"
 OUT = REPO / "data" / "registries" / "screen_findings"
 MARK = "CLAIM/EVALUATION MISMATCH"
@@ -89,13 +92,31 @@ def is_mismatch(notes: str):
     return None, "unclassified"
 
 
-def registry_kind(entry: str) -> str:
-    e = (entry or "").strip().lower()
-    if e.startswith("defense:"):
-        return "defense"
-    if e.startswith("mechanism:"):
-        return "mechanism"
-    return "none"
+def live_registry():
+    """What the registries say NOW, by paper, from their structured fields.
+
+    The packets carry a `current registry entry` column that reads
+    "defense: X" or "mechanism: Y". Those prefixes are the file the entry came
+    from, written by build_contribution_screen.py, not a claim about the
+    method. Comparing a coded contribution against that prefix produced 310
+    false disagreements: 180 methods it called wrongly-filed defenses already
+    said `validated_against: incidental`, and all 128 it called
+    wrongly-filed non-adversarial mechanisms already said `track: Security`.
+
+    The column is also a snapshot from the day the packets were built, so it
+    cannot see the 34 techniques backfilled afterwards.
+
+    So read the registries themselves, and read the fields that carry meaning.
+    """
+    out = {}
+    for fn, kind in (("rq3_pollution_registry.json", "mechanism"),
+                     ("rq4_defense_registry.json", "defense")):
+        for e in json.loads((REPO / "data" / "registries" / fn).read_text()):
+            out.setdefault(e.get("paper_id"), []).append(
+                {"kind": kind,
+                 "track": (e.get("track") or "").strip(),
+                 "validated_against": (e.get("validated_against") or "").strip()})
+    return out
 
 
 def coded_kind(contribution: str) -> str:
@@ -192,7 +213,7 @@ def main():
           f"(screener reported {REPORTED['out_of_scope']})")
     print(f"  violating a guard: {len(bad)}")
     print(f"  that hold a registry entry: "
-          f"{sum(1 for r in removals if registry_kind(r['current registry entry']) != 'none')}")
+          f"{sum(1 for r in removals if (r['current registry entry'] or '').strip().lower() not in ('', '(none)'))}")
 
     # ---- mismatch, computed properly
     verdicts = collections.Counter()
@@ -215,25 +236,45 @@ def main():
             i = n.find(MARK)
             print(f"    {r['packet']} #{r['#']}: ...{n[max(0,i-90):i+30]!r}")
 
-    # ---- registry disagreements, recomputed from the two label columns
+    # ---- registry disagreements, against the LIVE registries
+    live = live_registry()
+    # No try/except around this. Swallowing the failure here silently maps
+    # every paper to "no registry entry" and reports every coded technique as
+    # a disagreement, which is exactly what it did: 578 flagged against a true
+    # 268. A missing import should stop the script, not quietly invert it.
+    from src import registry_source as _rs
+    pid_of = {(p.get("title") or "").strip().lower(): p["paper_id"]
+              for p in _rs.load_papers()}
+    unmapped = sum(1 for r in rows
+                   if r["title"].strip().lower() not in pid_of)
+    if unmapped:
+        print(f"  WARNING: {unmapped} screen titles do not match any paper")
     dis = []
     for r in rows:
-        have = registry_kind(r["current registry entry"])
+        pid = pid_of.get(r["title"].strip().lower())
+        entries = live.get(pid, [])
         want = coded_kind(r["contribution"])
         conflict = None
-        if have == "defense" and want in ("fix", "none"):
-            conflict = f"filed defense, coded {r['contribution']}"
-        elif have == "mechanism" and want == "attack":
-            conflict = "filed mechanism (non-adversarial), coded proposes_attack"
-        elif have == "none" and want in ("attack", "defense", "mechanism"):
-            conflict = f"no registry entry, coded {r['contribution']}"
-        elif have == "defense" and want == "attack":
-            conflict = "filed defense, coded proposes_attack"
+        if not entries:
+            if want in ("attack", "defense", "mechanism", "fix"):
+                conflict = f"no registry entry, coded {r['contribution']}"
+        else:
+            # a method the screen calls a fix should not be recorded as having
+            # met an adversary; one it calls an attack should sit on the
+            # security track
+            if want == "fix" and any(
+                    e["validated_against"] == "adversarial" for e in entries):
+                conflict = "coded proposes_fix, registry says validated adversarially"
+            elif want == "attack" and all(
+                    e["track"] and e["track"] != "Security" for e in entries):
+                conflict = "coded proposes_attack, registry track is not Security"
+            elif want == "none" and any(e["kind"] == "defense" for e in entries):
+                conflict = f"holds a registry entry, coded {r['contribution']}"
         if conflict:
             dis.append({**r, "disagreement": conflict})
-    print(f"\nregistry disagreements (kind only): {len(dis)}  "
-          f"(screener reported {REPORTED['registry_disagreements']}, "
-          f"which also counted origin-only conflicts)")
+    print(f"\nregistry disagreements, against the live registries: {len(dis)}"
+          f"  (the screener reported {REPORTED['registry_disagreements']} by "
+          f"comparing against the packets' file-prefix label)")
     for k, v in collections.Counter(d["disagreement"] for d in dis).most_common():
         print(f"  {v:>4}  {k}")
 
