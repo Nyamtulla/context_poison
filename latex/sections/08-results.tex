@@ -95,12 +95,33 @@ were wrong, which is why the scope condition is in the paper.
 
 \subsection{The payload class decides, not the attack label}
 
-ACD~\cite{kim-2024-adaptive} was the best result in our campaign. It discounts
-tokens the context makes uncertain, and against corpus poisoning it is the only
-method that both reads a clean document and resists a poisoned one. At
-saturation it is \textbf{+9.2\pp} above the undefended arm ($p < 0.0001$) and
-on clean context it is \textbf{+53.5\pp} above answering with no document at
-all.
+ACD~\cite{kim-2024-adaptive} produced the strongest defensive result in our
+campaign. It discounts tokens the context makes uncertain, and against corpus
+poisoning it is the only method that both reads a clean document and declines a
+poisoned one. At saturation it is \textbf{+9.2\pp} above the undefended arm
+($p < 0.0001$) and on clean context it is \textbf{+53.5\pp} above answering
+with no document at all.
+
+\textbf{That result is not a robustness claim, and we state the limit before
+the result rather than after it.} The corpus-poisoning passage is Zhong et
+al.'s released artefact, optimized against a \emph{retriever} and against no
+defense of ours. It is therefore oblivious to ACD in the sense
+Carlini~\cite{carlini-2019-critique} uses when criticizing the DeepSec
+platform: a defense evaluated only against attacks that were not built for it
+has been shown to resist those attacks and nothing more. Inferring robustness
+from a non-adaptive attack is invalid, and it is the specific error that
+invalidated DeepSec's defense rankings. We claim only what the arm supports:
+\emph{ACD resists this particular non-adaptive optimized passage.} An attacker
+who knew ACD's entropy rule and optimized against it is untested here, and we
+expect such an attacker to do better, because the rule is public and
+differentiable.
+
+The same caveat does not weaken the failure results in this section. An attack
+that is not adapted to a defense and defeats it anyway is a \textbf{lower
+bound} on attack strength: if the cheapest payload wins, an adapted one also
+wins. Non-adaptive evaluation is invalid for claiming robustness and
+conservative for claiming failure, and every other result we report is of the
+second kind.
 
 We then ran the same defense, same items, same doses, against false evidence.
 
@@ -124,6 +145,12 @@ vs.\ no retrieval & +0.5 ($p{=}0.91$) & \textbf{-4.0} ($p{=}0.0499$) \\
 the no-retrieval floor exactly. Against the fluent payload it ends up
 resolvably \emph{below} that floor: the defended model does worse than a model
 given no document at all.
+
+This is also the narrow claim above being tested rather than merely hedged.
+Swapping the payload is the cheapest available step toward a worst-case
+evaluation, and one step was enough to remove the protection entirely. A
+defense whose guarantee does not survive a change of payload class would not be
+expected to survive an attacker optimizing against its rule.
 
 The reason is visible in the method. ACD keys on the uncertainty a passage
 induces. An optimized token string is incoherent and raises uncertainty, so ACD

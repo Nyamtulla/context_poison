@@ -64,6 +64,19 @@ to its literal scope: *ACD resists this specific non-adaptive optimised
 passage*, with the obliviousness stated in the sentence that makes the claim.
 We must not write "ACD is robust."
 
+**Done 2026-10-16, by downgrading rather than by running an adaptive attack.**
+The scope now appears *before* the result in §8 of the paper, not after it,
+and cites Carlini directly. "The best result in our campaign" became "the
+strongest defensive result," which is a statement about our measurements rather
+than about the defense. The abstract says the attacks are not adapted and that
+this makes failures lower bounds and resistances provisional. `acd_result.md`
+carries a Scope section saying the result must never be cited as robustness.
+
+**Still open:** the adaptive attack itself. ACD's entropy rule is public and
+differentiable, so optimising a passage against it is feasible and is the
+proper fix. Downgrading makes the paper honest; it does not make the
+measurement exist.
+
 ---
 
 ## 2. Averages across threat models — pass

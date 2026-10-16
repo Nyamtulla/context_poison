@@ -5,7 +5,9 @@ Prediction committed in `4017824`, before the run.
 
 `acd_result.md` reports ACD beating corpus poisoning: +9.2 pp over the
 undefended arm at saturation, p < 0.0001, while still reading a clean document
-(+53.5 pp over no-retrieval). That was the campaign's best result. This run
+(+53.5 pp over no-retrieval). That was the campaign's strongest defensive
+result, though against a non-adaptive payload only (see `acd_result.md`
+Scope). This run
 asks whether it survives a different payload.
 
 Everything is held fixed except what gets planted — same 400 items, same
