@@ -27,16 +27,19 @@ attack occupy the same cell, so the defense ought to apply, and no one had
 checked. We executed \NCampaignPairs{} such pairs across \NCampaignImpl{} defense
 implementations and
 \NCampaignEpisodes{} scored episodes, using each author's released code and weights, under
-an attack-works-first control and a fixed detectability threshold. Defenses
+an attack-works-first control and a fixed detectability threshold. Our attacks
+are not adapted to the defenses they meet, which makes every failure we report
+a lower bound and every resistance we report provisional. Defenses
 built for accidental context failure often do not survive deliberate attack,
 and the failure is systematic. The mechanism that repairs accidental
 corruption, which is to shift trust from the model's parameters toward the
 retrieved text, is the mechanism an attacker who owns that text exploits. The
 result carries a measured scope condition and one counterexample, so the
 trade-off is a design error and not a law. That counterexample is itself
-bounded: the one defense that resists an optimized adversarial passage falls
-below a no-retrieval baseline against a fluent sentence asserting a plausible
-falsehood. No defense we tested resists both payload classes, and the cheaper
+bounded twice over: the one defense that resists an optimized adversarial
+passage falls below a no-retrieval baseline against a fluent sentence asserting
+a plausible falsehood, and it was never tested against an attacker optimizing
+against its own rule. No defense we tested resists both payload classes, and the cheaper
 payload is the more damaging one.
 
 Finally we report three controls the literature omits, each of which overturned

@@ -7,6 +7,26 @@ Ninth defense in the RAG x silent-corruption cell, and the first that is
 resolvably protective under attack while still using the context when the
 context is good.
 
+## Scope, added 2026-10-16 after auditing against Carlini's DeepSec critique
+
+**This is not a robustness result and should never be cited as one.** The
+corpus-poisoning passage is Zhong et al.'s released artefact, optimised against
+a *retriever*, not against ACD. The run therefore shows that ACD resists one
+specific non-adaptive payload and nothing more. Inferring robustness from an
+attack that was not built for the defense is the exact error that invalidated
+DeepSec's defense rankings (`carlini_audit.md` §1).
+
+An attacker who knows ACD's entropy rule and optimises against it is untested.
+We expect such an attacker to do better, because the rule is public and
+differentiable.
+
+Two things already bound the claim from the other side. `acd_false_evidence_result.md`
+swaps the payload class and the protection disappears entirely, falling below
+the no-retrieval floor; `distractor_evidence_result.md` shows that what
+resistance remains is ACD falling back on memory rather than reading the real
+document. The failure results in both of those are unaffected by this caveat,
+since a non-adaptive attack that wins anyway is a lower bound.
+
 ## Result
 
 ctx_acc, recall against the gold answer. mdr 9.9 pp at n=400.
