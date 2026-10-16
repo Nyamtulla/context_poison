@@ -373,7 +373,119 @@ def fig_citation_network():
     save(fig, "fig5_citation_network")
 
 
+# ---------------------------------------------------------------- figure 6
+def fig_transfer_matrix():
+    """Who tests whose work, in the literature and in our campaign.
+
+    Two matrices on one scale. The left is every confirmed literature pair,
+    the right is what we executed. The point is the off-diagonal: the
+    literature has 7 cross-community pairs in 349, and one of its two
+    off-diagonal cells is empty outright.
+
+    Magnitude, so a single-hue ramp, with the count printed in every cell
+    because colour alone must not carry the number. Zero is left unfilled so
+    an empty cell reads as empty rather than as dark.
+    """
+    import sys as _s
+    _s.path.insert(0, str(REPO / "scripts"))
+    from pair_tally import retrieval_runs
+
+    tl = load("pair_timeline.json")["pairs"]
+    lit = collections.Counter((r["defense_track"], r["attack_track"])
+                              for r in tl if r["defense_track"] in ("Security", "ML/AI")
+                              and r["attack_track"] in ("Security", "ML/AI"))
+
+    # our own runs, keyed the same way
+    DT = {"ParamMute": "ML/AI", "CK-PLUG": "ML/AI", "COIECD": "ML/AI",
+          "ACD": "ML/AI", "DyPRAG": "ML/AI", "FaithfulRAG": "ML/AI",
+          "SpARE": "ML/AI", "SCR": "ML/AI",
+          "RobustRAG-DecodingAgg": "Security", "RobustRAG-KeywordAgg": "Security"}
+    AT = {"corpus poisoning": "Security", "PoisonedRAG": "Security",
+          "BadRAG sentiment steering": "Security",
+          "BadRAG denial-of-service": "Security",
+          "false evidence": "ML/AI", "distractor evidence": "ML/AI"}
+    ours_pairs = {(r["defense"], r["attack"])
+                  for r in retrieval_runs() if r["role"] == "transfer"}
+    ours = collections.Counter((DT.get(d), AT.get(a)) for d, a in ours_pairs)
+
+    TR = ["Security", "ML/AI"]
+    cmap = LinearSegmentedColormap.from_list("seq", SEQ)
+    fig, axes = plt.subplots(1, 2, figsize=(FULL, 2.25))
+    for ax, data, title, tot in (
+            (axes[0], lit, "Published literature", sum(lit.values())),
+            (axes[1], ours, "This paper's campaign", sum(ours.values()))):
+        M = np.array([[data.get((d, a), 0) for a in TR] for d in TR], float)
+        # colour is each cell's SHARE of its own panel, not its raw count.
+        # Shading two panels whose totals differ by an order of magnitude on
+        # independent count scales made 262 and 16 the same navy, which is the
+        # one comparison a reader takes from this figure. Share is the
+        # quantity that is actually comparable; the count is printed on top.
+        S = M / max(tot, 1)
+        vmax = 1.0
+        ax.imshow(np.where(M > 0, S, np.nan), cmap=cmap, vmin=0, vmax=vmax)
+        ax.set_xticks(range(2)); ax.set_xticklabels(TR)
+        ax.set_yticks(range(2)); ax.set_yticklabels(TR)
+        ax.set_xlabel("attack from"); ax.set_ylabel("defense from")
+        cross = int(M[0, 1] + M[1, 0])
+        ax.set_title(f"{title}\n{cross} of {int(tot)} cross-community "
+                     f"({100*cross/tot:.0f}%)", fontsize=7.5)
+        for i in range(2):
+            for j in range(2):
+                v = int(M[i, j])
+                dark = v > 0 and S[i, j] > 0.55 * vmax
+                ax.text(j, i, str(v), ha="center", va="center",
+                        fontsize=11, fontweight="bold",
+                        color="#ffffff" if dark else INK)
+                if v == 0:
+                    ax.text(j, i + 0.3, "never tested", ha="center",
+                            va="center", fontsize=6, color="#a4402c")
+        for s in ax.spines.values():
+            s.set_visible(False)
+        ax.set_xticks(np.arange(-.5, 2, 1), minor=True)
+        ax.set_yticks(np.arange(-.5, 2, 1), minor=True)
+        ax.grid(which="minor", color="#ffffff", linewidth=2)
+        ax.tick_params(which="minor", length=0)
+    # the 2x2 covers the two pure tracks only. Pairs where either side is a
+    # "Both"-track paper cannot answer a cross-community question, so they are
+    # excluded here; the full tally including them is in pair_timeline.json.
+    _all = len(tl)
+    print(f"    transfer matrix: literature {sum(lit.values())} of {_all} pairs "
+          f"(pure tracks only), ours {sum(ours.values())}")
+    save(fig, "fig6_transfer_matrix")
+
+
+# ---------------------------------------------------------------- figure 7
+def fig_lag():
+    """How far apart in time a defense and the attack it was tested on are.
+
+    Polarity around zero, so a diverging pair with a neutral midpoint: bars
+    left of zero are defenses that existed before the attack, bars right are
+    defenses built after it. One axis, counts only.
+    """
+    tl = load("pair_timeline.json")["pairs"]
+    g = collections.Counter(r["gap_years"] for r in tl)
+    ks = sorted(g)
+    vals = [g[k] for k in ks]
+    cols = ["#2a78d6" if k < 0 else (GREY_MID if k == 0 else "#eb6834") for k in ks]
+    fig, ax = plt.subplots(figsize=(COL, 1.8))
+    ax.bar(ks, vals, color=cols, edgecolor=MUTED, linewidth=0.4, width=0.78)
+    for k, v in zip(ks, vals):
+        ax.text(k, v + 1.5, str(v), ha="center", fontsize=6.5, color=INK2)
+    ax.axvline(-0.5, color=MUTED, lw=0.6, ls=":")
+    n_before = sum(v for k, v in g.items() if k < 0)
+    ax.set_xlabel("defense year minus attack year")
+    ax.set_ylabel("pairs")
+    ax.set_xticks(ks)
+    ax.set_ylim(0, max(vals) * 1.22)
+    ax.spines["top"].set_visible(False); ax.spines["right"].set_visible(False)
+    ax.annotate(f"{n_before} defenses predate\nthe attack they met",
+                xy=(-1.5, max(vals) * 0.82), fontsize=6.2, color="#2a78d6",
+                ha="center")
+    print(f"    lag: {n_before} of {len(tl)} defenses predate their attack")
+    save(fig, "fig7_lag")
+
+
 if __name__ == "__main__":
     fig_cube(); fig_channel_gap(); fig_who_reports(); fig_dose()
-    fig_citation_network()
+    fig_citation_network(); fig_transfer_matrix(); fig_lag()
     print("done")
