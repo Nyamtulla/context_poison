@@ -42,10 +42,10 @@ the weights so the combine cannot be done wrong by accident.
 
   * the 57 papers the contribution screen proposes removing - validating a
     paper we are about to drop wastes a coder;
-  * the 100 papers already drawn for the old purposive sample - those remain
-    useful as a **pilot** for estimating the agreement rate p, which is what
-    lets a second round shrink n, but they cannot also be part of the
-    probability sample that estimates it.
+  * the 100 papers already drawn for the old purposive sample. Those packets
+    were built but never coded, so there is no pilot estimate of the agreement
+    rate p and n stays at the conservative p=.50 figure. They are excluded to
+    avoid handing the same paper to two coders, not because they carry data.
 
 Seeded and reproducible: the same seed over the same frame yields the same
 papers, and the manifest records the frame size, the seed and the exclusions
@@ -228,14 +228,15 @@ def main():
     man = {
         "generated": "2026-10-16",
         "purpose": "stratified random validation sample; the purposive top-100 "
-                   "is the pilot and is excluded from this frame",
+                   "was built but never coded, and is excluded only to avoid "
+                   "duplicate work",
         "seed": args.seed,
         "allocation": args.allocation,
         "allocation_counts": want,
         "corpus_n": len(inc),
         "frame_n": len(frame),
         "excluded_proposed_removal": len(drop_ids),
-        "excluded_pilot": len(pilot),
+        "excluded_uncoded_purposive": len(pilot),
         "stratum_sizes_in_frame": gsize_frame,
         "stratum_weights_for_combine": weights,
         "stratum_weights_over_corpus": weights_corpus,
