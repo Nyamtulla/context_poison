@@ -65,6 +65,12 @@ from transfer_stats import (                      # noqa: E402
 # conflict between the two.
 # ---------------------------------------------------------------------------
 
+# attack name -> the per-item field holding its planted passage. Module level
+# because run_condition() needs it as well as main(); defining it inside main()
+# is what made the first distractor smoke run die on a NameError.
+PAY = {"false_evidence": "parametric_evidencde",
+       "distractor_evidence": "distractor_evidencde"}
+
 CHUNK_WORDS = 20
 BASE = "NousResearch/Meta-Llama-3-8B-Instruct"
 
@@ -81,7 +87,8 @@ def poison_context(context: str, passage: str, frac: float) -> str:
     return " ".join(chunks)
 
 
-def run_condition(model, data, passage, frac, schema, mode, alpha, max_new_tokens, top_k=1):
+def run_condition(model, data, passage, frac, schema, mode, alpha, max_new_tokens,
+                  top_k=1, payload_field=None):
     preds, golds, origs = [], [], []
     # ck.py's own signature defaults to top_k=1 (greedy); their eval_NQ.py
     # overrides it to 100, which makes every run stochastic. Identical
@@ -94,7 +101,7 @@ def run_condition(model, data, passage, frac, schema, mode, alpha, max_new_token
     for d in data:
         ctx = poison_context(
             d["context"],
-            passage if passage is not None else d["parametric_evidencde"], frac)
+            passage if passage is not None else d[payload_field], frac)
         context_prompt = CKEVAL.qa_to_prompt_baseline(d["question"], ctx, schema)
         base_prompt = "Q:{}\nA:".format(d["question"])
         out = model.generate(base_prompt, context_prompt, **params)
@@ -103,9 +110,17 @@ def run_condition(model, data, passage, frac, schema, mode, alpha, max_new_token
         origs.append(d["parametric_answer"])
     em, ps = CKEVAL.get_score(preds, golds)
     _, po = CKEVAL.get_score(preds, origs)
+    # recall against the PLANTED answer, scored with their own scorer so the
+    # three rates are directly comparable. Without it a distractor run cannot
+    # tell copying from remembering, which is the whole point of the payload.
+    pd_ = None
+    if data and data[0].get("distractor_answer") is not None:
+        _, pd_ = CKEVAL.get_score(preds, [d["distractor_answer"] for d in data])
     n = len(data)
     lo, hi = wilson(round(ps / 100 * n), n)
-    return {"n": n, "ctx_acc": round(ps, 2), "pm_acc": round(po, 2),
+    extra = {"dist_acc": round(pd_, 2)} if pd_ is not None else {}
+    return {**extra,
+            "n": n, "ctx_acc": round(ps, 2), "pm_acc": round(po, 2),
             "mr": round(po / (ps + po + 1e-10) * 100, 2), "em": round(em, 2),
             "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
 
@@ -124,10 +139,13 @@ def main():
     ap.add_argument("--out", type=str,
                     default="data/registries/ckplug_vs_corpus_poisoning.json")
     ap.add_argument("--attack", default="corpus_poisoning",
-                    choices=["corpus_poisoning", "false_evidence"],
+                    choices=["corpus_poisoning", "false_evidence",
+                             "distractor_evidence"],
                     help="corpus_poisoning plants the attack's optimised token "
                          "sequence; false_evidence plants a fluent passage "
-                         "asserting the model's own (wrong) prior answer")
+                         "asserting the model's own (wrong) prior answer; "
+                         "distractor_evidence plants a third answer that is "
+                         "neither the gold nor the prior")
     args = ap.parse_args()
 
     # Fingerprint what is actually planted and refuse to proceed if a
@@ -135,7 +153,7 @@ def main():
     # earlier ACD run applied the --attack flag to the output label but not the
     # payload and produced a complete, plausible result file under the wrong
     # attack name; only the numbers being identical to one decimal caught it.
-    if args.attack == "false_evidence":
+    if args.attack in PAY:
         passage = None
         _probe = None
     else:
@@ -144,19 +162,34 @@ def main():
     path = PM / "data" / "CoConflictQA" / "test" / args.data
     data = [json.loads(l) for l in path.read_text().splitlines()][: args.n]
 
-    if args.attack == "false_evidence":
-        miss = [d for d in data if not (d.get("parametric_evidencde") or "").strip()]
+    if args.attack in PAY:
+        fld = PAY[args.attack]
+        miss = [d for d in data if not (d.get(fld) or "").strip()]
         if miss:
-            raise SystemExit(f"{len(miss)} items lack parametric_evidencde")
-        _probe = data[0]["parametric_evidencde"]
+            raise SystemExit(f"{len(miss)} items lack {fld}")
+        _probe = data[0][fld]
         assert _probe != adversarial_text(), \
-            "false_evidence is planting the corpus-poisoning passage"
+            f"{args.attack} is planting the corpus-poisoning passage"
+        if args.attack == "distractor_evidence":
+            # three disjoint outcomes is the whole design; if they collide the
+            # arm proves nothing, so check rather than assume
+            bad = [d for d in data
+                   if str(d["distractor_answer"]).lower()
+                   in {str(a).lower() for a in d["answers"]}
+                   | {str(d["parametric_answer"]).lower()}]
+            if bad:
+                raise SystemExit(f"{len(bad)} items have a distractor equal to "
+                                 "the gold or the parametric answer")
     payload_fp = hashlib.sha256(_probe.encode()).hexdigest()[:16]
     print(f"  payload[{args.attack}] fp={payload_fp} sample={_probe[:70]!r}",
           flush=True)
 
-    _lab = ("corpus poisoning" if args.attack == "corpus_poisoning"
-            else "false evidence")
+    # one entry per attack. The two-branch version labelled a distractor run
+    # "false evidence", the same mislabelling that filed an early ACD run
+    # under the wrong attack.
+    _lab = {"corpus_poisoning": "corpus poisoning",
+            "false_evidence": "false evidence",
+            "distractor_evidence": "distractor evidence"}[args.attack]
     conditions = [("clean (native incidental conflict)", 0.0)] if args.clean_only else [
         ("clean (native incidental conflict)", 0.0),
         (f"{_lab}, 10% of context", 0.1),
@@ -171,7 +204,8 @@ def main():
         print(f"\n===== {arm} (alpha={args.alpha if mode=='ck' else 'n/a'}) =====", flush=True)
         for name, frac in conditions:
             r = run_condition(model, data, passage, frac, args.schema, mode,
-                              args.alpha, args.max_new_tokens, args.top_k)
+                              args.alpha, args.max_new_tokens, args.top_k,
+                              payload_field=PAY.get(args.attack))
             r.update(condition=name, frac=frac, arm=arm)
             results.append(r)
             print(f"  {name:<36} ctx_acc {r['ctx_acc']:5.1f}%  pm_acc {r['pm_acc']:5.1f}%"

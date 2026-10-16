@@ -91,6 +91,11 @@ from transfer_stats import (                      # noqa: E402
 # conflict between the two.
 # ---------------------------------------------------------------------------
 
+# attack name -> the per-item field holding its planted passage. Module level
+# because run_condition() needs it as well as main().
+PAY = {"false_evidence": "parametric_evidencde",
+       "distractor_evidence": "distractor_evidencde"}
+
 CHUNK_WORDS = 20
 BASE = "NousResearch/Meta-Llama-3-8B-Instruct"
 
@@ -107,13 +112,14 @@ def poison_context(context: str, passage: str, frac: float) -> str:
     return " ".join(chunks)
 
 
-def run_condition(model, tokenizer, data, passage, frac, dump=None):
+def run_condition(model, tokenizer, data, passage, frac, dump=None,
+                  payload_field=None):
     """One pass yields both arms, because model_answer returns both."""
     preds_def, preds_base, golds, origs = [], [], [], []
     for d in data:
         ctx = poison_context(
             d["context"],
-            passage if passage is not None else d["parametric_evidencde"], frac)
+            passage if passage is not None else d[payload_field], frac)
         gold = d["answers"][0] if isinstance(d["answers"], list) else d["answers"]
         # their protocol: generate exactly as many tokens as the gold answer has
         tgt_len = max(1, len(tokenizer.encode(gold, add_special_tokens=False)))
@@ -132,11 +138,18 @@ def run_condition(model, tokenizer, data, passage, frac, dump=None):
 
     n = len(data)
     out = {}
+    dists = ([d["distractor_answer"] for d in data]
+             if data and data[0].get("distractor_answer") is not None else None)
     for arm, preds in (("base_rag", preds_base), ("coiecd", preds_def)):
         em, ps = CKEVAL.get_score(preds, golds)
         _, po = CKEVAL.get_score(preds, origs)
+        # recall against the PLANTED answer; without it a distractor run cannot
+        # separate copying from remembering, which is the payload's purpose
+        pd_ = CKEVAL.get_score(preds, dists)[1] if dists else None
         lo, hi = wilson(round(ps / 100 * n), n)
-        out[arm] = {"n": n, "ctx_acc": round(ps, 2), "pm_acc": round(po, 2),
+        extra = {"dist_acc": round(pd_, 2)} if pd_ is not None else {}
+        out[arm] = {**extra,
+                    "n": n, "ctx_acc": round(ps, 2), "pm_acc": round(po, 2),
                     "mr": round(po / (ps + po + 1e-10) * 100, 2),
                     "em": round(em, 2),
                     "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
@@ -160,10 +173,13 @@ def main():
     ap.add_argument("--fracs", type=float, nargs="+", default=None,
                     help="override the poison levels, e.g. --fracs 0.0 1.0")
     ap.add_argument("--attack", default="corpus_poisoning",
-                    choices=["corpus_poisoning", "false_evidence"],
+                    choices=["corpus_poisoning", "false_evidence",
+                             "distractor_evidence"],
                     help="corpus_poisoning plants the attack's optimised token "
                          "sequence; false_evidence plants a fluent passage "
-                         "asserting the model's own (wrong) prior answer")
+                         "asserting the model's own (wrong) prior answer; "
+                         "distractor_evidence plants a third answer that is "
+                         "neither the gold nor the prior")
     args = ap.parse_args()
 
     # Fingerprint what is actually planted and refuse to proceed if a
@@ -171,7 +187,7 @@ def main():
     # earlier ACD run applied the --attack flag to the output label but not the
     # payload and produced a complete, plausible result file under the wrong
     # attack name; only the numbers being identical to one decimal caught it.
-    if args.attack == "false_evidence":
+    if args.attack in PAY:
         passage = None
         _probe = None
     else:
@@ -182,13 +198,24 @@ def main():
     kept = [r for r in rows if len(r["context"]) <= args.max_context_chars]
     data = kept[: args.n]
 
-    if args.attack == "false_evidence":
-        miss = [d for d in data if not (d.get("parametric_evidencde") or "").strip()]
+    if args.attack in PAY:
+        fld = PAY[args.attack]
+        miss = [d for d in data if not (d.get(fld) or "").strip()]
         if miss:
-            raise SystemExit(f"{len(miss)} items lack parametric_evidencde")
-        _probe = data[0]["parametric_evidencde"]
+            raise SystemExit(f"{len(miss)} items lack {fld}")
+        _probe = data[0][fld]
         assert _probe != adversarial_text(), \
-            "false_evidence is planting the corpus-poisoning passage"
+            f"{args.attack} is planting the corpus-poisoning passage"
+        if args.attack == "distractor_evidence":
+            # three disjoint outcomes is the whole design; a collision makes
+            # the arm unreadable, so check rather than assume
+            bad = [d for d in data
+                   if str(d["distractor_answer"]).lower()
+                   in {str(a).lower() for a in d["answers"]}
+                   | {str(d["parametric_answer"]).lower()}]
+            if bad:
+                raise SystemExit(f"{len(bad)} items have a distractor equal to "
+                                 "the gold or the parametric answer")
     payload_fp = hashlib.sha256(_probe.encode()).hexdigest()[:16]
     print(f"  payload[{args.attack}] fp={payload_fp} sample={_probe[:70]!r}",
           flush=True)
@@ -207,8 +234,12 @@ def main():
     CO.device = "cuda"
     CO.tokenizer = tokenizer
 
-    _lab = ("corpus poisoning" if args.attack == "corpus_poisoning"
-            else "false evidence")
+    # one entry per attack. The two-branch version labelled a distractor run
+    # "false evidence", the same mislabelling that filed an early ACD run
+    # under the wrong attack.
+    _lab = {"corpus_poisoning": "corpus poisoning",
+            "false_evidence": "false evidence",
+            "distractor_evidence": "distractor evidence"}[args.attack]
     conditions = [("clean (native incidental conflict)", 0.0)] if args.clean_only else [
         ("clean (native incidental conflict)", 0.0),
         (f"{_lab}, 10% of context", 0.1),
@@ -223,7 +254,8 @@ def main():
     results = []
     dump = [] if args.dump else None
     for name, frac in conditions:
-        got = run_condition(model, tokenizer, data, passage, frac, dump)
+        got = run_condition(model, tokenizer, data, passage, frac, dump,
+                            payload_field=PAY.get(args.attack))
         for arm, r in got.items():
             r.update(condition=name, frac=frac, arm=arm)
             results.append(r)
