@@ -10550,15 +10550,16 @@
   "confidence": "medium",
   "name": "four layer defense in depth architecture",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: The prompt integrity framework (Layer 4) is the most brittle of the four defense layers. (Section 8.1, Limitations of the Prompt Integrity Layer)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: The prompt integrity framework (Layer 4) is the most brittle of the four defense layers. (Section 8.1, Limitations of the Prompt Integrity Layer)",
   "has_defense": "yes",
   "defense_name": "four layer defense in depth architecture",
   "defense_intervention_point": "execution",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "applies",
   "origin_evidence": "The prompt integrity framework (Layer 4) is the most brittle of the four defense layers. (Section 8.1, Limitations of the Prompt Integrity Layer)",
   "evaluated_against": "No controlled attack experiment. Evidence is (a) a 90 day production deployment of nine OpenClaw agents with before/after security posture metrics across three hardening generations, (b) four HIGH severity findings discovered and remediated by an automated audit agent, and (c) a qualitative table mapping the eleven red-teaming case studies of Shapira et al. (CS#1-CS#11, including indirect injection via constitution, non-owner compliance, sensitive info disclosure, identity spoofing) to the defense layer that addresses each. The prompt integrity layer's effect is asserted 'in our testing' with no numbers.",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10571,15 +10572,16 @@
   "confidence": "medium",
   "name": "Portable Agent Memory",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: Zero injections reached the target model\u2019s instruction-following pathway. (Evaluation)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: Zero injections reached the target model\u2019s instruction-following pathway. (Evaluation)",
   "has_defense": "yes",
   "defense_name": "Portable Agent Memory",
   "defense_intervention_point": "ingestion",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "Zero injections reached the target model\u2019s instruction-following pathway. (Evaluation)",
   "evaluated_against": "Transfer Continuity Score on 50 coding/Q&A/planning tasks across three model pairs (Claude-3.5-Sonnet -> GPT-4-Turbo, GPT-4-Turbo -> Gemini-1.5-Pro, Gemini-1.5-Pro -> Claude-3.5-Sonnet) vs a no-memory baseline; Re-Hydration Fidelity under four token budgets (8192/6144/4096/2048); 1,500 tamper-mutation trials for hash/provenance detection; 200 prompt-injection attack patterns in four families (role elevation, instruction override, delimiter breakout, encoded/obfuscated injection); 350 capability-token validation trials; artifact size vs raw conversation JSON",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10592,15 +10594,16 @@
   "confidence": "medium",
   "name": "Cloud Decoy AI Agent",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We identify the third as an unaddressed exposure in this class of system, specify the mitigation it requires, and are explicit that the prototype evaluated here does not implement it. (Abstract)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We identify the third as an unaddressed exposure in this class of system, specify the mitigation it requires, and are explicit that the prototype evaluated here does not implement it. (Abstract)",
   "has_defense": "yes",
   "defense_name": "Cloud Decoy AI Agent",
   "defense_intervention_point": "execution",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "We identify the third as an unaddressed exposure in this class of system, specify the mitigation it requires, and are explicit that the prototype evaluated here does not implement it. (Abstract)",
   "evaluated_against": "Ten controlled AWS S3 decoy scenarios (enumeration only, enumeration+retrieval, multi-object retrieval, denied access, destructive deletion, delayed access, and scripted/SDK variants), scored manually by the authors against driver-script ground truth on complete event coverage, correct ordering, correct attribution of IAM principal/access key/role chain, complete object naming, and unsupported assertions; plus end-to-end latency (four to five minutes). Suite score 9.5/10, nine of ten scenarios reconstructed completely, zero untraceable assertions. The authors state there is no baseline, no ablation, no independent scoring, and one service on one provider - and NO prompt-injection experiment at all",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10613,15 +10616,16 @@
   "confidence": "medium",
   "name": "Z-Space",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: To address these challenges, this paper proposes Z-Space, a data-generation-oriented multi-agent collaborative tool invocation framework Z-Space. (Abstract)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: To address these challenges, this paper proposes Z-Space, a data-generation-oriented multi-agent collaborative tool invocation framework Z-Space. (Abstract)",
   "has_defense": "yes",
   "defense_name": "Z-Space",
   "defense_intervention_point": "none",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "To address these challenges, this paper proposes Z-Space, a data-generation-oriented multi-agent collaborative tool invocation framework Z-Space. (Abstract)",
   "evaluated_against": "Self-constructed enterprise dataset of 541 KBT tools and 280 user instructions (single- to six-step), with Qwen-plus/Qwen-max; baselines are an all-injection LLM baseline and an LLM+RAG baseline; metrics are tool invocation accuracy, token consumption and planning success rate, plus a scalability sweep of tool counts from 20 to 520 measuring token consumption",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10634,15 +10638,16 @@
   "confidence": "medium",
   "name": "CoMAI",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: As reported in Table 3, CoMAI achieved a 100% defense success rate on more than 500 adversarial samples, successfully detecting and neutralizing all malicious inputs such as \u201cignore previous instructions\u201d and covert logic manipulation attempts. (Evaluation, 4.3.4)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: As reported in Table 3, CoMAI achieved a 100% defense success rate on more than 500 adversarial samples, successfully detecting and neutralizing all malicious inputs such as \u201cignore previous instructions\u201d and covert logic manipulation attempts. (Evaluation, 4.3.4)",
   "has_defense": "yes",
   "defense_name": "CoMAI",
   "defense_intervention_point": "none",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "As reported in Table 3, CoMAI achieved a 100% defense success rate on more than 500 adversarial samples, successfully detecting and neutralizing all malicious inputs such as \u201cignore previous instructions\u201d and covert logic manipulation attempts. (Evaluation, 4.3.4)",
   "evaluated_against": "Defense success rate on 500+ self-constructed adversarial samples (explicit and implicit prompt injection, e.g. \"ignore previous instructions\" and covert logic manipulation) against a single-agent GPT-5-mini ablation, LLM-Interviewer and AI-Interviewer-Bot v3; plus admission-decision accuracy/recall vs a ten-professor expert gold standard and human interviewers over 55 candidates, score-distribution statistics, dimensional coverage, satisfaction/fluency, and a verbosity-bias correlation",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10663,7 +10668,8 @@
   "origin": "invents",
   "origin_evidence": "However, most existing methods struggle with complex, long-horizon tasks because they rely on a monolithic trajectory that entangles all past decisions and observations to solve the entire task in a single unified process. (Abstract)",
   "evaluated_against": "LoTa-Bench evaluation protocol in extended partially observable settings: WAH-NL with VirtualHome (250 train / 100 test tasks) and ALFRED with AI2THOR (valid-seen and valid-unseen); goal success rate and subgoal success rate across seven LLMs (LLaMA 3.1 8B/70B, Qwen 2.5 7B/72B, Mistral 7B, Gemma 2 9B, Phi-4-reasoning-plus 14B); baselines ZSP, Tree-Planner (N=25 and N=50), ReAct and ReAct+WM; plus ablations on the episodic/working memory systems and control flow types, computational cost analysis and qualitative failure cases",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10684,7 +10690,8 @@
   "origin": "invents",
   "origin_evidence": "Deploying lightweight Large Language Model (LLM) agents on edge servers can reduce latency and move agentic services closer to users, but resource-constrained edge models often struggle with long-horizon tasks that require persistent memory, subgoal tracking, and reflection. (Abstract)",
   "evaluated_against": "Five long-horizon tasks requiring 20+ steps (Blocksworld, Gripper, Tyreworld, Barman, Jericho) with Mistral-7b edge agents and deepseek-chat as cloud critic, in a homogeneous (Scenario A) and heterogeneous GPT-4-turbo/Mistral-7b (Scenario B) setup; baselines are STANDARD (AgentBoard-adapted memory agent) and LOCAL (HiAgent); metrics are Success Rate, Progress Rate, Grounding Accuracy, execution Steps, context token consumption, plus cloud-side coordination and overhead metrics",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10705,7 +10712,8 @@
   "origin": "invents",
   "origin_evidence": "Current methods for effectively diagnosing agent failures load the full trajectory into an LLM\u2019s context window, which suffers from attention dilution and fails when agentic traces inevitably exceed context limits. (Abstract)",
   "evaluated_against": "Who&When (Magentic-One Algorithm-Generated and CaptainAgent Hand-crafted subsets) and TRAIL (GAIA and SWE-Bench subsets); baselines: One-shot long-context CoT prompting, Step-by-step LLM judge, RAFFLES; metrics step-level accuracy, tolerant accuracy, precision, strict precision under fixed token budgets (25K-1M) and fixed scaling factors",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10726,7 +10734,8 @@
   "origin": "invents",
   "origin_evidence": "To address these limitations, we introduce PRInTS, a generative PRM trained with dual capabilities: (1) dense scoring based on the PRM\u2019s reasoning across multiple dimensions of step quality (e.g., interpretation of tool outputs, tool call informativeness) and (2) trajectory summarization that compresses the growing context while preserving essential information for step evaluation. (Abstract)",
   "evaluated_against": "FRAMES; GAIA (levels 1-3); WebWalkerQA (easy-hard); backbone agents Qwen3-32B, Tongyi DeepResearch-30B-A3B, Gemini-2.5-Flash; compared against other process/outcome reward-model baselines under best-of-n sampling, plus frontier references (Qwen3-235B-A22B-class, OpenAI DeepResearch); ablations on reward design (score-only vs comparison-only vs combined) and on input context (compressed summary vs raw trajectory vs most recent one/two/four steps)",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10747,7 +10756,8 @@
   "origin": "invents",
   "origin_evidence": "Such rigidity forces a trade-off between domain-specific performance and cross-task generalization: strong priors and compact tool spaces aid specialization but weaken transfer, while task-agnostic workflows and broad action spaces expand coverage but dilute guidance. (Abstract)",
   "evaluated_against": "FRAMES, xbench, GAIA, GAIA(WS) WebSailor subset, SWE-bench Lite, with Qwen3-8B/14B; baselines Vanilla Agent, OpenHands, WebSailor, SWE-Agent, Co-Sight, SWE-Search, AutoAgent, OWL, ReSum, OAgents, AgenTRIM; plus CAT training ablation (RFT, RFT+KTO)",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10768,7 +10778,8 @@
   "origin": "invents",
   "origin_evidence": "We present C LAWAUDIT, a static auditing framework for measuring implementation-level vulnerability exposure in the runtime layer of local LLM agents. (Abstract)",
   "evaluated_against": "OpenClawBench (446 GitHub Security Advisories from the OpenClaw repo, temporal split 229 train / 217 held-out test); baselines Semgrep Pro --config auto (~2,815 rules) and CodeQL javascript-security-extended (104 queries); metric advisory-level recall, plus a live HEAD-commit scan for triage/precision cost",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10781,15 +10792,16 @@
   "confidence": "medium",
   "name": "Trace",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: In this paper, we introduce Trace, a novel multi-stage attribution and forensic framework for AI attack agents using terminal command sequences. (Abstract)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: In this paper, we introduce Trace, a novel multi-stage attribution and forensic framework for AI attack agents using terminal command sequences. (Abstract)",
   "has_defense": "yes",
   "defense_name": "Trace",
   "defense_intervention_point": "execution",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "In this paper, we introduce Trace, a novel multi-stage attribution and forensic framework for AI attack agents using terminal command sequences. (Abstract)",
   "evaluated_against": "2,028 sessions (1,010 clean + 1,018 DPI) in a Linux CTF container with five planted flags, across 3 scaffolds x 7 frontier model families (Claude Opus, DeepSeek, Gemini 3.1, GLM-5, GPT-5.4, Kimi, Qwen); metrics macro F1 0.981 for fingerprinting, leave-one-scaffold-out generalization 0.815, DPI system-prompt extraction rate 81.9% at 0.736 Sentence-BERT fidelity (plus BERTScore check), verb-only evasion ablation, LLMmap adapted to shell commands as the only baseline, and an in-the-wild test on the blackbox Vulnetic pentest agent (78% family accuracy, full Gemini system prompt recovered)",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10802,15 +10814,16 @@
   "confidence": "medium",
   "name": "LIMBOSH",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: For this purpose, we deploy an input guard (see Figure 2) employing a random forest text classification model trained on n-grams of size 1-3. (Section IV-C, Prompt Injection Mitigation)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: For this purpose, we deploy an input guard (see Figure 2) employing a random forest text classification model trained on n-grams of size 1-3. (Section IV-C, Prompt Injection Mitigation)",
   "has_defense": "yes",
   "defense_name": "LIMBOSH",
   "defense_intervention_point": "execution",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "For this purpose, we deploy an input guard (see Figure 2) employing a random forest text classification model trained on n-grams of size 1-3. (Section IV-C, Prompt Injection Mitigation)",
   "evaluated_against": "11 LLMs (Gemma, GPT-3.5, GPT-4, GPT-4o, Llama2, Llama3, Mistral, Mixtral, OpenChat, Qwen, Tinyllama) scored for prompt-alignment under a rudimentary shell prompt; prompt-injection input-guard classifiers (random forest vs SVM vs naive Bayes, n-gram sweep) on the deepset Hugging Face prompt-injections dataset (662 prompts, 263 adversarial), best accuracy 0.88 under 5-fold CV; single-blind within-subjects study of 4 cybersecurity professionals interacting with LIMBOSH vs a control bash shell (commands issued, time, Likert realism ratings)",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10831,7 +10844,8 @@
   "origin": "invents",
   "origin_evidence": "A novel approach to digital forensic analysis of LLM-integrated applications is presented for prompt injection attacks. (Abstract)",
   "evaluated_against": "Six handcrafted prompt-to-SQL (P2SQL) attack samples taken from the categories of Pedro et al. (U.1 Drop tables; RD.1 Bypassing prompt restrictions on database writes x2; RD.2 Bypassing prompt restrictions on database read) mixed with 200 LLM-generated benign questions against a LangChain SQL-chain job-postings chatbot; 13 state-of-the-art LLMs then evaluated as forensic log analysers, varying sampling temperature and context window / log chunking",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10852,7 +10866,8 @@
   "origin": "invents",
   "origin_evidence": "Based on this insight, we propose a lookahead programming model that eliminates context transformation overhead by decoupling transformation from the critical path. (Introduction)",
   "evaluated_against": "Synchronous context engineering as the baseline, across four strategies (offloading, keep-recent-K, summarization, sub-agent isolation), on Qwen3-8B and Qwen3-32B H100 deployments in both PD co-located and PD-disaggregated settings at concurrency 1-64; also integrated into LangChain, LlamaIndex, AutoGen and OpenClaw. Every reported metric is systems efficiency: tail and transform-point time-to-first-token (up to 11.9x improvement, 64.5% average reduction under disaggregation), context length per turn, and KV-cache re-prefill cost. No accuracy, task-success or quality metric is reported anywhere.",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10873,7 +10888,8 @@
   "origin": "invents",
   "origin_evidence": "Context Viewer enables practical tasks such as analyzing agent failures, evaluating context compaction effectiveness, and studying the growth of system prompt components over time, functioning as an observability tool for context engineering. (Abstract)",
   "evaluated_against": "no evaluation",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10886,15 +10902,16 @@
   "confidence": "medium",
   "name": "Red-MIRROR",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: This paper proposes Red-MIRROR, a novel multi-agent automated penetration testing system that introduces a tightly coupled memory\u2013reflection backbone to explicitly govern inter-agent reasoning. (Abstract)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: This paper proposes Red-MIRROR, a novel multi-agent automated penetration testing system that introduces a tightly coupled memory\u2013reflection backbone to explicitly govern inter-agent reasoning. (Abstract)",
   "has_defense": "yes",
   "defense_name": "Red-MIRROR",
   "defense_intervention_point": "none",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "This paper proposes Red-MIRROR, a novel multi-agent automated penetration testing system that introduces a tightly coupled memory\u2013reflection backbone to explicitly govern inter-agent reasoning. (Abstract)",
   "evaluated_against": "XBOW benchmark (50 web exploitation challenges) and Vulhub CVE scenarios; baselines PentestAgent (50.0%), AutoPT (46.0%) and VulnBot (6.0%); metrics are overall exploitation success rate (86.0%), subtask completion rate (93.99%), Time-To-Exploit in agent steps (21.77 -> 13.19 on XBOW) and average dollar token cost per challenge ($0.10 -> $0.20); four-configuration ablation isolating SRMM and Dual-phase Reflection",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10915,7 +10932,8 @@
   "origin": "invents",
   "origin_evidence": "These challenges are often exacerbated by misinformation caused by lack of verification, reasoning without attribution, and potential knowledge conflicts. (Abstract)",
   "evaluated_against": "Exact-Match / SubEM / F1 on three multi-hop QA sets in the distractor setting (MuSiQue, 2WikiMultiHopQA, HotpotQA, 500 examples each) and on five LongBench QA sets (Qasper, MultiFieldQA-EN, MuSiQue, 2WikiMHQA, HotpotQA); baseline training datasets LongAlpaca, LongAlign, MuSiQue-Attribute, LongMIT, LongReward-SFT, SeaLong-SFT for SFT and LongReward-PO, SeaLong-PO for preference optimization; data-recipe ablations w/o CoC, w/o GT, w/o Doc and 1K-8K scaling, all on Llama-3.1-8B-Instruct",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10936,7 +10954,8 @@
   "origin": "invents",
   "origin_evidence": "This approach guarantees that only actions within the scope of the current permissions from the LLM can proceed. (Abstract)",
   "evaluated_against": "no evaluation",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10949,15 +10968,16 @@
   "confidence": "medium",
   "name": "ARGUS",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: To address this, we propose ARGUS, which searches for an optimal defense direction within the safety subspace that decouples from the utility degradation direction, further combining adaptive strength steering to achieve a better safety-utility trade-off. (Abstract)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: To address this, we propose ARGUS, which searches for an optimal defense direction within the safety subspace that decouples from the utility degradation direction, further combining adaptive strength steering to achieve a better safety-utility trade-off. (Abstract)",
   "has_defense": "yes",
   "defense_name": "ARGUS",
   "defense_intervention_point": "reasoning",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "To address this, we propose ARGUS, which searches for an optimal defense direction within the safety subspace that decouples from the utility degradation direction, further combining adaptive strength steering to achieve a better safety-utility trade-off. (Abstract)",
   "evaluated_against": "Own newly constructed cross-modal IPI benchmark spanning image, video and audio injections (existing datasets being image-only); models Qwen2-vl-7b (image, video) and Kimi-Audio-7b (audio); five baselines plus No Defense: System Prompt, Ignore Prompt, Noise, Removal, and AT (adversarial training); metrics UIA-inject / UIA-clean (utility), AIA and AIFA (attack success), and added inference time.",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10970,15 +10990,16 @@
   "confidence": "medium",
   "name": "UNNAMED: You've Changed: Detecting Modification of Black-Box Large La",
   "source": "contribution_screen_2026-10-16",
-  "notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We present an approach to monitor LLMs for changes by comparing the distributions of linguistic and psycholinguistic features of generated text. (Abstract)",
+  "notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We present an approach to monitor LLMs for changes by comparing the distributions of linguistic and psycholinguistic features of generated text. (Abstract)",
   "has_defense": "yes",
   "defense_name": "UNNAMED: You've Changed: Detecting Modification of Black-Box Large La",
   "defense_intervention_point": "execution",
-  "validated_against": "adversarial",
+  "validated_against": "",
   "origin": "invents",
   "origin_evidence": "We present an approach to monitor LLMs for changes by comparing the distributions of linguistic and psycholinguistic features of generated text. (Abstract)",
   "evaluated_against": "Five OpenAI completion models (text-ada-001, text-babbage-001, text-curie-001, text-davinci-003 and one further variant) plus Meta Llama 3 70B chat; pairwise same-model vs different-model corpus comparisons with Bonferroni-corrected thresholds (55 same-LLM tests, 220 different-LLM tests); graded mixtures of text from two LLMs to find the smallest detectable fraction (RQ3); GPT-2 corpus perplexity as a comparison signal; and a subtle sentiment-shifting prompt injection as the RQ4 attack case; features are LIWC summary variables (Analytic, Authentic, Clout, Tone) and VADER valence plus simple text statistics",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -10999,7 +11020,8 @@
   "origin": "invents",
   "origin_evidence": "We propose soft begging as a new alternative for LLM shielding. (Section 3, Soft Begging: Shielding LLMs with Soft Prompts)",
   "evaluated_against": "no evaluation",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  },
  {
   "row": null,
@@ -11020,6 +11042,7 @@
   "origin": "improves",
   "origin_evidence": "Attack detectors analyze input patterns and monitor model responses to identify anomalies and potential security breaches. (Abstract)",
   "evaluated_against": "Qualitative vulnerability table (High/Moderate/Low) of five metrics - Prompt Leaking, Code Generation, Content Manipulation, Spam Generation, Information Gathering - across WriteSonic, ChatGPT, Gemini AI and Hugging Face, plus a response-time vs number-of-requests plot for DDoS load",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "validated_against_needs_coding": true
  }
 ]
