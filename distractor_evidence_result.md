@@ -136,7 +136,55 @@ the real document, because neither mechanism can tell the real document from
 the planted one - both only arbitrate between *context* and *parameters*, and
 the attack lives inside the context.
 
+## The family of four
+
+CK-PLUG and COIECD complete the set, 2026-10-16. CK-PLUG runs at `--alpha 0.0`:
+at 0.5 the fusion collapses to `0.5 * full`, which cannot change a greedy
+argmax, and the alpha-0.5 false-evidence run was a documented no-op. All four
+runs plant the same payload, fingerprint `fd74b3e27116ffcb`.
+
+At saturation, each defense against its own undefended arm in the same run.
+`*` clears both the run's detectability threshold and Fisher at p<0.05.
+
+| defense | n | mdr | recalled from memory | copied the planted text | answered correctly |
+|---|---:|---:|---|---|---|
+| ParamMute | 781 | 7.1 | 39.0 -> 2.9 (**-36.1***) | 43.9 -> 81.4 (**+37.5***) | 5.4 -> 1.5 (-3.8) |
+| CK-PLUG | 781 | 7.1 | 36.1 -> 4.5 (**-31.6***) | 47.9 -> 86.7 (**+38.8***) | 9.3 -> 2.2 (**-7.2***) |
+| COIECD | 400 | 9.9 | 18.5 -> 13.0 (-5.5) | 39.0 -> 43.8 (+4.8) | 2.0 -> 1.2 (-0.8) |
+| ACD | 686 | 7.6 | 14.1 -> 32.5 (**+18.4***) | 76.0 -> 40.8 (**-35.1***) | 2.3 -> 5.0 (+2.6) |
+
+**Three of the four suppress memory and hand the mass to the attacker. One does
+the reverse. None improves accuracy.** CK-PLUG is the sharpest case in the
+campaign: it is the only defense whose accuracy loss clears the threshold on
+this payload, and at a 10 % dose it already copies 76.7 % against its
+undefended arm's 38.5 %, double, on one tenth of the context replaced.
+
+## The mass is conserved
+
+The three outcomes are disjoint by construction, so the deltas can be summed.
+If a defense merely moved probability between memory and the attacker, the two
+deltas would cancel.
+
+| defense | memory | copied | sum | correct |
+|---|---:|---:|---:|---:|
+| ParamMute | -36.1 | +37.5 | **+1.4** | -3.8 |
+| CK-PLUG | -31.6 | +38.8 | **+7.2** | -7.2 |
+| COIECD | -5.5 | +4.8 | **-0.8** | -0.8 |
+| ACD | +18.4 | -35.1 | -16.8 | +2.6 |
+
+For the three context-reliance defenses the sum is within 7 points of zero, and
+for CK-PLUG the residual is exactly its accuracy loss with the sign flipped.
+**These defenses do not add or remove correctness. They relocate it**, out of
+the model's memory and into whatever owns the context.
+
+ACD is the exception twice over: it moves mass the other way, and 14.1 points
+leave the three-way partition entirely. Its outputs under attack are, in that
+fraction of cases, none of gold, memory or the distractor. Whether that is
+abstention or degradation is not something this payload can answer, and it is
+the next thing worth measuring on this arm.
+
 ## Open
 
-CK-PLUG and COIECD on this payload would complete the family. Both were run on
-false evidence already, so the item set and the dosing carry over unchanged.
+The abstention question above. Separately, every run here is Llama-3-8B; the
+model control that overturned an earlier conclusion in this project has not
+been applied to the distractor payload.
