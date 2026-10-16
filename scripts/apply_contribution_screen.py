@@ -24,6 +24,7 @@ import collections
 import glob
 import json
 import pathlib
+import sys
 
 import openpyxl
 
@@ -83,6 +84,17 @@ def main():
     if bad:
         for n, why in bad:
             print(f"  SKIPPED {n}: {why}")
+    # The lead's boundary ruling overrides the screen in both directions, and
+    # it must be applied HERE too, not only in the re-derivation. Applying the
+    # screen's raw calls would remove five papers the lead readmitted and keep
+    # one the lead removed.
+    sys.path.insert(0, str(REPO / "scripts"))
+    from rederive_screen import apply_rulings
+    done, overridden = apply_rulings(done)
+    if overridden:
+        print(f"  lead rulings applied to {len(overridden)} papers "
+              f"({sum(1 for h,_ in overridden if h=='keep')} readmitted, "
+              f"{sum(1 for h,_ in overridden if h=='remove')} removed)")
     if not done:
         print("No completed rows found. Fill the 'contribution' column and re-run.")
         return

@@ -92,6 +92,11 @@ ATTACK_TOKENS = [
     ("corpus_poisoning", "corpus poisoning", "corpuspoisoning"),
     ("false_evidence", "false evidence", "knowledgeconflict"),
     ("distractor_evidence", "distractor evidence", "knowledgeconflict"),
+    # our adaptive attack on ACD: the distractor payload in whichever form
+    # minimises ACD's own ent_pos. Same registry key, because a literature
+    # pair would still call it knowledge conflict, but its own label, because
+    # it is a different payload with a different result.
+    ("adaptive_evidence", "adaptive distractor", "knowledgeconflict"),
     ("poisonedrag", "PoisonedRAG", "poisonedrag"),
 ]
 
