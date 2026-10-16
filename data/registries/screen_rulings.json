@@ -1,0 +1,30 @@
+{
+ "generated": "2026-10-16",
+ "purpose": "Project lead's rulings on contribution-screen calls. Applied on load by scripts/rederive_screen.py so the screener's spreadsheets stay untouched and every override is attributable.",
+ "boundary_ruling": {
+  "question": "Does benign long-context degradation, measured by needle or distractor probes with no attacker present, count as in scope?",
+  "answer": "yes",
+  "ruled_by": "project lead",
+  "date": "2026-10-16",
+  "consequence": "Papers removed on the grounds that they study long-context behaviour without an adversary are readmitted. Papers removed on subject matter (robot manipulation, GUI agents, multi-agent planning) stay removed."
+ },
+ "keep_despite_screen": [
+  {"title_contains": "Periodic RoPE",
+   "why": "holds the corpus's only 'position exhaustion' mechanism entry; NIAH retrieval collapses 100 -> 2.0% past the trained range"},
+  {"title_contains": "Language Models Need Sleep",
+   "why": "evaluates MK-NIAH/RULER, LongHealth, BABILong to 10M tokens; the screen's note that it never claims a context-degradation failure mode is factually wrong"},
+  {"title_contains": "Learning When to Attend",
+   "why": "evaluated on BABILong distractors and HELMET RAG; extends usable context 32K -> 128K"}
+ ],
+ "open_same_ruling": [
+  {"title_contains": "Beyond Needle(s) in the Embodied Haystack",
+   "status": "NOT YET RULED",
+   "why": "context-length x needle-depth heatmap, the canonical lost-in-the-middle plot; the ruling above appears to cover it but the lead has not seen it"},
+  {"title_contains": "Can Retrieval Heads See Images",
+   "status": "NOT YET RULED",
+   "why": "8K-128K x 6 needle depths; masking top-5% retrieval heads collapses accuracy 48.2 -> 5.7%. The audit calls removing it the single biggest substantive loss in the 57"},
+  {"title_contains": "Odysseys",
+   "status": "NOT YET RULED",
+   "why": "currently KEPT, but measures task success over long horizons with no in-window content failure. The ruling may imply it should go, which is the opposite direction from the two above"}
+ ]
+}
