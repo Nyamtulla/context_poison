@@ -1,6 +1,6 @@
 {
  "generated": "2026-10-16",
- "purpose": "stratified random validation sample; the purposive top-100 is the pilot and is excluded from this frame",
+ "purpose": "stratified random validation sample; the purposive top-100 was built but never coded, and is excluded only to avoid duplicate work",
  "seed": 20261016,
  "allocation": "both",
  "allocation_counts": {
@@ -10,7 +10,7 @@
  "corpus_n": 982,
  "frame_n": 825,
  "excluded_proposed_removal": 57,
- "excluded_pilot": 100,
+ "excluded_uncoded_purposive": 100,
  "stratum_sizes_in_frame": {
   "B": 119,
   "C": 706
