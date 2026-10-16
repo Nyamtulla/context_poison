@@ -121,8 +121,38 @@ def write(name, rows, fields):
     print(f"  wrote {name}: {len(rows)} rows")
 
 
+def apply_rulings(rows):
+    """Honour the project lead's overrides without editing the spreadsheets.
+
+    `screen_rulings.json` records decisions the lead made after reading the
+    screen. Applying them on load keeps the screener's sheets as an untouched
+    record of what it said, and keeps every override attributable to whoever
+    made it, which is what `registry_corrections.json` does for the registries.
+    """
+    f = REPO / "data" / "registries" / "screen_rulings.json"
+    if not f.exists():
+        return rows, []
+    spec = json.loads(f.read_text())
+    applied = []
+    for k in spec.get("keep_despite_screen", []):
+        needle = k["title_contains"].lower()
+        for r in rows:
+            if needle in r["title"].lower() and r["belongs_in_corpus"].lower() == "no":
+                r["belongs_in_corpus"] = "yes"
+                r["notes"] = (f"LEAD RULING {spec['boundary_ruling']['date']}: "
+                              f"readmitted. {k['why']} | " + r["notes"])
+                applied.append(r["title"])
+    return rows, applied
+
+
 def main():
     rows = load_rows()
+    rows, overridden = apply_rulings(rows)
+    if overridden:
+        print(f"lead rulings applied, {len(overridden)} papers readmitted:")
+        for t in overridden:
+            print(f"   {t[:72]}")
+        print()
     print(f"loaded {len(rows)} coded rows from the packets "
           f"(screener reported {REPORTED['rows']})\n")
 
