@@ -44,27 +44,30 @@ from src import registry_source  # noqa: E402
 # which registry a coded contribution belongs in
 TO_MECH = {"proposes_attack", "proposes_mechanism"}
 TO_DEF = {"proposes_defense", "proposes_fix"}
-# `validated_against` feeds NAdvOnly, NIncOnly and NBothValidated, which are
-# published numbers, so it is read from what the paper actually evaluated on
-# rather than inferred from whether the screen called the method a defense or a
-# fix. A method can be called a defense and never meet an attacker.
-ADVERSARIAL = (
-    "attack success", "asr", "adversarial", "attacker", "injection",
-    "poison", "jailbreak", "threat model", "red team", "exploit",
-    "malicious", "backdoor", "evasion",
-)
+# TWO FIELDS THIS SCRIPT REFUSES TO DERIVE, both learned the hard way on
+# 2026-10-16 when the first version of this file got them wrong.
+#
+# `validated_against` was derived by scanning the evaluation text for words
+# like "injection", "exploit" and "adversarial". It was wrong in 3 of the 13
+# cases it asserted:
+#
+#   Z-Space       "an all-injection llm baseline"  -> prompt stuffing, not an
+#                                                     attack
+#   Red-MIRROR    "web exploitation challenges"    -> the method IS the
+#                                                     attacker
+#   You've Changed "injection" in another sense
+#
+# A keyword cannot tell "the method was attacked" from "the method attacks"
+# from "the word means something else here". It is the same lesson the
+# defense-evaluation audit reached: a pattern confirms presence, never absence,
+# and here it could not even confirm presence. So we assert nothing and flag.
+#
+# `track` was copied from the paper. A paper can be labelled ML/AI while the
+# technique it proposes is a deliberate attack - NeuroGenPoisoning, MemVenom,
+# Chain-of-Trigger, ChainFuzzer and Zombie Agent were all filed ML/AI or Both
+# that way. The contribution decides the track, not the paper's label.
 
-
-def validated_from_evaluation(evaluated: str) -> str:
-    """adversarial when the evaluation names an attack, else blank.
-
-    Blank, not "incidental": a pattern can confirm that something is present,
-    it can never establish that it is absent. That caution is the general
-    conclusion of our own defense-evaluation audit, and the registry already
-    carries a blank category for exactly this case.
-    """
-    e = (evaluated or "").lower()
-    return "adversarial" if any(k in e for k in ADVERSARIAL) else ""
+TRACK_FOR = {"proposes_attack": "Security", "proposes_mechanism": "ML/AI"}
 
 
 def screen_rows():
@@ -113,7 +116,8 @@ def main():
             "row": p.get("row"), "paper_id": pid, "title": p.get("title"),
             "channel": (p.get("channel") or "").strip(),
             "consequence": (p.get("consequence") or "").strip(),
-            "track": (p.get("track") or "").strip(),
+            # NOT the paper's track: see the note above
+            "track": "",
             "is_extension_of": s["parent_technique"],
             "confidence": "medium",
             "name": name,
@@ -124,13 +128,15 @@ def main():
         }
         if s["contribution"] in TO_MECH:
             add_m.append({**base, "has_technique": "yes",
-                          "technique_name": name})
+                          "technique_name": name,
+                          "track": TRACK_FOR[s["contribution"]]})
         else:
             add_d.append({**base, "has_defense": "yes", "defense_name": name,
                           "defense_intervention_point":
                               (p.get("defense_intervention_point") or "").strip(),
-                          "validated_against":
-                              validated_from_evaluation(s["evaluated_against"]),
+                          # never derived; see the note above
+                          "validated_against": "",
+                          "validated_against_needs_coding": True,
                           "origin": s["origin"] or "proposed",
                           "origin_evidence": s["evidence_quote"][:400],
                           "evaluated_against": s["evaluated_against"],
@@ -139,9 +145,9 @@ def main():
     print(f"mechanisms/attacks to add: {len(add_m)}")
     for e in add_m:
         print(f"   {e['technique_name'][:52]:<54} [{e['channel']}/{e['consequence']}]")
-    import collections as _c
-    print(f"\ndefenses/fixes to add: {len(add_d)}  validated_against: "
-          f"{dict(_c.Counter(e['validated_against'] or '(blank, not asserted)' for e in add_d))}")
+    print(f"\ndefenses/fixes to add: {len(add_d)}  "
+          f"(validated_against left blank on all of them and flagged for "
+          f"coding; it is not derivable from the evaluation text)")
     for e in add_d[:12]:
         print(f"   {e['defense_name'][:52]:<54} [{e['validated_against']}]")
     if len(add_d) > 12:
