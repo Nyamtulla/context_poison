@@ -36,5 +36,38 @@
    "title_contains": "Odysseys",
    "why": "the screen kept it on a genre-precedent test (WebArena-style harnesses belong). Under the lead's ruling the test is whether the paper measures content already in the window being mishandled, and this measures task success and trajectory efficiency only, with no untrusted content and nothing position-dependent. Removed on 2026-10-16 so one test is applied to the whole set."
   }
- ]
+ ],
+ "contribution_coded_by_lead_session": {
+  "why": "The screen stopped at out_of_scope on these five and never coded what they contribute. After the lead's boundary ruling readmitted them the field was left blank rather than guessed. Coded here from each paper's own key_result and its existing registry entry, so the value is traceable to evidence rather than asserted.",
+  "date": "2026-10-16",
+  "codes": [
+   {
+    "title_contains": "Periodic RoPE",
+    "contribution": "proposes_fix",
+    "evidence": "holds both `position exhaustion` (mechanism, the corpus's only entry) and `P-RoPE / MiniWin` (defense, validated_against incidental). The method is the headline contribution; the mechanism is its diagnosis."
+   },
+   {
+    "title_contains": "Language Models Need Sleep",
+    "contribution": "proposes_fix",
+    "evidence": "holds `Sleep paradigm (Memory Consolidation + Dreaming)`, validated_against incidental; key_result reports it outperforming baselines across five task families"
+   },
+   {
+    "title_contains": "Learning When to Attend",
+    "contribution": "proposes_fix",
+    "evidence": "holds `L2A (Learning To Attend)`, validated_against incidental; key_result is performance within 3% of full attention from 8K to 128K"
+   },
+   {
+    "title_contains": "Beyond Needle(s) in the Embodied Haystack",
+    "contribution": "benchmark_or_dataset",
+    "evidence": "contributes the NiEH/NsiEH benchmark; key_result is a measurement, LLaVA-OV at 0.0% accuracy past 1M tokens, not a proposed method"
+   },
+   {
+    "title_contains": "Can Retrieval Heads See Images",
+    "contribution": "proposes_mechanism",
+    "evidence": "identifies multimodal retrieval heads as the component responsible: 4.4-10.2% of heads carry 50% of retrieval-score mass, and masking the top 5% collapses accuracy 48.2 -> 5.7 while random masking does not. A named incidental mechanism, and per the audit the only corpus paper naming the component responsible for lost-in-the-middle.",
+    "note": "has no registry entry yet; qualifies for one as an incidental mechanism",
+    "technique_name": "multimodal retrieval heads (sparse heads carrying retrieval)"
+   }
+  ]
+ }
 }
