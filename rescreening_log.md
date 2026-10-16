@@ -899,3 +899,52 @@ on load, so the previously published 529 stays reproducible with
 Regenerated after the change: RQ1 (60.5% empty, unchanged), RQ2 (11.7% / 9.3%,
 unchanged), `latex/numbers.tex`, and all five paper figures. The citation graph
 drops from 934 nodes to 932 and loses its only island.
+
+## Addendum 6 — the contribution re-screen, 2026-10-16
+
+All 982 papers were re-read against the rule that a paper stays only if it
+contributes an attack, a defense, an incidental mechanism or a fix. Benchmarks,
+surveys, measurement studies and position papers were kept throughout.
+
+**Corpus 982 -> 929.** 53 papers removed, nine of which held a registry entry;
+all nine were robot, game or planning defenses.
+
+The screen proposed 57 removals. The project lead ruled on 2026-10-16 that
+benign long-context degradation, measured by needle or distractor probes with
+no attacker present, **is in scope**. Applying that one test in both directions
+readmitted five papers and removed one the screen had kept:
+
+| paper | screen said | ruling |
+|---|---|---|
+| Periodic RoPE | remove | keep — holds the only `position exhaustion` mechanism |
+| Language Models Need Sleep | remove | keep |
+| Learning When to Attend | remove | keep |
+| Beyond Needle(s) in the Embodied Haystack | remove | keep |
+| Can Retrieval Heads See Images? | remove | keep |
+| Odysseys | keep | **remove** — task success only, no in-window failure |
+
+The ruling lives in `data/registries/screen_rulings.json` and is applied on
+load, so the screener's spreadsheets stay an untouched record of what it said.
+The five readmitted papers have `contribution` blanked and flagged: the screen
+stopped at `out_of_scope` and never coded what they actually propose, and
+guessing would have been worse than leaving it open.
+
+**Two derivation errors were found and corrected before anything was applied.**
+
+The screen's headline claim of 291 claim/evaluation mismatches was produced by
+a substring search that could not distinguish `CLAIM/EVALUATION MISMATCH` from
+`No CLAIM/EVALUATION MISMATCH`. Recomputed from the spreadsheets: **129 of 982,
+13.1%**. Four of its five summary files reproduce exactly, including the two
+load-bearing registry numbers (184 filed as defense but coded `proposes_fix`,
+128 deliberate attacks filed as non-adversarial `mechanism:`). An independent
+audit verified all 982 evidence quotes against the PDFs and found none
+fabricated.
+
+Second, excluding a paper from the workbook does not delete its registry entry.
+After the removals the raw defense registry still held 9 entries from excluded
+papers, so `NDefenses` read 527 while `NPapersDef` read 518. `gen_paper_numbers.py`
+now filters both registries to the included corpus.
+
+**What moved:** corpus 982->929, defenses 527->518, papers contributing nothing
+302->258, ML/AI track 384->336, cross-citation from ML/AI to security 9.4%->10.7%,
+citation network 932->878 nodes. The headline findings hold.

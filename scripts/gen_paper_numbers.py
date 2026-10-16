@@ -64,8 +64,15 @@ def main():
             "discovered_query", "hop", "seed_category", "abstract"}
     M["NCodedFields"] = len([h for h in hdr if h not in META])
 
-    # ---- registries
-    r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
+    # ---- registries, restricted to papers still IN the corpus.
+    # Excluding a paper from the workbook does not delete its registry entry,
+    # so after the 2026-10-16 contribution screen the raw file still held 9
+    # defenses from removed papers. Left unfiltered, NDefenses said 527 while
+    # NPapersDef said 518 and the two macros described different corpora.
+    r3 = [e for e in load("rq3_pollution_registry.json")
+          if e.get("paper_id") in included]
+    r4 = [e for e in load("rq4_defense_registry.json")
+          if e.get("paper_id") in included]
     M["NMechanisms"] = len(r3)
     tr3 = collections.Counter(e.get("track") for e in r3)
     M["NMechSecurity"], M["NMechML"] = tr3["Security"], tr3["ML/AI"]

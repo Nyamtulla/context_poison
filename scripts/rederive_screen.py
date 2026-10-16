@@ -143,8 +143,15 @@ def apply_rulings(rows):
         for r in rows:
             if needle in r["title"].lower() and r["belongs_in_corpus"].lower() == "no":
                 r["belongs_in_corpus"] = "yes"
-                r["notes"] = (f"LEAD RULING {date}: readmitted. {k['why']} | "
-                              + r["notes"])
+                # The screener stopped at out_of_scope and never coded what
+                # these papers actually contribute. Leaving that value in place
+                # would make the row contradict itself and would keep counting
+                # them as out_of_scope downstream. Blank it and flag instead of
+                # guessing a contribution nobody assigned.
+                r["contribution"] = ""
+                r["_needs_recoding"] = True
+                r["notes"] = (f"LEAD RULING {date}: readmitted; contribution "
+                              f"NOT YET CODED. {k['why']} | " + r["notes"])
                 applied.append(("keep", r["title"]))
     for k in spec.get("remove_despite_screen", []):
         needle = k["title_contains"].lower()
