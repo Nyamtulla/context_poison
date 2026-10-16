@@ -69,5 +69,17 @@
     "technique_name": "multimodal retrieval heads (sparse heads carrying retrieval)"
    }
   ]
+ },
+ "contribution_corrections": {
+  "why": "Codes the screen got wrong, corrected against the paper's own text.",
+  "date": "2026-10-16",
+  "codes": [
+   {
+    "title_contains": "EquiMem",
+    "from": "proposes_fix",
+    "to": "proposes_defense",
+    "evidence": "Section 5.3 is 'Robustness under Adaptive Attacks'; Algorithms 1-2 define two adaptive attack procedures and the paper states 'both attacks follow the adaptive threat model'. The abstract frames shared memory as 'a critical vulnerability'. Baselines include A-MemGuard, a published defense. This is a security defense, and one of the very few in the corpus evaluated against ADAPTIVE attacks."
+   }
+  ]
  }
 }

@@ -184,6 +184,14 @@ def apply_rulings(rows):
                 r["notes"] = (f"CODED {date}: {k['contribution']}. "
                               f"{k['evidence']} | " + r["notes"])
                 applied.append(("code", r["title"]))
+    for k in spec.get("contribution_corrections", {}).get("codes", []):
+        needle = k["title_contains"].lower()
+        for r in rows:
+            if needle in r["title"].lower() and r["contribution"] == k["from"]:
+                r["contribution"] = k["to"]
+                r["notes"] = (f"CODE CORRECTED {date}: {k['from']} -> "
+                              f"{k['to']}. {k['evidence']} | " + r["notes"])
+                applied.append(("recode", r["title"]))
     for k in spec.get("remove_despite_screen", []):
         needle = k["title_contains"].lower()
         for r in rows:
@@ -272,10 +280,14 @@ def main():
             # a method the screen calls a fix should not be recorded as having
             # met an adversary; one it calls an attack should sit on the
             # security track
-            if want == "fix" and any(
-                    e["validated_against"] == "adversarial" for e in entries):
-                conflict = "coded proposes_fix, registry says validated adversarially"
-            elif want == "attack" and all(
+            # NOT a conflict: a method designed for accidental context
+            # failure can still be evaluated against an attacker, and when it
+            # is, that is the cross-community behaviour this project exists to
+            # find. CDD is a knowledge-conflict diagnostic tested on 2,250
+            # adversarial records; EquiMem turned out to be a security defense
+            # the screen miscoded. Flagging the combination as an error would
+            # push us to "correct" the four most interesting rows in the set.
+            if want == "attack" and all(
                     e["track"] and e["track"] != "Security" for e in entries):
                 conflict = "coded proposes_attack, registry track is not Security"
             elif want == "none" and any(e["kind"] == "defense" for e in entries):
