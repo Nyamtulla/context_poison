@@ -133,15 +133,28 @@ def apply_rulings(rows):
     if not f.exists():
         return rows, []
     spec = json.loads(f.read_text())
+    date = spec["boundary_ruling"]["date"]
     applied = []
+    # the ruling cuts both ways: it readmits papers the screen removed on the
+    # wrong test, and it removes one the screen kept on a different test.
+    # Applying only the readmissions would leave the set incoherent again.
     for k in spec.get("keep_despite_screen", []):
         needle = k["title_contains"].lower()
         for r in rows:
             if needle in r["title"].lower() and r["belongs_in_corpus"].lower() == "no":
                 r["belongs_in_corpus"] = "yes"
-                r["notes"] = (f"LEAD RULING {spec['boundary_ruling']['date']}: "
-                              f"readmitted. {k['why']} | " + r["notes"])
-                applied.append(r["title"])
+                r["notes"] = (f"LEAD RULING {date}: readmitted. {k['why']} | "
+                              + r["notes"])
+                applied.append(("keep", r["title"]))
+    for k in spec.get("remove_despite_screen", []):
+        needle = k["title_contains"].lower()
+        for r in rows:
+            if needle in r["title"].lower() and r["belongs_in_corpus"].lower() != "no":
+                r["belongs_in_corpus"] = "no"
+                r["contribution"] = "out_of_scope"
+                r["notes"] = (f"LEAD RULING {date}: removed. {k['why']} | "
+                              + r["notes"])
+                applied.append(("remove", r["title"]))
     return rows, applied
 
 
@@ -149,9 +162,9 @@ def main():
     rows = load_rows()
     rows, overridden = apply_rulings(rows)
     if overridden:
-        print(f"lead rulings applied, {len(overridden)} papers readmitted:")
-        for t in overridden:
-            print(f"   {t[:72]}")
+        print(f"lead rulings applied to {len(overridden)} papers:")
+        for how, title in overridden:
+            print(f"   {how:<7} {title[:68]}")
         print()
     print(f"loaded {len(rows)} coded rows from the packets "
           f"(screener reported {REPORTED['rows']})\n")
