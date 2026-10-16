@@ -19,7 +19,7 @@ Carlini's conclusion is the sentence to keep in view:
 
 | # | Carlini's criticism | Us |
 |---|---|---|
-| 1 | Attacks are oblivious to the defense | **Exposed, with one asymmetry in our favour** |
+| 1 | Attacks are oblivious to the defense | **Addressed** for ACD (adaptive attack run); conservative elsewhere |
 | 2 | Averages computed across different threat models | **Pass** |
 | 3 | Permitted distortion too large to be meaningful | **Partial** |
 | 4 | Defenses evaluated outside their stated threat model | **Pass, and it is our thesis** |
@@ -72,10 +72,18 @@ than about the defense. The abstract says the attacks are not adapted and that
 this makes failures lower bounds and resistances provisional. `acd_result.md`
 carries a Scope section saying the result must never be cited as robustness.
 
-**Still open:** the adaptive attack itself. ACD's entropy rule is public and
-differentiable, so optimising a passage against it is feasible and is the
-proper fix. Downgrading makes the paper honest; it does not make the
-measurement exist.
+**The adaptive attack was then run** (2026-10-16, `adaptive_acd_result.md`).
+A white-box best-of-K search minimising ACD's own `ent_pos` removes 29 % of its
+protection and lands its accuracy on the undefended arm. All six predictions
+committed beforehand held, including the ceiling derived from the rule: ACD
+does not fall below undefended RAG, because `d_alpha` is bounded in (0,1).
+
+So this criticism moves from **exposed** to **addressed**: our one robustness
+claim has now met an adaptive attacker, the claim is scoped to what that
+attacker left standing, and the remaining gap is named rather than hidden.
+Best-of-K over five templates is the cheapest adaptive attack that exists;
+a gradient search on `ent_pos` is still the proper version and is still
+undone.
 
 ---
 
@@ -246,8 +254,9 @@ reviewer does.
 
 ## What to change, in order
 
-1. **Downgrade or re-run the ACD robustness claim.** It is the one place we
-   repeat DeepSec's actual error. (§1)
+1. ~~**Downgrade or re-run the ACD robustness claim.**~~ **Done both**: the
+   claim is scoped, and the adaptive attack was run and removed 29 % of the
+   protection. (§1)
 2. **Rerun one cell three times and publish the spread.** Cheap, and it
    converts an assertion into a measurement. (§10)
 3. **Promote the 10 % dose over saturation** in the headline numbers. (§3)
