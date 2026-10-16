@@ -30,7 +30,14 @@ import openpyxl
 REPO = pathlib.Path(__file__).resolve().parent.parent
 R = REPO / "data" / "registries"
 XLSX = REPO / "data" / "exports" / "paper_dashboard_source.xlsx"
-PACKETS = REPO / "data" / "exports" / "contribution_screen" / "*.xlsx"
+# The coded packets come back inside their bundle folders; the flat copies in
+# contribution_screen/ are the blanks that were handed out. Reading the blanks
+# reports "no completed rows" and looks like the screen never happened, so
+# prefer the bundles and fall back only if they are absent.
+_CS = REPO / "data" / "exports" / "contribution_screen"
+PACKETS = str(_CS / "bundles" / "packet-*" / "*.xlsx")
+if not glob.glob(PACKETS):
+    PACKETS = str(_CS / "*.xlsx")
 
 VALID = {"proposes_attack", "proposes_mechanism", "proposes_defense",
          "proposes_fix", "improves_existing", "applies_existing",
@@ -40,7 +47,7 @@ VALID = {"proposes_attack", "proposes_mechanism", "proposes_defense",
 
 def read_packets():
     out, bad = [], []
-    for p in sorted(glob.glob(str(PACKETS))):
+    for p in sorted(glob.glob(PACKETS)):
         wb = openpyxl.load_workbook(p, read_only=True)
         if "papers" not in wb.sheetnames:
             wb.close(); continue
