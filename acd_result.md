@@ -16,9 +16,14 @@ specific non-adaptive payload and nothing more. Inferring robustness from an
 attack that was not built for the defense is the exact error that invalidated
 DeepSec's defense rankings (`carlini_audit.md` §1).
 
-An attacker who knows ACD's entropy rule and optimises against it is untested.
-We expect such an attacker to do better, because the rule is public and
-differentiable.
+An attacker who knows ACD's entropy rule and optimises against it **has now
+been tested**, in `adaptive_acd_result.md`: a best-of-five search over sentence
+forms, all asserting the same answer, cuts median `ent_pos` 1.348 -> 0.783,
+raises `d_alpha` 0.525 -> 0.653, and removes **29 % of ACD's protection**
+(defensive gap 35.1 pp -> 25.1 pp), driving accuracy onto the undefended arm
+and below a no-retrieval baseline. All six predictions committed before that
+run held. That is a lower bound from a weak optimiser, so the resistance
+reported below degrades under adaptive pressure rather than surviving it.
 
 Two things already bound the claim from the other side. `acd_false_evidence_result.md`
 swaps the payload class and the protection disappears entirely, falling below
