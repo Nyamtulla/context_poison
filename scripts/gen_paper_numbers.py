@@ -153,6 +153,48 @@ def main():
                           + len({r["technique_name"] for r in scored}))
     M["NCampaignEpisodes"] = f"{rag_eps + agent_eps:,}"
 
+    # ---- the temporal layer. Which community's defense met which
+    # community's attack, and in what order. The 2x2 counts the two pure
+    # tracks only, because a "Both"-track paper cannot cross a boundary it
+    # sits on; the all-pairs figure is kept beside it so neither reading is
+    # lost.
+    tl = load("pair_timeline.json")["pairs"]
+    M["NTimelinePairs"] = len(tl)
+    _pre = [r for r in tl if r["defense_predates_attack"]]
+    M["NDefensePredates"] = len(_pre)
+    M["PctDefensePredates"] = f"{100*len(_pre)/len(tl):.1f}"
+    _pure = [r for r in tl if r["defense_track"] in ("Security", "ML/AI")
+             and r["attack_track"] in ("Security", "ML/AI")]
+    _x = [r for r in _pure if r["defense_track"] != r["attack_track"]]
+    M["NPureTrackPairs"] = len(_pure)
+    M["NCrossCommunityPairs"] = len(_x)
+    M["PctCrossCommunity"] = f"{100*len(_x)/len(_pure):.1f}"
+    M["NCrossAllPairs"] = sum(1 for r in tl
+                              if r["defense_track"] != r["attack_track"])
+    M["NSecDefVsMLAttack"] = sum(1 for r in _pure
+                                 if r["defense_track"] == "Security"
+                                 and r["attack_track"] == "ML/AI")
+    M["NMLDefVsSecAttack"] = sum(1 for r in _pure
+                                 if r["defense_track"] == "ML/AI"
+                                 and r["attack_track"] == "Security")
+    M["NPredatesAndCross"] = sum(1 for r in _pure
+                                 if r["defense_predates_attack"]
+                                 and r["defense_track"] != r["attack_track"])
+    # the same matrix for what we executed
+    _DT = {"ParamMute": "ML/AI", "CK-PLUG": "ML/AI", "COIECD": "ML/AI",
+           "ACD": "ML/AI", "DyPRAG": "ML/AI", "FaithfulRAG": "ML/AI",
+           "SpARE": "ML/AI", "SCR": "ML/AI",
+           "RobustRAG-DecodingAgg": "Security", "RobustRAG-KeywordAgg": "Security"}
+    _AT = {"corpus poisoning": "Security", "PoisonedRAG": "Security",
+           "BadRAG sentiment steering": "Security",
+           "BadRAG denial-of-service": "Security",
+           "false evidence": "ML/AI", "distractor evidence": "ML/AI"}
+    _op = {(r["defense"], r["attack"]) for r in runs if r["role"] == "transfer"}
+    _oc = sum(1 for d, a in _op if _DT.get(d) != _AT.get(a))
+    M["NOursPairs"] = len(_op)
+    M["NOursCrossPairs"] = _oc
+    M["PctOursCross"] = f"{100*_oc/len(_op):.0f}"
+
     # ---- the citation graph, so figure 5's caption cannot drift from it
     import networkx as nx
     net = load("citation_network_union.json")
