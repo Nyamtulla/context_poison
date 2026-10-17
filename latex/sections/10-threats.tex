@@ -13,7 +13,7 @@ in the sampled fields.
 cited paper into a track. That classification is automated over the full
 discovery pool. A systematic bias in it would move the rates. We regard the
 direction of the finding as safe, because the gap between \PctSecCitesML{}\% citation and
-99.1\% same-track evaluation is far larger than any plausible classification
+\PctSameTrack{}\% same-track evaluation is far larger than any plausible classification
 error, but the exact rates should be read as estimates.
 
 \textbf{Registry granularity.} What counts as one named mechanism is a
@@ -29,10 +29,26 @@ comparison. The two sides largely write about different pairs, so the
 association partly reflects selection of which pair to run, which is exactly
 our interpretation, rather than differing conduct on the same pair.
 
-\textbf{The campaign is a sample, not a census.} We ran 81 pairs out of a space
+\textbf{The campaign is a sample, not a census.} We ran \NCampaignPairs{} pairs out of a space
 of thousands. They were selected by the taxonomy rather than at random, biased
 toward pairs where both artifacts run. Defenses whose artifacts do not run are
 absent, and nothing here says whether they transfer.
+
+\textbf{Attacks are non-adaptive, with one exception.} This is the criticism
+that invalidated DEEPSEC's defense rankings~\cite{carlini-2019-critique} and
+we inherit it by design rather than by oversight. Its direction is not
+symmetric: an attack not built for a defense that defeats it anyway bounds
+attack strength from below, so our failure results are conservative, while a
+resistance result drawn the same way is not evidence of robustness.
+Section~\ref{sec:adaptive} tests the one resistance result we report. Every
+other defense in the campaign would need the same treatment before any claim
+that it holds.
+
+\textbf{Variance is argued, not measured.} We use greedy decoding throughout,
+so a rerun reproduces exactly, and we report Wilson intervals and a
+detectability threshold on every effect. We have not demonstrated that
+determinism by rerunning a cell end to end, and we have no multi-seed study of
+sensitivity to item order or few-shot choice.
 
 \textbf{Single dataset per cell.} The retrieval cell runs on CoConflictQA and
 open Natural Questions. The dosing model, which replaces a fraction of context

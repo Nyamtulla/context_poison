@@ -231,6 +231,17 @@ def main():
     M["NMLDefVsSecAttack"] = sum(1 for r in _pure
                                  if r["defense_track"] == "ML/AI"
                                  and r["attack_track"] == "Security")
+    # the two diagonal cells of the transfer matrix, so Table 1 and the
+    # sentence under it cannot drift apart
+    M["NSecDefSecAttack"] = sum(1 for r in _pure
+                                if r["defense_track"] == "Security"
+                                and r["attack_track"] == "Security")
+    M["NMLDefMLAttack"] = sum(1 for r in _pure
+                              if r["defense_track"] == "ML/AI"
+                              and r["attack_track"] == "ML/AI")
+    _same = sum(1 for r in tl if r["defense_track"] == r["attack_track"])
+    M["NSameTrackPairs"] = _same
+    M["PctSameTrack"] = f"{100*_same/len(tl):.1f}"
     M["NPredatesAndCross"] = sum(1 for r in _pure
                                  if r["defense_predates_attack"]
                                  and r["defense_track"] != r["attack_track"])

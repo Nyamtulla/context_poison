@@ -13,8 +13,39 @@ Our contribution is not a better enumeration of either side. It is that one
 search protocol, one screening pass and one taxonomy are applied to both, which
 is what makes the distance between them measurable. A systematization drawn
 from one literature cannot report that 9 papers in 10 do not cite the other, or
-that 99.1\% of tested pairs stay inside one track, because the other track is
+that \PctSameTrack{}\% of tested pairs stay inside one track, because the other track is
 not in its corpus.
+
+\subsection{Platforms that run attacks against defenses}
+
+The closest precedent is not a survey but a platform.
+DEEPSEC~\cite{ling-2019-deepsec} ran 16 adversarial-example attacks against 13
+defenses in one harness, which is structurally what we do here. It was also
+taken apart in public~\cite{carlini-2019-critique}, and the criticisms are
+worth naming because they define what such a platform has to get right:
+defenses were evaluated only against attacks crafted on undefended models;
+robustness was reported as an average over attacks rather than against the
+strongest one; several attacks and one defense were reimplemented incorrectly;
+and no variance was reported at all.
+
+We took those as a specification. We do not reimplement: every method runs
+from its authors' released code and weights, and the control-fires-first rule
+is an automated form of the check Carlini had to run by hand --- it fired on
+FaithfulRAG, which we report as not reportable rather than as defeated. We
+report per-cell rather than averaging across threat models, and we say so where
+a cross-payload comparison is confounded. We use greedy decoding throughout
+rather than reporting error bars over a stochastic decoder. The one criticism
+we inherit is obliviousness, and Sections~\ref{sec:experiments}
+and~\ref{sec:adaptive} state its direction and test the single claim that
+needs it.
+
+The reproducibility study of Olszewski et
+al.~\cite{olszewski-2023-reproducibility} is the methodological precedent for
+the other half: sampling papers from a venue, attempting to reproduce them, and
+reporting what failed and why. Our roadblock accounting in
+Section~\ref{sec:discussion} is in that genre, and our finding that several
+published defenses cannot be run from their released artifacts is consistent
+with theirs.
 
 The second difference is that we execute. Existing systematizations in this
 space report what papers claim their methods achieve. Section~\ref{sec:whoran}

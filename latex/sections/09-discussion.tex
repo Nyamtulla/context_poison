@@ -25,11 +25,11 @@ changing only the model changed an effect's magnitude, its existence, and once
 its sign. A single-model result in this area should be read as a
 model-specific result until shown otherwise.
 
-\subsection{Two conventions that make transfer measurable}
+\subsection{Three conventions that make transfer measurable}
 
 \textbf{State the threat model the evaluation actually covers.} Our defense
-census codes each method by what its own paper evaluated, and 97\% cover one
-threat model. Many of those papers describe their contribution in terms broad
+census codes each method by what its own paper evaluated, and
+\PctOneThreatModel{}\% cover one threat model. Many of those papers describe their contribution in terms broad
 enough to imply the other. A single required sentence naming the threat model
 the experiments cover would let a reader of the paper, and the maintainer of a
 system, see the gap without reading the appendix.
@@ -38,6 +38,17 @@ system, see the gap without reading the appendix.
 without the smallest difference the experiment could have detected makes "no
 effect" and "we could not tell" look identical. We computed this for every run
 and several of our own results moved from the first category to the second.
+
+\textbf{Say whether the attack was adapted to the defense.} A defense that
+holds against an attack built for a different target has been shown to resist
+that attack and nothing more. The asymmetry is what matters and it is rarely
+stated: non-adaptive evaluation is conservative evidence for a failure and no
+evidence at all for a guarantee. Every published evaluation of a
+context-reliance defense in our corpus is non-adaptive, and when we built an
+adaptive payload against the one method that had resisted, 29\% of its
+protection went (Section~\ref{sec:adaptive}). One sentence naming whether the
+attacker knew the defense would let a reader tell which kind of claim they are
+reading.
 
 \subsection{Artifacts}
 

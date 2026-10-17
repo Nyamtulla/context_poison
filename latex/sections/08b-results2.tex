@@ -81,3 +81,87 @@ Across the agent cell, 24 of 56 conditions show the technique holding with
 attack success driven to zero, 4 show a resolvable reduction, 19 show no
 resolvable effect at that sample size, and 9 show no reduction at all.
 Ingestion-stage techniques account for most of the holds.
+
+\subsection{An adaptive attacker}
+\label{sec:adaptive}
+
+Every result above comes from an attack that was not built for the defense it
+met. Section~\ref{sec:experiments} states why that is conservative for a
+failure and invalid for a resistance. ACD is our one resistance result, so it
+is the one that has to be tested properly.
+
+ACD mixes the no-context and with-context next-token distributions by
+\[
+d_\alpha = \frac{H}{H_{\mathrm{ctx}} + H},
+\qquad
+s \leftarrow s + d_\alpha\,(s_{\mathrm{ctx}} - s),
+\]
+where $H$ is the Shannon entropy of the no-context distribution and
+$H_{\mathrm{ctx}}$ that of the with-context one. $H$ is a property of the
+question. $H_{\mathrm{ctx}}$ is conditioned on the retrieved context, which an
+attacker who owns the corpus controls outright. \textbf{So the attack has
+exactly one objective: minimize $H_{\mathrm{ctx}}$.}
+
+\textbf{The ceiling follows from the rule, not from an experiment.} As
+$H_{\mathrm{ctx}} \to 0$, $d_\alpha \to 1$ and the update collapses to
+$s_{\mathrm{ctx}}$ unchanged, which is the undefended model. A perfect adaptive
+attack of this kind turns ACD into plain RAG and can do no better; it cannot
+drive ACD \emph{below} its own undefended arm, because $d_\alpha$ is bounded in
+$(0,1)$ and the endpoints are closed-book and plain RAG. We committed that
+bound, and five further predictions, before building the payload. An ACD arm
+landing below the undefended arm would have falsified our account of the
+mechanism.
+
+The attack is white-box and query-based: five candidate passages per item, all
+asserting the \emph{same} distractor answer and differing only in form, each
+scored by the $H_{\mathrm{ctx}}$ ACD itself would compute, keeping the
+minimum. Holding the asserted answer fixed is what makes any movement
+attributable to form rather than to a different claim. It is a deliberately
+weak optimizer, so what it achieves is again a lower bound.
+
+\begin{table}[t]
+\centering
+\caption{ACD against the distractor payload in its plain form and in the form
+that minimizes ACD's own entropy term, at saturation, $n=686$. The adaptive
+payload is stronger against the undefended arm too, so the defensive gap is
+the quantity that isolates the defense.}
+\label{tab:adaptive}
+\small
+\begin{tabular}{lrrr}
+\toprule
+at saturation & plain & adaptive & change \\
+\midrule
+median $H_{\mathrm{ctx}}$ & 1.348 & 0.783 & $-42\%$ \\
+median $d_\alpha$ & 0.525 & 0.653 & $+0.13$ \\
+\midrule
+undefended copies attacker & 76.0 & 89.1 & \\
+ACD copies attacker & 40.8 & \textbf{64.0} & $+23.2$ \\
+\textbf{defensive gap} & \textbf{35.1} & \textbf{25.1} & $\mathbf{-29\%}$ \\
+\midrule
+ACD recalls from memory & 32.5 & 22.2 & \\
+ACD answers correctly & 5.0 & 3.2 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All six predictions held. $H_{\mathrm{ctx}}$ falls 42\%, $d_\alpha$ rises
+toward 1, ACD's copy rate rises from 40.8\% to \textbf{64.0\%}
+($p = 9.5\times10^{-18}$), its parametric recall falls toward the undefended
+arm's, and its accuracy lands on \textbf{3.2\%} --- exactly the undefended
+arm, and below the no-retrieval floor of 8.2\%. ACD does not fall below the
+undefended arm on copy rate, as the ceiling requires.
+
+\textbf{The honest size of the effect is the gap, not ACD's rise.} The adaptive
+payload is stronger against the undefended arm as well, so reporting only
+ACD's change would credit the defense with damage the attack does to everyone.
+Against its own undefended arm the protection falls from 35.1\pp{} to
+25.1\pp{}: \textbf{29\% of it removed by a best-of-five search over sentence
+templates.} Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, so a
+gradient search on $H_{\mathrm{ctx}}$ has the remainder to work with.
+
+What this licenses is narrow and worth stating as such. It does not show ACD is
+broken. It shows that the one defense in our campaign that looked like a
+counterexample degrades under an attacker who reads the method and spends five
+forward passes per item, and that every published evaluation of a
+context-reliance defense in our corpus is non-adaptive. The gap between
+non-adaptive and adaptive evaluation is large enough to change the verdict.

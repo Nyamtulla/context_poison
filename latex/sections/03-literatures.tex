@@ -199,8 +199,8 @@ one of the two tracks gives Table~\ref{tab:transfer}.
 \toprule
 defense from $\downarrow$ \quad attack from $\rightarrow$ & Security & ML/AI \\
 \midrule
-Security & 262 & \textbf{\NSecDefVsMLAttack{}} \\
-ML/AI    & \NMLDefVsSecAttack{} & 80 \\
+Security & \NSecDefSecAttack{} & \textbf{\NSecDefVsMLAttack{}} \\
+ML/AI    & \NMLDefVsSecAttack{} & \NMLDefMLAttack{} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -209,7 +209,7 @@ ML/AI    & \NMLDefVsSecAttack{} & 80 \\
 failure mechanism. The cell is empty.} In the other direction there are
 \NMLDefVsSecAttack{} pairs out of \NPureTrackPairs{}. Together,
 \NCrossCommunityPairs{} pairs (\PctCrossCommunity{}\%) cross the boundary and
-the remaining 98\% stay inside one community.
+the remaining \PctSameTrack{}\% stay inside one community.
 
 This is consistent with the citation rates and sharper than them. The
 communities do not read each other, so they do not test each other, so the
