@@ -160,6 +160,53 @@ def main():
                           + len({r["technique_name"] for r in scored}))
     M["NCampaignEpisodes"] = f"{rag_eps + agent_eps:,}"
 
+    # ---- the taxonomy cube and the per-axis splits.
+    # Computed exactly as fig_cube does: over PAPER rows, one (channel,
+    # consequence) per paper, split by track. These were typed into the prose
+    # and went stale the moment the corpus moved: the text still said 98 empty
+    # cells of 162 when it had become 111.
+    CHS = ["direct-input", "tool-output", "RAG", "memory", "multi-agent",
+           "cross-modal", "tool-metadata", "skill", "supply-chain"]
+    CQS = ["goal-hijack", "reasoning-corruption", "silent-corruption",
+           "data-exfiltration", "persistence-backdoor", "resource-abuse"]
+    ci, qi, ti = hdr.index("channel"), hdr.index("consequence"), hdr.index("track")
+    occupied = set()
+    for r in rows:
+        if r[pi] not in included:
+            continue
+        c, q, tr = (str(r[ci] or "").strip(), str(r[qi] or "").strip(),
+                    str(r[ti] or "").strip())
+        if c in CHS and q in CQS and tr in ("Security", "ML/AI"):
+            occupied.add((c, q, tr))
+    NCELLS = len(CHS) * len(CQS) * 3      # 3 intents: adversarial, incidental, both
+    M["NCubeCells"] = NCELLS
+    M["NCubeEmpty"] = NCELLS - len(occupied)
+    M["PctCubeEmpty"] = f"{100*(NCELLS-len(occupied))/NCELLS:.1f}"
+
+    # mechanism registry splits, quoted in S4
+    _mq = collections.Counter(e.get("consequence") for e in r3)
+    _mc = collections.Counter(e.get("channel") for e in r3)
+    for key, src, pre in (("goal-hijack", _mq, "MechGoalHijack"),
+                          ("reasoning-corruption", _mq, "MechReasoning"),
+                          ("silent-corruption", _mq, "MechSilent"),
+                          ("direct-input", _mc, "MechDirectInput"),
+                          ("tool-output", _mc, "MechToolOutput"),
+                          ("RAG", _mc, "MechRAG")):
+        M["N" + pre] = src[key]
+        M["Pct" + pre] = f"{100*src[key]/len(r3):.1f}"
+    # defense intervention points, quoted in S4
+    _ip = collections.Counter((e.get("defense_intervention_point") or "none").strip()
+                              for e in r4)
+    for key, pre in (("reasoning", "DefPtReasoning"), ("ingestion", "DefPtIngestion"),
+                     ("execution", "DefPtExecution"), ("none", "DefPtNone")):
+        M["N" + pre] = _ip[key]
+        M["Pct" + pre] = f"{100*_ip[key]/len(r4):.1f}"
+
+    # injection variants with no tested defense, quoted in S5
+    _inj = [a for a in uni if "inject" in a.lower()]
+    M["NInjVariants"] = len(_inj)
+    M["NInjUncovered"] = sum(1 for a in _inj if a not in covered)
+
     # ---- the temporal layer. Which community's defense met which
     # community's attack, and in what order. The 2x2 counts the two pure
     # tracks only, because a "Both"-track paper cannot cross a boundary it

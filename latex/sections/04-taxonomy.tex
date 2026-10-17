@@ -18,7 +18,7 @@ three: adversarial, incidental, and both.
 \meth{persistence-backdoor}, \meth{data-exfiltration} and
 \meth{resource-abuse}.
 
-The three axes give 162 cells. The axes are chosen so that the two literatures
+The three axes give \NCubeCells{} cells. The axes are chosen so that the two literatures
 share them. An attack and an incidental mechanism that enter through the same
 channel and cause the same damage occupy the same cell, and differ only in the
 intent coordinate. That is what makes the taxonomy a tool for finding missing
@@ -40,7 +40,7 @@ addressing both.}
 
 \subsection{The cube is mostly empty}
 
-\textbf{98 of the 162 cells (60.5\%) contain no paper from either literature.}
+\textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) contain no paper from either literature.}
 Emptiness is not uniform. Table~\ref{tab:empty} gives the empty-cell count per
 channel.
 
@@ -74,11 +74,15 @@ The corpus names \textbf{\NMechanisms{} distinct mechanisms}, or
 \NMechML{} are incidental degradation mechanisms from the machine learning
 track.
 
-By consequence, \meth{goal-hijack} dominates at \NGoalHijack{} of \NMechanisms{} (\PctGoalHijack{}\%), followed
-by \meth{reasoning-corruption} at 46 (20.8\%) and \meth{silent-corruption} at
-21 (9.5\%). By channel, \meth{direct-input} (66, 29.9\%) and \meth{tool-output}
-(65, 29.4\%) together hold close to 60\% of all named mechanisms, with
-\meth{RAG} third at 27 (12.2\%).
+By consequence, \meth{goal-hijack} dominates at \NMechGoalHijack{} of
+\NMechanisms{} (\PctMechGoalHijack{}\%), followed
+by \meth{reasoning-corruption} at \NMechReasoning{} (\PctMechReasoning{}\%)
+and \meth{silent-corruption} at
+\NMechSilent{} (\PctMechSilent{}\%). By channel, \meth{direct-input}
+(\NMechDirectInput{}, \PctMechDirectInput{}\%) and \meth{tool-output}
+(\NMechToolOutput{}, \PctMechToolOutput{}\%) together hold close to
+three fifths of all named mechanisms, with
+\meth{RAG} third at \NMechRAG{} (\PctMechRAG{}\%).
 
 Mechanism count and paper count differ by a large factor, and the reason is
 structural. \NPapersMech{} of the \NCorpus{} included papers name a new
@@ -94,8 +98,11 @@ The corpus names \textbf{\NDefenses{} distinct defenses}. The track split is
 almost even: \NDefML{} from machine learning papers, \NDefSecurity{} from
 security papers, and \NDefBoth{} from papers that sit in both.
 
-By intervention point, 205 act at reasoning time (38.8\%), 152 at ingestion
-(28.7\%), 72 at execution (13.6\%), and 100 specify no single point (18.9\%).
+By intervention point, \NDefPtReasoning{} act at reasoning time
+(\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion
+(\PctDefPtIngestion{}\%), \NDefPtExecution{} at execution
+(\PctDefPtExecution{}\%), and \NDefPtNone{} specify no single point
+(\PctDefPtNone{}\%).
 
 The load-bearing number is what each defense was validated against in its own
 paper:
