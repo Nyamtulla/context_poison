@@ -1,46 +1,47 @@
-Large language model agents fail when their context window holds content they
-should not trust. Two research communities study this failure and rarely read
-each other. Security researchers study context that an attacker changes on
-purpose, such as indirect prompt injection, retrieval poisoning and memory
-backdoors, and they publish attacks and defenses. Machine learning researchers
-study context that becomes wrong on its own, such as retrieval noise, knowledge
-conflict, and long-context degradation, and they publish mechanisms and fixes.
-Even though the vocabularies differ, the failure is the same. In both cases
-the model cannot tell which part of its context deserves trust.
+Two research communities study the same failure in large language model
+agents, and neither tests the other's work. Security researchers study context
+an attacker changes on purpose, such as indirect prompt injection, retrieval
+poisoning and memory backdoors, and they publish attacks and defenses. Machine
+learning researchers study context that becomes wrong on its own, such as
+retrieval noise, knowledge conflict and long-context degradation, and they
+publish mechanisms and fixes. The vocabularies differ; the failure does not.
+In both cases the model cannot tell which part of its context deserves trust.
 
-We systematize both literatures under one taxonomy of channel, intent and
-consequence, built from \NCorpus{} papers read in full. The separation between the two
-communities is measurable rather than rhetorical. Only \PctSecCitesML{}\% of security
-papers cite the reliability literature and \PctMLCitesSec{}\% cite in the other
-direction.
-Of \NDefenses{} catalogued defenses, \NBothValidated{} were validated against both threat models. Of
-\NMechanismsBench{} named mechanisms, \NMechUncovered{} have no defense ever
-evaluated against them. The
-sharpest asymmetry is in who runs the experiment: across \NPairsComposite{} recovered
-(defense, attack) pairs, defenses prevail in \NOutcomeDefWins{} of
-\NOutcomeDefPaper{} pairs reported by defense papers and in
-\NOutcomeAtkDefWins{} of \NOutcomeAtkPaper{} pairs reported by attack papers.
+We measure the separation rather than assert it. From \NCorpus{} papers read in
+full we recover \NPureTrackPairs{} confirmed (defense, attack) pairs in which
+some paper evaluated some defense against some attack, and we date every one.
+Only \NCrossCommunityPairs{} of them (\PctCrossCommunity{}\%) cross between the
+two communities, and one direction is empty outright: \textbf{no security
+defense in our corpus has ever been evaluated against a machine learning
+failure mechanism}. Not once in \NPureTrackPairs{} pairs. The experiment the
+field most needs is the one it has never run.
 
-We then do what a survey normally cannot. We run the tests the field skipped.
-Our taxonomy identifies pairs in which a published defense and a published
-attack occupy the same cell, so the defense ought to apply, and no one had
-checked. We executed \NCampaignPairs{} such pairs across \NCampaignImpl{} defense
-implementations and
-\NCampaignEpisodes{} scored episodes, using each author's released code and weights, under
-an attack-works-first control and a fixed detectability threshold. Our attacks
-are not adapted to the defenses they meet, which makes every failure we report
-a lower bound and every resistance we report provisional. Defenses
-built for accidental context failure often do not survive deliberate attack,
-and the failure is systematic. The mechanism that repairs accidental
-corruption, which is to shift trust from the model's parameters toward the
-retrieved text, is the mechanism an attacker who owns that text exploits. The
-result carries a measured scope condition and one counterexample, so the
-trade-off is a design error and not a law. That counterexample is itself
-bounded twice over: the one defense that resists an optimized adversarial
-passage falls below a no-retrieval baseline against a fluent sentence asserting
-a plausible falsehood, and it was never tested against an attacker optimizing
-against its own rule. No defense we tested resists both payload classes, and the cheaper
-payload is the more damaging one.
+\textbf{So we ran it.} We built a uniform platform and executed
+\NCampaignPairs{} (defense, attack) pairs across \NCampaignImpl{}
+implementations and \NCampaignEpisodes{} scored episodes, each from its
+authors' released code and weights, under an attack-works-first control and a
+fixed detectability threshold. \NOursCrossPairs{} of our \NOursPairs{}
+retrieval-cell pairs cross the community boundary, against
+\PctCrossCommunity{}\% of the literature's.
+
+\textbf{The contribution is not that defenses fail. It is why, and it is one
+mechanism.} ParamMute suppresses the model's parametric memory and the
+attacker fills the vacancy, raising the rate at which the model copies planted
+text from 43.9\% to 81.4\%. ACD does the opposite, suppressing the suspicious
+document, and memory fills the vacancy instead. Both defenses succeed at their
+stated goal; neither improves accuracy. \textbf{Neither moves probability mass
+toward the real document, because neither can tell the real document from the
+planted one.} Both arbitrate between \emph{context} and \emph{parameters}, and
+the attack lives inside the context. To show this is relocation rather than
+loss we built a payload that plants a third answer, neither the truth nor the
+model's prior, which separates copying from remembering: across three
+context-reliance defenses the memory lost and the copying gained cancel to
+within 7 points. These methods move correctness; they do not create it.
+
+The finding survives an adaptive attacker. ACD's decision rule is public, so we
+optimized a payload against the single quantity it measures. That removes 29\%
+of its protection and drives its accuracy onto the undefended arm and below a
+no-retrieval baseline.
 
 Finally we report three controls the literature omits, each of which overturned
 a conclusion we would otherwise have published: a no-retrieval baseline, an

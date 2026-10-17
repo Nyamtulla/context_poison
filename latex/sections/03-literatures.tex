@@ -1,0 +1,240 @@
+\section{The two literatures}
+\label{sec:literatures}
+
+This section exists to establish one fact: the experiment this paper runs has
+never been run. Everything in it is measurement over a corpus, and it ends at
+the cell of the matrix that is empty.
+
+\subsection{Corpus}
+
+We began from 51 seed papers found during scoping, queried the Semantic
+Scholar Academic Graph and arXiv APIs with keyword clusters drawn from both
+vocabularies, and snowballed forward and backward. The discovery pool reached
+25,922 papers. Dual coding at that scale is not feasible for a small team, so
+we screened on title and abstract against written inclusion criteria, then read
+the survivors in full. The included corpus is \NCorpus{} papers, each carrying
+\NColumns{} recorded columns of which \NCodedFields{} are coded from the full
+text.
+
+Screening changed the corpus three times during the project and we report the
+current state only; every change is logged. The most recent was a
+contribution re-screen in which all \NScreened{} screened papers were re-read
+against a single rule: a paper stays if it contributes an attack, a failure
+mechanism, a defense or a fix. Benchmarks, surveys, measurement studies and
+position papers are kept even though they propose no technique, because they
+are how the field is organised. That pass removed 53 papers and, in the other
+direction, recovered 34 techniques that the original extraction had missed, so
+the registry counts in this paper are floors rather than censuses.
+
+\subsection{A joint taxonomy}
+\label{sec:taxonomy}
+
+We place every technique on three axes. \textbf{Channel} is where untrusted
+content enters: direct input, tool output, RAG, memory, multi-agent messages,
+cross-modal input, tool metadata, skills, supply chain. \textbf{Intent} is
+whether the corruption is deliberate, incidental, or studied as both.
+\textbf{Consequence} is what goes wrong: goal hijack, reasoning corruption,
+silent corruption, data exfiltration, persistence backdoor, resource abuse.
+
+The axes are chosen so the two literatures land in the same space without
+being forced into the same words. A security paper on indirect prompt
+injection and a machine learning paper on retrieval noise occupy the same
+channel and differ on intent, which is exactly the comparison the field does
+not make.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_cube}
+\caption{Channel $\times$ consequence occupancy, split by track. Empty cells
+are hatched rather than shaded, because the claim is about which cells hold no
+paper at all.}
+\label{fig:cube}
+\end{figure}
+
+\textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) contain no
+paper from either literature.} Emptiness is not uniform. Figure~\ref{fig:cube}
+shows the two tracks concentrating in different columns, and
+Figure~\ref{fig:channelgap} shows which channels are thin on both sides at
+once. The cells that are empty in both tracks are the ones where neither
+community has looked, which is a different and more interesting kind of gap
+than a cell one community has to itself.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_channel_gap}
+\caption{Empty cells per channel, out of 18 (3 intents $\times$ 6
+consequences), by track.}
+\label{fig:channelgap}
+\end{figure}
+
+\textbf{Census.} The registry holds \NMechanisms{} named mechanisms and
+\NDefenses{} named defenses and fixes. By consequence, \meth{goal-hijack}
+dominates the threat side at \NMechGoalHijack{} (\PctMechGoalHijack{}\%),
+followed by \meth{reasoning-corruption} at \NMechReasoning{}
+(\PctMechReasoning{}\%). By channel, \meth{direct-input}
+(\NMechDirectInput{}) and \meth{tool-output} (\NMechToolOutput{}) together
+hold close to three fifths. On the remedy side, \NDefPtReasoning{} methods act
+at reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
+\NDefPtExecution{} at execution, and \NDefPtNone{} specify no single point.
+
+The two sides are not the same size. There are \NDefenses{} remedies for
+\NMechanisms{} problems, and \NMechUncovered{} of \NMechanismsBench{} named
+mechanisms (\PctMechUncovered{}\%) have no defense ever evaluated against them.
+Among named injection variants, \NInjUncovered{} of \NInjVariants{} have zero
+tested defenses, while the single umbrella entry ``indirect prompt injection''
+absorbs the bulk of the pairs in the matrix. The field tests heavily against a
+category and lightly against its members.
+
+\subsection{How separate the two communities are}
+
+\begin{itemize}
+\item \textbf{\PctSecCitesML{}\%} of security papers (\NSecCitesML{} of
+  \NTrackSecurity{}) cite at least one machine learning paper on the same
+  failure.
+\item \textbf{\PctMLCitesSec{}\%} of machine learning papers (\NMLCitesSec{} of
+  \NTrackML{}) cite at least one security paper.
+\end{itemize}
+
+These are population counts over every paper's resolved citation edges, not
+sample estimates, so no confidence interval applies. Roughly nine papers in ten
+on both sides were written without reference to the other community's work on
+the same failure. The rates are stable across evidence grade, so this is not an
+artifact of preprint quality.
+
+\textbf{What carries the cross-track citations makes the rate look better than
+the engagement is.} \NNetworkCross{} of the \NNetworkEdges{} resolved edges
+(\PctNetworkCross{}\%) cross tracks, and they are concentrated: the ten
+most-cited bridging papers are benchmarks and landmark results that a paper can
+cite in its introduction without adopting anything from the other literature.
+Figure~\ref{fig:network} shows the shape, two clusters joined by a narrow band.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_citation_network}
+\caption{The corpus as a citation graph. Cross-track edges highlighted.
+Papers with no resolved edge inside the corpus are omitted.}
+\label{fig:network}
+\end{figure}
+
+\subsection{What has been tested against what}
+\label{sec:coverage}
+
+A (defense, attack) pair means some paper evaluated that defense against that
+attack. We recovered pairs by four routes: reading defense papers, a
+citation-and-full-text recovery pass, resolving benchmark names to their
+constituent attacks where the paper named them, and a reverse scan of attack
+papers. The last route matters because it is the only one that can observe a
+defense \emph{losing} to an attack published after it. The final matrix holds
+\textbf{\NPairsComposite{} confirmed pairs}.
+
+\textbf{The matrix is sparse in a specific way.} \NDefMatchedFull{} of
+\NDefenses{} defenses (\PctDefMatched{}\%) appear in at least one pair, and
+\NDefOneFull{} of those (\PctDefOneFull{}\%) appear in exactly one. The
+most cross-tested defense appears in \NDefCeiling{} pairs, and \NDefFourPlus{}
+appear in four or more. But of the pairs belonging to those \NDefFourPlus{},
+46\% were contributed by attack papers rather than by the defenses' own
+evaluations; for the broadest case, seven of its eight pairs come from attack
+papers. Breadth here is not evidence a method was evaluated widely by its
+authors. It is evidence that attackers chose it as a target.
+
+\textbf{How much of this gap is the field and how much is our instrument.} It
+is tempting to read the complement of the matrix as ``never tested'', and that
+reading is wrong. A defense evaluated on AgentDojo without naming which
+injection it faced was evaluated adversarially; it is simply not a named pair,
+because expanding a benchmark into its constituent attacks would manufacture
+coverage. So we audited all \NDefenses{} defenses directly against their own
+PDFs, asking the coarser question: was this method run against an adversary at
+all? \textbf{293 (55.6\%) were}, confirmed by two independent routes that
+overlap on 132 and therefore each found cases the other missed. \textbf{14
+(2.7\%) report no baseline comparison of any kind}, each confirmed by hand
+against the paper's own words. The remainder we report as undetermined.
+
+We report no number drawn from a negative class, and the reason generalises.
+We built three automated passes over these papers and hand-checking each found
+the same asymmetry: the positive class was reliable and the negative class was
+about half wrong. A pattern can confirm that something is present in a paper;
+it cannot establish that something is absent, because absence of the phrasing
+it knows is not absence of the thing. \textbf{A claim that something was never
+tested should state whether it means ``not done'' or ``not resolved''.}
+
+\subsection{Who ran the experiment decides the result}
+\label{sec:whoran}
+
+For every pair we also record which side of the field reported it and what
+outcome was reported.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_who_reports}
+\caption{The same defenses and the same attacks, reported by the two sides of
+the field. A defense paper reports its defense winning in \NOutcomeDefWins{}
+of \NOutcomeDefPaper{} pairs. An attack paper reports the defense winning in
+none of \NOutcomeAtkPaper{}.}
+\label{fig:whoreports}
+\end{figure}
+
+Defense papers report their defense winning essentially always. Attack papers
+report it losing essentially always. Neither number measures how often defenses
+work; the pair of numbers measures publication incentive. This is why the rest
+of this paper re-runs the defenses rather than citing either side's claim.
+
+\subsection{The cell nobody has filled}
+\label{sec:emptycell}
+
+The axes so far describe what each community studies. The question this paper
+turns on is narrower: \emph{has either community ever tested its methods
+against the other's problems?}
+
+We dated all \NTimelinePairs{} pairs and recorded which community each side
+came from. Restricting to the \NPureTrackPairs{} pairs where both sides sit in
+one of the two tracks gives Table~\ref{tab:transfer}.
+
+\begin{table}[t]
+\centering
+\caption{Which community's defense met which community's attack, across
+\NPureTrackPairs{} literature pairs.}
+\label{tab:transfer}
+\small
+\begin{tabular}{lrr}
+\toprule
+defense from $\downarrow$ \quad attack from $\rightarrow$ & Security & ML/AI \\
+\midrule
+Security & 262 & \textbf{\NSecDefVsMLAttack{}} \\
+ML/AI    & \NMLDefVsSecAttack{} & 80 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{No security defense has ever been evaluated against a machine learning
+failure mechanism. The cell is empty.} In the other direction there are
+\NMLDefVsSecAttack{} pairs out of \NPureTrackPairs{}. Together,
+\NCrossCommunityPairs{} pairs (\PctCrossCommunity{}\%) cross the boundary and
+the remaining 98\% stay inside one community.
+
+This is consistent with the citation rates and sharper than them. The
+communities do not read each other, so they do not test each other, so the
+question of whether either one's methods survive the other's threat model has
+no answer in the published record.
+
+\textbf{Nor is it answered by ordering.} \NDefensePredates{} of
+\NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a defense that predates
+the attack it was tested on, so defenses do meet later attacks. But only
+\NPredatesAndCross{} pair is both earlier \emph{and} cross-community.
+Figure~\ref{fig:lag} shows the full distribution.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig7_lag}
+\caption{Publication lag between a defense and the attack it was tested on.}
+\label{fig:lag}
+\end{figure}
+
+A reader might reasonably ask whether this is our boundary rather than the
+field's. The track label is assigned per paper, and papers that sit on the
+boundary are coded ``Both'' and excluded from Table~\ref{tab:transfer}
+precisely because they cannot cross a line they sit on; including them gives
+\NCrossAllPairs{} of \NTimelinePairs{} rather than
+\NCrossCommunityPairs{} of \NPureTrackPairs{}, and the empty cell stays empty
+either way.
+
+\textbf{The rest of this paper fills that cell.}
