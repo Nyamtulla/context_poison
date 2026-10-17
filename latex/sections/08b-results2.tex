@@ -82,6 +82,56 @@ attack success driven to zero, 4 show a resolvable reduction, 19 show no
 resolvable effect at that sample size, and 9 show no reduction at all.
 Ingestion-stage techniques account for most of the holds.
 
+\subsection{The dose where a defense has its best chance}
+\label{sec:lowdose}
+
+Results so far are reported at saturation, where the planted passage replaces
+the entire context. That corner is where the attack is strongest, and it is
+also where the measurement is weakest: with the real document entirely gone, no
+method can read it, so a low accuracy partly measures the attack being complete
+rather than the defense failing. Carlini makes the equivalent objection to
+DeepSec's distortion budgets~\cite{carlini-2019-critique}, and it applies to us.
+
+So we report the other end as well. At the \textbf{10\% dose} one chunk in ten
+is replaced and nine tenths of the honest document remain. If a method can
+discount a planted passage while still using a good one, this is where it
+shows.
+
+\begin{table}[t]
+\centering
+\caption{Every defense against every payload it met, at the 10\% dose. ``Helps''
+means the defended arm beats its own undefended arm by more than that run's
+detectability threshold. Worst case is the payload with the largest shortfall.}
+\label{tab:lowdose}
+\small
+\begin{tabular}{lrrl}
+\toprule
+defense & payloads & helps on & worst payload met \\
+\midrule
+ACD       & 4 & 0 & corpus poisoning \;\; $-3.2$ \\
+CK-PLUG   & 3 & 0 & corpus poisoning \;\; $-14.9$ \\
+COIECD    & 3 & 0 & distractor \;\; $-0.8$ \\
+DyPRAG    & 1 & 0 & corpus poisoning \;\; $-30.2$ \\
+ParamMute & 3 & 0 & distractor \;\; $-1.0$ \\
+SCR       & 1 & 0 & corpus poisoning \;\; $-12.8$ \\
+\midrule
+\textbf{total} & \textbf{15} & \textbf{0} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Not one of the 15 (defense, payload) pairs shows a resolvable benefit
+at the 10\% dose.} Every defense is at or below its own undefended arm on every
+payload it met, at the dose most favourable to it. The saturation numbers
+elsewhere in this paper are the dramatic version of the result;
+Table~\ref{tab:lowdose} is the defensible one.
+
+The table is also the worst-case reading that a security claim requires. A
+defense beaten by one of three payloads is not two-thirds robust, it is broken,
+and averaging across payloads would hide that. We report the minimum rather
+than the mean for the same reason Carlini gives: robustness is a property of
+the strongest attack a method has met, not of the attacks its authors chose.
+
 \subsection{An adaptive attacker}
 \label{sec:adaptive}
 

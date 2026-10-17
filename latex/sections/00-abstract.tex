@@ -24,8 +24,13 @@ fixed detectability threshold. \NOursCrossPairs{} of our \NOursPairs{}
 retrieval-cell pairs cross the community boundary, against
 \PctCrossCommunity{}\% of the literature's.
 
-\textbf{The contribution is not that defenses fail. It is why, and it is one
-mechanism.} ParamMute suppresses the model's parametric memory and the
+At the dose most favourable to a defense, where one chunk in ten is replaced
+and nine tenths of the honest document remain, \textbf{not one of 15 (defense,
+payload) pairs shows a resolvable benefit}: every method is at or below its own
+undefended arm on every payload it met.
+
+\textbf{But the contribution is not that defenses fail. It is why, and it is
+one mechanism.} ParamMute suppresses the model's parametric memory and the
 attacker fills the vacancy, raising the rate at which the model copies planted
 text from 43.9\% to 81.4\%. ACD does the opposite, suppressing the suspicious
 document, and memory fills the vacancy instead. Both defenses succeed at their
