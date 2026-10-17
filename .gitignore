@@ -33,3 +33,6 @@ verification/packets/*.zip
 
 # contribution-screen bundles: copies of gitignored PDFs
 data/exports/contribution_screen/bundles/
+
+# the confidence-group key: sending it to a coder biases the study it tests
+data/exports/confidence_validation/_key_DO_NOT_SHARE.json
