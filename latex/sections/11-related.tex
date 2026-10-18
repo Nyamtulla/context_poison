@@ -22,13 +22,13 @@ not in its corpus.
 
 The closest precedent is not a survey but a platform.
 DEEPSEC~\cite{ling-2019-deepsec} ran 16 adversarial-example attacks against 13
-defenses in one harness, which is structurally what we do here. It was also
-taken apart in public~\cite{carlini-2019-critique}, and the criticisms are
-worth naming because they define what such a platform has to get right:
-defenses were evaluated only against attacks crafted on undefended models;
-robustness was reported as an average over attacks rather than against the
-strongest one; several attacks and one defense were reimplemented incorrectly;
-and no variance was reported at all.
+defenses in one harness, which is structurally what we do here. It was also taken apart in
+public~\cite{carlini-2019-critique}. The criticisms are worth naming, because
+they define what such a platform has to get right. DEEPSEC evaluated defenses
+only against attacks crafted on undefended models. It reported robustness as
+an average over attacks rather than against the strongest one. It
+reimplemented several attacks and one defense incorrectly. And it reported no
+variance at all.
 
 We took those as a specification. We do not reimplement: every method runs
 from its authors' released code and weights, and the control-fires-first rule
