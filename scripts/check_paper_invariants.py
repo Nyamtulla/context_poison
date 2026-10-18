@@ -74,6 +74,18 @@ def main():
             if o[k] != n[k]:
                 so, sn = set(map(str, o[k])), set(map(str, n[k]))
                 lost, gained = sorted(so - sn), sorted(sn - so)
+                if k in ("macros", "numerals"):
+                    # these are (token, count) pairs, so a count change shows
+                    # up on BOTH sides. Only a token that vanished entirely is
+                    # a real loss; report the rest as a count change.
+                    lo = {x[0] for x in o[k]}
+                    ln = {x[0] for x in n[k]}
+                    gone, added = sorted(lo - ln), sorted(ln - lo)
+                    if not gone and not added:
+                        print(f"  {f}  {k}: counts changed only, nothing added "
+                              f"or removed")
+                        continue
+                    lost, gained = gone, added
                 print(f"  {f}  {k}:")
                 if lost:
                     print(f"      LOST    {lost[:8]}")
