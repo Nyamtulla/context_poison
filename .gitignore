@@ -49,3 +49,12 @@ data/exports/contribution_screen/bundles/
 
 # the confidence-group key: sending it to a coder biases the study it tests
 data/exports/confidence_validation/_key_DO_NOT_SHARE.json
+
+# meeting decks: internal, and regenerable from the registries by
+# scripts/build_advisor_deck.py and scripts/build_presentation.py. They are
+# ours, so this is tidiness rather than licensing - a public artifact repo
+# should hold the artifact, not the slides we showed each other.
+advisor_meeting.pptx
+advisor_meeting.pdf
+context_sok_results_presentation.pptx
+context_sok_results_presentation.pdf
