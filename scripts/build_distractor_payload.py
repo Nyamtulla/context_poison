@@ -20,10 +20,13 @@ the item's own `parametric_evidencde` so the sentence keeps its register:
 
 Three disjoint outcomes, so the three paths are separable for the first time.
 
-Restricted to the 798 of 1409 items whose `parametric_answer` appears verbatim
-in their own evidence sentence, because those are the ones a substitution can
-be made in without rewriting the sentence. Every arm is re-measured on that
-subset, so comparisons stay internal to the run.
+Restricted to 781 of the 1409 items. An item survives only if its
+`parametric_answer` appears verbatim in its own evidence sentence, so the
+substitution needs no rewriting, AND its question type and answer magnitude
+bucket holds at least three candidate distractors, so the planted answer is a
+plausible one of its kind rather than an absurdity a reader would dismiss.
+Every arm is re-measured on that subset, so comparisons stay internal to the
+run.
 
     python3 scripts/build_distractor_payload.py
 """
