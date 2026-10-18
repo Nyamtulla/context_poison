@@ -81,6 +81,24 @@ upstream project's own instructions, not by us: `third_party/ParamMute` needs
 its merged checkpoint and `third_party/DyPRAG` its trained projectors. Both
 are gitignored here because they are large and are not ours to redistribute.
 
+## First run: eight items, two doses
+
+Before spending an hour, spend two minutes confirming the model loads, the
+defense's vendored decoder runs, and the scorer agrees with itself.
+
+```bash
+python3 scripts/coiecd_vs_corpus_poisoning.py --n 8 --fracs 0 1.0 \
+  --attack distractor_evidence --data NaturalQuestionsShort_kc_distractor.jsonl \
+  --no_resume --out /tmp/first_run.json
+```
+
+The first invocation downloads Llama-3-8B-Instruct (about 16 GB) and is slow
+for that reason alone. What to look for in the output: three arms per dose
+(`rag`, `closedbook`, the defense), the clean dose showing the defense at or
+near the undefended arm, and the attacked dose showing both of them fall. Eight
+items is far below anything decidable — the point is that the machinery runs,
+not that the numbers mean something.
+
 ## Reproduce a headline result
 
 ### The mechanism finding: what a defense takes from memory, the attacker gets
@@ -138,6 +156,25 @@ numeric cells across 8 result rows, zero differences. What this does **not**
 cover is sensitivity to item order, batch composition, or which items a
 defense holds out as few-shot examples. A method fragile to those would pass
 this check and still be fragile.
+
+## The agent cell
+
+The retrieval cell above is one of two. The other runs injection attacks
+against agent-side defenses inside AgentDojo, which supplies a real
+tool-calling victim where a hijack is scored by the suite's own checker
+observing the injected goal being carried out, rather than by a regex over the
+reply. It has its own setup, its own virtual environment and its own README:
+
+- `agentdojo_harness/README.md` — why AgentDojo is the victim harness, the 16
+  corpus mechanisms rebuilt as AgentDojo attacks, and the undefended/defended
+  pairing that makes an inert payload report as inconclusive rather than as a
+  defense success.
+- `corpus_poisoning_harness/README.md` — the released corpus-poisoning attack,
+  reconstructed and checked against the numbers its own paper reports before
+  it was used against anything.
+
+The agent cell's results are the `technique_transfer_*`, `mechanism_triage_*`
+and `*_attack_screen_*` registries in `RUNS.md`.
 
 ## Every other run
 
