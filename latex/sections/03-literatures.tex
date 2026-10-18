@@ -29,18 +29,54 @@ the registry counts in this paper are floors rather than censuses.
 \subsection{A joint taxonomy}
 \label{sec:taxonomy}
 
-We place every technique on three axes. \textbf{Channel} is where untrusted
-content enters: direct input, tool output, RAG, memory, multi-agent messages,
-cross-modal input, tool metadata, skills, supply chain. \textbf{Intent} is
-whether the corruption is deliberate, incidental, or studied as both.
-\textbf{Consequence} is what goes wrong: goal hijack, reasoning corruption,
-silent corruption, data exfiltration, persistence backdoor, resource abuse.
+We place every named mechanism and every named defense on three axes. The axes
+are chosen so that the two literatures land in the same space without being
+forced into the same words: a security attack and a machine learning mechanism
+that enter by the same route and cause the same damage occupy the same cell and
+differ only on intent. That is what makes the taxonomy a way of finding missing
+experiments rather than a filing scheme.
 
-The axes are chosen so the two literatures land in the same space without
-being forced into the same words. A security paper on indirect prompt
-injection and a machine learning paper on retrieval noise occupy the same
-channel and differ on intent, which is exactly the comparison the field does
-not make.
+\textbf{Channel} is the route untrusted content takes into the context window.
+There are nine. \meth{direct-input} is content placed in the prompt by the user
+or an upstream service. \meth{RAG} is a passage a retriever selected from a
+corpus. \meth{tool-output} is whatever a called tool returned.
+\meth{tool-metadata} is the names, descriptions and schemas of the tools
+themselves, which the model reads before it calls anything. \meth{memory} is
+what the agent stored from an earlier turn or session. \meth{skill} is a file or
+instruction set the agent loads to extend itself. \meth{multi-agent} is a
+message from another agent. \meth{cross-modal} is content that arrives as an
+image, audio or document and is rendered into text. \meth{supply-chain} is
+content entering through a package, template or model the agent depends on.
+
+\textbf{Intent} is whether the content was placed deliberately: adversarial,
+incidental, or studied as both.
+
+\textbf{Consequence} is what the agent then does wrong. There are six.
+\meth{goal-hijack} is pursuing an objective it was not given.
+\meth{reasoning-corruption} is reaching a wrong conclusion while pursuing the
+right goal. \meth{silent-corruption} is producing a wrong output with nothing
+to signal it. \meth{data-exfiltration} is information crossing a boundary it
+should not. \meth{persistence-backdoor} is corruption that survives into a
+later session. \meth{resource-abuse} is spending compute, money or quota on the
+attacker's behalf.
+
+The three axes give \NCubeCells{} cells.
+
+\input{tables/channel_exemplars}
+
+\textbf{What is in the cells.} Table~\ref{tab:channels} names what each
+literature actually contributes per channel, because a count of
+\NMechanisms{} mechanisms is not a description of them. Four channels are named
+by both communities and five are effectively security-only:
+\meth{supply-chain} has no machine learning entry at all, and
+\meth{tool-metadata} and \meth{skill} have one each. \meth{tool-output} is the
+most lopsided channel in the corpus, and \meth{direct-input} the only balanced
+one.
+
+\meth{memory} is the clearest case of the same ground named twice. The security
+literature contributes AgentPoison, MemoryGraft and Sleeper Memory Poisoning;
+the machine learning literature contributes memory pollution, memory laundering
+and multi-target interference. Same channel, adjacent words, two literatures.
 
 \begin{figure}[t]
 \centering
@@ -55,9 +91,9 @@ paper at all.}
 paper from either literature.} Emptiness is not uniform. Figure~\ref{fig:cube}
 shows the two tracks concentrating in different columns, and
 Figure~\ref{fig:channelgap} shows which channels are thin on both sides at
-once. The cells that are empty in both tracks are the ones where neither
-community has looked, which is a different and more interesting kind of gap
-than a cell one community has to itself.
+once. The cells empty in both tracks are the ones where neither community has
+looked, which is a different and more interesting gap than a cell one community
+has to itself.
 
 \begin{figure}[t]
 \centering
@@ -67,24 +103,34 @@ consequences), by track.}
 \label{fig:channelgap}
 \end{figure}
 
-\textbf{Census.} The registry holds \NMechanisms{} named mechanisms and
-\NDefenses{} named defenses and fixes. By consequence, \meth{goal-hijack}
-dominates the threat side at \NMechGoalHijack{} (\PctMechGoalHijack{}\%),
-followed by \meth{reasoning-corruption} at \NMechReasoning{}
-(\PctMechReasoning{}\%). By channel, \meth{direct-input}
-(\NMechDirectInput{}) and \meth{tool-output} (\NMechToolOutput{}) together
-hold close to three fifths. On the remedy side, \NDefPtReasoning{} methods act
-at reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
+\textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
+\NMechSecurity{} from the security track and \NMechML{} from the machine
+learning track, and \NDefenses{} named defenses and fixes, \NDefSecurity{}
+and \NDefML{} respectively with \NDefBoth{} claimed by both. By consequence,
+\meth{goal-hijack} dominates the threat side at \NMechGoalHijack{}
+(\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption} at
+\NMechReasoning{} (\PctMechReasoning{}\%). By channel, \meth{direct-input}
+(\NMechDirectInput{}) and \meth{tool-output} (\NMechToolOutput{}) together hold
+close to three fifths. On the remedy side, \NDefPtReasoning{} methods act at
+reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
 \NDefPtExecution{} at execution, and \NDefPtNone{} specify no single point.
 
-The two sides are not the same size. There are \NDefenses{} remedies for
-\NMechanisms{} problems, and \NMechUncovered{} of \NMechanismsBench{} named
-mechanisms (\PctMechUncovered{}\%) have no defense ever evaluated against them.
-Among named injection variants, \NInjUncovered{} of \NInjVariants{} have zero
-tested defenses, while the single umbrella entry ``indirect prompt injection''
-absorbs the bulk of the pairs in the matrix. The field tests heavily against a
-category and lightly against its members.
+\textbf{Almost every defense answers to one threat model.} \NAdvOnly{} were
+validated against adversarial scenarios only and \NIncOnly{} against incidental
+scenarios only, leaving \NBothValidated{} (\PctBothValidated{}\%) validated
+against both and \NNoValidation{} with no validation we could identify. So
+\PctOneThreatModel{}\% of published defenses carry an untested
+cross-threat-model question, which is the gap this paper goes on to measure and
+then to fill.
 
+The two sides are also not the same size. There are \NDefenses{} remedies for
+\NMechanisms{} problems, and yet \NMechUncovered{} of \NMechanismsBench{} named
+mechanisms (\PctMechUncovered{}\%) have no defense ever evaluated against them.
+Effort is concentrated rather than scarce: a single umbrella entry, indirect
+prompt injection, absorbs more tested pairs than any other entry by a wide
+margin, while \NInjUncovered{} of \NInjVariants{} named injection variants have
+none at all. The field tests heavily against a category and lightly against its
+members.
 \subsection{How separate the two communities are}
 
 \begin{itemize}
