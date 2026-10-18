@@ -97,6 +97,9 @@ ATTACK_TOKENS = [
     # pair would still call it knowledge conflict, but its own label, because
     # it is a different payload with a different result.
     ("adaptive_evidence", "adaptive distractor", "knowledgeconflict"),
+    # the gradient version of the same attack: a GCG-optimised suffix appended
+    # to the best-of-K passage. Separate label for the same reason.
+    ("gradient_evidence", "gradient distractor", "knowledgeconflict"),
     ("poisonedrag", "PoisonedRAG", "poisonedrag"),
 ]
 

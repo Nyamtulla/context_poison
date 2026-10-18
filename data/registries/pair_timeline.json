@@ -78,24 +78,24 @@
   },
   {
    "defense": "ARGUS",
-   "defense_year": 2026,
+   "defense_year": 2025,
    "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
    "attack_track": "Security",
-   "gap_years": 2,
+   "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
    "match": "exact/exact"
   },
   {
    "defense": "ARGUS",
-   "defense_year": 2026,
+   "defense_year": 2025,
    "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
    "attack_track": "Security",
-   "gap_years": 3,
+   "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
    "match": "exact/exact"

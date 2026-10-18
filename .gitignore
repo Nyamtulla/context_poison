@@ -23,8 +23,12 @@ venv/
 # rebuilt harness venv (vllm + torch, ~10GB, regenerable -- see agentdojo_harness/README.md)
 agentdojo_harness/.venv/
 
-# third-party attack/defense source clones (own git history, regenerable)
-third_party/
+# third-party attack/defense source clones (own git history, their own
+# licenses, regenerable). The MANIFEST is ours and is tracked: it pins every
+# clone to the commit our runs used, and scripts/setup_third_party.py fetches
+# and verifies them from it.
+third_party/*
+!third_party/MANIFEST.json
 
 # verification packets: large derived artifacts, rebuilt by
 # scripts/build_packets.py in seconds. The workbooks are tracked; the zips

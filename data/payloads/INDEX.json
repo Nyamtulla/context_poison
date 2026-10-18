@@ -1,0 +1,28 @@
+{
+ "what_this_is": "Attack payloads built by this project, for the CoConflictQA item set that ships with ParamMute. Each file is that item set with one field added; the untouched rows are upstream's. `scripts/setup_third_party.py --payloads` copies them into the ParamMute tree where the runners read them.",
+ "base_item_set": "third_party/ParamMute/data/CoConflictQA/test/NaturalQuestionsShort_kc.jsonl (upstream, not redistributed here)",
+ "files": [
+  {
+   "name": "NaturalQuestionsShort_kc_adaptive.jsonl",
+   "sha256": "7d961474022a5717936cd892f0ff7193b0bae7a222b94401d526e0cc0e88b857",
+   "bytes": 1370402,
+   "rows": 781,
+   "n_optimised": 686,
+   "adds_field": "adaptive_evidencde",
+   "built_by": "python3 scripts/build_adaptive_acd_payload.py --n 686",
+   "asserts": "the same distractor answer as above, in whichever of five sentence forms minimises the entropy ACD's rule keys on (best-of-K, white-box)",
+   "ours": true
+  },
+  {
+   "name": "NaturalQuestionsShort_kc_distractor.jsonl",
+   "sha256": "0f09708c190b44bcd9dadce42f7d1ee7fcb0e950729a5fa796255d60ba7cd006",
+   "bytes": 1120598,
+   "rows": 781,
+   "n_optimised": 781,
+   "adds_field": "distractor_evidencde",
+   "built_by": "python3 scripts/build_distractor_payload.py",
+   "asserts": "a THIRD answer, equal to neither the gold answer nor the model's own prior answer, which is what separates copying the attacker from falling back on memory",
+   "ours": true
+  }
+ ]
+}

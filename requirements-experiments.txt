@@ -1,0 +1,20 @@
+# The experiment half of this repo. `requirements.txt` covers the corpus half
+# (search, screening, registries, dashboards) and does not need a GPU; this
+# file adds what the defense/attack runs need and does.
+#
+# These are the versions the published numbers were produced on, not floors.
+# Pinned rather than bounded because a decoder-level defense is sensitive to
+# the generation loop it runs inside: transformers reorganised `Cache` and
+# `logits_to_keep` between 4.x and 5.x, and several vendored defenses subclass
+# the sampling loop. A different minor version may still run and may not
+# reproduce. See EXPERIMENTS.md for the hardware these were run on.
+
+-r requirements.txt
+
+torch==2.10.0            # +cu128; install from the pytorch index for your CUDA
+transformers==5.5.0
+accelerate==1.13.0
+datasets==4.4.1
+sentencepiece==0.2.1
+numpy==2.2.6
+scipy==1.15.3

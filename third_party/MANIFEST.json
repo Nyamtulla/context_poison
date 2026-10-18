@@ -1,0 +1,207 @@
+{
+ "generated": "2026-10-17",
+ "what_this_is": "Every attack and defense implementation this project runs, pinned to the commit it was run at. We do not reimplement any method: each one executes from its authors' released code. `source_modified_by_us` is computed from `git status` in each clone and is false everywhere, which is the machine-checkable form of that claim. Re-verify with `python3 scripts/setup_third_party.py --verify`.",
+ "not_vendored": "These clones are gitignored rather than committed: they carry their own git history and their own licenses, and redistributing them here would relicense someone else's work. `setup_third_party.py` fetches them.",
+ "repos": [
+  {
+   "name": "ACD",
+   "url": "https://github.com/younanna/ACD.git",
+   "commit": "362bb3b91b66ba7de60c4252c3bd36c6de505b3d",
+   "role": "defense",
+   "we_run": "generation/gen_wrapper.py LMWrapper.generate_contrast",
+   "note": "Adaptive contrastive decoding; the entropy rule the adaptive attacks target",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "CK-PLUG",
+   "url": "https://github.com/byronBBL/CK-PLUG.git",
+   "commit": "4af30ead210cbefbd6e74a89d97b7c6774ab9c5f",
+   "role": "defense",
+   "we_run": "eval_NQ.get_score and the CK-PLUG decoder",
+   "note": "Knowledge-plugging decoder; also supplies the shared scoring rubric",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "COIECD",
+   "url": "https://github.com/Stacy027/COIECD.git",
+   "commit": "e48aadcd07f9b4394546469d71c56938c26e51b1",
+   "role": "defense",
+   "we_run": "their constrained decoding entry point",
+   "note": "Constrained entropy-informed contrastive decoding",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "COMBO",
+   "url": "https://github.com/yunx-z/COMBO.git",
+   "commit": "5824d476bf935abee1a47dfbcaf6cd49dc32fd80",
+   "role": "defense",
+   "we_run": "their compatibility model",
+   "note": "Discriminator-based conflict resolution",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "CheckRLM",
+   "url": "https://github.com/AI9Stars/CheckRLM.git",
+   "commit": "44ed3dc4090fb472e5a11c81cf0dbd15e4ef268c",
+   "role": "defense",
+   "we_run": "their checker",
+   "note": "Retrieval-augmented LM checking",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "ConflictQA",
+   "url": "https://github.com/Tianzhe26/ConflictQA.git",
+   "commit": "be7f9c5b7b0c9b6907aeaeeda8bb3c83e6b2e448",
+   "role": "data",
+   "we_run": "their item construction",
+   "note": "Knowledge-conflict benchmark",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "Discern-and-Answer",
+   "url": "https://github.com/wjdghks950/Discern-and-Answer.git",
+   "commit": "107b86ea98f975266a4665be3577cae482485f9d",
+   "role": "defense",
+   "we_run": "their prompting pipeline",
+   "note": "Discern-and-answer prompting",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "DyPRAG",
+   "url": "https://github.com/Trae1ounG/DyPRAG.git",
+   "commit": "8c999be7f241a0841abe33ab99658b4af7d1a824",
+   "role": "defense",
+   "we_run": "their projector inference path",
+   "note": "Dynamic parametric RAG",
+   "license_file": "LICENSE",
+   "source_modified_by_us": false
+  },
+  {
+   "name": "KConflict",
+   "url": "https://github.com/jinzhuoran/KConflict.git",
+   "commit": null,
+   "role": "data",
+   "we_run": "-",
+   "note": "Knowledge-conflict resource; clone is empty upstream; upstream repo has no commits, nothing to pin",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "Micro-Act",
+   "url": "https://github.com/Nan-Huo/Micro-Act.git",
+   "commit": "75d83aed2ab33ec1317dd088f704871e24657f60",
+   "role": "defense",
+   "we_run": "their action pipeline",
+   "note": "Fine-grained conflict resolution",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "MisKnow-Agent",
+   "url": "https://github.com/whfeLingYu/MisKnow-Agent.git",
+   "commit": "03078cf5bb6d4f4e8dd15524347b7b18a98a5574",
+   "role": "defense",
+   "we_run": "their agent loop",
+   "note": "Agentic misknowledge handling",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "ParamMute",
+   "url": "https://github.com/OpenBMB/ParamMute.git",
+   "commit": "cc81d30145c145b660f732da2bdc0556b1f6acaf",
+   "role": "defense + data",
+   "we_run": "their FFN-muting inference path; data/CoConflictQA",
+   "note": "Parametric muting; also the source of the CoConflictQA item set",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "ProbeRAG",
+   "url": "https://github.com/XMUDeepLIT/ProbeRAG.git",
+   "commit": "4ce8c132fdcd63a2c44203e738fe6993b9f2824b",
+   "role": "defense",
+   "we_run": "their probe",
+   "note": "Probe-based context arbitration",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "RobustRAG",
+   "url": "https://github.com/inspire-group/RobustRAG.git",
+   "commit": "9bc35b2fa5fa7d1088383b2789ec19a512d316b1",
+   "role": "defense",
+   "we_run": "their keyword/decoding aggregation",
+   "note": "Certifiably robust RAG aggregation; the security-track defense",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "SAE-based-representation-engineering",
+   "url": "https://github.com/yuzhaouoe/SAE-based-representation-engineering.git",
+   "commit": "cbdcddd8f4addd2bf5c1f811a1e904ad27e6950c",
+   "role": "defense",
+   "we_run": "their SAE steering",
+   "note": "Sparse-autoencoder representation steering",
+   "license_file": "LICENSE",
+   "source_modified_by_us": false
+  },
+  {
+   "name": "Swin-VIB",
+   "url": "https://github.com/JiataiWang/Swin-VIB.git",
+   "commit": "e5623616e2097795d58e882099377a08163a9f86",
+   "role": "defense",
+   "we_run": "their variational bottleneck",
+   "note": "Information-bottleneck context filter",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "indirect-data-poisoning",
+   "url": "https://github.com/gyevnarb/indirect-data-poisoning.git",
+   "commit": "377961ed7476e790d063cac8682442c277c6f78d",
+   "role": "attack",
+   "we_run": "their poisoning construction",
+   "note": "Indirect data poisoning; security-track attack",
+   "license_file": "LICENSE",
+   "source_modified_by_us": false
+  },
+  {
+   "name": "knowledgeable-R1",
+   "url": "https://github.com/lcy80366872/knowledgeable-R1.git",
+   "commit": "1a01cbad65529ac5c8585813ba03bbabeed92c01",
+   "role": "defense",
+   "we_run": "their RL policy",
+   "note": "RL-trained knowledge arbitration",
+   "license_file": "LICENSE",
+   "source_modified_by_us": false
+  },
+  {
+   "name": "rag_conflicts",
+   "url": "https://github.com/google-research-datasets/rag_conflicts.git",
+   "commit": "81ba921dd684a93db41a7e9dda6b6a7c67348a88",
+   "role": "data",
+   "we_run": "their released conflict set",
+   "note": "Google RAG conflict dataset",
+   "license_file": "LICENSE",
+   "source_modified_by_us": false
+  },
+  {
+   "name": "situated_faithfulness",
+   "url": "https://github.com/kkkevinkkkkk/situated_faithfulness.git",
+   "commit": "a18962ffa706ad7dc4754033726d69d78addfc75",
+   "role": "defense",
+   "we_run": "their SCR/ACR prompts",
+   "note": "Self-guided confidence reasoning",
+   "license_file": null,
+   "source_modified_by_us": false
+  }
+ ]
+}
