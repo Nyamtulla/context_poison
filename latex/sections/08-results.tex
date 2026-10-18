@@ -7,11 +7,23 @@ Stated first, then supported: \textbf{a defense that works by shifting trust
 from the model's parameters toward the retrieved text is correct when the text
 is merely stale and dangerous when an attacker owns it.}
 
-This family is large. It includes
-ParamMute~\cite{huang-2025-parammute}, CK-PLUG~\cite{bi-2025-parameters},
-SpARE~\cite{zhao-2024-steering}, COIECD~\cite{yuan-2024-discerning} and
-SHIFT~\cite{li-2026-shift}. All were published as fixes for knowledge
-conflict, and all were validated against the incidental threat model only. The
+The family is defined in Section~\ref{sec:twoplaces}: a method whose
+intervention is a weighting between the context-conditioned and the
+memory-conditioned prediction. It is large, and it is most of what we ran.
+\textbf{Seven of the ten implementations we attacked are in it} --- ACD,
+CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG --- alongside
+SHIFT~\cite{li-2026-shift}, which we ran only on clean context. The published
+members we cite are ParamMute~\cite{huang-2025-parammute},
+CK-PLUG~\cite{bi-2025-parameters}, SpARE~\cite{zhao-2024-steering},
+COIECD~\cite{yuan-2024-discerning} and SHIFT~\cite{li-2026-shift}, all
+published as fixes for knowledge conflict and all validated against the
+incidental threat model only.
+
+The other three are outside the family and are the reason the claim is not
+vacuous. DyPRAG converts the retrieved passage into weights, so there is no
+context-versus-memory dial to turn. The two RobustRAG variants isolate each
+passage and aggregate across them, which asks \emph{which} passages agree
+rather than how far to trust passages in general. The
 family's shared idea is reasonable for the problem it was built for. When a
 retrieved document disagrees with the model's memory, the document is usually
 newer, so trust the document. The idea becomes a liability the moment the
