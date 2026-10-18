@@ -22,7 +22,7 @@ contribution re-screen in which all \NScreened{} screened papers were re-read
 against a single rule: a paper stays if it contributes an attack, a failure
 mechanism, a defense or a fix. Benchmarks, surveys, measurement studies and
 position papers are kept even though they propose no technique, because they
-are how the field is organised. That pass removed 53 papers and, in the other
+are how the field is organized. That pass removed 53 papers and, in the other
 direction, recovered 34 techniques that the original extraction had missed, so
 the registry counts in this paper are floors rather than censuses.
 
@@ -71,7 +71,7 @@ the output fails as one of six \textbf{consequences}. A defense can intervene
 at three points, and the two literatures do not choose the same one: the
 security track masses at ingestion, the machine learning track at reasoning,
 and execution is security almost alone. Counts are named mechanisms per
-channel (left) and named defenses per intervention point (centre) and named mechanisms per
+channel (left) and named defenses per intervention point (center) and named mechanisms per
 consequence (right), by track. The consequence column is the sharpest
 division in the figure: every goal-hijack mechanism is security-track and
 none is machine learning, while reasoning corruption runs the other way.
@@ -141,7 +141,7 @@ and they are the thinnest in the corpus.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig2_channel_gap}
-\caption{Named mechanisms against named defenses, per channel, labelled with
+\caption{Named mechanisms against named defenses, per channel, labeled with
 defenses per mechanism. Channels are ordered by that ratio, so the under-served
 routes fall to the bottom. \meth{supply-chain} has fewer defenses than named
 mechanisms; \meth{cross-modal} and \meth{tool-metadata} are at parity. These
@@ -181,7 +181,7 @@ members.
 Every entry behind these counts is listed in
 Appendix~\ref{sec:census}: all \NMechanisms{} named mechanisms and all
 \NDefenses{} named defenses, with the channel, consequence, track and
-validation coding each was given, and the paper it came from. The counts in
+validation coding we gave each, and the paper it came from. The counts in
 this section are summaries of that table, not of a sample of it.
 \subsection{How separate the two communities are}
 
@@ -247,7 +247,7 @@ overlap on 132 and therefore each found cases the other missed. \textbf{14
 (2.7\%) report no baseline comparison of any kind}, each confirmed by hand
 against the paper's own words. The remainder we report as undetermined.
 
-We report no number drawn from a negative class, and the reason generalises.
+We report no number drawn from a negative class, and the reason generalizes.
 We built three automated passes over these papers and hand-checking each found
 the same asymmetry: the positive class was reliable and the negative class was
 about half wrong. A pattern can confirm that something is present in a paper;
@@ -328,8 +328,8 @@ Figure~\ref{fig:lag} shows the full distribution.
 \end{figure}
 
 A reader might reasonably ask whether this is our boundary rather than the
-field's. The track label is assigned per paper, and papers that sit on the
-boundary are coded ``Both'' and excluded from Table~\ref{tab:transfer}
+field's. We assign the track label per paper, code papers that sit on the
+boundary as ``Both'', and exclude them from Table~\ref{tab:transfer}
 precisely because they cannot cross a line they sit on; including them gives
 \NCrossAllPairs{} of \NTimelinePairs{} rather than
 \NCrossCommunityPairs{} of \NPureTrackPairs{}, and the empty cell stays empty

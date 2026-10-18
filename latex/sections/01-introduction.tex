@@ -70,6 +70,18 @@ experiments that fall in it.
 The second and third questions are the ones a survey normally cannot answer.
 They are what turns a coverage gap from an observation into evidence.
 
+\paragraph{Scope.}
+Three limits are worth stating before the contributions rather than after
+them. Our retrieval-cell experiments use one item set per cell, so they
+measure what a generator does with poisoned context and not how hard a
+retriever is to poison. Most of them use one model family at one size, and our
+own model control shows that changing the model changes outcomes, so the
+numbers hold for models of that class rather than in general. And every attack
+in the campaign except the two in Section~\ref{sec:adaptive} was built without
+knowledge of the defense it meets, which bounds attack strength from below:
+conservative evidence when a defense fails, and no evidence at all when one
+holds. Section~\ref{sec:threats} gives the full list.
+
 \paragraph{Contributions.}
 \begin{itemize}
 \item \textbf{The empty cell (RQ1).} Across \NPureTrackPairs{} confirmed
@@ -92,7 +104,7 @@ They are what turns a coverage gap from an observation into evidence.
   control and a fixed detectability threshold
   (Section~\ref{sec:experiments}). \NOursCrossPairs{} of our \NOursPairs{}
   retrieval-cell pairs cross the community boundary, against
-  \PctCrossCommunity{}\% of the literature's. At the dose most favourable to a
+  \PctCrossCommunity{}\% of the literature's. At the dose most favorable to a
   defense, not one of 15 (defense, payload) pairs shows a resolvable benefit.
 
 \item \textbf{One mechanism, not a list of failures (RQ3).} Context-reliance

@@ -64,7 +64,7 @@ is +9.3\pp. At saturation it is 4.2\pp \emph{below} the undefended model, and
 across the full dose range it loses 13.5\pp more accuracy than doing nothing at
 all.
 
-CK-PLUG's behaviour is the most extreme we measured, and it appears on a
+CK-PLUG's behavior is the most extreme we measured, and it appears on a
 different metric. Under BadRAG sentiment steering~\cite{xue-2024-badrag}, which
 tries to make the model answer in a negative tone, the undefended model adopts
 the attacker's framing 0.0\% of the time at every dose. CK-PLUG adopts it
@@ -181,7 +181,7 @@ effectiveness.
 \subsection{Two payloads, three defenses, three outcomes}
 \label{sec:payloads}
 
-ACD is not the only method whose behaviour depends on the form of the planted
+ACD is not the only method whose behavior depends on the form of the planted
 passage. We ran the three context-reliance defenses whose corpus-poisoning
 results are already in Table~\ref{tab:family} against false evidence as well,
 each against its own undefended arm over the same items at the same doses.
@@ -337,7 +337,7 @@ same dosing. CK-PLUG behaves as ParamMute does and more sharply: it is the only
 defense in this campaign whose accuracy loss on this payload clears its own
 threshold, and at a 10\% dose it already copies 76.7\% against its undefended
 arm's 38.5\%, double, on one tenth of the context replaced. COIECD moves in the
-same direction at every dose and clears nothing, which is its behaviour on both
+same direction at every dose and clears nothing, which is its behavior on both
 other payloads too.
 
 \textbf{The mass is conserved.} Because the three outcomes are disjoint by
