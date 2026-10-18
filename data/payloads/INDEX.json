@@ -23,6 +23,17 @@
    "built_by": "python3 scripts/build_distractor_payload.py",
    "asserts": "a THIRD answer, equal to neither the gold answer nor the model's own prior answer, which is what separates copying the attacker from falling back on memory",
    "ours": true
+  },
+  {
+   "name": "NaturalQuestionsShort_kc_gradient.jsonl",
+   "sha256": "9bb8b125878803f7eed35377349530fff15d1acb1fae8d94d6dc6a6608ee9189",
+   "bytes": 1706203,
+   "rows": 781,
+   "n_optimised": 686,
+   "adds_field": "gradient_evidencde",
+   "built_by": "python3 scripts/build_gradient_acd_payload.py --n 686 --steps 10 --batch 24",
+   "asserts": "the best-of-K passage plus a GCG-optimised 20-token suffix against the same entropy objective",
+   "ours": true
   }
  ]
 }

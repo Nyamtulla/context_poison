@@ -58,3 +58,7 @@ advisor_meeting.pptx
 advisor_meeting.pdf
 context_sok_results_presentation.pptx
 context_sok_results_presentation.pdf
+
+# per-defense dependency sets, built by scripts/setup_envs.py from the pinned
+# requirements in envs/*-requirements.txt. Installed packages, not our code.
+envs/*-libs/

@@ -8,6 +8,29 @@
 # `logits_to_keep` between 4.x and 5.x, and several vendored defenses subclass
 # the sampling loop. A different minor version may still run and may not
 # reproduce. See EXPERIMENTS.md for the hardware these were run on.
+#
+# ---------------------------------------------------------------------------
+# THIS FILE IS NOT ENOUGH ON ITS OWN. One defense cannot share it.
+#
+#   ACD       needs transformers==4.44.0, pinned by its own README. Its
+#             vendored sampling loop imports two symbols that 4.49 removed, so
+#             under the stack below it raises ImportError before it loads a
+#             model. Build its dependency set separately:
+#
+#                 python3 scripts/setup_envs.py
+#                 PYTHONPATH=envs/acd-libs python3 scripts/acd_vs_corpus_poisoning.py ...
+#
+#             Pins are in envs/acd-requirements.txt.
+#
+#   CK-PLUG   ships its own transformers 4.49 fork in `transformers-4.49/` and
+#             its README says to install it. Its scorer and decoder modules
+#             also import cleanly under the stack below, so we record the fork
+#             as recommended by its authors rather than required by us.
+#
+# Everything else runs on this file, including both adaptive payload builders.
+# That the defenses in one cell cannot share one environment is itself a
+# reproducibility finding, and Section "Discussion" of the paper reports it.
+# ---------------------------------------------------------------------------
 
 -r requirements.txt
 

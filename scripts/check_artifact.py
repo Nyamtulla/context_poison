@@ -8,7 +8,8 @@ break a reproduction attempt, in the order they break:
   1. the Python environment, against requirements-experiments.txt
   2. the Git LFS payloads (a 133-byte pointer where a 72 MB database should be
      is this repo's single most common setup failure)
-  3. every third-party implementation, present and on its pinned commit
+  3. every third-party implementation, present and on its pinned commit,
+     and the separate dependency set ACD needs
   4. every attack payload, present and matching the hash the published numbers
      were produced from
   5. every result registry the paper's macros read, present and parseable
@@ -86,9 +87,18 @@ def check_third_party():
     for line in r.stdout.splitlines():
         if "ok" not in line and line.strip() and "payload" not in line:
             print("  " + line.strip())
-    return report("20 repos on their pinned commits, sources unmodified",
-                  r.returncode == 0, tail[-1] if tail else "",
-                  "python3 scripts/setup_third_party.py")
+    ok = report("20 repos on their pinned commits, sources unmodified",
+                r.returncode == 0, tail[-1] if tail else "",
+                "python3 scripts/setup_third_party.py")
+    # ACD cannot share the main stack; without this it raises ImportError
+    # before it loads a model, which is a confusing way to learn it.
+    e = subprocess.run([sys.executable, str(REPO / "scripts" / "setup_envs.py"),
+                        "--verify"], capture_output=True, text=True, cwd=REPO)
+    for line in e.stdout.splitlines():
+        print("  " + line.strip())
+    return report("per-defense dependency sets",
+                  e.returncode == 0, "",
+                  "python3 scripts/setup_envs.py") and ok
 
 
 def check_payloads():

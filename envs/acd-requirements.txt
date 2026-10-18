@@ -1,0 +1,26 @@
+# ACD runs on transformers 4.44.0 and nothing newer.
+#
+# `third_party/ACD/generation/gen_wrapper.py` is a vendored copy of the
+# transformers sampling loop carrying the ACD rule, and it imports symbols
+# that later versions removed:
+#
+#   transformers 4.49+  ImportError: NEED_SETUP_CACHE_CLASSES_MAPPING
+#   transformers 4.49   ImportError: is_quanto_available
+#
+# ACD's own README says `Should use transformers==4.44.0`, so this is the
+# authors' pin, not ours.
+#
+# Install into a directory rather than a virtualenv, and put it FIRST on
+# PYTHONPATH:
+#
+#   python3 scripts/setup_envs.py
+#   PYTHONPATH=envs/acd-libs python3 scripts/acd_vs_corpus_poisoning.py ...
+#
+# `pip install -e` would write egg-info into third_party/ACD and make
+# `setup_third_party.py --verify` report the clone as modified. Keeping the
+# clones byte-identical to upstream is the evidence behind "we do not
+# reimplement", so the dependency lives outside them.
+
+transformers==4.44.0
+tokenizers==0.19.1          # 4.44 requires >=0.19,<0.20
+huggingface-hub==0.36.2     # 4.44 requires >=0.23.2,<1.0; the system has 1.9.2

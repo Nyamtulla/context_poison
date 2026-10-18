@@ -68,6 +68,7 @@ most common setup failure in this repo.
 pip install -r requirements-experiments.txt
 python3 scripts/setup_third_party.py              # clone the 20 implementations
 python3 scripts/setup_third_party.py --payloads   # install the built payloads
+python3 scripts/setup_envs.py                     # the one defense that needs its own stack
 python3 scripts/check_artifact.py                 # no GPU, no network
 ```
 
@@ -80,6 +81,38 @@ Some defenses need weights beyond the base model. Those are downloaded by the
 upstream project's own instructions, not by us: `third_party/ParamMute` needs
 its merged checkpoint and `third_party/DyPRAG` its trained projectors. Both
 are gitignored here because they are large and are not ours to redistribute.
+
+## One environment is not enough
+
+The defenses in a single cell cannot share one Python environment, and finding
+that out the hard way is why this section exists.
+
+| component | transformers | status |
+|---|---|---|
+| Everything else, including both payload builders | **5.5.0** | `requirements-experiments.txt` |
+| **ACD** | **4.44.0** | hard requirement, pinned by ACD's own README |
+| CK-PLUG | its own vendored 4.49 fork | recommended by its authors; also imports under 5.5.0 |
+
+ACD's vendored sampling loop imports `NEED_SETUP_CACHE_CLASSES_MAPPING` and
+`is_quanto_available`, both removed by transformers 4.49. Under the main stack
+the runner raises `ImportError` before it loads a model. `setup_envs.py`
+installs ACD's pins into `envs/acd-libs`, which goes **first** on `PYTHONPATH`:
+
+```bash
+PYTHONPATH=envs/acd-libs python3 scripts/acd_vs_corpus_poisoning.py ...
+```
+
+It installs to a directory rather than a virtualenv on purpose. `pip install -e`
+would write egg-info into `third_party/ACD`, and `setup_third_party.py --verify`
+would then report that clone as modified. The clones staying byte-identical to
+upstream is the evidence behind *we do not reimplement*, so the dependencies
+live outside them.
+
+This is not an inconvenience we are apologising for. The paper reports that
+several published defenses cannot be run from their released artifacts; this is
+the same problem one layer down, where the artifacts run but not together. An
+evaluation platform that spans two literatures has to carry several dependency
+sets at once, and saying so is part of the result.
 
 ## First run: eight items, two doses
 
@@ -130,10 +163,16 @@ python3 scripts/build_adaptive_acd_payload.py --n 686
 # the GCG version: a 20-token suffix optimised against the same objective
 python3 scripts/build_gradient_acd_payload.py --n 686 --steps 8 --batch 20
 
-python3 scripts/acd_vs_corpus_poisoning.py --n 686 --n_shots 5 \
+PYTHONPATH=envs/acd-libs python3 scripts/acd_vs_corpus_poisoning.py \
+  --n 686 --n_shots 5 \
   --attack adaptive_evidence --data NaturalQuestionsShort_kc_adaptive.jsonl \
   --out data/registries/acd_vs_adaptive_evidence.json
 ```
+
+The payload builders run on the **main** stack and the ACD evaluation runs on
+**4.44.0**. That split is deliberate and consistent: every payload is built
+under one stack and every payload is scored by ACD under the other, so the
+comparisons between them stay like for like.
 
 `--n_shots` must match the value the payload was built with. The few-shot
 demonstrations are held out of the evaluation slice, so a different count
