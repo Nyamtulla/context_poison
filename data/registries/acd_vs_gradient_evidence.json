@@ -13,7 +13,8 @@
  "prediction": "acd degrades less than rag because the attack raises contextual entropy and d_alpha discounts it; the claim only survives if acd sits above closedbook on clean context, otherwise it is DyPRAG again",
  "fracs_done": [
   0.0,
-  0.1
+  0.1,
+  0.5
  ],
  "results": [
   {
@@ -92,6 +93,45 @@
    "ci_high": 30.0,
    "condition": "gradient distractor, 10% of context",
    "frac": 0.1,
+   "arm": "acd"
+  },
+  {
+   "dist_acc": 71.14,
+   "n": 686,
+   "ctx_acc": 12.24,
+   "pm_acc": 11.81,
+   "mr": 49.09,
+   "em": 0.0,
+   "ci_low": 10.0,
+   "ci_high": 14.9,
+   "condition": "gradient distractor, 50% of context",
+   "frac": 0.5,
+   "arm": "rag"
+  },
+  {
+   "dist_acc": 1.02,
+   "n": 686,
+   "ctx_acc": 8.16,
+   "pm_acc": 50.29,
+   "mr": 86.03,
+   "em": 0.0,
+   "ci_low": 6.3,
+   "ci_high": 10.5,
+   "condition": "gradient distractor, 50% of context",
+   "frac": 0.5,
+   "arm": "closedbook"
+  },
+  {
+   "dist_acc": 50.73,
+   "n": 686,
+   "ctx_acc": 14.58,
+   "pm_acc": 23.47,
+   "mr": 61.69,
+   "em": 0.0,
+   "ci_low": 12.1,
+   "ci_high": 17.4,
+   "condition": "gradient distractor, 50% of context",
+   "frac": 0.5,
    "arm": "acd"
   }
  ]

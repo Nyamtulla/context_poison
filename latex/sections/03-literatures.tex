@@ -65,19 +65,15 @@ The three axes give \NCubeCells{} cells.
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/fig0_pipeline}
-\caption{The three axes as three distributions along the agent pipeline.
-Untrusted content enters through one of nine \textbf{channels} (A), a defense
-may act at one of three \textbf{points} (B), and the output fails as one of six
-\textbf{consequences} (C). The two literatures occupy different parts of every
-axis. The security track holds \meth{tool-output} and owns
-\meth{goal-hijack} outright, where the machine learning track names nothing at
-all; the machine learning track holds \meth{reasoning-corruption}. Defenses
-divide the same way: security masses at ingestion, machine learning at
-reasoning, and execution is security almost alone. Panels A and C count the
-same \NMechanisms{} named mechanisms on two different axes and share a scale;
-B counts the \NDefenses{} named defenses and has its own. Drawn as a flow
-rather than a tree because the taxonomy is a cube, and a hierarchy would
-assert a nesting that does not exist.}
+\caption{The taxonomy against the system it describes. Untrusted content
+arrives through one of nine \textbf{channels}, enters one context window, and
+the output fails as one of six \textbf{consequences}. A defense can intervene
+at three points, and the two literatures do not choose the same one: the
+security track masses at ingestion, the machine learning track at reasoning,
+and execution is security almost alone. Counts are named mechanisms per
+channel (left) and named defenses per intervention point (centre), by track.
+Drawn as a flow rather than a tree because the taxonomy is a cube; the
+pipeline is the one ordering the three axes genuinely have.}
 \label{fig:pipeline}
 \end{figure*}
 
@@ -93,7 +89,7 @@ The split is not only in vocabulary; it is in where each community thinks the
 problem should be solved, and a method built for one point is not a drop-in at
 another.
 
-The consequence axis separates them even more sharply. Every one of the
+The consequence axis separates them even more sharply, and the registry says so outright. Every one of the
 \NMechGoalHijack{} named goal-hijack mechanisms comes from the security track
 and none from the machine learning track, while reasoning corruption runs the
 other way. That is not two communities describing one phenomenon in different
