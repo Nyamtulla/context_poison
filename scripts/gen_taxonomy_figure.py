@@ -1,19 +1,20 @@
-"""The taxonomy as a pipeline: where content enters, where defenses intervene.
+"""The taxonomy as three linked distributions along the agent pipeline.
 
-The cube figure shows occupancy. It does not show the thing a reader needs
-first, which is what the axes *are* and how they relate to the system being
-attacked. This draws that: nine channels feeding one context window, three
-places a defense can intervene, six ways the output goes wrong.
+A taxonomy figure that only labels its own axes is a diagram, not a result.
+This encodes the three axes as quantities, so the reader sees the asymmetry
+rather than reading it off numerals:
 
-It is a flow rather than a tree on purpose. Our taxonomy is a cube --- channel
-x intent x consequence --- and drawing a cube as a hierarchy would assert a
-nesting that does not exist. The pipeline is the one ordering the three axes
-genuinely have: content arrives somewhere, is acted on somewhere, and fails as
-something.
+  where content enters     9 channels     named mechanisms, by track
+  where a defense acts     3 points       named defenses, by track
+  how the output fails     6 consequences named mechanisms, by track
 
-Every number is read from the registries. The asymmetry it exposes is the
-paper's argument in one picture: the security track masses at ingestion, the
-machine learning track at reasoning, and execution is security-only.
+Drawn as a flow rather than a tree because the taxonomy is a cube, and drawing
+a cube as a hierarchy would assert a nesting that does not exist. The pipeline
+is the one ordering the three axes genuinely have.
+
+Panels A and C count the same \\NMechanisms{} mechanisms on two different axes,
+so they share an x scale; B counts defenses and says so. Bar colour carries
+track and nothing else: every numeral is set in ink, never in a series colour.
 
 Out: latex/figures/fig0_pipeline.pdf
 """
@@ -22,35 +23,32 @@ from __future__ import annotations
 import collections
 import json
 import pathlib
-import sys
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 R = REPO / "data" / "registries"
 OUT = REPO / "latex" / "figures"
 
-CAT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
-INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
-GREY = "#f0efec"
-SEC, ML = CAT[0], CAT[1]
+SEC, ML = "#2a78d6", "#eb6834"
+INK, INK2, MUTED, GRID = "#0b0b0b", "#52514e", "#8a8984", "#eceae6"
 FULL = 7.0
 
 plt.rcParams.update({
-    "font.family": "serif", "font.size": 7.5,
-    "text.color": INK, "figure.dpi": 200,
+    "font.family": "serif", "font.size": 7.5, "figure.dpi": 200,
     "savefig.bbox": "tight", "savefig.pad_inches": 0.02, "pdf.fonttype": 42,
+    "text.color": INK,
 })
 
-CHANNELS = ["direct-input", "tool-output", "RAG", "memory", "multi-agent",
-            "cross-modal", "tool-metadata", "skill", "supply-chain"]
+CHANNELS = ["direct-input", "tool-output", "RAG", "memory", "cross-modal",
+            "tool-metadata", "multi-agent", "supply-chain", "skill"]
 CONSEQ = ["goal-hijack", "reasoning-corruption", "silent-corruption",
-          "data-exfiltration", "persistence-backdoor", "resource-abuse"]
-POINTS = [("ingestion", "ingestion"), ("reasoning", "reasoning"),
-          ("execution", "execution")]
+          "persistence-backdoor", "data-exfiltration", "resource-abuse"]
+POINTS = ["ingestion", "reasoning", "execution"]
 
 
 def load(n):
@@ -63,101 +61,98 @@ def load(n):
     return []
 
 
-def box(ax, x, y, w, h, label, fc, ec, fs=6.4, tc=INK, weight="normal"):
-    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=1.2",
-                                linewidth=0.7, facecolor=fc, edgecolor=ec))
-    ax.text(x + w / 2, y + h / 2, label, ha="center", va="center",
-            fontsize=fs, color=tc, fontweight=weight, linespacing=1.25)
+def pair_bars(ax, labels, sec, mlv, xmax, unit, show_all=True):
+    """Grouped horizontal bars, security above machine learning in each slot.
 
-
-def arrow(ax, x1, y1, x2, y2, color=MUTED, lw=0.6, alpha=1.0):
-    ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), arrowstyle="-|>",
-                                 mutation_scale=5, linewidth=lw,
-                                 color=color, alpha=alpha,
-                                 shrinkA=0, shrinkB=0))
+    Rounded data-ends, a recessive x grid, and value labels in ink outside the
+    bar so the number never sits on the colour it describes.
+    """
+    y = np.arange(len(labels))
+    h = 0.36
+    for off, v, c in ((h / 2, sec, SEC), (-h / 2, mlv, ML)):
+        ax.barh(y + off, v, h, color=c, zorder=3,
+                linewidth=0, align="center")
+        for yi, vi in zip(y + off, v):
+            if vi == 0:
+                ax.text(1.0, yi, "0", va="center", ha="left",
+                        fontsize=5.4, color=MUTED, zorder=4)
+            elif show_all:
+                ax.text(vi + xmax * 0.018, yi, str(vi), va="center",
+                        ha="left", fontsize=5.6, color=INK2, zorder=4)
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels, fontsize=6.3)
+    ax.invert_yaxis()
+    ax.set_xlim(0, xmax)
+    ax.set_ylim(len(labels) - 0.5, -0.5)
+    ax.set_xlabel(unit, fontsize=6.2, color=INK2)
+    ax.tick_params(axis="x", labelsize=5.8, length=0, colors=INK2)
+    ax.tick_params(axis="y", length=0)
+    ax.grid(axis="x", color=GRID, linewidth=0.5, zorder=0)
+    ax.set_axisbelow(True)
+    for s in ("top", "right", "left"):
+        ax.spines[s].set_visible(False)
+    ax.spines["bottom"].set_color(GRID)
+    ax.spines["bottom"].set_linewidth(0.6)
 
 
 def main():
-    mech = load("rq3_pollution_registry.json")
-    defs = load("rq4_defense_registry.json")
+    mech, defs = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
     mc = collections.Counter((e.get("channel"), e.get("track")) for e in mech)
+    qc = collections.Counter((e.get("consequence"), e.get("track")) for e in mech)
     dp = collections.Counter((e.get("defense_intervention_point"),
                               e.get("track")) for e in defs)
+    g = lambda c, k, t: c.get((k, t), 0)
 
-    fig, ax = plt.subplots(figsize=(FULL, 3.6))
-    ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
+    ch_s = [g(mc, c, "Security") for c in CHANNELS]
+    ch_m = [g(mc, c, "ML/AI") for c in CHANNELS]
+    cq_s = [g(qc, c, "Security") for c in CONSEQ]
+    cq_m = [g(qc, c, "ML/AI") for c in CONSEQ]
+    dp_s = [g(dp, p, "Security") for p in POINTS]
+    dp_m = [g(dp, p, "ML/AI") for p in POINTS]
+    # A and C count the SAME mechanisms on two axes, so one scale for both
+    mx = max(max(ch_s + ch_m), max(cq_s + cq_m)) * 1.22
 
-    # ---- legend, top centre (keeps colour meaning off the busy middle) -----
-    ax.add_patch(FancyBboxPatch((38.0, 92.6), 2.0, 2.0,
-                                boxstyle="round,pad=0,rounding_size=0.5",
-                                facecolor=SEC, edgecolor="none"))
-    ax.text(40.9, 93.6, "security", ha="left", va="center",
-            fontsize=6.4, color=INK)
-    ax.add_patch(FancyBboxPatch((50.0, 92.6), 2.0, 2.0,
-                                boxstyle="round,pad=0,rounding_size=0.5",
-                                facecolor=ML, edgecolor="none"))
-    ax.text(52.9, 93.6, "machine learning", ha="left", va="center",
-            fontsize=6.4, color=INK)
+    fig = plt.figure(figsize=(FULL, 3.15))
+    axA = fig.add_axes([0.072, 0.215, 0.200, 0.605])
+    axB = fig.add_axes([0.412, 0.215, 0.168, 0.605])
+    axC = fig.add_axes([0.772, 0.215, 0.188, 0.605])
 
-    # ---- channels, left ----------------------------------------------------
-    n = len(CHANNELS)
-    top, bot, gap = 88.0, 7.0, 1.4
-    h = (top - bot - gap * (n - 1)) / n
-    ax.text(11, 96.4, "where untrusted content enters", ha="center",
-            fontsize=7, color=INK, fontweight="bold")
-    ax.text(16.6, 90.0, "sec", ha="center", fontsize=5.6, color=SEC)
-    ax.text(20.0, 90.0, "ml", ha="center", fontsize=5.6, color=ML)
-    ax.text(11, 2.2, "9 channels, 233 named mechanisms", ha="center",
-            fontsize=6.0, color=INK2)
-    BUS = 25.0
-    for i, c in enumerate(CHANNELS):
-        y = top - i * (h + gap) - h
-        s_, m_ = mc.get((c, "Security"), 0), mc.get((c, "ML/AI"), 0)
-        box(ax, 1, y, 21, h, "", GREY, "#dcdad6")
-        ax.text(2.3, y + h / 2, c, ha="left", va="center", fontsize=6.3, color=INK)
-        ax.text(16.6, y + h / 2, f"{s_}", ha="center", va="center",
-                fontsize=6.2, color=SEC, fontweight="bold")
-        ax.text(20.0, y + h / 2, f"{m_}", ha="center", va="center",
-                fontsize=6.2, color=ML, fontweight="bold")
-        # short stub to a vertical bus, instead of nine lines crossing the page
-        ax.plot([22.2, BUS], [y + h / 2, y + h / 2], lw=0.5, color="#c9c7c3",
-                zorder=0)
-    ax.plot([BUS, BUS], [bot + h / 2, top - h / 2], lw=0.8, color="#c9c7c3",
-            zorder=0)
-    arrow(ax, BUS, 50, 30.4, 50, lw=1.0, color=INK2)
+    pair_bars(axA, CHANNELS, ch_s, ch_m, mx, "named mechanisms")
+    pair_bars(axB, POINTS, dp_s, dp_m, max(dp_s + dp_m) * 1.30, "named defenses")
+    pair_bars(axC, CONSEQ, cq_s, cq_m, mx, "named mechanisms")
 
-    # ---- the pipeline ------------------------------------------------------
-    box(ax, 31, 38, 15, 24, "context\nwindow", "#ffffff", MUTED, fs=7)
-    box(ax, 55, 38, 13, 24, "model", "#ffffff", MUTED, fs=7)
-    arrow(ax, 46.4, 50, 54.6, 50, lw=1.0, color=INK2)
-    arrow(ax, 68.4, 50, 76.6, 50, lw=1.0, color=INK2)
+    for ax, t in ((axA, "A. where untrusted content enters"),
+                  (axB, "B. where a defense acts"),
+                  (axC, "C. how the output fails")):
+        ax.set_title(t, fontsize=6.9, color=INK, fontweight="bold",
+                     loc="left", pad=5)
 
-    # ---- the three intervention points -------------------------------------
-    for (key, lab), xc in zip(POINTS, (28.6, 50.5, 72.2)):
-        s_, m_ = dp.get((key, "Security"), 0), dp.get((key, "ML/AI"), 0)
-        ax.plot([xc, xc], [30, 70], ls=(0, (2.2, 1.8)), lw=0.8,
-                color="#b9b7b2", zorder=0)
-        ax.text(xc, 26.0, lab, ha="center", fontsize=6.6, color=INK,
-                fontweight="bold")
-        ax.text(xc - 0.7, 21.3, f"{s_}", ha="right", fontsize=7.6, color=SEC,
-                fontweight="bold")
-        ax.text(xc, 21.3, "/", ha="center", fontsize=6.4, color=MUTED)
-        ax.text(xc + 0.7, 21.3, f"{m_}", ha="left", fontsize=7.6, color=ML,
-                fontweight="bold")
-    ax.text(50, 31.5, "where a defense can intervene", ha="center",
-            fontsize=6.4, color=INK2, style="italic")
-    ax.text(50, 2.2, "3 intervention points, 541 named defenses",
-            ha="center", fontsize=6.0, color=INK2)
+    # ---- the pipeline, carried in the gaps between the panel titles -------
+    # The arrows cannot run at mid-height: panels B and C carry long row
+    # labels to the left of their axes and an arrow there strikes through
+    # them. At title height the gaps are clear, and the three titles then
+    # read as one sentence, which is the flow.
+    for x0, x1 in ((0.378, 0.432), (0.665, 0.719)):
+        fig.add_artist(FancyArrowPatch((x0, 0.868), (x1, 0.868),
+                                       transform=fig.transFigure,
+                                       arrowstyle="-|>", mutation_scale=6,
+                                       linewidth=0.9, color=MUTED,
+                                       shrinkA=0, shrinkB=0))
 
-    # ---- consequences, right -----------------------------------------------
-    n2 = len(CONSEQ)
-    h2 = (top - bot - gap * (n2 - 1)) / n2
-    ax.text(88.5, 96.4, "how the output goes wrong", ha="center",
-            fontsize=7, color=INK, fontweight="bold")
-    ax.text(88.5, 2.2, "6 consequences", ha="center", fontsize=6.0, color=INK2)
-    for i, c in enumerate(CONSEQ):
-        y = top - i * (h2 + gap) - h2
-        box(ax, 78, y, 21, h2, c, GREY, "#dcdad6", fs=6.1)
+    # ---- legend, once, top left -------------------------------------------
+    for i, (c, lab) in enumerate(((SEC, "security track"),
+                                  (ML, "machine learning track"))):
+        fig.patches.append(plt.Rectangle((0.072 + i * 0.128, 0.936), 0.015, 0.022,
+                                         transform=fig.transFigure, facecolor=c,
+                                         edgecolor="none"))
+        fig.text(0.092 + i * 0.128, 0.947, lab, fontsize=6.4, color=INK,
+                 va="center")
+
+    fig.text(0.072, 0.012,
+             "Panels A and C count the same 233 named mechanisms on two "
+             "different axes and share a scale; B counts the 541 named "
+             "defenses and has its own.",
+             fontsize=5.9, color=MUTED)
 
     OUT.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
