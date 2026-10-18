@@ -260,3 +260,20 @@ Manual coding of Channel/Intent/Consequence/Defense fields, the
 cross-citation *rate* computation itself, and full-text extraction of
 paywalled papers. `export`'s CSV includes blank columns for the manual coding
 fields so that pass can start directly from this tool's output.
+
+## License
+
+The code, the registries and the write-ups in this repo are MIT licensed
+(`LICENSE`).
+
+Three things in or near this repo are **not** covered by it:
+
+- **The attack and defense implementations** under `third_party/` keep their
+  own licenses. They are fetched, not vendored, precisely so that stays true;
+  `third_party/MANIFEST.json` names each one and records whether it ships a
+  license file.
+- **The surveyed papers.** Their PDFs are not distributed here. Every record
+  keeps the DOI or arXiv id it was found by, and `scripts/fetch_missing_pdfs.py`
+  re-fetches what is openly available.
+- **The datasets and model weights** the experiments run on, which come from
+  their own sources under their own terms. `EXPERIMENTS.md` says which.
