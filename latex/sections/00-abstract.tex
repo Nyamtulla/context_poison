@@ -11,17 +11,19 @@ communities. One direction is empty outright: \textbf{no security defense in
 our corpus has ever been evaluated against a machine learning failure
 mechanism.}
 
-So we ran that experiment. We executed \NCampaignPairs{} (defense, attack)
+So we ran it. We executed \NCampaignPairs{} (defense, attack)
 pairs across \NCampaignImpl{} implementations and \NCampaignEpisodes{} scored
 episodes, each from its authors' released code and weights, under an
 attack-works-first control and a fixed detectability threshold. At the dose
 most favourable to a defense, not one of 15 (defense, payload) pairs shows a
-resolvable benefit, and the reason is a single mechanism rather than a list of
-failures. These methods arbitrate between trusting the context and trusting the
-model's parameters, and moving that dial relocates probability mass without
-creating any: suppress memory and the attacker receives what memory held,
-suppress the attacker and memory receives it back. Across three defenses the
-two movements cancel to within 7 points. Neither moves mass toward the real
-document, because the attack is inside the context. The one defense that
-resisted loses 29\% of its protection to an attacker who optimizes against the
-single quantity its rule measures.
+resolvable benefit, and the reason is one mechanism rather than a list of
+failures. Each of these defenses has one dial: how far to trust the retrieved
+document against how far to trust what the model learned in training. Turning
+it moves errors between the two sources and creates no correct answers. Turn it
+away from training and the attacker receives what the model
+used to recall; turn it away from the document and the model recalls it again.
+Across three defenses the two movements cancel to within 7 points. Neither
+direction helps, because the attacker's text sits inside the document the
+defense is deciding whether to trust. The one defense that resisted loses 29\% of its
+protection to an attacker who optimizes against the single quantity its rule
+measures.

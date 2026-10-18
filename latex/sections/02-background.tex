@@ -15,6 +15,23 @@ window. We exclude training-time poisoning and model weight attacks, because
 those do not travel through the context. We exclude jailbreaks in which the
 user is the attacker and there is no third-party content, for the same reason.
 
+\subsection{Two places an answer can come from}
+\label{sec:twoplaces}
+
+A model answers a question from one of two sources, and the distinction carries
+the whole of Section~\ref{sec:results}. The first is the \emph{context}: the
+document, tool output or message placed in front of it. The second is what the
+model learned during training and holds in its weights. The machine learning
+literature calls the second one \emph{parametric memory}; we use that term and
+the shorter \emph{memory} interchangeably, and every result table reports it as
+\texttt{pm\_acc}. One of the defenses we evaluate, ParamMute, is named for it.
+
+The distinction matters because the defenses in Section~\ref{sec:results} do
+not detect attacks. They arbitrate between these two sources, deciding how far
+to trust the context against how far to trust memory. That is a single dial,
+and Section~\ref{sec:distractor} shows what turning it does and does not
+achieve.
+
 \subsection{One failure, two vocabularies}
 
 Table~\ref{tab:vocab} sets the two vocabularies side by side. The slots are the
