@@ -162,10 +162,19 @@ bound, and five further predictions, before building the payload. An ACD arm
 landing below the undefended arm would have falsified our account of the
 mechanism.
 
-The attack is white-box and query-based: five candidate passages per item, all
+The attack is white-box and query-based. Five candidate passages per item, all
 asserting the \emph{same} distractor answer and differing only in form, each
 scored by the $H_{\mathrm{ctx}}$ ACD itself would compute, keeping the
-minimum. Holding the asserted answer fixed is what makes any movement
+minimum.
+
+\textbf{The attacker optimizes on the items it then attacks}, which is worth
+stating plainly because it looks like training on the test set and is not. The
+threat model gives the adversary the model and the defense rule, and an
+adversary who owns a corpus tunes the passage they are about to plant. A payload
+optimized on held-out items and transferred would measure something else, and
+something weaker. What is held out is the few-shot block: its demonstrations
+are drawn from items outside the evaluation slice and are never poisoned, so
+the defense is not shown the attack in its own prompt. Holding the asserted answer fixed is what makes any movement
 attributable to form rather than to a different claim. It is a deliberately
 weak optimizer, so what it achieves is again a lower bound.
 

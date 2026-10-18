@@ -91,6 +91,18 @@ were.
 
 \subsection{What we ran}
 
+\paragraph{Environment.}
+Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
+535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
+\texttt{transformers} 5.5.0. Two defenses cannot use that last version. ACD's
+released decoder imports symbols that \texttt{transformers} removed after
+4.44, which its own README pins, so it runs in a separate dependency set.
+CK-PLUG ships its own 4.49 fork and its README says to install it. We record
+this because it is a result as much as a configuration detail: the defenses in
+a single cell of this taxonomy cannot share one Python environment, which is
+the reproducibility problem of Section~\ref{sec:discussion} one layer further
+down. The released artifact builds each set and verifies it.
+
 The campaign covers two cells.
 
 The \textbf{retrieval cell} pairs defenses built for knowledge conflict against
@@ -169,6 +181,16 @@ arms, is measured on that same subset.
 
 \subsection{Three payload classes, and one adaptive}
 \label{sec:payloadclasses}
+
+\paragraph{Which items.}
+The retrieval cell evaluates every item whose context is at most 2000
+characters. The cut is on context length alone, never on an outcome, and it is
+applied once and then frozen, so every defense and every payload meets the
+same items. Its purpose is to keep contrastive-decoding defenses, which hold
+two forward passes of the model at once, inside the memory of one card at a
+batch size that the whole cell can share. The one narrower slice is the
+distractor payload, and Section~\ref{sec:payloadclasses} gives both of its
+conditions.
 
 Within the retrieval cell we hold the items, the dosing and the scorer fixed
 and vary only the \emph{form} of the planted passage. A defense that behaves

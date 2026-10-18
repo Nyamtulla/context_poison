@@ -79,6 +79,14 @@ attacked arms agreed to within 0.3\pp{} and the saturation row agreed exactly.
 Determinism within a stack and reproducibility across stacks are different
 properties, and only the first is established by the replicates above.
 
+\textbf{We do not measure what the defenses cost.} Every number here is an
+accuracy, a copy rate or an abstention rate. We report no inference latency,
+no memory footprint and no throughput, so nothing in this paper says whether a
+defense is affordable to deploy. That matters for the contrastive-decoding
+family in particular, which runs two forward passes per token. A method could
+be useless on the evidence here and still be the right choice at a cost we
+never measured, or hold up well and be unaffordable.
+
 \textbf{Single dataset per cell.} The retrieval cell runs on CoConflictQA and
 open Natural Questions. The dosing model, which replaces a fraction of context
 with planted passages, is a simplification of a real retrieval pipeline under
