@@ -31,6 +31,7 @@ document is written by an adversary, because the defense instructs the model to
 trust the one thing the adversary controls.
 
 \begin{table}[t]
+\centering
 \caption{Context-reliance defenses against corpus poisoning, each read against
 its own undefended arm in the same run. "Clean" is the defense's own published
 benefit. "Saturation" is 100\% poisoned context. Bold clears that run's
@@ -138,6 +139,7 @@ second kind.
 We then ran the same defense, same items, same doses, against false evidence.
 
 \begin{table}[t]
+\centering
 \caption{ACD against two payload classes, $n=400$, mdr 9.9\pp. The defense is
 unchanged. Only the form of the planted passage differs.}
 \label{tab:acd}
@@ -187,6 +189,7 @@ Predictions for all three were committed to version control before any of them
 ran.
 
 \begin{table}[t]
+\centering
 \caption{The same three defenses against two payload classes. Excess damage is
 the defended arm's clean-to-saturation collapse minus the same collapse in its
 own undefended arm; positive means the defense lost more accuracy than doing
@@ -316,7 +319,7 @@ detectability threshold and Fisher at $p<0.05$. Three suppress memory and hand
 the mass to the attacker; one does the reverse; none improves accuracy.}
 \label{tab:distractor}
 \small
-\begin{tabular}{lrrrr}
+\begin{tabular}{@{}lrrrr@{}}
 \toprule
 defense & $n$ & memory & copied & correct \\
 \midrule
