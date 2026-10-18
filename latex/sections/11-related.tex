@@ -33,8 +33,10 @@ from its authors' released code and weights, and the control-fires-first rule
 is an automated form of the check Carlini had to run by hand --- it fired on
 FaithfulRAG, which we report as not reportable rather than as defeated. We
 report per-cell rather than averaging across threat models, and we say so where
-a cross-payload comparison is confounded. We use greedy decoding throughout
-rather than reporting error bars over a stochastic decoder. The one criticism
+a cross-payload comparison is confounded. We use greedy decoding throughout rather than
+reporting error bars over a stochastic decoder, and we verified that choice by
+rerunning a cell three times for byte-identical output
+(Section~\ref{sec:threats}). The one criticism
 we inherit is obliviousness, and Sections~\ref{sec:experiments}
 and~\ref{sec:adaptive} state its direction and test the single claim that
 needs it.

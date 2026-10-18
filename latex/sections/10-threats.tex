@@ -44,11 +44,25 @@ Section~\ref{sec:adaptive} tests the one resistance result we report. Every
 other defense in the campaign would need the same treatment before any claim
 that it holds.
 
-\textbf{Variance is argued, not measured.} We use greedy decoding throughout,
-so a rerun reproduces exactly, and we report Wilson intervals and a
-detectability threshold on every effect. We have not demonstrated that
-determinism by rerunning a cell end to end, and we have no multi-seed study of
-sensitivity to item order or few-shot choice.
+\textbf{Variance.} Carlini lists ``no variance reported'' as one of five
+fatal flaws in DeepSec~\cite{carlini-2019-critique}, and his own check found a
+standard deviation of 6.8 points on a reported attack success rate, enough to
+make many of DeepSec's pairwise comparisons meaningless. We avoid that a
+different way: we use greedy decoding throughout, so there is no run-to-run
+noise to report.
+
+We demonstrate this rather than assert it. Rerunning one published cell three
+times from scratch with an identical command produced \textbf{byte-identical
+results}: 72 numeric cells across 8 result rows, zero differences, the same
+hash after removing the timestamp. Error bars over a deterministic decoder
+would be zero-width and would say less than this does. The uncertainty that
+remains is sampling uncertainty, which the Wilson intervals and the
+detectability threshold already carry.
+
+What this does \emph{not} show is insensitivity to item order, batch
+composition, or the few-shot examples a defense holds out. Those are untested,
+and a method whose result depended on them would pass this check and still be
+fragile.
 
 \textbf{Single dataset per cell.} The retrieval cell runs on CoConflictQA and
 open Natural Questions. The dosing model, which replaces a fraction of context

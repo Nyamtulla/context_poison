@@ -21,14 +21,14 @@ Carlini's conclusion is the sentence to keep in view:
 |---|---|---|
 | 1 | Attacks are oblivious to the defense | **Addressed** for ACD (adaptive attack run); conservative elsewhere |
 | 2 | Averages computed across different threat models | **Pass** |
-| 3 | Permitted distortion too large to be meaningful | **Partial** |
+| 3 | Permitted distortion too large to be meaningful | **Addressed** (10% dose now leads) |
 | 4 | Defenses evaluated outside their stated threat model | **Pass, and it is our thesis** |
 | 5 | Defended and undefended rates on different item sets | **Pass, verified** |
 | 6 | More attacker power yields a worse attack | **Pass, verified** |
-| 7 | Robustness reported as an average, not worst case | **Partial** |
+| 7 | Robustness reported as an average, not worst case | **Addressed** (worst payload per defense) |
 | 8 | Attacks reimplemented incorrectly | **Pass** |
 | 9 | Defense reimplemented incorrectly | **Pass, and we detect it** |
-| 10 | No error bars, no variance reported | **Partial** |
+| 10 | No error bars, no variance reported | **Addressed** (3 replicates, byte-identical) |
 
 ---
 
@@ -245,10 +245,16 @@ What we do not have:
   holds out. We have never measured that.
 - **No published rerun.** We assert determinism; we have not demonstrated it.
 
-**Action, and it is cheap.** Rerun one cell three times end to end and publish
-the spread. If it is bit-identical, that is a stronger variance statement than
-error bars and costs one paragraph. If it is not, we need to know before a
-reviewer does.
+**Done 2026-10-17.** Reran COIECD x distractor evidence, n=400, three times
+from scratch with an identical command. **Byte-identical**: 72 numeric cells
+across 8 result rows, zero differences, same hash after removing the
+timestamp. Recorded in `data/registries/variance_replicates_coiecd.json` and
+written into the threats section.
+
+So the claim is now demonstrated rather than asserted, and it is stronger than
+error bars would have been: over a deterministic decoder those are zero-width.
+What remains untested is sensitivity to item order, batch composition and
+few-shot choice, and the threats section says so.
 
 ---
 
@@ -257,10 +263,12 @@ reviewer does.
 1. ~~**Downgrade or re-run the ACD robustness claim.**~~ **Done both**: the
    claim is scoped, and the adaptive attack was run and removed 29 % of the
    protection. (§1)
-2. **Rerun one cell three times and publish the spread.** Cheap, and it
-   converts an assertion into a measurement. (§10)
-3. **Promote the 10 % dose over saturation** in the headline numbers. (§3)
-4. **Report worst-payload-met per defense**, with the count of payloads met.
+2. ~~**Rerun one cell three times and publish the spread.**~~ **Done**:
+   byte-identical across three replicates. (§10)
+3. ~~**Promote the 10 % dose over saturation.**~~ **Done**, and it produced a
+   better result than saturation: not one of 15 (defense, payload) pairs shows
+   a resolvable benefit at the 10 % dose. (§3)
+4. ~~**Report worst-payload-met per defense.**~~ **Done**, in the same table.
    (§7)
 5. **Put control-fires-first in the methodology section** as a named
    contribution rather than a footnote. It is the thing DeepSec most needed
