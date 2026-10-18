@@ -41,9 +41,12 @@ completely, and nothing in either community's publishing process would catch
 it, because each reviews against its own convention.
 
 So a method can be published, adopted and cited without anyone asking whether
-it survives the other community's threat model. That is a claim about the
-literature, and it is checkable. This paper checks it, and then runs the
-experiment the check shows is missing.
+it survives the other community's threat model.
+
+That is a testable claim about the literature, not a complaint about it. We
+test it by reading both literatures under one taxonomy and recovering every
+experiment either side has run. The test finds a gap. We then run the
+experiments that fall in it.
 
 \paragraph{Research questions.}
 \begin{description}
@@ -111,13 +114,13 @@ They are what turns a coverage gap from an observation into evidence.
   method degrades rather than collapses, and the price is now measured
   (Section~\ref{sec:adaptive}).
 
-\item \textbf{Three controls the literature omits}, each of which would have
-  produced a wrong published claim in our own work: a \textbf{no-retrieval
-  baseline}, which shows one apparently flat defense was flat because it had
-  stopped reading the document; an \textbf{abstention axis}, which shows a
-  defense that is inert on accuracy converts a third of its answers into
-  refusals; and a \textbf{model control}, which shows that changing only the
-  base model reverses outcomes (Section~\ref{sec:results2}).
+\item \textbf{Three controls the literature omits.} Each caught a wrong claim
+  we were about to publish (Section~\ref{sec:results2}). A \textbf{no-retrieval
+  baseline} showed that our strongest-looking defense was flat under attack
+  only because it had stopped reading the document. An \textbf{abstention
+  axis} showed that a defense with no effect on accuracy was in fact
+  converting a third of its answers into refusals. A \textbf{model control}
+  showed that changing the base model alone reverses outcomes.
 
 \item \textbf{A runnable artifact.} Every attack and defense executes from its
   authors' released code at a pinned commit, verified unmodified; the
