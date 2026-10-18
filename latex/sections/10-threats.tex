@@ -64,6 +64,20 @@ composition, or the few-shot examples a defense holds out. Those are untested,
 and a method whose result depended on them would pass this check and still be
 fragile.
 
+\textbf{Nor does it show reproducibility across environments}, and we have a
+measured example of the difference. The defenses in the retrieval cell cannot
+share one Python environment: ACD's released decoder imports symbols that
+newer \texttt{transformers} releases removed, and its authors pin a version
+the rest of the cell cannot use. Re-running an earlier ACD cell under a
+rebuilt stack moved the \emph{clean} arm, where no payload is planted and the
+result is a control, by up to 0.3\pp{}. The closed-book arm moved too, and
+that arm never sees the context at all, so nothing but the environment can
+explain it. We therefore re-ran the earlier adaptive payload under the same
+stack as the gradient payload rather than comparing across the two; the
+attacked arms agreed to within 0.3\pp{} and the saturation row agreed exactly.
+Determinism within a stack and reproducibility across stacks are different
+properties, and only the first is established by the replicates above.
+
 \textbf{Single dataset per cell.} The retrieval cell runs on CoConflictQA and
 open Natural Questions. The dosing model, which replaces a fraction of context
 with planted passages, is a simplification of a real retrieval pipeline under

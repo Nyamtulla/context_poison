@@ -14,7 +14,8 @@
  "fracs_done": [
   0.0,
   0.1,
-  0.5
+  0.5,
+  1.0
  ],
  "results": [
   {
@@ -132,6 +133,45 @@
    "ci_high": 17.4,
    "condition": "gradient distractor, 50% of context",
    "frac": 0.5,
+   "arm": "acd"
+  },
+  {
+   "dist_acc": 87.76,
+   "n": 686,
+   "ctx_acc": 2.33,
+   "pm_acc": 11.37,
+   "mr": 82.98,
+   "em": 0.0,
+   "ci_low": 1.4,
+   "ci_high": 3.8,
+   "condition": "gradient distractor, 100% of context",
+   "frac": 1.0,
+   "arm": "rag"
+  },
+  {
+   "dist_acc": 1.02,
+   "n": 686,
+   "ctx_acc": 8.16,
+   "pm_acc": 50.29,
+   "mr": 86.03,
+   "em": 0.0,
+   "ci_low": 6.3,
+   "ci_high": 10.5,
+   "condition": "gradient distractor, 100% of context",
+   "frac": 1.0,
+   "arm": "closedbook"
+  },
+  {
+   "dist_acc": 73.03,
+   "n": 686,
+   "ctx_acc": 2.62,
+   "pm_acc": 18.08,
+   "mr": 87.32,
+   "em": 0.0,
+   "ci_low": 1.7,
+   "ci_high": 4.1,
+   "condition": "gradient distractor, 100% of context",
+   "frac": 1.0,
    "arm": "acd"
   }
  ]

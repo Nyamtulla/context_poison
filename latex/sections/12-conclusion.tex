@@ -39,15 +39,19 @@ Two results bound that claim rather than soften it. Protection depends on the
 present, so an evaluation built around optimized payloads overstates how well a
 system holds; the fluent payload needs no gradient access and damages an
 undefended model roughly twice as hard. And the one defense that resisted loses
-29\% of its protection to an attacker who reads its rule and optimizes against
+58\% of its protection to an attacker who reads its rule and optimizes against
 the single quantity it measures.
 
 \paragraph{Future work.}
 
-\textbf{Finish the adaptive case.} Our adaptive attack is a best-of-five search
-over sentence forms, which reached 0.653 of the 1.0 its own ceiling allows. A
-gradient search over token ids against the same objective has the remainder to
-work with, and would settle whether that defense degrades or collapses.
+\textbf{Extend the adaptive case to the rest of the family.} We tested the one
+defense that resisted, with two optimizers: a best-of-five search over sentence
+forms and a gradient search over token ids, which took 29\% and 58\% of its
+protection respectively and settled that it degrades rather than collapses.
+Every other context-reliance method in the campaign has had only the
+non-adaptive treatment, which Section~\ref{sec:experiments} states is no
+evidence of robustness at all. The same two optimizers transfer directly: each
+of these methods exposes a scalar the attacker can address.
 
 \textbf{Close the supply-chain and cross-modal gaps.} These channels have fewer
 than one named defense per named mechanism and are the routes by which agents

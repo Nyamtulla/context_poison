@@ -171,25 +171,27 @@ weak optimizer, so what it achieves is again a lower bound.
 
 \begin{table}[t]
 \centering
-\caption{ACD against the distractor payload in its plain form and in the form
-that minimizes ACD's own entropy term, at saturation, $n=686$. The adaptive
-payload is stronger against the undefended arm too, so the defensive gap is
-the quantity that isolates the defense.}
+\caption{ACD against the distractor payload in its plain form and in two forms
+that minimize ACD's own entropy term, at saturation, $n=686$. Both adaptive
+payloads are stronger against the undefended arm too, so the defensive gap is
+the quantity that isolates the defense. All three columns were scored in one
+environment; see Section~\ref{sec:threats}.}
 \label{tab:adaptive}
 \small
 \begin{tabular}{lrrr}
 \toprule
-at saturation & plain & adaptive & change \\
+at saturation & plain & best-of-5 & gradient \\
 \midrule
-median $H_{\mathrm{ctx}}$ & 1.348 & 0.783 & $-42\%$ \\
-median $d_\alpha$ & 0.525 & 0.653 & $+0.13$ \\
+median $H_{\mathrm{ctx}}$ & 1.348 & 0.783 & \textbf{0.614} \\
+median $d_\alpha$ & 0.525 & 0.653 & \textbf{0.708} \\
 \midrule
-undefended copies attacker & 76.0 & 89.1 & \\
-ACD copies attacker & 40.8 & \textbf{64.0} & $+23.2$ \\
-\textbf{defensive gap} & \textbf{35.1} & \textbf{25.1} & $\mathbf{-29\%}$ \\
+undefended copies attacker & 76.0 & 89.1 & 87.8 \\
+ACD copies attacker & 40.8 & 64.0 & \textbf{73.0} \\
+\textbf{defensive gap} & \textbf{35.1} & \textbf{25.1} & \textbf{14.7} \\
+\textbf{protection removed} & --- & \textbf{29\%} & \textbf{58\%} \\
 \midrule
-ACD recalls from memory & 32.5 & 22.2 & \\
-ACD answers correctly & 5.0 & 3.2 & \\
+ACD recalls from memory & 32.5 & 22.2 & 18.1 \\
+ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -206,12 +208,45 @@ payload is stronger against the undefended arm as well, so reporting only
 ACD's change would credit the defense with damage the attack does to everyone.
 Against its own undefended arm the protection falls from 35.1\pp{} to
 25.1\pp{}: \textbf{29\% of it removed by a best-of-five search over sentence
-templates.} Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, so a
-gradient search on $H_{\mathrm{ctx}}$ has the remainder to work with.
+templates.} Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, which
+left a question the weak optimizer could not answer.
 
-What this licenses is narrow and worth stating as such. It does not show ACD is
-broken. It shows that the one defense in our campaign that looked like a
-counterexample degrades under an attacker who reads the method and spends five
-forward passes per item, and that every published evaluation of a
-context-reliance defense in our corpus is non-adaptive. The gap between
-non-adaptive and adaptive evaluation is large enough to change the verdict.
+\textbf{A gradient search answers it.} We ran a GCG-style coordinate search
+over a 20-token suffix against the same objective, appended to the passage
+best-of-five had already chosen so that the asserted answer stays fixed and
+any movement is the gradient's. Candidate tokens are restricted to
+space-leading printable ASCII, because a suffix that does not survive a
+decode and re-encode is not a passage an attacker can place in a corpus; the
+round trip is exact on all 686 items. A gradient passage is kept only where it
+beats the best-of-five passage on the reported measure, which it fails to do
+on 163 of 686, so the payload is monotone by construction.
+
+It drives $H_{\mathrm{ctx}}$ to 0.614 and $d_\alpha$ to 0.708, and the
+defensive gap falls to 14.7\pp{}: \textbf{58\% of ACD's protection removed},
+twice what sentence templates took. The 10.4\pp{} it takes beyond best-of-five
+clears the 7.6\pp{} detectability threshold at this sample size.
+
+\textbf{The gradient payload is weaker in general and stronger against the
+defense.} It damages the undefended arm \emph{less} than best-of-five does,
+87.8\% against 89.1\%, while taking considerably more from ACD. Since the gap
+is the quantity that isolates the defense, and the gap is what moved, this is
+the clearest evidence available that the search is attacking the method rather
+than simply producing a better payload. The dose structure agrees: at the 10\%
+dose the gap is 21.0, 21.3 and 21.1\pp{} across the three payloads, so ACD's
+protection only becomes attackable as the dose rises --- which is what one
+expects of a rule keyed on a statistic computed over the whole context.
+
+\textbf{ACD degrades under adaptive pressure; it does not collapse.} We
+committed the bands in advance: below 10\pp{} of remaining gap we would have
+called it neutralized, and 10 to 25\pp{} degraded further while holding
+something back. The result is the second. A rule that gives up 58\% of its
+protection to an attacker with gradients is a real obstacle that has now been
+priced, rather than either a solved problem or a broken one.
+
+What this licenses is still narrow. It does not show ACD is broken, and the
+ceiling in the rule says no attack of this kind could have driven it below the
+undefended arm. It shows that the one defense in our campaign that looked like
+a counterexample gives up most of its protection to an attacker who reads the
+method, and that every published evaluation of a context-reliance defense in
+our corpus is non-adaptive. The gap between non-adaptive and adaptive
+evaluation is large enough to change the verdict.
