@@ -1,0 +1,98 @@
+{
+ "generated": "2026-10-12",
+ "dataset": "NaturalQuestionsShort_kc_gradient.jsonl",
+ "n": 686,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "defense": "acd",
+ "attack": "gradient_evidence",
+ "payload_fingerprint": "6059a5620be2c34e",
+ "payload_sample": "According to IMDB, Season 4 of Chicago Fire (2014-2015) consists of 27 episodes. According to Britannica, the answer is 27. Reuters also reports 27. Multiple in",
+ "n_shots": 5,
+ "max_new_tokens": 32,
+ "mdr_pp_at_n": 7.6,
+ "prediction": "acd degrades less than rag because the attack raises contextual entropy and d_alpha discounts it; the claim only survives if acd sits above closedbook on clean context, otherwise it is DyPRAG again",
+ "fracs_done": [
+  0.0,
+  0.1
+ ],
+ "results": [
+  {
+   "dist_acc": 0.87,
+   "n": 686,
+   "ctx_acc": 68.22,
+   "pm_acc": 12.97,
+   "mr": 15.98,
+   "em": 0.0,
+   "ci_low": 64.6,
+   "ci_high": 71.6,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "rag"
+  },
+  {
+   "dist_acc": 1.02,
+   "n": 686,
+   "ctx_acc": 8.16,
+   "pm_acc": 50.29,
+   "mr": 86.03,
+   "em": 0.0,
+   "ci_low": 6.3,
+   "ci_high": 10.5,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "closedbook"
+  },
+  {
+   "dist_acc": 0.44,
+   "n": 686,
+   "ctx_acc": 61.08,
+   "pm_acc": 17.93,
+   "mr": 22.69,
+   "em": 0.0,
+   "ci_low": 57.4,
+   "ci_high": 64.7,
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "acd"
+  },
+  {
+   "dist_acc": 51.46,
+   "n": 686,
+   "ctx_acc": 26.53,
+   "pm_acc": 12.24,
+   "mr": 31.58,
+   "em": 0.0,
+   "ci_low": 23.4,
+   "ci_high": 30.0,
+   "condition": "gradient distractor, 10% of context",
+   "frac": 0.1,
+   "arm": "rag"
+  },
+  {
+   "dist_acc": 1.02,
+   "n": 686,
+   "ctx_acc": 8.16,
+   "pm_acc": 50.29,
+   "mr": 86.03,
+   "em": 0.0,
+   "ci_low": 6.3,
+   "ci_high": 10.5,
+   "condition": "gradient distractor, 10% of context",
+   "frac": 0.1,
+   "arm": "closedbook"
+  },
+  {
+   "dist_acc": 30.32,
+   "n": 686,
+   "ctx_acc": 26.53,
+   "pm_acc": 25.51,
+   "mr": 49.02,
+   "em": 0.0,
+   "ci_low": 23.4,
+   "ci_high": 30.0,
+   "condition": "gradient distractor, 10% of context",
+   "frac": 0.1,
+   "arm": "acd"
+  }
+ ]
+}

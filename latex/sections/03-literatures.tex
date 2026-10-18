@@ -62,6 +62,30 @@ attacker's behalf.
 
 The three axes give \NCubeCells{} cells.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig0_pipeline}
+\caption{The taxonomy against the system it describes. Untrusted content
+arrives through one of nine \textbf{channels}, enters one context window, and
+the output fails as one of six \textbf{consequences}. A defense can intervene
+at three points, and the two literatures do not choose the same one: the
+security track masses at ingestion, the machine learning track at reasoning,
+and execution is security almost alone. Counts are named mechanisms per
+channel (left) and named defenses per intervention point (centre), by track.
+Drawn as a flow rather than a tree because the taxonomy is a cube; the
+pipeline is the one ordering the three axes genuinely have.}
+\label{fig:pipeline}
+\end{figure*}
+
+Figure~\ref{fig:pipeline} puts the three axes against the system they
+describe, and shows an asymmetry the axes alone do not. The two literatures
+intervene at different points of the same pipeline. Security defenses mass at
+ingestion, where the question is whether content should be admitted. Machine
+learning fixes mass at reasoning, where the question is what to believe once it
+has been. Execution, where the question is what the agent is permitted to do,
+is security almost alone. The split is not only in vocabulary; it is in where
+each community thinks the problem should be solved.
+
 \input{tables/channel_exemplars}
 
 \textbf{What is in the cells.} Table~\ref{tab:channels} names what each
@@ -89,17 +113,26 @@ paper at all.}
 
 \textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) contain no
 paper from either literature.} Emptiness is not uniform. Figure~\ref{fig:cube}
-shows the two tracks concentrating in different columns, and
-Figure~\ref{fig:channelgap} shows which channels are thin on both sides at
-once. The cells empty in both tracks are the ones where neither community has
-looked, which is a different and more interesting gap than a cell one community
-has to itself.
+shows the two tracks concentrating in different columns. The cells
+empty in both tracks are the ones where neither community has looked, which is
+a different and more interesting gap than a cell one community has to itself.
+
+Figure~\ref{fig:channelgap} asks a separate question: where protection does not
+follow the problem. Counting named defenses against named mechanisms per
+channel, \meth{multi-agent} and \meth{memory} are served at roughly four
+defenses per mechanism, while \meth{supply-chain} has fewer defenses than
+mechanisms and \meth{cross-modal} and \meth{tool-metadata} sit at parity. Those
+three are the routes by which an agent accepts capability from a third party,
+and they are the thinnest in the corpus.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig2_channel_gap}
-\caption{Empty cells per channel, out of 18 (3 intents $\times$ 6
-consequences), by track.}
+\caption{Named mechanisms against named defenses, per channel, labelled with
+defenses per mechanism. Channels are ordered by that ratio, so the under-served
+routes fall to the bottom. \meth{supply-chain} has fewer defenses than named
+mechanisms; \meth{cross-modal} and \meth{tool-metadata} are at parity. These
+are the routes by which an agent accepts third-party capability.}
 \label{fig:channelgap}
 \end{figure}
 
