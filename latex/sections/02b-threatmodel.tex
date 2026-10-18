@@ -1,8 +1,8 @@
 \section{Threat model and system model}
 \label{sec:threat}
 
-Security systematizations state a threat model before they taxonomize, and this
-one spans two literatures with different assumptions, so we state both and say
+A security paper states its threat model before it taxonomizes. This paper
+spans two literatures that assume different ones, so we state both and say
 where each applies.
 
 \subsection{System model}
@@ -12,52 +12,50 @@ content it did not author, decides, and acts. Reading happens through the nine
 channels of Section~\ref{sec:taxonomy}. Acting means emitting text to a user or
 calling a tool whose effects leave the system.
 
-Three properties make this different from a single-turn chatbot and are what
-the taxonomy keys on. Content from many sources shares one context window and
-arrives with no trustworthy provenance marking. The agent's own output can
-become another agent's input, or its own input in a later turn through memory.
-And an action taken on corrupted context is not recoverable by correcting the
-context afterwards.
+Three properties separate this from a single-turn chatbot, and the taxonomy
+keys on all three. Content from many sources shares one context window, with
+no trustworthy marking of where any of it came from. The agent's own output
+can become another agent's input, or its own input a turn later through
+memory. And an action taken on corrupted context cannot be undone by fixing
+the context afterwards.
 
 \subsection{Adversarial threat model}
 
-The adversary controls the content of at least one channel but not the model
-weights, the decoding procedure, or the agent's code. This is the standing
-assumption of the security track and it covers the realistic deployment cases:
-writing a document a retriever may fetch, publishing a tool whose description
-the agent reads, posting content a browsing agent visits, or contributing a
-skill file or package the agent loads.
+The adversary controls the content of at least one channel. They do not
+control the model weights, the decoding procedure, or the agent's code. This
+is the standing assumption of the security track, and it covers the realistic
+deployment cases. An adversary can write a document a retriever may fetch,
+publish a tool whose description the agent reads, post content a browsing
+agent visits, or contribute a skill file the agent loads.
 
-The adversary knows the defense. They may adapt the payload to it, which is why
-average-case evaluation does not transfer. They do not need to know the user's
-specific query; the attacks we run are query-agnostic by construction.
+The adversary knows the defense and may adapt the payload to it. That is
+precisely why average-case evaluation does not transfer. The adversary does
+not need to know the user's query: every attack we run is query-agnostic by
+construction.
 
 We exclude three things. Training-time poisoning and weight-level attacks do
-not travel through the context window. A malicious user attacking their own
-agent is out of scope, because no third-party content is involved and the
-trust boundary we study does not exist. Denial of service through resource
-exhaustion is in the taxonomy as \meth{resource-abuse} but has no entries, and
-we make no claims about it.
+not travel through the context window. A user attacking their own agent
+involves no third-party content, so the trust boundary we study does not
+exist. Denial of service through resource exhaustion sits in the taxonomy as
+\meth{resource-abuse}, has no entries, and we make no claims about it.
 
 \subsection{Incidental threat model}
 
-There is no adversary. Content is wrong through ordinary pipeline behavior: a
-retrieved document is stale, a passage is irrelevant but topically close,
-important text sits in the middle of a long input, or a retrieved fact
+There is no adversary. Content goes wrong through ordinary pipeline behavior.
+A retrieved document is stale. A passage is irrelevant but topically close.
+Important text sits in the middle of a long input. A retrieved fact
 contradicts what the model learned in training. The machine learning track
-assumes this model, evaluates on average-case benchmarks, and is right to,
-because nothing is adapting.
+assumes this model and evaluates on average-case benchmarks, which is the
+right choice when nothing is adapting.
 
 \subsection{Why both, and what connects them}
 
-The two models differ in one assumption, adaptivity, and share everything else:
-the channel, the position in the context window, and the downstream
-consequence. A defense is validated against one of them, and
+The two models differ in exactly one assumption: adaptivity. They share the
+channel, the position in the context window, and the downstream consequence.
 Section~\ref{sec:taxonomy} shows that 97\% of published defenses are validated
-against exactly one.
+against one model and not the other.
 
-\textbf{The question this paper puts to the field is whether that single
-validation transfers.} It is not an unreasonable thing to assume. A method that
-makes a model robust to a stale document is addressing the same surface an
-attacker writes to. The assumption has simply never been tested at scale, and
-Section~\ref{sec:experiments} tests it.
+\textbf{This paper asks whether that single validation transfers.} The
+assumption behind it is reasonable. A method that makes a model robust to a
+stale document is working on the same surface an attacker writes to. It has
+simply never been tested at scale. Section~\ref{sec:experiments} tests it.

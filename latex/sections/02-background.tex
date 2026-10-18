@@ -3,38 +3,41 @@
 
 \subsection{What we mean by context poisoning}
 
-We use \emph{context poisoning} for any case where content enters an agent's
-context window, the agent should not have trusted it, and the agent's behavior
-changes as a result. The definition covers both communities on purpose. It says
-nothing about who put the content there.
+\emph{Context poisoning} is our term for three things happening together.
+Content enters an agent's context window. The agent should not have trusted
+it. The agent's behavior changes as a result. The definition says nothing
+about who put the content there, and that silence is deliberate: it is what
+lets both communities fit inside one term.
 
-This is wider than prompt injection, which is one channel and one intent, and
-wider than knowledge conflict, which is one consequence. It is narrower than
-"LLM safety", because it requires that the damage arrive through the context
-window. We exclude training-time poisoning and model weight attacks, because
-those do not travel through the context. We exclude jailbreaks in which the
-user is the attacker and there is no third-party content, for the same reason.
+The term is wider than prompt injection, which is one channel and one intent.
+It is wider than knowledge conflict, which is one consequence. It is narrower
+than ``LLM safety'', because the damage must arrive through the context
+window. Two things fall outside it. Training-time poisoning and weight attacks
+do not travel through the context. Jailbreaks in which the user is the
+attacker have no third-party content at all.
 
 \subsection{Two places an answer can come from}
 \label{sec:twoplaces}
 
-A model answers a question from one of two sources, and the distinction carries
-the whole of Section~\ref{sec:results}. The first is the \emph{context}: the
+A model answers from one of two sources. The first is the \emph{context}: the
 document, tool output or message placed in front of it. The second is what the
-model learned during training and holds in its weights. The machine learning
-literature calls the second one \emph{parametric memory}; we use that term and
-the shorter \emph{memory} interchangeably, and every result table reports it as
-\texttt{pm\_acc}. One of the defenses we evaluate, ParamMute, is named for it.
+model learned in training and holds in its weights. The machine learning
+literature calls that \emph{parametric memory}. We use the shorter
+\emph{memory} for it throughout, every result table reports it as
+\texttt{pm\_acc}, and one of the defenses we evaluate, ParamMute, is named for
+it.
+
+This distinction carries the whole of Section~\ref{sec:results}.
 
 \paragraph{Context-reliance defenses.}
-The distinction matters because a large group of published methods intervene
-on exactly it. We call a method a \emph{context-reliance defense} when its
-intervention is a \textbf{weighting between the model's context-conditioned
-prediction and its memory-conditioned prediction}. The test for membership is
-narrow and mechanical: the method changes \emph{how much} the model leans on
-retrieved text, and it never asks \emph{which} retrieved text deserves trust.
+A large family of published methods intervenes on exactly this distinction.
+A method is a \emph{context-reliance defense} when its intervention is a
+\textbf{weighting between the model's context-conditioned prediction and its
+memory-conditioned prediction}. The membership test is mechanical. The method
+changes \emph{how much} the model leans on retrieved text. It never asks
+\emph{which} retrieved text deserves trust.
 
-Their dials are implemented differently and are the same dial. ACD decodes
+These dials are built differently and are the same dial. ACD decodes
 from the no-context distribution and pulls it toward the with-context one by a
 weight computed from entropy. CK-PLUG interpolates the two distributions under
 a single parameter. ParamMute suppresses the feed-forward layers that carry
@@ -43,16 +46,16 @@ steer along a context-faithfulness direction in activation space. COIECD
 detects a conflict between the two sources and pushes toward the context. SCR
 makes the same trade through prompting rather than decoding.
 
-The family is defined this way because the definition is what carries the
-result. A dial that runs between \emph{believe the context} and \emph{believe
-memory} has no setting that separates a real document from a planted one, since
-both are context. Section~\ref{sec:distractor} measures what turning it does
-and does not achieve.
+The definition is narrow because the definition is what carries the result.
+The dial runs between \emph{believe the context} and \emph{believe memory}.
+No setting on it separates a real document from a planted one, because both
+are context. Section~\ref{sec:distractor} measures what turning it does and
+does not achieve.
 
 \subsection{One failure, two vocabularies}
 
-Table~\ref{tab:vocab} sets the two vocabularies side by side. The slots are the
-same. Only the names and the assumed threat model differ.
+Table~\ref{tab:vocab} sets the two vocabularies side by side. The slots are
+the same. Only the names and the assumed threat model differ.
 
 \begin{table}[t]
 \centering

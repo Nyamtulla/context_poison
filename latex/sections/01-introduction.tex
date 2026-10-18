@@ -81,6 +81,19 @@ missing experiment names the artifacts that would run it. To our knowledge
 this is the first evaluation in which published defenses from one of these
 communities meet published failure mechanisms from the other.
 
+\paragraph{How we keep the result honest.}
+A negative result is easy to produce by accident. Four rules guard against it,
+all fixed before any run. \textbf{The control fires first}: a defense that
+cannot reproduce its own published benefit in our harness yields no transfer
+number, and one defense failed this gate. \textbf{The attack works first}: a
+defended arm means nothing unless the same attack damaged the undefended arm
+in the same run. \textbf{Effects are gated on a detectability threshold}, so a
+difference too small for the sample size is reported as no resolvable effect
+rather than as no effect. \textbf{Predictions are committed to version control
+before each run}, and several were wrong. Section~\ref{sec:experiments} states
+each rule in full, and Section~\ref{sec:results2} reports the three cases where
+a control overturned a conclusion we had already drawn.
+
 \paragraph{Scope.}
 Three limits are worth stating before the contributions rather than after
 them. Our retrieval-cell experiments use one item set per cell, so they
