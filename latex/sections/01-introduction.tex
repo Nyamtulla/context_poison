@@ -28,35 +28,49 @@ The two communities describe the same underlying failure. A passage the model
 should not trust enters the context window and changes the output. Only the
 provenance differs. The model sees tokens either way.
 
-\paragraph{Why the split matters.}
-A vocabulary split would be harmless if it were only a naming difference. It is
-not. A fix designed for the accidental case is evaluated on average-case
-benchmarks, because nothing is adapting to it. A defense designed for the
-adversarial case is evaluated against a worst case, because something is. When
-the two communities do not read each other, a method can be published,
-adopted and cited without anyone asking whether it survives the other
-community's threat model. We show that this has happened, that it has happened
-at scale, and that for one common family of methods the answer is that it does
-not survive, for a reason that is visible in the method's own design.
+\paragraph{The split is not about words.}
+If the two communities differed only in vocabulary, a reader could translate
+between them and lose nothing. They differ in something load-bearing: what
+counts as a successful evaluation.
 
-\paragraph{What an SoK must add.}
-A systematization is judged on whether it gives the community a viewpoint it
-did not have, not on whether it summarizes well. We make four moves beyond
-summary. First, we measure how separate the two communities are, and find a
-cell of the cross-testing matrix that is empty: no security defense in our
-corpus has ever been evaluated against a machine learning failure mechanism.
-Second, we run the experiments that cell is missing, on the authors' own
-released code and weights. Third, we explain the result, which turns out to be
-one mechanism rather than a list of failures. Fourth, we show it survives an
-attacker who reads the defense and optimizes against it.
+A fix for the accidental case is measured on an average-case benchmark,
+because nothing is adapting to it. A defense for the adversarial case is
+measured against a worst case, because something is. Those are not two styles
+of the same test. A method can pass the first convincingly and fail the second
+completely, and nothing in either community's publishing process would catch
+it, because each reviews against its own convention.
 
-The second and third moves are the part a survey normally cannot do, and they
-are what turns a coverage gap from an observation into evidence.
+So a method can be published, adopted and cited without anyone asking whether
+it survives the other community's threat model. That is a claim about the
+literature, and it is checkable. This paper checks it, and then runs the
+experiment the check shows is missing.
+
+\paragraph{Research questions.}
+\begin{description}
+\item[RQ1] How separate are the two literatures, and is there a region of the
+  problem that neither has tested? We answer by coding \NCorpus{} papers from
+  both sides under one taxonomy and recovering every (defense, attack) pair
+  any of them reports (Section~\ref{sec:literatures}).
+\item[RQ2] When a defense built for one threat model is actually run against
+  the other, does it transfer? We answer by executing the pairs the literature
+  skipped, from the authors' released code and weights
+  (Sections~\ref{sec:experiments}, \ref{sec:results}).
+\item[RQ3] Where defenses fail, is the failure a property of individual
+  methods or of a design choice they share? We answer with a payload built to
+  separate the possible explanations rather than to maximize damage
+  (Section~\ref{sec:distractor}).
+\item[RQ4] Does that explanation survive an attacker who reads the defense and
+  optimizes against it? We answer by building two such attackers against the
+  one method that resisted (Section~\ref{sec:adaptive}).
+\end{description}
+
+The second and third questions are the ones a survey normally cannot answer.
+They are what turns a coverage gap from an observation into evidence.
 
 \paragraph{Contributions.}
 \begin{itemize}
-\item \textbf{The empty cell.} Across \NPureTrackPairs{} confirmed (defense,
-  attack) pairs recovered from \NCorpus{} papers read in full, only
+\item \textbf{The empty cell (RQ1).} Across \NPureTrackPairs{} confirmed
+  (defense, attack) pairs recovered from \NCorpus{} papers read in full, only
   \NCrossCommunityPairs{} (\PctCrossCommunity{}\%) cross between the two
   communities, and \textbf{no security defense has ever been evaluated against
   a machine learning failure mechanism} (Section~\ref{sec:emptycell}). The
@@ -66,29 +80,46 @@ are what turns a coverage gap from an observation into evidence.
   named defenses, coded by the threat model each was actually validated
   against rather than the one it claims; and citation rates of
   \PctSecCitesML{}\% and \PctMLCitesSec{}\% in the two directions
-  (Section~\ref{sec:literatures}).
+  (Section~\ref{sec:literatures}). The full census is
+  Appendix~\ref{sec:census}.
 
-\item \textbf{A platform, and \NCampaignPairs{} pairs run on it} across
+\item \textbf{A platform, and \NCampaignPairs{} pairs run on it (RQ2)} across
   \NCampaignImpl{} implementations and \NCampaignEpisodes{} scored episodes,
   each from its authors' released artifacts under an attack-works-first
   control and a fixed detectability threshold
   (Section~\ref{sec:experiments}). \NOursCrossPairs{} of our \NOursPairs{}
   retrieval-cell pairs cross the community boundary, against
-  \PctCrossCommunity{}\% of the literature's.
+  \PctCrossCommunity{}\% of the literature's. At the dose most favourable to a
+  defense, not one of 15 (defense, payload) pairs shows a resolvable benefit.
 
-\item \textbf{One mechanism, not a list of failures.} Context-reliance
-  defenses relocate correctness rather than creating it: what they take from
-  the model's memory the attacker receives, and what they take from the
-  attacker memory receives. Neither direction moves probability mass toward
-  the real document, because the axis these methods arbitrate on does not
-  contain the distinction an attacker violates
+\item \textbf{One mechanism, not a list of failures (RQ3).} Context-reliance
+  defenses --- methods whose intervention is a weighting between the
+  context-conditioned and the memory-conditioned prediction --- relocate
+  correctness rather than creating it. What they take from memory the attacker
+  receives, and what they take from the attacker memory receives; across three
+  defenses the two movements cancel to within 7 points. Neither direction
+  moves probability mass toward the real document, because the axis these
+  methods arbitrate on does not contain the distinction an attacker violates
   (Sections~\ref{sec:results}, \ref{sec:distractor}).
 
-\item \textbf{An adaptive attack} on the one defense that resisted, built
-  against the single quantity its rule measures. It removes 58\% of the
-  protection and drives accuracy onto the undefended arm
-  (Section~\ref{sec:results2}).
+\item \textbf{Two adaptive attacks on the one defense that resisted (RQ4).}
+  ACD weights the two distributions by an entropy term computed from the
+  retrieved context, which an attacker owns, so the attack has exactly one
+  objective: minimize that term. A best-of-five search over sentence forms
+  removes 29\% of its protection; a gradient search over token ids removes
+  \textbf{58\%}. Both stay above the ceiling the rule itself implies, so the
+  method degrades rather than collapses, and the price is now measured
+  (Section~\ref{sec:adaptive}).
 
-\item \textbf{Three controls} the literature omits, each of which changed a
-  conclusion in our own work (Section~\ref{sec:results2}).
+\item \textbf{Three controls the literature omits}, each of which would have
+  produced a wrong published claim in our own work: a \textbf{no-retrieval
+  baseline}, which shows one apparently flat defense was flat because it had
+  stopped reading the document; an \textbf{abstention axis}, which shows a
+  defense that is inert on accuracy converts a third of its answers into
+  refusals; and a \textbf{model control}, which shows that changing only the
+  base model reverses outcomes (Section~\ref{sec:results2}).
+
+\item \textbf{A runnable artifact.} Every attack and defense executes from its
+  authors' released code at a pinned commit, verified unmodified; the
+  harness, the payloads and the full census ship with it.
 \end{itemize}
