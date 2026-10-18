@@ -83,6 +83,8 @@ def main():
     mc = collections.Counter((e.get("channel"), e.get("track")) for e in mech)
     dp = collections.Counter((e.get("defense_intervention_point"),
                               e.get("track")) for e in defs)
+    qc = collections.Counter((e.get("consequence"), e.get("track"))
+                             for e in mech)
 
     fig, ax = plt.subplots(figsize=(FULL, 3.6))
     ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
@@ -130,10 +132,10 @@ def main():
     box(ax, 31, 38, 15, 24, "context\nwindow", "#ffffff", MUTED, fs=7)
     box(ax, 55, 38, 13, 24, "model", "#ffffff", MUTED, fs=7)
     arrow(ax, 46.4, 50, 54.6, 50, lw=1.0, color=INK2)
-    arrow(ax, 68.4, 50, 76.6, 50, lw=1.0, color=INK2)
+    arrow(ax, 68.4, 50, 73.4, 50, lw=1.0, color=INK2)
 
     # ---- the three intervention points -------------------------------------
-    for (key, lab), xc in zip(POINTS, (28.6, 50.5, 72.2)):
+    for (key, lab), xc in zip(POINTS, (28.6, 50.5, 69.4)):
         s_, m_ = dp.get((key, "Security"), 0), dp.get((key, "ML/AI"), 0)
         ax.plot([xc, xc], [30, 70], ls=(0, (2.2, 1.8)), lw=0.8,
                 color="#b9b7b2", zorder=0)
@@ -152,12 +154,21 @@ def main():
     # ---- consequences, right -----------------------------------------------
     n2 = len(CONSEQ)
     h2 = (top - bot - gap * (n2 - 1)) / n2
-    ax.text(88.5, 96.4, "how the output goes wrong", ha="center",
+    ax.text(86.5, 96.4, "how the output goes wrong", ha="center",
             fontsize=7, color=INK, fontweight="bold")
-    ax.text(88.5, 2.2, "6 consequences", ha="center", fontsize=6.0, color=INK2)
+    ax.text(93.6, 90.0, "sec", ha="center", fontsize=5.6, color=SEC)
+    ax.text(97.2, 90.0, "ml", ha="center", fontsize=5.6, color=ML)
+    ax.text(86.5, 2.2, "6 consequences, the same 233 mechanisms", ha="center", fontsize=6.0, color=INK2)
     for i, c in enumerate(CONSEQ):
         y = top - i * (h2 + gap) - h2
-        box(ax, 78, y, 21, h2, c, GREY, "#dcdad6", fs=6.1)
+        s_, m_ = qc.get((c, "Security"), 0), qc.get((c, "ML/AI"), 0)
+        box(ax, 74.5, y, 24.5, h2, "", GREY, "#dcdad6")
+        ax.text(75.7, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
+                color=INK)
+        ax.text(93.6, y + h2 / 2, f"{s_}", ha="center", va="center",
+                fontsize=6.2, color=SEC, fontweight="bold")
+        ax.text(97.2, y + h2 / 2, f"{m_}", ha="center", va="center",
+                fontsize=6.2, color=ML, fontweight="bold")
 
     OUT.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
