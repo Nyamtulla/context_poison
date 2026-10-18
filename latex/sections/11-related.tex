@@ -30,10 +30,10 @@ an average over attacks rather than against the strongest one. It
 reimplemented several attacks and one defense incorrectly. And it reported no
 variance at all.
 
-We took those as a specification. We do not reimplement: every method runs
-from its authors' released code and weights, and the control-fires-first rule
-is an automated form of the check Carlini had to run by hand --- it fired on
-FaithfulRAG, which we report as not reportable rather than as defeated. We
+We took those as a specification. We do not reimplement. Every method runs from its
+authors' released code and weights. The control-fires-first rule automates the
+check Carlini had to run by hand, and it fired on FaithfulRAG, which we report
+as not reportable rather than as defeated. We
 report per-cell rather than averaging across threat models, and we say so where
 a cross-payload comparison is confounded. We use greedy decoding throughout rather than
 reporting error bars over a stochastic decoder, and we verified that choice by

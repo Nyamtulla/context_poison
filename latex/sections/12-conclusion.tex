@@ -14,9 +14,9 @@ track. One direction of the cross-testing matrix is empty outright: no
 security defense in our corpus has ever been evaluated against a machine
 learning failure mechanism.
 
-We then ran that experiment, \NCampaignPairs{} pairs on the authors' released
-artifacts, \PctOursCross{}\% of the retrieval-cell ones crossing the boundary
-the literature does not cross.
+We then ran that experiment. \NCampaignPairs{} pairs, all on the authors'
+released artifacts. \PctOursCross{}\% of the retrieval-cell ones cross the
+boundary the literature does not.
 
 At the 10\% dose, where nine tenths of the honest document survives and a
 defense has its best chance, not one of 15 (defense, payload) pairs shows a
@@ -24,23 +24,28 @@ resolvable benefit.
 
 \textbf{The finding is a mechanism, not a verdict.} Context-reliance defenses
 do not fail because they are badly built. They fail because of what they
-arbitrate. Each one decides between trusting the context and trusting the
-model's parameters, and moving that dial relocates probability mass without
-creating any: suppress memory and the attacker receives what memory held;
-suppress the attacker and memory receives it back. We showed this directly
-with a payload that plants a third answer, which separates copying from
-remembering and lets the two movements be summed. Across three defenses they
-cancel to within 7 points. Neither direction moves mass toward the real
-document, because the context-versus-parameters axis does not contain the
-distinction an attacker violates: the attack is inside the context.
+arbitrate. Each one decides between trusting the context and trusting memory,
+and that dial moves correctness around without creating any. Suppress memory
+and the attacker receives what memory held. Suppress the attacker and memory
+receives it back.
 
-Two results bound that claim rather than soften it. Protection depends on the
-\emph{form} of the planted passage and not only on whether an attacker is
-present, so an evaluation built around optimized payloads overstates how well a
-system holds; the fluent payload needs no gradient access and damages an
-undefended model roughly twice as hard. And the one defense that resisted loses
-58\% of its protection to an attacker who reads its rule and optimizes against
-the single quantity it measures.
+We showed this directly. A payload that plants a third answer separates
+copying from remembering, so the two movements can be added up. Across three
+defenses they cancel to within 7 points. Neither direction moves anything
+toward the real document, because the dial has no setting for it. The attack
+is inside the context.
+
+Two results bound that claim rather than soften it.
+
+First, protection depends on the \emph{form} of the planted passage, not only
+on whether an attacker is present. An evaluation built around optimized
+payloads therefore overstates how well a system holds. The fluent payload
+needs no gradient access and damages an undefended model roughly twice as
+hard.
+
+Second, the one defense that resisted loses 58\% of its protection to an
+attacker who reads its rule and optimizes against the single quantity it
+measures.
 
 \paragraph{Future work.}
 

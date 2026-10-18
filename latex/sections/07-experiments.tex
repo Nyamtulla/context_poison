@@ -10,10 +10,10 @@ before any run.
 
 We did not pick case studies by familiarity. The taxonomy picks them.
 
-A (defense, attack) pair is a candidate when the defense and the attack occupy
-the same taxonomy cell, meaning the content enters through the same channel and
-causes the same consequence, and no paper in the corpus reports having run them
-together. If a defense repairs a failure that arrives through retrieval and
+A (defense, attack) pair is a candidate under two conditions. The defense and
+the attack must occupy the same taxonomy cell, which means the content enters
+through the same channel and causes the same consequence. And no paper in the
+corpus may report having run them together. If a defense repairs a failure that arrives through retrieval and
 corrupts answers quietly, and an attack arrives through retrieval and corrupts
 answers quietly, then the defense ought to apply. The taxonomy says so. Nobody
 had checked.
@@ -56,10 +56,10 @@ as failures of the method, and they belong in Section~\ref{sec:discussion}.
 \textbf{The control fires first.} If a defense cannot reproduce its own
 published benefit on its own benchmark in our harness, we report no transfer
 number from it. A defense that is broken in our hands tells us nothing about
-transfer. One defense failed this gate and is reported as not reportable rather
-than as defeated: FaithfulRAG~\cite{zhang-2025-faithfulrag} needs structured
-output support that open weights do not provide in its harness, and the ablated
-variant that does run cannot reproduce its own benefit.
+transfer. One defense failed this gate, and we report it as not reportable rather than
+as defeated. FaithfulRAG~\cite{zhang-2025-faithfulrag} needs structured output
+support that open weights do not provide in its harness. The ablated variant
+that does run cannot reproduce its own benefit.
 
 \textbf{The attack works first.} If the attack does not degrade the undefended
 arm in the same run, the defended arm means nothing. Every result below is
@@ -116,11 +116,10 @@ multi-step tool-use trajectory. A retrieval episode is one scored answer.
 
 \textbf{We built no benchmark.} Every question, gold answer and context in
 this paper belongs to the authors of the method or the benchmark we are
-running. Table~\ref{tab:provenance} lists each source and whose it is. This is
-deliberate rather than convenient: a defense evaluated on the distribution it
-was designed for cannot blame its failure on an unfamiliar dataset, and a
-result obtained that way is harder to dismiss than one obtained on data we
-chose ourselves.
+running. Table~\ref{tab:provenance} lists each source and whose it is. This is deliberate rather than convenient. A defense
+evaluated on the distribution it was designed for cannot blame its failure on
+an unfamiliar dataset. A result obtained that way is harder to dismiss than
+one obtained on data we chose ourselves.
 
 \begin{table}[t]
 \centering
@@ -197,9 +196,9 @@ Provenance is in Table~\ref{tab:provenance} and one case is worth drawing
 out. False evidence is the \texttt{parametric\_evidence} field that ships
 inside CoConflictQA, the benchmark the ParamMute authors released themselves,
 so one of the defenses we break is broken with a field from its own dataset.
-The distractor and the adaptive distractor are ours, and both are edits of that
-same field rather than new attack techniques: the distractor changes one word,
-and the adaptive version changes only the surface form around an unchanged
+The distractor and the adaptive distractor are ours. Both are edits of that
+same field rather than new attack techniques. The distractor changes one word.
+The adaptive version changes only the surface form around an unchanged
 claim.
 
 All payloads are dosed identically, replacing 10\%, 50\% and 100\% of the

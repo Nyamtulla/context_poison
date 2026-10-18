@@ -59,10 +59,10 @@ with both ends clearing the 11.4\pp threshold at $n=300$. One implementation of
 isolate-then-aggregate is resolvably protective and the other is resolvably
 harmful, on the same attack, at the same dose, inside one codebase.
 
-The gap grows as the honest minority of passages shrinks, from 13.0 points at
-five in ten to 29.7 at nine in ten, and then collapses to 1.7 at ten in ten
-when no honest passage remains and the two implementations have nothing left to
-disagree about. An SoK that reported one number per published method would have
+The gap grows as the honest minority of passages shrinks: 13.0 points at five
+in ten, 29.7 at nine in ten. It then collapses to 1.7 at ten in ten, where no
+honest passage remains and the two implementations have nothing left to
+disagree about. A survey reporting one number per published method would have
 missed all of this.
 
 \subsection{Defenses that do transfer, and one line that fixes one that does not}
@@ -227,14 +227,16 @@ twice what sentence templates took. The 10.4\pp{} it takes beyond best-of-five
 clears the 7.6\pp{} detectability threshold at this sample size.
 
 \textbf{The gradient payload is weaker in general and stronger against the
-defense.} It damages the undefended arm \emph{less} than best-of-five does,
-87.8\% against 89.1\%, while taking considerably more from ACD. Since the gap
-is the quantity that isolates the defense, and the gap is what moved, this is
-the clearest evidence available that the search is attacking the method rather
-than simply producing a better payload. The dose structure agrees: at the 10\%
-dose the gap is 21.0, 21.3 and 21.1\pp{} across the three payloads, so ACD's
-protection only becomes attackable as the dose rises --- which is what one
-expects of a rule keyed on a statistic computed over the whole context.
+defense.} It damages the undefended arm \emph{less} than best-of-five
+does, 87.8\% against 89.1\%, while taking considerably more from ACD. The gap
+is what isolates the defense, and the gap is what moved. That is the clearest
+evidence available that the search attacks the method rather than simply
+producing a better payload.
+
+The dose structure agrees. At the 10\% dose the gap is 21.0, 21.3 and
+21.1\pp{} across the three payloads. ACD's protection only becomes attackable
+as the dose rises, which is what one expects of a rule keyed on a statistic
+computed over the whole context.
 
 \textbf{ACD degrades under adaptive pressure; it does not collapse.} We
 committed the bands in advance: below 10\pp{} of remaining gap we would have

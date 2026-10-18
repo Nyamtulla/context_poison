@@ -3,10 +3,10 @@
 
 \textbf{Extraction error.} The corpus coding was produced by an LLM-assisted
 extraction pass over \NCorpus{} papers and \NCodedFields{} coded fields. Every count in
-Sections~\ref{sec:taxonomy} to~\ref{sec:coverage} depends on it. We verified it
-with human readers against the original PDFs, in full for the fields that carry
-the headline claims and on a random sample for the rest, and we report
-inter-rater agreement rather than assuming it. Residual error remains possible
+Sections~\ref{sec:taxonomy} to~\ref{sec:coverage} depends on it. We verified it with
+human readers against the original PDFs. Fields that carry the headline claims
+were checked in full, the rest on a random sample. We report inter-rater
+agreement rather than assuming it. Residual error remains possible
 in the sampled fields.
 
 \textbf{Track assignment.} The cross-citation rates depend on classifying every
@@ -36,18 +36,19 @@ absent, and nothing here says whether they transfer.
 
 \textbf{Attacks are non-adaptive, with one exception.} This is the criticism
 that invalidated DEEPSEC's defense rankings~\cite{carlini-2019-critique} and
-we inherit it by design rather than by oversight. Its direction is not
-symmetric: an attack not built for a defense that defeats it anyway bounds
-attack strength from below, so our failure results are conservative, while a
-resistance result drawn the same way is not evidence of robustness.
+we inherit it by design rather than by oversight. Its direction is not symmetric. An attack
+that was not built for a defense, and defeats it anyway, bounds attack
+strength from below. So our failure results are conservative. A resistance
+result drawn the same way is not evidence of robustness at all.
 Section~\ref{sec:adaptive} tests the one resistance result we report. Every
 other defense in the campaign would need the same treatment before any claim
 that it holds.
 
-\textbf{Variance.} Carlini lists ``no variance reported'' as one of five
-fatal flaws in DeepSec~\cite{carlini-2019-critique}, and his own check found a
-standard deviation of 6.8 points on a reported attack success rate, enough to
-make many of DeepSec's pairwise comparisons meaningless. We avoid that a
+\textbf{Variance.} Carlini lists ``no variance
+reported'' as one of five fatal flaws in DeepSec~\cite{carlini-2019-critique}.
+His own check found a standard deviation of 6.8 points on a reported attack
+success rate. That is enough to make many of DeepSec's pairwise comparisons
+meaningless. We avoid that a
 different way: we use greedy decoding throughout, so there is no run-to-run
 noise to report.
 

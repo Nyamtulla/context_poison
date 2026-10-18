@@ -118,16 +118,17 @@ with no document at all.
 \textbf{That result is not a robustness claim, and we state the limit before
 the result rather than after it.} The corpus-poisoning passage is Zhong et
 al.'s released artefact, optimized against a \emph{retriever} and against no
-defense of ours. It is therefore oblivious to ACD in the sense
+defense of ours. It is therefore oblivious to ACD, in the sense
 Carlini~\cite{carlini-2019-critique} uses when criticizing the DeepSec
-platform: a defense evaluated only against attacks that were not built for it
+platform. A defense evaluated only against attacks that were not built for it
 has been shown to resist those attacks and nothing more. Inferring robustness
-from a non-adaptive attack is invalid, and it is the specific error that
-invalidated DeepSec's defense rankings. We claim only what the arm supports:
-\emph{ACD resists this particular non-adaptive optimized passage.} An attacker
-who knew ACD's entropy rule and optimized against it is untested here, and we
-expect such an attacker to do better, because the rule is public and
-differentiable.
+from that is invalid. It is the specific error that invalidated DeepSec's
+defense rankings.
+
+So we claim only what the arm supports: \emph{ACD resists this particular
+non-adaptive optimized passage.} An attacker who knew ACD's entropy rule and
+optimized against it is untested here. We expect such an attacker to do
+better, because the rule is public and differentiable.
 
 The same caveat does not weaken the failure results in this section. An attack
 that is not adapted to a defense and defeats it anyway is a \textbf{lower
@@ -237,10 +238,10 @@ record it as directional rather than as a result.
 
 \subsection{A comparison we decline to make}
 
-The three results invite a ranking across payload classes, and we committed in
-advance to treating one as a falsifier: if any defense did \emph{better}
-against false evidence than against corpus poisoning, then "these defenses fail
-because they trust the context" would not be the mechanism. CK-PLUG does, at
+The three results invite a ranking across payload classes. We committed in
+advance to one falsifier. If any defense did \emph{better} against false
+evidence than against corpus poisoning, then ``these defenses fail because
+they trust the context'' would not be the mechanism. CK-PLUG does, at
 +0.4\pp against +5.4\pp.
 
 We do not think that reading survives inspection, and we say so rather than
@@ -273,9 +274,9 @@ is neither the gold nor the model's prior, by substituting a distractor into
 the item's own evidence sentence so the register is unchanged. Distractors are
 drawn from another item's parametric answer, matched on the question's wh-word
 and on digit count for numerics, so a person replaces a person and a year
-replaces a year. All three answers are checked disjoint per item at build time,
-which gives three disjoint readings of one output: gold means the model read
-the real context, the parametric answer means it recalled from memory, and the
+replaces a year. All three answers are checked disjoint per item at build
+time, so one output has three disjoint readings. Gold means the model read the
+real context. The parametric answer means it recalled from memory. The
 distractor means it copied the planted passage.
 
 Two controls license the reading. At clean dose the distractor rate is 0.8\%
@@ -306,10 +307,10 @@ suppresses memory and the attacker fills the vacancy; ACD suppresses the
 attacker and memory fills it. Neither moves probability mass toward the real
 document, because neither mechanism can tell the real document from the planted
 one. Both only arbitrate between \emph{context} and \emph{parameters}, and the
-attack lives inside the context. That is a sharper statement of this section's
-thesis than the excess-damage numbers alone support: the trade-off is not that
-context-reliance defenses trust context too much, it is that the axis they
-arbitrate on does not contain the distinction an attacker violates.
+attack lives inside the context. That is a sharper statement of this
+section's thesis than the excess-damage numbers alone support. The problem is
+not that context-reliance defenses trust context too much. It is that the axis
+they arbitrate on does not contain the distinction an attacker violates.
 
 \begin{table}[t]
 \centering
@@ -333,10 +334,10 @@ ACD       & 686 & $+18.4^{*}$ & $-35.1^{*}$ & $+2.6$ \\
 
 \textbf{Two more defenses make it a pattern rather than a pair.}
 Table~\ref{tab:distractor} adds CK-PLUG and COIECD on the same payload and the
-same dosing. CK-PLUG behaves as ParamMute does and more sharply: it is the only
-defense in this campaign whose accuracy loss on this payload clears its own
-threshold, and at a 10\% dose it already copies 76.7\% against its undefended
-arm's 38.5\%, double, on one tenth of the context replaced. COIECD moves in the
+same dosing. CK-PLUG behaves as ParamMute does, and more sharply. It is the
+only defense in this campaign whose accuracy loss on this payload clears its
+own threshold. At a 10\% dose it already copies 76.7\% against its undefended
+arm's 38.5\%. That is double the copying, on one tenth of the context. COIECD moves in the
 same direction at every dose and clears nothing, which is its behavior on both
 other payloads too.
 
