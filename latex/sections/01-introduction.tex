@@ -28,10 +28,9 @@ The two communities describe the same underlying failure. A passage the model
 should not trust enters the context window and changes the output. Only the
 provenance differs. The model sees tokens either way.
 
-\paragraph{The split is not about words.}
-If the two communities differed only in vocabulary, a reader could translate
-between them and lose nothing. They differ in something load-bearing: what
-counts as a successful evaluation.
+The split is not merely one of vocabulary. If it were, a reader could
+translate between the two communities and lose nothing. They differ in
+something load-bearing: what counts as a successful evaluation.
 
 A fix for the accidental case is measured on an average-case benchmark,
 because nothing is adapting to it. A defense for the adversarial case is
@@ -70,10 +69,9 @@ experiments that fall in it.
 The second and third questions are the ones a survey normally cannot answer.
 They are what turns a coverage gap from an observation into evidence.
 
-\paragraph{What is new here.}
 Both literatures have been surveyed before, each from inside itself, and we
-borrow from those surveys rather than competing with them. What is new is that
-one corpus, one taxonomy and one harness span both. That is what makes the
+borrow from those surveys rather than competing with them. What is new here is
+that one corpus, one taxonomy and one harness span both. That is what makes the
 empty cell visible: a survey of either literature alone cannot report a gap
 whose definition depends on the other, because the other is not in its corpus.
 It is also what makes the cell fillable, since the same taxonomy that locates a
@@ -81,18 +79,15 @@ missing experiment names the artifacts that would run it. To our knowledge
 this is the first evaluation in which published defenses from one of these
 communities meet published failure mechanisms from the other.
 
-\paragraph{How we keep the result honest.}
-A negative result is easy to produce by accident. Four rules guard against it,
-all fixed before any run. \textbf{The control fires first}: a defense that
-cannot reproduce its own published benefit in our harness yields no transfer
-number, and one defense failed this gate. \textbf{The attack works first}: a
-defended arm means nothing unless the same attack damaged the undefended arm
-in the same run. \textbf{Effects are gated on a detectability threshold}, so a
-difference too small for the sample size is reported as no resolvable effect
-rather than as no effect. \textbf{Predictions are committed to version control
-before each run}, and several were wrong. Section~\ref{sec:experiments} states
-each rule in full, and Section~\ref{sec:results2} reports the three cases where
-a control overturned a conclusion we had already drawn.
+A negative result is easy to produce by accident, so four rules were fixed
+before any run: a defense must reproduce its own published benefit in our
+harness before we report a transfer number from it, an attack must damage the
+undefended arm in the same run, effects below a detectability threshold are
+reported as no resolvable effect rather than as no effect, and every
+prediction was committed to version control first.
+Section~\ref{sec:experiments} states each rule in full, and
+Section~\ref{sec:results2} reports the three occasions on which a control
+overturned a conclusion we had already drawn.
 
 \paragraph{Scope.}
 Three limits are worth stating before the contributions rather than after
