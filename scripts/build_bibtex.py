@@ -110,20 +110,39 @@ def main() -> None:
         names = parse_authors(authors)
         author_field = " and ".join(esc(n) for n in names) or "Unknown"
 
-        kind = "article" if arxiv and not venue else "inproceedings"
+        # Semantic Scholar reports "arXiv" in the venue field for anything
+        # that only ever appeared there, and taking that literally produced
+        # 626 @inproceedings entries whose booktitle was "arXiv". They
+        # rendered as "In arXiv.", which is not a venue and reads as an error.
+        # A preprint is @misc with howpublished, which is what the ACM format
+        # expects and what the hand-written entries already use.
+        PREPRINT = {"arxiv", "corr", "biorxiv", "medrxiv", "ssrn",
+                    "research square", "preprint", "arxiv.org"}
+        is_preprint = (venue or "").strip().lower() in PREPRINT
+        real_venue = venue if (venue and not is_preprint) else None
+
+        kind = "inproceedings" if real_venue else "misc"
         lines = [f"@{kind}{{{key},",
                  f"  title     = {{{esc(title)}}},",
                  f"  author    = {{{author_field}}},"]
         if year:
             lines.append(f"  year      = {{{year}}},")
-        if venue:
-            lines.append(f"  booktitle = {{{esc(venue)}}},")
-        if doi:
+        if real_venue:
+            lines.append(f"  booktitle = {{{esc(real_venue)}}},")
+        elif arxiv:
+            lines.append(f"  howpublished = {{arXiv:{esc(arxiv)}}},")
+        # Keep a publisher DOI, drop the arXiv one: with eprint present it is
+        # the same identifier written twice.
+        if doi and not str(doi).lower().startswith("10.48550"):
             lines.append(f"  doi       = {{{esc(doi)}}},")
         if arxiv:
             lines.append(f"  eprint    = {{{esc(arxiv)}}},")
             lines.append("  archivePrefix = {arXiv},")
-        if url:
+        # The stored url is a Semantic Scholar landing page for 1,088 of
+        # these, which sends a reader to an aggregator rather than to the
+        # work. doi and eprint identify it better, so only a direct link
+        # survives.
+        if url and "semanticscholar.org" not in str(url):
             lines.append(f"  url       = {{{esc(url)}}},")
         # The corpus id is internal bookkeeping and used to be emitted as a
         # note. With 723 entries rendering, every reference carried a 40-digit

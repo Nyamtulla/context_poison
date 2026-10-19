@@ -111,6 +111,38 @@ each step easy.
 | F3 | Subbenchmarks not listed | the census appendix lists all 783 |
 | F4 | Relative numbers only | absolutes with n throughout |
 
+## Bibliography convention
+
+`latex/refs.bib` is 33 curated entries plus the corpus bibliography that
+`scripts/build_bibtex.py` generates. Both follow the same rules, and the
+generator enforces them, so fix the generator rather than the file.
+
+| the work is | entry type | fields |
+|---|---|---|
+| in a conference or workshop | `@inproceedings` | `booktitle`, `year`, publisher `doi` if there is one |
+| in a journal | `@article` | `journal`, `volume`, `number`, `pages`, `year`, `doi` |
+| on arXiv only | `@misc` | `howpublished = {arXiv:NNNN.NNNNN}`, `eprint`, `archivePrefix` |
+
+A work that is both published and on arXiv gets its real venue **and** its
+`eprint`. That is the useful case, not a conflict.
+
+Four things to keep out, each of which was in this file:
+
+- **`booktitle = {arXiv}`.** arXiv is not a conference and it renders as
+  "In arXiv." Semantic Scholar puts the string "arXiv" in its venue field, so
+  a generator that trusts that field produces hundreds of these.
+- **A Semantic Scholar landing page as `url`.** It sends a reader to an
+  aggregator rather than to the work. `doi` and `eprint` identify it better.
+- **An arXiv DOI (`10.48550/...`) beside an `eprint`.** The same identifier
+  written twice. A publisher DOI is worth keeping; an arXiv one is not.
+- **Internal identifiers in `note`.** Corpus ids are bookkeeping;
+  `manuscript/bibkey_index.json` maps keys back to records.
+
+**Never write a citation you have not checked.** One arXiv identifier in this
+file was invented from memory and pointed at an unrelated paper. Mark anything
+unverified with `VERIFY` in a `note` and resolve it before submission;
+`grep -c VERIFY latex/refs.bib` must be 0.
+
 ## Figures and layout (VUSEC)
 
 - [ ] Legible in black and white.
