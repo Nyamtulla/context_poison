@@ -57,9 +57,17 @@ def tex(s):
 
 
 def sources():
-    """paper_id -> 'Surname 2024'. Falls back to the title's first words."""
+    """paper_id -> bibkey, from the index build_bibtex.py writes.
+
+    Falls back to first author and year only when a paper has no key, which
+    currently never happens: all 715 census sources resolve. The fallback
+    stays so that a corpus change surfaces as a visible string in the table
+    rather than as a silently dropped citation.
+    """
+    idx = json.loads((REPO / "manuscript" / "bibkey_index.json").read_text())
+    bykey = {v["paper_id"]: k for k, v in idx.items()}
     wb = openpyxl.load_workbook(
-        REPO / "data" / "exports" / "paper_dashboard_source.xlsx", read_only=True)
+        REPO / "data" / "exports" / "paper_dashboard_source.xlsx", read_only=True)  # noqa
     ws = wb["Papers"]
     rows = list(ws.iter_rows(values_only=True))
     wb.close()
@@ -74,7 +82,12 @@ def sources():
         first = re.split(r"[;,]", auth)[0].strip() if auth else ""
         surname = first.split()[-1] if first else ""
         year = year.split(".")[0]
-        out[pid] = f"{surname} {year}".strip() if surname else (year or "---")
+        if pid in bykey:
+            out[pid] = "\\cite{" + bykey[pid] + "}"
+        else:
+            out[pid] = f"{surname} {year}".strip() if surname else "---"
+    n_cited = sum(1 for v in out.values() if v.startswith("\\cite"))
+    print(f"  {n_cited}/{len(out)} source papers resolve to a bibkey")
     return out
 
 
@@ -119,7 +132,7 @@ def main():
         n, un = name_of(e, "technique_name")
         m_unnamed += un
         mrows.append([n, tex(e.get("channel")), tex(e.get("consequence")),
-                      tex(e.get("track")), tex(src.get(e.get("paper_id"), "---"))])
+                      tex(e.get("track")), src.get(e.get("paper_id"), "---")])
 
     drows, d_unnamed = [], 0
     for e in sorted(defs, key=lambda e: key(e, "defense_name")):
@@ -128,7 +141,7 @@ def main():
         drows.append([n, tex(e.get("channel")),
                       tex(e.get("defense_intervention_point")),
                       tex(e.get("track")), tex(e.get("validated_against")),
-                      tex(src.get(e.get("paper_id"), "---"))])
+                      src.get(e.get("paper_id"), "---")])
 
     OUT.mkdir(parents=True, exist_ok=True)
     emit(OUT / "census_mechanisms.tex", mrows,

@@ -26,7 +26,8 @@ and every attack we run is published. The contribution is the pairing.
 learning method against a security attack, which is \PctOursCross{}\% against
 the literature's \PctCrossCommunity{}\%. Eight of our nine retrieval defense
 implementations are knowledge-conflict methods from the machine learning track,
-run against corpus poisoning, PoisonedRAG and BadRAG. That is the empty column
+run against corpus poisoning, PoisonedRAG~\cite{zou-2024-poisonedrag} and
+BadRAG~\cite{xue-2024-badrag}. That is the empty column
 of Table~\ref{tab:transfer}, populated.
 
 Of the \NRagPairsKeyed{} pairs we ran in the retrieval cell, counted at
@@ -144,7 +145,7 @@ edits of a field that already ships with the benchmark.}
 \toprule
 \textbf{Item set} & \textbf{Released by} \\
 \midrule
-CoConflictQA over Natural Questions & the ParamMute authors \\
+CoConflictQA~\cite{huang-2025-parammute} over Natural Questions & the ParamMute authors \\
 Open Natural Questions, with its retrieval pool & the RobustRAG authors \\
 FaithEval, SQuAD-negative & the FaithfulRAG authors \\
 AgentDojo banking suite & the AgentDojo authors \\
@@ -152,7 +153,7 @@ AgentDojo banking suite & the AgentDojo authors \\
 \textbf{Payload} & \textbf{Origin} \\
 \midrule
 Corpus poisoning & Zhong et al.'s released passage, unmodified \\
-PoisonedRAG, BadRAG & the published constructions \\
+PoisonedRAG~\cite{zou-2024-poisonedrag}, BadRAG~\cite{xue-2024-badrag} & the published constructions \\
 False evidence & CoConflictQA's own parametric-evidence field \\
 Distractor evidence & \textbf{ours}: one substitution into that field \\
 Adaptive distractor & \textbf{ours}: the same claim, reshaped against one
