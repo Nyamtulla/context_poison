@@ -97,30 +97,9 @@ is replaced and nine tenths of the honest document remain. If a method can
 discount a planted passage while still using a good one, this is where it
 shows.
 
-\begin{table}[t]
-\centering
-\caption{Every defense against every payload it met, at the 10\% dose. ``Helps''
-means the defended arm beats its own undefended arm by more than that run's
-detectability threshold. Worst case is the payload with the largest shortfall.}
-\label{tab:lowdose}
-\small
-\begin{tabular}{@{}lrrl@{}}
-\toprule
-defense & payloads & helps on & worst payload met \\
-\midrule
-ACD       & 4 & 0 & corpus poisoning \;\; $-3.2$ \\
-CK-PLUG   & 3 & 0 & corpus poisoning \;\; $-14.9$ \\
-COIECD    & 3 & 0 & distractor \;\; $-0.8$ \\
-DyPRAG    & 1 & 0 & corpus poisoning \;\; $-30.2$ \\
-ParamMute & 3 & 0 & distractor \;\; $-1.0$ \\
-SCR       & 1 & 0 & corpus poisoning \;\; $-12.8$ \\
-\midrule
-\textbf{total} & \textbf{15} & \textbf{0} & \\
-\bottomrule
-\end{tabular}
-\end{table}
+\input{tables/lowdose}
 
-\textbf{Not one of the 15 (defense, payload) pairs shows a resolvable benefit
+\textbf{Not one of the 16 (defense, payload) pairs shows a resolvable benefit
 at the 10\% dose.} Every defense is at or below its own undefended arm on every
 payload it met, at the dose most favorable to it. The saturation numbers
 elsewhere in this paper are the dramatic version of the result;

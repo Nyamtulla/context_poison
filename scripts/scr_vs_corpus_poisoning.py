@@ -48,6 +48,7 @@ genuine answers under one shared prompt; they are.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import pathlib
 import sys
@@ -133,14 +134,38 @@ def main():
     ap.add_argument("--fracs", type=float, nargs="+", default=[0.0, 0.1, 0.5, 1.0])
     ap.add_argument("--dump", default=None)
     ap.add_argument("--no_resume", action="store_true")
+    ap.add_argument("--attack", default="corpus_poisoning",
+                    choices=["corpus_poisoning", "distractor_evidence"],
+                    help="corpus_poisoning plants the released optimised "
+                         "passage; distractor_evidence plants a fluent "
+                         "sentence asserting a third answer, which separates "
+                         "copying the attacker from recalling from memory")
     ap.add_argument("--out", type=str,
                     default="data/registries/scr_vs_corpus_poisoning.json")
     args = ap.parse_args()
 
-    adv = adversarial_text()
+    PAY = {"distractor_evidence": "distractor_evidencde"}
+    adv = None if args.attack in PAY else adversarial_text()
     rows = [json.loads(l) for l in
             (PM / "data" / "CoConflictQA" / "test" / args.data).read_text().splitlines()]
     data = [r for r in rows if len(r["context"]) <= args.max_context_chars][: args.n]
+    if adv is None:
+        fld = PAY[args.attack]
+        missing = [d for d in data if not (d.get(fld) or "").strip()]
+        if missing:
+            raise SystemExit(f"{len(missing)} items lack {fld}")
+        # the arm proves nothing unless the three outcomes are disjoint
+        bad = [d for d in data
+               if str(d["distractor_answer"]).lower()
+               in {str(a).lower() for a in d["answers"]}
+               | {str(d["parametric_answer"]).lower()}]
+        if bad:
+            raise SystemExit(f"{len(bad)} items have a distractor equal to the "
+                             "gold or the parametric answer")
+    _probe = adv if adv is not None else data[0][PAY[args.attack]]
+    print(f"  payload[{args.attack}] "
+          f"fp={hashlib.sha256(_probe.encode()).hexdigest()[:16]} "
+          f"sample={_probe[:70]!r}", flush=True)
     print(f"{len(rows)} items, using {len(data)}", flush=True)
 
     tok = AutoTokenizer.from_pretrained(args.model)
@@ -157,6 +182,10 @@ def main():
 
     golds = [d["answers"] for d in data]
     origs = [d["parametric_answer"] for d in data]
+    # recall against the PLANTED answer, scored with the same rubric, so the
+    # three outcomes are directly comparable. Only defined for the distractor.
+    dists = ([d["distractor_answer"] for d in data]
+             if data and data[0].get("distractor_answer") is not None else None)
     n = len(data)
 
     # the no-context arm never sees the document: computed once, and its
@@ -168,7 +197,12 @@ def main():
         em, ps = CKEVAL.get_score(preds, golds)
         _, po = CKEVAL.get_score(preds, origs)
         lo, hi = wilson(round(ps / 100 * n), n)
-        return {"n": n, "ctx_acc": round(ps, 2), "pm_acc": round(po, 2),
+        extra = {}
+        if dists is not None:
+            _, pd = CKEVAL.get_score(preds, dists)
+            extra["dist_acc"] = round(pd, 2)
+        return {**extra,
+                "n": n, "ctx_acc": round(ps, 2), "pm_acc": round(po, 2),
                 "mr": round(po / (ps + po + 1e-10) * 100, 2), "em": round(em, 2),
                 "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
 
@@ -187,7 +221,10 @@ def main():
     def save():
         (REPO / args.out).write_text(json.dumps(
             {"generated": "2026-10-12", "dataset": args.data, "n": n,
-             "model": args.model, "defense": "scr", "n_shot": args.n_shot,
+             "model": args.model, "defense": "scr", "attack": args.attack,
+             "payload_fingerprint":
+                 hashlib.sha256(_probe.encode()).hexdigest()[:16],
+             "n_shot": args.n_shot,
              "mdr_pp_at_n": round(min_detectable_change(n, 0.5), 1),
              "prediction": ("scr degrades less than rag because the poisoned "
                             "passage does not read as credible evidence and scr "
@@ -204,7 +241,9 @@ def main():
             continue
         name = ("clean (native incidental conflict)" if frac <= 0
                 else f"corpus poisoning, {int(frac*100)}% of context")
-        ctxs = [poison_context(d["context"], adv, frac) for d in data]
+        ctxs = [poison_context(d["context"],
+                               adv if adv is not None else d[PAY[args.attack]],
+                               frac) for d in data]
         rag = gen(model, tok, [qa_prompt(tok, d["question"], c)
                                for d, c in zip(data, ctxs)],
                   args.max_new_tokens, args.batch_size)
