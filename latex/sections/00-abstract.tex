@@ -1,10 +1,9 @@
-Two research communities study the same failure in large language model agents,
-and neither tests the other's work. Security researchers study context that an
-attacker changes on purpose, and publish attacks and defenses. Machine learning
-researchers study context that becomes wrong on its own, and publish mechanisms
-and fixes. The vocabularies differ; the failure does not. In both cases the
-model cannot tell which part of its context deserves trust. We measure that
-separation rather than assert it: from \NCorpus{} papers read in full we
+Two research communities study the same failure in large language model
+agents, and neither tests the other's work. Security researchers study context
+an attacker changes on purpose; machine learning researchers study context that
+becomes wrong on its own. The vocabularies differ, the failure does not: either
+way the model cannot tell which part of its context deserves trust. We measure
+that separation rather than assert it. From \NCorpus{} papers read in full we
 recover \NPureTrackPairs{} confirmed (defense, attack) pairs, of which only
 \NCrossCommunityPairs{} (\PctCrossCommunity{}\%) cross between the two
 communities. One direction is empty outright: \textbf{no security defense in
@@ -17,13 +16,17 @@ episodes, each from its authors' released code and weights, under an
 attack-works-first control and a fixed detectability threshold. At the dose
 most favorable to a defense, not one of 16 (defense, payload) pairs shows a
 resolvable benefit, and the reason is one mechanism rather than a list of
-failures. Each of these defenses has one dial: how far to trust the retrieved
-document against how far to trust what the model learned in training. Turning
-it moves errors between the two sources and creates no correct answers. Turn it
-away from training and the attacker receives what the model
-used to recall; turn it away from the document and the model recalls it again.
-Across three defenses the two movements cancel to within 7 points. Neither
-direction helps, because the attacker's text sits inside the document the
-defense is deciding whether to trust. The one defense that resisted loses 58\% of its
-protection to an attacker who optimizes against the single quantity its rule
-measures.
+failures. Each of these defenses has one dial: how far to trust the retrieved document
+against how far to trust what the model learned in training. Turning it moves
+errors between the two sources and creates no correct answers. Turn it away
+from training and the attacker receives what the model used to recall; turn it
+away from the document and the model recalls it again. Across three defenses
+the two movements cancel to within 7 percentage points. Neither direction helps,
+because the attacker's text sits inside the document the defense is deciding
+whether to trust.
+
+One defense does resist these payloads. It weights the retrieved context by
+how far that context reduces the model's uncertainty, so a passage written to
+minimize that uncertainty turns the weighting off. Doing so removes 58\% of
+its protection, measured as the gap between how often it copies the attacker
+and how often an undefended model does.
