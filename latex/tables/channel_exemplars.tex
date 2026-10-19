@@ -8,15 +8,15 @@
 \toprule
 \textbf{Channel} & \textbf{Sec} & \textbf{ML} & \textbf{Security names} & \textbf{Machine learning names} \\
 \midrule
-\meth{direct-input} & 36 & 31 & Combined Attack; HackAPrompt: prompt-hacking t\,…; Tensor Trust: prompt extracti\,… & lost in the middle; distraction by irrelevant con\,…; context drift \\
-\meth{tool-output} & 64 & 3 & Indirect Prompt Injection; BIPIA benchmark attack set; Neural Exec & context rot; observation over-ingestion; plan anchor \\
-\meth{RAG} & 24 & 6 & PoisonedRAG; Indirect Data Poisoning; Salience Induction & distraction by irrelevant con\,…; identity drift; context compliance \\
-\meth{cross-modal} & 15 & 4 & steganographic prompt injecti\,…; MIRAGE; WebInject & evidence misalignment; cross-modality parametric kno\,…; context unawareness \\
-\meth{memory} & 11 & 7 & Cross-Session Stored Prompt I\,…; AgentPoison; MemoryGraft & memory misevolution; memory pollution; memory laundering \\
-\meth{tool-metadata} & 11 & 1 & Cross-Tool Description Poison\,…; ChatInject; Branded Whisper Attack / Vaul\,… & context rot \\
-\meth{multi-agent} & 6 & 3 & PlanFlip; OMNI-LEAK; Prompt Infection & Constraint Drift; extraneous cognitive load; context poisoning \\
-\meth{supply-chain} & 6 & 0 & PoisonedSkills / DDIPE; Parasitic Toolchain Attacks; Virtual Prompt Injection (VPI) & --- \\
-\meth{skill} & 3 & 1 & SkillJect; POISE & --- \\
+\meth{tool-output} & 64 & 3 & Indirect Prompt Injection~\cite{greshake-2023-not}; BIPIA benchmark attack set~\cite{yi-2023-benchmarking}; Neural Exec~\cite{pasquini-2024-neural} & context rot~\cite{xia-2026-diagnosing}; observation over-ingestion~\cite{gaur-2026-signaldriven}; plan anchor~\cite{yu-2026-webanchor} \\
+\meth{direct-input} & 36 & 31 & Combined Attack~\cite{liu-2023-formalizing}; HackAPrompt: prompt-hacking t\,…~\cite{schulhoff-2023-ignore}; Tensor Trust: prompt extracti\,…~\cite{toyer-2023-tensor} & lost in the middle~\cite{liu-2023-lost}; distraction by irrelevant con\,…~\cite{shi-2023-large}; context drift~\cite{dongre-2025-drift} \\
+\meth{RAG} & 24 & 6 & PoisonedRAG~\cite{zou-2024-poisonedrag}; Indirect Data Poisoning~\cite{gyevnar-2026-distributed}; Salience Induction~\cite{zhou-2026-salience} & distraction by irrelevant con\,…~\cite{wu-2024-easily}; identity drift~\cite{platnick-2025-idrag}; context compliance~\cite{chen-2026-rag} \\
+\meth{cross-modal} & 15 & 4 & steganographic prompt injecti\,…~\cite{pathade-2025-invisible}; MIRAGE~\cite{dai-2026-mirage}; WebInject~\cite{wang-2025-webinject} & evidence misalignment~\cite{qiu-2026-videoseal}; cross-modality parametric kno\,…~\cite{zhu-2024-unraveling}; context unawareness~\cite{xu-2026-contextaware} \\
+\meth{memory} & 11 & 7 & Cross-Session Stored Prompt I\,…~\cite{xie-2026-prompt}; AgentPoison~\cite{chen-2024-agentpoison}; MemoryGraft~\cite{srivastava-2025-memorygraft} & memory misevolution~\cite{xie-2026-memevobench}; memory pollution~\cite{liu-2026-failuregated}; memory laundering~\cite{wang-2026-state} \\
+\meth{tool-metadata} & 11 & 1 & Cross-Tool Description Poison\,…~\cite{shi-2026-think}; ChatInject~\cite{chang-2025-chatinject}; Branded Whisper Attack / Vaul\,…~\cite{debi-2026-whispers} & context rot~\cite{ayyagari-2026-context} \\
+\meth{multi-agent} & 6 & 3 & PlanFlip~\cite{wang-2026-planflip}; OMNI-LEAK~\cite{naik-2026-omnileak}; Prompt Infection~\cite{lee-2025-prompt} & Constraint Drift~\cite{bui-2026-himaptravel}; extraneous cognitive load~\cite{shang-2025-united}; context poisoning~\cite{chen-2026-unlocking} \\
+\meth{supply-chain} & 6 & 0 & PoisonedSkills / DDIPE~\cite{qu-2026-supplychain}; Parasitic Toolchain Attacks~\cite{zhao-2025-parasites}; Virtual Prompt Injection (VPI)~\cite{yan-2023-backdooring} & --- \\
+\meth{skill} & 3 & 1 & SkillJect~\cite{jia-2026-skillject}; POISE~\cite{hao-2026-poise} & --- \\
 \bottomrule
 \end{tabular}
 \end{table*}

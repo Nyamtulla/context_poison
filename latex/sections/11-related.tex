@@ -3,16 +3,28 @@
 
 \subsection{Systematizations of a single literature}
 
-Several recent systematizations cover parts of this space. Work on the agent
-attack surface enumerates attack classes against tool-using systems, and work
-on the prompt-injection landscape codes injection papers into structured
-comparison tables by method, surface, victim goal and capability. Both are
-careful and both are confined to the security literature. Surveys on the
-machine learning side cover knowledge conflict, long-context degradation and
-retrieval quality, and are likewise confined to their own literature.
+The security side has been systematized repeatedly and well. Work on the
+agent attack surface enumerates attack classes against tool-using
+systems~\cite{dehghantanha-2026-sok,chu-2026-systematic}, including the skill
+and tool channels specifically~\cite{jiang-2026-sok}. Work on the
+prompt-injection landscape codes injection papers into structured comparison
+tables by method, surface, victim goal and
+capability~\cite{yusifov-2026-taxonomy,duarte-2026-systematic}. Others take a
+lifecycle or stack view of where an LLM system is
+exposed~\cite{natanzi-2026-lifecycle,nemure-2026-llm}, trace long-term memory
+as its own attack surface~\cite{lin-2026-survey}, or survey agent
+trustworthiness broadly~\cite{qi-2026-trustworthy,mohan-2026-agent}. All are
+careful. All are confined to the security literature.
+
+The machine learning side has its own systematizations, and they do not
+overlap. Knowledge conflict between retrieved text and parametric memory has
+been surveyed on its own terms~\cite{xu-2024-knowledge}, as a problem of
+accuracy rather than of adversaries. That survey and the security ones above
+describe the same context window and share almost no references, which is the
+separation this paper measures rather than asserts.
 
 Three 2026 works sit closest to ours. A taxonomy-to-analysis study of the
-prompt-injection threat landscape~\cite{pilandscape-2026} codes injection
+prompt-injection threat landscape~\cite{wang-2026-landscape} codes injection
 papers and builds a benchmark for agent behavior under context-dependent
 interaction. PIArena~\cite{piarena-2026} is a modular platform for running
 injection attacks against injection defenses, and reports that defenses once
