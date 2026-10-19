@@ -108,13 +108,14 @@ The campaign covers two cells.
 
 The \textbf{retrieval cell} pairs defenses built for knowledge conflict against
 attacks built to poison a retrieval corpus. The victim model is
-Llama-3-8B-Instruct or Mistral-7B-Instruct, depending on what each defense
+Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
+Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each defense
 released. The data is CoConflictQA over Natural Questions, and open Natural
 Questions for the attacks that need a retrieval pool.
 
 The \textbf{agent cell} pairs ingestion-stage and execution-stage defense
 techniques against prompt-injection attacks inside the AgentDojo banking
-suite~\cite{debenedetti-2024-agentdojo}, with a Qwen2.5-14B-Instruct agent.
+suite~\cite{debenedetti-2024-agentdojo}, with a Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
 
 In total we executed \textbf{\NCampaignPairs{} distinct (defense, attack)
 pairs across \NCampaignImpl{} defense implementations, over
@@ -146,8 +147,8 @@ edits of a field that already ships with the benchmark.}
 \textbf{Item set} & \textbf{Released by} \\
 \midrule
 CoConflictQA~\cite{huang-2025-parammute} over Natural Questions & the ParamMute authors \\
-Open Natural Questions, with its retrieval pool & the RobustRAG authors \\
-FaithEval, SQuAD-negative & the FaithfulRAG authors \\
+Open Natural Questions~\cite{kwiatkowski-2019-natural}, with its retrieval pool & the RobustRAG authors \\
+FaithEval~\cite{ming-2024-faitheval}, SQuAD~\cite{rajpurkar-2016-squad} negatives & the FaithfulRAG authors \\
 AgentDojo banking suite & the AgentDojo authors \\
 \midrule
 \textbf{Payload} & \textbf{Origin} \\

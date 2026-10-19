@@ -220,7 +220,7 @@ Against its own undefended arm the protection falls from 35.1\pp{} to
 templates.} Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, which
 left a question the weak optimizer could not answer.
 
-\textbf{A gradient search answers it.} We ran a GCG-style coordinate search
+\textbf{A gradient search answers it.} We ran a GCG-style~\cite{zou-2023-universal} coordinate search
 over a 20-token suffix against the same objective, appended to the passage
 best-of-five had already chosen so that the asserted answer stays fixed and
 any movement is the gradient's. Candidate tokens are restricted to
