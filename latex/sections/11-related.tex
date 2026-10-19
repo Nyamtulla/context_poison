@@ -11,6 +11,18 @@ careful and both are confined to the security literature. Surveys on the
 machine learning side cover knowledge conflict, long-context degradation and
 retrieval quality, and are likewise confined to their own literature.
 
+Three 2026 works sit closest to ours. A taxonomy-to-analysis study of the
+prompt-injection threat landscape~\cite{pilandscape-2026} codes injection
+papers and builds a benchmark for agent behavior under context-dependent
+interaction. PIArena~\cite{piarena-2026} is a modular platform for running
+injection attacks against injection defenses, and reports that defenses once
+judged effective lose robustness on more diverse attacks. A concurrent
+evaluation of injection defenses~\cite{pidefense-eval-2026} finds that every
+defense relying on the model to protect itself breaks under an adaptive
+attacker, which is the same direction as our Section~\ref{sec:adaptive} result
+and reached on a disjoint set of methods. All three are security-side, which
+is what our corpus measures as the problem rather than a criticism of them.
+
 Our contribution is not a better enumeration of either side. It is that one
 search protocol, one screening pass and one taxonomy are applied to both, which
 is what makes the distance between them measurable. A systematization drawn
