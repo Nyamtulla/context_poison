@@ -86,6 +86,13 @@ def main():
     ap.add_argument("--model", type=str, default="NousResearch/Meta-Llama-3-8B")
     ap.add_argument("--data", type=str, default="NaturalQuestionsShort_kc.jsonl")
     ap.add_argument("--clean_only", action="store_true")
+    ap.add_argument("--attack", default="corpus_poisoning",
+                    choices=["corpus_poisoning", "distractor_evidence"],
+                    help="distractor_evidence plants a third answer. SpARE "
+                         "has no unsteered arm, so this run is not "
+                         "defended-vs-undefended: it is the two ends of one "
+                         "dial, and the distractor is what lets copying and "
+                         "recall be told apart on each end")
     ap.add_argument("--out", type=str,
                     default="data/registries/spare_vs_corpus_poisoning.json")
     args = ap.parse_args()
@@ -101,7 +108,9 @@ def main():
     demo.init_frozen_language_model = (
         lambda model_path, attn_imp="sdpa": _orig_init(model_path, attn_imp))
 
-    passage = adversarial_text()
+    FIELD = {"distractor_evidence": "distractor_evidencde"}
+    field = FIELD.get(args.attack)
+    passage = None if field else adversarial_text()
     path = PM / "data" / "CoConflictQA" / "test" / args.data
     data = [json.loads(l) for l in path.read_text().splitlines()][: args.n]
 
@@ -109,18 +118,22 @@ def main():
     (model, tokenizer, model_name, re_odqa_dataset,
      use_context_patch, use_parameter_patch, inspect_module) = demo.get_llama_spare(args.model)
 
+    label = {"corpus_poisoning": "corpus poisoning",
+             "distractor_evidence": "distractor evidence"}[args.attack]
     conditions = [("clean (native incidental conflict)", 0.0)] if args.clean_only else [
         ("clean (native incidental conflict)", 0.0),
-        ("corpus poisoning, 10% of context", 0.1),
-        ("corpus poisoning, 50% of context", 0.5),
-        ("corpus poisoning, 100% of context", 1.0)]
+        (f"{label}, 10% of context", 0.1),
+        (f"{label}, 50% of context", 0.5),
+        (f"{label}, 100% of context", 1.0)]
 
     results = []
     for name, frac in conditions:
-        tallies = {arm: {"ctx": 0, "pm": 0} for arm in
+        tallies = {arm: {"ctx": 0, "pm": 0, "dist": 0} for arm in
                    ("steer_to_use_context", "steer_to_use_parameter")}
         for d in data:
-            ex = {"context": poison_context(d["context"], passage, frac)[:2048],
+            ex = {"context": poison_context(
+                      d["context"], d[field] if field else passage,
+                      frac)[:2048],
                   "question": d["question"][:128]}
             out = demo.generate_two_answers(
                 ex, model, tokenizer, model_name, 42, re_odqa_dataset, 3,
@@ -129,6 +142,8 @@ def main():
                 pred = str(out.get(arm, ""))
                 tallies[arm]["ctx"] += acc_score(pred, d["answers"])
                 tallies[arm]["pm"] += acc_score(pred, d["parametric_answer"])
+                if d.get("distractor_answer") is not None:
+                    tallies[arm]["dist"] += acc_score(pred, d["distractor_answer"])
         n = len(data)
         print(f"\n{name}", flush=True)
         for arm, t in tallies.items():
@@ -138,6 +153,8 @@ def main():
                  "ctx_acc": round(ctx, 2), "pm_acc": round(pm, 2),
                  "mr": round(pm / (ctx + pm + 1e-10) * 100, 2),
                  "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
+            if data and data[0].get("distractor_answer") is not None:
+                r["dist_acc"] = round(t["dist"] / n * 100, 2)
             results.append(r)
             print(f"  {arm:<24} ctx_acc {ctx:5.1f}%  pm_acc {pm:5.1f}%  mr {r['mr']:5.1f}%",
                   flush=True)

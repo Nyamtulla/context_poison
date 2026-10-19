@@ -26,6 +26,7 @@ ParamMute and CK-PLUG runs on the same items.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import pathlib
 import sys
@@ -86,10 +87,13 @@ def load_model(path: str, gate: bool):
     return model, tok
 
 
-def run_condition(model, tok, data, passage, frac, max_new_tokens):
-    ctx_hits = pm_hits = 0
+def run_condition(model, tok, data, passage, frac, max_new_tokens, field=None):
+    """`passage` is the shared corpus-poisoning text; `field` names a per-item
+    payload instead, which is how the distractor arm works."""
+    ctx_hits = pm_hits = dist_hits = 0
     for d in data:
-        ctx = poison_context(d["context"], passage, frac)
+        ctx = poison_context(d["context"],
+                             d[field] if field else passage, frac)
         msgs = [{"role": "system", "content": SYSTEM_MESSAGE},
                 {"role": "user", "content": PROMPT_TEMPLATE.format(
                     context=ctx, question=d["question"])}]
@@ -101,12 +105,17 @@ def run_condition(model, tok, data, passage, frac, max_new_tokens):
         pred = tok.decode(out[0, ids.shape[-1]:], skip_special_tokens=True).strip()
         ctx_hits += acc_score(pred, d["answers"])
         pm_hits += acc_score(pred, d["parametric_answer"])
+        if d.get("distractor_answer") is not None:
+            dist_hits += acc_score(pred, d["distractor_answer"])
     n = len(data)
     ctx, pm = ctx_hits / n * 100, pm_hits / n * 100
     lo, hi = wilson(int(ctx_hits), n)
-    return {"n": n, "ctx_acc": round(ctx, 2), "pm_acc": round(pm, 2),
-            "mr": round(pm / (ctx + pm + 1e-10) * 100, 2),
-            "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
+    out = {"n": n, "ctx_acc": round(ctx, 2), "pm_acc": round(pm, 2),
+           "mr": round(pm / (ctx + pm + 1e-10) * 100, 2),
+           "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1)}
+    if data and data[0].get("distractor_answer") is not None:
+        out["dist_acc"] = round(dist_hits / n * 100, 2)
+    return out
 
 
 def main():
@@ -117,6 +126,11 @@ def main():
     ap.add_argument("--max_new_tokens", type=int, default=32)
     ap.add_argument("--data", type=str, default="NaturalQuestionsShort_kc.jsonl")
     ap.add_argument("--clean_only", action="store_true")
+    ap.add_argument("--attack", default="corpus_poisoning",
+                    choices=["corpus_poisoning", "distractor_evidence"],
+                    help="distractor_evidence plants a third answer, which "
+                         "separates copying the attacker from recalling from "
+                         "memory")
     ap.add_argument("--out", type=str,
                     default="data/registries/shift_vs_corpus_poisoning.json")
     args = ap.parse_args()
@@ -126,22 +140,42 @@ def main():
                              ignore_patterns=["*__pycache__*"])
     path = str(pathlib.Path(root) / args.subdir)
 
-    passage = adversarial_text()
+    FIELD = {"distractor_evidence": "distractor_evidencde"}
+    field = FIELD.get(args.attack)
+    passage = None if field else adversarial_text()
     dpath = PM / "data" / "CoConflictQA" / "test" / args.data
     data = [json.loads(l) for l in dpath.read_text().splitlines()][: args.n]
+    if field:
+        missing = [d for d in data if not (d.get(field) or "").strip()]
+        if missing:
+            raise SystemExit(f"{len(missing)} items lack {field}")
+        bad = [d for d in data
+               if str(d["distractor_answer"]).lower()
+               in {str(a).lower() for a in d["answers"]}
+               | {str(d["parametric_answer"]).lower()}]
+        if bad:
+            raise SystemExit(f"{len(bad)} items have a distractor equal to the "
+                             "gold or the parametric answer")
+    _probe = passage if passage is not None else data[0][field]
+    print(f"  payload[{args.attack}] "
+          f"fp={hashlib.sha256(_probe.encode()).hexdigest()[:16]} "
+          f"sample={_probe[:70]!r}", flush=True)
 
+    label = {"corpus_poisoning": "corpus poisoning",
+             "distractor_evidence": "distractor evidence"}[args.attack]
     conditions = [("clean (native incidental conflict)", 0.0)] if args.clean_only else [
         ("clean (native incidental conflict)", 0.0),
-        ("corpus poisoning, 10% of context", 0.1),
-        ("corpus poisoning, 50% of context", 0.5),
-        ("corpus poisoning, 100% of context", 1.0)]
+        (f"{label}, 10% of context", 0.1),
+        (f"{label}, 50% of context", 0.5),
+        (f"{label}, 100% of context", 1.0)]
 
     results = []
     for arm, gate in (("gate_off", False), ("shift", True)):
         print(f"\n===== {arm} (ffn_output_gate={gate}) =====", flush=True)
         model, tok = load_model(path, gate)
         for name, frac in conditions:
-            r = run_condition(model, tok, data, passage, frac, args.max_new_tokens)
+            r = run_condition(model, tok, data, passage, frac,
+                              args.max_new_tokens, field)
             r.update(condition=name, frac=frac, arm=arm)
             results.append(r)
             print(f"  {name:<36} ctx_acc {r['ctx_acc']:5.1f}%  "
@@ -149,8 +183,11 @@ def main():
         del model
         torch.cuda.empty_cache()
 
-    out = {"generated": "2026-10-03", "dataset": args.data, "n": len(data),
+    out = {"generated": "2026-10-19", "dataset": args.data, "n": len(data),
            "model": f"{args.model}/{args.subdir}",
+           "defense": "shift", "attack": args.attack,
+           "payload_fingerprint":
+               hashlib.sha256(_probe.encode()).hexdigest()[:16],
            "scorer": "shared normalize+substring rubric",
            "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
            "results": results}
