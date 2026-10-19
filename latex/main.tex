@@ -9,6 +9,12 @@
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{longtable}
+
+% Two-column measure plus long hyphenated model names
+% (Llama-3-8B-Instruct) produces lines TeX cannot break.
+% This lets it stretch interword space a little further
+% before it gives up and overflows into the margin.
+\emergencystretch=1.5em
 \usepackage{xcolor}
 
 % Numbers in tables line up; percentage points are written "pp" throughout.

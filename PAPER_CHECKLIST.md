@@ -126,8 +126,10 @@ each step easy.
       about a minute. The single-column `longtable` appendix renders
       correctly. **Build before every push**: three problems shipped while
       there was no toolchain, including one that halted the compile.
-- [ ] **26 overfull boxes over 15pt.** Mostly long identifiers in the
-      bibliography. Cosmetic, worth a pass before submission.
+- [x] ~~Overfull boxes.~~ Fixed. `\emergencystretch=1.5em` in the preamble
+      plus one British spelling removed took the worst from 32.8pt to none
+      over 2pt. One 2.12pt box remains in Section 10; that is 0.75mm and
+      invisible, and removing it costs prose for no visible gain.
 - [ ] **Verify the three 2026 citations** added to `refs.bib`. Their author
       lists are placeholders, each marked `VERIFY`.
 - [ ] **Pick a venue**, then re-check scope against its call for papers.

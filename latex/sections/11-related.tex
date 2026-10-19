@@ -33,17 +33,17 @@ not in its corpus.
 \subsection{Platforms that run attacks against defenses}
 
 The closest precedent is not a survey but a platform.
-DEEPSEC~\cite{ling-2019-deepsec} ran 16 adversarial-example attacks against 13
-defenses in one harness, which is structurally what we do here. It was also taken apart in
-public~\cite{carlini-2019-critique}. The criticisms are worth naming, because
+DEEPSEC~\cite{ling-2019-deepsec} ran 16 adversarial-example attacks against
+13 defenses in one harness, which is structurally what we do here. It was also
+taken apart in public~\cite{carlini-2019-critique}. The criticisms are worth naming, because
 they define what such a platform has to get right. DEEPSEC evaluated defenses
-only against attacks crafted on undefended models. It reported robustness as
-an average over attacks rather than against the strongest one. It
-reimplemented several attacks and one defense incorrectly. And it reported no
+only against attacks crafted on undefended models. It reported robustness as an
+average over attacks, not against the strongest. It reimplemented several
+attacks and one defense incorrectly. And it reported no
 variance at all.
 
-We took those as a specification. We do not reimplement. Every method runs from its
-authors' released code and weights. The control-fires-first rule automates the
+We took those as a specification. We do not reimplement: every method runs
+from its authors' released code and weights. The control-fires-first rule automates the
 check Carlini had to run by hand, and it fired on FaithfulRAG, which we report
 as not reportable rather than as defeated. We
 report per-cell rather than averaging across threat models, and we say so where
