@@ -70,7 +70,23 @@ def titleword(title: str) -> str:
 
 
 def esc(s: str) -> str:
-    return (s or "").replace("{", "").replace("}", "").replace("\\", "").strip()
+    """Strip braces and backslashes, then escape what LaTeX would choke on.
+
+    The strip came first and the escape did not exist, so a venue called
+    "Computer fraud & security" emitted a bare ampersand and the document
+    failed to compile with "Misplaced alignment tab character &". Titles and
+    venues from a bibliographic API carry all five of these.
+    """
+    s = (s or "").replace("{", "").replace("}", "").replace("\\", "").strip()
+    for ch in ("&", "%", "$", "#", "_"):
+        s = s.replace(ch, "\\" + ch)
+    # ^ and ~ need a command, not a backslash: a bare \^ is an accent waiting
+    # for its argument. Escaping $ without these two is worse than escaping
+    # none of them, because a title like "Multi$^2$" then leaves the caret
+    # outside math mode and the document fails with "Missing $ inserted".
+    s = s.replace("^", "\\textasciicircum{}")
+    s = s.replace("~", "\\textasciitilde{}")
+    return s
 
 
 def main() -> None:
@@ -109,7 +125,11 @@ def main() -> None:
             lines.append("  archivePrefix = {arXiv},")
         if url:
             lines.append(f"  url       = {{{esc(url)}}},")
-        lines.append(f"  note      = {{corpus id {pid}}}")
+        # The corpus id is internal bookkeeping and used to be emitted as a
+        # note. With 723 entries rendering, every reference carried a 40-digit
+        # hash, which is noise in a bibliography and tells a reader nothing.
+        # bibkey_index.json already maps key -> paper_id for anything that
+        # needs to get back to the record.
         lines.append("}")
         entries.append("\n".join(lines))
         index[key] = {"paper_id": pid, "title": title, "year": year}

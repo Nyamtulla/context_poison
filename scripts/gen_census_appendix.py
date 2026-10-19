@@ -150,9 +150,9 @@ def main():
          f"Every named mechanism in the corpus ({len(mrows)} entries). Rows in "
          r"\emph{italics} are entries whose authors gave their contribution no "
          "name; they are counted here because excluding them would overstate "
-         "how much of the field names what it finds. Source is first author "
-         "and year; full records with DOI or arXiv identifiers ship with the "
-         "artifact.",
+         "how much of the field names what it finds. Every row cites the paper "
+         "that named the mechanism; full records with DOI or arXiv identifiers "
+         "ship with the artifact.",
          "tab:census-mech",
          f"Table~\\ref{{tab:census-mech}}: named mechanisms, continued")
     emit(OUT / "census_defenses.tex", drows,
