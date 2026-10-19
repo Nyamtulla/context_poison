@@ -22,8 +22,10 @@ The SoK paper lives in `latex/` and mirrors to a separate repo that Overleaf
 syncs with. The two are **not** linked automatically.
 
 - **Pull before touching `latex/`, push after.** Co-authors edit in Overleaf,
-  so the mirror can be ahead. See `PAPER_WORKFLOW.md` for the subtree commands
-  and what to do when a push is rejected.
+  so the mirror can be ahead. Use `scripts/sync_paper.sh {status,pull,push}`;
+  `git subtree` no longer works here and `PAPER_WORKFLOW.md` says why.
+- **Compile before pushing.** `scripts/build_paper.sh`. Three defects have
+  shipped that only a build catches, one of which halted the compile.
 - **Order is pull, regenerate, edit, push.** `scripts/gen_paper_numbers.py`
   rewrites `latex/numbers.tex`; pulling on top of a freshly generated file
   conflicts in a generated artifact.
