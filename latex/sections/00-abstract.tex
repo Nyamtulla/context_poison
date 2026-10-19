@@ -22,10 +22,10 @@ defenses has one dial: how far to trust the retrieved document against how far
 to trust the model's own memory. Turning it moves errors between the two
 without creating correct answers. Trust the document more and the attacker,
 who wrote part of that document, receives what memory would have supplied;
-trust memory more and memory takes it back. Across three defenses these
-movements almost exactly cancel. Neither direction helps, because the
-attacker's text sits inside the very document the defense is deciding whether
-to trust. The one defense that does resist weights the context by how far it
-reduces the model's uncertainty, so a passage written to minimize that
-uncertainty turns the weighting off, cutting its advantage over an undefended
-model by 58\%.
+trust memory more and memory takes it back. The two movements almost exactly
+cancel. Neither helps, because the attacker's text sits inside the very
+document the defense is deciding whether to trust. One defense does resist. It
+gives the retrieved text less weight when that text makes the model less
+certain. So we wrote a passage that makes the model more certain. That turns
+the weighting off, and cuts the defense's advantage over an undefended model
+by 58\%.
