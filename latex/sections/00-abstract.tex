@@ -1,30 +1,30 @@
 Two research communities study the same failure in large language model
-agents, and neither tests the other's work. Security researchers study the context
-an attacker changes on purpose; machine learning researchers study context that
-becomes wrong on its own. The vocabularies differ, the failure does not: either
-way the model cannot tell which part of its context deserves trust. We measure
-that separation rather than assert it. From \NCorpus{} papers read in full we
-recover \NPureTrackPairs{} confirmed (defense, attack) pairs, of which only
-\NCrossCommunityPairs{} (\PctCrossCommunity{}\%) cross between the two
-communities. One direction is empty outright, according to our
-corpus: \textbf{no security defense has ever been evaluated against a machine
-learning failure mechanism.}
+agents, and neither tests the other's work. Security researchers study the
+context an attacker changes on purpose; machine learning researchers study
+context that becomes wrong on its own. Either way the model cannot tell which
+part of its context deserves trust. We measure that separation. From
+\NCorpus{} papers read in full we recover \NPureTrackPairs{} confirmed
+(defense, attack) pairs, of which only \NCrossCommunityPairs{}
+(\PctCrossCommunity{}\%) cross between the communities, and one direction is
+empty outright: \textbf{no security defense in our corpus has ever been
+evaluated against a machine learning failure mechanism.} The dates show the
+two sides reaching the same ground in turn rather than together. Of the eight
+channels both have named a failure in, security names it first in five and
+machine learning in none, by up to three years.
 
-So we ran it. We executed \NCampaignPairs{} (defense, attack) pairs across
-\NCampaignImpl{} implementations and \NCampaignEpisodes{} scored episodes,
-each from its authors' released code and weights, and each checked against an
-undefended model on the same items. Even at the dose most favorable to a
-defense, where nine tenths of the honest document survives, not one of them
-leaves the model better off than no defense at all. The reason is a single
-mechanism rather than a list of separate failures. Each of these defenses has
-one dial: how far to trust the retrieved document against how far to trust
-what the model learned in training. Turning it moves errors between the two
-sources without creating correct answers. Turn it away from training and the
-attacker receives what the model used to recall; turn it the other way and
-memory takes it back. Across three defenses these movements almost exactly
+So we ran the missing experiment. We executed \NCampaignPairs{} (defense,
+attack) pairs across \NCampaignImpl{} implementations and \NCampaignEpisodes{}
+scored episodes, each from its authors' released code and weights and each
+checked against an undefended model on the same items. Even where nine tenths
+of the honest document survives, not one of them leaves the model better off
+than no defense at all. The reason is a single mechanism. Each of these
+defenses has one dial: how far to trust the retrieved document against how far
+to trust what the model learned in training. Turning it moves errors between
+the two sources without creating correct answers: turn it away from training
+and the attacker receives what the model used to recall, turn it the other way
+and memory takes it back. Across three defenses these movements almost exactly
 cancel. Neither direction helps, because the attacker's text sits inside the
-very document the defense is deciding whether to trust. One defense does
-resist these payloads. It weights the retrieved context by how far that
-context reduces the model's uncertainty, so a passage written to minimize that
-uncertainty turns the weighting off. Doing so cuts its advantage over an
-undefended model by 58\%: degraded, not broken, and now priced.
+very document the defense is deciding whether to trust. The one defense that
+does resist weights the context by how far it reduces the model's uncertainty,
+so a passage written to minimize that uncertainty turns the weighting off,
+cutting its advantage over an undefended model by 58\%.

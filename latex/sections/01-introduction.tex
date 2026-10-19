@@ -53,15 +53,19 @@ experiments that fall in it.
   problem that neither has tested? We answer by coding \NCorpus{} papers from
   both sides under one taxonomy and recovering every (defense, attack) pair
   any of them reports (Section~\ref{sec:literatures}).
-\item[RQ2] When a defense built for one threat model is actually run against
+\item[RQ2] Does one community arrive at a problem the other has already
+  named, and if so which one arrives second? We answer by dating the first
+  paper from each side in every channel both of them work
+  (Section~\ref{sec:parallel}).
+\item[RQ3] When a defense built for one threat model is actually run against
   the other, does it transfer? We answer by executing the pairs the literature
   skipped, from the authors' released code and weights
   (Sections~\ref{sec:experiments}, \ref{sec:results}).
-\item[RQ3] Where defenses fail, is the failure a property of individual
+\item[RQ4] Where defenses fail, is the failure a property of individual
   methods or of a design choice they share? We answer with a payload built to
   separate the possible explanations rather than to maximize damage
   (Section~\ref{sec:distractor}).
-\item[RQ4] Does that explanation survive an attacker who reads the defense and
+\item[RQ5] Does that explanation survive an attacker who reads the defense and
   optimizes against it? We answer by building two such attackers against the
   one method that resisted (Section~\ref{sec:adaptive}).
 \end{description}
@@ -118,7 +122,17 @@ holds. Section~\ref{sec:threats} gives the full list.
   % APPENDIX-OFF: restore with sections/A-census
   % The full census is Appendix~\ref{sec:census}.
 
-\item \textbf{A platform, and \NCampaignPairs{} pairs run on it (RQ2)} across
+\item \textbf{The same ground, found twice (RQ2).} Eight channels have named
+  mechanisms from both communities. The security literature arrives first in
+  \NChannelsSecFirst{} of them, both arrive together in
+  \NChannelsSameYear{}, and \textbf{the machine learning literature arrives
+  first in none} (Section~\ref{sec:parallel}). The median lag where security
+  leads is \MedianChannelLag{} year and the longest is \MaxChannelLag{}. A
+  machine learning paper naming a failure is therefore often renaming one the
+  security literature named years earlier, in a body of work it cites
+  \PctMLCitesSec{}\% of the time.
+
+\item \textbf{A platform, and \NCampaignPairs{} pairs run on it (RQ3)} across
   \NCampaignImpl{} implementations and \NCampaignEpisodes{} scored episodes,
   each from its authors' released artifacts under an attack-works-first
   control and a fixed detectability threshold
@@ -127,7 +141,7 @@ holds. Section~\ref{sec:threats} gives the full list.
   \PctCrossCommunity{}\% of the literature's. At the dose most favorable to a
   defense, not one of 16 (defense, payload) pairs shows a resolvable benefit.
 
-\item \textbf{One mechanism, not a list of failures (RQ3).} Context-reliance
+\item \textbf{One mechanism, not a list of failures (RQ4).} Context-reliance
   defenses --- methods whose intervention is a weighting between the
   context-conditioned and the memory-conditioned prediction --- relocate
   correctness rather than creating it. What they take from memory the attacker
@@ -137,7 +151,7 @@ holds. Section~\ref{sec:threats} gives the full list.
   methods arbitrate on does not contain the distinction an attacker violates
   (Sections~\ref{sec:results}, \ref{sec:distractor}).
 
-\item \textbf{Two adaptive attacks on the one defense that resisted (RQ4).}
+\item \textbf{Two adaptive attacks on the one defense that resisted (RQ5).}
   ACD weights the two distributions by an entropy term computed from the
   retrieved context, which an attacker owns, so the attack has exactly one
   objective: minimize that term. A best-of-five search over sentence forms

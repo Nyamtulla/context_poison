@@ -212,6 +212,35 @@ def main():
     # tracks only, because a "Both"-track paper cannot cross a boundary it
     # sits on; the all-pairs figure is kept beside it so neither reading is
     # lost.
+    # --- parallel arrival: who reaches each channel first, and how late is
+    # the other one. This is the measurement behind the claim that the two
+    # communities rediscover the same problem rather than building on each
+    # other. A channel where both have named a mechanism is shared ground;
+    # the gap is between the first paper from each side.
+    _hdr, _rows = corpus_rows()
+    _h = {k: i for i, k in enumerate(_hdr) if k}
+    _yr = {r[_h["paper_id"]]: r[_h["year"]] for r in _rows
+           if r[_h["paper_id"]] and r[_h["year"]]}
+    _mech = load("rq3_pollution_registry.json")
+    _mech = _mech if isinstance(_mech, list) else (
+        _mech.get("entries") or _mech.get("mechanisms"))
+    _first = {}
+    for e in _mech:
+        y, ch, tr = _yr.get(e.get("paper_id")), e.get("channel"), e.get("track")
+        if not (y and ch) or tr not in ("Security", "ML/AI"):
+            continue
+        y = int(str(y).split(".")[0])
+        _first.setdefault(ch, {}).setdefault(tr, []).append(y)
+    _shared = {c: v for c, v in _first.items() if len(v) == 2}
+    _gaps = {c: min(v["ML/AI"]) - min(v["Security"]) for c, v in _shared.items()}
+    M["NSharedChannels"] = len(_shared)
+    M["NChannelsSecFirst"] = sum(1 for g in _gaps.values() if g > 0)
+    M["NChannelsSameYear"] = sum(1 for g in _gaps.values() if g == 0)
+    M["NChannelsMLFirst"] = sum(1 for g in _gaps.values() if g < 0)
+    _lead = sorted(g for g in _gaps.values() if g > 0)
+    M["MedianChannelLag"] = (_lead[len(_lead) // 2] if _lead else 0)
+    M["MaxChannelLag"] = (max(_lead) if _lead else 0)
+
     tl = load("pair_timeline.json")["pairs"]
     M["NTimelinePairs"] = len(tl)
     _pre = [r for r in tl if r["defense_predates_attack"]]

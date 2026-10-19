@@ -321,6 +321,38 @@ the attack it was tested on, so defenses do meet later attacks. But only
 \NPredatesAndCross{} pair is both earlier \emph{and} cross-community.
 Figure~\ref{fig:lag} shows the full distribution.
 
+\subsection{The same ground, found twice}
+\label{sec:parallel}
+
+If two communities work one problem without reading each other, the second to
+arrive restates what the first already knows. The dates say this is what
+happens, and they say which direction it runs in.
+
+Eight of our nine channels have named mechanisms from both tracks. Comparing
+the first paper from each side in each of those channels:
+\textbf{the security literature arrives first in \NChannelsSecFirst{} of
+\NSharedChannels{}, both arrive in the same year in \NChannelsSameYear{}, and
+the machine learning literature arrives first in \NChannelsMLFirst{}.} The
+median lag where security leads is \MedianChannelLag{} year and the longest is
+\MaxChannelLag{}. The \meth{supply-chain} channel, excluded here for having no
+machine learning entry at all, is the limit case of the same pattern.
+
+Set that beside the citation rates. A machine learning paper naming a failure
+in a channel is, more often than not, naming something a security paper named
+one to three years earlier, in a literature it has a
+\PctMLCitesSec{}\% chance of citing. We are not claiming the later work is
+derivative: these are different research questions asked of the same surface,
+and arriving second at a problem is not a fault. We are claiming the obvious
+consequence, which is that neither side can tell whether the other has already
+answered its question, and Table~\ref{tab:transfer} shows that nobody has
+checked.
+
+Two limits on this reading. The dates are publication dates in our corpus, so
+a channel that security reached first in work we did not include would move
+the count. And the direction may partly reflect that security publishes
+attacks, which are discrete and nameable, while the machine learning side
+publishes degradations, which are noticed before they are named.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig7_lag}
