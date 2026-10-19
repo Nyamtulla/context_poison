@@ -129,8 +129,9 @@ def main() -> None:
             lines.append(f"  year      = {{{year}}},")
         if real_venue:
             lines.append(f"  booktitle = {{{esc(real_venue)}}},")
-        elif arxiv:
-            lines.append(f"  howpublished = {{arXiv:{esc(arxiv)}}},")
+        # No howpublished here. ACM-Reference-Format already renders
+        # eprint + archivePrefix as "arXiv:NNNN.NNNNN", so emitting both
+        # printed the identifier twice in every preprint reference.
         # Keep a publisher DOI, drop the arXiv one: with eprint present it is
         # the same identifier written twice.
         if doi and not str(doi).lower().startswith("10.48550"):
@@ -142,7 +143,11 @@ def main() -> None:
         # these, which sends a reader to an aggregator rather than to the
         # work. doi and eprint identify it better, so only a direct link
         # survives.
-        if url and "semanticscholar.org" not in str(url):
+        # Drop a url that only repeats the eprint. ACM-Reference-Format
+        # already prints "arXiv:NNNN.NNNNN" from eprint, so an arxiv.org link
+        # beside it names the same thing twice in the same reference.
+        redundant = arxiv and "arxiv.org" in str(url or "").lower()
+        if url and "semanticscholar.org" not in str(url) and not redundant:
             lines.append(f"  url       = {{{esc(url)}}},")
         # The corpus id is internal bookkeeping and used to be emitted as a
         # note. With 723 entries rendering, every reference carried a 40-digit
