@@ -121,6 +121,9 @@ def main() -> None:
         is_preprint = (venue or "").strip().lower() in PREPRINT
         real_venue = venue if (venue and not is_preprint) else None
 
+        # Never @article without a journal: ACM-Reference-Format prints
+        # "(year)" where the journal would be, so the year appears twice in
+        # the rendered reference.
         kind = "inproceedings" if real_venue else "misc"
         lines = [f"@{kind}{{{key},",
                  f"  title     = {{{esc(title)}}},",
