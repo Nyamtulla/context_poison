@@ -1,14 +1,14 @@
 Two research communities study the same failure in large language model
-agents, and neither tests the other's work. Security researchers study context
+agents, and neither tests the other's work. Security researchers study the context
 an attacker changes on purpose; machine learning researchers study context that
 becomes wrong on its own. The vocabularies differ, the failure does not: either
 way the model cannot tell which part of its context deserves trust. We measure
 that separation rather than assert it. From \NCorpus{} papers read in full we
 recover \NPureTrackPairs{} confirmed (defense, attack) pairs, of which only
 \NCrossCommunityPairs{} (\PctCrossCommunity{}\%) cross between the two
-communities. One direction is empty outright: \textbf{no security defense in
-our corpus has ever been evaluated against a machine learning failure
-mechanism.}
+communities. One direction is empty outright, according to our
+corpus: \textbf{no security defense has ever been evaluated against a machine
+learning failure mechanism.}
 
 So we ran it. We executed \NCampaignPairs{} (defense, attack)
 pairs across \NCampaignImpl{} implementations and \NCampaignEpisodes{} scored
