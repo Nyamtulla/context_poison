@@ -94,9 +94,9 @@ def main():
          r"named nothing, and are ordered by how many defenses have been "
          r"evaluated against them. The channels both communities name are the "
          r"first four rows; the last five are named by the security "
-         r"literature almost alone. Every technique named here, and every "
-         r"other entry in the registry, is cited individually in "
-         r"Appendix~\ref{sec:census}.}",
+         # APPENDIX-OFF: the second sentence points at sections/A-census and
+         # is dropped while that appendix is commented out of main.tex.
+         r"literature almost alone.}",
          r"\label{tab:channels}",
          r"\small",
          r"\begin{tabular}{@{}lrrp{0.31\textwidth}p{0.31\textwidth}@{}}",

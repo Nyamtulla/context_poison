@@ -27,7 +27,11 @@ fi
 
 pages=$(pdfinfo main.pdf | awk '/^Pages/{print $2}')
 over=$(grep -oE 'Overfull \\hbox \([0-9.]+pt' /tmp/paper_build.log | grep -oE '[0-9.]+' | awk '$1>15' | wc -l)
-undef=$(grep -cE "Citation .* undefined|Reference .* undefined" /tmp/paper_build.log)
+undef=$(grep -cE "Citation .* undefined|Reference .* undefined|undefined (reference|citation)" /tmp/paper_build.log)
+# The log grep alone missed three dangling \ref that rendered as "??" on the
+# page, so check the rendered text too. That is the thing a reader sees.
+qq=$(pdftotext main.pdf - 2>/dev/null | grep -oE '\?\?|⁇' | wc -l)
+undef=$(( undef + qq ))
 echo "built  $OUT/main.pdf"
 echo "  pages              $pages"
 echo "  undefined cites/refs $undef   (must be 0)"
