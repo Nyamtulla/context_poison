@@ -10,7 +10,8 @@
  "mdr_pp_at_n": 9.9,
  "prediction": "scr degrades less than rag because the poisoned passage does not read as credible evidence and scr is asked to notice; survives only if scr sits above closedbook on clean context",
  "fracs_done": [
-  0.0
+  0.0,
+  0.1
  ],
  "results": [
   {
@@ -50,6 +51,45 @@
    "ci_high": 48.9,
    "condition": "clean (native incidental conflict)",
    "frac": 0.0,
+   "arm": "scr"
+  },
+  {
+   "dist_acc": 38.75,
+   "n": 400,
+   "ctx_acc": 24.75,
+   "pm_acc": 9.5,
+   "mr": 27.74,
+   "em": 22.25,
+   "ci_low": 20.8,
+   "ci_high": 29.2,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "rag"
+  },
+  {
+   "dist_acc": 0.5,
+   "n": 400,
+   "ctx_acc": 5.25,
+   "pm_acc": 58.75,
+   "mr": 91.8,
+   "em": 5.0,
+   "ci_low": 3.5,
+   "ci_high": 7.9,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
+   "arm": "closedbook"
+  },
+  {
+   "dist_acc": 16.5,
+   "n": 400,
+   "ctx_acc": 18.0,
+   "pm_acc": 33.5,
+   "mr": 65.05,
+   "em": 15.5,
+   "ci_low": 14.5,
+   "ci_high": 22.1,
+   "condition": "corpus poisoning, 10% of context",
+   "frac": 0.1,
    "arm": "scr"
   }
  ]
