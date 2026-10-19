@@ -11,7 +11,9 @@
  "prediction": "scr degrades less than rag because the poisoned passage does not read as credible evidence and scr is asked to notice; survives only if scr sits above closedbook on clean context",
  "fracs_done": [
   0.0,
-  0.1
+  0.1,
+  0.5,
+  1.0
  ],
  "results": [
   {
@@ -90,6 +92,84 @@
    "ci_high": 22.1,
    "condition": "corpus poisoning, 10% of context",
    "frac": 0.1,
+   "arm": "scr"
+  },
+  {
+   "dist_acc": 51.25,
+   "n": 400,
+   "ctx_acc": 12.75,
+   "pm_acc": 10.5,
+   "mr": 45.16,
+   "em": 10.25,
+   "ci_low": 9.8,
+   "ci_high": 16.4,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "rag"
+  },
+  {
+   "dist_acc": 0.5,
+   "n": 400,
+   "ctx_acc": 5.25,
+   "pm_acc": 58.75,
+   "mr": 91.8,
+   "em": 5.0,
+   "ci_low": 3.5,
+   "ci_high": 7.9,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "closedbook"
+  },
+  {
+   "dist_acc": 16.0,
+   "n": 400,
+   "ctx_acc": 11.75,
+   "pm_acc": 36.75,
+   "mr": 75.77,
+   "em": 10.0,
+   "ci_low": 9.0,
+   "ci_high": 15.3,
+   "condition": "corpus poisoning, 50% of context",
+   "frac": 0.5,
+   "arm": "scr"
+  },
+  {
+   "dist_acc": 66.5,
+   "n": 400,
+   "ctx_acc": 2.0,
+   "pm_acc": 14.0,
+   "mr": 87.5,
+   "em": 1.75,
+   "ci_low": 1.0,
+   "ci_high": 3.9,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "rag"
+  },
+  {
+   "dist_acc": 0.5,
+   "n": 400,
+   "ctx_acc": 5.25,
+   "pm_acc": 58.75,
+   "mr": 91.8,
+   "em": 5.0,
+   "ci_low": 3.5,
+   "ci_high": 7.9,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
+   "arm": "closedbook"
+  },
+  {
+   "dist_acc": 15.25,
+   "n": 400,
+   "ctx_acc": 4.75,
+   "pm_acc": 48.75,
+   "mr": 91.12,
+   "em": 4.5,
+   "ci_low": 3.1,
+   "ci_high": 7.3,
+   "condition": "corpus poisoning, 100% of context",
+   "frac": 1.0,
    "arm": "scr"
   }
  ]

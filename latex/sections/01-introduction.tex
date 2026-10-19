@@ -1,8 +1,8 @@
 \section{Introduction}
 
-An LLM agent reads from many places. It reads retrieved documents, the output
-of the tools it calls, the descriptions of the tools themselves, files and
-skills it loads, messages from other agents, and its own stored memory. All of
+An LLM agent reads from many places. It reads retrieved documents and the output of the tools it calls. It reads
+the descriptions of those tools, the files and skills it loads, and messages
+from other agents. It also reads its own stored memory. All of
 this arrives in one context window, and the model treats it as one body of
 text. The model has no reliable way to tell which part of that text is
 trustworthy and which part is not.
@@ -18,9 +18,10 @@ them~\cite{xiang-2024-certifiably,liu-2025-datasentinel,an-2025-ipiguard}.
 Success means the attacker fails to achieve a goal.
 
 The machine learning community studies content that became wrong without any
-attacker. It names mechanisms such as lost-in-the-middle~\cite{liu-2023-lost},
-context rot, and knowledge conflict between a retrieved passage and what the
-model already learned~\cite{xie-2023-adaptive}, and it publishes fixes for
+attacker. It names mechanisms such as lost-in-the-middle~\cite{liu-2023-lost} and
+context rot. It also names knowledge conflict, where a retrieved passage
+disagrees with what the model already
+learned~\cite{xie-2023-adaptive}. It publishes fixes for
 them~\cite{huang-2025-parammute,bi-2025-parameters,yuan-2024-discerning}.
 Success means accuracy goes up.
 
@@ -32,15 +33,15 @@ The difference is not merely one of vocabulary. If it were, a reader could
 translate between the two communities and lose nothing. They differ in
 something load-bearing: what counts as a successful evaluation.
 
-A fix for the accidental case is measured on an average-case benchmark,
-because nothing is adapting to it. A defense for the adversarial case is
-measured against a worst case, because something is. Those are not two styles
-of the same test. A method can pass the first convincingly and fail the second
-completely, and nothing in either community's publishing process would catch
-it, because each reviews against its own convention.
+Researchers measure a fix for the accidental case on an average-case
+benchmark, because nothing adapts to it. They measure a defense for the
+adversarial case against a worst case, because something does. Those are not two styles
+of the same test. A method can pass the first test convincingly and fail the second one
+completely. Neither community's publishing process catches this, because each
+reviews against its own convention.
 
-So a method can be published, adopted, and cited without anyone asking whether
-it survives the other community's threat model.
+So the field publishes, adopts, and cites a method without anyone asking
+whether it survives the other community's threat model.
 
 That is a testable claim about the literature, not a complaint about it. We
 test it by reading both literatures under one taxonomy and recovering every
@@ -73,37 +74,35 @@ experiments that fall in it.
 The second and third questions are the ones a survey normally cannot answer.
 They are what turns a coverage gap from an observation into evidence.
 
-Both literatures have been surveyed before, each from inside itself, and we
-borrow from those surveys rather than competing with them. What is new here is
+Others have surveyed both literatures before, each from inside itself. We
+borrow from those surveys rather than compete with them. What is new here is
 that one corpus, one taxonomy and one harness span both. That is what makes the
-empty cell visible: a survey of either literature alone cannot report a gap
-whose definition depends on the other, because the other is not in its corpus.
-It is also what makes the cell fillable, since the same taxonomy that locates a
-missing experiment names the artifacts that would run it. To our knowledge
+empty cell visible. A survey of one literature cannot report a gap that the
+other literature defines, because the other literature is not in its corpus.
+It also makes the cell fillable. The taxonomy that locates a missing
+experiment also names the artifacts that would run it. To our knowledge
 this is the first evaluation in which published defenses from one of these
 communities meet published failure mechanisms from the other.
 
-A negative result is easy to produce by accident, so four rules were fixed
-before any run: a defense must reproduce its own published benefit in our
-harness before we report a transfer number from it, an attack must damage the
-undefended arm in the same run, effects below a detectability threshold are
-reported as no resolvable effect rather than as no effect, and every
-prediction was committed to version control first.
+A negative result is easy to produce by accident. Four rules guard against
+that, and we fixed all four before any run. A defense must first reproduce its
+own published benefit in our harness. An attack must damage the undefended arm
+in the same run. An effect below the detectability threshold counts as no
+resolvable effect, not as no effect. And we commit every prediction to version
+control first.
 Section~\ref{sec:experiments} states each rule in full, and
 Section~\ref{sec:results2} reports the three occasions on which a control
 overturned a conclusion we had already drawn.
 
 \paragraph{Scope.}
 Three limits are worth stating before the contributions rather than after
-them. Our retrieval-cell experiments use one item set per cell, so they
-measure what a generator does with poisoned context and not how hard a
-retriever is to poison. Most of them use one model family at one size, and our
-own model control shows that changing the model changes outcomes, so the
-numbers hold for models of that class rather than in general. And every attack
-in the campaign except the two in Section~\ref{sec:adaptive} was built without
-knowledge of the defense it meets, which bounds attack strength from below:
-conservative evidence when a defense fails, and no evidence at all when one
-holds. Section~\ref{sec:threats} gives the full list.
+them. Our retrieval-cell experiments use one item set per cell. They measure what a
+generator does with poisoned context, not how hard a retriever is to poison. Most of them use one model family at one size. Our own model control shows
+that a different model gives different outcomes. The numbers therefore hold
+for models of that class, not in general. Every attack in the campaign, except the two in
+Section~\ref{sec:adaptive}, knows nothing of the defense it meets. That bounds
+attack strength from below. It gives conservative evidence when a defense
+fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives the full list.
 
 \paragraph{Contributions.}
 \begin{itemize}
