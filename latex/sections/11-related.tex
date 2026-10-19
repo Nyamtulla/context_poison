@@ -1,27 +1,26 @@
-\section{Related work}
-\label{sec:related}
+\section{Related work} \label{sec:related}
 
 \subsection{Systematizations of a single literature}
 
-The security side has been systematized repeatedly and well. Work on the
+Others have systematized the security side repeatedly and well. Work on the
 agent attack surface enumerates attack classes against tool-using
 systems~\cite{dehghantanha-2026-sok,chu-2026-systematic}, including the skill
-and tool channels specifically~\cite{jiang-2026-sok}. Work on the
-prompt-injection landscape codes injection papers into structured comparison
-tables by method, surface, victim goal and
+and tool channels specifically~\cite{jiang-2026-sok}. Other work codes
+injection papers into structured comparison tables, by method, by surface, by
+victim goal and by
 capability~\cite{yusifov-2026-taxonomy,duarte-2026-systematic}. Others take a
 lifecycle or stack view of where an LLM system is
-exposed~\cite{natanzi-2026-lifecycle,nemure-2026-llm}, trace long-term memory
-as its own attack surface~\cite{lin-2026-survey}, or survey agent
+exposed~\cite{natanzi-2026-lifecycle,nemure-2026-llm}. Others trace long-term
+memory as its own attack surface~\cite{lin-2026-survey}. Others survey agent
 trustworthiness broadly~\cite{qi-2026-trustworthy,mohan-2026-agent}. All are
-careful. All are confined to the security literature.
+careful. All of them stay inside the security literature.
 
 The machine learning side has its own systematizations, and they do not
-overlap. Knowledge conflict between retrieved text and parametric memory has
-been surveyed on its own terms~\cite{xu-2024-knowledge}, as a problem of
-accuracy rather than of adversaries. That survey and the security ones above
-describe the same context window and share almost no references, which is the
-separation this paper measures rather than asserts.
+overlap. One survey covers knowledge conflict between retrieved text and
+parametric memory on its own terms~\cite{xu-2024-knowledge}. It treats the
+problem as one of accuracy, not of adversaries. That survey and the security
+ones above describe the same context window. They share almost no references.
+This paper measures that separation rather than asserts it.
 
 Three 2026 works sit closest to ours. A taxonomy-to-analysis study of the
 prompt-injection threat landscape~\cite{wang-2026-landscape} codes injection
@@ -30,54 +29,52 @@ interaction. PIArena~\cite{piarena-2026} is a modular platform for running
 injection attacks against injection defenses, and reports that defenses once
 judged effective lose robustness on more diverse attacks. A concurrent
 evaluation of injection defenses~\cite{pidefense-eval-2026} finds that every
-defense relying on the model to protect itself breaks under an adaptive
-attacker, which is the same direction as our Section~\ref{sec:adaptive} result
-and reached on a disjoint set of methods. All three are security-side, which
-is what our corpus measures as the problem rather than a criticism of them.
+defense which relies on the model to protect itself breaks under an adaptive
+attacker. That is the same direction as our Section~\ref{sec:adaptive} result,
+reached on a disjoint set of methods. All three are security-side, which is
+what our corpus measures as the problem rather than a criticism of them.
 
-Our contribution is not a better enumeration of either side. It is that one
-search protocol, one screening pass and one taxonomy are applied to both, which
+Our contribution is not a better enumeration of either side. It is that we
+apply one search protocol, one screening pass and one taxonomy to both. That
 is what makes the distance between them measurable. A systematization drawn
-from one literature cannot report that 9 papers in 10 do not cite the other, or
-that \PctSameTrack{}\% of tested pairs stay inside one track, because the other track is
-not in its corpus.
+from one literature cannot report that 9 papers in 10 do not cite the other.
+Nor can it report that \PctSameTrack{}\% of tested pairs stay inside one
+track. The other track is not in its corpus.
 
 \subsection{Platforms that run attacks against defenses}
 
 The closest precedent is not a survey but a platform.
-DEEPSEC~\cite{ling-2019-deepsec} ran 16 adversarial-example attacks against
-13 defenses in one harness, which is structurally what we do here. It was also
-taken apart in public~\cite{carlini-2019-critique}. The criticisms are worth naming, because
-they define what such a platform has to get right. DEEPSEC evaluated defenses
-only against attacks crafted on undefended models. It reported robustness as an
-average over attacks, not against the strongest. It reimplemented several
-attacks and one defense incorrectly. And it reported no
+DEEPSEC~\cite{ling-2019-deepsec} ran 16 adversarial-example attacks against 13
+defenses in one harness, which is structurally what we do here. It was also
+taken apart in public~\cite{carlini-2019-critique}. The criticisms are worth
+naming, because they define what such a platform has to get right. DEEPSEC
+evaluated defenses only against attacks crafted on undefended models. It
+reported robustness as an average over attacks, not against the strongest. It
+reimplemented several attacks and one defense incorrectly. And it reported no
 variance at all.
 
 We took those as a specification. We do not reimplement: every method runs
-from its authors' released code and weights. The control-fires-first rule automates the
-check Carlini had to run by hand, and it fired on FaithfulRAG, which we report
-as not reportable rather than as defeated. We
-report per-cell rather than averaging across threat models, and we say so where
-a cross-payload comparison is confounded. We use greedy decoding throughout rather than
-reporting error bars over a stochastic decoder, and we verified that choice by
-rerunning a cell three times for byte-identical output
-(Section~\ref{sec:threats}). The one criticism
-we inherit is obliviousness, and Sections~\ref{sec:experiments}
+from its authors' released code and weights. The control-fires-first rule
+automates the check Carlini had to run by hand. It fired on FaithfulRAG, which
+we therefore report as not reportable rather than as defeated. We report per
+cell and never average across threat models. We also say where a cross-payload
+comparison is confounded. We use greedy decoding throughout, so we report no
+error bars over a stochastic decoder. We verified that choice: a cell rerun
+three times gives byte-identical output (Section~\ref{sec:threats}). The one
+criticism we inherit is obliviousness, and Sections~\ref{sec:experiments}
 and~\ref{sec:adaptive} state its direction and test the single claim that
 needs it.
 
 The reproducibility study of Olszewski et
 al.~\cite{olszewski-2023-reproducibility} is the methodological precedent for
-the other half: sampling papers from a venue, attempting to reproduce them, and
-reporting what failed and why. Our roadblock accounting in
-Section~\ref{sec:discussion} is in that genre, and our finding that several
-published defenses cannot be run from their released artifacts is consistent
-with theirs.
+the other half. They sample papers from a venue, try to reproduce them, and
+report what failed and why. Our roadblock accounting in
+Section~\ref{sec:discussion} is in that genre. Several published defenses do
+not run from their released artifacts, which agrees with what they found.
 
 The second difference is that we execute. Existing systematizations in this
 space report what papers claim their methods achieve. Section~\ref{sec:whoran}
-is our reason for not doing that: in this field the reported outcome of a
-(defense, attack) pair is close to determined by which side of the community
-wrote the paper. A systematization that aggregates those reports inherits that
+is our reason for not doing that. In this field, the side of the community
+that wrote the paper almost determines the reported outcome of a (defense,
+attack) pair. A systematization that aggregates those reports inherits that
 bias. Running the artifacts is the only way we found to avoid it.

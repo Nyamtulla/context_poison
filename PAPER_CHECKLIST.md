@@ -8,6 +8,7 @@ against the same bar.
 
 ```bash
 scripts/build_paper.sh                      # compile; fails loudly, reports page counts
+python3 scripts/check_ste.py                # simplified-English score; target 80%
 python3 scripts/check_paper_style.py        # style, structure, the checkable crimes
 python3 scripts/check_macros.py             # no orphan or undefined macros
 python3 scripts/check_paper_invariants.py --save /tmp/before.json
@@ -57,6 +58,33 @@ each step easy.
       they vivid, or buried?
 - [ ] **Venue fit.** Judged against that venue's call for papers. *Not yet
       decided for this paper.*
+
+## Simplified Technical English
+
+The lead asked for ASD-STE100 at 80%. `scripts/check_ste.py` measures the
+structural half of the standard, which is the half that applies here:
+
+| | |
+|---|---|
+| sentence | at most 25 words, one idea |
+| paragraph | at most 10 sentences |
+| voice | active; name the actor |
+| verbs | simple tenses, no progressive where a finite verb works |
+| nouns | at most three in a row |
+
+The controlled-vocabulary half does not apply. STE's approved list has no word
+for *entropy* or *adversarial*, and the standard handles this with Technical
+Names, which is the exemption this paper uses.
+
+100% is not the goal and would damage the prose: some claims need a
+subordinate clause, and a passive is right when the actor is genuinely unknown
+or irrelevant. The abstract, introduction and appendix sit at 100% because
+they happened to; the results sections sit lower because tables and
+comparisons need longer sentences.
+
+**The score cannot see clause depth.** A 38-word sentence with three nested
+clauses passes the length rule and is still hard to read. Only a person
+catches that.
 
 ## Writing (VUSEC, McDaniel)
 

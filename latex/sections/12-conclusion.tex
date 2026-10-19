@@ -7,30 +7,27 @@ community calls the content an attack and builds defenses. The machine learning
 community calls it a mechanism and builds fixes.
 
 We measured the distance between them over \NCorpus{} papers read in full.
-About one paper in ten cites the other side, \NBothValidated{} of
-\NDefenses{} defenses were validated against both threat models, and
-\PctSameTrack{}\% of tested (defense, attack) pairs stay inside a single
-track. One direction of the cross-testing matrix is empty outright: no
-security defense in our corpus has ever been evaluated against a machine
-learning failure mechanism.
+About one paper in ten cites the other side. Only \NBothValidated{} of
+\NDefenses{} defenses answer to both threat models. And \PctSameTrack{}\% of
+tested (defense, attack) pairs stay inside a single track. One direction of the cross-testing matrix is empty outright. No security
+defense in our corpus has ever met a machine learning failure mechanism.
 
 We then ran that experiment. \NCampaignPairs{} pairs, all on the authors'
 released artifacts. \PctOursCross{}\% of the retrieval-cell ones cross the
 boundary the literature does not.
 
-At the 10\% dose, where nine tenths of the honest document survives and a
-defense has its best chance, not one of 16 (defense, payload) pairs shows a
-resolvable benefit.
+The 10\% dose gives a defense its best chance, because nine tenths of the
+honest document survives. Not one of 16 (defense, payload) pairs shows a
+resolvable benefit there.
 
-\textbf{The finding is a mechanism, not a verdict.} Context-reliance defenses
-do not fail because they are badly built. They fail because of what they
+\textbf{The finding is a mechanism, not a verdict.} Context-reliance defenses do not fail because someone built them badly. They fail because of what they
 arbitrate. Each one decides between trusting the context and trusting memory,
 and that dial moves correctness around without creating any. Suppress memory
 and the attacker receives what memory held. Suppress the attacker and memory
 receives it back.
 
-We showed this directly. A payload that plants a third answer separates
-copying from remembering, so the two movements can be added up. In the three defenses that suppress
+We showed this directly. A payload that plants a third answer separates copying from remembering, so
+we can add the two movements together. In the three defenses that suppress
 memory they cancel to within 8 points. Neither direction moves anything
 toward the real document, because the dial has no setting for it. The attack
 is inside the context.
@@ -43,16 +40,15 @@ payloads therefore overstates how well a system holds. The fluent payload
 needs no gradient access and damages an undefended model roughly twice as
 hard.
 
-Second, the one defense that resisted loses 58\% of its protection to an
-attacker who reads its rule and optimizes against the single quantity it
-measures.
+Second, one defense did resist. It loses 58\% of that protection to an
+attacker who reads its rule and optimizes against the quantity it measures.
 
 \paragraph{Future work.}
 
-\textbf{Extend the adaptive case to the rest of the family.} We tested the one
-defense that resisted, with two optimizers: a best-of-five search over sentence
-forms and a gradient search over token ids, which took 29\% and 58\% of its
-protection respectively and settled that it degrades rather than collapses.
+\textbf{Extend the adaptive case to the rest of the family.} We tested the one defense that resisted,
+with two optimizers. A best-of-five search over sentence forms took 29\% of
+its protection. A gradient search over token ids took 58\%. Together they
+settle that the defense degrades rather than collapses.
 Every other context-reliance method in the campaign has had only the
 non-adaptive treatment, which Section~\ref{sec:experiments} states is no
 evidence of robustness at all. The same two optimizers transfer directly: each
@@ -71,8 +67,7 @@ evaluate are the agent-shaped ones. Running all three intervention points
 inside one agent harness would resolve it.
 
 \textbf{Make the empty cell the default, not the exception.} The deepest
-problem this paper documents is not any single defense. It is that reported
-outcomes are conditioned on who ran the experiment, and that nothing in current
-practice corrects for it. A shared harness that pairs defenses with attacks
-selected by a taxonomy rather than by either author would make transfer a
-measured property rather than an assumed one. We release ours.
+problem this paper documents is not any single defense. It is that who runs an experiment predicts its
+outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair defenses with attacks that a
+taxonomy selects, not attacks that either author selects. Transfer then
+becomes a measured property rather than an assumed one. We release ours.
