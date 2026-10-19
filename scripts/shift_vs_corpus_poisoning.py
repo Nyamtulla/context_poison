@@ -178,8 +178,9 @@ def main():
                               args.max_new_tokens, field)
             r.update(condition=name, frac=frac, arm=arm)
             results.append(r)
+            _d = f"  dist {r['dist_acc']:5.1f}%" if "dist_acc" in r else ""
             print(f"  {name:<36} ctx_acc {r['ctx_acc']:5.1f}%  "
-                  f"pm_acc {r['pm_acc']:5.1f}%  mr {r['mr']:5.1f}%", flush=True)
+                  f"pm_acc {r['pm_acc']:5.1f}%{_d}  mr {r['mr']:5.1f}%", flush=True)
         del model
         torch.cuda.empty_cache()
 

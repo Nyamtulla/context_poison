@@ -30,6 +30,7 @@ information, grouped activations and memorised sets under
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import pathlib
@@ -156,11 +157,16 @@ def main():
             if data and data[0].get("distractor_answer") is not None:
                 r["dist_acc"] = round(t["dist"] / n * 100, 2)
             results.append(r)
-            print(f"  {arm:<24} ctx_acc {ctx:5.1f}%  pm_acc {pm:5.1f}%  mr {r['mr']:5.1f}%",
-                  flush=True)
+            _d = f"  dist {r['dist_acc']:5.1f}%" if "dist_acc" in r else ""
+            print(f"  {arm:<24} ctx_acc {ctx:5.1f}%  pm_acc {pm:5.1f}%{_d}"
+                  f"  mr {r['mr']:5.1f}%", flush=True)
 
-    out = {"generated": "2026-10-02", "dataset": args.data, "n": len(data),
+    out = {"generated": "2026-10-19", "dataset": args.data, "n": len(data),
            "model": args.model, "scorer": "shared normalize+substring rubric",
+           "defense": "spare", "attack": args.attack,
+           "payload_fingerprint": hashlib.sha256(
+               (passage if passage is not None
+                else data[0][field]).encode()).hexdigest()[:16],
            "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
            "results": results}
     (REPO / args.out).write_text(json.dumps(out, indent=1))

@@ -264,8 +264,9 @@ def main():
         for arm in ARMS:
             r = got[arm]; r.update(condition=name, frac=frac, arm=arm)
             results.append(r)
+            _d = f"  dist {r['dist_acc']:5.1f}%" if "dist_acc" in r else ""
             print(f"    {arm:<11} ctx_acc {r['ctx_acc']:5.1f}%  pm_acc {r['pm_acc']:5.1f}%"
-                  f"  mr {r['mr']:5.1f}%  em {r['em']:5.1f}%", flush=True)
+                  f"{_d}  mr {r['mr']:5.1f}%  em {r['em']:5.1f}%", flush=True)
         if dump is not None:
             for i, d in enumerate(data):
                 dump.append({"frac": frac, "question": d["question"],
