@@ -1,0 +1,109 @@
+{
+ "generated": "2026-10-19",
+ "dataset": "NaturalQuestionsShort_kc_distractor.jsonl",
+ "n": 400,
+ "model": "NousResearch/Meta-Llama-3-8B",
+ "scorer": "shared normalize+substring rubric",
+ "defense": "spare",
+ "attack": "distractor_evidence",
+ "payload_fingerprint": "fd74b3e27116ffcb",
+ "mdr_pp_at_n": 9.9,
+ "results": [
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "steer_to_use_context",
+   "n": 400,
+   "ctx_acc": 55.25,
+   "pm_acc": 9.0,
+   "mr": 14.01,
+   "ci_low": 50.4,
+   "ci_high": 60.0,
+   "dist_acc": 0.25
+  },
+  {
+   "condition": "clean (native incidental conflict)",
+   "frac": 0.0,
+   "arm": "steer_to_use_parameter",
+   "n": 400,
+   "ctx_acc": 42.0,
+   "pm_acc": 17.5,
+   "mr": 29.41,
+   "ci_low": 37.3,
+   "ci_high": 46.9,
+   "dist_acc": 0.25
+  },
+  {
+   "condition": "distractor evidence, 10% of context",
+   "frac": 0.1,
+   "arm": "steer_to_use_context",
+   "n": 400,
+   "ctx_acc": 19.0,
+   "pm_acc": 4.75,
+   "mr": 20.0,
+   "ci_low": 15.5,
+   "ci_high": 23.1,
+   "dist_acc": 51.0
+  },
+  {
+   "condition": "distractor evidence, 10% of context",
+   "frac": 0.1,
+   "arm": "steer_to_use_parameter",
+   "n": 400,
+   "ctx_acc": 22.75,
+   "pm_acc": 26.0,
+   "mr": 53.33,
+   "ci_low": 18.9,
+   "ci_high": 27.1,
+   "dist_acc": 14.75
+  },
+  {
+   "condition": "distractor evidence, 50% of context",
+   "frac": 0.5,
+   "arm": "steer_to_use_context",
+   "n": 400,
+   "ctx_acc": 9.75,
+   "pm_acc": 2.5,
+   "mr": 20.41,
+   "ci_low": 7.2,
+   "ci_high": 13.1,
+   "dist_acc": 63.75
+  },
+  {
+   "condition": "distractor evidence, 50% of context",
+   "frac": 0.5,
+   "arm": "steer_to_use_parameter",
+   "n": 400,
+   "ctx_acc": 15.25,
+   "pm_acc": 31.25,
+   "mr": 67.2,
+   "ci_low": 12.1,
+   "ci_high": 19.1,
+   "dist_acc": 20.75
+  },
+  {
+   "condition": "distractor evidence, 100% of context",
+   "frac": 1.0,
+   "arm": "steer_to_use_context",
+   "n": 400,
+   "ctx_acc": 0.75,
+   "pm_acc": 0.25,
+   "mr": 25.0,
+   "ci_low": 0.3,
+   "ci_high": 2.2,
+   "dist_acc": 85.25
+  },
+  {
+   "condition": "distractor evidence, 100% of context",
+   "frac": 1.0,
+   "arm": "steer_to_use_parameter",
+   "n": 400,
+   "ctx_acc": 7.5,
+   "pm_acc": 33.25,
+   "mr": 81.6,
+   "ci_low": 5.3,
+   "ci_high": 10.5,
+   "dist_acc": 28.75
+  }
+ ]
+}
