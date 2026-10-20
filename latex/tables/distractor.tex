@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\caption{Context-reliance defenses against the distractor payload, at
+saturation. Memory is the parametric-answer rate, copied is the planted
+answer, correct is the gold answer; the three are disjoint, so the residual
+is mass that leaves the partition altogether. $*$ clears both the run's
+detectability threshold and Fisher at $p<0.05$.}
+\label{tab:distractor}
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+defense & $n$ & memory & copied & correct & residual \\
+\midrule
+ParamMute &  781 & $-36.1^{*}$ & $+37.5^{*}$ & $-3.8$ & $+1.4$ \\
+CK-PLUG   &  781 & $-31.6^{*}$ & $+38.8^{*}$ & $-7.2^{*}$ & $+7.2$ \\
+COIECD    &  400 & $-5.5$ & $+4.8$ & $-0.8$ & $-0.8$ \\
+ACD       &  686 & $+18.4^{*}$ & $-35.1^{*}$ & $+2.6$ & $-16.8$ \\
+SCR       &  400 & $+34.8^{*}$ & $-51.2^{*}$ & $+2.8$ & $-16.5$ \\
+\midrule
+SpARE$^{\dagger}$ &  400 & $+33.0^{*}$ & $-56.5^{*}$ & $+6.8$ & $-23.5$ \\
+\bottomrule
+\end{tabular}
+\\[2pt]
+{\footnotesize $^{\dagger}$SpARE's run carries no undefended arm, so its row
+compares steering toward memory against steering toward the context. It is
+not a defended-minus-undefended delta and does not belong in the same column
+of judgement as the rows above.}
+\end{table}
