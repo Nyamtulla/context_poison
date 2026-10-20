@@ -36,6 +36,16 @@ SEQ = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#2a78d6", "#256abf",
 # Security is red, machine learning is blue. Validated for deuteranopia and
 # protanopia (OKLab separation 28.8 / 25.0, floor is 8).
 TRACK_SEC, TRACK_ML = "#d6452a", "#2a78d6"
+
+# Ramps for magnitude. A panel that IS one track takes that track's ramp; a
+# panel that mixes tracks takes the neutral one, so a hue never means
+# "magnitude" and "track" in the same figure.
+SEQ_SEC = ["#fbdcd3", "#f6b9a8", "#ef947c", "#e76f52", "#d6452a", "#bf3d25",
+           "#ab361f", "#95301b", "#812814", "#6b1f0d"]
+SEQ_NEUTRAL = ["#f0efec", "#dcdbd7", "#c6c5c0", "#aeada8", "#969590",
+               "#7e7d78", "#666561", "#4e4d4a", "#383734", "#232220"]
+# Hues for distinctions that are NOT track. Red and blue are spoken for.
+ALT_A, ALT_B, ALT_C = "#1baf7a", "#eda100", "#8a5a2b"
 GREY_MID = "#f0efec"
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 
@@ -109,11 +119,13 @@ def fig_cube():
                 g[CHANNELS.index(c), CONSEQ.index(q)] += 1
         grids[track] = g
 
-    cmap = LinearSegmentedColormap.from_list("seq", SEQ)
+    ramps = {"Security": LinearSegmentedColormap.from_list("sec", SEQ_SEC),
+             "ML/AI": LinearSegmentedColormap.from_list("ml", SEQ)}
     vmax = max(g.max() for g in grids.values())
     fig, axes = plt.subplots(1, 2, figsize=(FULL, 2.9), constrained_layout=True)
     for ax, (track, g) in zip(axes, grids.items()):
         masked = np.ma.masked_where(g == 0, g)
+        cmap = ramps[track]
         cmap.set_bad(color="white")
         ax.imshow(masked, cmap=cmap, vmin=0, vmax=vmax, aspect="auto")
         for i in range(len(CHANNELS)):
@@ -132,7 +144,8 @@ def fig_cube():
         ax.set_yticklabels(CHANNELS if track == "Security" else [], fontsize=6.5)
         lab = "adversarial (Security track)" if track == "Security" else \
               "incidental (ML/AI track)"
-        ax.set_title(lab, fontsize=7.5, color=INK)
+        ax.set_title(lab, fontsize=7.5,
+                     color=TRACK_SEC if track == "Security" else TRACK_ML)
         for s in ax.spines.values():
             s.set_visible(False)
         ax.tick_params(length=0)
@@ -154,9 +167,9 @@ def fig_channel_gap():
     h = 0.38
     fig, ax = plt.subplots(figsize=(COL, 2.5), constrained_layout=True)
     ax.barh(y + h / 2, [m[c] for c in order], h, label="named mechanisms",
-            color=CAT[0])
+            color=ALT_A)
     ax.barh(y - h / 2, [d[c] for c in order], h, label="named defenses",
-            color=CAT[1])
+            color=ALT_B)
     for i, c in enumerate(order):
         ratio = (d[c] / m[c]) if m[c] else 0
         ax.text(max(m[c], d[c]) + 4, i, f"{ratio:.1f}x", va="center",
@@ -186,9 +199,9 @@ def fig_who_reports():
     fig, ax = plt.subplots(figsize=(COL, 1.6), constrained_layout=True)
     for i, (lab, win, inc, lose) in enumerate(data):
         left = 0
-        for v, col, name in ((win, CAT[0], "defense wins"),
+        for v, col, name in ((win, ALT_A, "defense wins"),
                              (inc, "#d8d7d2", "inconclusive"),
-                             (lose, "#d6452a", "defense loses")):
+                             (lose, ALT_C, "defense loses")):
             ax.barh(i, v, left=left, color=col, height=.5,
                     label=name if i == 0 else None)
             if v >= 8:
@@ -237,6 +250,11 @@ def fig_dose():
             ("SCR", "scr_vs_corpus_poisoning.json", "rag", "scr", 9.9)]
     fracs = [0.0, 0.1, 0.5, 1.0]
     MARK = ["o", "s", "^", "D", "v", "P"]
+    # Every defense plotted here is an ML/AI-track method, so they share the
+    # ML/AI hue and are told apart by marker, which the significance fill
+    # already relies on. Six separable hues are not available once red and
+    # blue are reserved for track.
+    DOSE_BLUES = [SEQ[2], SEQ[3], SEQ[4], SEQ[5], SEQ[7], SEQ[9]]
     fig, ax = plt.subplots(figsize=(COL * 1.55, 2.5), constrained_layout=True)
     ax.axhline(0, color=INK2, linewidth=0.8, zorder=2)
     for i, (name, fn, u, d, mdr) in enumerate(RUNS):
@@ -253,7 +271,7 @@ def fig_dose():
                 ka, kb = round(a * n / 100), round(b * n / 100)
                 _, pv = fisher_exact([[ka, n - ka], [kb, n - kb]])
                 xs.append(k); ys.append(a - b); res.append(pv < 0.05)
-        c = CAT[i % len(CAT)]
+        c = DOSE_BLUES[i % len(DOSE_BLUES)]
         ax.plot(xs, ys, linewidth=1.4, color=c, label=f"{name} (n={n})",
                 zorder=3)
         for x, y, r in zip(xs, ys, res):
@@ -413,7 +431,9 @@ def fig_transfer_matrix():
     ours = collections.Counter((DT.get(d), AT.get(a)) for d, a in ours_pairs)
 
     TR = ["Security", "ML/AI"]
-    cmap = LinearSegmentedColormap.from_list("seq", SEQ)
+    # Each cell mixes a defense track with an attack track, so no single track
+    # hue fits: magnitude goes neutral and the axes carry the track colours.
+    cmap = LinearSegmentedColormap.from_list("neutral", SEQ_NEUTRAL)
     fig, axes = plt.subplots(1, 2, figsize=(FULL, 2.25))
     for ax, data, title, tot in (
             (axes[0], lit, "Published literature", sum(lit.values())),
@@ -429,6 +449,9 @@ def fig_transfer_matrix():
         ax.imshow(np.where(M > 0, S, np.nan), cmap=cmap, vmin=0, vmax=vmax)
         ax.set_xticks(range(2)); ax.set_xticklabels(TR)
         ax.set_yticks(range(2)); ax.set_yticklabels(TR)
+        for lbls in (ax.get_xticklabels(), ax.get_yticklabels()):
+            for lbl, t in zip(lbls, TR):
+                lbl.set_color(TRACK_SEC if t == "Security" else TRACK_ML)
         ax.set_xlabel("attack from"); ax.set_ylabel("defense from")
         cross = int(M[0, 1] + M[1, 0])
         ax.set_title(f"{title}\n{cross} of {int(tot)} cross-community "
@@ -442,7 +465,7 @@ def fig_transfer_matrix():
                         color="#ffffff" if dark else INK)
                 if v == 0:
                     ax.text(j, i + 0.3, "never tested", ha="center",
-                            va="center", fontsize=6, color="#a4402c")
+                            va="center", fontsize=6, color=INK2)
         for s in ax.spines.values():
             s.set_visible(False)
         ax.set_xticks(np.arange(-.5, 2, 1), minor=True)
@@ -470,7 +493,7 @@ def fig_lag():
     g = collections.Counter(r["gap_years"] for r in tl)
     ks = sorted(g)
     vals = [g[k] for k in ks]
-    cols = ["#2a78d6" if k < 0 else (GREY_MID if k == 0 else "#eb6834") for k in ks]
+    cols = [ALT_A if k < 0 else (GREY_MID if k == 0 else ALT_B) for k in ks]
     fig, ax = plt.subplots(figsize=(COL, 1.8))
     ax.bar(ks, vals, color=cols, edgecolor=MUTED, linewidth=0.4, width=0.78)
     for k, v in zip(ks, vals):
@@ -483,7 +506,7 @@ def fig_lag():
     ax.set_ylim(0, max(vals) * 1.22)
     ax.spines["top"].set_visible(False); ax.spines["right"].set_visible(False)
     ax.annotate(f"{n_before} defenses predate\nthe attack they met",
-                xy=(-1.5, max(vals) * 0.82), fontsize=6.2, color="#2a78d6",
+                xy=(-1.5, max(vals) * 0.82), fontsize=6.2, color=ALT_A,
                 ha="center")
     print(f"    lag: {n_before} of {len(tl)} defenses predate their attack")
     save(fig, "fig7_lag")
