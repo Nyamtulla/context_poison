@@ -32,6 +32,10 @@ sys.path.insert(0, str(REPO / "scripts"))
 CAT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
 SEQ = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#2a78d6", "#256abf",
        "#1c5cab", "#184f95", "#104281", "#0d366b"]
+# Track convention, used in every figure that encodes track by colour:
+# Security is red, machine learning is blue. Validated for deuteranopia and
+# protanopia (OKLab separation 28.8 / 25.0, floor is 8).
+TRACK_SEC, TRACK_ML = "#d6452a", "#2a78d6"
 GREY_MID = "#f0efec"
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 
@@ -304,7 +308,7 @@ def fig_citation_network():
             G.add_edge(e["citing"], e["cited"])
     G.remove_nodes_from([n for n, d in G.degree() if d == 0])
 
-    COLORS = {"Security": CAT[0], "ML/AI": CAT[1], "Both": CAT[3]}
+    COLORS = {"Security": TRACK_SEC, "ML/AI": TRACK_ML, "Both": CAT[3]}
     # Spread the clusters. The default k packs 900 nodes into a hairball where
     # the band of cross-track edges, which is the whole point of the figure,
     # disappears into the overlap. A larger k plus more iterations separates
@@ -517,7 +521,7 @@ def fig_vocab():
 
     LX0, LX1 = 0.015, 0.487
     RX0, RX1 = 0.513, 0.985
-    SEC, ML = CAT[0], CAT[1]
+    SEC, ML = TRACK_SEC, TRACK_ML
 
     # column headers, each with its own colour bar: identity is never
     # carried by colour alone.
