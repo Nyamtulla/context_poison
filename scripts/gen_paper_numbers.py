@@ -55,6 +55,15 @@ def main():
 
     # ---- corpus
     M["NScreened"] = len(rows)
+    # provenance stages, for the PRISMA figure's prose (see gen_provenance.py)
+    import sqlite3 as _sq
+    _c = _sq.connect(REPO / "data" / "context_sok.db")
+    _g = lambda q: list(_c.execute(q))[0][0]
+    M["NQueries"] = _g("select count(*) from search_log")
+    M["NSurvived"] = _g("select count(*) from papers where hop<=1 and "
+                        "screen_auto in ('auto_include','needs_review')")
+    M["NFullText"] = len(rows)
+    _c.close()
     M["NCorpus"] = len(included)
     M["NExcluded"] = len(rows) - len(included)
     M["NColumns"] = len(hdr)
