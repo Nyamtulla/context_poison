@@ -485,7 +485,79 @@ def fig_lag():
     save(fig, "fig7_lag")
 
 
+# ---------------------------------------------------------------- figure 8
+VOCAB = [
+    ("The content that gets in", "attack,\nattack technique",
+     "mechanism,\ndegradation mechanism"),
+    ("Who placed it", "an adversary,\nmodeled explicitly",
+     "nobody; a property\nof the pipeline"),
+    ("The countermeasure", "defense, mitigation", "fix, method"),
+    ("What success means", "the adversary fails", "accuracy rises"),
+    ("Evaluation style", "worst case", "average case"),
+]
+
+
+def fig_vocab():
+    """The same slots, named twice. Replaces the old tab:vocab."""
+    from matplotlib.patches import FancyBboxPatch
+
+    nl = [max(s.count("\n"), m.count("\n")) + 1 for _, s, m in VOCAB]
+    head_in = 0.30
+    strip_in = 0.155
+    pad_in = 0.085
+    line_in = 0.125
+    gap_in = 0.075
+    rows_in = [strip_in + 2 * pad_in + n * line_in for n in nl]
+    H = head_in + sum(rows_in) + gap_in * (len(VOCAB) - 1) + 0.04
+
+    fig = plt.figure(figsize=(COL, H))
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_xlim(0, 1); ax.set_ylim(0, H)
+    ax.axis("off")
+
+    LX0, LX1 = 0.015, 0.487
+    RX0, RX1 = 0.513, 0.985
+    SEC, ML = CAT[0], CAT[1]
+
+    # column headers, each with its own colour bar: identity is never
+    # carried by colour alone.
+    y = H - 0.115
+    for x0, x1, lab, col in ((LX0, LX1, "SECURITY", SEC),
+                             (RX0, RX1, "MACHINE LEARNING", ML)):
+        ax.text((x0 + x1) / 2, y + 0.035, lab, ha="center", va="bottom",
+                fontsize=6.8, color=INK, fontweight="bold")
+        ax.plot([x0, x1], [y, y], color=col, lw=1.8,
+                solid_capstyle="butt", clip_on=False)
+
+    top = H - head_in
+    for (slot, sec, ml), nlines, rh in zip(VOCAB, nl, rows_in):
+        bot = top - rh
+        # the shared slot: one strip spanning both columns
+        ax.add_patch(FancyBboxPatch(
+            (LX0, top - strip_in), RX1 - LX0, strip_in,
+            boxstyle="round,pad=0,rounding_size=0.006",
+            facecolor=GREY_MID, edgecolor="none", mutation_aspect=0.35))
+        ax.text((LX0 + RX1) / 2, top - strip_in / 2, slot, ha="center",
+                va="center", fontsize=6.5, color=INK2, style="italic")
+
+        bh = rh - strip_in
+        for x0, x1, txt, col in ((LX0, LX1, sec, SEC), (RX0, RX1, ml, ML)):
+            ax.add_patch(FancyBboxPatch(
+                (x0, bot), x1 - x0, bh - 0.02,
+                boxstyle="round,pad=0,rounding_size=0.006",
+                facecolor="white", edgecolor=MUTED, linewidth=0.5,
+                mutation_aspect=0.35))
+            ax.plot([x0, x0], [bot, bot + bh - 0.02], color=col, lw=1.6,
+                    solid_capstyle="butt")
+            ax.text((x0 + x1) / 2, bot + (bh - 0.02) / 2, txt, ha="center",
+                    va="center", fontsize=6.6, color=INK, linespacing=1.35)
+        top = bot - gap_in
+
+    save(fig, "fig8_vocab")
+
+
 if __name__ == "__main__":
     fig_cube(); fig_channel_gap(); fig_who_reports(); fig_dose()
     fig_citation_network(); fig_transfer_matrix(); fig_lag()
+    fig_vocab()
     print("done")

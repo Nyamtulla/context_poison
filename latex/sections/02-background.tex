@@ -52,29 +52,16 @@ not achieve.
 
 \subsection{One failure, two vocabularies}
 
-Table~\ref{tab:vocab} sets the two vocabularies side by side. The slots are
+Figure~\ref{fig:vocab} sets the two vocabularies side by side. The slots are
 the same. Only the names and the assumed threat model differ.
 
-\begin{table}[t]
+\begin{figure}[t]
 \centering
-\caption{The same four slots, named twice. The taxonomy in
+\includegraphics[width=\columnwidth]{figures/fig8_vocab}
+\caption{The same five slots, named twice. The taxonomy in
 Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
-\label{tab:vocab}
-\small
-\begin{tabular}{@{}p{0.26\columnwidth}p{0.31\columnwidth}p{0.31\columnwidth}@{}}
-\toprule
-\textbf{Slot} & \textbf{Security} & \textbf{Machine learning} \\
-\midrule
-The content that gets in & attack, attack technique & mechanism, degradation
-mechanism \\
-Who placed it & an adversary, modeled explicitly & nobody; a property of the
-pipeline \\
-The countermeasure & defense, mitigation & fix, method \\
-What success means & the adversary fails & accuracy rises \\
-Evaluation style & worst case & average case \\
-\bottomrule
-\end{tabular}
-\end{table}
+\label{fig:vocab}
+\end{figure}
 
 The distinction is real in one respect and empty in another. It is real
 because an adaptive adversary re-optimizes against a filter and a stale
