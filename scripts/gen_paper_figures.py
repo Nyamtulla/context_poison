@@ -49,8 +49,10 @@ ALT_A, ALT_B, ALT_C = "#1baf7a", "#eda100", "#8a5a2b"
 GREY_MID = "#f0efec"
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 
-# acmart sigconf: 3.33in single column, 7.0in full width
-COL, FULL = 3.33, 7.0
+# IEEEtran conference: \columnwidth is 252pt and \textwidth is 516pt,
+# which is 3.49in and 7.14in. Measured from a probe build, not guessed.
+# (acmart sigconf was 3.33 / 7.0; figures were resized when the paper moved.)
+COL, FULL = 3.49, 7.14
 
 plt.rcParams.update({
     "font.family": "serif",

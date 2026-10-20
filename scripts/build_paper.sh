@@ -40,9 +40,11 @@ echo "  overfull boxes >15pt $over"
 # "the full census" in a sentence on page 2 and reported the appendix there.
 for p in $(seq 1 "$pages"); do
     t=$(pdftotext -f "$p" -l "$p" main.pdf - 2>/dev/null)
-    [ -z "${refp:-}" ] && echo "$t" | grep -qE '^REFERENCES[[:space:]]*$' \
+    # acmart prints REFERENCES, IEEEtran prints References. Match either,
+    # or the report silently loses the body/references split on a class change.
+    [ -z "${refp:-}" ] && echo "$t" | grep -qiE '^references[[:space:]]*$' \
         && { refp=$p; echo "  references start    p$p"; }
-    [ -z "${appp:-}" ] && echo "$t" | grep -qE '^THE FULL CENSUS[[:space:]]*$' \
+    [ -z "${appp:-}" ] && echo "$t" | grep -qiE '^the full census[[:space:]]*$' \
         && { appp=$p; echo "  appendix starts     p$p"; }
 done
 echo "  body                p1-$(( ${refp:-1} - 1 ))"

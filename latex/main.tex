@@ -1,21 +1,32 @@
 %% SoK: Context Poisoning in LLM Agents
 %%
-%% Built for acmart (CCS). To switch to USENIX, replace the class line and the
-%% \maketitle block with the usenix2019_v3 template; the section files need no
-%% change. See README.md.
-\documentclass[sigconf,nonacm]{acmart}
+%% Built for IEEEtran (IEEE S&P / Oakland). The section files are class
+%% agnostic and need no change. The previous acmart version is in git
+%% history; see README.md.
+\documentclass[conference]{IEEEtran}
 
+\usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{cite}
 
 % Two-column measure plus long hyphenated model names
 % (Llama-3-8B-Instruct) produces lines TeX cannot break.
 % This lets it stretch interword space a little further
 % before it gives up and overflows into the margin.
 \emergencystretch=1.5em
-\usepackage{xcolor}
+
+% IEEEtran sets \paragraph as a lettered heading and appends its own colon,
+% so "\paragraph{Research questions.}" rendered as "a) Research questions.:".
+% acmart ran it in bold on the same line. Restore that here rather than edit
+% seven section files, so the sections stay class agnostic.
+\makeatletter
+\renewcommand{\paragraph}[1]{\par\smallskip\noindent\textbf{#1}\ \ignorespaces}
+\makeatother
 
 % Numbers in tables line up; percentage points are written "pp" throughout.
 \newcommand{\pp}{\,pp}
@@ -37,21 +48,25 @@
 %     Incidental Context Poisoning in LLM Agents
 %   CPAT: Context Poisoning Across Tracks
 %   CROSSTRACK / CADET
-\title{Context Poisoning in LLM Agents}
-\subtitle{Adversarial Attacks, Incidental Degradation, and the Failure of
-Defense Transfer}
+%
+% IEEEtran has no \subtitle, so the former subtitle is folded into the title.
+\title{Context Poisoning in LLM Agents:\\
+Adversarial Attacks, Incidental Degradation,\\
+and the Failure of Defense Transfer}
 
-\author{Anonymous Author(s)}
-\affiliation{\institution{Anonymous Institution}\country{}}
+\author{\IEEEauthorblockN{Anonymous Author(s)}
+\IEEEauthorblockA{Anonymous Institution}}
+
+\maketitle
 
 \begin{abstract}
 \input{sections/00-abstract}
 \end{abstract}
 
-\keywords{large language model agents, context poisoning, prompt injection,
-retrieval-augmented generation, knowledge conflict, defense evaluation}
-
-\maketitle
+\begin{IEEEkeywords}
+large language model agents, context poisoning, prompt injection,
+retrieval-augmented generation, knowledge conflict, defense evaluation
+\end{IEEEkeywords}
 
 \input{sections/01-introduction}
 \input{sections/02-background}
@@ -65,7 +80,7 @@ retrieval-augmented generation, knowledge conflict, defense evaluation}
 \input{sections/11-related}
 \input{sections/12-conclusion}
 
-\bibliographystyle{ACM-Reference-Format}
+\bibliographystyle{IEEEtran}
 \bibliography{refs}
 
 \appendix

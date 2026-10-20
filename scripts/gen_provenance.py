@@ -109,7 +109,7 @@ def figure(n):
 
     INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
     GREY = "#f0efec"
-    COL = 3.33
+    COL = 3.49  # IEEEtran \columnwidth, see gen_paper_figures.py
     plt.rcParams.update({"font.family": "serif", "pdf.fonttype": 42,
                          "savefig.bbox": "tight", "savefig.pad_inches": 0.02})
 
