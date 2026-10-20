@@ -62,3 +62,16 @@ context_sok_results_presentation.pdf
 # per-defense dependency sets, built by scripts/setup_envs.py from the pinned
 # requirements in envs/*-requirements.txt. Installed packages, not our code.
 envs/*-libs/
+
+# the 125-paper validation study (2026-10-20). Same two rules as the
+# verification packets above, for the same two reasons.
+#
+# The zips carry the surveyed papers' own PDFs - 266 MB of them across the
+# eight packets - and those have their own redistribution terms while this
+# repo is public. The workbooks are tracked; the zips are rebuilt by
+# scripts/build_validation_study.py in seconds.
+data/exports/validation_study/packets/*/*.zip
+data/exports/validation_study/packets/*.zip
+#
+# the confidence-group key: sending it to a coder biases the study it tests
+data/exports/validation_study/_key_DO_NOT_SHARE.json
