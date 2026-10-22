@@ -111,9 +111,16 @@ def build_poisoned(item, top_k: int, n_poison: int, repeat: int = 5,
                 if "text" in c and "title" in c]
     if n_poison == 0:
         return passages
-    payload = {"poisonedrag": item["incorrect_context"][0],
-               "badrag_dos": DOS_PASSAGE,
-               "badrag_sentiment": SENTIMENT_PASSAGE}[attack]
+    # distractor_evidence is per-item, unlike the three security payloads,
+    # which are fixed strings. It is the item's own retrieved passage with
+    # every gold answer replaced by a type-matched wrong one, so the register
+    # is unchanged and nothing instructs the model.
+    if attack == "distractor_evidence":
+        payload = item["distractor_context"]
+    else:
+        payload = {"poisonedrag": item["incorrect_context"][0],
+                   "badrag_dos": DOS_PASSAGE,
+                   "badrag_sentiment": SENTIMENT_PASSAGE}[attack]
     bad = ("\n" + payload + "\n") * repeat
     keep = max(0, len(passages) - n_poison)
     return passages[:keep] + [bad] * min(n_poison, top_k)

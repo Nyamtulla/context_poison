@@ -176,8 +176,13 @@ def main():
     # cells of 162 when it had become 111.
     CHS = ["direct-input", "tool-output", "RAG", "memory", "multi-agent",
            "cross-modal", "tool-metadata", "skill", "supply-chain"]
+    # availability-loss added 2026-10-21: the agent cannot finish at all.
+    # The cube is 9 x 7 x 3 = 189 cells, not 162. Adding a sparse column
+    # RAISES the empty-cell percentage for a reason that has nothing to do
+    # with the field changing, so the prose must say why.
     CQS = ["goal-hijack", "reasoning-corruption", "silent-corruption",
-           "data-exfiltration", "persistence-backdoor", "resource-abuse"]
+           "data-exfiltration", "persistence-backdoor", "resource-abuse",
+           "availability-loss"]
     ci, qi, ti = hdr.index("channel"), hdr.index("consequence"), hdr.index("track")
     occupied = set()
     for r in rows:
@@ -190,6 +195,15 @@ def main():
     NCELLS = len(CHS) * len(CQS) * 3      # 3 intents: adversarial, incidental, both
     M["NCubeCells"] = NCELLS
     M["NCubeEmpty"] = NCELLS - len(occupied)
+    # papers that carry no channel or no consequence: multi-vector surveys
+    # and benchmarks whose surfaces are co-equal by construction. They are
+    # outside the cube by construction, and the empty-cell rate is only
+    # honest if their number is stated.
+    _unp = sum(1 for r in rows if r[pi] in included
+               and (str(r[ci] or "").strip() in ("", "none")
+                    or str(r[qi] or "").strip() in ("", "none")))
+    M["NUnplaceable"] = _unp
+    M["PctUnplaceable"] = f"{100*_unp/len(included):.1f}"
     M["PctCubeEmpty"] = f"{100*(NCELLS-len(occupied))/NCELLS:.1f}"
 
     # mechanism registry splits, quoted in S4

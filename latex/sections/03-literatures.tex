@@ -79,7 +79,17 @@ should not~\cite{yu-2023-assessing}. \meth{persistence-backdoor} is corruption t
 later session~\cite{yan-2023-backdooring}. \meth{resource-abuse} is spending compute, money or quota on the
 attacker's behalf~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
 
-The three axes give \NCubeCells{} cells.
+The three axes give \NCubeCells{} cells. The consequence axis gained
+\meth{availability-loss} after a full-text re-coding pass found papers whose
+measured harm is the agent failing to finish at all, which the original six
+could not express. Adding a sparse column raises the share of empty cells
+without anything in the field having changed, and we report the figure on the
+larger grid rather than the smaller one it would flatter.
+
+\NUnplaceable{} papers (\PctUnplaceable{}\%) carry no single channel or
+consequence. These are surveys and benchmarks whose attack surfaces are
+co-equal by construction, and forcing one coordinate on them would invent
+precision. They are counted in the corpus and excluded from the cube.
 
 \begin{figure*}[t]
 \centering
@@ -348,7 +358,8 @@ If two communities work one problem without reading each other, the second to
 arrive restates what the first already knows. The dates say this is what
 happens, and they say which direction it runs in.
 
-Eight of our nine channels have named mechanisms from both tracks. Comparing
+\NSharedChannels{} of our nine channels have named mechanisms from both
+tracks. Comparing
 the first paper from each side in each of those channels:
 \textbf{the security literature arrives first in \NChannelsSecFirst{} of
 \NSharedChannels{}, both arrive in the same year in \NChannelsSameYear{}, and

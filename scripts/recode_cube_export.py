@@ -31,8 +31,14 @@ CACHE = REPO / "data" / "cache" / "pdf_text"
 
 CHANNELS = ["direct-input", "RAG", "tool-output", "tool-metadata", "memory",
             "skill", "multi-agent", "cross-modal", "supply-chain"]
+# availability-loss added 2026-10-21. The full-text pilot found papers whose
+# measured harm is the agent becoming unable to finish the task at all -
+# context budget exhausted, or a defense that degraded the model into
+# refusing or timing out. The six-way scheme could not see them, and forcing
+# them into reasoning-corruption hid a real gap.
 CONSEQ = ["goal-hijack", "reasoning-corruption", "silent-corruption",
-          "data-exfiltration", "persistence-backdoor", "resource-abuse"]
+          "data-exfiltration", "persistence-backdoor", "resource-abuse",
+          "availability-loss"]
 
 
 def main():

@@ -95,7 +95,11 @@ def run_condition(defense, data, top_k, n_poison, attack, defended):
             pred = defense.query_undefended(item)
         pred = str(pred)
         correct += acc_score(pred, it["correct answer"])
-        attacked += acc_score(pred, it["incorrect answer"])
+        # the attacked outcome is "said the planted answer"; for the ML arm
+        # that is the distractor, not PoisonedRAG's adversarial target.
+        target = (it["distractor_answer"] if attack == "distractor_evidence"
+                  else it.get("incorrect answer"))
+        attacked += acc_score(pred, target)
         refused += is_refusal(pred)
         negative += is_negative(pred)
     n = len(data)
@@ -113,7 +117,8 @@ def run_condition(defense, data, top_k, n_poison, attack, defended):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--attack", required=True,
-                    choices=["poisonedrag", "badrag_dos", "badrag_sentiment"])
+                    choices=["poisonedrag", "badrag_dos", "badrag_sentiment",
+                             "distractor_evidence"])
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--model", type=str, default="mistral7b")
@@ -133,7 +138,13 @@ def main():
     ap.add_argument("--out", type=str, default=None)
     args = ap.parse_args()
 
-    data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: args.n]
+    # The ML/AI arm runs on the same open_nq items with a distractor passage
+    # precomputed by scripts/build_open_nq_distractor.py. Same harness, same
+    # dosing; only the payload's intent differs.
+    src = (REPO / "data" / "payloads" / "open_nq_distractor.json"
+           if args.attack == "distractor_evidence"
+           else RRAG / "data" / "open_nq.json")
+    data = json.loads(src.read_text())[: args.n]
     suffix = "" if args.method == "keyword" else f"_{args.method}"
     out_path = args.out or f"data/registries/{args.attack}_robustrag{suffix}.json"
 

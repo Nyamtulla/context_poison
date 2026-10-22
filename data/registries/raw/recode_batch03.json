@@ -1,0 +1,722 @@
+[
+ {
+  "paper_id": "2f1e9fa494e6f838f43d83f38b218cd9d478175c",
+  "title": "AgentWatcher: A Rule-based Prompt Injection Monitor",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/2f1e9fa494e6f838f43d83f38b218cd9d478175c.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "2f395b96c8f7bc517a425cff1bcdaef36f5d6739",
+  "title": "OdysseyBench: Evaluating LLM Agents on Long-Horizon Complex Office Application Workflows",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/2f395b96c8f7bc517a425cff1bcdaef36f5d6739.txt",
+  "current_track": "ML/AI",
+  "current_channel": "tool-output",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "2f6cc73ba64540df84322c0891a99d4f03d199fd",
+  "title": "Machine-Assisted Grading of Nationwide School-Leaving Essay Exams with LLMs and Statistical NLP",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/2f6cc73ba64540df84322c0891a99d4f03d199fd.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "2f6de8291c9a803faa7f7a33c74f4a2a3debd83b",
+  "title": "Neural Exec: Learning (and Learning from) Execution Triggers for Prompt Injection Attacks",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/2f6de8291c9a803faa7f7a33c74f4a2a3debd83b.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "301b6d574aa1f16b8b0ded55ec0236cbd2066260",
+  "title": "BenchOverflow: Measuring Overflow in Large Language Models via Plain-Text Prompts",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/301b6d574aa1f16b8b0ded55ec0236cbd2066260.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "resource-abuse"
+ },
+ {
+  "paper_id": "3037549015be6f15d4f1ec59b34554b9238ac0c3",
+  "title": "Bridging AI and Software Security: A Comparative Vulnerability Assessment of LLM Agent Deployment Paradigms",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/3037549015be6f15d4f1ec59b34554b9238ac0c3.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "30d0bcade8661fe2093bf9629d467d6f8233369e",
+  "title": "Adaptive Evaluation of Out-of-Band Defenses Against Prompt Injection in LLM Agents",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/30d0bcade8661fe2093bf9629d467d6f8233369e.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3120e577687f1ea6217cc0b546739aaa0295acbe",
+  "title": "Beware of Agentic Botnets: Scalable Untargeted Promptware Attacks via Universal and Transferable Adversarial HalluSquatting",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3120e577687f1ea6217cc0b546739aaa0295acbe.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "317d2659a28f8444d297f5020315bcdfc2509ab1",
+  "title": "FinPersona-Bench: A Benchmark for Longitudinal Psychometric Stability of Autonomous Financial Agents",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/317d2659a28f8444d297f5020315bcdfc2509ab1.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "31adb0c460abf3be3ef65356cb072548cd586ccc",
+  "title": "Learning What Not to Forget: Long-Horizon Agent Memory from a Few Kilobytes of Learning",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/31adb0c460abf3be3ef65356cb072548cd586ccc.txt",
+  "current_track": "ML/AI",
+  "current_channel": "memory",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "31babc068383c3966d322579eaaf79edc6a6bef4",
+  "title": "Generative AI in Cybersecurity: A Comprehensive Review of LLM Applications and Vulnerabilities",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/31babc068383c3966d322579eaaf79edc6a6bef4.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "31e1a7b22ce24c7d1aa5880295c7c2c46abd1ac7",
+  "title": "LPS-Bench: Benchmarking Safety Awareness of Computer-Use Agents in Long-Horizon Planning under Benign and Adversarial Scenarios",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/31e1a7b22ce24c7d1aa5880295c7c2c46abd1ac7.txt",
+  "current_track": "ML/AI",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "32316f1d08911b397f52f8644f46f5c129619383",
+  "title": "Defending Against Indirect Prompt Injection Attacks With Spotlighting",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/32316f1d08911b397f52f8644f46f5c129619383.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "32743a56cf5a28f45d9fdf237450095b1ec9efe9",
+  "title": "Ebbinghaus Forgetting Curve and Large Language Model Memory Management: A Cognitive Science-Driven Long-Context Enhancement Framework Design and Prospects",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/32743a56cf5a28f45d9fdf237450095b1ec9efe9.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "327f2df80cccd89a10934eef495b06af949b0feb",
+  "title": "The LLMbda Calculus: AI Agents, Conversations, and Information Flow",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/327f2df80cccd89a10934eef495b06af949b0feb.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "32aa80580c3152691ade3ce65f523ee15948312a",
+  "title": "Multi-Layered Framework for LLM Hallucination Mitigation in High-Stakes Applications: A Tutorial",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/32aa80580c3152691ade3ce65f523ee15948312a.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "silent-corruption"
+ },
+ {
+  "paper_id": "32bc9a01f4b0cbf8976bc682c282181dc6e0c1af",
+  "title": "A Survey on Data Security in Large Language Models",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/32bc9a01f4b0cbf8976bc682c282181dc6e0c1af.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "32c8b781ae70c35d67c337fbd4e674236b6545c4",
+  "title": "Defending against Adaptive Prompt Injection Attacks via Reasoning-enabled Task Alignment",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/32c8b781ae70c35d67c337fbd4e674236b6545c4.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "32f24af87e890011ed3e11194ba53e8dd53afbe0",
+  "title": "ControlNET: A Firewall for RAG-based LLM System",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/32f24af87e890011ed3e11194ba53e8dd53afbe0.txt",
+  "current_track": "Security",
+  "current_channel": "RAG",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "331e479bf3de8460da94b8aff680ed2357a87416",
+  "title": "Whispers in the Machine: Confidentiality in Agentic Systems",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/331e479bf3de8460da94b8aff680ed2357a87416.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "data-exfiltration"
+ },
+ {
+  "paper_id": "33888b7650d97a21dda39d9c6cefbacb5334dbe0",
+  "title": "Unraveling Cross-Modality Knowledge Conflicts in Large Vision-Language Models",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/33888b7650d97a21dda39d9c6cefbacb5334dbe0.txt",
+  "current_track": "ML/AI",
+  "current_channel": "cross-modal",
+  "current_consequence": "silent-corruption"
+ },
+ {
+  "paper_id": "33bceaac7888ac8c08e35b6045a7a2619e210e4e",
+  "title": "Oracle Poisoning: Corrupting Knowledge Graphs to Weaponise AI Agent Reasoning",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/33bceaac7888ac8c08e35b6045a7a2619e210e4e.txt",
+  "current_track": "Security",
+  "current_channel": "RAG",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "33c04fbf16bbcac199462a9f95044fcdfa6161fa",
+  "title": "Defense against Prompt Injection Attacks via Mixture of Encodings",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/33c04fbf16bbcac199462a9f95044fcdfa6161fa.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "341883c91dabb788b32dae7d1bd6c6146d266b95",
+  "title": "Failure-Gated Hierarchical Memory: Preventing Memory Pollution in Long-Horizon LLM Agents via Critic-Guided Write Control",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/341883c91dabb788b32dae7d1bd6c6146d266b95.txt",
+  "current_track": "ML/AI",
+  "current_channel": "memory",
+  "current_consequence": "silent-corruption"
+ },
+ {
+  "paper_id": "345f5f86cda5a7e23a1cf4d90b5e284eb1f29680",
+  "title": "MIRAGE: Context-Aware Prompt Injection against Mobile GUI Agents via User-Generated Content",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/345f5f86cda5a7e23a1cf4d90b5e284eb1f29680.txt",
+  "current_track": "Security",
+  "current_channel": "cross-modal",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "347650ce5f3201f54e13f193e2b614b6a21dec1c",
+  "title": "Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/347650ce5f3201f54e13f193e2b614b6a21dec1c.txt",
+  "current_track": "ML/AI",
+  "current_channel": "memory",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "3481b760e4327407c2511b1e29259a2fe1e0bbab",
+  "title": "CIBER: A Comprehensive Benchmark for Security Evaluation of Code Interpreter Agents",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3481b760e4327407c2511b1e29259a2fe1e0bbab.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "34df7d82136868e5d492968647efd17d442a6720",
+  "title": "MCPTox: A Benchmark for Tool Poisoning on Real-World MCP Servers",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/34df7d82136868e5d492968647efd17d442a6720.txt",
+  "current_track": "Security",
+  "current_channel": "tool-metadata",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3502f796c1d15f1355d0838f099178a9415b94b2",
+  "title": "ConflictRAG: Detecting and Resolving Knowledge Conflicts in Retrieval Augmented Generation",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3502f796c1d15f1355d0838f099178a9415b94b2.txt",
+  "current_track": "ML/AI",
+  "current_channel": "RAG",
+  "current_consequence": "silent-corruption"
+ },
+ {
+  "paper_id": "35812b4a3fba1211b4e6177c3c27c931d83859f0",
+  "title": "Agent Delivery Engineering Predictive Reliability Framework",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/35812b4a3fba1211b4e6177c3c27c931d83859f0.txt",
+  "current_track": "ML/AI",
+  "current_channel": "tool-output",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "35a7fa6cf6c4063ac233e20670e001b13f632093",
+  "title": "Architecting Secure AI Agents: Perspectives on System-Level Defenses Against Indirect Prompt Injection Attacks",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/35a7fa6cf6c4063ac233e20670e001b13f632093.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "35d401c58f0f111bf7cbf58634e8e12f3d52d579",
+  "title": "How does Misinformation Affect Large Language Model Behaviors and Preferences?",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/35d401c58f0f111bf7cbf58634e8e12f3d52d579.txt",
+  "current_track": "ML/AI",
+  "current_channel": "RAG",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "35d992fd33278b601ecf1bb977bcc9ab965d490f",
+  "title": "ID-RAG: Identity Retrieval-Augmented Generation for Long-Horizon Persona Coherence in Generative Agents",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/35d992fd33278b601ecf1bb977bcc9ab965d490f.txt",
+  "current_track": "ML/AI",
+  "current_channel": "RAG",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "35dd68af783d67ddbfdc0e10551ab7fe2860ec28",
+  "title": "Trace: Unmasking AI Attack Agents Through Terminal Behavior Fingerprinting",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/35dd68af783d67ddbfdc0e10551ab7fe2860ec28.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "362f97f9734e7dc1c20ac52f21dcbdb4be119c7e",
+  "title": "Scoped Verification for Reliable Long-Horizon Agentic Context Evolution under Distribution Shift",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/362f97f9734e7dc1c20ac52f21dcbdb4be119c7e.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "363ebeb72b02ba4261d92957df0c0e53f438297f",
+  "title": "AgentLAB: Benchmarking LLM Agents against Long-Horizon Attacks",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/363ebeb72b02ba4261d92957df0c0e53f438297f.txt",
+  "current_track": "ML/AI",
+  "current_channel": "tool-output",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "369148e6a920001cdc29e651a5019f096600f1f4",
+  "title": "Hijacking Large Audio-Language Models via Context-Agnostic and Imperceptible Auditory Prompt Injection",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/369148e6a920001cdc29e651a5019f096600f1f4.txt",
+  "current_track": "Security",
+  "current_channel": "cross-modal",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "36dd2ed29b677eff1f4689a18040d3fae5c4278a",
+  "title": "PlanFlip: Attacking Multi-Agent LLM Systems via Planning-Phase Prompt Injection",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/36dd2ed29b677eff1f4689a18040d3fae5c4278a.txt",
+  "current_track": "Security",
+  "current_channel": "multi-agent",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "37665dd5ae7245f087d663785c17eef068578676",
+  "title": "Backdooring Instruction-Tuned Large Language Models with Virtual Prompt Injection",
+  "year": 2023,
+  "text_path": "data/cache/pdf_text/37665dd5ae7245f087d663785c17eef068578676.txt",
+  "current_track": "Security",
+  "current_channel": "supply-chain",
+  "current_consequence": "persistence-backdoor"
+ },
+ {
+  "paper_id": "37d6bb36fcbac1a681bd5b6c523db14532fc6ea5",
+  "title": "AriadneMem: Threading the Maze of Lifelong Memory for LLM Agents",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/37d6bb36fcbac1a681bd5b6c523db14532fc6ea5.txt",
+  "current_track": "ML/AI",
+  "current_channel": "memory",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "381bb56e8033eaa85d1c391eb818b6ed38ed7a86",
+  "title": "AMemGym: Interactive Memory Benchmarking for Assistants in Long-Horizon Conversations",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/381bb56e8033eaa85d1c391eb818b6ed38ed7a86.txt",
+  "current_track": "ML/AI",
+  "current_channel": "memory",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "3835926e08ef43b543ee380600e4f271df589b84",
+  "title": "Defending against Indirect Prompt Injection by Instruction Detection",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/3835926e08ef43b543ee380600e4f271df589b84.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "38a1dc6d93422b3213c4a9e47e859783fff8fa3d",
+  "title": "A Systematic Survey of Security Threats and Defenses in LLM-Based AI Agents: A Layered Attack Surface Framework",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/38a1dc6d93422b3213c4a9e47e859783fff8fa3d.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "39361a6a3d86f8831de8537965ec4f9f65ea31f2",
+  "title": "RedTeamCUA: Realistic Adversarial Testing of Computer-Use Agents in Hybrid Web-OS Environments",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/39361a6a3d86f8831de8537965ec4f9f65ea31f2.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "396517eb4ba3cb0eb6afe8aa02cde9b121699c02",
+  "title": "From Shield to Target: Denial-of-Service Attacks on LLM-Based Agent Guardrails",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/396517eb4ba3cb0eb6afe8aa02cde9b121699c02.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "resource-abuse"
+ },
+ {
+  "paper_id": "39aa2fee90ab6a05748b14aae98d7e5ccde570da",
+  "title": "MAGE: Safeguarding LLM Agents against Long-Horizon Threats via Shadow Memory",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/39aa2fee90ab6a05748b14aae98d7e5ccde570da.txt",
+  "current_track": "ML/AI",
+  "current_channel": "memory",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "39bb5c87b4e4c9f95eab41c9a039a1b129b81677",
+  "title": "ENGRAM: Effective, Lightweight Memory Orchestration for Conversational Agents",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/39bb5c87b4e4c9f95eab41c9a039a1b129b81677.txt",
+  "current_track": "ML/AI",
+  "current_channel": "memory",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "39c923bffb4a8c59df0107d1e492ed691041d15b",
+  "title": "CAPTURE: Context-Aware Prompt Injection Testing and Robustness Enhancement",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/39c923bffb4a8c59df0107d1e492ed691041d15b.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3a6ca08f3507de0d642286defa5431f4088d0880",
+  "title": "Prompt Injection as Role Confusion",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3a6ca08f3507de0d642286defa5431f4088d0880.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3a7e5dd0b6cf4934876e60531fff22716421104e",
+  "title": "Silent Leaks: Implicit Knowledge Extraction Attack on RAG Systems through Benign Queries",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/3a7e5dd0b6cf4934876e60531fff22716421104e.txt",
+  "current_track": "Security",
+  "current_channel": "RAG",
+  "current_consequence": "data-exfiltration"
+ },
+ {
+  "paper_id": "3a87347a14add7aacd832851982d4116fe0b24a2",
+  "title": "MalSkillBench: A Runtime-Verified Benchmark of Malicious Agent Skills",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3a87347a14add7aacd832851982d4116fe0b24a2.txt",
+  "current_track": "Security",
+  "current_channel": "skill",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3a8ae0fe18fd081416b58065c4e618ad28836a4b",
+  "title": "SPIN: Self-Supervised Prompt INjection",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/3a8ae0fe18fd081416b58065c4e618ad28836a4b.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3ae6d1c79e243917bbf3e922075fdfdfe7b41ea9",
+  "title": "Are AI-assisted Development Tools Immune to Prompt Injection?",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3ae6d1c79e243917bbf3e922075fdfdfe7b41ea9.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3b04534002e0d95801c53ea45b690a9a18ef4cf3",
+  "title": "StructAgent: Harness Long-horizon Digital Agents with Unified Causal Structure",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3b04534002e0d95801c53ea45b690a9a18ef4cf3.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "3b81eca915a041b12eab31ffa62fca5bdabfbf17",
+  "title": "Certifiably Robust RAG against Retrieval Corruption",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/3b81eca915a041b12eab31ffa62fca5bdabfbf17.txt",
+  "current_track": "Security",
+  "current_channel": "RAG",
+  "current_consequence": "silent-corruption"
+ },
+ {
+  "paper_id": "3ba1322e1f7a457c1885df5aecc39c80528313d3",
+  "title": "Cache What Lasts: Token Retention for Memory-Bounded KV Cache in LLMs",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/3ba1322e1f7a457c1885df5aecc39c80528313d3.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "3c51e32c6059775328c1620a22dc8e7d602f83cc",
+  "title": "Rewriting the Response Path: Silent Tampering and Provider-Signed Defense in BYOK LLM Agents",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3c51e32c6059775328c1620a22dc8e7d602f83cc.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3d16be498e90f357318f27bf8c476567a51d4e47",
+  "title": "SecureCAI: Injection-Resilient LLM Assistants for Cybersecurity Operations",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3d16be498e90f357318f27bf8c476567a51d4e47.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3d3fe0e811aaad09aed39cbde449c17b83543c4c",
+  "title": "Learning When to Act or Refuse: Guarding Agentic Reasoning Models for Safe Multi-Step Tool Use",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3d3fe0e811aaad09aed39cbde449c17b83543c4c.txt",
+  "current_track": "Both",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3d68522abfadfc8ee6b7ec9edaaf91f1b2f38e5e",
+  "title": "Large Language Models Can Be Easily Distracted by Irrelevant Context",
+  "year": 2023,
+  "text_path": "data/cache/pdf_text/3d68522abfadfc8ee6b7ec9edaaf91f1b2f38e5e.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "3d8333ace789490b41a2de75e58464618aad2a87",
+  "title": "Image-based Prompt Injection: Hijacking Multimodal LLMs through Visually Embedded Adversarial Instructions",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/3d8333ace789490b41a2de75e58464618aad2a87.txt",
+  "current_track": "Security",
+  "current_channel": "cross-modal",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3dd46c0ab602825f50b522ca9f96d22c3c6925b4",
+  "title": "Parallel Context Compaction for Long-Horizon LLM Agent Serving",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3dd46c0ab602825f50b522ca9f96d22c3c6925b4.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "3e1d812a1ef4b02b7d60020cc8aaa596d28373da",
+  "title": "SecAlign: Defending Against Prompt Injection with Preference Optimization",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/3e1d812a1ef4b02b7d60020cc8aaa596d28373da.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3e8fdaeca758a97fb2f91e29a065c16754c77ef6",
+  "title": "Gated Coordination for Efficient Multi-Agent Collaboration in Minecraft Game",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3e8fdaeca758a97fb2f91e29a065c16754c77ef6.txt",
+  "current_track": "ML/AI",
+  "current_channel": "multi-agent",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "3f0ca570bfd749d73b1bd302ec8d2d55ce959c80",
+  "title": "PromptFuzz: Harnessing Fuzzing Techniques for Robust Testing of Prompt Injection in LLMs",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/3f0ca570bfd749d73b1bd302ec8d2d55ce959c80.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "3fdd6bd75acec6e9e54a439a0f8c878c3656397f",
+  "title": "PromptSentinel-X: A Leakage-Aware and Context-Aware Framework for Prompt-Injection Detection in Large Language Model-Powered Web Agents",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/3fdd6bd75acec6e9e54a439a0f8c878c3656397f.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "data-exfiltration"
+ },
+ {
+  "paper_id": "3ffb459ab34a6e766edbbdad32fe2c132ce47580",
+  "title": "Reliable Weak-to-Strong Monitoring of LLM Agents",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/3ffb459ab34a6e766edbbdad32fe2c132ce47580.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "402dcb96467b49a524a6771918a0d3b96c49ba1e",
+  "title": "OS-Harm: A Benchmark for Measuring Safety of Computer Use Agents",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/402dcb96467b49a524a6771918a0d3b96c49ba1e.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "407b6a1611ecc8b104d8c4af6c7bfd92d179f122",
+  "title": "A Framework for Security Testing of Large Language Models",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/407b6a1611ecc8b104d8c4af6c7bfd92d179f122.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "40ea97427c4750b1dee547f6c7b433733a80c38c",
+  "title": "Still: Amortized KV Cache Compaction in a Single Forward Pass",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/40ea97427c4750b1dee547f6c7b433733a80c38c.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "413e41f065d722e4316ebc56747ae5f6f4c53485",
+  "title": "Defense Against Indirect Prompt Injection via Tool Result Parsing",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/413e41f065d722e4316ebc56747ae5f6f4c53485.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "41b13ebbf1769d140b01590fb073a330f063702e",
+  "title": "Invisible Injections: Exploiting Vision-Language Models Through Steganographic Prompt Embedding",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/41b13ebbf1769d140b01590fb073a330f063702e.txt",
+  "current_track": "Security",
+  "current_channel": "cross-modal",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "420c63cc0480a1990a348b741612cbde516b3f30",
+  "title": "AgentProg: Empowering Long-Horizon GUI Agents with Program-guided Context Management",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/420c63cc0480a1990a348b741612cbde516b3f30.txt",
+  "current_track": "ML/AI",
+  "current_channel": "direct-input",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "4218729e1552df1b35801c81894b7652e57cefef",
+  "title": "WildClawBench: A Benchmark for Real-World, Long-Horizon Agent Evaluation",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/4218729e1552df1b35801c81894b7652e57cefef.txt",
+  "current_track": "ML/AI",
+  "current_channel": "tool-output",
+  "current_consequence": "reasoning-corruption"
+ },
+ {
+  "paper_id": "42555b0ed5e8a6e3556a5938c791e28ccd89dd57",
+  "title": "MIRAGE: Stealthy Visual Prompt Injection for Vulnerability Detection in Web Agents",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/42555b0ed5e8a6e3556a5938c791e28ccd89dd57.txt",
+  "current_track": "Security",
+  "current_channel": "cross-modal",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "4279709b7603081b51a577e22ecb846385a3a008",
+  "title": "AlignSentinel: Alignment-Aware Detection of Prompt Injection Attacks",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/4279709b7603081b51a577e22ecb846385a3a008.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "428e867f59ed171a0f7dad5cf2e034fee793a167",
+  "title": "Regime-Aware Peer Specialization for Robust RAG under Heterogeneous Knowledge Conflicts",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/428e867f59ed171a0f7dad5cf2e034fee793a167.txt",
+  "current_track": "ML/AI",
+  "current_channel": "RAG",
+  "current_consequence": "silent-corruption"
+ },
+ {
+  "paper_id": "42f560c26f22484fc7859a295527fd786f598f96",
+  "title": "When Compression Becomes an Attack Surface: Black-Box Attacks on Prompt-Compressed LLM Agents",
+  "year": 2025,
+  "text_path": "data/cache/pdf_text/42f560c26f22484fc7859a295527fd786f598f96.txt",
+  "current_track": "Security",
+  "current_channel": "tool-output",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "43408b3330d05250412940a0ea08791b35ebd185",
+  "title": "Diverse and Effective Red Teaming with Auto-generated Rewards and Multi-step Reinforcement Learning",
+  "year": 2024,
+  "text_path": "data/cache/pdf_text/43408b3330d05250412940a0ea08791b35ebd185.txt",
+  "current_track": "Security",
+  "current_channel": "direct-input",
+  "current_consequence": "goal-hijack"
+ },
+ {
+  "paper_id": "43706cbea8b3d68e48173070a95b7bb5073ad225",
+  "title": "RIPE-II: Retrieval In-Place Poisoning Evaluation with Indirect Injections",
+  "year": 2026,
+  "text_path": "data/cache/pdf_text/43706cbea8b3d68e48173070a95b7bb5073ad225.txt",
+  "current_track": "Security",
+  "current_channel": "RAG",
+  "current_consequence": "goal-hijack"
+ }
+]
