@@ -102,8 +102,9 @@ security track masses at ingestion, the machine learning track at reasoning,
 and execution is security almost alone. Counts are named mechanisms per
 channel (left) and named defenses per intervention point (center) and named mechanisms per
 consequence (right), by track. The consequence column is the sharpest
-division in the figure: every goal-hijack mechanism is security-track and
-none is machine learning, while reasoning corruption runs the other way.
+division in the figure: goal-hijack is security-track \NGoalHijackSec{} to
+\NGoalHijackML{}, and reasoning corruption runs the other way, \NReasonML{}
+to \NReasonSec{}.
 Drawn as a flow rather than a tree because the taxonomy is a cube; the
 pipeline is the one ordering the three axes genuinely have.}
 \label{fig:pipeline}
@@ -121,10 +122,11 @@ The split is not only in vocabulary; it is in where each community thinks the
 problem should be solved, and a method built for one point is not a drop-in at
 another.
 
-The consequence axis separates them even more sharply, and the registry says so outright. Every one of the
-\NMechGoalHijack{} named goal-hijack mechanisms comes from the security track
-and none from the machine learning track, while reasoning corruption runs the
-other way. That is not two communities describing one phenomenon in different
+The consequence axis separates them even more sharply, and the registry says
+so outright. Of the \NMechGoalHijack{} named goal-hijack mechanisms,
+\NGoalHijackSec{} come from the security track and \NGoalHijackML{} from
+machine learning. Reasoning corruption runs the other way, \NReasonML{} to
+\NReasonSec{}. That is not two communities describing one phenomenon in different
 words. It is two communities that have divided the phenomenon between them and
 stopped at the boundary.
 

@@ -87,6 +87,16 @@ def main():
     M["NMechSecurity"], M["NMechML"] = tr3["Security"], tr3["ML/AI"]
     cq = collections.Counter(e.get("consequence") for e in r3)
     M["NGoalHijack"] = cq["goal-hijack"]
+    # the consequence x track split. The prose used to say EVERY goal-hijack
+    # mechanism was security-track; after the full-text re-coding that is one
+    # paper short of true, so the claim is now carried by counts.
+    _ct = collections.defaultdict(collections.Counter)
+    for e in r3:
+        _ct[(e.get("consequence") or "").strip()][(e.get("track") or "").strip()] += 1
+    M["NGoalHijackSec"] = _ct["goal-hijack"]["Security"]
+    M["NGoalHijackML"] = _ct["goal-hijack"]["ML/AI"]
+    M["NReasonML"] = _ct["reasoning-corruption"]["ML/AI"]
+    M["NReasonSec"] = _ct["reasoning-corruption"]["Security"]
     M["PctGoalHijack"] = f'{100*cq["goal-hijack"]/len(r3):.1f}'
 
     M["NDefenses"] = len(r4)
