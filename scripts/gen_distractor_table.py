@@ -55,7 +55,13 @@ def row(name, fn, d_arm, b_arm):
         kd, kb = round(d[k] * n / 100), round(b[k] * n / 100)
         _, p = fisher_exact([[kd, n - kd], [kb, n - kb]])
         star = "^{*}" if (abs(delta) >= mdr and p < 0.05) else ""
-        cells.append(f"${delta:+.1f}{star}$")
+        # Show the two raw rates beside the delta. A bare "-36.1" does not
+        # say what it moved from, and the reader cannot otherwise tell a
+        # collapse from 39% apart from one from 5%. Rates are rounded for
+        # display; the delta is computed before rounding, so a pair may
+        # differ from its delta by 0.1.
+        cells.append(f"${delta:+.1f}{star}$ \\footnotesize{{"
+                     f"$({b[k]:.1f}\\!\\to\\!{d[k]:.1f})$}}")
         deltas.append(delta)
     resid = deltas[0] + deltas[1]
     return name, n, cells, resid
@@ -76,13 +82,16 @@ def main():
     print(f"  {nm:10s} n={n:4d}  " + "  ".join(c.strip('$') for c in cells)
           + f"  residual {resid:+.1f}  (steering comparison, not undefended)")
 
-    OUT.write_text(r"""\begin{table}[t]
+    OUT.write_text(r"""\begin{table*}[t]
 \centering
 \caption{Context-reliance defenses against the distractor payload, at
-saturation. Memory is the parametric-answer rate, copied is the planted
-answer, correct is the gold answer; the three are disjoint, so the residual
-is mass that leaves the partition altogether. $*$ clears both the run's
-detectability threshold and Fisher at $p<0.05$.}
+saturation, in percentage points against each run's own undefended arm, with
+the undefended and defended rates in brackets. Memory is the
+parametric-answer rate, copied is the planted answer, correct is the gold
+answer; the three are disjoint, so the residual is mass that leaves the
+partition altogether. $*$ clears both the run's detectability threshold and
+Fisher at $p<0.05$. Rates are rounded for display and deltas are computed
+before rounding.}
 \label{tab:distractor}
 \small
 \begin{tabular}{@{}lrrrrr@{}}
@@ -99,7 +108,7 @@ defense & $n$ & memory & copied & correct & residual \\
 compares steering toward memory against steering toward the context. It is
 not a defended-minus-undefended delta and does not belong in the same column
 of judgement as the rows above.}
-\end{table}
+\end{table*}
 """)
     print(f"wrote {OUT.relative_to(REPO)}")
 
