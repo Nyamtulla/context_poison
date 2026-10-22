@@ -101,56 +101,65 @@ def save(fig, name):
 
 # ---------------------------------------------------------------- figure 1
 def fig_cube():
-    """Channel x consequence occupancy, split by track.
+    """Named attacks against named defenses, per channel x consequence cell.
 
-    Magnitude, so one hue light to dark. Empty cells are left unfilled and
-    cross-hatched rather than painted the ramp's lightest step, because the
-    paper's claim is about which cells have NO paper and that must not look
-    like a small count.
+    Was a per-track paper count. It now plots the REGISTRY, because the
+    question the cell selection turns on is not how many papers touched a
+    cell but how many named attacks sit in it and how many named defenses
+    were ever aimed there. All 233 attacks and all 541 defenses place, so
+    the margins are the whole census.
+
+    Magnitude, so one hue light to dark on the total. A cell holding attacks
+    and no defense at all is outlined rather than recoloured: red already
+    means the security track everywhere else in this paper and must not be
+    overloaded here. Cells with nothing from either side are left unfilled
+    and cross-hatched, so "nobody named anything" cannot be mistaken for a
+    small count.
     """
-    hdr, rows = corpus()
-    ci, qi, ti = hdr.index("channel"), hdr.index("consequence"), hdr.index("track")
-    grids = {}
-    for track in ("Security", "ML/AI"):
+    r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
+
+    def grid(reg):
         g = np.zeros((len(CHANNELS), len(CONSEQ)))
-        for r in rows:
-            if (r[ti] or "") != track:
-                continue
-            c, q = str(r[ci] or "").strip(), str(r[qi] or "").strip()
+        for e in reg:
+            c = (e.get("channel") or "").strip()
+            q = (e.get("consequence") or "").strip()
             if c in CHANNELS and q in CONSEQ:
                 g[CHANNELS.index(c), CONSEQ.index(q)] += 1
-        grids[track] = g
+        return g
 
-    ramps = {"Security": LinearSegmentedColormap.from_list("sec", SEQ_SEC),
-             "ML/AI": LinearSegmentedColormap.from_list("ml", SEQ)}
-    vmax = max(g.max() for g in grids.values())
-    fig, axes = plt.subplots(1, 2, figsize=(FULL, 2.9), constrained_layout=True)
-    for ax, (track, g) in zip(axes, grids.items()):
-        masked = np.ma.masked_where(g == 0, g)
-        cmap = ramps[track]
-        cmap.set_bad(color="white")
-        ax.imshow(masked, cmap=cmap, vmin=0, vmax=vmax, aspect="auto")
-        for i in range(len(CHANNELS)):
-            for j in range(len(CONSEQ)):
-                v = int(g[i, j])
-                if v == 0:
-                    ax.add_patch(plt.Rectangle((j - .5, i - .5), 1, 1, fill=False,
-                                               hatch="///", edgecolor="#d8d7d2",
-                                               linewidth=0))
-                else:
-                    ax.text(j, i, v, ha="center", va="center", fontsize=6,
-                            color="white" if v > vmax * .45 else INK)
-        ax.set_xticks(range(len(CONSEQ)))
-        ax.set_xticklabels([c.replace("-", "-\n") for c in CONSEQ], fontsize=6)
-        ax.set_yticks(range(len(CHANNELS)))
-        ax.set_yticklabels(CHANNELS if track == "Security" else [], fontsize=6.5)
-        lab = "adversarial (Security track)" if track == "Security" else \
-              "incidental (ML/AI track)"
-        ax.set_title(lab, fontsize=7.5,
-                     color=TRACK_SEC if track == "Security" else TRACK_ML)
-        for s in ax.spines.values():
-            s.set_visible(False)
-        ax.tick_params(length=0)
+    A, D = grid(r3), grid(r4)
+    tot = A + D
+    cmap = LinearSegmentedColormap.from_list("cube", SEQ_NEUTRAL)
+    cmap.set_bad(color="white")
+    masked = np.ma.masked_where(tot == 0, tot)
+
+    fig, ax = plt.subplots(figsize=(FULL, 3.1), constrained_layout=True)
+    ax.imshow(masked, cmap=cmap, vmin=0, vmax=tot.max(), aspect="auto")
+    for i in range(len(CHANNELS)):
+        for j in range(len(CONSEQ)):
+            a, d, t = int(A[i, j]), int(D[i, j]), int(tot[i, j])
+            if t == 0:
+                ax.add_patch(plt.Rectangle((j - .5, i - .5), 1, 1, fill=False,
+                                           hatch="///", edgecolor="#d8d7d2",
+                                           linewidth=0))
+                continue
+            if a > 0 and d == 0:
+                ax.add_patch(plt.Rectangle((j - .5, i - .5), .98, .98,
+                                           fill=False, edgecolor=INK,
+                                           linewidth=1.1))
+            ink = "white" if t > tot.max() * .45 else INK
+            ax.text(j, i, f"{a}\u00b7{d}", ha="center", va="center",
+                    fontsize=6, color=ink)
+    ax.set_xticks(range(len(CONSEQ)))
+    ax.set_xticklabels([c.replace("-", "-\n") for c in CONSEQ], fontsize=6)
+    ax.set_yticks(range(len(CHANNELS)))
+    ax.set_yticklabels(CHANNELS, fontsize=6.5)
+    ax.set_title("named attacks \u00b7 named defenses, per cell; "
+                 "outlined = attacks with no defense",
+                 fontsize=7.5, color=INK)
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+    ax.tick_params(length=0)
     save(fig, "fig1_cube")
 
 

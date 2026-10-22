@@ -147,20 +147,32 @@ MemoryGraft~\cite{srivastava-2025-memorygraft} and Sleeper Memory Poisoning;
 the machine learning literature contributes memory pollution, memory laundering
 and multi-target interference. Same channel, adjacent words, two literatures.
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig1_cube}
-\caption{Channel $\times$ consequence occupancy, split by track. Empty cells
-are hatched rather than shaded, because the claim is about which cells hold no
-paper at all.}
+\includegraphics[width=0.86\textwidth]{figures/fig1_cube}
+\caption{Named attacks and named defenses per channel $\times$ consequence
+cell, written \texttt{attacks}$\cdot$\texttt{defenses}. All \NMechanisms{}
+attacks and all \NDefenses{} defenses place, so the margins are the whole
+census. Cells holding attacks and no defense at all are outlined; cells with
+nothing from either side are hatched rather than shaded, because ``nobody
+named anything here'' must not read as a small count.}
 \label{fig:cube}
-\end{figure}
+\end{figure*}
 
 \textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) contain no
-paper from either literature.} Emptiness is not uniform. Figure~\ref{fig:cube}
-shows the two tracks concentrating in different columns. The cells
-empty in both tracks are the ones where neither community has looked, which is
-a different and more interesting gap than a cell one community has to itself.
+paper from either literature.} Emptiness is not uniform, and the shape of it is
+easier to read over the registry than over the paper count.
+Figure~\ref{fig:cube} plots the named attacks against the named defenses in
+each cell. Two things are visible there that a paper count hides. Effort is
+concentrated: \meth{tool-output} $\times$ \meth{goal-hijack} alone holds 114 of
+the \NDefenses{} defenses, and \meth{RAG} $\times$ \meth{silent-corruption}
+another 71, so two cells of \NCubeCells{} absorb over a third of the remedy
+side. And the outlined cells are the ones with a named attack and no defense
+proposed against it anywhere: of the four
+\meth{persistence-backdoor} cells that hold a named attack and are not
+\meth{memory} or \meth{skill}, all four are outlined, as are
+\meth{supply-chain} and \meth{memory} $\times$ \meth{data-exfiltration}. A cell one community has to itself is a gap; a cell
+with attacks and no defense is a different and sharper one.
 
 Figure~\ref{fig:channelgap} asks a separate question: where protection does not
 follow the problem. Counting named defenses against named mechanisms per
