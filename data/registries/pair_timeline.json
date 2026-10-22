@@ -1627,13 +1627,13 @@
   {
    "defense": "FocusAgent / DefenseFocusAgent",
    "defense_year": 2025,
-   "defense_track": "Security",
+   "defense_track": "ML/AI",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
    "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
-   "cross_community": false,
+   "cross_community": true,
    "match": "exact/exact"
   },
   {
@@ -2059,13 +2059,13 @@
   {
    "defense": "MAGE (Memory As Guardrail Enforcement)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
+   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
    "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
-   "cross_community": true,
+   "cross_community": false,
    "match": "exact/exact"
   },
   {
@@ -2179,13 +2179,13 @@
   {
    "defense": "MOSAIC (plan-check-act/refuse post-training framework)",
    "defense_year": 2026,
-   "defense_track": "Both",
+   "defense_track": "Security",
    "attack": "ASB: Direct Prompt Injection (DPI)",
    "attack_year": 2024,
    "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
-   "cross_community": true,
+   "cross_community": false,
    "match": "exact/exact"
   },
   {
@@ -3019,10 +3019,10 @@
   {
    "defense": "SPRA (Scaffold-Preserving Representation Alignment)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
+   "defense_track": "Security",
    "attack": "scaffolding collapse",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
+   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
@@ -3523,13 +3523,13 @@
   {
    "defense": "TRACE (Trajectory Risk-Aware Compression)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
+   "defense_track": "Security",
    "attack": "UNNAMED: context-length-induced degradation independent of retrieval failure",
    "attack_year": 2025,
    "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
-   "cross_community": false,
+   "cross_community": true,
    "match": "exact/exact"
   },
   {
@@ -3679,13 +3679,13 @@
   {
    "defense": "Twin Agent (Explore Agent / Safe Agent residual-hint privilege separation)",
    "defense_year": 2026,
-   "defense_track": "Both",
+   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
    "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
-   "cross_community": true,
+   "cross_community": false,
    "match": "exact/exact"
   },
   {
@@ -3739,13 +3739,13 @@
   {
    "defense": "UNNAMED: DPO-based faithfulness-improvement training for GUI agents against environmental distraction",
    "defense_year": 2024,
-   "defense_track": "Both",
+   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context",
    "attack_year": 2023,
    "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
-   "cross_community": true,
+   "cross_community": false,
    "match": "exact/exact"
   },
   {
@@ -4051,10 +4051,10 @@
   {
    "defense": "UNNAMED: two preemptive-answer mitigations",
    "defense_year": 2024,
-   "defense_track": "Security",
+   "defense_track": "ML/AI",
    "attack": "preemptive answer attack (CoT short-circuiting)",
    "attack_year": 2024,
-   "attack_track": "Security",
+   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,

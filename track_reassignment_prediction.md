@@ -63,3 +63,55 @@ prevent.
 Our expectation, recorded now: **ML/AI**, because environmental distraction is
 an incidental failure mode and DPO faithfulness training reasons about no
 adversary. Stated so that being wrong is visible.
+
+---
+
+## Outcome, 2026-10-22
+
+**The pivotal case resolved as predicted.** The GUI-agent DPO defense carries
+`validated_against: incidental`, so the rule sent it to ML/AI mechanically and
+its pair is ML-defense against ML-attack. That route did not break the zero.
+
+**The zero broke anyway, through a pair we failed to name.** `NSecDefVsMLAttack`
+is **1**, not 0:
+
+> TRACE (Trajectory Risk-Aware Compression for Long-Horizon Agent Safety),
+> 2026, `validated_against: adversarial` -> Security, reported against
+> *context-length-induced degradation independent of retrieval failure*,
+> an ML/AI mechanism.
+
+**Why we missed it.** The risk analysis was run against `pair_timeline.json`
+as it sat on disk, and that file was stale: it predated the propagation that
+set TRACE's registry entry to `Both`. In the stale file TRACE's pair read
+ML/AI vs ML/AI, so it did not appear in the query for pairs that could land in
+the empty cell. **Rebuild the derived artifact before using it to assess risk**
+— the lesson is the same one the numbers.tex rule exists for.
+
+So the pre-registration did its job in the narrow sense, and the thing it was
+guarding against still happened by a route it did not cover. Both facts are
+reported.
+
+## What changed
+
+| | before | after |
+|---|---|---|
+| `NSecDefVsMLAttack` | 0 | **1** |
+| `NCubeCells` | 189 | 126 |
+| `NCubeEmpty` / `PctCubeEmpty` | 135 (71.4%) | 65 (**51.6%**) |
+| `NPureTrackPairs` | 346 | 349 |
+| `NCrossCommunityPairs` / pct | 4 (1.2%) | 5 (**1.4%**) |
+| `PctSameTrack` | 98.0 | 98.6 |
+| `NDefBoth` | 20 | 0 |
+| `NTrackSecurity` / `NTrackML` | 566 / 325 | 588 / 341 |
+
+The empty-cell rate fell further than the 57.1% predicted, because retracking
+the 38 papers also occupied cells that had been empty.
+
+## Limits of this pass
+
+Single-coded, by one coder, in one sitting. 22 went to Security and 16 to
+ML/AI; 10 of the 38 are recorded at medium or low confidence in
+`data/registries/raw/track_reassign_both.csv`, and one (`eba07d3742`) applies
+`validated_against` against the apparent sense of its own title rather than
+overriding the independently coded field. **These 38 belong in the validation
+packets**, which have to be rebuilt anyway.

@@ -2097,7 +2097,7 @@
   "confidence": "high",
   "notes": "Explicitly named and formally characterized failure mode: context compaction (summarization/eviction to manage token budget) silently removes in-context safety/governance constraints, causing later prohibited actions even without any adversary manipulating input; note the paper's own threat-model section frames it in adversarial/exploitable-surface terms, so this may be more appropriately a Track A entry -- flagging for cross-check, but the root mechanism (compaction dropping instructions) is itself incidental/non-adversarial.",
   "name": "Governance Decay",
-  "track": "Both"
+  "track": "ML/AI"
  },
  {
   "row": 575,
@@ -2293,7 +2293,7 @@
   "confidence": "medium",
   "notes": "Benchmark paper explicitly naming and characterizing \"memory misevolution\": gradual, self-reinforcing behavioral drift from repeated exposure to misleading information accumulated in persistent memory, distinguished by the authors from prior one-shot poisoning/static hallucination framings.",
   "name": "memory misevolution",
-  "track": "Both"
+  "track": "ML/AI"
  },
  {
   "row": 843,
@@ -2489,7 +2489,7 @@
   "confidence": "high",
   "notes": "Central named contribution: under sustained multi-turn student pressure (persistent requests, fake mastery claims, emotional urgency, role redefinition), an LLM Socratic tutor gradually abandons guided-inquiry constraints and reveals answers directly, driven by internal representation drift. Note: threat model is framed as red-teaming/sustained user pressure, bordering on Track A; included here as the paper frames it as incidental multi-turn dialogue drift rather than a discrete attack.",
   "name": "scaffolding collapse",
-  "track": "Both"
+  "track": "Security"
  },
  {
   "row": 976,
@@ -2769,7 +2769,7 @@
   "confidence": "high",
   "notes": "The LLM obtains an answer before reasoning, degrading CoT. Cross-track flavour: arises inadvertently OR by injection.",
   "name": "preemptive answer attack (CoT short-circuiting)",
-  "track": "Both"
+  "track": "ML/AI"
  },
  {
   "row": 1047,
@@ -3021,7 +3021,7 @@
   "confidence": "medium",
   "notes": "Names and characterises a distinct incidental degradation mechanism: benign, non-optimized natural-language prompts that saturate token budgets through helpfulness priors and weak length control, explicitly differentiated from optimized DoS attacks like Engorgio and AutoDoS. Conf medium because the contribution is delivered mainly as a benchmark and taxonomy of nine prompting strategies rather than a single new technique.",
   "name": "Overflow",
-  "track": "Both"
+  "track": "ML/AI"
  },
  {
   "row": 1123,
@@ -3099,7 +3099,7 @@
   "title": "When Routine Chats Turn Toxic: Unintended Long-Term State Poisoning in Personalized Agents",
   "channel": "memory",
   "consequence": "persistence-backdoor",
-  "track": "Both",
+  "track": "ML/AI",
   "is_extension_of": "",
   "confidence": "medium",
   "name": "unintended long-term state poisoning",

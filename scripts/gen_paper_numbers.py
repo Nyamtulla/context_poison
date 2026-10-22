@@ -218,7 +218,15 @@ def main():
                     str(r[ti] or "").strip())
         if c in CHS and q in CQS and tr in ("Security", "ML/AI"):
             occupied.add((c, q, tr))
-    NCELLS = len(CHS) * len(CQS) * 3      # 3 intents: adversarial, incidental, both
+    # The cube's third axis is intent, and the corpus codes it as track. The
+    # `Both` value was retired on 2026-10-22 (track_reassignment_prediction.md)
+    # because it was filtered out of this count and out of fig_cube, which left
+    # a third of the cube unoccupiable BY CONSTRUCTION and inflated the
+    # empty-cell rate. Two reachable intents, so the cube is 9 x 7 x 2.
+    NCELLS = len(CHS) * len(CQS) * 2
+    # The taxonomy's own axis sizes. These were typed as English words and
+    # went stale when availability-loss made it seven consequences.
+    M["NChannelCats"], M["NConseqCats"] = len(CHS), len(CQS)
     M["NCubeCells"] = NCELLS
     M["NCubeEmpty"] = NCELLS - len(occupied)
     # papers that carry no channel or no consequence: multi-vector surveys

@@ -54,7 +54,7 @@ and cause the same damage occupy the same cell. They differ only on intent. That
 experiments rather than a filing scheme.
 
 \textbf{Channel} is the route untrusted content takes into the context window.
-There are nine. \meth{direct-input} is content placed in the prompt by the user
+There are \NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
 or an upstream service~\cite{liu-2023-promptb}. \meth{RAG} is a passage a retriever selected from a
 corpus~\cite{zhong-2023-poisoning,zou-2024-poisonedrag}. \meth{tool-output} is whatever a called tool returned~\cite{greshake-2023-not}.
 \meth{tool-metadata} is the names, descriptions and schemas of the tools
@@ -69,7 +69,7 @@ on~\cite{yan-2023-backdooring}.
 \textbf{Intent} is whether the content was placed deliberately: adversarial,
 incidental, or studied as both.
 
-\textbf{Consequence} is what the agent then does wrong. There are six.
+\textbf{Consequence} is what the agent then does wrong. There are \NConseqCats{}.
 \meth{goal-hijack} is pursuing an objective it was not
 given~\cite{greshake-2023-not}.
 \meth{reasoning-corruption} is reaching a wrong conclusion while pursuing the
@@ -95,8 +95,8 @@ precision. They are counted in the corpus and excluded from the cube.
 \centering
 \includegraphics[width=\textwidth]{figures/fig0_pipeline}
 \caption{The taxonomy against the system it describes. Untrusted content
-arrives through one of nine \textbf{channels}, enters one context window, and
-the output fails as one of six \textbf{consequences}. A defense can intervene
+arrives through one of \NChannelCats{} \textbf{channels}, enters one context window, and
+the output fails as one of \NConseqCats{} \textbf{consequences}. A defense can intervene
 at three points, and the two literatures do not choose the same one: the
 security track masses at ingestion, the machine learning track at reasoning,
 and execution is security almost alone. Counts are named mechanisms per
@@ -342,11 +342,22 @@ ML/AI    & \NMLDefVsSecAttack{} & \NMLDefMLAttack{} \\
 \end{tabular}
 \end{table}
 
-\textbf{No security defense has ever been evaluated against a machine learning
-failure mechanism. The cell is empty.} In the other direction there are
-\NMLDefVsSecAttack{} pairs out of \NPureTrackPairs{}. Together,
+\textbf{Exactly \NSecDefVsMLAttack{} of \NPureTrackPairs{} pairs is a
+security defense evaluated against a machine learning failure mechanism},
+against \NSecDefSecAttack{} evaluated against security attacks. In the other
+direction there are \NMLDefVsSecAttack{}. Together,
 \NCrossCommunityPairs{} pairs (\PctCrossCommunity{}\%) cross the boundary and
 the remaining \PctSameTrack{}\% stay inside one community.
+
+The single crossing is worth naming, because it is the strongest evidence
+against our own framing and it is one pair.
+TRACE~\cite{hong-2026-trace}, a trajectory compressor built for long-horizon agent
+safety and validated adversarially, is reported against context-length-induced
+degradation, which is an incidental mechanism. It comes from a paper whose
+subject matter spans both communities, which is precisely the kind of paper
+that would cross first. One instance in \NPureTrackPairs{} is not a literature
+that tests across the boundary; it is the exception that shows what crossing
+would look like.
 
 This is consistent with the citation rates and sharper than them. The
 communities do not read each other, so they do not test each other, so the
@@ -400,11 +411,14 @@ publishes degradations, which are noticed before they are named.
 \end{figure}
 
 A reader might reasonably ask whether this is our boundary rather than the
-field's. We assign the track label per paper. Papers that sit on the boundary are
-coded ``Both'' and excluded from Table~\ref{tab:transfer}, because a paper
-cannot cross a line it sits on. Including them gives
-\NCrossAllPairs{} of \NTimelinePairs{} rather than
-\NCrossCommunityPairs{} of \NPureTrackPairs{}, and the empty cell stays empty
-either way.
+field's. We assign the track label per paper, and every paper gets one of the
+two. An earlier version of this coding carried a third value for papers that
+sit on the boundary, and excluded them here on the grounds that a paper cannot
+cross a line it sits on. That was the wrong call twice over: it dropped the
+boundary papers' pairs from the one table they bear most directly on, and,
+because the same label stood in for the cube's intent axis, it left a third of
+the cube unoccupiable by construction and inflated the empty-cell rate. Boundary papers are now assigned by the threat model
+their own evaluation adopts, and the single crossing above comes from one of
+them.
 
 \textbf{The rest of this paper fills that cell.}

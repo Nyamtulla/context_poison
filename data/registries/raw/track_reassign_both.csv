@@ -1,0 +1,39 @@
+paper_id,new_track,basis,confidence,note
+141d242563,Security,validated_against=adversarial,high,mechanical
+74aec0665c,Security,validated_against=adversarial,high,mechanical
+6792cb92e3,Security,validated_against=adversarial,high,mechanical
+arxiv:2511,Security,validated_against=adversarial,high,mechanical
+263a7f2569,Security,validated_against=adversarial,high,mechanical
+1ad06ca131,Security,validated_against=adversarial,high,mechanical
+6928b524b5,Security,validated_against=adversarial,high,mechanical
+eba07d3742,Security,validated_against=adversarial,low,"title reads incidental (scaffolding collapse); applying the independently coded field rather than overriding it"
+ee745d4c5e,ML/AI,validated_against=incidental,high,"PIVOTAL CASE: decides NSecDefVsMLAttack; resolved mechanically"
+cfae2299cb,Security,primary experiment adversarial,high,formal threat model across agent lifecycle
+2e6274d1f9,Security,primary experiment adversarial,high,backdoor ASR is the headline
+e7ce3289d6,Security,contribution framing,high,safety/security survey with compromise case study
+ae06bb0819,Security,contribution framing,high,explicit threat model; poisoned skill retrieval
+0e465e7e85,Security,contribution framing,medium,defensive tool for indirect prompt injection; headline is overhead
+bc4945c17e,Security,primary experiment adversarial,high,guardrails against unsafe actions
+c45754dd5a,Security,contribution framing,high,LLM security survey
+bdf313d3bd,Security,primary experiment adversarial,medium,instruction-hierarchy violation; headline is adherence accuracy
+a2c32e9b0c,Security,primary experiment adversarial,high,formal red-teaming over five attack categories
+c98b22964a,Security,primary experiment adversarial,medium,malicious agents injected into the graph; headline is task accuracy
+babb787906,Security,primary experiment adversarial,high,hidden injected instructions via font remapping
+0bd940bdd5,Security,primary experiment adversarial,high,several adversaries against a review pipeline
+2f6cc73ba6,Security,primary experiment adversarial,high,grading-override injection measured
+b29b7aaae0,Security,contribution framing,high,prompt-injection survey
+a110c0272f,ML/AI,headline result,medium,"headline is Transfer Continuity Score; injection is 1 of 6 motivating problems"
+arxiv:2606,ML/AI,contribution framing,high,position paper; non-adversarial primary focus
+d44e3f722d,ML/AI,primary experiment incidental,high,authors state no explicit attacker
+d63a875959,ML/AI,primary experiment incidental,high,explicitly agent-side unreliability not compromise
+c1cf294d2e,ML/AI,primary experiment incidental,medium,"threat model leads with non-adversarial catastrophic actions; headline is risk-scenario accuracy"
+f9272681e0,ML/AI,headline result,medium,"self-described adversarial, but the headline measures compaction-induced violation with no attacker"
+31e1a7b22c,ML/AI,primary experiment incidental,medium,dual model; Safe Rate is measured on benign underspecification
+7540074673,ML/AI,contribution framing,high,injection studied as a secondary robustness dimension
+452891cc25,ML/AI,contribution framing,high,capability/reliability failure taxonomy
+e7fed24b13,ML/AI,primary experiment incidental,medium,"contamination patterns rather than an attacker, though it reports ASR"
+681714a93b,ML/AI,contribution framing,medium,non-adversarial framing dominates
+02a48e1437,ML/AI,headline result,medium,"headline is success rate and pruning; the injection evaluation is Section 6"
+d8ba6085c7,ML/AI,headline result,medium,unintentional variant leads and carries the headline numbers
+301b6d574a,ML/AI,primary experiment incidental,high,deliberately weak adversary; overflow from helpfulness priors
+98b790d195,ML/AI,headline result,medium,provider drift detection rather than a context adversary
