@@ -93,86 +93,43 @@ precision. They are counted in the corpus and excluded from the cube.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig0_pipeline}
-\caption{The taxonomy against the system it describes. Untrusted content
-arrives through one of \NChannelCats{} \textbf{channels}, enters one context window, and
-the output fails as one of \NConseqCats{} \textbf{consequences}. A defense can intervene
-at three points, and the two literatures do not choose the same one: the
-security track masses at ingestion, the machine learning track at reasoning,
-and execution is security almost alone. Counts are named mechanisms per
-channel (left) and named defenses per intervention point (center) and named mechanisms per
-consequence (right), by track. The consequence column is the sharpest
-division in the figure: goal-hijack is security-track \NGoalHijackSec{} to
-\NGoalHijackML{}, and reasoning corruption runs the other way, \NReasonML{}
-to \NReasonSec{}.
-Drawn as a flow rather than a tree because the taxonomy is a cube; the
-pipeline is the one ordering the three axes genuinely have.}
-\label{fig:pipeline}
-\end{figure*}
-
-Figure~\ref{fig:pipeline} puts the three axes against the system they
-describe, and shows a separation the axes alone do not.
-
-The two literatures intervene at different points of the same pipeline.
-Security defenses mass at ingestion, where the question is whether content
-should be admitted. Machine learning fixes mass at reasoning, where the
-question is what to believe once it has been admitted. Execution, where the
-question is what the agent is then permitted to do, is security almost alone.
-The split is not only in vocabulary; it is in where each community thinks the
-problem should be solved, and a method built for one point is not a drop-in at
-another.
-
-The consequence axis separates them even more sharply, and the registry says
-so outright. Of the \NMechGoalHijack{} named goal-hijack mechanisms,
-\NGoalHijackSec{} come from the security track and \NGoalHijackML{} from
-machine learning. Reasoning corruption runs the other way, \NReasonML{} to
-\NReasonSec{}. That is not two communities describing one phenomenon in different
-words. It is two communities that have divided the phenomenon between them and
-stopped at the boundary.
-
-\input{tables/channel_exemplars}
-
-\textbf{What is in the cells.} Table~\ref{tab:channels} names what each
-literature actually contributes per channel, because a count of
-\NMechanisms{} mechanisms is not a description of them. Four channels are named
-by both communities and five are effectively security-only:
-\meth{supply-chain} has no machine learning entry at all, and
-\meth{tool-metadata} and \meth{skill} have one each. \meth{tool-output} is the
-most lopsided channel in the corpus, and \meth{direct-input} the only balanced
-one.
-
-\meth{memory} is the clearest case of the same ground named twice. The security literature contributes
-AgentPoison~\cite{chen-2024-agentpoison},
-MemoryGraft~\cite{srivastava-2025-memorygraft} and Sleeper Memory Poisoning;
-the machine learning literature contributes memory pollution, memory laundering
-and multi-target interference. Same channel, adjacent words, two literatures.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.86\textwidth]{figures/fig1_cube}
-\caption{Named attacks and named defenses per channel $\times$ consequence
-cell, written \texttt{attacks}$\cdot$\texttt{defenses}. All \NMechanisms{}
-attacks and all \NDefenses{} defenses place, so the margins are the whole
-census. Cells holding attacks and no defense at all are outlined; cells with
-nothing from either side are hatched rather than shaded, because ``nobody
-named anything here'' must not read as a small count.}
+\includegraphics[width=0.92\textwidth]{figures/fig1_cube}
+\caption{Named attacks against named defenses in every channel $\times$
+consequence cell, split by track. Solid bars are attacks, pale hatched bars
+are defenses, and heights are square-root scaled against one maximum shared
+by both panels, because linear scaling would leave the largest cell as the
+only visible bar. A cell holding attacks and no defense at all is outlined.
+All \NMechanisms{} attacks and all \NDefenses{} defenses place, so the two
+panels together are the whole census.}
 \label{fig:cube}
 \end{figure*}
 
 \textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) contain no
 paper from either literature.} Emptiness is not uniform, and the shape of it is
 easier to read over the registry than over the paper count.
-Figure~\ref{fig:cube} plots the named attacks against the named defenses in
-each cell. Two things are visible there that a paper count hides. Effort is
-concentrated: \meth{tool-output} $\times$ \meth{goal-hijack} alone holds 114 of
-the \NDefenses{} defenses, and \meth{RAG} $\times$ \meth{silent-corruption}
-another 71, so two cells of \NCubeCells{} absorb over a third of the remedy
-side. And the outlined cells are the ones with a named attack and no defense
-proposed against it anywhere: of the four
-\meth{persistence-backdoor} cells that hold a named attack and are not
-\meth{memory} or \meth{skill}, all four are outlined, as are
-\meth{supply-chain} and \meth{memory} $\times$ \meth{data-exfiltration}. A cell one community has to itself is a gap; a cell
-with attacks and no defense is a different and sharper one.
+Figure~\ref{fig:cube} puts the named attacks beside the named defenses in each
+cell. Three things are visible there that a paper count hides.
+
+The two panels barely overlap. The security track holds \NMechSecurity{} of
+the \NMechanisms{} attacks and masses them in \meth{goal-hijack}; the machine
+learning track holds \NMechML{} and masses them in
+\meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
+community works are nearly disjoint, which is the same separation the citation
+rates show, drawn as a picture.
+
+Effort is concentrated rather than scarce. Four cells hold more than fifty
+defenses each --- \meth{tool-output} $\times$ \meth{goal-hijack} at 113,
+\meth{direct-input} $\times$ \meth{goal-hijack} at 61, \meth{RAG} $\times$
+\meth{silent-corruption} at 60 and \meth{memory} $\times$
+\meth{reasoning-corruption} at 59 --- and between them they absorb over half of
+the \NDefenses{} defenses in the census.
+
+And nine cells hold a named attack with no defense ever proposed against it.
+Eight of them are in the security panel, four of those are
+\meth{persistence-backdoor}, and the ninth is \meth{memory} $\times$
+\meth{data-exfiltration} on the machine learning side. A cell one community has
+to itself is a gap; a cell with attacks and no defense is a different and
+sharper one.
 
 Figure~\ref{fig:channelgap} asks a separate question: where protection does not
 follow the problem. Counting named defenses against named mechanisms per

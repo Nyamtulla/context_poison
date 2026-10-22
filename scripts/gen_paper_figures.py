@@ -21,6 +21,7 @@ import numpy as np
 import openpyxl
 from scipy.stats import fisher_exact
 from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.patches import Patch
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 R = REPO / "data" / "registries"
@@ -74,8 +75,13 @@ plt.rcParams.update({
 
 CHANNELS = ["direct-input", "tool-output", "RAG", "memory", "multi-agent",
             "cross-modal", "tool-metadata", "skill", "supply-chain"]
+# availability-loss was added to the scheme on 2026-10-21 and to
+# gen_paper_numbers.py the same day, but not here, so every figure keyed on
+# CONSEQ silently dropped a column and the entries coded to it vanished from
+# the cube. Keep this list identical to CQS in gen_paper_numbers.py.
 CONSEQ = ["goal-hijack", "reasoning-corruption", "silent-corruption",
-          "data-exfiltration", "persistence-backdoor", "resource-abuse"]
+          "data-exfiltration", "persistence-backdoor", "resource-abuse",
+          "availability-loss"]
 
 
 def load(n):
@@ -101,65 +107,80 @@ def save(fig, name):
 
 # ---------------------------------------------------------------- figure 1
 def fig_cube():
-    """Named attacks against named defenses, per channel x consequence cell.
+    """Named attacks against named defenses, per cell, split by track.
 
-    Was a per-track paper count. It now plots the REGISTRY, because the
-    question the cell selection turns on is not how many papers touched a
-    cell but how many named attacks sit in it and how many named defenses
-    were ever aimed there. All 233 attacks and all 541 defenses place, so
-    the margins are the whole census.
+    Three quantities per cell -- attacks, defenses, and which track -- so
+    track is the panel (red Security, blue ML/AI, as everywhere else) and
+    attacks against defenses is a pair of mini bars inside the cell. Solid
+    is an attack, pale and hatched is a defense, which separates them
+    without a second hue and survives greyscale and both common CVD types.
 
-    Magnitude, so one hue light to dark on the total. A cell holding attacks
-    and no defense at all is outlined rather than recoloured: red already
-    means the security track everywhere else in this paper and must not be
-    overloaded here. Cells with nothing from either side are left unfilled
-    and cross-hatched, so "nobody named anything" cannot be mistaken for a
-    small count.
+    Heights are SQRT scaled against one global maximum shared by both
+    panels. Linear would make 113 the only visible bar in the figure and
+    hide every cell holding one or two entries, which is most of the cube.
+    A cell holding attacks and no defense at all is outlined.
     """
     r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
 
-    def grid(reg):
+    def grid(reg, track):
         g = np.zeros((len(CHANNELS), len(CONSEQ)))
         for e in reg:
             c = (e.get("channel") or "").strip()
             q = (e.get("consequence") or "").strip()
-            if c in CHANNELS and q in CONSEQ:
+            if (e.get("track") or "").strip() == track \
+                    and c in CHANNELS and q in CONSEQ:
                 g[CHANNELS.index(c), CONSEQ.index(q)] += 1
         return g
 
-    A, D = grid(r3), grid(r4)
-    tot = A + D
-    cmap = LinearSegmentedColormap.from_list("cube", SEQ_NEUTRAL)
-    cmap.set_bad(color="white")
-    masked = np.ma.masked_where(tot == 0, tot)
+    G = {t: (grid(r3, t), grid(r4, t)) for t in ("Security", "ML/AI")}
+    vmax = max(g.max() for pair in G.values() for g in pair)
+    hue = {"Security": (TRACK_SEC, SEQ_SEC[0]), "ML/AI": (TRACK_ML, SEQ[0])}
 
-    fig, ax = plt.subplots(figsize=(FULL, 3.1), constrained_layout=True)
-    ax.imshow(masked, cmap=cmap, vmin=0, vmax=tot.max(), aspect="auto")
-    for i in range(len(CHANNELS)):
-        for j in range(len(CONSEQ)):
-            a, d, t = int(A[i, j]), int(D[i, j]), int(tot[i, j])
-            if t == 0:
-                ax.add_patch(plt.Rectangle((j - .5, i - .5), 1, 1, fill=False,
-                                           hatch="///", edgecolor="#d8d7d2",
-                                           linewidth=0))
-                continue
-            if a > 0 and d == 0:
-                ax.add_patch(plt.Rectangle((j - .5, i - .5), .98, .98,
-                                           fill=False, edgecolor=INK,
-                                           linewidth=1.1))
-            ink = "white" if t > tot.max() * .45 else INK
-            ax.text(j, i, f"{a}\u00b7{d}", ha="center", va="center",
-                    fontsize=6, color=ink)
-    ax.set_xticks(range(len(CONSEQ)))
-    ax.set_xticklabels([c.replace("-", "-\n") for c in CONSEQ], fontsize=6)
-    ax.set_yticks(range(len(CHANNELS)))
-    ax.set_yticklabels(CHANNELS, fontsize=6.5)
-    ax.set_title("named attacks \u00b7 named defenses, per cell; "
-                 "outlined = attacks with no defense",
-                 fontsize=7.5, color=INK)
-    for sp in ax.spines.values():
-        sp.set_visible(False)
-    ax.tick_params(length=0)
+    fig, axes = plt.subplots(1, 2, figsize=(FULL, 3.4), constrained_layout=True)
+    for ax, (track, (A, D)) in zip(axes, G.items()):
+        solid, pale = hue[track]
+        for i in range(len(CHANNELS)):
+            for j in range(len(CONSEQ)):
+                a, d = int(A[i, j]), int(D[i, j])
+                ax.add_patch(plt.Rectangle((j - .47, i - .47), .94, .94,
+                                           facecolor="#f7f6f3",
+                                           edgecolor="none"))
+                if a == 0 and d == 0:
+                    continue
+                if d == 0:
+                    ax.add_patch(plt.Rectangle((j - .43, i - .43), .86, .86,
+                                               fill=False, edgecolor=INK,
+                                               linewidth=.9))
+                for v, x0, kw in ((a, -.40, dict(facecolor=solid,
+                                                 edgecolor="none")),
+                                  (d, .04, dict(facecolor=pale,
+                                                edgecolor=solid, hatch="////",
+                                                linewidth=.3))):
+                    if v == 0:
+                        continue
+                    # floor, so one entry is a visible bar and not a hairline
+                    h = .06 + .74 * np.sqrt(v / vmax)
+                    ax.add_patch(plt.Rectangle((j + x0, i + .40 - h), .36, h,
+                                               **kw))
+        ax.set_xlim(-.6, len(CONSEQ) - .4)
+        ax.set_ylim(len(CHANNELS) - .4, -.6)
+        ax.set_xticks(range(len(CONSEQ)))
+        ax.set_xticklabels([c.replace("-", "-\n") for c in CONSEQ], fontsize=6)
+        ax.set_yticks(range(len(CHANNELS)))
+        ax.set_yticklabels(CHANNELS if track == "Security" else [], fontsize=6.5)
+        ax.set_title("adversarial (Security track)" if track == "Security"
+                     else "incidental (ML/AI track)",
+                     fontsize=7.5, color=solid)
+        for sp in ax.spines.values():
+            sp.set_visible(False)
+        ax.tick_params(length=0)
+
+    axes[0].legend(handles=[
+        Patch(facecolor="#8e8d88", edgecolor="none", label="named attacks"),
+        Patch(facecolor="#e6e5e1", edgecolor="#8e8d88", hatch="////",
+              linewidth=.3, label="named defenses")],
+        fontsize=6, frameon=False, loc="lower left",
+        bbox_to_anchor=(0, -.22), ncol=2)
     save(fig, "fig1_cube")
 
 
