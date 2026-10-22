@@ -104,7 +104,23 @@ def main():
     M["NAdvOnly"], M["NIncOnly"] = va["adversarial"], va["incidental"]
     M["NBothValidated"], M["NNoValidation"] = va["both"], va[""]
     M["PctBothValidated"] = f'{100*va["both"]/len(r4):.1f}'
-    M["PctOneThreatModel"] = f'{100*(1-va["both"]/len(r4)):.0f}'
+    # Named "regime", not "threat model". In security a threat model is a
+    # specification of the adversary; "incidental" has no adversary at all,
+    # so the binary is which regime a paper's own evaluation covered.
+    M["PctOneRegime"] = f'{100*(1-va["both"]/len(r4)):.0f}'
+    # The re-coding emptied resource-abuse almost completely; the prose used
+    # to say "three mechanisms and three defenses" as literal numbers.
+    M["NMechResourceAbuse"] = sum(
+        1 for e in r3 if (e.get("consequence") or "").strip() == "resource-abuse")
+    M["NDefResourceAbuse"] = sum(
+        1 for e in r4 if (e.get("consequence") or "").strip() == "resource-abuse")
+    # Track and regime are coded independently; they are also almost the same
+    # partition. Count the defenses validated in the OTHER track's regime.
+    _other = {"Security": "incidental", "ML/AI": "adversarial"}
+    M["NDefCrossRegime"] = sum(
+        1 for e in r4
+        if _other.get((e.get("track") or "").strip())
+        == (e.get("validated_against") or "").strip())
     tr4 = collections.Counter(e.get("track") for e in r4)
     M["NDefML"], M["NDefSecurity"], M["NDefBoth"] = tr4["ML/AI"], tr4["Security"], tr4["Both"]
     ip = collections.Counter(e.get("defense_intervention_point") for e in r4)

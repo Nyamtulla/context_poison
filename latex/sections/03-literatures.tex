@@ -193,13 +193,19 @@ close to three fifths. On the remedy side, \NDefPtReasoning{} methods act at
 reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
 \NDefPtExecution{} at execution, and \NDefPtNone{} specify no single point.
 
-\textbf{Almost every defense answers to one threat model.} \NAdvOnly{} were
+\textbf{Almost every defense answers to one validation regime.} \NAdvOnly{} were
 validated against adversarial scenarios only and \NIncOnly{} against incidental
 scenarios only, leaving \NBothValidated{} (\PctBothValidated{}\%) validated
 against both and \NNoValidation{} with no validation we could identify. So
-\PctOneThreatModel{}\% of published defenses carry an untested
-cross-threat-model question, which is the gap this paper goes on to measure and
-then to fill.
+\PctOneRegime{}\% of published defenses carry an untested cross-regime
+question, which is the gap this paper goes on to measure and then to fill.
+
+The regime a defense was validated in is coded separately from the track it
+was published in, and the two turn out to be nearly the same partition. Of
+\NDefenses{} defenses, only \NDefCrossRegime{} were ever validated in the
+other community's regime. So the empty cell of
+Section~\ref{sec:emptycell}, which is a statement about tested pairs, has a
+counterpart one level down in the methods themselves.
 
 The two sides are also not the same size. There are \NDefenses{} remedies for
 \NMechanisms{} problems, and yet \NMechUncovered{} of \NMechanismsBench{} named
@@ -344,8 +350,8 @@ the remaining \PctSameTrack{}\% stay inside one community.
 
 This is consistent with the citation rates and sharper than them. The
 communities do not read each other, so they do not test each other, so the
-question of whether either one's methods survive the other's threat model has
-no answer in the published record.
+question of whether either one's methods survive the other's regime has no
+answer in the published record.
 
 \textbf{Nor is it answered by ordering.} \NDefensePredates{} of
 \NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a defense that predates

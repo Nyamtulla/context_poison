@@ -27,11 +27,11 @@ model-specific result until shown otherwise.
 
 \subsection{Three conventions that make transfer measurable}
 
-\textbf{State the threat model the evaluation actually covers.} Our defense
+\textbf{State the regime the evaluation actually covers.} Our defense
 census codes each method by what its own paper evaluated, and
-\PctOneThreatModel{}\% cover one threat model. Many of those papers describe their contribution in terms broad
-enough to imply the other. A single required sentence naming the threat model
-the experiments cover would let a reader of the paper, and the maintainer of a
+\PctOneRegime{}\% cover one regime. Many of those papers describe their
+contribution in terms broad enough to imply the other. A single required
+sentence naming the regime the experiments cover would let a reader of the paper, and the maintainer of a
 system, see the gap without reading the appendix.
 
 \textbf{Gate claims on a detectability threshold.} Reporting a difference
@@ -70,7 +70,7 @@ Three practical points follow from the results.
 
 If a system uses a knowledge-conflict method to improve answer quality, and
 that system also retrieves from a corpus an outsider can write to, then the
-method is operating outside its validated threat model. Our measurements say it
+method is operating outside its validated regime. Our measurements say it
 is more likely to increase damage than to reduce it.
 
 A defense that holds against an optimized adversarial passage may fail against

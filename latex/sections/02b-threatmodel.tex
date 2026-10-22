@@ -1,8 +1,11 @@
 \section{Threat model and system model} \label{sec:threat}
 
 A security paper states its threat model before it taxonomizes. This paper
-spans two literatures that assume different ones, so we state both and say
-where each applies.
+spans two literatures, only one of which assumes an adversary at all, so we
+state the threat model and then the regime the other literature works in.
+We keep the two words apart throughout: a \emph{threat model} specifies an
+adversary, and a \emph{regime} is which of the two a paper's own evaluation
+covered.
 
 \subsection{System model}
 
@@ -37,13 +40,15 @@ We exclude three things. Training-time poisoning and weight-level attacks do
 not travel through the context window. A user attacking their own agent
 involves no third-party content, so the trust boundary we study does not
 exist. Denial of service through resource exhaustion sits in the taxonomy as
-\meth{resource-abuse}. It is the thinnest cell we register: three mechanisms
-and three defenses, all from 2026. We report it and draw no conclusions from
-a cell that small.
+\meth{resource-abuse}. It is the thinnest cell we register: after the full-text
+coding pass it holds \NMechResourceAbuse{} mechanism and
+\NDefResourceAbuse{} defenses. We report it and draw no conclusions from a
+cell that small.
 
-\subsection{Incidental threat model}
+\subsection{Incidental regime}
 
-There is no adversary. Content goes wrong through ordinary pipeline behavior.
+There is no adversary, so this is not a threat model and we do not call it
+one. Content goes wrong through ordinary pipeline behavior.
 A retrieved document is stale. A passage is irrelevant but topically close.
 Important text sits in the middle of a long input. A retrieved fact
 contradicts what the model learned in training. The machine learning track
@@ -52,10 +57,10 @@ choice when nothing adapts.
 
 \subsection{Why both, and what connects them}
 
-The two models differ in exactly one assumption: adaptivity. They share the
+The two regimes differ in exactly one assumption: adaptivity. They share the
 channel, the position in the context window, and the downstream consequence.
-Section~\ref{sec:taxonomy} shows that 97\% of published defenses answer to one
-model and not the other.
+Section~\ref{sec:taxonomy} shows that \PctOneRegime{}\% of published defenses
+answer to one regime and not the other.
 
 \textbf{This paper asks whether that single validation transfers.} The
 assumption behind it is reasonable. A method that makes a model robust to a
