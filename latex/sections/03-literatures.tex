@@ -45,7 +45,9 @@ the registry counts in this paper are floors rather than censuses.
 \subsection{A joint taxonomy}
 \label{sec:taxonomy}
 
-We place every named mechanism and every named defense on three axes. The axes let the two
+We place every named mechanism and every named defense on three axes. Each
+axis value is named by the work that first identified it as a distinct
+surface or a distinct harm; we group the names rather than coin them. The axes let the two
 literatures land in the same space without forcing them into the same words. A
 security attack and a machine learning mechanism that enter by the same route
 and cause the same damage occupy the same cell. They differ only on intent. That is what makes the taxonomy a way of finding missing
@@ -53,27 +55,29 @@ experiments rather than a filing scheme.
 
 \textbf{Channel} is the route untrusted content takes into the context window.
 There are nine. \meth{direct-input} is content placed in the prompt by the user
-or an upstream service. \meth{RAG} is a passage a retriever selected from a
-corpus. \meth{tool-output} is whatever a called tool returned.
+or an upstream service~\cite{liu-2023-promptb}. \meth{RAG} is a passage a retriever selected from a
+corpus~\cite{zhong-2023-poisoning,zou-2024-poisonedrag}. \meth{tool-output} is whatever a called tool returned~\cite{greshake-2023-not}.
 \meth{tool-metadata} is the names, descriptions and schemas of the tools
-themselves, which the model reads before it calls anything. \meth{memory} is
-what the agent stored from an earlier turn or session. \meth{skill} is a file or
-instruction set the agent loads to extend itself. \meth{multi-agent} is a
-message from another agent. \meth{cross-modal} is content that arrives as an
-image, audio or document and is rendered into text. \meth{supply-chain} is
-content entering through a package, template or model the agent depends on.
+themselves, which the model reads before it calls anything~\cite{shi-2025-prompt}. \meth{memory} is
+what the agent stored from an earlier turn or session~\cite{chen-2024-agentpoison}. \meth{skill} is a file or
+instruction set the agent loads to extend itself~\cite{schmotz-2025-agent}. \meth{multi-agent} is a
+message from another agent~\cite{chen-2023-scalable}. \meth{cross-modal} is content that arrives as an
+image, audio or document and is rendered into text~\cite{zhu-2024-unraveling}. \meth{supply-chain} is
+content entering through a package, template or model the agent depends
+on~\cite{yan-2023-backdooring}.
 
 \textbf{Intent} is whether the content was placed deliberately: adversarial,
 incidental, or studied as both.
 
 \textbf{Consequence} is what the agent then does wrong. There are six.
-\meth{goal-hijack} is pursuing an objective it was not given.
+\meth{goal-hijack} is pursuing an objective it was not
+given~\cite{greshake-2023-not}.
 \meth{reasoning-corruption} is reaching a wrong conclusion while pursuing the
-right goal. \meth{silent-corruption} is producing a wrong output with nothing
-to signal it. \meth{data-exfiltration} is information crossing a boundary it
-should not. \meth{persistence-backdoor} is corruption that survives into a
-later session. \meth{resource-abuse} is spending compute, money or quota on the
-attacker's behalf.
+right goal~\cite{liu-2023-lost}. \meth{silent-corruption} is producing a wrong output with nothing
+to signal it~\cite{zhong-2023-poisoning}. \meth{data-exfiltration} is information crossing a boundary it
+should not~\cite{yu-2023-assessing}. \meth{persistence-backdoor} is corruption that survives into a
+later session~\cite{yan-2023-backdooring}. \meth{resource-abuse} is spending compute, money or quota on the
+attacker's behalf~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
 
 The three axes give \NCubeCells{} cells.
 
