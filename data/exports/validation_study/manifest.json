@@ -28,6 +28,8 @@
   "detectable_high_vs_low_gap_pp": 21.1,
   "note": "The strata exist for coverage. This design cannot resolve a high-vs-low accuracy gap below the figure above, so per-stratum numbers are descriptive."
  },
+ "double_coded": 0,
+ "reliability": "Single-coded by decision of the project lead, 2026-10-22. With no overlap there is no inter-rater agreement, so no Cohen's kappa and no reliability claim: a coder being wrong cannot be separated from the extraction being wrong. Describe the study as single-coded.",
  "fields_per_paper": 18,
  "registry_entries": 98,
  "coders": 4,

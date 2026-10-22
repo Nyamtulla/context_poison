@@ -394,6 +394,15 @@ def main():
          "no_confidence_excluded": len(inc) - sum(len(v) for v in frame.values()),
          "inference_target": "the frame, not the full corpus",
          "design_precision": precision(frame, DRAW),
+         "double_coded": args.double,
+         "reliability": ("Single-coded by decision of the project lead, "
+                         "2026-10-22. With no overlap there is no "
+                         "inter-rater agreement, so no Cohen's kappa and "
+                         "no reliability claim: a coder being wrong cannot "
+                         "be separated from the extraction being wrong. "
+                         "Describe the study as single-coded.")
+                        if not args.double else
+                        f"{args.double} papers given to a second coder",
          "fields_per_paper": len(FIELDS),
          "registry_entries": nent, "coders": args.coders,
          "papers": picked}, indent=1))
