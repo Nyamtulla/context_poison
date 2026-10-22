@@ -49,6 +49,7 @@ from __future__ import annotations
 import argparse
 import collections
 import csv
+import datetime
 import glob
 import json
 import pathlib
@@ -69,7 +70,16 @@ OUT = REPO / "data" / "exports" / "validation_study"
 TEMPLATE = OUT / "packet_template.xlsx"
 
 SEED = 20261020
-DRAW = {"high": 50, "medium": 40, "low": 35}
+# Allocation rebalanced 2026-10-22, when the full-text re-coding reshaped
+# the frame: medium went from the smallest stratum (117) to the largest
+# (520), so the stratum that dominates the overall estimate was the worst
+# measured. This split equalises the three half-widths at the same coder
+# cost. Proportional allocation beats it on the headline and collapses the
+# low stratum to +/-14.6pp, which is the one group we cannot afford to
+# lose. NOTE: at any feasible n this study cannot resolve a high-vs-low
+# accuracy gap below about 20pp; the strata exist for COVERAGE, not to
+# test that difference. Report per-stratum numbers descriptively.
+DRAW = {"high": 38, "medium": 52, "low": 35}
 RANK = {"low": 0, "medium": 1, "high": 2}
 
 FIELDS = ["track", "screening", "role", "channel", "consequence",
@@ -90,7 +100,25 @@ TOP = Alignment(vertical="top")
 
 
 def paper_confidence():
-    """paper_id -> lowest confidence any coding pass recorded for it."""
+    """paper_id -> the confidence of the coding that is actually in the corpus.
+
+    Until 2026-10-22 this read the RQ3/RQ4 extraction CSVs, whose confidence
+    belongs to the title-and-abstract pass. That pass has been superseded by
+    the full-text re-coding, which carries one confidence per paper for every
+    included paper and so leaves nobody unplaced. Stratifying on the old
+    values would sample against a coding the corpus no longer holds.
+
+    The re-coding wins. The old passes are a fallback for any paper it did
+    not reach, and there a paper still takes its LOWEST recorded value: if
+    any pass was unsure, the paper counts as the less confident group.
+    """
+    conf = {}
+    for f in sorted(glob.glob(str(RAW / "recode_decisions_batch*.csv"))):
+        for r in csv.DictReader(open(f, encoding="utf-8-sig")):
+            pid = (r.get("paper_id") or "").strip()
+            c = (r.get("confidence") or "").strip().lower()
+            if pid and c in RANK:
+                conf[pid] = c
     seen = collections.defaultdict(set)
     for f in glob.glob(str(RAW / "rq3_*.csv")) + glob.glob(str(RAW / "rq4_*.csv")):
         for r in csv.DictReader(open(f, encoding="utf-8-sig")):
@@ -98,8 +126,39 @@ def paper_confidence():
             c = (r.get("confidence") or "").strip().lower()
             if pid and c in RANK:
                 seen[pid].add(c)
-    return {p: min(v, key=lambda c: RANK[c]) for p, v in seen.items()}
+    for pid, v in seen.items():
+        conf.setdefault(pid, min(v, key=lambda c: RANK[c]))
+    return conf
 
+
+
+def precision(frame, draw, p=0.85):
+    """What this design can and cannot measure, recorded with the sample.
+
+    A reader of the results should not have to recompute this to find out
+    whether a difference is readable. Same rule as the experiments: state
+    the smallest detectable difference beside the estimate.
+    """
+    import math
+    tot = sum(len(v) for v in frame.values())
+    out, var = {}, 0.0
+    for g, pool in frame.items():
+        N, n = len(pool), draw[g]
+        v = p * (1 - p) / n * ((N - n) / (N - 1)) if n < N else 0.0
+        out[g] = round(1.96 * math.sqrt(v) * 100, 1)
+        var += (N / tot) ** 2 * v
+    nh, nl = draw["high"], draw["low"]
+    Nh, Nl = len(frame["high"]), len(frame["low"])
+    gap = (1.959964 + 0.8416) * math.sqrt(
+        p * (1 - p) * ((1 / nh) * ((Nh - nh) / (Nh - 1))
+                       + (1 / nl) * ((Nl - nl) / (Nl - 1)))) * 100
+    return {"assumed_accuracy": p,
+            "overall_ci_halfwidth_pp": round(1.96 * math.sqrt(var) * 100, 1),
+            "per_stratum_ci_halfwidth_pp": out,
+            "detectable_high_vs_low_gap_pp": round(gap, 1),
+            "note": "The strata exist for coverage. This design cannot "
+                    "resolve a high-vs-low accuracy gap below the figure "
+                    "above, so per-stratum numbers are descriptive."}
 
 def corpus():
     wb = openpyxl.load_workbook(
@@ -318,17 +377,23 @@ def main():
                       f"week {w + 1}" if args.weeks > 1 else "")
 
     (OUT / "_key_DO_NOT_SHARE.json").write_text(json.dumps(
-        {"generated": "2026-10-20", "seed": SEED,
+        {"generated": datetime.date.today().isoformat(), "seed": SEED,
          "warning": "Confidence group per paper. Never send this to a coder.",
          "key": {p: conf[p] for p in picked}}, indent=1))
     (OUT / "manifest.json").write_text(json.dumps(
-        {"generated": "2026-10-20", "seed": SEED, "draw": DRAW,
-         "rule": "paper confidence = lowest of any RQ3/RQ4 coding judgement",
+        {"generated": datetime.date.today().isoformat(), "seed": SEED, "draw": DRAW,
+         "rule": "paper confidence = the full-text re-coding's confidence "
+                 "for that paper; for any paper the re-coding did not "
+                 "reach, the lowest confidence any earlier RQ3/RQ4 pass "
+                 "recorded",
+         "labels_as_of": "full-text re-coding of all 929 papers, and the "
+                         "retirement of the Both track on 2026-10-22",
          "corpus_n": len(inc),
          "frame_n": sum(len(v) for v in frame.values()),
          "frame_sizes": {g: len(v) for g, v in frame.items()},
          "no_confidence_excluded": len(inc) - sum(len(v) for v in frame.values()),
          "inference_target": "the frame, not the full corpus",
+         "design_precision": precision(frame, DRAW),
          "fields_per_paper": len(FIELDS),
          "registry_entries": nent, "coders": args.coders,
          "papers": picked}, indent=1))
