@@ -22,7 +22,7 @@ document, tool output or message placed in front of it. The second is what the
 model learned in training and holds in its weights. The machine learning
 literature calls that \emph{parametric memory}. We use the shorter
 \emph{memory} for it throughout. Every result table reports it as
-\texttt{pm\_acc}. One of the defenses we evaluate, ParamMute, takes its name
+\texttt{pm\_acc}. One of the defenses we evaluate, ParamMute~\cite{huang-2025-parammute}, takes its name
 from it.
 
 This distinction carries the whole of Section~\ref{sec:results}.
@@ -37,11 +37,11 @@ trust.
 
 These methods build the dial differently, and it is the same dial. ACD decodes
 from the no-context distribution and pulls it toward the with-context one by a
-weight computed from entropy. CK-PLUG interpolates the two distributions under
+weight computed from entropy. CK-PLUG~\cite{bi-2025-parameters} interpolates the two distributions under
 a single parameter. ParamMute suppresses the feed-forward layers that carry
-parametric memory, forcing the model onto the retrieved text. SpARE and SHIFT
-steer along a context-faithfulness direction in activation space. COIECD
-detects a conflict between the two sources and pushes toward the context. SCR
+parametric memory, forcing the model onto the retrieved text. SpARE~\cite{zhao-2024-steering} and SHIFT~\cite{li-2026-shift}
+steer along a context-faithfulness direction in activation space. COIECD~\cite{yuan-2024-discerning}
+detects a conflict between the two sources and pushes toward the context. SCR~\cite{huang-2024-trust}
 makes the same trade through prompting rather than decoding.
 
 The definition is narrow because the definition is what carries the result.
