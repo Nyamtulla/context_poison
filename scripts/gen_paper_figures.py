@@ -136,7 +136,7 @@ def fig_cube():
     vmax = max(g.max() for pair in G.values() for g in pair)
     hue = {"Security": (TRACK_SEC, SEQ_SEC[0]), "ML/AI": (TRACK_ML, SEQ[0])}
 
-    fig, axes = plt.subplots(1, 2, figsize=(FULL, 3.4), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(FULL, 3.9), constrained_layout=True)
     for ax, (track, (A, D)) in zip(axes, G.items()):
         solid, pale = hue[track]
         for i in range(len(CHANNELS)):
@@ -162,10 +162,25 @@ def fig_cube():
                     h = .06 + .74 * np.sqrt(v / vmax)
                     ax.add_patch(plt.Rectangle((j + x0, i + .40 - h), .36, h,
                                                **kw))
+                    # The count, inside the bar once it is tall enough to
+                    # hold it and just above the bar when it is not. Reading
+                    # a sqrt-scaled bar off its height is guesswork; the
+                    # number is what a reader actually quotes.
+                    inside = h > .30
+                    ax.text(j + x0 + .18,
+                            i + .40 - h + (.14 if inside else -.05),
+                            str(v), ha="center",
+                            va="center" if inside else "bottom",
+                            fontsize=4.6,
+                            color=("white" if (inside and kw["facecolor"]
+                                               == solid) else INK))
         ax.set_xlim(-.6, len(CONSEQ) - .4)
         ax.set_ylim(len(CHANNELS) - .4, -.6)
         ax.set_xticks(range(len(CONSEQ)))
-        ax.set_xticklabels([c.replace("-", "-\n") for c in CONSEQ], fontsize=6)
+        # Two lines and no hyphen: at 6pt with the hyphen kept,
+        # "silent-corruption" and "data-exfiltration" ran into each other.
+        ax.set_xticklabels([c.replace("-", "\n") for c in CONSEQ],
+                           fontsize=5.4, linespacing=1.15)
         ax.set_yticks(range(len(CHANNELS)))
         ax.set_yticklabels(CHANNELS if track == "Security" else [], fontsize=6.5)
         ax.set_title("adversarial (Security track)" if track == "Security"
