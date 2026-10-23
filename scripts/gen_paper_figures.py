@@ -183,8 +183,8 @@ def fig_cube():
                            fontsize=5.4, linespacing=1.15)
         ax.set_yticks(range(len(CHANNELS)))
         ax.set_yticklabels(CHANNELS if track == "Security" else [], fontsize=6.5)
-        ax.set_title("adversarial (Security track)" if track == "Security"
-                     else "incidental (ML/AI track)",
+        ax.set_title("security regime" if track == "Security"
+                     else "safety regime",
                      fontsize=7.5, color=solid)
         for sp in ax.spines.values():
             sp.set_visible(False)

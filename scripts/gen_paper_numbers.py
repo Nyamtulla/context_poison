@@ -47,6 +47,13 @@ def corpus_rows():
     return list(rows[0]), rows[1:]
 
 
+import importlib.util as _ilu
+_sp = _ilu.spec_from_file_location(
+    "_rtv", pathlib.Path(__file__).with_name("retrack_by_venue.py"))
+_rtv = _ilu.module_from_spec(_sp); _sp.loader.exec_module(_rtv)
+_venue_bucket = _rtv.bucket
+
+
 def main():
     hdr, rows = corpus_rows()
     si, pi = hdr.index("screening"), hdr.index("paper_id")
@@ -84,7 +91,7 @@ def main():
           if e.get("paper_id") in included]
     M["NMechanisms"] = len(r3)
     tr3 = collections.Counter(e.get("track") for e in r3)
-    M["NMechSecurity"], M["NMechML"] = tr3["Security"], tr3["ML/AI"]
+    M["NMechSecurity"], M["NMechSafety"] = tr3["Security"], tr3["ML/AI"]
     cq = collections.Counter(e.get("consequence") for e in r3)
     M["NGoalHijack"] = cq["goal-hijack"]
     # the consequence x track split. The prose used to say EVERY goal-hijack
@@ -94,8 +101,8 @@ def main():
     for e in r3:
         _ct[(e.get("consequence") or "").strip()][(e.get("track") or "").strip()] += 1
     M["NGoalHijackSec"] = _ct["goal-hijack"]["Security"]
-    M["NGoalHijackML"] = _ct["goal-hijack"]["ML/AI"]
-    M["NReasonML"] = _ct["reasoning-corruption"]["ML/AI"]
+    M["NGoalHijackSafety"] = _ct["goal-hijack"]["ML/AI"]
+    M["NReasonSafety"] = _ct["reasoning-corruption"]["ML/AI"]
     M["NReasonSec"] = _ct["reasoning-corruption"]["Security"]
     M["PctGoalHijack"] = f'{100*cq["goal-hijack"]/len(r3):.1f}'
 
@@ -122,7 +129,7 @@ def main():
         if _other.get((e.get("track") or "").strip())
         == (e.get("validated_against") or "").strip())
     tr4 = collections.Counter(e.get("track") for e in r4)
-    M["NDefML"], M["NDefSecurity"], M["NDefBoth"] = tr4["ML/AI"], tr4["Security"], tr4["Both"]
+    M["NDefSafety"], M["NDefSecurity"], M["NDefBoth"] = tr4["ML/AI"], tr4["Security"], tr4["Both"]
     ip = collections.Counter(e.get("defense_intervention_point") for e in r4)
     for k, v in [("Reasoning", "reasoning"), ("Ingestion", "ingestion"),
                  ("Execution", "execution"), ("NoPoint", "none")]:
@@ -323,7 +330,7 @@ def main():
     M["NSharedChannels"] = len(_shared)
     M["NChannelsSecFirst"] = sum(1 for g in _gaps.values() if g > 0)
     M["NChannelsSameYear"] = sum(1 for g in _gaps.values() if g == 0)
-    M["NChannelsMLFirst"] = sum(1 for g in _gaps.values() if g < 0)
+    M["NChannelsSafetyFirst"] = sum(1 for g in _gaps.values() if g < 0)
     _lead = sorted(g for g in _gaps.values() if g > 0)
     M["MedianChannelLag"] = (_lead[len(_lead) // 2] if _lead else 0)
     M["MaxChannelLag"] = (max(_lead) if _lead else 0)
@@ -341,10 +348,10 @@ def main():
     M["PctCrossCommunity"] = f"{100*len(_x)/len(_pure):.1f}"
     M["NCrossAllPairs"] = sum(1 for r in tl
                               if r["defense_track"] != r["attack_track"])
-    M["NSecDefVsMLAttack"] = sum(1 for r in _pure
+    M["NSecDefVsSafetyAttack"] = sum(1 for r in _pure
                                  if r["defense_track"] == "Security"
                                  and r["attack_track"] == "ML/AI")
-    M["NMLDefVsSecAttack"] = sum(1 for r in _pure
+    M["NSafetyDefVsSecAttack"] = sum(1 for r in _pure
                                  if r["defense_track"] == "ML/AI"
                                  and r["attack_track"] == "Security")
 
@@ -369,15 +376,33 @@ def main():
     M["NVenuePairs"] = len(_sub)
     M["NVenueResolved"] = len(_res)
     M["PctVenueResolved"] = f"{100 * len(_res) / len(tl):.0f}"
-    M["NVenueSecDefMLAtk"] = sum(
+    M["NVenueSecDefSafetyAtk"] = sum(
         1 for x in _sub if x["defense_track"] == "Security"
         and x["attack_track"] == "ML/AI")
+
+    # Regime against venue. They are coded independently and they are not the
+    # same cut: adversarial work publishes at AI venues about as often as at
+    # security ones, and safety work never publishes at a security venue.
+    _reg_i = hdr.index("regime")
+    _vc = {}
+    for r in rows:
+        if r[pi] not in included:
+            continue
+        _vt, _ = _venue_bucket(str(r[_vi] or ""))
+        _vc[(str(r[_reg_i] or "").strip(), _vt)] = \
+            _vc.get((str(r[_reg_i] or "").strip(), _vt), 0) + 1
+    M["NRegimeSecAtSecVenue"] = _vc.get(("security", "Security"), 0)
+    M["NRegimeSecAtAIVenue"] = _vc.get(("security", "ML/AI"), 0)
+    M["NRegimeSafetyAtSecVenue"] = _vc.get(("safety", "Security"), 0)
+    M["NRegimeSafetyAtAIVenue"] = _vc.get(("safety", "ML/AI"), 0)
+    M["NRegimeSecNamedVenue"] = (M["NRegimeSecAtSecVenue"]
+                                 + M["NRegimeSecAtAIVenue"])
     # the two diagonal cells of the transfer matrix, so Table 1 and the
     # sentence under it cannot drift apart
     M["NSecDefSecAttack"] = sum(1 for r in _pure
                                 if r["defense_track"] == "Security"
                                 and r["attack_track"] == "Security")
-    M["NMLDefMLAttack"] = sum(1 for r in _pure
+    M["NSafetyDefSafetyAttack"] = sum(1 for r in _pure
                               if r["defense_track"] == "ML/AI"
                               and r["attack_track"] == "ML/AI")
     _same = sum(1 for r in tl if r["defense_track"] == r["attack_track"])
@@ -426,10 +451,10 @@ def main():
     mla = [r for r in inc if r[_ci["track"]] == "ML/AI"]
     a_b = sum(1 for r in sec if r[_ci["cites_track_b"]] == "Y")
     b_a = sum(1 for r in mla if r[_ci["cites_track_a"]] == "Y")
-    M["NTrackSecurity"], M["NTrackML"] = len(sec), len(mla)
-    M["NSecCitesML"], M["NMLCitesSec"] = a_b, b_a
-    M["PctSecCitesML"] = f"{100*a_b/len(sec):.1f}"
-    M["PctMLCitesSec"] = f"{100*b_a/len(mla):.1f}"
+    M["NRegimeSecurity"], M["NRegimeSafety"] = len(sec), len(mla)
+    M["NSecCitesSafety"], M["NSafetyCitesSec"] = a_b, b_a
+    M["PctSecCitesSafety"] = f"{100*a_b/len(sec):.1f}"
+    M["PctSafetyCitesSec"] = f"{100*b_a/len(mla):.1f}"
 
     # ---- who reports what. The abstract's reporter asymmetry, from the same
     # file pair_tally reads, so it cannot drift from the tally.

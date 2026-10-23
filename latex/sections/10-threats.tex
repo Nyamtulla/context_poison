@@ -10,10 +10,10 @@ agreement rather than assuming it. Residual error remains possible
 in the sampled fields.
 
 \textbf{Track assignment.} The cross-citation rates depend on classifying every
-cited paper into a track. That classification is automated over the full
+cited paper into a regime. That classification is automated over the full
 discovery pool. A systematic bias in it would move the rates. We regard the
-direction of the finding as safe, because the gap between \PctSecCitesML{}\% citation and
-\PctSameTrack{}\% same-track evaluation is far larger than any plausible classification
+direction of the finding as safe, because the gap between \PctSecCitesSafety{}\% citation and
+\PctSameTrack{}\% same-regime evaluation is far larger than any plausible classification
 error, but the exact rates should be read as estimates.
 
 \textbf{Registry granularity.} What counts as one named mechanism is a
@@ -121,8 +121,8 @@ would therefore describe an earlier field than the one we set out to measure.
 We report the restriction instead of adopting it. Resolving both sides of
 every pair back to a paper succeeds for \NVenueResolved{} of
 \NTimelinePairs{} pairs (\PctVenueResolved{}\%); of those, \NVenuePairs{} have
-a named venue on both sides, and \NVenueSecDefMLAtk{} of them is a security
-defense evaluated against a machine learning failure mechanism. The empty
+a named venue on both sides, and \NVenueSecDefSafetyAtk{} of them is a security
+defense evaluated against a safety failure mechanism. The empty
 direction stays empty among refereed work alone.
 
 \textbf{A recall check on the papers that named nothing.}

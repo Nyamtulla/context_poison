@@ -25,7 +25,7 @@ census, the taxonomy cube and the coverage matrix are computed over the
 analysis is computed over all \NCorpus{}. The PRISMA diagram carries the
 split as its own stage. AgentDojo~\cite{debenedetti-2024-agentdojo} is the
 clearest case: it is the environment \NAgentPairs{} of our own pairs run in,
-it names neither an attack nor a defense, and coding it to a track and a cell
+it names neither an attack nor a defense, and coding it to a regime and a cell
 asserted something about it that is not true.
 
 Of the \NNoTechnique{}, \NNoTechSurvey{} are surveys or systematizations,
@@ -88,7 +88,7 @@ content entering through a package, template or model the agent depends
 on~\cite{yan-2023-backdooring}.
 
 \textbf{Intent} is whether the content was placed deliberately: adversarial,
-incidental, or studied as both.
+safety, or studied as both.
 
 \textbf{Consequence} is what the agent then does wrong. There are \NConseqCats{}.
 \meth{goal-hijack} is pursuing an objective it was not
@@ -116,7 +116,7 @@ precision.
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig1_cube}
 \caption{Named attacks against named defenses in every channel $\times$
-consequence cell, split by track. Solid bars are attacks, pale hatched bars
+consequence cell, split by regime. Solid bars are attacks, pale hatched bars
 are defenses, each labelled with its count, and heights are square-root
 scaled against one maximum shared by both panels, because linear scaling
 would leave the largest cell as the only visible bar. Read the numbers rather
@@ -134,9 +134,9 @@ that ranges over six channels occupies none of them. Emptiness is not uniform,
 and Figure~\ref{fig:cube} puts the named attacks beside the named defenses in
 each cell. Three things are visible there that a count of papers hides.
 
-The two panels barely overlap. The security track holds \NMechSecurity{} of
+The two panels barely overlap. The security literature holds \NMechSecurity{} of
 the \NMechanisms{} attacks and masses them in \meth{goal-hijack}; the machine
-learning track holds \NMechML{} and masses them in
+learning literature holds \NMechSafety{} and masses them in
 \meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
 community works are nearly disjoint, which is the same separation the citation
 rates show, drawn as a picture.
@@ -175,9 +175,9 @@ are the routes by which an agent accepts third-party capability.}
 \end{figure}
 
 \textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
-\NMechSecurity{} from the security track and \NMechML{} from the machine
-learning track, and \NDefenses{} named defenses and fixes, \NDefSecurity{}
-and \NDefML{} respectively with \NDefBoth{} claimed by both. By consequence,
+\NMechSecurity{} from the security literature and \NMechSafety{} from the machine
+learning literature, and \NDefenses{} named defenses and fixes, \NDefSecurity{}
+and \NDefSafety{} respectively with \NDefBoth{} claimed by both. By consequence,
 \meth{goal-hijack} dominates the threat side at \NMechGoalHijack{}
 (\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption} at
 \NMechReasoning{} (\PctMechReasoning{}\%). By channel, \meth{direct-input}
@@ -187,13 +187,12 @@ reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
 \NDefPtExecution{} at execution, and \NDefPtNone{} specify no single point.
 
 \textbf{Almost every defense answers to one validation regime.} \NAdvOnly{} were
-validated against adversarial scenarios only and \NIncOnly{} against incidental
-scenarios only, leaving \NBothValidated{} (\PctBothValidated{}\%) validated
+validated in the security regime only and \NIncOnly{} in the safety regime only, leaving \NBothValidated{} (\PctBothValidated{}\%) validated
 against both and \NNoValidation{} with no validation we could identify. So
 \PctOneRegime{}\% of published defenses carry an untested cross-regime
 question, which is the gap this paper goes on to measure and then to fill.
 
-The regime a defense was validated in is coded separately from the track it
+The regime a defense was validated in is coded separately from the literature it
 was published in, and the two turn out to be nearly the same partition. Of
 \NDefenses{} defenses, only \NDefCrossRegime{} were ever validated in the
 other community's regime. So the empty cell of
@@ -212,17 +211,37 @@ members.
 % APPENDIX-OFF: restore this paragraph with sections/A-census
 % Every entry behind these counts is listed in
 % Appendix~\ref{sec:census}: all \NMechanisms{} named mechanisms and all
-% \NDefenses{} named defenses, with the channel, consequence, track and
+% \NDefenses{} named defenses, with the channel, consequence, regime and
 % validation coding we gave each, and the paper it came from. The counts in
 % this section are summaries of that table, not of a sample of it.
+\subsection{The separation is not where you would look for it}
+\label{sec:venue}
+
+Regime says what a paper is about. Venue says where its authors sent it.
+Coding both, independently, settles a question a reader will have about the
+first: whether our division is the field's or ours.
+
+It is not the field's institutional division. Of the \NRegimeSecNamedVenue{}
+security-regime papers that carry a named venue, \NRegimeSecAtAIVenue{}
+published at an AI venue and \NRegimeSecAtSecVenue{} at a security venue.
+Adversarial work on LLM agents goes to ACL, EMNLP, NeurIPS and AAAI about as
+readily as to S\&P and CCS. The traffic is one-way:
+\NRegimeSafetyAtAIVenue{} safety-regime papers carry a named venue and
+\NRegimeSafetyAtSecVenue{} of them published at a security venue.
+
+So the two bodies of work are not kept apart by their proceedings. They are
+kept apart by what they cite. That is a stronger claim than a venue split
+would have been, and a harder one to explain away: these papers appear beside
+each other and still do not read each other.
+
 \subsection{How separate the two communities are}
 
 \begin{itemize}
-\item \textbf{\PctSecCitesML{}\%} of security papers (\NSecCitesML{} of
-  \NTrackSecurity{}) cite at least one machine learning paper on the same
+\item \textbf{\PctSecCitesSafety{}\%} of security papers (\NSecCitesSafety{} of
+  \NRegimeSecurity{}) cite at least one machine learning paper on the same
   failure.
-\item \textbf{\PctMLCitesSec{}\%} of machine learning papers (\NMLCitesSec{} of
-  \NTrackML{}) cite at least one security paper.
+\item \textbf{\PctSafetyCitesSec{}\%} of machine learning papers (\NSafetyCitesSec{} of
+  \NRegimeSafety{}) cite at least one security paper.
 \end{itemize}
 
 These are population counts over every paper's resolved citation edges, not
@@ -231,9 +250,9 @@ on both sides were written without reference to the other community's work on
 the same failure. The rates are stable across evidence grade, so this is not an
 artifact of preprint quality.
 
-\textbf{What carries the cross-track citations makes the rate look better than
+\textbf{What carries the cross-regime citations makes the rate look better than
 the engagement is.} \NNetworkCross{} of the \NNetworkEdges{} resolved edges
-(\PctNetworkCross{}\%) cross tracks, and they are concentrated: the ten
+(\PctNetworkCross{}\%) cross regimes, and they are concentrated: the ten
 most-cited bridging papers are benchmarks and landmark results that a paper can
 cite in its introduction without adopting anything from the other literature.
 Figure~\ref{fig:network} shows the shape, two clusters joined by a narrow band.
@@ -241,7 +260,7 @@ Figure~\ref{fig:network} shows the shape, two clusters joined by a narrow band.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig5_citation_network}
-\caption{The corpus as a citation graph. Cross-track edges highlighted.
+\caption{The corpus as a citation graph. Cross-regime edges highlighted.
 Papers with no resolved edge inside the corpus are omitted.}
 \label{fig:network}
 \end{figure}
@@ -317,7 +336,7 @@ against the other's problems?}
 
 We dated all \NTimelinePairs{} pairs and recorded which community each side
 came from. Restricting to the \NPureTrackPairs{} pairs where both sides sit in
-one of the two tracks gives Table~\ref{tab:transfer}.
+one of the two regimes gives Table~\ref{tab:transfer}.
 
 \begin{table}[t]
 \centering
@@ -327,18 +346,18 @@ one of the two tracks gives Table~\ref{tab:transfer}.
 \small
 \begin{tabular}{@{}lrr@{}}
 \toprule
-defense from $\downarrow$ \quad attack from $\rightarrow$ & Security & ML/AI \\
+defense from $\downarrow$ \quad attack from $\rightarrow$ & Security & AI \\
 \midrule
-Security & \NSecDefSecAttack{} & \textbf{\NSecDefVsMLAttack{}} \\
-ML/AI    & \NMLDefVsSecAttack{} & \NMLDefMLAttack{} \\
+Security & \NSecDefSecAttack{} & \textbf{\NSecDefVsSafetyAttack{}} \\
+AI    & \NSafetyDefVsSecAttack{} & \NSafetyDefSafetyAttack{} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Exactly \NSecDefVsMLAttack{} of \NPureTrackPairs{} pairs is a
-security defense evaluated against a machine learning failure mechanism},
+\textbf{Exactly \NSecDefVsSafetyAttack{} of \NPureTrackPairs{} pairs is a
+security defense evaluated against a safety failure mechanism},
 against \NSecDefSecAttack{} evaluated against security attacks. In the other
-direction there are \NMLDefVsSecAttack{}. Together,
+direction there are \NSafetyDefVsSecAttack{}. Together,
 \NCrossCommunityPairs{} pairs (\PctCrossCommunity{}\%) cross the boundary and
 the remaining \PctSameTrack{}\% stay inside one community.
 
@@ -346,7 +365,7 @@ The single crossing is worth naming, because it is the strongest evidence
 against our own framing and it is one pair.
 TRACE~\cite{hong-2026-trace}, a trajectory compressor built for long-horizon agent
 safety and validated adversarially, is reported against context-length-induced
-degradation, which is an incidental mechanism. It comes from a paper whose
+degradation, which is a safety mechanism. It comes from a paper whose
 subject matter spans both communities, which is precisely the kind of paper
 that would cross first. One instance in \NPureTrackPairs{} is not a literature
 that tests across the boundary; it is the exception that shows what crossing
@@ -371,11 +390,11 @@ arrive restates what the first already knows. The dates say this is what
 happens, and they say which direction it runs in.
 
 \NSharedChannels{} of our nine channels have named mechanisms from both
-tracks. Comparing
+regimes. Comparing
 the first paper from each side in each of those channels:
 \textbf{the security literature arrives first in \NChannelsSecFirst{} of
 \NSharedChannels{}, both arrive in the same year in \NChannelsSameYear{}, and
-the machine learning literature arrives first in \NChannelsMLFirst{}.} The
+the machine learning literature arrives first in \NChannelsSafetyFirst{}.} The
 median lag where security leads is \MedianChannelLag{} year and the longest is
 \MaxChannelLag{}. The \meth{supply-chain} channel, excluded here for having no
 machine learning entry at all, is the limit case of the same pattern.
@@ -383,7 +402,7 @@ machine learning entry at all, is the limit case of the same pattern.
 Set that beside the citation rates. A machine learning paper naming a failure
 in a channel is, more often than not, naming something a security paper named
 one to three years earlier, in a literature it has a
-\PctMLCitesSec{}\% chance of citing. We are not claiming the later work is
+\PctSafetyCitesSec{}\% chance of citing. We are not claiming the later work is
 derivative: these are different research questions asked of the same surface,
 and arriving second at a problem is not a fault. We are claiming the obvious
 consequence, which is that neither side can tell whether the other has already
@@ -404,7 +423,7 @@ publishes degradations, which are noticed before they are named.
 \end{figure}
 
 A reader might reasonably ask whether this is our boundary rather than the
-field's. We assign the track label per paper, and every paper gets one of the
+field's. We assign the regime label per paper, and every paper gets one of the
 two. An earlier version of this coding carried a third value for papers that
 sit on the boundary, and excluded them here on the grounds that a paper cannot
 cross a line it sits on. That was the wrong call twice over: it dropped the
