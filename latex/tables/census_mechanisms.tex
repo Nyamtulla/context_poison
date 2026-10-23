@@ -3,7 +3,7 @@
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
 \begin{longtable}{@{}p{0.33\textwidth}llll@{}}
-\caption{Every named mechanism in the corpus (233 entries). Rows in \emph{italics} are entries whose authors gave their contribution no name; they are counted here because excluding them would overstate how much of the field names what it finds. Every row cites the paper that named the mechanism; full records with DOI or arXiv identifiers ship with the artifact.}\\
+\caption{Every named mechanism in the corpus (236 entries). Rows in \emph{italics} are entries whose authors gave their contribution no name; they are counted here because excluding them would overstate how much of the field names what it finds. Every row cites the paper that named the mechanism; full records with DOI or arXiv identifiers ship with the artifact.}\\
 \toprule
 \textbf{Mechanism or attack} & \textbf{Channel} & \textbf{Consequence} & \textbf{Track} & \textbf{Source} \\
 \midrule
@@ -18,238 +18,241 @@
 \endfoot
 \bottomrule
 \endlastfoot
-lost in the middle & direct-input & reasoning-corruption & ML/AI & \cite{liu-2023-lost} \\
-distraction by irrelevant context & direct-input & reasoning-corruption & ML/AI & \cite{shi-2023-large} \\
-\emph{context-length-induced degradation independent of retrieval failure} & direct-input & reasoning-corruption & ML/AI & \cite{du-2025-context} \\
-context drift & direct-input & reasoning-corruption & ML/AI & \cite{dongre-2025-drift} \\
-\emph{getting lost in multi-turn conversation (premature-answer unreliability under underspecification)} & direct-input & reasoning-corruption & ML/AI & \cite{laban-2025-llms} \\
-classifier context rot & direct-input & reasoning-corruption & ML/AI & \cite{martin-2026-classifier} \\
-mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation) & direct-input & reasoning-corruption & ML/AI & \cite{salvatore-2025-lost} \\
-Attention Latch & direct-input & reasoning-corruption & ML/AI & \cite{shehata-2026-attention} \\
-mechanistic refinement of lost-in-the-middle (threshold-dependent onset at \textasciitilde{}50\% of context window; effect vanishes near window limits) & direct-input & reasoning-corruption & ML/AI & \cite{veseli-2025-positional} \\
-mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings) & direct-input & reasoning-corruption & ML/AI & \cite{yu-2024-mitigate} \\
-\emph{long-context safety/refusal degradation in agents} & direct-input & reasoning-corruption & ML/AI & \cite{hadeliya-2025-refusals} \\
-cognitive bandwidth bottleneck (action-space scaling) & direct-input & reasoning-corruption & ML/AI & \cite{xu-2025-cognitive} \\
-\emph{abrupt persona/tone instability from lack of affective state inertia} & direct-input & reasoning-corruption & ML/AI & \cite{subaharan-2026-controlling} \\
-Governance Decay & direct-input & silent-corruption & ML/AI & \cite{chen-2026-governance} \\
-\emph{unverified success fabrication in unattended long-horizon agents (agent honesty gap)} & direct-input & silent-corruption & ML/AI & \cite{deng-2026-goalautopilot} \\
-Context Pollution (evolutionary search history bias) & direct-input & reasoning-corruption & ML/AI & \cite{yan-2026-pacevolve} \\
-\emph{plan non-persistence under context eviction (context-time memory volatility)} & direct-input & silent-corruption & ML/AI & \cite{mehta-2026-plans} \\
-context proprioceptive blindness & direct-input & reasoning-corruption & ML/AI & \cite{xu-2026-llm} \\
-Distributional Collapse & direct-input & silent-corruption & ML/AI & \cite{ebrahimzadeh-2026-not} \\
-\emph{summary-length invariance under context compaction} & direct-input & reasoning-corruption & ML/AI & \cite{cim-2026-parallel} \\
-Mandate Salience Decay (MSD) & direct-input & reasoning-corruption & ML/AI & \cite{safder-2026-finpersonabench} \\
-Contextual Belief Management (CBM) failure & direct-input & reasoning-corruption & ML/AI & \cite{xu-2026-should} \\
-agent drift (overthinking / overacting) & direct-input & reasoning-corruption & ML/AI & \cite{sui-2026-tact} \\
-context pollution (role conflation in single-agent code-as-action agents) & direct-input & silent-corruption & ML/AI & \cite{fei-2026-codedelegator} \\
-cumulative contextual decay (attention pollution, dilution, and drift) & direct-input & reasoning-corruption & ML/AI & \cite{hong-2025-rhea} \\
-contextual misguidance & direct-input & silent-corruption & ML/AI & \cite{wang-2026-alleviating} \\
-superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict) & direct-input & silent-corruption & ML/AI & \cite{li-2025-taming} \\
-position exhaustion & direct-input & reasoning-corruption & ML/AI & \cite{huo-2026-periodic} \\
-\emph{"malloc-only" context accumulation causing reasoning degeneration in extended CoT} & direct-input & reasoning-corruption & ML/AI & \cite{zheng-2026-free} \\
-scaffolding collapse & direct-input & reasoning-corruption & ML/AI & \cite{shao-2026-mitigating} \\
-KV-cache contamination & direct-input & reasoning-corruption & ML/AI & \cite{kang-2026-promptactivation} \\
-Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given) & direct-input & goal-hijack & Security & \cite{li-2025-transferable} \\
-ASTRA (and ASTRA++) & direct-input & goal-hijack & Security & \cite{pandya-2025-may} \\
-Blind attacks & direct-input & goal-hijack & Security & \cite{liu-2025-counterfactual} \\
-Brain-Prompt Injection & direct-input & goal-hijack & Security & \cite{tai-2026-brainprompt} \\
-Cognitive Overload Attack & direct-input & goal-hijack & Security & \cite{upadhayay-2024-cognitive} \\
-Combined Attack (Open-Prompt-Injection) & direct-input & goal-hijack & Security & \cite{liu-2023-formalizing} \\
-CoT Forgery (Chain-of-Thought Forgery) & direct-input & goal-hijack & Security & \cite{ye-2026-prompt} \\
-CyberSecEval 2: prompt-injection + code-interpreter-abuse test set & direct-input & goal-hijack & Security & \cite{bhatt-2024-cyberseceval} \\
-distraction effect (attention shift to injected instruction) & direct-input & reasoning-corruption & Security & \cite{hung-2024-attention} \\
-G2PIA (goal-guided generative prompt injection) & direct-input & goal-hijack & Security & \cite{zhang-2024-goalguided} \\
-Guidance Injection & direct-input & persistence-backdoor & Security & \cite{liu-2026-trojan} \\
-HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus & direct-input & goal-hijack & Security & \cite{schulhoff-2023-ignore} \\
-HOUYI & direct-input & goal-hijack & Security & \cite{liu-2023-promptb} \\
-JudgeDeceiver & direct-input & goal-hijack & Security & \cite{shi-2024-optimizationbased} \\
-LLMSmith: prompt-injection-to-RCE exploitation & direct-input & goal-hijack & Security & \cite{liu-2023-demystifying} \\
-message history forging (direct prompt injection via forged system/assistant roles) & direct-input & goal-hijack & Security & \cite{kaya-2025-meets} \\
-Overflow & direct-input & resource-abuse & Security & \cite{feiglin-2026-benchoverflow} \\
-P2SQL injection (prompt-to-SQL) & direct-input & goal-hijack & Security & \cite{pedro-2023-prompt} \\
-POUGH & direct-input & goal-hijack & Security & \cite{huang-2024-efficient} \\
-preemptive answer attack (CoT short-circuiting) & direct-input & reasoning-corruption & Security & \cite{xu-2024-preemptive} \\
-Reasoning Interruption Attack (adaptive token compression) & direct-input & reasoning-corruption & Security & \cite{cui-2025-tokenefficient} \\
-reasoning token overflow (RTO) / practical reasoning interruption attack & direct-input & reasoning-corruption & Security & \cite{cui-2025-practical} \\
-Reverse CAPTCHA (invisible Unicode instruction injection) & direct-input & goal-hijack & Security & \cite{graves-2026-reverse} \\
-Separator Injection Attack & direct-input & goal-hijack & Security & \cite{li-2025-separator} \\
-situation-driven contextual adversarial prompt attack & direct-input & goal-hijack & Security & \cite{das-2024-humaninterpretable} \\
-structured attack generation framework & direct-input & goal-hijack & Security & \cite{cai-2026-prompt} \\
-System Prompt Poisoning (SPP) & direct-input & persistence-backdoor & Security & \cite{guo-2025-system} \\
-Tensor Trust: prompt extraction / prompt hijacking & direct-input & goal-hijack & Security & \cite{toyer-2023-tensor} \\
-\emph{adaptive attack suite bypassing 12 PI/jailbreak defenses} & direct-input & goal-hijack & Security & \cite{nasr-2025-attacker} \\
-\emph{adaptive prompt-injection attacks for defense evaluation (PIEval)} & direct-input & goal-hijack & Security & \cite{jia-2025-critical} \\
-\emph{automatic universal gradient-based prompt injection} & direct-input & goal-hijack & Security & \cite{liu-2024-automatic} \\
-\emph{diverse RL red-teaming (auto-generated rewards + multi-step RL)} & direct-input & goal-hijack & Security & \cite{beutel-2024-diverse} \\
-\emph{Prompt Injection 2.0 (hybrid PI + classic web-exploit combination attacks)} & direct-input & goal-hijack & Security & \cite{mchugh-2025-prompt} \\
-\emph{rule-tag semantic reframing template attack ('Breaking the Prompt Wall')} & direct-input & goal-hijack & Security & \cite{chang-2025-breaking} \\
-\emph{system-prompt and uploaded-file extraction from custom GPTs} & direct-input & data-exfiltration & Security & \cite{yu-2023-assessing} \\
-Xmera (chimera MitM framework) & direct-input & silent-corruption & Security & \cite{fastowski-2025-injecting} \\
-context rot (agentic/long-horizon search) & tool-output & reasoning-corruption & ML/AI & \cite{xia-2026-diagnosing} \\
-plan anchor & tool-output & reasoning-corruption & ML/AI & \cite{yu-2026-webanchor} \\
-observation over-ingestion & tool-output & reasoning-corruption & ML/AI & \cite{gaur-2026-signaldriven} \\
-AdapTools & tool-output & goal-hijack & Security & \cite{wang-2026-adaptools} \\
-Adversarial HalluSquatting & tool-output & goal-hijack & Security & \cite{spira-2026-beware} \\
-Agent Data Injection (ADI) & tool-output & goal-hijack & Security & \cite{choi-2026-agent} \\
-Agent-as-a-Proxy attack & tool-output & goal-hijack & Security & \cite{isbarov-2026-bypassing} \\
-AGENTBAIT & tool-output & goal-hijack & Security & \cite{wu-2026-bots} \\
-AgentVigil & tool-output & goal-hijack & Security & \cite{wang-2025-agentvigilb} \\
-AIShellJack (coding-rule/config-file prompt injection against agentic IDE editors) & tool-output & goal-hijack & Security & \cite{liu-2025-your} \\
-ASPI (Ambiguous-State Prompt Injection) & tool-output & goal-hijack & Security & \cite{sehwag-2026-aspi} \\
-AutoDojo (adaptive black-box IPI attack generation) & tool-output & goal-hijack & Security & \cite{ma-2026-autodojo} \\
-AutoInject & tool-output & goal-hijack & Security & \cite{chen-2026-learning} \\
-autonomy tax & tool-output & reasoning-corruption & Security & \cite{li-2026-autonomy} \\
-AutoRed & tool-output & goal-hijack & Security & \cite{wang-2024-autored} \\
-BIPIA benchmark attack set & tool-output & goal-hijack & Security & \cite{yi-2023-benchmarking} \\
-ChainFuzzer & tool-output & goal-hijack & Security & \cite{wu-2026-chainfuzzer} \\
-Checkpoint-GCG & tool-output & goal-hijack & Security & \cite{yang-2025-checkpointgcg} \\
-ClawTrojan multi-step trojan/backdoor attack paradigm & tool-output & persistence-backdoor & Security & \cite{tan-2026-prompt} \\
-COMA & tool-output & goal-hijack & Security & \cite{liu-2025-compression} \\
-Cross-App Context Poisoning (Confused ChatGPT) & tool-output & goal-hijack & Security & \cite{wang-2026-confused} \\
-DataFlip & tool-output & goal-hijack & Security & \cite{choudhary-2025-not} \\
-EchoLeak (zero-click IPI, CVE-2025-32711) & tool-output & data-exfiltration & Security & \cite{reddy-2025-echoleak} \\
-F2A (Feign Agent Attack) & tool-output & goal-hijack & Security & \cite{ren-2024-f2a} \\
-FlashRT & tool-output & goal-hijack & Security & \cite{wang-2026-flashrt} \\
-Foot-in-the-Door (FITD) attack & tool-output & goal-hijack & Security & \cite{nakash-2024-breaking} \\
-Fun-tuning & tool-output & goal-hijack & Security & \cite{labunets-2025-funtuning} \\
-HARE (Hybrid Agent Roleplay Exploitation) / Token Economy Poisoning & tool-output & goal-hijack & Security & \cite{muhil-2025-evaluating} \\
-Indirect Prompt Injection (IPI) & tool-output & goal-hijack & Security & \cite{greshake-2023-not} \\
-Inter-Agent Trust Exploitation (AI agent privilege escalation) & tool-output & goal-hijack & Security & \cite{lupinacci-2025-dark} \\
-IterInject & tool-output & goal-hijack & Security & \cite{chen-2026-iterinject} \\
-Log-Substrate Prompt Injection & tool-output & goal-hijack & Security & \cite{pandey-2026-poisoning} \\
-LogInject / Passive Prompt Injection & tool-output & goal-hijack & Security & \cite{karanjai-2026-context} \\
-LogJack & tool-output & goal-hijack & Security & \cite{shah-2026-logjack} \\
-MUZZLE & tool-output & goal-hijack & Security & \cite{syros-2026-muzzle} \\
-Neural Exec & tool-output & goal-hijack & Security & \cite{pasquini-2024-neural} \\
-ObliInjection & tool-output & goal-hijack & Security & \cite{wang-2025-obliinjection} \\
-Parallel-Poisoned Web (fingerprinting + website cloaking against AI web agents) & tool-output & goal-hijack & Security & \cite{zychlinski-2025-whole} \\
-PI-Hunter & tool-output & goal-hijack & Security & \cite{he-2026-pihunter} \\
-PINA & tool-output & goal-hijack & Security & \cite{liu-2026-pina} \\
-PISmith & tool-output & goal-hijack & Security & \cite{yin-2026-pismith} \\
-Prompt Overflow Attack & tool-output & goal-hijack & Security & \cite{zhou-2026-prompt} \\
-PromptFuzz & tool-output & goal-hijack & Security & \cite{yu-2024-promptfuzz} \\
-PromptFuzz-SC & tool-output & goal-hijack & Security & \cite{ren-2026-deepseek} \\
-query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing) & tool-output & goal-hijack & Security & \cite{zhang-2025-blackbox} \\
-Reasoning-Extension Denial-of-Service (DoS) & tool-output & resource-abuse & Security & \cite{zhou-2026-shield} \\
-Relinking & tool-output & goal-hijack & Security & \cite{liu-2026-safe} \\
-RL-Hammer & tool-output & goal-hijack & Security & \cite{wen-2025-hammer} \\
-RTA-PostForge (response-path tampering attack) & tool-output & goal-hijack & Security & \cite{luo-2026-rewriting} \\
-SafeSearch & tool-output & goal-hijack & Security & \cite{dong-2025-safesearch} \\
-Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI & tool-output & goal-hijack & Security & \cite{ji-2025-taxonomy} \\
-Silent Egress (implicit prompt injection via URL preview/metadata) & tool-output & data-exfiltration & Security & \cite{lan-2026-silent} \\
-StruPhantom & tool-output & goal-hijack & Security & \cite{feng-2025-struphantom} \\
-Targeted Promptware Attacks & tool-output & goal-hijack & Security & \cite{nassi-2025-invitation} \\
-ToolLeak & tool-output & goal-hijack & Security & \cite{xie-2025-redteaming} \\
-TopicAttack & tool-output & goal-hijack & Security & \cite{chen-2025-topicattack} \\
-\emph{ChatGPT memory/URL-exfiltration prompt injection bypass} & tool-output & data-exfiltration & Security & \cite{schwartzman-2024-exfiltration} \\
-\emph{data flow-based injection attack for observed-data exfiltration ('Important message' template)} & tool-output & data-exfiltration & Security & \cite{alizadeh-2025-simple} \\
-\emph{HTML accessibility-tree universal adversarial trigger injection (TWUI)} & tool-output & goal-hijack & Security & \cite{johnson-2025-manipulating} \\
-\emph{in-browser LLM-guided fuzzing for agentic-browser IPI} & tool-output & goal-hijack & Security & \cite{cohen-2025-inbrowser} \\
-\emph{log-interpretation evasion prompt injection (malicious-as-benign misclassification)} & tool-output & goal-hijack & Security & \cite{landauer-2026-just} \\
-\emph{multi-probe evasive GCG suffix attack} & tool-output & goal-hijack & Security & \cite{rahman-2026-bypassing} \\
-\emph{PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)} & tool-output & goal-hijack & Security & \cite{vilches-2025-cybersecurity} \\
-\emph{privacy leakage attack chain (external-content deception + IPI + exfiltration)} & tool-output & data-exfiltration & Security & \cite{yang-2026-empirical} \\
-VeriGrey (grey-box agent fuzzing for IPI) & tool-output & goal-hijack & Security & \cite{zhang-2026-verigrey} \\
-VortexPIA & tool-output & data-exfiltration & Security & \cite{cui-2025-vortexpia} \\
-ZombAI & tool-output & persistence-backdoor & Security & \cite{bayu-2026-security} \\
-distraction by irrelevant context (graded by semantic relatedness) & RAG & reasoning-corruption & ML/AI & \cite{wu-2024-easily} \\
-identity drift (persona coherence decay in generative agents) & RAG & reasoning-corruption & ML/AI & \cite{platnick-2025-idrag} \\
-context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization) & RAG & silent-corruption & ML/AI & \cite{chen-2026-rag} \\
-mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3) & RAG & silent-corruption & ML/AI & \cite{jin-2024-cutting} \\
-\emph{over-trust bias toward conflicting external evidence over correct parametric memory in RALMs} & RAG & silent-corruption & ML/AI & \cite{jin-2024-tugofwar} \\
-knowledge conflict (contextual vs parametric) & RAG & reasoning-corruption & ML/AI & \cite{yuan-2024-discerning} \\
-AGGD (Approximate Greedy Gradient Descent) & RAG & silent-corruption & Security & \cite{su-2024-corpus} \\
-BadRAG & RAG & goal-hijack & Security & \cite{xue-2024-badrag} \\
-ConfusedPilot & RAG & data-exfiltration & Security & \cite{roychowdhury-2024-confusedpilot} \\
-DACSI (Document-Authored Control-Signal Impersonation) & RAG & goal-hijack & Security & \cite{zhu-2026-documentauthored} \\
-Ignore; Detect; Exploit (hidden prompt injection attacks) & RAG & goal-hijack & Security & \cite{collu-2025-misleading} \\
-IKEA (Implicit Knowledge Extraction Attack) & RAG & data-exfiltration & Security & \cite{wang-2025-silent} \\
-Indirect Data Poisoning (Distributed Denial of Science) & RAG & silent-corruption & Security & \cite{gyevnar-2026-distributed} \\
-Injection Paradox & RAG & goal-hijack & Security & \cite{paeng-2026-injection} \\
-LogicPoison & RAG & goal-hijack & Security & \cite{xiao-2026-logicpoison} \\
-NeuroGenPoisoning & RAG & goal-hijack & Security & \cite{zhu-2025-neurogenpoisoning} \\
-Oracle Poisoning & RAG & reasoning-corruption & Security & \cite{kereopayorke-2026-oracle} \\
-PANDORA (RAG Poisoning jailbreak) & RAG & goal-hijack & Security & \cite{deng-2024-pandora} \\
-PIDP-Attack & RAG & goal-hijack & Security & \cite{wang-2026-pidpattack} \\
-PoisonedRAG & RAG & goal-hijack & Security & \cite{zou-2024-poisonedrag} \\
-Prompt-Injected Data Extraction & RAG & data-exfiltration & Security & \cite{qi-2024-follow} \\
-RefineRAG & RAG & goal-hijack & Security & \cite{wang-2026-refinerag} \\
-Salience Induction & RAG & goal-hijack & Security & \cite{zhou-2026-salience} \\
-TrojanRAG & RAG & persistence-backdoor & Security & \cite{cheng-2024-trojanrag} \\
-\emph{backdoor-based RAG data extraction attack} & RAG & data-exfiltration & Security & \cite{peng-2024-data} \\
-\emph{gradient-based corpus poisoning (adversarial passage injection)} & RAG & silent-corruption & Security & \cite{zhong-2023-poisoning} \\
-\emph{RAG-manipulation attack on multi-agent debate consensus} & RAG & reasoning-corruption & Security & \cite{kraidia-2026-raginduced} \\
-\emph{retrieval-aware IPI (trigger-fragment decomposition attack)} & RAG & goal-hijack & Security & \cite{chang-2026-overcoming} \\
-\emph{retriever fine-tuning backdoor attack} & RAG & persistence-backdoor & Security & \cite{clop-2024-backdoored} \\
-\emph{tree-of-attacks ranking manipulation for conversational search} & RAG & goal-hijack & Security & \cite{pfrommer-2024-ranking} \\
-unintended long-term state poisoning & memory & silent-corruption & Both & \cite{xu-2026-routine} \\
-multi-target memory interference & memory & silent-corruption & ML/AI & \cite{lee-2026-minteval} \\
-\emph{temporally-distant information inaccessibility in long-horizon agentic reasoning} & memory & reasoning-corruption & ML/AI & \cite{hu-2026-sam} \\
-memory pollution (agent long-term memory) & memory & silent-corruption & ML/AI & \cite{liu-2026-failuregated} \\
-memory laundering & memory & silent-corruption & ML/AI & \cite{wang-2026-state} \\
-memory misevolution & memory & silent-corruption & ML/AI & \cite{xie-2026-memevobench} \\
-\emph{"cognitive event horizon" (context-saturation threshold beyond which accuracy collapses)} & memory & reasoning-corruption & ML/AI & \cite{milosevic-2026-episodicsemantic} \\
-\emph{granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse)} & memory & reasoning-corruption & ML/AI & \cite{shen-2026-structurally} \\
-AgentPoison & memory & persistence-backdoor & Security & \cite{chen-2024-agentpoison} \\
-Chain-of-Trigger Backdoor (CoTri) & memory & persistence-backdoor & Security & \cite{qiu-2025-chainoftrigger} \\
-Cliopatra & memory & data-exfiltration & Security & \cite{annamalai-2026-cliopatra} \\
-Cross-Session Stored Prompt Injection (XSPI) & memory & persistence-backdoor & Security & \cite{xie-2026-prompt} \\
-MemoryGraft & memory & persistence-backdoor & Security & \cite{srivastava-2025-memorygraft} \\
-MemVenom & memory & persistence-backdoor & Security & \cite{zhang-2026-memvenom} \\
-Plan Injection & memory & goal-hijack & Security & \cite{patlan-2025-context} \\
-Sleeper Memory Poisoning (Actor-Critic universal poisoning attack) & memory & persistence-backdoor & Security & \cite{pulipaka-2026-hidden} \\
-temporal memory contamination & memory & persistence-backdoor & Security & \cite{altawaha-2026-remembering} \\
-\emph{memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)} & memory & persistence-backdoor & Security & \cite{dash-2026-untrusted} \\
-Zombie Agent & memory & persistence-backdoor & Security & \cite{yang-2026-zombie} \\
-context unawareness (failure to identify a small decisive piece of evidence within long/complex context) & cross-modal & reasoning-corruption & ML/AI & \cite{xu-2026-contextaware} \\
-evidence misalignment (agentic long-video QA) & cross-modal & silent-corruption & ML/AI & \cite{qiu-2026-videoseal} \\
-cross-modality parametric knowledge conflict & cross-modal & silent-corruption & ML/AI & \cite{zhu-2024-unraveling} \\
-multimodal retrieval heads (sparse heads carrying retrieval) & cross-modal & reasoning-corruption & ML/AI & \cite{li-2026-retrieval} \\
-AgentTypo & cross-modal & goal-hijack & Security & \cite{li-2025-agenttypo} \\
-AudioHijack & cross-modal & goal-hijack & Security & \cite{chen-2026-hijacking} \\
-CrossInject & cross-modal & goal-hijack & Security & \cite{wang-2025-manipulating} \\
-Graph-based prompt injection (math-expression-to-graph encoding) & cross-modal & goal-hijack & Security & \cite{kwon-2024-graphbased} \\
-Image-based Prompt Injection (IPI) & cross-modal & goal-hijack & Security & \cite{nagaraja-2025-imagebased} \\
-incidental prompt injection & cross-modal & reasoning-corruption & Security & \cite{clusmann-2024-pen} \\
-Mind Mapping Prompt Injection & cross-modal & goal-hijack & Security & \cite{lee-2025-mind} \\
-MIRAGE & cross-modal & goal-hijack & Security & \cite{guo-2026-mirage} \\
-MIRAGE (Masked Injection via Residual And Generative Exploitation) & cross-modal & goal-hijack & Security & \cite{dai-2026-mirage} \\
-Physical Prompt Injection Attack (PPIA) & cross-modal & goal-hijack & Security & \cite{ling-2026-physical} \\
-PI3D & cross-modal & goal-hijack & Security & \cite{li-2026-extended} \\
-self-interpreting images via adversarial meta-instructions & cross-modal & silent-corruption & Security & \cite{zhang-2024-selfinterpreting} \\
-steganographic prompt injection (multi-domain spatial/frequency/neural embedding) & cross-modal & goal-hijack & Security & \cite{pathade-2025-invisible} \\
-\emph{multi-modal prompt injection against robot navigation} & cross-modal & goal-hijack & Security & \cite{zhang-2024-study} \\
-WebInject & cross-modal & goal-hijack & Security & \cite{wang-2025-webinject} \\
-context rot & tool-metadata & reasoning-corruption & ML/AI & \cite{ayyagari-2026-context} \\
-Attractive Metadata Attack (AMA) & tool-metadata & goal-hijack & Security & \cite{mo-2025-attractive} \\
-AutoMalTool & tool-metadata & goal-hijack & Security & \cite{he-2025-automatic} \\
-Branded Whisper Attack / Vault Whisper Attack (from 'Whispers of Wealth') & tool-metadata & resource-abuse & Security & \cite{debi-2026-whispers} \\
-ChatInject & tool-metadata & goal-hijack & Security & \cite{chang-2025-chatinject} \\
-Cross-Tool Description Poisoning & tool-metadata & goal-hijack & Security & \cite{shi-2026-think} \\
-MCP-ITP (Implicit Tool Poisoning) & tool-metadata & goal-hijack & Security & \cite{li-2026-mcpitp} \\
-Sampling-Based Injection (MCP sampling/createMessage attack) & tool-metadata & goal-hijack & Security & \cite{maloyan-2026-breaking} \\
-TIP (Tree-structured Injection for Payloads) / stealthy update attack & tool-metadata & goal-hijack & Security & \cite{shen-2026-invisible} \\
-ToolHijacker & tool-metadata & goal-hijack & Security & \cite{shi-2025-prompt} \\
-\emph{descriptor-level semantic manipulation attack (MCP tool-selection bias)} & tool-metadata & goal-hijack & Security & \cite{jamshidi-2025-semantic} \\
-VATS (Error-Path Injection via Implicit Authority) & tool-metadata & goal-hijack & Security & \cite{patel-2026-vats} \\
-extraneous cognitive load (context engineering overload) & multi-agent & reasoning-corruption & ML/AI & \cite{shang-2025-united} \\
-Constraint Drift (under long tool traces) & multi-agent & reasoning-corruption & ML/AI & \cite{bui-2026-himaptravel} \\
-context poisoning (self-induced, non-adversarial) & multi-agent & reasoning-corruption & ML/AI & \cite{chen-2026-unlocking} \\
-MAD-Spear (Conformity-Driven Prompt Injection Attack) & multi-agent & goal-hijack & Security & \cite{cui-2025-madspear} \\
-MAS hijacking & multi-agent & goal-hijack & Security & \cite{triedman-2025-multiagent} \\
-OMNI-LEAK (Orchestrator Multi-Agent Network Induced Data Leakage) & multi-agent & data-exfiltration & Security & \cite{naik-2026-omnileak} \\
-PlanFlip & multi-agent & goal-hijack & Security & \cite{wang-2026-planflip} \\
-Prompt Infection & multi-agent & goal-hijack & Security & \cite{lee-2025-prompt} \\
-\emph{subagent inheritance exploitation (4 classes: insecure memory inheritance, absent resource access control, async memory divergence, unauthorized cross-agent termination)} & multi-agent & goal-hijack & Security & \cite{cai-2026-child} \\
-backdoor-powered prompt injection attack & supply-chain & persistence-backdoor & Security & \cite{chen-2025-backdoorpowered} \\
-Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD) & supply-chain & goal-hijack & Security & \cite{zhao-2025-parasites} \\
-PoisonedAlign & supply-chain & goal-hijack & Security & \cite{shao-2024-enhancing} \\
-PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution) & supply-chain & goal-hijack & Security & \cite{qu-2026-supplychain} \\
-\emph{chat-template inference-time backdoor} & supply-chain & persistence-backdoor & Security & \cite{fogel-2026-inferencetime} \\
-Virtual Prompt Injection (VPI) & supply-chain & persistence-backdoor & Security & \cite{yan-2023-backdooring} \\
-\emph{agent-skill requirement decay under long trajectories (skill/requirement fade)} & skill & reasoning-corruption & ML/AI & \cite{xue-2026-agent} \\
-POISE & skill & goal-hijack & Security & \cite{hao-2026-poise} \\
-SkillJect & skill & goal-hijack & Security & \cite{jia-2026-skillject} \\
-\emph{skill-file prompt injection (trivial/non-optimized variant)} & skill & goal-hijack & Security & \cite{schmotz-2025-agent} \\
+distraction by irrelevant context & direct-input & silent-corruption & safety & \cite{shi-2023-large} \\
+\emph{context-length-induced degradation independent of retrieval failure} & direct-input & silent-corruption & safety & \cite{du-2025-context} \\
+context drift & direct-input & reasoning-corruption & safety & \cite{dongre-2025-drift} \\
+classifier context rot & direct-input & silent-corruption & safety & \cite{martin-2026-classifier} \\
+extraneous cognitive load (context engineering overload) & direct-input & reasoning-corruption & safety & \cite{shang-2025-united} \\
+mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation) & direct-input & silent-corruption & safety & \cite{salvatore-2025-lost} \\
+mechanistic refinement of lost-in-the-middle (threshold-dependent onset at \textasciitilde{}50\% of context window; effect vanishes near window limits) & direct-input & silent-corruption & safety & \cite{veseli-2025-positional} \\
+mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings) & direct-input & silent-corruption & safety & \cite{yu-2024-mitigate} \\
+\emph{long-context safety/refusal degradation in agents} & direct-input & reasoning-corruption & safety & \cite{hadeliya-2025-refusals} \\
+cognitive bandwidth bottleneck (action-space scaling) & direct-input & reasoning-corruption & safety & \cite{xu-2025-cognitive} \\
+Distributional Collapse & direct-input & silent-corruption & safety & \cite{ebrahimzadeh-2026-not} \\
+Mandate Salience Decay (MSD) & direct-input & goal-hijack & safety & \cite{safder-2026-finpersonabench} \\
+Contextual Belief Management (CBM) failure & direct-input & reasoning-corruption & safety & \cite{xu-2026-should} \\
+contextual misguidance & direct-input & silent-corruption & safety & \cite{wang-2026-alleviating} \\
+superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict) & direct-input & silent-corruption & safety & \cite{li-2025-taming} \\
+position exhaustion & direct-input & silent-corruption & safety & \cite{huo-2026-periodic} \\
+\emph{"malloc-only" context accumulation causing reasoning degeneration in extended CoT} & direct-input & availability-loss & safety & \cite{zheng-2026-free} \\
+KV-cache contamination & direct-input & silent-corruption & safety & \cite{kang-2026-promptactivation} \\
+Overflow & direct-input & availability-loss & safety & \cite{feiglin-2026-benchoverflow} \\
+preemptive answer attack (CoT short-circuiting) & direct-input & silent-corruption & safety & \cite{xu-2024-preemptive} \\
+scaffolding collapse & direct-input & goal-hijack & security & \cite{shao-2026-mitigating} \\
+Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given) & direct-input & goal-hijack & security & \cite{li-2025-transferable} \\
+ASPI (Ambiguous-State Prompt Injection) & direct-input & goal-hijack & security & \cite{sehwag-2026-aspi} \\
+AutoRed & direct-input & data-exfiltration & security & \cite{wang-2024-autored} \\
+Blind attacks & direct-input & silent-corruption & security & \cite{liu-2025-counterfactual} \\
+Brain-Prompt Injection & direct-input & goal-hijack & security & \cite{tai-2026-brainprompt} \\
+Checkpoint-GCG & direct-input & goal-hijack & security & \cite{yang-2025-checkpointgcg} \\
+Cognitive Overload Attack & direct-input & goal-hijack & security & \cite{upadhayay-2024-cognitive} \\
+COMA & direct-input & silent-corruption & security & \cite{liu-2025-compression} \\
+Combined Attack (Open-Prompt-Injection) & direct-input & goal-hijack & security & \cite{liu-2023-formalizing} \\
+CyberSecEval 2: prompt-injection + code-interpreter-abuse test set & direct-input & goal-hijack & security & \cite{bhatt-2024-cyberseceval} \\
+DataFlip & direct-input & goal-hijack & security & \cite{choudhary-2025-not} \\
+distraction effect (attention shift to injected instruction) & direct-input & reasoning-corruption & security & \cite{hung-2024-attention} \\
+F2A (Feign Agent Attack) & direct-input & goal-hijack & security & \cite{ren-2024-f2a} \\
+G2PIA (goal-guided generative prompt injection) & direct-input & goal-hijack & security & \cite{zhang-2024-goalguided} \\
+HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus & direct-input & goal-hijack & security & \cite{schulhoff-2023-ignore} \\
+HARE (Hybrid Agent Roleplay Exploitation) / Token Economy Poisoning & direct-input & goal-hijack & security & \cite{muhil-2025-evaluating} \\
+HOUYI & direct-input & resource-abuse & security & \cite{liu-2023-promptb} \\
+Ignore; Detect; Exploit (hidden prompt injection attacks) & direct-input & silent-corruption & security & \cite{collu-2025-misleading} \\
+JudgeDeceiver & direct-input & goal-hijack & security & \cite{shi-2024-optimizationbased} \\
+LLMSmith: prompt-injection-to-RCE exploitation & direct-input & goal-hijack & security & \cite{liu-2023-demystifying} \\
+message history forging (direct prompt injection via forged system/assistant roles) & direct-input & goal-hijack & security & \cite{kaya-2025-meets} \\
+ObliInjection & direct-input & goal-hijack & security & \cite{wang-2025-obliinjection} \\
+P2SQL injection (prompt-to-SQL) & direct-input & goal-hijack & security & \cite{pedro-2023-prompt} \\
+PINA & direct-input & goal-hijack & security & \cite{liu-2026-pina} \\
+Plan-of-Thought (PoT) Backdoor Attack & direct-input & persistence-backdoor & security & \cite{zhang-2024-agent} \\
+POUGH & direct-input & goal-hijack & security & \cite{huang-2024-efficient} \\
+Prompt Overflow Attack & direct-input & goal-hijack & security & \cite{zhou-2026-prompt} \\
+Prompt-Injected Data Extraction & direct-input & data-exfiltration & security & \cite{qi-2024-follow} \\
+PromptFuzz & direct-input & goal-hijack & security & \cite{yu-2024-promptfuzz} \\
+PromptFuzz-SC & direct-input & goal-hijack & security & \cite{ren-2026-deepseek} \\
+query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing) & direct-input & goal-hijack & security & \cite{zhang-2025-blackbox} \\
+Reasoning Interruption Attack (adaptive token compression) & direct-input & availability-loss & security & \cite{cui-2025-tokenefficient} \\
+reasoning token overflow (RTO) / practical reasoning interruption attack & direct-input & availability-loss & security & \cite{cui-2025-practical} \\
+Reverse CAPTCHA (invisible Unicode instruction injection) & direct-input & goal-hijack & security & \cite{graves-2026-reverse} \\
+Separator Injection Attack & direct-input & goal-hijack & security & \cite{li-2025-separator} \\
+situation-driven contextual adversarial prompt attack & direct-input & goal-hijack & security & \cite{das-2024-humaninterpretable} \\
+structured attack generation framework & direct-input & silent-corruption & security & \cite{cai-2026-prompt} \\
+StruPhantom & direct-input & goal-hijack & security & \cite{feng-2025-struphantom} \\
+System Prompt Poisoning (SPP) & direct-input & persistence-backdoor & security & \cite{guo-2025-system} \\
+Tensor Trust: prompt extraction / prompt hijacking & direct-input & goal-hijack & security & \cite{toyer-2023-tensor} \\
+\emph{adaptive attack suite bypassing 12 PI/jailbreak defenses} & direct-input & goal-hijack & security & \cite{nasr-2025-attacker} \\
+\emph{adaptive prompt-injection attacks for defense evaluation (PIEval)} & direct-input & goal-hijack & security & \cite{jia-2025-critical} \\
+\emph{automatic universal gradient-based prompt injection} & direct-input & goal-hijack & security & \cite{liu-2024-automatic} \\
+\emph{ChatGPT memory/URL-exfiltration prompt injection bypass} & direct-input & data-exfiltration & security & \cite{schwartzman-2024-exfiltration} \\
+\emph{log-interpretation evasion prompt injection (malicious-as-benign misclassification)} & direct-input & silent-corruption & security & \cite{landauer-2026-just} \\
+\emph{multi-modal prompt injection against robot navigation} & direct-input & goal-hijack & security & \cite{zhang-2024-study} \\
+\emph{Prompt Injection 2.0 (hybrid PI + classic web-exploit combination attacks)} & direct-input & goal-hijack & security & \cite{mchugh-2025-prompt} \\
+\emph{rule-tag semantic reframing template attack ('Breaking the Prompt Wall')} & direct-input & silent-corruption & security & \cite{chang-2025-breaking} \\
+\emph{system-prompt and uploaded-file extraction from custom GPTs} & direct-input & data-exfiltration & security & \cite{yu-2023-assessing} \\
+Xmera (chimera MitM framework) & direct-input & silent-corruption & security & \cite{fastowski-2025-injecting} \\
+ZombAI & direct-input & persistence-backdoor & security & \cite{bayu-2026-security} \\
+context rot (agentic/long-horizon search) & tool-output & availability-loss & safety & \cite{xia-2026-diagnosing} \\
+plan anchor & tool-output & reasoning-corruption & safety & \cite{yu-2026-webanchor} \\
+observation over-ingestion & tool-output & reasoning-corruption & safety & \cite{gaur-2026-signaldriven} \\
+context proprioceptive blindness & tool-output & silent-corruption & safety & \cite{xu-2026-llm} \\
+context poisoning (self-induced, non-adversarial) & tool-output & silent-corruption & safety & \cite{chen-2026-unlocking} \\
+context pollution (role conflation in single-agent code-as-action agents) & tool-output & reasoning-corruption & safety & \cite{fei-2026-codedelegator} \\
+Actor-Critic attack & tool-output & goal-hijack & security & \cite{shi-2025-lessons} \\
+AdapTools & tool-output & goal-hijack & security & \cite{wang-2026-adaptools} \\
+Agent Data Injection (ADI) & tool-output & goal-hijack & security & \cite{choi-2026-agent} \\
+Agent-as-a-Proxy attack & tool-output & goal-hijack & security & \cite{isbarov-2026-bypassing} \\
+AGENTBAIT & tool-output & goal-hijack & security & \cite{wu-2026-bots} \\
+AgentVigil & tool-output & goal-hijack & security & \cite{wang-2025-agentvigilb} \\
+ASTRA (and ASTRA++) & tool-output & goal-hijack & security & \cite{pandya-2025-may} \\
+AutoDojo (adaptive black-box IPI attack generation) & tool-output & goal-hijack & security & \cite{ma-2026-autodojo} \\
+AutoInject & tool-output & goal-hijack & security & \cite{chen-2026-learning} \\
+autonomy tax & tool-output & availability-loss & security & \cite{li-2026-autonomy} \\
+backdoor-powered prompt injection attack & tool-output & persistence-backdoor & security & \cite{chen-2025-backdoorpowered} \\
+BIPIA benchmark attack set & tool-output & goal-hijack & security & \cite{yi-2023-benchmarking} \\
+Chain-of-Trigger Backdoor (CoTri) & tool-output & persistence-backdoor & security & \cite{qiu-2025-chainoftrigger} \\
+ChainFuzzer & tool-output & goal-hijack & security & \cite{wu-2026-chainfuzzer} \\
+ChatInject & tool-output & goal-hijack & security & \cite{chang-2025-chatinject} \\
+CoT Forgery (Chain-of-Thought Forgery) & tool-output & goal-hijack & security & \cite{ye-2026-prompt} \\
+EchoLeak (zero-click IPI, CVE-2025-32711) & tool-output & data-exfiltration & security & \cite{reddy-2025-echoleak} \\
+FlashRT & tool-output & goal-hijack & security & \cite{wang-2026-flashrt} \\
+Foot-in-the-Door (FITD) attack & tool-output & goal-hijack & security & \cite{nakash-2024-breaking} \\
+Fun-tuning & tool-output & goal-hijack & security & \cite{labunets-2025-funtuning} \\
+Indirect Data Poisoning (Distributed Denial of Science) & tool-output & silent-corruption & security & \cite{gyevnar-2026-distributed} \\
+Indirect Prompt Injection (IPI) & tool-output & goal-hijack & security & \cite{greshake-2023-not} \\
+Inter-Agent Trust Exploitation (AI agent privilege escalation) & tool-output & goal-hijack & security & \cite{lupinacci-2025-dark} \\
+IterInject & tool-output & goal-hijack & security & \cite{chen-2026-iterinject} \\
+Log-Substrate Prompt Injection & tool-output & silent-corruption & security & \cite{pandey-2026-poisoning} \\
+LogInject / Passive Prompt Injection & tool-output & goal-hijack & security & \cite{karanjai-2026-context} \\
+LogJack & tool-output & goal-hijack & security & \cite{shah-2026-logjack} \\
+MUZZLE & tool-output & goal-hijack & security & \cite{syros-2026-muzzle} \\
+Oracle Poisoning & tool-output & silent-corruption & security & \cite{kereopayorke-2026-oracle} \\
+Parallel-Poisoned Web (fingerprinting + website cloaking against AI web agents) & tool-output & goal-hijack & security & \cite{zychlinski-2025-whole} \\
+Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD) & tool-output & data-exfiltration & security & \cite{zhao-2025-parasites} \\
+PI-Hunter & tool-output & goal-hijack & security & \cite{he-2026-pihunter} \\
+PISmith & tool-output & goal-hijack & security & \cite{yin-2026-pismith} \\
+PlanFlip & tool-output & goal-hijack & security & \cite{wang-2026-planflip} \\
+Reasoning-Extension Denial-of-Service (DoS) & tool-output & availability-loss & security & \cite{zhou-2026-shield} \\
+Relinking & tool-output & goal-hijack & security & \cite{liu-2026-safe} \\
+RL-Hammer & tool-output & goal-hijack & security & \cite{wen-2025-hammer} \\
+SafeSearch & tool-output & silent-corruption & security & \cite{dong-2025-safesearch} \\
+Sampling-Based Injection (MCP sampling/createMessage attack) & tool-output & goal-hijack & security & \cite{maloyan-2026-breaking} \\
+Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI & tool-output & goal-hijack & security & \cite{ji-2025-taxonomy} \\
+Silent Egress (implicit prompt injection via URL preview/metadata) & tool-output & data-exfiltration & security & \cite{lan-2026-silent} \\
+Targeted Promptware Attacks & tool-output & goal-hijack & security & \cite{nassi-2025-invitation} \\
+TIP (Tree-structured Injection for Payloads) / stealthy update attack & tool-output & goal-hijack & security & \cite{shen-2026-invisible} \\
+TopicAttack & tool-output & goal-hijack & security & \cite{chen-2025-topicattack} \\
+\emph{data flow-based injection attack for observed-data exfiltration ('Important message' template)} & tool-output & data-exfiltration & security & \cite{alizadeh-2025-simple} \\
+\emph{diverse RL red-teaming (auto-generated rewards + multi-step RL)} & tool-output & goal-hijack & security & \cite{beutel-2024-diverse} \\
+\emph{HTML accessibility-tree universal adversarial trigger injection (TWUI)} & tool-output & goal-hijack & security & \cite{johnson-2025-manipulating} \\
+\emph{in-browser LLM-guided fuzzing for agentic-browser IPI} & tool-output & goal-hijack & security & \cite{cohen-2025-inbrowser} \\
+\emph{PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)} & tool-output & goal-hijack & security & \cite{vilches-2025-cybersecurity} \\
+\emph{privacy leakage attack chain (external-content deception + IPI + exfiltration)} & tool-output & data-exfiltration & security & \cite{yang-2026-empirical} \\
+VATS (Error-Path Injection via Implicit Authority) & tool-output & goal-hijack & security & \cite{patel-2026-vats} \\
+VeriGrey (grey-box agent fuzzing for IPI) & tool-output & goal-hijack & security & \cite{zhang-2026-verigrey} \\
+VortexPIA & tool-output & data-exfiltration & security & \cite{cui-2025-vortexpia} \\
+lost in the middle & RAG & silent-corruption & safety & \cite{liu-2023-lost} \\
+distraction by irrelevant context (graded by semantic relatedness) & RAG & silent-corruption & safety & \cite{wu-2024-easily} \\
+context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization) & RAG & silent-corruption & safety & \cite{chen-2026-rag} \\
+mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3) & RAG & silent-corruption & safety & \cite{jin-2024-cutting} \\
+\emph{over-trust bias toward conflicting external evidence over correct parametric memory in RALMs} & RAG & silent-corruption & safety & \cite{jin-2024-tugofwar} \\
+knowledge conflict (contextual vs parametric) & RAG & reasoning-corruption & safety & \cite{yuan-2024-discerning} \\
+AGGD (Approximate Greedy Gradient Descent) & RAG & silent-corruption & security & \cite{su-2024-corpus} \\
+BadRAG & RAG & silent-corruption & security & \cite{xue-2024-badrag} \\
+Cliopatra & RAG & data-exfiltration & security & \cite{annamalai-2026-cliopatra} \\
+ConfusedPilot & RAG & data-exfiltration & security & \cite{roychowdhury-2024-confusedpilot} \\
+DACSI (Document-Authored Control-Signal Impersonation) & RAG & data-exfiltration & security & \cite{zhu-2026-documentauthored} \\
+IKEA (Implicit Knowledge Extraction Attack) & RAG & data-exfiltration & security & \cite{wang-2025-silent} \\
+Injection Paradox & RAG & silent-corruption & security & \cite{paeng-2026-injection} \\
+LogicPoison & RAG & silent-corruption & security & \cite{xiao-2026-logicpoison} \\
+Neural Exec & RAG & goal-hijack & security & \cite{pasquini-2024-neural} \\
+NeuroGenPoisoning & RAG & silent-corruption & security & \cite{zhu-2025-neurogenpoisoning} \\
+PANDORA (RAG Poisoning jailbreak) & RAG & goal-hijack & security & \cite{deng-2024-pandora} \\
+PIDP-Attack & RAG & silent-corruption & security & \cite{wang-2026-pidpattack} \\
+PoisonedRAG & RAG & silent-corruption & security & \cite{zou-2024-poisonedrag} \\
+RefineRAG & RAG & silent-corruption & security & \cite{wang-2026-refinerag} \\
+Salience Induction & RAG & silent-corruption & security & \cite{zhou-2026-salience} \\
+TrojanRAG & RAG & persistence-backdoor & security & \cite{cheng-2024-trojanrag} \\
+\emph{gradient-based corpus poisoning (adversarial passage injection)} & RAG & silent-corruption & security & \cite{zhong-2023-poisoning} \\
+\emph{multi-probe evasive GCG suffix attack} & RAG & goal-hijack & security & \cite{rahman-2026-bypassing} \\
+\emph{RAG-manipulation attack on multi-agent debate consensus} & RAG & silent-corruption & security & \cite{kraidia-2026-raginduced} \\
+\emph{retrieval-aware IPI (trigger-fragment decomposition attack)} & RAG & goal-hijack & security & \cite{chang-2026-overcoming} \\
+\emph{retriever fine-tuning backdoor attack} & RAG & persistence-backdoor & security & \cite{clop-2024-backdoored} \\
+\emph{tree-of-attacks ranking manipulation for conversational search} & RAG & silent-corruption & security & \cite{pfrommer-2024-ranking} \\
+\emph{getting lost in multi-turn conversation (premature-answer unreliability under underspecification)} & memory & silent-corruption & safety & \cite{laban-2025-llms} \\
+Attention Latch & memory & silent-corruption & safety & \cite{shehata-2026-attention} \\
+multi-target memory interference & memory & silent-corruption & safety & \cite{lee-2026-minteval} \\
+\emph{temporally-distant information inaccessibility in long-horizon agentic reasoning} & memory & reasoning-corruption & safety & \cite{hu-2026-sam} \\
+Constraint Drift (under long tool traces) & memory & reasoning-corruption & safety & \cite{bui-2026-himaptravel} \\
+identity drift (persona coherence decay in generative agents) & memory & reasoning-corruption & safety & \cite{platnick-2025-idrag} \\
+\emph{abrupt persona/tone instability from lack of affective state inertia} & memory & reasoning-corruption & safety & \cite{subaharan-2026-controlling} \\
+Governance Decay & memory & reasoning-corruption & safety & \cite{chen-2026-governance} \\
+\emph{unverified success fabrication in unattended long-horizon agents (agent honesty gap)} & memory & silent-corruption & safety & \cite{deng-2026-goalautopilot} \\
+memory pollution (agent long-term memory) & memory & silent-corruption & safety & \cite{liu-2026-failuregated} \\
+Context Pollution (evolutionary search history bias) & memory & reasoning-corruption & safety & \cite{yan-2026-pacevolve} \\
+\emph{plan non-persistence under context eviction (context-time memory volatility)} & memory & reasoning-corruption & safety & \cite{mehta-2026-plans} \\
+\emph{summary-length invariance under context compaction} & memory & silent-corruption & safety & \cite{cim-2026-parallel} \\
+memory laundering & memory & silent-corruption & safety & \cite{wang-2026-state} \\
+memory misevolution & memory & goal-hijack & safety & \cite{xie-2026-memevobench} \\
+\emph{"cognitive event horizon" (context-saturation threshold beyond which accuracy collapses)} & memory & availability-loss & safety & \cite{milosevic-2026-episodicsemantic} \\
+agent drift (overthinking / overacting) & memory & reasoning-corruption & safety & \cite{sui-2026-tact} \\
+\emph{granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse)} & memory & reasoning-corruption & safety & \cite{shen-2026-structurally} \\
+cumulative contextual decay (attention pollution, dilution, and drift) & memory & silent-corruption & safety & \cite{hong-2025-rhea} \\
+temporal memory contamination & memory & data-exfiltration & safety & \cite{altawaha-2026-remembering} \\
+unintended long-term state poisoning & memory & persistence-backdoor & safety & \cite{xu-2026-routine} \\
+AgentPoison & memory & persistence-backdoor & security & \cite{chen-2024-agentpoison} \\
+Cross-App Context Poisoning (Confused ChatGPT) & memory & goal-hijack & security & \cite{wang-2026-confused} \\
+Cross-Session Stored Prompt Injection (XSPI) & memory & persistence-backdoor & security & \cite{xie-2026-prompt} \\
+MemoryGraft & memory & persistence-backdoor & security & \cite{srivastava-2025-memorygraft} \\
+MemVenom & memory & persistence-backdoor & security & \cite{zhang-2026-memvenom} \\
+Plan Injection & memory & goal-hijack & security & \cite{patlan-2025-context} \\
+Sleeper Memory Poisoning (Actor-Critic universal poisoning attack) & memory & persistence-backdoor & security & \cite{pulipaka-2026-hidden} \\
+SpAIware & memory & persistence-backdoor & security & \cite{rehberger-2024-trust} \\
+\emph{memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)} & memory & persistence-backdoor & security & \cite{dash-2026-untrusted} \\
+\emph{subagent inheritance exploitation (4 classes: insecure memory inheritance, absent resource access control, async memory divergence, unauthorized cross-agent termination)} & memory & persistence-backdoor & security & \cite{cai-2026-child} \\
+Zombie Agent & memory & persistence-backdoor & security & \cite{yang-2026-zombie} \\
+context unawareness (failure to identify a small decisive piece of evidence within long/complex context) & cross-modal & silent-corruption & safety & \cite{xu-2026-contextaware} \\
+evidence misalignment (agentic long-video QA) & cross-modal & reasoning-corruption & safety & \cite{qiu-2026-videoseal} \\
+cross-modality parametric knowledge conflict & cross-modal & silent-corruption & safety & \cite{zhu-2024-unraveling} \\
+incidental prompt injection & cross-modal & silent-corruption & safety & \cite{clusmann-2024-pen} \\
+multimodal retrieval heads (sparse heads carrying retrieval) & cross-modal & silent-corruption & safety & \cite{li-2026-retrieval} \\
+AgentTypo & cross-modal & goal-hijack & security & \cite{li-2025-agenttypo} \\
+AudioHijack & cross-modal & goal-hijack & security & \cite{chen-2026-hijacking} \\
+CrossInject & cross-modal & goal-hijack & security & \cite{wang-2025-manipulating} \\
+Graph-based prompt injection (math-expression-to-graph encoding) & cross-modal & goal-hijack & security & \cite{kwon-2024-graphbased} \\
+Image-based Prompt Injection (IPI) & cross-modal & goal-hijack & security & \cite{nagaraja-2025-imagebased} \\
+Mind Mapping Prompt Injection & cross-modal & goal-hijack & security & \cite{lee-2025-mind} \\
+MIRAGE & cross-modal & goal-hijack & security & \cite{guo-2026-mirage} \\
+MIRAGE (Masked Injection via Residual And Generative Exploitation) & cross-modal & goal-hijack & security & \cite{dai-2026-mirage} \\
+Physical Prompt Injection Attack (PPIA) & cross-modal & goal-hijack & security & \cite{ling-2026-physical} \\
+PI3D & cross-modal & goal-hijack & security & \cite{li-2026-extended} \\
+self-interpreting images via adversarial meta-instructions & cross-modal & silent-corruption & security & \cite{zhang-2024-selfinterpreting} \\
+steganographic prompt injection (multi-domain spatial/frequency/neural embedding) & cross-modal & goal-hijack & security & \cite{pathade-2025-invisible} \\
+WebInject & cross-modal & goal-hijack & security & \cite{wang-2025-webinject} \\
+context rot & tool-metadata & reasoning-corruption & safety & \cite{ayyagari-2026-context} \\
+Attractive Metadata Attack (AMA) & tool-metadata & goal-hijack & security & \cite{mo-2025-attractive} \\
+AutoMalTool & tool-metadata & goal-hijack & security & \cite{he-2025-automatic} \\
+Cross-Tool Description Poisoning & tool-metadata & goal-hijack & security & \cite{shi-2026-think} \\
+MCP-ITP (Implicit Tool Poisoning) & tool-metadata & goal-hijack & security & \cite{li-2026-mcpitp} \\
+ToolHijacker & tool-metadata & goal-hijack & security & \cite{shi-2025-prompt} \\
+ToolLeak & tool-metadata & goal-hijack & security & \cite{xie-2025-redteaming} \\
+\emph{descriptor-level semantic manipulation attack (MCP tool-selection bias)} & tool-metadata & goal-hijack & security & \cite{jamshidi-2025-semantic} \\
+Branded Whisper Attack / Vault Whisper Attack (from 'Whispers of Wealth') & multi-agent & goal-hijack & security & \cite{debi-2026-whispers} \\
+MAD-Spear (Conformity-Driven Prompt Injection Attack) & multi-agent & silent-corruption & security & \cite{cui-2025-madspear} \\
+MAS hijacking & multi-agent & goal-hijack & security & \cite{triedman-2025-multiagent} \\
+OMNI-LEAK (Orchestrator Multi-Agent Network Induced Data Leakage) & multi-agent & data-exfiltration & security & \cite{naik-2026-omnileak} \\
+Prompt Infection & multi-agent & goal-hijack & security & \cite{lee-2025-prompt} \\
+Adversarial HalluSquatting & supply-chain & goal-hijack & security & \cite{spira-2026-beware} \\
+PoisonedAlign & supply-chain & goal-hijack & security & \cite{shao-2024-enhancing} \\
+RTA-PostForge (response-path tampering attack) & supply-chain & silent-corruption & security & \cite{luo-2026-rewriting} \\
+\emph{backdoor-based RAG data extraction attack} & supply-chain & data-exfiltration & security & \cite{peng-2024-data} \\
+\emph{chat-template inference-time backdoor} & supply-chain & persistence-backdoor & security & \cite{fogel-2026-inferencetime} \\
+Virtual Prompt Injection (VPI) & supply-chain & persistence-backdoor & security & \cite{yan-2023-backdooring} \\
+\emph{agent-skill requirement decay under long trajectories (skill/requirement fade)} & skill & silent-corruption & safety & \cite{xue-2026-agent} \\
+AIShellJack (coding-rule/config-file prompt injection against agentic IDE editors) & skill & goal-hijack & security & \cite{liu-2025-your} \\
+ClawTrojan multi-step trojan/backdoor attack paradigm & skill & persistence-backdoor & security & \cite{tan-2026-prompt} \\
+Guidance Injection & skill & goal-hijack & security & \cite{liu-2026-trojan} \\
+POISE & skill & goal-hijack & security & \cite{hao-2026-poise} \\
+PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution) & skill & goal-hijack & security & \cite{qu-2026-supplychain} \\
+SkillJect & skill & goal-hijack & security & \cite{jia-2026-skillject} \\
+\emph{skill-file prompt injection (trivial/non-optimized variant)} & skill & data-exfiltration & security & \cite{schmotz-2025-agent} \\
 \end{longtable}
 \endgroup

@@ -47,6 +47,17 @@ def load(n):
     return []
 
 
+def regime_label(track):
+    """The registry still stores Security / ML-AI; the paper says regimes.
+
+    Renaming the stored value would touch every registry and every script
+    that reads one, so the translation lives at the point of printing. If the
+    registries are ever re-keyed, delete this and the call sites.
+    """
+    return {"Security": "security", "ML/AI": "safety",
+            "Both": "both"}.get((track or "").strip(), track or "")
+
+
 def tex(s):
     s = str(s or "")
     for a, b in (("\\", r"\textbackslash{}"), ("&", r"\&"), ("%", r"\%"),
@@ -132,7 +143,7 @@ def main():
         n, un = name_of(e, "technique_name")
         m_unnamed += un
         mrows.append([n, tex(e.get("channel")), tex(e.get("consequence")),
-                      tex(e.get("track")), src.get(e.get("paper_id"), "---")])
+                      tex(regime_label(e.get("track"))), src.get(e.get("paper_id"), "---")])
 
     drows, d_unnamed = [], 0
     for e in sorted(defs, key=lambda e: key(e, "defense_name")):
@@ -140,7 +151,7 @@ def main():
         d_unnamed += un
         drows.append([n, tex(e.get("channel")),
                       tex(e.get("defense_intervention_point")),
-                      tex(e.get("track")), tex(e.get("validated_against")),
+                      tex(regime_label(e.get("track"))), tex(e.get("validated_against")),
                       src.get(e.get("paper_id"), "---")])
 
     OUT.mkdir(parents=True, exist_ok=True)

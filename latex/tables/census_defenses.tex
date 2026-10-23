@@ -3,7 +3,7 @@
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
 \begin{longtable}{@{}p{0.30\textwidth}lllll@{}}
-\caption{Every named defense in the corpus (550 entries). \emph{Validated vs} is the threat model the paper's own evaluation tested, not the one it claims. Conventions otherwise as in Table~\ref{tab:census-mech}.}\\
+\caption{Every named defense in the corpus (541 entries). \emph{Validated vs} is the threat model the paper's own evaluation tested, not the one it claims. Conventions otherwise as in Table~\ref{tab:census-mech}.}\\
 \toprule
 \textbf{Defense or fix} & \textbf{Channel} & \textbf{Acts at} & \textbf{Track} & \textbf{Validated vs} & \textbf{Source} \\
 \midrule
@@ -18,555 +18,546 @@
 \endfoot
 \bottomrule
 \endlastfoot
-ACON (Agent Context Optimization) & direct-input & ingestion & ML/AI & incidental & \cite{kang-2025-acon} \\
-ActiveContext (ContextCurator + TaskExecutor) & direct-input & ingestion & ML/AI & incidental & \cite{li-2026-escaping} \\
-ActQKV (Activation-aware Probe-Query) & direct-input & reasoning & ML/AI & incidental & \cite{xiao-2025-activationaware} \\
-AdaCoM (Adaptive Context Management) & direct-input & reasoning & ML/AI & incidental & \cite{yi-2026-learning} \\
-ADEMA (checkpoint-resumable persistence + segment-level memory condensation + epistemic bookkeeping) & direct-input & reasoning & ML/AI & incidental & \cite{zhou-2026-adema} \\
-Agent-BRACE (Agent Belief state Representation via Abstraction and Confidence Estimation) & direct-input & none & ML/AI & incidental & \cite{singh-2026-agentbrace} \\
-Agent-level affective subsystem (VAD state dynamics) & direct-input & reasoning & ML/AI & incidental & \cite{subaharan-2026-controlling} \\
-AgentFold (folding - granular condensation / deep consolidation context management) & direct-input & ingestion & ML/AI & incidental & \cite{ye-2025-agentfold} \\
-AgentProg (program-guided context management with Execution Tree and global belief state) & direct-input & ingestion & ML/AI & incidental & \cite{tian-2025-agentprog} \\
-AgentSwing & direct-input & reasoning & ML/AI & incidental & \cite{feng-2026-agentswing} \\
-APEMO (Affect-aware Peak-End Modulation for Orchestration) & direct-input & reasoning & ML/AI & incidental & \cite{shi-2026-alignment} \\
-ARC (Active and Reflection-driven Context management) & direct-input & reasoning & ML/AI & incidental & \cite{yao-2026-arc} \\
-ARC (Addressable Recall Compaction) & direct-input & ingestion & ML/AI & incidental & \cite{dang-2026-addressable} \\
-Autopilot (gated finite-state-machine execution firewall) & direct-input & reasoning & ML/AI & incidental & \cite{deng-2026-goalautopilot} \\
-BACM / BACM-RL (Budget-Aware Context Management) & direct-input & ingestion & ML/AI & incidental & \cite{wu-2026-contextbudget} \\
-Chain-of-Memory (CoM) - verifiable retrieval + causal tracing & direct-input & reasoning & ML/AI & incidental & \cite{jarsania-2025-chainofmemory} \\
-CoCoA (Confidence- and Context-Aware Adaptive Decoding) & direct-input & reasoning & ML/AI & incidental & \cite{khandelwal-2025-cocoa} \\
-CodeDelegator (role separation via Delegator/Coder agents + EPSS) & direct-input & execution & ML/AI & incidental & \cite{fei-2026-codedelegator} \\
-CompactionRL & direct-input & ingestion & ML/AI & incidental & \cite{li-2026-compactionrl} \\
-COMPASS (Context-Organized Multi-Agent Planning and Strategy System) & direct-input & reasoning & ML/AI & incidental & \cite{wan-2025-compass} \\
-Constraint Pinning & direct-input & ingestion & ML/AI & both & \cite{chen-2026-governance} \\
-Context Viewer & direct-input & none & ML/AI &  & \cite{sriraman-2026-context} \\
-Context-Agent (dynamic discourse tree) & direct-input & reasoning & ML/AI & incidental & \cite{hu-2026-contextagent} \\
-Context-Folding (FoldGRPO) & direct-input & ingestion & ML/AI & incidental & \cite{sun-2025-scaling} \\
-CWL (Context Window Lifecycle) & direct-input & ingestion & ML/AI & incidental & \cite{semenov-2026-compaction} \\
-Differential Transformer (DIFF Transformer) & direct-input & reasoning & ML/AI & incidental & \cite{ye-2024-differential} \\
-DualGraph & direct-input & reasoning & ML/AI & incidental & \cite{shi-2026-tale} \\
-Ebbinghaus Forgetting Curve Memory Enhancement Framework & direct-input & reasoning & ML/AI &  & \cite{jiang-2026-ebbinghaus} \\
-END (Early Noise Dropping) & direct-input & ingestion & ML/AI & incidental & \cite{jin-2025-end} \\
-Engram (Archive + Research Digest) & direct-input & none & ML/AI & incidental & \cite{karimi-2026-improving} \\
-Environment Maps (Contexts/Actions/Workflows/Tacit Knowledge graph) & direct-input & none & ML/AI & incidental & \cite{feng-2026-environment} \\
-EvoDS - Adaptive Context Compression (ACC) component specifically & direct-input & none & ML/AI & incidental & \cite{yang-2026-evods} \\
-FinLongDocAgent & direct-input & none & ML/AI & incidental & \cite{wang-2026-documentlevel} \\
-Focus (slime-mold-inspired active context compression) & direct-input & ingestion & ML/AI & incidental & \cite{verma-2026-active} \\
-FoldAct & direct-input & ingestion & ML/AI & incidental & \cite{shao-2025-foldact} \\
-Free()LM (Free-Module LoRA adapter) & direct-input & reasoning & ML/AI & incidental & \cite{zheng-2026-free} \\
-GCAD (Gated Cropped Attention-Delta steering) & direct-input & reasoning & ML/AI & incidental & \cite{kang-2026-promptactivation} \\
-GCC (Git-Context-Controller) & direct-input & ingestion & ML/AI & incidental & \cite{wu-2025-git} \\
-GenericAgent (GA) - contextual information density maximization & direct-input & ingestion & ML/AI & incidental & \cite{liang-2026-genericagent} \\
-GRACE (Graph-Regularized Agentic Context Evolution) & direct-input & reasoning & ML/AI & incidental & \cite{hsu-2026-scoped} \\
-Hierarchical Cognitive Caching (HCC), in ML-Master 2.0 & direct-input & none & ML/AI & incidental & \cite{zhu-2026-ultralonghorizon} \\
-HIPIF (Hierarchical Planning and Information Folding) & direct-input & ingestion & ML/AI & incidental & \cite{diao-2026-hipif} \\
-InftyThink with Cross-Chain Memory (semantic lemma retrieval) & direct-input & none & ML/AI & incidental & \cite{tekin-2025-directional} \\
-JUICE (Just Run Twice) & direct-input & reasoning & ML/AI & incidental & \cite{li-2025-taming} \\
-KScope-guided Constrained Context Summarization & direct-input & none & ML/AI & incidental & \cite{xiao-2025-kscope} \\
-L2A (Learning To Attend) & direct-input & reasoning & ML/AI & incidental & \cite{choudhary-2026-learning} \\
-lambda-RLM & direct-input & reasoning & ML/AI & incidental & \cite{roy-2026-ycombinator} \\
-Laser (structured action protocol + context register) & direct-input & ingestion & ML/AI & incidental & \cite{wang-2025-laser} \\
-LCLM (Latent Context Language Models) & direct-input & ingestion & ML/AI & incidental & \cite{li-2026-endtoend} \\
-LLM+DPP (Principled Content Selection pipeline) & direct-input & ingestion & ML/AI & incidental & \cite{padmakumar-2025-principled} \\
-LongCrafter & direct-input & reasoning & ML/AI & incidental & \cite{yuan-2026-longcrafter} \\
-LOOC (Leave-One-Out Compression) & direct-input & ingestion & ML/AI & incidental & \cite{wang-2026-alleviating} \\
-LWM-Planner (Fact Extraction and Compression / FEC) & direct-input & reasoning & ML/AI & incidental & \cite{holt-2025-factaugmented} \\
-Neural Paging / Page Controller & direct-input & ingestion & ML/AI & incidental & \cite{chen-2026-neural} \\
-P-RoPE / MiniWin (Periodic RoPE) & direct-input & reasoning & ML/AI & incidental & \cite{huo-2026-periodic} \\
-PAACE (Plan-Aware Automated Context Engineering) & direct-input & ingestion & ML/AI & incidental & \cite{yuksel-2025-paace} \\
-PACEvolve - Hierarchical Context Management (HCM) component specifically & direct-input & none & ML/AI & incidental & \cite{yan-2026-pacevolve} \\
-Parallel Compaction & direct-input & ingestion & ML/AI & incidental & \cite{cim-2026-parallel} \\
-Planning with Schemas (PwS) & direct-input & reasoning & ML/AI & incidental & \cite{xu-2025-cognitive} \\
-PRIMA (context-boundary discipline + reference-material sandboxing + poisoned-output rejection) & direct-input & execution & ML/AI & adversarial & \cite{annapureddy-2026-prima} \\
-Program-Guided (PG) Runtime / Compile-then-Page SOP compiler & direct-input & execution & ML/AI & incidental & \cite{yu-2026-compile} \\
-QUITO-X & direct-input & ingestion & ML/AI & incidental & \cite{wang-2024-quitox} \\
-QwenLong-CPRS & direct-input & ingestion & ML/AI & incidental & \cite{shen-2025-qwenlongcprs} \\
-RE-IAG (Reasoning-Evidence Interactive Augmented Graph) & direct-input & reasoning & ML/AI & incidental & \cite{sui-2026-decomposition} \\
-ReAcTree & direct-input & reasoning & ML/AI &  & \cite{choi-2025-reactree} \\
-ReCAP (Recursive Context-Aware Reasoning and Planning) & direct-input & reasoning & ML/AI & incidental & \cite{zhang-2025-recap} \\
-Recursive Models (recursive self-invocation with isolated subtask contexts) & direct-input & reasoning & ML/AI & incidental & \cite{yang-2026-recursive} \\
-ReSum / ReSum-GRPO & direct-input & ingestion & ML/AI & incidental & \cite{wu-2025-resum} \\
-Retrieve-then-Solve & direct-input & none & ML/AI & incidental & \cite{du-2025-context} \\
-Rhea (Role-aware Heuristic Episodic Attention) & direct-input & reasoning & ML/AI & incidental & \cite{hong-2025-rhea} \\
-RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation) & direct-input & reasoning & ML/AI & incidental & \cite{xu-2026-should} \\
-SAFARI & direct-input & none & ML/AI &  & \cite{zhu-2026-safari} \\
-Scale Positional Hidden States (single-dimension scaling) & direct-input & reasoning & ML/AI & incidental & \cite{yu-2024-mitigate} \\
-Self-GC (Self-Governing Context) & direct-input & ingestion & ML/AI & incidental & \cite{hao-2026-selfgc} \\
-Slipstream (asynchronous, judge-validated trajectory-grounded compaction) & direct-input & ingestion & ML/AI & incidental & \cite{chen-2026-slipstream} \\
-SmoothAgent & direct-input & ingestion & ML/AI &  & \cite{pan-2026-smoothagent} \\
-SpARE (Sparse Auto-Encoder Representation Engineering) & direct-input & reasoning & ML/AI & incidental & \cite{zhao-2024-steering} \\
-SPRA (Scaffold-Preserving Representation Alignment) & direct-input & reasoning & ML/AI & adversarial & \cite{shao-2026-mitigating} \\
-SSRP (Self-Synthesizing Reasoning Protocols) & direct-input & reasoning & ML/AI & incidental & \cite{shehata-2026-attention} \\
-State-Update Multi-turn Dialogue Strategy & direct-input & reasoning & ML/AI & incidental & \cite{liu-2025-stateupdate} \\
-Still (amortized KV cache compaction, Perceiver-based) & direct-input & ingestion & ML/AI & incidental & \cite{oneill-2026-still} \\
-STRACE (Structural Trajectory Analysis and Causal Extraction) & direct-input & none & ML/AI & incidental & \cite{chang-2026-noisy} \\
-StructAgent (unified causal state + verifier-backed state transitions) & direct-input & none & ML/AI & incidental & \cite{wu-2026-structagent} \\
-SUPO (summarization-based context management for RL) & direct-input & ingestion & ML/AI & incidental & \cite{lu-2025-scaling} \\
-TACT (Think-Act Calibration via activation Steering) & direct-input & reasoning & ML/AI & incidental & \cite{sui-2026-tact} \\
-TAG (Tagging-Augmented Generation) & direct-input & ingestion & ML/AI & incidental & \cite{pal-2025-taggingaugmented} \\
-TDP (Task-Decoupled Planning) & direct-input & reasoning & ML/AI & incidental & \cite{li-2026-entangled} \\
-TokenPilot (Ingestion-Aware Compaction + Lifecycle-Aware Eviction) & direct-input & ingestion & ML/AI & incidental & \cite{xu-2026-tokenpilot} \\
-TRACE (Trajectory Risk-Aware Compression) & direct-input & ingestion & ML/AI & adversarial & \cite{hong-2026-trace} \\
-TRIM-KV & direct-input & ingestion & ML/AI & incidental & \cite{bui-2025-cache} \\
-UniKnow / LM-UniKnow & direct-input & none & ML/AI & incidental & \cite{kim-2025-uniknow} \\
-VISTA (Visible Internal State for Tool Agents) & direct-input & reasoning & ML/AI & incidental & \cite{xu-2026-llm} \\
-WM-SAR (World-Model Subgraph Amplification Repair) & direct-input & reasoning & ML/AI & incidental & \cite{song-2026-repair} \\
-Yunque DeepResearch - Dynamic Context Management module specifically & direct-input & none & ML/AI & incidental & \cite{cai-2026-yunque} \\
-ASIDE (Architecturally Separated Instruction-Data Embeddings) & direct-input & reasoning & Security & adversarial & \cite{zverev-2025-aside} \\
-Attack Detector Algorithm and Attack Library & direct-input & ingestion & Security &  & \cite{alla-2025-cyberattacks} \\
-CaptureGuard & direct-input & ingestion & Security & adversarial & \cite{kholkar-2025-capture} \\
-ChatTEDU dual-LLM architecture (LLM-1 moderation gatekeeper + LLM-2 response generator) & direct-input & ingestion & Security & adversarial & \cite{emekci-2025-securing} \\
-Chunk-based hash + embedding prompt injection detection scheme (with optional blockchain audit logging) & direct-input & ingestion & Security & adversarial & \cite{hao-2025-privacypreserving} \\
-data defenses & direct-input & ingestion & Security & adversarial & \cite{agnew-2024-data} \\
-DMPI-PMHFE & direct-input & ingestion & Security & adversarial & \cite{ji-2025-detection} \\
-Enterprise Secure AI Execution Engine (Zero-Trust AI Security Gateway) & direct-input & ingestion & Security & adversarial & \cite{krishna-2026-enterprise} \\
-GenTel-Shield & direct-input & ingestion & Security & adversarial & \cite{li-2024-gentelsafe} \\
-GNN-based prompt injection detector & direct-input & ingestion & Security & adversarial & \cite{jadhav-2025-novel} \\
-GPT-OSSafeGuard + structured-representations + GSPO defense pipeline & direct-input & reasoning & Security & adversarial & \cite{gudinorosero-2025-prompt} \\
-Hybrid Constitutional Classifier & direct-input & ingestion & Security & adversarial & \cite{lan-2025-hybrid} \\
-InstruCoT & direct-input & reasoning & Security & adversarial & \cite{chang-2026-know} \\
-Instruction Hierarchy (privileged-instruction training) & direct-input & reasoning & Security & adversarial & \cite{wallace-2024-instruction} \\
-LLM-as-a-Judge (taxonomy-guided structured-reasoning judge) with Mixture-of-Models aggregation & direct-input & ingestion & Security & adversarial & \cite{le-2026-prompt} \\
-LLMON (LLM Object Notation) & direct-input & ingestion & Security & adversarial & \cite{hind-2026-llmon} \\
-LPDS (LLM Prompt Detection System) & direct-input & ingestion & Security & adversarial & \cite{kim-2024-protection} \\
-Polymorphic Prompt Assembling (PPA) & direct-input & ingestion & Security & adversarial & \cite{wang-2025-protect} \\
-Prompt Injection Threat Analysis + LLM Output Risk Monitoring framework & direct-input & ingestion & Security & adversarial & \cite{zhao-2025-novel} \\
-Prompt-Shield Framework (PSF) & direct-input & ingestion & Security & adversarial & \cite{hadiprakoso-2025-adaptive} \\
-PromptGuard & direct-input & ingestion & Security & adversarial & \cite{alzahrani-2026-promptguard} \\
-Route-Safety Audit Contract (confirmation-plus-provenance routing) & direct-input & execution & Security & adversarial & \cite{tai-2026-brainprompt} \\
-SE+CFE (Standard Evaluation + Counterfactual Evaluation) & direct-input & reasoning & Security & adversarial & \cite{liu-2025-counterfactual} \\
-Secure Artificial Intelligence (SAI) & direct-input & ingestion & Security & adversarial & \cite{teckani-2025-secure} \\
-SecureCAI & direct-input & reasoning & Security & adversarial & \cite{ali-2026-securecai} \\
-soft begging & direct-input & reasoning & Security &  & \cite{ostermann-2024-soft} \\
-SPIN (Self-Supervised Prompt INjection) & direct-input & reasoning & Security & adversarial & \cite{zhou-2024-spin} \\
-unified Prompt Assembling + State Management + Safety Validation framework & direct-input & execution & Security & adversarial & \cite{zhang-2025-enhancing} \\
-UniGuardian & direct-input & ingestion & Security & adversarial & \cite{lin-2025-uniguardian} \\
-\emph{deterministic post-audit verifier layer added to a compositional safety system} & direct-input & none & Security & adversarial & \cite{zhang-2026-ownerharm} \\
-\emph{domain-specific multi-layer safeguard pipeline (pattern filters + structural validation + contextual sandboxing + session-level behavioral checks)} & direct-input & reasoning & Security & adversarial & \cite{maiorano-2026-evaluating} \\
-\emph{ICL-based multi-LLM agent harmfulness-detection framework} & direct-input & reasoning & Security & adversarial & \cite{sato-2026-addressing} \\
-\emph{off-the-shelf LLM behavioral overseer (non-verbal interaction-trace adversarial-intent detection)} & direct-input & reasoning & Security & adversarial & \cite{musaffar-2026-detection} \\
-\emph{P2SQL mitigations (DB permission hardening + query rewriting)} & direct-input & execution & Security & adversarial & \cite{pedro-2023-prompt} \\
-\emph{secure prompt strategies for robotic navigation} & direct-input & ingestion & Security & adversarial & \cite{zhang-2024-study} \\
-\emph{two preemptive-answer mitigations} & direct-input & reasoning & Security & both & \cite{xu-2024-preemptive} \\
-\emph{Uncertainty-based Random Forest attack detector (chimera/Xmera)} & direct-input & none & Security & adversarial & \cite{fastowski-2025-injecting} \\
-Zero-Shot Embedding Drift Detection (ZEDD) & direct-input & ingestion & Security & adversarial & \cite{sekar-2026-zeroshot} \\
-Hybrid context management + deterministic programmatic safety checks / domain allowlisting / action restriction / least-privilege scoping (production browser-agent architecture) & tool-output & execution & Both & adversarial & \cite{vardanyan-2025-building} \\
-MOSAIC (plan-check-act/refuse post-training framework) & tool-output & reasoning & Both & adversarial & \cite{agarwal-2026-learning} \\
-Twin Agent (Explore Agent / Safe Agent residual-hint privilege separation) & tool-output & execution & Both & adversarial & \cite{hu-2026-twin} \\
-\emph{WAB Wasm-sandboxed capability-based authority mechanism (allowlisted API with explicit grant/revocation)} & tool-output & execution & Both & adversarial & \cite{liu-2026-wab} \\
-ADE-PRF (ADE Predictive Reliability Framework) & tool-output & none & ML/AI & incidental & \cite{liu-2026-agent} \\
-CES (Coordinator-Executor-State Tracker), specifically the State Tracker context-compression module & tool-output & none & ML/AI & incidental & \cite{deng-2025-training} \\
-ClinQueryAgent (Retrieval Agent sub-agent delegation) & tool-output & none & ML/AI & incidental & \cite{boyle-2026-clinqueryagent} \\
-ColorBrowserAgent (knowledge-aligned progressive summarization + human-in-the-loop knowledge adaptation) & tool-output & none & ML/AI & incidental & \cite{wang-2026-colorbrowseragent} \\
-GUI-PRA (Process Reward Agent) & tool-output & none & ML/AI & incidental & \cite{xiong-2025-guipra} \\
-MAT-based Assurance Framework (Message-Action Traces + governance layer: capability limits + action mediation) & tool-output & execution & ML/AI &  & \cite{paduraru-2026-tracebased} \\
-Mem0\^{}R (unified conversational + repository memory) & tool-output & none & ML/AI & incidental & \cite{liu-2026-scalable} \\
-PRInTS & tool-output & none & ML/AI &  & \cite{lee-2025-prints} \\
-Prometheus (memory-centric context engine with working memory over a repository knowledge graph) & tool-output & none & ML/AI & incidental & \cite{pan-2025-prometheus} \\
-Red-MIRROR & tool-output & none & ML/AI &  & \cite{khang-2026-redmirror} \\
-SDO (Signal-Driven Observation) & tool-output & ingestion & ML/AI & incidental & \cite{gaur-2026-signaldriven} \\
-ToolSelf & tool-output & none & ML/AI &  & \cite{zhou-2026-toolself} \\
-UI-Copilot (memory decoupling + Tool-Integrated Policy Optimization / TIPO) & tool-output & none & ML/AI & incidental & \cite{lu-2026-uicopilot} \\
-\emph{Rot-aware rejection-sampling filter for long-horizon search} & tool-output & reasoning & ML/AI & incidental & \cite{xia-2026-diagnosing} \\
-ACE (Abstract-Concrete-Execute) & tool-output & execution & Security & adversarial & \cite{li-2025-ace} \\
-Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol & tool-output & ingestion & Security & adversarial & \cite{fomin-2026-benchmarks} \\
-AegisAgent & tool-output & reasoning & Security & adversarial & \cite{wang-2025-aegisagent} \\
-Agent Privilege Separation (Reader/Actor two-agent isolation + JSON formatting) & tool-output & execution & Security & adversarial & \cite{cheng-2026-agent} \\
-Agent Sentry (structural classifier + allowlist + LLM judge) & tool-output & execution & Security & adversarial & \cite{sequeira-2026-agentsentry} \\
-AgentArmor & tool-output & execution & Security & adversarial & \cite{wang-2025-agentarmor} \\
-Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking & tool-output & reasoning & Security & adversarial & \cite{chauhan-2026-caught} \\
-AgenticOS (Ghost Kernel / Logic Shutter / Agent Capsule / Semantic Boundary Gateway) & tool-output & execution & Security & adversarial & \cite{zhao-2026-agenticos} \\
-AgentRedGuard & tool-output & none & Security & adversarial & \cite{dingeto-2026-agentredbench} \\
-AgenTRIM & tool-output & execution & Security & adversarial & \cite{betser-2026-agentrim} \\
-AgentSandbox & tool-output & none & Security & adversarial & \cite{zhang-2025-llm} \\
-AgentSecBench Combined defense stack (filtering + projection + redaction + delimiter annotation) & tool-output & reasoning & Security & adversarial & \cite{alpay-2026-agentsecbench} \\
-AgentSentry & tool-output & ingestion & Security & adversarial & \cite{zhang-2026-agentsentry} \\
-AgentShield & tool-output & execution & Security & adversarial & \cite{rassul-2026-agentshield} \\
-AgentSight (eBPF boundary tracing) & tool-output & execution & Security & both & \cite{zheng-2025-agentsight} \\
-AgentVisor & tool-output & execution & Security & adversarial & \cite{ying-2026-agentvisor} \\
-AgentWatcher & tool-output & ingestion & Security & adversarial & \cite{wang-2026-agentwatcher} \\
-AIR (Augmented Intermediate Representations) & tool-output & reasoning & Security & adversarial & \cite{kariyappa-2025-stronger} \\
-AlignSentinel (three-class instruction-hierarchy-aware attention-based classifier) & tool-output & ingestion & Security & adversarial & \cite{jia-2026-alignsentinel} \\
-APPA (Agentic Permissions Policy Algebra) & tool-output & execution & Security & adversarial & \cite{kravchenko-2026-agentic} \\
-AprielGuard & tool-output & ingestion & Security & adversarial & \cite{kasundra-2025-aprielguard} \\
-ARGUS & tool-output & reasoning & Security & adversarial & \cite{weng-2026-argus} \\
-ARLAS (Adversarial Reinforcement Learning for Agent Safety) & tool-output & reasoning & Security & adversarial & \cite{wang-2025-adversarial} \\
-ARSM-Agent & tool-output & execution & Security & adversarial & \cite{hu-2026-research} \\
-Attention Tracker & tool-output & reasoning & Security & adversarial & \cite{hung-2024-attention} \\
-AttriGuard & tool-output & execution & Security & adversarial & \cite{he-2026-attriguard} \\
-Aura & tool-output & execution & Security & adversarial & \cite{zou-2026-blind} \\
-Authenticated Prompts / Authenticated Context (cryptographic provenance + policy algebra) & tool-output & execution & Security & adversarial & \cite{rajagopalan-2026-protecting} \\
-AuthGraph & tool-output & execution & Security & adversarial & \cite{wang-2026-aligning} \\
-BinaryShield & tool-output & ingestion & Security & adversarial & \cite{gill-2025-binaryshield} \\
-Boundary awareness + explicit reminder & tool-output & ingestion & Security & adversarial & \cite{yi-2023-benchmarking} \\
-CachePrune & tool-output & reasoning & Security & adversarial & \cite{wang-2025-cacheprune} \\
-CaMeL & tool-output & execution & Security & adversarial & \cite{debenedetti-2025-defeating} \\
-CASCADE & tool-output & ingestion & Security & adversarial & \cite{turgut-2026-cascade} \\
-ceLLMate & tool-output & execution & Security & adversarial & \cite{meng-2025-cellmate} \\
-ClawAudit & tool-output & none & Security &  & \cite{zhang-2026-local} \\
-ClawGuard & tool-output & execution & Security & adversarial & \cite{zhao-2026-clawguard} \\
-Cloud Decoy AI Agent & tool-output & execution & Security &  & \cite{manivannan-2026-agentic} \\
-CodeSentinel & tool-output & ingestion & Security & adversarial & \cite{cheng-2026-codesentinel} \\
-Cognitive Control Architecture (CCA) & tool-output & execution & Security & adversarial & \cite{liang-2025-cognitive} \\
-Cognitive Firewall & tool-output & ingestion & Security & adversarial & \cite{lan-2026-cognitive} \\
-CommandSans & tool-output & ingestion & Security & adversarial & \cite{das-2025-commandsans} \\
-Contiguity-gate defense (for guardrail sliding-window aggregation) & tool-output & ingestion & Security & adversarial & \cite{zhou-2026-prompt} \\
-ContractGuard & tool-output & execution & Security & adversarial & \cite{iyer-2026-gate} \\
-CXI (Context-to-Execution Integrity) & tool-output & execution & Security & adversarial & \cite{santosgrueiro-2026-contexttoexecution} \\
-DASGuard & tool-output & execution & Security & adversarial & \cite{tan-2026-prompt} \\
-DataFilter & tool-output & ingestion & Security & adversarial & \cite{wang-2025-defending} \\
-DataSentinel & tool-output & ingestion & Security & adversarial & \cite{liu-2025-datasentinel} \\
-Defe-Prompt & tool-output & none & Security & adversarial & \cite{ren-2024-f2a} \\
-DefensiveToken (test-time optimized special tokens) & tool-output & ingestion & Security & adversarial & \cite{chen-2025-defending} \\
-DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems) & tool-output & execution & Security & adversarial & \cite{li-2025-drift} \\
-DRIP & tool-output & reasoning & Security & adversarial & \cite{liu-2025-drip} \\
-DualView & tool-output & ingestion & Security & adversarial & \cite{kim-2026-dualview} \\
-Encrypted Prompt & tool-output & execution & Security &  & \cite{chan-2025-encrypted} \\
-ESLD (External Surrogate Latent Defense) & tool-output & reasoning & Security & adversarial & \cite{narendra-2026-esld} \\
-f-secure LLM system (information flow control) & tool-output & execution & Security & adversarial & \cite{wu-2024-systemlevel} \\
-FASA (zero-trust, full-lifecycle defense philosophy) & tool-output & execution & Security & adversarial & \cite{ying-2026-uncovering} \\
-FATE (on-policy self-evolving repair framework) with Pareto-Front Policy Optimization (PFPO) & tool-output & reasoning & Security & adversarial & \cite{yin-2026-onpolicy} \\
-FATH (Formatting AuThentication with Hash-based tags) & tool-output & execution & Security & adversarial & \cite{wang-2024-fath} \\
-FocusAgent / DefenseFocusAgent & tool-output & ingestion & Security & both & \cite{kerboua-2025-focusagent} \\
-Forensic LLM-Trace & tool-output & none & Security & adversarial & \cite{s-2026-forensic} \\
-four layer defense in depth architecture & tool-output & execution & Security &  & \cite{maiti-2026-caging} \\
-GIF (Geometric Information Flow) & tool-output & reasoning & Security & adversarial & \cite{storek-2026-gif} \\
-Hybrid monitor scaffold (Monitor Red Teaming / MRT framework) & tool-output & execution & Security & adversarial & \cite{kale-2025-reliable} \\
-ICON (Inference-Time Correction) & tool-output & reasoning & Security & adversarial & \cite{wang-2026-icon} \\
-IDE-Sanitizer & tool-output & ingestion & Security & adversarial & \cite{nkoro-2026-idesanitizer} \\
-IH-Challenge (RL training dataset with online adversarial example generation) & tool-output & reasoning & Security & adversarial & \cite{guo-2026-ihchallenge} \\
-IHDec (Instruction Hierarchy-steered Decoding) & tool-output & reasoning & Security & both & \cite{liu-2026-ihdec} \\
-InjectDefuser & tool-output & none & Security & adversarial & \cite{koide-2026-clouding} \\
-InstructDetector & tool-output & ingestion & Security & adversarial & \cite{wen-2025-defending} \\
-IntentGuard & tool-output & reasoning & Security & adversarial & \cite{kang-2025-mitigating} \\
-IPIGuard & tool-output & execution & Security & adversarial & \cite{an-2025-ipiguard} \\
-ISE (Instructional Segment Embedding) & tool-output & reasoning & Security & adversarial & \cite{wu-2024-instructional} \\
-Jatmo & tool-output & reasoning & Security & adversarial & \cite{piet-2023-jatmo} \\
-KBRA (Keyed Binding Reassembly Audit) & tool-output & ingestion & Security & adversarial & \cite{liu-2026-safe} \\
-LeakSealer & tool-output & ingestion & Security & adversarial & \cite{panebianco-2025-leaksealer} \\
-LGA (Layered Governance Architecture) & tool-output & execution & Security & adversarial & \cite{ge-2026-governance} \\
-LIMBOSH & tool-output & execution & Security &  & \cite{johnson-2024-modular} \\
-LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine) & tool-output & ingestion & Security & adversarial & \cite{chennabasappa-2025-llamafirewall} \\
-LLM invocation logging & tool-output & execution & Security &  & \cite{chernyshev-2023-large} \\
-LLMbda / Randori (dynamic information-flow-control lambda calculus with verified interpreter) & tool-output & reasoning & Security & adversarial & \cite{garby-2026-llmbda} \\
-Mantis & tool-output & none & Security & adversarial & \cite{pasquini-2024-hacking} \\
-MELON (Masked re-Execution and TooL comparisON) & tool-output & reasoning & Security & adversarial & \cite{zhu-2025-melon} \\
-Meticulous Thought Defender & tool-output & reasoning & Security & adversarial & \cite{shi-2025-meticulous} \\
-MIPIAD & tool-output & reasoning & Security & adversarial & \cite{muhtadi-2026-mipiad} \\
-Mixture of Encodings & tool-output & ingestion & Security & adversarial & \cite{zhang-2025-defense} \\
-NeuroTaint & tool-output & reasoning & Security & adversarial & \cite{cai-2026-ghost} \\
-OpenClaw PRISM & tool-output & execution & Security & adversarial & \cite{li-2026-openclaw} \\
-OpenClaw-SRT (Semantic Routing \& Trust) & tool-output & execution & Security & adversarial & \cite{chen-2026-openclawsrt} \\
-PACT (Provenance-Aware Capability Contracts) & tool-output & execution & Security & adversarial & \cite{fan-2026-granularity} \\
-Pattern D: Inference-boundary redaction proxy (PII extraction/tokenization before model inference) & tool-output & ingestion & Security & adversarial & \cite{mohan-2026-agent} \\
-PCFI (Prompt Control-Flow Integrity) & tool-output & reasoning & Security & adversarial & \cite{alam-2026-prompt} \\
-PIGuard (Mitigating Over-defense for Free) & tool-output & ingestion & Security & adversarial & \cite{li-2025-piguard} \\
-PIIGuard & tool-output & ingestion & Security & adversarial & \cite{liu-2026-piiguard} \\
-PISanitizer & tool-output & ingestion & Security & adversarial & \cite{geng-2025-pisanitizer} \\
-PIShield & tool-output & reasoning & Security & adversarial & \cite{zou-2025-pishield} \\
-Plan-Then-Execute (PTE) architecture for web agents & tool-output & execution & Security & adversarial & \cite{piet-2026-web} \\
-PlanGuard & tool-output & reasoning & Security & adversarial & \cite{gong-2026-planguard} \\
-PRISM (activation-conditioned instruction-set interpreter) & tool-output & reasoning & Security & adversarial & \cite{gressel-2026-prism} \\
-Progent & tool-output & execution & Security & adversarial & \cite{shi-2025-progent} \\
-ProjGuard & tool-output & execution & Security & adversarial & \cite{contreras-2026-projguard} \\
-Prompt-response verification framework (Task Analyst + Safety Analyst + Judge) & tool-output & reasoning & Security & adversarial & \cite{thota-2026-verifying} \\
-prompt-shield (Seven Cross-Domain Detection Techniques) & tool-output & ingestion & Security & adversarial & \cite{munirathinam-2026-pattern} \\
-PromptArmor & tool-output & ingestion & Security & adversarial & \cite{shi-2025-promptarmor} \\
-PromptLocate (injected-prompt localization) & tool-output & ingestion & Security & adversarial & \cite{jia-2025-promptlocate} \\
-PromptSentinel-X & tool-output & ingestion & Security & adversarial & \cite{zhuhadar-2026-promptsentinelx} \\
-PromptShield (fine-tuned deployable PI detector) & tool-output & ingestion & Security & adversarial & \cite{jacob-2024-promptshield} \\
-PromptSleuth & tool-output & ingestion & Security & adversarial & \cite{wang-2025-promptsleuth} \\
-ReasAlign & tool-output & reasoning & Security & adversarial & \cite{li-2026-reasalign} \\
-RedVisor & tool-output & reasoning & Security & adversarial & \cite{liu-2026-redvisor} \\
-Rennervate & tool-output & reasoning & Security & adversarial & \cite{zhong-2025-attention} \\
-RETA (Reasoning-Enabled Task Alignment) & tool-output & reasoning & Security & adversarial & \cite{he-2026-defending} \\
-Robustness via Referencing (instruction-referencing defense) & tool-output & reasoning & Security & adversarial & \cite{chen-2025-robustness} \\
-RTBAS (Robust Tool-Based Agent System) & tool-output & execution & Security & adversarial & \cite{zhong-2025-rtbas} \\
-SafeAgent & tool-output & execution & Security & adversarial & \cite{liu-2026-safeagent} \\
-Safety-guided Chain-of-Thought (SCoT) & tool-output & none & Security & both & \cite{lee-2024-mobilesafetybench} \\
-SecAlign (preference optimization) & tool-output & reasoning & Security & adversarial & \cite{chen-2024-secalign} \\
-SecAlign++ / Meta-SecAlign & tool-output & reasoning & Security & adversarial & \cite{chen-2025-meta} \\
-SecInfer & tool-output & reasoning & Security & adversarial & \cite{liu-2025-secinfer} \\
-SecMCP & tool-output & reasoning & Security & adversarial & \cite{shi-2025-quantifying} \\
-Secure Prompt Engineering Patterns (SPEP) & tool-output & reasoning & Security & adversarial & \cite{sudarsan-2026-secure} \\
-SecureClaw (dual-boundary: effect-sink authorization + read-boundary plaintext confinement) & tool-output & execution & Security & adversarial & \cite{ma-2026-secureclaw} \\
-Sentinel (qualifire/prompt-injection-sentinel) & tool-output & ingestion & Security & adversarial & \cite{ivry-2025-sentinel} \\
-ShadowPlay & tool-output & ingestion & Security & both & \cite{alsobeh-2025-shadowplay} \\
-SHIELD & tool-output & ingestion & Security & adversarial & \cite{esugo-2025-shield} \\
-SIC (Soft Instruction Control) & tool-output & reasoning & Security & adversarial & \cite{walter-2025-soft} \\
-sign-c (server-side signing of execution-bearing response fields) & tool-output & execution & Security & adversarial & \cite{luo-2026-rewriting} \\
-Signed-Prompt & tool-output & ingestion & Security & adversarial & \cite{suo-2024-signedprompt} \\
-Spotlighting (delimiting / datamarking / encoding) & tool-output & ingestion & Security & adversarial & \cite{hines-2024-defending} \\
-StruQ (structured queries) & tool-output & ingestion & Security & adversarial & \cite{chen-2024-struq} \\
-SUPERVISOR & tool-output & none & Security & adversarial & \cite{wu-2026-bots} \\
-Task Shield & tool-output & reasoning & Security & adversarial & \cite{jia-2024-task} \\
-TaskTracker (activation-delta task-drift detection) & tool-output & reasoning & Security & adversarial & \cite{abdelnabi-2024-get} \\
-TIVS-O agentic defense pipeline (Front-End Agent + Guard-Sanitizer + Policy Enforcer with semantic caching) & tool-output & reasoning & Security & adversarial & \cite{gosmar-2026-prompt} \\
-Tool Result Parsing (ParseData/CheckTool) & tool-output & ingestion & Security & adversarial & \cite{yu-2026-defense} \\
-ToolSafe (TS-Guard + TS-Flow) & tool-output & execution & Security & adversarial & \cite{mou-2026-toolsafe} \\
-Trace & tool-output & execution & Security &  & \cite{ediga-2026-trace} \\
-TraceCaps & tool-output & execution & Security & adversarial & \cite{catarino-2026-tracecaps} \\
-TRACER-AI & tool-output & ingestion & Security & adversarial & \cite{singh-2026-tracerai} \\
-TracLLM & tool-output & reasoning & Security & adversarial & \cite{wang-2025-tracllm} \\
-Type-directed privilege separation & tool-output & execution & Security & adversarial & \cite{jacob-2025-preventing} \\
-\emph{Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)} & tool-output & reasoning & Security & adversarial & \cite{chen-2024-defense} \\
-\emph{Authorization framework for autonomous LLM agent threat mitigation} & tool-output & none & Security & adversarial & \cite{kota-2025-systemic} \\
-\emph{Context-Aware Interception Framework for PI detection/mitigation} & tool-output & execution & Security & adversarial & \cite{singh-2026-securing} \\
-\emph{Digital forensic analysis framework for post-hoc IPI attack identification from agent execution logs} & tool-output & none & Security & adversarial & \cite{chernyshev-2024-short} \\
-\emph{Embedding-based semantic context analysis detector for IPI} & tool-output & ingestion & Security & adversarial & \cite{alamsabi-2026-embeddingbased} \\
-\emph{Embedding-based traditional-ML classifiers for PI detection} & tool-output & ingestion & Security & adversarial & \cite{ayub-2024-embeddingbased} \\
-\emph{Explanation-based secondary detection signal for log-injection evasion} & tool-output & none & Security & adversarial & \cite{landauer-2026-just} \\
-\emph{Four-layer guardrail system for offensive-security AI agents} & tool-output & none & Security & adversarial & \cite{vilches-2025-cybersecurity} \\
-\emph{Fraud-detection-inspired trajectory-feature detector (XGBoost, 42-dim features)} & tool-output & ingestion & Security & adversarial & \cite{yu-2026-lowlatency} \\
-\emph{Hybrid multi-layered real-time PI detection framework} & tool-output & ingestion & Security & adversarial & \cite{prakash-2026-hybrid} \\
-\emph{Hybrid SIEM + One-Class SVM prompt-injection detection framework} & tool-output & ingestion & Security & adversarial & \cite{alshammari-2026-detecting} \\
-\emph{IPI detection + post-detection removal pipeline} & tool-output & ingestion & Security & adversarial & \cite{chen-2025-indirect} \\
-\emph{Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection} & tool-output & none & Security & adversarial & \cite{karanjai-2026-context} \\
-\emph{Positive-Security Prompt Firewall for healthcare PI/PHI protection} & tool-output & ingestion & Security & adversarial & \cite{schwoebel-2026-injection} \\
-\emph{Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)} & tool-output & ingestion & Security & adversarial & \cite{shukla-2026-data} \\
-\emph{Randomized/Adversarial Suffix Augmentation Training for task-drift probes} & tool-output & none & Security & adversarial & \cite{rahman-2026-bypassing} \\
-\emph{Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)} & tool-output & none & Security & adversarial & \cite{nakash-2024-breaking} \\
-\emph{six composable agent design patterns (e.g. Action-Selector) for prompt-injection-resistant architecture} & tool-output & execution & Security & adversarial & \cite{beurerkellner-2025-design} \\
-\emph{step-level fine-tuned industrial tool-call guardrail} & tool-output & execution & Security & adversarial & \cite{xue-2026-multiagent} \\
-\emph{Trust Context Separation for privileged AI agent systems} & tool-output & execution & Security & adversarial & \cite{singh-2026-securingb} \\
-User-Tool Aligned Safety RL Framework & tool-output & reasoning & Security & adversarial & \cite{sha-2025-agent} \\
-VIGIL & tool-output & execution & Security & adversarial & \cite{lin-2026-vigil} \\
-A-RAG (hierarchical retrieval interfaces) & RAG & none & ML/AI & incidental & \cite{du-2026-arag} \\
-ACD (Adaptive Contrastive Decoding) & RAG & reasoning & ML/AI & incidental & \cite{kim-2024-adaptive} \\
-Astute RAG & RAG & reasoning & ML/AI & incidental & \cite{wang-2024-astute} \\
-AttnComp (Attention-guided Context Compression) & RAG & ingestion & ML/AI & incidental & \cite{luo-2025-attncomp} \\
-BordaRAG (Borda Voting-based document selection) & RAG & reasoning & ML/AI & incidental & \cite{li-2025-bordarag} \\
-CARE-RAG (Conflict-Aware and Reliable Evidence for RAG) & RAG & reasoning & ML/AI & incidental & \cite{chen-2025-rethinking} \\
-CD2 (Conflict-Disentangle Contrastive Decoding) & RAG & reasoning & ML/AI & incidental & \cite{jin-2024-tugofwar} \\
-CDD (Context-Driven Decomposition) & RAG & none & ML/AI & adversarial & \cite{chen-2026-rag} \\
-CheckRLM & RAG & reasoning & ML/AI & incidental & \cite{xu-2026-checkrlm} \\
-CK-PLUG (Controllable Knowledge Plug-in) & RAG & reasoning & ML/AI & incidental & \cite{bi-2025-parameters} \\
-CKG-RAG & RAG & reasoning & ML/AI & incidental & \cite{zhang-2026-ckgrag} \\
-COIECD (contextual information-entropy constraint decoding) & RAG & reasoning & ML/AI & incidental & \cite{yuan-2024-discerning} \\
-COMBO (Compatibility-Oriented knowledge Merging) & RAG & reasoning & ML/AI & incidental & \cite{zhang-2023-merging} \\
-Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking) & RAG & reasoning & ML/AI & incidental & \cite{wu-2026-conflictaware} \\
-ConflictRAG (two-stage detection + Entropy-TOPSIS credibility + CARS metric) & RAG & reasoning & ML/AI & incidental & \cite{wang-2026-conflictrag} \\
-Corrective Retrieval Augmented Generation (CRAG) & RAG & ingestion & ML/AI & incidental & \cite{yan-2024-corrective} \\
-Cross-Validation Re-ranking (inter-context conflict-aware re-ranking) & RAG & ingestion & ML/AI & incidental & \cite{wu-2025-eliminating} \\
-CRVA-TGRAG (Conflict Resolution in Vulnerability Analysis via Teacher-Guided RAG) & RAG & reasoning & ML/AI & incidental & \cite{zhou-2026-tugofwar} \\
-Discern-and-Answer & RAG & none & ML/AI & incidental & \cite{hong-2023-gullible} \\
-Dynamic Context Selection (classifier-based adaptive k-selection + reranking) & RAG & ingestion & ML/AI & incidental & \cite{iratni-2025-dynamic} \\
-DyPRAG (Dynamic Parametric RAG) & RAG & reasoning & ML/AI & incidental & \cite{tan-2025-dynamic} \\
-EHR-RAG & RAG & none & ML/AI & incidental & \cite{cao-2026-ehrrag} \\
-ERA (Evidence-based Reliability Alignment) & RAG & reasoning & ML/AI & incidental & \cite{shin-2026-era} \\
-FaithfulRAG (fact-level conflict modeling + Self-Think) & RAG & reasoning & ML/AI & incidental & \cite{zhang-2025-faithfulrag} \\
-GenDiE (Generate, Discriminate, Evolve) & RAG & reasoning & ML/AI & incidental & \cite{li-2025-generate} \\
-ID-RAG (Identity Retrieval-Augmented Generation) & RAG & reasoning & ML/AI & incidental & \cite{platnick-2025-idrag} \\
-ITEM (Integrated Term Enhancement Methodology) & RAG & none & ML/AI & incidental & \cite{bei-2024-manufacturing} \\
-Knowledgeable-R1 & RAG & reasoning & ML/AI & incidental & \cite{lin-2025-resisting} \\
-KnowPO (Knowledge-aware Preference Optimization) & RAG & reasoning & ML/AI & incidental & \cite{zhang-2024-knowpo} \\
-KV-Fusion & RAG & reasoning & ML/AI & incidental & \cite{oh-2025-parallel} \\
-LDAR (Learning Distraction-Aware Retrieval) & RAG & ingestion & ML/AI & incidental & \cite{shim-2025-rag} \\
-LongFaith & RAG & reasoning & ML/AI &  & \cite{yang-2025-longfaith} \\
-LongRAG & RAG & reasoning & ML/AI & incidental & \cite{zhao-2024-longrag} \\
-MACR (multi-agent conflict resolution) & RAG & reasoning & ML/AI & incidental & \cite{peng-2026-navigating} \\
-MAL-RAG (Multiple Abstraction Level RAG) & RAG & ingestion & ML/AI & incidental & \cite{zheng-2025-multiple} \\
-Micro-Act (hierarchical action-space decomposition) & RAG & reasoning & ML/AI & incidental & \cite{huo-2025-microact} \\
-Mobile-Agent-RAG (Manager-RAG / Operator-RAG dual-level retrieval augmentation) & RAG & none & ML/AI & incidental & \cite{zhou-2025-mobileagentrag} \\
-ParamMute (Parametric Knowledge Muting through FFN Suppression) & RAG & reasoning & ML/AI & incidental & \cite{huang-2025-parammute} \\
-PH3 (Pruning Head via PatH PatcHing) & RAG & reasoning & ML/AI & incidental & \cite{jin-2024-cutting} \\
-ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention) & RAG & reasoning & ML/AI & incidental & \cite{gao-2025-blackbox} \\
-RADIANT (DPO-ECD, Entity-Context Divergence alignment) & RAG & none & ML/AI & incidental & \cite{rawte-2025-radiant} \\
-RAG-Modulo & RAG & none & ML/AI & incidental & \cite{jain-2024-ragmodulo} \\
-RAPS-DA (Regime-Aware Peer Specialization) & RAG & reasoning & ML/AI & both & \cite{wang-2026-regimeaware} \\
-RAT (Retrieval Augmented Thoughts) & RAG & reasoning & ML/AI & incidental & \cite{wang-2024-rat} \\
-Reconstruct to Discriminate (RtD) & RAG & reasoning & ML/AI & incidental & \cite{peng-2025-misinformation} \\
-RPO (Retrieval Preference Optimization) & RAG & reasoning & ML/AI & incidental & \cite{yan-2025-rpo} \\
-SABER (Self-Aware Belief Estimator for RAG) & RAG & reasoning & ML/AI & incidental & \cite{zhu-2026-trust} \\
-SCR \& CR-DPO (Situated Faithfulness) & RAG & reasoning & ML/AI & incidental & \cite{huang-2024-trust} \\
-Self-RAG & RAG & reasoning & ML/AI & incidental & \cite{asai-2023-selfrag} \\
-SHIFT (gate-modulated activation steering) & RAG & reasoning & ML/AI & incidental & \cite{li-2026-shift} \\
-SUGAR (Semantic Uncertainty Guided Adaptive Retrieval) & RAG & reasoning & ML/AI & incidental & \cite{zubkova-2025-sugar} \\
-Swin-VIB (variational information bottleneck pipeline) & RAG & reasoning & ML/AI & incidental & \cite{wang-2025-accommodate} \\
-Taxonomy-Aware / Pipeline conflict-type-aware response generation (from the CONFLICTS benchmark) & RAG & reasoning & ML/AI & incidental & \cite{cattan-2025-dragged} \\
-TCR (Transparent Conflict Resolution) & RAG & reasoning & ML/AI & incidental & \cite{ye-2026-seeing} \\
-TESSERA (neuro-symbolic MCTS with KG constraints) & RAG & none & ML/AI & incidental & \cite{jakhar-2026-llmguided} \\
-TruthfulRAG (knowledge-graph-based factual conflict resolution) & RAG & reasoning & ML/AI & incidental & \cite{liu-2026-truthfulrag} \\
-\emph{Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG)} & RAG & none & ML/AI & incidental & \cite{shen-2026-multiroute} \\
-\emph{pre-research and post-research verification defenses (verification-enhanced prompting + search-enabled verifier agent) for Deep Research agents} & RAG & none & ML/AI & adversarial & \cite{zhu-2026-deep} \\
-XoT (explanation-based thinking framework) & RAG & reasoning & ML/AI & incidental & \cite{zhao-2026-exploring} \\
-AttnTrace & RAG & reasoning & Security & adversarial & \cite{wang-2025-attntrace} \\
-BiRD (Bidirectional Ranking Defense) & RAG & ingestion & Security & adversarial & \cite{gao-2026-bird} \\
-chain-of-defensive-thought (CoDT) & RAG & reasoning & Security & adversarial & \cite{wang-2025-chainofdefensivethought} \\
-ControlNet (ControlNET) & RAG & ingestion & Security & adversarial & \cite{yao-2025-controlnet} \\
-DP-Fusion & RAG & reasoning & Security & adversarial & \cite{thareja-2025-dpfusion} \\
-FilterRAG / ML-FilterRAG & RAG & ingestion & Security & adversarial & \cite{edemacu-2025-defending} \\
-Governed Execution (modular prompt orchestration for RAG-grounded call-center agents) & RAG & none & Security & both & \cite{pachtrachai-2026-transcripts} \\
-KVEraser & RAG & reasoning & Security & incidental & \cite{li-2026-kveraser} \\
-LLM Firewall (Validator Agent) & RAG & ingestion & Security & adversarial & \cite{podpora-2025-llm} \\
-MedRAGShield & RAG & ingestion & Security & adversarial & \cite{shanid-2026-medragshield} \\
-PARSE (Provenance-Aware Retrieval Sanitization) & RAG & ingestion & Security & adversarial & \cite{pai-2026-parse} \\
-PhantomLint & RAG & ingestion & Security & adversarial & \cite{murray-2025-phantomlint} \\
-Prompt Injection as a Defense (against LLM-based PIE) & RAG & ingestion & Security & adversarial & \cite{liu-2024-evaluating} \\
-RAG-H & RAG & ingestion & Security & adversarial & \cite{ceraku-2026-ragh} \\
-ReliabilityRAG & RAG & ingestion & Security & adversarial & \cite{shen-2025-reliabilityrag} \\
-RobustRAG & RAG & ingestion & Security & adversarial & \cite{xiang-2024-certifiably} \\
-Salience Normalization (SN-1) & RAG & none & Security & adversarial & \cite{zhou-2026-salience} \\
-SD-RAG (Selective Disclosure RAG) & RAG & ingestion & Security & adversarial & \cite{masoud-2026-sdrag} \\
-SecureRag & RAG & ingestion & Security & adversarial & \cite{mishra-2025-securerag} \\
-TriShieldRAG & RAG & ingestion & Security & adversarial & \cite{mohanty-2026-trishieldrag} \\
-UGCBuster & RAG & ingestion & Security & adversarial & \cite{kaya-2025-meets} \\
-\emph{policy-first Hybrid RAG architecture (pre-reranking access control + BM25/dense fusion via RRF + evidence-pack citation-grounded generation)} & RAG & none & Security & adversarial & \cite{gudipuri-2026-enterprise} \\
-\emph{Scientist Persona + Provenance Audit mitigations against indirect data poisoning} & RAG & none & Security & adversarial & \cite{gyevnar-2026-distributed} \\
-\emph{security-aware RAG framework (evidence-based abstention + prompt-injection defense + multi-source agreement verification + trust-weighted retrieval)} & RAG & reasoning & Security & both & \cite{kolavennu-2026-securityaware} \\
-\emph{Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)} & RAG & none & Security & adversarial & \cite{ramakrishnan-2025-securing} \\
-\emph{Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)} & RAG & ingestion & Security & adversarial & \cite{saleem-2026-layered} \\
-\emph{two-plane OPA-based governance architecture for secure RAG (provenance + ABAC + policy-as-code across ingestion/indexing/retrieval/generation)} & RAG & ingestion & Security & adversarial & \cite{boggarapu-2026-secure} \\
-Windowed HTML content filtering (128/64-token chunking + PromptGuard/DeBERTaV3 classification) & RAG & ingestion & Security & adversarial & \cite{dinu-2025-disrupting} \\
-+ModTool (memory correction tool for MemEvoBench) & memory & none & ML/AI & both & \cite{xie-2026-memevobench} \\
-ActiveMem & memory & reasoning & ML/AI & incidental & \cite{jiang-2026-activemem} \\
-Aeon & memory & ingestion & ML/AI & incidental & \cite{arslan-2026-aeon} \\
-AFM (Adaptive Focus Memory) & memory & reasoning & ML/AI & incidental & \cite{cruz-2025-adaptive} \\
-AgeMem (Agentic Memory) & memory & reasoning & ML/AI & incidental & \cite{yu-2026-agentic} \\
-AMA-Agent (causality-graph construction + tool-augmented retrieval) & memory & none & ML/AI & incidental & \cite{zhao-2026-amabench} \\
-AriadneMem & memory & reasoning & ML/AI & incidental & \cite{zhu-2026-ariadnemem} \\
-AttriMem & memory & reasoning & ML/AI & incidental & \cite{li-2026-attrimem} \\
-AutoMEM & memory & none & ML/AI & incidental & \cite{chen-2026-exploring} \\
-CMI (Causal Memory Intervention) & memory & reasoning & ML/AI & both & \cite{srivastava-2026-causal} \\
-CoCortex & memory & reasoning & ML/AI & incidental & \cite{kaviyaraj-2026-cocortex} \\
-Cognitive Scaffold & memory & reasoning & ML/AI & incidental & \cite{ai-2026-cognitive} \\
-CoM (Chain-of-Memory) - Dynamic Memory Chain Evolution + Adaptive Truncation & memory & reasoning & ML/AI & incidental & \cite{xu-2026-chainofmemory} \\
-CoMIC & memory & none & ML/AI &  & \cite{wang-2026-comic} \\
-D-Mem (Dual-Process Memory System, Quality Gating) & memory & reasoning & ML/AI & incidental & \cite{you-2026-dmem} \\
-Dual-Process Memory Architecture (episodic-semantic memory for scientific agents) & memory & reasoning & ML/AI & incidental & \cite{milosevic-2026-episodicsemantic} \\
-EMem / EMem-G (event-centric elementary discourse unit memory) & memory & none & ML/AI & incidental & \cite{zhou-2025-simple} \\
-ENGRAM (typed memory + dense retrieval) & memory & none & ML/AI & incidental & \cite{patel-2025-engram} \\
-Ensemble QSP (hierarchical memory architecture) & memory & reasoning & ML/AI & incidental & \cite{tewari-2026-hierarchical} \\
-EverMemOS & memory & reasoning & ML/AI & incidental & \cite{hu-2026-evermemos} \\
-FGHM (Failure-Gated Hierarchical Memory) with Failure Critic and LTM Pollution Rate (LPR) metric & memory & ingestion & ML/AI & incidental & \cite{liu-2026-failuregated} \\
-Fine-Mem (Chunk-level Step Reward + Evidence-Anchored Reward Attribution) & memory & reasoning & ML/AI & incidental & \cite{ma-2026-finemem} \\
-FlashMem & memory & none & ML/AI & incidental & \cite{hou-2026-flashmem} \\
-G-MemLLM & memory & reasoning & ML/AI & incidental & \cite{xu-2026-gmemllm} \\
-GDWM (Gated Differentiable Working Memory) & memory & reasoning & ML/AI & incidental & \cite{mei-2026-gated} \\
-HAGE (RL-driven weighted graph evolution) & memory & reasoning & ML/AI & incidental & \cite{jiang-2026-hage} \\
-HiAgent & memory & reasoning & ML/AI & incidental & \cite{hu-2024-hiagent} \\
-Hippocampus (Dynamic Wavelet Matrix memory) & memory & none & ML/AI & incidental & \cite{li-2026-hippocampus} \\
-HMT (Hierarchical Memory Tree) & memory & reasoning & ML/AI & incidental & \cite{tan-2026-enhancing} \\
-HORMA (Hierarchical Organize-and-Retrieve Memory Agent) & memory & reasoning & ML/AI & incidental & \cite{hsu-2026-organize} \\
-LightMem & memory & none & ML/AI & incidental & \cite{zhang-2026-lightweight} \\
-LRE (Learned Relevance Eviction) & memory & none & ML/AI & incidental & \cite{lia-2026-learning} \\
-M2 (Dynamic Trajectory Summarization + Insight Retrieval Augmentation) & memory & reasoning & ML/AI & incidental & \cite{yan-2026-dualmemory} \\
-MAGE (Memory as Agent-Guided Exploration) - hierarchical state tree with Grow/Compress/Maintain/Revise & memory & none & ML/AI & incidental & \cite{chen-2026-semantic} \\
-MAGE (Memory As Guardrail Enforcement) & memory & execution & ML/AI & adversarial & \cite{wang-2026-mage} \\
-MAGMA (Multi-Graph Agentic Memory Architecture) & memory & reasoning & ML/AI & incidental & \cite{jiang-2026-magma} \\
-MEM1 & memory & reasoning & ML/AI & incidental & \cite{zhou-2025-mem1} \\
-MemAct (Memory-as-Action) with Dynamic Context Policy Optimization & memory & reasoning & ML/AI & incidental & \cite{zhang-2025-memory} \\
-Memanto (typed semantic memory + automated conflict resolution + temporal versioning) & memory & reasoning & ML/AI & incidental & \cite{abtahi-2026-memanto} \\
-MemAudit (counterfactual memory influence score + memory consistency graph) & memory & execution & ML/AI & adversarial & \cite{tan-2026-memaudit} \\
-Memex / MemexRL (indexed experience memory) & memory & reasoning & ML/AI & incidental & \cite{wang-2026-memex} \\
-MemFlow (Router Agent + tiered Memory Agent + Validator Agent) & memory & reasoning & ML/AI & incidental & \cite{chen-2026-memflow} \\
-MemGUI-Agent / ConAct (Context-as-Action) & memory & none & ML/AI & incidental & \cite{liu-2026-memguiagent} \\
-MemMachine (ground-truth-preserving memory) & memory & none & ML/AI & incidental & \cite{wang-2026-memmachine} \\
-MemoBrain & memory & reasoning & ML/AI & incidental & \cite{qian-2026-memobrain} \\
-Memory Sandbox (user-controlled memory objects) & memory & reasoning & ML/AI &  & \cite{huang-2023-memory} \\
-Memory-R1 & memory & reasoning & ML/AI & incidental & \cite{yan-2025-memoryr1} \\
-Memory-R2 (LoGo-GRPO training) with shared-parameter fact extractor / memory manager & memory & reasoning & ML/AI & incidental & \cite{yan-2026-memoryr2} \\
-MemTrace (memory evolution graph tracing + closed-loop correction) & memory & reasoning & ML/AI & incidental & \cite{deng-2026-memtrace} \\
-MemWeaver (graph memory + experience memory + passage memory) & memory & reasoning & ML/AI & incidental & \cite{ye-2026-memweaver} \\
-MetaMem (self-evolving meta-memory) & memory & reasoning & ML/AI & incidental & \cite{xin-2026-metamem} \\
-MGA (Memory-Driven GUI Agent) - Observer + Structured Memory & memory & reasoning & ML/AI & incidental & \cite{cheng-2025-mga} \\
-MMPO (Metacognitive Memory Policy Optimization) with Belief Entropy & memory & reasoning & ML/AI & incidental & \cite{liu-2026-metacognitive} \\
-MSCE (Memory-Skill Co-Evolution) & memory & reasoning & ML/AI & incidental & \cite{tang-2026-memory} \\
-Oblivion (decay-driven memory control) & memory & reasoning & ML/AI & incidental & \cite{rana-2026-oblivion} \\
-OCR-Memory (Optical Context Retrieval Memory) & memory & reasoning & ML/AI & incidental & \cite{li-2026-ocrmemory} \\
-PlugMem (knowledge-centric memory graph) & memory & none & ML/AI & incidental & \cite{yang-2026-plugmem} \\
-PraMem (Practice-derived Experiential Memory) & memory & none & ML/AI & incidental & \cite{li-2026-pramem} \\
-PRISM (Pareto-Efficient Retrieval over Intent-Aware Structured Memory) & memory & reasoning & ML/AI & incidental & \cite{peng-2026-prism} \\
-PRO-LONG (programmatic memory framework) & memory & reasoning & ML/AI & incidental & \cite{fox-2026-prolong} \\
-ReMEmbR (Retrieval-augmented Memory for Embodied Robots) & memory & none & ML/AI & incidental & \cite{anwar-2024-remembr} \\
-SAM (State-Adaptive Memory) & memory & reasoning & ML/AI & incidental & \cite{hu-2026-sam} \\
-Sleep paradigm (Memory Consolidation + Dreaming) & memory & reasoning & ML/AI & incidental & \cite{behrouz-2026-language} \\
-STITCH (Structured Intent Tracking in Contextual History) & memory & reasoning & ML/AI & incidental & \cite{yang-2026-grounding} \\
-Structurally Aligned Subtask-Level Memory & memory & reasoning & ML/AI & incidental & \cite{shen-2026-structurally} \\
-Synapse (trajectory-as-exemplar prompting + exemplar memory) & memory & none & ML/AI & incidental & \cite{zheng-2023-synapse} \\
-TokenMizer (typed knowledge-graph session memory) & memory & ingestion & ML/AI & incidental & \cite{mishra-2026-tokenmizer} \\
-TSUBASA (evolving memory + context distillation) & memory & reasoning & ML/AI & incidental & \cite{zhang-2026-tsubasa} \\
-UMA (Unified Memory Agent) & memory & reasoning & ML/AI & incidental & \cite{zhang-2026-learning} \\
-\emph{Tree-based + hierarchical storage combined memory method (Memory in LLM Era unified framework)} & memory & none & ML/AI & incidental & \cite{wu-2026-memory} \\
-Write-gate sanitization (pre-summarization redaction/rewrite) for memory laundering & memory & ingestion & ML/AI & incidental & \cite{wang-2026-state} \\
-AgentSys & memory & ingestion & Security & adversarial & \cite{wen-2026-agentsys} \\
-MemLineage & memory & ingestion & Security & adversarial & \cite{ouyang-2026-memlineage} \\
-Portable Agent Memory & memory & ingestion & Security &  & \cite{ravindran-2026-portable} \\
-\emph{DPO-based faithfulness-improvement training for GUI agents against environmental distraction} & cross-modal & none & Both & incidental & \cite{ma-2024-caution} \\
-AtlasVA (self-evolving visual skill memory) & cross-modal & none & ML/AI & incidental & \cite{wang-2026-atlasva} \\
-ContextRL & cross-modal & reasoning & ML/AI & incidental & \cite{xu-2026-contextaware} \\
-Dynamic Contrastive Decoding (DCD) for cross-modality knowledge conflict & cross-modal & none & ML/AI & incidental & \cite{zhu-2024-unraveling} \\
-KCM (Knowledge Conflict Mitigation) & cross-modal & reasoning & ML/AI & incidental & \cite{an-2026-enhancing} \\
-MAGIC-Video (multimodal memory graph + narrative chain) & cross-modal & reasoning & ML/AI & incidental & \cite{li-2026-bridging} \\
-MEMORA (Embodied Action Memory) & cross-modal & none & ML/AI & incidental & \cite{yu-2026-memora} \\
-ReflectVLM (test-time reflection framework) & cross-modal & reasoning & ML/AI & incidental & \cite{feng-2025-reflective} \\
-ToolScope (Perceive tool within Global Navigator / Agentic Executor / Response Synthesizer) & cross-modal & none & ML/AI & incidental & \cite{deng-2025-toolscope} \\
-VideoSEAL (decoupled planner-inspector) & cross-modal & reasoning & ML/AI & incidental & \cite{qiu-2026-videoseal} \\
-ARGUS & cross-modal & reasoning & Security &  & \cite{lu-2025-argus} \\
-Cross-Agent Multimodal Provenance-Aware Defense Framework & cross-modal & ingestion & Security & adversarial & \cite{syed-2025-trustworthy} \\
-DE-FIVE & cross-modal & ingestion & Security & adversarial & \cite{zhong-2026-defive} \\
-Multi-Layer Defense Framework (preprocessing + statistical + neural detection + behavioral monitoring) & cross-modal & ingestion & Security & adversarial & \cite{pathade-2025-invisible} \\
-SmoothVLM & cross-modal & none & Security & adversarial & \cite{sun-2024-safeguarding} \\
-SnapGuard (visual stability indicator + action-oriented textual signal recovery) & cross-modal & ingestion & Security & adversarial & \cite{du-2026-snapguard} \\
-SPML-IR specification-based image defense (two-stage input validation + prompt injection detection) & cross-modal & ingestion & Security & adversarial & \cite{sharma-2024-defending} \\
-\emph{Cross-Agent Multimodal Provenance-Aware Defense Framework (text/visual sanitizer agents + output validator + provenance ledger)} & cross-modal & ingestion & Security & adversarial & \cite{syed-2025-crossagent} \\
-SING (Synthetic Intention Graph) & tool-metadata & none & ML/AI & incidental & \cite{xiao-2026-sing} \\
-Skills Architecture (vs. MCP) & tool-metadata & ingestion & ML/AI & incidental & \cite{ayyagari-2026-context} \\
-Agentic JWT (A-JWT) & tool-metadata & execution & Security & adversarial & \cite{goswami-2025-agentic} \\
-aiAuthZ (identity-bound off-host authorization gateway) & tool-metadata & execution & Security & adversarial & \cite{kodathala-2026-aiauthz} \\
-DCP (Device Context Protocol) & tool-metadata & ingestion & Security & adversarial & \cite{yang-2026-device} \\
-MCP-Guard & tool-metadata & ingestion & Security & adversarial & \cite{xing-2025-mcpguard} \\
-MCP-Scanner & tool-metadata & ingestion & Security & adversarial & \cite{abadeh-2026-mcpscanner} \\
-SMCP (Secure Model Context Protocol) & tool-metadata & ingestion & Security & adversarial & \cite{hou-2026-smcp} \\
-Tool-Guard & tool-metadata & reasoning & Security & adversarial & \cite{shi-2026-think} \\
-\emph{layered MCP descriptor defense (descriptor integrity verification + pre-context semantic vetting + runtime guardrails)} & tool-metadata & none & Security & adversarial & \cite{jamshidi-2025-semantic} \\
-\emph{Policy Enforcement Point (PEP) for MCP tool-call boundary} & tool-metadata & execution & Security & adversarial & \cite{wang-2026-runtime} \\
-Z-Space & tool-metadata & none & Security &  & \cite{he-2025-zspace} \\
-CoThinker & multi-agent & reasoning & ML/AI & incidental & \cite{shang-2025-united} \\
-EquiMem & multi-agent & execution & ML/AI & adversarial & \cite{meng-2026-equimem} \\
-Gated Coordination (Partitioned Information Architecture + Cost-Sensitive Gated Escalation) & multi-agent & none & ML/AI & incidental & \cite{jian-2026-gated} \\
-GT-MCP (Game-Theoretic Multi-Agent Control) & multi-agent & reasoning & ML/AI & adversarial & \cite{jamshidi-2026-gametheoretic} \\
-HiMAP-Travel (day-level context isolation + transactional monitor + bargaining protocol) & multi-agent & none & ML/AI & incidental & \cite{bui-2026-himaptravel} \\
-HMAS-2 (Hybrid Multi-Agent System with feedback re-planning) & multi-agent & none & ML/AI & incidental & \cite{chen-2023-scalable} \\
-icat-agent (decentralized event-based multi-agent scaffold) & multi-agent & none & ML/AI & incidental & \cite{chen-2026-unlocking} \\
-KG-CFR (Knowledge-Grounded Counterfactual Reasoning) & multi-agent & none & ML/AI & incidental & \cite{maslowski-2026-decoupling} \\
-LongAgent & multi-agent & reasoning & ML/AI & incidental & \cite{zhao-2024-longagent} \\
-MEMO (Memory-augmented MOdel context optimization) & multi-agent & reasoning & ML/AI & incidental & \cite{xie-2026-memo} \\
-Meta-Team (collaborative self-evolution) & multi-agent & none & ML/AI & incidental & \cite{hao-2026-evolve} \\
-Multi2 (hierarchical multi-agent decision-making) & multi-agent & none & ML/AI & incidental & \cite{park-2026-multi} \\
-ROMA (Recursive Open Meta-Agents) with GEPA+ & multi-agent & none & ML/AI & incidental & \cite{alzubi-2026-roma} \\
-SearchSwarm (delegation-intelligence harness/training for main-agent-to-subagent task decomposition) & multi-agent & ingestion & ML/AI & incidental & \cite{ning-2026-searchswarm} \\
-StackPlanner & multi-agent & none & ML/AI & incidental & \cite{zhang-2026-stackplanner} \\
-STAR-PólyaMath & multi-agent & none & ML/AI & incidental & \cite{wu-2026-starp} \\
-TaskWeave (Formulate-Partition-Diagnose-Align cycle + dependency-aware trace memory) & multi-agent & none & ML/AI & incidental & \cite{zhu-2026-llm} \\
-TEP (Textual Equilibrium Propagation) & multi-agent & reasoning & ML/AI & incidental & \cite{chen-2026-textual} \\
-Tree of Agents (TOA) & multi-agent & reasoning & ML/AI & incidental & \cite{yu-2025-tree} \\
-\emph{hierarchical pixel-agent grid with spatial curriculum and selective oracle} & multi-agent & none & ML/AI & incidental & \cite{kar-2025-curriculum} \\
-Agent Capability Registry & multi-agent & none & Security & adversarial & \cite{cai-2026-child} \\
-BlindGuard & multi-agent & execution & Security & adversarial & \cite{miao-2025-blindguard} \\
-ChannelGuard & multi-agent & execution & Security & adversarial & \cite{hossain-2026-channelguard} \\
-CoMAI & multi-agent & none & Security &  & \cite{sun-2026-comai} \\
-G-Safeguard & multi-agent & execution & Security & adversarial & \cite{wang-2025-gsafeguard} \\
-GoalAnchorCheck (D1) / CrossAgentConsensus (D2) & multi-agent & none & Security & adversarial & \cite{wang-2026-planflip} \\
-Maris & multi-agent & execution & Security & adversarial & \cite{cui-2025-maris} \\
-MAScope & multi-agent & execution & Security & adversarial & \cite{wei-2026-input} \\
-SafeClaw-R & multi-agent & execution & Security & both & \cite{wang-2026-safeclawr} \\
-SafeSieve & multi-agent & ingestion & Security & both & \cite{zhang-2025-safesieve} \\
-SecureGov-Agent & multi-agent & execution & Security & adversarial & \cite{chen-2025-securegovagent} \\
-SentinelAgent & multi-agent & execution & Security & adversarial & \cite{he-2025-sentinelagent} \\
-Token-Level Round-Robin (RR) Collaboration / RRMaj & multi-agent & reasoning & Security & adversarial & \cite{liu-2026-consensus} \\
-\emph{Multi-agent PI defense pipeline (Chain-of-Agents / Coordinator-based)} & multi-agent & reasoning & Security & adversarial & \cite{hossain-2025-multiagent} \\
-\emph{multi-agent privacy firewall (browser extension + MITM proxy + PII-detection pipeline)} & multi-agent & ingestion & Security & incidental & \cite{cuesta-2026-multiagent} \\
-\emph{Representation Engineering-based Probing for IPI detection} & multi-agent & none & Security & adversarial & \cite{zhu-2026-your} \\
-\emph{Three-tier compositional runtime-verification fabric (MonPoly/RTLola-based) for LLM-assisted ISR swarms} & multi-agent & execution & Security & adversarial & \cite{kekatos-2026-missionlevel} \\
-ShieldNet & supply-chain & ingestion & Security & adversarial & \cite{yuan-2026-shieldnet} \\
-Unified Security Orchestration Framework (USOF) & supply-chain & ingestion & Security & adversarial & \cite{muthu-2026-unified} \\
-\emph{You've Changed: Detecting Modification of Black-Box Large La} & supply-chain & execution & Security &  & \cite{dima-2025-you} \\
-RS-Claw (hierarchical skill trees for remote-sensing agents) & skill & none & ML/AI & incidental & \cite{liu-2026-rsclaw} \\
-\emph{detailed external checklist restatement (vs generic self-check) for long-context skill-following} & skill & none & ML/AI & incidental & \cite{xue-2026-agent} \\
-RouteGuard & skill & ingestion & Security & adversarial & \cite{xiao-2026-routeguard} \\
-SkillScan & skill & none & Security & adversarial & \cite{liu-2026-agentb} \\
-SkillSec-Eval defenses (hybrid admission validation, retrieval validation layer, metadata sanitizer, LifecycleGuard taint-tracking, continuous re-validation) & skill & none & Security & adversarial & \cite{badhe-2026-agent} \\
-SkillVetBench (LLM-as-Judge) & skill & none & Security & adversarial & \cite{hossain-2026-skillvetbench} \\
+ActQKV (Activation-aware Probe-Query) & direct-input & reasoning & safety & incidental & \cite{xiao-2025-activationaware} \\
+Agent-BRACE (Agent Belief state Representation via Abstraction and Confidence Estimation) & direct-input & none & safety & incidental & \cite{singh-2026-agentbrace} \\
+Chain-of-Memory (CoM) - verifiable retrieval + causal tracing & direct-input & reasoning & safety & incidental & \cite{jarsania-2025-chainofmemory} \\
+CoCoA (Confidence- and Context-Aware Adaptive Decoding) & direct-input & reasoning & safety & incidental & \cite{khandelwal-2025-cocoa} \\
+CoThinker & direct-input & reasoning & safety & incidental & \cite{shang-2025-united} \\
+Differential Transformer (DIFF Transformer) & direct-input & reasoning & safety & incidental & \cite{ye-2024-differential} \\
+Ebbinghaus Forgetting Curve Memory Enhancement Framework & direct-input & reasoning & safety &  & \cite{jiang-2026-ebbinghaus} \\
+EvoDS - Adaptive Context Compression (ACC) component specifically & direct-input & none & safety & incidental & \cite{yang-2026-evods} \\
+FinLongDocAgent & direct-input & none & safety & incidental & \cite{wang-2026-documentlevel} \\
+Free()LM (Free-Module LoRA adapter) & direct-input & reasoning & safety & incidental & \cite{zheng-2026-free} \\
+G-MemLLM & direct-input & reasoning & safety & incidental & \cite{xu-2026-gmemllm} \\
+GCAD (Gated Cropped Attention-Delta steering) & direct-input & reasoning & safety & incidental & \cite{kang-2026-promptactivation} \\
+GDWM (Gated Differentiable Working Memory) & direct-input & reasoning & safety & incidental & \cite{mei-2026-gated} \\
+JUICE (Just Run Twice) & direct-input & reasoning & safety & incidental & \cite{li-2025-taming} \\
+KScope-guided Constrained Context Summarization & direct-input & none & safety & incidental & \cite{xiao-2025-kscope} \\
+L2A (Learning To Attend) & direct-input & reasoning & safety & incidental & \cite{choudhary-2026-learning} \\
+lambda-RLM & direct-input & reasoning & safety & incidental & \cite{roy-2026-ycombinator} \\
+LCLM (Latent Context Language Models) & direct-input & ingestion & safety & incidental & \cite{li-2026-endtoend} \\
+LLM+DPP (Principled Content Selection pipeline) & direct-input & ingestion & safety & incidental & \cite{padmakumar-2025-principled} \\
+LongCrafter & direct-input & reasoning & safety & incidental & \cite{yuan-2026-longcrafter} \\
+LOOC (Leave-One-Out Compression) & direct-input & ingestion & safety & incidental & \cite{wang-2026-alleviating} \\
+P-RoPE / MiniWin (Periodic RoPE) & direct-input & reasoning & safety & incidental & \cite{huo-2026-periodic} \\
+Planning with Schemas (PwS) & direct-input & reasoning & safety & incidental & \cite{xu-2025-cognitive} \\
+PRIMA (context-boundary discipline + reference-material sandboxing + poisoned-output rejection) & direct-input & execution & safety & adversarial & \cite{annapureddy-2026-prima} \\
+Program-Guided (PG) Runtime / Compile-then-Page SOP compiler & direct-input & execution & safety & incidental & \cite{yu-2026-compile} \\
+QUITO-X & direct-input & ingestion & safety & incidental & \cite{wang-2024-quitox} \\
+QwenLong-CPRS & direct-input & ingestion & safety & incidental & \cite{shen-2025-qwenlongcprs} \\
+Recursive Models (recursive self-invocation with isolated subtask contexts) & direct-input & reasoning & safety & incidental & \cite{yang-2026-recursive} \\
+Retrieve-then-Solve & direct-input & none & safety & incidental & \cite{du-2025-context} \\
+RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation) & direct-input & reasoning & safety & incidental & \cite{xu-2026-should} \\
+SAFARI & direct-input & none & safety &  & \cite{zhu-2026-safari} \\
+Scale Positional Hidden States (single-dimension scaling) & direct-input & reasoning & safety & incidental & \cite{yu-2024-mitigate} \\
+State-Update Multi-turn Dialogue Strategy & direct-input & reasoning & safety & incidental & \cite{liu-2025-stateupdate} \\
+Still (amortized KV cache compaction, Perceiver-based) & direct-input & ingestion & safety & incidental & \cite{oneill-2026-still} \\
+TAG (Tagging-Augmented Generation) & direct-input & ingestion & safety & incidental & \cite{pal-2025-taggingaugmented} \\
+TRIM-KV & direct-input & ingestion & safety & incidental & \cite{bui-2025-cache} \\
+\emph{two preemptive-answer mitigations} & direct-input & reasoning & safety & both & \cite{xu-2024-preemptive} \\
+AIR (Augmented Intermediate Representations) & direct-input & reasoning & security & adversarial & \cite{kariyappa-2025-stronger} \\
+ARSM-Agent & direct-input & execution & security & adversarial & \cite{hu-2026-research} \\
+ASIDE (Architecturally Separated Instruction-Data Embeddings) & direct-input & reasoning & security & adversarial & \cite{zverev-2025-aside} \\
+Attack Detector Algorithm and Attack Library & direct-input & ingestion & security &  & \cite{alla-2025-cyberattacks} \\
+BinaryShield & direct-input & ingestion & security & adversarial & \cite{gill-2025-binaryshield} \\
+CaptureGuard & direct-input & ingestion & security & adversarial & \cite{kholkar-2025-capture} \\
+ChatTEDU dual-LLM architecture (LLM-1 moderation gatekeeper + LLM-2 response generator) & direct-input & ingestion & security & adversarial & \cite{emekci-2025-securing} \\
+Chunk-based hash + embedding prompt injection detection scheme (with optional blockchain audit logging) & direct-input & ingestion & security & adversarial & \cite{hao-2025-privacypreserving} \\
+CoMAI & direct-input & none & security &  & \cite{sun-2026-comai} \\
+Contiguity-gate defense (for guardrail sliding-window aggregation) & direct-input & ingestion & security & adversarial & \cite{zhou-2026-prompt} \\
+data defenses & direct-input & ingestion & security & adversarial & \cite{agnew-2024-data} \\
+DataSentinel & direct-input & ingestion & security & adversarial & \cite{liu-2025-datasentinel} \\
+Defe-Prompt & direct-input & none & security & adversarial & \cite{ren-2024-f2a} \\
+DefensiveToken (test-time optimized special tokens) & direct-input & ingestion & security & adversarial & \cite{chen-2025-defending} \\
+DMPI-PMHFE & direct-input & ingestion & security & adversarial & \cite{ji-2025-detection} \\
+DP-Fusion & direct-input & reasoning & security & adversarial & \cite{thareja-2025-dpfusion} \\
+DRIP & direct-input & reasoning & security & adversarial & \cite{liu-2025-drip} \\
+Enterprise Secure AI Execution Engine (Zero-Trust AI Security Gateway) & direct-input & ingestion & security & adversarial & \cite{krishna-2026-enterprise} \\
+GenTel-Shield & direct-input & ingestion & security & adversarial & \cite{li-2024-gentelsafe} \\
+GNN-based prompt injection detector & direct-input & ingestion & security & adversarial & \cite{jadhav-2025-novel} \\
+Governed Execution (modular prompt orchestration for RAG-grounded call-center agents) & direct-input & none & security & both & \cite{pachtrachai-2026-transcripts} \\
+GPT-OSSafeGuard + structured-representations + GSPO defense pipeline & direct-input & reasoning & security & adversarial & \cite{gudinorosero-2025-prompt} \\
+Hybrid Constitutional Classifier & direct-input & ingestion & security & adversarial & \cite{lan-2025-hybrid} \\
+IDE-Sanitizer & direct-input & ingestion & security & adversarial & \cite{nkoro-2026-idesanitizer} \\
+IH-Challenge (RL training dataset with online adversarial example generation) & direct-input & reasoning & security & adversarial & \cite{guo-2026-ihchallenge} \\
+IHDec (Instruction Hierarchy-steered Decoding) & direct-input & reasoning & security & both & \cite{liu-2026-ihdec} \\
+InstruCoT & direct-input & reasoning & security & adversarial & \cite{chang-2026-know} \\
+Instruction Hierarchy (privileged-instruction training) & direct-input & reasoning & security & adversarial & \cite{wallace-2024-instruction} \\
+ISE (Instructional Segment Embedding) & direct-input & reasoning & security & adversarial & \cite{wu-2024-instructional} \\
+Jatmo & direct-input & reasoning & security & adversarial & \cite{piet-2023-jatmo} \\
+LIMBOSH & direct-input & execution & security &  & \cite{johnson-2024-modular} \\
+LLM invocation logging & direct-input & execution & security &  & \cite{chernyshev-2023-large} \\
+LLM-as-a-Judge (taxonomy-guided structured-reasoning judge) with Mixture-of-Models aggregation & direct-input & ingestion & security & adversarial & \cite{le-2026-prompt} \\
+LLMON (LLM Object Notation) & direct-input & ingestion & security & adversarial & \cite{hind-2026-llmon} \\
+LPDS (LLM Prompt Detection System) & direct-input & ingestion & security & adversarial & \cite{kim-2024-protection} \\
+MAGE (Memory As Guardrail Enforcement) & direct-input & execution & security & adversarial & \cite{wang-2026-mage} \\
+Meticulous Thought Defender & direct-input & reasoning & security & adversarial & \cite{shi-2025-meticulous} \\
+Polymorphic Prompt Assembling (PPA) & direct-input & ingestion & security & adversarial & \cite{wang-2025-protect} \\
+Prompt Injection as a Defense (against LLM-based PIE) & direct-input & ingestion & security & adversarial & \cite{liu-2024-evaluating} \\
+Prompt Injection Threat Analysis + LLM Output Risk Monitoring framework & direct-input & ingestion & security & adversarial & \cite{zhao-2025-novel} \\
+Prompt-response verification framework (Task Analyst + Safety Analyst + Judge) & direct-input & reasoning & security & adversarial & \cite{thota-2026-verifying} \\
+Prompt-Shield Framework (PSF) & direct-input & ingestion & security & adversarial & \cite{hadiprakoso-2025-adaptive} \\
+PromptGuard & direct-input & ingestion & security & adversarial & \cite{alzahrani-2026-promptguard} \\
+PromptLocate (injected-prompt localization) & direct-input & ingestion & security & adversarial & \cite{jia-2025-promptlocate} \\
+PromptSleuth & direct-input & ingestion & security & adversarial & \cite{wang-2025-promptsleuth} \\
+Route-Safety Audit Contract (confirmation-plus-provenance routing) & direct-input & execution & security & adversarial & \cite{tai-2026-brainprompt} \\
+SE+CFE (Standard Evaluation + Counterfactual Evaluation) & direct-input & reasoning & security & adversarial & \cite{liu-2025-counterfactual} \\
+SecInfer & direct-input & reasoning & security & adversarial & \cite{liu-2025-secinfer} \\
+Secure Artificial Intelligence (SAI) & direct-input & ingestion & security & adversarial & \cite{teckani-2025-secure} \\
+Secure Prompt Engineering Patterns (SPEP) & direct-input & reasoning & security & adversarial & \cite{sudarsan-2026-secure} \\
+SecureCAI & direct-input & reasoning & security & adversarial & \cite{ali-2026-securecai} \\
+Sentinel (qualifire/prompt-injection-sentinel) & direct-input & ingestion & security & adversarial & \cite{ivry-2025-sentinel} \\
+ShadowPlay & direct-input & ingestion & security & both & \cite{alsobeh-2025-shadowplay} \\
+SHIELD & direct-input & ingestion & security & adversarial & \cite{esugo-2025-shield} \\
+soft begging & direct-input & reasoning & security &  & \cite{ostermann-2024-soft} \\
+SPIN (Self-Supervised Prompt INjection) & direct-input & reasoning & security & adversarial & \cite{zhou-2024-spin} \\
+SPRA (Scaffold-Preserving Representation Alignment) & direct-input & reasoning & security & adversarial & \cite{shao-2026-mitigating} \\
+StruQ (structured queries) & direct-input & ingestion & security & adversarial & \cite{chen-2024-struq} \\
+TIVS-O agentic defense pipeline (Front-End Agent + Guard-Sanitizer + Policy Enforcer with semantic caching) & direct-input & reasoning & security & adversarial & \cite{gosmar-2026-prompt} \\
+unified Prompt Assembling + State Management + Safety Validation framework & direct-input & execution & security & adversarial & \cite{zhang-2025-enhancing} \\
+UniGuardian & direct-input & ingestion & security & adversarial & \cite{lin-2025-uniguardian} \\
+\emph{domain-specific multi-layer safeguard pipeline (pattern filters + structural validation + contextual sandboxing + session-level behavioral checks)} & direct-input & reasoning & security & adversarial & \cite{maiorano-2026-evaluating} \\
+\emph{Embedding-based traditional-ML classifiers for PI detection} & direct-input & ingestion & security & adversarial & \cite{ayub-2024-embeddingbased} \\
+\emph{Explanation-based secondary detection signal for log-injection evasion} & direct-input & none & security & adversarial & \cite{landauer-2026-just} \\
+\emph{Hybrid multi-layered real-time PI detection framework} & direct-input & ingestion & security & adversarial & \cite{prakash-2026-hybrid} \\
+\emph{Hybrid SIEM + One-Class SVM prompt-injection detection framework} & direct-input & ingestion & security & adversarial & \cite{alshammari-2026-detecting} \\
+\emph{ICL-based multi-LLM agent harmfulness-detection framework} & direct-input & reasoning & security & adversarial & \cite{sato-2026-addressing} \\
+\emph{Multi-agent PI defense pipeline (Chain-of-Agents / Coordinator-based)} & direct-input & reasoning & security & adversarial & \cite{hossain-2025-multiagent} \\
+\emph{multi-agent privacy firewall (browser extension + MITM proxy + PII-detection pipeline)} & direct-input & ingestion & security & incidental & \cite{cuesta-2026-multiagent} \\
+\emph{P2SQL mitigations (DB permission hardening + query rewriting)} & direct-input & execution & security & adversarial & \cite{pedro-2023-prompt} \\
+\emph{Positive-Security Prompt Firewall for healthcare PI/PHI protection} & direct-input & ingestion & security & adversarial & \cite{schwoebel-2026-injection} \\
+\emph{secure prompt strategies for robotic navigation} & direct-input & ingestion & security & adversarial & \cite{zhang-2024-study} \\
+\emph{step-level fine-tuned industrial tool-call guardrail} & direct-input & execution & security & adversarial & \cite{xue-2026-multiagent} \\
+\emph{Trust Context Separation for privileged AI agent systems} & direct-input & execution & security & adversarial & \cite{singh-2026-securingb} \\
+\emph{Uncertainty-based Random Forest attack detector (chimera/Xmera)} & direct-input & none & security & adversarial & \cite{fastowski-2025-injecting} \\
+ACON (Agent Context Optimization) & tool-output & ingestion & safety & incidental & \cite{kang-2025-acon} \\
+ActiveContext (ContextCurator + TaskExecutor) & tool-output & ingestion & safety & incidental & \cite{li-2026-escaping} \\
+AdaCoM (Adaptive Context Management) & tool-output & reasoning & safety & incidental & \cite{yi-2026-learning} \\
+AgentSwing & tool-output & reasoning & safety & incidental & \cite{feng-2026-agentswing} \\
+ARC (Addressable Recall Compaction) & tool-output & ingestion & safety & incidental & \cite{dang-2026-addressable} \\
+BACM / BACM-RL (Budget-Aware Context Management) & tool-output & ingestion & safety & incidental & \cite{wu-2026-contextbudget} \\
+ClinQueryAgent (Retrieval Agent sub-agent delegation) & tool-output & none & safety & incidental & \cite{boyle-2026-clinqueryagent} \\
+CodeDelegator (role separation via Delegator/Coder agents + EPSS) & tool-output & execution & safety & incidental & \cite{fei-2026-codedelegator} \\
+ColorBrowserAgent (knowledge-aligned progressive summarization + human-in-the-loop knowledge adaptation) & tool-output & none & safety & incidental & \cite{wang-2026-colorbrowseragent} \\
+CompactionRL & tool-output & ingestion & safety & incidental & \cite{li-2026-compactionrl} \\
+COMPASS (Context-Organized Multi-Agent Planning and Strategy System) & tool-output & reasoning & safety & incidental & \cite{wan-2025-compass} \\
+Context Viewer & tool-output & none & safety &  & \cite{sriraman-2026-context} \\
+Context-Folding (FoldGRPO) & tool-output & ingestion & safety & incidental & \cite{sun-2025-scaling} \\
+FocusAgent / DefenseFocusAgent & tool-output & ingestion & safety & both & \cite{kerboua-2025-focusagent} \\
+icat-agent (decentralized event-based multi-agent scaffold) & tool-output & none & safety & incidental & \cite{chen-2026-unlocking} \\
+MAT-based Assurance Framework (Message-Action Traces + governance layer: capability limits + action mediation) & tool-output & execution & safety &  & \cite{paduraru-2026-tracebased} \\
+PAACE (Plan-Aware Automated Context Engineering) & tool-output & ingestion & safety & incidental & \cite{yuksel-2025-paace} \\
+PRInTS & tool-output & none & safety &  & \cite{lee-2025-prints} \\
+Prometheus (memory-centric context engine with working memory over a repository knowledge graph) & tool-output & none & safety & incidental & \cite{pan-2025-prometheus} \\
+ReSum / ReSum-GRPO & tool-output & ingestion & safety & incidental & \cite{wu-2025-resum} \\
+SDO (Signal-Driven Observation) & tool-output & ingestion & safety & incidental & \cite{gaur-2026-signaldriven} \\
+Self-GC (Self-Governing Context) & tool-output & ingestion & safety & incidental & \cite{hao-2026-selfgc} \\
+Slipstream (asynchronous, judge-validated trajectory-grounded compaction) & tool-output & ingestion & safety & incidental & \cite{chen-2026-slipstream} \\
+SmoothAgent & tool-output & ingestion & safety &  & \cite{pan-2026-smoothagent} \\
+STRACE (Structural Trajectory Analysis and Causal Extraction) & tool-output & none & safety & incidental & \cite{chang-2026-noisy} \\
+Synapse (trajectory-as-exemplar prompting + exemplar memory) & tool-output & none & safety & incidental & \cite{zheng-2023-synapse} \\
+\emph{Rot-aware rejection-sampling filter for long-horizon search} & tool-output & reasoning & safety & incidental & \cite{xia-2026-diagnosing} \\
+VISTA (Visible Internal State for Tool Agents) & tool-output & reasoning & safety & incidental & \cite{xu-2026-llm} \\
+ACE (Abstract-Concrete-Execute) & tool-output & execution & security & adversarial & \cite{li-2025-ace} \\
+Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol & tool-output & ingestion & security & adversarial & \cite{fomin-2026-benchmarks} \\
+Agent Privilege Separation (Reader/Actor two-agent isolation + JSON formatting) & tool-output & execution & security & adversarial & \cite{cheng-2026-agent} \\
+Agent Sentry (structural classifier + allowlist + LLM judge) & tool-output & execution & security & adversarial & \cite{sequeira-2026-agentsentry} \\
+AgentArmor & tool-output & execution & security & adversarial & \cite{wang-2025-agentarmor} \\
+Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking & tool-output & reasoning & security & adversarial & \cite{chauhan-2026-caught} \\
+AgenticOS (Ghost Kernel / Logic Shutter / Agent Capsule / Semantic Boundary Gateway) & tool-output & execution & security & adversarial & \cite{zhao-2026-agenticos} \\
+AgentRedGuard & tool-output & none & security & adversarial & \cite{dingeto-2026-agentredbench} \\
+AgenTRIM & tool-output & execution & security & adversarial & \cite{betser-2026-agentrim} \\
+AgentSandbox & tool-output & none & security & adversarial & \cite{zhang-2025-llm} \\
+AgentSentry & tool-output & ingestion & security & adversarial & \cite{zhang-2026-agentsentry} \\
+AgentShield & tool-output & execution & security & adversarial & \cite{rassul-2026-agentshield} \\
+AgentSight (eBPF boundary tracing) & tool-output & execution & security & both & \cite{zheng-2025-agentsight} \\
+AgentSys & tool-output & ingestion & security & adversarial & \cite{wen-2026-agentsys} \\
+AgentVisor & tool-output & execution & security & adversarial & \cite{ying-2026-agentvisor} \\
+AgentWatcher & tool-output & ingestion & security & adversarial & \cite{wang-2026-agentwatcher} \\
+aiAuthZ (identity-bound off-host authorization gateway) & tool-output & execution & security & adversarial & \cite{kodathala-2026-aiauthz} \\
+AlignSentinel (three-class instruction-hierarchy-aware attention-based classifier) & tool-output & ingestion & security & adversarial & \cite{jia-2026-alignsentinel} \\
+APPA (Agentic Permissions Policy Algebra) & tool-output & execution & security & adversarial & \cite{kravchenko-2026-agentic} \\
+AprielGuard & tool-output & ingestion & security & adversarial & \cite{kasundra-2025-aprielguard} \\
+ARGUS & tool-output & reasoning & security & adversarial & \cite{weng-2026-argus} \\
+ARLAS (Adversarial Reinforcement Learning for Agent Safety) & tool-output & reasoning & security & adversarial & \cite{wang-2025-adversarial} \\
+Attention Tracker & tool-output & reasoning & security & adversarial & \cite{hung-2024-attention} \\
+AttriGuard & tool-output & execution & security & adversarial & \cite{he-2026-attriguard} \\
+Authenticated Prompts / Authenticated Context (cryptographic provenance + policy algebra) & tool-output & execution & security & adversarial & \cite{rajagopalan-2026-protecting} \\
+AuthGraph & tool-output & execution & security & adversarial & \cite{wang-2026-aligning} \\
+Boundary awareness + explicit reminder & tool-output & ingestion & security & adversarial & \cite{yi-2023-benchmarking} \\
+CaMeL & tool-output & execution & security & adversarial & \cite{debenedetti-2025-defeating} \\
+ceLLMate & tool-output & execution & security & adversarial & \cite{meng-2025-cellmate} \\
+ClawAudit & tool-output & none & security &  & \cite{zhang-2026-local} \\
+ClawGuard & tool-output & execution & security & adversarial & \cite{zhao-2026-clawguard} \\
+Cloud Decoy AI Agent & tool-output & execution & security &  & \cite{manivannan-2026-agentic} \\
+CodeSentinel & tool-output & ingestion & security & adversarial & \cite{cheng-2026-codesentinel} \\
+Cognitive Control Architecture (CCA) & tool-output & execution & security & adversarial & \cite{liang-2025-cognitive} \\
+Cognitive Firewall & tool-output & ingestion & security & adversarial & \cite{lan-2026-cognitive} \\
+CommandSans & tool-output & ingestion & security & adversarial & \cite{das-2025-commandsans} \\
+CXI (Context-to-Execution Integrity) & tool-output & execution & security & adversarial & \cite{santosgrueiro-2026-contexttoexecution} \\
+DataFilter & tool-output & ingestion & security & adversarial & \cite{wang-2025-defending} \\
+DCP (Device Context Protocol) & tool-output & ingestion & security & adversarial & \cite{yang-2026-device} \\
+DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems) & tool-output & execution & security & adversarial & \cite{li-2025-drift} \\
+DualView & tool-output & ingestion & security & adversarial & \cite{kim-2026-dualview} \\
+Encrypted Prompt & tool-output & execution & security &  & \cite{chan-2025-encrypted} \\
+ESLD (External Surrogate Latent Defense) & tool-output & reasoning & security & adversarial & \cite{narendra-2026-esld} \\
+f-secure LLM system (information flow control) & tool-output & execution & security & adversarial & \cite{wu-2024-systemlevel} \\
+FASA (zero-trust, full-lifecycle defense philosophy) & tool-output & execution & security & adversarial & \cite{ying-2026-uncovering} \\
+FATE (on-policy self-evolving repair framework) with Pareto-Front Policy Optimization (PFPO) & tool-output & reasoning & security & adversarial & \cite{yin-2026-onpolicy} \\
+FATH (Formatting AuThentication with Hash-based tags) & tool-output & execution & security & adversarial & \cite{wang-2024-fath} \\
+four layer defense in depth architecture & tool-output & execution & security &  & \cite{maiti-2026-caging} \\
+GIF (Geometric Information Flow) & tool-output & reasoning & security & adversarial & \cite{storek-2026-gif} \\
+GoalAnchorCheck (D1) / CrossAgentConsensus (D2) & tool-output & none & security & adversarial & \cite{wang-2026-planflip} \\
+Hybrid context management + deterministic programmatic safety checks / domain allowlisting / action restriction / least-privilege scoping (production browser-agent architecture) & tool-output & execution & security & adversarial & \cite{vardanyan-2025-building} \\
+ICON (Inference-Time Correction) & tool-output & reasoning & security & adversarial & \cite{wang-2026-icon} \\
+InjectDefuser & tool-output & none & security & adversarial & \cite{koide-2026-clouding} \\
+IntentGuard & tool-output & reasoning & security & adversarial & \cite{kang-2025-mitigating} \\
+IPIGuard & tool-output & execution & security & adversarial & \cite{an-2025-ipiguard} \\
+KBRA (Keyed Binding Reassembly Audit) & tool-output & ingestion & security & adversarial & \cite{liu-2026-safe} \\
+LGA (Layered Governance Architecture) & tool-output & execution & security & adversarial & \cite{ge-2026-governance} \\
+LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine) & tool-output & ingestion & security & adversarial & \cite{chennabasappa-2025-llamafirewall} \\
+LLMbda / Randori (dynamic information-flow-control lambda calculus with verified interpreter) & tool-output & reasoning & security & adversarial & \cite{garby-2026-llmbda} \\
+Mantis & tool-output & none & security & adversarial & \cite{pasquini-2024-hacking} \\
+MELON (Masked re-Execution and TooL comparisON) & tool-output & reasoning & security & adversarial & \cite{zhu-2025-melon} \\
+MIPIAD & tool-output & reasoning & security & adversarial & \cite{muhtadi-2026-mipiad} \\
+Mixture of Encodings & tool-output & ingestion & security & adversarial & \cite{zhang-2025-defense} \\
+MOSAIC (plan-check-act/refuse post-training framework) & tool-output & reasoning & security & adversarial & \cite{agarwal-2026-learning} \\
+NeuroTaint & tool-output & reasoning & security & adversarial & \cite{cai-2026-ghost} \\
+OpenClaw PRISM & tool-output & execution & security & adversarial & \cite{li-2026-openclaw} \\
+PACT (Provenance-Aware Capability Contracts) & tool-output & execution & security & adversarial & \cite{fan-2026-granularity} \\
+Pattern D: Inference-boundary redaction proxy (PII extraction/tokenization before model inference) & tool-output & ingestion & security & adversarial & \cite{mohan-2026-agent} \\
+PCFI (Prompt Control-Flow Integrity) & tool-output & reasoning & security & adversarial & \cite{alam-2026-prompt} \\
+PIGuard (Mitigating Over-defense for Free) & tool-output & ingestion & security & adversarial & \cite{li-2025-piguard} \\
+PIIGuard & tool-output & ingestion & security & adversarial & \cite{liu-2026-piiguard} \\
+PISanitizer & tool-output & ingestion & security & adversarial & \cite{geng-2025-pisanitizer} \\
+PIShield & tool-output & reasoning & security & adversarial & \cite{zou-2025-pishield} \\
+Plan-Then-Execute (PTE) architecture for web agents & tool-output & execution & security & adversarial & \cite{piet-2026-web} \\
+PlanGuard & tool-output & reasoning & security & adversarial & \cite{gong-2026-planguard} \\
+PRISM (activation-conditioned instruction-set interpreter) & tool-output & reasoning & security & adversarial & \cite{gressel-2026-prism} \\
+Progent & tool-output & execution & security & adversarial & \cite{shi-2025-progent} \\
+ProjGuard & tool-output & execution & security & adversarial & \cite{contreras-2026-projguard} \\
+prompt-shield (Seven Cross-Domain Detection Techniques) & tool-output & ingestion & security & adversarial & \cite{munirathinam-2026-pattern} \\
+PromptArmor & tool-output & ingestion & security & adversarial & \cite{shi-2025-promptarmor} \\
+PromptSentinel-X & tool-output & ingestion & security & adversarial & \cite{zhuhadar-2026-promptsentinelx} \\
+PromptShield (fine-tuned deployable PI detector) & tool-output & ingestion & security & adversarial & \cite{jacob-2024-promptshield} \\
+ReasAlign & tool-output & reasoning & security & adversarial & \cite{li-2026-reasalign} \\
+RedVisor & tool-output & reasoning & security & adversarial & \cite{liu-2026-redvisor} \\
+RETA (Reasoning-Enabled Task Alignment) & tool-output & reasoning & security & adversarial & \cite{he-2026-defending} \\
+Robustness via Referencing (instruction-referencing defense) & tool-output & reasoning & security & adversarial & \cite{chen-2025-robustness} \\
+RTBAS (Robust Tool-Based Agent System) & tool-output & execution & security & adversarial & \cite{zhong-2025-rtbas} \\
+SafeAgent & tool-output & execution & security & adversarial & \cite{liu-2026-safeagent} \\
+Safety-guided Chain-of-Thought (SCoT) & tool-output & none & security & both & \cite{lee-2024-mobilesafetybench} \\
+SecAlign (preference optimization) & tool-output & reasoning & security & adversarial & \cite{chen-2024-secalign} \\
+SecAlign++ / Meta-SecAlign & tool-output & reasoning & security & adversarial & \cite{chen-2025-meta} \\
+SecMCP & tool-output & reasoning & security & adversarial & \cite{shi-2025-quantifying} \\
+SecureClaw (dual-boundary: effect-sink authorization + read-boundary plaintext confinement) & tool-output & execution & security & adversarial & \cite{ma-2026-secureclaw} \\
+SIC (Soft Instruction Control) & tool-output & reasoning & security & adversarial & \cite{walter-2025-soft} \\
+Signed-Prompt & tool-output & ingestion & security & adversarial & \cite{suo-2024-signedprompt} \\
+Spotlighting (delimiting / datamarking / encoding) & tool-output & ingestion & security & adversarial & \cite{hines-2024-defending} \\
+SUPERVISOR & tool-output & none & security & adversarial & \cite{wu-2026-bots} \\
+Task Shield & tool-output & reasoning & security & adversarial & \cite{jia-2024-task} \\
+Tool Result Parsing (ParseData/CheckTool) & tool-output & ingestion & security & adversarial & \cite{yu-2026-defense} \\
+ToolSafe (TS-Guard + TS-Flow) & tool-output & execution & security & adversarial & \cite{mou-2026-toolsafe} \\
+Trace & tool-output & execution & security &  & \cite{ediga-2026-trace} \\
+TRACE (Trajectory Risk-Aware Compression) & tool-output & ingestion & security & adversarial & \cite{hong-2026-trace} \\
+TraceCaps & tool-output & execution & security & adversarial & \cite{catarino-2026-tracecaps} \\
+TRACER-AI & tool-output & ingestion & security & adversarial & \cite{singh-2026-tracerai} \\
+Twin Agent (Explore Agent / Safe Agent residual-hint privilege separation) & tool-output & execution & security & adversarial & \cite{hu-2026-twin} \\
+Type-directed privilege separation & tool-output & execution & security & adversarial & \cite{jacob-2025-preventing} \\
+\emph{Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)} & tool-output & reasoning & security & adversarial & \cite{chen-2024-defense} \\
+\emph{Authorization framework for autonomous LLM agent threat mitigation} & tool-output & none & security & adversarial & \cite{kota-2025-systemic} \\
+\emph{Context-Aware Interception Framework for PI detection/mitigation} & tool-output & execution & security & adversarial & \cite{singh-2026-securing} \\
+\emph{deterministic post-audit verifier layer added to a compositional safety system} & tool-output & none & security & adversarial & \cite{zhang-2026-ownerharm} \\
+\emph{Digital forensic analysis framework for post-hoc IPI attack identification from agent execution logs} & tool-output & none & security & adversarial & \cite{chernyshev-2024-short} \\
+\emph{Embedding-based semantic context analysis detector for IPI} & tool-output & ingestion & security & adversarial & \cite{alamsabi-2026-embeddingbased} \\
+\emph{Four-layer guardrail system for offensive-security AI agents} & tool-output & none & security & adversarial & \cite{vilches-2025-cybersecurity} \\
+\emph{Fraud-detection-inspired trajectory-feature detector (XGBoost, 42-dim features)} & tool-output & ingestion & security & adversarial & \cite{yu-2026-lowlatency} \\
+\emph{IPI detection + post-detection removal pipeline} & tool-output & ingestion & security & adversarial & \cite{chen-2025-indirect} \\
+\emph{Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection} & tool-output & none & security & adversarial & \cite{karanjai-2026-context} \\
+\emph{Policy Enforcement Point (PEP) for MCP tool-call boundary} & tool-output & execution & security & adversarial & \cite{wang-2026-runtime} \\
+\emph{Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)} & tool-output & ingestion & security & adversarial & \cite{shukla-2026-data} \\
+\emph{Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)} & tool-output & none & security & adversarial & \cite{nakash-2024-breaking} \\
+\emph{Representation Engineering-based Probing for IPI detection} & tool-output & none & security & adversarial & \cite{zhu-2026-your} \\
+\emph{Scientist Persona + Provenance Audit mitigations against indirect data poisoning} & tool-output & none & security & adversarial & \cite{gyevnar-2026-distributed} \\
+\emph{six composable agent design patterns (e.g. Action-Selector) for prompt-injection-resistant architecture} & tool-output & execution & security & adversarial & \cite{beurerkellner-2025-design} \\
+\emph{WAB Wasm-sandboxed capability-based authority mechanism (allowlisted API with explicit grant/revocation)} & tool-output & execution & security & adversarial & \cite{liu-2026-wab} \\
+User-Tool Aligned Safety RL Framework & tool-output & reasoning & security & adversarial & \cite{sha-2025-agent} \\
+VIGIL & tool-output & execution & security & adversarial & \cite{lin-2026-vigil} \\
+Windowed HTML content filtering (128/64-token chunking + PromptGuard/DeBERTaV3 classification) & tool-output & ingestion & security & adversarial & \cite{dinu-2025-disrupting} \\
+Zero-Shot Embedding Drift Detection (ZEDD) & tool-output & ingestion & security & adversarial & \cite{sekar-2026-zeroshot} \\
+A-RAG (hierarchical retrieval interfaces) & RAG & none & safety & incidental & \cite{du-2026-arag} \\
+ACD (Adaptive Contrastive Decoding) & RAG & reasoning & safety & incidental & \cite{kim-2024-adaptive} \\
+Astute RAG & RAG & reasoning & safety & incidental & \cite{wang-2024-astute} \\
+AttnComp (Attention-guided Context Compression) & RAG & ingestion & safety & incidental & \cite{luo-2025-attncomp} \\
+BordaRAG (Borda Voting-based document selection) & RAG & reasoning & safety & incidental & \cite{li-2025-bordarag} \\
+CARE-RAG (Conflict-Aware and Reliable Evidence for RAG) & RAG & reasoning & safety & incidental & \cite{chen-2025-rethinking} \\
+CD2 (Conflict-Disentangle Contrastive Decoding) & RAG & reasoning & safety & incidental & \cite{jin-2024-tugofwar} \\
+CDD (Context-Driven Decomposition) & RAG & none & safety & adversarial & \cite{chen-2026-rag} \\
+CheckRLM & RAG & reasoning & safety & incidental & \cite{xu-2026-checkrlm} \\
+CK-PLUG (Controllable Knowledge Plug-in) & RAG & reasoning & safety & incidental & \cite{bi-2025-parameters} \\
+CKG-RAG & RAG & reasoning & safety & incidental & \cite{zhang-2026-ckgrag} \\
+COIECD (contextual information-entropy constraint decoding) & RAG & reasoning & safety & incidental & \cite{yuan-2024-discerning} \\
+COMBO (Compatibility-Oriented knowledge Merging) & RAG & reasoning & safety & incidental & \cite{zhang-2023-merging} \\
+Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking) & RAG & reasoning & safety & incidental & \cite{wu-2026-conflictaware} \\
+ConflictRAG (two-stage detection + Entropy-TOPSIS credibility + CARS metric) & RAG & reasoning & safety & incidental & \cite{wang-2026-conflictrag} \\
+Corrective Retrieval Augmented Generation (CRAG) & RAG & ingestion & safety & incidental & \cite{yan-2024-corrective} \\
+Cross-Validation Re-ranking (inter-context conflict-aware re-ranking) & RAG & ingestion & safety & incidental & \cite{wu-2025-eliminating} \\
+CRVA-TGRAG (Conflict Resolution in Vulnerability Analysis via Teacher-Guided RAG) & RAG & reasoning & safety & incidental & \cite{zhou-2026-tugofwar} \\
+Discern-and-Answer & RAG & none & safety & incidental & \cite{hong-2023-gullible} \\
+DualGraph & RAG & reasoning & safety & incidental & \cite{shi-2026-tale} \\
+Dynamic Context Selection (classifier-based adaptive k-selection + reranking) & RAG & ingestion & safety & incidental & \cite{iratni-2025-dynamic} \\
+DyPRAG (Dynamic Parametric RAG) & RAG & reasoning & safety & incidental & \cite{tan-2025-dynamic} \\
+EHR-RAG & RAG & none & safety & incidental & \cite{cao-2026-ehrrag} \\
+END (Early Noise Dropping) & RAG & ingestion & safety & incidental & \cite{jin-2025-end} \\
+ERA (Evidence-based Reliability Alignment) & RAG & reasoning & safety & incidental & \cite{shin-2026-era} \\
+FaithfulRAG (fact-level conflict modeling + Self-Think) & RAG & reasoning & safety & incidental & \cite{zhang-2025-faithfulrag} \\
+GenDiE (Generate, Discriminate, Evolve) & RAG & reasoning & safety & incidental & \cite{li-2025-generate} \\
+ITEM (Integrated Term Enhancement Methodology) & RAG & none & safety & incidental & \cite{bei-2024-manufacturing} \\
+KCM (Knowledge Conflict Mitigation) & RAG & reasoning & safety & incidental & \cite{an-2026-enhancing} \\
+Knowledgeable-R1 & RAG & reasoning & safety & incidental & \cite{lin-2025-resisting} \\
+KnowPO (Knowledge-aware Preference Optimization) & RAG & reasoning & safety & incidental & \cite{zhang-2024-knowpo} \\
+KV-Fusion & RAG & reasoning & safety & incidental & \cite{oh-2025-parallel} \\
+KVEraser & RAG & reasoning & safety & incidental & \cite{li-2026-kveraser} \\
+LDAR (Learning Distraction-Aware Retrieval) & RAG & ingestion & safety & incidental & \cite{shim-2025-rag} \\
+LongFaith & RAG & reasoning & safety &  & \cite{yang-2025-longfaith} \\
+LongRAG & RAG & reasoning & safety & incidental & \cite{zhao-2024-longrag} \\
+MACR (multi-agent conflict resolution) & RAG & reasoning & safety & incidental & \cite{peng-2026-navigating} \\
+MAL-RAG (Multiple Abstraction Level RAG) & RAG & ingestion & safety & incidental & \cite{zheng-2025-multiple} \\
+Micro-Act (hierarchical action-space decomposition) & RAG & reasoning & safety & incidental & \cite{huo-2025-microact} \\
+Mobile-Agent-RAG (Manager-RAG / Operator-RAG dual-level retrieval augmentation) & RAG & none & safety & incidental & \cite{zhou-2025-mobileagentrag} \\
+ParamMute (Parametric Knowledge Muting through FFN Suppression) & RAG & reasoning & safety & incidental & \cite{huang-2025-parammute} \\
+PH3 (Pruning Head via PatH PatcHing) & RAG & reasoning & safety & incidental & \cite{jin-2024-cutting} \\
+ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention) & RAG & reasoning & safety & incidental & \cite{gao-2025-blackbox} \\
+RADIANT (DPO-ECD, Entity-Context Divergence alignment) & RAG & none & safety & incidental & \cite{rawte-2025-radiant} \\
+RAPS-DA (Regime-Aware Peer Specialization) & RAG & reasoning & safety & both & \cite{wang-2026-regimeaware} \\
+RAT (Retrieval Augmented Thoughts) & RAG & reasoning & safety & incidental & \cite{wang-2024-rat} \\
+RE-IAG (Reasoning-Evidence Interactive Augmented Graph) & RAG & reasoning & safety & incidental & \cite{sui-2026-decomposition} \\
+Reconstruct to Discriminate (RtD) & RAG & reasoning & safety & incidental & \cite{peng-2025-misinformation} \\
+RPO (Retrieval Preference Optimization) & RAG & reasoning & safety & incidental & \cite{yan-2025-rpo} \\
+SABER (Self-Aware Belief Estimator for RAG) & RAG & reasoning & safety & incidental & \cite{zhu-2026-trust} \\
+SCR \& CR-DPO (Situated Faithfulness) & RAG & reasoning & safety & incidental & \cite{huang-2024-trust} \\
+Self-RAG & RAG & reasoning & safety & incidental & \cite{asai-2023-selfrag} \\
+SHIFT (gate-modulated activation steering) & RAG & reasoning & safety & incidental & \cite{li-2026-shift} \\
+SpARE (Sparse Auto-Encoder Representation Engineering) & RAG & reasoning & safety & incidental & \cite{zhao-2024-steering} \\
+SUGAR (Semantic Uncertainty Guided Adaptive Retrieval) & RAG & reasoning & safety & incidental & \cite{zubkova-2025-sugar} \\
+Swin-VIB (variational information bottleneck pipeline) & RAG & reasoning & safety & incidental & \cite{wang-2025-accommodate} \\
+Taxonomy-Aware / Pipeline conflict-type-aware response generation (from the CONFLICTS benchmark) & RAG & reasoning & safety & incidental & \cite{cattan-2025-dragged} \\
+TCR (Transparent Conflict Resolution) & RAG & reasoning & safety & incidental & \cite{ye-2026-seeing} \\
+TruthfulRAG (knowledge-graph-based factual conflict resolution) & RAG & reasoning & safety & incidental & \cite{liu-2026-truthfulrag} \\
+UniKnow / LM-UniKnow & RAG & none & safety & incidental & \cite{kim-2025-uniknow} \\
+\emph{Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG)} & RAG & none & safety & incidental & \cite{shen-2026-multiroute} \\
+\emph{pre-research and post-research verification defenses (verification-enhanced prompting + search-enabled verifier agent) for Deep Research agents} & RAG & none & safety & adversarial & \cite{zhu-2026-deep} \\
+XoT (explanation-based thinking framework) & RAG & reasoning & safety & incidental & \cite{zhao-2026-exploring} \\
+AgentSecBench Combined defense stack (filtering + projection + redaction + delimiter annotation) & RAG & reasoning & security & adversarial & \cite{alpay-2026-agentsecbench} \\
+AttnTrace & RAG & reasoning & security & adversarial & \cite{wang-2025-attntrace} \\
+BiRD (Bidirectional Ranking Defense) & RAG & ingestion & security & adversarial & \cite{gao-2026-bird} \\
+CachePrune & RAG & reasoning & security & adversarial & \cite{wang-2025-cacheprune} \\
+chain-of-defensive-thought (CoDT) & RAG & reasoning & security & adversarial & \cite{wang-2025-chainofdefensivethought} \\
+ControlNet (ControlNET) & RAG & ingestion & security & adversarial & \cite{yao-2025-controlnet} \\
+FilterRAG / ML-FilterRAG & RAG & ingestion & security & adversarial & \cite{edemacu-2025-defending} \\
+InstructDetector & RAG & ingestion & security & adversarial & \cite{wen-2025-defending} \\
+LeakSealer & RAG & ingestion & security & adversarial & \cite{panebianco-2025-leaksealer} \\
+LLM Firewall (Validator Agent) & RAG & ingestion & security & adversarial & \cite{podpora-2025-llm} \\
+MedRAGShield & RAG & ingestion & security & adversarial & \cite{shanid-2026-medragshield} \\
+PARSE (Provenance-Aware Retrieval Sanitization) & RAG & ingestion & security & adversarial & \cite{pai-2026-parse} \\
+RAG-H & RAG & ingestion & security & adversarial & \cite{ceraku-2026-ragh} \\
+ReliabilityRAG & RAG & ingestion & security & adversarial & \cite{shen-2025-reliabilityrag} \\
+Rennervate & RAG & reasoning & security & adversarial & \cite{zhong-2025-attention} \\
+RobustRAG & RAG & ingestion & security & adversarial & \cite{xiang-2024-certifiably} \\
+Salience Normalization (SN-1) & RAG & none & security & adversarial & \cite{zhou-2026-salience} \\
+SD-RAG (Selective Disclosure RAG) & RAG & ingestion & security & adversarial & \cite{masoud-2026-sdrag} \\
+SecureRag & RAG & ingestion & security & adversarial & \cite{mishra-2025-securerag} \\
+TaskTracker (activation-delta task-drift detection) & RAG & reasoning & security & adversarial & \cite{abdelnabi-2024-get} \\
+TracLLM & RAG & reasoning & security & adversarial & \cite{wang-2025-tracllm} \\
+TriShieldRAG & RAG & ingestion & security & adversarial & \cite{mohanty-2026-trishieldrag} \\
+UGCBuster & RAG & ingestion & security & adversarial & \cite{kaya-2025-meets} \\
+\emph{policy-first Hybrid RAG architecture (pre-reranking access control + BM25/dense fusion via RRF + evidence-pack citation-grounded generation)} & RAG & none & security & adversarial & \cite{gudipuri-2026-enterprise} \\
+\emph{Randomized/Adversarial Suffix Augmentation Training for task-drift probes} & RAG & none & security & adversarial & \cite{rahman-2026-bypassing} \\
+\emph{security-aware RAG framework (evidence-based abstention + prompt-injection defense + multi-source agreement verification + trust-weighted retrieval)} & RAG & reasoning & security & both & \cite{kolavennu-2026-securityaware} \\
+\emph{Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)} & RAG & none & security & adversarial & \cite{ramakrishnan-2025-securing} \\
+\emph{Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)} & RAG & ingestion & security & adversarial & \cite{saleem-2026-layered} \\
+\emph{Three-tier compositional runtime-verification fabric (MonPoly/RTLola-based) for LLM-assisted ISR swarms} & RAG & execution & security & adversarial & \cite{kekatos-2026-missionlevel} \\
+\emph{two-plane OPA-based governance architecture for secure RAG (provenance + ABAC + policy-as-code across ingestion/indexing/retrieval/generation)} & RAG & ingestion & security & adversarial & \cite{boggarapu-2026-secure} \\
++ModTool (memory correction tool for MemEvoBench) & memory & none & safety & both & \cite{xie-2026-memevobench} \\
+ActiveMem & memory & reasoning & safety & incidental & \cite{jiang-2026-activemem} \\
+ADEMA (checkpoint-resumable persistence + segment-level memory condensation + epistemic bookkeeping) & memory & reasoning & safety & incidental & \cite{zhou-2026-adema} \\
+Aeon & memory & ingestion & safety & incidental & \cite{arslan-2026-aeon} \\
+AFM (Adaptive Focus Memory) & memory & reasoning & safety & incidental & \cite{cruz-2025-adaptive} \\
+AgeMem (Agentic Memory) & memory & reasoning & safety & incidental & \cite{yu-2026-agentic} \\
+Agent-level affective subsystem (VAD state dynamics) & memory & reasoning & safety & incidental & \cite{subaharan-2026-controlling} \\
+AgentFold (folding - granular condensation / deep consolidation context management) & memory & ingestion & safety & incidental & \cite{ye-2025-agentfold} \\
+AgentProg (program-guided context management with Execution Tree and global belief state) & memory & ingestion & safety & incidental & \cite{tian-2025-agentprog} \\
+AMA-Agent (causality-graph construction + tool-augmented retrieval) & memory & none & safety & incidental & \cite{zhao-2026-amabench} \\
+ARC (Active and Reflection-driven Context management) & memory & reasoning & safety & incidental & \cite{yao-2026-arc} \\
+AriadneMem & memory & reasoning & safety & incidental & \cite{zhu-2026-ariadnemem} \\
+AttriMem & memory & reasoning & safety & incidental & \cite{li-2026-attrimem} \\
+AutoMEM & memory & none & safety & incidental & \cite{chen-2026-exploring} \\
+Autopilot (gated finite-state-machine execution firewall) & memory & reasoning & safety & incidental & \cite{deng-2026-goalautopilot} \\
+CMI (Causal Memory Intervention) & memory & reasoning & safety & both & \cite{srivastava-2026-causal} \\
+CoCortex & memory & reasoning & safety & incidental & \cite{kaviyaraj-2026-cocortex} \\
+Cognitive Scaffold & memory & reasoning & safety & incidental & \cite{ai-2026-cognitive} \\
+CoM (Chain-of-Memory) - Dynamic Memory Chain Evolution + Adaptive Truncation & memory & reasoning & safety & incidental & \cite{xu-2026-chainofmemory} \\
+CoMIC & memory & none & safety &  & \cite{wang-2026-comic} \\
+Constraint Pinning & memory & ingestion & safety & both & \cite{chen-2026-governance} \\
+Context-Agent (dynamic discourse tree) & memory & reasoning & safety & incidental & \cite{hu-2026-contextagent} \\
+CWL (Context Window Lifecycle) & memory & ingestion & safety & incidental & \cite{semenov-2026-compaction} \\
+D-Mem (Dual-Process Memory System, Quality Gating) & memory & reasoning & safety & incidental & \cite{you-2026-dmem} \\
+Dual-Process Memory Architecture (episodic-semantic memory for scientific agents) & memory & reasoning & safety & incidental & \cite{milosevic-2026-episodicsemantic} \\
+EMem / EMem-G (event-centric elementary discourse unit memory) & memory & none & safety & incidental & \cite{zhou-2025-simple} \\
+Engram (Archive + Research Digest) & memory & none & safety & incidental & \cite{karimi-2026-improving} \\
+ENGRAM (typed memory + dense retrieval) & memory & none & safety & incidental & \cite{patel-2025-engram} \\
+Ensemble QSP (hierarchical memory architecture) & memory & reasoning & safety & incidental & \cite{tewari-2026-hierarchical} \\
+EverMemOS & memory & reasoning & safety & incidental & \cite{hu-2026-evermemos} \\
+FGHM (Failure-Gated Hierarchical Memory) with Failure Critic and LTM Pollution Rate (LPR) metric & memory & ingestion & safety & incidental & \cite{liu-2026-failuregated} \\
+Fine-Mem (Chunk-level Step Reward + Evidence-Anchored Reward Attribution) & memory & reasoning & safety & incidental & \cite{ma-2026-finemem} \\
+FlashMem & memory & none & safety & incidental & \cite{hou-2026-flashmem} \\
+Focus (slime-mold-inspired active context compression) & memory & ingestion & safety & incidental & \cite{verma-2026-active} \\
+FoldAct & memory & ingestion & safety & incidental & \cite{shao-2025-foldact} \\
+GCC (Git-Context-Controller) & memory & ingestion & safety & incidental & \cite{wu-2025-git} \\
+GenericAgent (GA) - contextual information density maximization & memory & ingestion & safety & incidental & \cite{liang-2026-genericagent} \\
+GRACE (Graph-Regularized Agentic Context Evolution) & memory & reasoning & safety & incidental & \cite{hsu-2026-scoped} \\
+GUI-PRA (Process Reward Agent) & memory & none & safety & incidental & \cite{xiong-2025-guipra} \\
+HAGE (RL-driven weighted graph evolution) & memory & reasoning & safety & incidental & \cite{jiang-2026-hage} \\
+HiAgent & memory & reasoning & safety & incidental & \cite{hu-2024-hiagent} \\
+Hierarchical Cognitive Caching (HCC), in ML-Master 2.0 & memory & none & safety & incidental & \cite{zhu-2026-ultralonghorizon} \\
+HiMAP-Travel (day-level context isolation + transactional monitor + bargaining protocol) & memory & none & safety & incidental & \cite{bui-2026-himaptravel} \\
+HIPIF (Hierarchical Planning and Information Folding) & memory & ingestion & safety & incidental & \cite{diao-2026-hipif} \\
+Hippocampus (Dynamic Wavelet Matrix memory) & memory & none & safety & incidental & \cite{li-2026-hippocampus} \\
+HMT (Hierarchical Memory Tree) & memory & reasoning & safety & incidental & \cite{tan-2026-enhancing} \\
+HORMA (Hierarchical Organize-and-Retrieve Memory Agent) & memory & reasoning & safety & incidental & \cite{hsu-2026-organize} \\
+ID-RAG (Identity Retrieval-Augmented Generation) & memory & reasoning & safety & incidental & \cite{platnick-2025-idrag} \\
+InftyThink with Cross-Chain Memory (semantic lemma retrieval) & memory & none & safety & incidental & \cite{tekin-2025-directional} \\
+Laser (structured action protocol + context register) & memory & ingestion & safety & incidental & \cite{wang-2025-laser} \\
+LightMem & memory & none & safety & incidental & \cite{zhang-2026-lightweight} \\
+LRE (Learned Relevance Eviction) & memory & none & safety & incidental & \cite{lia-2026-learning} \\
+LWM-Planner (Fact Extraction and Compression / FEC) & memory & reasoning & safety & incidental & \cite{holt-2025-factaugmented} \\
+M2 (Dynamic Trajectory Summarization + Insight Retrieval Augmentation) & memory & reasoning & safety & incidental & \cite{yan-2026-dualmemory} \\
+MAGE (Memory as Agent-Guided Exploration) - hierarchical state tree with Grow/Compress/Maintain/Revise & memory & none & safety & incidental & \cite{chen-2026-semantic} \\
+MAGMA (Multi-Graph Agentic Memory Architecture) & memory & reasoning & safety & incidental & \cite{jiang-2026-magma} \\
+Mem0\^{}R (unified conversational + repository memory) & memory & none & safety & incidental & \cite{liu-2026-scalable} \\
+MEM1 & memory & reasoning & safety & incidental & \cite{zhou-2025-mem1} \\
+MemAct (Memory-as-Action) with Dynamic Context Policy Optimization & memory & reasoning & safety & incidental & \cite{zhang-2025-memory} \\
+Memanto (typed semantic memory + automated conflict resolution + temporal versioning) & memory & reasoning & safety & incidental & \cite{abtahi-2026-memanto} \\
+Memex / MemexRL (indexed experience memory) & memory & reasoning & safety & incidental & \cite{wang-2026-memex} \\
+MemFlow (Router Agent + tiered Memory Agent + Validator Agent) & memory & reasoning & safety & incidental & \cite{chen-2026-memflow} \\
+MemGUI-Agent / ConAct (Context-as-Action) & memory & none & safety & incidental & \cite{liu-2026-memguiagent} \\
+MemMachine (ground-truth-preserving memory) & memory & none & safety & incidental & \cite{wang-2026-memmachine} \\
+MemoBrain & memory & reasoning & safety & incidental & \cite{qian-2026-memobrain} \\
+Memory Sandbox (user-controlled memory objects) & memory & reasoning & safety &  & \cite{huang-2023-memory} \\
+Memory-R1 & memory & reasoning & safety & incidental & \cite{yan-2025-memoryr1} \\
+Memory-R2 (LoGo-GRPO training) with shared-parameter fact extractor / memory manager & memory & reasoning & safety & incidental & \cite{yan-2026-memoryr2} \\
+MemTrace (memory evolution graph tracing + closed-loop correction) & memory & reasoning & safety & incidental & \cite{deng-2026-memtrace} \\
+MemWeaver (graph memory + experience memory + passage memory) & memory & reasoning & safety & incidental & \cite{ye-2026-memweaver} \\
+MetaMem (self-evolving meta-memory) & memory & reasoning & safety & incidental & \cite{xin-2026-metamem} \\
+MGA (Memory-Driven GUI Agent) - Observer + Structured Memory & memory & reasoning & safety & incidental & \cite{cheng-2025-mga} \\
+MMPO (Metacognitive Memory Policy Optimization) with Belief Entropy & memory & reasoning & safety & incidental & \cite{liu-2026-metacognitive} \\
+MSCE (Memory-Skill Co-Evolution) & memory & reasoning & safety & incidental & \cite{tang-2026-memory} \\
+Multi2 (hierarchical multi-agent decision-making) & memory & none & safety & incidental & \cite{park-2026-multi} \\
+Neural Paging / Page Controller & memory & ingestion & safety & incidental & \cite{chen-2026-neural} \\
+Oblivion (decay-driven memory control) & memory & reasoning & safety & incidental & \cite{rana-2026-oblivion} \\
+OCR-Memory (Optical Context Retrieval Memory) & memory & reasoning & safety & incidental & \cite{li-2026-ocrmemory} \\
+PACEvolve - Hierarchical Context Management (HCM) component specifically & memory & none & safety & incidental & \cite{yan-2026-pacevolve} \\
+Parallel Compaction & memory & ingestion & safety & incidental & \cite{cim-2026-parallel} \\
+PlugMem (knowledge-centric memory graph) & memory & none & safety & incidental & \cite{yang-2026-plugmem} \\
+Portable Agent Memory & memory & ingestion & safety &  & \cite{ravindran-2026-portable} \\
+PraMem (Practice-derived Experiential Memory) & memory & none & safety & incidental & \cite{li-2026-pramem} \\
+PRISM (Pareto-Efficient Retrieval over Intent-Aware Structured Memory) & memory & reasoning & safety & incidental & \cite{peng-2026-prism} \\
+PRO-LONG (programmatic memory framework) & memory & reasoning & safety & incidental & \cite{fox-2026-prolong} \\
+RAG-Modulo & memory & none & safety & incidental & \cite{jain-2024-ragmodulo} \\
+ReAcTree & memory & reasoning & safety &  & \cite{choi-2025-reactree} \\
+ReCAP (Recursive Context-Aware Reasoning and Planning) & memory & reasoning & safety & incidental & \cite{zhang-2025-recap} \\
+Red-MIRROR & memory & none & safety &  & \cite{khang-2026-redmirror} \\
+ReMEmbR (Retrieval-augmented Memory for Embodied Robots) & memory & none & safety & incidental & \cite{anwar-2024-remembr} \\
+Rhea (Role-aware Heuristic Episodic Attention) & memory & reasoning & safety & incidental & \cite{hong-2025-rhea} \\
+SAM (State-Adaptive Memory) & memory & reasoning & safety & incidental & \cite{hu-2026-sam} \\
+Sleep paradigm (Memory Consolidation + Dreaming) & memory & reasoning & safety & incidental & \cite{behrouz-2026-language} \\
+SSRP (Self-Synthesizing Reasoning Protocols) & memory & reasoning & safety & incidental & \cite{shehata-2026-attention} \\
+STITCH (Structured Intent Tracking in Contextual History) & memory & reasoning & safety & incidental & \cite{yang-2026-grounding} \\
+StructAgent (unified causal state + verifier-backed state transitions) & memory & none & safety & incidental & \cite{wu-2026-structagent} \\
+Structurally Aligned Subtask-Level Memory & memory & reasoning & safety & incidental & \cite{shen-2026-structurally} \\
+SUPO (summarization-based context management for RL) & memory & ingestion & safety & incidental & \cite{lu-2025-scaling} \\
+TACT (Think-Act Calibration via activation Steering) & memory & reasoning & safety & incidental & \cite{sui-2026-tact} \\
+TDP (Task-Decoupled Planning) & memory & reasoning & safety & incidental & \cite{li-2026-entangled} \\
+TokenMizer (typed knowledge-graph session memory) & memory & ingestion & safety & incidental & \cite{mishra-2026-tokenmizer} \\
+TokenPilot (Ingestion-Aware Compaction + Lifecycle-Aware Eviction) & memory & ingestion & safety & incidental & \cite{xu-2026-tokenpilot} \\
+ToolSelf & memory & none & safety &  & \cite{zhou-2026-toolself} \\
+TSUBASA (evolving memory + context distillation) & memory & reasoning & safety & incidental & \cite{zhang-2026-tsubasa} \\
+UI-Copilot (memory decoupling + Tool-Integrated Policy Optimization / TIPO) & memory & none & safety & incidental & \cite{lu-2026-uicopilot} \\
+UMA (Unified Memory Agent) & memory & reasoning & safety & incidental & \cite{zhang-2026-learning} \\
+\emph{Tree-based + hierarchical storage combined memory method (Memory in LLM Era unified framework)} & memory & none & safety & incidental & \cite{wu-2026-memory} \\
+WM-SAR (World-Model Subgraph Amplification Repair) & memory & reasoning & safety & incidental & \cite{song-2026-repair} \\
+Write-gate sanitization (pre-summarization redaction/rewrite) for memory laundering & memory & ingestion & safety & incidental & \cite{wang-2026-state} \\
+Yunque DeepResearch - Dynamic Context Management module specifically & memory & none & safety & incidental & \cite{cai-2026-yunque} \\
+Agent Capability Registry & memory & none & security & adversarial & \cite{cai-2026-child} \\
+EquiMem & memory & execution & security & adversarial & \cite{meng-2026-equimem} \\
+MemAudit (counterfactual memory influence score + memory consistency graph) & memory & execution & security & adversarial & \cite{tan-2026-memaudit} \\
+MemLineage & memory & ingestion & security & adversarial & \cite{ouyang-2026-memlineage} \\
+ContextRL & cross-modal & reasoning & safety & incidental & \cite{xu-2026-contextaware} \\
+Dynamic Contrastive Decoding (DCD) for cross-modality knowledge conflict & cross-modal & none & safety & incidental & \cite{zhu-2024-unraveling} \\
+MAGIC-Video (multimodal memory graph + narrative chain) & cross-modal & reasoning & safety & incidental & \cite{li-2026-bridging} \\
+ToolScope (Perceive tool within Global Navigator / Agentic Executor / Response Synthesizer) & cross-modal & none & safety & incidental & \cite{deng-2025-toolscope} \\
+\emph{DPO-based faithfulness-improvement training for GUI agents against environmental distraction} & cross-modal & none & safety & incidental & \cite{ma-2024-caution} \\
+VideoSEAL (decoupled planner-inspector) & cross-modal & reasoning & safety & incidental & \cite{qiu-2026-videoseal} \\
+AegisAgent & cross-modal & reasoning & security & adversarial & \cite{wang-2025-aegisagent} \\
+ARGUS & cross-modal & reasoning & security &  & \cite{lu-2025-argus} \\
+Aura & cross-modal & execution & security & adversarial & \cite{zou-2026-blind} \\
+Cross-Agent Multimodal Provenance-Aware Defense Framework & cross-modal & ingestion & security & adversarial & \cite{syed-2025-trustworthy} \\
+DE-FIVE & cross-modal & ingestion & security & adversarial & \cite{zhong-2026-defive} \\
+Multi-Layer Defense Framework (preprocessing + statistical + neural detection + behavioral monitoring) & cross-modal & ingestion & security & adversarial & \cite{pathade-2025-invisible} \\
+PhantomLint & cross-modal & ingestion & security & adversarial & \cite{murray-2025-phantomlint} \\
+SmoothVLM & cross-modal & none & security & adversarial & \cite{sun-2024-safeguarding} \\
+SnapGuard (visual stability indicator + action-oriented textual signal recovery) & cross-modal & ingestion & security & adversarial & \cite{du-2026-snapguard} \\
+SPML-IR specification-based image defense (two-stage input validation + prompt injection detection) & cross-modal & ingestion & security & adversarial & \cite{sharma-2024-defending} \\
+\emph{Cross-Agent Multimodal Provenance-Aware Defense Framework (text/visual sanitizer agents + output validator + provenance ledger)} & cross-modal & ingestion & security & adversarial & \cite{syed-2025-crossagent} \\
+RS-Claw (hierarchical skill trees for remote-sensing agents) & tool-metadata & none & safety & incidental & \cite{liu-2026-rsclaw} \\
+SING (Synthetic Intention Graph) & tool-metadata & none & safety & incidental & \cite{xiao-2026-sing} \\
+Skills Architecture (vs. MCP) & tool-metadata & ingestion & safety & incidental & \cite{ayyagari-2026-context} \\
+Z-Space & tool-metadata & none & safety &  & \cite{he-2025-zspace} \\
+CASCADE & tool-metadata & ingestion & security & adversarial & \cite{turgut-2026-cascade} \\
+ContractGuard & tool-metadata & execution & security & adversarial & \cite{iyer-2026-gate} \\
+MCP-Guard & tool-metadata & ingestion & security & adversarial & \cite{xing-2025-mcpguard} \\
+MCP-Scanner & tool-metadata & ingestion & security & adversarial & \cite{abadeh-2026-mcpscanner} \\
+SMCP (Secure Model Context Protocol) & tool-metadata & ingestion & security & adversarial & \cite{hou-2026-smcp} \\
+Tool-Guard & tool-metadata & reasoning & security & adversarial & \cite{shi-2026-think} \\
+\emph{layered MCP descriptor defense (descriptor integrity verification + pre-context semantic vetting + runtime guardrails)} & tool-metadata & none & security & adversarial & \cite{jamshidi-2025-semantic} \\
+ADE-PRF (ADE Predictive Reliability Framework) & multi-agent & none & safety & incidental & \cite{liu-2026-agent} \\
+Gated Coordination (Partitioned Information Architecture + Cost-Sensitive Gated Escalation) & multi-agent & none & safety & incidental & \cite{jian-2026-gated} \\
+HMAS-2 (Hybrid Multi-Agent System with feedback re-planning) & multi-agent & none & safety & incidental & \cite{chen-2023-scalable} \\
+KG-CFR (Knowledge-Grounded Counterfactual Reasoning) & multi-agent & none & safety & incidental & \cite{maslowski-2026-decoupling} \\
+LongAgent & multi-agent & reasoning & safety & incidental & \cite{zhao-2024-longagent} \\
+MEMO (Memory-augmented MOdel context optimization) & multi-agent & reasoning & safety & incidental & \cite{xie-2026-memo} \\
+Meta-Team (collaborative self-evolution) & multi-agent & none & safety & incidental & \cite{hao-2026-evolve} \\
+ROMA (Recursive Open Meta-Agents) with GEPA+ & multi-agent & none & safety & incidental & \cite{alzubi-2026-roma} \\
+SearchSwarm (delegation-intelligence harness/training for main-agent-to-subagent task decomposition) & multi-agent & ingestion & safety & incidental & \cite{ning-2026-searchswarm} \\
+StackPlanner & multi-agent & none & safety & incidental & \cite{zhang-2026-stackplanner} \\
+STAR-PólyaMath & multi-agent & none & safety & incidental & \cite{wu-2026-starp} \\
+TEP (Textual Equilibrium Propagation) & multi-agent & reasoning & safety & incidental & \cite{chen-2026-textual} \\
+Tree of Agents (TOA) & multi-agent & reasoning & safety & incidental & \cite{yu-2025-tree} \\
+Agentic JWT (A-JWT) & multi-agent & execution & security & adversarial & \cite{goswami-2025-agentic} \\
+BlindGuard & multi-agent & execution & security & adversarial & \cite{miao-2025-blindguard} \\
+ChannelGuard & multi-agent & execution & security & adversarial & \cite{hossain-2026-channelguard} \\
+Forensic LLM-Trace & multi-agent & none & security & adversarial & \cite{s-2026-forensic} \\
+G-Safeguard & multi-agent & execution & security & adversarial & \cite{wang-2025-gsafeguard} \\
+GT-MCP (Game-Theoretic Multi-Agent Control) & multi-agent & reasoning & security & adversarial & \cite{jamshidi-2026-gametheoretic} \\
+Hybrid monitor scaffold (Monitor Red Teaming / MRT framework) & multi-agent & execution & security & adversarial & \cite{kale-2025-reliable} \\
+Maris & multi-agent & execution & security & adversarial & \cite{cui-2025-maris} \\
+MAScope & multi-agent & execution & security & adversarial & \cite{wei-2026-input} \\
+SafeSieve & multi-agent & ingestion & security & both & \cite{zhang-2025-safesieve} \\
+SecureGov-Agent & multi-agent & execution & security & adversarial & \cite{chen-2025-securegovagent} \\
+SentinelAgent & multi-agent & execution & security & adversarial & \cite{he-2025-sentinelagent} \\
+Token-Level Round-Robin (RR) Collaboration / RRMaj & multi-agent & reasoning & security & adversarial & \cite{liu-2026-consensus} \\
+\emph{off-the-shelf LLM behavioral overseer (non-verbal interaction-trace adversarial-intent detection)} & multi-agent & reasoning & security & adversarial & \cite{musaffar-2026-detection} \\
+\emph{You've Changed: Detecting Modification of Black-Box Large La} & supply-chain & execution & safety &  & \cite{dima-2025-you} \\
+ShieldNet & supply-chain & ingestion & security & adversarial & \cite{yuan-2026-shieldnet} \\
+sign-c (server-side signing of execution-bearing response fields) & supply-chain & execution & security & adversarial & \cite{luo-2026-rewriting} \\
+Unified Security Orchestration Framework (USOF) & supply-chain & ingestion & security & adversarial & \cite{muthu-2026-unified} \\
+SafeClaw-R & skill & execution & safety & both & \cite{wang-2026-safeclawr} \\
+\emph{detailed external checklist restatement (vs generic self-check) for long-context skill-following} & skill & none & safety & incidental & \cite{xue-2026-agent} \\
+DASGuard & skill & execution & security & adversarial & \cite{tan-2026-prompt} \\
+OpenClaw-SRT (Semantic Routing \& Trust) & skill & execution & security & adversarial & \cite{chen-2026-openclawsrt} \\
+RouteGuard & skill & ingestion & security & adversarial & \cite{xiao-2026-routeguard} \\
+SkillScan & skill & none & security & adversarial & \cite{liu-2026-agentb} \\
+SkillSec-Eval defenses (hybrid admission validation, retrieval validation layer, metadata sanitizer, LifecycleGuard taint-tracking, continuous re-validation) & skill & none & security & adversarial & \cite{badhe-2026-agent} \\
+SkillVetBench (LLM-as-Judge) & skill & none & security & adversarial & \cite{hossain-2026-skillvetbench} \\
 \end{longtable}
 \endgroup
