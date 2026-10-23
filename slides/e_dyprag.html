@@ -1,0 +1,17 @@
+<section id="e_dyprag" data-transition="fade" style="background:#FBFBF8;color:#15181C;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:34px">
+<p style="font-size:25px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#D6452A">Experiment 6 &nbsp;&#183;&nbsp; DyPRAG vs corpus poisoning</p><h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:56px;font-weight:400;line-height:1.1;color:#15181C">DyPRAG looks immune because it stopped reading the document</h2><div style="display:flex;gap:26px">
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:28px;border:1px solid #E6E3DD;border-radius:14px"><h3 style="font-size:28px;font-weight:600;color:#15181C">What its paper claims</h3><p style="font-size:26px;color:#4A5568;line-height:1.4">Convert the retrieved passage into a small set of weights, inject them, and generate with the passage removed from the prompt &#8212; so there is no passage left for an attacker to own.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:28px;border:1px solid #E6E3DD;border-radius:14px"><h3 style="font-size:28px;font-weight:600;color:#15181C">What we ran</h3><p style="font-size:26px;color:#4A5568;line-height:1.4">Its released translator and checkpoints, <b>n = 400</b>, plus a <b>closed-book arm</b> that answers with no document at all.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:28px;border:1px solid #E6E3DD;border-radius:14px"><h3 style="font-size:28px;font-weight:600;color:#15181C">What we got</h3><p style="font-size:26px;color:#4A5568;line-height:1.4">Perfectly flat under an attack that destroys the undefended arm. The closed-book arm is <b>statistically indistinguishable from it</b>.</p></div>
+</div><table style="font-family:'IBM Plex Sans', Arial, sans-serif;font-size:28px;color:#15181C">
+<tr style="background:#EFEDE7"><th style="width:34%;text-align:left">accuracy on the gold answer</th><th style="width:22%;text-align:right">undefended</th><th style="width:22%;text-align:right">DyPRAG</th><th style="width:22%;text-align:right">closed book</th></tr>
+<tr><td style="text-align:left">clean context</td><td style="text-align:right;color:#2A78D6">63.8</td><td style="text-align:right">5.8</td><td style="text-align:right">7.5</td></tr>
+<tr><td style="text-align:left">10% poisoned</td><td style="text-align:right">&#8212;</td><td style="text-align:right">6.0</td><td style="text-align:right">7.5</td></tr>
+<tr><td style="text-align:left">100% poisoned</td><td style="text-align:right;color:#D6452A">2.5</td><td style="text-align:right">6.0</td><td style="text-align:right">7.5</td></tr>
+</table><p style="position:absolute;left:128px;bottom:64px;font-size:23px;color:#8D97A3">n = 400. Only a no-retrieval arm separates immunity from inattention, and no paper in this family reports one.</p>
+<aside>This is the clearest argument for the third arm, and it changed a conclusion we had already written down.
+
+All three committed predictions were confirmed. But the stated REASON was wrong: we said the attack's token-space precision cannot survive compression into a small weight update. Nothing survives it, the gold answer included.
+
+So a confirmed prediction can still be wrong underneath, and only the control shows it.</aside>
+</section>

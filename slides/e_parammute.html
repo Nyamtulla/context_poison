@@ -1,0 +1,18 @@
+<section id="e_parammute" data-transition="fade" style="background:#FBFBF8;color:#15181C;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:34px">
+<p style="font-size:25px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#D6452A">Experiment 1 &nbsp;&#183;&nbsp; ParamMute vs corpus poisoning</p><h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:56px;font-weight:400;line-height:1.1;color:#15181C">ParamMute helps on clean context and hurts under attack</h2><div style="display:flex;gap:26px">
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:28px;border:1px solid #E6E3DD;border-radius:14px"><h3 style="font-size:28px;font-weight:600;color:#15181C">What its paper claims</h3><p style="font-size:26px;color:#4A5568;line-height:1.4">Suppressing the FFN neurons that carry parametric memory makes the model follow the retrieved passage instead of its own prior. Validated on knowledge conflict only.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:28px;border:1px solid #E6E3DD;border-radius:14px"><h3 style="font-size:28px;font-weight:600;color:#15181C">What we ran</h3><p style="font-size:26px;color:#4A5568;line-height:1.4">Its released code and weights, CoConflictQA over Natural Questions, <b>n = 1409</b>. Corpus poisoning replaces 10%, 50% and 100% of the context, with a clean arm at 0%.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:28px;border:1px solid #E6E3DD;border-radius:14px"><h3 style="font-size:28px;font-weight:600;color:#15181C">What we got</h3><p style="font-size:26px;color:#4A5568;line-height:1.4">It reproduces its published benefit, then costs accuracy as soon as an adversary writes the context. The mechanism never stops working &#8212; that is the problem.</p></div>
+</div><table style="font-family:'IBM Plex Sans', Arial, sans-serif;font-size:28px;color:#15181C">
+<tr style="background:#EFEDE7"><th style="width:34%;text-align:left">accuracy on the gold answer</th><th style="width:22%;text-align:right">undefended</th><th style="width:22%;text-align:right">ParamMute</th><th style="width:22%;text-align:right">difference</th></tr>
+<tr><td style="text-align:left">clean context</td><td style="text-align:right">48.4</td><td style="text-align:right">57.7</td><td style="text-align:right;color:#2A78D6;font-weight:600">+9.3</td></tr>
+<tr><td style="text-align:left">10% poisoned</td><td style="text-align:right">29.8</td><td style="text-align:right">30.0</td><td style="text-align:right;color:#8D97A3">+0.2</td></tr>
+<tr><td style="text-align:left">50% poisoned</td><td style="text-align:right">19.9</td><td style="text-align:right">17.5</td><td style="text-align:right;color:#8D97A3">&#8722;2.3</td></tr>
+<tr><td style="text-align:left">100% poisoned</td><td style="text-align:right">5.3</td><td style="text-align:right">1.1</td><td style="text-align:right;color:#D6452A;font-weight:600">&#8722;4.2</td></tr>
+</table><p style="position:absolute;left:128px;bottom:64px;font-size:23px;color:#8D97A3">n = 1409, detectability threshold 5.3pp. Grey does not clear it. Higher is better throughout.</p>
+<aside>The headline test of the thesis: a defense built for context that goes bad by accident, run against context made bad on purpose.
+
+The control establishes first &mdash; +9.3 on its own benchmark with the inhibition logged firing &mdash; so every number under attack is readable.
+
+Across the whole dose range it loses 13.5 points more accuracy than doing nothing at all. Suppress the model's memory, and whatever owns the context inherits the answer.</aside>
+</section>

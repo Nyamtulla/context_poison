@@ -1,0 +1,23 @@
+<section id="signflip" data-section="What the experiments found." data-transition="fade" style="background:#FBFBF8;color:#15181C;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:62px;font-weight:400;line-height:1.1;width:1500px">Trusting the document helps when it is honest and hurts when it is attacked</h2>
+<table style="font-family:'IBM Plex Sans', Arial, sans-serif;font-size:30px;color:#15181C">
+<tr style="background:#EFEDE7"><th style="width:18%;text-align:left">defense</th><th style="width:10%;text-align:right">n</th><th style="width:36%;text-align:right">clean context</th><th style="width:36%;text-align:right">under attack</th></tr>
+<tr><td>SpARE</td><td style="text-align:right">500</td><td style="text-align:right;color:#2A78D6;font-weight:600">+14.2 &#160;(39.6&#8594;53.8)</td><td style="text-align:right;color:#D6452A;font-weight:600">&#8722;10.2 &#160;(12.0&#8594;1.8)</td></tr>
+<tr><td>ParamMute</td><td style="text-align:right">1409</td><td style="text-align:right;color:#2A78D6;font-weight:600">+9.3 &#160;(48.4&#8594;57.7)</td><td style="text-align:right;color:#D6452A;font-weight:600">&#8722;4.2 &#160;(5.3&#8594;1.1)</td></tr>
+<tr><td>COIECD</td><td style="text-align:right">400</td><td style="text-align:right;color:#8D97A3;font-weight:600">&#8722;0.8 &#160;(44.0&#8594;43.3)</td><td style="text-align:right;color:#8D97A3;font-weight:600">&#8722;1.8 &#160;(3.8&#8594;2.0)</td></tr>
+</table>
+<p style="font-size:24px;color:#8D97A3;line-height:1.4"><b>Accuracy on the gold answer &#8212; the one the real document supports &#8212; higher is better, not attack success rate.</b> Percentage points against the run&#8217;s own undefended arm, baseline and defended rate in brackets. Clean is 0% dose, under attack is 100%. Grey does not clear that run&#8217;s threshold. </p>
+<div style="display:flex;gap:48px">
+<p style="font-size:30px;line-height:1.35;flex:1">A method that shifts trust from memory toward the retrieved text is <b>correct when the text is stale</b> and <b>dangerous when an attacker owns it</b>. Seven of our ten implementations belong to this one family. Three defenses shown here; the rest follow one at a time.</p>
+<p style="font-size:30px;line-height:1.35;flex:1;color:#D6452A"><b>CK-PLUG under BadRAG tone steering:</b> the undefended model adopts the attacker&#8217;s framing 0.0% of the time. CK-PLUG does it 99.0%. It does not fail to stop the attack &#8212; it carries it.</p>
+</div>
+<aside>If anyone asks what the number is: the share of items where the model produced the gold answer, the one supported by the real retrieved document. In CoConflictQA each item also has a parametric answer the model would give from memory, and that one is wrong by construction, so accuracy here means "did it read the document correctly". Higher is better. It is NOT an attack success rate; ASR only appears in the agent cell.
+
+The bracket order is baseline first, defended second.
+
+This is the single design rule that explains most of what we found, and the family is defined mechanically: a method whose intervention is a weighting between the context-conditioned and the memory-conditioned prediction. ACD, COIECD, ParamMute, SCR, SpARE and others are in it. DyPRAG and the two RobustRAG variants are not, which is what keeps the claim from being vacuous.
+
+SpARE is the cleanest case because its control and its conviction are the same measurement: steering toward context is worth +14.2 when the context is honest and costs 10.2 when it is attacked. Both ends clear the threshold. Its bracketed pairs also show why we did not switch to percentage change: 0.0% to 99.0% on the tone-steering result has no percentage increase to quote.
+
+If the advisor pushes on "is this just suppressing memory being bad?" — no, and we can state the scope condition. Against BadRAG's refusal-induction variant ParamMute is strongly protective: it drops refusal from 52.4% to 0.2% and roughly doubles accuracy. One mechanism, two signs, selected by whether the memory held the right answer. We predicted little effect there and were wrong.</aside>
+</section>
