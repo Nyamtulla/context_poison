@@ -48,7 +48,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--defense", required=True)
     ap.add_argument("--attack", default="poisonedrag",
-                    choices=["poisonedrag", "badrag_dos", "badrag_sentiment"])
+                    choices=["poisonedrag", "badrag_dos", "badrag_sentiment",
+                             "corpus_poisoning"])
     ap.add_argument("--n", type=int, default=500)
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--doses", type=int, nargs="+",

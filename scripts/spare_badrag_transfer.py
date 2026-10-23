@@ -56,7 +56,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--attack", default="badrag_dos",
-                    choices=["badrag_dos", "poisonedrag"])
+                    choices=["badrag_dos", "poisonedrag", "corpus_poisoning"])
     ap.add_argument("--poison_counts", type=int, nargs="+", default=[0, 1, 5, 9, 10])
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--model", type=str, default="NousResearch/Meta-Llama-3-8B")

@@ -44,6 +44,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 
 from transfer_stats import min_detectable_change, wilson   # noqa: E402
 from spare_vs_corpus_poisoning import acc_score            # noqa: E402
+from transfer_stats import adversarial_text               # noqa: E402
 
 INHIBIT_LAYERS = [21, 22, 23, 24, 25, 26]
 
@@ -115,6 +116,19 @@ def build_poisoned(item, top_k: int, n_poison: int, repeat: int = 5,
     # which are fixed strings. It is the item's own retrieved passage with
     # every gold answer replaced by a type-matched wrong one, so the register
     # is unchanged and nothing instructs the model.
+    if attack == "corpus_poisoning":
+        # Their CorpusPoison, mode='displace', poison_order='forward': the
+        # optimised passage overwrites the FIRST n slots and is placed once,
+        # not repeated. The other payloads are short assertions that their
+        # own construction repeats five times; this one is already a long
+        # optimised token string, and repeating it is not what the attack
+        # does. Forward order matters because it is what displaces the
+        # highest-ranked honest passages.
+        adv = adversarial_text()
+        out = list(passages)
+        for i in range(min(n_poison, len(out))):
+            out[i] = adv
+        return out
     if attack == "distractor_evidence":
         payload = item["distractor_context"]
     else:
@@ -221,7 +235,8 @@ def main():
     ap.add_argument("--max_new_tokens", type=int, default=32)
     ap.add_argument("--poison_counts", type=int, nargs="+", default=[0, 1, 5, 10])
     ap.add_argument("--attack", default="poisonedrag",
-                    choices=["poisonedrag", "badrag_dos", "badrag_sentiment"],
+                    choices=["poisonedrag", "badrag_dos", "badrag_sentiment",
+                             "corpus_poisoning"],
                     help="poisonedrag inserts a false answer; badrag_dos "
                          "induces refusal; badrag_sentiment steers tone "
                          "without changing the answer. Scored accordingly.")
