@@ -1,0 +1,30 @@
+{
+ "defense": "acd",
+ "n": 400,
+ "dose": "clean",
+ "data": "NaturalQuestionsShort_kc.jsonl",
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "arms": {
+  "rag": {
+   "n": 400,
+   "ctx_acc": 66.0,
+   "pm_acc": 9.0
+  },
+  "closedbook": {
+   "n": 400,
+   "ctx_acc": 10.0,
+   "pm_acc": 44.75
+  },
+  "acd": {
+   "n": 400,
+   "ctx_acc": 63.5,
+   "pm_acc": 16.25
+  }
+ },
+ "expectation": {
+  "reproduces": "acd_vs_corpus_poisoning.json",
+  "tolerance_pp": 9.9
+ },
+ "delta": 0.0,
+ "verdict": "PASS"
+}

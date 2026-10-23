@@ -1,0 +1,30 @@
+{
+ "defense": "scr",
+ "n": 400,
+ "dose": "clean",
+ "data": "NaturalQuestionsShort_kc.jsonl",
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "arms": {
+  "rag": {
+   "n": 400,
+   "ctx_acc": 58.75,
+   "pm_acc": 9.25
+  },
+  "closedbook": {
+   "n": 400,
+   "ctx_acc": 4.75,
+   "pm_acc": 56.0
+  },
+  "scr": {
+   "n": 400,
+   "ctx_acc": 45.25,
+   "pm_acc": 22.5
+  }
+ },
+ "expectation": {
+  "reproduces": "scr_vs_corpus_poisoning.json",
+  "tolerance_pp": 9.9
+ },
+ "delta": 0.75,
+ "verdict": "PASS"
+}

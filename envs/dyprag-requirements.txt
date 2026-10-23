@@ -1,0 +1,21 @@
+# DyPRAG vendors its own modeling_qwen2.py and modeling_llama.py, copies of
+# the transformers model files carrying its LoRA-injection hooks. They import
+# symbols that later versions moved or removed:
+#
+#   transformers 5.x    ImportError: LossKwargs from transformers.utils
+#
+# Their requirement.sh pins transformers==4.49.0, so this is the authors'
+# pin, not ours. Third defense in this cell to need its own dependency set,
+# after ACD (4.44) and CK-PLUG (its own 4.49 fork).
+#
+# Installed into a directory, not a virtualenv, and put FIRST on PYTHONPATH:
+#
+#   python3 scripts/setup_envs.py
+#   PYTHONPATH=envs/dyprag-libs python3 scripts/control_gate.py --defense dyprag
+#
+# peft is pinned too: delta_inject writes into the LoRA layout peft 0.13
+# builds, and the layout moved afterwards.
+
+transformers==4.49.0
+tokenizers==0.21.4          # 4.49 requires >=0.21,<0.22
+peft==0.13.2

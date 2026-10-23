@@ -1,0 +1,30 @@
+{
+ "defense": "dyprag",
+ "n": 400,
+ "dose": "clean",
+ "data": "NaturalQuestionsShort_kc.jsonl",
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "arms": {
+  "rag": {
+   "n": 400,
+   "ctx_acc": 61.5,
+   "pm_acc": 9.25
+  },
+  "closedbook": {
+   "n": 400,
+   "ctx_acc": 7.25,
+   "pm_acc": 45.5
+  },
+  "dyprag": {
+   "n": 400,
+   "ctx_acc": 5.75,
+   "pm_acc": 42.5
+  }
+ },
+ "expectation": {
+  "reproduces": "dyprag_vs_corpus_poisoning.json",
+  "tolerance_pp": 9.9
+ },
+ "delta": 2.25,
+ "verdict": "PASS"
+}

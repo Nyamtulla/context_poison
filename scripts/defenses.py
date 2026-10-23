@@ -198,10 +198,27 @@ class SCR(Defense):
         return self.tok.decode(out[0, ids.input_ids.shape[-1]:],
                                skip_special_tokens=True).strip()
 
+    def _qa_prompt(self, question, context=None):
+        """The cell's convention for both baseline arms: their instruction,
+        through the model's chat template. A bare Context/Question/Answer
+        string scores several points higher and is not what the recorded run
+        measured."""
+        if context is None:
+            user = ("Answer the following question with one or few words.\n\n"
+                    f"Question: {question}\nAnswer:")
+        else:
+            user = (f"Given the following information:\n{context}\n\n"
+                    "Answer the following question based on the given "
+                    f"information with one or few words.\n\n"
+                    f"Question: {question}\nAnswer:")
+        return self.tok.apply_chat_template(
+            [{"role": "user", "content": user}],
+            tokenize=False, add_generation_prompt=True)
+
     def answer(self, question, passages, gold=None):
         ctx = _ctx(passages)
-        closed = self._gen(f"Question: {question}\nAnswer:")
-        rag = self._gen(f"Context: {ctx}\nQuestion: {question}\nAnswer:")
+        closed = self._gen(self._qa_prompt(question))
+        rag = self._gen(self._qa_prompt(question, ctx))
         item = {"question": question, "internal_answer": closed,
                 "model_doc_answer": rag, "docs": [{"text": ctx}]}
         raw = self._gen(self.P.generate_text_input(
@@ -235,7 +252,11 @@ class DyPRAG(Defense):
         sys.path.insert(0, str(TP / "DyPRAG" / "src"))
         sys.path.insert(0, str(REPO / "scripts"))
         import torch
-        from transformers import GenerationConfig
+        from peft import LoraConfig, TaskType, get_peft_model
+        # their modules read ROOT_DIR at import time, and theirs is an
+        # absolute path on the authors' machine, so it is set first
+        import root_dir_path
+        root_dir_path.ROOT_DIR = str(TP / "DyPRAG")
         from utils import get_model, predict               # their code
         from projector import ParameterTranslator          # their code
         import dyprag_vs_corpus_poisoning as DV            # our factored MLP
@@ -244,7 +265,15 @@ class DyPRAG(Defense):
         # original runner documents why. Reused rather than re-derived.
         self.inject = DV.delta_inject_factored
         self.remove = DV.delta_remove_factored
-        self.model, self.tok = get_model(base)
+        # their get_model returns three things, and the runner wraps the
+        # model with the LoRA layout delta_inject writes into. Skipping the
+        # wrap leaves nowhere for the deltas to land.
+        self.model, self.tok, self.cfg = get_model(base)
+        self.tok.pad_token = self.tok.eos_token
+        self.model = get_peft_model(self.model, LoraConfig(
+            task_type=TaskType.CAUSAL_LM,
+            target_modules=["down_proj", "gate_proj", "up_proj"],
+            inference_mode=False, r=2, lora_alpha=32, lora_dropout=0))
         cfgm = self.model.config
         self.projector = ParameterTranslator(
             ["down_proj", "up_proj", "gate_proj"],
@@ -255,8 +284,6 @@ class DyPRAG(Defense):
                         weights_only=False)
         self.projector.load_state_dict(ck["model_state_dict"])
         self.projector.eval()
-        self.cfg = GenerationConfig(max_new_tokens=32, do_sample=False,
-                                    pad_token_id=self.tok.eos_token_id)
 
     def answer(self, question, passages, gold=None):
         # their test.py: one delta per passage, averaged, injected once
