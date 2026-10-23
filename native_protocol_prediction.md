@@ -85,3 +85,23 @@ benchmark - rather than cited as attack doses.
 ~198,000 scored episodes at a measured ~5,800 per GPU-hour, and
 contrastive-decoding defenses run at about half that. Four to seven days of
 continuous A6000 time.
+
+## A limit recorded before the grid ran
+
+COIECD's `model_answer` truncates its input at 2048 tokens. That is the
+authors' number, inside the method, and the rule says we adapt the harness and
+leave the method alone.
+
+Under this attack construction the poisoned passage is repeated five times per
+slot, so the context grows with the dose. Measured over all 500 items:
+
+| dose | items over 2048 tokens |
+|---|---|
+| 0, 1, 2, 3, 5 | 0 of 500 |
+| 10 | 87 of 500 (17.4%) |
+
+So COIECD's saturation cell, and only that cell, is measured on a context the
+method truncates for about one item in six. No other defense in the grid caps
+its input. We report COIECD at dose 10 with that attached rather than dropping
+the cell or editing their constant, and the undefended arm beside it sees the
+same truncation, so the comparison is internally valid.
