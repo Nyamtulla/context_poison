@@ -113,6 +113,25 @@ precision.
 
 \begin{figure*}[t]
 \centering
+\includegraphics[width=\textwidth]{figures/fig0_pipeline}
+\caption{The taxonomy against the system it describes. Untrusted content
+arrives through one of \NChannelCats{} \textbf{channels}, enters one context
+window, and the output fails as one of \NConseqCats{} \textbf{consequences}. A
+defense can intervene at three points, and the two literatures do not choose
+the same one: the security side masses at ingestion, the safety side at
+reasoning, and execution is security almost alone. Counts are named mechanisms
+per channel (left), named defenses per intervention point (centre) and named
+mechanisms per consequence (right), by regime. The consequence column is the
+sharpest division in the figure: goal-hijack is \NGoalHijackSec{} security to
+\NGoalHijackSafety{} safety, and reasoning corruption runs the other way,
+\NReasonSafety{} to \NReasonSec{}. Drawn as a flow rather than a tree because
+the taxonomy is a cube; the pipeline is the one ordering the three axes
+genuinely have.}
+\label{fig:pipeline}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
 \includegraphics[width=0.92\textwidth]{figures/fig1_cube}
 \caption{Named attacks against named defenses in every channel $\times$
 consequence cell, split by regime. Solid bars are attacks, pale hatched bars
@@ -153,24 +172,13 @@ Eight of them are in the security panel, four of those are
 to itself is a gap; a cell with attacks and no defense is a different and
 sharper one.
 
-Figure~\ref{fig:channelgap} asks a separate question: where protection does not
-follow the problem. Counting named defenses against named mechanisms per
-channel, \meth{multi-agent} and \meth{memory} are served at roughly four
-defenses per mechanism, while \meth{supply-chain} has fewer defenses than
-mechanisms and \meth{cross-modal} and \meth{tool-metadata} sit at parity. Those
-three are the routes by which an agent accepts capability from a third party,
-and they are the thinnest in the corpus.
+Read along a row and the same figure answers where protection does not follow
+the problem. \meth{multi-agent} and \meth{memory} carry roughly four defenses
+per mechanism, while \meth{supply-chain} has fewer defenses than mechanisms
+and \meth{cross-modal} and \meth{tool-metadata} sit at parity. Those three are
+the routes by which an agent accepts capability from a third party, and they
+are the thinnest in the corpus.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig2_channel_gap}
-\caption{Named mechanisms against named defenses, per channel, labeled with
-defenses per mechanism. Channels are ordered by that ratio, so the under-served
-routes fall to the bottom. \meth{supply-chain} has fewer defenses than named
-mechanisms; \meth{cross-modal} and \meth{tool-metadata} are at parity. These
-are the routes by which an agent accepts third-party capability.}
-\label{fig:channelgap}
-\end{figure}
 
 \textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
 \NMechSecurity{} from the security literature and \NMechSafety{} from the safety literature, and \NDefenses{} named defenses and fixes, \NDefSecurity{}
