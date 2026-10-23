@@ -1,0 +1,15 @@
+# RobustRAG's DecodingAgg imports `_crop_past_key_values` from
+# transformers.generation.utils, a private helper later versions removed:
+#
+#   transformers 5.x   ImportError: _crop_past_key_values
+#
+# Their README says "Tested with torch==2.2.1 and transformers==4.40.1", so
+# this is the authors' pin. Fourth defense in this cell to need its own
+# dependency set, after ACD (4.44), CK-PLUG (its own 4.49 fork) and
+# DyPRAG (4.49 + peft 0.13.2).
+#
+#   python3 scripts/setup_envs.py
+#   PYTHONPATH=envs/robustrag-libs python3 scripts/robustrag_matrix.py ...
+
+transformers==4.40.1
+tokenizers==0.19.1          # 4.40 requires >=0.19,<0.20

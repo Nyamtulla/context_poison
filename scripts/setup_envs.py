@@ -39,6 +39,7 @@ ENVS = REPO / "envs"
 SETS = {
     "acd-libs": ("acd-requirements.txt", "transformers", "4.44.0"),
     "dyprag-libs": ("dyprag-requirements.txt", "transformers", "4.49.0"),
+    "robustrag-libs": ("robustrag-requirements.txt", "transformers", "4.40.1"),
 }
 
 
