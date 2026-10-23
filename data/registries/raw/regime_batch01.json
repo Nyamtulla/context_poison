@@ -1,0 +1,772 @@
+[
+ {
+  "paper_id": "9aa8ef5683aa8f81d3e0a826c076b45ff0f2d270",
+  "title": "[Short Paper] Forensic Analysis of Indirect Prompt Injection Attacks on LLM Agents",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Indirect prompt injection against LLM agents that ingest external content. The paper takes a post-hoc forensic stance: the attack has already occurred and the question is whether it can be reconstructed from agent execution logs.",
+  "technical_summary": "A digital-forensic framework for LLM agents: it generates agent execution logs on a realistic agentic-task benchmark, then uses LLMs to analyse those logs and identify traces of indirect prompt injection. The contribution is the forensic pipeline and benchmark rather than a defense.",
+  "text": "data/cache/pdf_text/9aa8ef5683aa8f81d3e0a826c076b45ff0f2d270.txt"
+ },
+ {
+  "paper_id": "81eb760ebbe224ae52cd7aea8f7f2865e4134908",
+  "title": "Overcoming the Retrieval Barrier: Indirect Prompt Injection in the Wild for LLM Systems",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "The adversary seeks to coerce a retrieval-augmented LLM system into executing an arbitrary attacker-chosen attack fragment (e.g., misinformation, phishing links, malicious Python commands like exfiltrating SSH keys) by ensuring it is retrieved into the model's context for a target natural user query, without assuming the malicious text is already 'in context' as prior idealized evaluations do. The threat model is strictly black-box: the adversary has no access to the parameters of the embedding model or retriever/LLM, can only query the embedding model via standard APIs (reflecting realistic deployments using proprietary services like OpenAI's text-embedding-3-small), has no visibility into the external corpus contents beyond the ability to inject their own single item (simulating a stealth attack practical for adversaries who can write to unverified-party-writable sources such as public",
+  "technical_summary": "This paper identifies and closes a critical gap in prior indirect prompt injection (IPI) research: nearly all previous IPI evaluations assumed the malicious text is already retrieved into an LLM's context (e.g., by designating a 'latest email' as poisoned, using single-item corpora, or requiring specially optimized trigger tokens in the user query itself), which blurs the distinction between direct and indirect injection and leaves the real-world retrieval feasibility of IPI attacks unclear. The authors empirically confirm this gap by showing that unoptimized malicious text is essentially never retrieved under natural queries across 11 diverse BEIR retrieval benchmarks, establishing retrieval as the decisive bottleneck for any IPI attack to succeed. To address this, they formalize IPI attack construction as decomposing an injected item into a trigger fragment x (a short token prefix whos",
+  "text": "data/cache/pdf_text/81eb760ebbe224ae52cd7aea8f7f2865e4134908.txt"
+ },
+ {
+  "paper_id": "dfc9d7ad54c197d239cb473f3ae7a64ab50d0e90",
+  "title": "Embedding-Based Detection of Indirect Prompt Injection Attacks in Large Language Models Using Semantic Context Analysis",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes an embedding-based detector for Indirect Prompt Injection Attacks that works by analysing the semantic relationship between the user's stated intent and the external content retrieved into context, rather than by inspecting the external content in isolation. That relational framing is the paper's core idea: an injected instruction is anomalous not because of its own surface features but because it is semantically unrelated to what the user asked for, which is a signal a content-only filter cannot see. The method is deliberately architecture-agnostic - it sits outside the LLM as an external detection layer requiring no modification to the model, in contrast to prevention-focused approaches that alter the underlying architecture. The study contributes a 70,000-sample dataset combining 35,000 malicious instances drawn from BIPIA (the Benchmark for Indirect Prompt Injection Attacks)",
+  "text": "data/cache/pdf_text/dfc9d7ad54c197d239cb473f3ae7a64ab50d0e90.txt"
+ },
+ {
+  "paper_id": "dd8e3ff740ecd615b37dfb219d98e73a782f71d1",
+  "title": "Hybrid Real-time Framework for Detecting Adaptive Prompt Injection Attacks in Large Language Models",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes a hybrid, multi-layered, real-time detection framework for prompt injection, motivated by a structured review of why single-point defenses fail. The review contribution is a cross-mapping (its Table 3) of ten attack types - direct injection, indirect prompt injection, data exfiltration, code injection, fraud/social engineering, malware transmission, manipulated content, DoS, role-playing/persona exploitation, and obfuscated attacks - against five defense families (RLHF, input/output filtering, Known-Answer Detection, LLM supervisor, encoding-based, architectural patterns), concluding that no existing strategy covers all attack types. Its sharpest analytical point concerns Known-Answer Detection: KAD assumes an injected task cannot observe or condition on the detection instruction, but since the detection instruction and the untrusted external data share one context window, that ",
+  "text": "data/cache/pdf_text/dd8e3ff740ecd615b37dfb219d98e73a782f71d1.txt"
+ },
+ {
+  "paper_id": "dacd135992e586b5a2b27c9134985d56cc4a20fb",
+  "title": "TRACER-AI: A Multi-Layer Explainable Framework for Prompt Injection, Agent Goal Hijacking, and Tool Misuse Detection in Agentic AI Systems",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes TRACER-AI, a four-layer explainable defense-in-depth framework for agentic systems, organized around an explicit attack progression - prompt injection leads to goal hijacking leads to tool misuse - rather than treating input filtering as the single enforcement boundary. The four layers are: (i) semantic prompt-injection detection at instruction intake; (ii) continuous goal-integrity monitoring that watches for deviation from the user's original objective across the agent's trajectory; (iii) contextual tool-risk control that authorizes or denies tool calls at execution time based on their risk in context; and (iv) structured explainable security decisions that expose which evidence caused an action to be allowed, monitored, confirmed, or blocked. These signals are fused into a dynamic risk score combining prompt-injection probability, goal deviation, tool risk, and contextual ano",
+  "text": "data/cache/pdf_text/dacd135992e586b5a2b27c9134985d56cc4a20fb.txt"
+ },
+ {
+  "paper_id": "440cdee84fc943b8919bcc0fb2308b0729b949ff",
+  "title": "Securing Autonomous AI Agents: A Context-Aware Interception Framework for Detecting and Mitigating Prompt Injection Attacks",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes the Analy8 Interception Layer, a context-aware security middleware that sits between an autonomous agent and its execution engine and screens both user prompts and fetched third-party data for direct and indirect prompt injection before they reach the LLM. The motivating argument is a latency/accuracy trade-off the paper states explicitly: static rule-based filters evaluate prompts in isolation and therefore cannot distinguish complex benign queries (multi-step mathematical reasoning, database-querying instructions legitimately aimed at the agent) from genuine attacks, producing high false positives and negatives; whereas LLM-as-a-judge screening has the necessary context but adds roughly 2-3 seconds per API call, which the authors argue is unviable for responsive interactive frontends. Analy8's design response is to avoid a generative model in the detection path entirely: class",
+  "text": "data/cache/pdf_text/440cdee84fc943b8919bcc0fb2308b0729b949ff.txt"
+ },
+ {
+  "paper_id": "08e6079c73649ba405826d9ea5da1c18645fcdb6",
+  "title": "Secure Prompt Engineering Patterns for Cloud LLM Agents",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Direct and indirect prompt manipulation of cloud-integrated LLM agents holding varying privilege levels, aiming at unauthorized cloud operations, data exposure, privilege escalation and resource misuse. Testbeds use isolated projects with controlled access rights and logging.",
+  "technical_summary": "A catalogue of five reusable secure-prompt patterns for cloud LLM agents, evaluated incrementally against a 200+ injection corpus on three isolated cloud testbeds, with a threat-vector taxonomy for direct and indirect manipulation.",
+  "text": "data/cache/pdf_text/08e6079c73649ba405826d9ea5da1c18645fcdb6.txt"
+ },
+ {
+  "paper_id": "7ff1a721846c7b157214001fd598df4a33fbbfe3",
+  "title": "MobileSafetyBench: Evaluating Safety of Autonomous Agents in Mobile Device Control",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "Formal threat model for the indirect prompt injection subset of tasks: malicious instructions are embedded within UI content the agent legitimately encounters while performing its assigned task -- such as the body of a text message from a stranger or a social media post -- rather than being supplied directly by the user. When the agent observes this content as part of its normal task execution (e.g., checking messages), the embedded instruction (e.g., 'sell 100 NVIDIA stocks') can deceive the agent into taking actions the user never authorized, exploiting the agent's tendency to treat all observed content as legitimate instructions. The paper also defines a broader, non-adversarial safety threat model for its daily-scenario tasks, characterizing safety as the agent's ability to avoid two OECD/Amodei-taxonomy-derived risk categories: misuse (agent complying with instructions that are unet",
+  "technical_summary": "MobileSafetyBench is a benchmark platform for evaluating both the safety and helpfulness of LLM-based agents that control mobile devices, addressing a gap where prior LLM safety benchmarks relied on question-answering formats that fail to capture dangerous agentic behaviors during actual device operation. The benchmark uses real Android emulators to create an interactive environment where device control is formulated as a sequential decision-making problem: at each timestep the agent receives a multi-modal observation (a screenshot plus text descriptions of UI elements, generated via a screen-layout translator) and a task instruction, and outputs an action (tapping, swiping, text input, or one of two explicit refusal actions -- refuse() and ask-consent()) from a predefined action space; an automatic rule-based evaluator scores the final device state and full action history at episode end",
+  "text": "data/cache/pdf_text/7ff1a721846c7b157214001fd598df4a33fbbfe3.txt"
+ },
+ {
+  "paper_id": "0f6b86356acc0b2a172096bda2193a6026986628",
+  "title": "Runtime Policy Enforcement for MCP-Based LLM Agents",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Presents a runtime Policy Enforcement Point (PEP) for MCP-based tool-calling LLM agents that intercepts at the tool-call boundary rather than at the prompt, motivated by the observation that prompt-level defenses leave three harm classes undefended: path traversal, user-guided exfiltration, and high-frequency tool abuse. The mechanism combines declarative rules over a cross-step information-flow label system - tracking source integrity and data sensitivity as labels that propagate across steps of an agent trajectory - with a synchronous SHA-256 hash-chained audit log providing tamper evidence. Because enforcement happens where the action occurs rather than where the text arrives, an injection that successfully subverts the model's reasoning still cannot execute a disallowed call, which is the structural argument for execution-stage placement. A conservative 'intent-taint' mitigation (con",
+  "text": "data/cache/pdf_text/0f6b86356acc0b2a172096bda2193a6026986628.txt"
+ },
+ {
+  "paper_id": "a110c0272fe8da942df2fe74205dd32157218587",
+  "title": "Portable Agent Memory: A Protocol for Cryptographically-Verified Memory Transfer Across Heterogeneous AI Agents",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "This is a paper with an explicit but partial security threat model, focused on memory-mediated attacks rather than being a pure security/red-teaming study. The paper identifies 'injection vulnerability' as one of six core problems motivating the work: naive memory injection (prepending raw conversation history into a new context) creates a prompt injection attack surface, since recalled text containing instruction-like patterns can hijack agent behavior. It also identifies 'no integrity verification' as a related problem: when memory is transferred, there is typically no mechanism to verify it has not been tampered with, so a corrupted or poisoned memory store can silently degrade agent behavior. The paper's Ethical Considerations section further explicitly discusses 'memory weaponization' -- the risk that portable memory could enable adversarial transfer, where an attacker poisons a sou",
+  "technical_summary": "Portable Agent Memory is an open protocol for serializing, transporting, and re-hydrating LLM agent memory across heterogeneous vendor platforms and model families with cryptographic integrity guarantees, addressing six identified problems in current agent memory systems: vendor lock-in (memory accumulated in one platform cannot be exported to competitors), session amnesia (catastrophic forgetting across session boundaries absent proprietary continuity mechanisms), lack of integrity verification (no way to detect tampering or poisoning of transferred memory), coarse access control (existing systems offer only binary full-memory-or-none access), injection vulnerability (naively prepending raw conversation history as memory creates a prompt-injection attack surface), and no cross-model transfer (memory formats, context-structure assumptions, and tokenization are incompatible across model f",
+  "text": "data/cache/pdf_text/a110c0272fe8da942df2fe74205dd32157218587.txt"
+ },
+ {
+  "paper_id": "156e8e6a9f11d3a3c9136dfc53211b9fb0d51699",
+  "title": "Systemic Vulnerabilities in Autonomous LLM Agents: A Comprehensive Threat Analysis and Authorization Framework",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Theoretical threat-model and authorization-framework paper for autonomous LLM agents, arguing that agentic systems introduce operational rather than merely informational risk: a static chatbot's failure modes are toxic generation or training-data leakage, whereas an agent typically holds write access to databases, the ability to send communications, and authority to execute code, so compromise becomes an access-control problem rather than a content problem. The paper formalizes four vectors - indirect prompt injection (corruption of the context window via retrieved external data), task hijacking (diversion of the agent's objective function), cross-agent spoofing (absence of cryptographic identity verification between agents), and unsafe tool invocation. Its central analytical claim is that Role-Based Access Control breaks down when the principal is probabilistic: RBAC grants rights to a ",
+  "text": "data/cache/pdf_text/156e8e6a9f11d3a3c9136dfc53211b9fb0d51699.txt"
+ },
+ {
+  "paper_id": "a00030f261b800f4156c88d01e0173f872962b99",
+  "title": "OPENCLAW-SRT: Resource-Aware Autonomous Agent Architecture for Smart City Edge Computing",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes OpenClaw-SRT (Semantic Routing & Trust), a three-layer architecture addressing two coupled bottlenecks in deploying autonomous agents to urban edge nodes: cost and indirect prompt injection exposure. The layers are (1) a Semantic Routing Layer using a lightweight local model (Llama 3.2 1B) to classify task complexity and divert simple requests to edge devices rather than the cloud; (2) a Privacy Gateway Layer applying PII masking and deterministic verification to block malicious code execution; and (3) a Security Sandbox Layer providing Docker containerized isolation with privilege grading. The security argument is that these compose: routing reduces how much untrusted content reaches a powerful cloud model at all, the gateway applies deterministic (non-model) checks rather than relying on the LLM to police itself, and the sandbox bounds what executes even when the earlier layer",
+  "text": "data/cache/pdf_text/a00030f261b800f4156c88d01e0173f872962b99.txt"
+ },
+ {
+  "paper_id": "45c41693ece0aebf5d9210aa3a983046ee325c65",
+  "title": "ProjGuard: Safety Monitoring for Computer-Use Agents via Low-Dimensional Projections",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Computer-use agents operating real desktop operating systems, exposed to prompt injection, indirect instructions and visual attacks delivered through the environment they observe.",
+  "technical_summary": "A behavioural-trajectory safety monitor for computer-use agents: instead of inspecting prompts or inputs with a second model, it derives a scalar risk signal from the agent's accumulated interaction history at each step and checks online whether execution is drifting toward an unsafe region of a low-dimensional projection.",
+  "text": "data/cache/pdf_text/45c41693ece0aebf5d9210aa3a983046ee325c65.txt"
+ },
+ {
+  "paper_id": "cce1b13eebe88e5051d329a95616c9df646fb08c",
+  "title": "Unified Security Orchestration Framework for Protecting AI/ML Systems Against Input-Based and Model Supply Chain Attacks",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes the Unified Security Orchestration Framework (USOF), a model-independent security control plane spanning the AI/ML lifecycle, motivated by the argument that existing AI security tooling is fragmented - each tool protects one component, so coordinated or novel attacks that cross components go uncovered. USOF composes six modules: the Input Trust and Threat Analysis Module (ITTAM) detecting input-based attacks across direct, indirect, multi-turn and multimodal vectors; a Context-Aware Policy Enforcement Engine (CAPEE) applying dynamic context-sensitive policy at runtime; an Execution Isolation Layer (EIL) bounding agentic actions; a Model Integrity and Supply Chain Validator (MISCV) detecting supply-chain compromise via training-data-independent behavioral fingerprinting; a Response Governance Engine (RGE) screening outputs for sensitive-data leakage and second-order injection; an",
+  "text": "data/cache/pdf_text/cce1b13eebe88e5051d329a95616c9df646fb08c.txt"
+ },
+ {
+  "paper_id": "bd8d64d442ec88eaf5c3117e3700e61021db0587",
+  "title": "Mind Mapping Prompt Injection: Visual Prompt Injection Attacks in Modern Large Language Models",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Introduces a multimodal prompt-injection technique that embeds malicious instructions inside a mind map image rather than in text, exploiting a property specific to that visual format: mind maps are intentionally incomplete, consisting of nodes and branches without explanatory detail. The attack works by having the model fill in the missing sections when it processes and interprets the image - the LLM's own completion behaviour generates the unauthorized output, so the harmful content is never written down by the attacker and never appears as an explicit instruction to be filtered. This is a meaningfully different mechanism from the masking and encoding tricks the paper positions itself against, which hide a fully-specified malicious instruction from a filter; here the instruction is genuinely absent and is reconstructed by the model from structural cues. The authors note the approach ap",
+  "text": "data/cache/pdf_text/bd8d64d442ec88eaf5c3117e3700e61021db0587.txt"
+ },
+ {
+  "paper_id": "af911725f2032ad6b8cb7d5c01fd7fb6e404e4ef",
+  "title": "LLM Firewall Using Validator Agent for Prevention Against Prompt Injection Attacks",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Extends a dual-agent RAG architecture into an 'LLM firewall' by adding output-level security validation, on the argument that input filtering alone is insufficient and that a successful attack is more legible in the response than in the request. A Validator Agent is positioned as a response firewall - analogous to a network firewall monitoring semantic boundaries - performing four multi-feature checks on generated output: prompt-injection detection, policy-compliance verification, sensitive-information redaction, and toxic-content filtering. The design thesis is explicitly contrarian to the dominant pattern this SoK documents: existing defenses concentrate on input-level screening, whereas this places the control point after generation, where the consequence of an injection (a leaked secret, a policy-violating instruction followed) has become concrete and detectable even if the triggerin",
+  "text": "data/cache/pdf_text/af911725f2032ad6b8cb7d5c01fd7fb6e404e4ef.txt"
+ },
+ {
+  "paper_id": "0ca1b5ccfc5cc3aeb869f45654dd7fa7fed3e188",
+  "title": "SHIELD: Security against Harmful Prompt Injection Evaluation and Language Detection Leveraging Ensemble Approach",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Prompt injection against LLMs deployed in finance, healthcare and cybersecurity, including indirect injection, command masking and obfuscated payloads reaching the model as user or retrieved input.",
+  "technical_summary": "A three-way ensemble detector for prompt injection - supervised classifier, zero-shot LLM inference and rule-based heuristics - released together with two purpose-built cybersecurity prompt-injection datasets and a systematic review of the Scopus-indexed literature.",
+  "text": "data/cache/pdf_text/0ca1b5ccfc5cc3aeb869f45654dd7fa7fed3e188.txt"
+ },
+ {
+  "paper_id": "arxiv:2607.24006",
+  "title": "Agentic Cloud Decoys: A Deception-Driven Framework for Autonomous Intrusion Investigation",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "The paper's primary contribution is a defensive/investigative framework (deception-based intrusion investigation), but it also formally identifies and analyzes an incidental, structurally embedded indirect-prompt-injection threat vector as one of three core design challenges (Section III-A). Because cloud telemetry (object keys, request parameters, user-agent strings) is partly 'adversary authored' -- providers record attacker-chosen values verbatim and faithfully -- any pipeline that moves log fields into a model prompt thereby constructs an indirect prompt injection channel; the authors argue that a decoy specifically widens rather than narrows this exposure, since a decoy exists precisely in order to be touched, and a decoy that permits writes is a resource on which an adversary can compose arbitrary strings in the expectation that a defender/agent will read them. The paper is explici",
+  "technical_summary": "This paper presents Cloud Decoy AI Agent, a deception-driven autonomous investigation framework that pairs a high-fidelity cloud decoy (an AWS S3 bucket designed to attract intrusion attempts, since no legitimate workflow has reason to touch it) with a tool-using LLM agent to compress the time between suspicious cloud activity and an analyst-ready incident report, addressing a long-standing 'visibility paradox' in cloud forensics where telemetry is technically complete but reconstruction latency (not detection coverage) is the binding constraint on incident response. The authors argue that naively wiring a decoy alert into an agentic pipeline is insufficient because of three structural properties of cloud telemetry: first, the natural unit of forensic investigation is the session, not the individual logged event, and the correct session-grouping key is obscured by identity layering intro",
+  "text": "data/cache/pdf_text/arxiv:2607.24006.txt"
+ },
+ {
+  "paper_id": "f5fa4852ded771092858856b14f0f59443479be5",
+  "title": "MCP-Scanner: Detecting Security Risks in Model Context Protocol Systems",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Introduces MCP-Scanner, an automated vulnerability scanner for Model Context Protocol servers, presented as the first tool covering the full MCP feature surface rather than tools alone - it inspects tools, prompts and resources, on the reasoning that each is a channel through which attacker-controlled content can reach an agent. Detection is multi-layered: keyword detection catches known patterns cheaply, semantic analysis generalizes beyond exact strings, and LLM-based evaluation handles threats requiring interpretation, with the three combined to find variable and tool poisoning, prompt injection, rug pull attacks (a server behaving benignly during review then changing after adoption) and server impersonation. The organizing abstraction is the Trust Boundary: threats are enumerated and addressed at each identified boundary in the MCP architecture rather than treated as a flat list, whi",
+  "text": "data/cache/pdf_text/f5fa4852ded771092858856b14f0f59443479be5.txt"
+ },
+ {
+  "paper_id": "9265b1252bde8bf36ecd4213e17646c04586963d",
+  "title": "RAG-H: A RAG-Hardened SOC Framework for Trustworthy Threat Intelligence and AI Defence",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes RAG-H, a multi-layer defense hardening the full RAG pipeline for Security Operations Center use, on the argument that existing defenses secure isolated pipeline stages, provide no end-to-end integrity guarantee, and - the paper's sharper methodological point - are evaluated on answer accuracy rather than on SOC mission impact. Controls are placed at all three pipeline stages: ingestion enforces provenance checks and source-reputation scoring so only trustworthy intelligence enters the knowledge base; retrieval combines semantic relevance with corpus-level credibility and analyst feedback to filter poisoned content; generation applies context sanitisation and self-verification, surfacing low-confidence outputs for analyst review rather than answering. The threat model is specific to cyber-threat-intelligence workflows, where adversaries poison the CTI knowledge base or embed hidd",
+  "text": "data/cache/pdf_text/9265b1252bde8bf36ecd4213e17646c04586963d.txt"
+ },
+ {
+  "paper_id": "dc05567166d3f4504978a6e1728bbd24a972805c",
+  "title": "MedRAGShield: A Three-Tier Defense Framework Against Document Poisoning and Adversarial Attacks in Medical Retrieval-Augmented Generation Systems",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Medical RAG question answering under document injection poisoning, hallucination exploitation, prompt injection and jailbreak attacks, where poisoned documents enter the retrieval corpus and reach the generator as trusted evidence.",
+  "technical_summary": "A three-tier middleware for medical RAG combining query-level injection detection, statistical confidence gating, and post-generation Domain-Aware Sanity Check rules that test the generated answer against medical ontological constraints.",
+  "text": "data/cache/pdf_text/dc05567166d3f4504978a6e1728bbd24a972805c.txt"
+ },
+ {
+  "paper_id": "b69be7f40b334e01df7527b41acc22b75b8bd727",
+  "title": "Secure Retrieval-Augmented Generation: Preventing Data Leakage with Provenance and Policy Enforcement",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Architecture and governance paper for securing enterprise RAG deployments in regulated sectors (financial services in particular), arguing that RAG's probabilistic retrieval creates structural data-leakage risk whenever access control is absent or applied at the wrong stage. It identifies four distinct threats that require different controls at different pipeline stages - prompt injection, entitlement bypass, index poisoning, and generation-stage inferential disclosure - and insists the mitigations are not interchangeable: enforcing at generation cannot repair an entitlement bypass that happened at retrieval. The proposed posture spans ingestion, indexing, retrieval and generation, mediated by identity-aware filtering, attribute-based access control (ABAC), and policy-as-code that is version-controlled and auditably separate from application code. Structurally the design rests on a two-p",
+  "text": "data/cache/pdf_text/b69be7f40b334e01df7527b41acc22b75b8bd727.txt"
+ },
+ {
+  "paper_id": "e8f42c742f2e6d3f570ec4ae4089309c64a61b24",
+  "title": "TracLLM: A Generic Framework for Attributing Long Context LLMs",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - non-adversarial in the sense that TracLLM is a defensive/forensic attribution tool rather than an attack, but it is explicitly designed and evaluated against an adversarial threat model: an attacker who injects malicious text into a long-context LLM's input -- either via prompt injection (directly embedding an adversarial instruction like 'When the query is [query], output [incorrect answer]' into the context) or via knowledge corruption/RAG poisoning attacks (e.g., PoisonedRAG, injecting malicious texts into a RAG system's knowledge database or an LLM agent's memory so that retrieval surfaces attacker-chosen content) -- with the goal of causing the LLM to generate an attacker-desired, incorrect, or harmful output. TracLLM's role is post-attack forensic analysis: given an already-compromised output, it must trace back through the (potentially hundreds-of-texts-long) context to iden",
+  "technical_summary": "TracLLM is the first generic context-traceback framework tailored to long-context LLMs, addressing the problem of identifying which specific texts (sentences, passages, or paragraphs) within a long context are most responsible for a given LLM output -- useful for debugging LLM-based systems, conducting post-attack forensic analysis of prompt injection or knowledge corruption attacks, and building user trust via source attribution. The paper first analyzes why existing feature-attribution approaches fall short at this task: gradient-based methods produce noisy per-token signals; citation-based methods (prompting the LLM to self-cite supporting texts) are shown to be manipulable by an attacker's injected instructions; Single Text Contribution (STC) fails when the harmful output requires multiple texts to jointly combine (since no individual text alone reproduces the output when tested in i",
+  "text": "data/cache/pdf_text/e8f42c742f2e6d3f570ec4ae4089309c64a61b24.txt"
+ },
+ {
+  "paper_id": "b7f22c242732ccba8be3c1f5484af4f5032a0d83",
+  "title": "TraceCaps: Inline Provenance and Risk Enforcement for Agentic Software Engineering",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes TraceCaps, a runtime provenance-and-enforcement mechanism for agentic software engineering workflows spanning planning, coding, testing and CI/CD. Its critique of existing defenses is precise: static analysers, provenance attestation and prompt guardrails typically audit after the fact, or operate without cryptographic guarantees, or lack runtime enforcement - so none can both prove what happened and stop it while it is happening. TraceCaps addresses this with two coupled mechanisms. First, cryptographically verifiable provenance capsules are attached to every agent step (prompt, memory access, tool call); capsules hash and sign events, link to their parents forming a verifiable chain, and embed risk features, so the derivation of any action is auditable and tamper-evident. Second, a monotone, persistent risk score gates tool actions inline against policy thresholds with allow /",
+  "text": "data/cache/pdf_text/b7f22c242732ccba8be3c1f5484af4f5032a0d83.txt"
+ },
+ {
+  "paper_id": "e2e5529df48fe6cf893da483360958b32d829724",
+  "title": "SecureGov-Agent: A Governance-Centric Multi-Agent Framework for Privacy-Preserving and Attack-Resilient LLM Agents",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes SecureGov-Agent, a governance-centric multi-agent framework built on the argument that existing defenses address single threat vectors while multi-agent systems face backdoor attacks, prompt injection and privacy leakage simultaneously, requiring unified governance rather than point solutions. The design adds a dedicated Governance Agent with three responsibilities: monitoring inter-agent communications, auditing tool invocations, and enforcing security policies - i.e. it observes the coordination substrate rather than any single agent's inputs. Trustworthiness is assessed dynamically per agent through a multi-perspective risk score combining three formally specified components: Content Risk computed from LLM embedding representations through learned parameters and a sigmoid; Privacy Risk derived from Named Entity Recognition and pattern matching, aggregating per-entity PII prob",
+  "text": "data/cache/pdf_text/e2e5529df48fe6cf893da483360958b32d829724.txt"
+ },
+ {
+  "paper_id": "6698e93bd70e3167295a01e76a0972030dd50f10",
+  "title": "Security Risk Evaluation of ZombAI Claude: Prompt Injection as a Backdoor for Command and Control Exploits",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Empirical black-box attack study against a computer-use agent, framed around AI agents acting as Command and Control (C2) systems that manage infrastructure autonomously. The paper introduces ZombAI, a direct black-box prompt-injection method requiring no internal model access or knowledge of training data, comprising six strategies each aimed at a different layer of the model's safety filtering: Template Completion, In-Context Attack, Code Injection, Prompt Rewriting, Low-Resource Language exploitation, and Genetic Algorithm-based perturbation. The target is Claude Sonnet 4.5 with Computer Use, integrated into the Bytebot agent framework and run inside a Docker sandbox to simulate realistic operating conditions while containing the consequences. The significance for this corpus is the consequence class: because the agent has computer-use capability, a successful injection converts into ",
+  "text": "data/cache/pdf_text/6698e93bd70e3167295a01e76a0972030dd50f10.txt"
+ },
+ {
+  "paper_id": "08511b5e1be93152829e91f34907e586b787a129",
+  "title": "Context Rot: Why MCP is Breaking in Production and How the Skills Architecture Fixes It",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Formalizes 'context rot' as a system-level failure class in production LLM agents - the progressive degradation of reasoning quality, task coherence and decision fidelity arising from uncontrolled accumulation, misalignment and entropic decay of context across extended agentic sessions - and argues it is architectural rather than model-specific. Three contributions: (a) a typed taxonomy of context-rot failure modes (Types I-V, where Type V is definitionally a protocol-level phenomenon); (b) an information-theoretic framing of context as a bandwidth-limited computational resource, operationalized through measurable quantities including a normalized context-entropy metric (H-hat) and a companion bandwidth/coherence metric (B-hat); and (c) a comparative evaluation of Model Context Protocol (MCP) based systems against a Skills Architecture alternative. The diagnostic framing is the interesti",
+  "text": "data/cache/pdf_text/08511b5e1be93152829e91f34907e586b787a129.txt"
+ },
+ {
+  "paper_id": "e446aa098e37f3969e1cde7101959575f46fec56",
+  "title": "Forensic LLM-Trace: Interpretable Multi-Agent AI Forensic Architecture for Prompt Injection Investigation",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Prompt injection, unauthorized reasoning manipulation and chained-agent compromise in enterprise, cloud and automation deployments of LLM agents. The forensic stance is post-hoc: fragmented contextual traces, temporary reasoning states and decentralized interaction logs must be reconstructed after an incident.",
+  "technical_summary": "A forensic architecture for multi-agent LLM ecosystems combining semantic artefact normalisation, confidence-oriented attribution, Neo4j graph-driven relationship reconstruction and automated threat-intelligence reporting into a single analytical pipeline.",
+  "text": "data/cache/pdf_text/e446aa098e37f3969e1cde7101959575f46fec56.txt"
+ },
+ {
+  "paper_id": "b99bf346a634338688ffe89878505bdc07bfe1c6",
+  "title": "Maris: A Formally Verifiable Privacy Policy Enforcement Paradigm for Multi-Agent Collaboration Systems",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "Maris considers a multi-agent collaboration system (MACS) where multiple agents {A_i}, each governed by a pre-specified privacy policy {p_i}, collaborate to complete a task while exchanging intermediate steps, data, and insights through inter-agent communication and interacting with external environments (LLMs, tools, human users) through agent-environment communication. Privacy non-compliance is modeled as arising from either (1) a malicious or compromised agent within the MACS that overly retrieves data from other agents or eavesdrops on inter-agent communication, or (2) malicious users or tools interacting with the MACS that overly retrieve data via mechanisms such as indirect prompt injection attacks -- explicitly distinguishing this multi-agent threat surface (which the paper argues prior single-agent-focused guardrail work like ShieldAgent overlooks) from single-agent settings. The",
+  "technical_summary": "Maris is a formally verifiable privacy policy enforcement paradigm designed to be integrated natively into existing multi-agent collaboration system (MACS) development frameworks (demonstrated on AG2, LangGraph, and A2A) without requiring developers to rewrite application logic. Its architecture has two main design contributions. First, an Action Generator automatically derives typed predicate signatures and structured action specifications for each agent directly from agent specifications and task descriptions, eliminating manual schema definition and providing a translation layer from natural-language agent behavior into structured, typed fields amenable to formal policy checking. Second, privacy compliance policies are expressed in Metric First-Order Temporal Logic (MFOTL), enabling both fine-grained, field-level flow control (e.g., blocking specific sensitive data attributes like pat",
+  "text": "data/cache/pdf_text/b99bf346a634338688ffe89878505bdc07bfe1c6.txt"
+ },
+ {
+  "paper_id": "c30673d667b2875f2a7563c4755520d6961783f8",
+  "title": "Addressing Prompt Injection in Large Language Models via In-Context Learning",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes a multi-LLM agent framework for prompt-injection and jailbreak detection that learns through In-Context Learning rather than parameter updates. The paper is motivated by two specific failures it diagnoses in existing defenses: over-refusal, where prompts containing harmful vocabulary but semantically benign intent get rejected, degrading utility; and a dataset problem, namely that benign prompts in public prompt-injection datasets are trivially separable (its examples: 'When is the next Bundestag election?', 'How much money should I save per month?'), so training on them cannot improve performance on genuinely borderline cases. The proposed method attacks both by construction: two cooperating teams of LLM agents - an Analysis Team and a Generation Team - interact to dynamically generate prompts that are hard to classify, and those hard cases accumulate as in-context exemplars. B",
+  "text": "data/cache/pdf_text/c30673d667b2875f2a7563c4755520d6961783f8.txt"
+ },
+ {
+  "paper_id": "1ee66ccebe2e1c1d8f3f3ec74c957ea91dcd2e98",
+  "title": "A Multi-Agent Framework for Step-Level Tool-Call Safety Evaluation in Industrial Control Systems",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Presents a guardrail-oriented dataset and benchmark for step-level tool-call safety in industrial LLM agents operating Programmable Logic Controllers and SCADA interfaces, where an unsafe tool call causes physical damage rather than an information-security loss. The framing contribution is a three-mode safety taxonomy distinguishing benign, injected-benign, and malicious requests - the middle category being the important one, capturing covert contextual manipulations that induce unsafe behaviour within otherwise legitimate tasks, as distinct from explicitly malicious requests. That distinction maps directly onto this SoK's adversarial/incidental axis while adding a third position: a legitimate task whose context has been manipulated, which is neither a clean benign trajectory nor an overtly hostile one. The dataset is constructed by a fully automated multi-agent pipeline that generates i",
+  "text": "data/cache/pdf_text/1ee66ccebe2e1c1d8f3f3ec74c957ea91dcd2e98.txt"
+ },
+ {
+  "paper_id": "574941aa01920e483d384d89061d91ec797b6a37",
+  "title": "Multi-Agent Firewall Architecture for Privacy Protection of Sensitive Data in Interactions with Language Models",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - non-adversarial (defensive privacy-protection system paper, not an attack study). The incidental failure mode of interest is inadvertent sensitive-data leakage by end users interacting with LLMs, rather than adversarial compromise: employees or individual users, prioritizing task efficiency over security guidance, may paste sensitive corporate data (proprietary code, business documents) or personal sensitive data (financial, legal, health information) directly into web-based or API-based LLM interactions, exposing this information to third-party model providers without adequate safeguards; the paper notes this productivity bias persists among 'power users' even when they are aware of the systemic risk, and that manual policies and static warnings both fail to prevent this behavior and contribute to alert fatigue. The paper does briefly note prompt injection evasion as an 'extensibl",
+  "technical_summary": "This paper presents an open-source, privacy-focused, user-facing firewall for detecting and preventing sensitive-data leakage in both web-based and programmatic (API) LLM interactions, motivated by the observation that organizations and individual users increasingly feed private, proprietary, financial, legal, or health information into LLMs without adequate safeguards, and that manual policies and static warnings fail to prevent this while causing alert fatigue. The architecture combines dual-layer traffic interception -- a browser extension using an extensible platform-adapter registry pattern to monitor web-based LLM interfaces at the DOM level, and a transparent Man-in-the-Middle proxy intercepting HTTP(S) and WebSocket Secure API traffic across multiple LLM providers (each with distinct message-encoding formats, e.g., OpenAI/Groq base64 data URLs, Anthropic Claude's distinct structu",
+  "text": "data/cache/pdf_text/574941aa01920e483d384d89061d91ec797b6a37.txt"
+ },
+ {
+  "paper_id": "af9f3b394a50bcbe1026685e991923d771c5608f",
+  "title": "Evaluating and Exploiting Security Vulnerabilities in Large Language Models (LLMs) for Offensive Penetration Testing",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Offensive penetration testing of LLMs, mixing direct prompt injection with multi-turn jailbreaks and context-manipulation techniques including memory-enabled recursive exploitation and agent roleplay.",
+  "technical_summary": "An offensive evaluation framework probing six open LLMs with five exploit strategies, reporting a qualitative cross-model vulnerability matrix rather than a defense.",
+  "text": "data/cache/pdf_text/af9f3b394a50bcbe1026685e991923d771c5608f.txt"
+ },
+ {
+  "paper_id": "18f0a52f091f3863670ea503bfd320d4bcb902a3",
+  "title": "Detection of adversarial intent in Human-AI teams using LLMs",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - non-adversarial defense-research framing, but the paper does study an adversarial scenario: a malicious AI teammate embedded within a human-AI team (three humans plus one AI assistant in a 25-round trivia game) that follows a model-based reinforcement-learning policy to strategically manipulate human teammates' trust allocations toward harmful outcomes, behaving helpfully for an initial period before switching to adversarial manipulation, with the key property that its manipulation occurs purely through behavioral/action patterns rather than any detectable linguistic or verbal trace (motivated by prior work showing such purely-behavioral manipulation can evade traditional linguistic safety filters). The paper's stated limitation directly acknowledges a threat this defense does not yet counter: an adaptive adversary that explicitly optimizes its behavior against the LLM-based detect",
+  "technical_summary": "This paper investigates whether off-the-shelf and lightly fine-tuned LLMs can serve as task-agnostic behavioral overseers that detect adversarial intent within human-AI teams purely from non-verbal interaction/action traces, without access to task-specific content (e.g., trivia questions, answer options) or explicit linguistic signals. Using a previously published dataset of a 25-round trivia game played by three human agents and one AI teammate that follows a model-based RL policy to strategically manipulate trust allocations (helpful for the first 10 rounds, adversarial for the final 15), the authors formalize malicious-behavior detection as a classification problem over serialized round data, benchmarking GPT-4.1, GPT-4.1-mini, GPT-4o, and GPT-o3 across three observation-window lengths (10-round, 5-round, 1-round) and multiple experimental axes: presence of expert/domain-specific exam",
+  "text": "data/cache/pdf_text/18f0a52f091f3863670ea503bfd320d4bcb902a3.txt"
+ },
+ {
+  "paper_id": "74aec0665c948c64072682901b7e95e7b71286e4",
+  "title": "WAB: Overcoming Memory, Network, and Security Walls in Native Agentic Browsers with WebAssembly",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes WAB, a WebAssembly-centered runtime for 'native agentic browsers' - browsers that treat agent execution as a first-class workload, running multi-step workflows locally at interactive latency while keeping sensitive user context on-device. The paper frames three runtime 'walls' that in-browser agent execution hits: a memory wall (agents need low-tail-latency access to evolving semantic context, but browser memory and persistent storage are constrained and heterogeneous), a network wall (stepwise tool invocation turns long-horizon workflows into RTT-amplified pipelines whose latency and variance compound per step), and a security wall (untrusted content and prompt injection can steer agents toward high-impact side effects without enforceable least-privilege boundaries). Wasm is proposed as a unifying answer because it supplies a portable execution target, a sandboxed environment, ",
+  "text": "data/cache/pdf_text/74aec0665c948c64072682901b7e95e7b71286e4.txt"
+ },
+ {
+  "paper_id": "5fd47f3c351347de692aa41262acd331635f5879",
+  "title": "Cross-Agent Multimodal Provenance-Aware Framework for Robust Prompt Injection Defense in Large Language and Vision-Language Models",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes a Cross-Agent Multimodal Provenance-Aware Defense Framework for prompt injection in LLM and Vision-Language Model agent graphs, addressing a threat the authors characterize as propagation rather than point compromise: hidden or malicious instructions embedded in text, images, metadata, or inter-agent messages can spread throughout an agent network built with LangChain- or GraphChain-style orchestration, triggering unintended behaviour, policy violation, or state corruption. The design sanitizes user- and agent-generated prompts and independently validates LLM output before delivery to downstream nodes, using three specialized agents - a text sanitizer, a visual sanitizer, and an output validator - synchronized by a provenance ledger that records modality, source and trust metadata across the agent network. The architecture then imposes ordered trust boundaries so an injected ins",
+  "text": "data/cache/pdf_text/5fd47f3c351347de692aa41262acd331635f5879.txt"
+ },
+ {
+  "paper_id": "febb0d38c39219f39d5325345882b5148a84b79e",
+  "title": "When Refusals Fail: Unstable Safety Mechanisms in Long-Context LLM Agents",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "The threat model centers on AgentHarm's existing harmful-task taxonomy (8 categories including disinformation and fraud, e.g., a task instructing an agent to generate a fabricated video of two named politicians and post it as real on social media), where the 'attacker' is effectively a user issuing an explicitly harmful multi-step agentic task; the paper's contribution is not a new attack but an evaluation of how the model's refusal behavior and task-execution safety degrade as a function of injected context padding (length, semantic type/relevance, and position relative to the task). Two related but distinct failure modes are identified as safety-relevant: refusal-rate volatility (whether models refuse a harmful request at all, which shifts unpredictably and non-monotonically with context length and can move in opposite directions across models) and refusal timing (whether refusal occur",
+  "technical_summary": "This paper investigates how safety alignment (measured via refusal behavior) and task capability of LLM-based agents scale with context length, addressing a gap in prior work that has focused on long-context accuracy/efficiency ('lost in the middle') or on short-prompt agent safety benchmarks (e.g., AgentHarm) separately, but not on how these two dimensions interact when an agent operates with long, padded context. The authors extend the AgentHarm benchmark (176 samples, 44 tasks, 8 harm categories, with manually implemented simulated tools such as Google Search or an X/Twitter posting API) with a controlled context-padding evaluation harness that inserts padding tokens of varying length (1K to 200K, and up to 800K for one model), type (random tokenizer-sampled tokens; non-relevant coherent fiction text spanning five genres; relevant coherent Wikipedia text matched to the task category; ",
+  "text": "data/cache/pdf_text/febb0d38c39219f39d5325345882b5148a84b79e.txt"
+ },
+ {
+  "paper_id": "1217aaf8b6fda0bc84a345feb611ce5b0edddd7a",
+  "title": "CoCortex: A Memory Governance Framework for Reliable Long-Horizon LLM Agents",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes CoCortex, a memory governance framework grounded in Bayesian reliability theory, built on the argument that existing memory architectures treat memory as a passive, implicitly trusted component - which produces silent error accumulation, hallucination persistence, and unrecoverable failures in long-running operations. The reframing is that memory is first-class fallible infrastructure requiring continuous oversight: once unreliable data enters memory it is likely to be retrieved, to affect reasoning, and to remain unnoticed indefinitely, so memory quality becomes the parameter governing agent reliability. Four governance mechanisms implement this: admission control deciding what may enter memory at all; dynamic reliability scoring maintaining accumulated evidence per memory item; lifecycle management handling retention, revision and expiry; and agent-scoped visibility limiting w",
+  "text": "data/cache/pdf_text/1217aaf8b6fda0bc84a345feb611ce5b0edddd7a.txt"
+ },
+ {
+  "paper_id": "22a9a24c625921d705506f798e91bb978d240ea2",
+  "title": "Is Deep Research Reliable? Misleading Knowledge Induces False Conclusions",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "This is a security/reliability paper with an explicit threat model: apparently credible but factually false 'misleading knowledge' -- documents constructed with controlled institutional-authority cues (from a pool of institutions at high/medium/low authority levels) and controlled source presentation styles (paper-like, blog, news article, social post) supporting a manually audited canonical false conclusion -- is injected into a Deep Research agent's iterative, long-horizon workflow (planning, searching, evidence accumulation, report generation) to test whether the agent's final report ends up endorsing the false conclusion (measured via a report-level false-conclusion adoption rate, FCAR), rather than merely retrieving/citing the misleading document without adopting its conclusion. This differs from prior short-form QA/RAG misleading-context robustness work in that the misleading conte",
+  "technical_summary": "This paper studies whether Deep Research agents -- LLM-based systems that conduct long-horizon information-seeking via iterative planning, searching, evidence accumulation, and report generation -- can resist apparently credible but factually false information introduced into their workflow, a failure mode distinct from prior work on misleading-context robustness in short-form QA and retrieval-augmented generation because Deep Research workflows allow misleading content to enter and be compressed at multiple different lifecycle stages before being reused, potentially unverified, during final report synthesis. The authors introduce MisKnow-Agent, a controlled framework for systematically constructing and validating misleading knowledge: for each research task drawn from DeepResearch Bench, a 'misleading-knowledge blueprint' specifies a canonical false conclusion and a pool of source insti",
+  "text": "data/cache/pdf_text/22a9a24c625921d705506f798e91bb978d240ea2.txt"
+ },
+ {
+  "paper_id": "f9272681e0e35b2a8d82ae1c862a43d6d825274c",
+  "title": "Governance Decay: How Context Compaction Silently Erases Safety Constraints in Long-Horizon LLM Agents",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "This is a formal, adversarial security paper. The threat model, termed 'Governance Decay,' identifies context compaction itself as a governance-critical, exploitable attack surface: modern LLM agent harnesses periodically compact (summarize or evict) conversation history to stay within a token budget, and this compaction is engineered solely to optimize for task continuity, treating standing in-context governance constraints (organizational policies, standing instructions, loaded memory specifying prohibited actions) as low-salience 'old' content that competes for a shrinking token budget against the active task state -- causing them to be silently dropped from the compacted summary even though the agent would reliably obey them if they remained visible. Building on this passive failure mode, the paper introduces the Compaction-Eviction Attack: a deletion-oriented indirect-prompt-injecti",
+  "technical_summary": "The paper identifies and formally characterizes Governance Decay: a silent safety-failure mode in modern long-horizon LLM agents arising specifically from context compaction, the mechanism (summarization or eviction of older conversation turns) that agent harnesses use to stay within a token budget as multi-step tool-use trajectories grow. The core finding is that in-context governance constraints -- runtime policies, standing instructions, or loaded memory specifying what an agent must not do -- are reliably obeyed by an agent while visible in its context, but are silently dropped when the harness compacts the history, because compaction is engineered purely to optimize task continuity and treats standing policies as low-salience, 'old' content competing against the active task state for a shrinking token budget. To measure this rigorously, the authors introduce ConstraintRot, a benchma",
+  "text": "data/cache/pdf_text/f9272681e0e35b2a8d82ae1c862a43d6d825274c.txt"
+ },
+ {
+  "paper_id": "arxiv:2601.02023",
+  "title": "Not All Needles Are Found: How Fact Distribution and Don't Make It Up Prompts Shape Retrieval, Reasoning, and Hallucination in Long-Context LLMs",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "This paper includes an explicit adversarial/misuse discussion in its Impact Statement (not a formal theorem-based threat model, but a stated threat framing). It identifies that malicious actors could deliberately exploit 'Distributional Collapse' by dispersing critical information within large documents (e.g., legal contracts, financial filings) to evade detection by LLM-based automated audits, and could weaponize the 'Safety Tax' by inducing over-conservative refusal to render valid queries unanswered. Recommended mitigations include not assuming large nominal context windows guarantee robust retrieval, empirically validating candidate models against distributional stress tests before deployment, favoring models demonstrating spatial invariance, and implementing hierarchical chunking to break up adversarial fact distributions before inference. This is directly relevant to context-poison",
+  "technical_summary": "This paper investigates how the statistical distribution of facts within a long-context corpus, rather than just context length, governs LLM reliability for agentic working-memory use cases, extending the traditional Needle-in-a-Haystack (NIAH) paradigm beyond single-fact retrieval. The authors construct a model-agnostic benchmark that places facts according to nine probabilistic distributions (Uniform, Normal, Lorentzian, Rayleigh and its flip, Exponential and its flip, Arcsine, Bimodal Gaussian Mixture) spanning from concentrated-central to concentrated-extremes patterns, and separately measures three capabilities: Literal Extraction (finding stated facts), Logical Inference (multi-hop reasoning over dispersed evidence, addressing the 'Two-Hop Curse'), and Faithfulness (resistance to hallucination/fabrication). Each condition is tested under both a Standard prompt and a strict Anti-Hal",
+  "text": "data/cache/pdf_text/arxiv:2601.02023.txt"
+ },
+ {
+  "paper_id": "arxiv:2605.24775",
+  "title": "PRIMA: Operational Patterns for Resilient Multi-Agent Research with Verifiable Identity and Convergent Feedback",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "This paper includes an explicit, structural (rather than fully formalized) threat model centered on 'indirect prompt injection through inter-step context' -- i.e., a compromised or adversarially-crafted upstream artifact (e.g., a prior sub-agent's output, or fetched reference material) being misinterpreted by a downstream agent as an executable directive rather than reference data. Countermeasures include: a 'context-boundary discipline' prompt clause explicitly identifying upstream-step context blocks as reference data rather than executable directives, with explicit guidance for handling directive-shaped content found within reference material; reference-material preprocessing with defensive guards for user-supplied URLs and filesystem paths, including anti-SSRF controls (rejecting loopback, link-local, RFC1918, multicast, and reserved address ranges; per-fetch size/time bounds; binary",
+  "technical_summary": "PRIMA is a multi-agent research system whose primary contribution is a set of operational patterns for surviving failure modes that emerge specifically during multi-hour, long-running (not single-shot) multi-agent LLM execution: upstream provider throttling without warning, orchestrators silently retrying through degraded modes, sub-agent task drift toward more convenient/accessible tools, agents narrating tool use rather than invoking it, apology-laden revision loops, and indirect prompt injection where upstream context is misread as executable directives. Three operational patterns address these: (1) a resilience-and-recovery layer that detects typed upstream rate-limit signals at the provider boundary, persists pause records to disk, and resumes long-running runs without re-executing already-converged work even across process restarts, including a completed-step loader that rejects po",
+  "text": "data/cache/pdf_text/arxiv:2605.24775.txt"
+ },
+ {
+  "paper_id": "dc27c98b0f700f4a55fe726e6eae23f90834cd7a",
+  "title": "BordaRAG: Resolving Knowledge Conflict in Retrieval-Augmented Generation via Borda Voting Process",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes BordaRAG, which reframes knowledge-conflict resolution in RAG as a voting problem and replaces the field's implicit default with a better voting rule. The observation motivating it is that retrieved documents frequently contain knowledge conflicting with one another, and existing approaches resolve this by keeping the most frequently mentioned knowledge, assuming the most representative answer aligns with the truth. Viewed formally, that is Majority Voting - it selects the most frequent candidate and discards the rest of the preference information - and it fails whenever the most frequent knowledge is not correct, which is precisely the case when retrieval surfaces a popular misconception or when an adversary has planted several copies of a false claim. BordaRAG instead applies the Borda count, a positional voting method that scores every candidate by its rank across all voters ",
+  "text": "data/cache/pdf_text/dc27c98b0f700f4a55fe726e6eae23f90834cd7a.txt"
+ },
+ {
+  "paper_id": "452b4750bfc661f1a78a953f56ebdf2d34369a19",
+  "title": "Enhancing Retrieval-Augmented Large Vision Language Models via Knowledge Conflict Mitigation",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes KCM, a training-free, plug-and-play framework that mitigates knowledge conflicts in Multimodal Retrieval-Augmented Generation for Large Vision Language Models. The problem it targets is a Track B incidental mechanism rather than an attack: MRAG retrieves external contextual knowledge to compensate for an LVLM's coarse-grained parametric knowledge, but the retrieved content is frequently misaligned with what the model already believes, and the resulting conflict produces unreliable responses - the paper's running example being a model answering 'Japan' from parametric memory when the retrieved context indicates Holland. KCM intervenes on the model's internals at inference time from three complementary angles. First, it adaptively adjusts attention distributions across attention heads so the model attends to contextual knowledge with less distraction. Second, it identifies and pru",
+  "text": "data/cache/pdf_text/452b4750bfc661f1a78a953f56ebdf2d34369a19.txt"
+ },
+ {
+  "paper_id": "01a8565a4529187bf9b51f28f0959f00a4fe8fd5",
+  "title": "Conflict-Aware RAG: Multi-Stage Learning with Conflict Signals for Robust Retrieval-Augmented Generation",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes Conflict-Aware RAG, a general training framework that leverages a model's own conflict-sensing capability to build robustness against knowledge conflicts arising when RAG integrates diverse and potentially contradictory web-sourced information. Its central construct is ConScore, a conflict signal quantifying the model's awareness of potential knowledge conflict by comparing generative probabilities across distinct knowledge sources - i.e. conflict is measured from the model's own distributional response to competing evidence rather than by an external consistency checker. ConScore then drives a three-stage optimization pipeline rather than a single training objective: in Supervised Fine-Tuning, conflict features select representative distracting documents, establishing core RAG capability against realistic interference; in Direct Preference Optimization, the conflict signal cons",
+  "text": "data/cache/pdf_text/01a8565a4529187bf9b51f28f0959f00a4fe8fd5.txt"
+ },
+ {
+  "paper_id": "3fdd6bd75acec6e9e54a439a0f8c878c3656397f",
+  "title": "PromptSentinel-X: A Leakage-Aware and Context-Aware Framework for Prompt-Injection Detection in Large Language Model-Powered Web Agents",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Presents PromptSentinel-X, a leakage-aware and context-aware screening framework for prompt-injection detection in LLM-powered web agents, built on the premise that such agents combine privileged instructions with user requests, webpages, retrieved documents, tool outputs, memory and conversation history - a mixture that static text classification may not capture. Its methodological contributions are as important as its detector. First, leakage-aware validation: rather than random splitting, it uses prompt-family-aware partitioning so near-duplicate prompt variants cannot straddle train and test, and it reports explicitly that random splitting produced a higher headline macro-F1 but 144 leakage warnings - i.e. it demonstrates on its own data how much benchmark leakage inflates reported detector performance, a diagnosis that applies to many detector papers in this corpus. Second, trusted-",
+  "text": "data/cache/pdf_text/3fdd6bd75acec6e9e54a439a0f8c878c3656397f.txt"
+ },
+ {
+  "paper_id": "26768533d0eef5c2f7dadf915f70a45d397a4040",
+  "title": "Agent Security Meets Regulatory Reality -- A Practitioner Systematization of Autonomous-Agent Threats and Controls in Regulated Financial Systems",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "The paper maps six established agentic threat categories from prior literature (prompt injection, identity and authorization, action auditability, tool abuse, data residency, and boundary policy enforcement) onto specific regulatory control obligations, arguing that legal accountability amplifies each threat relative to an unregulated deployment (e.g., an unresolved prompt injection is not just a security incident but a potential ECOA adverse-action-traceability failure or GDPR Article 22 automated-decision violation). The central prompt-injection-relevant finding (Pattern D) is that raw customer documents sent directly to a model inference endpoint simultaneously create the widest injection surface (untrusted document content could carry an injected instruction) and the least-controllable data-residency boundary (often a third-party service in a different jurisdiction); the mitigating a",
+  "technical_summary": "This is a practitioner systematization paper bridging two previously disconnected bodies of work: laboratory-based academic taxonomies of LLM agent security threats, and non-peer-reviewed practitioner/compliance guidance for regulated deployment. Drawing on production experience deploying MCP/RAG/A2A (Model Context Protocol, Retrieval-Augmented Generation, Agent-to-Agent) multi-agent systems to automate Know Your Customer (KYC) onboarding for a consumer credit product, the paper first maps six established agentic threat categories (prompt injection, identity and authorization, action auditability, tool abuse, data residency, boundary policy enforcement) onto specific control obligations imposed by US and EU financial regulation (ECOA and Regulation B, the EU AI Act, GDPR Article 22, and FINRA's 2026 agent guidance), arguing that legal accountability transforms each threat's stakes relati",
+  "text": "data/cache/pdf_text/26768533d0eef5c2f7dadf915f70a45d397a4040.txt"
+ },
+ {
+  "paper_id": "148ed0cd52183e01416bf8667917aa6045ef007c",
+  "title": "The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - non-adversarial from the perspective of the paper's own framing (the authors explicitly label this 'defensive security research reporting a side effect of safety training rather than a new offensive capability' in a Responsible Disclosure statement, since the injection paradoxically backfires against the attacker's stated intent in the Claude models tested). However, the paper does document a real adversarial motivation and precedent: it cites a February 2026 Microsoft Security report that 31 companies across 14 industries attempted 'AI recommendation poisoning' by planting hidden instructions in clickable links and URL parameters to bias AI-assistant recommendations, and explicitly raises 'the technical possibility of a reverse-attack scenario' in which an adversary deliberately embeds injections in a competitor's documents to suppress that competitor's brand via the safety-sensit",
+  "technical_summary": "This paper reports a previously undocumented failure mode of safety training in RAG-based LLM recommendation systems, termed the 'Injection Paradox': in safety-trained Claude models (Sonnet 4.6, Opus 4.6), prompt injections embedded in retrieved documents -- conventionally used by attackers to boost a target brand's recommendation -- instead trigger the model's injection-detection/safety behavior and suppress recommendations for that brand below the injection-free baseline, producing outcomes actively worse for the attacker than doing nothing. Using a wireless-earbud recommendation testbed (a 40-document corpus, six-type prompt-injection trigger taxonomy spanning Direct/Structural/Implicit categories, and over 4,500 trials across four GPT and three Claude models), the authors show this suppression is brand-level rather than document-level: even though only 1 of 4 same-brand documents in ",
+  "text": "data/cache/pdf_text/148ed0cd52183e01416bf8667917aa6045ef007c.txt"
+ },
+ {
+  "paper_id": "263a7f25698640876b6cab4deafc11989cb7461b",
+  "title": "PRISM: Recovering Instruction Sets from Language Model Activations",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - non-adversarial from the paper's own perspective (this is a monitoring/interpretability method, not an attack). The incidental failure mode of interest is indirect prompt injection and hidden/covert objective steering: the paper's motivating problem is that an LLM agent's behavior may be silently steered by attacker-controlled hidden instructions embedded in retrieved content (direct or indirect prompt injection) or by objectives the model adopts from contextual cues without disclosing them, and the paper explicitly evaluates PRISM's ability to recover exactly these adversarially-injected or covertly-embedded instructions (the AP and HO evaluation settings) as a security-relevant transparency/monitoring capability, distinct from developing any new attack itself.",
+  "technical_summary": "This paper formalizes 'instruction set retrieval' (ISR): the problem of recovering the full set of simultaneous instructions, constraints, prohibitions, and subgoals currently steering an LLM agent's behavior directly from its internal activations, rather than from its self-reported output or a single high-level behavioral summary. The authors argue existing activation-to-language interpretability methods (Patchscopes, LatentQA, Activation Oracles, Predictive Concept Decoders) are not designed for this multi-instruction setting -- they typically answer arbitrary natural-language questions about a hidden state or produce one high-level description, and when applied to instruction set retrieval they recover only a fraction of active instructions, conflate distinct constraints, or hallucinate objectives that were never present. PRISM addresses this with an activation-conditioned interpreter",
+  "text": "data/cache/pdf_text/263a7f25698640876b6cab4deafc11989cb7461b.txt"
+ },
+ {
+  "paper_id": "0388c22f0b2a9650d202ab8ccb445fb8af730f1e",
+  "title": "Detecting Prompt Injection Attacks in Generative AI Systems: A Hybrid SIEM and One-Class SVM Framework",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Presents a hybrid detection framework that connects LLM application-layer security to enterprise SOC infrastructure, on the argument that existing application-layer defenses such as PromptShield and Prompt-G operate in isolation from SOC tooling and lack the session-level visibility needed to detect multi-turn fragmented campaigns - where an attack is spread across turns so that no single prompt looks malicious. The architecture instruments a Phi-3 Mini Instruct gateway to emit structured telemetry, correlates events in Elastic SIEM using four expert-authored detection rules, and augments rule coverage with a One-Class Support Vector Machine trained exclusively on 1200 benign interactions. The one-class design is the notable choice: by learning only the benign manifold rather than a decision boundary between known attacks and benign traffic, the OCSVM can flag behaviour that deviates fro",
+  "text": "data/cache/pdf_text/0388c22f0b2a9650d202ab8ccb445fb8af730f1e.txt"
+ },
+ {
+  "paper_id": "621e920e2eee0c7fe8140804493062130587070f",
+  "title": "On-Policy Self-Evolution via Failure Trajectories for Agentic Safety Alignment",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - non-adversarial framing for the training methodology itself, though the paper addresses adversarial settings as part of its evaluation scope. FATE is a safety-alignment training method, not an attack; however, its target failure modes explicitly include adversarial agent behaviors: executing unsafe tool calls, following injected instructions (prompt injection), complying with harmful requests, and the incidental non-adversarial failure mode of over-refusing benign tasks despite appearing 'safe' (a false-safety failure where an agent refuses legitimate work rather than genuinely resolving a safety-utility tension). The paper explicitly frames trajectory-level safety (rather than final-response-level classification) as the correct unit of evaluation, since an agent can appear to give a harmless final response while having already executed an unsafe tool call earlier in its trajectory",
+  "technical_summary": "FATE (Failure-trajectory Adaptive Trajectory Evolution) is an on-policy self-evolving framework for agentic safety alignment that converts an LLM agent's own verifier-scored trajectory failures into dense, multi-objective repair supervision, avoiding both the safety-utility trade-off of scalar safety rewards (which often induce degenerate over-refusal) and the need for external expert demonstrations. At each self-evolution round, the current policy is rolled out on agent tasks spanning benign tasks, attacked legitimate tasks (prompt injection/jailbreaks), and harmful requests, and failures are collected via verifier scoring. For each collected failure trajectory, the same policy that produced the failure (not an external teacher) is prompted with the original task, the failed trajectory, and verifier feedback to generate K repair candidates. Each candidate is re-scored by verifiers acros",
+  "text": "data/cache/pdf_text/621e920e2eee0c7fe8140804493062130587070f.txt"
+ },
+ {
+  "paper_id": "b3d4488ddeda4aa364fab31468a3dc728f396cab",
+  "title": "Prompt injection attacks on educational large language models for higher and vocational education",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Studies prompt injection in educational LLM pipelines - automated grading, intelligent tutoring, question answering and instructional support - and introduces a structured attack-generation framework tailored to learning-oriented prompts. The threat model is domain-specific and well motivated: educational deployments combine high-frequency interaction, sensitive student data, and high-stakes outcomes in assessment and credentialing, and crucially the student is the untrusted party whose text is placed directly into the grader's context alongside system policies, task instructions and rubrics. The attack exploits exactly that structure. It proceeds in four stages: decompose composite educational prompts into functional segments (policy, instruction, rubric, student text); construct role-consistent attack vectors that speak in a register the grader expects; compose stealthy injections insi",
+  "text": "data/cache/pdf_text/b3d4488ddeda4aa364fab31468a3dc728f396cab.txt"
+ },
+ {
+  "paper_id": "96501f13d4c7a2da1228220c5723098e54f63a7c",
+  "title": "Security-Aware Retrieval-Augmented Generation System for Post-Quantum Cryptography Intelligence",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Hallucination, prompt injection and unverifiable retrieved sources in a cybersecurity knowledge-management setting, where an incorrect cryptographic recommendation has operational consequences.",
+  "technical_summary": "A production-oriented RAG pipeline for cryptography intelligence that requires multi-source corroboration before answering and abstains below a confidence threshold, trading coverage for verifiability.",
+  "text": "data/cache/pdf_text/96501f13d4c7a2da1228220c5723098e54f63a7c.txt"
+ },
+ {
+  "paper_id": "d9303eb738a56b0e72404d3ad57964c25611a226",
+  "title": "Sentinel: SOTA model to protect against prompt injections",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - non-adversarial in the sense that the paper does not construct novel attacks; it is a detector-training paper for the general prompt injection / jailbreak threat model, where malicious inputs (role-playing, instruction hijacking, biased-content generation attempts, obfuscation, character escaping, context ignoring, direct and indirect injection) attempt to make an LLM deviate from its intended instructions by exploiting the model's inability to distinguish trusted system instructions from untrusted user-provided data. The paper explicitly frames prompt injection detection as a 'cat-and-mouse game' where trained detectors risk becoming outdated against novel attack signatures not represented in training data.",
+  "technical_summary": "Sentinel is a binary prompt-injection/jailbreak detection classifier built by fine-tuning answerdotai/ModernBERT-large -- a modernized bidirectional encoder-only Transformer pretrained on 2 trillion tokens of English and code with an 8,192-token native context length, using rotary positional embeddings, local-global alternating attention, and FlashAttention-based unpadding for efficient long-sequence processing -- on a purpose-curated dataset that consolidates seven open-source jailbreak/prompt-injection and benign-instruction datasets with one private, LLM-synthesized dataset targeting nuanced error correction and real-world misclassification patterns. The paper's primary contribution is empirical rather than architectural: it argues that superior detection performance stems from the combination of a stronger, longer-context base encoder (versus the smaller DeBERTa-v3 architecture used ",
+  "text": "data/cache/pdf_text/d9303eb738a56b0e72404d3ad57964c25611a226.txt"
+ },
+ {
+  "paper_id": "fb1bc7f717df24bef2a98d1dab26b0d86f069dd2",
+  "title": "AutoRed: Automated Attack Scenario Generation Framework for Red Teaming of LLMs",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Presents AutoRed, a learning framework that automatically generates malicious attack scenarios for extracting sensitive information from LLMs, addressing the cost and time burden of red teaming that relies on human testers to hand-craft provocative test cases. The threat model is specifically privacy-oriented and in-context: sensitive information supplied during conversation is retained as in-context memory, and the attack aims to extract those conversation histories through injected prompts to uncover private data - so the target is not policy violation in the abstract but recovery of data the user themselves provided earlier in the session. AutoRed comprises three cooperating components: a malicious prompt generator producing candidate injection attempts, a sensitive information extractor recovering private content from the responses, and a stop point identifier determining when an att",
+  "text": "data/cache/pdf_text/fb1bc7f717df24bef2a98d1dab26b0d86f069dd2.txt"
+ },
+ {
+  "paper_id": "0099c9c109c3516f0bf0d7d67502e99e86c78130",
+  "title": "A Modular Generative Honeypot Shell",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Presents LIMBOSH, a modular generative honeypot shell written in Python that places attackers in conversation with an LLM configured to behave like a real shell. The central design claim is configurability through prompting: because the emulated system is produced by an LLM rather than by hand-written shell software, arbitrary honeypot configurations can be created simply by adjusting the prompt that seeds the LLM context - so building a decoy for a new system type becomes a prompt-authoring task rather than a software-engineering one. Relevant to this corpus as an instance of a deliberately deceptive context: the entire operating premise is that untrusted attacker input and system-defining instructions share one context window, which is the same instruction/data confusion that this SoK treats as the root mechanism of prompt injection, here adopted intentionally as an architecture. That ",
+  "text": "data/cache/pdf_text/0099c9c109c3516f0bf0d7d67502e99e86c78130.txt"
+ },
+ {
+  "paper_id": "927b5bd48e1210d752b8e7ce437afa8f5cc2bcdd",
+  "title": "Towards Large Language Model (LLM) Forensics Using LLM-based Invocation Log Analysis",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes digital forensic analysis of LLM-integrated applications through LLM invocation log analysis, targeting prompt-injection attacks specifically. The motivating problem is a forensic-readiness gap: as LLMs become architectural elements inside already-complex cloud systems, potential digital evidence appears in large volumes with complex patterns, and existing DF tooling lacks standardisation and support for these novel evidence sources. The paper's structural contribution is arguing that LLM invocation logging should be treated as a first-class digital-forensic-readiness (DFR) component rather than as operational telemetry - i.e. what an LLM was asked and what it returned needs to be captured deliberately, in a defined schema, before an incident, or the evidence simply does not exist afterwards. It implements a custom LLM invocation logger capturing a defined baseline attribute set",
+  "text": "data/cache/pdf_text/927b5bd48e1210d752b8e7ce437afa8f5cc2bcdd.txt"
+ },
+ {
+  "paper_id": "e7eee295a7aba7ce0aef3b83a1b964e6bd10169d",
+  "title": "A Trace-Based Assurance Framework for Agentic AI Orchestration: Contracts, Testing, and Governance",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "Formal, security-relevant threat model embedded in the failure taxonomy: untrusted inputs (e.g., inbound emails, retrieved snippets, or document excerpts) may carry indirect prompt injection attempts that enter via memory or external interfaces and alter agent policy so that an unsafe action is selected (F4: tool/memory injection and interface poisoning), while F5 (misuse and harmful task execution) formalizes the case where a system completes a harmful multi-step objective or performs a harmful external action without triggering refusal, containment, or escalation, with 'excessive agency' formalized as the condition where an agent is granted enough permissions that plausible perturbations or ordinary service failures can lead to unsafe external actions (Pr(action in unsafe set) > epsilon).",
+  "technical_summary": "This paper proposes a trace-based assurance framework for LLM-orchestrated multi-agent (Agentic AI) systems, addressing failures beyond incorrect final outputs -- including non-termination, role drift, unsupported-claim propagation, and attacks via untrusted context or external channels -- that arise from long-horizon interaction, stochastic decisions, and side effects such as API calls, database writes, and message sends. The core representation is the Message-Action Trace (MAT), which records each execution run as a sequence of typed steps (user/agent messages, tool calls, memory reads/writes, delegation, termination) augmented with provenance and machine-checkable contract verdicts; a contract is a boolean predicate over a step-level MAT record or a trace prefix (e.g., 'tool calls with side effects must be preceded by a verification action within h steps') that localizes the first vio",
+  "text": "data/cache/pdf_text/e7eee295a7aba7ce0aef3b83a1b964e6bd10169d.txt"
+ },
+ {
+  "paper_id": "c8bbbde5345092e81bfd17ad60456cd1f1ca4fdc",
+  "title": "AprielGuard",
+  "current_regime": "security",
+  "derived_from_threat_model": "safety",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - non-adversarial from the perspective of the paper's own methodology (it is a defensive/detection paper, not an attack paper), but its subject matter is explicitly adversarial: it targets detection of prompt injection, jailbreaks, multi-turn manipulation, and agentic-workflow attacks (targeting prompt inputs, reasoning traces, tool parameters, memory states, and inter-agent communications) that existing single-turn-focused moderation systems fail to catch, motivated by real-world agentic AI systems being vulnerable to indirect prompt injections and long-context manipulations that exploit reasoning/planning mechanisms.",
+  "technical_summary": "AprielGuard is an 8B-parameter unified safeguard model from ServiceNow's SLAM Lab that jointly detects safety risks (toxicity, bias, harmful content) and adversarial threats (prompt injection, jailbreaks) within a single taxonomy and model, rather than treating these as separate classification tasks requiring distinct models as most prior guardrails (Llama Guard, Granite Guardian, MD-Judge, WildGuard) do. The model is fine-tuned (SFT, 3 epochs, batch size 1 with 8-step gradient accumulation, LR 2e-4, Adam) from a downscaled variant of the base model underlying Apriel-1.5-15B-Thinker, using a chat-template format with a dedicated <|content|> tag pair that lets a single model handle standalone prompts, multi-turn conversations, and agentic workflows (with tool calls/execution traces) uniformly. Training data (327,714 samples) is entirely synthetic, generated via Mixtral-8x7B and internal u",
+  "text": "data/cache/pdf_text/c8bbbde5345092e81bfd17ad60456cd1f1ca4fdc.txt"
+ },
+ {
+  "paper_id": "6db401bb9e8afddf06290f64b9d0df7a67719ca3",
+  "title": "Decomposition, Think and Action: Alleviating Hallucinations of Large Language Models with Reasoning\u2013Evidence Interactive Augmented Graph",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes RE-IAG (Reasoning-Evidence Interactive Augmented Graph), a hallucination-mitigation framework addressing two limitations it identifies in iterative RAG approaches that interleave retrieval with stepwise reasoning. First, indiscriminate incorporation of external knowledge can interfere with reasoning, increasing latency and amplifying error accumulation - i.e. more retrieval is not monotonically better, and retrieved content actively degrades reasoning when injected without discrimination, which is precisely the distraction-by-irrelevant-context mechanism in this SoK's registry. Second, existing methods use a unidirectional flow of external knowledge into the model while neglecting internal-external knowledge synergy, limiting autonomous reasoning. RE-IAG responds with a staged triggering mechanism plus structured interaction: it performs localized refinement of intermediate reas",
+  "text": "data/cache/pdf_text/6db401bb9e8afddf06290f64b9d0df7a67719ca3.txt"
+ },
+ {
+  "paper_id": "653ca4825ad48531899871aa40c59300b6b97823",
+  "title": "Context Viewer: Turning LLM Contexts into Analyzable Artifacts",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Presents Context Viewer, a browser-based visual analytics system for exploratory analysis of LLM contexts, addressing the observability gap that arises as models move to long-horizon tasks and multi-turn interaction. The problem it names is that existing systems present context as monolithic text transcripts or JSON message logs, which makes it hard to analyse components, assess where tokens are spent, see when irrelevant material accumulates, or compare how trajectories differ across runs. The paper frames the underlying shift as one from prompt design to context engineering - understanding what information should enter, remain in, or be removed from the model's working context - and poses the diagnostic questions that follow: which parts of a trajectory concern the current task, where irrelevant material accumulated, what artifacts dominate token usage, what changed between two runs, a",
+  "text": "data/cache/pdf_text/653ca4825ad48531899871aa40c59300b6b97823.txt"
+ },
+ {
+  "paper_id": "fb7d254c08e64bf3d793c837749936a7795bf9b9",
+  "title": "CKG-RAG: Enhancing LLM Reasoning in Medical Domain Using Contextual Knowledge Graphs",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes CKG-RAG for medical question answering, targeting a failure chain the paper states directly: introducing multiple relevant passages at the retrieval stage produces excessively long input sequences, and in that regime LLMs focus on the beginning and end of context while neglecting the middle - the Lost in the Middle phenomenon - which undermines answer accuracy. So the paper treats a positional-attention mechanism as the binding constraint on medical RAG accuracy, making it a direct Track B contribution in a high-stakes domain. Two mechanisms address it. First, retrieved documents are organized into a structured knowledge graph to reduce semantic redundancy - attacking the problem at its source by shortening what must be attended to rather than by trying to improve attention over a long sequence. Second, and distinguishing it from conventional graph-RAG approaches that flatten gr",
+  "text": "data/cache/pdf_text/fb7d254c08e64bf3d793c837749936a7795bf9b9.txt"
+ },
+ {
+  "paper_id": "b83cdce032b6129b594adf9b3ff3fbc00d20534b",
+  "title": "Red-MIRROR: Agentic LLM-based Autonomous Penetration Testing with Reflective Verification and Knowledge-augmented Interaction",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "This is a security/offensive-AI paper with an explicit dual-use threat model and formal ethical safeguards discussion, though its core contribution is a capability-improving system rather than a defense against an external adversary. The paper frames Red-MIRROR as operating in 'a black-box ethical red-teaming environment' targeting real web application vulnerabilities (SQL injection, XSS, business logic flaws, IDOR, blind injection, cryptographic exploitation) via reconnaissance, payload generation, and adaptive validation across multi-step attack chains. Because autonomous penetration testing capabilities are inherently dual-use (repurposable for malicious cyber operations if deployed irresponsibly), the paper's Section 5.4 Ethical Considerations explicitly restricts intended use to 'authorized security research and controlled defensive validation environments' and proposes safeguards: ",
+  "technical_summary": "Red-MIRROR is a multi-agent autonomous penetration testing framework designed to address three architectural bottlenecks identified in prior LLM-based pentesting systems (VulnBot, PentestAgent, AutoPT, xOffense, Autopentest, PTFusion): memory fragmentation across long conversational histories that degrades long-horizon attack coherence, lack of robust validation for generated attack payloads before execution (leading to repeated malformed requests and elevated detection risk), and over-reliance on the LLM's parametric knowledge rather than external, curated security knowledge. The system introduces a tightly coupled 'memory-reflection backbone' combining three mechanisms: a Shared Recurrent Memory Mechanism (SRMM) providing persistent, structured state management across agents and attack phases (addressing session/context fragmentation in multi-phase attacks); a Dual-Phase Reflection mec",
+  "text": "data/cache/pdf_text/b83cdce032b6129b594adf9b3ff3fbc00d20534b.txt"
+ },
+ {
+  "paper_id": "32743a56cf5a28f45d9fdf237450095b1ec9efe9",
+  "title": "Ebbinghaus Forgetting Curve and Large Language Model Memory Management: A Cognitive Science-Driven Long-Context Enhancement Framework Design and Prospects",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes a cognitive-science-driven memory management framework for LLM long-context enhancement, taking the Ebbinghaus Forgetting Curve as its organizing principle. The problem statement is explicitly the Lost in the Middle phenomenon - a substantial decrease in the utilization efficiency of key information located in the middle of a long document - and the paper's distinctive move is to treat this as a memory-management problem rather than an attention problem, importing the human hierarchical memory system and a dynamic forgetting mechanism as design metaphors. The framework optimizes storage, retrieval and forgetting of long-text information, with the stated aim of building a quantifiable, predictable and manageable memory enhancement system. Its first named contribution is a multi-dimensional memory intensity quantification model that evaluates the intrinsic value of stored informat",
+  "text": "data/cache/pdf_text/32743a56cf5a28f45d9fdf237450095b1ec9efe9.txt"
+ },
+ {
+  "paper_id": "d3c9e1b9a6f4847efd8fd382fdb36e6a7536f655",
+  "title": "Chain-of-Memory: Taming Hallucinations in Million-Token Models with Verifiable Retrieval and Causal Tracing",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Introduces Chain-of-Memory (CoM), a framework combining verifiable retrieval with causal tracing to control hallucination in million-token-context models, where processing extensive documents produces fabrications that contradict the source material. Three mechanisms compose it. Memory-anchored reasoning grounds each inference step to retrieved passages through explicit citation tokens, producing an auditable reasoning chain rather than an unsupported answer - so provenance is a structural property of generation rather than a post-hoc attribution. Causal intervention probes identify hallucination-prone attention patterns by measuring the counterfactual impact of context perturbations, targeting the Lost in the Middle phenomenon specifically; this is a genuinely diagnostic method, since perturbing context and observing output change establishes which positions actually influence the answe",
+  "text": "data/cache/pdf_text/d3c9e1b9a6f4847efd8fd382fdb36e6a7536f655.txt"
+ },
+ {
+  "paper_id": "1bb6703e03c66fc8591d05cf1d2797a0b01757b7",
+  "title": "Alleviating Contextual Misguidance: Response-Aware Prompt Compression for Long-Context Question Answering",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Diagnoses a specific cause of Lost in the Middle and proposes a targeted mitigation. The paper's analytical contribution is the identification of 'contextual misguidance': the failure to retrieve centrally-located information is often caused not by position alone but by query-relevant yet non-grounding segments that distract the model - passages that look topically related to the query and therefore attract attention, without containing the information needed to answer it. That is a sharper mechanism than generic positional bias, and it connects Lost in the Middle to the distraction-by-irrelevant-context mechanism in this corpus's registry, arguing they are aspects of the same failure rather than separate phenomena. The proposed method, Leave-One-Out Compression (LOOC), is response-aware prompt compression: it quantifies each prompt segment's influence on model outputs by measuring what ",
+  "text": "data/cache/pdf_text/1bb6703e03c66fc8591d05cf1d2797a0b01757b7.txt"
+ },
+ {
+  "paper_id": "52ce4b28ac27bc2108cdf2b54b67a0cb560475f2",
+  "title": "Cognitive Scaffold: From Fluid Context to Crystallized Memory for Long-Horizon DeepResearch Agents",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Introduces Cognitive Scaffold, a factorized memory architecture for long-horizon DeepResearch agents, targeting what the authors name the 'context-noise trade-off': linear accumulation of interaction history degrades reasoning and dilutes fine-grained evidence, so simply keeping everything is self-defeating. The architecture decouples the agent's cognitive state into two components - a Fluid Working Context serving immediate reasoning, and a persistent Knowledge Graph for long-term retention - so that what the model attends to now is separated from what the system remembers. The distinguishing mechanism versus ordinary summarization-based compaction is how context is crystallized: rather than unstructured summarization, a Rejection Sampling Fine-Tuning pipeline converts saturated context into structured 'event snapshots' under strict atomic constraints that preserve numerical values and ",
+  "text": "data/cache/pdf_text/52ce4b28ac27bc2108cdf2b54b67a0cb560475f2.txt"
+ },
+ {
+  "paper_id": "02a48e14375b6fa7dac43d6a3a205a51ae998f17",
+  "title": "FocusAgent: Simple Yet Effective Ways of Trimming the Large Context of Web Agents",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "The security evaluation (Section 6) targets indirect prompt injection attacks against web agents, where malicious instructions are embedded in page content that is not visible to the human user but is present in the textual AxTree observation the agent processes -- specifically banner attacks (malicious instructions inserted into SVG elements and their alt-text fields) and popup attacks (a popup containing hidden malicious text embedded in the AxTree). The attacker is assumed to control content on a visited web page (e.g., via a compromised or malicious site element) and aims to hijack the agent's action sequence to pursue the attacker's goal instead of the user's task goal, evaluated using the DoomArena framework on WebArena Reddit tasks; the paper does not consider attacks that manipulate the retriever itself (e.g., adversarially crafting content to survive the LLM-based pruning step) ",
+  "technical_summary": "FocusAgent addresses the dual problem of context bloat and prompt-injection vulnerability in LLM-based web agents by using a lightweight LLM (e.g., GPT-4.1-mini) as a step-wise retriever over accessibility-tree (AxTree) observations, rather than relying on embedding/BM25-based chunk retrieval or naive bottom-truncation, both of which the authors argue either underperform in zero-shot settings or risk discarding essential contextual information. The two-stage pipeline first numbers every line of the current AxTree observation and constructs a retrieval prompt containing the task goal, the numbered observation, and (per ablation results) deliberately excludes interaction history, since including agent CoT history was found to degrade the smaller retriever model's judgment; the retriever LLM then outputs a chain-of-thought plus a set of relevant line ranges, following a 'soft' prompting str",
+  "text": "data/cache/pdf_text/02a48e14375b6fa7dac43d6a3a205a51ae998f17.txt"
+ },
+ {
+  "paper_id": "986fc8d841425a81947838425ea292685ef8325a",
+  "title": "Multi-Route Search and Adaptive Fusion for Power QA with Small Language Model Guidance",
+  "current_regime": "safety",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "",
+  "technical_summary": "Proposes a multi-path adaptive fusion retrieval framework guided by small language models for power-system documentation question answering, where documents serve as the core guideline for safe grid operation and retrieval precision bears on grid stability. Three domain-specific failure modes motivate it, each an instance of a mechanism in this corpus's registry: semantic drift from non-standardized industry terminology; increased semantic noise from fixed-window segmentation, i.e. chunking that cuts across the document's logical structure and produces fragments whose meaning depends on removed context; and knowledge conflicts arising in multi-source retrieval. The framework addresses these in sequence. It first constructs a common terminology repository and a section-structure-aware index that preserves the physical hierarchical logic of the source documents - so chunking follows docume",
+  "text": "data/cache/pdf_text/986fc8d841425a81947838425ea292685ef8325a.txt"
+ },
+ {
+  "paper_id": "d8ba6085c7c32cc367ab7f50d18744de846fcebd",
+  "title": "Preemptive Answer \"Attacks\" on Chain-of-Thought Reasoning",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "Two variants are studied side by side. In the unintentional case there is no attacker at all: the user's own prompt phrasing ('first give an answer, then show the step-by-step solution') causes the model to emit an answer before reasoning. In the malicious case a user performs prompt injection to force the same answer-first ordering with an attacker-chosen answer. The attacker needs only prompt-level access and no model internals.",
+  "technical_summary": "Introduces the preemptive answer scenario, in which an LLM produces an answer before it reasons, and shows that the subsequent chain-of-thought degrades to rationalizing that answer rather than deriving one. Distinguishes an unintentional variant arising from ordinary answer-first prompt phrasing from a malicious variant induced by prompt injection, and measures both with accuracy and an attack success rate across six reasoning datasets, two models and three CoT methods. Finds the incidental and adversarial variants inflict comparable damage on arithmetic tasks, which makes this one of the few papers in the corpus to instrument both failure modes under one protocol. Proposes two lightweight mitigations, problem restatement and self-reflection, which reduce but do not remove the degradation.",
+  "text": "data/cache/pdf_text/d8ba6085c7c32cc367ab7f50d18744de846fcebd.txt"
+ },
+ {
+  "paper_id": "301b6d574aa1f16b8b0ded55ec0236cbd2066260",
+  "title": "BenchOverflow: Measuring Overflow in Large Language Models via Plain-Text Prompts",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "Deliberately weak: any ordinary user issuing natural-language requests, with no adversarial suffixes, jailbreaks, special tokens, model-specific artifacts, corpus control or model access. The paper frames Overflow as arising from helpfulness priors and absent length control, so it can be triggered inadvertently (student misuse, curiosity stress tests) or exploited at scale for compute amplification, cost inflation (denial-of-wallet) and cross-tenant service degradation.",
+  "technical_summary": "Introduces Overflow, a non-adversarial failure mode in which ordinary plain-text prompts elicit excessive generation, and BenchOverflow, a model-agnostic benchmark of nine prompting strategies that amplify output volume without adversarial suffixes or policy circumvention. Evaluates nine open- and closed-source models under a standardized protocol with a fixed 5,000-new-token budget, quantifying tail risk with cap-saturation rates (CSR@1k/3k/5k) and empirical CDFs, and analysing within-prompt variance and cross-model correlation. Positions Overflow against optimized resource-exhaustion attacks (Engorgio, AutoDoS, OverThink, BitHydra) by requiring no optimization or data control. Assesses a lightweight model-agnostic conciseness reminder as a first-line mitigation and shows it attenuates right tails unevenly across models and strategies.",
+  "text": "data/cache/pdf_text/301b6d574aa1f16b8b0ded55ec0236cbd2066260.txt"
+ },
+ {
+  "paper_id": "98b790d195d775ee82c42fd596d588a792c6eab3",
+  "title": "You've Changed: Detecting Modification of Black-Box Large Language Models",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "The defender is a downstream developer consuming a black-box LLM through an API with no visibility into provider-side changes. The 'adversary' is either a provider performing silent updates, model swaps, quantization changes or control-vector edits, or a party injecting text into the system prompt. The paper highlights a class of injection in which the target task is not replaced but a distributional property of responses (for example sentiment) is shifted, leaving individual responses looking normal.",
+  "technical_summary": "Proposes monitoring a black-box LLM for modification by comparing distributions of linguistic and psycholinguistic features of its generated text across time, using Kolmogorov-Smirnov tests (with Bonferroni correction when aggregating features) to decide whether two samples came from the same model. Evaluates discrimination across five OpenAI completion models, identifies which feature families carry the signal, and measures sensitivity on synthetic mixtures of text from two models. Extends the same machinery to a secondary question: whether a system-prompt injection that shifts the sentiment distribution rather than replacing the task can be detected, using 3,000 Llama 3 70B book reviews per condition and VADER sentiment. Frames the method as a cheap continuous alternative to benchmark re-evaluation, which is expensive and vulnerable to benchmark contamination.",
+  "text": "data/cache/pdf_text/98b790d195d775ee82c42fd596d588a792c6eab3.txt"
+ },
+ {
+  "paper_id": "1759010234718b3ece22e9beb554f55b22b06fbe",
+  "title": "KVEraser: Learning to Steer KV Cache for Efficient Localized Context Erasing",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "N/A - not an adversarial-attack defense in the classic sense; the paper targets a general 'context erasing' problem where a short span already written into the KV cache is later identified as stale (out-of-date retrieved facts), incorrect (a faulty tool observation), retracted (a withdrawn user preference), or harmful (an adversarial instruction/injection in an imported skill file), and the system must make future decoding behave as though that span never appeared, without full recomputation.",
+  "technical_summary": "Introduces KVEraser, a learned KV-cache editing method that performs efficient, localized 'context erasing': given a processed context and a span to remove (e.g., a stale retrieved fact, an incorrect tool observation, a retracted user preference, or a harmful injected instruction), it replaces only that span's cached KV states with learned steering states while reusing the rest of the cache unchanged, avoiding the suffix-length-dependent cost of full recomputation. Trains a two-stage pipeline (generic span-neighbor pre-training, then task-specific fine-tuning) on Qwen3-8B and evaluates against full recomputation and three approximate baselines (delete-and-shift, instruction-only forgetting, local suffix repair) on a controlled synthetic erasing benchmark (1K-32K context) and on unseen long-document QA with harmful factual distractors, achieving near-full-recomputation quality at a fracti",
+  "text": "data/cache/pdf_text/1759010234718b3ece22e9beb554f55b22b06fbe.txt"
+ },
+ {
+  "paper_id": "b84eb462ce742f35d638d10b3218ddf72712f12b",
+  "title": "A pen mark is all you need - Incidental prompt injection attacks on Vision Language Models in real-life histopathology",
+  "current_regime": "safety",
+  "derived_from_threat_model": "security",
+  "why_open": "signals disagree",
+  "threat_model": "Deliberately weak: the central claim is that NO attacker is required. Handwritten pen marks, diagnostic annotations and institutional watermarks are routinely present on real pathology slides, so ordinary clinical data acts as an unintentional injection carrier. The authors contrast this with classical VLM prompt injection, which 'requires an active malicious actor with access to the prompt itself'. A malicious variant (deliberately swapped prostate/ovary watermarks) is also tested.",
+  "technical_summary": "Evaluates whether ordinary, non-adversarial artifacts on histopathology slides - handwritten pen labels, diagnostic annotations and institutional watermarks - function as unintentional prompt injections for vision-language models. Constructs four clinically relevant tasks (T-stage, lymph node infiltration, mutational status, tissue of origin) over public TCGA and TCIA whole-slide images and varies whether the visible label leaks the truth, misleads, or is absent, for 3888 total observations across three frontier VLMs. Finds the models abandon the tissue entirely and read the label: near-perfect on truth-leaking labels, near-zero on misleading ones, versus 30-65% clean baselines. Tests prompt engineering as a mitigation and shows it fails, with GPT-4o even moving in the opposite direction. Frames the phenomenon explicitly as 'incidental prompt injection', linking it to the Clever Hans / s",
+  "text": "data/cache/pdf_text/b84eb462ce742f35d638d10b3218ddf72712f12b.txt"
+ },
+ {
+  "paper_id": "646f950f41530e196f83033d21dfaefb27dd7b85",
+  "title": "Privacy-Preserving Prompt Injection Detection for Smart Cloud-Deployed Large Language Models",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Cloud LLM providers want to retroactively audit historical user prompts for newly discovered prompt-injection templates without storing raw user text, which may contain sensitive personal/business information subject to privacy regulation.",
+  "technical_summary": "Proposes a privacy-preserving prompt injection detection scheme for cloud-deployed LLMs that combines salted hash-based exact matching with sentence-embedding-based near-match detection over sliding-window chunks of user prompts, so raw plaintext is never persistently stored. Adds an optional blockchain logging layer (tested on the Sepolia testnet) for tamper-evident audit trails of flagged prompts. Benchmarks the scheme against full-text embedding detection and window-based hash detection on 2,000 synthetic test prompts spanning four injection templates, showing consistently higher F1 across similarity thresholds and window sizes. Concludes the approach balances detection accuracy with strict privacy requirements.",
+  "text": "data/cache/pdf_text/646f950f41530e196f83033d21dfaefb27dd7b85.txt"
+ },
+ {
+  "paper_id": "1ce4b21dda6721f1c94b63ab1b93144a87a9b0ad",
+  "title": "Enterprise Secure AI Execution Engine: A Zero-Trust Security Gateway for Enterprise LLM Systems",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Attackers submit arbitrary prompts (prompt injection, encoded payloads, multi-step reasoning attacks) without access to internal system settings or model configuration, attempting credential theft, role escalation, or confidential-document extraction from an enterprise LLM deployment across Admin/Employee/Intern access levels.",
+  "technical_summary": "Introduces the Enterprise Secure AI Execution Engine, a Zero-Trust AI Security Gateway that enforces input sanitization, Role-Based Access Control (RBAC), adversarial prompt detection, and deterministic tokenization of sensitive entities before prompts reach an enterprise LLM. Evaluates the gateway on a 300-prompt adversarial subset derived from the HackAPrompt benchmark across five attack categories under three RBAC roles. Reports 98.7% block accuracy and 99.3% tokenization accuracy versus 82%/75% for an unprotected baseline LLM deployment, with only a modest latency increase. Identifies usability trade-offs from default-deny policies and dependence on detection-model accuracy as open limitations.",
+  "text": "data/cache/pdf_text/1ce4b21dda6721f1c94b63ab1b93144a87a9b0ad.txt"
+ },
+ {
+  "paper_id": "2d3761e670c3597babbbcd9cf7b88327e07e770b",
+  "title": "Securing With Dual-LLM Architecture: ChatTEDU an Open Access Chatbot\u2019s Defense",
+  "current_regime": "security",
+  "derived_from_threat_model": "",
+  "why_open": "threat_model blank or unclear",
+  "threat_model": "Anonymous public users interact with an open-access, multilingual RAG-based educational chatbot and attempt prompt injection, jailbreaking, content manipulation, spam/advertisement insertion, and denial-of-service-style exploitation; 77.8% of observed real attacks used technical exploitation (vs. content-based manipulation) and 15% involved multilingual attack attempts.",
+  "technical_summary": "Introduces ChatTEDU, a dual-LLM defense architecture for an open-access, multilingual RAG-based educational chatbot deployed at TED University. Separates content moderation (LLM-1, GPT-4 with few-shot prompt-engineered threat classification) from response generation (LLM-2, GPT-4), so the moderation model gates all input before the generation model ever processes it. Evaluated against 4,501 real-world production interactions (180 malicious) collected over a two-month deployment, achieving 100% detection of identified attacks with 0.28% false positives and only 18% latency overhead while sustaining 95% throughput under peak concurrent load. Acknowledges that no baseline defense was directly compared on the same dataset and recommends future standardized benchmarking.",
+  "text": "data/cache/pdf_text/2d3761e670c3597babbbcd9cf7b88327e07e770b.txt"
+ }
+]

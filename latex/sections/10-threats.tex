@@ -112,3 +112,24 @@ full is the exception. The project kept no record of how that subset was
 chosen, so we cannot show it was unbiased. A reader should treat the corpus as
 a large and systematically discovered sample of the two literatures, not as
 their exhaustive intersection. The counts that follow from it are floors.
+
+\textbf{Most of the corpus is unrefereed, and the finding does not depend on
+that.} \NVenuePapers{} of \NCorpus{} papers carry a named publication venue;
+the rest are preprints, and the share falls with recency, from 85\% of our
+2023 papers to 21\% of our 2026 ones. A corpus restricted to refereed work
+would therefore describe an earlier field than the one we set out to measure.
+We report the restriction instead of adopting it. Resolving both sides of
+every pair back to a paper succeeds for \NVenueResolved{} of
+\NTimelinePairs{} pairs (\PctVenueResolved{}\%); of those, \NVenuePairs{} have
+a named venue on both sides, and \NVenueSecDefMLAtk{} of them is a security
+defense evaluated against a machine learning failure mechanism. The empty
+direction stays empty among refereed work alone.
+
+\textbf{A recall check on the papers that named nothing.}
+\NNoTechnique{} papers contributed no attack and no defense, and
+\NNoTechOther{} of those match none of the survey, benchmark, framework or
+position descriptions by title. A re-reading pass over a sample of that
+remainder found three candidates in forty-eight papers: one genuine omission,
+one duplicate of a defense already registered under another name, and one
+attack built by a defense paper for its own evaluation. We report the rate
+rather than claiming the census is complete.

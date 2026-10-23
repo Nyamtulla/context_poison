@@ -131,13 +131,32 @@ def main():
     # ---- which papers contribute what
     mech_p = {e.get("paper_id") for e in r3} & included
     def_p = {e.get("paper_id") for e in r4} & included
-    M["NPapersMech"], M["NPapersDef"] = len(mech_p), len(def_p)
-    M["NPapersBoth"] = len(mech_p & def_p)
-    M["NPapersNeither"] = len(included - mech_p - def_p)
+
+    # NPapersMech/Def/Both/Neither were retired on 2026-10-22: NAnalysed and
+    # NNoTechnique say the same things against the denominators the paper
+    # actually uses, and four unused macros invite a stale one being quoted.
     # The corpus is screened; the census is drawn from the papers that named
     # something. Each claim states its own denominator, so both are macros.
     M["NAnalysed"] = len(included & (mech_p | def_p))
     M["NNoTechnique"] = len(included - mech_p - def_p)
+    # What the papers that named nothing actually are. Reported because an
+    # exclusion stated without its composition is a convenience, not a
+    # criterion. Categories are assigned in this order and each paper is
+    # counted once, so the five sum to NNoTechnique.
+    import re as _re
+    _ti = hdr.index("title")
+    _none = [r for r in rows if r[pi] in (included - mech_p - def_p)]
+    _pats = [("Survey", r"\b(survey|systemati[sz]ation|sok|review|taxonomy|landscape)\b"),
+             ("Bench", r"\b(benchmark|evaluat|dataset|testbed|leaderboard|arena)\b"),
+             ("Position", r"\b(position|towards|roadmap|perspective|agenda|challenges|opportunit)\b"),
+             ("Framework", r"\b(framework|architecture|platform|protocol|pipeline|system)\b")]
+    _seen = set()
+    for _name, _pat in _pats:
+        _hit = {r[pi] for r in _none
+                if _re.search(_pat, str(r[_ti] or ""), _re.I)} - _seen
+        _seen |= _hit
+        M["NNoTech" + _name] = len(_hit)
+    M["NNoTechOther"] = len(_none) - len(_seen)
 
     # ---- coverage. Everything derives from ONE pair set, the composite in
     # pair_tally.composite_pairs(). RQ5's published 332 pairs and 106 covered
@@ -328,6 +347,31 @@ def main():
     M["NMLDefVsSecAttack"] = sum(1 for r in _pure
                                  if r["defense_track"] == "ML/AI"
                                  and r["attack_track"] == "Security")
+
+    # Robustness: two thirds of the corpus is preprint, so a reviewer will ask
+    # whether the finding is an artifact of unrefereed work. Restrict both
+    # sides of every pair to papers with a named venue and see what survives.
+    _vi = hdr.index("venue")
+    _named = {r[pi] for r in rows if r[pi] in included
+              and str(r[_vi] or "").strip()
+              and str(r[_vi] or "").strip().lower() != "arxiv"}
+    _dn, _an = {}, {}
+    for _reg, _keys, _m in ((r4, ("defense_name", "name"), _dn),
+                            (r3, ("technique_name", "name"), _an)):
+        for _e in _reg:
+            for _k in _keys:
+                if _e.get(_k):
+                    _m.setdefault(_e[_k].strip(), _e.get("paper_id"))
+    _res = [x for x in tl if x["defense"] in _dn and x["attack"] in _an]
+    _sub = [x for x in _res
+            if _dn[x["defense"]] in _named and _an[x["attack"]] in _named]
+    M["NVenuePapers"] = len(_named)
+    M["NVenuePairs"] = len(_sub)
+    M["NVenueResolved"] = len(_res)
+    M["PctVenueResolved"] = f"{100 * len(_res) / len(tl):.0f}"
+    M["NVenueSecDefMLAtk"] = sum(
+        1 for x in _sub if x["defense_track"] == "Security"
+        and x["attack_track"] == "ML/AI")
     # the two diagonal cells of the transfer matrix, so Table 1 and the
     # sentence under it cannot drift apart
     M["NSecDefSecAttack"] = sum(1 for r in _pure

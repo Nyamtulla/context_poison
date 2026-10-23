@@ -69,6 +69,8 @@ def _index(entries, namekeys, papers):
             "track": (e.get("track") or p.get("track") or "").strip(),
             "paper_id": e.get("paper_id"),
             "title": p.get("title") or e.get("title"),
+            "internal_to_defense_paper": bool(
+                e.get("internal_to_defense_paper")),
         }
     return out
 
@@ -105,6 +107,13 @@ def build():
                                "defense_match": dhow, "attack_match": ahow,
                                "defense_year": (D or {}).get("year"),
                                "attack_year": (A or {}).get("year")})
+            continue
+        # An attack a defense paper built for its own evaluation cannot pair
+        # with a defense from that same paper. Counting it would let a paper
+        # manufacture its own coverage, which is what the coverage result
+        # exists to detect. See scripts/apply_recall_findings.py.
+        if A.get("internal_to_defense_paper") and \
+                A.get("paper_id") and A["paper_id"] == D.get("paper_id"):
             continue
         cross = bool(D["track"] and A["track"] and D["track"] != A["track"])
         rows.append({
