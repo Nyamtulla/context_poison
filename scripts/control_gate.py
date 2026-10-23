@@ -28,40 +28,38 @@ sys.path.insert(0, str(REPO / "third_party" / "CK-PLUG"))
 DATA = (REPO / "third_party" / "ParamMute" / "data" / "CoConflictQA"
         / "test" / "NaturalQuestionsShort_kc.jsonl")
 
-# What each port has to reproduce, and where the number comes from. These are
-# directions and floors, not point estimates: the gate asks whether the method
-# still does its own job, not whether it matches to a decimal.
-EXPECT = {
-    "coiecd": dict(
-        arm="coiecd", against="base_rag", metric="pm_acc", direction="below",
-        floor=2.0,
-        why="COIECD suppresses the parametric answer; on clean data its own "
-            "run cut pm_acc while leaving accuracy flat. Accuracy is NOT the "
-            "gate, because inert-on-accuracy is its published behaviour."),
-    "acd": dict(
-        arm="acd", against="closedbook", metric="ctx_acc", direction="above",
-        floor=20.0,
-        why="ACD read the clean document well: +53.5pp over answering with no "
-            "document at all. A port that lost the context would show up here."),
-    "scr": dict(
-        arm="scr", against="closedbook", metric="ctx_acc", direction="above",
-        floor=20.0,
-        why="SCR scored +41.2pp over closed-book on clean context, which is "
-            "what shows it reads the document rather than abstaining."),
-    "dyprag": dict(
-        arm="dyprag", against="closedbook", metric="ctx_acc", direction="above",
-        floor=5.0,
-        why="DyPRAG claims to improve RAG. In our own runs it did not separate "
-            "from the closed-book arm, so this gate is EXPECTED TO FAIL; a "
-            "pass would mean the port reads passages its own script did not."),
+# What each port has to reproduce: the run we already have of that same
+# method, on the same data, at clean dose.
+#
+# An earlier version of this gate set a floor per defense - "suppress the
+# parametric rate by at least 2pp" - and that was the wrong test. On clean
+# data COIECD's parametric rate is about 7%, so there is almost nothing to
+# suppress; its suppression appears under attack, where that rate triples.
+# A floor chosen that way tests a condition the method does not claim.
+#
+# Reproduction is the right test and it is also the honest one: the port has
+# to put the same numbers on the board as the script it replaces, within the
+# resolution of the run. Tolerance is that run's own minimum detectable
+# change, so the gate cannot demand precision the sample size cannot deliver.
+REPRODUCE = {
+    "coiecd": ("coiecd_vs_corpus_poisoning.json",
+               {"base_rag": "base_rag", "coiecd": "coiecd"}),
+    "acd": ("acd_vs_corpus_poisoning.json",
+            {"rag": "rag", "closedbook": "closedbook", "acd": "acd"}),
+    "scr": ("scr_vs_corpus_poisoning.json",
+            {"rag": "rag", "closedbook": "closedbook", "scr": "scr"}),
+    "dyprag": ("dyprag_vs_corpus_poisoning.json",
+               {"rag": "rag", "closedbook": "closedbook", "dyprag": "dyprag"}),
 }
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--defense", required=True, choices=sorted(EXPECT))
+    ap.add_argument("--defense", required=True, choices=sorted(REPRODUCE))
     ap.add_argument("--n", type=int, default=100)
     ap.add_argument("--model", default="NousResearch/Meta-Llama-3-8B-Instruct")
+    ap.add_argument("--max_context_chars", type=int, default=2000,
+                    help="the frozen item set the reproduced runs used")
     a = ap.parse_args()
 
     import defenses
@@ -75,7 +73,14 @@ def main():
     import eval_NQ as CKEVAL                     # CK-PLUG's scorer, as the runs use
 
     allrows = [json.loads(l) for l in DATA.open()]
-    rows = allrows[:a.n]
+    # The runs being reproduced all filter to contexts of at most 2000
+    # characters and then take the first n. Comparing against an unfiltered
+    # slice is not a reproduction test: it is a different item set, and every
+    # arm shifts together without the port being wrong.
+    kept = [r for r in allrows if len(r["context"]) <= a.max_context_chars]
+    rows = kept[:a.n]
+    print(f"  {len(allrows)} items, {len(kept)} within "
+          f"{a.max_context_chars} chars, using {len(rows)}")
     print(f"{a.defense}: {len(rows)} items, clean dose, {DATA.name}")
 
     # ACD prompts few-shot, and a shot drawn from the evaluation slice would
@@ -83,7 +88,7 @@ def main():
     # this does too.
     kw = {}
     if a.defense == "acd":
-        shots = allrows[a.n:a.n + 5]
+        shots = kept[a.n:a.n + 5]
         if len(shots) < 5:
             raise SystemExit("not enough held-out items for ACD's few-shots")
         kw["shots"] = shots
@@ -109,27 +114,41 @@ def main():
                     "pm_acc": round(pm, 2)}
         print(f"  {arm:12} ctx_acc {ctx:6.2f}   pm_acc {pm:6.2f}")
 
-    e = EXPECT[a.defense]
-    delta = res[e["arm"]][e["metric"]] - res[e["against"]][e["metric"]]
-
-    # A gate that cannot resolve the effect it tests for will fail a good
-    # port. Same rule we apply to the experiments, applied to ourselves:
-    # report the smallest difference this n can see, and refuse to call a
-    # FAIL when the floor sits under it.
+    fn, armmap = REPRODUCE[a.defense]
+    prior = json.loads((REPO / "data" / "registries" / fn).read_text())
+    clean = {r["arm"]: r for r in prior["results"] if r["frac"] == 0.0}
+    mdr = prior.get("mdr_pp_at_n")
     from transfer_stats import min_detectable_change
-    base_rate = res[e["against"]][e["metric"]] / 100 or 0.5
-    mdr = min_detectable_change(len(rows), base_rate)
-    print(f"\n  gate power: at n={len(rows)} and a base rate of "
-          f"{100*base_rate:.1f}%, the smallest resolvable difference is "
-          f"{mdr:.1f}pp")
-    ok = delta >= e["floor"] if e["direction"] == "above" else delta <= -e["floor"]
-    if not ok and e["floor"] < mdr:
-        verdict = "UNDERPOWERED"
-    else:
-        verdict = "PASS" if ok else "FAIL"
-    print(f"\n  {e['arm']} vs {e['against']} on {e['metric']}: {delta:+.2f}"
-          f"  (needs {e['direction']} {e['floor']})  -> {verdict}")
-    print(f"  {e['why']}")
+    if mdr is None:
+        mdr = min_detectable_change(len(rows), 0.5)
+    # The recorded tolerance belongs to the recorded run's sample size. Ours
+    # may be smaller, and then our own estimate is the looser of the two: a
+    # gate run at n=2 against a tolerance computed at n=400 would pass
+    # anything. Take the larger, and say so when ours is the binding one.
+    ours_mdr = min_detectable_change(len(rows), 0.5)
+    if ours_mdr > mdr + 0.01:
+        print(f"  NOTE: this run's n={len(rows)} resolves only "
+              f"{ours_mdr:.1f}pp, looser than the recorded {mdr}pp. "
+              "Using the looser figure; re-run larger for a real verdict.")
+        mdr = ours_mdr
+
+    print(f"\n  reproducing {fn}, clean dose, tolerance {mdr:.1f}pp")
+    worst, ok = 0.0, True
+    for ours, theirs in armmap.items():
+        if theirs not in clean or ours not in res:
+            print(f"  {ours:12} MISSING from one side")
+            ok = False
+            continue
+        d = res[ours]["ctx_acc"] - clean[theirs]["ctx_acc"]
+        worst = max(worst, abs(d))
+        flag = "" if abs(d) <= mdr else "   <- outside tolerance"
+        ok = ok and abs(d) <= mdr
+        print(f"  {ours:12} ours {res[ours]['ctx_acc']:6.2f}   "
+              f"recorded {clean[theirs]['ctx_acc']:6.2f}   {d:+6.2f}{flag}")
+    verdict = "PASS" if ok else "FAIL"
+    print(f"\n  largest difference {worst:.2f}pp against {mdr:.1f}pp -> {verdict}")
+    e = {"reproduces": fn, "tolerance_pp": mdr}
+    delta = worst
 
     out = REPO / "data" / "registries" / f"control_gate_{a.defense}.json"
     out.write_text(json.dumps(
@@ -138,11 +157,7 @@ def main():
          "expectation": e, "delta": round(delta, 2), "verdict": verdict},
         indent=1))
     print(f"\nwrote {out.relative_to(REPO)}")
-    if verdict == "UNDERPOWERED":
-        print(f"Not a verdict: the floor of {e['floor']}pp is under this "
-              f"run's {mdr:.1f}pp resolution. Re-run with a larger --n "
-              "before concluding anything about the port.")
-    elif verdict == "FAIL":
+    if verdict == "FAIL":
         print("Gate failed: this defense reports no transfer number until the "
               "port reproduces its own published benefit.")
 

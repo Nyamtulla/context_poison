@@ -12,8 +12,8 @@ genuinely have: content arrives somewhere, is acted on somewhere, and fails as
 something.
 
 Every number is read from the registries. The asymmetry it exposes is the
-paper's argument in one picture: the security track masses at ingestion, the
-machine learning track at reasoning, and execution is security-only.
+paper's argument in one picture: the security side masses at ingestion, the
+safety side at reasoning, and execution is security-only.
 
 Out: latex/figures/fig0_pipeline.pdf
 """
@@ -36,7 +36,11 @@ OUT = REPO / "latex" / "figures"
 CAT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 GREY = "#f0efec"
-SEC, ML = CAT[0], CAT[1]
+# The track convention, the same hexes as gen_paper_figures.py: security is
+# red and safety is blue, in every figure in the paper. This file had them
+# the other way round, which made it the one figure where the colours meant
+# the opposite of everywhere else.
+SEC, ML = "#d6452a", "#2a78d6"
 FULL = 7.0
 
 plt.rcParams.update({
@@ -47,8 +51,12 @@ plt.rcParams.update({
 
 CHANNELS = ["direct-input", "tool-output", "RAG", "memory", "multi-agent",
             "cross-modal", "tool-metadata", "skill", "supply-chain"]
+# Keep in step with CQS in gen_paper_numbers.py and CONSEQ in
+# gen_paper_figures.py. availability-loss joined the scheme and this list was
+# missed, so the figure drew six columns while the paper said seven.
 CONSEQ = ["goal-hijack", "reasoning-corruption", "silent-corruption",
-          "data-exfiltration", "persistence-backdoor", "resource-abuse"]
+          "data-exfiltration", "persistence-backdoor", "resource-abuse",
+          "availability-loss"]
 POINTS = [("ingestion", "ingestion"), ("reasoning", "reasoning"),
           ("execution", "execution")]
 
@@ -98,7 +106,7 @@ def main():
     ax.add_patch(FancyBboxPatch((50.0, 92.6), 2.0, 2.0,
                                 boxstyle="round,pad=0,rounding_size=0.5",
                                 facecolor=ML, edgecolor="none"))
-    ax.text(52.9, 93.6, "machine learning", ha="left", va="center",
+    ax.text(52.9, 93.6, "safety", ha="left", va="center",
             fontsize=6.4, color=INK)
 
     # ---- channels, left ----------------------------------------------------
@@ -108,8 +116,8 @@ def main():
     ax.text(11, 96.4, "where untrusted content enters", ha="center",
             fontsize=7, color=INK, fontweight="bold")
     ax.text(16.6, 90.0, "sec", ha="center", fontsize=5.6, color=SEC)
-    ax.text(20.0, 90.0, "ml", ha="center", fontsize=5.6, color=ML)
-    ax.text(11, 2.2, "9 channels, 233 named mechanisms", ha="center",
+    ax.text(20.0, 90.0, "saf", ha="center", fontsize=5.6, color=ML)
+    ax.text(11, 2.2, f"{len(CHANNELS)} channels, {len(mech)} named mechanisms", ha="center",
             fontsize=6.0, color=INK2)
     BUS = 25.0
     for i, c in enumerate(CHANNELS):
@@ -157,8 +165,9 @@ def main():
     ax.text(86.5, 96.4, "how the output goes wrong", ha="center",
             fontsize=7, color=INK, fontweight="bold")
     ax.text(93.6, 90.0, "sec", ha="center", fontsize=5.6, color=SEC)
-    ax.text(97.2, 90.0, "ml", ha="center", fontsize=5.6, color=ML)
-    ax.text(86.5, 2.2, "6 consequences, the same 233 mechanisms", ha="center", fontsize=6.0, color=INK2)
+    ax.text(97.2, 90.0, "saf", ha="center", fontsize=5.6, color=ML)
+    ax.text(86.5, 2.2, f"{len(CONSEQ)} consequences, the same {len(mech)} mechanisms",
+            ha="center", fontsize=6.0, color=INK2)
     for i, c in enumerate(CONSEQ):
         y = top - i * (h2 + gap) - h2
         s_, m_ = qc.get((c, "Security"), 0), qc.get((c, "ML/AI"), 0)

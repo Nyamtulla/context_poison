@@ -38,6 +38,7 @@ ENVS = REPO / "envs"
 # name -> (requirements file, import to prove it worked, expected version)
 SETS = {
     "acd-libs": ("acd-requirements.txt", "transformers", "4.44.0"),
+    "dyprag-libs": ("dyprag-requirements.txt", "transformers", "4.49.0"),
 }
 
 

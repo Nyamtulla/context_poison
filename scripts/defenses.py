@@ -110,9 +110,10 @@ class ACD(Defense):
         self.tok = AutoTokenizer.from_pretrained(base)
         self.tok.add_special_tokens({"pad_token": "<PAD>"})  # their line
         self.tok.padding_side = "left"                       # their line
+        # their signature exactly: no dtype argument, it picks its own
         self.model = LMWrapper(model_name_or_path=base, cache_dir=None,
                                device_map="auto", max_memory={0: "45GiB"},
-                               torch_dtype=torch.bfloat16)
+                               offload_folder=None)
         self.model.gen_model.resize_token_embeddings(len(self.tok))
         self.model.gen_model.config.pad_token = self.tok.pad_token
         self.cfg = GenerationConfig(max_new_tokens=max_new_tokens,
@@ -172,7 +173,7 @@ class SCR(Defense):
     """
     name, arms = "scr", ("rag", "closedbook", "scr")
 
-    def __init__(self, base=BASE, n_shot=5, scr_max_new_tokens=256):
+    def __init__(self, base=BASE, n_shot=3, scr_max_new_tokens=256):
         sys.path.insert(0, str(TP / "situated_faithfulness"))
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
