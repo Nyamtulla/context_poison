@@ -62,6 +62,25 @@ def counts():
     n["from_survivors"] = n["fulltext"] - n["reinstated"]
     n["not_retrieved"] = n["survived"] - n["from_survivors"]
     n["hop2_in"] = sum(1 for i in ids if hp.get(i) == 2)
+
+    # Eligibility for synthesis, added 2026-10-22. A paper can be about
+    # context poisoning and still name no attack and no defense: surveys,
+    # benchmarks, practitioner guides, applications. Those papers are
+    # screened in and reported, but they contribute no row to either
+    # registry, so the census, the cube and the coverage matrix are not
+    # computed over them. AgentDojo is the clearest case -- it is the
+    # environment 56 of our own pairs run in, and it names nothing, so
+    # coding it to a regime and a cell was a category error.
+    import json as _json
+    reg = REPO / "data" / "registries"
+    contrib = set()
+    for fn in ("rq3_pollution_registry.json", "rq4_defense_registry.json"):
+        for e in _json.loads((reg / fn).read_text()):
+            if e.get("paper_id"):
+                contrib.add(e["paper_id"])
+    inc_ids = {r[pid] for r in rows[1:] if str(r[scr]).strip() != "Exclude"}
+    n["analysed"] = len(inc_ids & contrib)
+    n["no_technique"] = n["included"] - n["analysed"]
     return n
 
 
@@ -129,7 +148,11 @@ def figure(n):
          "selection rule not recorded"),
         (f"Full text read and coded\nn = {n['fulltext']:,}",
          f"excluded at full text\nn = {n['excluded_ft']:,}"),
-        (f"\\bf Included in the corpus\nn = {n['included']:,}", None),
+        (f"Included in the corpus\nn = {n['included']:,}",
+         "named no attack and no defense\n"
+         f"n = {n['no_technique']:,}\n"
+         "surveys, benchmarks, guides"),
+        (f"\\bf Contributing a named technique\nn = {n['analysed']:,}", None),
     ]
 
     bh, gap, W = 0.52, 0.30, 0.60
@@ -181,6 +204,8 @@ def main():
     assert (n["search"] + n["seeds"] + n["fwd"] + n["bwd"]
             + n["manual"]) == n["pool"], "identification does not balance"
     assert n["included"] + n["excluded_ft"] == n["fulltext"], "full-text stage does not balance"
+    assert n["analysed"] + n["no_technique"] == n["included"], \
+        "synthesis-eligibility stage does not balance"
     search_log()
     figure(n)
 

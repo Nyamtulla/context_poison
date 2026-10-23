@@ -134,6 +134,10 @@ def main():
     M["NPapersMech"], M["NPapersDef"] = len(mech_p), len(def_p)
     M["NPapersBoth"] = len(mech_p & def_p)
     M["NPapersNeither"] = len(included - mech_p - def_p)
+    # The corpus is screened; the census is drawn from the papers that named
+    # something. Each claim states its own denominator, so both are macros.
+    M["NAnalysed"] = len(included & (mech_p | def_p))
+    M["NNoTechnique"] = len(included - mech_p - def_p)
 
     # ---- coverage. Everything derives from ONE pair set, the composite in
     # pair_tally.composite_pairs(). RQ5's published 332 pairs and 106 covered
@@ -210,12 +214,19 @@ def main():
            "data-exfiltration", "persistence-backdoor", "resource-abuse",
            "availability-loss"]
     ci, qi, ti = hdr.index("channel"), hdr.index("consequence"), hdr.index("track")
+    # Computed over REGISTRY ENTRIES, not paper rows, since 2026-10-22.
+    # A paper that names no attack and no defense was still occupying a cell:
+    # AgentDojo sat in tool-output x goal-hijack x Security while naming
+    # nothing. The cube is a map of what the field has NAMED, so it is built
+    # from the things that were named. This also makes the empty-cell macro
+    # agree with Figure 4, which already plots the registry.
     occupied = set()
-    for r in rows:
-        if r[pi] not in included:
+    for e in r3 + r4:
+        if e.get("paper_id") not in included:
             continue
-        c, q, tr = (str(r[ci] or "").strip(), str(r[qi] or "").strip(),
-                    str(r[ti] or "").strip())
+        c, q, tr = ((e.get("channel") or "").strip(),
+                    (e.get("consequence") or "").strip(),
+                    (e.get("track") or "").strip())
         if c in CHS and q in CQS and tr in ("Security", "ML/AI"):
             occupied.add((c, q, tr))
     # The cube's third axis is intent, and the corpus codes it as track. The

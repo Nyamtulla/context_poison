@@ -16,6 +16,18 @@ the survivors in full. The included corpus is \NCorpus{} papers, each carrying
 \NColumns{} recorded columns of which \NCodedFields{} are coded from the full
 text.
 
+\textbf{Screening and synthesis are different sets, and we keep them apart.}
+A paper can be about context poisoning and still name no attack and no
+defense: surveys, benchmarks, practitioner guides, applications of somebody
+else's method. \NNoTechnique{} of the \NCorpus{} do exactly that, so the
+census, the taxonomy cube and the coverage matrix are computed over the
+\NAnalysed{} papers that contributed a named technique, and the citation
+analysis is computed over all \NCorpus{}. The PRISMA diagram carries the
+split as its own stage. AgentDojo~\cite{debenedetti-2024-agentdojo} is the
+clearest case: it is the environment \NAgentPairs{} of our own pairs run in,
+it names neither an attack nor a defense, and coding it to a track and a cell
+asserted something about it that is not true.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig9_prisma}
@@ -89,7 +101,7 @@ larger grid rather than the smaller one it would flatter.
 \NUnplaceable{} papers (\PctUnplaceable{}\%) carry no single channel or
 consequence. These are surveys and benchmarks whose attack surfaces are
 co-equal by construction, and forcing one coordinate on them would invent
-precision. They are counted in the corpus and excluded from the cube.
+precision.
 
 \begin{figure*}[t]
 \centering
@@ -106,11 +118,12 @@ panels together are the whole census.}
 \label{fig:cube}
 \end{figure*}
 
-\textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) contain no
-paper from either literature.} Emptiness is not uniform, and the shape of it is
-easier to read over the registry than over the paper count.
-Figure~\ref{fig:cube} puts the named attacks beside the named defenses in each
-cell. Three things are visible there that a paper count hides.
+\textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold no
+named attack and no named defense from either literature.} The cube counts
+what the field has named rather than which papers discuss a cell, so a survey
+that ranges over six channels occupies none of them. Emptiness is not uniform,
+and Figure~\ref{fig:cube} puts the named attacks beside the named defenses in
+each cell. Three things are visible there that a count of papers hides.
 
 The two panels barely overlap. The security track holds \NMechSecurity{} of
 the \NMechanisms{} attacks and masses them in \meth{goal-hijack}; the machine
