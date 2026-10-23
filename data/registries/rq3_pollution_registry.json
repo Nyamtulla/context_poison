@@ -3301,5 +3301,19 @@
   "is_extension_of": "",
   "notes": "Primarily a benchmark (ASB), but contribution 2 is an explicitly novel, named and formally defined attack that poisons plan demonstrations in the system prompt. [added by the recall pass, 2026-10-22]",
   "evidence_quote": "We propose a novel PoT Backdoor Attack, which embeds hidden instructions into the system prompt, exploiting the agent\u2019s planning process to achieve high attack success rates."
+ },
+ {
+  "paper_id": "be6724eff8c5795f9ab6e17c9cf8a28aeaf7f1ee",
+  "title": "Trust No AI: Prompt Injection Along The CIA Security Triad",
+  "technique_name": "SpAIware",
+  "name": "SpAIware",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "track": "Security",
+  "confidence": "medium",
+  "has_technique": true,
+  "is_extension_of": "",
+  "notes": "Practitioner compilation of the author's own disclosed exploits along the CIA triad; most are already registered or unnamed, but SpAIware -- persisting attacker instructions into ChatGPT long-term memory so every later conversation is quietly exfiltrated, extended into a C2 channel -- is named, distinct and absent from the registry. ZombAI from the same paper is already registered under another paper; Terminal DiLLMa and ASCII Smuggling are also named here but are output-rendering/terminal-escape issues rather than context poisoning. Confidence medium because the paper compiles prior blog/Black Hat disclosures rather than introducing SpAIware for the first time. [added by the recall pass, 2026-10-22]",
+  "evidence_quote": "G. Scenario 7: SpAIware \u2013 Memory Persistent Attacks [31] In December 2023 it was discovered that OpenAI\u2019s fix for markdown image rendering via the url_safe feature was incomplete and mobile clients remained vulnerable."
  }
 ]

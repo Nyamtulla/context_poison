@@ -25,14 +25,49 @@ every defense paper can manufacture its own coverage.
 import csv, datetime, json, pathlib, shutil
 
 REG = pathlib.Path(__file__).resolve().parent.parent / "data" / "registries"
-DUPLICATE_OF = {"Outer Prompt Extension (OPE)":
-                "Spotlighting (delimiting / datamarking / encoding)"}
+DUPLICATE_OF = {
+    # batch 1: a prompt-wrapper defense already present under its usual name
+    "Outer Prompt Extension (OPE)":
+        "Spotlighting (delimiting / datamarking / encoding)",
+    # batch 2: coined for long-context degradation, which the registry
+    # already carries three times as "context rot", plus "lost in the
+    # middle" and a context-accumulation entry. The coining paper is a
+    # serverless cost/latency benchmark; a new label on a known mechanism
+    # is not a new mechanism.
+    "Context Fatigue": "context rot",
+}
 INTERNAL = {"Actor-Critic attack"}
+
+# 4. A payload FORM is not a technique. We refuse to register our own
+#    distractor and adaptive-distractor payloads as attacks, because they are
+#    instruments rather than techniques, and the same rule has to hold for
+#    other people's. Rubric-Isomorphic Payloads is a way of shaping an
+#    indirect injection so it parses as the reviewer's expected JSON; the
+#    15 attacks it is carried by are borrowed from cited prior work.
+# Matched on a prefix, because the registry name and the decision CSV spell
+# the same thing differently ("... (DSAAP)" vs the expanded protocol name).
+NOT_A_TECHNIQUE = {
+    "Rubric-Isomorphic Payloads":
+        "a payload form, not a technique; its attacks are borrowed",
+}
 
 
 def main():
-    dec = [d for d in csv.DictReader(
-        open(REG / "raw/recheck_decisions_batch01.csv")) if d["verdict"] != "none"]
+    # Only batches whose agent has finished. An in-progress CSV is written
+    # incrementally, so globbing blindly registers a partial result: that
+    # happened once, adding an entry from a batch still running. A batch is
+    # complete when its row count matches its export.
+    dec = []
+    for f in sorted((REG / "raw").glob("recheck_decisions_batch*.csv")):
+        n = f.name.replace("recheck_decisions_batch", "").replace(".csv", "")
+        src = REG / "raw" / f"recheck_batch{n}.json"
+        rows = list(csv.DictReader(open(f)))
+        want = len(json.loads(src.read_text())) if src.exists() else None
+        if want is not None and len(rows) < want:
+            print(f"  SKIPPING batch {n}: {len(rows)} of {want} rows, "
+                  f"still running")
+            continue
+        dec += [d for d in rows if d["verdict"] != "none"]
     r3p = REG / "rq3_pollution_registry.json"
     r3 = json.loads(r3p.read_text())
     have = {(e.get("technique_name") or e.get("name") or "").strip() for e in r3}
@@ -40,6 +75,10 @@ def main():
     added, skipped = [], []
     for d in dec:
         name = d["name"].strip()
+        _form = next((k for k in NOT_A_TECHNIQUE if name.startswith(k)), None)
+        if _form:
+            skipped.append((name, NOT_A_TECHNIQUE[_form]))
+            continue
         if name in DUPLICATE_OF:
             skipped.append((name, f"already registered as {DUPLICATE_OF[name]}"))
             continue
