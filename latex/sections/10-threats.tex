@@ -128,13 +128,14 @@ direction stays empty among refereed work alone.
 \textbf{A recall check on the papers that named nothing.}
 \NNoTechnique{} papers contributed no attack and no defense, and
 \NNoTechOther{} of those match none of the survey, benchmark, framework or
-position descriptions by title. We re-read all \NNoTechOther{} of them and asked one
-question of each: does this paper name a technique we failed to register. Six
+position descriptions by title. We re-read \NRecallRead{} papers --- that
+bucket as it stood before the pass --- and asked one question of each: does
+this paper name a technique we failed to register. \NRecallCandidates{}
 candidates came back. Two were genuine omissions and are now in the census; one
 was a defense already registered under a different name; one renamed a
 mechanism the registry carries three times; one was a payload form rather than
 a technique; and one was an attack a defense paper built for its own
 evaluation, which is registered under the rule in
 Section~\ref{sec:literatures} and barred from pairing with its own paper's
-defense. Two omissions in \NNoTechOther{} papers is the recall figure we can
+defense. Two omissions in \NRecallRead{} papers is the recall figure we can
 support; we report it rather than claiming the census is complete.

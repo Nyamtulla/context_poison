@@ -164,6 +164,20 @@ def main():
         _seen |= _hit
         M["NNoTech" + _name] = len(_hit)
     M["NNoTechOther"] = len(_none) - len(_seen)
+    # The recall pass read the bucket as it stood BEFORE the pass, and the
+    # papers it found a technique in then left the bucket. So the number re-read
+    # is not NNoTechOther any more; it is the size of the exports, which is the
+    # ground truth of what was looked at. Typing 143 here would go stale the
+    # next time the pass runs.
+    import json as _json
+    _rb = sorted((REPO / "data" / "registries" / "raw").glob("recheck_batch*.json"))
+    M["NRecallRead"] = sum(len(_json.loads(f.read_text())) for f in _rb)
+    _rd = sorted((REPO / "data" / "registries" / "raw").glob(
+        "recheck_decisions_batch*.csv"))
+    import csv as _csv
+    _pos = [d for f in _rd for d in _csv.DictReader(open(f))
+            if d["verdict"] != "none"]
+    M["NRecallCandidates"] = len(_pos)
 
     # ---- coverage. Everything derives from ONE pair set, the composite in
     # pair_tally.composite_pairs(). RQ5's published 332 pairs and 106 covered
