@@ -91,8 +91,8 @@ in the same run. An effect below the detectability threshold counts as no
 resolvable effect, not as no effect. And we commit every prediction to version
 control first.
 Section~\ref{sec:experiments} states each rule in full, and
-Section~\ref{sec:results2} reports the three occasions on which a control
-overturned a conclusion we had already drawn.
+Section~\ref{sec:results2} reports three results that reverse without
+them.
 
 \paragraph{Scope.}
 Three limits are worth stating before the contributions rather than after
@@ -162,13 +162,13 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   method degrades rather than collapses, and the price is now measured
   (Section~\ref{sec:adaptive}).
 
-\item \textbf{Three controls the literature omits.} Each caught a wrong claim
-  we were about to publish (Section~\ref{sec:results2}). A \textbf{no-retrieval
-  baseline} showed that our strongest-looking defense was flat under attack
-  only because it had stopped reading the document. An \textbf{abstention
-  axis} showed that a defense with no effect on accuracy was in fact
-  converting a third of its answers into refusals. A \textbf{model control}
-  showed that changing the base model alone reverses outcomes.
+\item \textbf{Three controls the literature omits.} Each one decides how a
+  result reads (Section~\ref{sec:results2}). Against a \textbf{no-retrieval
+  baseline}, the flattest defense under attack turns out to be flat because
+  it has stopped reading the document. On an \textbf{abstention axis}, a
+  defense with no effect on accuracy is converting a third of its answers
+  into refusals. Under a \textbf{model control}, changing the base model
+  alone reverses outcomes.
 
 \item \textbf{A runnable artifact.} Every attack and defense executes from its
   authors' released code at a pinned commit, verified unmodified; the

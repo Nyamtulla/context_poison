@@ -109,8 +109,9 @@ The mechanism is the same in both cases. ParamMute suppresses the model's
 memory. When memory held the correct answer, that suppression destroys it. When
 the attack works by driving the model into refusal, suppressing memory removes
 the conflict that triggered the refusal. \textbf{One mechanism, two signs,
-selected by whether the memory was right.} We predicted little effect here and
-were wrong, which is why the scope condition is in the paper.
+selected by whether the memory was right.} The prediction committed before
+this run was that suppressing memory would do little here; the result is why
+the paper states a scope condition rather than a blanket one.
 
 \subsection{The payload class decides, not the attack label}
 
@@ -345,10 +346,10 @@ memory or the distractor.
 
 \textbf{The direction of the dial predicts whether mass is conserved.} Turn it
 toward the context and the accounting closes. Turn it toward memory and a sixth
-to a quarter of the sample goes somewhere the partition cannot see. We first
-read ACD's residual as a quirk of its implementation. It is not. SCR reaches
-almost the same figure by a different route, because SCR intervenes by prompting
-and ACD by decoding. SpARE, which steers activations, loses more still. Whether
+to a quarter of the sample goes somewhere the partition cannot see. The
+residual is a property of the direction rather than of one implementation:
+SCR reaches almost the same figure by a different route, intervening by
+prompting where ACD intervenes by decoding. SpARE, which steers activations, loses more still. Whether
 the lost mass is abstention or degradation is not a question this payload can
 answer. We flag it as the next measurement on this arm rather than read it
 either way.

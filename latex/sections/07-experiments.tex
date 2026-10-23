@@ -225,6 +225,5 @@ The adaptive version changes only the surface form around an unchanged
 claim.
 
 All payloads are dosed identically, replacing 10\%, 50\% and 100\% of the
-context, with a clean arm at 0\%. To guard against mislabelling we fingerprint
-the payload in every result file, after an early run was filed under the wrong
-attack with numbers that looked plausible.
+context, with a clean arm at 0\%. Every result file carries a fingerprint of the payload it was produced
+with, so a run cannot be read under the wrong attack label.

@@ -33,9 +33,8 @@ Of the \NNoTechnique{}, \NNoTechSurvey{} are surveys or systematizations,
 framework or architecture papers and \NNoTechPosition{} are position papers.
 The remaining \NNoTechOther{} match none of those descriptions by title: they
 are applications, empirical studies of off-the-shelf methods, and practitioner
-guides. We give the composition because an exclusion reported without one is a
-convenience rather than a criterion. A recall pass over a sample of that
-remainder is described in Section~\ref{sec:threats}.
+guides. Section~\ref{sec:threats} reports a recall pass over that
+remainder.
 
 \begin{figure}[t]
 \centering
@@ -100,12 +99,12 @@ should not~\cite{yu-2023-assessing}. \meth{persistence-backdoor} is corruption t
 later session~\cite{yan-2023-backdooring}. \meth{resource-abuse} is spending compute, money or quota on the
 attacker's behalf~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
 
-The three axes give \NCubeCells{} cells. The consequence axis gained
-\meth{availability-loss} after a full-text re-coding pass found papers whose
-measured harm is the agent failing to finish at all, which the original six
-could not express. Adding a sparse column raises the share of empty cells
-without anything in the field having changed, and we report the figure on the
-larger grid rather than the smaller one it would flatter.
+The three axes give \NCubeCells{} cells. \meth{availability-loss} earns a
+column of its own because a body of work measures exactly one harm --- the
+agent failing to finish at all --- which none of the other six expresses. It
+is a sparse column, and a sparse column raises the share of empty cells, so
+the empty-cell figure below is reported on the full grid rather than on a
+smaller one that would flatter it.
 
 \NUnplaceable{} papers (\PctUnplaceable{}\%) carry no single channel or
 consequence. These are surveys and benchmarks whose attack surfaces are
@@ -421,14 +420,11 @@ publishes degradations, which are noticed before they are named.
 \end{figure}
 
 A reader might reasonably ask whether this is our boundary rather than the
-field's. We assign the regime label per paper, and every paper gets one of the
-two. An earlier version of this coding carried a third value for papers that
-sit on the boundary, and excluded them here on the grounds that a paper cannot
-cross a line it sits on. That was the wrong call twice over: it dropped the
-boundary papers' pairs from the one table they bear most directly on, and,
-because the same label stood in for the cube's intent axis, it left a third of
-the cube unoccupiable by construction and inflated the empty-cell rate. Boundary papers are now assigned by the threat model
-their own evaluation adopts, and the single crossing above comes from one of
-them.
+field's. We assign the regime label per paper and every paper gets one of the
+two, including the papers that sit on the boundary: those take the regime
+their own evaluation adopts, so a paper that spans both communities still
+appears in Table~\ref{tab:transfer} rather than being set aside. The single
+crossing above comes from one of them, which is what one would expect --- a
+paper that reaches across is the kind of paper that crosses.
 
 \textbf{The rest of this paper fills that cell.}
