@@ -35,6 +35,16 @@ RRAG = REPO / "third_party" / "RobustRAG"
 sys.path.insert(0, str(RRAG))
 sys.path.insert(0, str(REPO / "scripts"))
 
+# Their src/models.py imports litellm at module scope for an API-model class
+# we never instantiate: every run in this project uses their local HFModel.
+# Stubbed rather than installed, the same way ck.py's unused vllm import is,
+# so the dependency set stays the authors' pins and nothing else.
+if "litellm" not in sys.modules:
+    import types
+    _ll = types.ModuleType("litellm")
+    _ll.batch_completion = None
+    sys.modules["litellm"] = _ll
+
 from src.defense import DecodingAgg, KeywordAgg    # noqa: E402  (their code)
 import torch                                      # noqa: E402
 from src import models as rr_models               # noqa: E402  (their code)
@@ -118,7 +128,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--attack", required=True,
                     choices=["poisonedrag", "badrag_dos", "badrag_sentiment",
-                             "distractor_evidence"])
+                             "distractor_evidence", "corpus_poisoning"])
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--model", type=str, default="mistral7b")
