@@ -346,6 +346,23 @@ def main():
     M["NDefOneFull"] = dist[1]
     M["PctDefOneFull"] = f'{100*dist[1]/len(per_def):.1f}'
     M["NDefCeiling"] = max(per_def.values())
+    # Breadth in this matrix is mostly attackers choosing a target, not
+    # authors evaluating widely. "Contributed by an attack paper" means the
+    # pair came from the reverse scan over attack papers, not from who
+    # reported its outcome; those are different facts and conflating them
+    # gives the wrong number.
+    from pair_tally import load as _pl
+    _atk = set()
+    for _f in ("attack_paper_evaluations.json",
+               "attack_paper_evaluations_pass3.json"):
+        _atk |= {(x["defense"], x["mechanism"]) for x in _pl(_f)["confirmed_pairs"]}
+    _wide = {d for d, c in per_def.items() if c >= 4}
+    _wp = [x for x in pairs if x[0] in _wide]
+    M["PctBreadthFromAttack"] = f"{100 * sum(1 for x in _wp if x in _atk) / len(_wp):.0f}"
+    _top = max(per_def, key=lambda d: per_def[d])
+    M["NBroadestPairs"] = per_def[_top]
+    M["NBroadestFromAttack"] = sum(1 for x in pairs
+                                   if x[0] == _top and x in _atk)
     M["NDefFourPlus"] = sum(v for k, v in dist.items() if k >= 4)
     # base-matrix figures, as RQ5 published them, for the contrast in S6
     M["NDefMatchedBase"], M["NDefOneBase"] = 197, 163
