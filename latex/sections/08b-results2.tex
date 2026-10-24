@@ -77,19 +77,20 @@ top-$k$ window, so isolate-then-aggregate has nothing honest left to aggregate.
 Backfilling the window to its intended size restores \textbf{45.2\%}, a gain of
 40.6\pp. \textbf{The defense was sound and the retrieval interface was not.}
 
-Across the agent cell, 24 of 56 conditions show the technique holding with
-attack success driven to zero, 4 show a resolvable reduction, 19 show no
-resolvable effect at that sample size, and 9 show no reduction at all.
+Across the agent cell, 24 of 56 conditions show the technique holding, with
+attack success driven to zero. A further 4 show a resolvable reduction. The
+rest divide between 19 with no resolvable effect at that sample size and 9
+with no reduction at all.
 Ingestion-stage techniques account for most of the holds.
 
 \subsection{The dose of maximum advantage}
 \label{sec:lowdose}
 
 Results so far are reported at saturation, where the planted passage replaces
-the entire context. That corner is where the attack is strongest, and it is
-also where the measurement is weakest: with the real document entirely gone, no
-method can read it, so a low accuracy partly measures the attack being complete
-rather than the defense failing. Carlini makes the equivalent objection to
+the entire context. That corner is where the attack is strongest. It is also
+where the measurement is weakest. With the real document entirely gone, no
+method can read it, so a low accuracy partly measures a complete attack rather
+than a failing defense. Carlini makes the equivalent objection to
 DeepSec's distortion budgets~\cite{carlini-2019-critique}, and it applies to us.
 
 So we report the other end as well. At the \textbf{10\% dose} one chunk in ten
@@ -134,9 +135,9 @@ exactly one objective: minimize $H_{\mathrm{ctx}}$.}
 \textbf{The ceiling follows from the rule, not from an experiment.} As
 $H_{\mathrm{ctx}} \to 0$, $d_\alpha \to 1$ and the update collapses to
 $s_{\mathrm{ctx}}$ unchanged, which is the undefended model. A perfect adaptive
-attack of this kind turns ACD into plain RAG and can do no better; it cannot
-drive ACD \emph{below} its own undefended arm, because $d_\alpha$ is bounded in
-$(0,1)$ and the endpoints are closed-book and plain RAG. We committed that
+attack of this kind turns ACD into plain RAG and can do no better. It cannot
+drive ACD \emph{below} its own undefended arm. $d_\alpha$ is bounded in
+$(0,1)$, and the endpoints are closed-book and plain RAG. We committed that
 bound, and five further predictions, before building the payload. An ACD arm
 landing below the undefended arm would have falsified our account of the
 mechanism.
@@ -160,7 +161,7 @@ weak optimizer, so what it achieves is again a lower bound.
 \begin{table}[t]
 \centering
 \caption{ACD against the distractor payload in its plain form and in two forms
-that minimize ACD's own entropy term, at saturation, $n=686$. Both adaptive
+that minimize ACD's own entropy term, at saturation, $n=\NAcdAdaptiveItems{}$. Both adaptive
 payloads are stronger against the undefended arm too, so the defensive gap is
 the quantity that isolates the defense. All three columns were scored in one
 environment; see Section~\ref{sec:threats}.}
@@ -205,9 +206,9 @@ best-of-five had already chosen so that the asserted answer stays fixed and
 any movement is the gradient's. Candidate tokens are restricted to
 space-leading printable ASCII, because a suffix that does not survive a
 decode and re-encode is not a passage an attacker can place in a corpus; the
-round trip is exact on all 686 items. A gradient passage is kept only where it
+round trip is exact on all \NAcdAdaptiveItems{} items. A gradient passage is kept only where it
 beats the best-of-five passage on the reported measure, which it fails to do
-on 163 of 686, so the payload is monotone by construction.
+on 163 of \NAcdAdaptiveItems{}, so the payload is monotone by construction.
 
 It drives $H_{\mathrm{ctx}}$ to 0.614 and $d_\alpha$ to 0.708, and the
 defensive gap falls to \NAcdGapGradient{}\pp{}: \textbf{\PctAcdRemovedGradient{}\% of ACD's protection removed},
@@ -237,8 +238,8 @@ priced, rather than either a solved problem or a broken one.
 
 What this licenses is still narrow. It does not show ACD is broken, and the
 ceiling in the rule says no attack of this kind could have driven it below the
-undefended arm. It shows that the one defense in our campaign that looked like
-a counterexample gives up most of its protection to an attacker who reads the
-method, and that every published evaluation of a context-reliance defense in
-our corpus is non-adaptive. The gap between non-adaptive and adaptive
+undefended arm. One defense in our campaign looked like a counterexample. It
+gives up most of its protection to an attacker who reads the method. Every
+published evaluation of a context-reliance defense in our corpus is
+non-adaptive. The gap between non-adaptive and adaptive
 evaluation is large enough to change the verdict.

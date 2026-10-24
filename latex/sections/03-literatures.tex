@@ -27,8 +27,8 @@ census, the taxonomy cube and the coverage matrix are computed over the
 \NAnalysed{} papers that contributed a named technique, and the citation
 analysis is computed over all \NCorpus{}. The PRISMA diagram carries the
 split as its own stage. AgentDojo~\cite{debenedetti-2024-agentdojo} is the
-clearest case: it is the environment \NAgentPairs{} of our own pairs run in,
-it names neither an attack nor a defense, and coding it to a regime and a cell
+clearest case. It is the environment \NAgentPairs{} of our own pairs run in,
+and it names neither an attack nor a defense. Coding it to a regime and a cell
 asserted something about it that is not true.
 
 Of the \NNoTechnique{}, \NNoTechSurvey{} are surveys or systematizations,
@@ -148,10 +148,10 @@ panels together are the whole census.}
 \label{fig:cube}
 \end{figure*}
 
-\textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold no
-named attack and no named defense from either literature.} The cube counts
-what the field has named rather than which papers discuss a cell, so a survey
-that ranges over six channels occupies none of them. Emptiness is not uniform,
+\textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold
+no named attack and no named defense from either literature.} The cube counts
+what the field has named, not which papers discuss a cell. A survey that
+ranges over six channels therefore occupies none of them. Emptiness is not uniform,
 and Figure~\ref{fig:cube} puts the named attacks beside the named defenses in
 each cell. Three things are visible there that a count of papers hides.
 
@@ -448,11 +448,11 @@ The dates say the same thing from a second direction, and they say which way
 it runs.
 
 \NSharedChannels{} of our nine channels have named mechanisms from both
-regimes. Comparing
-the first paper from each side in each of those channels:
-\textbf{the security literature arrives first in \NChannelsSecFirst{} of
-\NSharedChannels{}, both arrive in the same year in \NChannelsSameYear{}, and
-the safety literature arrives first in \NChannelsSafetyFirst{}.} The
+regimes. We compare
+the first paper from each side in each of those channels.
+\textbf{The security literature arrives first in \NChannelsSecFirst{} of
+\NSharedChannels{}. Both arrive in the same year in \NChannelsSameYear{}. The
+safety literature arrives first in \NChannelsSafetyFirst{}.} The
 median lag where security leads is \MedianChannelLag{} year and the longest is
 \MaxChannelLag{}. The \meth{supply-chain} channel, excluded here for having no
 safety-regime entry at all, is the limit case of the same pattern.
@@ -481,10 +481,10 @@ publishes degradations, which are noticed before they are named.
 \end{figure}
 
 A reader might reasonably ask whether this is our boundary rather than the
-field's. We assign the regime label per paper and every paper gets one of the
-two, including the papers that sit on the boundary: those take the regime
-their own evaluation adopts, so a paper that spans both communities still
-appears in Table~\ref{tab:transfer} rather than being set aside. The single
+field's. We assign the regime label per paper, and every paper takes one of the
+two. Papers on the boundary take the regime their own evaluation adopts. A
+paper that spans both communities therefore still appears in
+Table~\ref{tab:transfer}; we set none aside. The single
 crossing above comes from one of them, which is what one would expect --- a
 paper that reaches across is the kind of paper that crosses.
 

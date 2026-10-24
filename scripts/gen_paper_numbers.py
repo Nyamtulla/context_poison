@@ -253,6 +253,14 @@ def main():
     M["NPairsComposite"] = len(pairs)
     M["NPairsBase"] = cov["n_matched_pairs"]
 
+    # the share of tested pairs absorbed by the single coarsest registry
+    # entry, which Section 10 uses to price registry granularity. It was typed
+    # as 32.6% and had gone stale by ten points.
+    _mc = collections.Counter(a for _, a in pairs)
+    _topname, _topn = _mc.most_common(1)[0]
+    M["NTopMechPairs"] = _topn
+    M["PctTopMechShare"] = f"{100 * _topn / len(pairs):.1f}"
+
     covered = {a for _, a in pairs} & uni
     M["NMechCovered"] = len(covered)
     M["NMechUncovered"] = len(uni) - len(covered)

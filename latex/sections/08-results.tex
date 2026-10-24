@@ -238,9 +238,9 @@ and false evidence does not.
 
 \textbf{COIECD is inert against both.} Eight comparisons, largest 1.8\pp
 against a 9.9\pp threshold, no $p$ below 0.20. Its memorization-rate
-suppression does shrink roughly threefold under false evidence, which is what
-an entropy constraint should do when the planted passage agrees with the prior
-rather than contradicting it, but that signal sits below threshold and we
+suppression does shrink roughly threefold under false evidence. An entropy
+constraint should do exactly that when the planted passage agrees with the
+prior rather than contradicting it. The signal sits below threshold, so we
 record it as directional rather than as a result.
 
 \subsection{A comparison we exclude}
@@ -302,7 +302,7 @@ evidence was copying, not surviving memory.
 
 \textbf{ACD succeeds at the opposite job and the mass goes to memory instead.}
 ACD cuts the copy rate from 76.0\% to 40.8\% at saturation ($p = 2\times
-10^{-40}$, $n=686$), the largest defensive effect anywhere in this campaign and
+10^{-40}$, $n=\NAcdAdaptiveItems{}$), the largest defensive effect anywhere in this campaign and
 in the direction a defense is supposed to move. The refused mass does not go to
 the real document. Parametric recall rises 14.1\% to 32.5\% while gold
 accuracy moves 2.3\% to 5.0\%, which clears Fisher but not the 7.6\pp{}
