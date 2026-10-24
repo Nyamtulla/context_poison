@@ -168,7 +168,14 @@ def retrieval_runs():
         # one arm short. Dose sets differ between campaigns, which is why the
         # test compares the arms against each other rather than against a
         # fixed list.
-        if d.get("complete") is None:
+        # A native-grid registry writes every arm at each dose, so its arms
+        # stay symmetric all the way through and only the dose list shows how
+        # far it has got.
+        _dd = d.get("doses_done")
+        if d.get("complete") is None and _dd is not None:
+            if not set(GRID_DOSES) <= set(_dd):
+                continue
+        elif d.get("complete") is None:
             _per_arm = {}
             for r in rows:
                 _per_arm.setdefault(r.get("arm"), set()).add(
