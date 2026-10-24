@@ -3,11 +3,15 @@
 
 \textbf{Extraction error.} The corpus coding was produced by an LLM-assisted
 extraction pass over \NCorpus{} papers and \NCodedFields{} coded fields. Every count in
-Sections~\ref{sec:taxonomy} to~\ref{sec:coverage} depends on it. We verified it with
-human readers against the original PDFs. Fields that carry the headline claims
-were checked in full, the rest on a random sample. We report inter-rater
-agreement rather than assuming it. Residual error remains possible
-in the sampled fields.
+Sections~\ref{sec:taxonomy} to~\ref{sec:coverage} depends on it. A human validation study is drawn and
+stratified by the coding's own confidence: \NValidationDraw{} papers,
+\NValidationFields{} fields each, designed for a \NValidationCI{}\pp{}
+confidence interval on overall accuracy. \textbf{It has not been coded yet.}
+We therefore report no measured extraction-error rate, and the counts in those
+sections should be read as unvalidated. The study is single-coded by decision
+of the project lead. When it returns it will bound extraction error without
+separating a coder's mistake from the extraction's, so it will carry no
+inter-rater agreement and we will claim none.
 
 \textbf{Regime assignment.} The cross-citation rates depend on classifying every
 cited paper into a regime. That classification is automated over the full
@@ -18,17 +22,17 @@ error, but the exact rates should be read as estimates.
 
 \textbf{Registry granularity.} What counts as one named mechanism is a
 judgement. ``Indirect prompt injection'' is one registry entry and absorbs
-\PctTopMechShare{}\% of all tested pairs. \NInjUncovered{} of
-\NInjVariants{} named injection variants have none. A
+\PctTopMechShare{}\% of all tested pairs. \NInjUncovered{} of the \NInjVariants{} named injection
+variants have no tested pair at all. A
 coarser registry would make coverage look better and a finer one would make it
 look worse. We chose the granularity the papers themselves use, which is the
 name each paper gives its own contribution.
 
 \textbf{Who-reports-what is observational.} Section~\ref{sec:whoran} reports a
 strong association between authorship and outcome. It is not a controlled
-comparison. The two sides largely write about different pairs, so the
-association partly reflects selection of which pair to run, which is exactly
-our interpretation, rather than differing conduct on the same pair.
+comparison. The two sides largely write about different pairs. The
+association therefore reflects which pair each side chose to run, rather than
+differing conduct on the same pair. That selection is our interpretation.
 
 \textbf{The campaign is a sample, not a census.} We ran \NCampaignPairs{} pairs out of a space
 of thousands. They were selected by the taxonomy rather than at random, biased
@@ -70,9 +74,9 @@ fragile.
 measured example of the difference. The defenses in the retrieval cell cannot
 share one Python environment: ACD's released decoder imports symbols that
 newer \texttt{transformers} releases removed, and its authors pin a version
-the rest of the cell cannot use. Re-running an earlier ACD cell under a
-rebuilt stack moved the \emph{clean} arm, where no payload is planted and the
-result is a control, by up to 0.3\pp{}. The closed-book arm moved too, and
+the rest of the cell cannot use. The \emph{clean} arm plants no payload, so its result is a
+control. Re-running an earlier ACD cell under a rebuilt stack moved that arm
+by up to 0.3\pp{}. The closed-book arm moved too, and
 that arm never sees the context at all, so nothing but the environment can
 explain it. We therefore re-ran the earlier adaptive payload under the same
 stack as the gradient payload rather than comparing across the two; the
@@ -116,8 +120,9 @@ their exhaustive intersection. The counts that follow from it are floors.
 
 \textbf{Most of the corpus is unrefereed, and the finding does not depend on
 that.} \NVenuePapers{} of \NCorpus{} papers carry a named publication venue;
-the rest are preprints, and the share falls with recency, from 85\% of our
-2023 papers to 21\% of our 2026 ones. A corpus restricted to refereed work
+the rest are preprints, and the share falls with recency, from
+\PctVenueEarly{}\% of our \YearVenueEarly{} papers to \PctVenueLate{}\% of
+our \YearVenueLate{} ones. A corpus restricted to refereed work
 would therefore describe an earlier field than the one we set out to measure,
 so we report the restriction as a check rather than adopting it. Resolving both sides of
 every pair back to a paper succeeds for \NVenueResolved{} of
@@ -137,5 +142,5 @@ a defense already registered under a different name. One renamed a mechanism
 the registry carries three times. One was a payload form rather than a
 technique. The last was an attack a defense paper built for its own
 evaluation; Section~\ref{sec:literatures} registers it under the rule that
-bars a paper's own attack from pairing with its own defense. Two omissions in \NRecallRead{} papers is the measured recall of the
-census, and it is a rate rather than a guarantee of completeness.
+bars a paper's own attack from pairing with its own defense. Two omissions in \NRecallRead{} papers is what the census
+recall measures. It is a rate, not a guarantee of completeness.

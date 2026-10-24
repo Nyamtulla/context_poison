@@ -183,6 +183,39 @@ def main():
     M["NAcdAdaptiveItems"] = load("acd_vs_gradient_evidence.json")["n"]
     M["NAcdAdaptiveMdr"] = load("acd_vs_gradient_evidence.json")["mdr_pp_at_n"]
 
+    # ---- the validation study. Section 10 claimed human verification and
+    # an inter-rater agreement; the study is drawn, uncoded, and
+    # single-coded by design. Its own manifest says to describe it that way.
+    _vs = json.loads((REPO / "data" / "exports" / "validation_study"
+                      / "manifest.json").read_text())
+    M["NValidationDraw"] = sum(_vs["draw"].values())
+    M["NValidationHigh"] = _vs["draw"]["high"]
+    M["NValidationMedium"] = _vs["draw"]["medium"]
+    M["NValidationLow"] = _vs["draw"]["low"]
+    M["NValidationFields"] = _vs["fields_per_paper"]
+    M["NValidationCI"] = f'{_vs["design_precision"]["overall_ci_halfwidth_pp"]:.1f}'
+    M["NValidationDoubleCoded"] = _vs["double_coded"]
+
+    # share of each year's papers carrying a named venue, typed as 85% and
+    # 21% in Section 10 and derived from a corpus that moves
+    _vi2, _yi2 = hdr.index("venue"), hdr.index("year")
+    _byyear = collections.defaultdict(lambda: [0, 0])
+    for r in rows:
+        if r[pi] not in included or not r[_yi2]:
+            continue
+        _y = str(r[_yi2]).split(".")[0]
+        _byyear[_y][0] += 1
+        _v = str(r[_vi2] or "").strip()
+        if _v and _v.lower() != "arxiv":
+            _byyear[_y][1] += 1
+    # LaTeX control sequences are letters only, so the years cannot go in the
+    # macro names; they are emitted as their own macros instead.
+    _yrs = sorted(y for y, (tot, _) in _byyear.items() if tot >= 20)
+    for _lab, _y in (("Early", _yrs[0]), ("Late", _yrs[-1])):
+        _tot, _named = _byyear[_y]
+        M["PctVenue" + _lab] = f"{100 * _named / _tot:.0f}"
+        M["YearVenue" + _lab] = _y
+
     # ---- the regime framing test. Whether it takes an adversary to cause
     # the harm is the claim Section 2 rests on, and it was asserted before it
     # was measured. Five payload conditions on one item set; the arms differ
