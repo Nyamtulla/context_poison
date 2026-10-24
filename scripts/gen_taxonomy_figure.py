@@ -156,7 +156,13 @@ def main():
                 fontweight="bold")
     ax.text(50, 31.5, "where a defense can intervene", ha="center",
             fontsize=6.4, color=INK2, style="italic")
-    ax.text(50, 2.2, "3 intervention points, 541 named defenses",
+    # Defenses coded with no intervention point are not drawn, so the footer
+    # counts what is on the figure rather than the registry total. It said
+    # "541 named defenses" while showing 439 of them.
+    _shown = sum(dp.get((k, r), 0) for k, _ in POINTS
+                 for r in ("security", "safety"))
+    ax.text(50, 2.2,
+            f"{len(POINTS)} intervention points, {_shown} of {len(defs)} defenses",
             ha="center", fontsize=6.0, color=INK2)
 
     # ---- consequences, right -----------------------------------------------
