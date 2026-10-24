@@ -35,6 +35,7 @@ import json
 import pathlib
 import re
 import sys
+import time
 
 import torch
 
@@ -247,35 +248,67 @@ def main():
                          "merged Llama-3-8B checkpoint, so moving it would mean "
                          "retraining it rather than running it.")
     ap.add_argument("--out", type=str, default=None)
+    ap.add_argument("--no_resume", action="store_true",
+                    help="recompute every cell even if the registry has it")
     args = ap.parse_args()
     if args.defense == "parammute" and args.base_model != DEFAULT_BASE:
         ap.error("parammute is a merged checkpoint; --base_model cannot move it")
 
     data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: args.n]
     out_path = args.out or f"data/registries/{args.attack}_{args.defense}.json"
+    out_file = REPO / out_path
 
-    results = []
+    # Each (arm, dose) loads its own model and frees it again, so a cell is a
+    # natural checkpoint. Writing only at the end made every interruption cost
+    # the whole cell: a corpus-poisoning run was killed three and a half hours
+    # in with nothing on disk, because the card was needed elsewhere.
+    ident = {"defense": args.defense, "attack": args.attack,
+             "dataset": "open_nq (PoisonedRAG construction)",
+             "model": args.base_model, "n": len(data), "top_k": args.top_k}
+    payload = {**ident,
+               "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
+               "registry_status": "untested pair",
+               "results": []}
+
+    if out_file.exists() and not args.no_resume:
+        prev = json.loads(out_file.read_text())
+        # A resume is only valid against the same configuration. A file that
+        # shares the name but was produced at another n, top_k or model is a
+        # different experiment, and silently mixing the two would be worse
+        # than recomputing.
+        if all(prev.get(k) == v for k, v in ident.items()):
+            payload["results"] = prev.get("results", [])
+            if payload["results"]:
+                print(f"  resuming: {len(payload['results'])} of "
+                      f"{2 * len(args.poison_counts)} cells already on disk",
+                      flush=True)
+        elif prev.get("results"):
+            print("  existing registry is a different configuration; "
+                  "recomputing from the start", flush=True)
+
+    def flush():
+        payload["generated"] = time.strftime("%Y-%m-%d")
+        out_file.write_text(json.dumps(payload, indent=1))
+
+    done = {(r.get("arm"), r.get("n_poison")) for r in payload["results"]}
     for arm_on in (False, True):
         label = ("defended" if arm_on else "undefended")
         print(f"\n===== {args.defense} — {label} =====", flush=True)
         for npz in args.poison_counts:
+            if (label, npz) in done:
+                print(f"  poison {npz:>2}/{args.top_k}   on disk, skipped",
+                      flush=True)
+                continue
             r = run(args.defense, arm_on, data, args.top_k, npz,
                     args.max_new_tokens, args.attack, args.base_model)
             r.update(arm=label, n_poison=npz)
-            results.append(r)
+            payload["results"].append(r)
+            flush()
             print(f"  poison {npz:>2}/{args.top_k}   acc {r['acc']:5.1f}%   "
                   f"ASR {r['asr']:5.1f}%   95% CI [{r['asr_ci_low']}, {r['asr_ci_high']}]",
                   flush=True)
 
-    payload = {"generated": "2026-10-03", "defense": args.defense,
-               "attack": args.attack,
-               "dataset": "open_nq (PoisonedRAG construction)",
-        "model": args.base_model, "n": len(data),
-               "top_k": args.top_k,
-               "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
-               "registry_status": "untested pair",
-               "results": results}
-    (REPO / out_path).write_text(json.dumps(payload, indent=1))
+    flush()
     print(f"\nwrote {out_path}  (mdr {payload['mdr_pp_at_n']} pp)")
 
 

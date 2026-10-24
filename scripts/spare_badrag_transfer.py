@@ -36,6 +36,7 @@ import json
 import os
 import pathlib
 import sys
+import time
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 SP = REPO / "third_party" / "SAE-based-representation-engineering"
@@ -61,7 +62,45 @@ def main():
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--model", type=str, default="NousResearch/Meta-Llama-3-8B")
     ap.add_argument("--out", type=str, default=None)
+    ap.add_argument("--no_resume", action="store_true",
+                    help="recompute every dose even if the registry has it")
     args = ap.parse_args()
+
+    data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: args.n]
+    out_path = args.out or f"data/registries/{args.attack}_spare.json"
+    out_file = REPO / out_path
+
+    # Written after every dose rather than at the end. SpARE carries the SAEs
+    # beside the model and is the heaviest runner in the campaign, so losing a
+    # whole cell to an interruption is the most expensive failure here.
+    ident = {"defense": "spare", "attack": args.attack, "dataset": "open_nq",
+             "n": len(data), "top_k": args.top_k, "model": args.model}
+    payload = {**ident,
+               "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
+               "registry_status": "untested pair", "results": []}
+    if out_file.exists() and not args.no_resume:
+        prev = json.loads(out_file.read_text())
+        if all(prev.get(k) == v for k, v in ident.items()):
+            payload["results"] = prev.get("results", [])
+        elif prev.get("results"):
+            print("  existing registry is a different configuration; "
+                  "recomputing from the start", flush=True)
+
+    def flush():
+        payload["generated"] = time.strftime("%Y-%m-%d")
+        out_file.write_text(json.dumps(payload, indent=1))
+
+    done = {r.get("n_poison") for r in payload["results"]}
+    todo = [z for z in args.poison_counts if z not in done]
+    if done:
+        print(f"  resuming: {len(done)} of {len(args.poison_counts)} doses "
+              f"already on disk", flush=True)
+    # The model load is the expensive part, so it happens only if a dose needs
+    # it. A fully-resumed cell now costs seconds instead of a 26 GB load.
+    if not todo:
+        flush()
+        print(f"\nwrote {out_path}  (nothing to recompute)")
+        return
 
     import demo  # noqa: E402  (heavy import, deferred)
 
@@ -72,16 +111,12 @@ def main():
     demo.init_frozen_language_model = (
         lambda model_path, attn_imp="sdpa": _orig(model_path, attn_imp))
 
-    data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: args.n]
-    out_path = args.out or f"data/registries/{args.attack}_spare.json"
-
     print("loading SpARE (SAEs + cached activations) ...", flush=True)
     (model, tokenizer, model_name, re_odqa_dataset,
      use_context_patch, use_parameter_patch, inspect_module) = \
         demo.get_llama_spare(args.model)
 
-    results = []
-    for npz in args.poison_counts:
+    for npz in todo:
         tallies = {a: {"correct": 0, "attacked": 0, "refused": 0}
                    for a in ("steer_to_use_context", "steer_to_use_parameter")}
         for it in data:
@@ -108,16 +143,12 @@ def main():
                  "refusal_rate": round(refusal, 2),
                  "wrong_answer_rate": round(wrong, 2), "asr": round(asr, 2),
                  "asr_ci_low": round(lo * 100, 1), "asr_ci_high": round(hi * 100, 1)}
-            results.append(r)
+            payload["results"].append(r)
             print(f"  {arm:<24} acc {acc:5.1f}%   refusal {refusal:5.1f}%   "
                   f"wrong {wrong:5.1f}%", flush=True)
+        flush()
 
-    payload = {"generated": "2026-10-05", "defense": "spare",
-               "attack": args.attack, "dataset": "open_nq", "n": len(data),
-               "top_k": args.top_k, "model": args.model,
-               "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
-               "registry_status": "untested pair", "results": results}
-    (REPO / out_path).write_text(json.dumps(payload, indent=1))
+    flush()
     print(f"\nwrote {out_path}  (mdr {payload['mdr_pp_at_n']} pp)")
 
 
