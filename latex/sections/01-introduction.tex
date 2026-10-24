@@ -1,25 +1,27 @@
 \section{Introduction}
 
-An LLM agent reads from many places. It reads retrieved documents and the output of the tools it calls. It reads
+An LLM agent reads from many places~\cite{chu-2026-systematic,ma-2025-safety}.
+It reads retrieved documents and the output of the tools it calls. It reads
 the descriptions of those tools, the files and skills it loads, and messages
 from other agents. It also reads its own stored memory. All of
 this arrives in one context window, and the model treats it as one body of
 text. The model has no reliable way to tell which part of that text is
-trustworthy and which part is not.
+trustworthy and which part is not~\cite{greshake-2023-not}.
 
 Two research communities study what goes wrong when untrustworthy content gets
 in, and they use different words for it.
 
 The security community studies content that an attacker placed there on
-purpose. It names attacks such as indirect prompt injection, retrieval
+purpose. It names attacks such as indirect prompt
+injection~\cite{greshake-2023-not}, retrieval
 poisoning~\cite{zou-2024-poisonedrag,zhong-2023-poisoning} and memory
-backdoors, and it publishes defenses against
+backdoors~\cite{dash-2026-untrusted}, and it publishes defenses against
 them~\cite{xiang-2024-certifiably,liu-2025-datasentinel,an-2025-ipiguard}.
 Success means the attacker fails to achieve a goal.
 
 The safety community studies content that became wrong without any
 attacker. It names mechanisms such as lost-in-the-middle~\cite{liu-2023-lost} and
-context rot. It also names knowledge conflict, where a retrieved passage
+context rot~\cite{xia-2026-diagnosing}. It also names knowledge conflict, where a retrieved passage
 disagrees with what the model already
 learned~\cite{xie-2023-adaptive}. It publishes fixes for
 them~\cite{huang-2025-parammute,bi-2025-parameters,yuan-2024-discerning}.
@@ -52,8 +54,7 @@ experiments that fall in it.
 \begin{description}
 \item[RQ1] \textbf{Are the two communities reinventing the wheel?} We code
   \NCorpus{} papers from both regimes under one taxonomy, compare what each community
-  names inside the same cell in our coverage matrix, and date the first paper from each side in every
-  shared channel (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
+  names inside the same cell in our coverage matrix, and date the first paper from each side in every shared channel (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 \item[RQ2] \textbf{Is there a region of the problem that neither community
   has tested?} We recover every (defense, attack) pair reported by the
   \NAnalysed{} papers that name a technique (Section~\ref{sec:literatures}).
@@ -69,12 +70,15 @@ experiments that fall in it.
   (Section~\ref{sec:adaptive}).
 \end{description}
 
-The last three questions are the ones a survey normally cannot answer. They
-are what turns a coverage gap from an observation into evidence.
-
-Others have surveyed both literatures before, each from inside itself. We
-borrow from those surveys rather than compete with them. What is new here is
-that one corpus, one taxonomy and one harness span both. That is what makes the
+Others have surveyed both literatures before, each from inside itself: the
+security side
+repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
+and the safety side on its own terms as a problem of knowledge
+conflict~\cite{xu-2024-knowledge}. We borrow from those surveys rather than
+compete with them. But the last three questions are the ones a survey normally
+cannot answer, and they are what turns a coverage gap from an observation into
+evidence. What is new here is that one corpus, one taxonomy, and one harness
+span both. That is what makes the
 empty cell visible. A survey of one literature cannot report a gap that the
 other literature defines, because the other literature is not in its corpus.
 It also makes the cell fillable. The taxonomy that locates a missing
