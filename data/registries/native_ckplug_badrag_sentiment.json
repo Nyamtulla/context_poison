@@ -139,6 +139,18 @@
    "asr_ci_high": 97.1,
    "arm": "defended",
    "n_poison": 5
+  },
+  {
+   "n": 500,
+   "acc": 0.4,
+   "asr": 99.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 99.0,
+   "wrong_answer_rate": 0.4,
+   "asr_ci_low": 97.7,
+   "asr_ci_high": 99.6,
+   "arm": "defended",
+   "n_poison": 10
   }
  ],
  "generated": "2026-10-24"
