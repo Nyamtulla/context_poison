@@ -163,6 +163,26 @@ def main():
                         None, nk(a).lower(), nk(b).lower()).ratio() > thresh:
                     n += 1
         return n
+    # ---- the adaptive campaign against ACD. These were typed into five
+    # files as 58%, 29%, 14.7pp and 10.4pp, with no generator behind them,
+    # which is the condition the macro rule exists to prevent. The gap is the
+    # payload's advantage over the defended arm at full dose; protection
+    # removed is that gap against the non-adaptive payload's.
+    def _gap(name):
+        d = load(f"acd_vs_{name}_evidence.json")
+        full = {r["arm"]: r for r in d["results"] if r.get("frac") == 1.0}
+        return full["rag"]["dist_acc"] - full["acd"]["dist_acc"]
+    _g0 = _gap("distractor")
+    _gb, _gg = _gap("adaptive"), _gap("gradient")
+    M["NAcdGapBase"] = f"{_g0:.1f}"
+    M["NAcdGapBestOf"] = f"{_gb:.1f}"
+    M["NAcdGapGradient"] = f"{_gg:.1f}"
+    M["PctAcdRemovedBestOf"] = f"{100 * (1 - _gb / _g0):.0f}"
+    M["PctAcdRemovedGradient"] = f"{100 * (1 - _gg / _g0):.0f}"
+    M["NAcdGradientBeyond"] = f"{_gb - _gg:.1f}"
+    M["NAcdAdaptiveItems"] = load("acd_vs_gradient_evidence.json")["n"]
+    M["NAcdAdaptiveMdr"] = load("acd_vs_gradient_evidence.json")["mdr_pp_at_n"]
+
     M["NMechNameClash"] = _clashes(r3)
     M["NDefNameClash"] = _clashes(r4)
     _cells = collections.defaultdict(set)
@@ -243,6 +263,7 @@ def main():
     dist = collections.Counter(per_def.values())
     M["NDefMatchedFull"] = len(per_def)
     M["PctDefMatched"] = f'{100*len(per_def)/len(r4):.1f}'
+    M["PctDefUnmatched"] = f'{100*(1-len(per_def)/len(r4)):.0f}'
     M["NDefOneFull"] = dist[1]
     M["PctDefOneFull"] = f'{100*dist[1]/len(per_def):.1f}'
     M["NDefCeiling"] = max(per_def.values())

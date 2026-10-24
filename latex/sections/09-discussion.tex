@@ -1,7 +1,7 @@
-\section{What the field should change}
+\section{Recommendations}
 \label{sec:discussion}
 
-\subsection{Three controls that belong in both communities' reporting}
+\subsection{Controls both communities should report}
 
 Section~\ref{sec:results2} reports three results that read the other way
 without the arm beside them. None of the three arms is expensive. None is
@@ -25,7 +25,7 @@ changing only the model changed an effect's magnitude, its existence, and once
 its sign. A single-model result in this area should be read as a
 model-specific result until shown otherwise.
 
-\subsection{Three conventions that make transfer measurable}
+\subsection{Conventions for measurable transfer}
 
 \textbf{State the regime the evaluation actually covers.} Our defense
 census codes each method by what its own paper evaluated, and
@@ -45,7 +45,8 @@ that attack and nothing more. The asymmetry is what matters and it is rarely
 stated: non-adaptive evaluation is conservative evidence for a failure and no
 evidence at all for a guarantee. Every published evaluation of a
 context-reliance defense in our corpus is non-adaptive, and when we built an
-adaptive payload against the one method that had resisted, 58\% of its
+adaptive payload against the one method that had resisted,
+\PctAcdRemovedGradient{}\% of its
 protection went (Section~\ref{sec:adaptive}). One sentence naming whether the
 attacker knew the defense would let a reader tell which kind of claim they are
 reading.
@@ -61,10 +62,11 @@ run reliably on any freely-available open-weight model.
 We note this without blame. Releasing a working artifact is harder than it
 looks and is rarely rewarded. But the coverage gap this paper measures is
 partly an artifact gap. A defense nobody else can run is a defense nobody else
-will test, and 60\% of the defenses in our census have no confirmed test
+will test, and \PctDefUnmatched{}\% of the defenses in our census have no
+confirmed test
 against any named mechanism.
 
-\subsection{What this means for someone deploying an agent}
+\subsection{Implications for deployment}
 
 Three practical points follow from the results.
 

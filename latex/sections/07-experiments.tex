@@ -6,7 +6,7 @@ the instrument we built to fill it: a uniform harness that runs a published
 defense against a published attack under one protocol, with the controls fixed
 before any run.
 
-\subsection{How we selected pairs}
+\subsection{Pair selection}
 
 We did not pick case studies by familiarity. The taxonomy picks them.
 
@@ -51,7 +51,7 @@ undocumented. Two execution-stage defenses do not run reliably on any
 freely-available open-weight model. We record these as roadblocks rather than
 as failures of the method, and they belong in Section~\ref{sec:discussion}.
 
-\subsection{Four rules fixed before any run}
+\subsection{Pre-registered experimental rules}
 
 \textbf{The control fires first.} If a defense cannot reproduce its own
 published benefit on its own benchmark in our harness, we report no transfer
@@ -124,7 +124,7 @@ episodes in the agent cell.
 The two episode counts are not comparable units. An agent episode is a complete
 multi-step tool-use trajectory. A retrieval episode is one scored answer.
 
-\subsection{Where the data comes from}
+\subsection{Datasets}
 \label{sec:provenance}
 
 \textbf{We built no benchmark.} Every question, gold answer and context in
@@ -180,7 +180,7 @@ distractors, so that the planted answer is a plausible example of its kind
 rather than an absurdity a reader would dismiss. Every arm in those runs, including the undefended and no-retrieval
 arms, is measured on that same subset.
 
-\subsection{Three payload classes, and one adaptive}
+\subsection{Payload classes}
 \label{sec:payloadclasses}
 
 \paragraph{Which items.}

@@ -1,38 +1,31 @@
-Two research communities study the same failure in large language model
-agents, and neither tests the other's work. Security researchers study the
-context an attacker changes on purpose; safety researchers study
-context that becomes wrong on its own. Either way the model cannot tell which
-part of its context deserves trust. We measure that separation. We read
-\NCorpus{} papers in full; \NAnalysed{} of them name an attack or a defense,
-and from those we recover \NPureRegimePairs{} confirmed (defense, attack)
-pairs. Only \NCrossCommunityPairs{} of them (\PctCrossCommunity{}\%)
-cross between the communities, and one direction is all but closed:
-\textbf{\NSecDefVsSafetyAttack{} security defense in our corpus has ever been
-evaluated against a safety failure mechanism}, against
-\NSecDefSecAttack{} evaluated against security attacks. They are not duplicating each other: across \NMechanisms{} named
-mechanisms we find \NMechNameClash{} cross-community name collisions inside a
-taxonomy cell. They are dividing the problem instead. Security names how bad
-text arrives and defends at ingestion; safety names why the model believes it
-and defends at reasoning, \NDefPtReasoningSafety{} defenses against
-\NDefPtReasoningSec{}. Both have named a failure in \NSharedChannels{}
-channels, security first in \NChannelsSecFirst{} of them and safety in none,
-by up to \MaxChannelLag{} years. The halves never meet, and a defense that
-reasons better about a document sits downstream of whoever wrote it.
+Large language model agents answer from retrieved documents. An attacker who
+controls one document controls the answer. Two research communities study this
+failure and neither tests the other's work. Security researchers study context
+an attacker changes on purpose; safety researchers study context that becomes
+wrong on its own. The model cannot tell the difference.
 
-So we ran the missing experiment. We executed \NCampaignPairs{} (defense,
-attack) pairs across \NCampaignImpl{} implementations and \NCampaignEpisodes{}
-scored episodes. Every method runs from its authors' released code and
-weights. We check each pair against an undefended model on the same items.
-Even where nine tenths of the honest document survives, not one of them leaves
-the model better off than no defense at all. The reason is a single mechanism.
-Each of these defenses has one dial: how far to trust the retrieved document
-against how far to trust the model's own memory. Turning it moves errors
-between the two without creating correct answers. The attacker wrote part of
-that document. Trust the document more, and the attacker receives what memory
-would have supplied. Trust memory more, and memory takes it back. The two
-movements almost exactly cancel. Neither direction helps. The attacker's text
-sits inside the same document that the defense must judge. One defense does
-resist. It gives the retrieved text less weight when that text makes the model
-less certain. So we wrote a passage that makes the model more certain. That
-turns the weighting off, and cuts the defense's advantage over an undefended
-model by 58\%.
+We read \NCorpus{} papers in full. \NAnalysed{} name an attack or a defense,
+and from those we recover \NPureRegimePairs{} confirmed (defense, attack)
+pairs. Only \NCrossCommunityPairs{} (\PctCrossCommunity{}\%) cross between
+the communities, and one direction is all but closed:
+\textbf{\NSecDefVsSafetyAttack{} security defense has ever been evaluated
+against a safety failure mechanism}, against \NSecDefSecAttack{} evaluated
+against security attacks. The two sides do not duplicate each other. Across
+\NMechanisms{} named mechanisms we find \NMechNameClash{} cross-community
+name collisions. They divide the problem instead. Security names how the bad
+text arrives and defends at ingestion. Safety names why the model believes it
+and defends at reasoning, \NDefPtReasoningSafety{} defenses against
+\NDefPtReasoningSec{}. A defense that reasons better about a document sits
+downstream of whoever wrote it.
+
+We then ran the experiments neither community has run. The campaign covers
+\NCampaignPairs{} pairs across \NCampaignImpl{} implementations and
+\NCampaignEpisodes{} scored episodes. Every method runs from its authors'
+released code and weights, against an undefended model on the same items. No
+context-reliance defense leaves the model better off than no defense at all.
+One mechanism explains this. Each defense weighs the retrieved document
+against the model's memory, and moving that weight relocates errors instead of
+creating correct answers. One defense resists, by discounting context that
+raises the model's uncertainty. A gradient-optimized passage that lowers
+uncertainty removes \PctAcdRemovedGradient{}\% of its protection. We report
+results for one model family and one retrieval setting.

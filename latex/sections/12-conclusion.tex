@@ -42,14 +42,17 @@ payloads therefore overstates how well a system holds. The fluent payload
 needs no gradient access and damages an undefended model roughly twice as
 hard.
 
-Second, one defense did resist. It loses 58\% of that protection to an
+Second, one defense did resist. It loses \PctAcdRemovedGradient{}\% of that
+protection to an
 attacker who reads its rule and optimizes against the quantity it measures.
 
 \paragraph{Future work.}
 
 \textbf{Extend the adaptive case to the rest of the family.} We tested the one defense that resisted,
-with two optimizers. A best-of-five search over sentence forms took 29\% of
-its protection. A gradient search over token ids took 58\%. Together they
+with two optimizers. A best-of-five search over sentence forms took
+\PctAcdRemovedBestOf{}\% of
+its protection. A gradient search over token ids took
+\PctAcdRemovedGradient{}\%. Together they
 settle that the defense degrades rather than collapses.
 Every other context-reliance method in the campaign has had only the
 non-adaptive treatment, which Section~\ref{sec:experiments} states is no

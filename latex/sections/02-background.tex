@@ -1,6 +1,6 @@
 \section{Background and scope} \label{sec:background}
 
-\subsection{What we mean by context poisoning}
+\subsection{Context poisoning}
 
 \emph{Context poisoning} is our term for three things happening together.
 Content enters an agent's context window. The agent should not have trusted
@@ -15,7 +15,7 @@ window. Two things fall outside it. Training-time poisoning and weight attacks
 do not travel through the context. Jailbreaks in which the user is the
 attacker have no third-party content at all.
 
-\subsection{Two places an answer can come from} \label{sec:twoplaces}
+\subsection{Parametric and contextual answers} \label{sec:twoplaces}
 
 A model answers from one of two sources. The first is the \emph{context}: the
 document, tool output or message placed in front of it. The second is what the
@@ -75,7 +75,7 @@ records provenance in a separate \emph{intent} axis. Writing "attack" at the
 top level would have made the safety half unregisterable, because an
 attack presupposes an attacker.
 
-\subsection{The agent context as a set of inflow channels}
+\subsection{Inflow channels}
 
 It helps to picture the context window as a body of water fed by a fixed set
 of inflow streams. Whatever enters through any stream mixes into the same body

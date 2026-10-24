@@ -50,28 +50,23 @@ experiments that fall in it.
 
 \paragraph{Research questions.}
 \begin{description}
-\item[RQ1] \textbf{Are the two communities reinventing the wheel?} Two
-  literatures work one problem and do not cite each other, so the first
-  question is whether each is doing the other's work twice. We answer by
-  coding \NCorpus{} papers from both sides under one taxonomy, comparing what
-  each side names inside the same cell, and dating the first paper from each
-  side in every channel both of them work (Sections~\ref{sec:literatures},
-  \ref{sec:parallel}).
-\item[RQ2] If they are not duplicating, is there a region of the problem that
-  neither has tested? We answer by recovering every (defense, attack) pair
-  reported by the \NAnalysed{} papers that name a technique
-  (Section~\ref{sec:literatures}).
-\item[RQ3] When a defense built for one regime is actually run against
-  the other, does it transfer? We answer by executing the pairs the literature
-  skipped, from the authors' released code and weights
-  (Sections~\ref{sec:experiments}, \ref{sec:results}).
-\item[RQ4] Where defenses fail, is the failure a property of individual
-  methods or of a design choice they share? We answer with a payload built to
-  separate the possible explanations rather than to maximize damage
-  (Section~\ref{sec:distractor}).
-\item[RQ5] Does that explanation survive an attacker who reads the defense and
-  optimizes against it? We answer by building two such attackers against the
-  one method that resisted (Section~\ref{sec:adaptive}).
+\item[RQ1] \textbf{Are the two communities reinventing the wheel?} We code
+  \NCorpus{} papers from both sides under one taxonomy, compare what each side
+  names inside the same cell, and date the first paper from each side in every
+  shared channel (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
+\item[RQ2] \textbf{Is there a region of the problem that neither community
+  has tested?} We recover every (defense, attack) pair reported by the
+  \NAnalysed{} papers that name a technique (Section~\ref{sec:literatures}).
+\item[RQ3] \textbf{Does a defense built for one regime transfer to the
+  other?} We execute the pairs the literature skipped, from the authors'
+  released code and weights (Sections~\ref{sec:experiments},
+  \ref{sec:results}).
+\item[RQ4] \textbf{Is failure a property of individual methods or of a design
+  choice they share?} We build a payload that separates the explanations
+  rather than maximizes damage (Section~\ref{sec:distractor}).
+\item[RQ5] \textbf{Does that explanation survive an adaptive attacker?} We
+  build two optimizers against the one method that resisted
+  (Section~\ref{sec:adaptive}).
 \end{description}
 
 The last three questions are the ones a survey normally cannot answer. They
@@ -114,10 +109,10 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   there are \NMechNameClash{} cross-community name collisions inside a
   taxonomy cell, and \NDefNameClash{} among \NDefenses{} defenses. They are
   dividing the problem. In the \NSharedCells{} cells both occupy, security
-  names how the bad text arrives and safety names why the model believes it,
-  and their defenses split the same way: \NDefPtIngestionSec{} security
-  defenses act at ingestion against \NDefPtIngestionSafety{} safety ones,
-  while \NDefPtReasoningSafety{} safety defenses act at reasoning against
+  names how the bad text arrives and safety names why the model believes it.
+  Their defenses split the same way. \NDefPtIngestionSec{} security defenses
+  act at ingestion against \NDefPtIngestionSafety{} safety ones, and
+  \NDefPtReasoningSafety{} safety defenses act at reasoning against
   \NDefPtReasoningSec{} (Section~\ref{sec:parallel}). The dates say the same
   thing: \NSharedChannels{} channels have mechanisms from both, security
   arrives first in \NChannelsSecFirst{} and \textbf{safety in none}, by a
@@ -168,8 +163,8 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   ACD~\cite{kim-2024-adaptive} weights the two distributions by an entropy term computed from the
   retrieved context, which an attacker owns, so the attack has exactly one
   objective: minimize that term. A best-of-five search over sentence forms
-  removes 29\% of its protection; a gradient search over token ids removes
-  \textbf{58\%}. Both stay above the ceiling the rule itself implies, so the
+  removes \PctAcdRemovedBestOf{}\% of its protection; a gradient search over
+  token ids removes \textbf{\PctAcdRemovedGradient{}\%}. Both stay above the ceiling the rule itself implies, so the
   method degrades rather than collapses, and the price is now measured
   (Section~\ref{sec:adaptive}).
 

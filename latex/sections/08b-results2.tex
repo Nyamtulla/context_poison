@@ -1,4 +1,4 @@
-\section{Results: controls, implementations and defenses that hold}
+\section{Results: controls and defenses that hold}
 \label{sec:results2}
 
 Section~\ref{sec:results} reports a negative result about one family of
@@ -6,7 +6,7 @@ defenses. This section reports three things that complicate it: three controls w
 which a result reads the other way, a test of whether a result belongs to a
 principle or to one codebase, and the defenses that did transfer.
 
-\subsection{Three controls that reverse a reading}
+\subsection{Controls that reverse a reading}
 
 Each of the following reverses if the arm beside it is dropped, and in each
 case that arm is one the relevant literature does not report.
@@ -65,7 +65,7 @@ honest passage remains and the two implementations have nothing left to
 disagree about. A survey reporting one number per published method would have
 missed all of this.
 
-\subsection{Defenses that do transfer, and one line that fixes one that does not}
+\subsection{Defenses that transfer}
 
 The picture is not uniformly negative, and the exceptions are informative.
 
@@ -82,7 +82,7 @@ attack success driven to zero, 4 show a resolvable reduction, 19 show no
 resolvable effect at that sample size, and 9 show no reduction at all.
 Ingestion-stage techniques account for most of the holds.
 
-\subsection{The dose where a defense has its best chance}
+\subsection{The dose of maximum advantage}
 \label{sec:lowdose}
 
 Results so far are reported at saturation, where the planted passage replaces
@@ -111,7 +111,7 @@ and averaging across payloads would hide that. We report the minimum rather
 than the mean for the same reason Carlini gives: robustness is a property of
 the strongest attack a method has met, not of the attacks its authors chose.
 
-\subsection{An adaptive attacker}
+\subsection{Adaptive attackers}
 \label{sec:adaptive}
 
 Every result above comes from an attack that was not built for the defense it
@@ -175,8 +175,8 @@ median $d_\alpha$ & 0.525 & 0.653 & \textbf{0.708} \\
 \midrule
 undefended copies attacker & 76.0 & 89.1 & 87.8 \\
 ACD copies attacker & 40.8 & 64.0 & \textbf{73.0} \\
-\textbf{defensive gap} & \textbf{35.1} & \textbf{25.1} & \textbf{14.7} \\
-\textbf{protection removed} & --- & \textbf{29\%} & \textbf{58\%} \\
+\textbf{defensive gap} & \textbf{\NAcdGapBase{}} & \textbf{\NAcdGapBestOf{}} & \textbf{\NAcdGapGradient{}} \\
+\textbf{protection removed} & --- & \textbf{\PctAcdRemovedBestOf{}\%} & \textbf{\PctAcdRemovedGradient{}\%} \\
 \midrule
 ACD recalls from memory & 32.5 & 22.2 & 18.1 \\
 ACD answers correctly & 5.0 & 3.2 & 2.6 \\
@@ -194,9 +194,9 @@ undefended arm on copy rate, as the ceiling requires.
 \textbf{The honest size of the effect is the gap, not ACD's rise.} The adaptive
 payload is stronger against the undefended arm as well, so reporting only
 ACD's change would credit the defense with damage the attack does to everyone.
-Against its own undefended arm the protection falls from 35.1\pp{} to
-25.1\pp{}: \textbf{29\% of it removed by a best-of-five search over sentence
-templates.} Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, which
+Against its own undefended arm the protection falls from \NAcdGapBase{}\pp{}
+to \NAcdGapBestOf{}\pp{}: \textbf{\PctAcdRemovedBestOf{}\% of it removed by a
+best-of-five search over sentence templates.} Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, which
 left a question the weak optimizer could not answer.
 
 \textbf{A gradient search answers it.} We ran a GCG-style~\cite{zou-2023-universal} coordinate search
@@ -210,9 +210,10 @@ beats the best-of-five passage on the reported measure, which it fails to do
 on 163 of 686, so the payload is monotone by construction.
 
 It drives $H_{\mathrm{ctx}}$ to 0.614 and $d_\alpha$ to 0.708, and the
-defensive gap falls to 14.7\pp{}: \textbf{58\% of ACD's protection removed},
-twice what sentence templates took. The 10.4\pp{} it takes beyond best-of-five
-clears the 7.6\pp{} detectability threshold at this sample size.
+defensive gap falls to \NAcdGapGradient{}\pp{}: \textbf{\PctAcdRemovedGradient{}\% of ACD's protection removed},
+twice what sentence templates took. The \NAcdGradientBeyond{}\pp{} it takes beyond
+best-of-five clears the \NAcdAdaptiveMdr{}\pp{} detectability threshold at this
+sample size.
 
 \textbf{The gradient payload is weaker in general and stronger against the
 defense.} It damages the undefended arm \emph{less} than best-of-five
@@ -229,7 +230,8 @@ computed over the whole context.
 \textbf{ACD degrades under adaptive pressure; it does not collapse.} We
 committed the bands in advance: below 10\pp{} of remaining gap we would have
 called it neutralized, and 10 to 25\pp{} degraded further while holding
-something back. The result is the second. A rule that gives up 58\% of its
+something back. The result is the second. A rule that gives up
+\PctAcdRemovedGradient{}\% of its
 protection to an attacker with gradients is a real obstacle that has now been
 priced, rather than either a solved problem or a broken one.
 

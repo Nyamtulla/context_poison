@@ -1,4 +1,4 @@
-\section{Are we reinventing the wheel?}
+\section{Two literatures, one problem}
 \label{sec:literatures}
 
 Two communities work one problem and do not cite each other. The obvious
@@ -123,7 +123,7 @@ window, and the output fails as one of \NConseqCats{} \textbf{consequences}. A
 defense can intervene at three points, and the two literatures do not choose
 the same one: the security side masses at ingestion, the safety side at
 reasoning, and execution is security almost alone. Counts are named mechanisms
-per channel (left), named defenses per intervention point (centre) and named
+per channel (left), named defenses per intervention point (center) and named
 mechanisms per consequence (right), by regime. The consequence column is the
 sharpest division in the figure: goal-hijack is \NGoalHijackSec{} security to
 \NGoalHijackSafety{} safety, and reasoning corruption runs the other way,
@@ -138,7 +138,7 @@ genuinely have.}
 \includegraphics[width=0.92\textwidth]{figures/fig1_cube}
 \caption{Named attacks against named defenses in every channel $\times$
 consequence cell, split by regime. Solid bars are attacks, pale hatched bars
-are defenses, each labelled with its count, and heights are square-root
+are defenses, each labeled with its count, and heights are square-root
 scaled against one maximum shared by both panels, because linear scaling
 would leave the largest cell as the only visible bar. Read the numbers rather
 than the heights where the two are close; the bars carry the shape and the
@@ -222,7 +222,7 @@ members.
 % \NDefenses{} named defenses, with the channel, consequence, regime and
 % validation coding we gave each, and the paper it came from. The counts in
 % this section are summaries of that table, not of a sample of it.
-\subsection{The separation is not where you would look for it}
+\subsection{Regime versus venue}
 \label{sec:venue}
 
 Regime says what a paper is about. Venue says where its authors sent it.
@@ -242,7 +242,7 @@ kept apart by what they cite. That is a stronger claim than a venue split
 would have been, and a harder one to explain away: these papers appear beside
 each other and still do not read each other.
 
-\subsection{How separate the two communities are}
+\subsection{Cross-citation between the literatures}
 
 \begin{itemize}
 \item \textbf{\PctSecCitesSafety{}\%} of security papers (\NSecCitesSafety{} of
@@ -273,7 +273,7 @@ Papers with no resolved edge inside the corpus are omitted.}
 \label{fig:network}
 \end{figure}
 
-\subsection{What has been tested against what}
+\subsection{Recovered defense--attack pairs}
 \label{sec:coverage}
 
 A (defense, attack) pair means some paper evaluated that defense against that
@@ -314,7 +314,7 @@ it cannot establish that something is absent, because absence of the phrasing
 it knows is not absence of the thing. \textbf{A claim that something was never
 tested should state whether it means ``not done'' or ``not resolved''.}
 
-\subsection{Who ran the experiment decides the result}
+\subsection{Reporter bias in recovered pairs}
 \label{sec:whoran}
 
 For every pair we also record which side of the field reported it and what
@@ -335,7 +335,7 @@ report it losing essentially always. Neither number measures how often defenses
 work; the pair of numbers measures publication incentive. This is why the rest
 of this paper re-runs the defenses rather than citing either side's claim.
 
-\subsection{The cell nobody has filled}
+\subsection{The untested region}
 \label{sec:emptycell}
 
 The axes so far describe what each community studies. The question this paper
@@ -390,7 +390,7 @@ the attack it was tested on, so defenses do meet later attacks. But only
 \NPredatesAndCross{} pair is both earlier \emph{and} cross-community.
 Figure~\ref{fig:lag} shows the full distribution.
 
-\subsection{No, and the reason is worse}
+\subsection{Division of labor, not duplication}
 \label{sec:parallel}
 
 If two communities work one problem without reading each other, the second to
@@ -411,7 +411,7 @@ other. \textbf{One side builds the attack. The other side has already
 explained why it works, and is not cited for it.}
 
 This reading is ours, taken from the mechanism names and their papers rather
-than from a coded field, and it is not clean at the edges: a few safety-regime
+than from a coded field. It is not clean at the edges. A few safety-regime
 entries name a delivery route rather than a susceptibility, \meth{KV-cache
 contamination} and \meth{incidental prompt injection} among them. The
 intervention points below are coded, and they divide the same way.
@@ -436,7 +436,7 @@ none      & \NDefPtNoPointSec{} & \NDefPtNoPointSafety{} \\
 \end{tabular}
 \end{table}
 
-Duplicated effort wastes labour and leaves two working defenses. Complementary
+Duplicated effort wastes labor and leaves two working defenses. Complementary
 effort that never meets leaves one broken chain: a reasoning-stage defense sits
 downstream of an adversary who already controls its input. That is not a
 rhetorical point. It is the mechanism behind the sign flip in

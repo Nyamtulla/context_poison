@@ -6,13 +6,13 @@ state the threat model and then the regime the other literature works in.
 
 \textbf{Three words, kept apart.} A \emph{threat model} specifies an
 adversary: their goal, what they control, what they know. A \emph{regime} is
-which of two conditions a piece of work addresses, and we take the division
-from Lin et al.~\cite{lin-2025-safety-security}: \meth{security} is
-resilience against ``intentional attacks \ldots\ in the presence of
-adversarial actors'', built on an asset, an adversary and a vulnerability;
-\meth{safety} is avoiding ``unintended harmful outcomes \ldots\ despite
-uncertainties in inputs, goals, training data, or deployment conditions'', in
-non-adversarial environments. A \emph{venue} is where a paper published.
+which of two conditions a piece of work addresses. We take the division from
+Lin et al.~\cite{lin-2025-safety-security}. \meth{Security} is resilience
+against ``intentional attacks \ldots\ in the presence of adversarial
+actors'', built on an asset, an adversary and a vulnerability. \meth{Safety}
+is avoiding ``unintended harmful outcomes \ldots\ despite uncertainties in
+inputs, goals, training data, or deployment conditions'', in non-adversarial
+environments. A \emph{venue} is where a paper published.
 
 Regime and venue are coded independently and they are not the same cut, which
 Section~\ref{sec:venue} measures. Because the word \meth{security} names a
@@ -34,7 +34,7 @@ can become another agent's input, or its own input a turn later through
 memory. And an action taken on corrupted context cannot be undone by fixing
 the context afterwards.
 
-\subsection{The security regime, and its threat model}
+\subsection{The security regime}
 
 The adversary controls the content of at least one channel. They do not
 control the model weights, the decoding procedure, or the agent's code. This
@@ -67,7 +67,7 @@ Important text sits in the middle of a long input. A retrieved fact
 contradicts what the model learned in training. The safety literature assumes this regime and evaluates on average-case benchmarks. That is the right
 choice when nothing adapts.
 
-\subsection{Why both, and what connects them}
+\subsection{What connects the two regimes}
 
 The two regimes differ in exactly one assumption: adaptivity. They share the
 channel, the position in the context window, and the downstream consequence.

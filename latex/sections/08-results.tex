@@ -1,7 +1,7 @@
 \section{Results: the context-reliance family under attack}
 \label{sec:results}
 
-\subsection{One design rule explains most of what we found}
+\subsection{A shared design rule}
 
 Stated first, then supported: \textbf{a defense that works by shifting trust
 from the model's parameters toward the retrieved text is correct when the text
@@ -113,7 +113,7 @@ selected by whether the memory was right.} The prediction committed before
 this run was that suppressing memory would do little here; the result is why
 the paper states a scope condition rather than a blanket one.
 
-\subsection{The payload class decides, not the attack label}
+\subsection{Payload class, not attack label}
 
 ACD~\cite{kim-2024-adaptive} produced the strongest defensive result in our
 campaign. It discounts tokens the context makes uncertain, and against corpus
@@ -186,7 +186,7 @@ dose, falling to 15.2\% at 10\% dose against 26.5\% for corpus poisoning. The
 field's attention to optimized adversarial passages is not matched by their
 effectiveness.
 
-\subsection{Two payloads, three defenses, three outcomes}
+\subsection{Payload class against defense outcome}
 \label{sec:payloads}
 
 ACD is not the only method whose behavior depends on the form of the planted
@@ -243,7 +243,7 @@ an entropy constraint should do when the planted passage agrees with the prior
 rather than contradicting it, but that signal sits below threshold and we
 record it as directional rather than as a result.
 
-\subsection{A comparison we decline to make}
+\subsection{A comparison we exclude}
 
 The three results invite a ranking across payload classes. We committed in
 advance to one falsifier. If any defense did \emph{better} against false
@@ -265,7 +265,7 @@ payload, against the control measured beside it in the same run, every
 comparison in this section stands. We state the limit because the alternative
 is to report a falsifier as passed when the instrument cannot support it.
 
-\subsection{Separating copying from remembering}
+\subsection{Copying versus remembering}
 \label{sec:distractor}
 
 Under false evidence the planted passage asserts the same string the model
@@ -358,7 +358,7 @@ SpARE's row needs one caution. Its run carries no undefended arm, so it compares
 steering toward memory against steering toward the context. That is a comparison
 between two settings of the same dial, not between a defense and its absence.
 
-\subsection{Asking the model to judge the document}
+\subsection{An LLM-as-judge arm}
 
 SCR~\cite{huang-2024-trust} is the only method we ran whose design anticipates
 an adversary. It shows the model its own no-context answer, the document, and
