@@ -286,8 +286,14 @@ def main():
             print("  existing registry is a different configuration; "
                   "recomputing from the start", flush=True)
 
+    _expected = 2 * len(args.poison_counts)
+
     def flush():
         payload["generated"] = time.strftime("%Y-%m-%d")
+        # Now that the registry is written as it goes, a reader has to be able
+        # to tell a finished cell from one still running. Without this flag a
+        # half-done cell counts toward the paper's campaign totals.
+        payload["complete"] = len(payload["results"]) >= _expected
         out_file.write_text(json.dumps(payload, indent=1))
 
     done = {(r.get("arm"), r.get("n_poison")) for r in payload["results"]}

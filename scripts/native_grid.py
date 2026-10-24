@@ -107,6 +107,9 @@ def main():
                "model": a.model, "n": len(data), "protocol": "native: j of k",
                "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
                "doses_done": sorted({r["n_poison"] for r in results}),
+               # a reader must be able to tell a finished cell from one still
+               # running, now that the file appears after the first dose
+               "complete": set(a.doses) <= {r["n_poison"] for r in results},
                "results": results}
         out.write_text(json.dumps(doc, indent=1))
         print(f"    dose {j} written ({time.time()-t0:.0f}s)", flush=True)

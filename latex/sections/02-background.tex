@@ -62,13 +62,37 @@ Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
 \label{fig:vocab}
 \end{figure}
 
-The distinction is real in one respect and empty in another. It is real
-because an adaptive adversary re-optimizes against a filter and a stale
-retrieval index does not. A method tuned to the average case has no reason to
-hold at the worst case. It is empty because the model cannot tell the
-difference. A poisoned passage and a stale passage arrive through the same
-channel, occupy the same positions, and corrupt the same reasoning. The
-provenance differs; the token stream does not.
+The distinction is real in one respect and smaller than it looks in another.
+It is real because an adaptive adversary re-optimizes against a filter and a
+stale retrieval index does not. A method tuned to the average case has no
+reason to hold at the worst case.
+
+It is smaller than it looks because we measured it. We built two payloads that
+assert the same false answer, in the same slots, at the same dose. One is the
+passage PoisonedRAG writes to be believed. The other is the item's own
+retrieved passage with the gold answer replaced, which is what a superseded
+document looks like. Only the provenance differs. Over \NRegimeItems{} items,
+the crafted passage wins \NRegimeGapLow{}\pp{} at one poisoned passage in
+ten: \PctCraftLow{}\% against \PctStaleLow{}\%. At full dose the two sit
+\NRegimeGapSat{}\pp{} apart, inside the \NRegimeMdr{}\pp{} threshold.
+\textbf{The document nobody wrote as an attack still drives the model onto the
+false answer \PctStaleSat{}\% of the time}, against \PctRegimeClean{}\% on
+clean context. It also costs more accuracy at full dose than the crafted
+passage does, \AccStaleSat{} against \AccCraftSat{}.
+
+The other mechanism shows no difference at all. An optimized corpus-poisoning
+artifact and a real passage retrieved for a different question displace the
+same evidence and leave the model in the same place: \PctCorpusSat{}\% and
+\PctMisretrievalSat{}\% adoption, \AccCorpusSat{} and
+\AccMisretrievalSat{}\% accuracy, every gap inside the threshold. Against
+displacement the adversary buys nothing that a retrieval error does not
+already supply.
+
+So provenance buys an attacker a measurable advantage when the payload asserts
+a lie and the dose is low. It buys little once the context is saturated, and
+nothing when the payload only displaces. The model cannot tell the difference
+in any of these cases; what changes is how efficiently the text was written to
+exploit that.
 
 Our taxonomy therefore uses \emph{mechanism} as the neutral term for both, and
 records provenance in a separate \emph{intent} axis. Writing "attack" at the

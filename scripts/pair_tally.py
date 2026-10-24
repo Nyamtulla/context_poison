@@ -64,6 +64,15 @@ def attack_universe():
 # counted.
 # (token, label, literature-lookup key). Two implementations of RobustRAG are
 # distinct runs but one registry entry, so they share a lookup key.
+# Studies that are not (defense, attack) runs at all. The regime framing test
+# varies the payload's provenance against an undefended model, so it has no
+# defense arm to tally. Listing it here keeps the unclassified guard below
+# doing its real job, which is catching a genuinely mis-named result file.
+NOT_PAIR_RUNS = {"regime_framing_test"}
+
+# the dose grid every native-protocol cell runs
+GRID_DOSES = (0, 1, 2, 3, 5, 10)
+
 DEFENSE_TOKENS = [
     ("robustrag_decoding", "RobustRAG-DecodingAgg", "robustrag"),
     ("robustrag", "RobustRAG-KeywordAgg", "robustrag"),
@@ -146,6 +155,28 @@ def retrieval_runs():
                 and isinstance(rows[0], dict) and "arm" in rows[0]):
             continue
         stem = path.stem.lower()
+        if stem in NOT_PAIR_RUNS:
+            continue
+        # A registry written incrementally says when it is finished. Files
+        # that predate incremental writing carry no flag and were only ever
+        # written complete, so absence means complete.
+        if d.get("complete") is False:
+            continue
+        # Cells that began before the flag existed carry no marker, so
+        # completeness is inferred from arm symmetry: a runner sweeps every
+        # dose for one arm and then the next, so a run caught mid-flight has
+        # one arm short. Dose sets differ between campaigns, which is why the
+        # test compares the arms against each other rather than against a
+        # fixed list.
+        if d.get("complete") is None:
+            _per_arm = {}
+            for r in rows:
+                _per_arm.setdefault(r.get("arm"), set()).add(
+                    r.get("frac") if r.get("frac") is not None
+                    else r.get("n_poison"))
+            if len(_per_arm) > 1 and len(set(map(frozenset,
+                                                 _per_arm.values()))) > 1:
+                continue
         # metadata first where present, then the filename
         defense, dkey = _token(d.get("defense") or "", DEFENSE_TOKENS)
         if defense is None:

@@ -1,0 +1,49 @@
+{
+ "generated": "2026-10-24",
+ "defense": "scr",
+ "attack": "poisonedrag",
+ "dataset": "open_nq",
+ "top_k": 10,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "n": 500,
+ "protocol": "native: j of k",
+ "mdr_pp_at_n": 8.9,
+ "doses_done": [
+  0
+ ],
+ "results": [
+  {
+   "n_poison": 0,
+   "arm": "rag",
+   "n": 500,
+   "acc": 56.6,
+   "attacked": 2.8,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 52.2,
+   "ci_high": 60.9
+  },
+  {
+   "n_poison": 0,
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 28.6,
+   "attacked": 3.8,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 24.8,
+   "ci_high": 32.7
+  },
+  {
+   "n_poison": 0,
+   "arm": "scr",
+   "n": 500,
+   "acc": 54.0,
+   "attacked": 3.0,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.4,
+   "ci_low": 49.6,
+   "ci_high": 58.3
+  }
+ ]
+}

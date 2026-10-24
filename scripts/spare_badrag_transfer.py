@@ -86,8 +86,13 @@ def main():
             print("  existing registry is a different configuration; "
                   "recomputing from the start", flush=True)
 
+    _expected = 2 * len(args.poison_counts)
+
     def flush():
         payload["generated"] = time.strftime("%Y-%m-%d")
+        # see poisonedrag_transfer: an in-progress registry must not be read
+        # as a finished one
+        payload["complete"] = len(payload["results"]) >= _expected
         out_file.write_text(json.dumps(payload, indent=1))
 
     done = {r.get("n_poison") for r in payload["results"]}

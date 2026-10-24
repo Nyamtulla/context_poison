@@ -183,6 +183,38 @@ def main():
     M["NAcdAdaptiveItems"] = load("acd_vs_gradient_evidence.json")["n"]
     M["NAcdAdaptiveMdr"] = load("acd_vs_gradient_evidence.json")["mdr_pp_at_n"]
 
+    # ---- the regime framing test. Whether it takes an adversary to cause
+    # the harm is the claim Section 2 rests on, and it was asserted before it
+    # was measured. Five payload conditions on one item set; the arms differ
+    # only in who wrote the payload and what it does.
+    _rf = load("regime_framing_test.json")
+    _rb = {}
+    for _r in _rf["results"]:
+        _rb.setdefault(_r["arm"], {})[_r["n_poison"]] = _r
+    M["NRegimeItems"] = _rf["n"]
+    M["NRegimeMdr"] = f'{_rf["mdr_pp_at_n"]:.1f}'
+    _cb, _cr, _st = (_rb["closedbook"][0], _rb["a2_poisonedrag_x1"],
+                     _rb["a3_incidental_stale"])
+    _mis, _cp = _rb["a4_incidental_misretrieval"], _rb["a5_corpus_poisoning"]
+    M["PctRegimeClean"] = f'{_st[0]["attacked"]:.1f}'
+    M["PctCraftLow"], M["PctStaleLow"] = (f'{_cr[1]["attacked"]:.1f}',
+                                          f'{_st[1]["attacked"]:.1f}')
+    M["PctCraftSat"], M["PctStaleSat"] = (f'{_cr[10]["attacked"]:.1f}',
+                                          f'{_st[10]["attacked"]:.1f}')
+    M["NRegimeGapLow"] = f'{_cr[1]["attacked"] - _st[1]["attacked"]:.1f}'
+    M["NRegimeGapSat"] = f'{_cr[10]["attacked"] - _st[10]["attacked"]:.1f}'
+    # the displacement column: an optimised artefact against plain retrieval
+    # error, same measure
+    M["PctMisretrievalSat"] = f'{_mis[10]["attacked"]:.1f}'
+    M["PctCorpusSat"] = f'{_cp[10]["attacked"]:.1f}'
+    M["AccMisretrievalSat"] = f'{_mis[10]["acc"]:.1f}'
+    M["AccCorpusSat"] = f'{_cp[10]["acc"]:.1f}'
+    M["AccStaleSat"], M["AccCraftSat"] = (f'{_st[10]["acc"]:.1f}',
+                                          f'{_cr[10]["acc"]:.1f}')
+    M["AccRegimeClosedBook"] = f'{_cb["acc"]:.1f}'
+    # the published construction repeats its passage five times per slot
+    M["NRegimeRepeatMax"] = f'{max(_rb["a1_poisonedrag_x5"][k]["attacked"] - _cr[k]["attacked"] for k in (1, 2, 3, 5, 10)):.1f}'
+
     M["NMechNameClash"] = _clashes(r3)
     M["NDefNameClash"] = _clashes(r4)
     _cells = collections.defaultdict(set)
