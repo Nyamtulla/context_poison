@@ -133,6 +133,49 @@ def main():
     for k, v in [("Reasoning", "reasoning"), ("Ingestion", "ingestion"),
                  ("Execution", "execution"), ("NoPoint", "none")]:
         M["NDef" + k] = ip[v]
+    # Where each regime intervenes. The two communities defend the same cells
+    # and do not defend them in the same place, which is the measurement
+    # behind S3's answer and the mechanism behind the sign flip in S8.
+    _ipr = collections.Counter((e.get("defense_intervention_point"),
+                                e.get("regime")) for e in r4)
+    for k, v in [("Reasoning", "reasoning"), ("Ingestion", "ingestion"),
+                 ("Execution", "execution"), ("NoPoint", "none")]:
+        M["NDefPt" + k + "Sec"] = _ipr[(v, "security")]
+        M["NDefPt" + k + "Safety"] = _ipr[(v, "safety")]
+
+    # ---- is either community naming what the other already named? Same
+    # taxonomy cell, best fuzzy match between the two regimes' names. Typed
+    # into the prose this would be a claim; computed here it is a check a
+    # reader can re-run.
+    import difflib
+    def _clashes(reg, thresh=0.55):
+        nk = lambda e: (e.get("name") or e.get("technique_name")
+                        or e.get("defense_name") or "")
+        _s = [e for e in reg if e.get("regime") == "security"]
+        _m = [e for e in reg if e.get("regime") == "safety"]
+        n = 0
+        for a in _s:
+            for b in _m:
+                if (a.get("channel"), a.get("consequence")) != \
+                   (b.get("channel"), b.get("consequence")):
+                    continue
+                if difflib.SequenceMatcher(
+                        None, nk(a).lower(), nk(b).lower()).ratio() > thresh:
+                    n += 1
+        return n
+    M["NMechNameClash"] = _clashes(r3)
+    M["NDefNameClash"] = _clashes(r4)
+    _cells = collections.defaultdict(set)
+    for e in r3:
+        _cells[(e.get("channel"), e.get("consequence"))].add(e.get("regime"))
+    M["NSharedCells"] = sum(1 for v in _cells.values()
+                            if {"security", "safety"} <= v)
+    M["NOccupiedCells"] = len(_cells)
+    _sh = {k for k, v in _cells.items() if {"security", "safety"} <= v}
+    M["NMechSharedSec"] = sum(1 for e in r3 if e.get("regime") == "security"
+                              and (e.get("channel"), e.get("consequence")) in _sh)
+    M["NMechSharedSafety"] = sum(1 for e in r3 if e.get("regime") == "safety"
+                                 and (e.get("channel"), e.get("consequence")) in _sh)
 
     # ---- which papers contribute what
     mech_p = {e.get("paper_id") for e in r3} & included

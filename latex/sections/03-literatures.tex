@@ -1,9 +1,12 @@
-\section{The two literatures}
+\section{Are we reinventing the wheel?}
 \label{sec:literatures}
 
-This section exists to establish one fact: the experiment this paper runs has
-never been run. Everything in it is measurement over a corpus, and it ends at
-the cell of the matrix that is empty.
+Two communities work one problem and do not cite each other. The obvious
+question is whether they are doing each other's work twice, and it is worth
+asking out loud because a reader will ask it anyway. The answer is no, and
+what they are doing instead costs the field more than duplication would.
+Everything in this section is measurement over a corpus, and it ends at the
+cell of the matrix that is empty.
 
 \subsection{Corpus}
 
@@ -387,12 +390,62 @@ the attack it was tested on, so defenses do meet later attacks. But only
 \NPredatesAndCross{} pair is both earlier \emph{and} cross-community.
 Figure~\ref{fig:lag} shows the full distribution.
 
-\subsection{The same ground, found twice}
+\subsection{No, and the reason is worse}
 \label{sec:parallel}
 
 If two communities work one problem without reading each other, the second to
-arrive restates what the first already knows. The dates say this is what
-happens, and they say which direction it runs in.
+arrive should restate what the first already knows. Among \NMechanisms{} named
+mechanisms, the number of cross-regime name collisions within a taxonomy cell
+is \NMechNameClash{}. Among \NDefenses{} defenses it is \NDefNameClash{}.
+Nobody is naming the same thing twice.
+
+They are naming different halves of one causal chain. \NSharedCells{} of our
+\NOccupiedCells{} occupied cells hold mechanisms from both regimes,
+\NMechSharedSec{} security and \NMechSharedSafety{} safety. Read them side by
+side and the security entries are overwhelmingly ways of getting bad text in,
+the safety entries reasons the model believes bad text once it is there. The
+\meth{RAG} $\times$ \meth{silent-corruption} cell is the clearest case:
+PoisonedRAG, BadRAG and their relatives on one side; over-trust in conflicting
+external evidence, lost-in-the-middle and knowledge-conflict circuits on the
+other. \textbf{One side builds the attack. The other side has already
+explained why it works, and is not cited for it.}
+
+This reading is ours, taken from the mechanism names and their papers rather
+than from a coded field, and it is not clean at the edges: a few safety-regime
+entries name a delivery route rather than a susceptibility, \meth{KV-cache
+contamination} and \meth{incidental prompt injection} among them. The
+intervention points below are coded, and they divide the same way.
+Figure~\ref{fig:pipeline} draws this split against the pipeline; the counts
+are here because the argument rests on them.
+
+\begin{table}[t]
+\centering
+\caption{Where each regime's defenses intervene. Security keeps the text out
+and contains what it does; safety improves reasoning over text already
+accepted.}
+\label{tab:intervention}
+\begin{tabular}{lrr}
+\toprule
+intervention point & security & safety \\
+\midrule
+ingestion & \NDefPtIngestionSec{} & \NDefPtIngestionSafety{} \\
+execution & \NDefPtExecutionSec{} & \NDefPtExecutionSafety{} \\
+reasoning & \NDefPtReasoningSec{} & \NDefPtReasoningSafety{} \\
+none      & \NDefPtNoPointSec{} & \NDefPtNoPointSafety{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Duplicated effort wastes labour and leaves two working defenses. Complementary
+effort that never meets leaves one broken chain: a reasoning-stage defense sits
+downstream of an adversary who already controls its input. That is not a
+rhetorical point. It is the mechanism behind the sign flip in
+Section~\ref{sec:results}, where methods that shift trust toward the retrieved
+document help when the document is honest and hurt when it is written by
+someone else.
+
+The dates say the same thing from a second direction, and they say which way
+it runs.
 
 \NSharedChannels{} of our nine channels have named mechanisms from both
 regimes. Comparing
