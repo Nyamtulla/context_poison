@@ -156,7 +156,7 @@ def main():
 
     OUT.mkdir(parents=True, exist_ok=True)
     emit(OUT / "census_mechanisms.tex", mrows,
-         ["Mechanism or attack", "Channel", "Consequence", "Track", "Source"],
+         ["Mechanism or attack", "Channel", "Consequence", "Regime", "Source"],
          r"p{0.33\textwidth}llll",
          f"Every named mechanism in the corpus ({len(mrows)} entries). Rows in "
          r"\emph{italics} are entries whose authors gave their contribution no "
@@ -167,7 +167,7 @@ def main():
          "tab:census-mech",
          f"Table~\\ref{{tab:census-mech}}: named mechanisms, continued")
     emit(OUT / "census_defenses.tex", drows,
-         ["Defense or fix", "Channel", "Acts at", "Track", "Validated vs",
+         ["Defense or fix", "Channel", "Acts at", "Regime", "Validated vs",
           "Source"],
          r"p{0.30\textwidth}lllll",
          f"Every named defense in the corpus ({len(drows)} entries). "

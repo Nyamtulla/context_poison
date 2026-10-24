@@ -113,6 +113,64 @@ selected by whether the memory was right.} The prediction committed before
 this run was that suppressing memory would do little here; the result is why
 the paper states a scope condition rather than a blanket one.
 
+\subsection{Payload provenance}
+\label{sec:regime}
+
+Every result in this section is about a defense. This one is not. The paper
+divides its corpus by regime, and that division rests on a claim about the
+stimulus rather than about any method: that an adversary and an accident
+produce the same failure. We asserted it in Section~\ref{sec:twoplaces}
+before anyone had measured it, so we measured it.
+
+\input{tables/regime_framing}
+
+Table~\ref{tab:regime} crosses who wrote the payload against what the payload
+does. Two rows assert the attacker's false answer in prose written to be
+believed. One asserts \emph{the same false answer} using the item's own
+retrieved passage with the gold value replaced, which is what a superseded
+document looks like. Two rows assert nothing and displace the evidence
+instead, one an optimized artifact and one a real passage retrieved for a
+different question. Dose, slot positions and scorer are fixed across all of
+them. Predictions were registered before the run.
+
+\textbf{The published construction's repetition buys nothing.} PoisonedRAG
+repeats its passage five times in each slot it takes. Placed once it loses at
+most \NRegimeRepeatMax{}\pp{} of adoption, under threshold at every dose. We
+had predicted 10 to 20\pp{} and were wrong. The practical consequence is that
+no number in this campaign needs a repetition caveat.
+
+\textbf{Craft buys an attacker a real advantage, and only at low dose.} With
+one poisoned passage in ten, the crafted passage is adopted
+\PctCraftLow{}\% of the time against \PctStaleLow{}\% for the stale document,
+a gap of \NRegimeGapLow{}\pp{} that clears the threshold. That is the dose
+range a deployment actually faces. At saturation the gap is
+\NRegimeGapSat{}\pp{}, inside the threshold, and the two are not
+distinguishable. \textbf{A document nobody wrote as an attack still carries
+the model onto the false answer \PctStaleSat{}\% of the time.} It also costs
+more accuracy at saturation than the crafted passage does, \AccStaleSat{}
+against \AccCraftSat{}. The attacker optimizes for his own answer, not for
+damage.
+
+\textbf{Against displacement the adversary buys nothing at all.} Zhong et
+al.'s optimized artifact and a passage retrieved for someone else's question
+land on the same numbers: \PctCorpusSat{}\% and \PctMisretrievalSat{}\%
+adoption, \AccCorpusSat{} and \AccMisretrievalSat{} accuracy, every gap inside
+the threshold. For this mechanism, an attack and a retrieval error are the
+same event.
+
+Two readings follow, and they are different sizes. The narrow one is a scope
+condition on this campaign. At low dose the payloads here are not
+interchangeable with ordinary wrong documents. A defense that handles one has
+not been shown to handle the other. The broad one is about the field. The two
+literatures study a failure that is substantially the same stimulus, and
+becomes the same stimulus exactly where it hurts most --- under saturation,
+and for the mechanism that removes evidence rather than inserting a lie. The
+citation gap in Section~\ref{sec:literatures} is therefore not two communities
+working on different problems.
+
+Every arm falls below the no-retrieval row by the last dose. Retrieval has a
+poisoning budget, and past it the model is better off not reading at all.
+
 \subsection{Payload class, not attack label}
 
 ACD~\cite{kim-2024-adaptive} produced the strongest defensive result in our
