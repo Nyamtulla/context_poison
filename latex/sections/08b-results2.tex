@@ -12,8 +12,8 @@ Each of the following reverses if the arm beside it is dropped, and in each
 case that arm is one the relevant literature does not report.
 
 \textbf{A no-retrieval baseline.} DyPRAG~\cite{tan-2025-dynamic} is perfectly
-flat under an attack that destroys the undefended arm, scoring 5.8, 6.0, 5.2
-and 6.0 across the dose range while the undefended arm falls from 63.8\% to
+flat under an attack that destroys the undefended arm, scoring 5.8\%, 6.0\%, 5.2\%
+and 6.0\% across the dose range while the undefended arm falls from 63.8\% to
 2.5\%. Read alone, that is the strongest defense result in the campaign. The
 closed-book arm scores 7.5\% and is statistically indistinguishable from it.
 \textbf{DyPRAG is flat because it is not reading the document}, not because it
@@ -70,8 +70,9 @@ missed all of this.
 The picture is not uniformly negative, and the exceptions are informative.
 
 RobustRAG~\cite{xiang-2024-certifiably} stops PoisonedRAG~\cite{zou-2024-poisonedrag}, which its own paper tested, and we reproduce that
-(+11.0\pp). It then fails completely against corpus poisoning at displace-10,
-scoring 4.6\% against the undefended arm's 3.4\%. The reason is not its
+(+11.0\pp). It then gives no protection at all against corpus poisoning at
+displace-10, scoring 4.6\% against the undefended arm's 3.4\%, both on the
+floor. The reason is not its
 security mechanism. Corpus poisoning displaces every honest passage out of the
 top-$k$ window, so isolate-then-aggregate has nothing honest left to aggregate.
 Backfilling the window to its intended size restores \textbf{45.2\%}, a gain of

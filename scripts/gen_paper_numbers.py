@@ -183,6 +183,12 @@ def main():
     M["NAcdAdaptiveItems"] = load("acd_vs_gradient_evidence.json")["n"]
     M["NAcdAdaptiveMdr"] = load("acd_vs_gradient_evidence.json")["mdr_pp_at_n"]
 
+    # The adversarial-validation audit ran over the registry as it stood on
+    # 2026-10-15. Section 3 turned its counts into percentages of the current
+    # registry, which has grown since, so the shares were against a retired
+    # denominator. The audit's own size is the honest one to quote.
+    M["NDefEvalAudited"] = load("defense_evaluation_status.json")["n_defenses"]
+
     # ---- the validation study. Section 10 claimed human verification and
     # an inter-rater agreement; the study is drawn, uncoded, and
     # single-coded by design. Its own manifest says to describe it that way.

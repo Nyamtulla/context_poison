@@ -82,8 +82,8 @@ full dose. The defense does not fail to stop the attack. It carries it.
 \includegraphics[width=0.82\textwidth]{figures/fig4_dose_response}
 \caption{Every retrieval-cell defense against corpus poisoning, measured as the
 defended arm minus its own undefended arm in the same run. Zero means the
-defense changed nothing. Filled markers are resolvable at $p < .05$ by Fisher's exact test~\cite{fisher-1922-interpretation},
-exact test, hollow are not. Three patterns are visible. SpARE and ParamMute
+defense changed nothing. Filled markers are resolvable at $p < .05$ by Fisher's
+exact test~\cite{fisher-1922-interpretation}; hollow markers are not. Three patterns are visible. SpARE and ParamMute
 start above zero and cross it, which is the sign flip. CK-PLUG and SCR sit
 below zero almost everywhere, costing accuracy before the attack arrives. ACD
 is the only line that rises, and Table~\ref{tab:acd} shows that rise does not
@@ -275,7 +275,8 @@ COIECD    &  400 & +1.0           & -1.2 \\
 \end{table}
 
 \textbf{ParamMute is harmful against both, and the way it fails is the
-finding.} A defense worth +9.7\pp on honest context costs 12 to 13 points more
+finding.} On this run's honest context it is worth +9.7\pp, against the
++9.3\pp of the corpus-poisoning run beside it. It costs 12 to 13 points more
 than doing nothing once an adversary writes the context, and it does not matter
 whether the adversary writes gibberish or prose. What does change is how well
 ParamMute does its own job. Its suppression of the wrong parametric answer

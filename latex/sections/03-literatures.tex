@@ -295,12 +295,13 @@ is tempting to read the complement of the matrix as ``never tested'', and that
 reading is wrong. A defense evaluated on AgentDojo~\cite{debenedetti-2024-agentdojo} without naming which
 injection it faced was evaluated adversarially; it is simply not a named pair,
 because expanding a benchmark into its constituent attacks would manufacture
-coverage. So we audited all \NDefenses{} defenses directly against their own
-PDFs, asking the coarser question: was this method run against an adversary at
-all? \textbf{293 (55.6\%) were}, confirmed by two independent routes that
-overlap on 132 and therefore each found cases the other missed. \textbf{14
-(2.7\%) report no baseline comparison of any kind}, each confirmed by hand
-against the paper's own words. The remainder we report as undetermined.
+coverage. So we audited the \NDefEvalAudited{} defenses the registry held when the
+audit ran, directly against their own PDFs, asking the coarser question: was
+this method run against an adversary at all? \textbf{293 were}, confirmed by
+two independent routes that overlap on 132 and therefore each found cases the
+other missed. \textbf{14 report no baseline comparison of any kind}, each
+confirmed by hand against the paper's own words. The registry has grown since,
+so these are counts over that audited set rather than shares of the census. The remainder we report as undetermined.
 
 We report no number drawn from a negative class, and the reason generalizes.
 We built three automated passes over these papers and hand-checking each found
