@@ -1,17 +1,17 @@
 # Cross-Citation Analysis (RQ2)
 
-Regenerated 2026-10-16 by `scripts/rq2_cross_citation.py`.
+Regenerated 2026-10-23 by `scripts/rq2_cross_citation.py`.
 
 **RQ2:** Do the agent-security-poisoning literature (Track A) and the agentic-context-management/reliability literature (Track B) cite each other, or have they evolved as disconnected communities studying the same failure mode?
 
 ## Headline result
 
-Computed over the **entire coded population** (916 papers classified as Track A/Security or Track B/ML-AI; 13 additional papers classified as "Both"), not a sample:
+Computed over the **entire coded population** (929 papers classified as Track A/Security or Track B/ML-AI; 0 additional papers classified as "Both"), not a sample:
 
 | Direction | Papers citing >=1 paper from the other track | Total papers in track | Rate |
 |---|---|---|---|
-| Track A (Security) -> cites Track B (ML/AI) | 68 | 580 | **11.7%** |
-| Track B (ML/AI) -> cites Track A (Security) | 36 | 336 | **10.7%** |
+| Track A (Security) -> cites Track B (ML/AI) | 68 | 588 | **11.6%** |
+| Track B (ML/AI) -> cites Track A (Security) | 38 | 341 | **11.1%** |
 
 Because this is a full-population count (every paper's citation edges are resolved mechanically from the actual citation graph, not hand-sampled), no confidence interval is reported.
 
@@ -19,8 +19,8 @@ Because this is a full-population count (every paper's citation edges are resolv
 
 | Grade | Track A citing B | Track B citing A |
 |---|---|---|
-| B | 14/93 = 15.1% | 7/74 = 9.5% |
-| C | 54/487 = 11.1% | 29/262 = 11.1% |
+| B | 12/91 = 13.2% | 10/78 = 12.8% |
+| C | 56/497 = 11.3% | 28/263 = 10.6% |
 
 ## Methodology note
 

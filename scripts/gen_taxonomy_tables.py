@@ -76,12 +76,12 @@ def main():
     by = collections.defaultdict(list)
     for i, x in enumerate(mech):
         name = (x.get("technique_name") or x.get("name") or "").strip()
-        by[(x.get("channel") or "?", x.get("track") or "?")].append(
+        by[(x.get("channel") or "?", x.get("regime") or "?")].append(
             (i, name, bykey.get(x.get("paper_id"))))
 
     channels = sorted({c for c, _ in by},
                       key=lambda c: -sum(len(by.get((c, t), []))
-                                         for t in ("Security", "ML/AI", "Both")))
+                                         for t in ("security", "safety", "Both")))
 
     def cell(ch, tr):
         rows = by.get((ch, tr), [])
@@ -111,16 +111,16 @@ def main():
          r"\textbf{Security names} & \textbf{Machine learning names} \\",
          r"\midrule"]
     for ch in channels:
-        ns, es = cell(ch, "Security")
-        nm, em = cell(ch, "ML/AI")
+        ns, es = cell(ch, "security")
+        nm, em = cell(ch, "safety")
         L.append(f"\\meth{{{tex(ch)}}} & {ns} & {nm} & {es} & {em} \\\\")
     L += [r"\bottomrule", r"\end{tabular}", r"\end{table*}", ""]
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("\n".join(L))
     print(f"wrote {OUT.relative_to(REPO)}  ({len(channels)} channels)")
     for ch in channels:
-        ns, _ = cell(ch, "Security")
-        nm, _ = cell(ch, "ML/AI")
+        ns, _ = cell(ch, "security")
+        nm, _ = cell(ch, "safety")
         print(f"  {ch:<16} Sec {ns:>3}   ML {nm:>3}")
 
 

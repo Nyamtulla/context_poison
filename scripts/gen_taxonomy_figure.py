@@ -88,10 +88,10 @@ def arrow(ax, x1, y1, x2, y2, color=MUTED, lw=0.6, alpha=1.0):
 def main():
     mech = load("rq3_pollution_registry.json")
     defs = load("rq4_defense_registry.json")
-    mc = collections.Counter((e.get("channel"), e.get("track")) for e in mech)
+    mc = collections.Counter((e.get("channel"), e.get("regime")) for e in mech)
     dp = collections.Counter((e.get("defense_intervention_point"),
-                              e.get("track")) for e in defs)
-    qc = collections.Counter((e.get("consequence"), e.get("track"))
+                              e.get("regime")) for e in defs)
+    qc = collections.Counter((e.get("consequence"), e.get("regime"))
                              for e in mech)
 
     fig, ax = plt.subplots(figsize=(FULL, 3.6))
@@ -122,7 +122,7 @@ def main():
     BUS = 25.0
     for i, c in enumerate(CHANNELS):
         y = top - i * (h + gap) - h
-        s_, m_ = mc.get((c, "Security"), 0), mc.get((c, "ML/AI"), 0)
+        s_, m_ = mc.get((c, "security"), 0), mc.get((c, "safety"), 0)
         box(ax, 1, y, 21, h, "", GREY, "#dcdad6")
         ax.text(2.3, y + h / 2, c, ha="left", va="center", fontsize=6.3, color=INK)
         ax.text(16.6, y + h / 2, f"{s_}", ha="center", va="center",
@@ -144,7 +144,7 @@ def main():
 
     # ---- the three intervention points -------------------------------------
     for (key, lab), xc in zip(POINTS, (28.6, 50.5, 69.4)):
-        s_, m_ = dp.get((key, "Security"), 0), dp.get((key, "ML/AI"), 0)
+        s_, m_ = dp.get((key, "security"), 0), dp.get((key, "safety"), 0)
         ax.plot([xc, xc], [30, 70], ls=(0, (2.2, 1.8)), lw=0.8,
                 color="#b9b7b2", zorder=0)
         ax.text(xc, 26.0, lab, ha="center", fontsize=6.6, color=INK,
@@ -170,7 +170,7 @@ def main():
             ha="center", fontsize=6.0, color=INK2)
     for i, c in enumerate(CONSEQ):
         y = top - i * (h2 + gap) - h2
-        s_, m_ = qc.get((c, "Security"), 0), qc.get((c, "ML/AI"), 0)
+        s_, m_ = qc.get((c, "security"), 0), qc.get((c, "safety"), 0)
         box(ax, 74.5, y, 24.5, h2, "", GREY, "#dcdad6")
         ax.text(75.7, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
                 color=INK)

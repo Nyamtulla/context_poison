@@ -7,4190 +7,4190 @@
   {
    "defense": "+ModTool (memory correction tool for MemEvoBench)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "memory misevolution",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "ACD (Adaptive Contrastive Decoding)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "ACE (Abstract-Concrete-Execute)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ACE (Abstract-Concrete-Execute)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "InjecAgent: Data Stealing injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ACE (Abstract-Concrete-Execute)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "InjecAgent: Direct Harm injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ACON (Agent Context Optimization)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "ARGUS",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ARGUS",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ARLAS (Adversarial Reinforcement Learning for Agent Safety)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ASIDE (Architecturally Separated Instruction-Data Embeddings)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ASIDE (Architecturally Separated Instruction-Data Embeddings)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Tensor Trust: prompt extraction / prompt hijacking",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ActiveContext (ContextCurator + TaskExecutor)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context proprioceptive blindness",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "ActiveContext (ContextCurator + TaskExecutor)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "ActiveContext (ContextCurator + TaskExecutor)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "observation over-ingestion",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "AgenTRIM",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgenTRIM",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: tool-knowledge injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgenTRIM",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Cross-Tool Description Poisoning",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgenTRIM",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Agent Capability Registry",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "UNNAMED: subagent inheritance exploitation (4 classes: insecure memory inheritance, absent resource access control, async memory divergence, unauthorized cross-agent termination)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Agent-level affective subsystem (VAD state dynamics)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: abrupt persona/tone instability from lack of affective state inertia",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "AgentArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "ASB: Observation Prompt Injection (OPI)",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: tool-knowledge injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentFold (folding - granular condensation / deep consolidation context management)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: temporally-distant information inaccessibility in long-horizon agentic reasoning",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "AgentFold (folding - granular condensation / deep consolidation context management)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "AgentProg (program-guided context management with Execution Tree and global belief state)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "AgentRedGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentSandbox",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "UNNAMED: data flow-based injection attack for observed-data exfiltration ('Important message' template)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentSentry",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentSentry",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: tool-knowledge injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentSentry",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentShield",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentSys",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ASB: Observation Prompt Injection (OPI)",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentSys",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentSys",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentVisor",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: direct injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentVisor",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentVisor",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentWatcher",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AgentWatcher",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AlignSentinel (three-class instruction-hierarchy-aware attention-based classifier)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: direct injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Astute RAG",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Astute RAG",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context (graded by semantic relatedness)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Attention Tracker",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Attention Tracker",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AttnComp (Attention-guided Context Compression)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context (graded by semantic relatedness)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "AttnTrace",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AttnTrace",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AttnTrace",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Relinking",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AttriGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AttriGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: tool-knowledge injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AttriGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Aura",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "AuthGraph",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Autopilot (gated finite-state-machine execution firewall)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: unverified success fabrication in unattended long-horizon agents (agent honesty gap)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "BiRD (Bidirectional Ranking Defense)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "BiRD (Bidirectional Ranking Defense)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "BlindGuard",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Boundary awareness + explicit reminder",
    "defense_year": 2023,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CDD (Context-Driven Decomposition)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "COIECD (contextual information-entropy constraint decoding)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "knowledge conflict (contextual vs parametric)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "COMPASS (Context-Organized Multi-Agent Planning and Strategy System)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "Constraint Drift (under long tool traces)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "CaMeL",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Agent Data Injection (ADI)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CaMeL",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "ClawTrojan multi-step trojan/backdoor attack paradigm",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CaMeL",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CaMeL",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "RTA-PostForge (response-path tampering attack)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CaMeL",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Relinking",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CachePrune",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CaptureGuard",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ChannelGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ChannelGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ClawGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ChatInject",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ClawGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ClawGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "SkillJect",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ClinQueryAgent (Retrieval Agent sub-agent delegation)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "CoThinker",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "extraneous cognitive load (context engineering overload)",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "CodeDelegator (role separation via Delegator/Coder agents + EPSS)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context pollution (role conflation in single-agent code-as-action agents)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "CodeSentinel",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Cognitive Control Architecture (CCA)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Cognitive Control Architecture (CCA)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Cognitive Firewall",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ColorBrowserAgent (knowledge-aligned progressive summarization + human-in-the-loop knowledge adaptation)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context drift",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "CommandSans",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CommandSans",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "CommandSans",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Constraint Pinning",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "Governance Decay",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Context-Folding (FoldGRPO)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "context proprioceptive blindness",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Contiguity-gate defense (for guardrail sliding-window aggregation)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Prompt Overflow Attack",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ContractGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Corrective Retrieval Augmented Generation (CRAG)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": true,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "security"
   },
   {
    "defense": "Corrective Retrieval Augmented Generation (CRAG)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context (graded by semantic relatedness)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Cross-Agent Multimodal Provenance-Aware Defense Framework",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DASGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ClawTrojan multi-step trojan/backdoor attack paradigm",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DCP (Device Context Protocol)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DCP (Device Context Protocol)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DCP (Device Context Protocol)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: tool-knowledge injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DE-FIVE",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AutoDojo (adaptive black-box IPI attack generation)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DRIP",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DRIP",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataFilter",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataFilter",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataFilter",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: tool-knowledge injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataFilter",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AutoDojo (adaptive black-box IPI attack generation)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataFilter",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataFilter",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PISmith",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataFilter",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataSentinel",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "DataFlip",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataSentinel",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataSentinel",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "ObliInjection",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataSentinel",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PISmith",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DataSentinel",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "ToolHijacker",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Defe-Prompt",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "F2A (Feign Agent Attack)",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Differential Transformer (DIFF Transformer)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Discern-and-Answer",
    "defense_year": 2023,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Dual-Process Memory Architecture (episodic-semantic memory for scientific agents)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: \"cognitive event horizon\" (context-saturation threshold beyond which accuracy collapses)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "DualView",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Cross-Session Stored Prompt Injection (XSPI)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "DualView",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Dynamic Context Selection (classifier-based adaptive k-selection + reranking)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context (graded by semantic relatedness)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Dynamic Context Selection (classifier-based adaptive k-selection + reranking)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Dynamic Contrastive Decoding (DCD) for cross-modality knowledge conflict",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "cross-modality parametric knowledge conflict",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "END (Early Noise Dropping)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Enterprise Secure AI Execution Engine (Zero-Trust AI Security Gateway)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "FATH (Formatting AuThentication with Hash-based tags)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "FGHM (Failure-Gated Hierarchical Memory) with Failure Critic and LTM Pollution Rate (LPR) metric",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "memory pollution (agent long-term memory)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "FilterRAG / ML-FilterRAG",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "FinLongDocAgent",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Focus (slime-mold-inspired active context compression)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "FocusAgent / DefenseFocusAgent",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": true,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "security"
   },
   {
    "defense": "Free()LM (Free-Module LoRA adapter)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: \"malloc-only\" context accumulation causing reasoning degeneration in extended CoT",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "G-Safeguard",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "GCAD (Gated Cropped Attention-Delta steering)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "KV-cache contamination",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "GRACE (Graph-Regularized Agentic Context Evolution)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "Governance Decay",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "GUI-PRA (Process Reward Agent)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "GoalAnchorCheck (D1) / CrossAgentConsensus (D2)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "PlanFlip",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "HIPIF (Hierarchical Planning and Information Folding)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "HiAgent",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": -2,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "HiMAP-Travel (day-level context isolation + transactional monitor + bargaining protocol)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "Constraint Drift (under long tool traces)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "ICON (Inference-Time Correction)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ICON (Inference-Time Correction)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ID-RAG (Identity Retrieval-Augmented Generation)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "identity drift (persona coherence decay in generative agents)",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "IH-Challenge (RL training dataset with online adversarial example generation)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "IHDec (Instruction Hierarchy-steered Decoding)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "IPIGuard",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "IPIGuard",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "IPIGuard",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "InstructDetector",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "InstructDetector",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Instruction Hierarchy (privileged-instruction training)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Tensor Trust: prompt extraction / prompt hijacking",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Instruction Hierarchy (privileged-instruction training)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Instruction Hierarchy (privileged-instruction training)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "backdoor-powered prompt injection attack",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "IntentGuard",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "JUICE (Just Run Twice)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict)",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "KBRA (Keyed Binding Reassembly Audit)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Relinking",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "KV-Fusion",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "LDAR (Learning Distraction-Aware Retrieval)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context (graded by semantic relatedness)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "LGA (Layered Governance Architecture)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "LLM+DPP (Principled Content Selection pipeline)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Agent Data Injection (ADI)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Agent-as-a-Proxy attack",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "LongAgent",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "LongCrafter",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "M2 (Dynamic Trajectory Summarization + Insight Retrieval Augmentation)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "MAGE (Memory As Guardrail Enforcement)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MELON (Masked re-Execution and TooL comparisON)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AdapTools",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MELON (Masked re-Execution and TooL comparisON)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "ClawTrojan multi-step trojan/backdoor attack paradigm",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MELON (Masked re-Execution and TooL comparisON)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MELON (Masked re-Execution and TooL comparisON)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PI-Hunter",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MELON (Masked re-Execution and TooL comparisON)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Reasoning-Extension Denial-of-Service (DoS)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MEM1",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "observation over-ingestion",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "MIPIAD",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MIPIAD",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MMPO (Metacognitive Memory Policy Optimization) with Belief Entropy",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "memory misevolution",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "MOSAIC (plan-check-act/refuse post-training framework)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ASB: Direct Prompt Injection (DPI)",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MemAct (Memory-as-Action) with Dynamic Context Policy Optimization",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "observation over-ingestion",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "MemLineage",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentPoison",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "MemLineage",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "MemoryGraft",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Mixture of Encodings",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Multi-Layer Defense Framework (preprocessing + statistical + neural detection + behavioral monitoring)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "steganographic prompt injection (multi-domain spatial/frequency/neural embedding)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "NeuroTaint",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Cross-Session Stored Prompt Injection (XSPI)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "NeuroTaint",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "OpenClaw PRISM",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "P-RoPE / MiniWin (Periodic RoPE)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "position exhaustion",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "PACT (Provenance-Aware Capability Contracts)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PACT (Provenance-Aware Capability Contracts)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "InjecAgent: Data Stealing injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PACT (Provenance-Aware Capability Contracts)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "InjecAgent: Direct Harm injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PH3 (Pruning Head via PatH PatcHing)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "PH3 (Pruning Head via PatH PatcHing)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict)",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "PIGuard (Mitigating Over-defense for Free)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PISanitizer",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PISanitizer",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PIShield",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Plan-Then-Execute (PTE) architecture for web agents",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Agent Data Injection (ADI)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PlanGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PlanGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "InjecAgent: Data Stealing injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PlanGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "InjecAgent: Direct Harm injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Planning with Schemas (PwS)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "cognitive bandwidth bottleneck (action-space scaling)",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Polymorphic Prompt Assembling (PPA)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Polymorphic Prompt Assembling (PPA)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Separator Injection Attack",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Progent",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Agent Data Injection (ADI)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Progent",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AutoDojo (adaptive black-box IPI attack generation)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Progent",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Cross-Tool Description Poisoning",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Progent",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: tool-knowledge injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentVigil",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PISmith",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptArmor",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ASPI (Ambiguous-State Prompt Injection)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptLocate (injected-prompt localization)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "prefix/exact"
+   "match": "prefix/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptSleuth",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Cross-Session Stored Prompt Injection (XSPI)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "PromptSleuth",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RADIANT (DPO-ECD, Entity-Context Divergence alignment)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "RETA (Reasoning-Enabled Task Alignment)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AutoInject",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RETA (Reasoning-Enabled Task Alignment)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RETA (Reasoning-Enabled Task Alignment)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "PISmith",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RETA (Reasoning-Enabled Task Alignment)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "RL-Hammer",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "Contextual Belief Management (CBM) failure",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "RS-Claw (hierarchical skill trees for remote-sensing agents)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "RTBAS (Robust Tool-Based Agent System)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ReCAP (Recursive Context-Aware Reasoning and Planning)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "context drift",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "ReasAlign",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RedVisor",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RedVisor",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ReliabilityRAG",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Rennervate",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Rennervate",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Neural Exec",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Rennervate",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "POUGH",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Retrieve-then-Solve",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: context-length-induced degradation independent of retrieval failure",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Retrieve-then-Solve",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Rhea (Role-aware Heuristic Episodic Attention)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "cumulative contextual decay (attention pollution, dilution, and drift)",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "RobustRAG",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Robustness via Referencing (instruction-referencing defense)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Robustness via Referencing (instruction-referencing defense)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RouteGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "RouteGuard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SAM (State-Adaptive Memory)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "SE+CFE (Standard Evaluation + Counterfactual Evaluation)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Blind attacks",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SIC (Soft Instruction Control)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SIC (Soft Instruction Control)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SPRA (Scaffold-Preserving Representation Alignment)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "scaffolding collapse",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SSRP (Self-Synthesizing Reasoning Protocols)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "ASB: Memory Poisoning",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": true,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "security"
   },
   {
    "defense": "SSRP (Self-Synthesizing Reasoning Protocols)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "Attention Latch",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "SSRP (Self-Synthesizing Reasoning Protocols)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "SUPERVISOR",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AGENTBAIT",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SafeAgent",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ASB: Direct Prompt Injection (DPI)",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SafeAgent",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ASB: Memory Poisoning",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SafeAgent",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Safety-guided Chain-of-Thought (SCoT)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Salience Normalization (SN-1)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Salience Induction",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Scale Positional Hidden States (single-dimension scaling)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Scale Positional Hidden States (single-dimension scaling)",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "SecAlign (preference optimization)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "ASTRA (and ASTRA++)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecAlign (preference optimization)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "COMA",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecAlign (preference optimization)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Checkpoint-GCG",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecAlign (preference optimization)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "FlashRT",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -2,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecAlign (preference optimization)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Neural Exec",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecAlign (preference optimization)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "TopicAttack",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecAlign (preference optimization)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecAlign (preference optimization)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "backdoor-powered prompt injection attack",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecAlign++ / Meta-SecAlign",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecInfer",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecInfer",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecInfer",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "InjecAgent: Data Stealing injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecInfer",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "InjecAgent: Direct Harm injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecInfer",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Neural Exec",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SecMCP",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Self-RAG",
    "defense_year": 2023,
-   "defense_track": "ML/AI",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": true,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "security"
   },
   {
    "defense": "Self-RAG",
    "defense_year": 2023,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context (graded by semantic relatedness)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "SkillScan",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Guidance Injection",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SkillScan",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SkillVetBench (LLM-as-Judge)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "UNNAMED: skill-file prompt injection (trivial/non-optimized variant)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "SnapGuard (visual stability indicator + action-oriented textual signal recovery)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "WebInject",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Spotlighting (delimiting / datamarking / encoding)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "DACSI (Document-Authored Control-Signal Impersonation)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -2,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Spotlighting (delimiting / datamarking / encoding)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -2,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Spotlighting (delimiting / datamarking / encoding)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": -1,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Spotlighting (delimiting / datamarking / encoding)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "UNNAMED: chat-template inference-time backdoor",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -2,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "StruQ (structured queries)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "BIPIA benchmark attack set",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "StruQ (structured queries)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "StruQ (structured queries)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Structurally Aligned Subtask-Level Memory",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "TACT (Think-Act Calibration via activation Steering)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "agent drift (overthinking / overacting)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "TRACE (Trajectory Risk-Aware Compression)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "UNNAMED: context-length-induced degradation independent of retrieval failure",
    "attack_year": 2025,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": true,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "safety"
   },
   {
    "defense": "Task Shield",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Task Shield",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Task Shield",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "TaskTracker (activation-delta task-drift detection)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "UNNAMED: multi-probe evasive GCG suffix attack",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": -2,
    "defense_predates_attack": true,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Tool Result Parsing (ParseData/CheckTool)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Tool-Guard",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Cross-Tool Description Poisoning",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ToolSafe (TS-Guard + TS-Flow)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ASB: Direct Prompt Injection (DPI)",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "ToolSafe (TS-Guard + TS-Flow)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Reasoning-Extension Denial-of-Service (DoS)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "TracLLM",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "TracLLM",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Tree of Agents (TOA)",
    "defense_year": 2025,
-   "defense_track": "ML/AI",
    "attack": "lost in the middle",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "TriShieldRAG",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Twin Agent (Explore Agent / Safe Agent residual-hint privilege separation)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "Type-directed privilege separation",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UI-Copilot (memory decoupling + Tool-Integrated Policy Optimization / TIPO)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: DPO-based faithfulness-improvement training for GUI agents against environmental distraction",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "distraction by irrelevant context",
    "attack_year": 2023,
-   "attack_track": "ML/AI",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "UNNAMED: Embedding-based traditional-ML classifiers for PI detection",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Explanation-based secondary detection signal for log-injection evasion",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Four-layer guardrail system for offensive-security AI agents",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "UNNAMED: PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Hybrid multi-layered real-time PI detection framework",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: direct injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: IPI detection + post-detection removal pipeline",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Combined Attack (Open-Prompt-Injection)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "LogInject / Passive Prompt Injection",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Multi-agent PI defense pipeline (Chain-of-Agents / Coordinator-based)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: P2SQL mitigations (DB permission hardening + query rewriting)",
    "defense_year": 2023,
-   "defense_track": "Security",
    "attack": "P2SQL injection (prompt-to-SQL)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Randomized/Adversarial Suffix Augmentation Training for task-drift probes",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "UNNAMED: multi-probe evasive GCG suffix attack",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Foot-in-the-Door (FITD) attack",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "InjecAgent: Data Stealing injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "InjecAgent: Direct Harm injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Representation Engineering-based Probing for IPI detection",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: ignore-previous injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Representation Engineering-based Probing for IPI detection",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Rot-aware rejection-sampling filter for long-horizon search",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context rot (agentic/long-horizon search)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "UNNAMED: Scientist Persona + Provenance Audit mitigations against indirect data poisoning",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Data Poisoning (Distributed Denial of Science)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Three-tier compositional runtime-verification fabric (MonPoly/RTLola-based) for LLM-assisted ISR swarms",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: Uncertainty-based Random Forest attack detector (chimera/Xmera)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "Xmera (chimera MitM framework)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: detailed external checklist restatement (vs generic self-check) for long-context skill-following",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "UNNAMED: agent-skill requirement decay under long trajectories (skill/requirement fade)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "UNNAMED: layered MCP descriptor defense (descriptor integrity verification + pre-context semantic vetting + runtime guardrails)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "UNNAMED: descriptor-level semantic manipulation attack (MCP tool-selection bias)",
    "attack_year": 2025,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: secure prompt strategies for robotic navigation",
    "defense_year": 2024,
-   "defense_track": "Security",
    "attack": "UNNAMED: multi-modal prompt injection against robot navigation",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "UNNAMED: two preemptive-answer mitigations",
    "defense_year": 2024,
-   "defense_track": "ML/AI",
    "attack": "preemptive answer attack (CoT short-circuiting)",
    "attack_year": 2024,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "VIGIL",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "VideoSEAL (decoupled planner-inspector)",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "evidence misalignment (agentic long-video QA)",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "Write-gate sanitization (pre-summarization redaction/rewrite) for memory laundering",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "memory laundering",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "aiAuthZ (identity-bound off-host authorization gateway)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "AgentDojo: important-instructions injection",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "chain-of-defensive-thought (CoDT)",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "PoisonedRAG",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "lambda-RLM",
    "defense_year": 2026,
-   "defense_track": "ML/AI",
    "attack": "context rot",
    "attack_year": 2026,
-   "attack_track": "ML/AI",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "safety",
+   "attack_regime": "safety"
   },
   {
    "defense": "prompt-shield (Seven Cross-Domain Detection Techniques)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "Indirect Prompt Injection (IPI)",
    "attack_year": 2023,
-   "attack_track": "Security",
    "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "sign-c (server-side signing of execution-bearing response fields)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ASB: Direct Prompt Injection (DPI)",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "sign-c (server-side signing of execution-bearing response fields)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "ASB: Observation Prompt Injection (OPI)",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "sign-c (server-side signing of execution-bearing response fields)",
    "defense_year": 2026,
-   "defense_track": "Security",
    "attack": "RTA-PostForge (response-path tampering attack)",
    "attack_year": 2026,
-   "attack_track": "Security",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   },
   {
    "defense": "unified Prompt Assembling + State Management + Safety Validation framework",
    "defense_year": 2025,
-   "defense_track": "Security",
    "attack": "UNNAMED: multi-modal prompt injection against robot navigation",
    "attack_year": 2024,
-   "attack_track": "Security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
-   "match": "exact/exact"
+   "match": "exact/exact",
+   "defense_regime": "security",
+   "attack_regime": "security"
   }
  ],
  "undated": []

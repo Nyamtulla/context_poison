@@ -54,7 +54,7 @@ def regime_label(track):
     that reads one, so the translation lives at the point of printing. If the
     registries are ever re-keyed, delete this and the call sites.
     """
-    return {"Security": "security", "ML/AI": "safety",
+    return {"security": "security", "safety": "safety",
             "Both": "both"}.get((track or "").strip(), track or "")
 
 
@@ -136,14 +136,14 @@ def main():
     mech, defs = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
     order = {c: i for i, c in enumerate(CHANNEL_ORDER)}
     key = lambda e, k: (order.get(e.get("channel"), 99),
-                        e.get("track") or "", (e.get(k) or "").lower())
+                        e.get("regime") or "", (e.get(k) or "").lower())
 
     mrows, m_unnamed = [], 0
     for e in sorted(mech, key=lambda e: key(e, "technique_name")):
         n, un = name_of(e, "technique_name")
         m_unnamed += un
         mrows.append([n, tex(e.get("channel")), tex(e.get("consequence")),
-                      tex(regime_label(e.get("track"))), src.get(e.get("paper_id"), "---")])
+                      tex(regime_label(e.get("regime"))), src.get(e.get("paper_id"), "---")])
 
     drows, d_unnamed = [], 0
     for e in sorted(defs, key=lambda e: key(e, "defense_name")):
@@ -151,7 +151,7 @@ def main():
         d_unnamed += un
         drows.append([n, tex(e.get("channel")),
                       tex(e.get("defense_intervention_point")),
-                      tex(regime_label(e.get("track"))), tex(e.get("validated_against")),
+                      tex(regime_label(e.get("regime"))), tex(e.get("validated_against")),
                       src.get(e.get("paper_id"), "---")])
 
     OUT.mkdir(parents=True, exist_ok=True)

@@ -49,10 +49,10 @@ def attack_universe():
     """237 = 223 registry attacks + 14 that exist only inside a benchmark."""
     reg = load("rq3_pollution_registry.json")
     bench = load("rq3_benchmark_mechanisms.json")["mechanisms"]
-    track = {m["name"]: m["track"] for m in reg}
+    track = {m["name"]: m["regime"] for m in reg}
     for b in bench:
         # benchmark-only entries are all adversarial suites
-        track.setdefault(b.get("name") or b.get("technique_name"), "Security")
+        track.setdefault(b.get("name") or b.get("technique_name"), "security")
     return track
 
 
@@ -221,8 +221,8 @@ def main():
 
     print("\n== the two threat models are separate problems ==")
     n_def = collections.Counter(d["validated_against"] for d in defenses)
-    for label, va, tr in [("adversarial", "adversarial", "Security"),
-                          ("incidental", "incidental", "ML/AI")]:
+    for label, va, tr in [("adversarial", "adversarial", "security"),
+                          ("incidental", "incidental", "safety")]:
         targets = [n for n, t in track.items() if t == tr]
         covered = sum(1 for n in targets if per_attack.get(n, 0))
         print(f"  {label:12s} {n_def[va]:>4} defenses vs {len(targets):>4} targets "

@@ -340,13 +340,13 @@ turns on is narrower: \emph{has either community ever tested its methods
 against the other's problems?}
 
 We dated all \NTimelinePairs{} pairs and recorded which community each side
-came from. Restricting to the \NPureTrackPairs{} pairs where both sides sit in
+came from. Restricting to the \NPureRegimePairs{} pairs where both sides sit in
 one of the two regimes gives Table~\ref{tab:transfer}.
 
 \begin{table}[t]
 \centering
 \caption{Which community's defense met which community's attack, across
-\NPureTrackPairs{} literature pairs.}
+\NPureRegimePairs{} literature pairs.}
 \label{tab:transfer}
 \small
 \begin{tabular}{@{}lrr@{}}
@@ -359,12 +359,12 @@ AI    & \NSafetyDefVsSecAttack{} & \NSafetyDefSafetyAttack{} \\
 \end{tabular}
 \end{table}
 
-\textbf{Exactly \NSecDefVsSafetyAttack{} of \NPureTrackPairs{} pairs is a
+\textbf{Exactly \NSecDefVsSafetyAttack{} of \NPureRegimePairs{} pairs is a
 security defense evaluated against a safety failure mechanism},
 against \NSecDefSecAttack{} evaluated against security attacks. In the other
 direction there are \NSafetyDefVsSecAttack{}. Together,
 \NCrossCommunityPairs{} pairs (\PctCrossCommunity{}\%) cross the boundary and
-the remaining \PctSameTrack{}\% stay inside one community.
+the remaining \PctSameRegime{}\% stay inside one community.
 
 The single crossing is worth naming, because it is the strongest evidence
 against our own framing and it is one pair.
@@ -372,7 +372,7 @@ TRACE~\cite{hong-2026-trace}, a trajectory compressor built for long-horizon age
 safety and validated adversarially, is reported against context-length-induced
 degradation, which is a safety mechanism. It comes from a paper whose
 subject matter spans both communities, which is precisely the kind of paper
-that would cross first. One instance in \NPureTrackPairs{} is not a literature
+that would cross first. One instance in \NPureRegimePairs{} is not a literature
 that tests across the boundary; it is the exception that shows what crossing
 would look like.
 

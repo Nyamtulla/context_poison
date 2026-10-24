@@ -36,26 +36,26 @@ def load_corpus():
 def compute_rates(rows, idx):
     track_a = track_b = both = 0
     a_cites_b = b_cites_a = 0
-    grade_stats = {"Security": {}, "ML/AI": {}}
+    grade_stats = {"security": {}, "safety": {}}
     for row in rows:
-        track = row[idx["track"]]
+        track = row[idx["regime"]]
         grade = row[idx["evidence_grade"]] or "?"
         ca = row[idx["cites_track_a"]]
         cb = row[idx["cites_track_b"]]
-        if track == "Security":
+        if track == "security":
             track_a += 1
-            grade_stats["Security"].setdefault(grade, [0, 0])
-            grade_stats["Security"][grade][0] += 1
+            grade_stats["security"].setdefault(grade, [0, 0])
+            grade_stats["security"][grade][0] += 1
             if cb == "Y":
                 a_cites_b += 1
-                grade_stats["Security"][grade][1] += 1
-        elif track == "ML/AI":
+                grade_stats["security"][grade][1] += 1
+        elif track == "safety":
             track_b += 1
-            grade_stats["ML/AI"].setdefault(grade, [0, 0])
-            grade_stats["ML/AI"][grade][0] += 1
+            grade_stats["safety"].setdefault(grade, [0, 0])
+            grade_stats["safety"][grade][0] += 1
             if ca == "Y":
                 b_cites_a += 1
-                grade_stats["ML/AI"][grade][1] += 1
+                grade_stats["safety"][grade][1] += 1
         elif track == "Both":
             both += 1
     return {
@@ -96,10 +96,10 @@ def render_report(stats):
     lines.append("")
     lines.append("| Grade | Track A citing B | Track B citing A |")
     lines.append("|---|---|---|")
-    grades = sorted(set(stats["grade_stats"]["Security"]) | set(stats["grade_stats"]["ML/AI"]))
+    grades = sorted(set(stats["grade_stats"]["security"]) | set(stats["grade_stats"]["safety"]))
     for g in grades:
-        a_tot, a_hit = stats["grade_stats"]["Security"].get(g, [0, 0])
-        b_tot, b_hit = stats["grade_stats"]["ML/AI"].get(g, [0, 0])
+        a_tot, a_hit = stats["grade_stats"]["security"].get(g, [0, 0])
+        b_tot, b_hit = stats["grade_stats"]["safety"].get(g, [0, 0])
         a_str = f"{a_hit}/{a_tot} = {a_hit/a_tot*100:.1f}%" if a_tot else "n/a"
         b_str = f"{b_hit}/{b_tot} = {b_hit/b_tot*100:.1f}%" if b_tot else "n/a"
         lines.append(f"| {g} | {a_str} | {b_str} |")

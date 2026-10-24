@@ -90,20 +90,20 @@ def main():
     r4 = [e for e in load("rq4_defense_registry.json")
           if e.get("paper_id") in included]
     M["NMechanisms"] = len(r3)
-    tr3 = collections.Counter(e.get("track") for e in r3)
-    M["NMechSecurity"], M["NMechSafety"] = tr3["Security"], tr3["ML/AI"]
+    tr3 = collections.Counter(e.get("regime") for e in r3)
+    M["NMechSecurity"], M["NMechSafety"] = tr3["security"], tr3["safety"]
     cq = collections.Counter(e.get("consequence") for e in r3)
     M["NGoalHijack"] = cq["goal-hijack"]
-    # the consequence x track split. The prose used to say EVERY goal-hijack
+    # the consequence x regime split. The prose used to say EVERY goal-hijack
     # mechanism was security-track; after the full-text re-coding that is one
     # paper short of true, so the claim is now carried by counts.
     _ct = collections.defaultdict(collections.Counter)
     for e in r3:
-        _ct[(e.get("consequence") or "").strip()][(e.get("track") or "").strip()] += 1
-    M["NGoalHijackSec"] = _ct["goal-hijack"]["Security"]
-    M["NGoalHijackSafety"] = _ct["goal-hijack"]["ML/AI"]
-    M["NReasonSafety"] = _ct["reasoning-corruption"]["ML/AI"]
-    M["NReasonSec"] = _ct["reasoning-corruption"]["Security"]
+        _ct[(e.get("consequence") or "").strip()][(e.get("regime") or "").strip()] += 1
+    M["NGoalHijackSec"] = _ct["goal-hijack"]["security"]
+    M["NGoalHijackSafety"] = _ct["goal-hijack"]["safety"]
+    M["NReasonSafety"] = _ct["reasoning-corruption"]["safety"]
+    M["NReasonSec"] = _ct["reasoning-corruption"]["security"]
     M["PctGoalHijack"] = f'{100*cq["goal-hijack"]/len(r3):.1f}'
 
     M["NDefenses"] = len(r4)
@@ -121,15 +121,14 @@ def main():
         1 for e in r3 if (e.get("consequence") or "").strip() == "resource-abuse")
     M["NDefResourceAbuse"] = sum(
         1 for e in r4 if (e.get("consequence") or "").strip() == "resource-abuse")
-    # Track and regime are coded independently; they are also almost the same
-    # partition. Count the defenses validated in the OTHER track's regime.
-    _other = {"Security": "incidental", "ML/AI": "adversarial"}
+    # Count the defenses validated in the OTHER regime.
+    _other = {"security": "incidental", "safety": "adversarial"}
     M["NDefCrossRegime"] = sum(
         1 for e in r4
-        if _other.get((e.get("track") or "").strip())
+        if _other.get((e.get("regime") or "").strip())
         == (e.get("validated_against") or "").strip())
-    tr4 = collections.Counter(e.get("track") for e in r4)
-    M["NDefSafety"], M["NDefSecurity"], M["NDefBoth"] = tr4["ML/AI"], tr4["Security"], tr4["Both"]
+    tr4 = collections.Counter(e.get("regime") for e in r4)
+    M["NDefSafety"], M["NDefSecurity"], M["NDefBoth"] = tr4["safety"], tr4["security"], tr4["Both"]
     ip = collections.Counter(e.get("defense_intervention_point") for e in r4)
     for k, v in [("Reasoning", "reasoning"), ("Ingestion", "ingestion"),
                  ("Execution", "execution"), ("NoPoint", "none")]:
@@ -253,7 +252,7 @@ def main():
     CQS = ["goal-hijack", "reasoning-corruption", "silent-corruption",
            "data-exfiltration", "persistence-backdoor", "resource-abuse",
            "availability-loss"]
-    ci, qi, ti = hdr.index("channel"), hdr.index("consequence"), hdr.index("track")
+    ci, qi, ti = hdr.index("channel"), hdr.index("consequence"), hdr.index("regime")
     # Computed over REGISTRY ENTRIES, not paper rows, since 2026-10-22.
     # A paper that names no attack and no defense was still occupying a cell:
     # AgentDojo sat in tool-output x goal-hijack x Security while naming
@@ -266,10 +265,10 @@ def main():
             continue
         c, q, tr = ((e.get("channel") or "").strip(),
                     (e.get("consequence") or "").strip(),
-                    (e.get("track") or "").strip())
-        if c in CHS and q in CQS and tr in ("Security", "ML/AI"):
+                    (e.get("regime") or "").strip())
+        if c in CHS and q in CQS and tr in ("security", "safety"):
             occupied.add((c, q, tr))
-    # The cube's third axis is intent, and the corpus codes it as track. The
+    # The cube's third axis is the regime. The
     # `Both` value was retired on 2026-10-22 (track_reassignment_prediction.md)
     # because it was filtered out of this count and out of fig_cube, which left
     # a third of the cube unoccupiable BY CONSTRUCTION and inflated the
@@ -334,13 +333,13 @@ def main():
         _mech.get("entries") or _mech.get("mechanisms"))
     _first = {}
     for e in _mech:
-        y, ch, tr = _yr.get(e.get("paper_id")), e.get("channel"), e.get("track")
-        if not (y and ch) or tr not in ("Security", "ML/AI"):
+        y, ch, tr = _yr.get(e.get("paper_id")), e.get("channel"), e.get("regime")
+        if not (y and ch) or tr not in ("security", "safety"):
             continue
         y = int(str(y).split(".")[0])
         _first.setdefault(ch, {}).setdefault(tr, []).append(y)
     _shared = {c: v for c, v in _first.items() if len(v) == 2}
-    _gaps = {c: min(v["ML/AI"]) - min(v["Security"]) for c, v in _shared.items()}
+    _gaps = {c: min(v["safety"]) - min(v["security"]) for c, v in _shared.items()}
     M["NSharedChannels"] = len(_shared)
     M["NChannelsSecFirst"] = sum(1 for g in _gaps.values() if g > 0)
     M["NChannelsSameYear"] = sum(1 for g in _gaps.values() if g == 0)
@@ -354,20 +353,20 @@ def main():
     _pre = [r for r in tl if r["defense_predates_attack"]]
     M["NDefensePredates"] = len(_pre)
     M["PctDefensePredates"] = f"{100*len(_pre)/len(tl):.1f}"
-    _pure = [r for r in tl if r["defense_track"] in ("Security", "ML/AI")
-             and r["attack_track"] in ("Security", "ML/AI")]
-    _x = [r for r in _pure if r["defense_track"] != r["attack_track"]]
-    M["NPureTrackPairs"] = len(_pure)
+    _pure = [r for r in tl if r["defense_regime"] in ("security", "safety")
+             and r["attack_regime"] in ("security", "safety")]
+    _x = [r for r in _pure if r["defense_regime"] != r["attack_regime"]]
+    M["NPureRegimePairs"] = len(_pure)
     M["NCrossCommunityPairs"] = len(_x)
     M["PctCrossCommunity"] = f"{100*len(_x)/len(_pure):.1f}"
     M["NCrossAllPairs"] = sum(1 for r in tl
-                              if r["defense_track"] != r["attack_track"])
+                              if r["defense_regime"] != r["attack_regime"])
     M["NSecDefVsSafetyAttack"] = sum(1 for r in _pure
-                                 if r["defense_track"] == "Security"
-                                 and r["attack_track"] == "ML/AI")
+                                 if r["defense_regime"] == "security"
+                                 and r["attack_regime"] == "safety")
     M["NSafetyDefVsSecAttack"] = sum(1 for r in _pure
-                                 if r["defense_track"] == "ML/AI"
-                                 and r["attack_track"] == "Security")
+                                 if r["defense_regime"] == "safety"
+                                 and r["attack_regime"] == "security")
 
     # Robustness: two thirds of the corpus is preprint, so a reviewer will ask
     # whether the finding is an artifact of unrefereed work. Restrict both
@@ -391,8 +390,8 @@ def main():
     M["NVenueResolved"] = len(_res)
     M["PctVenueResolved"] = f"{100 * len(_res) / len(tl):.0f}"
     M["NVenueSecDefSafetyAtk"] = sum(
-        1 for x in _sub if x["defense_track"] == "Security"
-        and x["attack_track"] == "ML/AI")
+        1 for x in _sub if x["defense_regime"] == "security"
+        and x["attack_regime"] == "safety")
 
     # Regime against venue. They are coded independently and they are not the
     # same cut: adversarial work publishes at AI venues about as often as at
@@ -414,26 +413,26 @@ def main():
     # the two diagonal cells of the transfer matrix, so Table 1 and the
     # sentence under it cannot drift apart
     M["NSecDefSecAttack"] = sum(1 for r in _pure
-                                if r["defense_track"] == "Security"
-                                and r["attack_track"] == "Security")
+                                if r["defense_regime"] == "security"
+                                and r["attack_regime"] == "security")
     M["NSafetyDefSafetyAttack"] = sum(1 for r in _pure
-                              if r["defense_track"] == "ML/AI"
-                              and r["attack_track"] == "ML/AI")
-    _same = sum(1 for r in tl if r["defense_track"] == r["attack_track"])
-    M["NSameTrackPairs"] = _same
-    M["PctSameTrack"] = f"{100*_same/len(tl):.1f}"
+                              if r["defense_regime"] == "safety"
+                              and r["attack_regime"] == "safety")
+    _same = sum(1 for r in tl if r["defense_regime"] == r["attack_regime"])
+    M["NSameRegimePairs"] = _same
+    M["PctSameRegime"] = f"{100*_same/len(tl):.1f}"
     M["NPredatesAndCross"] = sum(1 for r in _pure
                                  if r["defense_predates_attack"]
-                                 and r["defense_track"] != r["attack_track"])
+                                 and r["defense_regime"] != r["attack_regime"])
     # the same matrix for what we executed
-    _DT = {"ParamMute": "ML/AI", "CK-PLUG": "ML/AI", "COIECD": "ML/AI",
-           "ACD": "ML/AI", "DyPRAG": "ML/AI", "FaithfulRAG": "ML/AI",
-           "SpARE": "ML/AI", "SCR": "ML/AI",
-           "RobustRAG-DecodingAgg": "Security", "RobustRAG-KeywordAgg": "Security"}
-    _AT = {"corpus poisoning": "Security", "PoisonedRAG": "Security",
-           "BadRAG sentiment steering": "Security",
-           "BadRAG denial-of-service": "Security",
-           "false evidence": "ML/AI", "distractor evidence": "ML/AI"}
+    _DT = {"ParamMute": "safety", "CK-PLUG": "safety", "COIECD": "safety",
+           "ACD": "safety", "DyPRAG": "safety", "FaithfulRAG": "safety",
+           "SpARE": "safety", "SCR": "safety",
+           "RobustRAG-DecodingAgg": "security", "RobustRAG-KeywordAgg": "security"}
+    _AT = {"corpus poisoning": "security", "PoisonedRAG": "security",
+           "BadRAG sentiment steering": "security",
+           "BadRAG denial-of-service": "security",
+           "false evidence": "safety", "distractor evidence": "safety"}
     _op = {(r["defense"], r["attack"]) for r in runs if r["role"] == "transfer"}
     _oc = sum(1 for d, a in _op if _DT.get(d) != _AT.get(a))
     M["NOursPairs"] = len(_op)
@@ -448,7 +447,7 @@ def main():
         if e["citing"] in included and e["cited"] in included:
             G.add_edge(e["citing"], e["cited"])
     G.remove_nodes_from([n for n, d in G.degree() if d == 0])
-    trk = {r[pi]: (r[hdr.index("track")] or "").strip() for r in rows}
+    trk = {r[pi]: (r[hdr.index("regime")] or "").strip() for r in rows}
     ncross = sum(1 for u, v in G.edges() if trk.get(u) != trk.get(v))
     M["NNetworkNodes"] = G.number_of_nodes()
     M["NNetworkEdges"] = f"{G.number_of_edges():,}"
@@ -456,13 +455,13 @@ def main():
     M["PctNetworkCross"] = f"{100*ncross/G.number_of_edges():.1f}"
 
     # ---- RQ2's paper-level cross-citation rates. Same counting rule as
-    # scripts/rq2_cross_citation.py, over the same columns: a Security paper
-    # counts if it cites any ML/AI paper at all. The abstract carried 9.3
+    # scripts/rq2_cross_citation.py, over the same columns: a security-regime paper
+    # counts if it cites any safety-regime paper at all. The abstract carried 9.3
     # against the report's 9.4 before these became macros.
-    _ci = {c: hdr.index(c) for c in ("track", "cites_track_a", "cites_track_b")}
+    _ci = {c: hdr.index(c) for c in ("regime", "cites_track_a", "cites_track_b")}
     inc = [r for r in rows if r[pi] in included]
-    sec = [r for r in inc if r[_ci["track"]] == "Security"]
-    mla = [r for r in inc if r[_ci["track"]] == "ML/AI"]
+    sec = [r for r in inc if r[_ci["regime"]] == "security"]
+    mla = [r for r in inc if r[_ci["regime"]] == "safety"]
     a_b = sum(1 for r in sec if r[_ci["cites_track_b"]] == "Y")
     b_a = sum(1 for r in mla if r[_ci["cites_track_a"]] == "Y")
     M["NRegimeSecurity"], M["NRegimeSafety"] = len(sec), len(mla)

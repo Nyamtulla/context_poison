@@ -26,7 +26,7 @@ OUTPUT_PATH = REPO_ROOT / "rq1_taxonomy_analysis.md"
 
 CHANNELS = ["memory", "RAG", "tool-output", "tool-metadata", "skill",
             "multi-agent", "cross-modal", "supply-chain", "direct-input"]
-TRACKS = ["Security", "ML/AI", "Both"]
+TRACKS = ["security", "safety", "Both"]
 CONSEQUENCES = ["goal-hijack", "data-exfiltration", "persistence-backdoor",
                 "resource-abuse", "silent-corruption", "reasoning-corruption"]
 DEFENSE_POINTS = ["ingestion", "reasoning", "execution", "none"]
@@ -45,7 +45,7 @@ def load_corpus():
 def build_cube(rows, idx):
     cube = defaultdict(int)
     for row in rows:
-        ch, tr, co = row[idx["channel"]], row[idx["track"]], row[idx["consequence"]]
+        ch, tr, co = row[idx["channel"]], row[idx["regime"]], row[idx["consequence"]]
         if ch and tr and co:
             cube[(ch, tr, co)] += 1
     return cube
@@ -73,7 +73,7 @@ def render_report(rows, idx, cube, matrix):
 
     co_by_track = defaultdict(lambda: defaultdict(int))
     for row in rows:
-        tr, co = row[idx["track"]], row[idx["consequence"]]
+        tr, co = row[idx["regime"]], row[idx["consequence"]]
         if tr and co:
             co_by_track[tr][co] += 1
 
@@ -107,7 +107,7 @@ def render_report(rows, idx, cube, matrix):
     lines.append("| Consequence | Security (Track A) | ML/AI (Track B) | Both |")
     lines.append("|---|---:|---:|---:|")
     for co in CONSEQUENCES:
-        lines.append(f"| {co} | {co_by_track['Security'][co]} | {co_by_track['ML/AI'][co]} | {co_by_track['Both'][co]} |")
+        lines.append(f"| {co} | {co_by_track['security'][co]} | {co_by_track['safety'][co]} | {co_by_track['Both'][co]} |")
     lines.append("")
     lines.append("## Channel x Defense-intervention-point coverage")
     lines.append("")

@@ -40,7 +40,7 @@ TRACK_SEC, TRACK_ML = "#d6452a", "#2a78d6"
 
 # Ramps for magnitude. A panel that IS one track takes that track's ramp; a
 # panel that mixes tracks takes the neutral one, so a hue never means
-# "magnitude" and "track" in the same figure.
+# "magnitude" and "regime" in the same figure.
 SEQ_SEC = ["#fbdcd3", "#f6b9a8", "#ef947c", "#e76f52", "#d6452a", "#bf3d25",
            "#ab361f", "#95301b", "#812814", "#6b1f0d"]
 SEQ_NEUTRAL = ["#f0efec", "#dcdbd7", "#c6c5c0", "#aeada8", "#969590",
@@ -127,14 +127,14 @@ def fig_cube():
         for e in reg:
             c = (e.get("channel") or "").strip()
             q = (e.get("consequence") or "").strip()
-            if (e.get("track") or "").strip() == track \
+            if (e.get("regime") or "").strip() == track \
                     and c in CHANNELS and q in CONSEQ:
                 g[CHANNELS.index(c), CONSEQ.index(q)] += 1
         return g
 
-    G = {t: (grid(r3, t), grid(r4, t)) for t in ("Security", "ML/AI")}
+    G = {t: (grid(r3, t), grid(r4, t)) for t in ("security", "safety")}
     vmax = max(g.max() for pair in G.values() for g in pair)
-    hue = {"Security": (TRACK_SEC, SEQ_SEC[0]), "ML/AI": (TRACK_ML, SEQ[0])}
+    hue = {"security": (TRACK_SEC, SEQ_SEC[0]), "safety": (TRACK_ML, SEQ[0])}
 
     fig, axes = plt.subplots(1, 2, figsize=(FULL, 3.9), constrained_layout=True)
     for ax, (track, (A, D)) in zip(axes, G.items()):
@@ -182,8 +182,8 @@ def fig_cube():
         ax.set_xticklabels([c.replace("-", "\n") for c in CONSEQ],
                            fontsize=5.4, linespacing=1.15)
         ax.set_yticks(range(len(CHANNELS)))
-        ax.set_yticklabels(CHANNELS if track == "Security" else [], fontsize=6.5)
-        ax.set_title("security regime" if track == "Security"
+        ax.set_yticklabels(CHANNELS if track == "security" else [], fontsize=6.5)
+        ax.set_title("security regime" if track == "security"
                      else "safety regime",
                      fontsize=7.5, color=solid)
         for sp in ax.spines.values():
@@ -363,7 +363,7 @@ def fig_citation_network():
     import networkx as nx
     net = load("citation_network_union.json")
     hdr, rows = corpus()
-    pi, ti = hdr.index("paper_id"), hdr.index("track")
+    pi, ti = hdr.index("paper_id"), hdr.index("regime")
     track = {r[pi]: (r[ti] or "").strip() for r in rows}
     inc = set(track)
 
@@ -373,7 +373,7 @@ def fig_citation_network():
             G.add_edge(e["citing"], e["cited"])
     G.remove_nodes_from([n for n, d in G.degree() if d == 0])
 
-    COLORS = {"Security": TRACK_SEC, "ML/AI": TRACK_ML, "Both": CAT[3]}
+    COLORS = {"security": TRACK_SEC, "safety": TRACK_ML, "Both": CAT[3]}
     # Spread the clusters. The default k packs 900 nodes into a hairball where
     # the band of cross-track edges, which is the whole point of the figure,
     # disappears into the overlap. A larger k plus more iterations separates
@@ -460,24 +460,24 @@ def fig_transfer_matrix():
     from pair_tally import retrieval_runs
 
     tl = load("pair_timeline.json")["pairs"]
-    lit = collections.Counter((r["defense_track"], r["attack_track"])
-                              for r in tl if r["defense_track"] in ("Security", "ML/AI")
-                              and r["attack_track"] in ("Security", "ML/AI"))
+    lit = collections.Counter((r["defense_regime"], r["attack_regime"])
+                              for r in tl if r["defense_regime"] in ("security", "safety")
+                              and r["attack_regime"] in ("security", "safety"))
 
     # our own runs, keyed the same way
-    DT = {"ParamMute": "ML/AI", "CK-PLUG": "ML/AI", "COIECD": "ML/AI",
-          "ACD": "ML/AI", "DyPRAG": "ML/AI", "FaithfulRAG": "ML/AI",
-          "SpARE": "ML/AI", "SCR": "ML/AI",
-          "RobustRAG-DecodingAgg": "Security", "RobustRAG-KeywordAgg": "Security"}
-    AT = {"corpus poisoning": "Security", "PoisonedRAG": "Security",
-          "BadRAG sentiment steering": "Security",
-          "BadRAG denial-of-service": "Security",
-          "false evidence": "ML/AI", "distractor evidence": "ML/AI"}
+    DT = {"ParamMute": "safety", "CK-PLUG": "safety", "COIECD": "safety",
+          "ACD": "safety", "DyPRAG": "safety", "FaithfulRAG": "safety",
+          "SpARE": "safety", "SCR": "safety",
+          "RobustRAG-DecodingAgg": "security", "RobustRAG-KeywordAgg": "security"}
+    AT = {"corpus poisoning": "security", "PoisonedRAG": "security",
+          "BadRAG sentiment steering": "security",
+          "BadRAG denial-of-service": "security",
+          "false evidence": "safety", "distractor evidence": "safety"}
     ours_pairs = {(r["defense"], r["attack"])
                   for r in retrieval_runs() if r["role"] == "transfer"}
     ours = collections.Counter((DT.get(d), AT.get(a)) for d, a in ours_pairs)
 
-    TR = ["Security", "ML/AI"]
+    TR = ["security", "safety"]
     # Each cell mixes a defense track with an attack track, so no single track
     # hue fits: magnitude goes neutral and the axes carry the track colours.
     cmap = LinearSegmentedColormap.from_list("neutral", SEQ_NEUTRAL)
@@ -498,7 +498,7 @@ def fig_transfer_matrix():
         ax.set_yticks(range(2)); ax.set_yticklabels(TR)
         for lbls in (ax.get_xticklabels(), ax.get_yticklabels()):
             for lbl, t in zip(lbls, TR):
-                lbl.set_color(TRACK_SEC if t == "Security" else TRACK_ML)
+                lbl.set_color(TRACK_SEC if t == "security" else TRACK_ML)
         ax.set_xlabel("attack from"); ax.set_ylabel("defense from")
         cross = int(M[0, 1] + M[1, 0])
         ax.set_title(f"{title}\n{cross} of {int(tot)} cross-community "
