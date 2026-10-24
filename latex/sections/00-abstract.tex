@@ -25,3 +25,48 @@ creating correct answers. One defense resists, by discounting context that
 raises the model's uncertainty. A gradient-optimized passage that lowers
 uncertainty removes \PctAcdRemovedGradient{}\% of its protection. We report
 results for one model family and one retrieval setting.
+
+% ============================================================================
+% ALTERNATIVE ABSTRACT --- the number-heavy version, kept for later editing.
+%
+% The live abstract above carries four figures: the corpus size, the single
+% security defense ever evaluated against a safety failure mechanism, the size
+% of the campaign, and the share of ACD's protection an adaptive attacker
+% removes. This version carries eleven, one every 23 words.
+%
+% To swap: comment out the live text above and uncomment this block. Both are
+% valid LaTeX and both compile; every macro either one uses is defined in
+% numbers.tex, so neither can go stale.
+%
+% Note that the version below already contains one commented-out sentence of
+% its own, on cross-community name collisions.
+% ----------------------------------------------------------------------------
+% Large language model agents answer from their context. An attacker who
+% controls one context controls the answer. Two research communities study this
+% failure, and neither tests the other's work. Security researchers study context
+% an attacker changes on purpose; safety researchers study context that becomes
+% wrong on its own. The model cannot tell the difference.
+%
+% We read \NCorpus{} papers in full. \NAnalysed{} name an attack or a defense,
+% and from those we recover \NPureRegimePairs{} confirmed (defense, attack)
+% pairs. Only \NCrossCommunityPairs{} cross between
+% the communities, and only \NSecDefVsSafetyAttack{} security defense has ever been evaluated
+% against a safety failure mechanism, whereas \NSecDefSecAttack{} have been evaluated
+% against security attacks. The two sides do not duplicate each other.
+% %Across \NMechanisms{} named mechanisms we find \NMechNameClash{} cross-community name collisions.
+% They divide the problem instead. Security focuses on how the bad
+% text arrives and defends at ingestion. Safety deals with why the model believes it
+% and defends at reasoning, \NDefPtReasoningSafety{} defenses against
+% \NDefPtReasoningSec{}. A defense at the reasoning stage judges text the
+% attacker has already chosen.
+%
+% We then ran the experiments neither community has run. Our campaign covers
+% \NCampaignPairs{} pairs across \NCampaignImpl{} implementations. Every method runs from its authors'
+% released code and weights against an undefended model on the same items. No
+% context-reliance defense leaves the model better off than no defense at all.
+% One mechanism explains this. Each defense weighs the retrieved document
+% against the model's memory, and moving that weight relocates errors instead of
+% creating correct answers. One defense resists, by discounting context that
+% raises the model's uncertainty. A gradient-optimized passage that lowers
+% uncertainty removes \PctAcdRemovedGradient{}\% of its protection. We report
+% results for one model family and one retrieval setting.
