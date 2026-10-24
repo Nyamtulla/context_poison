@@ -9,9 +9,15 @@ pairs. Only \NCrossCommunityPairs{} of them (\PctCrossCommunity{}\%)
 cross between the communities, and one direction is all but closed:
 \textbf{\NSecDefVsSafetyAttack{} security defense in our corpus has ever been
 evaluated against a safety failure mechanism}, against
-\NSecDefSecAttack{} evaluated against security attacks. The dates show the two sides reaching the same ground in turn
-rather than together. Both communities have named a failure in \NSharedChannels{} channels.
-Security names it first in \NChannelsSecFirst{} of them, and safety in none, by up to \MaxChannelLag{} years.
+\NSecDefSecAttack{} evaluated against security attacks. They are not duplicating each other: across \NMechanisms{} named
+mechanisms we find \NMechNameClash{} cross-community name collisions inside a
+taxonomy cell. They are dividing the problem instead. Security names how bad
+text arrives and defends at ingestion; safety names why the model believes it
+and defends at reasoning, \NDefPtReasoningSafety{} defenses against
+\NDefPtReasoningSec{}. Both have named a failure in \NSharedChannels{}
+channels, security first in \NChannelsSecFirst{} of them and safety in none,
+by up to \MaxChannelLag{} years. The halves never meet, and a defense that
+reasons better about a document sits downstream of whoever wrote it.
 
 So we ran the missing experiment. We executed \NCampaignPairs{} (defense,
 attack) pairs across \NCampaignImpl{} implementations and \NCampaignEpisodes{}

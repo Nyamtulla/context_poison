@@ -50,15 +50,17 @@ experiments that fall in it.
 
 \paragraph{Research questions.}
 \begin{description}
-\item[RQ1] How separate are the two literatures, and is there a region of the
-  problem that neither has tested? We answer by coding \NCorpus{} papers from
-  both sides under one taxonomy and recovering every (defense, attack) pair
-  reported by the \NAnalysed{} of them that name a technique
+\item[RQ1] \textbf{Are the two communities reinventing the wheel?} Two
+  literatures work one problem and do not cite each other, so the first
+  question is whether each is doing the other's work twice. We answer by
+  coding \NCorpus{} papers from both sides under one taxonomy, comparing what
+  each side names inside the same cell, and dating the first paper from each
+  side in every channel both of them work (Sections~\ref{sec:literatures},
+  \ref{sec:parallel}).
+\item[RQ2] If they are not duplicating, is there a region of the problem that
+  neither has tested? We answer by recovering every (defense, attack) pair
+  reported by the \NAnalysed{} papers that name a technique
   (Section~\ref{sec:literatures}).
-\item[RQ2] Does one community arrive at a problem the other has already
-  named, and if so which one arrives second? We answer by dating the first
-  paper from each side in every channel both of them work
-  (Section~\ref{sec:parallel}).
 \item[RQ3] When a defense built for one regime is actually run against
   the other, does it transfer? We answer by executing the pairs the literature
   skipped, from the authors' released code and weights
@@ -72,8 +74,8 @@ experiments that fall in it.
   one method that resisted (Section~\ref{sec:adaptive}).
 \end{description}
 
-The second and third questions are the ones a survey normally cannot answer.
-They are what turns a coverage gap from an observation into evidence.
+The last three questions are the ones a survey normally cannot answer. They
+are what turns a coverage gap from an observation into evidence.
 
 Others have surveyed both literatures before, each from inside itself. We
 borrow from those surveys rather than compete with them. What is new here is
@@ -107,7 +109,26 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
 
 \paragraph{Contributions.}
 \begin{itemize}
-\item \textbf{The cell nobody fills (RQ1).} Across \NPureRegimePairs{}
+\item \textbf{Not the wheel, but half of it (RQ1).} The two communities are
+  not duplicating each other's work: across \NMechanisms{} named mechanisms
+  there are \NMechNameClash{} cross-community name collisions inside a
+  taxonomy cell, and \NDefNameClash{} among \NDefenses{} defenses. They are
+  dividing the problem. In the \NSharedCells{} cells both occupy, security
+  names how the bad text arrives and safety names why the model believes it,
+  and their defenses split the same way: \NDefPtIngestionSec{} security
+  defenses act at ingestion against \NDefPtIngestionSafety{} safety ones,
+  while \NDefPtReasoningSafety{} safety defenses act at reasoning against
+  \NDefPtReasoningSec{} (Section~\ref{sec:parallel}). The dates say the same
+  thing: \NSharedChannels{} channels have mechanisms from both, security
+  arrives first in \NChannelsSecFirst{} and \textbf{safety in none}, by a
+  median of \MedianChannelLag{} year and up to \MaxChannelLag{}, in a body of
+  work the later side cites \PctSafetyCitesSec{}\% of the time.
+  \textbf{Duplicated effort would still leave two working defenses; halves
+  that never meet leave one broken chain}, and that chain is what
+  Section~\ref{sec:results} breaks.
+
+
+\item \textbf{The cell nobody fills (RQ2).} Across \NPureRegimePairs{}
   confirmed (defense, attack) pairs, recovered from the \NAnalysed{} papers
   that name a technique among \NCorpus{} read in full, only \NCrossCommunityPairs{} (\PctCrossCommunity{}\%) cross between
   the two communities, and \textbf{a security defense has been evaluated
@@ -123,17 +144,6 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   (Section~\ref{sec:literatures}).
   % APPENDIX-OFF: restore with sections/A-census
   % The full census is Appendix~\ref{sec:census}.
-
-\item \textbf{The same ground, found twice (RQ2).} \NSharedChannels{} channels have named
-  mechanisms from both communities. The security literature arrives first in
-  \NChannelsSecFirst{} of them, both arrive together in
-  \NChannelsSameYear{}, and \textbf{the safety literature arrives
-  first in none} (Section~\ref{sec:parallel}). The median lag where security
-  leads is \MedianChannelLag{} year and the longest is \MaxChannelLag{}. A
-  safety-regime paper naming a failure is therefore often renaming one the
-  security literature named years earlier, in a body of work it cites
-  \PctSafetyCitesSec{}\% of the time.
-
 \item \textbf{A platform, and \NCampaignPairs{} pairs run on it (RQ3)} across
   \NCampaignImpl{} implementations and \NCampaignEpisodes{} scored episodes,
   each from its authors' released artifacts under an attack-works-first
