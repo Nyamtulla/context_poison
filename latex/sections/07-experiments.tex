@@ -23,7 +23,7 @@ and every attack we run is published. The contribution is the pairing.
 
 \textbf{The campaign is deliberately cross-community.}
 \NOursCrossPairs{} of our \NOursPairs{} retrieval-cell pairs put a safety method against a security attack, which is \PctOursCross{}\% against
-the literature's \PctCrossCommunity{}\%. Eight of our nine retrieval defense
+the literature's \PctCrossCommunity{}\%. \NRagImplSafety{} of our \NRagImpl{} retrieval defense
 implementations are knowledge-conflict methods from the safety literature,
 run against corpus poisoning, PoisonedRAG~\cite{zou-2024-poisonedrag} and
 BadRAG~\cite{xue-2024-badrag}. That is the empty column
@@ -97,10 +97,10 @@ Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
 \texttt{transformers} 5.5.0. Two defenses cannot use that last version. ACD's
 released decoder imports symbols that \texttt{transformers} removed after
 4.44, which its own README pins, so it runs in a separate dependency set.
-CK-PLUG ships its own 4.49 fork and its README says to install it. We record
-this because it is a result as much as a configuration detail: the defenses in
-a single cell of this taxonomy cannot share one Python environment, which is
-the reproducibility problem of Section~\ref{sec:discussion} one layer further
+CK-PLUG ships its own 4.49 fork and its README says to install it. We record this
+because it is a result as much as a configuration detail. The defenses in a
+single cell of this taxonomy cannot share one Python environment. That is the
+reproducibility problem of Section~\ref{sec:discussion}, one layer further
 down. The released artifact builds each set and verifies it.
 
 The campaign covers two cells.
@@ -190,7 +190,7 @@ applied once and then frozen, so every defense and every payload meets the
 same items. Its purpose is to keep contrastive-decoding defenses, which hold
 two forward passes of the model at once, inside the memory of one card at a
 batch size that the whole cell can share. The one narrower slice is the
-distractor payload, and Section~\ref{sec:payloadclasses} gives both of its
+distractor payload, and Section~\ref{sec:provenance} gives both of its
 conditions.
 
 Within the retrieval cell we hold the items, the dosing and the scorer fixed
@@ -224,6 +224,17 @@ same field rather than new attack techniques. The distractor changes one word.
 The adaptive version changes only the surface form around an unchanged
 claim.
 
-All payloads are dosed identically, replacing 10\%, 50\% and 100\% of the
-context, with a clean arm at 0\%. Every result file carries a fingerprint of the payload it was produced
-with, so a run cannot be read under the wrong attack label.
+\paragraph{Two dosing protocols, and why both exist.}
+CoConflictQA gives one context passage per item, so there is no ranked list to
+dose. On it we cut the context into fixed-length chunks and replace a
+fraction: 10\%, 50\% and 100\%, with a clean arm at 0\%. Open Natural
+Questions ships a retrieval pool, so there we dose the way the attack papers
+dose, replacing $j$ of the top ten retrieved passages for $j$ in $\{0, 1, 2,
+3, 5, 10\}$. The second is the attacks' own construction and the first is
+ours. That distinction matters, because a protocol we invented is a place
+where our own choices can decide a result, so each number below reports which
+protocol produced it. Section~\ref{sec:regime} runs entirely under the
+attacks' own dosing.
+
+Every result file carries a fingerprint of the payload it was produced with,
+so a run cannot be read under the wrong attack label.

@@ -570,6 +570,11 @@ def main():
            "BadRAG sentiment steering": "security",
            "BadRAG denial-of-service": "security",
            "false evidence": "safety", "distractor evidence": "safety"}
+    # how many of the retrieval-cell implementations come from each regime.
+    # Section 7 said "eight of our nine" while NRagImpl read ten.
+    M["NRagImplSafety"] = sum(1 for v in _DT.values() if v == "safety")
+    M["NRagImplSecurity"] = sum(1 for v in _DT.values() if v == "security")
+
     _op = {(r["defense"], r["attack"]) for r in runs if r["role"] == "transfer"}
     _oc = sum(1 for d, a in _op if _DT.get(d) != _AT.get(a))
     M["NOursPairs"] = len(_op)
