@@ -119,20 +119,13 @@ precision.
 \includegraphics[width=\textwidth]{figures/fig0_pipeline}
 \caption{The taxonomy against the system it describes. Untrusted content
 arrives through one of \NChannelCats{} \textbf{channels}, enters one context
-window, and the output fails as one of \NConseqCats{} \textbf{consequences}. A
-defense can intervene at three points, and the two literatures do not choose
-the same one: the security side masses at ingestion, the safety side at
-reasoning, and execution is security almost alone. Counts are named mechanisms
-per channel (left), named defenses per intervention point (center) and named
-mechanisms per consequence (right), by regime. The center counts only the
-defenses whose intervention point is coded; \NDefPtNoPointSec{} security and
-\NDefPtNoPointSafety{} safety defenses name no single point and are left out
-of that panel. The consequence column is the
-sharpest division in the figure: goal-hijack is \NGoalHijackSec{} security to
-\NGoalHijackSafety{} safety, and reasoning corruption runs the other way,
-\NReasonSafety{} to \NReasonSec{}. Drawn as a flow rather than a tree because
-the taxonomy is a cube; the pipeline is the one ordering the three axes
-genuinely have.}
+window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
+A defense can intervene at one of three points between them. The third axis,
+\textbf{regime}, is not drawn here: every mechanism and every defense also
+carries one, and Table~\ref{tab:intervention} and Figure~\ref{fig:cube} give
+the split. This figure carries the vocabulary; the counts are in the text.
+Drawn as a flow rather than a tree because the taxonomy is a cube, and the
+pipeline is the one ordering the three axes genuinely have.}
 \label{fig:pipeline}
 \end{figure*}
 
@@ -412,6 +405,11 @@ PoisonedRAG, BadRAG and their relatives on one side; over-trust in conflicting
 external evidence, lost-in-the-middle and knowledge-conflict circuits on the
 other. \textbf{One side builds the attack. The other side has already
 explained why it works, and is not cited for it.}
+
+The consequences each side names show the same division. Goal-hijack, an
+attacker's objective, is \NGoalHijackSec{} security mechanisms to
+\NGoalHijackSafety{} safety ones. Reasoning corruption, a degradation, runs
+the other way: \NReasonSafety{} safety to \NReasonSec{} security.
 
 This reading is ours, taken from the mechanism names and their papers rather
 than from a coded field. It is not clean at the edges. A few safety-regime

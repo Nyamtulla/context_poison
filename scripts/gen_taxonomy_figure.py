@@ -11,9 +11,11 @@ nesting that does not exist. The pipeline is the one ordering the three axes
 genuinely have: content arrives somewhere, is acted on somewhere, and fails as
 something.
 
-Every number is read from the registries. The asymmetry it exposes is the
-paper's argument in one picture: the security side masses at ingestion, the
-safety side at reasoning, and execution is security-only.
+No count appears on it. An earlier version printed a security and a safety
+total beside every row, which made the figure read as a dashboard, invited
+the counts to be mistaken for attacks against defenses, and printed one total
+that had gone stale. The quantities belong in the prose, where they are
+macros; this figure carries the vocabulary and the shape of the system.
 
 Out: latex/figures/fig0_pipeline.pdf
 """
@@ -97,40 +99,21 @@ def main():
     fig, ax = plt.subplots(figsize=(FULL, 3.6))
     ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
 
-    # ---- legend, top centre (keeps colour meaning off the busy middle) -----
-    ax.add_patch(FancyBboxPatch((38.0, 92.6), 2.0, 2.0,
-                                boxstyle="round,pad=0,rounding_size=0.5",
-                                facecolor=SEC, edgecolor="none"))
-    ax.text(40.9, 93.6, "security", ha="left", va="center",
-            fontsize=6.4, color=INK)
-    ax.add_patch(FancyBboxPatch((50.0, 92.6), 2.0, 2.0,
-                                boxstyle="round,pad=0,rounding_size=0.5",
-                                facecolor=ML, edgecolor="none"))
-    ax.text(52.9, 93.6, "safety", ha="left", va="center",
-            fontsize=6.4, color=INK)
-
     # ---- channels, left ----------------------------------------------------
     n = len(CHANNELS)
     top, bot, gap = 88.0, 7.0, 1.4
     h = (top - bot - gap * (n - 1)) / n
-    ax.text(11, 96.4, "where untrusted content enters", ha="center",
+    ax.text(9, 96.4, "where untrusted content enters", ha="center",
             fontsize=7, color=INK, fontweight="bold")
-    ax.text(16.6, 90.0, "sec", ha="center", fontsize=5.6, color=SEC)
-    ax.text(20.0, 90.0, "saf", ha="center", fontsize=5.6, color=ML)
-    ax.text(11, 2.2, f"{len(CHANNELS)} channels, {len(mech)} named mechanisms", ha="center",
+    ax.text(9, 2.2, f"{len(CHANNELS)} channels", ha="center",
             fontsize=6.0, color=INK2)
     BUS = 25.0
     for i, c in enumerate(CHANNELS):
         y = top - i * (h + gap) - h
-        s_, m_ = mc.get((c, "security"), 0), mc.get((c, "safety"), 0)
-        box(ax, 1, y, 21, h, "", GREY, "#dcdad6")
+        box(ax, 1, y, 17, h, "", GREY, "#dcdad6")
         ax.text(2.3, y + h / 2, c, ha="left", va="center", fontsize=6.3, color=INK)
-        ax.text(16.6, y + h / 2, f"{s_}", ha="center", va="center",
-                fontsize=6.2, color=SEC, fontweight="bold")
-        ax.text(20.0, y + h / 2, f"{m_}", ha="center", va="center",
-                fontsize=6.2, color=ML, fontweight="bold")
         # short stub to a vertical bus, instead of nine lines crossing the page
-        ax.plot([22.2, BUS], [y + h / 2, y + h / 2], lw=0.5, color="#c9c7c3",
+        ax.plot([18.2, BUS], [y + h / 2, y + h / 2], lw=0.5, color="#c9c7c3",
                 zorder=0)
     ax.plot([BUS, BUS], [bot + h / 2, top - h / 2], lw=0.8, color="#c9c7c3",
             zorder=0)
@@ -140,50 +123,31 @@ def main():
     box(ax, 31, 38, 15, 24, "context\nwindow", "#ffffff", MUTED, fs=7)
     box(ax, 55, 38, 13, 24, "model", "#ffffff", MUTED, fs=7)
     arrow(ax, 46.4, 50, 54.6, 50, lw=1.0, color=INK2)
-    arrow(ax, 68.4, 50, 73.4, 50, lw=1.0, color=INK2)
+    arrow(ax, 68.4, 50, 76.4, 50, lw=1.0, color=INK2)
 
     # ---- the three intervention points -------------------------------------
     for (key, lab), xc in zip(POINTS, (28.6, 50.5, 69.4)):
-        s_, m_ = dp.get((key, "security"), 0), dp.get((key, "safety"), 0)
         ax.plot([xc, xc], [30, 70], ls=(0, (2.2, 1.8)), lw=0.8,
                 color="#b9b7b2", zorder=0)
         ax.text(xc, 26.0, lab, ha="center", fontsize=6.6, color=INK,
                 fontweight="bold")
-        ax.text(xc - 0.7, 21.3, f"{s_}", ha="right", fontsize=7.6, color=SEC,
-                fontweight="bold")
-        ax.text(xc, 21.3, "/", ha="center", fontsize=6.4, color=MUTED)
-        ax.text(xc + 0.7, 21.3, f"{m_}", ha="left", fontsize=7.6, color=ML,
-                fontweight="bold")
     ax.text(50, 31.5, "where a defense can intervene", ha="center",
             fontsize=6.4, color=INK2, style="italic")
-    # Defenses coded with no intervention point are not drawn, so the footer
-    # counts what is on the figure rather than the registry total. It said
-    # "541 named defenses" while showing 439 of them.
-    _shown = sum(dp.get((k, r), 0) for k, _ in POINTS
-                 for r in ("security", "safety"))
-    ax.text(50, 2.2,
-            f"{len(POINTS)} intervention points, {_shown} of {len(defs)} defenses",
-            ha="center", fontsize=6.0, color=INK2)
+    ax.text(50, 2.2, f"{len(POINTS)} intervention points", ha="center",
+            fontsize=6.0, color=INK2)
 
     # ---- consequences, right -----------------------------------------------
     n2 = len(CONSEQ)
     h2 = (top - bot - gap * (n2 - 1)) / n2
-    ax.text(86.5, 96.4, "how the output goes wrong", ha="center",
+    ax.text(88.5, 96.4, "how the output goes wrong", ha="center",
             fontsize=7, color=INK, fontweight="bold")
-    ax.text(93.6, 90.0, "sec", ha="center", fontsize=5.6, color=SEC)
-    ax.text(97.2, 90.0, "saf", ha="center", fontsize=5.6, color=ML)
-    ax.text(86.5, 2.2, f"{len(CONSEQ)} consequences, the same {len(mech)} mechanisms",
-            ha="center", fontsize=6.0, color=INK2)
+    ax.text(88.5, 2.2, f"{len(CONSEQ)} consequences", ha="center",
+            fontsize=6.0, color=INK2)
     for i, c in enumerate(CONSEQ):
         y = top - i * (h2 + gap) - h2
-        s_, m_ = qc.get((c, "security"), 0), qc.get((c, "safety"), 0)
-        box(ax, 74.5, y, 24.5, h2, "", GREY, "#dcdad6")
-        ax.text(75.7, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
+        box(ax, 77.5, y, 21.5, h2, "", GREY, "#dcdad6")
+        ax.text(78.7, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
                 color=INK)
-        ax.text(93.6, y + h2 / 2, f"{s_}", ha="center", va="center",
-                fontsize=6.2, color=SEC, fontweight="bold")
-        ax.text(97.2, y + h2 / 2, f"{m_}", ha="center", va="center",
-                fontsize=6.2, color=ML, fontweight="bold")
 
     OUT.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
