@@ -313,16 +313,20 @@ the coarser question: was this method run against an adversary at all?
 unambiguous adversarial signal inside their own evaluation section, and
 \NDefEvalBenchmark{} were run on an adversarial benchmark without naming
 the attack. \NDefEvalNoBaseline{} state that they ran no real
-comparison at all. The remaining \NDefEvalUndetermined{} we report as
-undetermined: a paper that evaluated only on capability benchmarks has not
-been shown untested, only unmeasured under attack. The classification is
-conservative by construction --- anything the coded fields leave ambiguous
-lands in the undetermined bucket rather than in a positive one.
+comparison at all. \NDefEvalNoAdversary{} were evaluated with real
+baselines but never against an adversary, on capability and quality
+benchmarks instead: these are not untested methods, they are methods whose
+behavior under attack is simply unmeasured, which for a fix aimed at
+accidental failure is the normal state and is the population this paper's
+campaign probes. For the remaining \NDefEvalUnclear{} the coded fields do
+not say. The classification is conservative by construction --- anything
+ambiguous lands in that last group rather than in a positive one.
 
-We report no number drawn from a negative class, and the reason generalizes.
-We built three automated passes over these papers and hand-checking each found
-the same asymmetry: the positive class was reliable and the negative class was
-about half wrong. A pattern can confirm that something is present in a paper;
+Every count above is a positive finding: something the paper says, not
+something a pass failed to find. We report no number of the second kind, and
+the reason generalizes. We built three automated passes over these papers,
+and hand-checking each found the same asymmetry: what a pass flagged as
+present was reliable, and what it flagged as absent was about half wrong. A pattern can confirm that something is present in a paper;
 it cannot establish that something is absent, because absence of the phrasing
 it knows is not absence of the thing. A claim that something was never
 tested should state whether it means ``not done'' or ``not resolved''.
@@ -342,9 +346,7 @@ none of \NOutcomeAtkPaper{}.}
 
 For every pair we also record which side of the field reported it and what
 outcome was reported. Figure~\ref{fig:whoreports} puts the two reporters
-side by side.
-
-Defense papers report their defense winning in \NOutcomeDefWins{} of
+side by side. Defense papers report their defense winning in \NOutcomeDefWins{} of
 \NOutcomeDefPaper{} pairs, with the remaining \NOutcomeDefIncon{}
 reporting no result we could resolve. Attack papers report a defense
 winning \NOutcomeAtkDefWins{} times in \NOutcomeAtkPaper{}: they report it

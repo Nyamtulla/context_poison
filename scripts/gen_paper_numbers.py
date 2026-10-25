@@ -216,11 +216,21 @@ def main():
     M["NDefEvalNoBaseline"] = _evc["no_baseline"]
     # everything else is a negative or an unclear read, and this paper does
     # not report a number drawn from a negative class
-    M["NDefEvalUndetermined"] = (_evc["non_adversarial"] + _evc["unclear"])
+    # Split, not lumped. "non_adversarial" means the paper DID evaluate, with
+    # real baselines, on capability or quality benchmarks -- there was simply
+    # no adversary in the experiment. That is a positive-class finding and
+    # the paper may state it. "unclear" is the only genuine don't-know.
+    # Reporting the sum as one undetermined bucket read as "never tested
+    # against anything", which is not what either category says.
+    M["NDefEvalNoAdversary"] = _evc["non_adversarial"]
+    M["NDefEvalUnclear"] = _evc["unclear"]
     # The audit is a snapshot. It matched the registry when it last ran; if
     # defenses are added and it is not re-run, the prose starts quoting an
     # old denominator against a current census, which is the error this
     # paragraph used to carry. Say so loudly rather than let it pass.
+    assert (M["NDefEvalAdversarial"] + M["NDefEvalNoBaseline"]
+            + M["NDefEvalNoAdversary"] + M["NDefEvalUnclear"]
+            == M["NDefEvalAudited"]), "evaluation statuses do not partition"
     if M["NDefEvalAudited"] != M["NDefenses"]:
         print(f"  WARNING: evaluation audit covers {M['NDefEvalAudited']} "
               f"defenses, registry holds {M['NDefenses']}. Re-run "
