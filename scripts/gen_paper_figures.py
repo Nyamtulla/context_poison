@@ -220,8 +220,12 @@ def fig_intervention():
     better about text already accepted -- and a shape is what a reader takes
     from a bar and has to assemble from a column of digits.
 
-    Regime is what this figure encodes, so it takes the track hues; safety
-    is hatched as well, because red and blue land on the same grey.
+    Regime is what this figure encodes, so it takes the track hues plain,
+    exactly as the cube panels and the citation graph do. No hatch: inside
+    the cube a hatch means "defense", and borrowing it here to mean "safety"
+    would give one texture two jobs three pages apart. The black-and-white
+    reading is carried by position instead -- security is the upper bar of
+    every pair, in every group, and the caption says so.
     """
     r4 = load("rq4_defense_registry.json")
     POINTS = ["ingestion", "execution", "reasoning", "none"]
@@ -230,10 +234,10 @@ def fig_intervention():
     y = np.arange(len(POINTS))[::-1]
     h = 0.38
     fig, ax = plt.subplots(figsize=(COL, 1.75), constrained_layout=True)
-    for off, reg, col, hat in ((h / 2, "security", TRACK_SEC, ""),
-                               (-h / 2, "safety", TRACK_ML, "///")):
+    for off, reg, col in ((h / 2, "security", TRACK_SEC),
+                          (-h / 2, "safety", TRACK_ML)):
         vals = [c[(p, reg)] for p in POINTS]
-        ax.barh(y + off, vals, h, color=col, hatch=hat, edgecolor=INK,
+        ax.barh(y + off, vals, h, color=col, edgecolor=col,
                 linewidth=.3, label=reg)
         for yy, v in zip(y + off, vals):
             ax.text(v + 3, yy, str(v), va="center", fontsize=6, color=INK)
