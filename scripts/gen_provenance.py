@@ -123,11 +123,13 @@ def search_log():
 def figure(n):
     """Corpus construction in four stages.
 
-    The eight-stage version read like a slide. Four stages carry the same
-    facts: where the records came from, how the pool grew, what the screen
-    kept, and what the full-text pass kept. Exclusions hang off the stage
-    they belong to as plain text, not as filled boxes, because a shaded box
-    is decoration and the number is the content.
+    Each stage is one box: a bold stage name, then two cells side by side.
+    The left cell is what the stage removed or what it was given, the right
+    cell is what came out of it and went on to the next stage. Every stage
+    has the same shape, so the reader learns the layout once.
+
+    All type is ink. Muted grey reads on a screen and disappears in print,
+    and these numbers are the content of the figure, not an aside.
     """
     import matplotlib
     matplotlib.use("Agg")
@@ -136,52 +138,54 @@ def figure(n):
 
     INK, MUTED = "#0b0b0b", "#6b6a66"
     COL = 3.49  # IEEEtran \columnwidth, see gen_paper_figures.py
+
     plt.rcParams.update({"font.family": "serif", "pdf.fonttype": 42,
                          "savefig.bbox": "tight", "savefig.pad_inches": 0.02})
 
-    # Four boxes of the same shape: a stage name, what left at that stage,
-    # and what survived it. Side callouts were dropped because only two of
-    # the four stages could carry one, and an arrow on half the boxes reads
-    # as an omission on the other half.
     stages = [
         ("Seeds and database search",
-         f"{n['queries']} queries across {n['apis']} APIs",
-         f"{n['seeds']} seeds  +  {n['search']:,} records   "
-         f"n = {n['hop0']:,}"),
+         f"{n['queries']} queries\nacross {n['apis']} APIs",
+         f"{n['seeds']} seeds + {n['search']:,} records\nn = {n['hop0']:,}"),
         ("Snowballed, both directions",
-         f"discovery pool {n['pool'] + n['hop2']:,}  ·  "
-         f"hop-2, out of scope  {n['hop2']:,}",
-         f"working pool, hop 0–1   n = {n['pool']:,}"),
+         f"discovery pool {n['pool'] + n['hop2']:,}\n"
+         f"hop-2, out of scope {n['hop2']:,}",
+         f"working pool, hop 0–1\nn = {n['pool']:,}"),
         ("Screened on title and abstract",
-         f"excluded against written criteria  {n['auto_exclude']:,}",
-         f"survived   n = {n['survived']:,}"),
+         f"excluded against\nwritten criteria {n['auto_exclude']:,}",
+         f"survived\nn = {n['survived']:,}"),
         ("Read in full and coded",
-         f"never retrieved {n['not_retrieved']:,}  ·  "
-         f"excluded {n['excluded_ft']:,}",
-         f"corpus   n = {n['included']:,}   "
-         f"({n['analysed']:,} name a technique)"),
+         f"never retrieved {n['not_retrieved']:,}\n"
+         f"excluded at full text {n['excluded_ft']:,}",
+         f"corpus n = {n['included']:,}\n"
+         f"{n['analysed']:,} name a technique"),
     ]
 
-    bh, gap, W, X = 0.56, 0.24, 0.80, 0.015
-    H = len(stages) * bh + (len(stages) - 1) * gap + 0.08
+    bh, gap, W, X = 0.545, 0.24, 0.84, 0.015
+    pad, mid = 0.022, 0.018          # inset from the outer box, gap between
+    cw = (W - 2 * pad - mid) / 2     # width of one inner cell
+    head_in, cell_in = 0.17, 0.33    # heading band, inner cell height
+
+    H = len(stages) * bh + (len(stages) - 1) * gap + 0.04
     fig = plt.figure(figsize=(COL, H))
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, 1); ax.set_ylim(0, H)
     ax.axis("off")
 
-    y = H - 0.04
-    for i, (head, lost, kept) in enumerate(stages):
+    y = H - 0.02
+    for i, (head, left, right) in enumerate(stages):
         ax.add_patch(Rectangle((X, y - bh), W, bh, facecolor="none",
-                               edgecolor=MUTED, linewidth=0.6))
-        cx = X + W / 2
-        ax.text(cx, y - 0.150, head, ha="center", va="center",
-                fontsize=6.4, color=INK, fontweight="bold")
-        ax.text(cx, y - 0.300, lost, ha="center", va="center",
-                fontsize=5.6, color=MUTED)
-        ax.text(cx, y - 0.440, kept, ha="center", va="center",
-                fontsize=6.2, color=INK)
+                               edgecolor=INK, linewidth=0.7))
+        ax.text(X + W / 2, y - head_in / 2 - 0.02, head, ha="center",
+                va="center", fontsize=6.5, color=INK, fontweight="bold")
+        cy = y - head_in - cell_in
+        for k, txt in enumerate((left, right)):
+            cx = X + pad + k * (cw + mid)
+            ax.add_patch(Rectangle((cx, cy), cw, cell_in, facecolor="none",
+                                   edgecolor=MUTED, linewidth=0.45))
+            ax.text(cx + cw / 2, cy + cell_in / 2, txt, ha="center",
+                    va="center", fontsize=5.7, color=INK, linespacing=1.4)
         if i < len(stages) - 1:
             ax.add_patch(FancyArrowPatch(
-                (cx, y - bh), (cx, y - bh - gap),
+                (X + W / 2, y - bh), (X + W / 2, y - bh - gap),
                 arrowstyle="-|>", mutation_scale=6, color=INK, lw=0.7))
         y -= bh + gap
 

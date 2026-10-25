@@ -13,7 +13,8 @@
   1,
   2,
   3,
-  5
+  5,
+  10
  ],
  "results": [
   {
@@ -180,6 +181,39 @@
    "neg_rate": 1.4,
    "ci_low": 36.6,
    "ci_high": 45.2
+  },
+  {
+   "n_poison": 10,
+   "arm": "rag",
+   "n": 500,
+   "acc": 13.2,
+   "attacked": 62.6,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 10.5,
+   "ci_high": 16.4
+  },
+  {
+   "n_poison": 10,
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 28.6,
+   "attacked": 3.8,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 24.8,
+   "ci_high": 32.7
+  },
+  {
+   "n_poison": 10,
+   "arm": "scr",
+   "n": 500,
+   "acc": 26.0,
+   "attacked": 21.8,
+   "refusal_rate": 0.0,
+   "neg_rate": 1.0,
+   "ci_low": 22.3,
+   "ci_high": 30.0
   }
  ]
 }
