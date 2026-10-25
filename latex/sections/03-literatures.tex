@@ -21,7 +21,7 @@ against written inclusion criteria, then read the survivors in full. The include
 \NColumns{} recorded columns of which \NCodedFields{} are coded from the full
 text.
 
-\textbf{Screening and synthesis are different sets, and we keep them apart.}
+Screening and synthesis are different sets, and we keep them apart.
 A paper can be about context poisoning and still name no attack and no
 defense: surveys, benchmarks, practitioner guides, applications of somebody
 else's method. \NNoTechnique{} of the \NCorpus{} do exactly that, so the
@@ -137,8 +137,8 @@ the two panels together are the whole census.}
 \label{fig:cube}
 \end{figure*}
 
-\textbf{\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold
-no named attack and no named defense from either literature.} The cube counts
+\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold
+no named attack and no named defense from either literature. The cube counts
 what the field has named, not which papers discuss a cell. A survey that
 ranges over six channels therefore occupies none of them. Emptiness is not uniform,
 and Figure~\ref{fig:cube} puts the named attacks beside the named defenses in
@@ -186,7 +186,7 @@ close to three fifths. On the remedy side, \NDefPtReasoning{} methods act at
 reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
 \NDefPtExecution{} at execution, and \NDefPtNone{} specify no single point.
 
-\textbf{Almost every defense answers to one validation regime.} \NAdvOnly{} were
+Almost every defense answers to one validation regime. \NAdvOnly{} were
 validated in the security regime only and \NIncOnly{} in the safety regime only, leaving \NBothValidated{} (\PctBothValidated{}\%) validated
 against both and \NNoValidation{} with no validation we could identify. So
 \PctOneRegime{}\% of published defenses carry an untested cross-regime
@@ -221,7 +221,7 @@ Regime says what a paper is about. Venue says where its authors sent it. We
 code the two independently, which answers the first objection a reader will
 raise: that the division we draw is our own rather than the field's.
 
-\textbf{The field does not divide itself this way institutionally.} Of the
+The field does not divide itself this way institutionally. Of the
 \NRegimeSecNamedVenue{} security-regime papers that name a venue,
 \NRegimeSecAtAIVenue{} published at an AI venue and \NRegimeSecAtSecVenue{}
 at a security venue. Adversarial work on LLM agents goes to ACL, EMNLP,
@@ -254,8 +254,8 @@ safety-regime paper, and \PctSafetyCitesSec{}\% of safety-regime papers
 \PctSecNoCross{}\% of papers on each side were written without reference
 to the other community.
 
-\textbf{What carries the cross-regime citations makes the rate look better
-than the engagement is.} \NNetworkCross{} of the \NNetworkEdges{} resolved
+What carries the cross-regime citations makes the rate look better
+than the engagement is. \NNetworkCross{} of the \NNetworkEdges{} resolved
 edges (\PctNetworkCross{}\%) cross regimes, and they concentrate on a
 handful of papers either side can cite in an introduction without adopting
 anything from it. The four most-cited bridges are
@@ -287,7 +287,7 @@ citation-and-full-text recovery pass, resolving benchmark names to their
 constituent attacks where the paper named them, and a reverse scan of attack
 papers. The last route matters because it is the only one that can observe a
 defense \emph{losing} to an attack published after it. The final matrix holds
-\textbf{\NPairsComposite{} confirmed pairs}.
+\NPairsComposite{} confirmed pairs.
 
 \textbf{The matrix is sparse in a specific way.} \NDefMatchedFull{} of
 \NDefenses{} defenses (\PctDefMatched{}\%) appear in at least one pair, and
@@ -300,7 +300,7 @@ the defenses' own evaluations; for the broadest case,
 papers. Breadth here is not evidence a method was evaluated widely by its
 authors. It is evidence that attackers chose it as a target.
 
-\textbf{How much of this gap is the field and how much is our instrument.} It
+How much of this gap is the field and how much is our instrument. It
 is tempting to read the complement of the matrix as ``never tested'', and that
 reading is wrong. A defense evaluated on AgentDojo~\cite{debenedetti-2024-agentdojo} without naming which
 injection it faced was evaluated adversarially; it is simply not a named pair,
@@ -308,12 +308,12 @@ because expanding a benchmark into its constituent attacks would manufacture
 coverage. So we audited the \NDefEvalAudited{} defenses the registry held when the
 audit ran, directly against their own PDFs, asking the coarser question: was
 this method run against an adversary at all?
-\textbf{\NDefEvalAdversarial{} were} (\PctDefEvalAdversarial{}\%):
+\NDefEvalAdversarial{} were (\PctDefEvalAdversarial{}\%):
 \NDefEvalPair{} appear in a confirmed pair, \NDefEvalProse{} carry an
 unambiguous adversarial signal inside their own evaluation section, and
 \NDefEvalBenchmark{} were run on an adversarial benchmark without naming
-the attack. \textbf{\NDefEvalNoBaseline{} report no baseline comparison of
-any kind}, each confirmed by hand against the paper's own words. The
+the attack. \NDefEvalNoBaseline{} report no baseline comparison of
+any kind, each confirmed by hand against the paper's own words. The
 remaining \NDefEvalUndetermined{} we report as undetermined. The registry
 has grown since, so these are counts over that audited set rather than
 shares of the census.
@@ -323,8 +323,8 @@ We built three automated passes over these papers and hand-checking each found
 the same asymmetry: the positive class was reliable and the negative class was
 about half wrong. A pattern can confirm that something is present in a paper;
 it cannot establish that something is absent, because absence of the phrasing
-it knows is not absence of the thing. \textbf{A claim that something was never
-tested should state whether it means ``not done'' or ``not resolved''.}
+it knows is not absence of the thing. A claim that something was never
+tested should state whether it means ``not done'' or ``not resolved''.
 
 \begin{figure}[t]
 \centering
@@ -343,10 +343,19 @@ For every pair we also record which side of the field reported it and what
 outcome was reported. Figure~\ref{fig:whoreports} puts the two reporters
 side by side.
 
-Defense papers report their defense winning essentially always. Attack papers
-report it losing essentially always. Neither number measures how often defenses
-work; the pair of numbers measures publication incentive. This is why the rest
-of this paper re-runs the defenses rather than citing either side's claim.
+Defense papers report their defense winning in \NOutcomeDefWins{} of
+\NOutcomeDefPaper{} pairs, with the remaining \NOutcomeDefIncon{}
+reporting no result we could resolve. Attack papers report a defense
+winning \NOutcomeAtkDefWins{} times in \NOutcomeAtkPaper{}: they report it
+losing in \NOutcomeAtkDefLoses{} and reach no directional verdict in
+\NOutcomeAtkIncon{}. The two sides never meet on the same pair:
+\NOutcomeBothSides{} of the \NOutcomePairs{} pairs carrying a reported
+outcome are reported by both.
+
+Neither number measures how often defenses work. The pair of numbers
+measures publication incentive, and the size of the gap is the reason the
+rest of this paper re-runs the defenses rather than citing either side's
+claim.
 
 \subsection{The untested region}
 \label{sec:emptycell}
@@ -373,8 +382,8 @@ campaign. A combination nobody has run at all is marked.}
 \label{fig:transfermatrix}
 \end{figure}
 
-\textbf{Exactly \NSecDefVsSafetyAttack{} of \NPureRegimePairs{} pairs is a
-security defense evaluated against a safety failure mechanism},
+Exactly \NSecDefVsSafetyAttack{} of \NPureRegimePairs{} pairs is a
+security defense evaluated against a safety failure mechanism,
 against \NSecDefSecAttack{} evaluated against security attacks. In the other
 direction there are \NSafetyDefVsSecAttack{}. Together,
 \NCrossCommunityPairs{} pairs (\PctCrossCommunity{}\%) cross the boundary and
@@ -413,15 +422,15 @@ Nobody is naming the same thing twice.
 They are naming different halves of one causal chain. \NSharedCells{} of our
 \NOccupiedCells{} occupied cells hold mechanisms from both regimes,
 \NMechSharedSec{} security and \NMechSharedSafety{} safety. Read them side by
-side and the security entries are overwhelmingly ways of getting bad text in,
-the safety entries reasons the model believes bad text once it is there. The
+side, and the security entries are overwhelmingly ways of getting bad text in, while
+the safety entries are reasons the model believes bad text once it is there. The
 \meth{RAG} $\times$ \meth{silent-corruption} cell is the clearest case:
 PoisonedRAG, BadRAG and their relatives on one side; over-trust in conflicting
-external evidence, lost-in-the-middle and knowledge-conflict circuits on the
-other. \textbf{One side builds the attack. The other side has already
-explained why it works, and is not cited for it.}
+external evidence, lost-in-the-middle, and knowledge-conflict circuits on the
+other. One side builds the attack. The other side has already
+explained why it works and is not cited for it.
 
-The consequences each side names show the same division. Goal-hijack, an
+The consequences each side names show the same division. Goal-hijacking, an
 attacker's objective, is \NGoalHijackSec{} security mechanisms to
 \NGoalHijackSafety{} safety ones. Reasoning corruption, a degradation, runs
 the other way: \NReasonSafety{} safety to \NReasonSec{} security.
@@ -459,9 +468,9 @@ it runs.
 \NSharedChannels{} of our nine channels have named mechanisms from both
 regimes. We compare
 the first paper from each side in each of those channels.
-\textbf{The security literature arrives first in \NChannelsSecFirst{} of
+The security literature arrives first in \NChannelsSecFirst{} of
 \NSharedChannels{}. Both arrive in the same year in \NChannelsSameYear{}. The
-safety literature arrives first in \NChannelsSafetyFirst{}.} The
+safety literature arrives first in \NChannelsSafetyFirst{}. The
 median lag where security leads is \MedianChannelLag{} year and the longest is
 \MaxChannelLag{}. The \meth{supply-chain} channel, excluded here for having no
 safety-regime entry at all, is the limit case of the same pattern.
