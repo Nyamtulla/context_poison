@@ -656,9 +656,16 @@ def main():
     # ---- the citation graph, so figure 5's caption cannot drift from it
     import networkx as nx
     net = load("citation_network_union.json")
+    # Restricted to the NAnalysed papers that contributed a named technique,
+    # not to all NCorpus screened-in papers. A survey or a benchmark names
+    # no attack and no defense, so it has no regime-specific stake in the
+    # literature it cites; counting it as a citer measures reading habits
+    # rather than whether the two communities build on each other. The cube,
+    # the census and the coverage matrix already use this denominator.
+    _an = included & (mech_p | def_p)
     G = nx.Graph()
     for e in net["edges"]:
-        if e["citing"] in included and e["cited"] in included:
+        if e["citing"] in _an and e["cited"] in _an:
             G.add_edge(e["citing"], e["cited"])
     G.remove_nodes_from([n for n, d in G.degree() if d == 0])
     trk = {r[pi]: (r[hdr.index("regime")] or "").strip() for r in rows}
@@ -680,14 +687,14 @@ def main():
     # disagree. scripts/rq2_cross_citation.py still reads the old columns
     # and will differ until it is moved over too.
     #
-    # The rate counts citations to papers INSIDE the corpus, so a paper that
-    # cites the other regime's work from outside our 929 does not register.
-    # That makes every figure here a floor.
+    # The rate counts citations to papers inside the analysed set, so a
+    # paper that cites the other regime's work from outside it does not
+    # register. That makes every figure here a floor.
     _cites = collections.defaultdict(set)
     for e in net["edges"]:
-        if e["citing"] in included and e["cited"] in included:
+        if e["citing"] in _an and e["cited"] in _an:
             _cites[e["citing"]].add(e["cited"])
-    inc = [r for r in rows if r[pi] in included]
+    inc = [r for r in rows if r[pi] in _an]
     sec = [r for r in inc if trk.get(r[pi]) == "security"]
     mla = [r for r in inc if trk.get(r[pi]) == "safety"]
 
@@ -696,7 +703,15 @@ def main():
 
     a_b = sum(1 for r in sec if _crosses(r, "safety"))
     b_a = sum(1 for r in mla if _crosses(r, "security"))
-    M["NRegimeSecurity"], M["NRegimeSafety"] = len(sec), len(mla)
+    # The citation denominators are the analysed papers per regime, which
+    # are NOT NRegimeSecurity / NRegimeSafety: those count every screened-in
+    # paper and the venue subsection needs them that way.
+    M["NAnalysedSec"], M["NAnalysedSafety"] = len(sec), len(mla)
+    # every screened-in paper per regime, which the venue subsection uses
+    M["NRegimeSecurity"] = sum(1 for r in rows if r[pi] in included
+                               and trk.get(r[pi]) == "security")
+    M["NRegimeSafety"] = sum(1 for r in rows if r[pi] in included
+                             and trk.get(r[pi]) == "safety")
     M["NSecCitesSafety"], M["NSafetyCitesSec"] = a_b, b_a
     M["PctSecCitesSafety"] = f"{100*a_b/len(sec):.1f}"
     M["PctSafetyCitesSec"] = f"{100*b_a/len(mla):.1f}"

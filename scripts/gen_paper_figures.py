@@ -454,17 +454,25 @@ def fig_citation_network():
     and that question is unreadable if both edge classes are painted alike.
 
     Layout is a spring embedding on the union network (full-text pass plus the
-    Semantic Scholar table), restricted to included papers. Isolates are
-    dropped from the drawing and reported in the caption instead, because a
-    ring of unconnected dots carries no information and costs the layout its
-    resolution.
+    Semantic Scholar table), restricted to the papers that contributed a
+    named technique -- the same denominator the prose quotes and the same one
+    the cube uses. A survey cites widely and names nothing, so counting it
+    here would measure reading habits rather than whether the two communities
+    build on each other. Isolates are dropped from the drawing and reported
+    in the caption instead, because a ring of unconnected dots carries no
+    information and costs the layout its resolution.
     """
     import networkx as nx
     net = load("citation_network_union.json")
     hdr, rows = corpus()
     pi, ti = hdr.index("paper_id"), hdr.index("regime")
     track = {r[pi]: (r[ti] or "").strip() for r in rows}
-    inc = set(track)
+    contrib = set()
+    for fn in ("rq3_pollution_registry.json", "rq4_defense_registry.json"):
+        for e in load(fn):
+            if e.get("paper_id"):
+                contrib.add(e["paper_id"])
+    inc = set(track) & contrib
 
     G = nx.Graph()
     for e in net["edges"]:

@@ -248,33 +248,39 @@ read each other.
 \label{sec:citation}
 
 \textbf{Neither side reads the other.} \PctSecCitesSafety{}\% of
-security-regime papers (\NSecCitesSafety{} of \NRegimeSecurity{}) cite a
-safety-regime paper at all, and \PctSafetyCitesSec{}\% of safety-regime
-papers (\NSafetyCitesSec{} of \NRegimeSafety{}) cite a security one.
-About \PctSecNoCross{}\% of papers on each side were written without
-citing the other community at all. These are population counts over every
+security-regime papers (\NSecCitesSafety{} of \NAnalysedSec{}) cite a
+safety-regime paper, and \PctSafetyCitesSec{}\% of safety-regime papers
+(\NSafetyCitesSec{} of \NAnalysedSafety{}) cite a security one. About
+\PctSecNoCross{}\% of papers on each side were written without reference
+to the other community.
+
+The denominator is the \NAnalysed{} papers that named a technique, not
+every screened-in paper: a survey cites widely and names nothing, so
+counting it would measure reading habits rather than whether the two
+communities build on each other. These are population counts over every
 resolved citation edge, not sample estimates, so no confidence interval
-applies, and the rates hold across evidence grades, so they are not an
-artifact of preprint quality. They count citations to papers inside the
-corpus, so a paper that reaches across to work we did not include does not
-register: every rate here is a floor.
+applies, and the pattern holds in both evidence grades, so it is not an
+artifact of preprint quality. They count citations inside that set, so a
+paper reaching across to work outside it does not register: every rate here
+is a floor.
 
 \textbf{What carries the cross-regime citations makes the rate look better
 than the engagement is.} \NNetworkCross{} of the \NNetworkEdges{} resolved
 edges (\PctNetworkCross{}\%) cross regimes, and they concentrate on a
 handful of papers either side can cite in an introduction without adopting
 anything from it. The four most-cited bridges are
-WebArena~\cite{zhou-2023-webarena},
 lost-in-the-middle~\cite{liu-2023-lost}, Greshake et
-al.~\cite{greshake-2023-not} and AgentDojo~\cite{debenedetti-2024-agentdojo}:
-two environments and two landmark results, none of them a method anyone
-adopted across the boundary. Figure~\ref{fig:network} shows the shape, two
+al.~\cite{greshake-2023-not}, PoisonedRAG~\cite{zou-2024-poisonedrag} and
+Self-RAG~\cite{asai-2023-selfrag}. These are the papers that name the
+problem, and a citation to one places a paper in a setting rather than
+showing a method crossing the boundary. Figure~\ref{fig:network} shows the shape, two
 clusters joined by a narrow band.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig5_citation_network}
-\caption{The corpus as a citation graph. Security papers are red circles
+\caption{The \NAnalysed{} papers that named a technique, as a citation
+graph. Security papers are red circles
 and safety papers are blue triangles, so the two regimes stay apart in a
 black-and-white print. Cross-regime edges are drawn dark against the pale
 same-regime ones. Papers with no resolved edge inside the corpus are
