@@ -137,66 +137,74 @@ def fig_cube():
 
     G = {t: (grid(r3, t), grid(r4, t)) for t in ("security", "safety")}
     vmax = max(g.max() for pair in G.values() for g in pair)
-    hue = {"security": (TRACK_SEC, SEQ_SEC[0]), "safety": (TRACK_ML, SEQ[0])}
+    hue = {"security": (TRACK_SEC, SEQ_SEC[1]),
+           "safety": (TRACK_ML, SEQ[1])}
+
+    # Geometry, in cell units. The count sits on a fixed baseline at the top
+    # of its cell and the bar grows up from the bottom towards it, so a tall
+    # bar can never reach its own label and no cell needs the number moved
+    # inside it. The earlier version switched the label in or out depending
+    # on bar height, which put white type on four different backgrounds and
+    # collided in the cells that matter most.
+    LBL_Y, BAR_Y, HMAX = -.34, .42, .60
 
     fig, axes = plt.subplots(1, 2, figsize=(FULL, 3.9), constrained_layout=True)
     for ax, (track, (A, D)) in zip(axes, G.items()):
-        solid, pale = hue[track]
+        col, pale = hue[track]
         for i in range(len(CHANNELS)):
             for j in range(len(CONSEQ)):
                 a, d = int(A[i, j]), int(D[i, j])
+                # a hairline cell boundary, not a filled wash: the grid has
+                # to be findable without putting a shade behind every number
                 ax.add_patch(plt.Rectangle((j - .47, i - .47), .94, .94,
-                                           facecolor="#f7f6f3",
-                                           edgecolor="none"))
+                                           facecolor="none", edgecolor=INK,
+                                           linewidth=.2))
                 if a == 0 and d == 0:
                     continue
                 if d == 0:
-                    ax.add_patch(plt.Rectangle((j - .43, i - .43), .86, .86,
+                    ax.add_patch(plt.Rectangle((j - .47, i - .47), .94, .94,
                                                fill=False, edgecolor=INK,
-                                               linewidth=.9))
-                for v, x0, kw in ((a, -.40, dict(facecolor=solid,
-                                                 edgecolor="none")),
+                                               linewidth=1.4))
+                # Attacks take the full track hue, defenses a pale tint of
+                # the same hue. Hatching read as texture at 4.6pt and went
+                # muddy in print, and an OPEN bar was worse: a thin rectangle
+                # is already how this figure marks a cell with no defense in
+                # it, so the two treatments collided.
+                for v, x0, kw in ((a, -.40, dict(facecolor=col,
+                                                 edgecolor=col, linewidth=.4)),
                                   (d, .04, dict(facecolor=pale,
-                                                edgecolor=solid, hatch="////",
-                                                linewidth=.3))):
+                                                edgecolor=col, linewidth=.5))):
                     if v == 0:
                         continue
                     # floor, so one entry is a visible bar and not a hairline
-                    h = .06 + .74 * np.sqrt(v / vmax)
-                    ax.add_patch(plt.Rectangle((j + x0, i + .40 - h), .36, h,
-                                               **kw))
-                    # The count, inside the bar once it is tall enough to
-                    # hold it and just above the bar when it is not. Reading
-                    # a sqrt-scaled bar off its height is guesswork; the
-                    # number is what a reader actually quotes.
-                    inside = h > .30
-                    ax.text(j + x0 + .18,
-                            i + .40 - h + (.14 if inside else -.05),
-                            str(v), ha="center",
-                            va="center" if inside else "bottom",
-                            fontsize=4.6,
-                            color=("white" if (inside and kw["facecolor"]
-                                               == solid) else INK))
+                    h = .05 + HMAX * np.sqrt(v / vmax)
+                    ax.add_patch(plt.Rectangle((j + x0, i + BAR_Y - h), .36,
+                                               h, **kw))
+                    ax.text(j + x0 + .18, i + LBL_Y, str(v), ha="center",
+                            va="center", fontsize=5.3, color=INK)
         ax.set_xlim(-.6, len(CONSEQ) - .4)
         ax.set_ylim(len(CHANNELS) - .4, -.6)
         ax.set_xticks(range(len(CONSEQ)))
         # Two lines and no hyphen: at 6pt with the hyphen kept,
         # "silent-corruption" and "data-exfiltration" ran into each other.
         ax.set_xticklabels([c.replace("-", "\n") for c in CONSEQ],
-                           fontsize=5.4, linespacing=1.15)
+                           fontsize=5.6, linespacing=1.15)
         ax.set_yticks(range(len(CHANNELS)))
         ax.set_yticklabels(CHANNELS if track == "security" else [], fontsize=6.5)
         ax.set_title("security regime" if track == "security"
                      else "safety regime",
-                     fontsize=7.5, color=solid)
+                     fontsize=7.5, color=col)
         for sp in ax.spines.values():
             sp.set_visible(False)
         ax.tick_params(length=0)
 
     axes[0].legend(handles=[
-        Patch(facecolor="#8e8d88", edgecolor="none", label="named attacks"),
-        Patch(facecolor="#e6e5e1", edgecolor="#8e8d88", hatch="////",
-              linewidth=.3, label="named defenses")],
+        # the legend sits under the security panel, so it speaks in that
+        # panel's hue; the safety panel uses the same two treatments in blue
+        Patch(facecolor=TRACK_SEC, edgecolor=TRACK_SEC, linewidth=.4,
+              label="named attacks"),
+        Patch(facecolor=SEQ_SEC[1], edgecolor=TRACK_SEC, linewidth=.5,
+              label="named defenses")],
         fontsize=6, frameon=False, loc="lower left",
         bbox_to_anchor=(0, -.22), ncol=2)
     save(fig, "fig1_cube")
