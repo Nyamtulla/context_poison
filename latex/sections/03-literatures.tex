@@ -159,11 +159,11 @@ separates the pair in a black-and-white print. Heights are square-root
 scaled, because linear scaling would leave the largest cell as the only
 visible bar: the bars carry the shape and the printed counts carry the
 value. A cell that holds attacks and no defense is outlined in bold. Each
-panel's last column totals a channel and its last row totals a consequence.
-The margins take the paper's off-regime pair, amber for the attack side and
-green for the defense side, because a total belongs to no regime; they are
-scaled against their own maximum, so a margin bar and a cell bar of equal
-height are not equal counts. All \NMechanisms{} attacks
+panel's last row totals a consequence down that panel, and the single
+column on the right totals a channel across both. The totals take the
+paper's off-regime pair, amber and green, because a total belongs to no
+regime, and they are scaled against their own maximum, so a totals bar and
+a cell bar of equal height are not equal counts. All \NMechanisms{} attacks
 and all \NDefenses{} defenses place, so the panels together are the whole
 census.}
 \label{fig:cube}
@@ -199,15 +199,13 @@ panel, \NCellsAttackNoDefBackdoor{} of those are
 to itself is a gap; a cell with attacks and no defense is a different and
 sharper one.
 
-Reading a ratio along a row of the cube is guesswork, so the last column
-of each panel totals it. The two panels put their defenses in different
-places. Security's mass on \meth{direct-input} and \meth{tool-output},
-and across \meth{memory}, \meth{cross-modal}, \meth{tool-metadata},
-\meth{skill} and \meth{supply-chain} it has no more defenses than it has
-mechanisms. The AI/ML panel inverts that shape and masses on
-\meth{memory} and \meth{RAG}. \meth{skill}, \meth{tool-metadata} and
-\meth{supply-chain} are the routes by which an agent accepts capability
-from a third party, and they are the thinnest rows in both panels.
+Reading a ratio along a row of the cube is guesswork, so the totals
+column on the right counts each channel across both regimes.
+\meth{multi-agent} and \meth{memory} carry several defenses for every
+mechanism, while \meth{supply-chain} has fewer defenses than mechanisms
+and \meth{cross-modal}, \meth{tool-metadata} and \meth{skill} sit near
+parity. Those last are the routes by which an agent accepts capability
+from a third party, and they are the thinnest rows in the corpus.
 
 
 \textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
