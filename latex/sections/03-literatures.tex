@@ -127,11 +127,13 @@ to signal it~\cite{zhong-2023-poisoning}. \meth{data-exfiltration} is informatio
 should not~\cite{yu-2023-assessing}. \meth{persistence-backdoor} is corruption that survives into a
 later session~\cite{yan-2023-backdooring}. \meth{resource-abuse} is spending compute, money or quota on the
 attacker's behalf~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
+\meth{availability-loss} is the agent failing to finish the task at
+all~\cite{xia-2026-diagnosing}.
+Figure~\ref{fig:pipeline} sets the three axes against the system they
+describe.
 
-The three axes give \NCubeCells{} cells. \meth{availability-loss} earns a
-column of its own because a body of work measures exactly one harm --- the
-agent failing to finish at all --- which none of the other six expresses. It
-is a sparse column, and a sparse column raises the share of empty cells, so
+The three axes give \NCubeCells{} cells. \meth{availability-loss} is the
+sparsest of them, and a sparse column raises the share of empty cells, so
 the empty-cell figure below is reported on the full grid rather than on a
 smaller one that would flatter it.
 
@@ -331,7 +333,8 @@ tested should state whether it means ``not done'' or ``not resolved''.}
 \label{sec:whoran}
 
 For every pair we also record which side of the field reported it and what
-outcome was reported.
+outcome was reported. Figure~\ref{fig:whoreports} puts the two reporters
+side by side.
 
 \begin{figure}[t]
 \centering

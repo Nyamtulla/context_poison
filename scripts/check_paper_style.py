@@ -124,6 +124,16 @@ def main():
                       ("threat model present", r"\\(?:sub)?section\{(?:Threat model|The security regime)")):
         say(bool(re.search(pat, joined)), name)
 
+    # A float the prose never points at is a float the reader never looks
+    # at. Two figures and two tables shipped unreferenced before this check
+    # existed, each of them carrying an argument the text was making in
+    # words a page away.
+    print("\n[every float is pointed at]")
+    labels = set(re.findall(r"\\label\{((?:fig|tab):[^}]+)\}", joined))
+    for lab in sorted(labels):
+        say(bool(re.search(r"\\(?:auto)?ref\{" + re.escape(lab) + r"\}",
+                           joined)), f"{lab} referenced in the text")
+
     print(f"\n{fails} fail, {warns} warn")
     print("Judgement-based rules that no script can check are in "
           "PAPER_CHECKLIST.md; run through them before each submission.")

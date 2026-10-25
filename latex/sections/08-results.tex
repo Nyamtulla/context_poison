@@ -79,6 +79,8 @@ tries to make the model answer in a negative tone, the undefended model adopts
 the attacker's framing 0.0\% of the time at every dose. CK-PLUG adopts it
 78.2\% of the time with a single poisoned passage out of ten, and 99.0\% at
 full dose. The defense does not fail to stop the attack. It carries it.
+Figure~\ref{fig:dose} plots every retrieval-cell defense against dose on
+one axis, each measured against its own undefended arm.
 
 \begin{figure*}[t]
 \centering
@@ -256,7 +258,7 @@ passage. We ran the three context-reliance defenses whose corpus-poisoning
 results are already in Table~\ref{tab:family} against false evidence as well,
 each against its own undefended arm over the same items at the same doses.
 Predictions for all three were committed to version control before any of them
-ran.
+ran. Table~\ref{tab:payloads} puts the two payload classes side by side.
 
 \begin{table}[t]
 \centering
