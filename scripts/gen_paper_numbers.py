@@ -64,7 +64,6 @@ def main():
     M = {}
 
     # ---- corpus
-    M["NScreened"] = len(rows)
     # provenance stages, for the PRISMA figure's prose (see gen_provenance.py)
     import sqlite3 as _sq
     _c = _sq.connect(REPO / "data" / "context_sok.db")
@@ -86,7 +85,6 @@ def main():
     M["NHopTwo"] = _g("select count(*) from papers where hop=2")
     _c.close()
     M["NCorpus"] = len(included)
-    M["NExcluded"] = len(rows) - len(included)
     M["NColumns"] = len(hdr)
     # coded fields are everything that is not bibliographic metadata
     META = {"paper_id", "title", "authors", "year", "venue", "citation_count",
@@ -107,7 +105,6 @@ def main():
     tr3 = collections.Counter(e.get("regime") for e in r3)
     M["NMechSecurity"], M["NMechSafety"] = tr3["security"], tr3["safety"]
     cq = collections.Counter(e.get("consequence") for e in r3)
-    M["NGoalHijack"] = cq["goal-hijack"]
     # the consequence x regime split. The prose used to say EVERY goal-hijack
     # mechanism was security-track; after the full-text re-coding that is one
     # paper short of true, so the claim is now carried by counts.
@@ -118,7 +115,6 @@ def main():
     M["NGoalHijackSafety"] = _ct["goal-hijack"]["safety"]
     M["NReasonSafety"] = _ct["reasoning-corruption"]["safety"]
     M["NReasonSec"] = _ct["reasoning-corruption"]["security"]
-    M["PctGoalHijack"] = f'{100*cq["goal-hijack"]/len(r3):.1f}'
 
     M["NDefenses"] = len(r4)
     va = collections.Counter(e.get("validated_against") for e in r4)
@@ -144,7 +140,7 @@ def main():
         if _other.get((e.get("regime") or "").strip())
         == (e.get("validated_against") or "").strip())
     tr4 = collections.Counter(e.get("regime") for e in r4)
-    M["NDefSafety"], M["NDefSecurity"], M["NDefBoth"] = tr4["safety"], tr4["security"], tr4["Both"]
+    M["NDefSafety"], M["NDefSecurity"] = tr4["safety"], tr4["security"]
     ip = collections.Counter(e.get("defense_intervention_point") for e in r4)
     for k, v in [("Reasoning", "reasoning"), ("Ingestion", "ingestion"),
                  ("Execution", "execution"), ("NoPoint", "none")]:
@@ -211,12 +207,8 @@ def main():
     _vs = json.loads((REPO / "data" / "exports" / "validation_study"
                       / "manifest.json").read_text())
     M["NValidationDraw"] = sum(_vs["draw"].values())
-    M["NValidationHigh"] = _vs["draw"]["high"]
-    M["NValidationMedium"] = _vs["draw"]["medium"]
-    M["NValidationLow"] = _vs["draw"]["low"]
     M["NValidationFields"] = _vs["fields_per_paper"]
     M["NValidationCI"] = f'{_vs["design_precision"]["overall_ci_halfwidth_pp"]:.1f}'
-    M["NValidationDoubleCoded"] = _vs["double_coded"]
 
     # share of each year's papers carrying a named venue, typed as 85% and
     # 21% in Section 10 and derived from a corpus that moves
@@ -246,16 +238,12 @@ def main():
     _rb = {}
     for _r in _rf["results"]:
         _rb.setdefault(_r["arm"], {})[_r["n_poison"]] = _r
-    M["NRegimeItems"] = _rf["n"]
-    M["NRegimeMdr"] = f'{_rf["mdr_pp_at_n"]:.1f}'
     _cb, _cr, _st = (_rb["closedbook"][0], _rb["a2_poisonedrag_x1"],
                      _rb["a3_incidental_stale"])
     _mis, _cp = _rb["a4_incidental_misretrieval"], _rb["a5_corpus_poisoning"]
-    M["PctRegimeClean"] = f'{_st[0]["attacked"]:.1f}'
     M["PctCraftLow"], M["PctStaleLow"] = (f'{_cr[1]["attacked"]:.1f}',
                                           f'{_st[1]["attacked"]:.1f}')
-    M["PctCraftSat"], M["PctStaleSat"] = (f'{_cr[10]["attacked"]:.1f}',
-                                          f'{_st[10]["attacked"]:.1f}')
+    M["PctStaleSat"] = f'{_st[10]["attacked"]:.1f}' 
     M["NRegimeGapLow"] = f'{_cr[1]["attacked"] - _st[1]["attacked"]:.1f}'
     M["NRegimeGapSat"] = f'{_cr[10]["attacked"] - _st[10]["attacked"]:.1f}'
     # the displacement column: an optimised artefact against plain retrieval
@@ -266,7 +254,6 @@ def main():
     M["AccCorpusSat"] = f'{_cp[10]["acc"]:.1f}'
     M["AccStaleSat"], M["AccCraftSat"] = (f'{_st[10]["acc"]:.1f}',
                                           f'{_cr[10]["acc"]:.1f}')
-    M["AccRegimeClosedBook"] = f'{_cb["acc"]:.1f}'
     # the published construction repeats its passage five times per slot
     M["NRegimeRepeatMax"] = f'{max(_rb["a1_poisonedrag_x5"][k]["attacked"] - _cr[k]["attacked"] for k in (1, 2, 3, 5, 10)):.1f}'
 
@@ -338,21 +325,17 @@ def main():
     uni = set(attack_universe())
     M["NMechanismsBench"] = len(uni)
     M["NPairsComposite"] = len(pairs)
-    M["NPairsBase"] = cov["n_matched_pairs"]
 
     # the share of tested pairs absorbed by the single coarsest registry
     # entry, which Section 10 uses to price registry granularity. It was typed
     # as 32.6% and had gone stale by ten points.
     _mc = collections.Counter(a for _, a in pairs)
     _topname, _topn = _mc.most_common(1)[0]
-    M["NTopMechPairs"] = _topn
     M["PctTopMechShare"] = f"{100 * _topn / len(pairs):.1f}"
 
     covered = {a for _, a in pairs} & uni
-    M["NMechCovered"] = len(covered)
     M["NMechUncovered"] = len(uni) - len(covered)
     M["PctMechUncovered"] = f'{100*M["NMechUncovered"]/len(uni):.1f}'
-    M["PctMechCovered"] = f'{100*len(covered)/len(uni):.1f}'
 
     per_def = collections.Counter(d for d, _ in pairs)
     dist = collections.Counter(per_def.values())
@@ -380,9 +363,6 @@ def main():
     M["NBroadestFromAttack"] = sum(1 for x in pairs
                                    if x[0] == _top and x in _atk)
     M["NDefFourPlus"] = sum(v for k, v in dist.items() if k >= 4)
-    # base-matrix figures, as RQ5 published them, for the contrast in S6
-    M["NDefMatchedBase"], M["NDefOneBase"] = 197, 163
-    M["PctDefOneBase"] = f'{100*163/197:.1f}' 
 
     # ---- the execution campaign. These move every time a run lands, which
     # is why they are macros: the first draft hardcoded 81 pairs and 156,308
@@ -408,7 +388,6 @@ def main():
     M["NRagImpl"] = len({r["defense"] for r in transfer})
     M["NAgentPairs"] = len(agent_pairs)
     M["NAgentEpisodes"] = f"{agent_eps:,}"
-    M["NAgentTechniques"] = len({r["technique_name"] for r in scored})
     # The agent cell by intervention point. A technique "holds" when the
     # defended arm's attack success is zero. Which stage a technique acts at
     # decides whether it does, which is the division of labor in Section 3
@@ -475,7 +454,6 @@ def main():
         if c in CHS and q and tr in ("security", "safety"):
             _seven.add((c, q, tr))
     _n7 = len(CHS) * (len(CQS) + 1) * 2
-    M["PctCubeEmptySeven"] = round(100 * (_n7 - len(_seven)) / _n7, 1)
 
     # Cells holding a named attack and no defense at all. Typed as "nine"
     # and "eight" in the prose; the merge moved one of them and neither
@@ -592,8 +570,6 @@ def main():
     M["NPureRegimePairs"] = len(_pure)
     M["NCrossCommunityPairs"] = len(_x)
     M["PctCrossCommunity"] = f"{100*len(_x)/len(_pure):.1f}"
-    M["NCrossAllPairs"] = sum(1 for r in tl
-                              if r["defense_regime"] != r["attack_regime"])
     M["NSecDefVsSafetyAttack"] = sum(1 for r in _pure
                                  if r["defense_regime"] == "security"
                                  and r["attack_regime"] == "safety")
@@ -653,11 +629,7 @@ def main():
     M["NSecDefSecAttack"] = sum(1 for r in _pure
                                 if r["defense_regime"] == "security"
                                 and r["attack_regime"] == "security")
-    M["NSafetyDefSafetyAttack"] = sum(1 for r in _pure
-                              if r["defense_regime"] == "safety"
-                              and r["attack_regime"] == "safety")
     _same = sum(1 for r in tl if r["defense_regime"] == r["attack_regime"])
-    M["NSameRegimePairs"] = _same
     M["PctSameRegime"] = f"{100*_same/len(tl):.1f}"
     M["NPredatesAndCross"] = sum(1 for r in _pure
                                  if r["defense_predates_attack"]
@@ -674,7 +646,6 @@ def main():
     # how many of the retrieval-cell implementations come from each regime.
     # Section 7 said "eight of our nine" while NRagImpl read ten.
     M["NRagImplSafety"] = sum(1 for v in _DT.values() if v == "safety")
-    M["NRagImplSecurity"] = sum(1 for v in _DT.values() if v == "security")
 
     _op = {(r["defense"], r["attack"]) for r in runs if r["role"] == "transfer"}
     _oc = sum(1 for d, a in _op if _DT.get(d) != _AT.get(a))
@@ -692,7 +663,6 @@ def main():
     G.remove_nodes_from([n for n, d in G.degree() if d == 0])
     trk = {r[pi]: (r[hdr.index("regime")] or "").strip() for r in rows}
     ncross = sum(1 for u, v in G.edges() if trk.get(u) != trk.get(v))
-    M["NNetworkNodes"] = G.number_of_nodes()
     M["NNetworkEdges"] = f"{G.number_of_edges():,}"
     M["NNetworkCross"] = ncross
     M["PctNetworkCross"] = f"{100*ncross/G.number_of_edges():.1f}"
@@ -721,7 +691,6 @@ def main():
     M["NOutcomeDefPaper"] = sum(_dp.values())
     M["NOutcomeDefWins"] = _dp["defense_wins_claimed"]
     M["NOutcomeAtkPaper"] = sum(_ap.values())
-    M["NOutcomeAtkDefWins"] = _ap["defense_wins_claimed"]
 
     (REPO / "latex" / "numbers.tex").write_text(
         "% GENERATED by scripts/gen_paper_numbers.py. Do not edit by hand.\n"
