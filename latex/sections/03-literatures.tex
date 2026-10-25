@@ -384,12 +384,14 @@ turns on is narrower: \emph{has either community ever tested its methods
 against the other's problems?}
 
 A pair is one defense run against one failure mechanism by some paper.
-Figure~\ref{fig:transfermatrix} sorts pairs into four boxes: who built the
-defense, against whose problem it was run. The left panel is what the
-literature has already done, over the \NPureRegimePairs{} pairs whose two
-sides both sit in one regime. The right panel is what we ran ourselves.
+Sort every pair into four boxes --- who built the defense, against whose
+problem it was run --- over the \NPureRegimePairs{} pairs whose two sides
+both sit in one regime. The left panel of Figure~\ref{fig:transfermatrix},
+in Section~\ref{sec:results}, draws the result; the right panel of the
+same figure is what we ran ourselves, and is this section's question
+answered.
 
-Read the left panel along its diagonal and nearly everything is there.
+Read it along the diagonal and nearly everything is there.
 Each community tests its own defenses against its own problems:
 \NSecDefSecAttack{} security-on-security pairs and
 \NSafetyDefSafetyAttack{} safety-on-safety. The two off-diagonal boxes are
@@ -420,28 +422,6 @@ This is consistent with the citation rates and sharper than them. The
 communities do not read each other, so they do not test each other, so the
 question of whether either one's methods survive the other's regime has no
 answer in the published record.
-
-The right panel is this paper's answer to that, in the same four boxes.
-\NOursCrossPairs{} of our \NOursPairs{} retrieval-cell pairs sit
-off-diagonal, \PctOursCross{}\% against the literature's
-\PctCrossCommunity{}\%. One box stays empty on our side too, and it is a
-limit worth stating: every cross-regime pair we ran takes a safety method
-and attacks it, because those methods release code that runs on retrieval
-data. We did not run the mirror image, a security defense against an
-accidental failure. Section~\ref{sec:threats} returns to it.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig6_transfer_matrix}
-\caption{Who built the defense (rows) against whose problem it was run
-(columns). Left: what the literature has already done. Right: what we ran.
-The literature sits on its diagonal; our campaign does not. Cell shade is
-each panel's own share rather than a shared count scale, because the two
-totals differ by an order of magnitude; the printed count is the value. The
-right-hand panel covers the retrieval-cell transfer pairs, not the whole
-campaign, and the box we did not run either is marked.}
-\label{fig:transfermatrix}
-\end{figure}
 
 Nor is it answered by ordering. \NDefensePredates{} of
 \NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a defense that
@@ -523,7 +503,7 @@ chance of citing. It is not renaming that paper's mechanism --- the collision
 count above says it is not --- and arriving second at a surface is not a
 fault. We are claiming the obvious
 consequence, which is that neither side can tell whether the other has already
-answered its question, and Figure~\ref{fig:transfermatrix} shows that nobody
+answered its question, and Section~\ref{sec:emptycell} shows that nobody
 has checked.
 
 Two limits on this reading. The dates are publication dates in our corpus, so
@@ -542,8 +522,8 @@ publishes degradations, which are noticed before they are named.
 A reader might reasonably ask whether this is our boundary rather than the
 field's. We assign the regime label per paper, and every paper takes one of the
 two. Papers on the boundary take the regime their own evaluation adopts. A
-paper that spans both communities therefore still appears in
-Figure~\ref{fig:transfermatrix}; we set none aside. The single
+paper that spans both communities therefore still sits among the
+\NPureRegimePairs{} pairs; we set none aside. The single
 crossing above comes from one of them, which is what one would expect --- a
 paper that reaches across is the kind of paper that crosses.
 
