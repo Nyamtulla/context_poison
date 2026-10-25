@@ -2,18 +2,24 @@
 
 \subsection{Context poisoning}
 
-\emph{Context poisoning} is our term for three things happening together.
+It helps to picture the context window as a body of water fed by a fixed set
+of inflow streams. Whatever enters through any stream mixes into the same body
+and affects everything downstream, whether it was dumped in deliberately or
+arrived as runoff. The question this paper answers first is simply, how
+many streams are there, and how many consequences may arise because of this pollution? 
+
+Context poisoning is our term for three things happening together.
 Content enters an agent's context window. The agent should not have trusted
 it. The agent's behavior changes as a result. The definition says nothing
 about who put the content there, and that silence is deliberate: it is what
-lets both communities fit inside one term.
+lets both communities fit inside one term. 
 
-The term is wider than prompt injection, which is one channel and one intent.
-It is wider than knowledge conflict, which is one consequence. It is narrower
+A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower
 than ``LLM safety'', because the damage must arrive through the context
 window. Two things fall outside it. Training-time poisoning and weight attacks
 do not travel through the context. Jailbreaks in which the user is the
 attacker have no third-party content at all.
+
 
 \subsection{Parametric and contextual answers} \label{sec:twoplaces}
 
@@ -23,8 +29,6 @@ model learned in training and holds in its weights. The safety literature calls 
 \emph{memory} for it throughout. Every result table reports it as
 \texttt{pm\_acc}. One of the defenses we evaluate, ParamMute~\cite{huang-2025-parammute}, takes its name
 from it.
-
-Section~\ref{sec:results} rests entirely on this distinction.
 
 \paragraph{Context-reliance defenses.} A large family of published methods
 intervenes on exactly this distinction. A method is a \emph{context-reliance
@@ -98,18 +102,3 @@ Our taxonomy therefore uses \emph{mechanism} as the neutral term for both, and
 records provenance in a separate \emph{intent} axis. Writing "attack" at the
 top level would have made the safety half unregisterable, because an
 attack presupposes an attacker.
-
-\subsection{Inflow channels}
-
-It helps to picture the context window as a body of water fed by a fixed set
-of inflow streams. Whatever enters through any stream mixes into the same body
-and affects everything downstream, whether it was dumped in deliberately or
-arrived as runoff. The question this paper answers first is simple to state: how
-many streams are there, and for each one, what stands guard at its mouth?
-
-The picture needs one correction. Something outside a pond pollutes it, but
-some of these channels feed themselves. A poisoned agent's output becomes
-another agent's input, and poisoned memory reactivates in a later session. The
-phenomenon is worse than the picture: contamination can propagate to other
-agents~\cite{lee-2025-prompt} and can re-enter the same agent from
-storage~\cite{dash-2026-untrusted}.

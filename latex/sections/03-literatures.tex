@@ -76,6 +76,21 @@ security attack and a safety mechanism that enter by the same route
 and cause the same damage occupy the same cell. They differ only on intent. That is what makes our taxonomy a way of finding missing
 experiments rather than a filing scheme.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig0_pipeline}
+\caption{The taxonomy against the system it describes. Untrusted content
+arrives through one of \NChannelCats{} \textbf{channels}, enters one context
+window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
+A defense can intervene at one of three points between them. The third axis,
+\textbf{regime}, is not drawn here: every mechanism and every defense also
+carries one, and Table~\ref{tab:intervention} and Figure~\ref{fig:cube} give
+the split. This figure carries the vocabulary; the counts are in the text.
+Drawn as a flow rather than a tree because the taxonomy is a cube, and the
+pipeline is the one ordering the three axes genuinely have.}
+\label{fig:pipeline}
+\end{figure*}
+
 \textbf{Channel} is the route untrusted content takes into the context window.
 There are \NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
 or an upstream service~\cite{liu-2023-promptb}. \meth{RAG} is a passage a retriever selected from a
@@ -113,21 +128,6 @@ smaller one that would flatter it.
 consequence. These are surveys and benchmarks whose attack surfaces are
 co-equal by construction, and forcing one coordinate on them would invent
 precision.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/fig0_pipeline}
-\caption{The taxonomy against the system it describes. Untrusted content
-arrives through one of \NChannelCats{} \textbf{channels}, enters one context
-window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
-A defense can intervene at one of three points between them. The third axis,
-\textbf{regime}, is not drawn here: every mechanism and every defense also
-carries one, and Table~\ref{tab:intervention} and Figure~\ref{fig:cube} give
-the split. This figure carries the vocabulary; the counts are in the text.
-Drawn as a flow rather than a tree because the taxonomy is a cube, and the
-pipeline is the one ordering the three axes genuinely have.}
-\label{fig:pipeline}
-\end{figure*}
 
 \begin{figure*}[t]
 \centering
