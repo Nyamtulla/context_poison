@@ -515,15 +515,12 @@ def main():
     M["NCellsAttackNoDefSec"] = sum(1 for k in _nodef if k[2] == "security")
     M["NCellsAttackNoDefBackdoor"] = sum(
         1 for k in _nodef if k[1] == "persistence-backdoor")
-    # papers that carry no channel or no consequence: multi-vector surveys
-    # and benchmarks whose surfaces are co-equal by construction. They are
-    # outside the cube by construction, and the empty-cell rate is only
-    # honest if their number is stated.
-    _unp = sum(1 for r in rows if r[pi] in included
-               and (str(r[ci] or "").strip() in ("", "none")
-                    or str(r[qi] or "").strip() in ("", "none")))
-    M["NUnplaceable"] = _unp
-    M["PctUnplaceable"] = f"{100*_unp/len(included):.1f}"
+    # NUnplaceable / PctUnplaceable lived here: papers carrying no channel or
+    # no consequence, which are outside the cube by construction. The
+    # paragraph that reported them was cut from S3 on 2026-10-25, so the
+    # macros are gone too rather than left generating into numbers.tex
+    # unread. The count is still recoverable from the corpus if the
+    # paragraph comes back.
     M["PctCubeEmpty"] = f"{100*(NCELLS-len(occupied))/NCELLS:.1f}"
 
     # mechanism registry splits, quoted in S4
