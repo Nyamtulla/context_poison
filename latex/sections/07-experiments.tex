@@ -93,6 +93,7 @@ control \emph{before} each run. Several were wrong, and we say so where they
 were.
 
 \subsection{What we ran}
+\label{sec:whatweran}
 
 \paragraph{Environment.}
 Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
@@ -114,6 +115,19 @@ Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
 Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each defense
 released. The data is CoConflictQA~\cite{huang-2025-parammute} over Natural Questions, and open Natural
 Questions for the attacks that need a retrieval pool.
+
+Those defenses turn the same dial. ACD decodes from the no-context
+distribution and pulls it toward the with-context one by a weight computed
+from entropy. CK-PLUG~\cite{bi-2025-parameters} interpolates the two
+distributions under a single parameter. ParamMute~\cite{huang-2025-parammute}
+suppresses the feed-forward layers that carry parametric memory, forcing the
+model onto the retrieved text. SpARE~\cite{zhao-2024-steering} and
+SHIFT~\cite{li-2026-shift} steer along a context-faithfulness direction in
+activation space. COIECD~\cite{yuan-2024-discerning} detects a conflict
+between the two sources and pushes toward the context.
+SCR~\cite{huang-2024-trust} makes the same trade through prompting rather
+than decoding. Each changes \emph{how much} the model leans on retrieved
+text. None asks \emph{which} retrieved text deserves trust.
 
 The \textbf{agent cell} pairs ingestion-stage and execution-stage defense
 techniques against prompt-injection attacks inside the AgentDojo banking

@@ -1,4 +1,9 @@
-\section{Background and scope} \label{sec:background}
+\section{Background, scope and threat model} \label{sec:background}
+
+A security paper states its threat model before it taxonomizes. This paper
+spans two literatures, only one of which assumes an adversary at all, so we
+define the failure, state the threat model, and then state the regime the
+other literature works in.
 
 \subsection{Context poisoning}
 
@@ -6,7 +11,7 @@ Context poisoning is our term for three things happening together.
 Content enters an agent's context window. The agent should not have trusted
 it. The agent's behavior changes as a result. The definition says nothing
 about who put the content there, and that silence is deliberate: it is what
-lets both communities fit inside one term. 
+lets both communities fit inside one term.
 
 A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower
 than ``LLM safety'', because the damage must arrive through the context
@@ -14,40 +19,82 @@ window. Two things fall outside it. Training-time poisoning and weight attacks
 do not travel through the context. Jailbreaks in which the user is the
 attacker have no third-party content at all.
 
+\subsection{System model}
 
-\subsection{Parametric and contextual answers} \label{sec:twoplaces}
+The subject is an LLM agent: a model that, within one task, repeatedly reads
+content it did not author, decides, and acts. Reading happens through the nine
+channels of Section~\ref{sec:taxonomy}. Acting means emitting text to a user
+or calling a tool whose effects leave the system.
 
-A model answers from one of two sources. The first is the \emph{context}: the
-document, tool output or message placed in front of it. The second is what the
-model learned in training and holds in its weights. The safety literature calls that \emph{parametric memory}. We use the shorter
-\emph{memory} for it throughout. Every result table reports it as
-\texttt{pm\_acc}. One of the defenses we evaluate, ParamMute~\cite{huang-2025-parammute}, takes its name
-from it.
+Three properties separate this from a single-turn chatbot, and our taxonomy
+keys on all three. Content from many sources shares one context window, with
+no trustworthy marking of where any of it came from. The agent's own output
+can become another agent's input, or its own input a turn later through
+memory. And an action taken on corrupted context cannot be undone by fixing
+the context afterwards.
 
-\paragraph{Context-reliance defenses.} A large family of published methods
-intervenes on exactly this distinction. A method is a \emph{context-reliance
-defense} when its intervention is a \textbf{weighting between the model's
-context-conditioned prediction and its memory-conditioned prediction}. The
-membership test is mechanical. The method changes \emph{how much} the model
-leans on retrieved text. It never asks \emph{which} retrieved text deserves
-trust.
+\subsection{Terminology} \label{sec:terms}
 
-These methods build the dial differently, and it is the same dial. ACD decodes
-from the no-context distribution and pulls it toward the with-context one by a
-weight computed from entropy. CK-PLUG~\cite{bi-2025-parameters} interpolates the two distributions under
-a single parameter. ParamMute suppresses the feed-forward layers that carry
-parametric memory, forcing the model onto the retrieved text. SpARE~\cite{zhao-2024-steering} and SHIFT~\cite{li-2026-shift}
-steer along a context-faithfulness direction in activation space. COIECD~\cite{yuan-2024-discerning}
-detects a conflict between the two sources and pushes toward the context. SCR~\cite{huang-2024-trust}
-makes the same trade through prompting rather than decoding.
+\textbf{Three words, kept apart.} A \emph{threat model} specifies an
+adversary: their goal, what they control, what they know. A \emph{regime} is
+which of two conditions a piece of work addresses. We take the division from
+Lin et al.~\cite{lin-2025-safety-security}. \meth{Security} is resilience
+against ``intentional attacks \ldots\ in the presence of adversarial
+actors'', built on an asset, an adversary and a vulnerability. \meth{Safety}
+is avoiding ``unintended harmful outcomes \ldots\ despite uncertainties in
+inputs, goals, training data, or deployment conditions'', in non-adversarial
+environments. A \emph{venue} is where a paper published.
 
-The definition is narrow because the definition is what carries the result.
-The dial runs between \emph{believe the context} and \emph{believe memory}. No
-setting on it separates a real document from a planted one, because both are
-context. Section~\ref{sec:distractor} measures what turning it does and does
-not achieve.
+Regime and venue are coded independently and they are not the same cut, which
+Section~\ref{sec:venue} measures. Because the word \meth{security} names a
+value of both, we always write \emph{security venue} or \emph{AI venue} when
+we mean the venue, and \meth{security} or \meth{safety} unqualified when we
+mean the regime.
 
-\subsection{One failure, two vocabularies}
+\textbf{Context and memory.} A model answers from one of two sources. The
+first is the \emph{context}: the document, tool output or message placed in
+front of it. The second is what the model learned in training and holds in its
+weights. The safety literature calls that \emph{parametric memory}. We use the
+shorter \emph{memory} for it throughout, and every result table reports it as
+\texttt{pm\_acc}. The distinction matters beyond bookkeeping, because a large
+family of published defenses intervenes on exactly it;
+Section~\ref{sec:whatweran} says which methods and
+Section~\ref{sec:results} says what turning that dial achieves.
+
+\subsection{The security regime}
+
+The adversary controls the content of at least one channel. They do not
+control the model weights, the decoding procedure, or the agent's code. This
+is the standing assumption of the security literature, and it covers the realistic
+deployment cases. An adversary can write a document that a retriever may
+fetch. They can publish a tool whose description the agent reads. They can
+post content that a browsing agent visits, or contribute a skill file that the
+agent loads.
+
+The adversary knows the defense and may adapt the payload to it. That is
+precisely why average-case evaluation does not transfer. The adversary does
+not need to know the user's query: every attack we run is query-agnostic by
+construction.
+
+We exclude three things. Training-time poisoning and weight-level attacks do
+not travel through the context window. A user attacking their own agent
+involves no third-party content, so the trust boundary we study does not
+exist. Denial of service through resource exhaustion sits in the taxonomy as
+\meth{resource-abuse}. It is the thinnest cell we register: after the full-text
+coding pass it holds \NMechResourceAbuse{} mechanism and
+\NDefResourceAbuse{} defenses. We report it and draw no conclusions from a
+cell that small.
+
+\subsection{The safety regime}
+
+There is no adversary, so this is not a threat model and we do not call it
+one. Content goes wrong through ordinary pipeline behavior.
+A retrieved document is stale. A passage is irrelevant but topically close.
+Important text sits in the middle of a long input. A retrieved fact
+contradicts what the model learned in training. The safety literature assumes this regime and evaluates on average-case benchmarks. That is the right
+choice when nothing adapts.
+
+\subsection{One failure, two vocabularies} \label{sec:twovocab}
 
 Figure~\ref{fig:vocab} sets the two vocabularies side by side. The slots are
 the same. Only the names and the assumed adversary differ.
@@ -60,39 +107,27 @@ Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
 \label{fig:vocab}
 \end{figure}
 
-The distinction is real in one respect and smaller than it looks in another.
+The two regimes differ in exactly one assumption: adaptivity. They share the
+channel, the position in the context window, and the downstream consequence.
+That difference is real in one respect and smaller than it looks in another.
 It is real because an adaptive adversary re-optimizes against a filter and a
 stale retrieval index does not. A method tuned to the average case has no
 reason to hold at the worst case.
 
-It is smaller than it looks because we measured it. We built two payloads that
-assert the same false answer, in the same slots, at the same dose. One is the
-passage PoisonedRAG writes to be believed. The other is the item's own
-retrieved passage with the gold answer replaced, which is what a superseded
-document looks like. Only the provenance differs. Over \NRegimeItems{} items,
-the crafted passage wins \NRegimeGapLow{}\pp{} at one poisoned passage in
-ten: \PctCraftLow{}\% against \PctStaleLow{}\%. At full dose the two sit
-\NRegimeGapSat{}\pp{} apart, inside the \NRegimeMdr{}\pp{} threshold.
-\textbf{The document nobody wrote as an attack still drives the model onto the
-false answer \PctStaleSat{}\% of the time}, against \PctRegimeClean{}\% on
-clean context. It also costs more accuracy at full dose than the crafted
-passage does, \AccStaleSat{} against \AccCraftSat{}.
-
-The other mechanism shows no difference at all. An optimized corpus-poisoning
-artifact and a real passage retrieved for a different question displace the
-same evidence. They leave the model in the same place: \PctCorpusSat{}\% and
-\PctMisretrievalSat{}\% adoption, \AccCorpusSat{} and
-\AccMisretrievalSat{}\% accuracy. Every gap sits inside the threshold. Against
-displacement the adversary buys nothing that a retrieval error does not
-already supply.
-
-So provenance buys an attacker a measurable advantage when the payload asserts
-a lie and the dose is low. It buys little once the context is saturated, and
-nothing when the payload only displaces. The model cannot tell the difference
-in any of these cases; what changes is how efficiently the text was written to
-exploit that.
+It is smaller than it looks because the model sees tokens either way, and
+nothing in the text marks which hand wrote it. We assert that here and test
+it in Section~\ref{sec:regime}, where payloads that assert the same false
+answer in the same slots at the same dose differ only in whether someone
+wrote the sentence to be believed.
 
 Our taxonomy therefore uses \emph{mechanism} as the neutral term for both, and
-records provenance in a separate \emph{intent} axis. Writing "attack" at the
+records provenance in a separate \emph{intent} axis. Writing ``attack'' at the
 top level would have made the safety half unregisterable, because an
 attack presupposes an attacker.
+
+\textbf{This paper asks whether single-regime validation transfers.} Most
+published defenses answer to one regime and not the other, which
+Section~\ref{sec:taxonomy} counts. The assumption behind that practice is
+reasonable. A method that makes a model robust to a stale document works on
+the same surface that an attacker writes to. Nobody has simply tested it at
+scale. Section~\ref{sec:experiments} tests it.

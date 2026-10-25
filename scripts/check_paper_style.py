@@ -121,7 +121,7 @@ def main():
     for name, pat in (("contributions explicit", r"\\paragraph\{Contributions"),
                       ("novelty explicit", r"What is new here|first evaluation in which"),
                       ("scope/limits stated early", r"\\paragraph\{Scope"),
-                      ("threat model present", r"\\section\{Threat model")):
+                      ("threat model present", r"\\(?:sub)?section\{(?:Threat model|The security regime)")):
         say(bool(re.search(pat, joined)), name)
 
     print(f"\n{fails} fail, {warns} warn")

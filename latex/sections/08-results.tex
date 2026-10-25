@@ -7,7 +7,7 @@ Stated first, then supported: \textbf{a defense that works by shifting trust
 from the model's parameters toward the retrieved text is correct when the text
 is merely stale and dangerous when an attacker owns it.}
 
-The family is defined in Section~\ref{sec:twoplaces}: a method whose
+The family is defined by what it does: a method whose
 intervention is a weighting between the context-conditioned and the
 memory-conditioned prediction. It is large, and it is most of what we ran.
 \textbf{Seven of the ten implementations we attacked are in it} --- ACD,
@@ -23,7 +23,10 @@ vacuous. DyPRAG~\cite{tan-2025-dynamic} converts the retrieved passage into weig
 context-versus-memory dial to turn. The two RobustRAG variants isolate each
 passage and aggregate across them, which asks \emph{which} passages agree
 rather than how far to trust passages in general. The
-family's shared idea is reasonable for the problem it was built for. When a
+family's shared idea is reasonable for the problem it was built for. The
+dial runs between \emph{believe the context} and \emph{believe memory}, and
+no setting on it separates a real document from a planted one, because both
+are context. When a
 retrieved document disagrees with the model's memory, the document is usually
 newer, so trust the document. The idea becomes a liability the moment the
 document is written by an adversary, because the defense instructs the model to
@@ -119,7 +122,7 @@ the paper states a scope condition rather than a blanket one.
 Every result in this section is about a defense. This one is not. The paper
 divides its corpus by regime, and that division rests on a claim about the
 stimulus rather than about any method: that an adversary and an accident
-produce the same failure. We asserted it in Section~\ref{sec:twoplaces}
+produce the same failure. We asserted it in Section~\ref{sec:twovocab}
 before anyone had measured it, so we measured it.
 
 \input{tables/regime_framing}
