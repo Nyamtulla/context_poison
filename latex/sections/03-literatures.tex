@@ -371,23 +371,21 @@ against the other's problems?}
 
 We dated all \NTimelinePairs{} pairs and recorded which community each side
 came from. Restricting to the \NPureRegimePairs{} pairs where both sides sit in
-one of the two regimes gives Table~\ref{tab:transfer}.
+one of the two regimes gives the left panel of
+Figure~\ref{fig:transfermatrix}; the right panel is the same count for our
+own campaign.
 
-\begin{table}[t]
+\begin{figure*}[t]
 \centering
-\caption{Which community's defense met which community's attack, across
-\NPureRegimePairs{} literature pairs.}
-\label{tab:transfer}
-\small
-\begin{tabular}{@{}lrr@{}}
-\toprule
-defense from $\downarrow$ \quad attack from $\rightarrow$ & Security & AI \\
-\midrule
-Security & \NSecDefSecAttack{} & \textbf{\NSecDefVsSafetyAttack{}} \\
-AI    & \NSafetyDefVsSecAttack{} & \NSafetyDefSafetyAttack{} \\
-\bottomrule
-\end{tabular}
-\end{table}
+\includegraphics[width=\textwidth]{figures/fig6_transfer_matrix}
+\caption{Which community's defense met which community's attack, in the
+published literature and in this paper's campaign. Cell shade is each
+panel's own share rather than a shared count scale, because the two totals
+differ by an order of magnitude; the printed count is the value. The
+right-hand panel covers the retrieval-cell transfer pairs, not the whole
+campaign. A combination nobody has run at all is marked.}
+\label{fig:transfermatrix}
+\end{figure*}
 
 \textbf{Exactly \NSecDefVsSafetyAttack{} of \NPureRegimePairs{} pairs is a
 security defense evaluated against a safety failure mechanism},
@@ -405,21 +403,6 @@ subject matter spans both communities, which is precisely the kind of paper
 that would cross first. One instance in \NPureRegimePairs{} is not a literature
 that tests across the boundary; it is the exception that shows what crossing
 would look like.
-
-Figure~\ref{fig:transfermatrix} puts that distribution beside the one our
-own campaign produces, which is the gap this paper sets out to close.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/fig6_transfer_matrix}
-\caption{Which community's defense met which community's attack, in the
-published literature and in this paper's campaign. Cell shade is each
-panel's own share rather than a shared count scale, because the two totals
-differ by an order of magnitude; the printed count is the value. The
-right-hand panel covers the retrieval-cell transfer pairs, not the whole
-campaign. A combination nobody has run at all is marked.}
-\label{fig:transfermatrix}
-\end{figure*}
 
 This is consistent with the citation rates and sharper than them. The
 communities do not read each other, so they do not test each other, so the
@@ -511,8 +494,8 @@ chance of citing. It is not renaming that paper's mechanism --- the collision
 count above says it is not --- and arriving second at a surface is not a
 fault. We are claiming the obvious
 consequence, which is that neither side can tell whether the other has already
-answered its question, and Table~\ref{tab:transfer} shows that nobody has
-checked.
+answered its question, and Figure~\ref{fig:transfermatrix} shows that nobody
+has checked.
 
 Two limits on this reading. The dates are publication dates in our corpus, so
 a channel that security reached first in work we did not include would move
@@ -531,7 +514,7 @@ A reader might reasonably ask whether this is our boundary rather than the
 field's. We assign the regime label per paper, and every paper takes one of the
 two. Papers on the boundary take the regime their own evaluation adopts. A
 paper that spans both communities therefore still appears in
-Table~\ref{tab:transfer}; we set none aside. The single
+Figure~\ref{fig:transfermatrix}; we set none aside. The single
 crossing above comes from one of them, which is what one would expect --- a
 paper that reaches across is the kind of paper that crosses.
 
