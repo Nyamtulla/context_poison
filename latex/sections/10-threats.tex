@@ -18,7 +18,13 @@ cited paper into a regime. That classification is automated over the full
 discovery pool. A systematic bias in it would move the rates. We regard the
 direction of the finding as safe, because the gap between \PctSecCitesSafety{}\% citation and
 \PctSameRegime{}\% same-regime evaluation is far larger than any plausible classification
-error, but the exact rates should be read as estimates.
+error, but the exact rates should be read as estimates. Two further limits
+bound them. The denominator is the \NAnalysed{} papers that named a
+technique rather than every screened-in paper, because a survey cites
+widely and names nothing, so counting it would measure reading habits. And
+only citations to papers inside that set register, so a paper reaching
+across to work we did not include does not count: every cross-citation rate
+in this paper is a floor.
 
 \textbf{Registry granularity.} What counts as one named mechanism is a
 judgement. ``Indirect prompt injection'' is one registry entry and absorbs
