@@ -491,6 +491,25 @@ def main():
             if c in CHS and q and tr in ("security", "safety"):
                 s.add((c, q, tr))
         return s
+    # The four heaviest cells, named explicitly rather than taken as a
+    # top-four, so the prose cannot silently describe a different cell than
+    # the one it prints a number for. These were typed; one of them had
+    # drifted by a point before anybody re-read it.
+    _dcell = collections.Counter(
+        ((e.get("channel") or "").strip(),
+         canon_consequence(e.get("consequence")),
+         (e.get("regime") or "").strip()) for e in r4)
+    _top = {
+        "NDefCellToolOutGoalHijack": ("tool-output", "goal-hijack", "security"),
+        "NDefCellDirectInGoalHijack": ("direct-input", "goal-hijack",
+                                       "security"),
+        "NDefCellRagSilent": ("RAG", "silent-corruption", "safety"),
+        "NDefCellMemReasoning": ("memory", "reasoning-corruption", "safety"),
+    }
+    for _k, _cell in _top.items():
+        M[_k] = _dcell[_cell]
+    M["PctTopFourDef"] = f'{100 * sum(_dcell[c] for c in _top.values()) / len(r4):.0f}'
+
     _nodef = _cells(r3) - _cells(r4)
     M["NCellsAttackNoDef"] = len(_nodef)
     M["NCellsAttackNoDefSec"] = sum(1 for k in _nodef if k[2] == "security")

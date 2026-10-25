@@ -178,11 +178,13 @@ community works are nearly disjoint, which is the same separation the citation
 rates show, drawn as a picture.
 
 Effort is concentrated rather than scarce. Four cells hold more than fifty
-defenses each --- \meth{tool-output} $\times$ \meth{goal-hijack} at 113,
-\meth{direct-input} $\times$ \meth{goal-hijack} at 61, \meth{RAG} $\times$
-\meth{silent-corruption} at 60 and \meth{memory} $\times$
-\meth{reasoning-corruption} at 59 --- and between them they absorb over half of
-the \NDefenses{} defenses in the census.
+defenses each --- \meth{tool-output} $\times$ \meth{goal-hijack} at
+\NDefCellToolOutGoalHijack{}, \meth{direct-input} $\times$
+\meth{goal-hijack} at \NDefCellDirectInGoalHijack{}, \meth{RAG} $\times$
+\meth{silent-corruption} at \NDefCellRagSilent{} and \meth{memory}
+$\times$ \meth{reasoning-corruption} at \NDefCellMemReasoning{} --- and
+between them they absorb \PctTopFourDef{}\% of the \NDefenses{} defenses
+in the census.
 
 And \NCellsAttackNoDef{} cells hold a named attack with no defense ever
 proposed against it. \NCellsAttackNoDefSec{} of them are in the security
