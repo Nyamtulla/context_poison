@@ -609,9 +609,8 @@ def fig_transfer_matrix():
     # meant one of the two sections had to cite a float three sections away;
     # the panels never shared a colour scale anyway, so nothing is lost by
     # separating them.
-    panels = [("fig6a_transfer_lit", lit, "Published literature"),
-              ("fig6b_transfer_ours", ours, "This paper's campaign")]
-    for name, data, title in panels:
+    panels = [("fig6a_transfer_lit", lit), ("fig6b_transfer_ours", ours)]
+    for name, data in panels:
         tot = sum(data.values())
         fig, ax = plt.subplots(figsize=(COL * 0.58, 1.55),
                                constrained_layout=True)
@@ -631,9 +630,10 @@ def fig_transfer_matrix():
                 lbl.set_color(TRACK_SEC if t == "security" else TRACK_ML)
         ax.set_xlabel("attack from", fontsize=5.6)
         ax.set_ylabel("defense from", fontsize=5.6)
-        cross = int(M[0, 1] + M[1, 0])
-        ax.set_title(f"{title}\n{cross} of {int(tot)} cross-community "
-                     f"({100*cross/tot:.0f}%)", fontsize=5.8)
+        # No title. Which panel this is, and its cross-community share, are
+        # said once in the caption instead of twice on the page -- and the
+        # caption can use the macros, so the share cannot drift from the
+        # prose that quotes it.
         for i in range(2):
             for j in range(2):
                 v = int(M[i, j])
