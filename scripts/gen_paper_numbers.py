@@ -199,7 +199,24 @@ def main():
     # 2026-10-15. Section 3 turned its counts into percentages of the current
     # registry, which has grown since, so the shares were against a retired
     # denominator. The audit's own size is the honest one to quote.
-    M["NDefEvalAudited"] = load("defense_evaluation_status.json")["n_defenses"]
+    _ev = load("defense_evaluation_status.json")
+    _evc = _ev["counts"]
+    M["NDefEvalAudited"] = _ev["n_defenses"]
+    # 293 / 132 / 14 were typed into the prose from defense_evaluation_audit.md.
+    # The 14 still agrees; the other two do not, because that report counted
+    # two OVERLAPPING routes (214 in a coverage pair, 211 with an adversarial
+    # signal, 132 in both) while this registry assigns each defense exactly one
+    # status. Reading the registry gives a partition that adds up and that the
+    # generator can recompute, so the paper quotes it instead.
+    M["NDefEvalAdversarial"] = _ev["n_evaluated_adversarially"]
+    M["PctDefEvalAdversarial"] = f'{_ev["pct_evaluated_adversarially"]:.1f}'
+    M["NDefEvalPair"] = _evc["named_mechanism"]
+    M["NDefEvalProse"] = _evc["adversarial_prose"]
+    M["NDefEvalBenchmark"] = _evc["benchmark_only"]
+    M["NDefEvalNoBaseline"] = _evc["no_baseline"]
+    # everything else is a negative or an unclear read, and this paper does
+    # not report a number drawn from a negative class
+    M["NDefEvalUndetermined"] = (_evc["non_adversarial"] + _evc["unclear"])
 
     # ---- the validation study. Section 10 claimed human verification and
     # an inter-rater agreement; the study is drawn, uncoded, and
