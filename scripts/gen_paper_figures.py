@@ -49,7 +49,6 @@ SEQ_SEC = ["#fbdcd3", "#f6b9a8", "#ef947c", "#e76f52", "#d6452a", "#bf3d25",
 # so it survives both common CVD types and greyscale printing.
 SEQ_ALT = ["#e3f5ee", "#c4e9dc", "#9eddc8", "#74cfb1", "#46c098",
            "#1baf7a", "#169068", "#117455", "#0d5a42", "#09412f"]
-# Hues for distinctions that are NOT track. Red and blue are spoken for.
 # Hues for distinctions that are NOT regime, with one meaning each across
 # every figure: ALT_A is the defense side (defenses, defense wins, defense
 # predates its attack) and ALT_B the attack side (mechanisms, defense loses,
