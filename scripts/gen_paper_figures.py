@@ -211,6 +211,45 @@ def fig_cube():
     save(fig, "fig1_cube")
 
 
+# ---------------------------------------------------------------- figure 10
+def fig_intervention():
+    """Where each regime's defenses intervene.
+
+    This was a four-row table. The claim it carries is a shape -- security
+    stops the text getting in and contains what it does, safety reasons
+    better about text already accepted -- and a shape is what a reader takes
+    from a bar and has to assemble from a column of digits.
+
+    Regime is what this figure encodes, so it takes the track hues; safety
+    is hatched as well, because red and blue land on the same grey.
+    """
+    r4 = load("rq4_defense_registry.json")
+    POINTS = ["ingestion", "execution", "reasoning", "none"]
+    c = collections.Counter(((e.get("defense_intervention_point") or "none"),
+                             (e.get("regime") or "").strip()) for e in r4)
+    y = np.arange(len(POINTS))[::-1]
+    h = 0.38
+    fig, ax = plt.subplots(figsize=(COL, 1.75), constrained_layout=True)
+    for off, reg, col, hat in ((h / 2, "security", TRACK_SEC, ""),
+                               (-h / 2, "safety", TRACK_ML, "///")):
+        vals = [c[(p, reg)] for p in POINTS]
+        ax.barh(y + off, vals, h, color=col, hatch=hat, edgecolor=INK,
+                linewidth=.3, label=reg)
+        for yy, v in zip(y + off, vals):
+            ax.text(v + 3, yy, str(v), va="center", fontsize=6, color=INK)
+    ax.set_yticks(y)
+    ax.set_yticklabels(POINTS, fontsize=6.5)
+    ax.set_xlabel("named defenses")
+    ax.set_xlim(0, max(c.values()) * 1.16)
+    ax.legend(frameon=False, fontsize=6.5, loc="lower right")
+    ax.grid(axis="x", color="#eceae6", linewidth=0.5)
+    ax.set_axisbelow(True)
+    for s in ("top", "right", "left"):
+        ax.spines[s].set_visible(False)
+    ax.tick_params(length=0)
+    save(fig, "fig10_intervention")
+
+
 # ---------------------------------------------------------------- figure 2
 def fig_channel_gap():
     """Named mechanisms against named defenses, per channel.
@@ -679,5 +718,6 @@ def fig_vocab():
 if __name__ == "__main__":
     fig_cube(); fig_channel_gap(); fig_who_reports(); fig_dose()
     fig_citation_network(); fig_transfer_matrix(); fig_lag()
+    fig_intervention()
     fig_vocab()
     print("done")

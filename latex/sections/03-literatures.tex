@@ -95,7 +95,7 @@ window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
 A defense can intervene at one of three points between them. The third
 axis, \textbf{regime}, has no position in this flow because every mechanism
 and every defense carries one wherever it sits;
-Table~\ref{tab:intervention} and Figure~\ref{fig:cube} give its split. This
+Figure~\ref{fig:intervention} and Figure~\ref{fig:cube} give its split. This
 figure carries the vocabulary and the counts are in the text. Drawn as a
 flow rather than a tree because the taxonomy is a cube, and the pipeline is
 the one ordering the three axes genuinely have.}
@@ -467,26 +467,20 @@ than from a coded field. It is not clean at the edges. A few safety-regime
 entries name a delivery route rather than a susceptibility, \meth{KV-cache
 contamination} and \meth{incidental prompt injection} among them. The
 intervention points below are coded, and they divide the same way.
-Figure~\ref{fig:pipeline} draws this split against the pipeline; the counts
-are here because the argument rests on them.
+Figure~\ref{fig:pipeline} draws this split against the pipeline, and
+Figure~\ref{fig:intervention} counts it, because the argument rests on the
+counts.
 
-\begin{table}[t]
+\begin{figure}[t]
 \centering
-\caption{Where each regime's defenses intervene. Security keeps the text out
-and contains what it does; safety improves reasoning over text already
-accepted.}
-\label{tab:intervention}
-\begin{tabular}{lrr}
-\toprule
-intervention point & security & safety \\
-\midrule
-ingestion & \NDefPtIngestionSec{} & \NDefPtIngestionSafety{} \\
-execution & \NDefPtExecutionSec{} & \NDefPtExecutionSafety{} \\
-reasoning & \NDefPtReasoningSec{} & \NDefPtReasoningSafety{} \\
-none      & \NDefPtNoPointSec{} & \NDefPtNoPointSafety{} \\
-\bottomrule
-\end{tabular}
-\end{table}
+\includegraphics[width=\columnwidth]{figures/fig10_intervention}
+\caption{Where each regime's defenses intervene. Security keeps the text
+out and contains what it does; safety improves reasoning over text already
+accepted. Points run in pipeline order. Safety is hatched as well as blue,
+because the two regime hues land on the same grey in a black-and-white
+print.}
+\label{fig:intervention}
+\end{figure}
 
 Duplicated effort wastes labor and leaves two working defenses. Complementary
 effort that never meets leaves one broken chain: a reasoning-stage defense sits
