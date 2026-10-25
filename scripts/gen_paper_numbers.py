@@ -667,20 +667,41 @@ def main():
     M["NNetworkCross"] = ncross
     M["PctNetworkCross"] = f"{100*ncross/G.number_of_edges():.1f}"
 
-    # ---- RQ2's paper-level cross-citation rates. Same counting rule as
-    # scripts/rq2_cross_citation.py, over the same columns: a security-regime paper
-    # counts if it cites any safety-regime paper at all. The abstract carried 9.3
-    # against the report's 9.4 before these became macros.
-    _ci = {c: hdr.index(c) for c in ("regime", "cites_track_a", "cites_track_b")}
+    # ---- paper-level cross-citation rates, from the SAME graph as the
+    # figure above.
+    #
+    # These used to read the hand-coded cites_track_a / cites_track_b
+    # columns, and the two disagreed by five points: 11.6% coded against
+    # 17.3% from the graph. The columns are keyed to the old `track`
+    # partition, which the regime migration superseded, so a paper whose
+    # regime changed kept a flag computed against the other partition. The
+    # graph is keyed to the current regime on both endpoints and is the same
+    # object Figure 5 draws, so the prose and the figure can no longer
+    # disagree. scripts/rq2_cross_citation.py still reads the old columns
+    # and will differ until it is moved over too.
+    #
+    # The rate counts citations to papers INSIDE the corpus, so a paper that
+    # cites the other regime's work from outside our 929 does not register.
+    # That makes every figure here a floor.
+    _cites = collections.defaultdict(set)
+    for e in net["edges"]:
+        if e["citing"] in included and e["cited"] in included:
+            _cites[e["citing"]].add(e["cited"])
     inc = [r for r in rows if r[pi] in included]
-    sec = [r for r in inc if r[_ci["regime"]] == "security"]
-    mla = [r for r in inc if r[_ci["regime"]] == "safety"]
-    a_b = sum(1 for r in sec if r[_ci["cites_track_b"]] == "Y")
-    b_a = sum(1 for r in mla if r[_ci["cites_track_a"]] == "Y")
+    sec = [r for r in inc if trk.get(r[pi]) == "security"]
+    mla = [r for r in inc if trk.get(r[pi]) == "safety"]
+
+    def _crosses(r, other):
+        return any(trk.get(c) == other for c in _cites.get(r[pi], ()))
+
+    a_b = sum(1 for r in sec if _crosses(r, "safety"))
+    b_a = sum(1 for r in mla if _crosses(r, "security"))
     M["NRegimeSecurity"], M["NRegimeSafety"] = len(sec), len(mla)
     M["NSecCitesSafety"], M["NSafetyCitesSec"] = a_b, b_a
     M["PctSecCitesSafety"] = f"{100*a_b/len(sec):.1f}"
     M["PctSafetyCitesSec"] = f"{100*b_a/len(mla):.1f}"
+    M["PctSecNoCross"] = f"{100*(len(sec)-a_b)/len(sec):.0f}"
+    M["PctSafetyNoCross"] = f"{100*(len(mla)-b_a)/len(mla):.0f}"
 
     # ---- who reports what. The abstract's reporter asymmetry, from the same
     # file pair_tally reads, so it cannot drift from the tally.
