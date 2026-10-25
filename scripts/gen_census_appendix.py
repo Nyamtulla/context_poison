@@ -25,6 +25,8 @@ from __future__ import annotations
 
 import json
 import pathlib
+
+from taxonomy import canon_consequence
 import re
 
 import openpyxl
@@ -142,7 +144,11 @@ def main():
     for e in sorted(mech, key=lambda e: key(e, "technique_name")):
         n, un = name_of(e, "technique_name")
         m_unnamed += un
-        mrows.append([n, tex(e.get("channel")), tex(e.get("consequence")),
+        # the census prints the axis value a mechanism now carries, not the
+        # raw coding value, so the appendix and the cube cannot disagree
+        mrows.append([n, tex(e.get("channel")),
+                      tex(canon_consequence(e.get("consequence"))
+                          or e.get("consequence")),
                       tex(regime_label(e.get("regime"))), src.get(e.get("paper_id"), "---")])
 
     drows, d_unnamed = [], 0

@@ -80,10 +80,9 @@ We exclude three things. Training-time poisoning and weight-level attacks do
 not travel through the context window. A user attacking their own agent
 involves no third-party content, so the trust boundary we study does not
 exist. Denial of service through resource exhaustion sits in the taxonomy as
-\meth{resource-abuse}. It is the thinnest cell we register: after the full-text
-coding pass it holds \NMechResourceAbuse{} mechanism and
-\NDefResourceAbuse{} defenses. We report it and draw no conclusions from a
-cell that small.
+\meth{availability-loss}, alongside the non-adversarial ways an agent fails
+to deliver its work. It is the thinnest consequence we register and we draw
+no strong conclusion from it.
 
 \subsection{The safety regime}
 

@@ -53,14 +53,7 @@ plt.rcParams.update({
     "savefig.bbox": "tight", "savefig.pad_inches": 0.02, "pdf.fonttype": 42,
 })
 
-CHANNELS = ["direct-input", "tool-output", "RAG", "memory", "multi-agent",
-            "cross-modal", "tool-metadata", "skill", "supply-chain"]
-# Keep in step with CQS in gen_paper_numbers.py and CONSEQ in
-# gen_paper_figures.py. availability-loss joined the scheme and this list was
-# missed, so the figure drew six columns while the paper said seven.
-CONSEQ = ["goal-hijack", "reasoning-corruption", "silent-corruption",
-          "data-exfiltration", "persistence-backdoor", "resource-abuse",
-          "availability-loss"]
+from taxonomy import CHANNELS, CONSEQ
 POINTS = [("ingestion", "ingestion"), ("reasoning", "reasoning"),
           ("execution", "execution")]
 

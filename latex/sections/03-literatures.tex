@@ -125,18 +125,23 @@ given~\cite{greshake-2023-not}.
 right goal~\cite{liu-2023-lost}. \meth{silent-corruption} is producing a wrong output with nothing
 to signal it~\cite{zhong-2023-poisoning}. \meth{data-exfiltration} is information crossing a boundary it
 should not~\cite{yu-2023-assessing}. \meth{persistence-backdoor} is corruption that survives into a
-later session~\cite{yan-2023-backdooring}. \meth{resource-abuse} is spending compute, money or quota on the
-attacker's behalf~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
-\meth{availability-loss} is the agent failing to finish the task at
-all~\cite{xia-2026-diagnosing}.
+later session~\cite{yan-2023-backdooring}. \meth{availability-loss} is the agent not delivering its work: either it
+fails to finish the task at all~\cite{xia-2026-diagnosing}, or it finishes
+only after spending compute, money or quota out of proportion to
+it~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
 Figure~\ref{fig:pipeline} sets the three axes against the system they
 describe.
 
-The three axes give \NCubeCells{} cells. \meth{resource-abuse} is by far
-the sparsest column, at \NMechResourceAbuse{} mechanism and
-\NDefResourceAbuse{} defenses, and a sparse column raises the share of
-empty cells, so the empty-cell figure below is reported on the full grid
-rather than on a smaller one that would flatter it.
+The three axes give \NCubeCells{} cells. An earlier version of the scheme
+split \meth{availability-loss} in two, separating the case where an
+adversary consumes the victim's resources from the case where the agent
+simply does not finish. The split divided one harm by who gains rather than
+by what goes wrong, and it left a column holding a single mechanism and no
+defense at all, so we merged the two. The merge removes a column that was
+nearly empty, which lowers the empty-cell share reported below from
+\PctCubeEmptySeven{}\% on the seven-consequence grid to
+\PctCubeEmpty{}\% on this one; the count
+of occupied cells is unchanged but for the one that moved.
 
 \NUnplaceable{} papers (\PctUnplaceable{}\%) carry no single channel or
 consequence. These are surveys and benchmarks whose attack surfaces are
@@ -179,9 +184,10 @@ defenses each --- \meth{tool-output} $\times$ \meth{goal-hijack} at 113,
 \meth{reasoning-corruption} at 59 --- and between them they absorb over half of
 the \NDefenses{} defenses in the census.
 
-And nine cells hold a named attack with no defense ever proposed against it.
-Eight of them are in the security panel, four of those are
-\meth{persistence-backdoor}, and the ninth is \meth{memory} $\times$
+And \NCellsAttackNoDef{} cells hold a named attack with no defense ever
+proposed against it. \NCellsAttackNoDefSec{} of them are in the security
+panel, \NCellsAttackNoDefBackdoor{} of those are
+\meth{persistence-backdoor}, and the last is \meth{memory} $\times$
 \meth{data-exfiltration} on the safety side. A cell one community has
 to itself is a gap; a cell with attacks and no defense is a different and
 sharper one.

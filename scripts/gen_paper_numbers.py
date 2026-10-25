@@ -54,6 +54,9 @@ _rtv = _ilu.module_from_spec(_sp); _sp.loader.exec_module(_rtv)
 _venue_bucket = _rtv.bucket
 
 
+from taxonomy import canon_consequence
+
+
 def main():
     hdr, rows = corpus_rows()
     si, pi = hdr.index("screening"), hdr.index("paper_id")
@@ -126,12 +129,14 @@ def main():
     # specification of the adversary; "incidental" has no adversary at all,
     # so the binary is which regime a paper's own evaluation covered.
     M["PctOneRegime"] = f'{100*(1-va["both"]/len(r4)):.0f}'
-    # The re-coding emptied resource-abuse almost completely; the prose used
-    # to say "three mechanisms and three defenses" as literal numbers.
-    M["NMechResourceAbuse"] = sum(
-        1 for e in r3 if (e.get("consequence") or "").strip() == "resource-abuse")
-    M["NDefResourceAbuse"] = sum(
-        1 for e in r4 if (e.get("consequence") or "").strip() == "resource-abuse")
+    # resource-abuse was merged into availability-loss on 2026-10-24 (see
+    # scripts/taxonomy.py), so these count the merged consequence instead.
+    M["NMechAvailLoss"] = sum(
+        1 for e in r3 if canon_consequence(e.get("consequence"))
+        == "availability-loss")
+    M["NDefAvailLoss"] = sum(
+        1 for e in r4 if canon_consequence(e.get("consequence"))
+        == "availability-loss")
     # Count the defenses validated in the OTHER regime.
     _other = {"security": "incidental", "safety": "adversarial"}
     M["NDefCrossRegime"] = sum(
@@ -427,15 +432,7 @@ def main():
     # consequence) per paper, split by track. These were typed into the prose
     # and went stale the moment the corpus moved: the text still said 98 empty
     # cells of 162 when it had become 111.
-    CHS = ["direct-input", "tool-output", "RAG", "memory", "multi-agent",
-           "cross-modal", "tool-metadata", "skill", "supply-chain"]
-    # availability-loss added 2026-10-21: the agent cannot finish at all.
-    # The cube is 9 x 7 x 3 = 189 cells, not 162. Adding a sparse column
-    # RAISES the empty-cell percentage for a reason that has nothing to do
-    # with the field changing, so the prose must say why.
-    CQS = ["goal-hijack", "reasoning-corruption", "silent-corruption",
-           "data-exfiltration", "persistence-backdoor", "resource-abuse",
-           "availability-loss"]
+    from taxonomy import CHANNELS as CHS, CONSEQ as CQS
     ci, qi, ti = hdr.index("channel"), hdr.index("consequence"), hdr.index("regime")
     # Computed over REGISTRY ENTRIES, not paper rows, since 2026-10-22.
     # A paper that names no attack and no defense was still occupying a cell:
@@ -447,10 +444,10 @@ def main():
     for e in r3 + r4:
         if e.get("paper_id") not in included:
             continue
-        c, q, tr = ((e.get("channel") or "").strip(),
-                    (e.get("consequence") or "").strip(),
-                    (e.get("regime") or "").strip())
-        if c in CHS and q in CQS and tr in ("security", "safety"):
+        c = (e.get("channel") or "").strip()
+        q = canon_consequence(e.get("consequence"))
+        tr = (e.get("regime") or "").strip()
+        if c in CHS and q and tr in ("security", "safety"):
             occupied.add((c, q, tr))
     # The cube's third axis is the regime. The
     # `Both` value was retired on 2026-10-22 (track_reassignment_prediction.md)
@@ -463,6 +460,42 @@ def main():
     M["NChannelCats"], M["NConseqCats"] = len(CHS), len(CQS)
     M["NCubeCells"] = NCELLS
     M["NCubeEmpty"] = NCELLS - len(occupied)
+
+    # The seven-consequence grid, before resource-abuse was merged into
+    # availability-loss. The merge removes a nearly empty column and so
+    # lowers the empty-cell rate; the prose has to report the before as well
+    # as the after, and neither figure may be typed into it.
+    _seven = set()
+    for e in r3 + r4:
+        if e.get("paper_id") not in included:
+            continue
+        c = (e.get("channel") or "").strip()
+        q = (e.get("consequence") or "").strip()
+        tr = (e.get("regime") or "").strip()
+        if c in CHS and q and tr in ("security", "safety"):
+            _seven.add((c, q, tr))
+    _n7 = len(CHS) * (len(CQS) + 1) * 2
+    M["PctCubeEmptySeven"] = round(100 * (_n7 - len(_seven)) / _n7, 1)
+
+    # Cells holding a named attack and no defense at all. Typed as "nine"
+    # and "eight" in the prose; the merge moved one of them and neither
+    # number would have been re-checked.
+    def _cells(reg):
+        s = set()
+        for e in reg:
+            if e.get("paper_id") not in included:
+                continue
+            c = (e.get("channel") or "").strip()
+            q = canon_consequence(e.get("consequence"))
+            tr = (e.get("regime") or "").strip()
+            if c in CHS and q and tr in ("security", "safety"):
+                s.add((c, q, tr))
+        return s
+    _nodef = _cells(r3) - _cells(r4)
+    M["NCellsAttackNoDef"] = len(_nodef)
+    M["NCellsAttackNoDefSec"] = sum(1 for k in _nodef if k[2] == "security")
+    M["NCellsAttackNoDefBackdoor"] = sum(
+        1 for k in _nodef if k[1] == "persistence-backdoor")
     # papers that carry no channel or no consequence: multi-vector surveys
     # and benchmarks whose surfaces are co-equal by construction. They are
     # outside the cube by construction, and the empty-cell rate is only

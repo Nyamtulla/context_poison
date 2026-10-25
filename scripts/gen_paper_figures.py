@@ -84,15 +84,7 @@ plt.rcParams.update({
     "pdf.fonttype": 42,
 })
 
-CHANNELS = ["direct-input", "tool-output", "RAG", "memory", "multi-agent",
-            "cross-modal", "tool-metadata", "skill", "supply-chain"]
-# availability-loss was added to the scheme on 2026-10-21 and to
-# gen_paper_numbers.py the same day, but not here, so every figure keyed on
-# CONSEQ silently dropped a column and the entries coded to it vanished from
-# the cube. Keep this list identical to CQS in gen_paper_numbers.py.
-CONSEQ = ["goal-hijack", "reasoning-corruption", "silent-corruption",
-          "data-exfiltration", "persistence-backdoor", "resource-abuse",
-          "availability-loss"]
+from taxonomy import CHANNELS, CONSEQ, canon_consequence
 
 
 def load(n):
@@ -137,9 +129,9 @@ def fig_cube():
         g = np.zeros((len(CHANNELS), len(CONSEQ)))
         for e in reg:
             c = (e.get("channel") or "").strip()
-            q = (e.get("consequence") or "").strip()
+            q = canon_consequence(e.get("consequence"))
             if (e.get("regime") or "").strip() == track \
-                    and c in CHANNELS and q in CONSEQ:
+                    and c in CHANNELS and q:
                 g[CHANNELS.index(c), CONSEQ.index(q)] += 1
         return g
 
