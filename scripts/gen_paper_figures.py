@@ -43,11 +43,14 @@ TRACK_SEC, TRACK_ML = "#d6452a", "#2a78d6"
 # "magnitude" and "regime" in the same figure.
 SEQ_SEC = ["#fbdcd3", "#f6b9a8", "#ef947c", "#e76f52", "#d6452a", "#bf3d25",
            "#ab361f", "#95301b", "#812814", "#6b1f0d"]
-SEQ_NEUTRAL = ["#f0efec", "#dcdbd7", "#c6c5c0", "#aeada8", "#969590",
-               "#7e7d78", "#666561", "#4e4d4a", "#383734", "#232220"]
+# A mixed-track panel cannot take red or blue without a hue meaning both
+# "magnitude" and "regime" in one figure, and a grey ramp reads as a shaded
+# slide. One off-track hue, light to dark: lightness carries the magnitude,
+# so it survives both common CVD types and greyscale printing.
+SEQ_ALT = ["#e3f5ee", "#c4e9dc", "#9eddc8", "#74cfb1", "#46c098",
+           "#1baf7a", "#169068", "#117455", "#0d5a42", "#09412f"]
 # Hues for distinctions that are NOT track. Red and blue are spoken for.
 ALT_A, ALT_B, ALT_C = "#1baf7a", "#eda100", "#8a5a2b"
-GREY_MID = "#f0efec"
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 
 # IEEEtran conference: \columnwidth is 252pt and \textwidth is 516pt,
@@ -479,8 +482,9 @@ def fig_transfer_matrix():
 
     TR = ["security", "safety"]
     # Each cell mixes a defense track with an attack track, so no single track
-    # hue fits: magnitude goes neutral and the axes carry the track colours.
-    cmap = LinearSegmentedColormap.from_list("neutral", SEQ_NEUTRAL)
+    # hue fits: magnitude takes the off-track ramp and the axes keep the
+    # track colours.
+    cmap = LinearSegmentedColormap.from_list("alt", SEQ_ALT)
     fig, axes = plt.subplots(1, 2, figsize=(FULL, 2.25))
     for ax, data, title, tot in (
             (axes[0], lit, "Published literature", sum(lit.values())),
@@ -540,9 +544,13 @@ def fig_lag():
     g = collections.Counter(r["gap_years"] for r in tl)
     ks = sorted(g)
     vals = [g[k] for k in ks]
-    cols = [ALT_A if k < 0 else (GREY_MID if k == 0 else ALT_B) for k in ks]
+    # Zero has no polarity, so it gets no fill. An open bar reads as the
+    # midpoint without a third shade standing in for one.
+    cols = ["none" if k == 0 else (ALT_A if k < 0 else ALT_B) for k in ks]
+    edges = [INK2 if k == 0 else MUTED for k in ks]
+    widths = [0.8 if k == 0 else 0.4 for k in ks]
     fig, ax = plt.subplots(figsize=(COL, 1.8))
-    ax.bar(ks, vals, color=cols, edgecolor=MUTED, linewidth=0.4, width=0.78)
+    ax.bar(ks, vals, color=cols, edgecolor=edges, linewidth=widths, width=0.78)
     for k, v in zip(ks, vals):
         ax.text(k, v + 1.5, str(v), ha="center", fontsize=6.5, color=INK2)
     ax.axvline(-0.5, color=MUTED, lw=0.6, ls=":")
@@ -552,9 +560,9 @@ def fig_lag():
     ax.set_xticks(ks)
     ax.set_ylim(0, max(vals) * 1.22)
     ax.spines["top"].set_visible(False); ax.spines["right"].set_visible(False)
-    ax.annotate(f"{n_before} defenses predate\nthe attack they met",
-                xy=(-1.5, max(vals) * 0.82), fontsize=6.2, color=ALT_A,
-                ha="center")
+    ax.annotate(f"{n_before} defenses\npredate the\nattack they met",
+                xy=(-2.42, max(vals) * 0.62), fontsize=6.0, color=ALT_A,
+                ha="left")
     print(f"    lag: {n_before} of {len(tl)} defenses predate their attack")
     save(fig, "fig7_lag")
 

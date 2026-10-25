@@ -139,46 +139,44 @@ def figure(n):
     plt.rcParams.update({"font.family": "serif", "pdf.fonttype": 42,
                          "savefig.bbox": "tight", "savefig.pad_inches": 0.02})
 
+    # Four boxes of the same shape: a stage name, what left at that stage,
+    # and what survived it. Side callouts were dropped because only two of
+    # the four stages could carry one, and an arrow on half the boxes reads
+    # as an omission on the other half.
     stages = [
         ("Seeds and database search",
-         f"{n['seeds']} seed papers  +  {n['search']:,} records\n"
-         f"from {n['queries']} queries across {n['apis']} APIs",
-         None),
+         f"{n['seeds']} seed papers  +  {n['search']:,} records",
+         f"from {n['queries']} queries across {n['apis']} APIs"),
         ("Snowballed, both directions",
-         f"forward {n['fwd']:,}  ·  backward {n['bwd']:,}\n"
-         f"working pool  n = {n['pool']:,}",
-         None),
+         f"forward {n['fwd']:,}  ·  backward {n['bwd']:,}",
+         f"working pool, hop 0–1   n = {n['pool']:,}"),
         ("Screened on title and abstract",
-         f"against written criteria\nsurvived  n = {n['survived']:,}",
-         f"excluded  {n['auto_exclude']:,}\n"
-         f"not retrieved  {n['not_retrieved']:,}"),
+         f"excluded against written criteria  {n['auto_exclude']:,}",
+         f"survived   n = {n['survived']:,}"),
         ("Read in full and coded",
-         f"corpus  n = {n['included']:,}\n"
-         f"naming a technique  n = {n['analysed']:,}",
-         f"excluded at full text  {n['excluded_ft']:,}"),
+         f"never retrieved {n['not_retrieved']:,}  ·  "
+         f"excluded {n['excluded_ft']:,}",
+         f"corpus   n = {n['included']:,}   "
+         f"({n['analysed']:,} name a technique)"),
     ]
 
-    bh, gap, W, X = 0.54, 0.26, 0.56, 0.015
+    bh, gap, W, X = 0.56, 0.24, 0.80, 0.015
     H = len(stages) * bh + (len(stages) - 1) * gap + 0.08
     fig = plt.figure(figsize=(COL, H))
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, 1); ax.set_ylim(0, H)
     ax.axis("off")
 
     y = H - 0.04
-    for i, (head, body, side) in enumerate(stages):
+    for i, (head, lost, kept) in enumerate(stages):
         ax.add_patch(Rectangle((X, y - bh), W, bh, facecolor="none",
                                edgecolor=MUTED, linewidth=0.6))
         cx = X + W / 2
-        ax.text(cx, y - 0.165, head, ha="center", va="center",
+        ax.text(cx, y - 0.150, head, ha="center", va="center",
                 fontsize=6.4, color=INK, fontweight="bold")
-        ax.text(cx, y - bh + 0.185, body, ha="center", va="center",
-                fontsize=6.1, color=INK, linespacing=1.35)
-        if side:
-            ax.text(X + W + 0.075, y - bh / 2, side, ha="left", va="center",
-                    fontsize=5.4, color=MUTED, linespacing=1.4)
-            ax.add_patch(FancyArrowPatch(
-                (X + W, y - bh / 2), (X + W + 0.06, y - bh / 2),
-                arrowstyle="-|>", mutation_scale=5, color=MUTED, lw=0.5))
+        ax.text(cx, y - 0.300, lost, ha="center", va="center",
+                fontsize=5.6, color=MUTED)
+        ax.text(cx, y - 0.440, kept, ha="center", va="center",
+                fontsize=6.2, color=INK)
         if i < len(stages) - 1:
             ax.add_patch(FancyArrowPatch(
                 (cx, y - bh), (cx, y - bh - gap),
