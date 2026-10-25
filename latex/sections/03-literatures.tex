@@ -66,11 +66,8 @@ copy. Reading an uncredentialed copy would put a claim in the census that no
 venue stands behind.
 
 We then coded the \NFullText{} retrieved papers against the inclusion
-criteria and kept \NCorpus{}. The criteria changed three times during the
-project; the paper reports the current state and every change is logged. The
-most recent was a contribution re-screen against a single rule: a paper stays
-if it contributes an attack, a failure mechanism, a defense or a fix.
-Benchmarks, surveys, measurement studies and position papers stay even though
+criteria and kept \NCorpus{}. The paper stays if it contributes an attack, a failure mechanism, a defense, or a fix.
+Benchmarks, surveys, measurement studies, and position papers stay even though
 they propose no technique, because they are how the field is organized. That
 pass removed 53 papers and recovered 34 techniques the first extraction had
 missed, so the registry counts here are floors.
@@ -92,13 +89,7 @@ experiments rather than a filing scheme.
 \caption{The taxonomy against the system it describes. Untrusted content
 arrives through one of \NChannelCats{} \textbf{channels}, enters one context
 window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
-A defense can intervene at one of three points between them. The third
-axis, \textbf{regime}, has no position in this flow because every mechanism
-and every defense carries one wherever it sits;
-Figure~\ref{fig:intervention} and Figure~\ref{fig:cube} give its split. This
-figure carries the vocabulary and the counts are in the text. Drawn as a
-flow rather than a tree because the taxonomy is a cube, and the pipeline is
-the one ordering the three axes genuinely have.}
+A defense can intervene at one of three points between them.}
 \label{fig:pipeline}
 \end{figure*}
 
@@ -132,40 +123,17 @@ it~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
 Figure~\ref{fig:pipeline} sets the three axes against the system they
 describe.
 
-The three axes give \NCubeCells{} cells. An earlier version of the scheme
-split \meth{availability-loss} in two, separating the case where an
-adversary consumes the victim's resources from the case where the agent
-simply does not finish. The split divided one harm by who gains rather than
-by what goes wrong, and it left a column holding a single mechanism and no
-defense at all, so we merged the two. The merge removes a column that was
-nearly empty, which lowers the empty-cell share reported below from
-\PctCubeEmptySeven{}\% on the seven-consequence grid to
-\PctCubeEmpty{}\% on this one; the count
-of occupied cells is unchanged but for the one that moved.
-
-\NUnplaceable{} papers (\PctUnplaceable{}\%) carry no single channel or
-consequence. These are surveys and benchmarks whose attack surfaces are
-co-equal by construction, and forcing one coordinate on them would invent
-precision.
-
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig1_cube}
 \caption{Named attacks against named defenses in every channel $\times$
 consequence cell, split by regime. Solid bars are attacks and pale hatched
-bars are defenses, both in the regime's own hue, each with its count
-printed above it on a fixed line. The hatch, not the tint, is what
-separates the pair in a black-and-white print. Heights are square-root
-scaled, because linear scaling would leave the largest cell as the only
-visible bar: the bars carry the shape and the printed counts carry the
-value. A cell that holds attacks and no defense is outlined in bold. Each
-panel's last row totals a consequence down that panel, and the single
-column on the right totals a channel across both. The totals take the
-paper's off-regime pair, amber and green, because a total belongs to no
-regime, and they are scaled against their own maximum, so a totals bar and
-a cell bar of equal height are not equal counts. All \NMechanisms{} attacks
-and all \NDefenses{} defenses place, so the panels together are the whole
-census.}
+bars are defenses, both in the regime's own hue, each with its count printed
+above it on a fixed line. A cell that holds attacks and no defense is outlined in
+bold. Each panel's last row totals a consequence down that panel; the column
+on the right totals a channel across both. Totals carry their own scale. All
+\NMechanisms{} attacks and all \NDefenses{} defenses place, so
+the two panels together are the whole census.}
 \label{fig:cube}
 \end{figure*}
 
@@ -199,13 +167,12 @@ panel, \NCellsAttackNoDefBackdoor{} of those are
 to itself is a gap; a cell with attacks and no defense is a different and
 sharper one.
 
-Reading a ratio along a row of the cube is guesswork, so the totals
-column on the right counts each channel across both regimes.
-\meth{multi-agent} and \meth{memory} carry several defenses for every
-mechanism, while \meth{supply-chain} has fewer defenses than mechanisms
-and \meth{cross-modal}, \meth{tool-metadata} and \meth{skill} sit near
-parity. Those last are the routes by which an agent accepts capability
-from a third party, and they are the thinnest rows in the corpus.
+The totals column collapses the consequence axis and reports it.
+\meth{multi-agent} and \meth{memory} carry several defenses
+per mechanism, while \meth{supply-chain} has fewer defenses than mechanisms
+and \meth{cross-modal}, \meth{tool-metadata} and \meth{skill} sit at parity. Those are
+the routes by which an agent accepts capability from a third party, and they
+are the thinnest in the corpus.
 
 
 \textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
@@ -312,6 +279,16 @@ omitted.}
 \label{fig:network}
 \end{figure}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_who_reports}
+\caption{The same defenses and the same attacks, reported by the two sides of
+the field. A defense paper reports its defense winning in \NOutcomeDefWins{}
+of \NOutcomeDefPaper{} pairs. An attack paper reports the defense winning in
+none of \NOutcomeAtkPaper{}.}
+\label{fig:whoreports}
+\end{figure}
+
 \subsection{Recovered defense--attack pairs}
 \label{sec:coverage}
 
@@ -361,16 +338,6 @@ tested should state whether it means ``not done'' or ``not resolved''.}
 For every pair we also record which side of the field reported it and what
 outcome was reported. Figure~\ref{fig:whoreports} puts the two reporters
 side by side.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig3_who_reports}
-\caption{The same defenses and the same attacks, reported by the two sides of
-the field. A defense paper reports its defense winning in \NOutcomeDefWins{}
-of \NOutcomeDefPaper{} pairs. An attack paper reports the defense winning in
-none of \NOutcomeAtkPaper{}.}
-\label{fig:whoreports}
-\end{figure}
 
 Defense papers report their defense winning essentially always. Attack papers
 report it losing essentially always. Neither number measures how often defenses
