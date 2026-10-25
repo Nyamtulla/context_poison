@@ -35,9 +35,11 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 R = REPO / "data" / "registries"
 OUT = REPO / "latex" / "figures"
 
-CAT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
-GREY = "#f0efec"
+# No fills. Every box here was washed in #f0efec, which is the shade that
+# makes a figure read as a slide and is the first thing to disappear in a
+# printed copy. Boxes are white with a hairline edge; the rules and stubs
+# are ink, thin.
 # The track convention, the same hexes as gen_paper_figures.py: security is
 # red and safety is blue, in every figure in the paper. This file had them
 # the other way round, which made it the one figure where the colours meant
@@ -101,53 +103,69 @@ def main():
 
     # ---- channels, left ----------------------------------------------------
     n = len(CHANNELS)
-    top, bot, gap = 88.0, 7.0, 1.4
+    top, bot, gap = 88.0, 15.0, 1.4
     h = (top - bot - gap * (n - 1)) / n
     ax.text(9, 96.4, "where untrusted content enters", ha="center",
             fontsize=7, color=INK, fontweight="bold")
-    ax.text(9, 2.2, f"{len(CHANNELS)} channels", ha="center",
-            fontsize=6.0, color=INK2)
     BUS = 25.0
     for i, c in enumerate(CHANNELS):
         y = top - i * (h + gap) - h
-        box(ax, 1, y, 17, h, "", GREY, "#dcdad6")
+        box(ax, 1, y, 17, h, "", "#ffffff", INK)
         ax.text(2.3, y + h / 2, c, ha="left", va="center", fontsize=6.3, color=INK)
         # short stub to a vertical bus, instead of nine lines crossing the page
-        ax.plot([18.2, BUS], [y + h / 2, y + h / 2], lw=0.5, color="#c9c7c3",
+        ax.plot([18.2, BUS], [y + h / 2, y + h / 2], lw=0.4, color=INK,
                 zorder=0)
-    ax.plot([BUS, BUS], [bot + h / 2, top - h / 2], lw=0.8, color="#c9c7c3",
+    ax.plot([BUS, BUS], [bot + h / 2, top - h / 2], lw=0.6, color=INK,
             zorder=0)
     arrow(ax, BUS, 50, 30.4, 50, lw=1.0, color=INK2)
 
     # ---- the pipeline ------------------------------------------------------
-    box(ax, 31, 38, 15, 24, "context\nwindow", "#ffffff", MUTED, fs=7)
-    box(ax, 55, 38, 13, 24, "model", "#ffffff", MUTED, fs=7)
+    box(ax, 31, 38, 15, 24, "context\nwindow", "#ffffff", INK, fs=7)
+    box(ax, 55, 38, 13, 24, "model", "#ffffff", INK, fs=7)
     arrow(ax, 46.4, 50, 54.6, 50, lw=1.0, color=INK2)
     arrow(ax, 68.4, 50, 76.4, 50, lw=1.0, color=INK2)
 
     # ---- the three intervention points -------------------------------------
     for (key, lab), xc in zip(POINTS, (28.6, 50.5, 69.4)):
-        ax.plot([xc, xc], [30, 70], ls=(0, (2.2, 1.8)), lw=0.8,
-                color="#b9b7b2", zorder=0)
-        ax.text(xc, 26.0, lab, ha="center", fontsize=6.6, color=INK,
+        ax.plot([xc, xc], [34, 74], ls=(0, (2.2, 1.8)), lw=0.6,
+                color=INK, zorder=0)
+        ax.text(xc, 30.0, lab, ha="center", fontsize=6.6, color=INK,
                 fontweight="bold")
-    ax.text(50, 31.5, "where a defense can intervene", ha="center",
-            fontsize=6.4, color=INK2, style="italic")
-    ax.text(50, 2.2, f"{len(POINTS)} intervention points", ha="center",
-            fontsize=6.0, color=INK2)
+    ax.text(50, 76.5, f"where a defense can intervene "
+                      f"({len(POINTS)} intervention points)", ha="center",
+            fontsize=6.4, color=INK)
 
     # ---- consequences, right -----------------------------------------------
     n2 = len(CONSEQ)
     h2 = (top - bot - gap * (n2 - 1)) / n2
     ax.text(88.5, 96.4, "how the output goes wrong", ha="center",
             fontsize=7, color=INK, fontweight="bold")
-    ax.text(88.5, 2.2, f"{len(CONSEQ)} consequences", ha="center",
-            fontsize=6.0, color=INK2)
     for i, c in enumerate(CONSEQ):
         y = top - i * (h2 + gap) - h2
-        box(ax, 77.5, y, 21.5, h2, "", GREY, "#dcdad6")
+        box(ax, 77.5, y, 21.5, h2, "", "#ffffff", INK)
         ax.text(78.7, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
                 color=INK)
+
+    # The three axes of the taxonomy, named together. Regime has no place
+    # in the flow -- every mechanism and every defense carries one wherever
+    # it sits -- so it was left off the figure entirely and the caption had
+    # to apologise for it. Naming all three on one strip draws it without
+    # pretending it is a stage.
+    ax.plot([1, 99], [10.5, 10.5], lw=0.5, color=INK)
+    ax.text(9.5, 5.5, f"channel  ({len(CHANNELS)} values)", ha="center",
+            fontsize=6.2, color=INK)
+    ax.text(88.5, 5.5, f"consequence  ({len(CONSEQ)} values)", ha="center",
+            fontsize=6.2, color=INK)
+    ax.text(36, 5.5, "regime", ha="left", va="center", fontsize=6.2,
+            color=INK)
+    for x0, c, lab in ((44.5, SEC, "security"), (56.5, ML, "safety")):
+        ax.add_patch(FancyBboxPatch((x0, 4.6), 1.8, 1.8,
+                                    boxstyle="round,pad=0,rounding_size=0.3",
+                                    linewidth=0, facecolor=c))
+        ax.text(x0 + 2.6, 5.5, lab, ha="left", va="center", fontsize=6.2,
+                color=INK)
+    ax.text(50, 0.6, "every mechanism and every defense carries a regime "
+                     "wherever it sits", ha="center", fontsize=5.8, color=INK)
 
     OUT.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
