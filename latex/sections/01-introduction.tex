@@ -91,41 +91,39 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
 
 \paragraph{Contributions.}
 \begin{itemize}
-\item \textbf{Not the wheel, but half of it (RQ1).} The two communities are
-  not duplicating each other's work. They are dividing the problem. One side
-  studies how the bad text arrives and defends where it enters; the other
-  studies why the model believes it and defends where it reasons.
-  \textbf{Duplicated effort would still leave two working defenses; halves
-  that never meet leave neither} (Section~\ref{sec:parallel}).
+\item \textbf{We show that the two communities divide the problem rather than
+  duplicate it (RQ1).} One side studies how the bad text arrives and defends
+  where it enters; the other studies why the model believes it and defends
+  where it reasons (Section~\ref{sec:parallel}).
 
-\item \textbf{The region nobody tests (RQ2).} Of every confirmed (defense,
-  attack) pair either community reports, only a handful cross between them,
-  and \textbf{a security defense has been evaluated against an AI/ML failure
-  mechanism exactly \NSecDefVsSafetyAttack{} time}
+\item \textbf{We identify the region neither community has tested (RQ2).} Of
+  every confirmed (defense, attack) pair either community reports, only a
+  handful cross between them, and a security defense has been evaluated
+  against an AI/ML failure mechanism exactly \NSecDefVsSafetyAttack{} time
   (Section~\ref{sec:emptycell}).
 
-\item \textbf{A platform, and \NCampaignPairs{} pairs run on it (RQ3).} Every
-  method executes from its authors' released code and weights, against an
-  undefended arm on the same items, under controls fixed before any run
-  (Section~\ref{sec:experiments}).
+\item \textbf{We build a platform and run \NCampaignPairs{} pairs on it
+  (RQ3).} Every method executes against an undefended arm on the same items,
+  under controls we fixed before any run (Section~\ref{sec:experiments}).
 
-\item \textbf{One mechanism, not a list of failures (RQ4).} The defenses that
-  fail here share a design: they weight the retrieved text against the model's
-  memory. That relocates correctness rather than creating it. What they take
-  from memory the attacker receives, and what they take from the attacker
-  memory receives. Neither direction moves anything toward the real document
-  (Sections~\ref{sec:results}, \ref{sec:distractor}).
+\item \textbf{We identify one mechanism behind the failures rather than a list
+  of them (RQ4).} The defenses that fail share a design: they weight the
+  retrieved text against the model's memory. That relocates correctness
+  instead of creating it. What they take from memory the attacker receives,
+  and what they take from the attacker memory receives, so neither direction
+  moves anything toward the real document (Sections~\ref{sec:results},
+  \ref{sec:distractor}).
 
-\item \textbf{Two adaptive attacks on the one defense that resisted (RQ5).} It
-  loses \textbf{\PctAcdRemovedGradient{}\%} of its protection to an attacker
-  who reads its rule, which prices the method rather than dismissing it
-  (Section~\ref{sec:adaptive}).
+\item \textbf{We build two adaptive attacks against the one defense that
+  resisted (RQ5).} It loses \textbf{\PctAcdRemovedGradient{}\%} of its
+  protection to an attacker who reads its rule, which prices the method rather
+  than dismissing it (Section~\ref{sec:adaptive}).
 
-\item \textbf{Three controls the literature omits}, each of which decides how
-  a result reads: a no-retrieval baseline, an abstention axis, and a second
-  base model (Section~\ref{sec:results2}).
+\item \textbf{We report three controls the literature omits}, each of which
+  decides how a result reads: a no-retrieval baseline, an abstention axis, and
+  a second base model (Section~\ref{sec:results2}).
 
-\item \textbf{A runnable artifact.} Every attack and defense executes from its
-  authors' released code at a pinned commit, verified unmodified; the harness,
-  the payloads and the full census ship with it.
+\item \textbf{We release a runnable artifact.} Every attack and defense
+  executes from its authors' released code at a pinned commit, verified
+  unmodified; the harness, the payloads and the full census ship with it.
 \end{itemize}
