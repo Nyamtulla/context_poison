@@ -383,18 +383,27 @@ The axes so far describe what each community studies. The question this paper
 turns on is narrower: \emph{has either community ever tested its methods
 against the other's problems?}
 
-We dated all \NTimelinePairs{} pairs and recorded which community each side
-came from. Restricting to the \NPureRegimePairs{} pairs where both sides sit in
-one of the two regimes gives the left panel of
-Figure~\ref{fig:transfermatrix}; the right panel is the same count for our
-own campaign.
+A pair is one defense run against one failure mechanism by some paper.
+Figure~\ref{fig:transfermatrix} sorts pairs into four boxes: who built the
+defense, against whose problem it was run. The left panel is what the
+literature has already done, over the \NPureRegimePairs{} pairs whose two
+sides both sit in one regime. The right panel is what we ran ourselves.
 
-Exactly \NSecDefVsSafetyAttack{} of \NPureRegimePairs{} pairs is a
-security defense evaluated against a safety failure mechanism,
-against \NSecDefSecAttack{} evaluated against security attacks. In the other
-direction there are \NSafetyDefVsSecAttack{}. Together,
-\NCrossCommunityPairs{} pairs (\PctCrossCommunity{}\%) cross the boundary and
-the remaining \PctSameRegime{}\% stay inside one community.
+Read the left panel along its diagonal and nearly everything is there.
+Each community tests its own defenses against its own problems:
+\NSecDefSecAttack{} security-on-security pairs and
+\NSafetyDefSafetyAttack{} safety-on-safety. The two off-diagonal boxes are
+the ones that would answer our question, and they are almost empty.
+\NSecDefVsSafetyAttack{} security defense has ever been run against a
+safety failure mechanism; \NSafetyDefVsSecAttack{} safety methods have been
+run against security attacks. That is \NCrossCommunityPairs{} pairs in
+\NPureRegimePairs{}, \PctCrossCommunity{}\%, and the other
+\PctSameRegime{}\% never leave their own community.
+
+That near-empty off-diagonal is the untested region. It is not a
+claim that these methods fail outside their own regime. It is a claim that
+nobody has checked, and a deployed system does not sort its inputs into
+``an attacker wrote this'' and ``this is merely stale''.
 
 The single crossing is worth naming, because it is the strongest evidence
 against our own framing and it is one pair.
@@ -412,15 +421,25 @@ communities do not read each other, so they do not test each other, so the
 question of whether either one's methods survive the other's regime has no
 answer in the published record.
 
+The right panel is this paper's answer to that, in the same four boxes.
+\NOursCrossPairs{} of our \NOursPairs{} retrieval-cell pairs sit
+off-diagonal, \PctOursCross{}\% against the literature's
+\PctCrossCommunity{}\%. One box stays empty on our side too, and it is a
+limit worth stating: every cross-regime pair we ran takes a safety method
+and attacks it, because those methods release code that runs on retrieval
+data. We did not run the mirror image, a security defense against an
+accidental failure. Section~\ref{sec:threats} returns to it.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig6_transfer_matrix}
-\caption{Which community's defense met which community's attack, in the
-published literature and in this paper's campaign. Cell shade is each
-panel's own share rather than a shared count scale, because the two totals
-differ by an order of magnitude; the printed count is the value. The
+\caption{Who built the defense (rows) against whose problem it was run
+(columns). Left: what the literature has already done. Right: what we ran.
+The literature sits on its diagonal; our campaign does not. Cell shade is
+each panel's own share rather than a shared count scale, because the two
+totals differ by an order of magnitude; the printed count is the value. The
 right-hand panel covers the retrieval-cell transfer pairs, not the whole
-campaign. A combination nobody has run at all is marked.}
+campaign, and the box we did not run either is marked.}
 \label{fig:transfermatrix}
 \end{figure}
 

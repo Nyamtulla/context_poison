@@ -680,6 +680,9 @@ def main():
     M["NSecDefSecAttack"] = sum(1 for r in _pure
                                 if r["defense_regime"] == "security"
                                 and r["attack_regime"] == "security")
+    M["NSafetyDefSafetyAttack"] = sum(1 for r in _pure
+                                      if r["defense_regime"] == "safety"
+                                      and r["attack_regime"] == "safety")
     _same = sum(1 for r in tl if r["defense_regime"] == r["attack_regime"])
     M["PctSameRegime"] = f"{100*_same/len(tl):.1f}"
     M["NPredatesAndCross"] = sum(1 for r in _pure

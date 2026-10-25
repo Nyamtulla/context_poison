@@ -582,9 +582,16 @@ def fig_transfer_matrix():
           "ACD": "safety", "DyPRAG": "safety", "FaithfulRAG": "safety",
           "SpARE": "safety", "SCR": "safety",
           "RobustRAG-DecodingAgg": "security", "RobustRAG-KeywordAgg": "security"}
+    # The two adaptive payloads were missing here, so their pairs landed in
+    # the panel's denominator and in none of its cells: the figure printed
+    # "19 of 37" while the macro the prose uses said 21. They are gradient-
+    # and search-optimised against the defense they face, which is the
+    # security regime by definition.
     AT = {"corpus poisoning": "security", "PoisonedRAG": "security",
           "BadRAG sentiment steering": "security",
           "BadRAG denial-of-service": "security",
+          "adaptive distractor": "security",
+          "gradient distractor": "security",
           "false evidence": "safety", "distractor evidence": "safety"}
     ours_pairs = {(r["defense"], r["attack"])
                   for r in retrieval_runs() if r["role"] == "transfer"}
