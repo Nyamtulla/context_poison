@@ -594,6 +594,11 @@ def main():
     M["NRegimeSafetyAtAIVenue"] = _vc.get(("safety", "ML/AI"), 0)
     M["NRegimeSecNamedVenue"] = (M["NRegimeSecAtSecVenue"]
                                  + M["NRegimeSecAtAIVenue"])
+    # The safety side needs its own total. The prose used to reach for
+    # NRegimeSafetyAtAIVenue as "safety papers with a named venue", which is
+    # only right while no safety paper has published at a security venue.
+    M["NRegimeSafetyNamedVenue"] = (M["NRegimeSafetyAtSecVenue"]
+                                    + M["NRegimeSafetyAtAIVenue"])
     # the two diagonal cells of the transfer matrix, so Table 1 and the
     # sentence under it cannot drift apart
     M["NSecDefSecAttack"] = sum(1 for r in _pure

@@ -246,24 +246,35 @@ members.
 \subsection{Regime versus venue}
 \label{sec:venue}
 
-Regime says what a paper is about. Venue says where its authors sent it.
-Coding both, independently, settles a question a reader will have about the
-first: whether our division is the field's or ours.
+Regime says what a paper is about. Venue says where its authors sent it. We
+code the two independently, which answers the first objection a reader will
+raise: that the division we draw is our own rather than the field's.
 
-It is not the field's institutional division. Of the \NRegimeSecNamedVenue{}
-security-regime papers that carry a named venue, \NRegimeSecAtAIVenue{}
-published at an AI venue and \NRegimeSecAtSecVenue{} at a security venue.
-Adversarial work on LLM agents goes to ACL, EMNLP, NeurIPS and AAAI about as
-readily as to S\&P and CCS. The traffic is one-way:
-\NRegimeSafetyAtAIVenue{} safety-regime papers carry a named venue and
-\NRegimeSafetyAtSecVenue{} of them published at a security venue.
+\textbf{The field does not divide itself this way institutionally.} Of the
+\NRegimeSecNamedVenue{} security-regime papers that name a venue,
+\NRegimeSecAtAIVenue{} published at an AI venue and \NRegimeSecAtSecVenue{}
+at a security venue. Adversarial work on LLM agents goes to ACL, EMNLP,
+NeurIPS and AAAI about as readily as to S\&P and CCS.
+
+\textbf{The traffic runs one way.} Of the \NRegimeSafetyNamedVenue{}
+safety-regime papers that name a venue, \NRegimeSafetyAtSecVenue{}
+published at a security venue. Security researchers submit to AI
+conferences; the reverse does not happen in this corpus.
+
+One limit on the reading. A venue is coded only where the record carries
+one, so this covers \NRegimeSecNamedVenue{} of \NRegimeSecurity{}
+security-regime papers and \NRegimeSafetyNamedVenue{} of
+\NRegimeSafety{} on the safety side. The rest are preprints with no venue
+recorded, and we draw no conclusion about where they will land.
 
 So the two bodies of work are not kept apart by their proceedings. They are
-kept apart by what they cite. That is a stronger claim than a venue split
-would have been, and a harder one to explain away: these papers appear beside
-each other and still do not read each other.
+kept apart by what they cite, which Section~\ref{sec:citation} measures.
+That is a stronger claim than a venue split would have been, and a harder
+one to explain away: these papers appear beside each other and still do not
+read each other.
 
 \subsection{Cross-citation between the literatures}
+\label{sec:citation}
 
 \begin{itemize}
 \item \textbf{\PctSecCitesSafety{}\%} of security papers (\NSecCitesSafety{} of
