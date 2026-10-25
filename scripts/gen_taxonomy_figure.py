@@ -107,7 +107,7 @@ def main():
     h = (top - bot - gap * (n - 1)) / n
     ax.text(9, 96.4, "where untrusted content enters", ha="center",
             fontsize=7, color=INK, fontweight="bold")
-    BUS = 25.0
+    BUS, RBUS = 22.5, 76.0
     for i, c in enumerate(CHANNELS):
         y = top - i * (h + gap) - h
         box(ax, 1, y, 17, h, "", "#ffffff", INK)
@@ -123,10 +123,10 @@ def main():
     box(ax, 31, 38, 15, 24, "context\nwindow", "#ffffff", INK, fs=7)
     box(ax, 55, 38, 13, 24, "model", "#ffffff", INK, fs=7)
     arrow(ax, 46.4, 50, 54.6, 50, lw=1.0, color=INK2)
-    arrow(ax, 68.4, 50, 76.4, 50, lw=1.0, color=INK2)
+    arrow(ax, 68.4, 50, RBUS, 50, lw=1.0, color=INK2)
 
     # ---- the three intervention points -------------------------------------
-    for (key, lab), xc in zip(POINTS, (28.6, 50.5, 69.4)):
+    for (key, lab), xc in zip(POINTS, (27.5, 50.5, 70.2)):
         ax.plot([xc, xc], [34, 74], ls=(0, (2.2, 1.8)), lw=0.6,
                 color=INK, zorder=0)
         ax.text(xc, 30.0, lab, ha="center", fontsize=6.6, color=INK,
@@ -145,27 +145,20 @@ def main():
         box(ax, 77.5, y, 21.5, h2, "", "#ffffff", INK)
         ax.text(78.7, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
                 color=INK)
+        # the output fans out the way the input fanned in
+        ax.plot([RBUS, 77.3], [y + h2 / 2, y + h2 / 2], lw=0.4, color=INK,
+                zorder=0)
+    ax.plot([RBUS, RBUS], [bot + h2 / 2, top - h2 / 2], lw=0.6, color=INK,
+            zorder=0)
 
-    # The three axes of the taxonomy, named together. Regime has no place
-    # in the flow -- every mechanism and every defense carries one wherever
-    # it sits -- so it was left off the figure entirely and the caption had
-    # to apologise for it. Naming all three on one strip draws it without
-    # pretending it is a stage.
+    # Only the two axes the flow actually lays out. Regime is carried by
+    # every entry wherever it sits, so it has no position here and the
+    # caption says so in one clause instead of the figure faking a slot.
     ax.plot([1, 99], [10.5, 10.5], lw=0.5, color=INK)
     ax.text(9.5, 5.5, f"channel  ({len(CHANNELS)} values)", ha="center",
             fontsize=6.2, color=INK)
     ax.text(88.5, 5.5, f"consequence  ({len(CONSEQ)} values)", ha="center",
             fontsize=6.2, color=INK)
-    ax.text(36, 5.5, "regime", ha="left", va="center", fontsize=6.2,
-            color=INK)
-    for x0, c, lab in ((44.5, SEC, "security"), (56.5, ML, "safety")):
-        ax.add_patch(FancyBboxPatch((x0, 4.6), 1.8, 1.8,
-                                    boxstyle="round,pad=0,rounding_size=0.3",
-                                    linewidth=0, facecolor=c))
-        ax.text(x0 + 2.6, 5.5, lab, ha="left", va="center", fontsize=6.2,
-                color=INK)
-    ax.text(50, 0.6, "every mechanism and every defense carries a regime "
-                     "wherever it sits", ha="center", fontsize=5.8, color=INK)
 
     OUT.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
