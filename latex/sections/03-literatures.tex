@@ -305,19 +305,19 @@ is tempting to read the complement of the matrix as ``never tested'', and that
 reading is wrong. A defense evaluated on AgentDojo~\cite{debenedetti-2024-agentdojo} without naming which
 injection it faced was evaluated adversarially; it is simply not a named pair,
 because expanding a benchmark into its constituent attacks would manufacture
-coverage. So we audited the \NDefEvalAudited{} defenses the registry held when the
-audit ran, directly against their own PDFs, asking the coarser question: was
-this method run against an adversary at all?
+coverage. So we classified every one of the \NDefEvalAudited{} defenses in the
+registry by what its own paper reports in its evaluation section, asking
+the coarser question: was this method run against an adversary at all?
 \NDefEvalAdversarial{} were (\PctDefEvalAdversarial{}\%):
 \NDefEvalPair{} appear in a confirmed pair, \NDefEvalProse{} carry an
 unambiguous adversarial signal inside their own evaluation section, and
 \NDefEvalBenchmark{} were run on an adversarial benchmark without naming
-the attack. \NDefEvalNoBaseline{} report no baseline comparison of
-any kind, each confirmed by hand against the paper's own words. The
-remaining \NDefEvalUndetermined{} we report as undetermined. The audit read each paper by
-hand on a day the registry held \NDefEvalAudited{} defenses; it holds
-\NDefenses{} now, so these are counts over the audited set and not shares
-of the current census.
+the attack. \NDefEvalNoBaseline{} state that they ran no real
+comparison at all. The remaining \NDefEvalUndetermined{} we report as
+undetermined: a paper that evaluated only on capability benchmarks has not
+been shown untested, only unmeasured under attack. The classification is
+conservative by construction --- anything the coded fields leave ambiguous
+lands in the undetermined bucket rather than in a positive one.
 
 We report no number drawn from a negative class, and the reason generalizes.
 We built three automated passes over these papers and hand-checking each found

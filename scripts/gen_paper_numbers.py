@@ -217,6 +217,14 @@ def main():
     # everything else is a negative or an unclear read, and this paper does
     # not report a number drawn from a negative class
     M["NDefEvalUndetermined"] = (_evc["non_adversarial"] + _evc["unclear"])
+    # The audit is a snapshot. It matched the registry when it last ran; if
+    # defenses are added and it is not re-run, the prose starts quoting an
+    # old denominator against a current census, which is the error this
+    # paragraph used to carry. Say so loudly rather than let it pass.
+    if M["NDefEvalAudited"] != M["NDefenses"]:
+        print(f"  WARNING: evaluation audit covers {M['NDefEvalAudited']} "
+              f"defenses, registry holds {M['NDefenses']}. Re-run "
+              f"scripts/classify_defense_evaluation.py.")
 
     # ---- the validation study. Section 10 claimed human verification and
     # an inter-rater agreement; the study is drawn, uncoded, and

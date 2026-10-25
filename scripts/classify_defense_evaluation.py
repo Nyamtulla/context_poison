@@ -32,6 +32,7 @@ reports both:
 Precision over recall throughout: anything ambiguous lands in `unclear`.
 """
 import collections
+import datetime
 import json
 import pathlib
 import re
@@ -128,7 +129,9 @@ def main():
     n = len(r4)
     adversarial = counts["named_mechanism"] + counts["benchmark_only"] + counts["adversarial_prose"]
     (R / "defense_evaluation_status.json").write_text(json.dumps({
-        "generated": "2026-10-15",
+        # the run date, not a literal: the audit was re-run over the
+        # grown registry and a frozen date made the output look stale
+        "generated": datetime.date.today().isoformat(),
         "purpose": __doc__.strip().split("\n\n")[0],
         "n_defenses": n,
         "counts": dict(counts),
