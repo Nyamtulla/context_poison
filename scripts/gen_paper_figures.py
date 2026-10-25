@@ -605,11 +605,16 @@ def fig_transfer_matrix():
     # One column, not two. At text width the 2x2 grid had nothing to fill
     # the space with but type, so its numbers were set larger than the body
     # text around them and the figure read as a poster.
-    fig, axes = plt.subplots(1, 2, figsize=(COL, 1.45),
-                             constrained_layout=True)
-    for ax, data, title, tot in (
-            (axes[0], lit, "Published literature", sum(lit.values())),
-            (axes[1], ours, "This paper's campaign", sum(ours.values()))):
+    # Two separate files, one panel each. They used to share a figure, which
+    # meant one of the two sections had to cite a float three sections away;
+    # the panels never shared a colour scale anyway, so nothing is lost by
+    # separating them.
+    panels = [("fig6a_transfer_lit", lit, "Published literature"),
+              ("fig6b_transfer_ours", ours, "This paper's campaign")]
+    for name, data, title in panels:
+        tot = sum(data.values())
+        fig, ax = plt.subplots(figsize=(COL * 0.58, 1.55),
+                               constrained_layout=True)
         M = np.array([[data.get((d, a), 0) for a in TR] for d in TR], float)
         # colour is each cell's SHARE of its own panel, not its raw count.
         # Shading two panels whose totals differ by an order of magnitude on
@@ -648,10 +653,10 @@ def fig_transfer_matrix():
     # the 2x2 covers the two pure tracks only. Pairs where either side is a
     # "Both"-track paper cannot answer a cross-community question, so they are
     # excluded here; the full tally including them is in pair_timeline.json.
+        save(fig, name)
     _all = len(tl)
     print(f"    transfer matrix: literature {sum(lit.values())} of {_all} pairs "
           f"(pure tracks only), ours {sum(ours.values())}")
-    save(fig, "fig6_transfer_matrix")
 
 
 # ---------------------------------------------------------------- figure 7
