@@ -1,10 +1,7 @@
 \section{Introduction}
 
-An LLM agent reads from many places~\cite{chu-2026-systematic,ma-2025-safety}.
-It reads retrieved documents and the output of the tools it calls. It reads
-the descriptions of those tools, the files and skills it loads, and messages
-from other agents. It also reads its own stored memory. All of
-this arrives in one context window, and the model treats it as one body of
+An LLM agent reads from many places. It reads retrieved documents and the output of the tools it calls. It reads the descriptions of those tools, the files and skills it loads, and messages
+from other agents. It also reads its own stored memory~\cite{chu-2026-systematic,ma-2025-safety}. All of this arrives in one context window, and the model treats it as one body of
 text. The model has no reliable way to tell which part of that text is
 trustworthy and which part is not~\cite{greshake-2023-not}.
 
@@ -31,6 +28,17 @@ The two communities describe the same underlying failure. A passage the model
 should not trust enters the context window and changes the output. Only the
 provenance differs. The model sees tokens either way.
 
+So we place every named attack and every named defense on one grid. A
+\emph{channel} is where the untrusted text enters: retrieval, tool output,
+memory, and six others. A \emph{consequence} is how the output then fails. One
+channel and one consequence name a \emph{cell}. A third axis, the
+\emph{regime}, records whether an adversary put the text there or it arrived
+wrong on its own. Crossing the defenses against the attacks gives a
+\emph{coverage matrix}, which records which defense has actually been run
+against which attack. Section~\ref{sec:taxonomy} builds the grid from the
+corpus and Section~\ref{sec:coverage} fills the matrix; the questions below
+use both.
+
 The difference is not merely one of vocabulary. If it were, a reader could
 translate between the two communities and lose nothing. They differ in
 something load-bearing: what counts as a successful evaluation.
@@ -54,7 +62,7 @@ experiments that fall in it.
 \begin{description}
 \item[RQ1] \textbf{Are the two communities reinventing the wheel?} We code
   \NCorpus{} papers from both regimes under one taxonomy, compare what each community
-  names inside the same cell in our coverage matrix, and date the first paper from each side in every shared channel (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
+  names inside the same cell of our coverage matrix, and date the first paper from each side in every shared channel (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 \item[RQ2] \textbf{Is there a region of the problem that neither community
   has tested?} We recover every (defense, attack) pair reported by the
   \NAnalysed{} papers that name a technique (Section~\ref{sec:literatures}).
@@ -70,21 +78,17 @@ experiments that fall in it.
   (Section~\ref{sec:adaptive}).
 \end{description}
 
-Others have surveyed both literatures before, each from inside itself: the
+Others have separately surveyed both literatures before: the
 security side
 repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
 and the safety side on its own terms as a problem of knowledge
 conflict~\cite{xu-2024-knowledge}. We borrow from those surveys rather than
-compete with them. But the last three questions are the ones a survey normally
+compete with them. But the last three research questions are the ones a survey normally
 cannot answer, and they are what turns a coverage gap from an observation into
 evidence. What is new here is that one corpus, one taxonomy, and one harness
-span both. That is what makes the
-empty cell visible. A survey of one literature cannot report a gap that the
-other literature defines, because the other literature is not in its corpus.
-It also makes the cell fillable. Our taxonomy locates an empty cell and names
-the defense and the attack that sit in it, and those are published methods
-with released code, so the cell names the experiment we then run. To our knowledge
-this is the first evaluation in which published defenses from one of these
+span both. A survey of one piece of literature cannot report a gap that the
+other literature defines. Our taxonomy locates missing experiments across both literature and maps
+the defense and attack pairs, which are published methods with released code. To our knowledge this is the first evaluation in which published defenses from one of these
 communities meet published failure mechanisms from the other.
 
 A negative result is easy to produce by accident. Four rules guard against
@@ -94,13 +98,13 @@ in the same run. An effect below the detectability threshold counts as no
 resolvable effect, not as no effect. And we commit every prediction to version
 control first.
 Section~\ref{sec:experiments} states each rule in full, and
-Section~\ref{sec:results2} reports three results that reverse without
-them.
+Section~\ref{sec:results2} reports three results that reverse without them.
 
 \paragraph{Scope.}
 Three limits are worth stating before the contributions rather than after
-them. Our retrieval-cell experiments use one item set per cell. They measure what a
-generator does with poisoned context, not how hard a retriever is to poison. Most of them use one model family at one size. Our own model control shows
+them. Our retrieval-cell experiments use one item set per cell. They measure
+what a generator does with poisoned context, not how hard a retriever is to
+poison. Most of them use one model family at one size. Our own model control shows
 that a different model gives different outcomes. The numbers therefore hold
 for models of that class, not in general. Every attack in the campaign, except the two in
 Section~\ref{sec:adaptive}, knows nothing of the defense it meets. That bounds
