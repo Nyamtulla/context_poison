@@ -68,7 +68,11 @@ plt.rcParams.update({
     "legend.fontsize": 7,
     "axes.edgecolor": MUTED,
     "axes.linewidth": 0.6,
-    "xtick.color": INK2, "ytick.color": INK2,
+    "xtick.color": INK, "ytick.color": INK,
+    # every categorical pair in this file is ALSO separated by a
+    # hatch, so the figures read in black and white; the default
+    # hatch stroke is too fine to survive a 300dpi print
+    "hatch.linewidth": 0.4,
     "text.color": INK, "axes.labelcolor": INK,
     "figure.dpi": 200,
     "savefig.bbox": "tight",
@@ -165,15 +169,16 @@ def fig_cube():
                     ax.add_patch(plt.Rectangle((j - .47, i - .47), .94, .94,
                                                fill=False, edgecolor=INK,
                                                linewidth=1.4))
-                # Attacks take the full track hue, defenses a pale tint of
-                # the same hue. Hatching read as texture at 4.6pt and went
-                # muddy in print, and an OPEN bar was worse: a thin rectangle
-                # is already how this figure marks a cell with no defense in
-                # it, so the two treatments collided.
+                # Attacks take the full track hue; defenses a pale tint of
+                # the same hue AND a hatch, so the pair separates by texture
+                # as well as by value and survives a greyscale print. An
+                # unfilled bar was tried and rejected: a thin rectangle is
+                # already how this figure marks a cell with no defense in it.
                 for v, x0, kw in ((a, -.40, dict(facecolor=col,
                                                  edgecolor=col, linewidth=.4)),
                                   (d, .04, dict(facecolor=pale,
-                                                edgecolor=col, linewidth=.5))):
+                                                edgecolor=col, hatch="///",
+                                                linewidth=.5))):
                     if v == 0:
                         continue
                     # floor, so one entry is a visible bar and not a hairline
@@ -203,8 +208,8 @@ def fig_cube():
         # panel's hue; the safety panel uses the same two treatments in blue
         Patch(facecolor=TRACK_SEC, edgecolor=TRACK_SEC, linewidth=.4,
               label="named attacks"),
-        Patch(facecolor=SEQ_SEC[1], edgecolor=TRACK_SEC, linewidth=.5,
-              label="named defenses")],
+        Patch(facecolor=SEQ_SEC[1], edgecolor=TRACK_SEC, hatch="///",
+              linewidth=.5, label="named defenses")],
         fontsize=6, frameon=False, loc="lower left",
         bbox_to_anchor=(0, -.22), ncol=2)
     save(fig, "fig1_cube")
@@ -227,11 +232,11 @@ def fig_channel_gap():
     ax.barh(y + h / 2, [m[c] for c in order], h, label="named mechanisms",
             color=ALT_A)
     ax.barh(y - h / 2, [d[c] for c in order], h, label="named defenses",
-            color=ALT_B)
+            color=ALT_B, hatch="///", edgecolor=INK, linewidth=.3)
     for i, c in enumerate(order):
         ratio = (d[c] / m[c]) if m[c] else 0
         ax.text(max(m[c], d[c]) + 4, i, f"{ratio:.1f}x", va="center",
-                fontsize=6, color=INK2)
+                fontsize=6, color=INK)
     ax.set_yticks(y)
     ax.set_yticklabels(order, fontsize=6.5)
     ax.set_xlabel("count")
@@ -257,17 +262,24 @@ def fig_who_reports():
     fig, ax = plt.subplots(figsize=(COL, 1.6), constrained_layout=True)
     for i, (lab, win, inc, lose) in enumerate(data):
         left = 0
-        for v, col, name in ((win, ALT_A, "defense wins"),
-                             (inc, "#d8d7d2", "inconclusive"),
-                             (lose, ALT_C, "defense loses")):
-            ax.barh(i, v, left=left, color=col, height=.5,
+        # three outcomes, three textures: the segment that used to be a grey
+        # fill is now an open hatched bar, so the series separates in print
+        for v, col, hat, name in ((win, ALT_A, "", "defense wins"),
+                                  (inc, "white", "...", "inconclusive"),
+                                  (lose, ALT_C, "///", "defense loses")):
+            ax.barh(i, v, left=left, color=col, height=.5, hatch=hat,
+                    edgecolor=INK, linewidth=.3,
                     label=name if i == 0 else None)
-            if v >= 8:
+            if v >= 20:
                 ax.text(left + v / 2, i, str(v), ha="center", va="center",
-                        fontsize=6.5, color="white" if col != "#d8d7d2" else INK2)
+                        fontsize=6.5, color="white" if col != "white" else INK)
+            elif v:
+                # too narrow to hold the number; set it above the segment
+                ax.text(left + v / 2, i + .33, str(v), ha="center",
+                        va="bottom", fontsize=6.2, color=INK)
             left += v
         ax.text(left + 5, i, f"n={win+inc+lose}", va="center", fontsize=6.5,
-                color=INK2)
+                color=INK)
     ax.set_yticks([0, 1])
     ax.set_yticklabels([d[0] for d in data], fontsize=6.5)
     ax.set_xlim(0, 225)
@@ -384,7 +396,11 @@ def fig_citation_network():
             G.add_edge(e["citing"], e["cited"])
     G.remove_nodes_from([n for n, d in G.degree() if d == 0])
 
-    COLORS = {"security": TRACK_SEC, "safety": TRACK_ML, "Both": CAT[3]}
+    # Hue says regime and so does the marker shape, because this figure has
+    # to be readable in a black-and-white print: red circles and blue
+    # triangles stay apart at any ink budget.
+    COLORS = {"security": (TRACK_SEC, "o"), "safety": (TRACK_ML, "^"),
+              "Both": (CAT[3], "s")}
     # Spread the clusters. The default k packs 900 nodes into a hairball where
     # the band of cross-track edges, which is the whole point of the figure,
     # disappears into the overlap. A larger k plus more iterations separates
@@ -418,13 +434,14 @@ def fig_citation_network():
                                      zorder=1))
     ax.add_collection(LineCollection(cross, colors="#1a1a1a", linewidths=0.3,
                                      alpha=0.45, zorder=3))
-    for tr, col in COLORS.items():
+    for tr, (col, mk) in COLORS.items():
         ns = [n for n in G if track.get(n) == tr]
         if not ns:
             continue
         # a thin surface ring keeps overlapping markers readable as separate
         # dots rather than a solid mass
-        ax.scatter([pos[n][0] for n in ns], [pos[n][1] for n in ns], s=7,
+        ax.scatter([pos[n][0] for n in ns], [pos[n][1] for n in ns],
+                   s=9 if mk != "o" else 7, marker=mk,
                    c=col, linewidths=0.25, edgecolors="white", zorder=4,
                    label=f"{tr} ({len(ns)})")
     ax.scatter([], [], s=0, label=" ")
@@ -555,10 +572,14 @@ def fig_lag():
     # Zero has no polarity, so it gets no fill. An open bar reads as the
     # midpoint without a third shade standing in for one.
     cols = ["none" if k == 0 else (ALT_A if k < 0 else ALT_B) for k in ks]
-    edges = [INK2 if k == 0 else MUTED for k in ks]
+    edges = [INK for k in ks]
     widths = [0.8 if k == 0 else 0.4 for k in ks]
     fig, ax = plt.subplots(figsize=(COL, 1.8))
-    ax.bar(ks, vals, color=cols, edgecolor=edges, linewidth=widths, width=0.78)
+    hats = ["" if k < 0 else ("" if k == 0 else "///") for k in ks]
+    bars = ax.bar(ks, vals, color=cols, edgecolor=edges, linewidth=widths,
+                  width=0.78)
+    for b, hh in zip(bars, hats):
+        b.set_hatch(hh)
     for k, v in zip(ks, vals):
         ax.text(k, v + 1.5, str(v), ha="center", fontsize=6.5, color=INK2)
     ax.axvline(-0.5, color=MUTED, lw=0.6, ls=":")
