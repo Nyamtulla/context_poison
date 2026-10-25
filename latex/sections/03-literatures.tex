@@ -442,11 +442,13 @@ Figure~\ref{fig:lag} shows the full distribution.
 \subsection{Division of labor, not duplication}
 \label{sec:parallel}
 
-If two communities work one problem without reading each other, the second to
-arrive should restate what the first already knows. Among \NMechanisms{} named
-mechanisms, the number of cross-regime name collisions within a taxonomy cell
-is \NMechNameClash{}. Among \NDefenses{} defenses it is \NDefNameClash{}.
-Nobody is naming the same thing twice.
+If two communities work one problem without reading each other, the second
+to arrive should restate what the first already knows under a new name. We
+tested that directly: inside each taxonomy cell, we looked for a
+security-regime name and a safety-regime name close enough to be the same
+thing relabelled. Among \NMechanisms{} named mechanisms there are
+\NMechNameClash{} such collisions, and among \NDefenses{} defenses there
+is \NDefNameClash{}. Nobody is naming the same thing twice.
 
 They are naming different halves of one causal chain. \NSharedCells{} of our
 \NOccupiedCells{} occupied cells hold mechanisms from both regimes,
@@ -483,20 +485,20 @@ pair, which is what separates the two without colour.}
 \label{fig:intervention}
 \end{figure}
 
-Duplicated effort wastes labor and leaves two working defenses. Complementary
-effort that never meets leaves one broken chain: a reasoning-stage defense sits
-downstream of an adversary who already controls its input. That is not a
-rhetorical point. It is the mechanism behind the sign flip in
-Section~\ref{sec:results}, where methods that shift trust toward the retrieved
-document help when the document is honest and hurt when it is written by
-someone else.
+If the two sides were duplicating each other, the cost would be wasted
+labor and the field would still end up holding two defenses that work.
+Dividing the problem costs something else: it leaves a chain with a gap in
+it. A reasoning-stage defense sits downstream of an adversary who already
+controls its input, and no amount of better reasoning recovers a document
+that was written to be believed. That is not a rhetorical point. It is the
+mechanism behind the sign flip in Section~\ref{sec:results}, where methods
+that shift trust toward the retrieved document help when the document is
+honest and hurt when it is written by someone else.
 
-The dates say the same thing from a second direction, and they say which way
-it runs.
-
-\NSharedChannels{} of our nine channels have named mechanisms from both
-regimes. We compare
-the first paper from each side in each of those channels.
+Publication dates say the same thing from a second direction, and they say
+which way the division runs. \NSharedChannels{} of our nine channels have
+named mechanisms from both regimes, and we compare the first paper from
+each side in each of them.
 The security literature arrives first in \NChannelsSecFirst{} of
 \NSharedChannels{}. Both arrive in the same year in \NChannelsSameYear{}. The
 safety literature arrives first in \NChannelsSafetyFirst{}. The
@@ -506,8 +508,8 @@ safety-regime entry at all, is the limit case of the same pattern.
 
 Set that beside the citation rates. A safety-regime paper naming a failure in
 a channel is, more often than not, working ground a security paper reached one
-to three years earlier, in a literature it has a \PctSafetyCitesSec{}\%
-chance of citing. It is not renaming that paper's mechanism --- the collision
+to three years earlier, in a literature that only \PctSafetyCitesSec{}\% of
+safety-regime papers cite at all. It is not renaming that paper's mechanism --- the collision
 count above says it is not --- and arriving second at a surface is not a
 fault. We are claiming the obvious
 consequence, which is that neither side can tell whether the other has already
