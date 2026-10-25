@@ -255,7 +255,9 @@ def fig_cube():
                                edgecolor=INK, linewidth=.2))
     pair(mg, MI, 0, chanA.sum(), chanD.sum(), ALT_B, ALT_A, cmax,
          dedge=SEQ_ALT[7])
-    mg.set_xlim(-.6, .4)
+    # the cell spans -.47 to .47, so an upper limit of .4 clipped its right
+    # edge; the panel is one cell wide and needs room for all of it
+    mg.set_xlim(-.6, .6)
     mg.set_ylim(MI + .6, -.6)
     mg.set_xticks([0])
     mg.set_xticklabels(["both regimes"], fontsize=5.4, rotation=32,
