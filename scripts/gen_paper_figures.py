@@ -55,6 +55,9 @@ SEQ_ALT = ["#e3f5ee", "#c4e9dc", "#9eddc8", "#74cfb1", "#46c098",
 # attack predates its defense). ALT_B is always the hatched one. ALT_C is
 # kept for a third category no figure currently needs.
 ALT_A, ALT_B, ALT_C = "#1baf7a", "#eda100", "#8a5a2b"
+# ALT_C's pale tint, for margin totals in the cube: a total is not a regime,
+# so it must not wear a regime's hue.
+ALT_C_PALE = "#e6d3bf"
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 
 # IEEEtran conference: \columnwidth is 252pt and \textwidth is 516pt,
@@ -122,6 +125,15 @@ def fig_cube():
     panels. Linear would make 113 the only visible bar in the figure and
     hide every cell holding one or two entries, which is most of the cube.
     A cell holding attacks and no defense at all is outlined.
+
+    Two margins carry the totals that used to be a separate bar chart. The
+    bottom row of each panel totals a consequence down its own panel; the
+    narrow panel on the right totals a channel across BOTH panels, which is
+    the cross-regime figure the channel-gap chart reported, with the
+    defense-to-mechanism ratio printed beside it. Margins are brown, not
+    red or blue, because a total belongs to no regime, and each margin is
+    scaled against its own maximum -- a marginal bar and a cell bar of the
+    same height are not the same number, and the hue break is what says so.
     """
     r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
 
@@ -148,8 +160,35 @@ def fig_cube():
     # collided in the cells that matter most.
     LBL_Y, BAR_Y, HMAX = -.34, .42, .60
 
-    fig, axes = plt.subplots(1, 2, figsize=(FULL, 3.9), constrained_layout=True)
-    for ax, (track, (A, D)) in zip(axes, G.items()):
+    # one bar-drawing routine, used by the cells and by both margins
+    def pair(ax, i, j, a, d, solid, tint, scale):
+        for v, x0, kw in ((a, -.40, dict(facecolor=solid, edgecolor=solid,
+                                         linewidth=.4)),
+                          (d, .04, dict(facecolor=tint, edgecolor=solid,
+                                        hatch="///", linewidth=.5))):
+            if v == 0:
+                continue
+            h = .05 + HMAX * np.sqrt(v / scale)
+            ax.add_patch(plt.Rectangle((j + x0, i + BAR_Y - h), .36, h, **kw))
+            ax.text(j + x0 + (.14 if x0 < 0 else .22), i + LBL_Y,
+                    str(int(v)), ha="center", va="center", fontsize=4.9,
+                    color=INK)
+
+    # column margin: a channel totalled across BOTH panels
+    chanA = sum(G[t][0] for t in G).sum(axis=1)
+    chanD = sum(G[t][1] for t in G).sum(axis=1)
+    cmax = max(chanA.max(), chanD.max())
+    # row margin: a consequence totalled down its own panel
+    rowmax = max(g.sum(axis=0).max() for pair_ in G.values() for g in pair_)
+
+    fig, axes = plt.subplots(1, 3, figsize=(FULL, 4.35),
+                             gridspec_kw={"width_ratios": [6, 6, 1.25]},
+                             constrained_layout=True)
+    # the default inter-axes padding spends about a column's worth of width
+    # on white space, which is what pushed the consequence labels into each
+    # other once the margins took their share
+    fig.get_layout_engine().set(w_pad=0.012, wspace=0.015)
+    for ax, (track, (A, D)) in zip(axes[:2], G.items()):
         col, pale = hue[track]
         for i in range(len(CHANNELS)):
             for j in range(len(CONSEQ)):
@@ -170,26 +209,29 @@ def fig_cube():
                 # as well as by value and survives a greyscale print. An
                 # unfilled bar was tried and rejected: a thin rectangle is
                 # already how this figure marks a cell with no defense in it.
-                for v, x0, kw in ((a, -.40, dict(facecolor=col,
-                                                 edgecolor=col, linewidth=.4)),
-                                  (d, .04, dict(facecolor=pale,
-                                                edgecolor=col, hatch="///",
-                                                linewidth=.5))):
-                    if v == 0:
-                        continue
-                    # floor, so one entry is a visible bar and not a hairline
-                    h = .05 + HMAX * np.sqrt(v / vmax)
-                    ax.add_patch(plt.Rectangle((j + x0, i + BAR_Y - h), .36,
-                                               h, **kw))
-                    ax.text(j + x0 + .18, i + LBL_Y, str(v), ha="center",
-                            va="center", fontsize=5.3, color=INK)
+                pair(ax, i, j, a, d, col, pale, vmax)
+
+        # the bottom margin, set off by a gap so it cannot be read as a
+        # tenth channel
+        mi = len(CHANNELS) + 0.42
+        for j in range(len(CONSEQ)):
+            ax.add_patch(plt.Rectangle((j - .47, mi - .47), .94, .94,
+                                       facecolor="none", edgecolor=INK,
+                                       linewidth=.2))
+            pair(ax, mi, j, A[:, j].sum(), D[:, j].sum(),
+                 ALT_C, ALT_C_PALE, rowmax)
+        if track == "security":
+            ax.text(-.62, mi, "all channels", ha="right", va="center",
+                    fontsize=6, color=INK)
         ax.set_xlim(-.6, len(CONSEQ) - .4)
-        ax.set_ylim(len(CHANNELS) - .4, -.6)
+        ax.set_ylim(len(CHANNELS) + 1.0, -.6)
         ax.set_xticks(range(len(CONSEQ)))
-        # Two lines and no hyphen: at 6pt with the hyphen kept,
-        # "silent-corruption" and "data-exfiltration" ran into each other.
-        ax.set_xticklabels([c.replace("-", "\n") for c in CONSEQ],
-                           fontsize=5.6, linespacing=1.15)
+        # Rotated, and the hyphen kept. Two flat lines collided whatever
+        # the size, because "reasoning-corruption" is wider than its column
+        # once the margins have taken their share of the width; shrinking
+        # until it fit put the axis labels below five point.
+        ax.set_xticklabels(CONSEQ, fontsize=5.4, rotation=32, ha="right",
+                           rotation_mode="anchor")
         ax.set_yticks(range(len(CHANNELS)))
         ax.set_yticklabels(CHANNELS if track == "security" else [], fontsize=6.5)
         ax.set_title("security regime" if track == "security"
@@ -199,15 +241,41 @@ def fig_cube():
             sp.set_visible(False)
         ax.tick_params(length=0)
 
+    # the right-hand margin: one channel per row, totalled across regimes,
+    # which is exactly what the channel-gap bar chart used to report
+    mg = axes[2]
+    for i in range(len(CHANNELS)):
+        mg.add_patch(plt.Rectangle((-.47, i - .47), .94, .94,
+                                   facecolor="none", edgecolor=INK,
+                                   linewidth=.2))
+        pair(mg, i, 0, chanA[i], chanD[i], ALT_C, ALT_C_PALE, cmax)
+        if chanA[i]:
+            mg.text(.50, i + LBL_Y, f"{chanD[i] / chanA[i]:.1f}$\\times$",
+                    ha="left", va="center", fontsize=4.9, color=INK)
+    mg.set_xlim(-.6, .4)
+    mg.set_ylim(len(CHANNELS) + 1.0, -.6)
+    mg.set_xticks([0]); mg.set_xticklabels(["all consequences"],
+                                           fontsize=5.4, rotation=32,
+                                           ha="right", rotation_mode="anchor")
+    mg.set_yticks([])
+    mg.set_title("both regimes", fontsize=7.5, color=ALT_C)
+    for sp in mg.spines.values():
+        sp.set_visible(False)
+    mg.tick_params(length=0)
+
     axes[0].legend(handles=[
         # the legend sits under the security panel, so it speaks in that
         # panel's hue; the safety panel uses the same two treatments in blue
         Patch(facecolor=TRACK_SEC, edgecolor=TRACK_SEC, linewidth=.4,
               label="named attacks"),
         Patch(facecolor=SEQ_SEC[1], edgecolor=TRACK_SEC, hatch="///",
-              linewidth=.5, label="named defenses")],
+              linewidth=.5, label="named defenses"),
+        Patch(facecolor=ALT_C, edgecolor=ALT_C, linewidth=.4,
+              label="margin totals"),
+        Patch(facecolor=ALT_C_PALE, edgecolor=ALT_C, hatch="///",
+              linewidth=.5, label="(own scale)")],
         fontsize=6, frameon=False, loc="lower left",
-        bbox_to_anchor=(0, -.22), ncol=2)
+        bbox_to_anchor=(0, -.30), ncol=4, columnspacing=1.0)
     save(fig, "fig1_cube")
 
 
@@ -252,49 +320,6 @@ def fig_intervention():
         ax.spines[s].set_visible(False)
     ax.tick_params(length=0)
     save(fig, "fig10_intervention")
-
-
-# ---------------------------------------------------------------- figure 2
-def fig_channel_gap():
-    """Named mechanisms against named defenses, per channel.
-
-    Two categorical series, fixed slot order, sorted by the ratio so the
-    under-served channels fall to the bottom where the claim is.
-    """
-    r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
-    m = collections.Counter(e.get("channel") for e in r3)
-    d = collections.Counter(e.get("channel") for e in r4)
-    # The cube and the pipeline figure both lay the channels out in CHANNELS
-    # order. Sorting this one by ratio instead meant the same nine labels ran
-    # top-to-bottom in two different orders three pages apart, and a reader
-    # comparing the figures had to re-find every row. The ratio is printed on
-    # each row, so ordering by it bought nothing the numbers do not say.
-    order = list(reversed(CHANNELS))
-    y = np.arange(len(order))
-    h = 0.38
-    fig, ax = plt.subplots(figsize=(COL, 2.5), constrained_layout=True)
-    # Hue carries one meaning across every non-track figure in this paper:
-    # ALT_A is the defense side, ALT_B the attack side. Amber is always the
-    # hatched one, so the pair also separates in a black-and-white print.
-    ax.barh(y + h / 2, [m[c] for c in order], h, label="named mechanisms",
-            color=ALT_B, hatch="///", edgecolor=INK, linewidth=.3)
-    ax.barh(y - h / 2, [d[c] for c in order], h, label="named defenses",
-            color=ALT_A)
-    for i, c in enumerate(order):
-        ratio = (d[c] / m[c]) if m[c] else 0
-        ax.text(max(m[c], d[c]) + 4, i, f"{ratio:.1f}x", va="center",
-                fontsize=6, color=INK)
-    ax.set_yticks(y)
-    ax.set_yticklabels(order, fontsize=6.5)
-    ax.set_xlabel("count")
-    ax.set_xlim(0, 200)
-    ax.legend(frameon=False, loc="lower right", fontsize=6.5)
-    ax.grid(axis="x", color="#eceae6", linewidth=0.5)
-    ax.set_axisbelow(True)
-    for s in ("top", "right", "left"):
-        ax.spines[s].set_visible(False)
-    ax.tick_params(length=0)
-    save(fig, "fig2_channel_gap")
 
 
 # ---------------------------------------------------------------- figure 3
@@ -720,7 +745,7 @@ def fig_vocab():
 
 
 if __name__ == "__main__":
-    fig_cube(); fig_channel_gap(); fig_who_reports(); fig_dose()
+    fig_cube(); fig_who_reports(); fig_dose()
     fig_citation_network(); fig_transfer_matrix(); fig_lag()
     fig_intervention()
     fig_vocab()
