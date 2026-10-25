@@ -508,7 +508,7 @@ def fig_citation_network():
         (cross if track.get(u) != track.get(v) else same).append((pos[u], pos[v]))
 
     fig, ax = plt.subplots(figsize=(FULL * 0.56, 4.05))
-    fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.11)
+    fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
     from matplotlib.collections import LineCollection
     # Cross-track edges concentrate between the clusters. Drawn solid they
     # merge into a black mass that reads as "heavily connected", which is the
@@ -528,17 +528,18 @@ def fig_citation_network():
                    s=9 if mk != "o" else 7, marker=mk,
                    c=col, linewidths=0.25, edgecolors="white", zorder=4,
                    label=f"{tr} ({len(ns)})")
-    ax.scatter([], [], s=0, label=" ")
+    # The spring layout leaves the lower left of the canvas empty, so the
+    # legend goes there instead of under the figure, where it cost a strip
+    # of height and a three-column row the reader had to scan sideways.
     from matplotlib.lines import Line2D
     h, l = ax.get_legend_handles_labels()
     h += [Line2D([], [], color="#dcdbd6", lw=1.2),
           Line2D([], [], color="#111111", lw=1.4)]
-    l += [f"same-track citation ({len(same)})",
-          f"cross-track citation ({len(cross)})"]
-    ax.legend(h, l, frameon=False, fontsize=6, loc="upper center",
-              bbox_to_anchor=(0.5, 0.045), ncol=3, columnspacing=1.0,
-              handlelength=1.4, handletextpad=0.5,
-              bbox_transform=fig.transFigure)
+    l += [f"same-regime citation ({len(same)})",
+          f"cross-regime citation ({len(cross)})"]
+    ax.legend(h, l, frameon=False, fontsize=6, loc="lower left", ncol=1,
+              handlelength=1.4, handletextpad=0.5, labelspacing=0.45,
+              borderaxespad=0.2)
     if island:
         cx = sum(pos[n][0] for n in island) / len(island)
         cy = sum(pos[n][1] for n in island) / len(island)
