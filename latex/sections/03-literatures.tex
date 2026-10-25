@@ -410,12 +410,13 @@ the remaining \PctSameRegime{}\% stay inside one community.
 
 The single crossing is worth naming, because it is the strongest evidence
 against our own framing and it is one pair.
-TRACE~\cite{hong-2026-trace}, a trajectory compressor built for long-horizon agent
-safety and validated adversarially, is reported against context-length-induced
-degradation, which is a safety mechanism. It comes from a paper whose
-subject matter spans both communities, which is precisely the kind of paper
-that would cross first. One instance in \NPureRegimePairs{} is not a literature
-that tests across the boundary; it is the exception that shows what crossing
+TRACE~\cite{hong-2026-trace} is a trajectory compressor for long-horizon
+agents whose own evaluation is adversarial, which is what places it in the
+security regime, and it is reported against context-length-induced
+degradation, a safety mechanism. It comes from a paper whose subject matter
+spans both communities, which is precisely the kind of paper that would
+cross first. One instance in \NPureRegimePairs{} is not a literature that
+tests across the boundary; it is the exception that shows what crossing
 would look like.
 
 This is consistent with the citation rates and sharper than them. The
@@ -423,10 +424,12 @@ communities do not read each other, so they do not test each other, so the
 question of whether either one's methods survive the other's regime has no
 answer in the published record.
 
-\textbf{Nor is it answered by ordering.} \NDefensePredates{} of
-\NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a defense that predates
-the attack it was tested on, so defenses do meet later attacks. But only
-\NPredatesAndCross{} pair is both earlier \emph{and} cross-community.
+Nor is it answered by ordering. \NDefensePredates{} of
+\NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a defense that
+predates the attack it was tested on, so defenses do meet attacks their
+authors could not have designed against. But only \NPredatesAndCross{}
+pair is both earlier \emph{and} cross-community, so meeting an unforeseen
+attack and meeting the other community's attack are not the same event.
 Figure~\ref{fig:lag} shows the full distribution.
 
 \subsection{Division of labor, not duplication}
