@@ -78,11 +78,19 @@ top-$k$ window, so isolate-then-aggregate has nothing honest left to aggregate.
 Backfilling the window to its intended size restores \textbf{45.2\%}, a gain of
 40.6\pp. \textbf{The defense was sound and the retrieval interface was not.}
 
-Across the agent cell, 24 of 56 conditions show the technique holding, with
-attack success driven to zero. A further 4 show a resolvable reduction. The
-rest divide between 19 with no resolvable effect at that sample size and 9
-with no reduction at all.
-Ingestion-stage techniques account for most of the holds.
+Across the agent cell, \NAgentHolds{} of \NAgentConditions{} conditions show
+the technique holding, with attack success driven to zero. A further 4 show a
+resolvable reduction. The rest divide between 19 with no resolvable effect at
+that sample size and 9 with no reduction at all.
+
+\textbf{Every hold is at ingestion or at execution.} Of the
+\NAgentHolds{} that hold, \NAgentHoldsIngestion{} act at ingestion and
+\NAgentHoldsExecution{} at execution, which is every execution-stage
+technique we ran. \textbf{None of the \NAgentTriedReasoning{}
+reasoning-stage conditions holds.} The stage a technique acts at, rather than
+the technique, predicts whether it survives here --- the division
+Section~\ref{sec:parallel} finds in the literature, reproduced in what the
+methods actually do.
 
 \subsection{The dose of maximum advantage}
 \label{sec:lowdose}

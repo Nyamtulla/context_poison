@@ -14,14 +14,12 @@ attacker has already chosen.
 
 We then ran the experiments neither community has run. Our campaign covers
 \NCampaignPairs{} pairs, each run from its authors' released code and weights
-against an undefended model on the same items. No
-context-reliance defense leaves the model better off than no defense at all.
-One mechanism explains this. Each defense weighs the retrieved document
-against the model's memory, and moving that weight relocates errors instead of
-creating correct answers. One defense resists, by discounting context that
-raises the model's uncertainty. A gradient-optimized passage that lowers
-uncertainty removes \PctAcdRemovedGradient{}\% of its protection. We report
-results for one model family and one retrieval setting.
+against an undefended model on the same items. \textbf{Where a
+defense intervenes decides whether it survives.} Techniques that act at
+ingestion or at execution drive attack success to zero in \NAgentHolds{} of
+\NAgentConditions{} agent conditions, while no defense that reasons over text
+already in the window leaves the model better off than no defense at all. We
+report results for one model family and one retrieval setting.
 
 % ============================================================================
 % ALTERNATIVE ABSTRACT --- the number-heavy version, kept for later editing.

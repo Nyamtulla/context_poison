@@ -393,6 +393,19 @@ def main():
     M["NAgentPairs"] = len(agent_pairs)
     M["NAgentEpisodes"] = f"{agent_eps:,}"
     M["NAgentTechniques"] = len({r["technique_name"] for r in scored})
+    # The agent cell by intervention point. A technique "holds" when the
+    # defended arm's attack success is zero. Which stage a technique acts at
+    # decides whether it does, which is the division of labor in Section 3
+    # confirmed by execution rather than asserted.
+    _hold = [r for r in scored if r["defended"]["asr_pct"] == 0]
+    M["NAgentConditions"] = len(scored)
+    M["NAgentHolds"] = len(_hold)
+    for _lab, _k in (("Ingestion", "ingestion"), ("Execution", "execution"),
+                     ("Reasoning", "reasoning")):
+        M["NAgentHolds" + _lab] = sum(1 for r in _hold
+                                      if r.get("intervention_point") == _k)
+        M["NAgentTried" + _lab] = sum(1 for r in scored
+                                      if r.get("intervention_point") == _k)
     M["NCampaignPairs"] = len(rag_pairs) + len(agent_pairs)
     M["NCampaignImpl"] = (len({r["defense"] for r in transfer})
                           + len({r["technique_name"] for r in scored}))
