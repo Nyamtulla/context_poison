@@ -606,11 +606,11 @@ def fig_vocab():
     top = H - head_in
     for (slot, sec, ml), nlines, rh in zip(VOCAB, nl, rows_in):
         bot = top - rh
-        # the shared slot: one strip spanning both columns
-        ax.add_patch(FancyBboxPatch(
-            (LX0, top - strip_in), RX1 - LX0, strip_in,
-            boxstyle="round,pad=0,rounding_size=0.006",
-            facecolor=GREY_MID, edgecolor="none", mutation_aspect=0.35))
+        # the shared slot: a hairline rule across both columns, with the
+        # slot name sitting on it. A filled band here was decoration -- the
+        # rule already says "this spans both".
+        ax.plot([LX0, RX1], [top - strip_in, top - strip_in],
+                color=MUTED, lw=0.5, solid_capstyle="butt", clip_on=False)
         ax.text((LX0 + RX1) / 2, top - strip_in / 2, slot, ha="center",
                 va="center", fontsize=6.5, color=INK2, style="italic")
 

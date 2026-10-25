@@ -25,8 +25,8 @@ defense: surveys, benchmarks, practitioner guides, applications of somebody
 else's method. \NNoTechnique{} of the \NCorpus{} do exactly that, so the
 census, the taxonomy cube and the coverage matrix are computed over the
 \NAnalysed{} papers that contributed a named technique, and the citation
-analysis is computed over all \NCorpus{}. The PRISMA diagram carries the
-split as its own stage. AgentDojo~\cite{debenedetti-2024-agentdojo} is the
+analysis is computed over all \NCorpus{}. Figure~\ref{fig:prisma} reports both counts at
+its last stage. AgentDojo~\cite{debenedetti-2024-agentdojo} is the
 clearest case. It is the environment \NAgentPairs{} of our own pairs run in,
 and it names neither an attack nor a defense. Coding it to a regime and a cell
 asserted something about it that is not true.
@@ -42,14 +42,15 @@ remainder.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig9_prisma}
-\caption{Corpus construction, counted at every stage. One edge is honest
-about a gap: the records that survived screening but were never retrieved
-were chosen by a rule the project did not record. The queries, their dates
-and their hit counts ship with the artifact as a search log.}
+\caption{Corpus construction in four stages. The exclusions beside each
+stage include one honest gap: the records that survived screening but were
+never retrieved were chosen by a rule the project did not record. The
+queries, their dates and their hit counts ship with the artifact as a search
+log.}
 \label{fig:prisma}
 \end{figure}
 
-Figure~\ref{fig:prisma} counts every stage, and the artifact ships the
+Figure~\ref{fig:prisma} counts each stage, and the artifact ships the
 \NQueries{} queries with their dates and hit counts. One stage is weaker than
 the rest. Of the \NSurvived{} records that survived screening,
 \NFullText{} were read in full, and nothing we recorded says how that subset

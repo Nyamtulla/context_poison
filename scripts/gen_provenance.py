@@ -121,73 +121,68 @@ def search_log():
 
 
 def figure(n):
+    """Corpus construction in four stages.
+
+    The eight-stage version read like a slide. Four stages carry the same
+    facts: where the records came from, how the pool grew, what the screen
+    kept, and what the full-text pass kept. Exclusions hang off the stage
+    they belong to as plain text, not as filled boxes, because a shaded box
+    is decoration and the number is the content.
+    """
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+    from matplotlib.patches import Rectangle, FancyArrowPatch
 
-    INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
-    GREY = "#f0efec"
+    INK, MUTED = "#0b0b0b", "#6b6a66"
     COL = 3.49  # IEEEtran \columnwidth, see gen_paper_figures.py
     plt.rcParams.update({"font.family": "serif", "pdf.fonttype": 42,
                          "savefig.bbox": "tight", "savefig.pad_inches": 0.02})
 
-    main = [
-        ("Records identified\n"
-         f"{n['search']:,} database search  ·  {n['seeds']} seeds", None),
-        ("Snowballed, both directions\n"
-         f"forward {n['fwd']:,}  ·  backward {n['bwd']:,}",
-         f"hop-2 records discovered\nbut out of scope by design\nn = {n['hop2']:,}"),
-        (f"Working pool, hop 0–1\nn = {n['pool']:,}", None),
-        ("Title and abstract screen\n"
-         f"against written criteria\nn = {n['pool']:,}",
-         f"auto-excluded\nn = {n['auto_exclude']:,}"),
-        (f"Survived the screen\nn = {n['survived']:,}\n"
-         f"({n['auto_include']:,} include, {n['needs_review']:,} to review)",
-         f"full text not retrieved\nn = {n['not_retrieved']:,}\n"
-         "selection rule not recorded"),
-        (f"Full text read and coded\nn = {n['fulltext']:,}",
-         f"excluded at full text\nn = {n['excluded_ft']:,}"),
-        (f"Included in the corpus\nn = {n['included']:,}",
-         "named no attack and no defense\n"
-         f"n = {n['no_technique']:,}\n"
-         "surveys, benchmarks, guides"),
-        (f"\\bf Contributing a named technique\nn = {n['analysed']:,}", None),
+    stages = [
+        ("Seeds and database search",
+         f"{n['seeds']} seed papers  +  {n['search']:,} records\n"
+         f"from {n['queries']} queries across {n['apis']} APIs",
+         None),
+        ("Snowballed, both directions",
+         f"forward {n['fwd']:,}  ·  backward {n['bwd']:,}\n"
+         f"working pool  n = {n['pool']:,}",
+         None),
+        ("Screened on title and abstract",
+         f"against written criteria\nsurvived  n = {n['survived']:,}",
+         f"excluded  {n['auto_exclude']:,}\n"
+         f"not retrieved  {n['not_retrieved']:,}"),
+        ("Read in full and coded",
+         f"corpus  n = {n['included']:,}\n"
+         f"naming a technique  n = {n['analysed']:,}",
+         f"excluded at full text  {n['excluded_ft']:,}"),
     ]
 
-    bh, gap, W = 0.52, 0.30, 0.60
-    H = len(main) * bh + (len(main) - 1) * gap + 0.30
+    bh, gap, W, X = 0.54, 0.26, 0.56, 0.015
+    H = len(stages) * bh + (len(stages) - 1) * gap + 0.08
     fig = plt.figure(figsize=(COL, H))
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, 1); ax.set_ylim(0, H)
     ax.axis("off")
 
-    y = H - 0.12
-    for i, (txt, side) in enumerate(main):
-        bold = txt.startswith("\\bf")
-        txt = txt.replace("\\bf ", "")
-        ax.add_patch(FancyBboxPatch(
-            (0.02, y - bh), W, bh,
-            boxstyle="round,pad=0,rounding_size=0.01",
-            facecolor="white" if not bold else GREY,
-            edgecolor=INK2 if bold else MUTED,
-            linewidth=0.9 if bold else 0.55, mutation_aspect=0.4))
-        ax.text(0.02 + W / 2, y - bh / 2, txt, ha="center", va="center",
-                fontsize=6.3, color=INK, linespacing=1.3,
-                fontweight="bold" if bold else "normal")
+    y = H - 0.04
+    for i, (head, body, side) in enumerate(stages):
+        ax.add_patch(Rectangle((X, y - bh), W, bh, facecolor="none",
+                               edgecolor=MUTED, linewidth=0.6))
+        cx = X + W / 2
+        ax.text(cx, y - 0.165, head, ha="center", va="center",
+                fontsize=6.4, color=INK, fontweight="bold")
+        ax.text(cx, y - bh + 0.185, body, ha="center", va="center",
+                fontsize=6.1, color=INK, linespacing=1.35)
         if side:
-            ax.add_patch(FancyBboxPatch(
-                (0.655, y - bh + 0.04), 0.325, bh - 0.08,
-                boxstyle="round,pad=0,rounding_size=0.01",
-                facecolor=GREY, edgecolor="none", mutation_aspect=0.4))
-            ax.text(0.8175, y - bh / 2, side, ha="center", va="center",
-                    fontsize=5.5, color=INK2, linespacing=1.3)
+            ax.text(X + W + 0.075, y - bh / 2, side, ha="left", va="center",
+                    fontsize=5.4, color=MUTED, linespacing=1.4)
             ax.add_patch(FancyArrowPatch(
-                (0.02 + W, y - bh / 2), (0.65, y - bh / 2),
-                arrowstyle="-|>", mutation_scale=6, color=MUTED, lw=0.6))
-        if i < len(main) - 1:
+                (X + W, y - bh / 2), (X + W + 0.06, y - bh / 2),
+                arrowstyle="-|>", mutation_scale=5, color=MUTED, lw=0.5))
+        if i < len(stages) - 1:
             ax.add_patch(FancyArrowPatch(
-                (0.02 + W / 2, y - bh), (0.02 + W / 2, y - bh - gap),
-                arrowstyle="-|>", mutation_scale=7, color=INK2, lw=0.7))
+                (cx, y - bh), (cx, y - bh - gap),
+                arrowstyle="-|>", mutation_scale=6, color=INK, lw=0.7))
         y -= bh + gap
 
     out = REPO / "latex" / "figures" / "fig9_prisma.pdf"
