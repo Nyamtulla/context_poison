@@ -197,9 +197,11 @@ are the thinnest in the corpus.
 \centering
 \includegraphics[width=\columnwidth]{figures/fig2_channel_gap}
 \caption{Named mechanisms against named defenses in each channel, with the
-defense-to-mechanism ratio printed at the right. Channels are ordered by
-that ratio, so the routes where protection has not followed the problem fall
-to the bottom. Defenses are hatched, so the pair separates without colour.}
+defense-to-mechanism ratio printed at the right. Channels run in the same
+order here, in Figure~\ref{fig:pipeline} and in Figure~\ref{fig:cube}.
+Mechanisms are hatched, so the pair separates without colour. Amber is
+the attack side and green the defense side wherever regime is not what a
+figure encodes.}
 \label{fig:channelgap}
 \end{figure}
 
@@ -386,9 +388,9 @@ one of the two regimes gives the left panel of
 Figure~\ref{fig:transfermatrix}; the right panel is the same count for our
 own campaign.
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig6_transfer_matrix}
+\includegraphics[width=\columnwidth]{figures/fig6_transfer_matrix}
 \caption{Which community's defense met which community's attack, in the
 published literature and in this paper's campaign. Cell shade is each
 panel's own share rather than a shared count scale, because the two totals
@@ -396,7 +398,7 @@ differ by an order of magnitude; the printed count is the value. The
 right-hand panel covers the retrieval-cell transfer pairs, not the whole
 campaign. A combination nobody has run at all is marked.}
 \label{fig:transfermatrix}
-\end{figure*}
+\end{figure}
 
 \textbf{Exactly \NSecDefVsSafetyAttack{} of \NPureRegimePairs{} pairs is a
 security defense evaluated against a safety failure mechanism},

@@ -50,6 +50,11 @@ SEQ_SEC = ["#fbdcd3", "#f6b9a8", "#ef947c", "#e76f52", "#d6452a", "#bf3d25",
 SEQ_ALT = ["#e3f5ee", "#c4e9dc", "#9eddc8", "#74cfb1", "#46c098",
            "#1baf7a", "#169068", "#117455", "#0d5a42", "#09412f"]
 # Hues for distinctions that are NOT track. Red and blue are spoken for.
+# Hues for distinctions that are NOT regime, with one meaning each across
+# every figure: ALT_A is the defense side (defenses, defense wins, defense
+# predates its attack) and ALT_B the attack side (mechanisms, defense loses,
+# attack predates its defense). ALT_B is always the hatched one. ALT_C is
+# kept for a third category no figure currently needs.
 ALT_A, ALT_B, ALT_C = "#1baf7a", "#eda100", "#8a5a2b"
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 
@@ -225,14 +230,22 @@ def fig_channel_gap():
     r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
     m = collections.Counter(e.get("channel") for e in r3)
     d = collections.Counter(e.get("channel") for e in r4)
-    order = sorted(CHANNELS, key=lambda c: (d[c] / m[c]) if m[c] else 0)
+    # The cube and the pipeline figure both lay the channels out in CHANNELS
+    # order. Sorting this one by ratio instead meant the same nine labels ran
+    # top-to-bottom in two different orders three pages apart, and a reader
+    # comparing the figures had to re-find every row. The ratio is printed on
+    # each row, so ordering by it bought nothing the numbers do not say.
+    order = list(reversed(CHANNELS))
     y = np.arange(len(order))
     h = 0.38
     fig, ax = plt.subplots(figsize=(COL, 2.5), constrained_layout=True)
+    # Hue carries one meaning across every non-track figure in this paper:
+    # ALT_A is the defense side, ALT_B the attack side. Amber is always the
+    # hatched one, so the pair also separates in a black-and-white print.
     ax.barh(y + h / 2, [m[c] for c in order], h, label="named mechanisms",
-            color=ALT_A)
-    ax.barh(y - h / 2, [d[c] for c in order], h, label="named defenses",
             color=ALT_B, hatch="///", edgecolor=INK, linewidth=.3)
+    ax.barh(y - h / 2, [d[c] for c in order], h, label="named defenses",
+            color=ALT_A)
     for i, c in enumerate(order):
         ratio = (d[c] / m[c]) if m[c] else 0
         ax.text(max(m[c], d[c]) + 4, i, f"{ratio:.1f}x", va="center",
@@ -266,7 +279,7 @@ def fig_who_reports():
         # fill is now an open hatched bar, so the series separates in print
         for v, col, hat, name in ((win, ALT_A, "", "defense wins"),
                                   (inc, "white", "...", "inconclusive"),
-                                  (lose, ALT_C, "///", "defense loses")):
+                                  (lose, ALT_B, "///", "defense loses")):
             ax.barh(i, v, left=left, color=col, height=.5, hatch=hat,
                     edgecolor=INK, linewidth=.3,
                     label=name if i == 0 else None)
@@ -510,7 +523,11 @@ def fig_transfer_matrix():
     # hue fits: magnitude takes the off-track ramp and the axes keep the
     # track colours.
     cmap = LinearSegmentedColormap.from_list("alt", SEQ_ALT)
-    fig, axes = plt.subplots(1, 2, figsize=(FULL, 2.25))
+    # One column, not two. At text width the 2x2 grid had nothing to fill
+    # the space with but type, so its numbers were set larger than the body
+    # text around them and the figure read as a poster.
+    fig, axes = plt.subplots(1, 2, figsize=(COL, 1.45),
+                             constrained_layout=True)
     for ax, data, title, tot in (
             (axes[0], lit, "Published literature", sum(lit.values())),
             (axes[1], ours, "This paper's campaign", sum(ours.values()))):
@@ -523,25 +540,26 @@ def fig_transfer_matrix():
         S = M / max(tot, 1)
         vmax = 1.0
         ax.imshow(np.where(M > 0, S, np.nan), cmap=cmap, vmin=0, vmax=vmax)
-        ax.set_xticks(range(2)); ax.set_xticklabels(TR)
-        ax.set_yticks(range(2)); ax.set_yticklabels(TR)
+        ax.set_xticks(range(2)); ax.set_xticklabels(TR, fontsize=5.4)
+        ax.set_yticks(range(2)); ax.set_yticklabels(TR, fontsize=5.4)
         for lbls in (ax.get_xticklabels(), ax.get_yticklabels()):
             for lbl, t in zip(lbls, TR):
                 lbl.set_color(TRACK_SEC if t == "security" else TRACK_ML)
-        ax.set_xlabel("attack from"); ax.set_ylabel("defense from")
+        ax.set_xlabel("attack from", fontsize=5.6)
+        ax.set_ylabel("defense from", fontsize=5.6)
         cross = int(M[0, 1] + M[1, 0])
         ax.set_title(f"{title}\n{cross} of {int(tot)} cross-community "
-                     f"({100*cross/tot:.0f}%)", fontsize=7.5)
+                     f"({100*cross/tot:.0f}%)", fontsize=5.8)
         for i in range(2):
             for j in range(2):
                 v = int(M[i, j])
                 dark = v > 0 and S[i, j] > 0.55 * vmax
                 ax.text(j, i, str(v), ha="center", va="center",
-                        fontsize=11, fontweight="bold",
+                        fontsize=7.5, fontweight="bold",
                         color="#ffffff" if dark else INK)
                 if v == 0:
                     ax.text(j, i + 0.3, "never tested", ha="center",
-                            va="center", fontsize=6, color=INK)
+                            va="center", fontsize=4.6, color=INK)
         for s in ax.spines.values():
             s.set_visible(False)
         ax.set_xticks(np.arange(-.5, 2, 1), minor=True)
