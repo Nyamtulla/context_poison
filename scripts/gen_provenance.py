@@ -154,14 +154,14 @@ def figure(n):
          f"excluded against\nwritten criteria {n['auto_exclude']:,}",
          f"survived\nn = {n['survived']:,}"),
         ("Read in full and coded",
-         f"never retrieved {n['not_retrieved']:,}\n"
+         f"excluded before retrieval {n['not_retrieved']:,}\n"
          f"excluded at full text {n['excluded_ft']:,}",
          f"corpus n = {n['included']:,}\n"
          f"{n['analysed']:,} name a technique"),
     ]
 
-    bh, gap, W, X = 0.545, 0.24, 0.84, 0.015
-    pad, mid = 0.022, 0.018          # inset from the outer box, gap between
+    bh, gap, W, X = 0.545, 0.24, 0.988, 0.006
+    pad, mid = 0.018, 0.058          # inset from the outer box, gap between
     cw = (W - 2 * pad - mid) / 2     # width of one inner cell
     head_in, cell_in = 0.17, 0.33    # heading band, inner cell height
 
@@ -182,7 +182,14 @@ def figure(n):
             ax.add_patch(Rectangle((cx, cy), cw, cell_in, facecolor="none",
                                    edgecolor=MUTED, linewidth=0.45))
             ax.text(cx + cw / 2, cy + cell_in / 2, txt, ha="center",
-                    va="center", fontsize=5.7, color=INK, linespacing=1.4)
+                    va="center", fontsize=6.0, color=INK, linespacing=1.4)
+        # left cell is what the stage removed, right is what it passed on;
+        # the arrow is the "and so we were left with" between them
+        ax.add_patch(FancyArrowPatch(
+            (X + pad + cw, cy + cell_in / 2),
+            (X + pad + cw + mid, cy + cell_in / 2),
+            arrowstyle="-|>", mutation_scale=5, color=INK, lw=0.6,
+            shrinkA=1.5, shrinkB=1.5))
         if i < len(stages) - 1:
             ax.add_patch(FancyArrowPatch(
                 (X + W / 2, y - bh), (X + W / 2, y - bh - gap),
