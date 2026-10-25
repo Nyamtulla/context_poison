@@ -247,26 +247,27 @@ read each other.
 \subsection{Cross-citation between the literatures}
 \label{sec:citation}
 
-\begin{itemize}
-\item \textbf{\PctSecCitesSafety{}\%} of security papers (\NSecCitesSafety{} of
-  \NRegimeSecurity{}) cite at least one safety-regime paper on the same
-  failure.
-\item \textbf{\PctSafetyCitesSec{}\%} of safety-regime papers (\NSafetyCitesSec{} of
-  \NRegimeSafety{}) cite at least one security paper.
-\end{itemize}
+\textbf{Neither side reads the other.} \PctSecCitesSafety{}\% of
+security-regime papers (\NSecCitesSafety{} of \NRegimeSecurity{}) cite a
+safety-regime paper on the same failure, and \PctSafetyCitesSec{}\% of
+safety-regime papers (\NSafetyCitesSec{} of \NRegimeSafety{}) cite a
+security one. Roughly nine papers in ten on each side were written without
+reference to the other community's work on the same failure. These are
+population counts over every resolved citation edge, not sample estimates,
+so no confidence interval applies, and the rates hold across evidence
+grades, so they are not an artifact of preprint quality.
 
-These are population counts over every paper's resolved citation edges, not
-sample estimates, so no confidence interval applies. Roughly nine papers in ten
-on both sides were written without reference to the other community's work on
-the same failure. The rates are stable across evidence grade, so this is not an
-artifact of preprint quality.
-
-\textbf{What carries the cross-regime citations makes the rate look better than
-the engagement is.} \NNetworkCross{} of the \NNetworkEdges{} resolved edges
-(\PctNetworkCross{}\%) cross regimes, and they are concentrated: the ten
-most-cited bridging papers are benchmarks and landmark results that a paper can
-cite in its introduction without adopting anything from the other literature.
-Figure~\ref{fig:network} shows the shape, two clusters joined by a narrow band.
+\textbf{What carries the cross-regime citations makes the rate look better
+than the engagement is.} \NNetworkCross{} of the \NNetworkEdges{} resolved
+edges (\PctNetworkCross{}\%) cross regimes, and they concentrate on a
+handful of papers either side can cite in an introduction without adopting
+anything from it. The four most-cited bridges are
+WebArena~\cite{zhou-2023-webarena},
+lost-in-the-middle~\cite{liu-2023-lost}, Greshake et
+al.~\cite{greshake-2023-not} and AgentDojo~\cite{debenedetti-2024-agentdojo}:
+two environments and two landmark results, none of them a method anyone
+adopted across the boundary. Figure~\ref{fig:network} shows the shape, two
+clusters joined by a narrow band.
 
 \begin{figure}[t]
 \centering
