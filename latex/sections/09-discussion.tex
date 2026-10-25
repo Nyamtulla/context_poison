@@ -52,6 +52,18 @@ went (Section~\ref{sec:adaptive}). One sentence naming whether the
 attacker knew the defense would let a reader tell which kind of claim they are
 reading.
 
+\textbf{Compose across the boundary, and measure the composition.}
+Section~\ref{sec:parallel} shows the two communities defending different
+stages of one pipeline, and Section~\ref{sec:results} shows the reasoning
+stage failing on its own once an adversary writes the input. The obvious
+next move is to put an ingestion-stage filter in front of a
+reasoning-stage method and see whether the pair holds where each half does
+not. We do not know that it works. Nothing in this paper tests a composed
+defense, and a filter that passes a fluent falsehood leaves the reasoning
+stage exactly where our results find it. That is the point: the experiment
+is cheap, both halves are published with released code, and no paper in
+\NCorpus{} has run it.
+
 \subsection{Artifacts}
 
 The reconstruction standard made artifact quality measurable as a side effect.
