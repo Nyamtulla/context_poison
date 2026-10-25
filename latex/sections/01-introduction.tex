@@ -16,7 +16,7 @@ backdoors~\cite{dash-2026-untrusted}, and it publishes defenses against
 them~\cite{xiang-2024-certifiably,liu-2025-datasentinel,an-2025-ipiguard}.
 Success means the attacker fails to achieve a goal.
 
-The safety community studies content that became wrong without any
+The AI/ML community studies content that became wrong without any
 attacker. It names mechanisms such as lost-in-the-middle~\cite{liu-2023-lost} and
 context rot~\cite{xia-2026-diagnosing}. It also names knowledge conflict, where a retrieved passage
 disagrees with what the model already
@@ -27,17 +27,6 @@ Success means accuracy goes up.
 The two communities describe the same underlying failure. A passage the model
 should not trust enters the context window and changes the output. Only the
 provenance differs. The model sees tokens either way.
-
-So we place every named attack and every named defense on one grid. A
-\emph{channel} is where the untrusted text enters: retrieval, tool output,
-memory, and six others. A \emph{consequence} is how the output then fails. One
-channel and one consequence name a \emph{cell}. A third axis, the
-\emph{regime}, records whether an adversary put the text there or it arrived
-wrong on its own. Crossing the defenses against the attacks gives a
-\emph{coverage matrix}, which records which defense has actually been run
-against which attack. Section~\ref{sec:taxonomy} builds the grid from the
-corpus and Section~\ref{sec:coverage} fills the matrix; the questions below
-use both.
 
 The difference is not merely one of vocabulary. If it were, a reader could
 translate between the two communities and lose nothing. They differ in
@@ -51,7 +40,7 @@ completely. Neither community's publishing process catches this, because each
 reviews against its own convention.
 
 So the field publishes, adopts, and cites a method without anyone asking
-whether it survives the other community's validation regime.
+whether it survives the other community's test.
 
 That is a testable claim about the literature, not a complaint about it. We
 test it by reading both literatures under one taxonomy and recovering every
@@ -60,14 +49,15 @@ experiments that fall in it.
 
 \paragraph{Research questions.}
 \begin{description}
-\item[RQ1] \textbf{Are the two communities reinventing the wheel?} We code
-  \NCorpus{} papers from both regimes under one taxonomy, compare what each community
-  names inside the same cell of our coverage matrix, and date the first paper from each side in every shared channel (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
+\item[RQ1] \textbf{Are the two communities reinventing the wheel?} We read
+  \NCorpus{} papers from both sides under one scheme, compare what each
+  community names for the same failure, and date who reached each problem
+  first (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 \item[RQ2] \textbf{Is there a region of the problem that neither community
   has tested?} We recover every (defense, attack) pair reported by the
   \NAnalysed{} papers that name a technique (Section~\ref{sec:literatures}).
-\item[RQ3] \textbf{Does a defense built for one regime transfer to the
-  other?} We execute the pairs the literature skipped, from the authors'
+\item[RQ3] \textbf{Does a defense built for one community's problem transfer
+  to the other's?} We execute the pairs the literature skipped, from the authors'
   released code and weights (Sections~\ref{sec:experiments},
   \ref{sec:results}).
 \item[RQ4] \textbf{Is failure a property of individual methods or of a design
@@ -81,14 +71,15 @@ experiments that fall in it.
 Others have separately surveyed both literatures before: the
 security side
 repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
-and the safety side on its own terms as a problem of knowledge
+and the AI/ML side on its own terms as a problem of knowledge
 conflict~\cite{xu-2024-knowledge}. We borrow from those surveys rather than
 compete with them. But the last three research questions are the ones a survey normally
 cannot answer, and they are what turns a coverage gap from an observation into
 evidence. What is new here is that one corpus, one taxonomy, and one harness
 span both. A survey of one piece of literature cannot report a gap that the
-other literature defines. Our taxonomy locates missing experiments across both literature and maps
-the defense and attack pairs, which are published methods with released code. To our knowledge this is the first evaluation in which published defenses from one of these
+other literature defines. Our taxonomy locates missing experiments across both literatures and names
+the defense and the attack in each, which are published methods with released
+code. To our knowledge this is the first evaluation in which published defenses from one of these
 communities meet published failure mechanisms from the other.
 
 A negative result is easy to produce by accident. Four rules guard against
@@ -102,7 +93,7 @@ Section~\ref{sec:results2} reports three results that reverse without them.
 
 \paragraph{Scope.}
 Three limits are worth stating before the contributions rather than after
-them. Our retrieval-cell experiments use one item set per cell. They measure
+them. Our retrieval experiments use one item set for each setting. They measure
 what a generator does with poisoned context, not how hard a retriever is to
 poison. Most of them use one model family at one size. Our own model control shows
 that a different model gives different outcomes. The numbers therefore hold
@@ -114,79 +105,40 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
 \paragraph{Contributions.}
 \begin{itemize}
 \item \textbf{Not the wheel, but half of it (RQ1).} The two communities are
-  not duplicating each other's work: across \NMechanisms{} named mechanisms
-  there are \NMechNameClash{} cross-community name collisions inside a
-  taxonomy cell, and \NDefNameClash{} among \NDefenses{} defenses. They are
-  dividing the problem. In the \NSharedCells{} cells both occupy, security
-  names how the bad text arrives and safety names why the model believes it.
-  Their defenses split the same way. \NDefPtIngestionSec{} security defenses
-  act at ingestion against \NDefPtIngestionSafety{} safety ones, and
-  \NDefPtReasoningSafety{} safety defenses act at reasoning against
-  \NDefPtReasoningSec{} (Section~\ref{sec:parallel}). The dates say the same
-  thing: \NSharedChannels{} channels have mechanisms from both, security
-  arrives first in \NChannelsSecFirst{} and \textbf{safety in none}, by a
-  median of \MedianChannelLag{} year and up to \MaxChannelLag{}, in a body of
-  work the later side cites \PctSafetyCitesSec{}\% of the time.
+  not duplicating each other's work. They are dividing the problem. One side
+  studies how the bad text arrives and defends where it enters; the other
+  studies why the model believes it and defends where it reasons.
   \textbf{Duplicated effort would still leave two working defenses; halves
-  that never meet leave neither.} A defense that reasons about a document
-  cannot choose the document, and Section~\ref{sec:results} measures what
-  that costs.
+  that never meet leave neither} (Section~\ref{sec:parallel}).
 
+\item \textbf{The region nobody tests (RQ2).} Of every confirmed (defense,
+  attack) pair either community reports, only a handful cross between them,
+  and \textbf{a security defense has been evaluated against an AI/ML failure
+  mechanism exactly \NSecDefVsSafetyAttack{} time}
+  (Section~\ref{sec:emptycell}).
 
-\item \textbf{The cell nobody fills (RQ2).} Across \NPureRegimePairs{}
-  confirmed (defense, attack) pairs, recovered from the \NAnalysed{} papers
-  that name a technique among \NCorpus{} read in full, only \NCrossCommunityPairs{} (\PctCrossCommunity{}\%) cross between
-  the two communities, and \textbf{a security defense has been evaluated
-  against a safety failure mechanism exactly
-  \NSecDefVsSafetyAttack{} time}, against \NSecDefSecAttack{} evaluations against
-  security attacks (Section~\ref{sec:emptycell}). The
-  supporting measurements are a joint taxonomy over channel, intent and
-  consequence, of which \PctCubeEmpty{}\% of cells hold no paper from either
-  side; a census of \NMechanismsBench{} named mechanisms and \NDefenses{}
-  named defenses, coded by the regime each was actually validated
-  against rather than the one it claims; and citation rates of
-  \PctSecCitesSafety{}\% and \PctSafetyCitesSec{}\% in the two directions
-  (Section~\ref{sec:literatures}).
-  % APPENDIX-OFF: restore with sections/A-census
-  % The full census is Appendix~\ref{sec:census}.
-\item \textbf{A platform, and \NCampaignPairs{} pairs run on it (RQ3)} across
-  \NCampaignImpl{} implementations and \NCampaignEpisodes{} scored episodes,
-  each from its authors' released artifacts under an attack-works-first
-  control and a fixed detectability threshold
-  (Section~\ref{sec:experiments}). \NOursCrossPairs{} of our \NOursPairs{}
-  retrieval-cell pairs cross the community boundary, against
-  \PctCrossCommunity{}\% of the literature's. At the dose most favorable to a
-  defense, not one of 16 (defense, payload) pairs shows a resolvable benefit.
+\item \textbf{A platform, and \NCampaignPairs{} pairs run on it (RQ3).} Every
+  method executes from its authors' released code and weights, against an
+  undefended arm on the same items, under controls fixed before any run
+  (Section~\ref{sec:experiments}).
 
-\item \textbf{One mechanism, not a list of failures (RQ4).} Context-reliance
-  defenses --- methods whose intervention is a weighting between the
-  context-conditioned and the memory-conditioned prediction --- relocate
-  correctness rather than creating it. What they take from memory the attacker
-  receives, and what they take from the attacker memory receives; in the three
-  defenses that suppress memory, the two movements cancel to within 8
-  percentage points. Neither
-  direction moves anything toward the real document, because the axis these
-  methods arbitrate on does not contain the distinction an attacker violates
+\item \textbf{One mechanism, not a list of failures (RQ4).} The defenses that
+  fail here share a design: they weight the retrieved text against the model's
+  memory. That relocates correctness rather than creating it. What they take
+  from memory the attacker receives, and what they take from the attacker
+  memory receives. Neither direction moves anything toward the real document
   (Sections~\ref{sec:results}, \ref{sec:distractor}).
 
-\item \textbf{Two adaptive attacks on the one defense that resisted (RQ5).}
-  ACD~\cite{kim-2024-adaptive} weights the two distributions by an entropy term computed from the
-  retrieved context, which an attacker owns, so the attack has exactly one
-  objective: minimize that term. A best-of-five search over sentence forms
-  removes \PctAcdRemovedBestOf{}\% of its protection; a gradient search over
-  token ids removes \textbf{\PctAcdRemovedGradient{}\%}. Both stay above the ceiling the rule itself implies, so the
-  method degrades rather than collapses, and the price is now measured
+\item \textbf{Two adaptive attacks on the one defense that resisted (RQ5).} It
+  loses \textbf{\PctAcdRemovedGradient{}\%} of its protection to an attacker
+  who reads its rule, which prices the method rather than dismissing it
   (Section~\ref{sec:adaptive}).
 
-\item \textbf{Three controls the literature omits.} Each one decides how a
-  result reads (Section~\ref{sec:results2}). Against a \textbf{no-retrieval
-  baseline}, the flattest defense under attack turns out to be flat because
-  it has stopped reading the document. On an \textbf{abstention axis}, a
-  defense with no effect on accuracy is converting a third of its answers
-  into refusals. Under a \textbf{model control}, changing the base model
-  alone reverses outcomes.
+\item \textbf{Three controls the literature omits}, each of which decides how
+  a result reads: a no-retrieval baseline, an abstention axis, and a second
+  base model (Section~\ref{sec:results2}).
 
 \item \textbf{A runnable artifact.} Every attack and defense executes from its
-  authors' released code at a pinned commit, verified unmodified; the
-  harness, the payloads and the full census ship with it.
+  authors' released code at a pinned commit, verified unmodified; the harness,
+  the payloads and the full census ship with it.
 \end{itemize}
