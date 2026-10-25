@@ -145,10 +145,12 @@ def figure(n):
     # as an omission on the other half.
     stages = [
         ("Seeds and database search",
-         f"{n['seeds']} seed papers  +  {n['search']:,} records",
-         f"from {n['queries']} queries across {n['apis']} APIs"),
+         f"{n['queries']} queries across {n['apis']} APIs",
+         f"{n['seeds']} seeds  +  {n['search']:,} records   "
+         f"n = {n['hop0']:,}"),
         ("Snowballed, both directions",
-         f"forward {n['fwd']:,}  ·  backward {n['bwd']:,}",
+         f"discovery pool {n['pool'] + n['hop2']:,}  ·  "
+         f"hop-2, out of scope  {n['hop2']:,}",
          f"working pool, hop 0–1   n = {n['pool']:,}"),
         ("Screened on title and abstract",
          f"excluded against written criteria  {n['auto_exclude']:,}",

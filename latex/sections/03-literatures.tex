@@ -10,12 +10,14 @@ cell of the matrix that is empty.
 
 \subsection{Corpus}
 
-We began from 51 seed papers found during scoping, queried the Semantic
+We began from \NSeeds{} seed papers found during scoping, queried the Semantic
 Scholar Academic Graph and arXiv APIs with keyword clusters drawn from both
 vocabularies, and snowballed forward and backward. The discovery pool reached
-25,922 papers. Dual coding at that scale is not feasible for a small team, so
-we screened on title and abstract against written inclusion criteria, then read
-the survivors in full. The included corpus is \NCorpus{} papers, each carrying
+\NDiscovered{} papers. \NHopTwo{} of those are hop-2 records, discovered
+before the snowball depth was capped at one hop and kept in the database but
+outside the working pool, which leaves \NWorkingPool{}. Dual coding at that
+scale is not feasible for a small team, so we screened on title and abstract
+against written inclusion criteria, then read the survivors in full. The included corpus is \NCorpus{} papers, each carrying
 \NColumns{} recorded columns of which \NCodedFields{} are coded from the full
 text.
 

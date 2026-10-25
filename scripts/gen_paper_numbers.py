@@ -70,6 +70,15 @@ def main():
     M["NSurvived"] = _g("select count(*) from papers where hop<=1 and "
                         "screen_auto in ('auto_include','needs_review')")
     M["NFullText"] = len(rows)
+    # The discovery pool is everything the search and the snowball ever
+    # returned, hop-2 fan-out included. The working pool stops at hop 1,
+    # because depth was dialled back after the hop-2 records were already in
+    # the database. The figure shows both so the two totals reconcile.
+    M["NSeeds"] = _g("select count(*) from papers "
+                     "where discovered_via='seed'")
+    M["NDiscovered"] = _g("select count(*) from papers")
+    M["NWorkingPool"] = _g("select count(*) from papers where hop<=1")
+    M["NHopTwo"] = _g("select count(*) from papers where hop=2")
     _c.close()
     M["NCorpus"] = len(included)
     M["NExcluded"] = len(rows) - len(included)
