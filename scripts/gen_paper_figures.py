@@ -541,7 +541,7 @@ def fig_transfer_matrix():
                         color="#ffffff" if dark else INK)
                 if v == 0:
                     ax.text(j, i + 0.3, "never tested", ha="center",
-                            va="center", fontsize=6, color=INK2)
+                            va="center", fontsize=6, color=INK)
         for s in ax.spines.values():
             s.set_visible(False)
         ax.set_xticks(np.arange(-.5, 2, 1), minor=True)

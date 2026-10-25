@@ -185,12 +185,23 @@ Eight of them are in the security panel, four of those are
 to itself is a gap; a cell with attacks and no defense is a different and
 sharper one.
 
-Read along a row and the same figure answers where protection does not follow
-the problem. \meth{multi-agent} and \meth{memory} carry roughly four defenses
+Reading a ratio along a row of the cube is guesswork, so
+Figure~\ref{fig:channelgap} collapses the consequence axis and reports it
+directly. \meth{multi-agent} and \meth{memory} carry roughly four defenses
 per mechanism, while \meth{supply-chain} has fewer defenses than mechanisms
 and \meth{cross-modal} and \meth{tool-metadata} sit at parity. Those three are
 the routes by which an agent accepts capability from a third party, and they
 are the thinnest in the corpus.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_channel_gap}
+\caption{Named mechanisms against named defenses in each channel, with the
+defense-to-mechanism ratio printed at the right. Channels are ordered by
+that ratio, so the routes where protection has not followed the problem fall
+to the bottom. Defenses are hatched, so the pair separates without colour.}
+\label{fig:channelgap}
+\end{figure}
 
 
 \textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
@@ -394,6 +405,21 @@ subject matter spans both communities, which is precisely the kind of paper
 that would cross first. One instance in \NPureRegimePairs{} is not a literature
 that tests across the boundary; it is the exception that shows what crossing
 would look like.
+
+Figure~\ref{fig:transfermatrix} puts that distribution beside the one our
+own campaign produces, which is the gap this paper sets out to close.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig6_transfer_matrix}
+\caption{Which community's defense met which community's attack, in the
+published literature and in this paper's campaign. Cell shade is each
+panel's own share rather than a shared count scale, because the two totals
+differ by an order of magnitude; the printed count is the value. The
+right-hand panel covers the retrieval-cell transfer pairs, not the whole
+campaign. A combination nobody has run at all is marked.}
+\label{fig:transfermatrix}
+\end{figure*}
 
 This is consistent with the citation rates and sharper than them. The
 communities do not read each other, so they do not test each other, so the
