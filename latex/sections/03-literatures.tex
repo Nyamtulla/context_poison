@@ -44,30 +44,36 @@ remainder.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig9_prisma}
-\caption{Corpus construction in four stages. Each stage reports what it
-removed on the left and what it passed on to the next stage on the right.
-One of those removals is an honest gap: the records that survived screening
-but were never retrieved were chosen by a rule the project did not record.
-The queries, their dates and their hit counts ship with the artifact as a
-search log.}
+\caption{Corpus construction. Each stage reports what it removed on the
+left and what it passed to the next stage on the right. The queries, their
+dates and their hit counts ship with the artifact as a search log.}
 \label{fig:prisma}
 \end{figure}
 
-Figure~\ref{fig:prisma} counts each stage, and the artifact ships the
-\NQueries{} queries with their dates and hit counts. One stage is weaker than
-the rest. Of the \NSurvived{} records that survived screening,
-\NFullText{} were read in full, and nothing we recorded says how that subset
-was chosen. We report the gap rather than reconstruct a rule for it.
+We follow PRISMA~\cite{page-2021-prisma} for identification, screening and
+inclusion, and Figure~\ref{fig:prisma} reports the count at every stage. The
+artifact ships the \NQueries{} queries with their dates and their hit counts.
 
-Screening changed the corpus three times during the project and we report the
-current state only; every change is logged. The most recent was a
-contribution re-screen in which all \NScreened{} screened papers were re-read
-against a single rule: a paper stays if it contributes an attack, a failure
-mechanism, a defense or a fix. Benchmarks, surveys, measurement studies and
-position papers are kept even though they propose no technique, because they
-are how the field is organized. That pass removed 53 papers and, in the other
-direction, recovered 34 techniques that the original extraction had missed, so
-the registry counts in this paper are floors rather than censuses.
+Screening ran as two passes over title and abstract. The first applied the
+written criteria to the whole working pool and removed \NAutoExcluded{}
+records. The second read the \NSurvived{} survivors and carried
+\NFullText{} of them forward to full-text retrieval. A record left at the
+second pass on either of two grounds. Its title and abstract placed it
+outside the scope we had written down, or no full text was obtainable from a
+peer-reviewed venue or a recognized preprint server, which is the case for
+withdrawn papers and for records whose only version was an uncredentialed
+copy. Reading an uncredentialed copy would put a claim in the census that no
+venue stands behind.
+
+We then coded the \NFullText{} retrieved papers against the inclusion
+criteria and kept \NCorpus{}. The criteria changed three times during the
+project; the paper reports the current state and every change is logged. The
+most recent was a contribution re-screen against a single rule: a paper stays
+if it contributes an attack, a failure mechanism, a defense or a fix.
+Benchmarks, surveys, measurement studies and position papers stay even though
+they propose no technique, because they are how the field is organized. That
+pass removed 53 papers and recovered 34 techniques the first extraction had
+missed, so the registry counts here are floors.
 
 \subsection{A joint taxonomy}
 \label{sec:taxonomy}

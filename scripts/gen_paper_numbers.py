@@ -74,6 +74,8 @@ def main():
     # returned, hop-2 fan-out included. The working pool stops at hop 1,
     # because depth was dialled back after the hop-2 records were already in
     # the database. The figure shows both so the two totals reconcile.
+    M["NAutoExcluded"] = _g("select count(*) from papers where hop<=1 and "
+                            "screen_auto='auto_exclude'")
     M["NSeeds"] = _g("select count(*) from papers "
                      "where discovered_via='seed'")
     M["NDiscovered"] = _g("select count(*) from papers")

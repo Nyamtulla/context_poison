@@ -153,8 +153,10 @@ def figure(n):
         ("Screened on title and abstract",
          f"excluded against\nwritten criteria {n['auto_exclude']:,}",
          f"survived\nn = {n['survived']:,}"),
-        ("Read in full and coded",
-         f"excluded before retrieval {n['not_retrieved']:,}\n"
+        ("Retrieved in full",
+         f"excluded, not relevant\nor unavailable {n['not_retrieved']:,}",
+         f"retrieved and read\nn = {n['fulltext']:,}"),
+        ("Coded against the inclusion criteria",
          f"excluded at full text {n['excluded_ft']:,}",
          f"corpus n = {n['included']:,}\n"
          f"{n['analysed']:,} name a technique"),
