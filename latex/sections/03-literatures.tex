@@ -282,7 +282,11 @@ omitted.}
 \label{sec:coverage}
 
 A (defense, attack) pair means some paper evaluated that defense against that
-attack. We recovered pairs by four routes: reading defense papers, a
+attack. The registry's unit is the claim: a method enters it when its paper
+proposes it against a named failure mechanism, not when the paper
+demonstrates that it works. \emph{Defense} therefore means
+proposed-against, and the distance between proposing and demonstrating is
+part of what this section measures. We recovered pairs by four routes: reading defense papers, a
 citation-and-full-text recovery pass, resolving benchmark names to their
 constituent attacks where the paper named them, and a reverse scan of attack
 papers. The last route matters because it is the only one that can observe a
@@ -315,11 +319,23 @@ unambiguous adversarial signal inside their own evaluation section, and
 the attack. \NDefEvalNoBaseline{} state that they ran no real
 comparison at all. \NDefEvalNoAdversary{} were evaluated with real
 baselines but never against an adversary, on capability and quality
-benchmarks instead: these are not untested methods, they are methods whose
-behavior under attack is simply unmeasured, which for a fix aimed at
-accidental failure is the normal state and is the population this paper's
-campaign probes. For the remaining \NDefEvalUnclear{} the coded fields do
-not say. The classification is conservative by construction --- anything
+benchmarks instead. For the remaining \NDefEvalUnclear{} the coded fields
+do not say.
+
+That \NDefEvalNoAdversary{} is two populations, and they read differently.
+\NDefNoAdvSafety{} are safety-regime fixes, most of them against
+\meth{silent-corruption} and \meth{reasoning-corruption}. These are not
+untested methods: a fix for a stale or conflicting passage is demonstrated
+by accuracy rising on cases where the context is wrong, and there is no
+adversary to put in the experiment. Their behavior under attack is
+unmeasured rather than unsound, and they are the population this paper's
+campaign probes. The other \NDefNoAdvSecurity{} sit in the security
+regime, and \NDefClaimsAdvNoAdv{} of them name an adversarial threat model
+in their own evaluation coding while putting no adversary in the
+experiment, most against \meth{goal-hijack}. That is a different failing
+from the first group. It is a defense whose evaluation does not meet its
+own stated threat model, and it is the one place in this audit where the
+gap is the paper's rather than the field's convention. The classification is conservative by construction --- anything
 ambiguous lands in that last group rather than in a positive one.
 
 Every count above is a positive finding: something the paper says, not

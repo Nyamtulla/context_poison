@@ -224,6 +224,22 @@ def main():
     # against anything", which is not what either category says.
     M["NDefEvalNoAdversary"] = _evc["non_adversarial"]
     M["NDefEvalUnclear"] = _evc["unclear"]
+    # Inside the no-adversary group, two populations that read very
+    # differently. Most are safety-regime fixes evaluated the way that
+    # community evaluates, which is the paper's thesis rather than a fault.
+    # A minority claim an adversarial threat model in their own coding and
+    # still put no adversary in the experiment, which is a defense whose
+    # evaluation does not match its own claim. The split was in the data and
+    # in no section.
+    _na = [d for d in _ev["defenses"] if d["status"] == "non_adversarial"]
+    _reg4 = {e.get("defense_name"): (e.get("regime") or "").strip()
+             for e in r4}
+    M["NDefNoAdvSafety"] = sum(
+        1 for d in _na if _reg4.get(d["defense_name"]) == "safety")
+    M["NDefNoAdvSecurity"] = sum(
+        1 for d in _na if _reg4.get(d["defense_name"]) == "security")
+    M["NDefClaimsAdvNoAdv"] = sum(
+        1 for d in _na if d.get("validated_against") == "adversarial")
     # The audit is a snapshot. It matched the registry when it last ran; if
     # defenses are added and it is not re-run, the prose starts quoting an
     # old denominator against a current census, which is the error this
