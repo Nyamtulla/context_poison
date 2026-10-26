@@ -62,11 +62,11 @@ experiments that fall in it to answer the following research questions.
 \item[RQ4] \textbf{Does that explanation survive an adaptive attacker?} We
   build two optimizers against the one method that resisted
   (Section~\ref{sec:adaptive}).
-\item[RQ5] \textbf{What does a system inherit when it deploys one of these
-  methods outside the regime its authors validated?} We report the clean and
-  attacked ends of every method on the same items, and what the pair of them
-  means for a deployment whose corpus an outsider can write to
-  (Sections~\ref{sec:results2}, \ref{sec:discussion}).
+\item[RQ5] \textbf{Does that finding survive the controls the literature
+  omits?} We add a no-retrieval arm, an abstention axis and a second base
+  model, and we run two implementations of the one principle that held, to
+  separate a property of a design from a quirk of one codebase
+  (Section~\ref{sec:results2}).
 \end{description}
 
 Others have separately surveyed both literatures before: the
@@ -122,15 +122,16 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   protection to an attacker who reads its rule, which prices the method rather
   than dismissing it (Section~\ref{sec:adaptive}).
 
-\item \textbf{We state what a deployment inherits from these methods
-  (RQ5).} A method that tunes how much the model trusts retrieved text is
-  correct when the text is merely stale and dangerous when an attacker owns
-  it, and a writable corpus is the second case
-  (Sections~\ref{sec:results2}, \ref{sec:discussion}).
+\item \textbf{We report three controls the literature omits, and a
+  finding does not survive all of them (RQ5).} A no-retrieval baseline, an
+  abstention axis and a second base model each decide how a result reads,
+  and two implementations of one principle let us tell a design from a
+  codebase (Section~\ref{sec:results2}).
 
-\item \textbf{We report three controls the literature omits}, each of which
-  decides how a result reads: a no-retrieval baseline, an abstention axis, and
-  a second base model (Section~\ref{sec:results2}).
+\item \textbf{We state what a deployment inherits from these methods.} A
+  method that tunes how much the model trusts retrieved text is correct when
+  the text is merely stale and dangerous when an attacker owns it, and a
+  writable corpus is the second case (Section~\ref{sec:discussion}).
 
 \item \textbf{We release a runnable artifact.} Every attack and defense
   executes from its authors' released code at a pinned commit, verified
