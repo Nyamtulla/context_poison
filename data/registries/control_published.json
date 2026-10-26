@@ -43,13 +43,13 @@
     },
     "ACD": {
       "benefit_pp": null,
-      "baseline": "contrastive-decoding baselines",
-      "metric": "open-domain QA accuracy (per-table; no headline figure)",
-      "source": "Abstract: 'ACD demonstrates improvements in open-domain question answering tasks compared to baselines, especially in robustness by remaining undistracted by noisy contexts' -- stated without a number; the per-dataset tables carry it",
+      "baseline": "contrastive-decoding methods: RegCls, RegOpn, CAD, MICD_F, MICD_D",
+      "metric": "EM accuracy (Table 1: All / SubsetGold / SubsetNoisy)",
+      "source": "Section 'Performance on RAG': 'ACD outperforms the baselines across all datasets and models within the RAG framework, particularly when considering the full test data (All)' and 'ACD achieves either the best or second-best performance' on the gold and noisy subsets. No single figure is given in prose.",
       "paper_id": "915539c51252649cf7d09e25dea3af199235ebed",
       "metric_matches_ours": true,
-      "published_direction": "positive, magnitude not stated in the abstract",
-      "note": "Needs a per-dataset figure read out of the result tables; the abstract makes the claim qualitatively."
+      "published_direction": "positive, against other decoding methods",
+      "note": "Two reasons there is no number to put here. The paper states the gain directionally, and its baselines are competing contrastive decoders we do not run, not plain RAG or closed book. Table 1 carries per-cell figures but the cached text renders it as unattributable column dumps, so a number lifted from it would be a guess. Read from the PDF if an exact figure is wanted."
     },
     "SCR": {
       "benefit_pp": null,
@@ -65,10 +65,11 @@
       "benefit_pp": null,
       "baseline": null,
       "source": "Abstract claims cost reduction and test-time knowledge enhancement over PRAG; no clean-context accuracy gain over RAG is claimed there. A per-dataset figure is still needed from the tables.",
-      "note": "inference_method=dyprag: no passage in context",
+      "note": "No comparative claim could be recovered: this paper's cached extraction is almost entirely numeric column dumps with the prose lost, so neither a figure nor a directional statement is quotable from it. The abstract claims cost reduction and test-time knowledge enhancement over PRAG and does not claim a clean-context accuracy gain over RAG. Needs the PDF.",
       "metric": "QA accuracy (per-dataset tables)",
       "paper_id": "8a2acc213b370c342cff3fa0301935612b403b21",
-      "metric_matches_ours": null
+      "metric_matches_ours": null,
+      "published_direction": "not recoverable from the cached text"
     },
     "RobustRAG": {
       "benefit_pp": 0.0,
@@ -84,7 +85,7 @@
       "benefit_pp": null,
       "baseline": null,
       "source": null,
-      "note": "inference_method=dyprag_combine: passage plus parameters",
+      "note": "No comparative claim could be recovered: this paper's cached extraction is almost entirely numeric column dumps with the prose lost, so neither a figure nor a directional statement is quotable from it. The abstract claims cost reduction and test-time knowledge enhancement over PRAG and does not claim a clean-context accuracy gain over RAG. Needs the PDF.",
       "metric": null,
       "paper_id": "8a2acc213b370c342cff3fa0301935612b403b21",
       "metric_matches_ours": null
