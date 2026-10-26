@@ -59,14 +59,14 @@ experiments that fall in it to answer the following research questions.
   design choice they share?} We build a payload that separates the
   explanations rather than maximizes damage
   (Section~\ref{sec:distractor}).
-\item[RQ4] \textbf{Does that explanation survive an adaptive attacker?} We
-  build two optimizers against the one method that resisted
-  (Section~\ref{sec:adaptive}).
-\item[RQ5] \textbf{Does that finding survive the controls the literature
+\item[RQ4] \textbf{Does that finding survive the controls the literature
   omits?} We add a no-retrieval arm, an abstention axis and a second base
   model, and we run two implementations of the one principle that held, to
   separate a property of a design from a quirk of one codebase
   (Section~\ref{sec:results2}).
+\item[RQ5] \textbf{Does that explanation survive an adaptive attacker?} We
+  build two optimizers against the one method that resisted
+  (Section~\ref{sec:adaptive}).
 \end{description}
 
 Others have separately surveyed both literatures before: the
@@ -118,16 +118,16 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   moves anything toward the real document (Sections~\ref{sec:results},
   \ref{sec:distractor}).
 
-\item \textbf{We build two adaptive attacks against the one defense that
-  resisted (RQ4).} It loses \PctAcdRemovedGradient{}\% of its
-  protection to an attacker who reads its rule, which prices the method rather
-  than dismissing it (Section~\ref{sec:adaptive}).
-
 \item \textbf{We report three controls the literature omits, and a
-  finding does not survive all of them (RQ5).} A no-retrieval baseline, an
+  finding does not survive all of them (RQ4).} A no-retrieval baseline, an
   abstention axis and a second base model each decide how a result reads,
   and two implementations of one principle let us tell a design from a
   codebase (Section~\ref{sec:results2}).
+
+\item \textbf{We build two adaptive attacks against the one defense that
+  resisted (RQ5).} It loses \PctAcdRemovedGradient{}\% of its
+  protection to an attacker who reads its rule, which prices the method rather
+  than dismissing it (Section~\ref{sec:adaptive}).
 
 \item \textbf{We state what a deployment inherits from these methods.} A
   method that tunes how much the model trusts retrieved text is correct when
@@ -150,3 +150,14 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   executes from its authors' released code at a pinned commit, verified
   unmodified; the harness, the payloads and the full census ship with it.
 \end{itemize}
+
+\paragraph{How the paper reads.} Section~\ref{sec:background} fixes the
+terms and the threat model. Section~\ref{sec:literatures} answers RQ1 and
+ends at the region nobody has tested. Section~\ref{sec:experiments} builds
+the harness and Section~\ref{sec:results} runs it, which answers RQ2 and,
+in Section~\ref{sec:distractor}, RQ3. Section~\ref{sec:results2} tries to
+break those results with the controls the literature omits (RQ4) and then
+with an adaptive attacker (RQ5). Section~\ref{sec:discussion} turns what
+survives into conventions, into what a deployment inherits, and into the
+design rule a defense covering both regimes would have to follow.
+Section~\ref{sec:threats} states the limits and what is not finished.
