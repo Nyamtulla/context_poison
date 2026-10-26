@@ -1,0 +1,14 @@
+{
+  "purpose": "The benefit each defense's OWN paper reports, which Section 7.3's control gate checks our reconstruction against. This half cannot be computed from our data; it has to be read out of the papers.",
+  "how_to_fill": "For each defense set benefit_pp to the accuracy gain its paper reports over its own baseline, baseline to the name of that baseline as the paper describes it, and source to the table or section the number came from. Do not fill these from memory. scripts/gen_control_spec.py merges this into control_spec.json; anything still null prints as a dash and is counted as pending.",
+  "defenses": {
+    "ParamMute": {"benefit_pp": null, "baseline": null, "source": null},
+    "CK-PLUG":   {"benefit_pp": null, "baseline": null, "source": null},
+    "SpARE":     {"benefit_pp": null, "baseline": null, "source": null},
+    "COIECD":    {"benefit_pp": null, "baseline": null, "source": null},
+    "ACD":       {"benefit_pp": null, "baseline": null, "source": null},
+    "SCR":       {"benefit_pp": null, "baseline": null, "source": null},
+    "DyPRAG":    {"benefit_pp": null, "baseline": null, "source": null},
+    "RobustRAG": {"benefit_pp": null, "baseline": null, "source": null}
+  }
+}

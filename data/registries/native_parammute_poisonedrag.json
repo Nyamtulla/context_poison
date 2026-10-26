@@ -1,5 +1,4 @@
 {
- "generated": "2026-10-03",
  "defense": "parammute",
  "attack": "poisonedrag",
  "dataset": "open_nq (PoisonedRAG construction)",
@@ -153,5 +152,7 @@
    "arm": "defended",
    "n_poison": 10
   }
- ]
+ ],
+ "generated": "2026-10-25",
+ "complete": true
 }

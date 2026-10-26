@@ -1,0 +1,151 @@
+{
+ "generated_by": "scripts/gen_control_spec.py",
+ "purpose": "Inputs to the Section 7.3 control gate. The reconstructed side is computed here; the published side must be read out of each defense's paper into control_published.json.",
+ "entries": [
+  {
+   "defense": "ParamMute",
+   "registry": "parammute_vs_corpus_poisoning.json",
+   "clean_selector": {
+    "frac": 0.0
+   },
+   "baseline_arm": "base",
+   "defended_arm": "parammute",
+   "n": 1409,
+   "mdr_pp": 5.3,
+   "baseline_acc": 48.4,
+   "defended_acc": 57.7,
+   "reconstructed_benefit_pp": 9.3,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null
+  },
+  {
+   "defense": "CK-PLUG",
+   "registry": "ckplug_vs_corpus_poisoning.json",
+   "clean_selector": {
+    "frac": 0.0
+   },
+   "baseline_arm": "base_rag",
+   "defended_arm": "ck",
+   "n": 800,
+   "mdr_pp": 7.0,
+   "baseline_acc": 60.37,
+   "defended_acc": 55.87,
+   "reconstructed_benefit_pp": -4.5,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null
+  },
+  {
+   "defense": "SpARE",
+   "registry": "spare_vs_corpus_poisoning.json",
+   "clean_selector": {
+    "frac": 0.0
+   },
+   "baseline_arm": "steer_to_use_parameter",
+   "defended_arm": "steer_to_use_context",
+   "n": 500,
+   "mdr_pp": 8.9,
+   "baseline_acc": 39.6,
+   "defended_acc": 53.8,
+   "reconstructed_benefit_pp": 14.2,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null
+  },
+  {
+   "defense": "COIECD",
+   "registry": "coiecd_vs_corpus_poisoning.json",
+   "clean_selector": {
+    "frac": 0.0
+   },
+   "baseline_arm": "base_rag",
+   "defended_arm": "coiecd",
+   "n": 400,
+   "mdr_pp": 9.9,
+   "baseline_acc": 44.0,
+   "defended_acc": 43.25,
+   "reconstructed_benefit_pp": -0.75,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null
+  },
+  {
+   "defense": "ACD",
+   "registry": "acd_vs_corpus_poisoning.json",
+   "clean_selector": {
+    "frac": 0.0
+   },
+   "baseline_arm": "rag",
+   "defended_arm": "acd",
+   "n": 400,
+   "mdr_pp": 9.9,
+   "baseline_acc": 66.0,
+   "defended_acc": 63.5,
+   "reconstructed_benefit_pp": -2.5,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null,
+   "alt_baseline_arm": "closedbook",
+   "alt_baseline_acc": 10.0,
+   "reconstructed_benefit_vs_alt_pp": 53.5
+  },
+  {
+   "defense": "SCR",
+   "registry": "scr_vs_corpus_poisoning.json",
+   "clean_selector": {
+    "frac": 0.0
+   },
+   "baseline_arm": "rag",
+   "defended_arm": "scr",
+   "n": 400,
+   "mdr_pp": 9.9,
+   "baseline_acc": 59.5,
+   "defended_acc": 46.0,
+   "reconstructed_benefit_pp": -13.5,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null,
+   "alt_baseline_arm": "closedbook",
+   "alt_baseline_acc": 4.75,
+   "reconstructed_benefit_vs_alt_pp": 41.25
+  },
+  {
+   "defense": "DyPRAG",
+   "registry": "dyprag_vs_corpus_poisoning.json",
+   "clean_selector": {
+    "frac": 0.0
+   },
+   "baseline_arm": "rag",
+   "defended_arm": "dyprag",
+   "n": 400,
+   "mdr_pp": 9.9,
+   "baseline_acc": 63.75,
+   "defended_acc": 5.75,
+   "reconstructed_benefit_pp": -58.0,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null,
+   "alt_baseline_arm": "closedbook",
+   "alt_baseline_acc": 7.5,
+   "reconstructed_benefit_vs_alt_pp": -1.75
+  },
+  {
+   "defense": "RobustRAG",
+   "registry": "corpus_poisoning_vs_robustrag.json",
+   "clean_selector": {
+    "condition": "clean (no attack)"
+   },
+   "baseline_arm": "undefended",
+   "defended_arm": "RobustRAG",
+   "n": 500,
+   "mdr_pp": 8.9,
+   "baseline_acc": 60.6,
+   "defended_acc": 57.2,
+   "reconstructed_benefit_pp": -3.4,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null
+  }
+ ]
+}

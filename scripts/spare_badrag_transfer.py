@@ -46,6 +46,13 @@ sys.path.insert(0, str(REPO / "scripts"))
 # spare/utils.py: PROJ_DIR defaults to "./", so every cache_data path resolves
 # against the caller's cwd and silently misses the shipped weights.
 os.environ.setdefault("PROJ_DIR", str(SP))
+# SpARE's SAE decoder prefers a hand-written Triton kernel. Triton JIT-compiles
+# a CUDA shim with gcc against Python.h, and this box has no python3-dev, so
+# every SpARE cell died at the first decode. spare/sae/utils.py ships the
+# switch: eager_decode is scatter-then-matmul, the same arithmetic unfused, so
+# turning the kernel off costs speed and changes no result. Same reasoning as
+# the flash_attention_2 to SDPA substitution below.
+os.environ.setdefault("SAE_DISABLE_TRITON", "1")
 
 from transfer_stats import min_detectable_change, wilson        # noqa: E402
 from spare_vs_corpus_poisoning import acc_score                 # noqa: E402
