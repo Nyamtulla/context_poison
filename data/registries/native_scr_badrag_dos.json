@@ -10,7 +10,8 @@
  "mdr_pp_at_n": 8.9,
  "doses_done": [
   0,
-  1
+  1,
+  2
  ],
  "complete": false,
  "results": [
@@ -79,6 +80,39 @@
    "neg_rate": 43.2,
    "ci_low": 22.2,
    "ci_high": 29.8
+  },
+  {
+   "n_poison": 2,
+   "arm": "rag",
+   "n": 500,
+   "acc": 3.6,
+   "attacked": 0.2,
+   "refusal_rate": 96.4,
+   "neg_rate": 91.6,
+   "ci_low": 2.3,
+   "ci_high": 5.6
+  },
+  {
+   "n_poison": 2,
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 28.6,
+   "attacked": 3.8,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 24.8,
+   "ci_high": 32.7
+  },
+  {
+   "n_poison": 2,
+   "arm": "scr",
+   "n": 500,
+   "acc": 20.2,
+   "attacked": 1.2,
+   "refusal_rate": 60.2,
+   "neg_rate": 52.0,
+   "ci_low": 16.9,
+   "ci_high": 23.9
   }
  ]
 }
