@@ -13,11 +13,13 @@
     },
     "CK-PLUG": {
       "benefit_pp": null,
-      "baseline": null,
-      "source": null,
-      "metric": null,
-      "paper_id": null,
-      "metric_matches_ours": null
+      "baseline": "RAG",
+      "metric": "memory recall (MR), a controllability range -- not accuracy",
+      "source": "Abstract: 'on LLAMA3-8B, memory recall (MR) of RAG response can be adjusted within a broad range (9.9%-71.9%), compared to the baseline of 42.1%' ... 'while maintaining generation fluency and knowledge accuracy'",
+      "paper_id": "f0b199b7b9939cfd3d8bd69149d5bed7af40e0d2",
+      "metric_matches_ours": false,
+      "published_direction": "no accuracy benefit claimed",
+      "note": "CK-PLUG's contribution is a tuning knob over reliance, not an accuracy gain: the paper claims accuracy is MAINTAINED while MR moves. Our -4.5pp clean-context figure is therefore not a failure to reproduce a benefit; no clean-context accuracy benefit was ever claimed. The gate needs a different test for this method."
     },
     "SpARE": {
       "benefit_pp": null,
@@ -37,19 +39,23 @@
     },
     "ACD": {
       "benefit_pp": null,
-      "baseline": null,
-      "source": null,
-      "metric": null,
-      "paper_id": null,
-      "metric_matches_ours": null
+      "baseline": "contrastive-decoding baselines",
+      "metric": "open-domain QA accuracy (per-table; no headline figure)",
+      "source": "Abstract: 'ACD demonstrates improvements in open-domain question answering tasks compared to baselines, especially in robustness by remaining undistracted by noisy contexts' -- stated without a number; the per-dataset tables carry it",
+      "paper_id": "915539c51252649cf7d09e25dea3af199235ebed",
+      "metric_matches_ours": true,
+      "published_direction": "positive, magnitude not stated in the abstract",
+      "note": "Needs a per-dataset figure read out of the result tables; the abstract makes the claim qualitatively."
     },
     "SCR": {
       "benefit_pp": null,
-      "baseline": null,
-      "source": null,
-      "metric": null,
-      "paper_id": null,
-      "metric_matches_ours": null
+      "baseline": "InternalConf",
+      "metric": "Acct / Accf (accuracy given true / false contexts)",
+      "source": "Table 2, captioned 'Main Result Llama-3-8B. The SCR methods don't perform well compared to InternalConf.'; abstract: 'for a weaker model like Llama-3-8B, RCR outperforms SCR'",
+      "paper_id": "6eb82be7028ac751e0539f93b84ab15048e41646",
+      "metric_matches_ours": true,
+      "published_direction": "negative on our victim model",
+      "note": "There is no published benefit on Llama-3-8B to reproduce. The authors report SCR underperforming their own baseline on exactly the model we run; SCR is their method for strong reasoners (GPT-4o), RCR is the one they recommend at this scale. Our -13.5pp on clean context agrees with them in direction, so the control gate's premise does not hold for this cell."
     },
     "DyPRAG": {
       "benefit_pp": null,
