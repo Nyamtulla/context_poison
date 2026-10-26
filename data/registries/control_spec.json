@@ -53,11 +53,11 @@
    "baseline_acc": 39.6,
    "defended_acc": 53.8,
    "reconstructed_benefit_pp": 14.2,
-   "published_benefit_pp": null,
-   "published_baseline": null,
-   "published_source": null,
-   "published_metric": null,
-   "metric_matches_ours": null
+   "published_benefit_pp": 10.0,
+   "published_baseline": "existing representation-engineering methods (+15% against contrastive decoding)",
+   "published_source": "Abstract: 'SpARE can effectively control the usage of either knowledge source to resolve knowledge conflict ... surpassing existing representation engineering methods (+10%) as well as contrastive decoding methods (+15%)'",
+   "published_metric": "open-domain QA accuracy",
+   "metric_matches_ours": false
   },
   {
    "defense": "COIECD",
@@ -72,11 +72,11 @@
    "baseline_acc": 44.0,
    "defended_acc": 43.25,
    "reconstructed_benefit_pp": -0.75,
-   "published_benefit_pp": null,
-   "published_baseline": null,
-   "published_source": null,
-   "published_metric": null,
-   "metric_matches_ours": null
+   "published_benefit_pp": 0.0,
+   "published_baseline": "regular decoding on non-conflicting context",
+   "published_source": "Abstract: 'It can improve the model's faithfulness to conflicting context, and simultaneously maintain high performance among non-conflicting context.'",
+   "published_metric": "QA accuracy",
+   "metric_matches_ours": true
   },
   {
    "defense": "ACD",
@@ -137,8 +137,8 @@
    "reconstructed_benefit_pp": -1.75,
    "published_benefit_pp": null,
    "published_baseline": null,
-   "published_source": null,
-   "published_metric": null,
+   "published_source": "Abstract claims cost reduction and test-time knowledge enhancement over PRAG; no clean-context accuracy gain over RAG is claimed there. A per-dataset figure is still needed from the tables.",
+   "published_metric": "QA accuracy (per-dataset tables)",
    "metric_matches_ours": null,
    "alt_baseline_arm": "rag",
    "alt_baseline_acc": 63.75,
@@ -179,11 +179,11 @@
    "baseline_acc": 60.6,
    "defended_acc": 57.2,
    "reconstructed_benefit_pp": -3.4,
-   "published_benefit_pp": null,
-   "published_baseline": null,
-   "published_source": null,
-   "published_metric": null,
-   "metric_matches_ours": null
+   "published_benefit_pp": 0.0,
+   "published_baseline": "undefended RAG, no attack",
+   "published_source": "Section I: 'certifiable robustness while maintaining high clean performance'",
+   "published_metric": "QA accuracy",
+   "metric_matches_ours": true
   }
  ]
 }
