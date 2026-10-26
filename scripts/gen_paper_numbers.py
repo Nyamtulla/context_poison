@@ -796,6 +796,16 @@ def main():
     M["NOutcomePairs"] = len(_byside)
     M["NOutcomeBothSides"] = sum(1 for v in _byside.values() if len(v) > 1)
 
+    # The low-dose table's own total, which the prose quoted in two places as
+    # a typed 16. gen_lowdose_table.py already computes it; read it back so
+    # the sentence and the table cannot disagree.
+    _ld = REPO / "latex" / "tables" / "lowdose.tex"
+    if _ld.exists():
+        import re as _re2
+        _m = _re2.search(r"\\textbf\{total\}\s*&\s*\\textbf\{(\d+)\}", _ld.read_text())
+        if _m:
+            M["NLowDosePairs"] = _m.group(1)
+
     # The model control in S8b. RobustRAG's two aggregation variants disagree
     # resolvably at nine poisoned passages against refusal induction on
     # Mistral; on Llama they do not, and the protective one is no longer
