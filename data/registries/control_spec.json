@@ -116,19 +116,39 @@
    "clean_selector": {
     "frac": 0.0
    },
-   "baseline_arm": "rag",
+   "baseline_arm": "closedbook",
    "defended_arm": "dyprag",
    "n": 400,
    "mdr_pp": 9.9,
-   "baseline_acc": 63.75,
+   "baseline_acc": 7.5,
    "defended_acc": 5.75,
-   "reconstructed_benefit_pp": -58.0,
+   "reconstructed_benefit_pp": -1.75,
+   "published_benefit_pp": null,
+   "published_baseline": null,
+   "published_source": null,
+   "alt_baseline_arm": "rag",
+   "alt_baseline_acc": 63.75,
+   "reconstructed_benefit_vs_alt_pp": -58.0
+  },
+  {
+   "defense": "DyPRAG-Combine",
+   "registry": "dyprag_vs_corpus_poisoning.json",
+   "clean_selector": {
+    "frac": 0.0
+   },
+   "baseline_arm": "rag",
+   "defended_arm": "dyprag_combine",
+   "n": 400,
+   "mdr_pp": 9.9,
+   "baseline_acc": 63.75,
+   "defended_acc": 53.0,
+   "reconstructed_benefit_pp": -10.75,
    "published_benefit_pp": null,
    "published_baseline": null,
    "published_source": null,
    "alt_baseline_arm": "closedbook",
    "alt_baseline_acc": 7.5,
-   "reconstructed_benefit_vs_alt_pp": -1.75
+   "reconstructed_benefit_vs_alt_pp": 45.5
   },
   {
    "defense": "RobustRAG",

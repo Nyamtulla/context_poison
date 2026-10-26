@@ -59,8 +59,20 @@ SPEC = [
     {"defense": "SCR", "registry": "scr_vs_corpus_poisoning.json",
      "clean": ("frac", 0.0), "baseline": "rag", "defended": "scr",
      "alt_baseline": "closedbook"},
+    # DyPRAG ships two published inference methods and they are different
+    # experiments, not a variant. third_party/DyPRAG/test.py:21 decides it:
+    #   get_pred(model, psgs=None if inference_method == "dyprag" else passages)
+    # Plain dyprag answers with NO passage in the window -- the document
+    # exists only as an injected rank-2 LoRA -- so its honest baseline is the
+    # no-document arm, not undefended RAG. dyprag_combine keeps the passage
+    # and adds the parameters, so its baseline IS undefended RAG. Scoring
+    # plain dyprag against rag compares a method that was handed no document
+    # to one that was, which is the comparison its paper does not make.
     {"defense": "DyPRAG", "registry": "dyprag_vs_corpus_poisoning.json",
-     "clean": ("frac", 0.0), "baseline": "rag", "defended": "dyprag",
+     "clean": ("frac", 0.0), "baseline": "closedbook", "defended": "dyprag",
+     "alt_baseline": "rag"},
+    {"defense": "DyPRAG-Combine", "registry": "dyprag_vs_corpus_poisoning.json",
+     "clean": ("frac", 0.0), "baseline": "rag", "defended": "dyprag_combine",
      "alt_baseline": "closedbook"},
     {"defense": "RobustRAG", "registry": "corpus_poisoning_vs_robustrag.json",
      "clean": ("condition", "clean (no attack)"), "baseline": "undefended",
