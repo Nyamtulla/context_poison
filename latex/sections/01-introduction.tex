@@ -135,4 +135,17 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
 \item \textbf{We release a runnable artifact.} Every attack and defense
   executes from its authors' released code at a pinned commit, verified
   unmodified; the harness, the payloads and the full census ship with it.
+
+\item \textbf{We derive the design rule a defense covering both regimes
+  would have to follow, and we have not yet built one.} Every signal inside
+  the context window belongs to whoever wrote the passage, which is why the
+  reasoning stage fails and why the one method that resisted fell to an
+  attacker who read its rule. A method that covers both regimes has to key
+  on something the attacker does not hold --- provenance, agreement across
+  independently retrieved passages, or the decision to act rather than the
+  decision to believe --- and it still needs the reasoning stage for the
+  stale document nobody wrote as an attack. The experiment that tests this,
+  one ingestion-stage method in front of one reasoning-stage method, is
+  specified and queued; it has not run, and we claim no result from it
+  (Section~\ref{sec:discussion}).
 \end{itemize}
