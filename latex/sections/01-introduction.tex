@@ -45,23 +45,28 @@ experiments that fall in it to answer the following research questions.
 
 \paragraph{Research questions.}
 \begin{description}
-\item[RQ1] \textbf{Are the two communities reinventing the wheel?} We read
-  \NCorpus{} papers from both sides under one scheme, compare what each
-  community names for the same failure, and date who reached each problem
-  first (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
-\item[RQ2] \textbf{Is there a region of the problem that neither community
-  has tested?} We recover every (defense, attack) pair reported by the
-  \NAnalysed{} papers that name a technique (Section~\ref{sec:literatures}).
-\item[RQ3] \textbf{Does a defense built for one community's problem transfer
-  to the other's?} We execute the pairs the literature skipped, from the authors'
-  released code and weights (Sections~\ref{sec:experiments},
-  \ref{sec:results}).
-\item[RQ4] \textbf{Is failure a property of individual methods or of a design
-  choice they share?} We build a payload that separates the explanations
-  rather than maximizes damage (Section~\ref{sec:distractor}).
-\item[RQ5] \textbf{Does that explanation survive an adaptive attacker?} We
+\item[RQ1] \textbf{What has the field tested, and what has it left
+  untested?} We read \NCorpus{} papers from both sides under one scheme and
+  recover every (defense, attack) pair the \NAnalysed{} papers that name a
+  technique report, so that the region we run in is one the literature
+  demonstrably has not (Sections~\ref{sec:literatures},
+  \ref{sec:parallel}).
+\item[RQ2] \textbf{Does a defense built for one regime's problem survive
+  the other's?} We execute the pairs the literature skipped, from the
+  authors' released code and weights
+  (Sections~\ref{sec:experiments}, \ref{sec:results}).
+\item[RQ3] \textbf{Is failure a property of individual methods or of a
+  design choice they share?} We build a payload that separates the
+  explanations rather than maximizes damage
+  (Section~\ref{sec:distractor}).
+\item[RQ4] \textbf{Does that explanation survive an adaptive attacker?} We
   build two optimizers against the one method that resisted
   (Section~\ref{sec:adaptive}).
+\item[RQ5] \textbf{What does a system inherit when it deploys one of these
+  methods outside the regime its authors validated?} We report the clean and
+  attacked ends of every method on the same items, and what the pair of them
+  means for a deployment whose corpus an outsider can write to
+  (Sections~\ref{sec:results2}, \ref{sec:discussion}).
 \end{description}
 
 Others have separately surveyed both literatures before: the
@@ -91,23 +96,21 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
 
 \paragraph{Contributions.}
 \begin{itemize}
-\item \textbf{We show that the two communities divide the problem rather than
-  duplicate it (RQ1).} One side studies how the bad text arrives and defends
-  where it enters; the other studies why the model believes it and defends
-  where it reasons (Section~\ref{sec:parallel}).
-
-\item \textbf{We identify the region neither community has tested (RQ2).} Of
+\item \textbf{We establish that the region we run in is untested
+  (RQ1).} The two communities divide the problem rather than duplicate it:
+  one studies how the bad text arrives and defends where it enters, the
+  other studies why the model believes it and defends where it reasons. Of
   every confirmed (defense, attack) pair either community reports, only a
   handful cross between them, and a security defense has been evaluated
   against an AI/ML failure mechanism exactly \NSecDefVsSafetyAttack{} time
-  (Section~\ref{sec:emptycell}).
+  (Sections~\ref{sec:parallel}, \ref{sec:emptycell}).
 
 \item \textbf{We build a platform and run \NCampaignPairs{} pairs on it
-  (RQ3).} Every method executes against an undefended arm on the same items,
+  (RQ2).} Every method executes against an undefended arm on the same items,
   under controls we fixed before any run (Section~\ref{sec:experiments}).
 
 \item \textbf{We identify one mechanism behind the failures rather than a list
-  of them (RQ4).} The defenses that fail share a design: they weight the
+  of them (RQ3).} The defenses that fail share a design: they weight the
   retrieved text against the model's memory. That relocates correctness
   instead of creating it. What they take from memory the attacker receives,
   and what they take from the attacker memory receives, so neither direction
@@ -115,9 +118,15 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   \ref{sec:distractor}).
 
 \item \textbf{We build two adaptive attacks against the one defense that
-  resisted (RQ5).} It loses \textbf{\PctAcdRemovedGradient{}\%} of its
+  resisted (RQ4).} It loses \textbf{\PctAcdRemovedGradient{}\%} of its
   protection to an attacker who reads its rule, which prices the method rather
   than dismissing it (Section~\ref{sec:adaptive}).
+
+\item \textbf{We state what a deployment inherits from these methods
+  (RQ5).} A method that tunes how much the model trusts retrieved text is
+  correct when the text is merely stale and dangerous when an attacker owns
+  it, and a writable corpus is the second case
+  (Sections~\ref{sec:results2}, \ref{sec:discussion}).
 
 \item \textbf{We report three controls the literature omits}, each of which
   decides how a result reads: a no-retrieval baseline, an abstention axis, and
