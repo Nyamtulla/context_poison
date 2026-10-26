@@ -229,6 +229,17 @@ def main():
     # field declined to test across the boundary because it already knew the
     # answer: a method cannot be claiming adversarial scope and knowingly
     # withholding the adversarial test at the same time.
+    # ParamMute's two ends, quoted in S9's deployment implication. The same
+    # pair already appears in S8's family table; reading both from the one
+    # registry keeps the recommendation and the result from drifting.
+    _pm = load("parammute_vs_corpus_poisoning.json")
+    _pmr = _pm if isinstance(_pm, list) else _pm.get("results", [])
+    _at = {(r.get("arm"), r.get("frac")): r.get("ctx_acc") for r in _pmr}
+    for lab, frac in (("Clean", 0.0), ("Sat", 1.0)):
+        _b, _d = _at.get(("base", frac)), _at.get(("parammute", frac))
+        if None not in (_b, _d):
+            M["NDefCell" + lab] = f"{_d - _b:+.1f}\\pp"
+
     M["NDefClaimExceedsTest"] = sum(
         1 for x in _ev["defenses"]
         if x["status"] == "non_adversarial"

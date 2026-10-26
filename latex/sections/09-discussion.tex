@@ -64,6 +64,16 @@ stage exactly where our results find it. That is the point: the experiment
 is cheap, both halves are published with released code, and no paper in
 \NCorpus{} has run it.
 
+\textbf{Test a fix for accidental failure against a deliberate one.} A
+method aimed at stale or conflicting retrieval is evaluated on
+average-case benchmarks, which is the right choice for the problem it was
+built for and says nothing about the worst case. The cost of not checking
+is not a missing result: it is that the method ships with a benefit its
+users will read as general, and the worst case is where it reverses.
+Running one published poisoning attack against an existing evaluation is a
+day's work and needs no new data. A method that cannot be tested that way
+should say which regime its benefit holds in.
+
 \subsection{Artifacts}
 
 The reconstruction standard made artifact quality measurable as a side effect.
@@ -82,10 +92,21 @@ confirmed test against any named mechanism.
 
 Three practical points follow from the results.
 
+A method that tunes how much the model trusts retrieved text is correct
+when the text is merely stale and dangerous when an attacker owns it. If the
+corpus an agent retrieves from is one an outsider can write to, the second
+case is the deployed case.
+
 Consider a system that uses a knowledge-conflict method to improve answer
-quality, and that also retrieves from a corpus an outsider can write to. The
-method then operates outside its validated regime. Our measurements say it
-is more likely to increase damage than to reduce it.
+quality and retrieves from such a corpus. The method operates outside the
+regime its authors validated, and our measurements say it is more likely to
+increase damage than to reduce it: ParamMute~\cite{huang-2025-parammute} is
+worth \NDefCellClean{} on clean context and \NDefCellSat{} once the
+context is saturated, below the undefended model on the same items. The
+claim is about a design choice rather than a community. A method that
+converts the document to weights has no dial to turn and does not show the
+reversal, and one method in the family resisted until an adaptive attacker
+priced it.
 
 A defense that holds against an optimized adversarial passage may fail against
 a fluent sentence that simply asserts a plausible falsehood. In our
