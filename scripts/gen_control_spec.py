@@ -123,6 +123,8 @@ def main():
             "published_benefit_pp": pub.get(s["defense"], {}).get("benefit_pp"),
             "published_baseline": pub.get(s["defense"], {}).get("baseline"),
             "published_source": pub.get(s["defense"], {}).get("source"),
+            "published_metric": pub.get(s["defense"], {}).get("metric"),
+            "metric_matches_ours": pub.get(s["defense"], {}).get("metric_matches_ours"),
         }
         if s["alt_baseline"] and s["alt_baseline"] in arms:
             alt = arms[s["alt_baseline"]]

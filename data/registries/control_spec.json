@@ -15,9 +15,11 @@
    "baseline_acc": 48.4,
    "defended_acc": 57.7,
    "reconstructed_benefit_pp": 9.3,
-   "published_benefit_pp": null,
-   "published_baseline": null,
-   "published_source": null
+   "published_benefit_pp": 5.0,
+   "published_baseline": "vanilla RAG",
+   "published_source": "Main Results / Table 2: 'Compared to the vanilla RAG model, ParamMute achieves an average improvement of 5% in ConR and reduces MemR by 4%'",
+   "published_metric": "ConR (context recall), averaged over CoFaithfulQA",
+   "metric_matches_ours": false
   },
   {
    "defense": "CK-PLUG",
@@ -34,7 +36,9 @@
    "reconstructed_benefit_pp": -4.5,
    "published_benefit_pp": null,
    "published_baseline": null,
-   "published_source": null
+   "published_source": null,
+   "published_metric": null,
+   "metric_matches_ours": null
   },
   {
    "defense": "SpARE",
@@ -51,7 +55,9 @@
    "reconstructed_benefit_pp": 14.2,
    "published_benefit_pp": null,
    "published_baseline": null,
-   "published_source": null
+   "published_source": null,
+   "published_metric": null,
+   "metric_matches_ours": null
   },
   {
    "defense": "COIECD",
@@ -68,7 +74,9 @@
    "reconstructed_benefit_pp": -0.75,
    "published_benefit_pp": null,
    "published_baseline": null,
-   "published_source": null
+   "published_source": null,
+   "published_metric": null,
+   "metric_matches_ours": null
   },
   {
    "defense": "ACD",
@@ -86,6 +94,8 @@
    "published_benefit_pp": null,
    "published_baseline": null,
    "published_source": null,
+   "published_metric": null,
+   "metric_matches_ours": null,
    "alt_baseline_arm": "closedbook",
    "alt_baseline_acc": 10.0,
    "reconstructed_benefit_vs_alt_pp": 53.5
@@ -106,6 +116,8 @@
    "published_benefit_pp": null,
    "published_baseline": null,
    "published_source": null,
+   "published_metric": null,
+   "metric_matches_ours": null,
    "alt_baseline_arm": "closedbook",
    "alt_baseline_acc": 4.75,
    "reconstructed_benefit_vs_alt_pp": 41.25
@@ -126,6 +138,8 @@
    "published_benefit_pp": null,
    "published_baseline": null,
    "published_source": null,
+   "published_metric": null,
+   "metric_matches_ours": null,
    "alt_baseline_arm": "rag",
    "alt_baseline_acc": 63.75,
    "reconstructed_benefit_vs_alt_pp": -58.0
@@ -146,6 +160,8 @@
    "published_benefit_pp": null,
    "published_baseline": null,
    "published_source": null,
+   "published_metric": null,
+   "metric_matches_ours": null,
    "alt_baseline_arm": "closedbook",
    "alt_baseline_acc": 7.5,
    "reconstructed_benefit_vs_alt_pp": 45.5
@@ -165,7 +181,9 @@
    "reconstructed_benefit_pp": -3.4,
    "published_benefit_pp": null,
    "published_baseline": null,
-   "published_source": null
+   "published_source": null,
+   "published_metric": null,
+   "metric_matches_ours": null
   }
  ]
 }

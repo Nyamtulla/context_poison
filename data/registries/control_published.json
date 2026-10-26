@@ -1,53 +1,81 @@
 {
   "purpose": "The benefit each defense's OWN paper reports, which Section 7.3's control gate checks our reconstruction against. This half cannot be computed from our data; it has to be read out of the papers.",
-  "how_to_fill": "For each defense set benefit_pp to the accuracy gain its paper reports over its own baseline, baseline to the name of that baseline as the paper describes it, and source to the table or section the number came from. Do not fill these from memory. scripts/gen_control_spec.py merges this into control_spec.json; anything still null prints as a dash and is counted as pending.",
+  "how_to_fill": "For each defense record what its OWN paper reports: benefit_pp, the baseline it is measured against, the METRIC that benefit is in, and the table or section it came from. The metric matters as much as the number: ParamMute's headline gain is in ConR (how often the answer follows the context), not in accuracy, so it cannot be compared numerically to our ctx_acc gain. Where the metrics differ the gate is directional - did the method help, in the same direction, at a comparable magnitude - not an equality test. Read these out of data/cache/pdf_text/<paper_id>.txt, never from memory, and quote the source.",
   "defenses": {
     "ParamMute": {
-      "benefit_pp": null,
-      "baseline": null,
-      "source": null
+      "benefit_pp": 5.0,
+      "baseline": "vanilla RAG",
+      "metric": "ConR (context recall), averaged over CoFaithfulQA",
+      "source": "Main Results / Table 2: 'Compared to the vanilla RAG model, ParamMute achieves an average improvement of 5% in ConR and reduces MemR by 4%'",
+      "paper_id": "cb2afbc72cb0a90be167252faee9df999dc1dbf7",
+      "metric_matches_ours": false,
+      "note": "Their table reports ConR/MemR/MR only; there is no accuracy column, so our +9.3pp ctx_acc gain is a different quantity. Same direction, comparable size, but not the same measurement."
     },
     "CK-PLUG": {
       "benefit_pp": null,
       "baseline": null,
-      "source": null
+      "source": null,
+      "metric": null,
+      "paper_id": null,
+      "metric_matches_ours": null
     },
     "SpARE": {
       "benefit_pp": null,
       "baseline": null,
-      "source": null
+      "source": null,
+      "metric": null,
+      "paper_id": null,
+      "metric_matches_ours": null
     },
     "COIECD": {
       "benefit_pp": null,
       "baseline": null,
-      "source": null
+      "source": null,
+      "metric": null,
+      "paper_id": null,
+      "metric_matches_ours": null
     },
     "ACD": {
       "benefit_pp": null,
       "baseline": null,
-      "source": null
+      "source": null,
+      "metric": null,
+      "paper_id": null,
+      "metric_matches_ours": null
     },
     "SCR": {
       "benefit_pp": null,
       "baseline": null,
-      "source": null
+      "source": null,
+      "metric": null,
+      "paper_id": null,
+      "metric_matches_ours": null
     },
     "DyPRAG": {
       "benefit_pp": null,
       "baseline": null,
       "source": null,
-      "note": "inference_method=dyprag: no passage in context"
+      "note": "inference_method=dyprag: no passage in context",
+      "metric": null,
+      "paper_id": null,
+      "metric_matches_ours": null
     },
     "RobustRAG": {
       "benefit_pp": null,
       "baseline": null,
-      "source": null
+      "source": null,
+      "metric": null,
+      "paper_id": null,
+      "metric_matches_ours": null
     },
     "DyPRAG-Combine": {
       "benefit_pp": null,
       "baseline": null,
       "source": null,
-      "note": "inference_method=dyprag_combine: passage plus parameters"
+      "note": "inference_method=dyprag_combine: passage plus parameters",
+      "metric": null,
+      "paper_id": null,
+      "metric_matches_ours": null
     }
   }
 }
