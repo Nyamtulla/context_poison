@@ -102,15 +102,17 @@ def run_condition(defense, data, top_k, n_poison, attack, defended,
     """
     correct = attacked = refused = negative = 0
     for it in data:
-        passages = build_poisoned(it, top_k, n_poison, attack=attack)
+        passages = ([] if defended == "closedbook"
+                    else build_poisoned(it, top_k, n_poison, attack=attack))
         item = {"question": it["question"],
                 "answer": it["correct answer"],
                 "topk_content": passages,
                 "incorrect_answer": it.get("incorrect answer", []),
                 "incorrect_context": it.get("incorrect_context", [])}
-        if defended:
+        if defended is True:
             pred, _ = defense.query(item)
         else:
+            # closedbook reaches here too: same undefended call, no passage
             pred = defense.query_undefended(item)
         pred = str(pred)
         correct += acc_score(pred, it["correct answer"])
@@ -194,8 +196,20 @@ def main():
 
     results = []
     preds = [] if args.dump_predictions else None
-    for defended in (False, True):
-        label = "defended" if defended else "undefended"
+    # The no-retrieval arm Section 9 asks every paper to report. It does not
+    # depend on the attack or the dose, so it is measured once and written
+    # against every dose, giving the registry the same shape as the cells
+    # that always carried it.
+    for defended in ("closedbook", False, True):
+        label = ({"closedbook": "closedbook"}.get(defended)
+                 or ("defended" if defended else "undefended"))
+        if defended == "closedbook":
+            rcb = run_condition(defense, data, args.top_k, 0, args.attack,
+                                defended, dump=None)
+            for npz in args.poison_counts:
+                results.append(dict(rcb, arm=label, n_poison=npz))
+            print(f"  closedbook   acc {rcb['acc']:5.1f}%", flush=True)
+            continue
         print(f"\n===== RobustRAG/{args.method} — {label} ({args.attack}) =====",
               flush=True)
         for npz in args.poison_counts:

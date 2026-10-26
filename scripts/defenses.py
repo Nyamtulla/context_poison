@@ -50,7 +50,7 @@ class Defense:
 # ---------------------------------------------------------------- COIECD
 class COIECD(Defense):
     """Entropy-constrained decoding. model_answer returns both arms at once."""
-    name, arms = "coiecd", ("base_rag", "coiecd")
+    name, arms = "coiecd", ("base_rag", "coiecd", "closedbook")
 
     def __init__(self, base=BASE):
         sys.path.insert(0, str(TP / "COIECD"))
@@ -83,7 +83,13 @@ class COIECD(Defense):
         n = max(1, len(self.tok.encode(gold or "x", add_special_tokens=False)))
         defended, base, _ = self.CO.model_answer(
             self.model, self.tok, question, _ctx(passages), n)
-        return {"coiecd": defended.strip(), "base_rag": base.strip()}
+        # The no-retrieval arm, through their own entry point with an empty
+        # context. Section 9 asks every paper to report one, and a defense
+        # that is inert on accuracy cannot be read without it.
+        _, closed, _ = self.CO.model_answer(
+            self.model, self.tok, question, _ctx([]), n)
+        return {"coiecd": defended.strip(), "base_rag": base.strip(),
+                "closedbook": closed.strip()}
 
 
 # ---------------------------------------------------------------- ACD

@@ -176,7 +176,15 @@ DEFAULT_BASE = "NousResearch/Meta-Llama-3-8B-Instruct"
 
 
 def run(defense, arm_on, data, top_k, n_poison, max_new_tokens,
-        attack="poisonedrag", base_model=DEFAULT_BASE):
+        attack="poisonedrag", base_model=DEFAULT_BASE, closedbook=False):
+    """closedbook: answer with no passage at all.
+
+    Section 9 asks every paper to report a no-retrieval arm, and without one
+    a defense that barely reads the document looks robust when it is only
+    absent. The arm does not depend on the attack or the dose -- the model
+    never sees a passage -- so it is measured once per defense and the same
+    value is written against every dose.
+    """
     if defense == "parammute":
         model, tok = load_parammute(arm_on)
         gen = lambda p: generate_plain(model, tok, p, max_new_tokens)
@@ -202,7 +210,8 @@ def run(defense, arm_on, data, top_k, n_poison, max_new_tokens,
 
     correct = attacked = refused = negative = 0
     for it in data:
-        passages = build_poisoned(it, top_k, n_poison, attack=attack)
+        passages = ([] if closedbook
+                    else build_poisoned(it, top_k, n_poison, attack=attack))
         prompt = make_prompt(it["question"], passages)
         if defense == "parammute":
             pred = gen(prompt)
@@ -286,7 +295,7 @@ def main():
             print("  existing registry is a different configuration; "
                   "recomputing from the start", flush=True)
 
-    _expected = 2 * len(args.poison_counts)
+    _expected = 3 * len(args.poison_counts)
 
     def flush():
         payload["generated"] = time.strftime("%Y-%m-%d")
@@ -297,6 +306,20 @@ def main():
         out_file.write_text(json.dumps(payload, indent=1))
 
     done = {(r.get("arm"), r.get("n_poison")) for r in payload["results"]}
+
+    # the no-retrieval arm: one measurement, replayed against every dose so
+    # the registry has the same shape as the cells that always carried it
+    if ("closedbook", args.poison_counts[0]) not in done:
+        print("\n===== %s — closedbook (no passage) =====" % args.defense,
+              flush=True)
+        rcb = run(args.defense, False, data, args.top_k, 0,
+                  args.max_new_tokens, args.attack, args.base_model,
+                  closedbook=True)
+        for npz in args.poison_counts:
+            payload["results"].append(dict(rcb, arm="closedbook", n_poison=npz))
+        flush()
+        print(f"  closedbook   acc {rcb['acc']:5.1f}%", flush=True)
+
     for arm_on in (False, True):
         label = ("defended" if arm_on else "undefended")
         print(f"\n===== {args.defense} — {label} =====", flush=True)
