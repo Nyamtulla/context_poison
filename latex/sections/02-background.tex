@@ -21,7 +21,8 @@ attacker have no third-party content at all.
 
 \subsection{One failure, two vocabularies} \label{sec:twovocab}
 
-Figure~\ref{fig:vocab} sets the two vocabularies side by side. The slots are
+That one failure has two names, because two communities arrived at it
+separately. Figure~\ref{fig:vocab} sets their vocabularies side by side. The slots are
 the same. Only the names and the assumed adversary differ.
 
 \begin{figure}[t]
@@ -32,7 +33,7 @@ Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
 \label{fig:vocab}
 \end{figure}
 
-The two regimes differ in exactly one assumption: adaptivity. They share the
+The two differ in exactly one assumption: adaptivity. They share the
 channel, the position in the context window, and the downstream consequence.
 That difference is real in one respect and smaller than it looks in another.
 It is real because an adaptive adversary re-optimizes against a filter and a
@@ -60,7 +61,9 @@ scale. Section~\ref{sec:experiments} tests it.
 \subsection{System and threat model}
 \label{sec:securityregime}
 
-The subject is an LLM agent: a model that, within one task, repeatedly reads
+Both communities study the same system, and only one of them assumes an
+attacker inside it. This subsection states the system first and then the
+attacker. The subject is an LLM agent: a model that, within one task, repeatedly reads
 content it did not author, decides, and acts. Reading happens through the nine
 channels of Section~\ref{sec:taxonomy}. Acting means emitting text to a user
 or calling a tool whose effects leave the system.
@@ -99,17 +102,14 @@ one, so what follows is not a threat model and we do not call it that.
 Content goes wrong through ordinary pipeline behavior.
 A retrieved document is stale. A passage is irrelevant but topically close.
 Important text sits in the middle of a long input. A retrieved fact
-contradicts what the model learned in training. The safety literature assumes this regime and evaluates on average-case benchmarks. That is the right
+contradicts what the model learned in training. The safety literature assumes this condition and evaluates on average-case benchmarks. That is the right
 choice when nothing adapts.
 
 \subsection{Terminology} \label{sec:terms}
 
-Three words in this paper look interchangeable and are not. We use each of
-them for one thing only.
-
-A \emph{threat model} names an adversary: what they want, what they
-control, and what they know. It is the subject of
-Section~\ref{sec:securityregime}.
+The subsection above describes two conditions: one with an adversary and
+one without. The paper needs a word for that distinction, and a second word
+that is easy to confuse with it.
 
 A \emph{regime} is the condition a piece of work addresses, and every paper
 in our corpus takes one of two. We follow Lin et
@@ -124,9 +124,12 @@ A \emph{venue} is where a paper was published. It is not the same cut as
 the regime, which Section~\ref{sec:venue} measures: adversarial work
 appears at AI conferences as often as at security ones.
 
-The word \emph{security} names a value of two of these, so we write
-\emph{security venue} or \emph{AI venue} for the venue and plain
-\meth{security} or \meth{safety} for the regime.
+The word \emph{security} names a value of both, so we write
+\emph{security venue} or \emph{AI venue} when we mean where a paper
+appeared, and plain \meth{security} or \meth{safety} when we mean what it
+addresses. A \emph{threat model}, the subject of the subsection above, is
+narrower than either: it names one adversary, and only the security regime
+has one.
 
 \textbf{Context and memory.} A model answers from one of two sources. The
 first is the \emph{context}: the document, tool output or message placed in
