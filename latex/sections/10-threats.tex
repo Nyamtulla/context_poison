@@ -6,7 +6,7 @@ extraction pass over \NCorpus{} papers and \NCodedFields{} coded fields. Every c
 Sections~\ref{sec:taxonomy} to~\ref{sec:coverage} depends on it. A human validation study is drawn and
 stratified by the coding's own confidence: \NValidationDraw{} papers,
 \NValidationFields{} fields each, designed for a \NValidationCI{}\pp{}
-confidence interval on overall accuracy. \textbf{It has not been coded yet.}
+confidence interval on overall accuracy. It has not been coded yet.
 We therefore report no measured extraction-error rate, and the counts in those
 sections should be read as unvalidated. The study is single-coded by decision
 of the project lead. When it returns it will bound extraction error without
@@ -85,7 +85,7 @@ composition, or the few-shot examples a defense holds out. Those are untested,
 and a method whose result depended on them would pass this check and still be
 fragile.
 
-\textbf{Nor does it show reproducibility across environments}, and we have a
+Nor does it show reproducibility across environments, and we have a
 measured example of the difference. The defenses in the retrieval cell cannot
 share one Python environment: ACD's released decoder imports symbols that
 newer \texttt{transformers} releases removed, and its authors pin a version
@@ -146,7 +146,7 @@ a named venue on both sides, and \NVenueSecDefSafetyAtk{} of them is a security
 defense evaluated against a safety failure mechanism. The empty
 direction stays empty among refereed work alone.
 
-\textbf{A recall check on the papers that named nothing.}
+A recall check on the papers that named nothing.
 \NNoTechnique{} papers contributed no attack and no defense, and
 \NNoTechOther{} of those match none of the survey, benchmark, framework or
 position descriptions by title. We re-read \NRecallRead{} papers --- that

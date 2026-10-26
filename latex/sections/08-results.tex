@@ -36,7 +36,7 @@ is merely stale and dangerous when an attacker owns it.}
 The family is defined by what it does: a method whose
 intervention is a weighting between the context-conditioned and the
 memory-conditioned prediction. It is large, and it is most of what we ran.
-\textbf{Seven of the ten implementations we attacked are in it} --- ACD,
+Seven of the ten implementations we attacked are in it --- ACD,
 CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG --- alongside
 SHIFT~\cite{li-2026-shift}, which we ran only on clean context. The published
 members we cite are ParamMute~\cite{huang-2025-parammute},
@@ -90,8 +90,8 @@ than accuracy, so its clean cell reports that metric.}
 \end{table*}
 
 SpARE is the cleanest case because its control and its conviction are the same
-measurement. Steering toward the context is worth \textbf{+14.2\pp} when the
-context is honest and costs \textbf{-10.2\pp} when it is attacked. Both ends
+measurement. Steering toward the context is worth +14.2\pp when the
+context is honest and costs -10.2\pp when it is attacked. Both ends
 clear the 8.9\pp threshold. The sign flips.
 
 ParamMute shows the same shape on a larger sample. Its benefit on clean context
@@ -169,7 +169,7 @@ its passage five times in each slot it takes. Placed once it loses at most
 \NRegimeRepeatMax{}\pp{} of adoption, under threshold at every dose, so no
 number in this campaign needs a repetition caveat.
 
-\textbf{Craft buys an attacker a real advantage, and only at low dose.} With
+Craft buys an attacker a real advantage, and only at low dose. With
 one poisoned passage in ten, the crafted passage is adopted
 \PctCraftLow{}\% of the time against \PctStaleLow{}\% for the stale document,
 a gap of \NRegimeGapLow{}\pp{} that clears the threshold. That is the dose
@@ -207,8 +207,8 @@ it, and the model would do better not reading at all.
 ACD~\cite{kim-2024-adaptive} produced the strongest defensive result in our
 campaign. It discounts tokens the context makes uncertain, and against corpus
 poisoning it is the only method that both reads a clean document and declines a
-poisoned one. At saturation it is \textbf{+9.2\pp} above the undefended arm
-($p < 0.0001$) and on clean context it is \textbf{+53.5\pp} above answering
+poisoned one. At saturation it is +9.2\pp above the undefended arm
+($p < 0.0001$) and on clean context it is +53.5\pp above answering
 with no document at all.
 
 \textbf{That result is not a robustness claim, and we state the limit before
@@ -311,14 +311,14 @@ finding.} On this run's honest context it is worth +9.7\pp, against the
 than doing nothing once an adversary writes the context, and it does not matter
 whether the adversary writes gibberish or prose. What does change is how well
 ParamMute does its own job. Its suppression of the wrong parametric answer
-falls from \textbf{-42.5\pp} under corpus poisoning to \textbf{-8.8\pp} under
+falls from -42.5\pp under corpus poisoning to -8.8\pp under
 false evidence. The reason is structural. Under corpus poisoning the wrong
 answer has one source, the model's memory, so inhibiting memory removes it.
 Under false evidence it has two, memory and the planted passage, and ParamMute
 touches only one of them. \textbf{The attack duplicated the answer into the
 channel the defense does not operate on.}
 
-\textbf{CK-PLUG is harmful against one payload and flat against the other}, and
+CK-PLUG is harmful against one payload and flat against the other, and
 the shape matters more than the sign. Under corpus poisoning its cost grows
 with the attack: -4.5\pp on clean context, then -14.9 and -15.1 once poison is
 present. Under false evidence it is a constant offset of about -4.4\pp at every
@@ -390,7 +390,7 @@ gain that tracks the suppression almost one for one. This also settles the
 measurement limit above: ParamMute's residual parametric rate under false
 evidence was copying, not surviving memory.
 
-\textbf{ACD succeeds at the opposite job and the mass goes to memory instead.}
+ACD succeeds at the opposite job and the mass goes to memory instead.
 ACD cuts the copy rate from 76.0\% to 40.8\% at saturation ($p = 2\times
 10^{-40}$, $n=\NAcdAdaptiveItems{}$), the largest defensive effect anywhere in this campaign and
 in the direction a defense is supposed to move. The refused mass does not go to
@@ -399,7 +399,7 @@ accuracy moves 2.3\% to 5.0\%, which clears Fisher but not the 7.6\pp{}
 threshold, and sits below the no-retrieval arm's 8.2\%. Resisting the attack
 did not make the pipeline better than switching retrieval off.
 
-\textbf{The two results are one mechanism read from both ends.} ParamMute
+The two results are one mechanism read from both ends. ParamMute
 suppresses memory and the attacker fills the vacancy; ACD suppresses the
 attacker and memory fills it. Neither moves probability mass toward the real
 document, because neither mechanism can tell the real document from the planted
@@ -411,7 +411,7 @@ they arbitrate on does not contain the distinction an attacker violates.
 
 \input{tables/distractor}
 
-\textbf{Two more defenses make it a pattern rather than a pair.}
+Two more defenses make it a pattern rather than a pair.
 Table~\ref{tab:distractor} adds CK-PLUG and COIECD on the same payload and the
 same dosing. CK-PLUG behaves as ParamMute does, and more sharply. It is the
 only defense in this campaign whose accuracy loss on this payload clears its
@@ -434,7 +434,7 @@ share of it on the way: $16.8$, $16.5$ and $23.5$\pp{} leave the three-way
 partition altogether. In that fraction of cases the output is none of gold,
 memory or the distractor.
 
-\textbf{The direction of the dial predicts whether mass is conserved.} Turn it
+The direction of the dial predicts whether mass is conserved. Turn it
 toward the context and the accounting closes. Turn it toward memory and a sixth
 to a quarter of the sample goes somewhere the partition cannot see. The
 residual is a property of the direction rather than of one implementation:
@@ -456,7 +456,7 @@ the answer the document supports, and asks the model to judge which to believe.
 
 It does help at saturation, +2.8\pp over the undefended arm ($p = 0.025$), and
 it does genuinely read the document, scoring 41.2\pp above no-retrieval on
-clean context. \textbf{It pays 13.5 points on clean data to buy that 2.8.} The
+clean context. It pays 13.5 points on clean data to buy that 2.8. The
 cost is resolvable at every dose below saturation and is roughly five times the
 benefit. A defense deployed permanently and attacked occasionally is a poor
 trade at that exchange rate.
