@@ -1,0 +1,50 @@
+{
+ "generated": "2026-10-26",
+ "defense": "scr",
+ "attack": "badrag_dos",
+ "dataset": "open_nq",
+ "top_k": 10,
+ "model": "NousResearch/Meta-Llama-3-8B-Instruct",
+ "n": 500,
+ "protocol": "native: j of k",
+ "mdr_pp_at_n": 8.9,
+ "doses_done": [
+  0
+ ],
+ "complete": false,
+ "results": [
+  {
+   "n_poison": 0,
+   "arm": "rag",
+   "n": 500,
+   "acc": 56.6,
+   "attacked": 2.8,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 52.2,
+   "ci_high": 60.9
+  },
+  {
+   "n_poison": 0,
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 28.6,
+   "attacked": 3.8,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 24.8,
+   "ci_high": 32.7
+  },
+  {
+   "n_poison": 0,
+   "arm": "scr",
+   "n": 500,
+   "acc": 54.4,
+   "attacked": 2.4,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.8,
+   "ci_low": 50.0,
+   "ci_high": 58.7
+  }
+ ]
+}

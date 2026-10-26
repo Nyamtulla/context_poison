@@ -59,10 +59,12 @@ experiments that fall in it to answer the following research questions.
   design choice they share?} We build a payload that separates the
   explanations rather than maximizes damage
   (Section~\ref{sec:distractor}).
-\item[RQ4] \textbf{Does that finding survive the controls the literature
-  omits?} We add a no-retrieval arm, an abstention axis and a second base
-  model, and we run two implementations of the one principle that held, to
-  separate a property of a design from a quirk of one codebase
+\item[RQ4] \textbf{Do the measurements the field leaves out change the
+  result?} We re-read every result against three arms almost no paper
+  reports: what the model scores with no document at all, whether a defense
+  gained accuracy or only stopped answering, and whether the result holds on
+  a second base model. We also run two implementations of the one principle
+  that held, to tell a property of a design from a quirk of one codebase
   (Section~\ref{sec:results2}).
 \item[RQ5] \textbf{Does that explanation survive an adaptive attacker?} We
   build two optimizers against the one method that resisted
@@ -110,19 +112,20 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   (RQ2).} Every method executes against an undefended arm on the same items,
   under controls we fixed before any run (Section~\ref{sec:experiments}).
 
-\item \textbf{We identify one mechanism behind the failures rather than a list
-  of them (RQ3).} The defenses that fail share a design: they weight the
-  retrieved text against the model's memory. That relocates correctness
-  instead of creating it. What they take from memory the attacker receives,
+\item \textbf{We trace the failures to a single design choice (RQ3).}
+  Every method that fails weights the retrieved text against the model's
+  memory, and turning that weight relocates correctness instead of creating
+  it. What they take from memory the attacker receives,
   and what they take from the attacker memory receives, so neither direction
   moves anything toward the real document (Sections~\ref{sec:results},
   \ref{sec:distractor}).
 
-\item \textbf{We report three controls the literature omits, and a
-  finding does not survive all of them (RQ4).} A no-retrieval baseline, an
-  abstention axis and a second base model each decide how a result reads,
-  and two implementations of one principle let us tell a design from a
-  codebase (Section~\ref{sec:results2}).
+\item \textbf{We re-read every result against three arms the field
+  omits, and one finding does not survive them (RQ4).} Without a
+  no-retrieval arm a defense that never uses the document looks robust.
+  Without an abstention axis a method that stopped answering looks inert.
+  Without a second model an effect that reverses looks settled
+  (Section~\ref{sec:results2}).
 
 \item \textbf{We build two adaptive attacks against the one defense that
   resisted (RQ5).} It loses \PctAcdRemovedGradient{}\% of its
