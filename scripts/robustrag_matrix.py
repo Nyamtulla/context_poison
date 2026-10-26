@@ -90,7 +90,16 @@ def _stop_on_tokens_call(self, input_ids, scores, **kwargs):
 StopOnTokens.__call__ = _stop_on_tokens_call
 
 
-def run_condition(defense, data, top_k, n_poison, attack, defended):
+def run_condition(defense, data, top_k, n_poison, attack, defended,
+                  dump=None):
+    """dump: a list to append per-item predictions to.
+
+    The composition experiment needs each method's answer per item, not its
+    aggregate. The two halves cannot share a Python environment -- that is
+    recorded in Section 7 -- so they cannot be composed in one process. They
+    are run separately, their predictions dumped, and combined offline by
+    scripts/compose_offline.py.
+    """
     correct = attacked = refused = negative = 0
     for it in data:
         passages = build_poisoned(it, top_k, n_poison, attack=attack)
@@ -112,6 +121,10 @@ def run_condition(defense, data, top_k, n_poison, attack, defended):
         attacked += acc_score(pred, target)
         refused += is_refusal(pred)
         negative += is_negative(pred)
+        if dump is not None:
+            dump.append({"question": it["question"], "pred": pred,
+                         "gold": it["correct answer"],
+                         "n_poison": n_poison, "defended": defended})
     n = len(data)
     asr_count = {"badrag_dos": refused,
                  "badrag_sentiment": negative}.get(attack, attacked)
@@ -146,6 +159,9 @@ def main():
     ap.add_argument("--poison_counts", type=int, nargs="+",
                     default=[0, 1, 5, 9, 10])
     ap.add_argument("--out", type=str, default=None)
+    ap.add_argument("--dump_predictions", type=str, default=None,
+                    help="write per-item predictions here, for the offline "
+                         "composition in scripts/compose_offline.py")
     args = ap.parse_args()
 
     # The ML/AI arm runs on the same open_nq items with a distractor passage
@@ -177,12 +193,14 @@ def main():
                else DecodingAgg(llm, args))
 
     results = []
+    preds = [] if args.dump_predictions else None
     for defended in (False, True):
         label = "defended" if defended else "undefended"
         print(f"\n===== RobustRAG/{args.method} — {label} ({args.attack}) =====",
               flush=True)
         for npz in args.poison_counts:
-            r = run_condition(defense, data, args.top_k, npz, args.attack, defended)
+            r = run_condition(defense, data, args.top_k, npz, args.attack,
+                              defended, dump=preds)
             r.update(arm=label, n_poison=npz)
             results.append(r)
             print(f"  poison {npz:>2}/{args.top_k}   acc {r['acc']:5.1f}%   "
@@ -199,6 +217,12 @@ def main():
                "results": results}
     (REPO / out_path).write_text(json.dumps(payload, indent=1))
     print(f"\nwrote {out_path}  (mdr {payload['mdr_pp_at_n']} pp)")
+    if preds is not None:
+        (REPO / args.dump_predictions).write_text(json.dumps(
+            {"defense": f"robustrag-{args.method}", "attack": args.attack,
+             "model": args.model, "n": len(data), "predictions": preds},
+            indent=1))
+        print(f"wrote {args.dump_predictions}  ({len(preds)} predictions)")
 
 
 if __name__ == "__main__":

@@ -56,6 +56,11 @@ def main():
                     default=[0, 1, 2, 3, 5, 10])
     ap.add_argument("--model", default="NousResearch/Meta-Llama-3-8B-Instruct")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--dump_predictions", default=None,
+                    help="write per-item predictions here. The composition "
+                         "experiment combines two methods that cannot share "
+                         "a Python environment, so they run separately and "
+                         "scripts/compose_offline.py joins their answers.")
     a = ap.parse_args()
 
     out = REPO / (a.out or
@@ -87,6 +92,18 @@ def main():
                 preds[arm].append(got[arm])
             if i % 50 == 0:
                 print(f"    dose {j}: {i}/{len(data)}", flush=True)
+        if a.dump_predictions:
+            _dp = REPO / a.dump_predictions
+            _acc = json.loads(_dp.read_text()) if _dp.exists() else {
+                "defense": a.defense, "attack": a.attack, "model": a.model,
+                "n": len(data), "predictions": []}
+            for arm in d.arms:
+                for pr, it in zip(preds[arm], data):
+                    _acc["predictions"].append({
+                        "question": it["question"], "pred": pr,
+                        "gold": it["correct answer"], "n_poison": j,
+                        "arm": arm})
+            _dp.write_text(json.dumps(_acc, indent=1))
         for arm in d.arms:
             n = len(data)
             acc = 100 * sum(acc_score(p, it["correct answer"])
