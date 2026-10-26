@@ -37,7 +37,7 @@ The family is defined by what it does: a method whose
 intervention is a weighting between the context-conditioned and the
 memory-conditioned prediction. It is large, and it is most of what we ran.
 Seven of the ten implementations we attacked are in it --- ACD,
-CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG --- alongside
+CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG~\cite{zhang-2025-faithfulrag} --- alongside
 SHIFT~\cite{li-2026-shift}, which we ran only on clean context. The published
 members we cite are ParamMute~\cite{huang-2025-parammute},
 CK-PLUG~\cite{bi-2025-parameters}, SpARE~\cite{zhao-2024-steering},
@@ -46,7 +46,7 @@ published as fixes for knowledge conflict and all validated in the safety regime
 
 The other three are outside the family and are the reason the claim is not
 vacuous. DyPRAG~\cite{tan-2025-dynamic} converts the retrieved passage into weights, so there is no
-context-versus-memory dial to turn. The two RobustRAG variants isolate each
+context-versus-memory dial to turn. The two RobustRAG~\cite{xiang-2024-certifiably} variants isolate each
 passage and aggregate across them, which asks \emph{which} passages agree
 rather than how far to trust passages in general. The
 family's shared idea is reasonable for the problem it was built for. The
@@ -164,7 +164,7 @@ instead, one an optimized artifact and one a real passage retrieved for a
 different question. Dose, slot positions and scorer are fixed across all of
 them. Predictions were registered before the run.
 
-The published construction's repetition buys nothing. PoisonedRAG repeats
+The published construction's repetition buys nothing. PoisonedRAG~\cite{zou-2024-poisonedrag} repeats
 its passage five times in each slot it takes. Placed once it loses at most
 \NRegimeRepeatMax{}\pp{} of adoption, under threshold at every dose, so no
 number in this campaign needs a repetition caveat.

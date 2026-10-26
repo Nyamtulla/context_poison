@@ -20,7 +20,7 @@ DyPRAG is flat because it is not reading the document, not because it
 is resisting the attack. Only a no-retrieval arm separates immunity from
 inattention, and no paper in this family reports one.
 
-\textbf{An abstention axis.} COIECD is inert on accuracy at every dose. Dumping
+\textbf{An abstention axis.} COIECD~\cite{yuan-2024-discerning} is inert on accuracy at every dose. Dumping
 and classifying every generation shows it is not inert at all. On the items
 where the undefended model answered from memory, COIECD converts
 32.1\% of those answers into explicit abstentions, and does so only
@@ -52,7 +52,7 @@ and share no decision logic downstream of it. One extracts keywords and
 re-prompts; the other averages next-token distributions.
 
 Both show the same behavior under tone steering, at or below 0.3\% across four
-cells and two models, against CK-PLUG's 99.0\% on the same attack and model.
+cells and two models, against CK-PLUG~\cite{bi-2025-parameters}'s 99.0\% on the same attack and model.
 \textbf{Aggregation does not open the tone-steering hole. Context-reliance
 does.} That the two independent implementations agree is what licenses stating
 it as a property of the principle.
@@ -135,7 +135,7 @@ the strongest attack a method has met, not of the attacks its authors chose.
 
 Every result above comes from an attack that was not built for the defense it
 met. Section~\ref{sec:experiments} states why that is conservative for a
-failure and invalid for a resistance. ACD is our one resistance result, so it
+failure and invalid for a resistance. ACD~\cite{kim-2024-adaptive} is our one resistance result, so it
 is the one that has to be tested properly.
 
 ACD mixes the no-context and with-context next-token distributions by
