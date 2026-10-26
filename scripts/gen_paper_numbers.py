@@ -224,6 +224,15 @@ def main():
     # against anything", which is not what either category says.
     M["NDefEvalNoAdversary"] = _evc["non_adversarial"]
     M["NDefEvalUnclear"] = _evc["unclear"]
+    # Defenses whose own coding claims an adversarial threat model and whose
+    # evaluation contains no adversary. Evidence against the reading that the
+    # field declined to test across the boundary because it already knew the
+    # answer: a method cannot be claiming adversarial scope and knowingly
+    # withholding the adversarial test at the same time.
+    M["NDefClaimExceedsTest"] = sum(
+        1 for x in _ev["defenses"]
+        if x["status"] == "non_adversarial"
+        and x.get("validated_against") == "adversarial")
     # Inside the no-adversary group, two populations that read very
     # differently. Most are safety-regime fixes evaluated the way that
     # community evaluates, which is the paper's thesis rather than a fault.

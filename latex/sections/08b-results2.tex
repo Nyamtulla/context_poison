@@ -6,6 +6,21 @@ defenses. This section reports three things that complicate it: three controls w
 which a result reads the other way, a test of whether a result belongs to a
 principle or to one codebase, and the defenses that did transfer.
 
+One reading would make that negative result uninteresting: that the
+communities never tested across the boundary because they already knew the
+answer, so an experiment confirming it adds nothing. Three measurements say
+otherwise. The communities do not read each other, and a judgement cannot be
+informed by work nobody cites: \PctSecCitesSafety{}\% of security-regime
+papers cite a safety-regime paper, and
+\NOutcomeBothSides{} of \NOutcomePairs{} reported pairs carry an account
+from both sides. \NDefClaimExceedsTest{} defenses claim an adversarial
+threat model in their own evaluation coding while putting no adversary in
+the experiment, which is not what withholding a test you expect to fail
+looks like. And the result is not that the methods do nothing. They help on
+clean context and then do harm under attack: the sign flips, which no
+expectation of ``it will not transfer'' predicts. One method did resist, and
+it took an adaptive attacker to price it.
+
 \subsection{Controls that reverse a reading}
 
 Each of the following reverses if the arm beside it is dropped, and in each
