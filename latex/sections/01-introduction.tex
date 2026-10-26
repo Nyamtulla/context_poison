@@ -96,14 +96,15 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
 
 \paragraph{Contributions.}
 \begin{itemize}
-\item \textbf{We establish that the region we run in is untested
-  (RQ1).} The two communities divide the problem rather than duplicate it:
-  one studies how the bad text arrives and defends where it enters, the
-  other studies why the model believes it and defends where it reasons. Of
-  every confirmed (defense, attack) pair either community reports, only a
-  handful cross between them, and a security defense has been evaluated
-  against an AI/ML failure mechanism exactly \NSecDefVsSafetyAttack{} time
-  (Sections~\ref{sec:parallel}, \ref{sec:emptycell}).
+\item \textbf{We show that the two communities divide the problem rather than
+  duplicate it (RQ1).} One side studies how the bad text arrives and defends
+  where it enters; the other studies why the model believes it and defends
+  where it reasons. That division, not duplication, is what leaves a region
+  neither side has tested: of every confirmed (defense, attack) pair either
+  community reports, only a handful cross between them, and a security
+  defense has been evaluated against an AI/ML failure mechanism exactly
+  \NSecDefVsSafetyAttack{} time (Sections~\ref{sec:parallel},
+  \ref{sec:emptycell}).
 
 \item \textbf{We build a platform and run \NCampaignPairs{} pairs on it
   (RQ2).} Every method executes against an undefended arm on the same items,
@@ -118,7 +119,7 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   \ref{sec:distractor}).
 
 \item \textbf{We build two adaptive attacks against the one defense that
-  resisted (RQ4).} It loses \textbf{\PctAcdRemovedGradient{}\%} of its
+  resisted (RQ4).} It loses \PctAcdRemovedGradient{}\% of its
   protection to an attacker who reads its rule, which prices the method rather
   than dismissing it (Section~\ref{sec:adaptive}).
 
@@ -133,20 +134,19 @@ fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives th
   the text is merely stale and dangerous when an attacker owns it, and a
   writable corpus is the second case (Section~\ref{sec:discussion}).
 
-\item \textbf{We release a runnable artifact.} Every attack and defense
-  executes from its authors' released code at a pinned commit, verified
-  unmodified; the harness, the payloads and the full census ship with it.
-
 \item \textbf{We derive the design rule a defense covering both regimes
   would have to follow, and we have not yet built one.} Every signal inside
   the context window belongs to whoever wrote the passage, which is why the
   reasoning stage fails and why the one method that resisted fell to an
-  attacker who read its rule. A method that covers both regimes has to key
-  on something the attacker does not hold --- provenance, agreement across
-  independently retrieved passages, or the decision to act rather than the
-  decision to believe --- and it still needs the reasoning stage for the
-  stale document nobody wrote as an attack. The experiment that tests this,
-  one ingestion-stage method in front of one reasoning-stage method, is
-  specified and queued; it has not run, and we claim no result from it
+  attacker who read its rule. Such a method has to key on something the
+  attacker does not hold --- provenance, agreement across independently
+  retrieved passages, or the decision to act rather than the decision to
+  believe --- and it still needs the reasoning stage for the stale document
+  nobody wrote as an attack. The experiment that tests this is specified and
+  queued; it has not run, and we claim no result from it
   (Section~\ref{sec:discussion}).
+
+\item \textbf{We release a runnable artifact.} Every attack and defense
+  executes from its authors' released code at a pinned commit, verified
+  unmodified; the harness, the payloads and the full census ship with it.
 \end{itemize}
