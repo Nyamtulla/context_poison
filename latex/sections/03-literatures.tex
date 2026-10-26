@@ -443,14 +443,24 @@ Figure~\ref{fig:lag} shows the full distribution.
 \label{sec:parallel}
 
 If two communities work one problem without reading each other, the second
-to arrive should restate what the first already knows under a new name. We
-tested that directly: inside each taxonomy cell, we looked for a
-security-regime name and a safety-regime name close enough to be the same
-thing relabelled. Among \NMechanisms{} named mechanisms there are
-\NMechNameClash{} such collisions, and among \NDefenses{} defenses there
-is \NDefNameClash{}. Nobody is naming the same thing twice.
+to arrive should rebuild what the first already has. The decisive evidence
+is not what the methods are called but where in the pipeline they act, which
+is a coded field rather than a reading of names. Security defends where the
+text enters: \NDefPtIngestionSec{} of its defenses act at ingestion.
+Safety defends where the text is used: \NDefPtReasoningSafety{} of its
+defenses act at reasoning. Figure~\ref{fig:pipeline} draws that split
+against the pipeline and Figure~\ref{fig:intervention} counts it. Two
+bodies of work that intervene at different stages are not building the same
+thing, whatever they name it.
 
-They are naming different halves of one causal chain. \NSharedCells{} of our
+The names agree with the coding. Inside each taxonomy cell we looked for a
+security-regime name and a safety-regime name close enough to be the same
+thing relabelled: among \NMechanisms{} named mechanisms there are
+\NMechNameClash{} such collisions, and among \NDefenses{} defenses there
+is \NDefNameClash{}. That test can only catch relabelling, so it confirms
+the division rather than establishing it.
+
+The two sides name different halves of one causal chain. \NSharedCells{} of our
 \NOccupiedCells{} occupied cells hold mechanisms from both regimes,
 \NMechSharedSec{} security and \NMechSharedSafety{} safety. Read them side by
 side, and the security entries are overwhelmingly ways of getting bad text in, while
@@ -466,14 +476,12 @@ attacker's objective, is \NGoalHijackSec{} security mechanisms to
 \NGoalHijackSafety{} safety ones. Reasoning corruption, a degradation, runs
 the other way: \NReasonSafety{} safety to \NReasonSec{} security.
 
-This reading is ours, taken from the mechanism names and their papers rather
-than from a coded field. It is not clean at the edges. A few safety-regime
-entries name a delivery route rather than a susceptibility, \meth{KV-cache
-contamination} and \meth{incidental prompt injection} among them. The
-intervention points below are coded, and they divide the same way.
-Figure~\ref{fig:pipeline} draws this split against the pipeline, and
-Figure~\ref{fig:intervention} counts it, because the argument rests on the
-counts.
+That last reading is ours, taken from the mechanism names and their papers
+rather than from a coded field, and it is not clean at the edges. A few
+safety-regime entries name a delivery route rather than a susceptibility,
+\meth{KV-cache contamination} and \meth{incidental prompt injection} among
+them. The intervention points the subsection opens with are coded, and the
+argument rests on them.
 
 \begin{figure}[t]
 \centering
