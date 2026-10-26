@@ -30,12 +30,18 @@ were confident wrong answers and what it produced instead was "not mentioned".
 That is a real safety gain, and it is invisible in the accuracy column that
 every paper in this family reports.
 
-\textbf{A model control.} RobustRAG ran on Mistral and the context-reliance
-family ran on Llama, because those are the models each paper released. Re-running
-RobustRAG on the other family's model changes outcomes. The tone-steering
-finding survives unchanged, which strengthens it. A second finding inverts.
-\textbf{Holding defense and attack fixed and changing only the base model
-changes an effect's size, its existence, and in one case its sign.}
+\textbf{A model control.} RobustRAG ran on Mistral and the
+context-reliance family ran on Llama, because those are the models each
+paper released. Re-running RobustRAG on the other family's model changes
+outcomes. The tone-steering finding survives unchanged, which strengthens
+it. The implementation divergence below does not. At nine poisoned passages
+against refusal induction, KeywordAgg is \NKeywordNineMistral{}\pp{} on
+Mistral and \NKeywordNineLlama{}\pp{} on Llama: the variant that is
+resolvably protective on one model is not protective on the other, while
+DecodingAgg stays harmful on both (\NDecodingNineMistral{}\pp{} and
+\NDecodingNineLlama{}\pp{}). Holding defense and attack fixed and changing
+only the base model changes an effect's size, its existence, and in one case
+its sign.
 
 \subsection{Principle or implementation}
 
@@ -54,10 +60,13 @@ it as a property of the principle.
 The caution runs the other way too. Across fifteen dose levels the two
 implementations agree within noise on thirteen. On one they do not. At nine
 poisoned passages in ten, against refusal induction, KeywordAgg is
-\textbf{+12.3\pp} and DecodingAgg is \textbf{-17.3\pp}, a gap of 29.7 points
-with both ends clearing the 11.4\pp threshold at $n=300$. One implementation of
-isolate-then-aggregate is resolvably protective and the other is resolvably
-harmful, on the same attack, at the same dose, inside one codebase.
+\NKeywordNineMistral{}\pp{} and DecodingAgg is
+\NDecodingNineMistral{}\pp{}, with both ends clearing the 11.4\pp
+threshold at $n=300$. One implementation of isolate-then-aggregate is
+resolvably protective and the other is resolvably harmful, on the same
+attack, at the same dose, inside one codebase --- on this model. The control
+above shows the protective end does not survive a change of base model, so
+the divergence is a property of the pair, not of the principle.
 
 The gap grows as the honest minority of passages shrinks: 13.0 points at five
 in ten, 29.7 at nine in ten. It then collapses to 1.7 at ten in ten, where no

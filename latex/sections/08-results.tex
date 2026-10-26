@@ -147,11 +147,11 @@ the paper states a scope condition rather than a blanket one.
 \subsection{Payload provenance}
 \label{sec:regime}
 
-Every result in this section is about a defense. This one is not. The paper
-divides its corpus by regime, and that division rests on a claim about the
-stimulus rather than about any method: that an adversary and an accident
-produce the same failure. We asserted it in Section~\ref{sec:twovocab}
-before anyone had measured it, so we measured it.
+Every result in this section is about a defense. This one is not. The
+paper divides its corpus by regime, and that division rests on a claim about
+the stimulus rather than about any method: that an adversary and an accident
+produce the same failure. Section~\ref{sec:twovocab} states it; this
+measures it.
 
 \input{tables/regime_framing}
 
@@ -164,11 +164,10 @@ instead, one an optimized artifact and one a real passage retrieved for a
 different question. Dose, slot positions and scorer are fixed across all of
 them. Predictions were registered before the run.
 
-\textbf{The published construction's repetition buys nothing.} PoisonedRAG
-repeats its passage five times in each slot it takes. Placed once it loses at
-most \NRegimeRepeatMax{}\pp{} of adoption, under threshold at every dose. We
-had predicted 10 to 20\pp{} and were wrong. The practical consequence is that
-no number in this campaign needs a repetition caveat.
+The published construction's repetition buys nothing. PoisonedRAG repeats
+its passage five times in each slot it takes. Placed once it loses at most
+\NRegimeRepeatMax{}\pp{} of adoption, under threshold at every dose, so no
+number in this campaign needs a repetition caveat.
 
 \textbf{Craft buys an attacker a real advantage, and only at low dose.} With
 one poisoned passage in ten, the crafted passage is adopted
