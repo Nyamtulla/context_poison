@@ -1,9 +1,9 @@
 \section{Background, scope and threat model} \label{sec:background}
 
-A security paper states its threat model before it taxonomizes. This paper
-spans two literatures, only one of which assumes an adversary at all, so we
-define the failure, state the threat model, and then state the regime the
-other literature works in.
+This section fixes the terms the rest of the paper uses. It defines the
+failure we study, states the threat model we assume, and then states the
+condition the other literature works in, which has no adversary and so is
+not a threat model at all.
 
 \subsection{Context poisoning}
 
@@ -35,21 +35,29 @@ the context afterwards.
 
 \subsection{Terminology} \label{sec:terms}
 
-\textbf{Three words, kept apart.} A \emph{threat model} specifies an
-adversary: their goal, what they control, what they know. A \emph{regime} is
-which of two conditions a piece of work addresses. We take the division from
-Lin et al.~\cite{lin-2025-safety-security}. \meth{Security} is resilience
-against ``intentional attacks \ldots\ in the presence of adversarial
-actors'', built on an asset, an adversary and a vulnerability. \meth{Safety}
-is avoiding ``unintended harmful outcomes \ldots\ despite uncertainties in
-inputs, goals, training data, or deployment conditions'', in non-adversarial
-environments. A \emph{venue} is where a paper published.
+Three words in this paper look interchangeable and are not. We use each of
+them for one thing only.
 
-Regime and venue are coded independently and they are not the same cut, which
-Section~\ref{sec:venue} measures. Because the word \meth{security} names a
-value of both, we always write \emph{security venue} or \emph{AI venue} when
-we mean the venue, and \meth{security} or \meth{safety} unqualified when we
-mean the regime.
+A \emph{threat model} names an adversary: what they want, what they
+control, and what they know. It is the subject of
+Section~\ref{sec:securityregime}.
+
+A \emph{regime} is the condition a piece of work addresses, and every paper
+in our corpus takes one of two. We follow Lin et
+al.~\cite{lin-2025-safety-security}. \meth{Security} work assumes an
+adversary and asks whether a system resists ``intentional attacks
+\ldots\ in the presence of adversarial actors''. \meth{Safety} work
+assumes none and asks whether a system avoids ``unintended harmful outcomes
+\ldots\ despite uncertainties in inputs, goals, training data, or
+deployment conditions''.
+
+A \emph{venue} is where a paper was published. It is not the same cut as
+the regime, which Section~\ref{sec:venue} measures: adversarial work
+appears at AI conferences as often as at security ones.
+
+The word \emph{security} names a value of two of these, so we write
+\emph{security venue} or \emph{AI venue} for the venue and plain
+\meth{security} or \meth{safety} for the regime.
 
 \textbf{Context and memory.} A model answers from one of two sources. The
 first is the \emph{context}: the document, tool output or message placed in
@@ -62,6 +70,7 @@ Section~\ref{sec:whatweran} says which methods and
 Section~\ref{sec:results} says what turning that dial achieves.
 
 \subsection{The security regime}
+\label{sec:securityregime}
 
 The adversary controls the content of at least one channel. They do not
 control the model weights, the decoding procedure, or the agent's code. This
