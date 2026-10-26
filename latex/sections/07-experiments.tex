@@ -56,13 +56,26 @@ as failures of the method, and they belong in Section~\ref{sec:discussion}.
 A negative result is easy to produce by accident. Four rules guard against
 that, and we fixed all four before any run.
 
-\textbf{The control fires first.} If a defense cannot reproduce its own
-published benefit on its own benchmark in our harness, we report no transfer
-number from it. A defense that is broken in our hands tells us nothing about
-transfer. One defense failed this gate, and we report it as not reportable rather than
-as defeated. FaithfulRAG~\cite{zhang-2025-faithfulrag} needs structured output
-support that open weights do not provide in its harness. The ablated variant
-that does run cannot reproduce its own benefit.
+\textbf{The control fires first.} A defense that is broken in our hands
+tells us nothing about transfer, so before any transfer number we check that
+the method still does on clean context what its authors say it does. The
+check is directional and it is per method, because the thing each paper
+claims is not the same quantity. ParamMute reports a gain in context
+recall, not in accuracy. CK-PLUG claims no accuracy gain at all: its
+contribution is a knob that moves memorization rate while accuracy is held,
+so its control fires on that rate instead. ACD states its improvement
+without a figure. SCR's own authors report it underperforming their
+baseline on Llama-3-8B, the model we run it on, so on this model there is no
+published gain to reproduce and agreement with them means moving the same
+way they report. We therefore check the direction, on the metric that
+paper uses, for the model it used, and we record for every method which
+quantity its control was read on. Where no comparable published figure
+exists we say so rather than manufacture a threshold.
+
+One defense fails the check outright and we report it as not reportable
+rather than as defeated. FaithfulRAG~\cite{zhang-2025-faithfulrag} needs
+structured output support that open weights do not provide in its harness,
+and the ablated variant that does run shows none of its own benefit.
 
 \textbf{The attack works first.} If the attack does not degrade the undefended
 arm in the same run, the defended arm means nothing. Every result below is
