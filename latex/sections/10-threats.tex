@@ -69,11 +69,15 @@ reported'' as one of five fatal flaws in DeepSec~\cite{carlini-2019-critique}.
 His own check found a standard deviation of 6.8 points on a reported attack
 success rate. That is enough to make many of DeepSec's pairwise comparisons
 meaningless. We avoid that a
-different way: we use greedy decoding throughout, so there is no run-to-run
-noise to report.
+different way: we use greedy decoding everywhere except one cell, so there is
+no run-to-run noise to report. The exception is
+CheckRLM~\cite{xu-2026-checkrlm}, whose own recipe samples at a temperature
+its authors set per backbone. Our standard is to keep an author's
+configuration where it differs from ours, so that cell decodes as they
+specify and the replication below does not cover it.
 
-Rerunning one published cell three
-times from scratch with an identical command produced \textbf{byte-identical
+Rerunning one published cell that decodes greedily, three
+times from scratch with an identical command, produced \textbf{byte-identical
 results}: 72 numeric cells across 8 result rows, zero differences, the same
 hash after removing the timestamp. Error bars over a deterministic decoder
 would be zero-width and would say less than this does. The uncertainty that
