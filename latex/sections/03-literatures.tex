@@ -8,6 +8,15 @@ would.
 Everything in this section is measurement over our corpus, and it ends at the
 cell of the matrix that is empty.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig9_prisma}
+\caption{Corpus construction. Each stage reports what it removed on the
+left and what it passed to the next stage on the right. The queries, their
+dates and their hit counts ship with the artifact as a search log.}
+\label{fig:prisma}
+\end{figure}
+
 \subsection{Corpus}
 
 We began from \NSeeds{} seed papers found during scoping, queried the Semantic
@@ -41,14 +50,6 @@ are applications, empirical studies of off-the-shelf methods, and practitioner
 guides. Section~\ref{sec:threats} reports a recall pass over that
 remainder.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig9_prisma}
-\caption{Corpus construction. Each stage reports what it removed on the
-left and what it passed to the next stage on the right. The queries, their
-dates and their hit counts ship with the artifact as a search log.}
-\label{fig:prisma}
-\end{figure}
 
 We follow PRISMA~\cite{page-2021-prisma} for identification, screening and
 inclusion, and Figure~\ref{fig:prisma} reports the count at every stage. The
@@ -72,17 +73,6 @@ they propose no technique, because they are how the field is organized. That
 pass removed 53 papers and recovered 34 techniques the first extraction had
 missed, so the registry counts here are floors.
 
-\subsection{A joint taxonomy}
-\label{sec:taxonomy}
-
-We place every named mechanism and every named defense on three axes. Each
-axis value is named by the work that first identified it as a distinct
-surface or a distinct harm; we group the names rather than coin them. The axes let the two
-literatures land in the same space without forcing them into the same words. A
-security attack and a safety mechanism that enter by the same route
-and cause the same damage occupy the same cell. They differ only on intent. That is what makes our taxonomy a way of finding missing
-experiments rather than a filing scheme.
-
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/fig0_pipeline}
@@ -92,6 +82,20 @@ window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
 A defense can intervene at one of three points between them.}
 \label{fig:pipeline}
 \end{figure*}
+
+\subsection{A joint taxonomy}
+\label{sec:taxonomy}
+
+
+
+We place every named mechanism and every named defense on three axes. Each
+axis value is named by the work that first identified it as a distinct
+surface or a distinct harm; we group the names rather than coin them. The axes let the two
+literatures land in the same space without forcing them into the same words. A
+security attack and a safety mechanism that enter by the same route
+and cause the same damage occupy the same cell. They differ only on intent. That is what makes our taxonomy a way of finding missing
+experiments rather than a filing scheme.
+
 
 \textbf{Channel} is the route untrusted content takes into the context window.
 There are \NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
@@ -217,7 +221,7 @@ members.
 \subsection{Regime versus venue}
 \label{sec:venue}
 
-Regime says what a paper is about. Venue says where its authors sent it. We
+The regime says what a paper is about, either security or safety. Venue says where its authors sent it. We
 code the two independently, which is what separates the division we draw
 from the field's own institutional one.
 

@@ -2,7 +2,7 @@
 
 This section fixes the terms the rest of the paper uses. It defines the
 failure we study, shows that two communities name it twice, states the
-system and the adversary we assume, and ends with the vocabulary the later
+system and the adversary we assume, and explains the vocabulary the later
 sections depend on.
 
 \subsection{Context poisoning}
@@ -13,8 +13,7 @@ it. The agent's behavior changes as a result. The definition says nothing
 about who put the content there, and that silence is deliberate: it is what
 lets both communities fit inside one term.
 
-A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower
-than ``LLM safety'', because the damage must arrive through the context
+A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower than ``LLM safety'', because the damage must arrive through the context
 window. Two things fall outside it. Training-time poisoning and weight attacks
 do not travel through the context. Jailbreaks in which the user is the
 attacker have no third-party content at all.
@@ -39,14 +38,6 @@ wrote it. Section~\ref{sec:regime} tests the second half with payloads that
 assert the same false answer, in the same slots, at the same dose, and differ
 only in whether a person wrote the sentence to be believed.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig8_vocab}
-\caption{The same five slots, named twice. The taxonomy in
-Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
-\label{fig:vocab}
-\end{figure}
-
 Two vocabularies for one failure force a choice of words, and this paper
 makes it once. We use \emph{mechanism} for anything that puts untrusted
 content into the context window, whether an attacker wrote that content or a
@@ -58,77 +49,36 @@ alternative was to put ``attack'' at the top level of the taxonomy in
 Section~\ref{sec:taxonomy}, and that would have made the safety half
 unregisterable, because an attack presupposes an attacker.
 
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig8_vocab}
+\caption{The same five slots, named twice. The taxonomy in
+Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
+\label{fig:vocab}
+\end{figure}
+
 \subsection{System and threat model}
 \label{sec:securityregime}
 
 Both communities study the same system, and only one of them assumes an
-attacker inside it. This subsection states the system first and then the
-attacker. The subject is an LLM agent: a model that, within one task, repeatedly reads
-content it did not author, decides, and acts. Reading happens through the nine
-channels of Section~\ref{sec:taxonomy}. Acting means emitting text to a user
-or calling a tool whose effects leave the system.
-
-Three properties separate this from a single-turn chatbot, and our taxonomy
-keys on all three. Content from many sources shares one context window, with
-no trustworthy marking of where any of it came from. The agent's own output
-can become another agent's input, or its own input a turn later through
-memory. And an action taken on corrupted context cannot be undone by fixing
+attacker inside it. The subject of the system is an LLM agent: a model that, within one task, repeatedly reads
+content it did not author, decides, and acts. Content from many sources shares one context window, with
+no trustworthy marking of where any of it came from. And an action taken in a corrupted context cannot be undone by fixing
 the context afterwards.
 
 \textbf{The adversary.} The adversary controls the content of at least one channel. They do not
 control the model weights, the decoding procedure, or the agent's code. This covers the realistic
 deployment cases. An adversary can write a document that a retriever may
 fetch. They can publish a tool whose description the agent reads. They can
-post content that a browsing agent visits, or contribute a skill file that the
-agent loads.
-
-The adversary knows the defense and may adapt the payload to it. The adversary does
+post content that a browsing agent visits or contribute a skill file that the
+agent loads. The adversary knows the defense and may adapt the payload to it. The adversary does
 not need to know the user's query: every attack we run is query-agnostic by
 construction.
 
-We exclude three things. Training-time poisoning and weight-level attacks do
-not travel through the context window. A user attacking their own agent
-involves no third-party content, so the trust boundary we study does not
-exist. Denial of service through resource exhaustion sits in the taxonomy as
-\meth{availability-loss}, alongside the non-adversarial ways an agent fails
-to deliver its work. It holds the fewest named mechanisms of any
-consequence, \NMechAvailLoss{} against \NDefAvailLoss{} defenses, and we
-draw no strong conclusion from it.
-
 \textbf{Where there is no adversary.} Without an attacker there is no threat
-model, and we do not call what follows one. The content goes wrong because
-the pipeline behaves normally. A retrieved document is out of date. A passage is close to the
+model. The content goes wrong because the pipeline behaves normally. A retrieved document is out of date. A passage is close to the
 topic but does not answer the question. Important text sits in the middle of
 a long input. A retrieved fact disagrees with what the model learned in
 training. These causes do not adapt, so this literature evaluates on
 average-case benchmarks.
-
-\subsection{Terminology} \label{sec:terms}
-
-This subsection defines the words the paper uses most often. Two of them
-say something about a paper: a \textbf{regime} is what the paper addresses,
-and a \textbf{venue} is where it appeared.
-
-A paper's \textbf{regime} is the condition it addresses, \meth{security} or
-\meth{safety} in the sense Section~\ref{sec:twovocab} gives them. Every
-paper in our corpus takes one of the two. A \textbf{threat model} is
-narrower than a regime.
-It names one adversary, and only the security regime has one.
-
-A paper's \textbf{venue} is the conference or journal that published it.
-Regime and venue are easy to mix up, because a security paper often appears
-at a security venue. They are not the same cut. Adversarial work appears at
-AI venues as often as at security ones, which Section~\ref{sec:venue}
-measures. The word \emph{security} names a regime and a kind of venue, so we
-write \emph{security venue} or \emph{AI venue} for where a paper appeared,
-and plain \meth{security} or \meth{safety} for what it addresses.
-
-\textbf{Context and memory.} A model answers from one of two sources. The
-first is the \textbf{context}: the document, tool output or message placed in
-front of it. The second is what the model learned in training and holds in its
-weights. The safety literature calls that \emph{parametric memory}. We use the
-shorter \textbf{memory} for it throughout, and every result table reports it as
-\texttt{pm\_acc}. The distinction matters beyond bookkeeping, because a large
-family of published defenses intervenes on exactly it;
-Section~\ref{sec:whatweran} says which methods and
-Section~\ref{sec:results} says what turning that dial achieves.
