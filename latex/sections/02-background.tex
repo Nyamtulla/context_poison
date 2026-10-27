@@ -93,13 +93,14 @@ to deliver its work. It holds the fewest named mechanisms of any
 consequence, \NMechAvailLoss{} against \NDefAvailLoss{} defenses, and we
 draw no strong conclusion from it.
 
-\textbf{Where there is no adversary.} The other literature works without
-one, so what follows is not a threat model and we do not call it that.
-Content goes wrong through ordinary pipeline behavior.
-A retrieved document is stale. A passage is irrelevant but topically close.
-Important text sits in the middle of a long input. A retrieved fact
-contradicts what the model learned in training. The safety literature assumes this condition and evaluates on average-case benchmarks. That is the right
-choice when nothing adapts.
+\textbf{Where there is no adversary.} The safety literature studies the same
+system without an attacker in it. Nothing below is a threat model, and we do
+not call it one. The content goes wrong because the pipeline behaves
+normally. A retrieved document is out of date. A passage is close to the
+topic but does not answer the question. Important text sits in the middle of
+a long input. A retrieved fact disagrees with what the model learned in
+training. Nothing here adapts to a defense, so this literature evaluates on
+average-case benchmarks, which is the right choice for these causes.
 
 \subsection{Terminology} \label{sec:terms}
 
