@@ -67,11 +67,11 @@ ships two aggregation variants that share the isolate-then-aggregate principle
 and share no decision logic downstream of it. One extracts keywords and
 re-prompts; the other averages next-token distributions.
 
-Both show the same behavior under tone steering, at or below 0.3\% across four
-cells and two models, against CK-PLUG's 99.0\% on the same attack and model.
-\textbf{Aggregation does not open the tone-steering hole. Context-reliance
-does.} That the two independent implementations agree is what licenses stating
-it as a property of the principle.
+Both show the same behavior under tone steering, at or below 0.3\% across
+four cells and two models, against CK-PLUG's 99.0\% on the same attack and
+model. Aggregation does not open the tone-steering hole; context-reliance
+does. Two implementations that share only the principle agree here, so the
+behavior belongs to the principle.
 
 The caution runs the other way too. Across fifteen dose levels the two
 implementations agree within noise on thirteen. On one they do not. At nine
@@ -92,9 +92,7 @@ missed all of this.
 
 \subsection{Defenses that transfer}
 
-The picture is not uniformly negative, and the exceptions are informative.
-
-RobustRAG stops PoisonedRAG, which its own paper tested, and we reproduce that
+The exceptions are informative. RobustRAG stops PoisonedRAG, which its own paper tested, and we reproduce that
 (+11.0\pp). It then gives no protection at all against corpus poisoning at
 displace-10, scoring 4.6\% against the undefended arm's 3.4\%, both on the
 floor. The reason is not its
@@ -108,11 +106,11 @@ the technique holding, with attack success driven to zero. A further 4 show a
 resolvable reduction. The rest divide between 19 with no resolvable effect at
 that sample size and 9 with no reduction at all.
 
-\textbf{Every hold is at ingestion or at execution.} Of the
+Every hold is at ingestion or at execution. Of the
 \NAgentHolds{} that hold, \NAgentHoldsIngestion{} act at ingestion and
 \NAgentHoldsExecution{} at execution, which is every execution-stage
-technique we ran. \textbf{None of the \NAgentTriedReasoning{}
-reasoning-stage conditions holds.} The stage a technique acts at, rather than
+technique we ran. None of the \NAgentTriedReasoning{}
+reasoning-stage conditions holds. The stage a technique acts at, rather than
 the technique, predicts whether it survives here --- the division
 Section~\ref{sec:parallel} finds in the literature, reproduced in what the
 methods actually do.
@@ -134,11 +132,11 @@ shows.
 
 \input{tables/lowdose}
 
-\textbf{Not one of the \NLowDosePairs{} (defense, payload) pairs shows a resolvable benefit
-at the 10\% dose.} Every defense is at or below its own undefended arm on every
+Not one of the \NLowDosePairs{} (defense, payload) pairs shows a resolvable benefit
+at the 10\% dose. Every defense is at or below its own undefended arm on every
 payload it met, at the dose most favorable to it. The saturation numbers
-elsewhere in this paper are the dramatic version of the result;
-Table~\ref{tab:lowdose} is the defensible one.
+elsewhere in this paper are the larger version of this result.
+Table~\ref{tab:lowdose} is the one a defense cannot explain away.
 
 The table is also the worst-case reading that a security claim requires. A
 defense beaten by one of three payloads is not two-thirds robust, it is broken,
@@ -163,8 +161,8 @@ s \leftarrow s + d_\alpha\,(s_{\mathrm{ctx}} - s),
 where $H$ is the Shannon entropy of the no-context distribution and
 $H_{\mathrm{ctx}}$ that of the with-context one. $H$ is a property of the
 question. $H_{\mathrm{ctx}}$ is conditioned on the retrieved context, which an
-attacker who owns the corpus controls outright. \textbf{So the attack has
-exactly one objective: minimize $H_{\mathrm{ctx}}$.}
+attacker who owns the corpus controls outright. So the attack has
+exactly one objective: minimize $H_{\mathrm{ctx}}$.
 
 The ceiling follows from the rule, not from an experiment. As
 $H_{\mathrm{ctx}} \to 0$, $d_\alpha \to 1$ and the update collapses to
@@ -181,9 +179,8 @@ asserting the \emph{same} distractor answer and differing only in form, each
 scored by the $H_{\mathrm{ctx}}$ ACD itself would compute, keeping the
 minimum.
 
-The attacker optimizes on the items it then attacks, which is worth
-stating plainly because it looks like training on the test set and is not. The
-threat model gives the adversary the model and the defense rule, and an
+The attacker optimizes on the items it then attacks. This is not training on
+the test set. The threat model gives the adversary the model and the defense rule, and an
 adversary who owns a corpus tunes the passage they are about to plant. A payload
 optimized on held-out items and transferred would measure something else, and
 something weaker. What is held out is the few-shot block: its demonstrations
@@ -231,11 +228,11 @@ The honest size of the effect is the gap, not ACD's rise. The adaptive
 payload is stronger against the undefended arm as well, so reporting only
 ACD's change would credit the defense with damage the attack does to everyone.
 Against its own undefended arm the protection falls from \NAcdGapBase{}\pp{}
-to \NAcdGapBestOf{}\pp{}: \textbf{\PctAcdRemovedBestOf{}\% of it removed by a
-best-of-five search over sentence templates.} Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, which
+to \NAcdGapBestOf{}\pp{}: \PctAcdRemovedBestOf{}\% of it removed by a
+best-of-five search over sentence templates. Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, which
 left a question the weak optimizer could not answer.
 
-\textbf{A gradient search answers it.} We ran a GCG-style~\cite{zou-2023-universal} coordinate search
+A gradient search answers it. We ran a GCG-style~\cite{zou-2023-universal} coordinate search
 over a 20-token suffix against the same objective, appended to the passage
 best-of-five had already chosen so that the asserted answer stays fixed and
 any movement is the gradient's. Candidate tokens are restricted to
@@ -246,17 +243,16 @@ beats the best-of-five passage on the reported measure, which it fails to do
 on 163 of \NAcdAdaptiveItems{}, so the payload is monotone by construction.
 
 It drives $H_{\mathrm{ctx}}$ to 0.614 and $d_\alpha$ to 0.708, and the
-defensive gap falls to \NAcdGapGradient{}\pp{}: \textbf{\PctAcdRemovedGradient{}\% of ACD's protection removed},
+defensive gap falls to \NAcdGapGradient{}\pp{}: \PctAcdRemovedGradient{}\% of ACD's protection removed,
 twice what sentence templates took. The \NAcdGradientBeyond{}\pp{} it takes beyond
 best-of-five clears the \NAcdAdaptiveMdr{}\pp{} detectability threshold at this
 sample size.
 
-\textbf{The gradient payload is weaker in general and stronger against the
-defense.} It damages the undefended arm \emph{less} than best-of-five
+The gradient payload is weaker in general and stronger against the
+defense. It damages the undefended arm \emph{less} than best-of-five
 does, 87.8\% against 89.1\%, while taking considerably more from ACD. The gap
-is what isolates the defense, and the gap is what moved. That is the clearest
-evidence available that the search attacks the method rather than simply
-producing a better payload.
+is what isolates the defense, and the gap is what moved. The search therefore attacks the method rather than simply producing a
+better payload.
 
 The dose structure agrees. At the 10\% dose the gap is 21.0, 21.3 and
 21.1\pp{} across the three payloads. ACD's protection only becomes attackable
