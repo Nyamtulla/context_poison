@@ -2,9 +2,10 @@
 \label{sec:experiments}
 
 Section~\ref{sec:emptycell} ends at a cell nobody has filled. This section
-and the next answer RQ2, and this one is the instrument we built to do it: a uniform harness that runs a published
-defense against a published attack under one protocol, with the controls fixed
-before any run.
+describes the instrument we built to fill it. It is one harness. It runs a
+published defense against a published attack under one protocol, with the
+controls fixed before any run. The next two sections report what it
+produced, and together they answer RQ2.
 
 \subsection{Pair selection}
 
@@ -13,10 +14,9 @@ We did not pick case studies by familiarity. The taxonomy picks them.
 A (defense, attack) pair is a candidate under two conditions. The defense and
 the attack must occupy the same taxonomy cell, which means the content enters
 through the same channel and causes the same consequence. And no paper in the
-corpus may report having run them together. If a defense repairs a failure that arrives through retrieval and
-corrupts answers quietly, and an attack arrives through retrieval and corrupts
-answers quietly, then the defense ought to apply. The taxonomy says so. Nobody
-had checked.
+corpus may report having run them together. A defense that repairs quiet answer corruption arriving through retrieval
+ought to apply to an attack that arrives the same way and does the same
+damage. The taxonomy says so. Nobody had checked.
 
 \textbf{We are not proposing new defenses.} Every method we run is published,
 and every attack we run is published. The contribution is the pairing.
@@ -37,7 +37,8 @@ those papers tested themselves and which we re-ran as controls.
 
 \subsection{The reconstruction standard}
 
-Every number we report comes from running a defense's own released code and
+The taxonomy decides which pairs we run. This rule decides what counts as
+running one. Every number we report comes from running a defense's own released code and
 weights. We never cite a paper's reported numbers as evidence about that
 paper's method. Where a harness had to be adapted to our data, we adapted the
 harness and left the method and the evaluation rubric untouched. Where an
@@ -53,23 +54,23 @@ as failures of the method, and they belong in Section~\ref{sec:discussion}.
 
 \subsection{Pre-registered experimental rules}
 
-A negative result is easy to produce by accident. Four rules guard against
-that, and we fixed all four before any run.
+Released code is not enough on its own. A negative result is easy to produce
+by accident, so four rules guard against that, and we fixed all four before
+any run.
 
 \textbf{The control fires first.} A defense that is broken in our hands
 tells us nothing about transfer, so before any transfer number we check that
-the method still does on clean context what its authors say it does. The
-check is directional and it is per method, because the thing each paper
-claims is not the same quantity. ParamMute reports a gain in context
+the method still does on clean context what its authors say it does. The check is directional, and it is set per method, because no two papers
+claim the same quantity. ParamMute reports a gain in context
 recall, not in accuracy. CK-PLUG claims no accuracy gain at all: its
 contribution is a knob that moves memorization rate while accuracy is held,
 so its control fires on that rate instead. ACD~\cite{kim-2024-adaptive} states its improvement
 without a figure. SCR's own authors report it underperforming their
 baseline on Llama-3-8B, the model we run it on, so on this model there is no
 published gain to reproduce and agreement with them means moving the same
-way they report. We therefore check the direction, on the metric that
-paper uses, for the model it used, and we record for every method which
-quantity its control was read on. Where no comparable published figure
+way they report. For each method we therefore check the direction of the change, on the metric
+that paper uses, for the model it used. We record which quantity each
+control was read on. Where no comparable published figure
 exists we say so rather than manufacture a threshold.
 
 One defense fails the check outright and we report it as not reportable
@@ -108,7 +109,7 @@ control \emph{before} each run, and they ship with the artifact.
 \label{sec:whatweran}
 
 \paragraph{Environment.}
-Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
+Those four rules hold for every run below. Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
 535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
 \texttt{transformers} 5.5.0. Two defenses cannot use that last version. ACD's
 released decoder imports symbols that \texttt{transformers} removed after
@@ -191,9 +192,6 @@ defense's rule \\
 \end{tabular}
 \end{table}
 
-Holding the items fixed is also what makes the payload comparison in
-Section~\ref{sec:payloadclasses} mean anything. Within a cell the items, the
-dosing and the scorer never change; only the form of the planted passage does.
 Carlini's fifth criticism of DeepSec is that it compared defended and
 undefended rates computed on different item sets, which makes the numbers
 incomparable rather than merely noisy~\cite{carlini-2019-critique}. We checked
@@ -218,9 +216,7 @@ characters. The cut is on context length alone, never on an outcome, and it is
 applied once and then frozen, so every defense and every payload meets the
 same items. Its purpose is to keep contrastive-decoding defenses, which hold
 two forward passes of the model at once, inside the memory of one card at a
-batch size that the whole cell can share. The one narrower slice is the
-distractor payload, and Section~\ref{sec:provenance} gives both of its
-conditions.
+batch size that the whole cell can share.
 
 Within the retrieval cell we hold the items, the dosing and the scorer fixed
 and vary only the \emph{form} of the planted passage. A defense that behaves
@@ -244,14 +240,10 @@ An adaptive distractor is the same payload in whichever surface form
 minimizes the specific quantity one defense's rule measures
 (Section~\ref{sec:results2}).
 
-Provenance is in Table~\ref{tab:provenance} and one case is worth drawing
-out. False evidence is the \texttt{parametric\_evidence} field that ships
-inside CoConflictQA, the benchmark the ParamMute authors released themselves,
-so one of the defenses we break is broken with a field from its own dataset.
-The distractor and the adaptive distractor are ours. Both are edits of that
-same field rather than new attack techniques. The distractor changes one word.
-The adaptive version changes only the surface form around an unchanged
-claim.
+One of these cases is worth drawing out. False evidence is the
+\texttt{parametric\_evidence} field that ships inside CoConflictQA, the
+benchmark the ParamMute authors released themselves. One of the defenses we
+break is broken with a field from its own dataset.
 
 \paragraph{Two dosing protocols, and why both exist.}
 CoConflictQA gives one context passage per item, so there is no ranked list to
