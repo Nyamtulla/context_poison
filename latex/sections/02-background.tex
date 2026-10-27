@@ -22,8 +22,18 @@ attacker have no third-party content at all.
 \subsection{One failure, two vocabularies} \label{sec:twovocab}
 
 That one failure has two names, because two communities arrived at it
-separately. Figure~\ref{fig:vocab} sets their vocabularies side by side. The slots are
-the same. Only the names and the assumed adversary differ.
+separately. Figure~\ref{fig:vocab} puts the two vocabularies side by side.
+The slots are the same: the same channel, the same position in the context
+window, the same downstream consequence. Only the names differ, and one
+assumption behind them. The security community assumes an adversary who
+re-optimizes against whatever method is in place. The safety community
+assumes a stale document or a retrieval error, and neither of those adapts.
+That difference is real, because a method tuned to the average case has no
+reason to hold at the worst case. It is also smaller than it looks, because
+the model reads tokens either way, and nothing in the text marks which hand
+wrote it. Section~\ref{sec:regime} tests the second half with payloads that
+assert the same false answer, in the same slots, at the same dose, and differ
+only in whether a person wrote the sentence to be believed.
 
 \begin{figure}[t]
 \centering
@@ -33,30 +43,16 @@ Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
 \label{fig:vocab}
 \end{figure}
 
-The two differ in exactly one assumption: adaptivity. They share the
-channel, the position in the context window, and the downstream consequence.
-That difference is real in one respect and smaller than it looks in another.
-It is real because an adaptive adversary re-optimizes against a filter and a
-stale retrieval index does not. A method tuned to the average case has no
-reason to hold at the worst case.
-
-It is smaller than it looks because the model sees tokens either way, and
-nothing in the text marks which hand wrote it. We assert that here and test
-it in Section~\ref{sec:regime}, where payloads that assert the same false
-answer in the same slots at the same dose differ only in whether someone
-wrote the sentence to be believed.
-
-Our taxonomy therefore uses \emph{mechanism} as the neutral term for both, and
-records provenance in a separate \emph{intent} axis. Writing ``attack'' at the
-top level would have made the safety half unregisterable, because an
-attack presupposes an attacker.
-
-This paper asks whether single-regime validation transfers. Most
-published defenses answer to one regime and not the other, which
-Section~\ref{sec:taxonomy} counts. The assumption behind that practice is
-reasonable. A method that makes a model robust to a stale document works on
-the same surface that an attacker writes to. Nobody has simply tested it at
-scale. Section~\ref{sec:experiments} tests it.
+Two vocabularies for one failure force a choice of words, and this paper
+makes it once. We use \emph{mechanism} for anything that puts untrusted
+content into the context window, whether an attacker wrote that content or a
+pipeline delivered it by accident. We use \emph{defense} for anything that is
+meant to stop such content from changing the answer, whether its authors call
+it a defense or a fix. Provenance is not discarded. It moves to a separate
+\emph{intent} axis, where the later sections read it off when it matters. The
+alternative was to put ``attack'' at the top level of the taxonomy in
+Section~\ref{sec:taxonomy}, and that would have made the safety half
+unregisterable, because an attack presupposes an attacker.
 
 \subsection{System and threat model}
 \label{sec:securityregime}
