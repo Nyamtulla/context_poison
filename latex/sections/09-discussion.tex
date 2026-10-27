@@ -27,6 +27,9 @@ model-specific result until shown otherwise.
 
 \subsection{Conventions for measurable transfer}
 
+The controls above are about one experiment. These five are about what a
+paper says it covers.
+
 \textbf{State the regime the evaluation actually covers.} Our defense
 census codes each method by what its own paper evaluated, and
 \PctOneRegime{}\% cover one regime. Many of those papers describe their
@@ -40,17 +43,14 @@ without the smallest difference the experiment could have detected makes "no
 effect" and "we could not tell" look identical. We computed this for every run
 and several of our own results moved from the first category to the second.
 
-Say whether the attack was adapted to the defense. A defense that
+\textbf{Say whether the attack was adapted to the defense.} A defense that
 holds against an attack built for a different target has been shown to resist
-that attack and nothing more. The asymmetry matters and papers rarely state it.
-Non-adaptive evaluation is conservative evidence for a failure. It is no
-evidence at all for a guarantee. Every published evaluation of a
-context-reliance defense in our corpus is non-adaptive. We built an adaptive
-payload against the one method that had resisted, and
-\PctAcdRemovedGradient{}\% of its protection
-went (Section~\ref{sec:adaptive}). One sentence naming whether the
-attacker knew the defense would let a reader tell which kind of claim they are
-reading.
+that attack and nothing more. Every published evaluation of a
+context-reliance defense in our corpus is non-adaptive, and when we built an
+adaptive payload against the one method that had resisted,
+\PctAcdRemovedGradient{}\% of its protection went
+(Section~\ref{sec:adaptive}). One sentence naming whether the attacker knew
+the defense tells a reader which kind of claim they are reading.
 
 \textbf{Compose across the boundary, and measure the composition.}
 Section~\ref{sec:parallel} shows the two communities defending different
@@ -60,8 +60,7 @@ next move is to put an ingestion-stage filter in front of a
 reasoning-stage method and see whether the pair holds where each half does
 not. We do not know that it works. Nothing in this paper tests a composed
 defense, and a filter that passes a fluent falsehood leaves the reasoning
-stage exactly where our results find it. That is the point: the experiment
-is cheap, both halves are published with released code, and no paper in
+stage exactly where our results find it. The experiment is cheap, both halves are published with released code, and no paper in
 \NCorpus{} has run it.
 
 \textbf{Test a fix for accidental failure against a deliberate one.} A
