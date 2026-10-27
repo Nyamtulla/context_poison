@@ -30,6 +30,13 @@ adversary and asks whether a system resists ``intentional attacks \ldots\ in
 the presence of adversarial actors''. \meth{Safety} work assumes none and
 asks whether a system avoids ``unintended harmful outcomes \ldots\ despite
 uncertainties in inputs, goals, training data, or deployment conditions''.
+We call the condition a paper addresses its \textbf{regime}, and every paper
+in our corpus takes one of these two. A regime is not a \textbf{venue}, the
+conference or journal that published the paper. The two are easy to mix up,
+because security work often appears at a security venue, but
+Section~\ref{sec:venue} shows that adversarial work appears at AI venues just
+as often. We write \emph{security venue} or \emph{AI venue} for where a paper
+appeared, and plain \meth{security} or \meth{safety} for what it addresses.
 An adversary re-optimizes against whatever method is in place; a stale
 document does not. That difference is real, because a method tuned to the average case has no
 reason to hold at the worst case. It is also smaller than it looks, because
@@ -47,7 +54,12 @@ it a defense or a fix. Provenance is not discarded. It moves to a separate
 \emph{intent} axis, where the later sections read it off when it matters. The
 alternative was to put ``attack'' at the top level of the taxonomy in
 Section~\ref{sec:taxonomy}, and that would have made the safety half
-unregisterable, because an attack presupposes an attacker.
+unregisterable, because an attack presupposes an attacker. Two more words
+name where an answer comes from. The \textbf{context} is the document, tool
+output or message placed in front of the model. \textbf{Memory} is what the
+model learned in training and holds in its weights, which the safety
+literature calls \emph{parametric memory}. A large family of published
+defenses works by shifting the model from the second to the first.
 
 
 \begin{figure}[t]
