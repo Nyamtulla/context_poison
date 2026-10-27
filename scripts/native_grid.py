@@ -39,7 +39,8 @@ if "vllm" not in sys.modules:
     _st.LLM = _st.SamplingParams = None
     sys.modules["vllm"] = _st
 
-from poisonedrag_transfer import build_poisoned, is_refusal, is_negative  # noqa: E402
+from poisonedrag_transfer import (build_poisoned, direct_input_question,  # noqa: E402
+                                  is_refusal, is_negative)
 from spare_vs_corpus_poisoning import acc_score                          # noqa: E402
 from transfer_stats import min_detectable_change, wilson                 # noqa: E402
 
@@ -107,6 +108,15 @@ def main():
     ap.add_argument("--attack", default="poisonedrag",
                     choices=["poisonedrag", "badrag_dos", "badrag_sentiment",
                              "corpus_poisoning"])
+    ap.add_argument("--placement", default="retrieval",
+                    choices=["retrieval", "direct"],
+                    help="which channel the payload arrives through. "
+                         "`retrieval` plants it among the retrieved passages, "
+                         "which is what every run in this matrix has done so "
+                         "far. `direct` leaves the retrieved set clean and "
+                         "puts the same payload in the user turn, so a "
+                         "defense that reweights or isolates passages never "
+                         "sees it as a passage.")
     ap.add_argument("--n", type=int, default=500)
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--doses", type=int, nargs="+",
@@ -130,7 +140,9 @@ def main():
     a = ap.parse_args()
 
     out = REPO / (a.out or
-                  f"data/registries/native_{a.defense}_{a.attack}.json")
+                  f"data/registries/native_{a.defense}_{a.attack}"
+                  + ("" if a.placement == "retrieval" else "_direct")
+                  + ".json")
     doc = json.loads(out.read_text()) if out.exists() else {}
     done = {r["n_poison"] for r in doc.get("results", [])}
     if done:
@@ -154,10 +166,18 @@ def main():
         t0 = time.time()
         preds = {arm: [] for arm in d.arms}
         for i, it in enumerate(data, 1):
-            passages = build_poisoned(it, a.top_k, j, attack=a.attack)
+            if a.placement == "direct":
+                # The dose is the number of copies in the user turn; the
+                # retrieved set stays clean at every dose.
+                passages = build_poisoned(it, a.top_k, 0)
+                question = (direct_input_question(it, a.attack, repeat=j)
+                            if j else it["question"])
+            else:
+                passages = build_poisoned(it, a.top_k, j, attack=a.attack)
+                question = it["question"]
             gold = it["correct answer"]
             gold = gold[0] if isinstance(gold, list) else gold
-            got = d.answer(it["question"], passages, gold=gold)
+            got = d.answer(question, passages, gold=gold)
             for arm in d.arms:
                 preds[arm].append(got[arm])
             if i % 50 == 0:
@@ -190,7 +210,8 @@ def main():
             print(f"  dose {j:>2}/{a.top_k}  {arm:12} acc {acc:5.2f}  "
                   f"attacked {atk:5.2f}")
         doc = {"generated": time.strftime("%Y-%m-%d"), "defense": a.defense,
-               "attack": a.attack, "dataset": "open_nq", "top_k": a.top_k,
+               "attack": a.attack, "placement": a.placement,
+               "dataset": "open_nq", "top_k": a.top_k,
                "model": a.model, "n": len(data), "protocol": "native: j of k",
                "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
                "doses_done": sorted({r["n_poison"] for r in results}),

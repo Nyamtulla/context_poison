@@ -158,6 +158,33 @@ def borrowed_passage(item, pool=None):
     return None
 
 
+def payload_text(item, attack: str) -> str:
+    """The planted text itself, with no placement decided.
+
+    Pulled out of build_poisoned so the same payload can enter through a
+    different channel. Section III-B's taxonomy separates the route from the
+    content, and until now every runner here could only place content on the
+    RAG route.
+    """
+    if attack == "distractor_evidence":
+        return item["distractor_context"]
+    return {"poisonedrag": item["incorrect_context"][0],
+            "badrag_dos": DOS_PASSAGE,
+            "badrag_sentiment": SENTIMENT_PASSAGE}[attack]
+
+
+def direct_input_question(item, attack: str, repeat: int = 5) -> str:
+    """The same payload, arriving in the user's own turn.
+
+    The direct-input channel is content placed in the prompt by the user or by
+    an upstream service that composes it. The retrieved set stays clean, so
+    anything a defense does here is about the content rather than about where
+    retrieval put it. A defense that isolates or reweights passages never sees
+    this text as a passage at all.
+    """
+    return item["question"] + "\n\n" + ("\n" + payload_text(item, attack) + "\n") * repeat
+
+
 def build_poisoned(item, top_k: int, n_poison: int, repeat: int = 5,
                    attack: str = "poisonedrag"):
     """RobustRAG's own `Poison.attack` construction, applied to open_nq.
@@ -196,12 +223,7 @@ def build_poisoned(item, top_k: int, n_poison: int, repeat: int = 5,
                              f"{item['question']!r}; filter the data first")
         keep = max(0, len(passages) - n_poison)
         return passages[:keep] + [p] * min(n_poison, top_k)
-    if attack == "distractor_evidence":
-        payload = item["distractor_context"]
-    else:
-        payload = {"poisonedrag": item["incorrect_context"][0],
-                   "badrag_dos": DOS_PASSAGE,
-                   "badrag_sentiment": SENTIMENT_PASSAGE}[attack]
+    payload = payload_text(item, attack)
     bad = ("\n" + payload + "\n") * repeat
     keep = max(0, len(passages) - n_poison)
     return passages[:keep] + [bad] * min(n_poison, top_k)

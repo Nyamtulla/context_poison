@@ -56,7 +56,7 @@ from transfer_stats import min_detectable_change, wilson        # noqa: E402
 from spare_vs_corpus_poisoning import acc_score                 # noqa: E402
 import poisonedrag_transfer as pr                              # noqa: E402
 from poisonedrag_transfer import (                              # noqa: E402
-    build_poisoned, is_negative, is_refusal)
+    build_poisoned, direct_input_question, is_negative, is_refusal)
 
 
 # ---------------------------------------------------------------------------
@@ -92,7 +92,7 @@ StopOnTokens.__call__ = _stop_on_tokens_call
 
 
 def run_condition(defense, data, top_k, n_poison, attack, defended,
-                  dump=None):
+                  dump=None, placement="retrieval"):
     """dump: a list to append per-item predictions to.
 
     The composition experiment needs each method's answer per item, not its
@@ -103,9 +103,16 @@ def run_condition(defense, data, top_k, n_poison, attack, defended,
     """
     correct = attacked = refused = negative = 0
     for it in data:
-        passages = ([] if defended == "closedbook"
-                    else build_poisoned(it, top_k, n_poison, attack=attack))
-        item = {"question": it["question"],
+        question = it["question"]
+        if placement == "direct" and defended != "closedbook":
+            passages = build_poisoned(it, top_k, 0)
+            if n_poison:
+                question = direct_input_question(it, attack, repeat=n_poison)
+        elif defended == "closedbook":
+            passages = []
+        else:
+            passages = build_poisoned(it, top_k, n_poison, attack=attack)
+        item = {"question": question,
                 "answer": it["correct answer"],
                 "topk_content": passages,
                 "incorrect_answer": it.get("incorrect answer", []),
@@ -148,6 +155,12 @@ def main():
                              # the mirror direction: a security-regime defense
                              # against a retrieval error nobody wrote
                              "misretrieval"])
+    ap.add_argument("--placement", default="retrieval",
+                    choices=["retrieval", "direct"],
+                    help="`direct` leaves the retrieved set clean and puts "
+                         "the payload in the user turn. RobustRAG aggregates "
+                         "over isolated passages, so on this channel its "
+                         "mechanism has nothing to isolate.")
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--model", type=str, default="mistral7b")
@@ -194,6 +207,7 @@ def main():
                   "items have no clean donor and are dropped", flush=True)
         data = keep
     suffix = "" if args.method == "keyword" else f"_{args.method}"
+    suffix += "" if args.placement == "retrieval" else "_direct"
     out_path = args.out or f"data/registries/{args.attack}_robustrag{suffix}.json"
 
     prev = None
@@ -232,7 +246,7 @@ def main():
 
     if args.closedbook_only:
         rcb = run_condition(defense, data, args.top_k, 0, args.attack,
-                            "closedbook", dump=None)
+                            "closedbook", dump=None, placement=args.placement)
         for npz in sorted({r["n_poison"] for r in prev["results"]}):
             prev["results"].append(dict(rcb, arm="closedbook", n_poison=npz,
                                         measured="backfill"))
@@ -255,7 +269,8 @@ def main():
                  or ("defended" if defended else "undefended"))
         if defended == "closedbook":
             rcb = run_condition(defense, data, args.top_k, 0, args.attack,
-                                defended, dump=None)
+                                defended, dump=None,
+                                placement=args.placement)
             for npz in args.poison_counts:
                 results.append(dict(rcb, arm=label, n_poison=npz))
             print(f"  closedbook   acc {rcb['acc']:5.1f}%", flush=True)
@@ -264,7 +279,7 @@ def main():
               flush=True)
         for npz in args.poison_counts:
             r = run_condition(defense, data, args.top_k, npz, args.attack,
-                              defended, dump=preds)
+                              defended, dump=preds, placement=args.placement)
             r.update(arm=label, n_poison=npz)
             results.append(r)
             print(f"  poison {npz:>2}/{args.top_k}   acc {r['acc']:5.1f}%   "
@@ -275,7 +290,8 @@ def main():
                "defense": f"robustrag-{args.method}",
                "defense_family": "isolate-then-aggregate",
                "aggregation_method": args.method,
-               "attack": args.attack, "dataset": "open_nq", "n": len(data),
+               "attack": args.attack, "placement": args.placement,
+               "dataset": "open_nq", "n": len(data),
                "top_k": args.top_k, "model": args.model,
                "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
                "results": results}
