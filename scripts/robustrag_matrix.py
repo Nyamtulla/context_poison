@@ -54,6 +54,7 @@ from src.prompt_template import LLAMA_TMPL        # noqa: E402  (their code)
 
 from transfer_stats import min_detectable_change, wilson        # noqa: E402
 from spare_vs_corpus_poisoning import acc_score                 # noqa: E402
+import poisonedrag_transfer as pr                              # noqa: E402
 from poisonedrag_transfer import (                              # noqa: E402
     build_poisoned, is_negative, is_refusal)
 
@@ -143,7 +144,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--attack", required=True,
                     choices=["poisonedrag", "badrag_dos", "badrag_sentiment",
-                             "distractor_evidence", "corpus_poisoning"])
+                             "distractor_evidence", "corpus_poisoning",
+                             # the mirror direction: a security-regime defense
+                             # against a retrieval error nobody wrote
+                             "misretrieval"])
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--top_k", type=int, default=10)
     ap.add_argument("--model", type=str, default="mistral7b")
@@ -179,6 +183,16 @@ def main():
            if args.attack == "distractor_evidence"
            else RRAG / "data" / "open_nq.json")
     data = json.loads(src.read_text())[: args.n]
+    if args.attack == "misretrieval":
+        # The donor pool is the item set itself. Items with no clean donor -
+        # every candidate states this item's gold answer - are dropped, and
+        # the drop is reported rather than silently shrinking n.
+        pr.set_misretrieval_pool(json.loads(src.read_text()))
+        keep = [it for it in data if pr.borrowed_passage(it) is not None]
+        if len(keep) != len(data):
+            print(f"  misretrieval: {len(data) - len(keep)} of {len(data)} "
+                  "items have no clean donor and are dropped", flush=True)
+        data = keep
     suffix = "" if args.method == "keyword" else f"_{args.method}"
     out_path = args.out or f"data/registries/{args.attack}_robustrag{suffix}.json"
 

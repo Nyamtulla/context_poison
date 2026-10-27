@@ -101,6 +101,63 @@ def is_negative(text: str) -> bool:
     return bool(NEGATIVE_RE.search(text or ""))
 
 
+# ---------------------------------------------------------------------------
+# misretrieval: the accident, not the attack
+# ---------------------------------------------------------------------------
+# Every other payload here was written by somebody. This one is a real,
+# unmodified passage that a retriever returned for a different question, which
+# is what an ordinary retrieval error puts in the context window. It is the
+# stimulus Section V-D calls incidental, and it is what lets a security
+# defense be tested against a safety failure rather than against a payload we
+# constructed.
+#
+# Drawn deterministically: the donor is chosen by a generator seeded from the
+# item itself, so a rerun of a cell produces the same context, which the
+# byte-identical replication in the threats section depends on.
+_MIS_POOL: list = []
+
+
+def set_misretrieval_pool(data) -> None:
+    global _MIS_POOL
+    _MIS_POOL = list(data)
+
+
+def _golds(item) -> list[str]:
+    g = list(item["correct answer"]) + list(item.get("expanded answer", []))
+    return [s.lower() for s in (str(x) for x in g) if s.strip()]
+
+
+def borrowed_passage(item, pool=None):
+    """A real passage for another question, or None if no clean donor exists.
+
+    Rejected if it happens to state this item's gold answer, which would make
+    it a help rather than a distraction, or the attack's target answer, which
+    would turn an accident into an accidental attack.
+    """
+    import hashlib
+    import random as _random
+    pool = pool if pool is not None else _MIS_POOL
+    if not pool:
+        raise SystemExit("misretrieval: call set_misretrieval_pool(data) first")
+    gs = _golds(item)
+    x = str(item.get("incorrect answer", "")).lower()
+    seed = int(hashlib.sha256(item["question"].encode()).hexdigest()[:8], 16)
+    rng = _random.Random(seed)
+    for _ in range(40):
+        donor = pool[rng.randrange(len(pool))]
+        if donor.get("question") == item["question"]:
+            continue
+        for c in donor.get("context", [])[:3]:
+            if "text" not in c or "title" not in c:
+                continue
+            p = c["title"] + "\n" + c["text"]
+            low = p.lower()
+            if any(g in low for g in gs) or (x and x in low):
+                continue
+            return p
+    return None
+
+
 def build_poisoned(item, top_k: int, n_poison: int, repeat: int = 5,
                    attack: str = "poisonedrag"):
     """RobustRAG's own `Poison.attack` construction, applied to open_nq.
@@ -130,6 +187,15 @@ def build_poisoned(item, top_k: int, n_poison: int, repeat: int = 5,
         for i in range(min(n_poison, len(out))):
             out[i] = adv
         return out
+    if attack == "misretrieval":
+        # An accident does not repeat itself five times, so the borrowed
+        # passage is placed once per slot, the way regime_test.py places it.
+        p = borrowed_passage(item)
+        if p is None:
+            raise SystemExit("misretrieval: no clean donor for "
+                             f"{item['question']!r}; filter the data first")
+        keep = max(0, len(passages) - n_poison)
+        return passages[:keep] + [p] * min(n_poison, top_k)
     if attack == "distractor_evidence":
         payload = item["distractor_context"]
     else:
