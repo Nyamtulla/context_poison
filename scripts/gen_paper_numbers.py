@@ -849,6 +849,163 @@ def main():
         if v is not None:
             M["NDecodingNine" + key] = f"{v:+.1f}"
 
+    # ---- experiment effect sizes ------------------------------------
+    # These were typed into Sections V and VI until the registries behind
+    # them started moving again: the grid re-runs cells, and a typed number
+    # is one that was right when it was typed. Each macro below names the
+    # registry, the arm and the dose it comes from, so the prose cannot
+    # drift from the run.
+    def _rr(files, **sel):
+        rows = []
+        for f in ([files] if isinstance(files, str) else files):
+            rows += [r for r in load(f)["results"]
+                     if all(r.get(k) == v for k, v in sel.items())]
+        return rows
+
+    def _x(files, metric, **sel):
+        rows = _rr(files, **sel)
+        if len(rows) != 1:
+            raise SystemExit(f"{files} {sel}: matched {len(rows)} rows")
+        return float(rows[0][metric])
+
+    def _xd(files, metric, a, b, **sel):
+        return _x(files, metric, arm=a, **sel) - _x(files, metric, arm=b, **sel)
+
+    def _avg(files, metric, arm, doses):
+        vs = [_x(files, metric, arm=arm, n_poison=j) for j in doses]
+        return sum(vs) / len(vs)
+
+    def _collapse(f, arm):
+        return _x(f, "ctx_acc", arm=arm, frac=0.0) - _x(f, "ctx_acc", arm=arm,
+                                                        frac=1.0)
+
+    def _excess(f, defended, baseline):
+        """Defended arm's clean-to-saturation fall, minus the baseline's."""
+        return _collapse(f, defended) - _collapse(f, baseline)
+
+    SPARE, PM = "spare_vs_corpus_poisoning.json", "parammute_vs_corpus_poisoning.json"
+    CK, CO = "ckplug_vs_corpus_poisoning.json", "coiecd_vs_corpus_poisoning.json"
+    ACD, SCRF = "acd_vs_corpus_poisoning.json", "scr_vs_corpus_poisoning.json"
+    PMF, CKF = "parammute_vs_false_evidence.json", "ckplug_vs_false_evidence.json"
+    COF = "coiecd_vs_false_evidence.json"
+    PMD = "parammute_vs_distractor_evidence.json"
+    ACDD = "acd_vs_distractor_evidence.json"
+    CKD = "ckplug_vs_distractor_evidence.json"
+    DOS = ["badrag_dos_parammute.json", "badrag_dos_parammute_dose.json"]
+    SENT = "badrag_sentiment_ckplug.json"
+
+    E = {
+        # the shared design rule
+        "ESpareClean": _xd(SPARE, "ctx_acc", "steer_to_use_context",
+                           "steer_to_use_parameter", frac=0.0),
+        "ESpareSat": _xd(SPARE, "ctx_acc", "steer_to_use_context",
+                         "steer_to_use_parameter", frac=1.0),
+        "ESpareMdr": load(SPARE)["mdr_pp_at_n"],
+        "EParamClean": _xd(PM, "ctx_acc", "parammute", "base", frac=0.0),
+        "EParamSatGap": _xd(PM, "ctx_acc", "base", "parammute", frac=1.0),
+        "EParamExcessCorpus": _excess(PM, "parammute", "base"),
+        "EParamExcessFalse": _excess(PMF, "parammute", "base"),
+        # CK-PLUG carries the tone attack rather than stopping it
+        "ECkSentUndefMax": max(r["negative_framing_rate"]
+                               for r in _rr(SENT, arm="undefended")),
+        "ECkSentOne": _x(SENT, "negative_framing_rate", arm="defended", n_poison=1),
+        "ECkSentSat": _x(SENT, "negative_framing_rate", arm="defended", n_poison=10),
+        # the scope condition: refusal induction, where memory was wrong
+        "EPmDosUndefRef": _x(DOS, "refusal_rate", arm="undefended", n_poison=1),
+        "EPmDosUndefAcc": _x(DOS, "acc", arm="undefended", n_poison=1),
+        "EPmDosDefRef": _x(DOS, "refusal_rate", arm="defended", n_poison=1),
+        "EPmDosDefAcc": _x(DOS, "acc", arm="defended", n_poison=1),
+        "EPmDosCleanGap": (_x(DOS, "acc", arm="defended", n_poison=0)
+                           - _x(DOS, "acc", arm="defended", n_poison=1)),
+        "EPmDosUndefAvg": _avg(DOS, "acc", "undefended", [1, 2, 3, 5]),
+        "EPmDosDefAvg": _avg(DOS, "acc", "defended", [1, 2, 3, 5]),
+        # ACD, the one method that resisted
+        "EAcdSatGain": _xd(ACD, "ctx_acc", "acd", "rag", frac=1.0),
+        "EAcdCleanVsNoRet": _xd(ACD, "ctx_acc", "acd", "closedbook", frac=0.0),
+        # the fluent payload does more damage than the optimized one
+        "ECoiecdFalseLow": _x(COF, "ctx_acc", arm="base_rag", frac=0.1),
+        "ECoiecdCorpusLow": _x(CO, "ctx_acc", arm="base_rag", frac=0.1),
+        "ECkUndefFalseLow": _x(CKF, "ctx_acc", arm="base_rag", frac=0.1),
+        "ECkUndefCorpusLow": _x(CK, "ctx_acc", arm="base_rag", frac=0.1),
+        # payload class against defense outcome
+        "EParamFalseClean": _xd(PMF, "ctx_acc", "parammute", "base", frac=0.0),
+        "EParamCorpusPmDrop": _xd(PM, "pm_acc", "parammute", "base", frac=1.0),
+        "EParamFalsePmDrop": _xd(PMF, "pm_acc", "parammute", "base", frac=1.0),
+        "ECkCleanCost": _xd(CK, "ctx_acc", "ck", "base_rag", frac=0.0),
+        "ECkLowCost": _xd(CK, "ctx_acc", "ck", "base_rag", frac=0.1),
+        "ECkMidCost": _xd(CK, "ctx_acc", "ck", "base_rag", frac=0.5),
+        "ECkFalseOffset": _xd(CKF, "ctx_acc", "ck", "base_rag", frac=0.0),
+        "ECkMdr": load(CK)["mdr_pp_at_n"],
+        "ECkExcessCorpus": _excess(CK, "ck", "base_rag"),
+        "ECkExcessFalse": _excess(CKF, "ck", "base_rag"),
+        "ECoiecdLargest": max(abs(_xd(CO, "ctx_acc", "coiecd", "base_rag", frac=f))
+                              for f in (0.0, 0.1, 0.5, 1.0)),
+        "ECoiecdMdr": load(CO)["mdr_pp_at_n"],
+        "ECoiecdExcessCorpus": _excess(CO, "coiecd", "base_rag"),
+        "ECoiecdExcessFalse": _excess(COF, "coiecd", "base_rag"),
+        # copying versus remembering
+        "EPmDistMdr": load(PMD)["mdr_pp_at_n"],
+        "EPmDistPmBase": _x(PMD, "pm_acc", arm="base", frac=1.0),
+        "EPmDistPmDef": _x(PMD, "pm_acc", arm="parammute", frac=1.0),
+        "EPmDistPmDrop": _xd(PMD, "pm_acc", "base", "parammute", frac=1.0),
+        "EPmDistGoldBase": _x(PMD, "ctx_acc", arm="base", frac=1.0),
+        "EPmDistGoldDef": _x(PMD, "ctx_acc", arm="parammute", frac=1.0),
+        "EPmDistCopyBase": _x(PMD, "dist_acc", arm="base", frac=1.0),
+        "EPmDistCopyDef": _x(PMD, "dist_acc", arm="parammute", frac=1.0),
+        "EPmDistCopyGain": _xd(PMD, "dist_acc", "parammute", "base", frac=1.0),
+        "EAcdDistMdr": load(ACDD)["mdr_pp_at_n"],
+        "EAcdDistCopyBase": _x(ACDD, "dist_acc", arm="rag", frac=1.0),
+        "EAcdDistCopyDef": _x(ACDD, "dist_acc", arm="acd", frac=1.0),
+        "EAcdDistPmBase": _x(ACDD, "pm_acc", arm="rag", frac=1.0),
+        "EAcdDistPmDef": _x(ACDD, "pm_acc", arm="acd", frac=1.0),
+        "EAcdDistGoldBase": _x(ACDD, "ctx_acc", arm="rag", frac=1.0),
+        "EAcdDistGoldDef": _x(ACDD, "ctx_acc", arm="acd", frac=1.0),
+        "EAcdDistNoRet": _x(ACDD, "ctx_acc", arm="closedbook", frac=1.0),
+        "ECkDistCopyDef": _x(CKD, "dist_acc", arm="ck", frac=0.1),
+        "ECkDistCopyBase": _x(CKD, "dist_acc", arm="base_rag", frac=0.1),
+        # the LLM-as-judge arm
+        "EScrSatGain": _xd(SCRF, "ctx_acc", "scr", "rag", frac=1.0),
+        "EScrCleanVsNoRet": _xd(SCRF, "ctx_acc", "scr", "closedbook", frac=0.0),
+        # written as a price the method pays, so the macro is the magnitude
+        "EScrCleanCost": abs(_xd(SCRF, "ctx_acc", "scr", "rag", frac=0.0)),
+        "EScrNoRetPm": _x(SCRF, "pm_acc", arm="closedbook", frac=0.0),
+    }
+
+    # the two result tables print the arm pair behind each delta
+    for nm, f, dfn, base in (("Param", PM, "parammute", "base"),
+                             ("Ck", CK, "ck", "base_rag"),
+                             ("Spare", SPARE, "steer_to_use_context",
+                              "steer_to_use_parameter"),
+                             ("Coiecd", CO, "coiecd", "base_rag")):
+        for lbl, fr in (("Clean", 0.0), ("Sat", 1.0)):
+            E[f"E{nm}{lbl}Base"] = _x(f, "ctx_acc", arm=base, frac=fr)
+            E[f"E{nm}{lbl}Def"] = _x(f, "ctx_acc", arm=dfn, frac=fr)
+        E[f"E{nm}N"] = load(f)["n"]
+        E[f"E{nm}Mdr"] = load(f)["mdr_pp_at_n"]
+    # CK-PLUG's control fires on memorization rate, not accuracy
+    E["ECkCleanMrBase"] = _x(CK, "mr", arm="base_rag", frac=0.0)
+    E["ECkCleanMrDef"] = _x(CK, "mr", arm="ck", frac=0.0)
+    E["ECkCleanMrDelta"] = _xd(CK, "mr", "ck", "base_rag", frac=0.0)
+    E["ECoiecdCleanDelta"] = _xd(CO, "ctx_acc", "coiecd", "base_rag", frac=0.0)
+    E["ECoiecdSatDelta"] = _xd(CO, "ctx_acc", "coiecd", "base_rag", frac=1.0)
+    E["ESpareSatBase"] = _x(SPARE, "ctx_acc", arm="steer_to_use_parameter", frac=1.0)
+    E["EParamSatDelta"] = _xd(PM, "ctx_acc", "parammute", "base", frac=1.0)
+    E["ECkSatDelta"] = _xd(CK, "ctx_acc", "ck", "base_rag", frac=1.0)
+    E["EParamDistN"] = load(PMD)["n"]
+
+    # Python rounds halves to even, so 0.25 would print as 0.2 where the
+    # paper has always printed 0.3. Round half up, as a reader expects.
+    from decimal import Decimal, ROUND_HALF_UP
+
+    def _fmt(v):
+        if not isinstance(v, float):
+            return str(v)
+        return str(Decimal(repr(v)).quantize(Decimal("0.1"),
+                                             rounding=ROUND_HALF_UP))
+
+    for k, v in E.items():
+        M[k] = _fmt(v)
+
     (REPO / "latex" / "numbers.tex").write_text(
         "% GENERATED by scripts/gen_paper_numbers.py. Do not edit by hand.\n"
         "% Re-run after any corpus or registry rebuild.\n\n"
