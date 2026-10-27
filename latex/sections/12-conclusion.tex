@@ -6,8 +6,8 @@ should not trust, and it cannot tell which content that is. The security
 community calls the content an attack and builds defenses. The safety community calls it a mechanism and builds fixes.
 
 We measured the distance between them over \NCorpus{} papers read in full,
-of which \NAnalysed{} name an attack or a defense. About one paper in ten
-cites the other side. Only \NBothValidated{} of \NDefenses{} defenses answer
+of which \NAnalysed{} name an attack or a defense.
+\PctSecCitesSafety{}\% of security-regime papers cite a safety-regime one. Only \NBothValidated{} of \NDefenses{} defenses answer
 to both regimes. And \PctSameRegime{}\% of
 tested (defense, attack) pairs stay inside a single regime. One direction of the
 cross-testing matrix holds \NSecDefVsSafetyAttack{} pair in \NPureRegimePairs{}: a
@@ -22,13 +22,14 @@ The 10\% dose gives a defense its best chance, because nine tenths of the
 honest document survives. Not one of \NLowDosePairs{} (defense, payload) pairs shows a
 resolvable benefit there.
 
-\textbf{The finding is a mechanism, not a verdict.} Context-reliance defenses do not fail because someone built them badly. They fail because of what they
+The finding is a mechanism, not a verdict. Context-reliance defenses do not
+fail because someone built them badly. They fail because of what they
 arbitrate. Each one decides between trusting the context and trusting memory,
 and that dial moves correctness around without creating any. Suppress memory
 and the attacker receives what memory held. Suppress the attacker and memory
 receives it back.
 
-We showed this directly. A payload that plants a third answer separates copying from remembering, so
+A payload that plants a third answer separates copying from remembering, so
 we can add the two movements together. In the three defenses that suppress
 memory they cancel to within 8 points. Neither direction moves anything
 toward the real document, because the dial has no setting for it. The attack
@@ -48,7 +49,8 @@ attacker who reads its rule and optimizes against the quantity it measures.
 
 \paragraph{Future work.}
 
-Extend the adaptive case to the rest of the family. We tested the one defense that resisted,
+\textbf{Extend the adaptive case to the rest of the family.} We tested the
+one defense that resisted,
 with two optimizers. A best-of-five search over sentence forms took
 \PctAcdRemovedBestOf{}\% of
 its protection. A gradient search over token ids took
@@ -71,7 +73,7 @@ also the ones whose harnesses model a text-classification victim, and the
 execution defenses we could not evaluate are the agent-shaped ones. Running all three intervention points
 inside one agent harness would resolve it.
 
-Make the empty cell the default, not the exception. The deepest
+\textbf{Make the empty cell the default, not the exception.} The deepest
 problem this paper documents is not any single defense. It is that who runs an experiment predicts its
 outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair defenses with attacks that a
 taxonomy selects, not attacks that either author selects. Transfer then
