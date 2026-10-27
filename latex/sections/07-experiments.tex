@@ -18,10 +18,10 @@ corpus may report having run them together. A defense that repairs quiet answer 
 ought to apply to an attack that arrives the same way and does the same
 damage. The taxonomy says so. Nobody had checked.
 
-\textbf{We are not proposing new defenses.} Every method we run is published,
+We are not proposing new defenses. Every method we run is published,
 and every attack we run is published. The contribution is the pairing.
 
-\textbf{The campaign is deliberately cross-community.}
+The campaign is deliberately cross-community.
 \NOursCrossPairs{} of our \NOursPairs{} retrieval-cell pairs put a safety method against a security attack, which is \PctOursCross{}\% against
 the literature's \PctCrossCommunity{}\%. \NRagImplSafety{} of our \NRagImpl{} retrieval defense
 implementations are knowledge-conflict methods from the safety literature,
@@ -30,8 +30,8 @@ BadRAG~\cite{xue-2024-badrag}. That is the empty column
 of Figure~\ref{fig:transferlit}, populated.
 
 Of the \NRagPairsKeyed{} pairs we ran in the retrieval cell, counted at
-registry-name level, \textbf{\NRagPairsNovel{} are absent from the
-\NPairsComposite{} pairs the literature reports}. The two that are not novel
+registry-name level, \NRagPairsNovel{} are absent from the
+\NPairsComposite{} pairs the literature reports. The two that are not novel
 are COIECD against knowledge conflict and RobustRAG~\cite{xiang-2024-certifiably} against PoisonedRAG, which
 those papers tested themselves and which we re-ran as controls.
 
@@ -90,8 +90,8 @@ resolvable effect", never as "no effect". This matters because several
 published claims in this area rest on differences that a run of their size
 cannot resolve.
 
-Attacks are not adapted to the defenses they meet, with one
-exception reported in Section~\ref{sec:results2}. Carlini's critique of the
+\textbf{Attacks are not adapted to the defenses they meet.} The one
+exception is reported in Section~\ref{sec:results2}. Carlini's critique of the
 DeepSec platform~\cite{carlini-2019-critique} identifies this as the error that
 invalidated DeepSec's defense rankings, so we state the consequence precisely
 rather than leaving it implicit. An attack that is not built for a defense and
@@ -146,9 +146,9 @@ The agent cell pairs ingestion-stage and execution-stage defense
 techniques against prompt-injection attacks inside the AgentDojo banking
 suite~\cite{debenedetti-2024-agentdojo}, with a Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
 
-In total we executed \textbf{\NCampaignPairs{} distinct (defense, attack)
-pairs across \NCampaignImpl{} defense implementations, over
-\NCampaignEpisodes{} scored episodes}: \NRagPairs{} pairs and \NRagEpisodes{}
+In total we executed \NCampaignPairs{} distinct (defense, attack) pairs
+across \NCampaignImpl{} defense implementations, over \NCampaignEpisodes{}
+scored episodes: \NRagPairs{} pairs and \NRagEpisodes{}
 episodes in the retrieval cell, \NAgentPairs{} pairs and \NAgentEpisodes{}
 episodes in the agent cell.
 The two episode counts are not comparable units. An agent episode is a complete
@@ -157,7 +157,7 @@ multi-step tool-use trajectory. A retrieval episode is one scored answer.
 \subsection{Datasets}
 \label{sec:provenance}
 
-\textbf{We built no benchmark.} Every question, gold answer and context in
+We built no benchmark. Every question, gold answer and context in
 this paper belongs to the authors of the method or the benchmark we are
 running. Table~\ref{tab:provenance} lists each source and whose it is. This is deliberate rather than convenient. A defense
 evaluated on the distribution it was designed for cannot blame its failure on
