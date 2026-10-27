@@ -228,17 +228,25 @@ drawing out. False evidence is the
 benchmark the ParamMute authors released themselves. One of the defenses we
 break is broken with a field from its own dataset.
 
-\paragraph{Two dosing protocols, and why both exist.}
-CoConflictQA gives one context passage per item, so there is no ranked list to
-dose. On it we cut the context into fixed-length chunks and replace a
-fraction: 10\%, 50\% and 100\%, with a clean arm at 0\%. Open Natural
-Questions ships a retrieval pool, so there we dose the way the attack papers
-dose, replacing $j$ of the top ten retrieved passages for $j$ in $\{0, 1, 2,
-3, 5, 10\}$. The second is the attacks' own construction and the first is
-ours. That distinction matters, because a protocol we invented is a place
-where our own choices can decide a result, so each number below reports which
-protocol produced it. Section~\ref{sec:regime} runs entirely under the
-attacks' own dosing.
+\paragraph{Two dosing protocols.}
+The \textbf{dose} is how much of the context the planted passage occupies.
+It is the axis every result in this paper is read along, because a defense
+that holds against one poisoned passage and fails against five has not failed
+in the same way as one that never helped.
 
-Every result file carries a fingerprint of the payload it was produced with,
-so a run cannot be read under the wrong attack label.
+The two item sets are shaped differently, so the dose is measured differently
+on each. CoConflictQA gives one context passage per item, and a single
+passage has no ranked list to dose. On it we cut the context into
+fixed-length chunks and replace a fraction of them: 10\%, 50\% and 100\%,
+with a clean arm at 0\%. Open Natural Questions ships a retrieval pool, so
+there we dose the way the attack papers dose, replacing $j$ of the top ten
+retrieved passages for $j$ in $\{0, 1, 2, 3, 5, 10\}$.
+
+The second protocol is the attacks' own construction. The first is ours, and
+that is the one to watch, because a protocol we invented is a place where our
+own choices can decide a result. Every number below therefore reports which
+protocol produced it, and Section~\ref{sec:regime}, where the payload itself
+is the subject, runs entirely under the attacks' own dosing.
+
+Every result file also carries a fingerprint of the payload it was produced
+with, so a run cannot be read under the wrong attack label.
