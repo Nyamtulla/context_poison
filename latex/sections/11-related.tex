@@ -31,15 +31,15 @@ judged effective lose robustness on more diverse attacks. A concurrent
 evaluation of injection defenses~\cite{pidefense-eval-2026} finds that every
 defense which relies on the model to protect itself breaks under an adaptive
 attacker. That is the same direction as our Section~\ref{sec:adaptive} result,
-reached on a disjoint set of methods. All three are security-side, which is
-what our corpus measures as the problem rather than a criticism of them.
+reached on a disjoint set of methods. All three stay on the security side. That is the gap this paper measures,
+not a fault of theirs.
 
 Our contribution is not a better enumeration of either side. It is that we
 apply one search protocol, one screening pass and one taxonomy to both. That
-is what makes the distance between them measurable. A systematization drawn
-from one literature cannot report that 9 papers in 10 do not cite the other.
-Nor can it report that \PctSameRegime{}\% of tested pairs stay inside one
-regime. The other is not in its corpus.
+is what makes the distance between them measurable. A systematization drawn from one literature cannot report that
+\PctSecCitesSafety{}\% of security-regime papers cite a safety-regime one,
+or that \PctSameRegime{}\% of tested pairs stay inside one regime. The other
+literature is not in its corpus.
 
 \subsection{Attack--defense evaluation platforms}
 
@@ -72,9 +72,9 @@ report what failed and why. Our roadblock accounting in
 Section~\ref{sec:discussion} is in that genre. Several published defenses do
 not run from their released artifacts, which agrees with what they found.
 
-The second difference is that we execute. Existing systematizations in this
-space report what papers claim their methods achieve. Section~\ref{sec:whoran}
-is our reason for not doing that. In this field, the side of the community
-that wrote the paper almost determines the reported outcome of a (defense,
-attack) pair. A systematization that aggregates those reports inherits that
+The difference from both precedents is that we execute. Existing
+systematizations in this space report what papers claim their methods
+achieve. Section~\ref{sec:whoran} shows why we do not. The side of the
+community that wrote the paper almost determines the reported outcome of a
+(defense, attack) pair. A systematization that aggregates those reports inherits that
 bias. Running the artifacts is the only way we found to avoid it.
