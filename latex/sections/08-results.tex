@@ -29,9 +29,9 @@ box we did not run either is marked.}
 
 \subsection{A shared design rule}
 
-Stated first, then supported: \textbf{a defense that works by shifting trust
-from the model's parameters toward the retrieved text is correct when the text
-is merely stale and dangerous when an attacker owns it.}
+A defense that works by shifting trust from the model's parameters toward
+the retrieved text is correct when the text is merely stale, and dangerous
+when an attacker owns it. The rest of this subsection supports that.
 
 The family is defined by what it does: a method whose
 intervention is a weighting between the context-conditioned and the
@@ -127,11 +127,11 @@ survive a change of payload.}
 
 \subsection{The scope condition}
 
-The rule is not that suppressing parametric memory is always harmful. We can
-state when it is.
+The rule above is not that suppressing parametric memory is always harmful.
+We can state when it is.
 
-\textbf{Suppressing the model's prior knowledge hurts only where that prior
-knowledge held the right answer.} Against BadRAG's denial-of-service variant,
+Suppressing the model's prior knowledge hurts only where that prior
+knowledge held the right answer. Against BadRAG's denial-of-service variant,
 which makes the model refuse rather than answer wrongly, ParamMute is strongly
 protective. With one poisoned passage in ten the undefended model refuses
 52.4\% of the time and holds 27.0\% accuracy. ParamMute drops refusal to 0.2\%
@@ -142,8 +142,8 @@ model averages 25.8\% accuracy and ParamMute averages 57.6\%.
 The mechanism is the same in both cases. ParamMute suppresses the model's
 memory. When memory held the correct answer, that suppression destroys it. When
 the attack works by driving the model into refusal, suppressing memory removes
-the conflict that triggered the refusal. \textbf{One mechanism, two signs,
-selected by whether the memory was right.} The prediction committed before
+the conflict that triggered the refusal. One mechanism, two signs,
+selected by whether the memory was right. The prediction committed before
 this run was that suppressing memory would do little here; the result is why
 the paper states a scope condition rather than a blanket one.
 
@@ -184,7 +184,7 @@ more accuracy at saturation than the crafted passage does, \AccStaleSat{}
 against \AccCraftSat{}. The attacker optimizes for his own answer, not for
 damage.
 
-\textbf{Against displacement the adversary buys nothing at all.} Zhong et
+Against displacement the adversary buys nothing at all. Zhong et
 al.'s optimized artifact and a passage retrieved for someone else's question
 land on the same numbers: \PctCorpusSat{}\% and \PctMisretrievalSat{}\%
 adoption, \AccCorpusSat{} and \AccMisretrievalSat{} accuracy, every gap inside
@@ -207,15 +207,16 @@ it, and the model would do better not reading at all.
 
 \subsection{Payload class, not attack label}
 
-ACD produced the strongest defensive result in our
+The two subsections above hold the payload fixed and vary the defense. The
+three below hold the defense fixed and vary the payload, starting with the one
+method that resisted. ACD produced the strongest defensive result in our
 campaign. It discounts tokens the context makes uncertain, and against corpus
 poisoning it is the only method that both reads a clean document and declines a
 poisoned one. At saturation it is +9.2\pp above the undefended arm
 ($p < 0.0001$) and on clean context it is +53.5\pp above answering
 with no document at all.
 
-\textbf{That result is not a robustness claim, and we state the limit before
-the result rather than after it.} The corpus-poisoning passage is Zhong et
+That result is not a robustness claim. The corpus-poisoning passage is Zhong et
 al.'s released artefact, optimized against a \emph{retriever} and against no
 defense of ours. It is therefore oblivious to ACD, in the sense
 Carlini~\cite{carlini-2019-critique} uses when criticizing the DeepSec
@@ -229,12 +230,10 @@ non-adaptive optimized passage.} An attacker who knew ACD's entropy rule and
 optimized against it is untested here. We expect such an attacker to do
 better, because the rule is public and differentiable.
 
-The same caveat does not weaken the failure results in this section. An attack
-that is not adapted to a defense and defeats it anyway is a \textbf{lower
-bound} on attack strength: if the cheapest payload wins, an adapted one also
-wins. Non-adaptive evaluation is invalid for claiming robustness and
-conservative for claiming failure, and every other result we report is of the
-second kind.
+The caveat applies to this result alone. By the fourth rule of
+Section~\ref{sec:experiments}, a non-adaptive attack that defeats a defense
+is a lower bound on attack strength, so every other result in this section is
+unaffected.
 
 We then ran the same defense, same items, same doses, against false evidence.
 
@@ -255,12 +254,11 @@ vs.\ no retrieval & +0.5 ($p{=}0.91$) & \textbf{-4.0} ($p{=}0.0499$) \\
 \end{tabular}
 \end{table}
 
-\textbf{The protection collapses.} Against the incoherent payload, ACD restores
+The protection collapses. Against the incoherent payload, ACD restores
 the no-retrieval floor exactly. Against the fluent payload it ends up
 resolvably \emph{below} that floor: the defended model does worse than a model
 given no document at all.
 
-This is also the narrow claim above being tested rather than merely hedged.
 Swapping the payload is the cheapest available step toward a worst-case
 evaluation, and one step was enough to remove the protection entirely. A
 defense whose guarantee does not survive a change of payload class would not be
@@ -271,8 +269,8 @@ induces. An optimized token string is incoherent and raises uncertainty, so ACD
 discounts it. A fluent sentence asserting a plausible wrong answer lowers
 uncertainty, so ACD trusts it more.
 
-This has a practical consequence. \textbf{The cheaper and more natural-looking
-attack is the stronger one.} For COIECD's undefended arm, false evidence cuts
+This has a practical consequence. The cheaper and more natural-looking
+attack is the stronger one. For COIECD's undefended arm, false evidence cuts
 accuracy roughly twice as far as gradient-optimized corpus poisoning at every
 dose, falling to 15.2\% at 10\% dose against 26.5\% for corpus poisoning. The
 field's attention to optimized adversarial passages is not matched by their
@@ -308,8 +306,8 @@ COIECD    &  400 & +1.0           & -1.2 \\
 \end{tabular}
 \end{table}
 
-\textbf{ParamMute is harmful against both, and the way it fails is the
-finding.} On this run's honest context it is worth +9.7\pp, against the
+ParamMute is harmful against both, and the way it fails is the
+finding. On this run's honest context it is worth +9.7\pp, against the
 +9.3\pp of the corpus-poisoning run beside it. It costs 12 to 13 points more
 than doing nothing once an adversary writes the context, and it does not matter
 whether the adversary writes gibberish or prose. What does change is how well
@@ -318,8 +316,8 @@ falls from -42.5\pp under corpus poisoning to -8.8\pp under
 false evidence. The reason is structural. Under corpus poisoning the wrong
 answer has one source, the model's memory, so inhibiting memory removes it.
 Under false evidence it has two, memory and the planted passage, and ParamMute
-touches only one of them. \textbf{The attack duplicated the answer into the
-channel the defense does not operate on.}
+touches only one of them. The attack duplicated the answer into the
+channel the defense does not operate on.
 
 CK-PLUG is harmful against one payload and flat against the other, and
 the shape matters more than the sign. Under corpus poisoning its cost grows
@@ -329,7 +327,7 @@ dose including the clean one, and no cell clears the 7.0\pp threshold. CK-PLUG
 pays a fixed price for being switched on; corpus poisoning amplifies that price
 and false evidence does not.
 
-\textbf{COIECD is inert against both.} Eight comparisons, largest 1.8\pp
+COIECD is inert against both. Eight comparisons, largest 1.8\pp
 against a 9.9\pp threshold, no $p$ below 0.20. Its memorization-rate
 suppression does shrink roughly threefold under false evidence. An entropy
 constraint should do exactly that when the planted passage agrees with the
@@ -344,28 +342,25 @@ evidence than against corpus poisoning, then ``these defenses fail because
 they trust the context'' would not be the mechanism. CK-PLUG does, at
 +0.4\pp against +5.4\pp.
 
-We do not think that reading survives inspection, and we say so rather than
-quietly dropping the test. The two payloads are not equally strong on the
+That reading does not survive inspection. The two payloads are not equally strong on the
 undefended arm. False evidence is roughly twice as damaging at every dose: for
 CK-PLUG's undefended arm, 23.0\% against 39.2\% at 10\% dose, and for COIECD's,
 15.2\% against 26.5\%. Excess damage is a difference of two collapses, and when
 the undefended arm has already collapsed there is less room left for a defense
 to make things worse.
 
-\textbf{Excess-damage comparisons across payload classes are therefore
-confounded by attack strength and should not be read as a ranking.} Within a
+Excess-damage comparisons across payload classes are therefore
+confounded by attack strength and should not be read as a ranking. Within a
 payload, against the control measured beside it in the same run, every
-comparison in this section stands. We state the limit because the alternative
-is to report a falsifier as passed when the instrument cannot support it.
+comparison in this section stands.
 
 \subsection{Copying versus remembering}
 \label{sec:distractor}
 
 This subsection answers RQ3. Under false evidence the planted passage asserts the same string the model
 would have recalled, so the parametric-answer rate cannot distinguish a model
-that remembered from one that copied. They produce identical output. That is
-the attack's design rather than a flaw in the metric, and it leaves the central
-claim of this section resting on an ambiguous measurement.
+that remembered from one that copied. They produce identical output. That is the attack's design rather than a flaw in the metric, but it leaves
+the central claim of this section resting on an ambiguous measurement.
 
 Planting the \emph{gold} answer does not fix it, because gold is already in the
 real context, so an output of gold stays two-ways ambiguous. A third answer
@@ -384,8 +379,8 @@ undefended and 0.6\% defended, so the answer essentially never appears unless
 it is planted. In the run that carries one, a no-retrieval arm holds at 1.0\%:
 a model with no document never emits it.
 
-\textbf{ParamMute succeeds at its stated job and hands the freed probability
-mass to the attacker.} At saturation it suppresses parametric recall from
+ParamMute succeeds at its stated job and hands the freed probability
+mass to the attacker. At saturation it suppresses parametric recall from
 39.0\% to 2.9\%, a 36.1\pp{} reduction, resolvable at every dose. Accuracy
 against the gold answer does not rise with it; it moves 5.4\% to 1.5\%, under
 the 7.1\pp{} threshold. The copy rate rises 43.9\% to 81.4\%, a 37.5\pp{}
@@ -407,8 +402,7 @@ suppresses memory and the attacker fills the vacancy; ACD suppresses the
 attacker and memory fills it. Neither moves probability mass toward the real
 document, because neither mechanism can tell the real document from the planted
 one. Both only arbitrate between \emph{context} and \emph{parameters}, and the
-attack lives inside the context. That is a sharper statement of this
-section's thesis than the excess-damage numbers alone support. The problem is
+attack lives inside the context. The problem is
 not that context-reliance defenses trust context too much. It is that the axis
 they arbitrate on does not contain the distinction an attacker violates.
 
@@ -423,12 +417,12 @@ arm's 38.5\%. That is double the copying, on one tenth of the context. COIECD mo
 same direction at every dose and clears nothing, which is its behavior on both
 other payloads too.
 
-\textbf{The mass is conserved in one direction only.} The three outcomes are
+The mass is conserved in one direction only. The three outcomes are
 disjoint by construction, so the deltas can be summed, and the residual column
 reports what is left. For the three defenses that suppress memory, the memory
 lost and the copying gained cancel to within 8\pp{}. For CK-PLUG the residual
-is exactly its accuracy loss with the sign reversed. \textbf{These methods do
-not create or destroy correctness; they relocate it}, out of the model's
+is exactly its accuracy loss with the sign reversed. These methods do
+not create or destroy correctness; they relocate it, out of the model's
 parameters and into whatever owns the context.
 
 The defenses that push the other way do not balance. ACD, SCR and SpARE all
