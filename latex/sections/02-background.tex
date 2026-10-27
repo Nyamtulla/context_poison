@@ -25,10 +25,14 @@ That one failure has two names, because two communities arrived at it
 separately. Figure~\ref{fig:vocab} puts the two vocabularies side by side.
 The slots are the same: the same channel, the same position in the context
 window, the same downstream consequence. Only the names differ, and one
-assumption behind them. The security community assumes an adversary who
-re-optimizes against whatever method is in place. The safety community
-assumes a stale document or a retrieval error, and neither of those adapts.
-That difference is real, because a method tuned to the average case has no
+assumption behind them. We take that assumption from Lin et
+al.~\cite{lin-2025-safety-security}. \meth{Security} work assumes an
+adversary and asks whether a system resists ``intentional attacks \ldots\ in
+the presence of adversarial actors''. \meth{Safety} work assumes none and
+asks whether a system avoids ``unintended harmful outcomes \ldots\ despite
+uncertainties in inputs, goals, training data, or deployment conditions''.
+An adversary re-optimizes against whatever method is in place; a stale
+document does not. That difference is real, because a method tuned to the average case has no
 reason to hold at the worst case. It is also smaller than it looks, because
 the model reads tokens either way, and nothing in the text marks which hand
 wrote it. Section~\ref{sec:regime} tests the second half with payloads that
@@ -72,15 +76,13 @@ memory. And an action taken on corrupted context cannot be undone by fixing
 the context afterwards.
 
 \textbf{The adversary.} The adversary controls the content of at least one channel. They do not
-control the model weights, the decoding procedure, or the agent's code. This
-is the standing assumption of the security literature, and it covers the realistic
+control the model weights, the decoding procedure, or the agent's code. This covers the realistic
 deployment cases. An adversary can write a document that a retriever may
 fetch. They can publish a tool whose description the agent reads. They can
 post content that a browsing agent visits, or contribute a skill file that the
 agent loads.
 
-The adversary knows the defense and may adapt the payload to it. That is
-precisely why average-case evaluation does not transfer. The adversary does
+The adversary knows the defense and may adapt the payload to it. The adversary does
 not need to know the user's query: every attack we run is query-agnostic by
 construction.
 
@@ -93,14 +95,13 @@ to deliver its work. It holds the fewest named mechanisms of any
 consequence, \NMechAvailLoss{} against \NDefAvailLoss{} defenses, and we
 draw no strong conclusion from it.
 
-\textbf{Where there is no adversary.} The safety literature studies the same
-system without an attacker in it. Nothing below is a threat model, and we do
-not call it one. The content goes wrong because the pipeline behaves
-normally. A retrieved document is out of date. A passage is close to the
+\textbf{Where there is no adversary.} Without an attacker there is no threat
+model, and we do not call what follows one. The content goes wrong because
+the pipeline behaves normally. A retrieved document is out of date. A passage is close to the
 topic but does not answer the question. Important text sits in the middle of
 a long input. A retrieved fact disagrees with what the model learned in
-training. Nothing here adapts to a defense, so this literature evaluates on
-average-case benchmarks, which is the right choice for these causes.
+training. These causes do not adapt, so this literature evaluates on
+average-case benchmarks.
 
 \subsection{Terminology} \label{sec:terms}
 
@@ -108,14 +109,10 @@ This subsection defines the words the paper uses most often. Two of them
 say something about a paper: a \textbf{regime} is what the paper addresses,
 and a \textbf{venue} is where it appeared.
 
-A paper's \textbf{regime} is the condition it addresses, and every paper in
-our corpus takes one of two. We follow Lin et
-al.~\cite{lin-2025-safety-security}. \meth{Security} work assumes an
-adversary and asks whether a system resists ``intentional attacks
-\ldots\ in the presence of adversarial actors''. \meth{Safety} work
-assumes none and asks whether a system avoids ``unintended harmful outcomes
-\ldots\ despite uncertainties in inputs, goals, training data, or
-deployment conditions''. A \textbf{threat model} is narrower than a regime.
+A paper's \textbf{regime} is the condition it addresses, \meth{security} or
+\meth{safety} in the sense Section~\ref{sec:twovocab} gives them. Every
+paper in our corpus takes one of the two. A \textbf{threat model} is
+narrower than a regime.
 It names one adversary, and only the security regime has one.
 
 A paper's \textbf{venue} is the conference or journal that published it.
