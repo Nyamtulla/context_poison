@@ -104,35 +104,33 @@ average-case benchmarks, which is the right choice for these causes.
 
 \subsection{Terminology} \label{sec:terms}
 
-The subsection above describes two conditions: one with an adversary and
-one without. The paper needs a word for that distinction, and a second word
-that is easy to confuse with it.
+This subsection defines the words the paper uses most often. Two of them
+say something about a paper: a \textbf{regime} is what the paper addresses,
+and a \textbf{venue} is where it appeared.
 
-A \emph{regime} is the condition a piece of work addresses, and every paper
-in our corpus takes one of two. We follow Lin et
+A paper's \textbf{regime} is the condition it addresses, and every paper in
+our corpus takes one of two. We follow Lin et
 al.~\cite{lin-2025-safety-security}. \meth{Security} work assumes an
 adversary and asks whether a system resists ``intentional attacks
 \ldots\ in the presence of adversarial actors''. \meth{Safety} work
 assumes none and asks whether a system avoids ``unintended harmful outcomes
 \ldots\ despite uncertainties in inputs, goals, training data, or
-deployment conditions''.
+deployment conditions''. A \textbf{threat model} is narrower than a regime.
+It names one adversary, and only the security regime has one.
 
-A \emph{venue} is where a paper was published. It is not the same cut as
-the regime, which Section~\ref{sec:venue} measures: adversarial work
-appears at AI conferences as often as at security ones.
-
-The word \emph{security} names a value of both, so we write
-\emph{security venue} or \emph{AI venue} when we mean where a paper
-appeared, and plain \meth{security} or \meth{safety} when we mean what it
-addresses. A \emph{threat model}, the subject of the subsection above, is
-narrower than either: it names one adversary, and only the security regime
-has one.
+A paper's \textbf{venue} is the conference or journal that published it.
+Regime and venue are easy to mix up, because a security paper often appears
+at a security venue. They are not the same cut. Adversarial work appears at
+AI venues as often as at security ones, which Section~\ref{sec:venue}
+measures. The word \emph{security} names a regime and a kind of venue, so we
+write \emph{security venue} or \emph{AI venue} for where a paper appeared,
+and plain \meth{security} or \meth{safety} for what it addresses.
 
 \textbf{Context and memory.} A model answers from one of two sources. The
-first is the \emph{context}: the document, tool output or message placed in
+first is the \textbf{context}: the document, tool output or message placed in
 front of it. The second is what the model learned in training and holds in its
 weights. The safety literature calls that \emph{parametric memory}. We use the
-shorter \emph{memory} for it throughout, and every result table reports it as
+shorter \textbf{memory} for it throughout, and every result table reports it as
 \texttt{pm\_acc}. The distinction matters beyond bookkeeping, because a large
 family of published defenses intervenes on exactly it;
 Section~\ref{sec:whatweran} says which methods and
