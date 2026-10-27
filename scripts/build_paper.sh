@@ -27,6 +27,9 @@ fi
 
 pages=$(pdfinfo main.pdf | awk '/^Pages/{print $2}')
 over=$(grep -oE 'Overfull \\hbox \([0-9.]+pt' /tmp/paper_build.log | grep -oE '[0-9.]+' | awk '$1>15' | wc -l)
+# Underfull hboxes are loose lines a reader sees as rivers of white space.
+# vbox cases come from float placement and are left to LaTeX.
+under=$(grep -oE 'Underfull \\hbox \(badness [0-9]+' /tmp/paper_build.log | grep -oE '[0-9]+$' | awk '$1>3000' | sort -u | wc -l)
 undef=$(grep -cE "Citation .* undefined|Reference .* undefined|undefined (reference|citation)" /tmp/paper_build.log)
 # The log grep alone missed three dangling \ref that rendered as "??" on the
 # page, so check the rendered text too. That is the thing a reader sees.
@@ -36,6 +39,7 @@ echo "built  $OUT/main.pdf"
 echo "  pages              $pages"
 echo "  undefined cites/refs $undef   (must be 0)"
 echo "  overfull boxes >15pt $over"
+echo "  underfull lines      $under"
 # Match the rendered headings on their own line. Matching loosely found
 # "the full census" in a sentence on page 2 and reported the appendix there.
 for p in $(seq 1 "$pages"); do
