@@ -310,7 +310,7 @@ authors. It is evidence that attackers chose it as a target.
 
 How much of this gap is the field and how much is our instrument. It
 is tempting to read the complement of the matrix as ``never tested'', and that
-reading is wrong. A defense evaluated on AgentDojo~\cite{debenedetti-2024-agentdojo} without naming which
+reading is wrong. A defense evaluated on AgentDojo without naming which
 injection it faced was evaluated adversarially; it is simply not a named pair,
 because expanding a benchmark into its constituent attacks would manufacture
 coverage. So we classified every one of the \NDefEvalAudited{} defenses in the
@@ -470,7 +470,7 @@ The two sides name different halves of one causal chain. \NSharedCells{} of our
 side, and the security entries are overwhelmingly ways of getting bad text in, while
 the safety entries are reasons the model believes bad text once it is there. The
 \meth{RAG} $\times$ \meth{silent-corruption} cell is the clearest case:
-PoisonedRAG, BadRAG and their relatives on one side; over-trust in conflicting
+PoisonedRAG, BadRAG~\cite{xue-2024-badrag} and their relatives on one side; over-trust in conflicting
 external evidence, lost-in-the-middle, and knowledge-conflict circuits on the
 other. One side builds the attack. The other side has already
 explained why it works and is not cited for it.

@@ -87,7 +87,7 @@ fragile.
 
 Nor does it show reproducibility across environments, and we have a
 measured example of the difference. The defenses in the retrieval cell cannot
-share one Python environment: ACD~\cite{kim-2024-adaptive}'s released decoder imports symbols that
+share one Python environment: ACD's released decoder imports symbols that
 newer \texttt{transformers} releases removed, and its authors pin a version
 the rest of the cell cannot use. The \emph{clean} arm plants no payload, so its result is a
 control. Re-running an earlier ACD cell under a rebuilt stack moved that arm
@@ -172,6 +172,6 @@ as complete.
   ingestion-stage method in front of one reasoning-stage method. The design
   rule stays a prediction until this run gives a result.
 \item \textbf{Read two published benefits from their papers.}
-  ACD~\cite{kim-2024-adaptive} and DyPRAG~\cite{tan-2025-dynamic} give no
+  ACD and DyPRAG give no
   figure in their text. Their controls stay directional.
 \end{itemize}

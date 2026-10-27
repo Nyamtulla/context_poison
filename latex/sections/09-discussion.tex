@@ -81,7 +81,7 @@ Among the best-cited untested defenses in the cell we studied, two name
 empty repositories. Two more ship code without the trained weights it needs.
 One runs. Two further execution-stage defenses do not
 run reliably on any freely-available open-weight model. One more,
-FaithfulRAG~\cite{zhang-2025-faithfulrag}, needs structured-output support
+FaithfulRAG, needs structured-output support
 that open weights do not provide in its harness. The ablated variant that
 does run shows none of its own benefit, so we report it as not reportable
 rather than as defeated.
@@ -104,7 +104,7 @@ case is the deployed case.
 Consider a system that uses a knowledge-conflict method to improve answer
 quality and retrieves from such a corpus. The method operates outside the
 regime its authors validated, and our measurements say it is more likely to
-increase damage than to reduce it: ParamMute~\cite{huang-2025-parammute} is
+increase damage than to reduce it: ParamMute is
 worth \NDefCellClean{} on clean context and \NDefCellSat{} once the
 context is saturated, below the undefended model on the same items. The
 claim is about a design choice rather than a community. A method that
