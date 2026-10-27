@@ -993,6 +993,45 @@ def main():
     E["ECkSatDelta"] = _xd(CK, "ctx_acc", "ck", "base_rag", frac=1.0)
     E["EParamDistN"] = load(PMD)["n"]
 
+    # The residual column of the distractor table: memory delta plus copy
+    # delta, the mass that leaves the three-way partition. Same formula as
+    # scripts/gen_distractor_table.py, which draws the table itself.
+    def _resid(f, dfn, base):
+        return (_xd(f, "pm_acc", dfn, base, frac=1.0)
+                + _xd(f, "dist_acc", dfn, base, frac=1.0))
+
+    for nm, f, dfn, base in (
+            ("Acd", ACDD, "acd", "rag"),
+            ("Scr", "scr_vs_distractor_evidence.json", "scr", "rag"),
+            ("Spare", "spare_vs_distractor_evidence.json",
+             "steer_to_use_parameter", "steer_to_use_context"),
+            ("Param", PMD, "parammute", "base"),
+            ("Ck", CKD, "ck", "base_rag")):
+        E[f"E{nm}Resid"] = abs(_resid(f, dfn, base))
+    # the controls that license the three-way reading
+    E["EDistCleanBase"] = _x(PMD, "dist_acc", arm="base", frac=0.0)
+    E["EDistCleanDef"] = _x(PMD, "dist_acc", arm="parammute", frac=0.0)
+    E["EDistCleanNoRet"] = _x(ACDD, "dist_acc", arm="closedbook", frac=0.0)
+    # SCR slides from the document toward memory as the dose rises
+    for lbl, fr in (("Clean", 0.0), ("Low", 0.1), ("Mid", 0.5), ("Sat", 1.0)):
+        E[f"EScrPm{lbl}"] = _x(SCRF, "pm_acc", arm="scr", frac=fr)
+
+    # Section VI: controls, and the adaptive attack on ACD
+    DYP = "dyprag_vs_corpus_poisoning.json"
+    ADAPT, GRAD = "acd_vs_adaptive_evidence.json", "acd_vs_gradient_evidence.json"
+    for lbl, fr in (("Clean", 0.0), ("Low", 0.1), ("Mid", 0.5), ("Sat", 1.0)):
+        E[f"EDyprag{lbl}"] = _x(DYP, "ctx_acc", arm="dyprag", frac=fr)
+    E["EDypragRagClean"] = _x(DYP, "ctx_acc", arm="rag", frac=0.0)
+    E["EDypragRagSat"] = _x(DYP, "ctx_acc", arm="rag", frac=1.0)
+    E["EDypragNoRet"] = _x(DYP, "ctx_acc", arm="closedbook", frac=0.0)
+    E["ERobustMdr"] = load("badrag_dos_robustrag.json")["mdr_pp_at_n"]
+    E["EAcdAdaptCopy"] = _x(ADAPT, "dist_acc", arm="acd", frac=1.0)
+    E["EAcdGradCopy"] = _x(GRAD, "dist_acc", arm="acd", frac=1.0)
+    E["EAcdAdaptUndefCopy"] = _x(ADAPT, "dist_acc", arm="rag", frac=1.0)
+    E["EAcdGradUndefCopy"] = _x(GRAD, "dist_acc", arm="rag", frac=1.0)
+    E["EAcdAdaptAcc"] = _x(ADAPT, "ctx_acc", arm="acd", frac=1.0)
+    E["EAcdAdaptNoRet"] = _x(ADAPT, "ctx_acc", arm="closedbook", frac=1.0)
+
     # Python rounds halves to even, so 0.25 would print as 0.2 where the
     # paper has always printed 0.3. Round half up, as a reader expects.
     from decimal import Decimal, ROUND_HALF_UP

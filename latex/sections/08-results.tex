@@ -380,9 +380,10 @@ time, so one output has three disjoint readings. Gold means the model read the
 real context. The parametric answer means it recalled from memory. The
 distractor means it copied the planted passage.
 
-Two controls license the reading. At clean dose the distractor rate is 0.8\%
-undefended and 0.6\% defended, so the answer essentially never appears unless
-it is planted. In the run that carries one, a no-retrieval arm holds at 1.0\%:
+Two controls license the reading. At clean dose the distractor rate is
+\EDistCleanBase\% undefended and \EDistCleanDef\% defended, so the answer
+essentially never appears unless it is planted. In the run that carries one, a
+no-retrieval arm holds at \EDistCleanNoRet\%:
 a model with no document never emits it.
 
 ParamMute succeeds at its stated job and hands the freed probability
@@ -436,8 +437,8 @@ parameters and into whatever owns the context.
 
 The defenses that push the other way do not balance. ACD, SCR and SpARE all
 move mass from the attacker back toward memory, and all three lose a large
-share of it on the way: $16.8$, $16.5$ and $23.5$\pp{} leave the three-way
-partition altogether. In that fraction of cases the output is none of gold,
+share of it on the way: $\EAcdResid$, $\EScrResid$ and $\ESpareResid$\pp{}
+leave the three-way partition altogether. In that fraction of cases the output is none of gold,
 memory or the distractor.
 
 The direction of the dial predicts whether mass is conserved. Turn it
@@ -468,7 +469,7 @@ cost is resolvable at every dose below saturation and is roughly five times the
 benefit. A defense deployed permanently and attacked occasionally is a poor
 trade at that exchange rate.
 
-SCR's parametric-answer rate climbs 22.8, 33.8, 35.8, 52.5 across the dose
-range, converging on the closed-book rate of \EScrNoRetPm{}. Both SCR and ACD slide from
+SCR's parametric-answer rate climbs \EScrPmClean{}, \EScrPmLow{},
+\EScrPmMid{}, \EScrPmSat{} across the dose range, converging on the closed-book rate of \EScrNoRetPm{}. Both SCR and ACD slide from
 the document toward memory as the attack grows. SCR simply destroys more
 correct answers on the way.

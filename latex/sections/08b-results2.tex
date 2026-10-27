@@ -28,10 +28,12 @@ Each of the following reverses if the arm beside it is dropped, and in each
 case that arm is one the relevant literature does not report.
 
 \textbf{A no-retrieval baseline.} DyPRAG is perfectly
-flat under an attack that destroys the undefended arm, scoring 5.8\%, 6.0\%, 5.2\%
-and 6.0\% across the dose range while the undefended arm falls from 63.8\% to
-2.5\%. Read alone, that is the strongest defense result in the campaign. The
-closed-book arm scores 7.5\% and is statistically indistinguishable from it.
+flat under an attack that destroys the undefended arm, scoring
+\EDypragClean\%, \EDypragLow\%, \EDypragMid\% and \EDypragSat\% across
+the dose range while the undefended arm falls from \EDypragRagClean\% to
+\EDypragRagSat\%. Read alone, that is the strongest defense result in the
+campaign. The closed-book arm scores \EDypragNoRet\% and is statistically
+indistinguishable from it.
 DyPRAG is flat because it is not reading the document, not because it
 is resisting the attack. Only a no-retrieval arm separates immunity from
 inattention, and no paper in this family reports one.
@@ -77,7 +79,7 @@ The caution runs the other way too. Across fifteen dose levels the two
 implementations agree within noise on thirteen. On one they do not. At nine
 poisoned passages in ten, against refusal induction, KeywordAgg is
 \NKeywordNineMistral{}\pp{} and DecodingAgg is
-\NDecodingNineMistral{}\pp{}, with both ends clearing the 11.4\pp
+\NDecodingNineMistral{}\pp{}, with both ends clearing the \ERobustMdr\pp
 threshold at $n=300$. One implementation of isolate-then-aggregate is
 resolvably protective and the other is resolvably harmful, on the same
 attack, at the same dose, inside one codebase --- on this model. The control
@@ -216,11 +218,11 @@ ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \end{table}
 
 All six predictions held, and Table~\ref{tab:adaptive} carries
-them. $H_{\mathrm{ctx}}$ falls 42\%, $d_\alpha$ rises
-toward 1, ACD's copy rate rises from 40.8\% to 64.0\%
-($p = 9.5\times10^{-18}$), its parametric recall falls toward the undefended
-arm's, and its accuracy lands on 3.2\% --- exactly the undefended
-arm, and below the no-retrieval floor of 8.2\%. ACD does not fall below the
+them. $H_{\mathrm{ctx}}$ falls 42\%, $d_\alpha$ rises toward 1, ACD's copy rate rises from \EAcdDistCopyDef\% to
+\EAcdAdaptCopy\% ($p = 9.5\times10^{-18}$), its parametric recall falls
+toward the undefended arm's, and its accuracy lands on \EAcdAdaptAcc\% ---
+exactly the undefended arm, and below the no-retrieval floor of
+\EAcdAdaptNoRet\%. ACD does not fall below the
 undefended arm on copy rate, as the ceiling requires.
 
 The honest size of the effect is the gap, not ACD's rise. The adaptive
@@ -249,7 +251,8 @@ sample size.
 
 The gradient payload is weaker in general and stronger against the
 defense. It damages the undefended arm \emph{less} than best-of-five
-does, 87.8\% against 89.1\%, while taking considerably more from ACD. The gap
+does, \EAcdGradUndefCopy\% against \EAcdAdaptUndefCopy\%, while taking
+considerably more from ACD. The gap
 is what isolates the defense, and the gap is what moved. The search therefore attacks the method rather than simply producing a
 better payload.
 
