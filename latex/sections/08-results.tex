@@ -61,7 +61,7 @@ newer, so trust the document. The idea becomes a liability the moment the
 document is written by an adversary, because the defense instructs the model to
 trust the one thing the adversary controls.
 
-\begin{table*}[t]
+\begin{table}[t]
 \centering
 \caption{Context-reliance defenses against corpus poisoning, in percentage
 points against each defense's own undefended arm in the same run, with the
@@ -70,27 +70,27 @@ published benefit. "Saturation" is 100\% poisoned context. Bold clears that
 run's minimum detectable change. Rates are rounded for display and deltas are
 computed before rounding.}
 \label{tab:family}
-\small
-\begin{tabular}{@{}lrrrr@{}}
+\footnotesize
+\begin{tabular}{@{}l@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
 \toprule
 \textbf{Defense} & \textbf{$n$} & \textbf{mdr} & \textbf{Clean} &
 \textbf{Saturation} \\
 \midrule
-ParamMute & 1409 & 5.3 & \textbf{+9.3} \footnotesize{$(48.4\!\to\!57.7)$} &
-  \textbf{-4.2} \footnotesize{$(5.3\!\to\!1.1)$} \\
+ParamMute & 1409 & 5.3 & \textbf{+9.3} \scriptsize{$(48.4\!\to\!57.7)$} &
+  \textbf{-4.2} \scriptsize{$(5.3\!\to\!1.1)$} \\
 CK-PLUG   &  800 & 7.0 &
-  \textbf{-10.1}$^{\dagger}$ \footnotesize{$(25.1\!\to\!15.0)$} &
-  \textbf{-9.9} \footnotesize{$(10.1\!\to\!0.3)$} \\
-SpARE     &  500 & 8.9 & \textbf{+14.2} \footnotesize{$(39.6\!\to\!53.8)$} &
-  \textbf{-10.2} \footnotesize{$(12.0\!\to\!1.8)$} \\
-COIECD    &  400 & 9.9 & -0.8 \footnotesize{$(44.0\!\to\!43.3)$} &
-  -1.8 \footnotesize{$(3.8\!\to\!2.0)$} \\
+  \textbf{-10.1}$^{\dagger}$ \scriptsize{$(25.1\!\to\!15.0)$} &
+  \textbf{-9.9} \scriptsize{$(10.1\!\to\!0.3)$} \\
+SpARE     &  500 & 8.9 & \textbf{+14.2} \scriptsize{$(39.6\!\to\!53.8)$} &
+  \textbf{-10.2} \scriptsize{$(12.0\!\to\!1.8)$} \\
+COIECD    &  400 & 9.9 & -0.8 \scriptsize{$(44.0\!\to\!43.3)$} &
+  -1.8 \scriptsize{$(3.8\!\to\!2.0)$} \\
 \bottomrule
 \end{tabular}
 \\[2pt]
 {\footnotesize $^{\dagger}$CK-PLUG's control fires on memorization rate rather
 than accuracy, so its clean cell reports that metric.}
-\end{table*}
+\end{table}
 
 SpARE is the cleanest case because its control and its conviction are the same
 measurement. Steering toward the context is worth +14.2\pp when the
@@ -111,9 +111,9 @@ full dose. The defense does not fail to stop the attack. It carries it.
 Figure~\ref{fig:dose} plots every retrieval-cell defense against dose on
 one axis, each measured against its own undefended arm.
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/fig4_dose_response}
+\includegraphics[width=\columnwidth]{figures/fig4_dose_response}
 \caption{Every retrieval-cell defense against corpus poisoning, measured as the
 defended arm minus its own undefended arm in the same run. Zero means the
 defense changed nothing. Filled markers are resolvable at $p < .05$ by Fisher's
@@ -123,7 +123,7 @@ below zero almost everywhere, costing accuracy before the attack arrives. ACD
 is the only line that rises, and Table~\ref{tab:acd} shows that rise does not
 survive a change of payload.}
 \label{fig:dose}
-\end{figure*}
+\end{figure}
 
 \subsection{The scope condition}
 
@@ -242,8 +242,8 @@ We then ran the same defense, same items, same doses, against false evidence.
 \caption{ACD against two payload classes, $n=400$, mdr 9.9\pp. The defense is
 unchanged. Only the form of the planted passage differs.}
 \label{tab:acd}
-\small
-\begin{tabular}{@{}lrr@{}}
+\footnotesize
+\begin{tabular}{@{}l@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
 \toprule
 \textbf{Comparison at saturation} & \textbf{Corpus poisoning} &
 \textbf{False evidence} \\

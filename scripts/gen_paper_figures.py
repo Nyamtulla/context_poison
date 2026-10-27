@@ -401,7 +401,9 @@ def fig_dose():
     # already relies on. Six separable hues are not available once red and
     # blue are reserved for track.
     DOSE_BLUES = [SEQ[2], SEQ[3], SEQ[4], SEQ[5], SEQ[7], SEQ[9]]
-    fig, ax = plt.subplots(figsize=(COL * 1.55, 2.5), constrained_layout=True)
+    # Drawn at column width: the paper places this one in a single column, so
+    # drawing it wider and letting LaTeX scale it down shrinks every label.
+    fig, ax = plt.subplots(figsize=(COL, 2.6), constrained_layout=True)
     ax.axhline(0, color=INK2, linewidth=0.8, zorder=2)
     for i, (name, fn, u, d, mdr) in enumerate(RUNS):
         path = R / fn
@@ -429,12 +431,9 @@ def fig_dose():
     ax.set_xlabel("share of context replaced by the attack")
     ax.set_ylabel("defended minus undefended (pp)")
     ax.set_xlim(-0.12, len(fracs) - 0.88)
-    ax.legend(frameon=False, fontsize=6, loc="center left",
-              bbox_to_anchor=(1.01, 0.5), handlelength=1.6)
-    ax.text(len(fracs) - 1.02, 1.2, "defense helps", fontsize=6, color=INK2,
-            va="bottom", ha="right")
-    ax.text(len(fracs) - 1.02, -1.2, "defense hurts", fontsize=6, color=INK2,
-            va="top", ha="right")
+    ax.legend(frameon=False, fontsize=5.8, loc="upper center",
+              bbox_to_anchor=(0.5, -0.22), ncol=3, handlelength=1.4,
+              columnspacing=1.0, handletextpad=0.4)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
     ax.tick_params(length=0)
