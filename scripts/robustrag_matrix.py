@@ -161,6 +161,12 @@ def main():
     ap.add_argument("--poison_counts", type=int, nargs="+",
                     default=[0, 1, 5, 9, 10])
     ap.add_argument("--out", type=str, default=None)
+    ap.add_argument("--closedbook_only", action="store_true",
+                    help="measure only the no-retrieval arm and merge it into "
+                         "an existing registry, for cells that were finished "
+                         "before that arm was required. The merged rows carry "
+                         "`measured: backfill`: they come from a later "
+                         "session than the dose arms beside them.")
     ap.add_argument("--dump_predictions", type=str, default=None,
                     help="write per-item predictions here, for the offline "
                          "composition in scripts/compose_offline.py")
@@ -175,6 +181,22 @@ def main():
     data = json.loads(src.read_text())[: args.n]
     suffix = "" if args.method == "keyword" else f"_{args.method}"
     out_path = args.out or f"data/registries/{args.attack}_robustrag{suffix}.json"
+
+    prev = None
+    if args.closedbook_only:
+        prev_file = REPO / out_path
+        if not prev_file.exists():
+            sys.exit(f"{out_path}: nothing to merge into")
+        prev = json.loads(prev_file.read_text())
+        rows = prev.get("results") or []
+        if any(r.get("arm") == "closedbook" for r in rows):
+            print(f"{out_path}: already carries a closedbook arm")
+            return
+        for k, v in (("attack", args.attack), ("model", args.model),
+                     ("top_k", args.top_k), ("n", len(data))):
+            if prev.get(k) != v:
+                sys.exit(f"{out_path}: {k} is {prev.get(k)!r}, not {v!r}; "
+                         "this registry is a different experiment")
 
     # `llama8b` in their registry points at the gated meta-llama repo. The
     # other half of this matrix (ParamMute, CK-PLUG) runs the NousResearch
@@ -193,6 +215,20 @@ def main():
         llm = create_model(args.model)
     defense = (KeywordAgg(llm) if args.method == "keyword"
                else DecodingAgg(llm, args))
+
+    if args.closedbook_only:
+        rcb = run_condition(defense, data, args.top_k, 0, args.attack,
+                            "closedbook", dump=None)
+        for npz in sorted({r["n_poison"] for r in prev["results"]}):
+            prev["results"].append(dict(rcb, arm="closedbook", n_poison=npz,
+                                        measured="backfill"))
+        prev["backfill"] = {"date": "2026-10-26", "arms": ["closedbook"],
+                            "note": "measured after the dose arms, in a later "
+                                    "session; see the environment threat in "
+                                    "the paper"}
+        prev_file.write_text(json.dumps(prev, indent=1))
+        print(f"  closedbook   acc {rcb['acc']:5.1f}%   merged into {out_path}")
+        return
 
     results = []
     preds = [] if args.dump_predictions else None

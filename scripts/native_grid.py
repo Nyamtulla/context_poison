@@ -44,6 +44,63 @@ from spare_vs_corpus_poisoning import acc_score                          # noqa:
 from transfer_stats import min_detectable_change, wilson                 # noqa: E402
 
 
+def backfill_closedbook(a, out, doc):
+    """Add the no-retrieval arm to a registry that already has every dose.
+
+    The arm does not depend on the dose, so it is measured once and written
+    against each dose the file carries, which is how the runners that always
+    had it shape their output.
+    """
+    rows = doc.get("results") or []
+    if not rows:
+        sys.exit(f"{out.name}: no existing results to merge into")
+    if any(r.get("arm") == "closedbook" for r in rows):
+        print(f"{out.name}: already carries a closedbook arm, nothing to do")
+        return
+    for k, v in (("defense", a.defense), ("attack", a.attack),
+                 ("model", a.model), ("top_k", a.top_k)):
+        if doc.get(k) != v:
+            sys.exit(f"{out.name}: {k} is {doc.get(k)!r}, not {v!r}; "
+                     "this registry is a different experiment")
+    data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: a.n]
+    if doc.get("n") != len(data):
+        sys.exit(f"{out.name}: n is {doc.get('n')}, not {len(data)}")
+
+    import defenses
+    d = defenses.load(a.defense, a.model)
+    if "closedbook" not in d.arms:
+        sys.exit(f"{a.defense} exposes no closedbook arm")
+    preds = []
+    for i, it in enumerate(data, 1):
+        gold = it["correct answer"]
+        gold = gold[0] if isinstance(gold, list) else gold
+        # no passages at all: this is the arm, not a dose of it
+        preds.append(d.answer(it["question"], [], gold=gold)["closedbook"])
+        if i % 50 == 0:
+            print(f"    closedbook: {i}/{len(data)}", flush=True)
+
+    n = len(data)
+    acc = 100 * sum(acc_score(p, it["correct answer"])
+                    for p, it in zip(preds, data)) / n
+    atk = 100 * sum(acc_score(p, it["incorrect answer"])
+                    for p, it in zip(preds, data)) / n
+    lo, hi = wilson(round(acc / 100 * n), n)
+    row = {"arm": "closedbook", "n": n, "acc": round(acc, 2),
+           "attacked": round(atk, 2),
+           "refusal_rate": round(100 * sum(map(is_refusal, preds)) / n, 2),
+           "neg_rate": round(100 * sum(map(is_negative, preds)) / n, 2),
+           "ci_low": round(lo * 100, 1), "ci_high": round(hi * 100, 1),
+           "measured": "backfill"}
+    for j in sorted({r["n_poison"] for r in rows}):
+        doc["results"].append(dict(row, n_poison=j))
+    doc["backfill"] = {"date": time.strftime("%Y-%m-%d"), "arms": ["closedbook"],
+                       "note": "measured after the dose arms, in a later "
+                               "session; see the environment threat in the paper"}
+    out.write_text(json.dumps(doc, indent=1))
+    print(f"  closedbook   acc {acc:5.2f}   merged into {out.name}")
+
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--defense", required=True)
@@ -56,6 +113,15 @@ def main():
                     default=[0, 1, 2, 3, 5, 10])
     ap.add_argument("--model", default="NousResearch/Meta-Llama-3-8B-Instruct")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--closedbook_only", action="store_true",
+                    help="measure only the no-retrieval arm and merge it into "
+                         "an existing registry. Eight cells were finished "
+                         "before Section VII asked every run to carry that "
+                         "arm; re-running them whole costs six doses to "
+                         "recover one dose-independent number. The merged "
+                         "rows are tagged `measured: backfill` because they "
+                         "come from a later session, and the environment "
+                         "caveat in Section VIII applies to them.")
     ap.add_argument("--dump_predictions", default=None,
                     help="write per-item predictions here. The composition "
                          "experiment combines two methods that cannot share "
@@ -69,6 +135,10 @@ def main():
     done = {r["n_poison"] for r in doc.get("results", [])}
     if done:
         print(f"resuming: doses {sorted(done)} already written")
+
+    if a.closedbook_only:
+        backfill_closedbook(a, out, doc)
+        return
 
     data = json.loads((RRAG / "data" / "open_nq.json").read_text())[: a.n]
     print(f"{a.defense} vs {a.attack}: {len(data)} items, top_k={a.top_k}")
