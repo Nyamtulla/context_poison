@@ -218,12 +218,9 @@ with no document at all.
 
 That result is not a robustness claim. The corpus-poisoning passage is Zhong et
 al.'s released artefact, optimized against a \emph{retriever} and against no
-defense of ours. It is therefore oblivious to ACD, in the sense
-Carlini~\cite{carlini-2019-critique} uses when criticizing the DeepSec
-platform. A defense evaluated only against attacks that were not built for it
-has been shown to resist those attacks and nothing more. Inferring robustness
-from that is invalid. It is the specific error that invalidated DeepSec's
-defense rankings.
+defense of ours. It is therefore oblivious to ACD. A defense evaluated only against attacks
+that were not built for it has been shown to resist those attacks and nothing
+more, so inferring robustness from this arm would be invalid.
 
 So we claim only what the arm supports: \emph{ACD resists this particular
 non-adaptive optimized passage.} An attacker who knew ACD's entropy rule and

@@ -122,8 +122,7 @@ Results so far are reported at saturation, where the planted passage replaces
 the entire context. That corner is where the attack is strongest. It is also
 where the measurement is weakest. With the real document entirely gone, no
 method can read it, so a low accuracy partly measures a complete attack rather
-than a failing defense. Carlini makes the equivalent objection to
-DeepSec's distortion budgets~\cite{carlini-2019-critique}, and it applies to us.
+than a failing defense.
 
 So we report the other end as well. At the 10\% dose one chunk in ten
 is replaced and nine tenths of the honest document remain. If a method can
@@ -140,9 +139,9 @@ Table~\ref{tab:lowdose} is the one a defense cannot explain away.
 
 The table is also the worst-case reading that a security claim requires. A
 defense beaten by one of three payloads is not two-thirds robust, it is broken,
-and averaging across payloads would hide that. We report the minimum rather
-than the mean for the same reason Carlini gives: robustness is a property of
-the strongest attack a method has met, not of the attacks its authors chose.
+and averaging across payloads would hide that. We therefore report the
+minimum rather than the mean: robustness is a property of the strongest
+attack a method has met, not of the attacks its authors chose.
 
 \subsection{Adaptive attackers}
 \label{sec:adaptive}

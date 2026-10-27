@@ -138,8 +138,9 @@ down. The released artifact builds each set and verifies it.
 \subsection{Datasets}
 \label{sec:provenance}
 
-Every question, gold answer and context in this paper belongs to the authors of the method or the benchmark we are
-running. Table~\ref{tab:provenance} lists each source and whose it is. This is deliberate rather than convenient. A defense
+An \textbf{item} is one question, its gold answer, and the context the model
+is given to answer it from. Every item in this paper belongs to the authors
+of the method or the benchmark we are running. Table~\ref{tab:provenance} lists each source and whose it is. This is deliberate rather than convenient. A defense
 evaluated on the distribution it was designed for cannot blame its failure on
 an unfamiliar dataset. A result obtained that way is harder to dismiss than
 one obtained on data we chose ourselves.
@@ -172,11 +173,10 @@ defense's rule \\
 \end{tabular}
 \end{table}
 
-Carlini's fifth criticism of DeepSec is that it compared defended and
-undefended rates computed on different item sets, which makes the numbers
-incomparable rather than merely noisy~\cite{carlini-2019-critique}. We checked
-this mechanically rather than by inspection: across every result registry,
-no run compares two arms measured on different items.
+Every comparison in this paper is between arms measured on the same items.
+Rates computed on different item sets are incomparable rather than merely
+noisy, so we checked this mechanically rather than by inspection: across
+every result registry, no run compares two arms measured on different items.
 
 The one place the item set narrows is the distractor payload, and it narrows
 for both arms together. It is defined on 781 of CoConflictQA's 1,409 items. An item
@@ -190,37 +190,40 @@ arms, is measured on that same subset.
 \subsection{Payload classes}
 \label{sec:payloadclasses}
 
-\paragraph{Which items.}
 The retrieval cell evaluates every item whose context is at most 2000
-characters. The cut is on context length alone, never on an outcome, and it is
-applied once and then frozen, so every defense and every payload meets the
-same items. Its purpose is to keep contrastive-decoding defenses, which hold
-two forward passes of the model at once, inside the memory of one card at a
-batch size that the whole cell can share.
+characters. The cut is on context length alone, never on an outcome, and it
+is applied once and then frozen, so every defense and every payload meets the
+same items. Its purpose is memory. Contrastive-decoding defenses hold two
+forward passes of the model at once, and this keeps the whole cell inside one
+card at a batch size every defense can share.
 
-Within the retrieval cell we hold the items, the dosing and the scorer fixed
-and vary only the \emph{form} of the planted passage. A defense that behaves
-differently across them tells us which property it is actually keying on.
+On those items we hold the dosing and the scorer fixed as well, and vary only
+the \emph{form} of the planted passage. There are four forms. They differ in
+how the passage reads and in what it does to the evidence, and a defense that
+behaves differently across them tells us which property it is actually keying
+on.
 
 Corpus poisoning~\cite{zhong-2023-poisoning,su-2024-corpus} optimizes a
 token sequence to be retrieved for many queries. The resulting passage is
 incoherent to a human reader. It attacks by displacing honest documents.
 
-False evidence plants a fluent, well-formed sentence that asserts the
-wrong answer the model itself would have given from memory. It is drawn from
+False evidence does the opposite. It plants a fluent, well-formed sentence
+that asserts the wrong answer the model itself would have given from memory. It is drawn from
 CoConflictQA and reads like an ordinary encyclopaedia sentence. It attacks by
 agreeing with the model's prior.
 
-Distractor evidence is the same fluent sentence with one word
-changed, asserting a third answer that is neither the truth nor the model's
-prior. It is not a stronger attack; it is a measuring instrument, and
+Distractor evidence is that same fluent sentence with one word changed, so
+that it asserts a third answer which is neither the truth nor the model's
+prior. It is not a stronger attack. It is a measuring instrument, and
 Section~\ref{sec:distractor} explains why it was necessary.
 
-An adaptive distractor is the same payload in whichever surface form
-minimizes the specific quantity one defense's rule measures
+An adaptive distractor is the distractor payload again, in whichever surface
+form minimizes the quantity one defense's rule measures
 (Section~\ref{sec:results2}).
 
-One of these cases is worth drawing out. False evidence is the
+Two of the four are ours, the distractor and its adaptive form, and both are
+edits of a field that already ships with the benchmark. That field is worth
+drawing out. False evidence is the
 \texttt{parametric\_evidence} field that ships inside CoConflictQA, the
 benchmark the ParamMute authors released themselves. One of the defenses we
 break is broken with a field from its own dataset.
