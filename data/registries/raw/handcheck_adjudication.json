@@ -1,0 +1,168 @@
+{
+ "generated": "2026-10-27",
+ "frame": "analysed papers with a reference section read (>= 2000 chars) and no cross-regime edge in the union network",
+ "frame_size": 616,
+ "seed": 20261027,
+ "n_checked": 30,
+ "method": "largest share of a target title's content words inside one 60-word window of the reference section, any order; deliberately not v3's id/prefix matching",
+ "threshold": 0.7,
+ "positive_control": {
+  "design": "run the same scanner over papers that DO have a known cross-regime edge, and see whether it finds that edge",
+  "n_papers": 12,
+  "known_edges": 13,
+  "recovered": 13,
+  "note": "the scanner is not silently too strict"
+ },
+ "n_candidates": 4,
+ "n_confirmed_misses": 0,
+ "verdicts": [
+  {
+   "n": 1,
+   "citing": "Gated Coordination for Efficient Multi-Agent Collaboration in Minecraft Game",
+   "target": "Context-to-Execution Integrity for LLM Agents",
+   "verdict": "false positive",
+   "why": "The window is the paper's own body text about separating private execution memory from public coordination records, not a reference entry. It shares context/execution/agents with the target title by subject matter. 'Integrity' does not appear."
+  },
+  {
+   "n": 2,
+   "citing": "Prompt Infection: LLM-to-LLM Prompt Injection within Multi-agent Systems",
+   "target": "Corrective Retrieval Augmented Generation",
+   "verdict": "false positive",
+   "why": "Matched 'retrieval augmented generation' inside a DIFFERENT reference (Kim and Diaz, fair ranking in RAG). 'Corrective' absent."
+  },
+  {
+   "n": 3,
+   "citing": "MemLineage: Lineage-Guided Enforcement for LLM Agent Memory",
+   "target": "Corrective Retrieval Augmented Generation",
+   "verdict": "false positive",
+   "why": "Matched 'retrieval augmented generation' inside the RAGPart/RAGMask corpus-poisoning reference. 'Corrective' absent."
+  },
+  {
+   "n": 4,
+   "citing": "ConfusedPilot: Confused Deputy Risks in RAG-based LLMs",
+   "target": "Corrective Retrieval Augmented Generation",
+   "verdict": "false positive",
+   "why": "Matched 'retrieval augmented generation' across a run of vendor documentation URLs (SageMaker, Azure Search, IBM). 'Corrective' absent."
+  }
+ ],
+ "result": {
+  "sampled": "0/30 (drawn from the 616 evidenced negatives)",
+  "short_section_census": "0/14 (all of them)",
+  "combined": "0/44",
+  "wilson_upper_95": 8.0,
+  "rule_of_three_upper_95": 6.8
+ },
+ "what_this_does_not_cover": [
+  "citations to other-regime work that is NOT in the analysed set -- those never counted toward the rate in the first place",
+  "precision. This checks whether the matcher MISSED citations, not whether the 138 edges it found are real",
+  "the 586 evidenced negatives that were not drawn"
+ ],
+ "short_section_census": {
+  "why": "The sampling frame originally dropped papers whose reference section came out under 2000 characters, on the assumption that a short section means a truncated extraction. That assumption was wrong, so instead of excluding them all 14 were read in full -- a census, not a sample.",
+  "n": 14,
+  "completeness_test": "For each paper: compare the highest in-text citation marker in the body against the number of entries captured, and measure how much PDF text follows the reference section. A truncated extraction shows markers above the last captured entry, or text after the section. All 14 show neither: the markers stop at or below the entries captured, and 0 characters follow.",
+  "verdict": "all 14 are complete short bibliographies -- 4 to 14 references, from short workshop and conference papers -- not truncations",
+  "cross_regime_scan": "Re-scanned at a LOWER threshold (0.50) against every analysed title of both regimes. 8 cross-regime candidates surfaced across the 14; all 8 are the same generic-phrase collision: 'retrieval augmented generation' inside the Lewis et al. RAG reference matching PoisonedRAG / TrojanRAG / BadRAG / Corrective RAG / ConflictRAG, and 'agent ... reinforcement learning' across the Voyager and Reflexion entries. Every one is missing the title's distinguishing word.",
+  "confirmed_misses": 0,
+  "papers": [
+   {
+    "paper_id": "20d6d4a901b4b535e46e8a086c6a1f64e13948a4",
+    "regime": "security",
+    "title": "Securing AI Agents Against Prompt Injection Attacks",
+    "ref_chars": 1196,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "20de9e55b6c846184380423f3092d02f7318a0cf",
+    "regime": "security",
+    "title": "Reverse CAPTCHA: Evaluating LLM Susceptibility to Invisible Unicode Instruction Injection",
+    "ref_chars": 1303,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "2742c3d77c4aa6d023b7dfc77984ad10e6aae274",
+    "regime": "security",
+    "title": "Signed-Prompt: A New Approach to Prevent Prompt Injection Attacks Against LLM-Integrated Applications",
+    "ref_chars": 1960,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "4b6793d43e7527b152ce0700204a8f3f3dee7928",
+    "regime": "security",
+    "title": "Graph-Based Prompt Injection Attacks Against Large Language Models",
+    "ref_chars": 1764,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "540ba347afa82e8437754c15b58eb1d365aa11f0",
+    "regime": "security",
+    "title": "Caging the Agents: A Zero Trust Security Architecture for Autonomous AI in Healthcare",
+    "ref_chars": 1280,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "5fd47f3c351347de692aa41262acd331635f5879",
+    "regime": "security",
+    "title": "Cross-Agent Multimodal Provenance-Aware Framework for Robust Prompt Injection Defense in Large Language and Vision-Language Models",
+    "ref_chars": 1921,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "64d23577d2a98b29dd80949c5fbb3b6d44d44a84",
+    "regime": "security",
+    "title": "Agent Skills Enable a New Class of Realistic and Trivially Simple Prompt Injections",
+    "ref_chars": 1156,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "74aec0665c948c64072682901b7e95e7b71286e4",
+    "regime": "security",
+    "title": "WAB: Overcoming Memory, Network, and Security Walls in Native Agentic Browsers with WebAssembly",
+    "ref_chars": 1096,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "arxiv:2511.12712",
+    "regime": "safety",
+    "title": "Adaptive Focus Memory for Language Models",
+    "ref_chars": 1483,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "arxiv:2605.24775",
+    "regime": "safety",
+    "title": "PRIMA: Operational Patterns for Resilient Multi-Agent Research with Verifiable Identity and Convergent Feedback",
+    "ref_chars": 1064,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "arxiv:2606.15899",
+    "regime": "security",
+    "title": "SkillVetBench: LLM-as-Judge for Multi-Dimensional Security Risk Evaluation in Open-Source LLM Agent Skills",
+    "ref_chars": 591,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "b69be7f40b334e01df7527b41acc22b75b8bd727",
+    "regime": "security",
+    "title": "Secure Retrieval-Augmented Generation: Preventing Data Leakage with Provenance and Policy Enforcement",
+    "ref_chars": 1832,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "e446aa098e37f3969e1cde7101959575f46fec56",
+    "regime": "security",
+    "title": "Forensic LLM-Trace: Interpretable Multi-Agent AI Forensic Architecture for Prompt Injection Investigation",
+    "ref_chars": 1921,
+    "n_refs_read": null
+   },
+   {
+    "paper_id": "fa6afa1b821c74ea098f81cd38de5abd04874143",
+    "regime": "safety",
+    "title": "Active Context Compression: Autonomous Memory Management in LLM Agents",
+    "ref_chars": 1361,
+    "n_refs_read": null
+   }
+  ]
+ }
+}

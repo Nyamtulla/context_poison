@@ -1,0 +1,371 @@
+{
+ "generated_seed": 20261027,
+ "n_drawn": 30,
+ "frame_size": 616,
+ "threshold": 0.7,
+ "method": "largest share of a target title's content words inside one 60-word window of the reference section, any order; deliberately not v3's id/prefix matching",
+ "papers": [
+  {
+   "paper_id": "35d401c58f0f111bf7cbf58634e8e12f3d52d579",
+   "regime": "safety",
+   "title": "How does Misinformation Affect Large Language Model Behaviors and Preferences?",
+   "year": 2025,
+   "venue": "ACL",
+   "ref_chars": 124061,
+   "n_ref_words": 18539,
+   "n_same_regime_cited": 1,
+   "candidates": []
+  },
+  {
+   "paper_id": "1a9e1c18c9353aa1558e5aebd9816f7b94e44f57",
+   "regime": "safety",
+   "title": "Classifier Context Rot: Monitor Performance Degrades with Context Length",
+   "year": 2026,
+   "venue": "arXiv",
+   "ref_chars": 10458,
+   "n_ref_words": 1526,
+   "n_same_regime_cited": 1,
+   "candidates": []
+  },
+  {
+   "paper_id": "cb2afbc72cb0a90be167252faee9df999dc1dbf7",
+   "regime": "safety",
+   "title": "ParamMute: Suppressing Knowledge-Critical FFNs for Faithful Retrieval-Augmented Generation",
+   "year": 2025,
+   "venue": "NeurIPS",
+   "ref_chars": 85444,
+   "n_ref_words": 12353,
+   "n_same_regime_cited": 3,
+   "candidates": []
+  },
+  {
+   "paper_id": "32743a56cf5a28f45d9fdf237450095b1ec9efe9",
+   "regime": "safety",
+   "title": "Ebbinghaus Forgetting Curve and Large Language Model Memory Management: A Cognitive Science-Driven Long-Context Enhancement Framework Design and Prospects",
+   "year": 2026,
+   "venue": "International Congress on Information and Communication Technology",
+   "ref_chars": 4548,
+   "n_ref_words": 655,
+   "n_same_regime_cited": 1,
+   "candidates": []
+  },
+  {
+   "paper_id": "3e8fdaeca758a97fb2f91e29a065c16754c77ef6",
+   "regime": "safety",
+   "title": "Gated Coordination for Efficient Multi-Agent Collaboration in Minecraft Game",
+   "year": 2026,
+   "venue": "arXiv",
+   "ref_chars": 40183,
+   "n_ref_words": 5680,
+   "n_same_regime_cited": 2,
+   "candidates": [
+    {
+     "target_id": "eb94638423842764221b08cb7a9343d439c2257e",
+     "target_title": "Context-to-Execution Integrity for LLM Agents",
+     "coverage": 0.75,
+     "n_title_words": 4,
+     "window_text": "visible blocks containers furnaces and sign information coordination policy addendum treat agent state as private verified working memory treat other agents as the public coordination board only prefer local recovery when the issue is locally solvable use public coordination only through the strict structured protocol figure 6 representative execution layer prompt the prompt explicitly separates private execution memory from public coordination records thereby preventing hidden teammate states and free form dialogue history from contaminating local execution context a private execution state symbol role representative content local resources smooth sandstone 12 ladder 143 active local objective place"
+    }
+   ]
+  },
+  {
+   "paper_id": "adfccd1c12f402e56e137fa63c34f2b8126895de",
+   "regime": "safety",
+   "title": "TokenPilot: Cache-Efficient Context Management for LLM Agents",
+   "year": 2026,
+   "venue": "arXiv",
+   "ref_chars": 30071,
+   "n_ref_words": 4277,
+   "n_same_regime_cited": 9,
+   "candidates": []
+  },
+  {
+   "paper_id": "75bd9e32591e367259d4f91f7611212e892adb23",
+   "regime": "safety",
+   "title": "Can Retrieval Heads See Images? Multimodal Retrieval Heads in Long-Context Vision-Language Models",
+   "year": 2026,
+   "venue": "arXiv",
+   "ref_chars": 22330,
+   "n_ref_words": 3403,
+   "n_same_regime_cited": 0,
+   "candidates": []
+  },
+  {
+   "paper_id": "25bb43f9e14b7d157a84736ee63352c6227766e0",
+   "regime": "safety",
+   "title": "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research",
+   "year": 2026,
+   "venue": null,
+   "ref_chars": 52179,
+   "n_ref_words": 7281,
+   "n_same_regime_cited": 0,
+   "candidates": []
+  },
+  {
+   "paper_id": "47878fc606ace61368776bf9407466cc19ea7a9b",
+   "regime": "safety",
+   "title": "Lost in the Middle: An Emergent Property from Information Retrieval Demands in LLMs",
+   "year": 2025,
+   "venue": "arXiv",
+   "ref_chars": 14032,
+   "n_ref_words": 2434,
+   "n_same_regime_cited": 2,
+   "candidates": []
+  },
+  {
+   "paper_id": "1217aaf8b6fda0bc84a345feb611ce5b0edddd7a",
+   "regime": "safety",
+   "title": "CoCortex: A Memory Governance Framework for Reliable Long-Horizon LLM Agents",
+   "year": 2026,
+   "venue": "2026 International Conference on Next Generation Electronics (NELEX)",
+   "ref_chars": 3543,
+   "n_ref_words": 517,
+   "n_same_regime_cited": 0,
+   "candidates": []
+  },
+  {
+   "paper_id": "12f4ff7993bf9d6443339a86ab9b91d8050b93bd",
+   "regime": "safety",
+   "title": "MemMachine: A Ground-Truth-Preserving Memory System for Personalized AI Agents",
+   "year": 2026,
+   "venue": "arXiv",
+   "ref_chars": 4114,
+   "n_ref_words": 583,
+   "n_same_regime_cited": 1,
+   "candidates": []
+  },
+  {
+   "paper_id": "904a2c2ec156575c2d5a691fde982f479c0ae2b2",
+   "regime": "safety",
+   "title": "Fine-Mem: Fine-Grained Feedback Alignment for Long-Horizon Memory Management",
+   "year": 2026,
+   "venue": "ACL",
+   "ref_chars": 33275,
+   "n_ref_words": 5071,
+   "n_same_regime_cited": 2,
+   "candidates": []
+  },
+  {
+   "paper_id": "9aa8ef5683aa8f81d3e0a826c076b45ff0f2d270",
+   "regime": "security",
+   "title": "[Short Paper] Forensic Analysis of Indirect Prompt Injection Attacks on LLM Agents",
+   "year": 2024,
+   "venue": "International Conference on Trust, Privacy and Security in Intelligent Systems and Applications",
+   "ref_chars": 3296,
+   "n_ref_words": 496,
+   "n_same_regime_cited": 0,
+   "candidates": []
+  },
+  {
+   "paper_id": "c30673d667b2875f2a7563c4755520d6961783f8",
+   "regime": "security",
+   "title": "Addressing Prompt Injection in Large Language Models via In-Context Learning",
+   "year": 2026,
+   "venue": "Computers, Materials &amp; Continua",
+   "ref_chars": 10719,
+   "n_ref_words": 1604,
+   "n_same_regime_cited": 7,
+   "candidates": []
+  },
+  {
+   "paper_id": "0b708c14a822691047238cfc50dc15312ee8cef1",
+   "regime": "security",
+   "title": "F2A: An Innovative Approach for Prompt Injection by Utilizing Feign Security Detection Agents",
+   "year": 2024,
+   "venue": "arXiv",
+   "ref_chars": 5566,
+   "n_ref_words": 824,
+   "n_same_regime_cited": 3,
+   "candidates": []
+  },
+  {
+   "paper_id": "165921d2aa4f1d110d25d488ea8b205d134b16e6",
+   "regime": "security",
+   "title": "Prompt Infection: LLM-to-LLM Prompt Injection within Multi-agent Systems",
+   "year": 2025,
+   "venue": "ESORICS",
+   "ref_chars": 12684,
+   "n_ref_words": 1662,
+   "n_same_regime_cited": 8,
+   "candidates": [
+    {
+     "target_id": "5bbc2b5aa6c63c6a2cfccf095d6020b063ad47ac",
+     "target_title": "Corrective Retrieval Augmented Generation",
+     "coverage": 0.75,
+     "n_title_words": 4,
+     "window_text": "arxiv 2302 05733 cs to eun kim and fernando diaz towards fair rag on the impact of fair ranking in retrieval augmented generation september 2024 url http arxiv org abs 2409 11598 arxiv 2409 11598 cs langgraph langgraph url https www langchain"
+    }
+   ]
+  },
+  {
+   "paper_id": "9ddcbbff1e23b7f995fc363ad5123091f8866748",
+   "regime": "security",
+   "title": "IPIGuard: A Novel Tool Dependency Graph-Based Defense Against Indirect Prompt Injection in LLM Agents",
+   "year": 2025,
+   "venue": "EMNLP",
+   "ref_chars": 23499,
+   "n_ref_words": 3478,
+   "n_same_regime_cited": 7,
+   "candidates": []
+  },
+  {
+   "paper_id": "4f6bc1797993f1ff1ddb1fccb9111bc424fa2242",
+   "regime": "security",
+   "title": "RAG-Induced Failures in Multi-Agent Large Language Model Debate",
+   "year": 2026,
+   "venue": "2026 1st International Conference on Emerging Technologies and Engineering Systems (ICETES)",
+   "ref_chars": 7960,
+   "n_ref_words": 1023,
+   "n_same_regime_cited": 0,
+   "candidates": []
+  },
+  {
+   "paper_id": "arxiv:2605.14421",
+   "regime": "security",
+   "title": "MemLineage: Lineage-Guided Enforcement for LLM Agent Memory",
+   "year": 2026,
+   "venue": "arXiv",
+   "ref_chars": 6016,
+   "n_ref_words": 811,
+   "n_same_regime_cited": 7,
+   "candidates": [
+    {
+     "target_id": "5bbc2b5aa6c63c6a2cfccf095d6020b063ad47ac",
+     "target_title": "Corrective Retrieval Augmented Generation",
+     "coverage": 0.75,
+     "n_title_words": 4,
+     "window_text": "via arxiv 2605 08442v1 11 pankayaraj pathmanathan michael andrei panaitescu liess cho yu jason chiang and furong huang ragpart ragmask retrieval stage de fenses against corpus poisoning in retrieval augmented generation arxiv preprint arxiv 2512 24268 2025 verified via arxiv 2512 24268 substituted for the unverifiable ragshield as the canonical"
+    }
+   ]
+  },
+  {
+   "paper_id": "f851714285c7a6bfb963da98d67f04df0eafbac9",
+   "regime": "security",
+   "title": "A Multi-Agent LLM Defense Pipeline Against Prompt Injection Attacks",
+   "year": 2025,
+   "venue": "IEEE International WIE Conference on Electrical and Computer Engineering",
+   "ref_chars": 4098,
+   "n_ref_words": 569,
+   "n_same_regime_cited": 4,
+   "candidates": []
+  },
+  {
+   "paper_id": "45c41693ece0aebf5d9210aa3a983046ee325c65",
+   "regime": "security",
+   "title": "ProjGuard: Safety Monitoring for Computer-Use Agents via Low-Dimensional Projections",
+   "year": 2026,
+   "venue": null,
+   "ref_chars": 13054,
+   "n_ref_words": 1890,
+   "n_same_regime_cited": 0,
+   "candidates": []
+  },
+  {
+   "paper_id": "5820789dfe6afa80ed0674223576d98bc3297e24",
+   "regime": "security",
+   "title": "Agent-Sentry: Bounding LLM Agents via Execution Provenance",
+   "year": 2026,
+   "venue": "arXiv",
+   "ref_chars": 49143,
+   "n_ref_words": 7169,
+   "n_same_regime_cited": 14,
+   "candidates": []
+  },
+  {
+   "paper_id": "9157268c9fede51f4c2f051df0b8092d2472e32f",
+   "regime": "security",
+   "title": "Inference-Time Backdoors via Chat Templates: From LLM Supply Chains to Agentic System Compromise",
+   "year": 2026,
+   "venue": null,
+   "ref_chars": 43679,
+   "n_ref_words": 6079,
+   "n_same_regime_cited": 9,
+   "candidates": []
+  },
+  {
+   "paper_id": "39c923bffb4a8c59df0107d1e492ed691041d15b",
+   "regime": "security",
+   "title": "CAPTURE: Context-Aware Prompt Injection Testing and Robustness Enhancement",
+   "year": 2025,
+   "venue": "arXiv",
+   "ref_chars": 12972,
+   "n_ref_words": 1845,
+   "n_same_regime_cited": 8,
+   "candidates": []
+  },
+  {
+   "paper_id": "4279709b7603081b51a577e22ecb846385a3a008",
+   "regime": "security",
+   "title": "AlignSentinel: Alignment-Aware Detection of Prompt Injection Attacks",
+   "year": 2026,
+   "venue": "arXiv",
+   "ref_chars": 33110,
+   "n_ref_words": 5065,
+   "n_same_regime_cited": 17,
+   "candidates": []
+  },
+  {
+   "paper_id": "arxiv:2509.00124",
+   "regime": "security",
+   "title": "A Whole New World: Creating a Parallel-Poisoned Web Only AI-Agents Can See",
+   "year": 2025,
+   "venue": "arXiv",
+   "ref_chars": 2507,
+   "n_ref_words": 305,
+   "n_same_regime_cited": 2,
+   "candidates": []
+  },
+  {
+   "paper_id": "7493b35122cc9a5cea86996568e281624b8da76a",
+   "regime": "security",
+   "title": "Whispers of Wealth: Red-Teaming Google's Agent Payments Protocol via Prompt Injection",
+   "year": 2026,
+   "venue": null,
+   "ref_chars": 6339,
+   "n_ref_words": 854,
+   "n_same_regime_cited": 7,
+   "candidates": []
+  },
+  {
+   "paper_id": "9716eff749e27faf90abb1b7c88728e23ed35032",
+   "regime": "security",
+   "title": "ConfusedPilot: Confused Deputy Risks in RAG-based LLMs",
+   "year": 2024,
+   "venue": "arXiv",
+   "ref_chars": 17004,
+   "n_ref_words": 2164,
+   "n_same_regime_cited": 5,
+   "candidates": [
+    {
+     "target_id": "5bbc2b5aa6c63c6a2cfccf095d6020b063ad47ac",
+     "target_title": "Corrective Retrieval Augmented Generation",
+     "coverage": 0.75,
+     "n_title_words": 4,
+     "window_text": "com sagemaker latest dg jumpstart foundation models customize rag html 12 3 https learn microsoft com en us azure search retrieval augmented generation overview 4 https www ibm com architectures hybrid genai rag 5 https www salesforce com news stories retrieval augmented"
+    }
+   ]
+  },
+  {
+   "paper_id": "299ec08b60dbb993f96cf45c011c387477e3f9c8",
+   "regime": "security",
+   "title": "Automatic Red Teaming LLM-Based Agents With Model Context Protocol Tools",
+   "year": 2025,
+   "venue": "IEEE Transactions on Information Forensics and Security",
+   "ref_chars": 20709,
+   "n_ref_words": 3145,
+   "n_same_regime_cited": 17,
+   "candidates": []
+  },
+  {
+   "paper_id": "5ab80084ac08ac0d52cb6b718e61c6f0c47fb913",
+   "regime": "security",
+   "title": "aiAuthZ: Off-Host, Identity-Bound Authorization for AI Agents",
+   "year": 2026,
+   "venue": null,
+   "ref_chars": 5274,
+   "n_ref_words": 636,
+   "n_same_regime_cited": 3,
+   "candidates": []
+  }
+ ]
+}
