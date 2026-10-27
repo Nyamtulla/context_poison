@@ -55,11 +55,11 @@ toward pairs where both artifacts run. Defenses whose artifacts do not run are
 absent, and nothing here says whether they transfer.
 
 \textbf{Attacks are non-adaptive, with one exception.} This is the criticism
-that invalidated DEEPSEC's defense rankings~\cite{carlini-2019-critique} and
-we inherit it by design rather than by oversight. Its direction is not symmetric. An attack
-that was not built for a defense, and defeats it anyway, bounds attack
-strength from below. So our failure results are conservative. A resistance
-result drawn the same way is not evidence of robustness at all.
+that invalidated DEEPSEC's defense rankings~\cite{carlini-2019-critique}, and
+we inherit it. An attack that was not built for a defense and defeats it
+anyway bounds attack strength from below, so our failure results are
+conservative. A resistance result drawn the same way is not evidence of
+robustness at all.
 Section~\ref{sec:adaptive} tests the one resistance result we report. Every
 other defense in the campaign would need the same treatment before any claim
 that it holds.
@@ -72,7 +72,7 @@ meaningless. We avoid that a
 different way: we use greedy decoding throughout, so there is no run-to-run
 noise to report.
 
-We demonstrate this rather than assert it. Rerunning one published cell three
+Rerunning one published cell three
 times from scratch with an identical command produced \textbf{byte-identical
 results}: 72 numeric cells across 8 result rows, zero differences, the same
 hash after removing the timestamp. Error bars over a deterministic decoder
@@ -116,8 +116,7 @@ with poisoned context rather than how hard the context is to poison.
 \textbf{Model coverage.} Most retrieval-cell results use Llama-3-8B-Instruct,
 with Mistral-7B-Instruct where a defense required it. Our own model control
 shows this is a real limitation: changing the model changed outcomes. The
-results should be read as holding for models of this class and size, and the
-model control is reported rather than hidden for that reason.
+results should be read as holding for models of this class and size.
 
 \textbf{Scorer.} We reuse each defense's own evaluation rubric where one
 exists, and a shared recall-based rubric across the retrieval cell. Recall
@@ -139,15 +138,14 @@ the rest are preprints, and the share falls with recency, from
 \PctVenueEarly{}\% of our \YearVenueEarly{} papers to \PctVenueLate{}\% of
 our \YearVenueLate{} ones. A corpus restricted to refereed work
 would therefore describe an earlier field than the one we set out to measure,
-so we report the restriction as a check rather than adopting it. Resolving both sides of
+so the restriction is a check and not the corpus. Resolving both sides of
 every pair back to a paper succeeds for \NVenueResolved{} of
 \NTimelinePairs{} pairs (\PctVenueResolved{}\%); of those, \NVenuePairs{} have
 a named venue on both sides, and \NVenueSecDefSafetyAtk{} of them is a security
 defense evaluated against a safety failure mechanism. The empty
 direction stays empty among refereed work alone.
 
-A recall check on the papers that named nothing.
-\NNoTechnique{} papers contributed no attack and no defense, and
+\textbf{Census recall.} \NNoTechnique{} papers contributed no attack and no defense, and
 \NNoTechOther{} of those match none of the survey, benchmark, framework or
 position descriptions by title. We re-read \NRecallRead{} papers --- that
 bucket as it stood before the pass --- and asked one question of each: does
@@ -157,8 +155,8 @@ a defense already registered under a different name. One renamed a mechanism
 the registry carries three times. One was a payload form rather than a
 technique. The last was an attack a defense paper built for its own
 evaluation; Section~\ref{sec:literatures} registers it under the rule that
-bars a paper's own attack from pairing with its own defense. Two omissions in \NRecallRead{} papers is what the census
-recall measures. It is a rate, not a guarantee of completeness.
+bars a paper's own attack from pairing with its own defense. Two omissions in
+\NRecallRead{} papers is a rate, not a guarantee of completeness.
 
 \textbf{To be done.} Four items are not complete. We report none of them
 as complete.
