@@ -9,7 +9,7 @@ produced, and together they answer RQ2.
 
 \subsection{Pair selection}
 
-We did not pick case studies by familiarity. The taxonomy picks them.
+We did not pick case studies by familiarity; the taxonomy picks them.
 A (defense, attack) pair is a candidate under two conditions. The defense and
 the attack must occupy the same taxonomy cell, which means the content enters
 through the same channel and causes the same consequence. And no paper in the
@@ -18,15 +18,11 @@ ought to apply to an attack that arrives the same way and does the same
 damage. The taxonomy says so. Nobody had checked. We are not proposing new defenses. Every method we run is published,
 and every attack we run is published. The contribution is the pairing.
 
-The campaign is deliberately cross-community.
-\NOursCrossPairs{} of our \NOursPairs{} retrieval-cell pairs put a safety method against a security attack, which is \PctOursCross{}\% against
+The campaign is deliberately cross-community, \NOursCrossPairs{} of our \NOursPairs{} retrieval-cell pairs put a safety method against a security attack, which is \PctOursCross{}\% against
 the literature's \PctCrossCommunity{}\%. \NRagImplSafety{} of our \NRagImpl{} retrieval defense
 implementations are knowledge-conflict methods from the safety literature,
-run against corpus poisoning, PoisonedRAG and
-BadRAG. That is the empty column
-of Figure~\ref{fig:transferlit}, populated.
-
-Of the \NRagPairsKeyed{} pairs we ran in the retrieval cell, counted at
+run against corpus poisoning, PoisonedRAG and BadRAG. That is the empty column
+of Figure~\ref{fig:transferlit}, populated. Of the \NRagPairsKeyed{} pairs we ran in the retrieval cell, counted at
 registry-name level, \NRagPairsNovel{} are absent from the
 \NPairsComposite{} pairs the literature reports. The two that are not novel
 are COIECD~\cite{yuan-2024-discerning} against knowledge conflict and RobustRAG~\cite{xiang-2024-certifiably} against PoisonedRAG, which
@@ -34,14 +30,14 @@ those papers tested themselves and which we re-ran as controls.
 
 \subsection{The reconstruction standard}
 
-The taxonomy decides which pairs we run. This rule decides what counts as
+The taxonomy decides which pairs we run, and this rule decides what counts as
 running one. Every number we report comes from running a defense's own released code and
 weights. We never cite a paper's reported numbers as evidence about that
 paper's method. Where a harness had to be adapted to our data, we adapted the
 harness and left the method and the evaluation rubric untouched. Where an
 author's rubric and ours differed, we used the author's.
 
-This standard cost us coverage and we report the cost. Of the defenses we tried
+This standard cost us coverage, and we report the cost. Of the defenses we tried
 to run, several could not be evaluated at all, and the reasons are themselves a
 finding. One ships a pipeline whose datasets the authors state they cannot
 release. One requires a four-stage data build whose intermediate format is
@@ -57,18 +53,18 @@ any run.
 
 \textbf{The control fires first.} A defense that is broken in our hands
 tells us nothing about transfer, so before any transfer number we check that
-the method still does on clean context what its authors say it does. The check is directional, and it is set per method, because no two papers
+the method still does, in a clean context, what its authors say it does. The check is directional, and it is set per method, because no two papers
 claim the same quantity. ParamMute~\cite{huang-2025-parammute} reports a gain in context
 recall, not in accuracy. CK-PLUG~\cite{bi-2025-parameters} claims no accuracy gain at all: its
 contribution is a knob that moves memorization rate while accuracy is held,
 so its control fires on that rate instead. ACD~\cite{kim-2024-adaptive} states its improvement
-without a figure. SCR's own authors~\cite{huang-2024-trust} report it underperforming their
+without a figure. SCR's~\cite{huang-2024-trust} own authors report it underperforming their
 baseline on Llama-3-8B, the model we run it on, so on this model there is no
-published gain to reproduce and agreement with them means moving the same
-way they report. For each method we therefore check the direction of the change, on the metric
-that paper uses, for the model it used. We record which quantity each
+published gain to reproduce, and agreement with them means moving the same
+way they report. For each method, we therefore check the direction of the change, on the metric
+that paper uses for the model it used. We record which quantity each
 control was read on. Where no comparable published figure
-exists we say so rather than manufacture a threshold.
+exists, we say so rather than manufacture a threshold.
 
 
 \textbf{The attack works first.} If the attack does not degrade the undefended
@@ -83,11 +79,7 @@ resolvable effect", never as "no effect". This matters because several
 published claims in this area rest on differences that a run of their size
 cannot resolve.
 
-\textbf{Attacks are not adapted to the defenses they meet.} The one
-exception is reported in Section~\ref{sec:results2}. Carlini's critique of the
-DeepSec platform~\cite{carlini-2019-critique} identifies this as the error that
-invalidated DeepSec's defense rankings, so we state the consequence precisely
-rather than leaving it implicit. An attack that is not built for a defense and
+\textbf{Attacks are not adapted to the defenses they meet.} An attack that is not built for a defense and
 defeats it anyway is a lower bound on attack strength: if the
 cheapest payload wins, an adapted one also wins. So non-adaptive evaluation is
 conservative for a claim that a defense fails, and invalid for a claim that one
@@ -101,24 +93,9 @@ control \emph{before} each run, and they ship with the artifact.
 \subsection{What we ran}
 \label{sec:whatweran}
 
-\paragraph{Environment.}
-Those four rules hold for every run below. Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
-535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
-\texttt{transformers} 5.5.0. Two defenses cannot use that last version. ACD's
-released decoder imports symbols that \texttt{transformers} removed after
-4.44, which its own README pins, so it runs in a separate dependency set.
-CK-PLUG ships its own 4.49 fork and its README says to install it. We record this
-because it is a result as much as a configuration detail. The defenses in a
-single cell of this taxonomy cannot share one Python environment. That is the
-reproducibility problem of Section~\ref{sec:discussion}, one layer further
-down. The released artifact builds each set and verifies it.
-
-The campaign covers two cells.
-
-The retrieval cell pairs defenses built for knowledge conflict against
+The campaign covers two cells, the retrieval cell and the agent cell. The retrieval cell pairs defenses built for knowledge conflict against
 attacks built to poison a retrieval corpus. The victim model is
-Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
-Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each defense
+Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each defense
 released. The data is CoConflictQA~\cite{huang-2025-parammute} over Natural Questions, and open Natural
 Questions for the attacks that need a retrieval pool.
 
@@ -147,11 +124,21 @@ episodes in the agent cell.
 The two episode counts are not comparable units. An agent episode is a complete
 multi-step tool-use trajectory. A retrieval episode is one scored answer.
 
+Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
+535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
+\texttt{transformers} 5.5.0. Two defenses cannot use that last version. ACD's
+released decoder imports symbols that \texttt{transformers} removed after
+4.44, which its own README pins, so it runs in a separate dependency set.
+CK-PLUG ships its own 4.49 fork and its README says to install it. We record this
+because it is a result as much as a configuration detail. The defenses in a
+single cell of this taxonomy cannot share one Python environment. That is the
+reproducibility problem of Section~\ref{sec:discussion}, one layer further
+down. The released artifact builds each set and verifies it.
+
 \subsection{Datasets}
 \label{sec:provenance}
 
-We built no benchmark. Every question, gold answer and context in
-this paper belongs to the authors of the method or the benchmark we are
+Every question, gold answer and context in this paper belongs to the authors of the method or the benchmark we are
 running. Table~\ref{tab:provenance} lists each source and whose it is. This is deliberate rather than convenient. A defense
 evaluated on the distribution it was designed for cannot blame its failure on
 an unfamiliar dataset. A result obtained that way is harder to dismiss than
