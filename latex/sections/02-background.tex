@@ -82,15 +82,16 @@ the context afterwards.
 \textbf{The adversary.} The adversary controls the content of at least one channel. They do not
 control the model weights, the decoding procedure, or the agent's code. This covers the realistic
 deployment cases. An adversary can write a document that a retriever may
-fetch. They can publish a tool whose description the agent reads. They can
-post content that a browsing agent visits or contribute a skill file that the
-agent loads. The adversary knows the defense and may adapt the payload to it. The adversary does
+fetch~\cite{zou-2024-poisonedrag}. They can publish a tool whose description
+the agent reads~\cite{shi-2025-prompt}. They can post content that a browsing
+agent visits~\cite{greshake-2023-not} or contribute a skill file that the
+agent loads~\cite{schmotz-2025-agent}. The adversary knows the defense and may adapt the payload to it. The adversary does
 not need to know the user's query: every attack we run is query-agnostic by
 construction.
 
 \textbf{Where there is no adversary.} Without an attacker there is no threat
-model. The content goes wrong because the pipeline behaves normally. A retrieved document is out of date. A passage is close to the
-topic but does not answer the question. Important text sits in the middle of
-a long input. A retrieved fact disagrees with what the model learned in
-training. These causes do not adapt, so this literature evaluates on
+model. The content goes wrong because the pipeline behaves normally. A retrieved document is out of date. A passage is close to the topic but
+does not answer the question~\cite{shi-2023-large}. Important text sits in
+the middle of a long input~\cite{liu-2023-lost}. A retrieved fact disagrees
+with what the model learned in training~\cite{xu-2024-knowledge}. These causes do not adapt, so this literature evaluates on
 average-case benchmarks.
