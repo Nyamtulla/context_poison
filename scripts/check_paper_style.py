@@ -77,6 +77,10 @@ def prose(t):
 def main():
     B = body()
     joined = "\n".join(B.values())
+    # The presence checks below look for phrases, and the sources are hard
+    # wrapped, so a phrase that straddles a line break reads as missing. The
+    # novelty statement failed this way while sitting in the introduction.
+    flow = re.sub(r"\s+", " ", joined)
 
     print("\n[style]  VUSEC + McDaniel")
     for name, pat, warn in (("American English", BRIT, False),
@@ -115,14 +119,14 @@ def main():
                       ("software versions given (F2)", r"transformers}? \d|PyTorch \d|Python \d"),
                       ("baseline stated (D1)", r"undefended arm|no-retrieval|closed-book"),
                       ("significance stated (B4)", r"detectab|Wilson|confidence interval|power")):
-        say(bool(re.search(pat, joined, re.I)), name)
+        say(bool(re.search(pat, flow, re.I)), name)
 
     print("\n[reviewer's eye]  Roscoe")
     for name, pat in (("contributions explicit", r"\\paragraph\{Contributions"),
                       ("novelty explicit", r"What is new here|first evaluation in which"),
                       ("scope/limits stated early", r"\\paragraph\{Scope"),
                       ("threat model present", r"\\(?:sub)?section\{(?:Threat model|System and threat model)")):
-        say(bool(re.search(pat, joined)), name)
+        say(bool(re.search(pat, flow)), name)
 
     # A float the prose never points at is a float the reader never looks
     # at. Two figures and two tables shipped unreferenced before this check

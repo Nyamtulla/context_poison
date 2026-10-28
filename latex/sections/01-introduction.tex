@@ -71,30 +71,25 @@ experiments that fall in it to answer the following research questions.
   (Section~\ref{sec:adaptive}).
 \end{description}
 
-Others have separately surveyed both literatures before: the
-security side
+Both literatures have been systematized before: the security side
 repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
 and the AI/ML side on its own terms as a problem of knowledge
-conflict~\cite{xu-2024-knowledge}. We borrow from those surveys rather than
-compete with them. But the last three research questions are the ones a survey normally
-cannot answer, and they are what turns a coverage gap from an observation into
-evidence. What is new here is that one corpus, one taxonomy, and one harness
-span both. A survey of one piece of literature cannot report a gap that the
-other literature defines. Our taxonomy locates missing experiments across both literatures and names
-the defense and the attack in each, which are published methods with released
-code. To our knowledge this is the first evaluation in which published defenses from one of these
-communities meet published failure mechanisms from the other.
+conflict~\cite{xu-2024-knowledge}. None of it runs the experiment. A
+survey of one literature has only that literature's methods in hand, and the
+test we need takes a defense from one side and an attack from the other. So we
+read both, found the pairs nobody has run, and ran them from the authors'
+released code and weights. To our knowledge this is the first evaluation
+in which published defenses from one of these communities meet published
+failure mechanisms from the other.
 
 \paragraph{Scope.}
-Three limits are worth stating before the contributions rather than after
-them. Our retrieval experiments use one item set for each setting. They measure
-what a generator does with poisoned context, not how hard a retriever is to
-poison. Most of them use one model family at one size. Our own model control shows
-that a different model gives different outcomes. The numbers therefore hold
-for models of that class, not in general. Every attack in the campaign, except the two in
-Section~\ref{sec:adaptive}, knows nothing of the defense it meets. That bounds
-attack strength from below. It gives conservative evidence when a defense
-fails, and no evidence at all when one holds. Section~\ref{sec:threats} gives the full list.
+Three limits bound what follows. Each setting runs on one dataset, and we plant
+poisoned passages into the context rather than attack the retriever, so the
+numbers describe what a generator does with bad text. Most runs use one model
+family at one size, and our own control shows that a different model can reverse
+an outcome. Almost every attack we run knows nothing of the defense it meets,
+which bounds attack strength from below: conservative evidence when a defense
+fails, and no evidence at all when one holds.
 
 \paragraph{Contributions.}
 \begin{itemize}
