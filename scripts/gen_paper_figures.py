@@ -591,7 +591,11 @@ def fig_transfer_matrix():
           "BadRAG denial-of-service": "security",
           "adaptive distractor": "security",
           "gradient distractor": "security",
-          "false evidence": "safety", "distractor evidence": "safety"}
+          "false evidence": "safety", "distractor evidence": "safety",
+          # Retrieval returns a genuine but unhelpful passage, with nobody
+          # behind it. Missing here, its pairs sat in the denominator and in
+          # no cell, which is how the adaptive payloads went wrong above.
+          "misretrieval (irrelevant retrieved context)": "safety"}
     ours_pairs = {(r["defense"], r["attack"])
                   for r in retrieval_runs() if r["role"] == "transfer"}
     ours = collections.Counter((DT.get(d), AT.get(a)) for d, a in ours_pairs)

@@ -750,7 +750,10 @@ def main():
     _AT = {"corpus poisoning": "security", "PoisonedRAG": "security",
            "BadRAG sentiment steering": "security",
            "BadRAG denial-of-service": "security",
-           "false evidence": "safety", "distractor evidence": "safety"}
+           "adaptive distractor": "security",
+           "gradient distractor": "security",
+           "false evidence": "safety", "distractor evidence": "safety",
+           "misretrieval (irrelevant retrieved context)": "safety"}
     # how many of the retrieval-cell implementations come from each regime.
     # Section 7 said "eight of our nine" while NRagImpl read ten.
     M["NRagImplSafety"] = sum(1 for v in _DT.values() if v == "safety")
@@ -759,6 +762,15 @@ def main():
     _oc = sum(1 for d, a in _op if _DT.get(d) != _AT.get(a))
     M["NOursPairs"] = len(_op)
     M["NOursCrossPairs"] = _oc
+    # The quadrant that used to be empty: a security defense run against a
+    # safety-regime mechanism. Every attack label must be in _AT above, or an
+    # unmapped one reads as cross against every defense and lands in no
+    # quadrant -- the same way it went wrong in gen_paper_figures.py.
+    _un = {a for _, a in _op if a not in _AT}
+    if _un:
+        raise SystemExit(f"attack labels missing from _AT: {sorted(_un)}")
+    M["NOursSecDefSafetyMech"] = sum(
+        1 for d, a in _op if _DT.get(d) == "security" and _AT.get(a) == "safety")
     M["PctOursCross"] = f"{100*_oc/len(_op):.0f}"
 
     # ---- the citation graph, so figure 5's caption cannot drift from it
@@ -1059,6 +1071,30 @@ def main():
     E["EDypragRagSat"] = _x(DYP, "ctx_acc", arm="rag", frac=1.0)
     E["EDypragNoRet"] = _x(DYP, "ctx_acc", arm="closedbook", frac=0.0)
     E["ERobustMdr"] = load("badrag_dos_robustrag.json")["mdr_pp_at_n"]
+    # RobustRAG, a security defense, against the two safety-regime mechanisms
+    # of the retrieval cell. Distractor evidence plants a passage asserting a
+    # wrong answer, which is structurally what RobustRAG's own threat model
+    # describes with the attacker removed. Misretrieval plants nothing and
+    # only degrades what the retriever returns, so isolate-then-aggregate has
+    # no dishonest passage to isolate.
+    RKD = "native_robustrag-keyword_distractor_evidence.json"
+    RDD = "native_robustrag-decoding_distractor_evidence.json"
+    RKM = "native_robustrag-keyword_misretrieval.json"
+    RDM = "native_robustrag-decoding_misretrieval.json"
+    for lbl, f in (("Key", RKD), ("Dec", RDD)):
+        for d, j in (("Two", 2), ("Ten", 10)):
+            E[f"ERobustDist{lbl}{d}"] = _x(f, "asr", arm="defended",
+                                           n_poison=j)
+    for d, j in (("Two", 2), ("Ten", 10)):
+        E[f"ERobustDistUndef{d}"] = _x(RKD, "asr", arm="undefended",
+                                       n_poison=j)
+    for lbl, f in (("Key", RKM), ("Dec", RDM)):
+        for d, j in (("Clean", 0), ("Five", 5)):
+            E[f"ERobustMis{lbl}{d}"] = _x(f, "acc", arm="defended",
+                                          n_poison=j)
+    for d, j in (("Clean", 0), ("Five", 5)):
+        E[f"ERobustMisUndef{d}"] = _x(RKM, "acc", arm="undefended",
+                                      n_poison=j)
     E["EAcdAdaptCopy"] = _x(ADAPT, "dist_acc", arm="acd", frac=1.0)
     E["EAcdGradCopy"] = _x(GRAD, "dist_acc", arm="acd", frac=1.0)
     E["EAcdAdaptUndefCopy"] = _x(ADAPT, "dist_acc", arm="rag", frac=1.0)

@@ -17,11 +17,12 @@ the passage to weights, and RobustRAG's~\cite{xiang-2024-certifiably} two
 variants aggregate over isolated passages. Section~\ref{sec:results2}
 reports them, and they do not behave as the seven do.
 
-One box stays empty on our side too, and it is a limit: every cross-regime
-pair we ran takes a safety method and attacks it, because those methods
-release code that runs on retrieval data. We did not run the mirror image, a
-security defense against an accidental failure.
-Section~\ref{sec:threats} returns to it.
+The mirror image is thin on our side, and that is a limit. Most cross-regime
+pairs we ran take a safety method and attack it, because those methods
+release code that runs on retrieval data. \NOursSecDefSafetyMech{} of
+\NOursPairs{} go the other way, a security defense against an accidental
+failure, and all \NOursSecDefSafetyMech{} are one defense family.
+Section~\ref{sec:transfer} reports them.
 
 \begin{figure}[t]
 \centering
@@ -31,8 +32,9 @@ Figure~\ref{fig:transferlit} used for the literature.
 \NOursCrossPairs{} of \NOursPairs{} pairs (\PctOursCross{}\%) cross
 between the communities. Shade is the cell's share of this grid, so shades
 are not comparable with the other figure; the printed count is the value.
-Covers the retrieval-cell transfer pairs, not the whole campaign, and the
-box we did not run either is marked.}
+Covers the retrieval-cell transfer pairs, not the whole campaign. All four
+boxes are occupied, and the \NOursSecDefSafetyMech{} security defenses run
+against a safety mechanism are one defense family.}
 \label{fig:transferours}
 \end{figure}
 

@@ -93,6 +93,7 @@ disagree about. A survey reporting one number per published method would have
 missed all of this.
 
 \subsection{Defenses that transfer}
+\label{sec:transfer}
 
 The exceptions are informative. RobustRAG stops PoisonedRAG, which its own paper tested, and we reproduce that
 (+11.0\pp). It then gives no protection at all against corpus poisoning at
@@ -102,6 +103,26 @@ security mechanism. Corpus poisoning displaces every honest passage out of the
 top-$k$ window, so isolate-then-aggregate has nothing honest left to aggregate.
 Backfilling the window to its intended size restores 45.2\%, a gain of
 40.6\pp. The defense was sound and the retrieval interface was not.
+
+The same defense meets the other regime twice, and the two cells disagree.
+Against distractor evidence --- a passage asserting a wrong answer, which is
+what RobustRAG's threat model describes with the attacker taken out --- it
+holds at low dose. At two planted passages in ten the keyword variant scores
+\ERobustDistKeyTwo{}\% and the decoding variant \ERobustDistDecTwo{}\%,
+against the undefended arm's \ERobustDistUndefTwo{}\%. The hold does not
+survive dosing: at ten in ten both sit near \ERobustDistKeyTen{}\% against
+\ERobustDistUndefTen{}\%. Against misretrieval it never helps. Both defended
+arms start below the undefended one, \ERobustMisKeyClean{}\% and
+\ERobustMisDecClean{}\% against \ERobustMisUndefClean{}\%, and both are
+still below it at five in ten, \ERobustMisKeyFive{}\% and
+\ERobustMisDecFive{}\% against \ERobustMisUndefFive{}\%. Misretrieval
+plants nothing, so isolate-then-aggregate has no dishonest passage to isolate
+and the defense pays its accuracy cost for nothing.
+
+A defense built for an adversary transfers on the shape of the stimulus, not
+on the presence of one. Where an incidental mechanism puts a wrong claim in
+the window it is worth running. Where it only degrades what the retriever
+returns it is a cost.
 
 Across the agent cell, \NAgentHolds{} of \NAgentConditions{} conditions show
 the technique holding, with attack success driven to zero. A further 4 show a
