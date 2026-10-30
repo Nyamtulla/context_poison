@@ -123,14 +123,20 @@ def fig_cube():
     hide every cell holding one or two entries, which is most of the cube.
     A cell holding mechanisms and no fix at all is outlined.
 
-    Each panel carries its own margins: a last column totalling every
-    consequence for a channel, and a last row totalling every channel for a
-    consequence. They sit a gap away from the grid so they cannot be read
-    as a seventh consequence or a tenth channel. Margins take the paper's
-    off-regime pair -- amber for the mechanism side, green for the fix
-    side -- because a total is across the regimes and must not wear either
-    regime's hue. Each panel's margins are scaled against their own maximum, so a
-    margin bar and a cell bar of equal height are not equal counts.
+    Each panel carries a last row totalling every channel for a consequence,
+    and the figure carries one last column totalling every channel across
+    both panels. They sit a gap away from the grid so they cannot be read as
+    a seventh consequence or a tenth channel. A panel's own totals keep that
+    panel's hue, because they are still that regime's count. Only the column
+    that adds the regimes together leaves the regime hues, for the paper's
+    off-regime pair, because it belongs to neither. Margins are scaled
+    against their own maximum, so a margin bar and a cell bar of equal
+    height are not equal counts.
+
+    Fill and texture carry one meaning and only one, in every cell and every
+    margin: solid is a mechanism, hatched is a fix. That is what the legend
+    names, and it is the reading that survives a greyscale print, where hue
+    is gone and a bar has nothing left but its texture.
     """
     r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
 
@@ -221,8 +227,7 @@ def fig_cube():
             ax.add_patch(plt.Rectangle((j - .47, MI - .47), .94, .94,
                                        facecolor="none", edgecolor=INK,
                                        linewidth=.2))
-            pair(ax, MI, j, A[:, j].sum(), D[:, j].sum(), ALT_B, ALT_A,
-             rmax, dedge=SEQ_ALT[7])
+            pair(ax, MI, j, A[:, j].sum(), D[:, j].sum(), col, pale, rmax)
         if track == "security":
             ax.text(-.62, MI, "all channels", ha="right", va="center",
                     fontsize=6, color=INK)
@@ -267,19 +272,19 @@ def fig_cube():
         sp.set_visible(False)
     mg.tick_params(length=0)
 
+    # Two entries, because there are two things. The earlier legend named
+    # the cells and the margins separately, which gave one convention four
+    # swatches; in greyscale the two solid ones and the two hatched ones are
+    # the same swatch twice, and a reader is owed an explanation for a
+    # difference that is not there. Hue is read off the panel titles and the
+    # last column's label instead.
     axes[0].legend(handles=[
-        # the legend sits under the security panel, so it speaks in that
-        # panel's hue; the safety panel uses the same two treatments in blue
         Patch(facecolor=TRACK_SEC, edgecolor=TRACK_SEC, linewidth=.4,
-              label="named mechanisms"),
+              label="mechanisms"),
         Patch(facecolor=SEQ_SEC[1], edgecolor=TRACK_SEC, hatch="///",
-              linewidth=.5, label="named fixes"),
-        Patch(facecolor=ALT_B, edgecolor=ALT_B, linewidth=.4,
-              label="all mechanisms"),
-        Patch(facecolor=ALT_A, edgecolor=SEQ_ALT[7], hatch="///",
-              linewidth=.5, label="all fixes")],
-        fontsize=6, frameon=False, loc="lower left",
-        bbox_to_anchor=(0, -.30), ncol=4, columnspacing=1.0)
+              linewidth=.5, label="fixes")],
+        fontsize=6.5, frameon=False, loc="lower left",
+        bbox_to_anchor=(0, -.26), ncol=2, columnspacing=1.0)
     save(fig, "fig1_cube")
 
 
