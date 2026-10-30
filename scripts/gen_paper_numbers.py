@@ -790,8 +790,15 @@ def main():
     _un = {a for _, a in _op if a not in _AT}
     if _un:
         raise SystemExit(f"attack labels missing from _AT: {sorted(_un)}")
-    M["NOursSecDefSafetyMech"] = sum(
-        1 for d, a in _op if _DT.get(d) == "security" and _AT.get(a) == "safety")
+    # The campaign's four boxes, by which literature each side came from.
+    # Two are home ground and two are crossings; Section 4 is organised on
+    # them, so all four are macros rather than one.
+    for _lbl, _dr, _ar in (("SecDefSafetyMech", "security", "safety"),
+                           ("SecDefSecMech", "security", "security"),
+                           ("SafDefSecMech", "safety", "security"),
+                           ("SafDefSafetyMech", "safety", "safety")):
+        M["NOurs" + _lbl] = sum(1 for d, a in _op
+                                if _DT.get(d) == _dr and _AT.get(a) == _ar)
     M["PctOursCross"] = f"{100*_oc/len(_op):.0f}"
 
     # ---- the citation graph, so figure 5's caption cannot drift from it

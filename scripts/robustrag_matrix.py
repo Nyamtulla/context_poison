@@ -153,8 +153,16 @@ def main():
                     choices=["poisonedrag", "badrag_dos", "badrag_sentiment",
                              "distractor_evidence", "corpus_poisoning",
                              # the mirror direction: a security-regime defense
-                             # against a retrieval error nobody wrote
-                             "misretrieval"])
+                             # against a failure nobody wrote. misretrieval
+                             # and incidental_stale are insertions -- text
+                             # arrives that should not be believed, with no
+                             # author behind it. The last two are
+                             # degradations: the window keeps only passages
+                             # that deserve belief, and the context stops
+                             # working because the decisive one moved or
+                             # because there is more of everything.
+                             "misretrieval", "incidental_stale",
+                             "lost_in_the_middle", "context_dilution"])
     ap.add_argument("--placement", default="retrieval",
                     choices=["retrieval", "direct"],
                     help="`direct` leaves the retrieved set clean and puts "
@@ -196,16 +204,36 @@ def main():
            if args.attack == "distractor_evidence"
            else RRAG / "data" / "open_nq.json")
     data = json.loads(src.read_text())[: args.n]
-    if args.attack == "misretrieval":
-        # The donor pool is the item set itself. Items with no clean donor -
-        # every candidate states this item's gold answer - are dropped, and
-        # the drop is reported rather than silently shrinking n.
+    # Three of the mechanisms cannot be built for every item, and each is
+    # dropped on its own test rather than on a shared one, because the tests
+    # fail on different items: a clean donor is available for all of them, a
+    # stale passage for 80%, a locatable gold passage for 83%. Every drop is
+    # reported rather than silently shrinking n.
+    if args.attack in ("misretrieval", "context_dilution"):
+        # The donor pool is the item set itself.
         pr.set_misretrieval_pool(json.loads(src.read_text()))
-        keep = [it for it in data if pr.borrowed_passage(it) is not None]
-        if len(keep) != len(data):
-            print(f"  misretrieval: {len(data) - len(keep)} of {len(data)} "
-                  "items have no clean donor and are dropped", flush=True)
-        data = keep
+        # context_dilution draws up to max(doses) distinct donors per item,
+        # so it has to be viable at the deepest dose, not just at one.
+        deep = max(args.poison_counts) if args.attack == "context_dilution" else 1
+        keep = [it for it in data
+                if all(pr.borrowed_passage(it, salt=k) is not None
+                       for k in range(deep))]
+    elif args.attack == "incidental_stale":
+        import regime_test as rt
+        keep = [it for it in data if rt.stale_passage(it, args.top_k) is not None]
+    elif args.attack == "lost_in_the_middle":
+        # An item needs a decisive passage to move and enough non-decisive
+        # ones to bury it among. Items whose every retrieved passage states
+        # the answer cannot be given a bad position at all, and items with
+        # none have nothing to move.
+        keep = [it for it in data
+                if 1 <= len(pr.gold_slots(it, args.top_k)) <= 5]
+    else:
+        keep = data
+    if len(keep) != len(data):
+        print(f"  {args.attack}: {len(data) - len(keep)} of {len(data)} "
+              "items cannot carry this mechanism and are dropped", flush=True)
+    data = keep
     suffix = "" if args.method == "keyword" else f"_{args.method}"
     suffix += "" if args.placement == "retrieval" else "_direct"
     out_path = args.out or f"data/registries/{args.attack}_robustrag{suffix}.json"

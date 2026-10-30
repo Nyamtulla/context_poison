@@ -127,7 +127,27 @@ def _golds(item) -> list[str]:
     return [s.lower() for s in (str(x) for x in g) if s.strip()]
 
 
-def borrowed_passage(item, pool=None):
+def gold_slots(item, top_k: int) -> list[int]:
+    """Indices of every retrieved passage stating the gold answer.
+
+    Usually more than one. Only 10% of the open_nq items have exactly one
+    decisive passage inside the top ten, which is why the position mechanism
+    moves the whole set rather than a single document.
+    """
+    gs = _golds(item)
+    return [i for i, p in enumerate(c["title"] + "\n" + c["text"]
+                                    for c in item["context"][:top_k]
+                                    if "text" in c and "title" in c)
+            if any(g in p.lower() for g in gs)]
+
+
+def gold_slot(item, top_k: int):
+    """The first such index, or None."""
+    s = gold_slots(item, top_k)
+    return s[0] if s else None
+
+
+def borrowed_passage(item, pool=None, salt=0):
     """A real passage for another question, or None if no clean donor exists.
 
     Rejected if it happens to state this item's gold answer, which would make
@@ -141,7 +161,9 @@ def borrowed_passage(item, pool=None):
         raise SystemExit("misretrieval: call set_misretrieval_pool(data) first")
     gs = _golds(item)
     x = str(item.get("incorrect answer", "")).lower()
-    seed = int(hashlib.sha256(item["question"].encode()).hexdigest()[:8], 16)
+    seed = int(hashlib.sha256(
+        (item["question"] + ("" if not salt else f"#{salt}")).encode()
+    ).hexdigest()[:8], 16)
     rng = _random.Random(seed)
     for _ in range(40):
         donor = pool[rng.randrange(len(pool))]
@@ -223,6 +245,53 @@ def build_poisoned(item, top_k: int, n_poison: int, repeat: int = 5,
                              f"{item['question']!r}; filter the data first")
         keep = max(0, len(passages) - n_poison)
         return passages[:keep] + [p] * min(n_poison, top_k)
+    if attack == "incidental_stale":
+        # The item's OWN retrieved passage with every gold form replaced by
+        # the same target PoisonedRAG uses. Nothing is added and nothing
+        # instructs the model: it reads as ordinary corpus prose that is out
+        # of date. regime_test.py owns the construction; this calls it rather
+        # than restating it, so the two arms cannot drift apart.
+        import regime_test as rt
+        s = rt.stale_passage(item, top_k)
+        if s is None:
+            raise SystemExit("incidental_stale: no usable passage for "
+                             f"{item['question']!r}; filter the data first")
+        keep = max(0, len(passages) - n_poison)
+        return passages[:keep] + [s] * min(n_poison, top_k)
+    if attack == "lost_in_the_middle":
+        # Degradation. The window keeps exactly the passages it had, in the
+        # same number, and only the decisive one moves. Dose is the index it
+        # moves to, so this traces the published U rather than a monotone
+        # fall: the middle of a ten-passage window is the worst place to be
+        # and the last slot recovers some of it. Nothing arrives that should
+        # not be believed, which is what makes it a degradation and not an
+        # insertion.
+        # EVERY passage stating the answer moves, as one block. Moving only
+        # the first does nothing here: this retrieval set is redundant, and
+        # 90% of items have the answer in two or more passages, so a copy
+        # stays at the front and the dose does not bite.
+        idx = gold_slots(item, top_k)
+        if not idx:
+            raise SystemExit("lost_in_the_middle: no gold passage for "
+                             f"{item['question']!r}; filter the data first")
+        out = list(passages)
+        block = [out[i] for i in idx]
+        rest = [p for i, p in enumerate(out) if i not in set(idx)]
+        j = min(n_poison, len(rest))
+        return rest[:j] + block + rest[j:]
+    if attack == "context_dilution":
+        # Degradation. Real passages for other questions are APPENDED, so the
+        # decisive passage keeps its index and only the window grows. That is
+        # what separates this from misretrieval, which borrows the same text
+        # to displace the decisive passage instead of to sit beside it.
+        out = list(passages)
+        for k in range(n_poison):
+            d = borrowed_passage(item, pool=_MIS_POOL, salt=k)
+            if d is None:
+                raise SystemExit("context_dilution: no clean donor for "
+                                 f"{item['question']!r}; filter the data first")
+            out.append(d)
+        return out
     payload = payload_text(item, attack)
     bad = ("\n" + payload + "\n") * repeat
     keep = max(0, len(passages) - n_poison)

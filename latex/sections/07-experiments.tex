@@ -15,18 +15,10 @@ the attack must occupy the same taxonomy cell, which means the content enters
 through the same channel and causes the same consequence. And no paper in the
 corpus may report having run them together. A defense that repairs quiet answer corruption arriving through retrieval
 ought to apply to an attack that arrives the same way and does the same
-damage. The taxonomy says so. Nobody had checked. We are not proposing new defenses. Every method we run is published,
-and every attack we run is published. The contribution is the pairing.
+damage. The taxonomy says so. Nobody had checked.
 
-The campaign is deliberately cross-community, \NOursCrossPairs{} of our \NOursPairs{} retrieval-cell pairs put a safety method against a security attack, which is \PctOursCross{}\% against
-the literature's \PctCrossCommunity{}\%. \NRagImplSafety{} of our \NRagImpl{} retrieval defense
-implementations are knowledge-conflict methods from the safety literature,
-run against corpus poisoning, PoisonedRAG and BadRAG. That is the empty column
-of Figure~\ref{fig:transferlit}, populated. Of the \NRagPairsKeyed{} pairs we ran in the retrieval cell, counted at
-registry-name level, \NRagPairsNovel{} are absent from the
-\NPairsComposite{} pairs the literature reports. The two that are not novel
-are COIECD~\cite{yuan-2024-discerning} against knowledge conflict and RobustRAG~\cite{xiang-2024-certifiably} against PoisonedRAG, which
-those papers tested themselves and which we re-ran as controls.
+We are not proposing new defenses. Every method we run is published, and
+every attack we run is published. The contribution is the pairing.
 
 \subsection{The reconstruction standard}
 
@@ -37,13 +29,10 @@ paper's method. Where a harness had to be adapted to our data, we adapted the
 harness and left the method and the evaluation rubric untouched. Where an
 author's rubric and ours differed, we used the author's.
 
-This standard cost us coverage, and we report the cost. Of the defenses we tried
-to run, several could not be evaluated at all, and the reasons are themselves a
-finding. One ships a pipeline whose datasets the authors state they cannot
-release. One requires a four-stage data build whose intermediate format is
-undocumented. Two execution-stage defenses do not run reliably on any
-freely-available open-weight model. We record these as roadblocks rather than
-as failures of the method, and they belong in Section~\ref{sec:discussion}.
+The standard cost us coverage. Several defenses could not be evaluated at
+all, for reasons that lie in what their artifacts ship rather than in what
+their methods do, and we record those as roadblocks rather than as failures
+of the method.
 
 \subsection{Pre-registered experimental rules}
 
@@ -93,7 +82,49 @@ control \emph{before} each run, and they ship with the artifact.
 \subsection{What we ran}
 \label{sec:whatweran}
 
-The campaign covers two cells, the retrieval cell and the agent cell. The retrieval cell pairs defenses built for knowledge conflict against
+Every pair we ran is two choices: which literature the defense came from,
+and which literature the failure came from. That makes four boxes, and they
+do not ask the same question.
+
+Two boxes are home ground. A method meets the kind of failure its own authors
+built it for, so nothing there tests transfer. These are where the first rule
+above is satisfied: \NOursSafDefSafetyMech{} and \NOursSecDefSecMech{} of
+our \NOursPairs{} retrieval pairs.
+
+The other two boxes are crossings, and each asks its own question.
+
+The first crossing puts an adversary in front of a method built for honest
+error. These are methods for a context that is merely wrong --- out of date,
+or contradicted by what the model already believes --- and the question is
+what they do when someone chose the wrong text on purpose. That is most of
+what we ran, \NOursSafDefSecMech{} pairs.
+
+The second crossing runs the other way. It gives a method built against an
+adversary a failure nobody wrote. The question is whether such a method needs
+an attacker to earn its place, or whether it helps whenever the context stops
+supporting the right answer. This is the smaller side, \NOursSecDefSafetyMech{}
+pairs.
+
+Inside each crossing the pairs vary along one axis, and it is a different
+axis in each. Going one way, what changes is how much the attacker controls:
+a passage optimized against the retriever, a fluent sentence asserting a
+chosen answer, a passage that steers behavior rather than the answer, and a
+passage optimized against the defense itself. Going the other way, what
+changes is whether anything arrives at all: text that reaches the window and
+should not be believed although no one wrote it to deceive, against a window
+whose contents all deserve belief and which stops working because the
+decisive passage moved or because there is simply more of everything.
+
+The two crossings together are \NOursCrossPairs{} of the \NOursPairs{}
+retrieval pairs, against the \PctCrossCommunity{}\% the literature manages,
+and \NRagImplSafety{} of our \NRagImpl{} retrieval defense implementations
+are knowledge-conflict methods meeting an attack. That is the empty column of
+Figure~\ref{fig:transferlit}, populated. Counted at registry-name level,
+\NRagPairsNovel{} of \NRagPairsKeyed{} pairs are absent from the
+\NPairsComposite{} the literature reports, and the two that are not are the
+home-ground pairs their own papers already ran.
+
+The campaign covers two rigs, the retrieval cell and the agent cell. The retrieval cell pairs defenses built for knowledge conflict against
 attacks built to poison a retrieval corpus. The victim model is
 Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each defense
 released. The data is CoConflictQA~\cite{huang-2025-parammute} over Natural Questions, and open Natural
