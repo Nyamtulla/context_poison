@@ -104,6 +104,33 @@ def main():
     M["NMechanisms"] = len(r3)
     tr3 = collections.Counter(e.get("regime") for e in r3)
     M["NMechSecurity"], M["NMechSafety"] = tr3["security"], tr3["safety"]
+    # Whether a mechanism puts content into the window or the context stops
+    # working with nothing added. The definition in Section 2 used to cover
+    # only the first, which left most of the safety regime outside the word
+    # the taxonomy files it under. mechanism_kind.json carries the coding.
+    _kind = {(e["paper_id"], e["name"]): e["kind"]
+             for e in load("mechanism_kind.json")["entries"]}
+    kc = collections.Counter(
+        (e.get("regime"), _kind.get((e.get("paper_id"), e.get("name"))))
+        for e in r3)
+    M["NInsertion"] = sum(v for k, v in kc.items() if k[1] == "insertion")
+    M["NDegradation"] = sum(v for k, v in kc.items() if k[1] == "degradation")
+    M["NSecInsertion"] = kc[("security", "insertion")]
+    M["NSecDegradation"] = kc[("security", "degradation")]
+    M["NSafInsertion"] = kc[("safety", "insertion")]
+    M["NSafDegradation"] = kc[("safety", "degradation")]
+    # Attack nests inside insertion rather than sitting beside degradation.
+    # The alternative split -- adversary present or not -- partitions the
+    # registry exactly as the regime column already does, so it would carry
+    # no information the paper does not already have. Insertion cuts across
+    # the regimes instead, which is what isolates NAccident: content that
+    # really does arrive with nobody behind it.
+    _ag = {(e["paper_id"], e["name"]): e.get("agency")
+           for e in load("mechanism_kind.json")["entries"]}
+    ac = collections.Counter(
+        _ag.get((e.get("paper_id"), e.get("name"))) for e in r3)
+    M["NAttack"], M["NAccident"] = ac["attack"], ac["accident"]
+    M["NBothAgency"] = ac["both"]
     cq = collections.Counter(e.get("consequence") for e in r3)
     # the consequence x regime split. The prose used to say EVERY goal-hijack
     # mechanism was security-track; after the full-text re-coding that is one
@@ -120,6 +147,13 @@ def main():
     va = collections.Counter(e.get("validated_against") for e in r4)
     M["NAdvOnly"], M["NIncOnly"] = va["adversarial"], va["incidental"]
     M["NBothValidated"], M["NNoValidation"] = va["both"], va[""]
+    # The same two counts under the names the taxonomy uses. A fix whose
+    # authors tested it against an adversary is a defense; one tested only
+    # against incidental failure is a remedy. Both are read off the paper's
+    # own evaluation, which is what the registry recorded -- not off what
+    # its authors say they built the method for.
+    M["NFixes"] = len(r4)
+    M["NDefenseFix"], M["NRemedy"] = va["adversarial"], va["incidental"]
     M["PctBothValidated"] = f'{100*va["both"]/len(r4):.1f}'
     # Named "regime", not "threat model". In security a threat model is a
     # specification of the adversary; "incidental" has no adversary at all,

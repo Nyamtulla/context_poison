@@ -1,0 +1,1900 @@
+{
+ "generated": "2026-10-30",
+ "what": "Two nested questions. kind: does the mechanism put content into the context window (insertion) or does the context stop working with nothing added (degradation)? agency, defined only for insertion: did an adversary write the content (attack), did a retriever, tool or the agent's own memory deliver it with nobody behind it (accident), or does the paper describe one mechanism reachable both ways (both)?",
+ "method": "Safety-regime entries hand-coded one by one against the registry name and notes. Security-regime entries screened by keyword for degradation language; all 14 hits read by hand and all insert content, so the regime is recorded as insertion throughout without a full read of 176 entries.",
+ "coder": "single-coded, not double-coded",
+ "entries": [
+  {
+   "row": 2,
+   "paper_id": "705e49afd92130f2bc1e0d4d0b1f6cb14e88803f",
+   "name": "Indirect Prompt Injection (IPI)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 5,
+   "paper_id": "f4e06256ab07727ff4e0465deea83fcf45012354",
+   "name": "PoisonedRAG",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 6,
+   "paper_id": "b6948a9e8b3eec5a56a80c69727154fcd7ececce",
+   "name": "AgentPoison",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 10,
+   "paper_id": "b1d80b2eda7e175e235185bdc7df4e8233f36ef4",
+   "name": "MemoryGraft",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 11,
+   "paper_id": "1c9bcfc9cdc00223df43dc6a1fa1a2621d151f35",
+   "name": "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 13,
+   "paper_id": "02834792c8d9631bbfd28163b2106e0e3cc7d127",
+   "name": "PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 14,
+   "paper_id": "33bceaac7888ac8c08e35b6045a7a2619e210e4e",
+   "name": "Oracle Poisoning",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 17,
+   "paper_id": "e3a49a110801fd961db887f8af1239cc79b55a5b",
+   "name": "UNNAMED: gradient-based corpus poisoning (adversarial passage injection)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 18,
+   "paper_id": "d8d0d704446ffaf09b9722360ed76341934ec3a3",
+   "name": "TrojanRAG",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 19,
+   "paper_id": "a2a4ddbed34916cfa345e957cf060da99685e37b",
+   "name": "PANDORA (RAG Poisoning jailbreak)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 20,
+   "paper_id": "1027d120189fd6cd9aec1af273cd9a5baaf645d7",
+   "name": "BadRAG",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 21,
+   "paper_id": "9716eff749e27faf90abb1b7c88728e23ed35032",
+   "name": "ConfusedPilot",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 22,
+   "paper_id": "19afd7b97061fdf0dd4a4726bef4ed8acd31a0a8",
+   "name": "AGGD (Approximate Greedy Gradient Descent)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 51,
+   "paper_id": "9538721e4cc16422e006c3a04b536c9a1f636fa3",
+   "name": "AgentVigil",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 55,
+   "paper_id": "2b73f8dbb2af737fe707df3b2dcb21a9cea62db5",
+   "name": "UNNAMED: HTML accessibility-tree universal adversarial trigger injection (TWUI)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 66,
+   "paper_id": "fda75a14d8eda2bb64aff391b99bce89e42eccbe",
+   "name": "AdapTools",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 67,
+   "paper_id": "81eb760ebbe224ae52cd7aea8f7f2865e4134908",
+   "name": "UNNAMED: retrieval-aware IPI (trigger-fragment decomposition attack)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 68,
+   "paper_id": "0ba8da7bad04313c39bb9cb45d946645b22c6872",
+   "name": "MUZZLE",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 76,
+   "paper_id": "7eccc944154275a6ecd2f7cc379a3798ff855a30",
+   "name": "IterInject",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 81,
+   "paper_id": "a882a5686912be056ef2a5ba091022193eba801b",
+   "name": "LogJack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 87,
+   "paper_id": "09377c53e8bff67f1d8f1d778e529736a878f338",
+   "name": "ChatInject",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 88,
+   "paper_id": "8b9011b256c4819d47721efc3f9522a721b92735",
+   "name": "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 96,
+   "paper_id": "7493b35122cc9a5cea86996568e281624b8da76a",
+   "name": "Branded Whisper Attack / Vault Whisper Attack (from 'Whispers of Wealth')",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 101,
+   "paper_id": "0d3726b27797f667331480e3a25baeec8df7beca",
+   "name": "UNNAMED: privacy leakage attack chain (external-content deception + IPI + exfiltration)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 105,
+   "paper_id": "42555b0ed5e8a6e3556a5938c791e28ccd89dd57",
+   "name": "MIRAGE (Masked Injection via Residual And Generative Exploitation)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 106,
+   "paper_id": "c678482d8da6d9f65e629434caf99b6beafff8d7",
+   "name": "DACSI (Document-Authored Control-Signal Impersonation)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 115,
+   "paper_id": "f29954ddd1789d73a01677ee6f4f0eb1c9e91b91",
+   "name": "PI-Hunter",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 117,
+   "paper_id": "4ee49d7be0b3e20ca27fe05ef99170d1b37664db",
+   "name": "TIP (Tree-structured Injection for Payloads) / stealthy update attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 118,
+   "paper_id": "8271b26fbebe6ec2929840b97583b3813228d27e",
+   "name": "Agent Data Injection (ADI)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 119,
+   "paper_id": "75aac5648bbe852990ade21c52179c7c129b5f7f",
+   "name": "VATS (Error-Path Injection via Implicit Authority)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 127,
+   "paper_id": "19f4bb442c551929118eeddaf92f594602f9e3ec",
+   "name": "Targeted Promptware Attacks",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 133,
+   "paper_id": "6bad6cb411a86c0be216ee051ba51b07f3b0bafa",
+   "name": "OMNI-LEAK (Orchestrator Multi-Agent Network Induced Data Leakage)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 134,
+   "paper_id": "6424243734d098460777049e1f11705d1b5d85c8",
+   "name": "Foot-in-the-Door (FITD) attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 135,
+   "paper_id": "66c8e83ed0fc215dc8be0e44715a692ef27f005b",
+   "name": "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 146,
+   "paper_id": "f8c0d1102dad313ced71f63c79868a2389f8f68f",
+   "name": "Agent-as-a-Proxy attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 155,
+   "paper_id": "cc586b2ca0dd46a67cbb6f4e8417c4002bb9403d",
+   "name": "Cross-App Context Poisoning (Confused ChatGPT)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 160,
+   "paper_id": "a5074bc01f873646e663eef4e37d99844d9a6047",
+   "name": "AutoDojo (adaptive black-box IPI attack generation)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 169,
+   "paper_id": "eb6cbd2b06a980d8fabc1d7615575498385b35c8",
+   "name": "ToolHijacker",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 173,
+   "paper_id": "edd63168ea32a84ef63b3f34495cb8b65222ee32",
+   "name": "WebInject",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 174,
+   "paper_id": "6da58f1bf1a4873c15f0862dd58ecdde4fe6a029",
+   "name": "CrossInject",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 175,
+   "paper_id": "c0956166abdc1c330f56a4b5fdb09d05d659a453",
+   "name": "RL-Hammer",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 176,
+   "paper_id": "4851dbb8c416d8c15d4f6a71a12ffd346d9685f4",
+   "name": "UNNAMED: Prompt Injection 2.0 (hybrid PI + classic web-exploit combination attacks)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 180,
+   "paper_id": "611967b1b2ddbee4b308451d4ae958f0ac78eb93",
+   "name": "UNNAMED: data flow-based injection attack for observed-data exfiltration ('Important message' template)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 181,
+   "paper_id": "88043f04702a99d5acc496c6e799b6ae330295c3",
+   "name": "ObliInjection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 182,
+   "paper_id": "7c7ba94eb5d96b665397db77f765910e5acde5c6",
+   "name": "Fun-tuning",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 186,
+   "paper_id": "a75e8fbb6fa08ac1283619fd32f85057f561a003",
+   "name": "AIShellJack (coding-rule/config-file prompt injection against agentic IDE editors)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 189,
+   "paper_id": "db4cf9f6a653d5c15973e836c800ea47743251ae",
+   "name": "HOUYI",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 190,
+   "paper_id": "bd8d64d442ec88eaf5c3117e3700e61021db0587",
+   "name": "Mind Mapping Prompt Injection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 193,
+   "paper_id": "2f6de8291c9a803faa7f7a33c74f4a2a3debd83b",
+   "name": "Neural Exec",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 194,
+   "paper_id": "165921d2aa4f1d110d25d488ea8b205d134b16e6",
+   "name": "Prompt Infection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 204,
+   "paper_id": "7b9f2477dce1435f698b4dfa605c1551e5b08a4e",
+   "name": "UNNAMED: PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 205,
+   "paper_id": "045d0a985cbae7f44d7577c8f0d2183406d9a24d",
+   "name": "System Prompt Poisoning (SPP)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 207,
+   "paper_id": "8c72e098e53eddb8e1e8fb05601a03a7b0ca57e0",
+   "name": "UNNAMED: rule-tag semantic reframing template attack ('Breaking the Prompt Wall')",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 208,
+   "paper_id": "b780b02d8efd54751a3af61374638bc3d80eb722",
+   "name": "AgentTypo",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 214,
+   "paper_id": "1115a843e8f3d142180f807c97f71cde65d2ad12",
+   "name": "MAD-Spear (Conformity-Driven Prompt Injection Attack)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 220,
+   "paper_id": "arxiv:2607.10712",
+   "name": "Indirect Data Poisoning (Distributed Denial of Science)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 224,
+   "paper_id": "arxiv:2603.17639",
+   "name": "VeriGrey (grey-box agent fuzzing for IPI)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 227,
+   "paper_id": "arxiv:2509.00124",
+   "name": "Parallel-Poisoned Web (fingerprinting + website cloaking against AI web agents)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 229,
+   "paper_id": "arxiv:2503.12188",
+   "name": "MAS hijacking",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 231,
+   "paper_id": "f49a3d773c41cb6943f94e26147f60fc51648d4e",
+   "name": "MCP-ITP (Implicit Tool Poisoning)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 232,
+   "paper_id": "96146fc642ef28da0ad11f620d5d2d6e4719e4b2",
+   "name": "Cross-Tool Description Poisoning",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 233,
+   "paper_id": "08cec247465505fc4fb5ac6ab841c2b29a3c0477",
+   "name": "UNNAMED: descriptor-level semantic manipulation attack (MCP tool-selection bias)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 238,
+   "paper_id": "299ec08b60dbb993f96cf45c011c387477e3f9c8",
+   "name": "AutoMalTool",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 239,
+   "paper_id": "1763949de4f182019fdf2f21a101f60df339dd59",
+   "name": "Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 255,
+   "paper_id": "ac4d3cc1cd6289702d7ab3cb54bda5e17506224d",
+   "name": "Salience Induction",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 257,
+   "paper_id": "63f6b63c1fa113768d60a6a383654dd109468187",
+   "name": "PIDP-Attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 259,
+   "paper_id": "5dc3693b68a1d749d985b31bb6de7656a08caee6",
+   "name": "RefineRAG",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 263,
+   "paper_id": "4eec7ad1aef177297d0c2019434a84e48fb1f4f7",
+   "name": "UNNAMED: retriever fine-tuning backdoor attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 267,
+   "paper_id": "42f560c26f22484fc7859a295527fd786f598f96",
+   "name": "COMA",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 273,
+   "paper_id": "d29b631cd6072f3854cf100c3e6ca688233a23be",
+   "name": "LogicPoison",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 275,
+   "paper_id": "3a7e5dd0b6cf4934876e60531fff22716421104e",
+   "name": "IKEA (Implicit Knowledge Extraction Attack)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 279,
+   "paper_id": "f3387da9a5116a4c0845618b1cd367cddf23e1e4",
+   "name": "FlashRT",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 280,
+   "paper_id": "469d4b8f7660de4bf1651a92bbc1ced997e631ec",
+   "name": "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 294,
+   "paper_id": "c4ecc7fc2e1342dabec05c750735d70f2a61b30f",
+   "name": "Inter-Agent Trust Exploitation (AI agent privilege escalation)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 296,
+   "paper_id": "6698e93bd70e3167295a01e76a0972030dd50f10",
+   "name": "ZombAI",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 297,
+   "paper_id": "4f44017ed6ef809cb60654bd5eff64acff54b17e",
+   "name": "AGENTBAIT",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 300,
+   "paper_id": "a4acc9e39473f642ab9cf1f05201effe95600fba",
+   "name": "Sampling-Based Injection (MCP sampling/createMessage attack)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 309,
+   "paper_id": "71a8c71c735207d71c7042a6aa021c48272c826d",
+   "name": "SkillJect",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 312,
+   "paper_id": "77bd60b2f06f814a3f6ef85ec0c11b0176b0ceb1",
+   "name": "Guidance Injection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 314,
+   "paper_id": "4c0f6dc02450d6e58abdadd5293d7bd762129886",
+   "name": "POISE",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 315,
+   "paper_id": "36dd2ed29b677eff1f4689a18040d3fae5c4278a",
+   "name": "PlanFlip",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 328,
+   "paper_id": "4f6bc1797993f1ff1ddb1fccb9111bc424fa2242",
+   "name": "UNNAMED: RAG-manipulation attack on multi-agent debate consensus",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 329,
+   "paper_id": "b46e67e21542fdd9e0ce0cfa1be6fd5030df2c5b",
+   "name": "UNNAMED: subagent inheritance exploitation (4 classes: insecure memory inheritance, absent resource access control, async memory divergence, unauthorized cross-agent termination)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 341,
+   "paper_id": "af9f3b394a50bcbe1026685e991923d771c5608f",
+   "name": "HARE (Hybrid Agent Roleplay Exploitation) / Token Economy Poisoning",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 353,
+   "paper_id": "0b708c14a822691047238cfc50dc15312ee8cef1",
+   "name": "F2A (Feign Agent Attack)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 354,
+   "paper_id": "64d23577d2a98b29dd80949c5fbb3b6d44d44a84",
+   "name": "UNNAMED: skill-file prompt injection (trivial/non-optimized variant)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 355,
+   "paper_id": "369148e6a920001cdc29e651a5019f096600f1f4",
+   "name": "AudioHijack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 356,
+   "paper_id": "ce9d30735c0c27de65e68b228d77381d77f2a28b",
+   "name": "ClawTrojan multi-step trojan/backdoor attack paradigm",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 361,
+   "paper_id": "a60e902d31e306c0118cc6f90a1a095142bb650b",
+   "name": "StruPhantom",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 362,
+   "paper_id": "5b77cfb3a7d902911dce1b9db57fec8c439845ae",
+   "name": "Silent Egress (implicit prompt injection via URL preview/metadata)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 370,
+   "paper_id": "ce3c17589968d73b61e109edf397276760151157",
+   "name": "Attractive Metadata Attack (AMA)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 377,
+   "paper_id": "e086e2f5c47a0f3acd45577bad937ee699c4a570",
+   "name": "Plan Injection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 680,
+   "paper_id": "c14b66c10e7d4416e4e98b31baf020270cddb294",
+   "name": "LogInject / Passive Prompt Injection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 681,
+   "paper_id": "3120e577687f1ea6217cc0b546739aaa0295acbe",
+   "name": "Adversarial HalluSquatting",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 690,
+   "paper_id": "ba326d9ed781485e28aa6285d915026a582b2a20",
+   "name": "Relinking",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 693,
+   "paper_id": "396517eb4ba3cb0eb6afe8aa02cde9b121699c02",
+   "name": "Reasoning-Extension Denial-of-Service (DoS)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 695,
+   "paper_id": "1f517e201e63cb9a4cd87c289ed41f0cd367d42c",
+   "name": "Brain-Prompt Injection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 699,
+   "paper_id": "0df85692d5ea487cb0871c79795a37db4684a8d9",
+   "name": "Cross-Session Stored Prompt Injection (XSPI)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 701,
+   "paper_id": "345f5f86cda5a7e23a1cf4d90b5e284eb1f29680",
+   "name": "MIRAGE",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 705,
+   "paper_id": "974ca97f815234d7bff52e212d2f9abf225af2e4",
+   "name": "Log-Substrate Prompt Injection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 708,
+   "paper_id": "885424bbfda807e19d566c2e281a7aad31fb75d0",
+   "name": "Prompt Overflow Attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 711,
+   "paper_id": "83499754304da8eede7d57b4d17a8104520a391d",
+   "name": "ASPI (Ambiguous-State Prompt Injection)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 718,
+   "paper_id": "3c51e32c6059775328c1620a22dc8e7d602f83cc",
+   "name": "RTA-PostForge (response-path tampering attack)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 727,
+   "paper_id": "108d63a6e425f35130f2defd80d1ec07681aaa13",
+   "name": "PromptFuzz-SC",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 736,
+   "paper_id": "a93eb55526ee6d441f19bdd47b70974af990079c",
+   "name": "PISmith",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 740,
+   "paper_id": "20de9e55b6c846184380423f3092d02f7318a0cf",
+   "name": "Reverse CAPTCHA (invisible Unicode instruction injection)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 743,
+   "paper_id": "3a6ca08f3507de0d642286defa5431f4088d0880",
+   "name": "CoT Forgery (Chain-of-Thought Forgery)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 750,
+   "paper_id": "a209860c510bc26c0a7493db9006762240d3fc8c",
+   "name": "PI3D",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 751,
+   "paper_id": "f3a1695cd2de9a1561a96fa0da3cdf9adb388b47",
+   "name": "AutoInject",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 754,
+   "paper_id": "1378649f3d7cfacaba92132e233146885c86e7fc",
+   "name": "UNNAMED: multi-probe evasive GCG suffix attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 756,
+   "paper_id": "ace8ae46e3f9e33fe92bb50fafd6973f2504e127",
+   "name": "PINA",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 762,
+   "paper_id": "a497744c319e8465df81a12ccfe60a2bce4017ea",
+   "name": "Xmera (chimera MitM framework)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 764,
+   "paper_id": "add98c38c95c9639e0f7d07ca0087b087e1d00d1",
+   "name": "ToolLeak",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 768,
+   "paper_id": "5c771766b54a3e40aee1c045141a0119e2bdfee3",
+   "name": "DataFlip",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 772,
+   "paper_id": "c177630e593936a6698accb0b565cfb841d34517",
+   "name": "Checkpoint-GCG",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 774,
+   "paper_id": "1121c75cb5290163f6b0d7f4b668043eb7cbf4b1",
+   "name": "Separator Injection Attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 775,
+   "paper_id": "43408b3330d05250412940a0ea08791b35ebd185",
+   "name": "UNNAMED: diverse RL red-teaming (auto-generated rewards + multi-step RL)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 776,
+   "paper_id": "fb1bc7f717df24bef2a98d1dab26b0d86f069dd2",
+   "name": "AutoRed",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 778,
+   "paper_id": "6d4070ca0ba7ccdedb044c9a15301ad41f6aeb05",
+   "name": "Cognitive Overload Attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 780,
+   "paper_id": "3f0ca570bfd749d73b1bd302ec8d2d55ce959c80",
+   "name": "PromptFuzz",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 783,
+   "paper_id": "e0e8c1eb4bfe2a5aba365237966142c5fa8e1d16",
+   "name": "UNNAMED: ChatGPT memory/URL-exfiltration prompt injection bypass",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 786,
+   "paper_id": "7b00cb1fe1773f964d123dab6d4812c7bc63de06",
+   "name": "Prompt-Injected Data Extraction",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 818,
+   "paper_id": "75012c31dc32c879fbbae669b6119efc4198b095",
+   "name": "SafeSearch",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 826,
+   "paper_id": "9157268c9fede51f4c2f051df0b8092d2472e32f",
+   "name": "UNNAMED: chat-template inference-time backdoor",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 829,
+   "paper_id": "9832eb62e0b3d826d21445fc1fd2fcf6ced7d41a",
+   "name": "UNNAMED: backdoor-based RAG data extraction attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1009,
+   "paper_id": "8ba7f2d66ab1cb40af28d1889ffa21f298fa0c52",
+   "name": "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 24,
+   "paper_id": "1733eb7792f7a43dd21f51f4d1017a1bffd217b5",
+   "name": "lost in the middle",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 25,
+   "paper_id": "3d68522abfadfc8ee6b7ec9edaaf91f1b2f38e5e",
+   "name": "distraction by irrelevant context",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 28,
+   "paper_id": "55e0300470bc99172e763f6fd6d3e7935f7d90e0",
+   "name": "UNNAMED: context-length-induced degradation independent of retrieval failure",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 29,
+   "paper_id": "7af5369308e2ee98df1e458f3e040ce674559f1d",
+   "name": "context drift",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 30,
+   "paper_id": "bb5d81576c113f0b16234fd0db4238a4281c8388",
+   "name": "UNNAMED: getting lost in multi-turn conversation (premature-answer unreliability under underspecification)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 32,
+   "paper_id": "579fa5e99937ddf437eda7ae00c3bdf62f32d1e9",
+   "name": "context rot (agentic/long-horizon search)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 308,
+   "paper_id": "08511b5e1be93152829e91f34907e586b787a129",
+   "name": "context rot",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 379,
+   "paper_id": "1a9e1c18c9353aa1558e5aebd9816f7b94e44f57",
+   "name": "classifier context rot",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 386,
+   "paper_id": "8408df2d1326e6fe8713e680c24e2fd40ea0c7d7",
+   "name": "extraneous cognitive load (context engineering overload)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 389,
+   "paper_id": "arxiv:2607.17937",
+   "name": "UNNAMED: agent-skill requirement decay under long trajectories (skill/requirement fade)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 391,
+   "paper_id": "47878fc606ace61368776bf9407466cc19ea7a9b",
+   "name": "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 394,
+   "paper_id": "arxiv:2604.24512",
+   "name": "Attention Latch",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 407,
+   "paper_id": "arxiv:2508.07479",
+   "name": "mechanistic refinement of lost-in-the-middle (threshold-dependent onset at ~50% of context window; effect vanishes near window limits)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 417,
+   "paper_id": "arxiv:2406.02536",
+   "name": "mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 419,
+   "paper_id": "5168d3595acaf7528039ee542eb57d0dc3ad2fd8",
+   "name": "distraction by irrelevant context (graded by semantic relatedness)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 425,
+   "paper_id": "febb0d38c39219f39d5325345882b5148a84b79e",
+   "name": "UNNAMED: long-context safety/refusal degradation in agents",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 461,
+   "paper_id": "e8da028dac974c26a614f8322b67f86aaa879073",
+   "name": "cognitive bandwidth bottleneck (action-space scaling)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 465,
+   "paper_id": "dfd55d856ccb37a4599f52a31fb1e6d109b168db",
+   "name": "multi-target memory interference",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 493,
+   "paper_id": "5d930fcf06f911ff99ca509135faf8144ee8e86d",
+   "name": "plan anchor",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 496,
+   "paper_id": "5df5f1166129e67e4eb3b102539766c365c91bb7",
+   "name": "UNNAMED: temporally-distant information inaccessibility in long-horizon agentic reasoning",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 500,
+   "paper_id": "d9e214309a03bdea6b2ad5e858eb54b8db18141c",
+   "name": "Constraint Drift (under long tool traces)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 512,
+   "paper_id": "35d992fd33278b601ecf1bb977bcc9ab965d490f",
+   "name": "identity drift (persona coherence decay in generative agents)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 535,
+   "paper_id": "f259b2f9d94edd5254891a7efc05503c6528e0f3",
+   "name": "UNNAMED: abrupt persona/tone instability from lack of affective state inertia",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 536,
+   "paper_id": "f9272681e0e35b2a8d82ae1c862a43d6d825274c",
+   "name": "Governance Decay",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 575,
+   "paper_id": "b6f2abdf6b7896e12671af37ab280b17c5ab5c36",
+   "name": "UNNAMED: unverified success fabrication in unattended long-horizon agents (agent honesty gap)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 584,
+   "paper_id": "341883c91dabb788b32dae7d1bd6c6146d266b95",
+   "name": "memory pollution (agent long-term memory)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 589,
+   "paper_id": "230ab088432e2fcc7e34b6148fd08fef30cb2077",
+   "name": "Context Pollution (evolutionary search history bias)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 592,
+   "paper_id": "efd0c320f1c24b5beb87a531a4ad1a82f66ec00d",
+   "name": "observation over-ingestion",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 610,
+   "paper_id": "929e9b30474e7fe4e4bb16504f04f1756d0a959e",
+   "name": "UNNAMED: plan non-persistence under context eviction (context-time memory volatility)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 617,
+   "paper_id": "arxiv:2606.30005",
+   "name": "context proprioceptive blindness",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 618,
+   "paper_id": "arxiv:2606.25514",
+   "name": "context poisoning (self-induced, non-adversarial)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 631,
+   "paper_id": "arxiv:2601.02023",
+   "name": "Distributional Collapse",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 637,
+   "paper_id": "3dd46c0ab602825f50b522ca9f96d22c3c6925b4",
+   "name": "UNNAMED: summary-length invariance under context compaction",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 652,
+   "paper_id": "bac834b243ee47e83b60117d529a369dec67514e",
+   "name": "context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 660,
+   "paper_id": "4c0a545b1eb73084e3d395435af9cf6649c2b1da",
+   "name": "mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 666,
+   "paper_id": "812b87876b22260fe046af447c5f40a4ce2906ea",
+   "name": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 713,
+   "paper_id": "2d065df525f7619bc44fe5fdf385e1ea9714b822",
+   "name": "memory laundering",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident",
+   "agency_ruling": "Hostile content exists upstream, so the default from the safety regime looks wrong. It is not: the named mechanism is the compression step that strips the content of its detectable markers, and the paper frames that step as a non-adversarial incident of how multi-agent systems summarise. The adversary is in the input, not in the mechanism."
+  },
+  {
+   "row": 798,
+   "paper_id": "e7fed24b1353cf82d465d68dbda87c2b7243c60a",
+   "name": "memory misevolution",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 843,
+   "paper_id": "317d2659a28f8444d297f5020315bcdfc2509ab1",
+   "name": "Mandate Salience Decay (MSD)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 849,
+   "paper_id": "72b5e6023db3b5af8e8f27f8b4a52bc5f1f32ba7",
+   "name": "context unawareness (failure to identify a small decisive piece of evidence within long/complex context)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 856,
+   "paper_id": "a0f82fcf24f6f280ef4ff950bfdd25430a1556f2",
+   "name": "Contextual Belief Management (CBM) failure",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 862,
+   "paper_id": "7a39d0ccffe0c30b98a3a4b2c1bb82bb0e8c6026",
+   "name": "UNNAMED: \"cognitive event horizon\" (context-saturation threshold beyond which accuracy collapses)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 867,
+   "paper_id": "a562f07f3d017e69d2064d92e994687f2b4b2447",
+   "name": "evidence misalignment (agentic long-video QA)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 874,
+   "paper_id": "db7cc2cb222b7bf8e88a73e792bb231ca8c3f44a",
+   "name": "agent drift (overthinking / overacting)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 891,
+   "paper_id": "e735128608be493b73022765c49c3f12c4c91591",
+   "name": "UNNAMED: granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 901,
+   "paper_id": "894af73fb679f95ea1a36eb6bad300bfb80566fa",
+   "name": "context pollution (role conflation in single-agent code-as-action agents)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 910,
+   "paper_id": "d128557bbd9330a3f0a62eb47e2a47dbb0df849b",
+   "name": "cumulative contextual decay (attention pollution, dilution, and drift)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 935,
+   "paper_id": "1bb6703e03c66fc8591d05cf1d2797a0b01757b7",
+   "name": "contextual misguidance",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 943,
+   "paper_id": "b7ba9df4eb239708cf48f25be87b5bceeca010e3",
+   "name": "superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 951,
+   "paper_id": "646defbd740313a62d454d986c1411b03ef6de26",
+   "name": "position exhaustion",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 965,
+   "paper_id": "4bc97dba841ff291ef59c77dc8b2b053366d79ff",
+   "name": "UNNAMED: \"malloc-only\" context accumulation causing reasoning degeneration in extended CoT",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": 972,
+   "paper_id": "eba07d3742ba4bb126ccf59e06cf3d1988cbfd8c",
+   "name": "scaffolding collapse",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "both",
+   "agency_ruling": "Sustained multi-turn pressure on a tutor, which the paper describes with manipulation patterns (fake mastery claims, role redefinition) that a genuinely struggling student also produces. The security regime supplies the default; the mechanism does not require intent."
+  },
+  {
+   "row": 976,
+   "paper_id": "4c75b2840ab60724b9a7a7a6d7ab91464271cd5f",
+   "name": "KV-cache contamination",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 1002,
+   "paper_id": "33888b7650d97a21dda39d9c6cefbacb5334dbe0",
+   "name": "cross-modality parametric knowledge conflict",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 1011,
+   "paper_id": "9adddfe5a596d20b534a29d9937efcd3cb85d3cf",
+   "name": "Combined Attack (Open-Prompt-Injection)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1013,
+   "paper_id": "6d465be006615460d41060f9f5068d51fc1f46b1",
+   "name": "BIPIA benchmark attack set",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1015,
+   "paper_id": "37665dd5ae7245f087d663785c17eef068578676",
+   "name": "Virtual Prompt Injection (VPI)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1016,
+   "paper_id": "e56f14ced9f7ce344ed14bdcb46860ccac72ac83",
+   "name": "JudgeDeceiver",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1018,
+   "paper_id": "0a6a350653369dc92fde4cf9992951534ed1f169",
+   "name": "UNNAMED: automatic universal gradient-based prompt injection",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1019,
+   "paper_id": "e25b4bdfc3f5a8293ea6cd687a0203e446594188",
+   "name": "Tensor Trust: prompt extraction / prompt hijacking",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1020,
+   "paper_id": "2b289e1d136edeb6354496518af5230bddc09e61",
+   "name": "distraction effect (attention shift to injected instruction)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1021,
+   "paper_id": "0894585294c67193ff3190240554677b56fd79a0",
+   "name": "P2SQL injection (prompt-to-SQL)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1022,
+   "paper_id": "e5e3bf694dca35269b40247cc52fcc54f475cf96",
+   "name": "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1023,
+   "paper_id": "910a4623f7732b1ea32dc2cdda7a30a227b89a11",
+   "name": "UNNAMED: system-prompt and uploaded-file extraction from custom GPTs",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1025,
+   "paper_id": "f529cec54e76166cdfe5f9610a26412886d80fbd",
+   "name": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1026,
+   "paper_id": "f3de6ea08e2464190673c0ec8f78e5ec1cd08642",
+   "name": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1029,
+   "paper_id": "9be0dea0d6b892a2162490fb02712efaf10c0c87",
+   "name": "LLMSmith: prompt-injection-to-RCE exploitation",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1039,
+   "paper_id": "4d1f37057fd008317d634d3f10ff73c81b442035",
+   "name": "G2PIA (goal-guided generative prompt injection)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1041,
+   "paper_id": "85eac6fe1eabd526282a224863c338fe36ec6587",
+   "name": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1043,
+   "paper_id": "f02fc3e2ab00d74f2397f70bab09a526e1910b56",
+   "name": "UNNAMED: tree-of-attacks ranking manipulation for conversational search",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1044,
+   "paper_id": "bb5cd74e28059073b0f50ba42b1dcec41d29af82",
+   "name": "UNNAMED: multi-modal prompt injection against robot navigation",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1046,
+   "paper_id": "d8ba6085c7c32cc367ab7f50d18744de846fcebd",
+   "name": "preemptive answer attack (CoT short-circuiting)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "both",
+   "agency_ruling": "The registry note says it 'arises inadvertently OR by injection'. The paper characterises one mechanism reachable two ways, so neither label alone is true of it."
+  },
+  {
+   "row": 1047,
+   "paper_id": "68132d7cf87e6e0357757c5ff0bb55105eb9980d",
+   "name": "EchoLeak (zero-click IPI, CVE-2025-32711)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1051,
+   "paper_id": "c87a76ebb3df5edcbd7a03699e798d2be1806a9b",
+   "name": "TopicAttack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1058,
+   "paper_id": "f1611e6d829ba799783393b00f529c1e3f01ed76",
+   "name": "POUGH",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1060,
+   "paper_id": "e3aaa5e8a177a0b629408aadaf096a03b04cb014",
+   "name": "PoisonedAlign",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1066,
+   "paper_id": "2818ef5d5fdafa2760a9fa088e1ee362ad766669",
+   "name": "ASTRA (and ASTRA++)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1072,
+   "paper_id": "7cf2dd505b53e690ce0ff1fd15cc55f127841819",
+   "name": "situation-driven contextual adversarial prompt attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1074,
+   "paper_id": "98616ac01f3b3f25cf510afad96f577be7f7e92f",
+   "name": "query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1075,
+   "paper_id": "0e3f35c9f300156346dd5ddd75b78f768a21deb8",
+   "name": "message history forging (direct prompt injection via forged system/assistant roles)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1076,
+   "paper_id": "80581658e7c708c40e635a5360b5eca9a31eee1d",
+   "name": "reasoning token overflow (RTO) / practical reasoning interruption attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1082,
+   "paper_id": "fde97b99a946bc96d79e0f9d73ef1359594b7d3e",
+   "name": "VortexPIA",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1084,
+   "paper_id": "271266265fa50cde314ebdd428a3d63353c117ba",
+   "name": "self-interpreting images via adversarial meta-instructions",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1085,
+   "paper_id": "3d8333ace789490b41a2de75e58464618aad2a87",
+   "name": "Image-based Prompt Injection (IPI)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1086,
+   "paper_id": "41b13ebbf1769d140b01590fb073a330f063702e",
+   "name": "steganographic prompt injection (multi-domain spatial/frequency/neural embedding)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1090,
+   "paper_id": "88637a2c392f1c185bc282d4abaccc221a0bb291",
+   "name": "Reasoning Interruption Attack (adaptive token compression)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1092,
+   "paper_id": "8e3d50541e3973b16386b337080de0929c3ceb7b",
+   "name": "Physical Prompt Injection Attack (PPIA)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1096,
+   "paper_id": "20885362d31a4d213881e2c178ffc6fc0a81fe93",
+   "name": "backdoor-powered prompt injection attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1100,
+   "paper_id": "2ec84999ddecd420c0e4b215e524e7a7f38e9944",
+   "name": "Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1104,
+   "paper_id": "301b6d574aa1f16b8b0ded55ec0236cbd2066260",
+   "name": "Overflow",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 1123,
+   "paper_id": "f18b95663f87743335eee0578212fcb484882eae",
+   "name": "Blind attacks",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1124,
+   "paper_id": "d45e2718c4ae41fb90436d97eb89542f525dbc1f",
+   "name": "Cliopatra",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1135,
+   "paper_id": "b84eb462ce742f35d638d10b3218ddf72712f12b",
+   "name": "incidental prompt injection",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": 1148,
+   "paper_id": "4b6793d43e7527b152ce0700204a8f3f3dee7928",
+   "name": "Graph-based prompt injection (math-expression-to-graph encoding)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": 1040,
+   "paper_id": "654c9a01b995637f5849e8977691ae648160b5ca",
+   "name": "knowledge conflict (contextual vs parametric)",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": null,
+   "paper_id": "d44e3f722dcb61e16a54a3978f473a6a947a072e",
+   "name": "unintended long-term state poisoning",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": null,
+   "paper_id": "a776dcb6b3c4d50cd149ff39c9ac18de31572b95",
+   "name": "NeuroGenPoisoning",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "cf4df6c19699a57b0bee87a490146ffc99c7c950",
+   "name": "MemVenom",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "70c860c7a318c6b01fa84356c1afb3ff1de2e37b",
+   "name": "temporal memory contamination",
+   "regime": "safety",
+   "kind": "insertion",
+   "agency": "accident"
+  },
+  {
+   "row": null,
+   "paper_id": "2e6274d1f91b2e2290cda4c747abdcdf59ada46c",
+   "name": "Chain-of-Trigger Backdoor (CoTri)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "064e99edb10404a43f0aa04813a68ae6da2728e2",
+   "name": "autonomy tax",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "148ed0cd52183e01416bf8667917aa6045ef007c",
+   "name": "Injection Paradox",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "b3d4488ddeda4aa364fab31468a3dc728f396cab",
+   "name": "structured attack generation framework",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "48c12080143be758aa764aeab6bc2a0edff4a6cc",
+   "name": "ChainFuzzer",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "5dce672edae58beb9b150718f0f15c13c8a3d4a6",
+   "name": "Zombie Agent",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "e236558c3ce8b819ccf0ef524629c3bd86f7940c",
+   "name": "Ignore; Detect; Exploit (hidden prompt injection attacks)",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "75bd9e32591e367259d4f91f7611212e892adb23",
+   "name": "multimodal retrieval heads (sparse heads carrying retrieval)",
+   "regime": "safety",
+   "kind": "degradation",
+   "agency": null
+  },
+  {
+   "row": null,
+   "paper_id": "5012daa3095e9b6bf6d70d0ec8ffdb381e982687",
+   "name": "Actor-Critic attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "5f4efbe3aae1d8f44ceab1da257ae685d6beb00b",
+   "name": "Plan-of-Thought (PoT) Backdoor Attack",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  },
+  {
+   "row": null,
+   "paper_id": "be6724eff8c5795f9ab6e17c9cf8a28aeaf7f1ee",
+   "name": "SpAIware",
+   "regime": "security",
+   "kind": "insertion",
+   "agency": "attack"
+  }
+ ],
+ "method_agency": "Default from regime: security insertion reads as attack, safety insertion as accident. All 20 safety-regime insertion entries were read by hand, and so were the 7 security-regime insertion entries whose notes use incidental language (benign, inadvertent, naturally occurring). Three entries are ruled against their default and carry an agency_ruling field."
+}

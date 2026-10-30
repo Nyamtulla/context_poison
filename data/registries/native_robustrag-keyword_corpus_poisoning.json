@@ -153,6 +153,91 @@
    "asr_ci_high": 1.7,
    "arm": "defended",
    "n_poison": 10
+  },
+  {
+   "n": 500,
+   "acc": 31.2,
+   "asr": 3.6,
+   "refusal_rate": 0.6,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 3.6,
+   "asr_ci_low": 2.3,
+   "asr_ci_high": 5.6,
+   "arm": "closedbook",
+   "n_poison": 0,
+   "measured": "backfill"
+  },
+  {
+   "n": 500,
+   "acc": 31.2,
+   "asr": 3.6,
+   "refusal_rate": 0.6,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 3.6,
+   "asr_ci_low": 2.3,
+   "asr_ci_high": 5.6,
+   "arm": "closedbook",
+   "n_poison": 1,
+   "measured": "backfill"
+  },
+  {
+   "n": 500,
+   "acc": 31.2,
+   "asr": 3.6,
+   "refusal_rate": 0.6,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 3.6,
+   "asr_ci_low": 2.3,
+   "asr_ci_high": 5.6,
+   "arm": "closedbook",
+   "n_poison": 2,
+   "measured": "backfill"
+  },
+  {
+   "n": 500,
+   "acc": 31.2,
+   "asr": 3.6,
+   "refusal_rate": 0.6,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 3.6,
+   "asr_ci_low": 2.3,
+   "asr_ci_high": 5.6,
+   "arm": "closedbook",
+   "n_poison": 3,
+   "measured": "backfill"
+  },
+  {
+   "n": 500,
+   "acc": 31.2,
+   "asr": 3.6,
+   "refusal_rate": 0.6,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 3.6,
+   "asr_ci_low": 2.3,
+   "asr_ci_high": 5.6,
+   "arm": "closedbook",
+   "n_poison": 5,
+   "measured": "backfill"
+  },
+  {
+   "n": 500,
+   "acc": 31.2,
+   "asr": 3.6,
+   "refusal_rate": 0.6,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 3.6,
+   "asr_ci_low": 2.3,
+   "asr_ci_high": 5.6,
+   "arm": "closedbook",
+   "n_poison": 10,
+   "measured": "backfill"
   }
- ]
+ ],
+ "backfill": {
+  "date": "2026-10-26",
+  "arms": [
+   "closedbook"
+  ],
+  "note": "measured after the dose arms, in a later session; see the environment threat in the paper"
+ }
 }

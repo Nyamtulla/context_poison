@@ -8,15 +8,6 @@ would.
 Everything in this section is measurement over our corpus, and it ends at the
 cell of the matrix that is empty.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig9_prisma}
-\caption{Corpus construction. Each stage reports what it removed on the
-left and what it passed to the next stage on the right. The queries, their
-dates and their hit counts ship with the artifact as a search log.}
-\label{fig:prisma}
-\end{figure}
-
 \subsection{Corpus}
 
 We began from \NSeeds{} seed papers found during scoping, queried the Semantic
@@ -50,6 +41,14 @@ are applications, empirical studies of off-the-shelf methods, and practitioner
 guides. Section~\ref{sec:threats} reports a recall pass over that
 remainder.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig9_prisma}
+\caption{Corpus construction. Each stage reports what it removed on the
+left and what it passed to the next stage on the right. The queries, their
+dates and their hit counts ship with the artifact as a search log.}
+\label{fig:prisma}
+\end{figure}
 
 We follow PRISMA~\cite{page-2021-prisma} for identification, screening and
 inclusion, and Figure~\ref{fig:prisma} reports the count at every stage. The
@@ -97,8 +96,9 @@ and cause the same damage occupy the same cell. They differ only on intent. That
 experiments rather than a filing scheme.
 
 
-\textbf{Channel} is the route untrusted content takes into the context window.
-There are \NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
+\textbf{Channel} is the part of the context window at issue: the route the
+content took in for an insertion mechanism, and the stream that grew, shifted
+or was evicted for a degradation one. There are \NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
 or an upstream service~\cite{liu-2023-promptb}. \meth{RAG} is a passage a retriever selected from a
 corpus~\cite{zhong-2023-poisoning,zou-2024-poisonedrag}. \meth{tool-output} is whatever a called tool returned~\cite{greshake-2023-not}.
 \meth{tool-metadata} is the names, descriptions and schemas of the tools

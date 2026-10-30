@@ -1,0 +1,362 @@
+[
+ {
+  "n": 1,
+  "name": "lost in the middle",
+  "channel": "RAG",
+  "verdict": "outside"
+ },
+ {
+  "n": 2,
+  "name": "distraction by irrelevant context",
+  "channel": "direct-input",
+  "verdict": "fits"
+ },
+ {
+  "n": 3,
+  "name": "UNNAMED: context-length-induced degradation independent of retrieval failure",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 4,
+  "name": "context drift",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 5,
+  "name": "UNNAMED: getting lost in multi-turn conversation (premature-answer unreliability under underspecification)",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 6,
+  "name": "context rot (agentic/long-horizon search)",
+  "channel": "tool-output",
+  "verdict": "outside"
+ },
+ {
+  "n": 7,
+  "name": "context rot",
+  "channel": "tool-metadata",
+  "verdict": "outside"
+ },
+ {
+  "n": 8,
+  "name": "classifier context rot",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 9,
+  "name": "extraneous cognitive load (context engineering overload)",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 10,
+  "name": "UNNAMED: agent-skill requirement decay under long trajectories (skill/requirement fade)",
+  "channel": "skill",
+  "verdict": "outside"
+ },
+ {
+  "n": 11,
+  "name": "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 12,
+  "name": "Attention Latch",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 13,
+  "name": "mechanistic refinement of lost-in-the-middle (threshold-dependent onset at ~50% of context window; effect vanishes near window limits)",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 14,
+  "name": "mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings)",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 15,
+  "name": "distraction by irrelevant context (graded by semantic relatedness)",
+  "channel": "RAG",
+  "verdict": "fits"
+ },
+ {
+  "n": 16,
+  "name": "UNNAMED: long-context safety/refusal degradation in agents",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 17,
+  "name": "cognitive bandwidth bottleneck (action-space scaling)",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 18,
+  "name": "multi-target memory interference",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 19,
+  "name": "plan anchor",
+  "channel": "tool-output",
+  "verdict": "outside"
+ },
+ {
+  "n": 20,
+  "name": "UNNAMED: temporally-distant information inaccessibility in long-horizon agentic reasoning",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 21,
+  "name": "Constraint Drift (under long tool traces)",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 22,
+  "name": "identity drift (persona coherence decay in generative agents)",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 23,
+  "name": "UNNAMED: abrupt persona/tone instability from lack of affective state inertia",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 24,
+  "name": "Governance Decay",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 25,
+  "name": "UNNAMED: unverified success fabrication in unattended long-horizon agents (agent honesty gap)",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 26,
+  "name": "memory pollution (agent long-term memory)",
+  "channel": "memory",
+  "verdict": "fits"
+ },
+ {
+  "n": 27,
+  "name": "Context Pollution (evolutionary search history bias)",
+  "channel": "memory",
+  "verdict": "fits"
+ },
+ {
+  "n": 28,
+  "name": "observation over-ingestion",
+  "channel": "tool-output",
+  "verdict": "outside"
+ },
+ {
+  "n": 29,
+  "name": "UNNAMED: plan non-persistence under context eviction (context-time memory volatility)",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 30,
+  "name": "context proprioceptive blindness",
+  "channel": "tool-output",
+  "verdict": "outside"
+ },
+ {
+  "n": 31,
+  "name": "context poisoning (self-induced, non-adversarial)",
+  "channel": "tool-output",
+  "verdict": "fits"
+ },
+ {
+  "n": 32,
+  "name": "Distributional Collapse",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 33,
+  "name": "UNNAMED: summary-length invariance under context compaction",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 34,
+  "name": "context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization)",
+  "channel": "RAG",
+  "verdict": "borderline"
+ },
+ {
+  "n": 35,
+  "name": "mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3)",
+  "channel": "RAG",
+  "verdict": "outside"
+ },
+ {
+  "n": 36,
+  "name": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
+  "channel": "RAG",
+  "verdict": "fits"
+ },
+ {
+  "n": 37,
+  "name": "memory laundering",
+  "channel": "memory",
+  "verdict": "fits"
+ },
+ {
+  "n": 38,
+  "name": "memory misevolution",
+  "channel": "memory",
+  "verdict": "fits"
+ },
+ {
+  "n": 39,
+  "name": "Mandate Salience Decay (MSD)",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 40,
+  "name": "context unawareness (failure to identify a small decisive piece of evidence within long/complex context)",
+  "channel": "cross-modal",
+  "verdict": "outside"
+ },
+ {
+  "n": 41,
+  "name": "Contextual Belief Management (CBM) failure",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 42,
+  "name": "UNNAMED: \"cognitive event horizon\" (context-saturation threshold beyond which accuracy collapses)",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 43,
+  "name": "evidence misalignment (agentic long-video QA)",
+  "channel": "cross-modal",
+  "verdict": "outside"
+ },
+ {
+  "n": 44,
+  "name": "agent drift (overthinking / overacting)",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 45,
+  "name": "UNNAMED: granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse)",
+  "channel": "memory",
+  "verdict": "fits"
+ },
+ {
+  "n": 46,
+  "name": "context pollution (role conflation in single-agent code-as-action agents)",
+  "channel": "tool-output",
+  "verdict": "fits"
+ },
+ {
+  "n": 47,
+  "name": "cumulative contextual decay (attention pollution, dilution, and drift)",
+  "channel": "memory",
+  "verdict": "outside"
+ },
+ {
+  "n": 48,
+  "name": "contextual misguidance",
+  "channel": "direct-input",
+  "verdict": "fits"
+ },
+ {
+  "n": 49,
+  "name": "superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict)",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 50,
+  "name": "position exhaustion",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 51,
+  "name": "UNNAMED: \"malloc-only\" context accumulation causing reasoning degeneration in extended CoT",
+  "channel": "direct-input",
+  "verdict": "outside"
+ },
+ {
+  "n": 52,
+  "name": "KV-cache contamination",
+  "channel": "direct-input",
+  "verdict": "borderline"
+ },
+ {
+  "n": 53,
+  "name": "cross-modality parametric knowledge conflict",
+  "channel": "cross-modal",
+  "verdict": "fits"
+ },
+ {
+  "n": 54,
+  "name": "preemptive answer attack (CoT short-circuiting)",
+  "channel": "direct-input",
+  "verdict": "fits"
+ },
+ {
+  "n": 55,
+  "name": "Overflow",
+  "channel": "direct-input",
+  "verdict": "fits"
+ },
+ {
+  "n": 56,
+  "name": "incidental prompt injection",
+  "channel": "cross-modal",
+  "verdict": "fits"
+ },
+ {
+  "n": 57,
+  "name": "knowledge conflict (contextual vs parametric)",
+  "channel": "RAG",
+  "verdict": "fits"
+ },
+ {
+  "n": 58,
+  "name": "unintended long-term state poisoning",
+  "channel": "memory",
+  "verdict": "fits"
+ },
+ {
+  "n": 59,
+  "name": "temporal memory contamination",
+  "channel": "memory",
+  "verdict": "fits"
+ },
+ {
+  "n": 60,
+  "name": "multimodal retrieval heads (sparse heads carrying retrieval)",
+  "channel": "cross-modal",
+  "verdict": "outside"
+ }
+]

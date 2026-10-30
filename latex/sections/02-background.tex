@@ -46,20 +46,37 @@ assert the same false answer, in the same slots, in the same amount, and
 differ only in whether a person wrote the sentence to be believed.
 
 Two vocabularies for one failure force a choice of words, and this paper
-makes it once. We use \emph{mechanism} for anything that puts untrusted
-content into the context window, whether an attacker wrote that content or a
-pipeline delivered it by accident. We use \emph{defense} for anything that is
-meant to stop such content from changing the answer, whether its authors call
-it a defense or a fix. Provenance is not discarded. It moves to a separate
-\emph{intent} axis, where the later sections read it off when it matters. The
-alternative was to put ``attack'' at the top level of the taxonomy in
-Section~\ref{sec:taxonomy}, and that would have made the safety half
-unregisterable, because an attack presupposes an attacker. Two more words
-name where an answer comes from. The \textbf{context} is the document, tool
+makes it once. We use \emph{mechanism} for anything that makes the context
+stop supporting the right answer, and \emph{fix} for anything meant to keep
+it supporting that answer, whatever either one's authors call it.
+
+Each word splits in two. A mechanism is an \emph{insertion} when content
+arrives in the window that should not be believed, and a \emph{degradation}
+when nothing arrives. In the second case the context stops working because it
+grew too long, because the decisive passage sits in the wrong place, or
+because compaction evicted the rule the agent needed. Accuracy falls with the
+right document present and correctly retrieved. \emph{Attack} sits inside
+insertion, not beside degradation. It names the \NAttack{} insertion
+mechanisms an adversary wrote, against the \NAccident{} that a retriever, a
+tool or the agent's own memory delivered with nobody behind them. Splitting on
+the adversary instead would have renamed the regime partition and added
+nothing, because every security-regime mechanism has one and no safety-regime
+mechanism does. Insertion cuts across the regimes instead: \NSecInsertion{}
+of the \NMechSecurity{} security-regime mechanisms are insertion and
+\NSecDegradation{} are degradation, while the safety regime splits
+\NSafInsertion{} to \NSafDegradation{}.
+
+A fix splits by what its own evaluation tested. A \emph{defense} met an
+adversary there. A \emph{remedy} met only incidental failure. That is
+\NDefenseFix{} defenses and \NRemedy{} remedies of \NFixes{}. The split
+records what a method has been pointed at, not how well it works, and a fix
+that filters what enters has nothing to act on against degradation.
+
+Two more words name where an answer comes from. The \textbf{context} is the document, tool
 output or message placed in front of the model. \textbf{Memory} is what the
 model learned in training and holds in its weights, which the safety
 literature calls \emph{parametric memory}. A large family of published
-defenses works by shifting the model from the second to the first.
+fixes works by shifting the model from the second to the first.
 
 
 \begin{figure}[t]

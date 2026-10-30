@@ -101,6 +101,11 @@ ATTACK_TOKENS = [
     ("corpus_poisoning", "corpus poisoning", "corpuspoisoning"),
     ("false_evidence", "false evidence", "knowledgeconflict"),
     ("distractor_evidence", "distractor evidence", "knowledgeconflict"),
+    # Retrieval returns a genuine but unhelpful passage. Nothing is planted
+    # and no adversary exists, so it keys to the safety-regime mechanism the
+    # literature already names rather than to a poisoning entry.
+    ("misretrieval", "misretrieval (irrelevant retrieved context)",
+     "distractionbyirrelevantcontext"),
     # our adaptive attack on ACD: the distractor payload in whichever form
     # minimises ACD's own ent_pos. Same registry key, because a literature
     # pair would still call it knowledge conflict, but its own label, because

@@ -148,6 +148,85 @@
    "neg_rate": 0.0,
    "ci_low": 6.4,
    "ci_high": 11.4
+  },
+  {
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 26.0,
+   "attacked": 3.0,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 22.3,
+   "ci_high": 30.0,
+   "measured": "backfill",
+   "n_poison": 0
+  },
+  {
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 26.0,
+   "attacked": 3.0,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 22.3,
+   "ci_high": 30.0,
+   "measured": "backfill",
+   "n_poison": 1
+  },
+  {
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 26.0,
+   "attacked": 3.0,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 22.3,
+   "ci_high": 30.0,
+   "measured": "backfill",
+   "n_poison": 2
+  },
+  {
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 26.0,
+   "attacked": 3.0,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 22.3,
+   "ci_high": 30.0,
+   "measured": "backfill",
+   "n_poison": 3
+  },
+  {
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 26.0,
+   "attacked": 3.0,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 22.3,
+   "ci_high": 30.0,
+   "measured": "backfill",
+   "n_poison": 5
+  },
+  {
+   "arm": "closedbook",
+   "n": 500,
+   "acc": 26.0,
+   "attacked": 3.0,
+   "refusal_rate": 0.0,
+   "neg_rate": 0.0,
+   "ci_low": 22.3,
+   "ci_high": 30.0,
+   "measured": "backfill",
+   "n_poison": 10
   }
- ]
+ ],
+ "backfill": {
+  "date": "2026-10-27",
+  "arms": [
+   "closedbook"
+  ],
+  "note": "measured after the dose arms, in a later session; see the environment threat in the paper"
+ }
 }
