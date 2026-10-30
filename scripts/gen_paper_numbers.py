@@ -447,25 +447,27 @@ def main():
     M["NDefMatchedFull"] = len(per_def)
     M["PctDefMatched"] = f'{100*len(per_def)/len(r4):.1f}'
     M["PctDefUnmatched"] = f'{100*(1-len(per_def)/len(r4)):.0f}'
-    # The unpaired fixes are two populations that mean opposite things, and
-    # one number hides that. A remedy whose community never runs an
-    # adversarial experiment is absent from the matrix because nobody has
-    # attacked it. A defense whose authors did attack it, with an attack the
-    # literature never named again, is absent because pairing works on names.
-    # The first is a finding about the field, the second a limit on this
-    # instrument. Note that NDefNoAdvSafety counts a DIFFERENT population,
-    # from the evaluation audit rather than from pairing: the two happen to
-    # agree on 173 and share only 162 members.
+    # The evaluation audit is not a second opinion on the matrix, it is the
+    # matrix refined. Its named_mechanism group is exactly the set of
+    # defenses that appear in a confirmed pair -- asserted below, because the
+    # two are built by different code from different files and a drift
+    # between them would make the audit's categories stop partitioning the
+    # unpaired defenses, which is the only reason they are worth printing.
     _tight = lambda s: "".join(c for c in (s or "").lower() if c.isalnum())
-    _pd = {_tight(d) for d in per_def}
-    _unp = [e for e in r4 if _tight(e.get("defense_name")) not in _pd]
-    M["NFixUnpaired"] = len(_unp)
-    M["NFixUnpairedRemedy"] = sum(
-        1 for e in _unp if e.get("validated_against") == "incidental"
-        and (e.get("regime") or "").strip() == "safety")
-    M["NFixUnpairedDefense"] = sum(
-        1 for e in _unp if e.get("validated_against") == "adversarial"
-        and (e.get("regime") or "").strip() == "security")
+    _pd = {_tight(d) for d in per_def} & {_tight(e.get("defense_name"))
+                                          for e in r4}
+    _named = {_tight(d["defense_name"]) for d in _ev["defenses"]
+              if d["status"] == "named_mechanism"}
+    if _pd != _named:
+        raise SystemExit(
+            "evaluation audit and pairing disagree on which defenses pair: "
+            f"{len(_pd - _named)} only paired, {len(_named - _pd)} only named")
+    M["NFixUnpaired"] = len(r4) - M["NDefMatchedFull"]
+    # Of the unpaired, those an adversary was nonetheless put in front of:
+    # the attack simply carries no name the literature reuses, so pairing
+    # cannot see it. The rest of the unpaired ran no adversary at all, ran no
+    # real comparison, or do not say.
+    M["NFixUnpairedAttacked"] = M["NDefEvalProse"] + M["NDefEvalBenchmark"]
     M["NDefOneFull"] = dist[1]
     M["PctDefOneFull"] = f'{100*dist[1]/len(per_def):.1f}'
     M["NDefCeiling"] = max(per_def.values())
