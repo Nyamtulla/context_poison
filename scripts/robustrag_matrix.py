@@ -226,8 +226,14 @@ def main():
         # ones to bury it among. Items whose every retrieved passage states
         # the answer cannot be given a bad position at all, and items with
         # none have nothing to move.
+        # Half the window, not a constant: an item needs a decisive passage
+        # to move and enough non-decisive ones to bury it among, and "enough"
+        # scales with how deep the window is. The mechanism is invisible at
+        # top-k 10 -- a pilot put every position inside 2.7 points, against a
+        # detectable change of 15.8 -- so the cell that tests it runs deeper,
+        # which is the range the effect was first reported in.
         keep = [it for it in data
-                if 1 <= len(pr.gold_slots(it, args.top_k)) <= 5]
+                if 1 <= len(pr.gold_slots(it, args.top_k)) <= args.top_k // 2]
     else:
         keep = data
     if len(keep) != len(data):

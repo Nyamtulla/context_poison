@@ -121,15 +121,15 @@ def fig_cube():
     Heights are SQRT scaled against one global maximum shared by both
     panels. Linear would make 113 the only visible bar in the figure and
     hide every cell holding one or two entries, which is most of the cube.
-    A cell holding attacks and no defense at all is outlined.
+    A cell holding mechanisms and no fix at all is outlined.
 
     Each panel carries its own margins: a last column totalling every
     consequence for a channel, and a last row totalling every channel for a
     consequence. They sit a gap away from the grid so they cannot be read
     as a seventh consequence or a tenth channel. Margins take the paper's
-    off-regime pair -- amber for the attack side, green for the defense
-    side -- because a total is not a regime and must not wear a regime's
-    hue. Each panel's margins are scaled against their own maximum, so a
+    off-regime pair -- amber for the mechanism side, green for the fix
+    side -- because a total is across the regimes and must not wear either
+    regime's hue. Each panel's margins are scaled against their own maximum, so a
     margin bar and a cell bar of equal height are not equal counts.
     """
     r3, r4 = load("rq3_pollution_registry.json"), load("rq4_defense_registry.json")
@@ -158,8 +158,8 @@ def fig_cube():
     LBL_Y, BAR_Y, HMAX = -.34, .42, .60
 
     # one bar-drawing routine, used by the cells and by the margins. The
-    # rule does not change between them: the attack bar is solid and the
-    # defense bar is hatched, in the cells and in the totals alike.
+    # rule does not change between them: the mechanism bar is solid and the
+    # fix bar is hatched, in the cells and in the totals alike.
     def pair(ax, i, j, a, d, solid, tint, scale, dedge=None):
         akw = dict(facecolor=solid, edgecolor=solid, linewidth=.4)
         dkw = dict(facecolor=tint, edgecolor=dedge or solid, linewidth=.5,
@@ -207,11 +207,11 @@ def fig_cube():
                     ax.add_patch(plt.Rectangle((j - .47, i - .47), .94, .94,
                                                fill=False, edgecolor=INK,
                                                linewidth=1.4))
-                # Attacks take the full track hue; defenses a pale tint of
+                # Mechanisms take the full regime hue; fixes a pale tint of
                 # the same hue AND a hatch, so the pair separates by texture
                 # as well as by value and survives a greyscale print. An
                 # unfilled bar was tried and rejected: a thin rectangle is
-                # already how this figure marks a cell with no defense in it.
+                # already how this figure marks a cell with no fix in it.
                 pair(ax, i, j, a, d, col, pale, vmax)
 
         # the totals row, a gap below the grid so it cannot be read as a
@@ -271,13 +271,13 @@ def fig_cube():
         # the legend sits under the security panel, so it speaks in that
         # panel's hue; the safety panel uses the same two treatments in blue
         Patch(facecolor=TRACK_SEC, edgecolor=TRACK_SEC, linewidth=.4,
-              label="named attacks"),
+              label="named mechanisms"),
         Patch(facecolor=SEQ_SEC[1], edgecolor=TRACK_SEC, hatch="///",
-              linewidth=.5, label="named defenses"),
+              linewidth=.5, label="named fixes"),
         Patch(facecolor=ALT_B, edgecolor=ALT_B, linewidth=.4,
-              label="all attacks"),
+              label="all mechanisms"),
         Patch(facecolor=ALT_A, edgecolor=SEQ_ALT[7], hatch="///",
-              linewidth=.5, label="all defenses")],
+              linewidth=.5, label="all fixes")],
         fontsize=6, frameon=False, loc="lower left",
         bbox_to_anchor=(0, -.30), ncol=4, columnspacing=1.0)
     save(fig, "fig1_cube")
@@ -292,12 +292,13 @@ def fig_intervention():
     better about text already accepted -- and a shape is what a reader takes
     from a bar and has to assemble from a column of digits.
 
-    Regime is what this figure encodes, so it takes the track hues plain,
-    exactly as the cube panels and the citation graph do. No hatch: inside
-    the cube a hatch means "defense", and borrowing it here to mean "safety"
-    would give one texture two jobs three pages apart. The black-and-white
-    reading is carried by position instead -- security is the upper bar of
-    every pair, in every group, and the caption says so.
+    Regime takes the regime hues, exactly as the cube panels and the
+    citation graph do. Hue alone does not survive a greyscale print, so
+    safety also carries a texture. It is a dot, not the cube's diagonal:
+    there a hatch means "fix", and every bar in this figure is a fix
+    already, so reusing the same glyph for "safety" would give one texture
+    two jobs three pages apart. Position is the third cue -- security is the
+    upper bar of every pair, in every group.
     """
     r4 = load("rq4_defense_registry.json")
     POINTS = ["ingestion", "execution", "reasoning", "none"]
@@ -306,16 +307,20 @@ def fig_intervention():
     y = np.arange(len(POINTS))[::-1]
     h = 0.38
     fig, ax = plt.subplots(figsize=(COL, 1.75), constrained_layout=True)
-    for off, reg, col in ((h / 2, "security", TRACK_SEC),
-                          (-h / 2, "safety", TRACK_ML)):
+    for off, reg, col, hatch in ((h / 2, "security", TRACK_SEC, None),
+                                 (-h / 2, "safety", TRACK_ML, "....")):
         vals = [c[(p, reg)] for p in POINTS]
-        ax.barh(y + off, vals, h, color=col, edgecolor=col,
-                linewidth=.3, label=reg)
+        # the hatch is drawn in the edge colour, so white dots over the full
+        # regime hue: the bar keeps its weight and the texture reads in
+        # greyscale, where a pale tint would instead read as a smaller value.
+        ax.barh(y + off, vals, h, color=col,
+                edgecolor="#ffffff" if hatch else col,
+                hatch=hatch, linewidth=.3, label=reg)
         for yy, v in zip(y + off, vals):
             ax.text(v + 3, yy, str(v), va="center", fontsize=6, color=INK)
     ax.set_yticks(y)
     ax.set_yticklabels(POINTS, fontsize=6.5)
-    ax.set_xlabel("named defenses")
+    ax.set_xlabel("named fixes")
     ax.set_xlim(0, max(c.values()) * 1.16)
     ax.legend(frameon=False, fontsize=6.5, loc="lower right")
     ax.grid(axis="x", color="#eceae6", linewidth=0.5)
