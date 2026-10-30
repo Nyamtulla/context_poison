@@ -447,6 +447,25 @@ def main():
     M["NDefMatchedFull"] = len(per_def)
     M["PctDefMatched"] = f'{100*len(per_def)/len(r4):.1f}'
     M["PctDefUnmatched"] = f'{100*(1-len(per_def)/len(r4)):.0f}'
+    # The unpaired fixes are two populations that mean opposite things, and
+    # one number hides that. A remedy whose community never runs an
+    # adversarial experiment is absent from the matrix because nobody has
+    # attacked it. A defense whose authors did attack it, with an attack the
+    # literature never named again, is absent because pairing works on names.
+    # The first is a finding about the field, the second a limit on this
+    # instrument. Note that NDefNoAdvSafety counts a DIFFERENT population,
+    # from the evaluation audit rather than from pairing: the two happen to
+    # agree on 173 and share only 162 members.
+    _tight = lambda s: "".join(c for c in (s or "").lower() if c.isalnum())
+    _pd = {_tight(d) for d in per_def}
+    _unp = [e for e in r4 if _tight(e.get("defense_name")) not in _pd]
+    M["NFixUnpaired"] = len(_unp)
+    M["NFixUnpairedRemedy"] = sum(
+        1 for e in _unp if e.get("validated_against") == "incidental"
+        and (e.get("regime") or "").strip() == "safety")
+    M["NFixUnpairedDefense"] = sum(
+        1 for e in _unp if e.get("validated_against") == "adversarial"
+        and (e.get("regime") or "").strip() == "security")
     M["NDefOneFull"] = dist[1]
     M["PctDefOneFull"] = f'{100*dist[1]/len(per_def):.1f}'
     M["NDefCeiling"] = max(per_def.values())

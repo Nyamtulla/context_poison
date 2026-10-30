@@ -86,10 +86,28 @@ does run shows none of its own benefit, so we report it as not reportable
 rather than as defeated.
 
 We note this without blame. Releasing a working artifact is harder than it
-looks and is rarely rewarded. But the coverage gap this paper measures is
-partly an artifact gap. A defense nobody else can run is a defense nobody else
-will test. \PctDefUnmatched{}\% of the defenses in our census have no
-confirmed test against any named mechanism.
+looks and is rarely rewarded. But a defense nobody else can run is a defense
+nobody else will test, so part of the coverage gap this paper measures is an
+artifact gap.
+
+Only part of it. \NFixUnpaired{} of \NFixes{} fixes have no confirmed test
+against any named mechanism, and that one number holds two populations that
+mean opposite things.
+
+\NFixUnpairedRemedy{} of the unpaired are remedies, safety-regime methods
+whose own evaluation reports no adversary. Nobody has attacked them, because
+their community does not run that experiment. That is a finding about the
+field.
+
+\NFixUnpairedDefense{} of the unpaired are defenses, security-regime methods
+their own authors did attack, with an attack that carries no name the
+literature uses again. Pairing works on names, so the matrix cannot see them.
+Their absence from it measures this instrument rather than the field.
+Section~\ref{sec:literatures} reaches the same division from the other side,
+by auditing what every evaluation in the registry reports rather than by
+asking which methods pair. The fixes left over
+are validated both ways, or carry no record of what they were validated
+against.
 
 \subsection{Implications for deployment}
 
