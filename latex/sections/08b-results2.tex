@@ -92,6 +92,42 @@ honest passage remains and the two implementations have nothing left to
 disagree about. A survey reporting one number per published method would have
 missed all of this.
 
+\subsection{The grid on the other item set}
+\label{sec:grid}
+
+Everything above runs on CoConflictQA, where an item carries one context
+passage and a dose is a fraction of the chunks that passage is cut into.
+The campaign also runs every defense against every attack on open Natural
+Questions, where a dose is $j$ of the top ten retrieved passages.
+Table~\ref{tab:grid} is that grid: \NGridCells{} cells, each read against
+its own undefended arm on the same items at the same dose. The two item sets
+are not comparable and we do not compare them. What the grid adds is breadth:
+the design rule of Section~\ref{sec:results} was read off one attack, and
+here it meets four.
+
+It survives the breadth. The split is not between defenses that work and
+defenses that do not, but between defenses that keep a fallback and defenses
+that remove one. ACD, SCR and DyPRAG leave the model a route back to its own
+parameters, and they gain under saturation. ParamMute and CK-PLUG suppress
+that route to force reliance on the retrieved text, and when every retrieved
+passage is planted there is nothing left to rely on: they end further below
+their own undefended arms than any other method here. Of the
+\NGridCells{} cells, \NGridGainSat{} show the defended arm ahead at
+saturation by more than that run's detectability threshold,
+\NGridLoseSat{} show it behind by more than the threshold, and
+\NGridFlatSat{} resolve to no difference.
+
+The clean column prices them. \NGridFreeClean{} of the \NGridCells{} cells
+cost nothing measurable when no passage is planted, so most of these methods
+are free to leave switched on. The \NGridCostClean{} that are not belong to
+two methods, and both pay more than twenty points for protection they only
+collect under attack.
+
+Two mechanisms in this grid are not yet complete. A stale document and a
+diluted window are running, and we report no numbers for them here.
+
+\input{tables/grid}
+
 \subsection{Defenses that transfer}
 \label{sec:transfer}
 

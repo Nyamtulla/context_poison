@@ -1099,6 +1099,56 @@ def main():
     E["EDypragRagSat"] = _x(DYP, "ctx_acc", arm="rag", frac=1.0)
     E["EDypragNoRet"] = _x(DYP, "ctx_acc", arm="closedbook", frac=0.0)
     E["ERobustMdr"] = load("badrag_dos_robustrag.json")["mdr_pp_at_n"]
+    # The open-NQ grid, which reached the paper only as a count of pairs.
+    # Every cell is read against its OWN undefended arm on the same items at
+    # the same dose, and every verdict runs through the detectability gate
+    # the rest of the paper uses, so a cell that moves less than its own
+    # threshold counts as neither a gain nor a loss.
+    import glob as _glob
+    from transfer_stats import min_detectable_change
+    _UND = ("undefended", "base_rag", "rag", "base")
+    _DEF = ("defended", "ck", "coiecd", "acd", "scr", "parammute", "dyprag")
+    _cells, _gain, _lose, _freeclean, _costclean = [], 0, 0, 0, 0
+    for _f in sorted(_glob.glob(str(R / "native_*.json"))):
+        # The _direct cells put the same payload in the user turn instead of
+        # among the retrieved passages. That is a different channel, not
+        # another cell of this grid, and it is discussed where placement is.
+        if _f.endswith("_direct.json"):
+            continue
+        _d = json.loads(pathlib.Path(_f).read_text())
+        _rows = [r for r in (_d.get("results") or []) if isinstance(r, dict)]
+        _arms = {r.get("arm") for r in _rows} - {None}
+        _u = next((a for a in _UND if a in _arms), None)
+        _v = next((a for a in _DEF if a in _arms), None)
+        if not _u or not _v:
+            continue
+        def _acc(arm, j, rows=_rows):
+            return next((r.get("acc") for r in rows
+                         if r.get("arm") == arm and r.get("n_poison") == j), None)
+        _n = _d.get("n") or 500
+        for _j, _bucket in ((0, "clean"), (10, "sat")):
+            _a, _b = _acc(_v, _j), _acc(_u, _j)
+            if None in (_a, _b):
+                continue
+            _thr = min_detectable_change(_n, max(_b, 1.0) / 100)
+            _delta = _a - _b
+            if _bucket == "sat":
+                _cells.append(_delta)
+                if _delta > _thr:
+                    _gain += 1
+                elif _delta < -_thr:
+                    _lose += 1
+            else:
+                if abs(_delta) <= _thr:
+                    _freeclean += 1
+                elif _delta < 0:
+                    _costclean += 1
+    M["NGridCells"] = len(_cells)
+    M["NGridGainSat"] = _gain
+    M["NGridLoseSat"] = _lose
+    M["NGridFlatSat"] = len(_cells) - _gain - _lose
+    M["NGridFreeClean"] = _freeclean
+    M["NGridCostClean"] = _costclean
     # RobustRAG, a security defense, against the two safety-regime mechanisms
     # of the retrieval cell. Distractor evidence plants a passage asserting a
     # wrong answer, which is structurally what RobustRAG's own threat model
