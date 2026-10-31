@@ -106,6 +106,16 @@ ATTACK_TOKENS = [
     # literature already names rather than to a poisoning entry.
     ("misretrieval", "misretrieval (irrelevant retrieved context)",
      "distractionbyirrelevantcontext"),
+    # A real retrieved passage with the gold answer swapped: nothing is
+    # planted that anyone wrote, and the passage contradicts what the model
+    # remembers, which is the knowledge-conflict mechanism with no author.
+    ("incidental_stale", "stale document",
+     "knowledgeconflictcontextualvsparametric"),
+    # Real passages for other questions appended beside the decisive one, so
+    # the window grows and nothing in it deserves disbelief. It keys to the
+    # length-degradation mechanism rather than to a poisoning entry.
+    ("context_dilution", "context dilution (window growth)",
+     "contextlengthinduceddegradation"),
     # our adaptive attack on ACD: the distractor payload in whichever form
     # minimises ACD's own ent_pos. Same registry key, because a literature
     # pair would still call it knowledge conflict, but its own label, because

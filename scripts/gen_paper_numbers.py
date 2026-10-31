@@ -797,7 +797,11 @@ def main():
            "adaptive distractor": "security",
            "gradient distractor": "security",
            "false evidence": "safety", "distractor evidence": "safety",
-           "misretrieval (irrelevant retrieved context)": "safety"}
+           "misretrieval (irrelevant retrieved context)": "safety",
+           # Both are real passages from the item set itself, with no
+           # author behind them, so both sit in the safety regime.
+           "stale document": "safety",
+           "context dilution (window growth)": "safety"}
     # how many of the retrieval-cell implementations come from each regime.
     # Section 7 said "eight of our nine" while NRagImpl read ten.
     M["NRagImplSafety"] = sum(1 for v in _DT.values() if v == "safety")
@@ -832,6 +836,11 @@ def main():
     M["NCampSecDefSafetyMech"] = M["NOursSecDefSafetyMech"]
     M["NCampSafDefSecMech"] = M["NOursSafDefSecMech"]
     M["NCampSafDefSafetyMech"] = M["NOursSafDefSafetyMech"]
+    # The crossings at campaign scale, so the share can be set beside the
+    # literature's share of its own pairs rather than against a count.
+    M["NCampCrossPairs"] = (M["NCampSecDefSafetyMech"]
+                            + M["NCampSafDefSecMech"])
+    M["PctCampCross"] = f'{100*M["NCampCrossPairs"]/M["NCampaignPairs"]:.0f}'
     _boxsum = (M["NCampSecDefSecMech"] + M["NCampSecDefSafetyMech"]
                + M["NCampSafDefSecMech"] + M["NCampSafDefSafetyMech"])
     if _boxsum != M["NCampaignPairs"]:
