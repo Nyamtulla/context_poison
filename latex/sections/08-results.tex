@@ -1,4 +1,4 @@
-\section{Results: the context-reliance family under attack}
+\section{Results}
 \label{sec:results}
 
 \subsection{What this section covers}
@@ -11,10 +11,10 @@ off-diagonals do not: where the literature has
 \NCampCrossPairs{}.
 
 The cell holds \NRagImpl{} defense implementations. Seven of them share one
-design, and Section~\ref{sec:results} is about that design. The other three
+design, and most of this section is about that design. The other three
 are the reason its claim can fail: DyPRAG~\cite{tan-2025-dynamic} converts
 the passage to weights, and RobustRAG's~\cite{xiang-2024-certifiably} two
-variants aggregate over isolated passages. Section~\ref{sec:results2}
+variants aggregate over isolated passages. Section~\ref{sec:transfer}
 reports them, and they do not behave as the seven do.
 
 The mirror image is thin on our side, and that is a limit. Most cross-regime
@@ -214,13 +214,9 @@ same event.
 Two readings follow, and they are different sizes. The narrow one is a scope
 condition on this campaign. The payloads here are not interchangeable with
 ordinary wrong documents, at any dose we report. A defense that handles one
-has not been shown to handle the other. The broad one is about the field, and
-it belongs to one mechanism rather than to both. Where the attack removes the
-evidence rather than inserting a lie, the two literatures study the same
-stimulus: an optimized artifact and a retrieval error are one event, and no
-dose separates them. The
-citation gap in Section~\ref{sec:literatures} is therefore not two communities
-working on different problems.
+has not been shown to handle the other. The broad one holds for one mechanism and not the other. Where the attack
+removes the evidence rather than planting a lie, an optimized passage and an
+ordinary retrieval error are the same event, and no dose separates them.
 
 Every arm falls below the no-retrieval row by the last dose. Past some dose,
 whatever wrote the context has taken more from the model than retrieval gives
@@ -494,3 +490,330 @@ context to \EScrPmSat{} on a corrupted one, moving toward the closed-book
 rate of \EScrNoRetPm{}. Both SCR and ACD slide from
 the document toward memory as the attack grows. SCR simply destroys more
 correct answers on the way.
+
+\subsection{Results that flip without a control}
+\label{sec:controls}
+
+Each of the following reverses if the arm beside it is dropped, and in each
+case that arm is one the relevant literature does not report.
+
+\textbf{A no-retrieval baseline.} DyPRAG is perfectly
+flat under an attack that destroys the undefended arm, scoring
+\EDypragClean\% on a clean context and \EDypragSat\% on a corrupted one, across
+the dose range while the undefended arm falls from \EDypragRagClean\% to
+\EDypragRagSat\%. Read alone, that is the strongest defense result in the
+campaign. The closed-book arm scores \EDypragNoRet\% and is statistically
+indistinguishable from it.
+DyPRAG is flat because it is not reading the document, not because it
+is resisting the attack. Only a no-retrieval arm separates immunity from
+inattention, and no paper in this family reports one.
+
+\textbf{An abstention axis.} COIECD is inert on accuracy at every dose. Dumping
+and classifying every generation shows it is not inert at all. On the items
+where the undefended model answered from memory, COIECD converts
+32.1\% of those answers into explicit abstentions, and does so only
+under attack; on clean context the same pairing moves almost nothing. Because
+the parametric answer is wrong by construction in this data, what it suppressed
+were confident wrong answers and what it produced instead was "not mentioned".
+That is a real safety gain, and it is invisible in the accuracy column that
+every paper in this family reports.
+
+\textbf{A model control.} RobustRAG ran on Mistral and the
+context-reliance family ran on Llama, because those are the models each
+paper released. Re-running RobustRAG on the other family's model changes
+outcomes. The tone-steering finding survives unchanged, which strengthens
+it. The implementation divergence below does not. At nine poisoned passages
+against refusal induction, KeywordAgg is \NKeywordNineMistral{}\pp{} on
+Mistral and \NKeywordNineLlama{}\pp{} on Llama: the variant that is
+resolvably protective on one model is not protective on the other, while
+DecodingAgg stays harmful on both (\NDecodingNineMistral{}\pp{} and
+\NDecodingNineLlama{}\pp{}). Holding defense and attack fixed and changing
+only the base model changes an effect's size, its existence, and in one case
+its sign.
+
+\subsection{Is it the design, or one codebase?}
+
+A single implementation cannot tell you whether you have found a property of a
+design principle or a quirk of one codebase. RobustRAG
+ships two aggregation variants that share the isolate-then-aggregate principle
+and share no decision logic downstream of it. One extracts keywords and
+re-prompts; the other averages next-token distributions.
+
+Both show the same behavior under tone steering, at or below 0.3\% across
+four cells and two models, against CK-PLUG's 99.0\% on the same attack and
+model. Aggregation does not open the tone-steering hole; context-reliance
+does. Two implementations that share only the principle agree here, so the
+behavior belongs to the principle.
+
+The caution runs the other way too. Across fifteen dose levels the two
+implementations agree within noise on thirteen. On one they do not. At nine
+poisoned passages in ten, against refusal induction, KeywordAgg is
+\NKeywordNineMistral{}\pp{} and DecodingAgg is
+\NDecodingNineMistral{}\pp{}, with both ends clearing the \ERobustMdr\pp
+threshold at $n=300$. One implementation of isolate-then-aggregate is
+resolvably protective and the other is resolvably harmful, on the same
+attack, at the same dose, inside one codebase --- on this model. The control
+above shows the protective end does not survive a change of base model, so
+the divergence is a property of the pair, not of the principle.
+
+The gap grows as the honest minority of passages shrinks: 13.0 points at five
+in ten, 29.7 at nine in ten. It then collapses to 1.7 at ten in ten, where no
+honest passage remains and the two implementations have nothing left to
+disagree about. A survey reporting one number per published method would have
+missed all of this.
+
+\subsection{Every defense against every attack}
+\label{sec:grid}
+
+Everything above runs on CoConflictQA, where an item carries one context
+passage and the only two conditions are a clean context and a corrupted one.
+The campaign also runs every defense against every attack on open Natural
+Questions, where a dose is $j$ of the top ten retrieved passages.
+Table~\ref{tab:grid} is that grid: \NGridCells{} cells, each read against
+its own undefended arm on the same items at the same dose. The two item sets
+are not comparable and we do not compare them. What the grid adds is breadth:
+the design rule above was read off one attack, and
+here it meets four.
+
+Across that breadth almost nothing helps. Of the \NGridCells{} cells,
+\NGridGainTop{} show the defended arm ahead at the top dose by more than
+that run's detectability threshold, \NGridLoseTop{} show it behind by more
+than the threshold, and \NGridFlatTop{} resolve to no difference. All
+\NGridGainTop{} gains are against the denial-of-service payload, where the
+undefended model refuses to answer and any method that restores an answer
+gains accuracy for a reason that is not robustness. Every cell that resolves
+against a payload which plants a false answer rather than suppressing one
+resolves downward.
+
+The losses are concentrated the way that rule predicts.
+CK-PLUG and DyPRAG hold \NGridLoseTopTwo{} of the \NGridLoseTop{}: both
+suppress the model's own parameters to force reliance on retrieved text, and
+both pay for it on every payload they meet.
+
+The clean column prices them. \NGridFreeClean{} of the \NGridCells{} cells
+cost nothing measurable when no passage is planted, so most of these methods
+are free to leave switched on. The \NGridCostClean{} that are not belong to
+the same two methods, and both pay more than twenty points before any
+passage is planted.
+
+Two mechanisms in this grid are not yet complete. A stale document and a
+diluted window are running, and we report no numbers for them here.
+
+\input{tables/grid}
+
+\subsection{The defenses that do transfer}
+\label{sec:transfer}
+
+The exceptions are informative. RobustRAG stops PoisonedRAG, which its own
+paper tested, and we reproduce that (+\ERobustPoisonedGain{}\pp). Against
+corpus poisoning it neither helps nor hurts anywhere in the range we report:
+\ERobustDispOneDef{}\% against the undefended arm's \ERobustDispOneUndef{}\%
+at one displaced passage and \ERobustDispFiveDef{}\% against
+\ERobustDispFiveUndef{}\% at five, both gaps inside the
+\ERobustDispMdr{}\pp{} threshold. Refilling the window from ranks the
+attacker does not hold moves it to \ERobustBackfillFive{}\% at five, also
+inside the threshold.
+
+One condition past that range says why, and we report it as a diagnostic
+rather than as a result. When the attacker holds every retrieved passage both
+arms sit on the floor, \ERobustDispTenDef{}\% and
+\ERobustDispTenUndef{}\%, and the same refill restores
+\ERobustBackfillTen{}\%. What decides that cell is not the defense but the
+attacker's budget against the retrieval depth. Isolate-then-aggregate needs
+an honest passage to aggregate, and whether one exists is a property of the
+pipeline rather than of the method. The defense's own authors sweep a
+corruption size up to half the window and no further, so we draw no verdict
+about the defense from a condition they do not evaluate.
+
+The same defense meets the other regime twice, and the two cells disagree.
+Against distractor evidence --- a passage asserting a wrong answer, which is
+what RobustRAG's threat model describes with the attacker taken out --- it
+holds at low dose. At two planted passages in ten the keyword variant scores
+\ERobustDistKeyTwo{}\% and the decoding variant \ERobustDistDecTwo{}\%,
+against the undefended arm's \ERobustDistUndefTwo{}\%. The hold does not
+survive dosing: at ten in ten both sit near \ERobustDistKeyTen{}\% against
+\ERobustDistUndefTen{}\%. Against misretrieval it never helps. Both defended
+arms start below the undefended one, \ERobustMisKeyClean{}\% and
+\ERobustMisDecClean{}\% against \ERobustMisUndefClean{}\%, and both are
+still below it at five in ten, \ERobustMisKeyFive{}\% and
+\ERobustMisDecFive{}\% against \ERobustMisUndefFive{}\%. Misretrieval
+plants nothing, so isolate-then-aggregate has no dishonest passage to isolate
+and the defense pays its accuracy cost for nothing.
+
+A defense built for an adversary transfers on the shape of the stimulus, not
+on the presence of one. Where an incidental mechanism puts a wrong claim in
+the window it is worth running. Where it only degrades what the retriever
+returns it is a cost.
+
+Across the agent cell, \NAgentHolds{} of \NAgentConditions{} conditions show
+the technique holding, with attack success driven to zero. A further 4 show a
+resolvable reduction. The rest divide between 19 with no resolvable effect at
+that sample size and 9 with no reduction at all.
+
+Every hold is at ingestion or at execution. Of the
+\NAgentHolds{} that hold, \NAgentHoldsIngestion{} act at ingestion and
+\NAgentHoldsExecution{} at execution, which is every execution-stage
+technique we ran. None of the \NAgentTriedReasoning{}
+reasoning-stage conditions holds. The stage a technique acts at, rather than
+the technique, predicts whether it survives here --- the division
+Section~\ref{sec:parallel} finds in the literature, reproduced in what the
+methods actually do.
+
+\subsection{The dose that favors a defense most}
+\label{sec:lowdose}
+
+A result read at the top of the dose range is read where the attack is
+strongest and the measurement is weakest. The fewer honest passages remain,
+the more a low accuracy measures the attack rather than a failing defense.
+
+So we report the other end as well, and the attacks supply it. One poisoned
+passage in ten is the default in the released attack constructor, and it is
+the dose most favorable to a defense: nine honest passages remain for it to
+work with. If a method can discount a planted passage while still using a
+good one, this is where it shows.
+
+\NGridLowHelps{} of the \NGridLowPairs{} pairs in Table~\ref{tab:grid} show
+a resolvable benefit there. Every other defense is at or below its own
+undefended arm, at the dose that favors it most, against an attack run at
+its authors' own strength. Both exceptions are the denial-of-service payload,
+where the undefended model refuses to answer and any method that restores an
+answer gains accuracy for a reason that is not robustness.
+
+The table is also the worst-case reading that a security claim requires. A
+defense beaten by one of three payloads is not two-thirds robust, it is broken,
+and averaging across payloads would hide that. We therefore report the
+minimum rather than the mean: robustness is a property of the strongest
+attack a method has met, not of the attacks its authors chose.
+
+\subsection{An attacker who reads the defense}
+\label{sec:adaptive}
+
+This subsection answers RQ5. Every result above comes from an attack that was not built for the defense it
+met. Section~\ref{sec:experiments} states why that is conservative for a
+failure and invalid for a resistance. ACD is our one resistance result, so it
+is the one that has to be tested properly.
+
+ACD mixes the no-context and with-context next-token distributions by
+\[
+d_\alpha = \frac{H}{H_{\mathrm{ctx}} + H},
+\qquad
+s \leftarrow s + d_\alpha\,(s_{\mathrm{ctx}} - s),
+\]
+where $H$ is the Shannon entropy of the no-context distribution and
+$H_{\mathrm{ctx}}$ that of the with-context one. $H$ is a property of the
+question. $H_{\mathrm{ctx}}$ is conditioned on the retrieved context, which an
+attacker who owns the corpus controls outright. So the attack has
+exactly one objective: minimize $H_{\mathrm{ctx}}$.
+
+The ceiling follows from the rule, not from an experiment. As
+$H_{\mathrm{ctx}} \to 0$, $d_\alpha \to 1$ and the update collapses to
+$s_{\mathrm{ctx}}$ unchanged, which is the undefended model. A perfect adaptive
+attack of this kind turns ACD into plain RAG and can do no better. It cannot
+drive ACD \emph{below} its own undefended arm. $d_\alpha$ is bounded in
+$(0,1)$, and the endpoints are closed-book and plain RAG. We committed that
+bound, and five further predictions, before building the payload. An ACD arm
+landing below the undefended arm would have falsified our account of the
+mechanism.
+
+The attack is white-box and query-based. Five candidate passages per item, all
+asserting the \emph{same} distractor answer and differing only in form, each
+scored by the $H_{\mathrm{ctx}}$ ACD itself would compute, keeping the
+minimum.
+
+The attacker optimizes on the items it then attacks. This is not training on
+the test set. The threat model gives the adversary the model and the defense rule, and an
+adversary who owns a corpus tunes the passage they are about to plant. A payload
+optimized on held-out items and transferred would measure something else, and
+something weaker. What is held out is the few-shot block: its demonstrations
+are drawn from items outside the evaluation slice and are never poisoned, so
+the defense is not shown the attack in its own prompt. Holding the asserted answer fixed is what makes any movement
+attributable to form rather than to a different claim. It is a deliberately
+weak optimizer, so what it achieves is again a lower bound.
+
+\begin{table}[t]
+\centering
+\caption{ACD against the distractor payload in its plain form and in two forms
+that minimize ACD's own entropy term, on a corrupted context, $n=\NAcdAdaptiveItems{}$. Both adaptive
+payloads are stronger against the undefended arm too, so the defensive gap is
+the quantity that isolates the defense. All three columns were scored in one
+environment; see Section~\ref{sec:threats}.}
+\label{tab:adaptive}
+\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+corrupted context & plain & best-of-5 & gradient \\
+\midrule
+median $H_{\mathrm{ctx}}$ & 1.348 & 0.783 & \textbf{0.614} \\
+median $d_\alpha$ & 0.525 & 0.653 & \textbf{0.708} \\
+\midrule
+undefended copies attacker & 76.0 & 89.1 & 87.8 \\
+ACD copies attacker & 40.8 & 64.0 & \textbf{73.0} \\
+\textbf{defensive gap} & \textbf{\NAcdGapBase{}} & \textbf{\NAcdGapBestOf{}} & \textbf{\NAcdGapGradient{}} \\
+\textbf{protection removed} & --- & \textbf{\PctAcdRemovedBestOf{}\%} & \textbf{\PctAcdRemovedGradient{}\%} \\
+\midrule
+ACD recalls from memory & 32.5 & 22.2 & 18.1 \\
+ACD answers correctly & 5.0 & 3.2 & 2.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All six predictions held, and Table~\ref{tab:adaptive} carries
+them. $H_{\mathrm{ctx}}$ falls 42\%, $d_\alpha$ rises toward 1, ACD's copy rate rises from \EAcdDistCopyDef\% to
+\EAcdAdaptCopy\% ($p = 9.5\times10^{-18}$), its parametric recall falls
+toward the undefended arm's, and its accuracy lands on \EAcdAdaptAcc\% ---
+exactly the undefended arm, and below the no-retrieval floor of
+\EAcdAdaptNoRet\%. ACD does not fall below the
+undefended arm on copy rate, as the ceiling requires.
+
+The honest size of the effect is the gap, not ACD's rise. The adaptive
+payload is stronger against the undefended arm as well, so reporting only
+ACD's change would credit the defense with damage the attack does to everyone.
+Against its own undefended arm the protection falls from \NAcdGapBase{}\pp{}
+to \NAcdGapBestOf{}\pp{}: \PctAcdRemovedBestOf{}\% of it removed by a
+best-of-five search over sentence templates. Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, which
+left a question the weak optimizer could not answer.
+
+A gradient search answers it. We ran a GCG-style~\cite{zou-2023-universal} coordinate search
+over a 20-token suffix against the same objective, appended to the passage
+best-of-five had already chosen so that the asserted answer stays fixed and
+any movement is the gradient's. Candidate tokens are restricted to
+space-leading printable ASCII, because a suffix that does not survive a
+decode and re-encode is not a passage an attacker can place in a corpus; the
+round trip is exact on all \NAcdAdaptiveItems{} items. A gradient passage is kept only where it
+beats the best-of-five passage on the reported measure, which it fails to do
+on 163 of \NAcdAdaptiveItems{}, so the payload is monotone by construction.
+
+It drives $H_{\mathrm{ctx}}$ to 0.614 and $d_\alpha$ to 0.708, and the
+defensive gap falls to \NAcdGapGradient{}\pp{}: \PctAcdRemovedGradient{}\% of ACD's protection removed,
+twice what sentence templates took. The \NAcdGradientBeyond{}\pp{} it takes beyond
+best-of-five clears the \NAcdAdaptiveMdr{}\pp{} detectability threshold at this
+sample size.
+
+The gradient payload is weaker in general and stronger against the
+defense. It damages the undefended arm \emph{less} than best-of-five
+does, \EAcdGradUndefCopy\% against \EAcdAdaptUndefCopy\%, while taking
+considerably more from ACD. The gap
+is what isolates the defense, and the gap is what moved. The search therefore attacks the method rather than simply producing a
+better payload.
+
+The two conditions agree. On a clean context the three payloads are
+indistinguishable: no gap between the arms exceeds \NAcdGapCleanMax{}\pp{},
+because there is nothing there to defend against. They separate only once
+the context is corrupted, which is what one expects of a rule keyed on a
+statistic computed over the whole context.
+
+ACD degrades under adaptive pressure; it does not collapse. We
+committed the bands in advance: below 10\pp{} of remaining gap we would have
+called it neutralized, and 10 to 25\pp{} degraded further while holding
+something back. The result is the second. A rule that gives up
+\PctAcdRemovedGradient{}\% of its
+protection to an attacker with gradients is a real obstacle that has now been
+priced, rather than either a solved problem or a broken one.
+
+What this licenses is still narrow. It does not show ACD is broken, and the
+ceiling in the rule says no attack of this kind could have driven it below the
+undefended arm. One defense in our campaign looked like a counterexample. It
+gives up most of its protection to an attacker who reads the method. Every
+published evaluation of a context-reliance defense in our corpus is
+non-adaptive. The gap between non-adaptive and adaptive
+evaluation is large enough to change the verdict.
