@@ -113,7 +113,7 @@ honest and costs \ESpareSat\pp when it is attacked. Both ends clear the
 
 ParamMute shows the same shape on a larger sample. Its benefit on clean context
 is +\EParamClean\pp. On a corrupted context it is \EParamSatGap\pp \emph{below} the
-undefended model, and across the full dose range it loses
+undefended model, and between those two conditions it loses
 \EParamExcessCorpus\pp more accuracy than doing nothing at all.
 
 CK-PLUG's behavior is the most extreme we measured, and it appears on a
@@ -121,7 +121,7 @@ different metric. Under BadRAG sentiment steering~\cite{xue-2024-badrag}, which
 tries to make the model answer in a negative tone, the undefended model never
 adopts the attacker's framing more than \ECkSentUndefMax\% of the time at any
 dose. CK-PLUG adopts it \ECkSentOne\% of the time with a single poisoned
-passage out of ten, and \ECkSentSat\% at full dose. The defense does not fail to stop the attack. It carries it.
+passage out of ten, and \ECkSentTop\% at five. The defense does not fail to stop the attack. It carries it.
 Figure~\ref{fig:dose} plots the safety-regime defenses of the retrieval cell
 against the attack's own dose ladder, each measured against its own
 undefended arm.
@@ -134,11 +134,10 @@ poisoning, on the attack's own dose ladder, measured as the defended arm
 minus its own undefended arm in the same run. Zero means the defense changed
 nothing. Filled markers are resolvable at $p < .05$ by Fisher's exact
 test~\cite{fisher-1922-interpretation}; hollow markers are not. Three
-patterns are visible. CK-PLUG and DyPRAG start far below zero and pay that
-cost before any passage is planted. ParamMute tracks zero until the honest
-passages are nearly gone and then falls furthest of any line. SCR and DyPRAG
-are flat or below zero until the last dose and then rise sharply, which is
-where a method that keeps a route back to its own parameters collects.}
+pattern is visible, and it is a separation rather than a trend. CK-PLUG and
+DyPRAG sit more than twenty points below zero before any passage is planted
+and stay there. The other four track zero across the whole range. No line
+crosses zero, and inside this range the dose does not decide any of them.}
 \label{fig:dose}
 \end{figure}
 
@@ -191,32 +190,35 @@ its passage five times in each slot it takes. Placed once it loses at most
 \NRegimeRepeatMax{}\pp{} of adoption, under threshold at every dose, so no
 number in this campaign needs a repetition caveat.
 
-Craft buys an attacker a real advantage, and only at low dose. With
+Craft buys an attacker a real advantage, and it buys it at every dose. With
 one poisoned passage in ten, the crafted passage is adopted
 \PctCraftLow{}\% of the time against \PctStaleLow{}\% for the stale document,
-a gap of \NRegimeGapLow{}\pp{} that clears the threshold. That is the dose
-range a deployment actually faces. At saturation the gap is
-\NRegimeGapSat{}\pp{}, inside the threshold, and the two are not
-distinguishable. \textbf{A document nobody wrote as an attack still carries
-the model onto the false answer \PctStaleSat{}\% of the time.} It also costs
-more accuracy at saturation than the crafted passage does, \AccStaleSat{}
-against \AccCraftSat{}. The attacker optimizes for his own answer, not for
-damage.
+a gap of \NRegimeGapLow{}\pp{}. The gap never falls below
+\NRegimeGapMin{}\pp{} anywhere in the range, so it clears the
+\NRegimeThresh{}\pp{} threshold at every dose. Writing the sentence to be
+believed is worth something, and the campaign can measure it.
+
+\textbf{A document nobody wrote as an attack still carries the model onto the
+false answer \PctStaleTop{}\% of the time}, against \PctStaleClean{}\% on a
+clean context. It also costs more accuracy than the crafted passage does at
+that dose, \AccStaleTop{} against \AccCraftTop{}. The attacker optimizes for
+his own answer, not for damage.
 
 Against displacement the adversary buys nothing at all. Zhong et
 al.'s optimized artifact and a passage retrieved for someone else's question
-land on the same numbers: \PctCorpusSat{}\% and \PctMisretrievalSat{}\%
-adoption, \AccCorpusSat{} and \AccMisretrievalSat{} accuracy, every gap inside
-the threshold. For this mechanism, an attack and a retrieval error are the
+land on the same numbers: \PctCorpusTop{}\% and \PctMisretrievalTop{}\%
+adoption, \AccCorpusTop{} and \AccMisretrievalTop{} accuracy, every gap inside
+the threshold at every dose. For this mechanism, an attack and a retrieval error are the
 same event.
 
 Two readings follow, and they are different sizes. The narrow one is a scope
-condition on this campaign. At low dose the payloads here are not
-interchangeable with ordinary wrong documents. A defense that handles one has
-not been shown to handle the other. The broad one is about the field. The two
-literatures study a failure that is substantially the same stimulus, and
-becomes the same stimulus exactly where it hurts most --- under saturation,
-and for the mechanism that removes evidence rather than inserting a lie. The
+condition on this campaign. The payloads here are not interchangeable with
+ordinary wrong documents, at any dose we report. A defense that handles one
+has not been shown to handle the other. The broad one is about the field, and
+it belongs to one mechanism rather than to both. Where the attack removes the
+evidence rather than inserting a lie, the two literatures study the same
+stimulus: an optimized artifact and a retrieval error are one event, and no
+dose separates them. The
 citation gap in Section~\ref{sec:literatures} is therefore not two communities
 working on different problems.
 

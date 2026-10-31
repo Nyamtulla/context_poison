@@ -19,7 +19,8 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 REG = REPO / "data" / "registries" / "regime_framing_test.json"
 OUT = REPO / "latex" / "tables" / "regime_framing.tex"
 
-DOSES = [0, 1, 2, 3, 5, 10]
+# Stops at the largest corruption size the defense authors evaluate.
+DOSES = [0, 1, 2, 3, 5]
 ROWS = [
     ("a1_poisonedrag_x5", r"PoisonedRAG, repeated $\times 5$", "adversarial"),
     ("a2_poisonedrag_x1", r"PoisonedRAG, placed once", "adversarial"),

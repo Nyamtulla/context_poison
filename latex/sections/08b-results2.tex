@@ -105,23 +105,26 @@ are not comparable and we do not compare them. What the grid adds is breadth:
 the design rule of Section~\ref{sec:results} was read off one attack, and
 here it meets four.
 
-It survives the breadth. The split is not between defenses that work and
-defenses that do not, but between defenses that keep a fallback and defenses
-that remove one. ACD, SCR and DyPRAG leave the model a route back to its own
-parameters, and they gain under saturation. ParamMute and CK-PLUG suppress
-that route to force reliance on the retrieved text, and when every retrieved
-passage is planted there is nothing left to rely on: they end further below
-their own undefended arms than any other method here. Of the
-\NGridCells{} cells, \NGridGainSat{} show the defended arm ahead at
-saturation by more than that run's detectability threshold,
-\NGridLoseSat{} show it behind by more than the threshold, and
-\NGridFlatSat{} resolve to no difference.
+Across that breadth almost nothing helps. Of the \NGridCells{} cells,
+\NGridGainTop{} show the defended arm ahead at the top dose by more than
+that run's detectability threshold, \NGridLoseTop{} show it behind by more
+than the threshold, and \NGridFlatTop{} resolve to no difference. All
+\NGridGainTop{} gains are against the denial-of-service payload, where the
+undefended model refuses to answer and any method that restores an answer
+gains accuracy for a reason that is not robustness. Every cell that resolves
+against a payload which plants a false answer rather than suppressing one
+resolves downward.
+
+The losses are concentrated the way Section~\ref{sec:results} predicts.
+CK-PLUG and DyPRAG hold \NGridLoseTopTwo{} of the \NGridLoseTop{}: both
+suppress the model's own parameters to force reliance on retrieved text, and
+both pay for it on every payload they meet.
 
 The clean column prices them. \NGridFreeClean{} of the \NGridCells{} cells
 cost nothing measurable when no passage is planted, so most of these methods
 are free to leave switched on. The \NGridCostClean{} that are not belong to
-two methods, and both pay more than twenty points for protection they only
-collect under attack.
+the same two methods, and both pay more than twenty points before any
+passage is planted.
 
 Two mechanisms in this grid are not yet complete. A stale document and a
 diluted window are running, and we report no numbers for them here.
@@ -177,10 +180,9 @@ methods actually do.
 \subsection{The dose of maximum advantage}
 \label{sec:lowdose}
 
-A result read where every retrieved passage is planted is read at the
-corner where the attack is strongest and the measurement is weakest. With no
-honest passage left, no method can read one, so a low accuracy partly
-measures a complete attack rather than a failing defense.
+A result read at the top of the dose range is read where the attack is
+strongest and the measurement is weakest. The fewer honest passages remain,
+the more a low accuracy measures the attack rather than a failing defense.
 
 So we report the other end as well, and the attacks supply it. One poisoned
 passage in ten is the default in the released attack constructor, and it is
@@ -190,7 +192,7 @@ good one, this is where it shows.
 
 \NGridLowHelps{} of the \NGridLowPairs{} pairs in Table~\ref{tab:grid} show
 a resolvable benefit there. Every other defense is at or below its own
-undefended arm, at the dose that favours it most, against an attack run at
+undefended arm, at the dose that favors it most, against an attack run at
 its authors' own strength. Both exceptions are the denial-of-service payload,
 where the undefended model refuses to answer and any method that restores an
 answer gains accuracy for a reason that is not robustness.

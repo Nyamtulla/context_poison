@@ -11,9 +11,10 @@ pairs.
 Two numbers per cell, both against that cell's OWN undefended arm on the
 same items at the same dose:
 
-  clean       what the defense costs when nothing is planted (dose 0)
-  saturated   what it is worth when every retrieved passage is planted
-              (dose 10 of 10)
+  clean   what the defense costs when nothing is planted (dose 0)
+  five    what it is worth at five poisoned passages of ten, which is the
+          largest corruption size the RobustRAG authors sweep in their own
+          run script at top-k ten
 
 A defense whose clean column is negative is paying rent. One whose saturated
 column is positive is earning it back under attack. The two are independent,
@@ -32,6 +33,8 @@ import pathlib
 REPO = pathlib.Path(__file__).resolve().parent.parent
 REG = REPO / "data" / "registries"
 OUT = REPO / "latex" / "tables" / "grid.tex"
+# The ladder stops where the literature stops; see gen_paper_numbers.
+TOPDOSE = 5
 
 # The undefended arm and the defended arm carry a different name in each
 # author's own harness, and we keep the author's name rather than rewriting
@@ -74,7 +77,7 @@ def cell(path):
         return next((r.get("acc") for r in rows
                      if r.get("arm") == arm and r.get("n_poison") == j), None)
     out = []
-    for j in (0, 10):
+    for j in (0, TOPDOSE):
         a, b = acc(v, j), acc(u, j)
         out.append(None if None in (a, b) else a - b)
     return tuple(out)
@@ -100,8 +103,9 @@ def main():
          "Natural Questions, dosed as $j$ of the top ten retrieved passages. "
          "Each cell is percentage points against that run's own undefended "
          "arm on the same items: \\emph{clean} is dose 0, what the defense "
-         "costs when nothing is planted, and \\emph{sat.} is dose 10 of 10, "
-         "what it is worth when every retrieved passage is planted. A dash "
+         "costs when nothing is planted, and \\emph{5/10} is five poisoned "
+         "passages of ten, the largest corruption size these attacks' and "
+         "defenses' own authors evaluate. A dash "
          "is a pair we have not run. This item set is not CoConflictQA and "
          "the two sets of numbers are not comparable.}",
          "\\label{tab:grid}", "\\footnotesize",
@@ -110,7 +114,7 @@ def main():
         f"\\multicolumn{{2}}{{c}}{{{ATK.get(a, a)}}}" for a in used) + " \\\\")
     L.append("".join(f"\\cmidrule(lr){{{2+2*i}-{3+2*i}}}"
                      for i in range(len(used))))
-    L.append("defense & " + " & ".join(["clean & sat."] * len(used)) + " \\\\")
+    L.append("defense & " + " & ".join(["clean & 5/10"] * len(used)) + " \\\\")
     L.append("\\midrule")
     for dfn in ROWS:
         if not any((dfn, a) in grid for a in used):

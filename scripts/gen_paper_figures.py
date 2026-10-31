@@ -418,7 +418,7 @@ def fig_dose():
             ("DyPRAG", "native_dyprag_corpus_poisoning.json")]
     UND = ("undefended", "base_rag", "rag", "base")
     DEF = ("defended", "ck", "coiecd", "acd", "scr", "parammute", "dyprag")
-    doses = [0, 1, 2, 3, 5, 10]
+    doses = [0, 1, 2, 3, 5]
     MARK = ["o", "s", "^", "D", "v", "P"]
     # Every defense plotted here is an ML/AI-track method, so they share the
     # ML/AI hue and are told apart by marker, which the significance fill
