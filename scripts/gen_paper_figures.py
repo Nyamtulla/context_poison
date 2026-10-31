@@ -629,6 +629,15 @@ def fig_transfer_matrix():
     ours_pairs = {(r["defense"], r["attack"])
                   for r in retrieval_runs() if r["role"] == "transfer"}
     ours = collections.Counter((DT.get(d), AT.get(a)) for d, a in ours_pairs)
+    # The agent cell belongs in these boxes too, and used to be left out, so
+    # the panel showed the retrieval cell while the prose beside it counted
+    # the campaign. Every technique in that cell is a prompt-injection
+    # defense and every attack an AgentDojo injection, so all of its pairs
+    # land in one box.
+    _agent = load("technique_transfer_full_banking.json")["results"]
+    _apairs = {(r["technique_name"], r["attack"])
+               for r in _agent if not r.get("error")}
+    ours[("security", "security")] += len(_apairs)
 
     TR = ["security", "safety"]
     # Each cell mixes a defense track with an attack track, so no single track
@@ -638,15 +647,14 @@ def fig_transfer_matrix():
     # One column, not two. At text width the 2x2 grid had nothing to fill
     # the space with but type, so its numbers were set larger than the body
     # text around them and the figure read as a poster.
-    # Two separate files, one panel each. They used to share a figure, which
-    # meant one of the two sections had to cite a float three sections away;
-    # the panels never shared a colour scale anyway, so nothing is lost by
-    # separating them.
-    panels = [("fig6a_transfer_lit", lit), ("fig6b_transfer_ours", ours)]
-    for name, data in panels:
+    # One figure, two panels. The comparison between them is the point, and
+    # split across two floats three sections apart a reader had to carry the
+    # left-hand numbers in their head to read the right-hand ones.
+    panels = [("published literature", lit), ("this campaign", ours)]
+    fig, axes = plt.subplots(1, 2, figsize=(COL, 1.75),
+                             constrained_layout=True)
+    for ax, (name, data) in zip(axes, panels):
         tot = sum(data.values())
-        fig, ax = plt.subplots(figsize=(COL * 0.58, 1.55),
-                               constrained_layout=True)
         M = np.array([[data.get((d, a), 0) for a in TR] for d in TR], float)
         # colour is each cell's SHARE of its own panel, not its raw count.
         # Shading two panels whose totals differ by an order of magnitude on
@@ -662,11 +670,11 @@ def fig_transfer_matrix():
             for lbl, t in zip(lbls, TR):
                 lbl.set_color(TRACK_SEC if t == "security" else TRACK_ML)
         ax.set_xlabel("attack from", fontsize=5.6)
-        ax.set_ylabel("defense from", fontsize=5.6)
-        # No title. Which panel this is, and its cross-community share, are
-        # said once in the caption instead of twice on the page -- and the
-        # caption can use the macros, so the share cannot drift from the
-        # prose that quotes it.
+        # Only the left panel keeps the y label: side by side they share the
+        # same rows, and repeating it put type in the gap between them.
+        ax.set_ylabel("defense from" if name.startswith("published") else "",
+                      fontsize=5.6)
+        ax.set_title(f"{name} ({tot})", fontsize=6.4, color=INK)
         for i in range(2):
             for j in range(2):
                 v = int(M[i, j])
@@ -686,7 +694,7 @@ def fig_transfer_matrix():
     # the 2x2 covers the two pure tracks only. Pairs where either side is a
     # "Both"-track paper cannot answer a cross-community question, so they are
     # excluded here; the full tally including them is in pair_timeline.json.
-        save(fig, name)
+    save(fig, "fig6_transfer")
     _all = len(tl)
     print(f"    transfer matrix: literature {sum(lit.values())} of {_all} pairs "
           f"(pure tracks only), ours {sum(ours.values())}")

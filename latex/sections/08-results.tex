@@ -4,11 +4,11 @@
 \subsection{What the campaign covers}
 \label{sec:coverage2}
 
-Before any outcome, what was run. Figure~\ref{fig:transferours} puts the
-campaign in the same four boxes Section~\ref{sec:emptycell} used for the
-literature. \NOursCrossPairs{} of our \NOursPairs{}
-retrieval-cell pairs sit off-diagonal, \PctOursCross{}\% against the
-literature's \PctCrossCommunity{}\%.
+Before any outcome, what was run. Figure~\ref{fig:transfer} puts the campaign
+beside the literature in the same four boxes. The diagonals look alike. The
+off-diagonals do not: where the literature has
+\NCrossCommunityPairs{} crossing pairs, the campaign has
+\NOursCrossPairs{}.
 
 The cell holds \NRagImpl{} defense implementations. Seven of them share one
 design, and Section~\ref{sec:results} is about that design. The other three
@@ -26,16 +26,16 @@ Section~\ref{sec:transfer} reports them.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.58\columnwidth]{figures/fig6b_transfer_ours}
-\caption{This paper's campaign, in the four boxes
-Figure~\ref{fig:transferlit} used for the literature.
-\NOursCrossPairs{} of \NOursPairs{} pairs (\PctOursCross{}\%) cross
-between the communities. Shade is the cell's share of this grid, so shades
-are not comparable with the other figure; the printed count is the value.
-Covers the retrieval-cell transfer pairs, not the whole campaign. All four
-boxes are occupied, and the \NOursSecDefSafetyMech{} security defenses run
-against a safety mechanism are one defense family.}
-\label{fig:transferours}
+\includegraphics[width=\columnwidth]{figures/fig6_transfer}
+\caption{Who built the defense (rows) against whose problem it was run
+(columns). Left, every confirmed pair in the literature; right, every pair
+in this campaign. Shade is each cell's share of its own panel, so the two
+panels are not on one colour scale and the printed count is the value. The
+literature crosses between the communities in \NCrossCommunityPairs{} pairs
+of \NPureRegimePairs{} (\PctCrossCommunity{}\%); one of its two
+off-diagonal boxes holds a single pair. All four boxes are occupied on the
+right.}
+\label{fig:transfer}
 \end{figure}
 
 \subsection{A shared design rule}
