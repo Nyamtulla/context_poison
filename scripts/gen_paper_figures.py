@@ -405,14 +405,20 @@ def fig_dose():
     saturation against its 9.9 pp mdr would mark it unresolvable, when the
     exact test on the same counts gives p < 0.0001.
     """
-    RUNS = [("ParamMute", "parammute_vs_corpus_poisoning.json", "base", "parammute", 5.3),
-            ("CK-PLUG", "ckplug_vs_corpus_poisoning.json", "base_rag", "ck", 7.0),
-            ("SpARE", "spare_vs_corpus_poisoning.json", "steer_to_use_parameter",
-             "steer_to_use_context", 8.9),
-            ("COIECD", "coiecd_vs_corpus_poisoning.json", "base_rag", "coiecd", 9.9),
-            ("ACD", "acd_vs_corpus_poisoning.json", "rag", "acd", 9.9),
-            ("SCR", "scr_vs_corpus_poisoning.json", "rag", "scr", 9.9)]
-    fracs = [0.0, 0.1, 0.5, 1.0]
+    # On the attacks' own ladder. The axis used to be a fraction of a single
+    # CoConflictQA passage cut into chunks -- clean, 10%, 50%, 100% -- which
+    # was a dose we built for an item set that has none. Open NQ ships a
+    # ranked pool, so the dose is the attack's own parameter: j of the top
+    # ten, where j=1 is the default in its released constructor.
+    RUNS = [("ParamMute", "native_parammute_corpus_poisoning.json"),
+            ("CK-PLUG", "native_ckplug_corpus_poisoning.json"),
+            ("COIECD", "native_coiecd_corpus_poisoning.json"),
+            ("ACD", "native_acd_corpus_poisoning.json"),
+            ("SCR", "native_scr_corpus_poisoning.json"),
+            ("DyPRAG", "native_dyprag_corpus_poisoning.json")]
+    UND = ("undefended", "base_rag", "rag", "base")
+    DEF = ("defended", "ck", "coiecd", "acd", "scr", "parammute", "dyprag")
+    doses = [0, 1, 2, 3, 5, 10]
     MARK = ["o", "s", "^", "D", "v", "P"]
     # Every defense plotted here is an ML/AI-track method, so they share the
     # ML/AI hue and are told apart by marker, which the significance fill
@@ -423,17 +429,23 @@ def fig_dose():
     # drawing it wider and letting LaTeX scale it down shrinks every label.
     fig, ax = plt.subplots(figsize=(COL, 2.6), constrained_layout=True)
     ax.axhline(0, color=INK2, linewidth=0.8, zorder=2)
-    for i, (name, fn, u, d, mdr) in enumerate(RUNS):
+    for i, (name, fn) in enumerate(RUNS):
         path = R / fn
         if not path.exists():
             continue
-        rows = {(r["arm"], r["frac"]): r
-                for r in json.loads(path.read_text())["results"]}
-        n = rows[(d, fracs[0])]["n"]
+        blob = json.loads(path.read_text())
+        raw = [r for r in blob["results"] if isinstance(r, dict)]
+        arms = {r.get("arm") for r in raw} - {None}
+        u = next((a for a in UND if a in arms), None)
+        d = next((a for a in DEF if a in arms), None)
+        if not u or not d:
+            continue
+        rows = {(r["arm"], r["n_poison"]): r for r in raw}
+        n = blob.get("n") or rows[(d, 0)]["n"]
         xs, ys, res = [], [], []
-        for k, f in enumerate(fracs):
-            if (d, f) in rows and (u, f) in rows:
-                a, b = rows[(d, f)]["ctx_acc"], rows[(u, f)]["ctx_acc"]
+        for k, j in enumerate(doses):
+            if (d, j) in rows and (u, j) in rows:
+                a, b = rows[(d, j)]["acc"], rows[(u, j)]["acc"]
                 ka, kb = round(a * n / 100), round(b * n / 100)
                 _, pv = fisher_exact([[ka, n - ka], [kb, n - kb]])
                 xs.append(k); ys.append(a - b); res.append(pv < 0.05)
@@ -444,11 +456,11 @@ def fig_dose():
             ax.plot(x, y, MARK[i % len(MARK)], markersize=4.2, color=c,
                     markerfacecolor=c if r else "white",
                     markeredgecolor=c, markeredgewidth=1.0, zorder=4)
-    ax.set_xticks(range(len(fracs)))
-    ax.set_xticklabels(["clean", "10%", "50%", "100%"])
-    ax.set_xlabel("share of context replaced by the attack")
+    ax.set_xticks(range(len(doses)))
+    ax.set_xticklabels([str(j) for j in doses])
+    ax.set_xlabel("poisoned passages, of the top ten retrieved")
     ax.set_ylabel("defended minus undefended (pp)")
-    ax.set_xlim(-0.12, len(fracs) - 0.88)
+    ax.set_xlim(-0.12, len(doses) - 0.88)
     ax.legend(frameon=False, fontsize=5.8, loc="upper center",
               bbox_to_anchor=(0.5, -0.22), ncol=3, handlelength=1.4,
               columnspacing=1.0, handletextpad=0.4)

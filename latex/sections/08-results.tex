@@ -122,20 +122,23 @@ tries to make the model answer in a negative tone, the undefended model never
 adopts the attacker's framing more than \ECkSentUndefMax\% of the time at any
 dose. CK-PLUG adopts it \ECkSentOne\% of the time with a single poisoned
 passage out of ten, and \ECkSentSat\% at full dose. The defense does not fail to stop the attack. It carries it.
-Figure~\ref{fig:dose} plots every retrieval-cell defense against dose on
-one axis, each measured against its own undefended arm.
+Figure~\ref{fig:dose} plots the safety-regime defenses of the retrieval cell
+against the attack's own dose ladder, each measured against its own
+undefended arm.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig4_dose_response}
-\caption{Every retrieval-cell defense against corpus poisoning, measured as the
-defended arm minus its own undefended arm in the same run. Zero means the
-defense changed nothing. Filled markers are resolvable at $p < .05$ by Fisher's
-exact test~\cite{fisher-1922-interpretation}; hollow markers are not. Three patterns are visible. SpARE and ParamMute
-start above zero and cross it, which is the sign flip. CK-PLUG and SCR sit
-below zero almost everywhere, costing accuracy before the attack arrives. ACD
-is the only line that rises, and Table~\ref{tab:acd} shows that rise does not
-survive a change of payload.}
+\caption{Every safety-regime defense in the retrieval cell against corpus
+poisoning, on the attack's own dose ladder, measured as the defended arm
+minus its own undefended arm in the same run. Zero means the defense changed
+nothing. Filled markers are resolvable at $p < .05$ by Fisher's exact
+test~\cite{fisher-1922-interpretation}; hollow markers are not. Three
+patterns are visible. CK-PLUG and DyPRAG start far below zero and pay that
+cost before any passage is planted. ParamMute tracks zero until the honest
+passages are nearly gone and then falls furthest of any line. SCR and DyPRAG
+are flat or below zero until the last dose and then rise sharply, which is
+where a method that keeps a route back to its own parameters collects.}
 \label{fig:dose}
 \end{figure}
 
@@ -270,8 +273,8 @@ vs.\ no retrieval & +\EAcdCorpusVsNoRet{} ($p\PAcdCorpusVsNoRet{}$) &
 \end{tabular}
 \end{table}
 
-The protection collapses. Against the incoherent payload, ACD restores
-the no-retrieval floor exactly. Against the fluent payload it ends up
+The protection collapses, and Table~\ref{tab:acd} is where. Against the
+incoherent payload, ACD restores the no-retrieval floor exactly. Against the fluent payload it ends up
 resolvably \emph{below} that floor: the defended model does worse than a model
 given no document at all.
 
