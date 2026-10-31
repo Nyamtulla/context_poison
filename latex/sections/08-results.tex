@@ -1,7 +1,7 @@
 \section{Results: the context-reliance family under attack}
 \label{sec:results}
 
-\subsection{What the campaign covers}
+\subsection{What this section covers}
 \label{sec:coverage2}
 
 Before any outcome, what was run. Figure~\ref{fig:transfer} puts the campaign
@@ -38,11 +38,12 @@ right.}
 \label{fig:transfer}
 \end{figure}
 
-\subsection{A shared design rule}
+\subsection{One dial, and when turning it helps}
 
-A defense that works by shifting trust from the model's parameters toward
-the retrieved text is correct when the text is merely stale, and dangerous
-when an attacker owns it. The rest of this subsection supports that.
+These defenses all turn one dial: how far to trust the retrieved document
+over what the model already knows. Turning it toward the document is right
+when the document is merely out of date. It is dangerous when an attacker
+wrote the document. The rest of this subsection supports that.
 
 The family is defined by what it does: a method whose
 intervention is a weighting between the context-conditioned and the
@@ -141,13 +142,12 @@ crosses zero, and inside this range the dose does not decide any of them.}
 \label{fig:dose}
 \end{figure}
 
-\subsection{The scope condition}
+\subsection{When the rule does not apply}
 
-The rule above is not that suppressing parametric memory is always harmful.
-We can state when it is.
+The rule above does not say that suppressing the model's memory always
+hurts.
 
-Suppressing the model's prior knowledge hurts only where that prior
-knowledge held the right answer. Against BadRAG's denial-of-service variant,
+It hurts in one case only: when that memory held the right answer. Against BadRAG's denial-of-service variant,
 which makes the model refuse rather than answer wrongly, ParamMute is strongly
 protective. With one poisoned passage in ten the undefended model refuses
 \EPmDosUndefRef\% of the time and holds \EPmDosUndefAcc\% accuracy.
@@ -160,19 +160,19 @@ model averages \EPmDosUndefAvg\% accuracy and ParamMute averages
 The mechanism is the same in both cases. ParamMute suppresses the model's
 memory. When memory held the correct answer, that suppression destroys it. When
 the attack works by driving the model into refusal, suppressing memory removes
-the conflict that triggered the refusal. One mechanism, two signs,
-selected by whether the memory was right. The prediction committed before
-this run was that suppressing memory would do little here; the result is why
-the paper states a scope condition rather than a blanket one.
+the conflict that triggered the refusal. One mechanism, two signs, and what picks the sign is whether the memory was
+right. We committed before this run to the prediction that suppressing memory
+would do little here. It is why the rule above has a boundary instead of
+applying everywhere.
 
-\subsection{Payload provenance}
+\subsection{Does it take an attacker?}
 \label{sec:regime}
 
-Every result in this section is about a defense. This one is not. The
-paper divides its corpus by regime, and that division rests on a claim about
-the stimulus rather than about any method: that an adversary and an accident
-produce the same failure. Section~\ref{sec:twovocab} states it; this
-measures it.
+Every result in this section is about a defense. This one is not. It is
+about the bad text itself. Splitting the corpus into two regimes assumes that
+an attacker's passage and an honest mistake do the same damage, and if that
+assumption is wrong the split is wrong. Section~\ref{sec:twovocab} makes the
+assumption; this measures it.
 
 \input{tables/regime_framing}
 
@@ -226,7 +226,7 @@ Every arm falls below the no-retrieval row by the last dose. Past some dose,
 whatever wrote the context has taken more from the model than retrieval gives
 it, and the model would do better not reading at all.
 
-\subsection{Payload class, not attack label}
+\subsection{The shape of the passage, not its name}
 
 The two subsections above hold the payload fixed and vary the defense. The
 three below hold the defense fixed and vary the payload, starting with the one
@@ -298,7 +298,7 @@ corrupted context leaves \ECoiecdFalseCorrupt\% against
 field's attention to optimized adversarial passages is not matched by their
 effectiveness.
 
-\subsection{Payload class against defense outcome}
+\subsection{The same defenses against a second passage}
 \label{sec:payloads}
 
 ACD is not the only method whose behavior depends on the form of the planted
@@ -358,13 +358,14 @@ constraint should do exactly that when the planted passage agrees with the
 prior rather than contradicting it. The signal sits below the threshold, so
 we record it as directional and not as a result.
 
-\subsection{A comparison we exclude}
+\subsection{A ranking we refuse to make}
 
-The three results invite a ranking across payload classes. We committed in
-advance to one falsifier. If any defense did \emph{better} against false
-evidence than against corpus poisoning, then ``these defenses fail because
-they trust the context'' would not be the mechanism. CK-PLUG does, at
-+\ECkExcessFalse\pp against +\ECkExcessCorpus\pp.
+The three results invite a ranking: which passage is worse for a defense.
+Before running them we wrote down the one result that would prove our
+explanation wrong. If a defense did \emph{better} against false evidence than
+against corpus poisoning, then ``these defenses fail because they trust the
+context'' could not be the reason. CK-PLUG does, at +\ECkExcessFalse\pp
+against +\ECkExcessCorpus\pp.
 
 That reading does not survive inspection. The two payloads are not equally strong on the
 undefended arm. False evidence is roughly twice as damaging: on a corrupted context
@@ -379,7 +380,7 @@ confounded by attack strength and should not be read as a ranking. Within a
 payload, against the control measured beside it in the same run, every
 comparison in this section stands.
 
-\subsection{Copying versus remembering}
+\subsection{Did it remember, or did it copy?}
 \label{sec:distractor}
 
 This subsection answers RQ3. Under false evidence the planted passage asserts the same string the model
@@ -430,10 +431,11 @@ The two results are one mechanism read from both ends. ParamMute
 suppresses memory and the attacker fills the vacancy; ACD suppresses the
 attacker and memory fills it. Neither moves probability mass toward the real
 document, because neither mechanism can tell the real document from the planted
-one. Both only arbitrate between \emph{context} and \emph{parameters}, and the
-attack lives inside the context. The problem is
-not that context-reliance defenses trust context too much. It is that the axis
-they arbitrate on does not contain the distinction an attacker violates.
+one. Both only choose between the \emph{document} and the model's
+\emph{memory}, and the attack is inside the document. So the problem is not
+that these defenses trust the document too much. It is that their one choice
+cannot separate a real document from a planted one, which is the only
+separation that would help.
 
 \input{tables/distractor}
 
@@ -474,7 +476,7 @@ SpARE's row needs one caution. Its run carries no undefended arm, so it compares
 steering toward memory against steering toward the context. That is a comparison
 between two settings of the same dial, not between a defense and its absence.
 
-\subsection{An LLM-as-judge arm}
+\subsection{The one defense that expects an attacker}
 
 SCR is the only method we ran whose design anticipates
 an adversary. It shows the model its own no-context answer, the document, and

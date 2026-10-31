@@ -22,7 +22,7 @@ clean context and then do harm under attack: the sign flips, which no
 expectation of ``it will not transfer'' predicts. One method did resist, and
 it took an adaptive attacker to price it.
 
-\subsection{Controls that reverse a reading}
+\subsection{Results that flip without a control}
 
 Each of the following reverses if the arm beside it is dropped, and in each
 case that arm is one the relevant literature does not report.
@@ -61,7 +61,7 @@ DecodingAgg stays harmful on both (\NDecodingNineMistral{}\pp{} and
 only the base model changes an effect's size, its existence, and in one case
 its sign.
 
-\subsection{Principle or implementation}
+\subsection{Is it the design, or one codebase?}
 
 A single implementation cannot tell you whether you have found a property of a
 design principle or a quirk of one codebase. RobustRAG
@@ -92,7 +92,7 @@ honest passage remains and the two implementations have nothing left to
 disagree about. A survey reporting one number per published method would have
 missed all of this.
 
-\subsection{The grid on the other item set}
+\subsection{Every defense against every attack}
 \label{sec:grid}
 
 Everything above runs on CoConflictQA, where an item carries one context
@@ -131,7 +131,7 @@ diluted window are running, and we report no numbers for them here.
 
 \input{tables/grid}
 
-\subsection{Defenses that transfer}
+\subsection{The defenses that do transfer}
 \label{sec:transfer}
 
 The exceptions are informative. RobustRAG stops PoisonedRAG, which its own
@@ -189,7 +189,7 @@ the technique, predicts whether it survives here --- the division
 Section~\ref{sec:parallel} finds in the literature, reproduced in what the
 methods actually do.
 
-\subsection{The dose of maximum advantage}
+\subsection{The dose that favors a defense most}
 \label{sec:lowdose}
 
 A result read at the top of the dose range is read where the attack is
@@ -215,7 +215,7 @@ and averaging across payloads would hide that. We therefore report the
 minimum rather than the mean: robustness is a property of the strongest
 attack a method has met, not of the attacks its authors chose.
 
-\subsection{Adaptive attackers}
+\subsection{An attacker who reads the defense}
 \label{sec:adaptive}
 
 This subsection answers RQ5. Every result above comes from an attack that was not built for the defense it
