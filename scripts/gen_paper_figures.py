@@ -50,11 +50,19 @@ SEQ_SEC = ["#fbdcd3", "#f6b9a8", "#ef947c", "#e76f52", "#d6452a", "#bf3d25",
 SEQ_ALT = ["#e3f5ee", "#c4e9dc", "#9eddc8", "#74cfb1", "#46c098",
            "#1baf7a", "#169068", "#117455", "#0d5a42", "#09412f"]
 # Hues for distinctions that are NOT regime, with one meaning each across
-# every figure: ALT_A is the defense side (defenses, defense wins, defense
-# predates its attack) and ALT_B the attack side (mechanisms, defense loses,
-# attack predates its defense). ALT_B is always the hatched one. ALT_C is
-# kept for a third category no figure currently needs.
-ALT_A, ALT_B, ALT_C = "#1baf7a", "#eda100", "#8a5a2b"
+# every figure: ALT_A is the fix side (fixes, defense wins, defense predates
+# its attack) and ALT_B the mechanism side (mechanisms, defense loses, attack
+# predates its defense). Which of the two is hatched is the figure's own
+# business, and the cube and the outcome bars differ on it. ALT_C is kept for
+# a third category no figure currently needs.
+#
+# ALT_B was #eda100, a bright amber that weighs 165 in greyscale against
+# ALT_A's 125. Everywhere else in the paper a mechanism bar is the DARKER of
+# a pair -- the regime hues weigh 109 against a 218 tint -- so the one pair
+# that is not a regime ran the weight backwards, and a greyscale reader
+# reading by weight read it the wrong way round. The darker amber weighs 112,
+# which is the regime mechanism's own weight.
+ALT_A, ALT_B, ALT_C = "#1baf7a", "#a06e00", "#8a5a2b"
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 
 # IEEEtran conference: \columnwidth is 252pt and \textwidth is 516pt,
