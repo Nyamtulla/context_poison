@@ -1128,6 +1128,25 @@ def main():
     E["NDistractorItems"] = next(
         f["rows"] for f in _pidx["files"] if "_distractor." in f["name"])
     E["NCoConflictItems"] = load(PM)["n"]
+    # The RobustRAG displacement cell. Its numbers were typed, and the
+    # backfill result sits at a displacement of ten, past the range this
+    # paper reports, so it is carried as a diagnostic and labelled as one.
+    _cvr = {(r["condition"], r["defended"]): r
+            for r in load("corpus_poisoning_vs_robustrag.json")["results"]
+            if isinstance(r, dict)}
+    _bf = {r["condition"]: r
+           for r in load("robustrag_backfill.json")["results"]
+           if isinstance(r, dict)}
+    E["ERobustPoisonedGain"] = (_cvr[("PoisonedRAG [control]", True)]["acc"]
+                                - _cvr[("PoisonedRAG [control]", False)]["acc"])
+    for _lbl, _c in (("One", "corpus poisoning, displace 1"),
+                     ("Five", "corpus poisoning, displace 5"),
+                     ("Ten", "corpus poisoning, displace 10")):
+        E[f"ERobustDisp{_lbl}Def"] = _cvr[(_c, True)]["acc"]
+        E[f"ERobustDisp{_lbl}Undef"] = _cvr[(_c, False)]["acc"]
+    E["ERobustBackfillTen"] = _bf["corpus poisoning, displace 10"]["acc"]
+    E["ERobustBackfillFive"] = _bf["corpus poisoning, displace 5"]["acc"]
+    E["ERobustDispMdr"] = load("corpus_poisoning_vs_robustrag.json")["mdr_pp_at_n"]
     E["EAcdN"] = load(ACD)["n"]
     E["EAcdMdr"] = load(ACD)["mdr_pp_at_n"]
 

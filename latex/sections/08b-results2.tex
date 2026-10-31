@@ -134,14 +134,26 @@ diluted window are running, and we report no numbers for them here.
 \subsection{Defenses that transfer}
 \label{sec:transfer}
 
-The exceptions are informative. RobustRAG stops PoisonedRAG, which its own paper tested, and we reproduce that
-(+11.0\pp). It then gives no protection at all against corpus poisoning at
-displace-10, scoring 4.6\% against the undefended arm's 3.4\%, both on the
-floor. The reason is not its
-security mechanism. Corpus poisoning displaces every honest passage out of the
-top-$k$ window, so isolate-then-aggregate has nothing honest left to aggregate.
-Backfilling the window to its intended size restores 45.2\%, a gain of
-40.6\pp. The defense was sound and the retrieval interface was not.
+The exceptions are informative. RobustRAG stops PoisonedRAG, which its own
+paper tested, and we reproduce that (+\ERobustPoisonedGain{}\pp). Against
+corpus poisoning it neither helps nor hurts anywhere in the range we report:
+\ERobustDispOneDef{}\% against the undefended arm's \ERobustDispOneUndef{}\%
+at one displaced passage and \ERobustDispFiveDef{}\% against
+\ERobustDispFiveUndef{}\% at five, both gaps inside the
+\ERobustDispMdr{}\pp{} threshold. Refilling the window from ranks the
+attacker does not hold moves it to \ERobustBackfillFive{}\% at five, also
+inside the threshold.
+
+One condition past that range says why, and we report it as a diagnostic
+rather than as a result. When the attacker holds every retrieved passage both
+arms sit on the floor, \ERobustDispTenDef{}\% and
+\ERobustDispTenUndef{}\%, and the same refill restores
+\ERobustBackfillTen{}\%. What decides that cell is not the defense but the
+attacker's budget against the retrieval depth. Isolate-then-aggregate needs
+an honest passage to aggregate, and whether one exists is a property of the
+pipeline rather than of the method. The defense's own authors sweep a
+corruption size up to half the window and no further, so we draw no verdict
+about the defense from a condition they do not evaluate.
 
 The same defense meets the other regime twice, and the two cells disagree.
 Against distractor evidence --- a passage asserting a wrong answer, which is
