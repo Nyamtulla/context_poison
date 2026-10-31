@@ -111,8 +111,8 @@ chosen answer, a passage that steers behavior rather than the answer, and a
 passage optimized against the defense itself. Going the other way, what
 changes is whether anything arrives at all: text that reaches the window and
 should not be believed although no one wrote it to deceive, against a window
-whose contents all deserve belief and which stops working because the
-decisive passage moved or because there is simply more of everything.
+whose contents all deserve belief and which stops working because there is
+simply more of everything.
 
 The two crossings together are \NOursCrossPairs{} of the \NOursPairs{}
 retrieval pairs, against the \PctCrossCommunity{}\% the literature manages,
@@ -177,9 +177,11 @@ one obtained on data we chose ourselves.
 
 \begin{table}[t]
 \centering
-\caption{Item sets and payloads, by owner. No item set is ours. Of the payload
-classes, two are the original authors' and two are ours, and both of ours are
-edits of a field that already ships with the benchmark.}
+\caption{Item sets and payloads, by owner. No item set is ours. Three
+payloads come from the attack literature and five are ours, and none of the
+five is a new attack: three are edits of a field the benchmark already ships,
+and two reuse the item set's own retrieved passages, which is what makes them
+controls rather than attacks.}
 \label{tab:provenance}
 \small
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.40\columnwidth}>{\raggedright\arraybackslash}p{0.52\columnwidth}@{}}
@@ -199,6 +201,12 @@ False evidence & CoConflictQA's own parametric-evidence field \\
 Distractor evidence & \textbf{ours}: one substitution into that field \\
 Adaptive distractor & \textbf{ours}: the same claim, reshaped against one
 defense's rule \\
+Gradient distractor & \textbf{ours}: that passage and a suffix optimized
+against the same rule \\
+Stale document & \textbf{ours}: a real retrieved passage, gold answer
+swapped \\
+Misretrieval & \textbf{ours}: a real passage, unmodified, retrieved for
+another question \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -209,7 +217,8 @@ noisy, so we checked this mechanically rather than by inspection: across
 every result registry, no run compares two arms measured on different items.
 
 The one place the item set narrows is the distractor payload, and it narrows
-for both arms together. It is defined on 781 of CoConflictQA's 1,409 items. An item
+for both arms together. It is defined on \NDistractorItems{} of CoConflictQA's
+\NCoConflictItems{} items. An item
 qualifies on two conditions. Its remembered answer must appear verbatim in its
 own evidence sentence, so that the substitution needs no rewriting. And its
 question type and answer magnitude must admit at least three candidate
@@ -228,7 +237,7 @@ forward passes of the model at once, and this keeps the whole cell inside one
 card at a batch size every defense can share.
 
 On those items we hold the dosing and the scorer fixed as well, and vary only
-the \emph{form} of the planted passage. There are four forms. They differ in
+the \emph{form} of the planted passage. There are five forms. They differ in
 how the passage reads and in what it does to the evidence, and a defense that
 behaves differently across them tells us which property it is actually keying
 on.
@@ -248,11 +257,12 @@ prior. It is not a stronger attack. It is a measuring instrument, and
 Section~\ref{sec:distractor} explains why it was necessary.
 
 An adaptive distractor is the distractor payload again, in whichever surface
-form minimizes the quantity one defense's rule measures
-(Section~\ref{sec:results2}).
+form minimizes the quantity one defense's rule measures. A gradient
+distractor is that passage with a short optimized suffix appended against the
+same quantity (Section~\ref{sec:results2}).
 
-Two of the four are ours, the distractor and its adaptive form, and both are
-edits of a field that already ships with the benchmark. That field is worth
+Three of the five are ours, the distractor and its two optimized forms, and
+all three are edits of a field that already ships with the benchmark. That field is worth
 drawing out. False evidence is the
 \texttt{parametric\_evidence} field that ships inside CoConflictQA, the
 benchmark the ParamMute authors released themselves. One of the defenses we

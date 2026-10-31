@@ -1084,6 +1084,12 @@ def main():
     # the controls that license the three-way reading
     # The ACD table's own n and threshold, read from its own runs rather
     # than borrowed, and its four p-values recomputed from the arm counts.
+    # The distractor subset and the item set it is drawn from, which the
+    # provenance section quoted as typed numbers.
+    _pidx = json.loads((REPO / "data" / "payloads" / "INDEX.json").read_text())
+    E["NDistractorItems"] = next(
+        f["rows"] for f in _pidx["files"] if "_distractor." in f["name"])
+    E["NCoConflictItems"] = load(PM)["n"]
     E["EAcdN"] = load(ACD)["n"]
     E["EAcdMdr"] = load(ACD)["mdr_pp_at_n"]
 
