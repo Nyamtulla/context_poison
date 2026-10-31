@@ -1,31 +1,10 @@
 \section{Experiments}
 \label{sec:campaign}
 
-This section says what we ran. It reports no results.
-
-Every pair is two choices: which literature the defense came from, and which
-literature the failure came from. That gives four groups, and they do not ask
-the same thing.
-
-Two groups are home ground. A method meets the kind of failure its own
-authors built it for, so nothing there tests whether a method carries over.
-We run those pairs because a method that fails on its home ground tells us
-nothing about the group beside it. They hold \NCampSecDefSecMech{} and
-\NCampSafDefSafetyMech{} of our \NCampaignPairs{} pairs.
-
-The other two groups are crossings. One puts an attacker in front of a
-method built for honest error, which is \NCampSafDefSecMech{} pairs. The
-other gives a method built against an attacker a failure nobody wrote, which
-is \NCampSecDefSafetyMech{} pairs. Together the crossings are
-\NCampCrossPairs{} pairs, \PctCampCross{}\% of the campaign, against the
-\PctCrossCommunity{}\% the literature reaches. Figure~\ref{fig:transfer}
-puts the two side by side.
-
-The groups are not spread evenly across the two rigs. The retrieval cell
-holds all four. The agent cell holds one: every technique in it is a
-prompt-injection defense and every attack an AgentDojo injection, so all
-\NAgentPairs{} of its pairs are a security defense meeting a security
-mechanism. Every crossing we report therefore comes from the retrieval cell.
+We executed \NCampaignPairs{} (defense, attack) pairs across \NCampaignImpl{}
+defense implementations and \NCampaignEpisodes{} scored episodes. Every
+method ran from its authors' released code and weights.
+Figure~\ref{fig:transfer} sets the campaign beside the published literature.
 
 \begin{figure}[t]
 \centering
@@ -41,30 +20,43 @@ right.}
 \label{fig:transfer}
 \end{figure}
 
-\input{tables/experiments}
+The main experiment puts a defense from one literature in front of an attack
+from the other. We ran \NCampCrossPairs{} such pairs, all on retrieval
+question answering over Natural Questions.
+\NCampSafDefSecMech{} of them take a knowledge-conflict method, built for a
+document that is merely out of date, and attack it with corpus poisoning,
+PoisonedRAG or BadRAG. The remaining \NCampSecDefSafetyMech{} run the other
+way: a defense built against an attacker meets a failure nobody wrote, such
+as a passage retrieved for the wrong question or a real passage whose answer
+has since changed.
 
-Table~\ref{tab:experiments} lists the kinds of run and the question each one
-was built to settle. The first two kinds are the crossings and the home
-ground above. The third varies the shape of the planted passage while holding
-the defense and the dose fixed, so that a defense which behaves differently
-across shapes tells us what it is keying on. The fourth and fifth are
-measurements the published evaluations leave out: what the same model scores
-with no document at all, and whether a result holds on a second model or on a
-second implementation of the same design. The sixth builds the attack against
-the defense it meets instead of pointing a fixed attack at it. The last
-stacks two defenses that act at different stages.
+A second experiment pairs each method with the kind of attack its own authors
+used. These \NCampSecDefSecMech{} security pairs and
+\NCampSafDefSafetyMech{} safety pairs tell us nothing about whether a method
+carries across, and we ran them so that a failure in the paragraph above
+cannot be blamed on our harness. Most of them are the agent experiment:
+\NAgentPairs{} pairs in which eight prompt-injection defenses meet seven
+injected-instruction attacks inside the AgentDojo banking
+suite~\cite{debenedetti-2024-agentdojo}.
 
-Every run carries the same arms. A clean arm with nothing planted, an
-undefended arm on the same items at the same dose, and a closed-book arm
-that sees no document. Every comparison in this paper is a defended arm
-against its own undefended arm, never against a number from another run, and
-every difference smaller than that run's detectability threshold is reported
-as unresolved rather than as zero.
+A third experiment holds the defense and the dose fixed and changes only the
+shape of the planted passage. The five shapes are a token sequence optimized
+to be retrieved, a fluent sentence asserting the answer the model would have
+given from memory, the same sentence asserting a third answer instead, a real
+passage retrieved for another question, and a real passage with its answer
+swapped. A defense that behaves differently across them is keying on the
+shape of the text rather than on the attack it was named for.
 
-In total we executed \NCampaignPairs{} distinct (defense, attack) pairs
-across \NCampaignImpl{} defense implementations, over \NCampaignEpisodes{}
-scored episodes: \NRagPairs{} pairs and \NRagEpisodes{} episodes in the
-retrieval cell, \NAgentPairs{} pairs and \NAgentEpisodes{} episodes in the
-agent cell. An agent episode is a complete multi-step tool-use trajectory and
-a retrieval episode is one scored answer, so the two episode counts are not
-the same unit.
+A fourth set of runs supplies the measurements published evaluations leave
+out. Every run above carries three arms on the same items: a clean arm with
+nothing planted, an undefended arm, and an arm that sees no document at all.
+We also re-ran the retrieval experiment on a second base model, and we ran
+both released implementations of the one defense design that held, which
+share a principle and no code downstream of it.
+
+The last two experiments test the explanation rather than the methods. We
+built two attacks against the single defense that resisted, one searching
+over surface forms and one optimizing a suffix with gradients, both targeting
+the quantity that defense's own rule measures. And we stacked two defenses
+that act at different stages of the same pipeline, to test the design rule
+the observations below arrive at.
