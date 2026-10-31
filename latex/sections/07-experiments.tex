@@ -258,25 +258,26 @@ drawing out. False evidence is the
 benchmark the ParamMute authors released themselves. One of the defenses we
 break is broken with a field from its own dataset.
 
-\paragraph{Two dosing protocols.}
-The \textbf{dose} is how much of the context the planted passage occupies.
-It is the axis every result in this paper is read along, because a defense
-that holds against one poisoned passage and fails against five has not failed
-in the same way as one that never helped.
+\paragraph{Dose, and the one item set that has none.}
+The \textbf{dose} is how many of the retrieved passages are planted. It is
+the axis every result in this paper is read along, because a defense that
+holds against one poisoned passage and fails against five has not failed in
+the same way as one that never helped.
 
-The two item sets are shaped differently, so the dose is measured differently
-on each. CoConflictQA gives one context passage per item, and a single
-passage has no ranked list to dose. On it we cut the context into
-fixed-length chunks and replace a fraction of them: 10\%, 50\% and 100\%,
-with a clean arm at 0\%. Open Natural Questions ships a retrieval pool, so
-there we dose the way the attack papers dose, replacing $j$ of the top ten
-retrieved passages for $j$ in $\{0, 1, 2, 3, 5, 10\}$.
+We take the dose from the attacks rather than define one. Their released
+constructor is parameterised by how many of the top $k$ retrieved passages
+it replaces, where it places them and how often the planted sentence repeats
+inside its passage. We keep that construction and sweep the one parameter:
+$j$ of the top ten, for $j$ in $\{0, 1, 2, 3, 5, 10\}$. Their own default is
+$j = 1$, so their setting is one of our points and the rest are further
+readings of the same instrument.
 
-The second protocol is the attacks' own construction. The first is ours, and
-that is the one to watch, because a protocol we invented is a place where our
-own choices can decide a result. Every number below therefore reports which
-protocol produced it, and Section~\ref{sec:regime}, where the payload itself
-is the subject, runs entirely under the attacks' own dosing.
+One item set has no such axis and we do not give it one. CoConflictQA
+supplies a single context passage per item, which either carries the
+conflicting claim or does not, and a single passage has no ranked list to
+dose. We report it in the two conditions its own authors run, a clean
+context and a corrupted one. The two item sets are never combined in one
+number.
 
 Every result file also carries a fingerprint of the payload it was produced
 with, so a run cannot be read under the wrong attack label.

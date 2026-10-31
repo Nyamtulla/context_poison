@@ -29,7 +29,7 @@ case that arm is one the relevant literature does not report.
 
 \textbf{A no-retrieval baseline.} DyPRAG is perfectly
 flat under an attack that destroys the undefended arm, scoring
-\EDypragClean\%, \EDypragLow\%, \EDypragMid\% and \EDypragSat\% across
+\EDypragClean\% on a clean context and \EDypragSat\% on a corrupted one, across
 the dose range while the undefended arm falls from \EDypragRagClean\% to
 \EDypragRagSat\%. Read alone, that is the strongest defense result in the
 campaign. The closed-book arm scores \EDypragNoRet\% and is statistically
@@ -177,24 +177,23 @@ methods actually do.
 \subsection{The dose of maximum advantage}
 \label{sec:lowdose}
 
-Results so far are reported at saturation, where the planted passage replaces
-the entire context. That corner is where the attack is strongest. It is also
-where the measurement is weakest. With the real document entirely gone, no
-method can read it, so a low accuracy partly measures a complete attack rather
-than a failing defense.
+A result read where every retrieved passage is planted is read at the
+corner where the attack is strongest and the measurement is weakest. With no
+honest passage left, no method can read one, so a low accuracy partly
+measures a complete attack rather than a failing defense.
 
-So we report the other end as well. At the 10\% dose one chunk in ten
-is replaced and nine tenths of the honest document remain. If a method can
-discount a planted passage while still using a good one, this is where it
-shows.
+So we report the other end as well, and the attacks supply it. One poisoned
+passage in ten is the default in the released attack constructor, and it is
+the dose most favorable to a defense: nine honest passages remain for it to
+work with. If a method can discount a planted passage while still using a
+good one, this is where it shows.
 
-\input{tables/lowdose}
-
-Not one of the \NLowDosePairs{} (defense, payload) pairs shows a resolvable benefit
-at the 10\% dose. Every defense is at or below its own undefended arm on every
-payload it met, at the dose most favorable to it. The saturation numbers
-elsewhere in this paper are the larger version of this result.
-Table~\ref{tab:lowdose} is the one a defense cannot explain away.
+\NGridLowHelps{} of the \NGridLowPairs{} pairs in Table~\ref{tab:grid} show
+a resolvable benefit there. Every other defense is at or below its own
+undefended arm, at the dose that favours it most, against an attack run at
+its authors' own strength. Both exceptions are the denial-of-service payload,
+where the undefended model refuses to answer and any method that restores an
+answer gains accuracy for a reason that is not robustness.
 
 The table is also the worst-case reading that a security claim requires. A
 defense beaten by one of three payloads is not two-thirds robust, it is broken,
@@ -250,7 +249,7 @@ weak optimizer, so what it achieves is again a lower bound.
 \begin{table}[t]
 \centering
 \caption{ACD against the distractor payload in its plain form and in two forms
-that minimize ACD's own entropy term, at saturation, $n=\NAcdAdaptiveItems{}$. Both adaptive
+that minimize ACD's own entropy term, on a corrupted context, $n=\NAcdAdaptiveItems{}$. Both adaptive
 payloads are stronger against the undefended arm too, so the defensive gap is
 the quantity that isolates the defense. All three columns were scored in one
 environment; see Section~\ref{sec:threats}.}
@@ -258,7 +257,7 @@ environment; see Section~\ref{sec:threats}.}
 \small
 \begin{tabular}{@{}lrrr@{}}
 \toprule
-at saturation & plain & best-of-5 & gradient \\
+corrupted context & plain & best-of-5 & gradient \\
 \midrule
 median $H_{\mathrm{ctx}}$ & 1.348 & 0.783 & \textbf{0.614} \\
 median $d_\alpha$ & 0.525 & 0.653 & \textbf{0.708} \\
@@ -313,10 +312,11 @@ considerably more from ACD. The gap
 is what isolates the defense, and the gap is what moved. The search therefore attacks the method rather than simply producing a
 better payload.
 
-The dose structure agrees. At the 10\% dose the gap is 21.0, 21.3 and
-21.1\pp{} across the three payloads. ACD's protection only becomes attackable
-as the dose rises, which is what one expects of a rule keyed on a statistic
-computed over the whole context.
+The two conditions agree. On a clean context the three payloads are
+indistinguishable: no gap between the arms exceeds \NAcdGapCleanMax{}\pp{},
+because there is nothing there to defend against. They separate only once
+the context is corrupted, which is what one expects of a rule keyed on a
+statistic computed over the whole context.
 
 ACD degrades under adaptive pressure; it does not collapse. We
 committed the bands in advance: below 10\pp{} of remaining gap we would have

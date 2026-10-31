@@ -112,7 +112,7 @@ honest and costs \ESpareSat\pp when it is attacked. Both ends clear the
 \ESpareMdr\pp threshold. The sign flips.
 
 ParamMute shows the same shape on a larger sample. Its benefit on clean context
-is +\EParamClean\pp. At saturation it is \EParamSatGap\pp \emph{below} the
+is +\EParamClean\pp. On a corrupted context it is \EParamSatGap\pp \emph{below} the
 undefended model, and across the full dose range it loses
 \EParamExcessCorpus\pp more accuracy than doing nothing at all.
 
@@ -228,7 +228,7 @@ three below hold the defense fixed and vary the payload, starting with the one
 method that resisted. ACD produced the strongest defensive result in our
 campaign. It discounts tokens the context makes uncertain, and against corpus
 poisoning it is the only method that both reads a clean document and declines a
-poisoned one. At saturation it is +\EAcdSatGain\pp above the undefended arm
+poisoned one. On a corrupted context it is +\EAcdSatGain\pp above the undefended arm
 ($p < 0.0001$) and on clean context it is +\EAcdCleanVsNoRet\pp above
 answering with no document at all.
 
@@ -258,7 +258,7 @@ unchanged. Only the form of the planted passage differs.}
 \footnotesize
 \begin{tabular}{@{}l@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
 \toprule
-\textbf{Comparison at saturation} & \textbf{Corpus poisoning} &
+\textbf{Comparison, corrupted context} & \textbf{Corpus poisoning} &
 \textbf{False evidence} \\
 \midrule
 vs.\ undefended  & \textbf{+9.2} ($p{<}0.0001$) & +3.0 ($p{=}0.059$) \\
@@ -284,9 +284,9 @@ uncertainty, so ACD trusts it more.
 
 This has a practical consequence. The cheaper and more natural-looking
 attack is the stronger one. For COIECD's undefended arm, false evidence cuts
-accuracy roughly twice as far as gradient-optimized corpus poisoning at every
-dose, falling to \ECoiecdFalseLow\% at 10\% dose against
-\ECoiecdCorpusLow\% for corpus poisoning. The
+accuracy roughly twice as far as gradient-optimized corpus poisoning: a
+corrupted context leaves \ECoiecdFalseCorrupt\% against
+\ECoiecdCorpusCorrupt\% for corpus poisoning. The
 field's attention to optimized adversarial passages is not matched by their
 effectiveness.
 
@@ -303,7 +303,7 @@ ran. Table~\ref{tab:payloads} puts the two payload classes side by side.
 \begin{table}[t]
 \centering
 \caption{The same three defenses against two payload classes. Excess damage is
-the defended arm's clean-to-saturation collapse minus the same collapse in its
+the defended arm's clean-to-corrupted collapse minus the same collapse in its
 own undefended arm; positive means the defense lost more accuracy than doing
 nothing would have.}
 \label{tab:payloads}
@@ -335,10 +335,10 @@ channel the defense does not operate on.
 
 CK-PLUG is harmful against one payload and flat against the other, and
 the shape matters more than the sign. Under corpus poisoning its cost grows
-with the attack: \ECkCleanCost\pp on clean context, then \ECkLowCost{} and
-\ECkMidCost{} once poison is present. Under false evidence it is a constant
-offset of about \ECkFalseOffset\pp at every dose including the clean one, and
-no cell clears the \ECkMdr\pp threshold. CK-PLUG
+with the attack: \ECkCleanCost\pp on a clean context and \ECkSatDelta\pp
+once the context is corrupted. Under false evidence it is a constant offset
+of about \ECkFalseOffset\pp in both conditions, and no cell clears the
+\ECkMdr\pp threshold. CK-PLUG
 pays a fixed price for being switched on; corpus poisoning amplifies that price
 and false evidence does not.
 
@@ -359,10 +359,10 @@ they trust the context'' would not be the mechanism. CK-PLUG does, at
 +\ECkExcessFalse\pp against +\ECkExcessCorpus\pp.
 
 That reading does not survive inspection. The two payloads are not equally strong on the
-undefended arm. False evidence is roughly twice as damaging at every dose: for
-CK-PLUG's undefended arm, \ECkUndefFalseLow\% against \ECkUndefCorpusLow\%
-at 10\% dose, and for COIECD's, \ECoiecdFalseLow\% against
-\ECoiecdCorpusLow\%. Excess damage is a difference of two collapses, and when
+undefended arm. False evidence is roughly twice as damaging: on a corrupted context
+CK-PLUG's undefended arm holds \ECkUndefFalseCorrupt\% against
+\ECkUndefCorpusCorrupt\%, and COIECD's \ECoiecdFalseCorrupt\% against
+\ECoiecdCorpusCorrupt\%. Excess damage is a difference of two collapses, and when
 the undefended arm has already collapsed there is less room left for a defense
 to make things worse.
 
@@ -398,7 +398,7 @@ no-retrieval arm holds at \EDistCleanNoRet\%:
 a model with no document never emits it.
 
 ParamMute succeeds at its stated job and hands the freed probability
-mass to the attacker. At saturation it suppresses parametric recall from
+mass to the attacker. On a corrupted context it suppresses parametric recall from
 \EPmDistPmBase\% to \EPmDistPmDef\%, a \EPmDistPmDrop\pp{} reduction,
 resolvable at every dose. Accuracy against the gold answer does not rise with
 it; it moves \EPmDistGoldBase\% to \EPmDistGoldDef\%, under the
@@ -409,8 +409,8 @@ measurement limit above: ParamMute's residual parametric rate under false
 evidence was copying, not surviving memory.
 
 ACD succeeds at the opposite job and the mass goes to memory instead.
-ACD cuts the copy rate from \EAcdDistCopyBase\% to \EAcdDistCopyDef\% at
-saturation ($p = 2\times 10^{-40}$, $n=\NAcdAdaptiveItems{}$), the largest defensive effect anywhere in this campaign and
+ACD cuts the copy rate from \EAcdDistCopyBase\% to \EAcdDistCopyDef\% on a
+corrupted context ($p = 2\times 10^{-40}$, $n=\NAcdAdaptiveItems{}$), the largest defensive effect anywhere in this campaign and
 in the direction a defense is supposed to move. The refused mass does not go to
 the real document. Parametric recall rises \EAcdDistPmBase\% to \EAcdDistPmDef\% while gold
 accuracy moves \EAcdDistGoldBase\% to \EAcdDistGoldDef\%, which clears
@@ -433,8 +433,8 @@ Two more defenses make it a pattern rather than a pair.
 Table~\ref{tab:distractor} adds CK-PLUG and COIECD on the same payload and the
 same dosing. CK-PLUG behaves as ParamMute does, and more sharply. It is the
 only defense in this campaign whose accuracy loss on this payload clears its
-own threshold. At a 10\% dose it already copies \ECkDistCopyDef\% against
-its undefended arm's \ECkDistCopyBase\%. That is double the copying, on one tenth of the context. COIECD moves in the
+own threshold. On a corrupted context it copies \ECkDistCopyDefCorrupt\% against its
+undefended arm's \ECkDistCopyBaseCorrupt\%, close to double. COIECD moves in the
 same direction at every dose and clears nothing, which is its behavior on both
 other payloads too.
 
@@ -472,15 +472,15 @@ SCR is the only method we ran whose design anticipates
 an adversary. It shows the model its own no-context answer, the document, and
 the answer the document supports, and asks the model to judge which to believe.
 
-It does help at saturation, +\EScrSatGain\pp over the undefended arm
+It does help on a corrupted context, +\EScrSatGain\pp over the undefended arm
 ($p = 0.025$), and it does genuinely read the document, scoring
 \EScrCleanVsNoRet\pp above no-retrieval on clean context. It pays
-\EScrCleanCost\pp on clean data to buy that \EScrSatGain{}. The
-cost is resolvable at every dose below saturation and is roughly five times the
-benefit. A defense deployed permanently and attacked occasionally is a poor
+\EScrCleanCost\pp on a clean context to buy that \EScrSatGain{}. The cost is
+resolvable and is roughly five times the benefit. A defense deployed permanently and attacked occasionally is a poor
 trade at that exchange rate.
 
-SCR's parametric-answer rate climbs \EScrPmClean{}, \EScrPmLow{},
-\EScrPmMid{}, \EScrPmSat{} across the dose range, converging on the closed-book rate of \EScrNoRetPm{}. Both SCR and ACD slide from
+SCR's parametric-answer rate climbs from \EScrPmClean{} on a clean
+context to \EScrPmSat{} on a corrupted one, moving toward the closed-book
+rate of \EScrNoRetPm{}. Both SCR and ACD slide from
 the document toward memory as the attack grows. SCR simply destroys more
 correct answers on the way.

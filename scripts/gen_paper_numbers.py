@@ -890,16 +890,6 @@ def main():
     M["NOutcomePairs"] = len(_byside)
     M["NOutcomeBothSides"] = sum(1 for v in _byside.values() if len(v) > 1)
 
-    # The low-dose table's own total, which the prose quoted in two places as
-    # a typed 16. gen_lowdose_table.py already computes it; read it back so
-    # the sentence and the table cannot disagree.
-    _ld = REPO / "latex" / "tables" / "lowdose.tex"
-    if _ld.exists():
-        import re as _re2
-        _m = _re2.search(r"\\textbf\{total\}\s*&\s*\\textbf\{(\d+)\}", _ld.read_text())
-        if _m:
-            M["NLowDosePairs"] = _m.group(1)
-
     # The model control in S8b. RobustRAG's two aggregation variants disagree
     # resolvably at nine poisoned passages against refusal induction on
     # Mistral; on Llama they do not, and the protective one is no longer
@@ -996,18 +986,20 @@ def main():
         # ACD, the one method that resisted
         "EAcdSatGain": _xd(ACD, "ctx_acc", "acd", "rag", frac=1.0),
         "EAcdCleanVsNoRet": _xd(ACD, "ctx_acc", "acd", "closedbook", frac=0.0),
-        # the fluent payload does more damage than the optimized one
-        "ECoiecdFalseLow": _x(COF, "ctx_acc", arm="base_rag", frac=0.1),
-        "ECoiecdCorpusLow": _x(CO, "ctx_acc", arm="base_rag", frac=0.1),
-        "ECkUndefFalseLow": _x(CKF, "ctx_acc", arm="base_rag", frac=0.1),
-        "ECkUndefCorpusLow": _x(CK, "ctx_acc", arm="base_rag", frac=0.1),
+        # The undefended arm under each payload, in the authors' own
+        # corrupted condition. These replace four readings taken at an
+        # intermediate fraction of a context this item set does not divide.
+        "ECoiecdFalseCorrupt": _x(COF, "ctx_acc", arm="base_rag", frac=1.0),
+        "ECoiecdCorpusCorrupt": _x(CO, "ctx_acc", arm="base_rag", frac=1.0),
+        "ECkUndefFalseCorrupt": _x(CKF, "ctx_acc", arm="base_rag", frac=1.0),
+        "ECkUndefCorpusCorrupt": _x(CK, "ctx_acc", arm="base_rag", frac=1.0),
+        "ECkDistCopyDefCorrupt": _x(CKD, "dist_acc", arm="ck", frac=1.0),
+        "ECkDistCopyBaseCorrupt": _x(CKD, "dist_acc", arm="base_rag", frac=1.0),
         # payload class against defense outcome
         "EParamFalseClean": _xd(PMF, "ctx_acc", "parammute", "base", frac=0.0),
         "EParamCorpusPmDrop": _xd(PM, "pm_acc", "parammute", "base", frac=1.0),
         "EParamFalsePmDrop": _xd(PMF, "pm_acc", "parammute", "base", frac=1.0),
         "ECkCleanCost": _xd(CK, "ctx_acc", "ck", "base_rag", frac=0.0),
-        "ECkLowCost": _xd(CK, "ctx_acc", "ck", "base_rag", frac=0.1),
-        "ECkMidCost": _xd(CK, "ctx_acc", "ck", "base_rag", frac=0.5),
         "ECkFalseOffset": _xd(CKF, "ctx_acc", "ck", "base_rag", frac=0.0),
         "ECkMdr": load(CK)["mdr_pp_at_n"],
         "ECkExcessCorpus": _excess(CK, "ck", "base_rag"),
@@ -1035,8 +1027,6 @@ def main():
         "EAcdDistGoldBase": _x(ACDD, "ctx_acc", arm="rag", frac=1.0),
         "EAcdDistGoldDef": _x(ACDD, "ctx_acc", arm="acd", frac=1.0),
         "EAcdDistNoRet": _x(ACDD, "ctx_acc", arm="closedbook", frac=1.0),
-        "ECkDistCopyDef": _x(CKD, "dist_acc", arm="ck", frac=0.1),
-        "ECkDistCopyBase": _x(CKD, "dist_acc", arm="base_rag", frac=0.1),
         # the LLM-as-judge arm
         "EScrSatGain": _xd(SCRF, "ctx_acc", "scr", "rag", frac=1.0),
         "EScrCleanVsNoRet": _xd(SCRF, "ctx_acc", "scr", "closedbook", frac=0.0),
@@ -1086,14 +1076,21 @@ def main():
     E["EDistCleanBase"] = _x(PMD, "dist_acc", arm="base", frac=0.0)
     E["EDistCleanDef"] = _x(PMD, "dist_acc", arm="parammute", frac=0.0)
     E["EDistCleanNoRet"] = _x(ACDD, "dist_acc", arm="closedbook", frac=0.0)
-    # SCR slides from the document toward memory as the dose rises
-    for lbl, fr in (("Clean", 0.0), ("Low", 0.1), ("Mid", 0.5), ("Sat", 1.0)):
+    # SCR slides from the document toward memory when the context is
+    # corrupted. Two conditions, not four: the intermediate fractions were a
+    # dose axis this item set does not have, built by cutting its single
+    # context passage into chunks and replacing some of them. That axis was
+    # ours, and it is gone. What is left is the condition the knowledge-
+    # conflict papers themselves run -- a clean context against a corrupted
+    # one -- and the dose question is asked on open NQ, where the attack
+    # authors supply the dose.
+    for lbl, fr in (("Clean", 0.0), ("Sat", 1.0)):
         E[f"EScrPm{lbl}"] = _x(SCRF, "pm_acc", arm="scr", frac=fr)
 
     # Section VI: controls, and the adaptive attack on ACD
     DYP = "dyprag_vs_corpus_poisoning.json"
     ADAPT, GRAD = "acd_vs_adaptive_evidence.json", "acd_vs_gradient_evidence.json"
-    for lbl, fr in (("Clean", 0.0), ("Low", 0.1), ("Mid", 0.5), ("Sat", 1.0)):
+    for lbl, fr in (("Clean", 0.0), ("Sat", 1.0)):
         E[f"EDyprag{lbl}"] = _x(DYP, "ctx_acc", arm="dyprag", frac=fr)
     E["EDypragRagClean"] = _x(DYP, "ctx_acc", arm="rag", frac=0.0)
     E["EDypragRagSat"] = _x(DYP, "ctx_acc", arm="rag", frac=1.0)
@@ -1109,6 +1106,7 @@ def main():
     _UND = ("undefended", "base_rag", "rag", "base")
     _DEF = ("defended", "ck", "coiecd", "acd", "scr", "parammute", "dyprag")
     _cells, _gain, _lose, _freeclean, _costclean = [], 0, 0, 0, 0
+    _lowtot = _lowhelps = 0
     for _f in sorted(_glob.glob(str(R / "native_*.json"))):
         # The _direct cells put the same payload in the user turn instead of
         # among the retrieved passages. That is a different channel, not
@@ -1126,7 +1124,7 @@ def main():
             return next((r.get("acc") for r in rows
                          if r.get("arm") == arm and r.get("n_poison") == j), None)
         _n = _d.get("n") or 500
-        for _j, _bucket in ((0, "clean"), (10, "sat")):
+        for _j, _bucket in ((0, "clean"), (1, "low"), (10, "sat")):
             _a, _b = _acc(_v, _j), _acc(_u, _j)
             if None in (_a, _b):
                 continue
@@ -1138,6 +1136,14 @@ def main():
                     _gain += 1
                 elif _delta < -_thr:
                     _lose += 1
+            elif _bucket == "low":
+                # One poisoned passage in ten, which is the attack authors'
+                # own default: poison_num=1 in their released constructor.
+                # The dose most favourable to a defense, because nine honest
+                # passages remain for it to work with.
+                _lowtot += 1
+                if _delta > _thr:
+                    _lowhelps += 1
             else:
                 if abs(_delta) <= _thr:
                     _freeclean += 1
@@ -1147,6 +1153,8 @@ def main():
     M["NGridGainSat"] = _gain
     M["NGridLoseSat"] = _lose
     M["NGridFlatSat"] = len(_cells) - _gain - _lose
+    M["NGridLowPairs"] = _lowtot
+    M["NGridLowHelps"] = _lowhelps
     M["NGridFreeClean"] = _freeclean
     M["NGridCostClean"] = _costclean
     # RobustRAG, a security defense, against the two safety-regime mechanisms
@@ -1173,6 +1181,14 @@ def main():
     for d, j in (("Clean", 0), ("Five", 5)):
         E[f"ERobustMisUndef{d}"] = _x(RKM, "acc", arm="undefended",
                                       n_poison=j)
+    # The three distractor payloads on a CLEAN context, where there is
+    # nothing to defend against and the gap between the arms should be
+    # nothing either. It is: the largest of the three is the number
+    # below, against 35.1, 25.1 and 14.7 once the context is corrupted.
+    E["NAcdGapCleanMax"] = max(
+        abs(_x(f, "dist_acc", arm=a, frac=0.0)
+            - _x(f, "dist_acc", arm="acd", frac=0.0))
+        for f, a in ((ACDD, "rag"), (ADAPT, "rag"), (GRAD, "rag")))
     E["EAcdAdaptCopy"] = _x(ADAPT, "dist_acc", arm="acd", frac=1.0)
     E["EAcdGradCopy"] = _x(GRAD, "dist_acc", arm="acd", frac=1.0)
     E["EAcdAdaptUndefCopy"] = _x(ADAPT, "dist_acc", arm="rag", frac=1.0)
