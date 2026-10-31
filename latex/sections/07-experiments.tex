@@ -78,58 +78,8 @@ asserting it.
 Predictions were written into the runner scripts and committed to version
 control \emph{before} each run, and they ship with the artifact.
 
-\subsection{What we ran}
+\subsection{The two rigs}
 \label{sec:whatweran}
-
-Every pair we ran is two choices: which literature the defense came from,
-and which literature the failure came from. That makes four boxes, and they
-do not ask the same question.
-
-Two boxes are home ground. A method meets the kind of failure its own authors
-built it for, so nothing there tests transfer. These are where the first rule
-above is satisfied, and they hold \NCampSecDefSecMech{} and
-\NCampSafDefSafetyMech{} of our \NCampaignPairs{} pairs.
-
-The other two boxes are crossings, and each asks its own question.
-
-The first crossing puts an adversary in front of a method built for honest
-error. These are methods for a context that is merely wrong --- out of date,
-or contradicted by what the model already believes --- and the question is
-what they do when someone chose the wrong text on purpose. That is most of
-what we ran, \NCampSafDefSecMech{} pairs.
-
-The second crossing runs the other way. It gives a method built against an
-adversary a failure nobody wrote. The question is whether such a method needs
-an attacker to earn its place, or whether it helps whenever the context stops
-supporting the right answer. This is the smaller side,
-\NCampSecDefSafetyMech{} pairs.
-
-Inside each crossing the pairs vary along one axis, and it is a different
-axis in each. Going one way, what changes is how much the attacker controls:
-a passage optimized against the retriever, a fluent sentence asserting a
-chosen answer, a passage that steers behavior rather than the answer, and a
-passage optimized against the defense itself. Going the other way, what
-changes is whether anything arrives at all: text that reaches the window and
-should not be believed although no one wrote it to deceive, against a window
-whose contents all deserve belief and which stops working because there is
-simply more of everything.
-
-The four boxes are not spread evenly across the two rigs the campaign runs
-on. The retrieval cell holds all four. The agent cell holds one: every
-technique in it is a prompt-injection defense and every attack an AgentDojo
-injection, so all \NAgentPairs{} of its pairs are a security defense meeting
-a security mechanism. Every crossing we report is therefore a retrieval-cell
-result, and the agent cell tests no transfer at all.
-
-The two crossings together are \NCampCrossPairs{} of \NCampaignPairs{}
-pairs, \PctCampCross{}\% against the \PctCrossCommunity{}\% the
-literature manages,
-and \NRagImplSafety{} of our \NRagImpl{} retrieval defense implementations
-are knowledge-conflict methods meeting an attack. That is the literature's
-empty column, populated. Counted at registry-name level,
-\NRagPairsNovel{} of \NRagPairsKeyed{} pairs are absent from the
-\NPairsComposite{} the literature reports, and the two that are not are the
-home-ground pairs their own papers already ran.
 
 The retrieval cell pairs defenses built for knowledge conflict against
 attacks built to poison a retrieval corpus. The victim model is
@@ -153,14 +103,6 @@ text. None asks \emph{which} retrieved text deserves trust.
 The agent cell pairs ingestion-stage and execution-stage defense
 techniques against prompt-injection attacks inside the AgentDojo banking
 suite~\cite{debenedetti-2024-agentdojo}, with a Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
-
-In total we executed \NCampaignPairs{} distinct (defense, attack) pairs
-across \NCampaignImpl{} defense implementations, over \NCampaignEpisodes{}
-scored episodes: \NRagPairs{} pairs and \NRagEpisodes{}
-episodes in the retrieval cell, \NAgentPairs{} pairs and \NAgentEpisodes{}
-episodes in the agent cell.
-The two episode counts are not comparable units. An agent episode is a complete
-multi-step tool-use trajectory. A retrieval episode is one scored answer.
 
 Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
 535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
