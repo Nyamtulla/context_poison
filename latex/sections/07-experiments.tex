@@ -87,8 +87,8 @@ do not ask the same question.
 
 Two boxes are home ground. A method meets the kind of failure its own authors
 built it for, so nothing there tests transfer. These are where the first rule
-above is satisfied: \NOursSafDefSafetyMech{} and \NOursSecDefSecMech{} of
-our \NOursPairs{} retrieval pairs.
+above is satisfied, and they hold \NCampSecDefSecMech{} and
+\NCampSafDefSafetyMech{} of our \NCampaignPairs{} pairs.
 
 The other two boxes are crossings, and each asks its own question.
 
@@ -96,13 +96,13 @@ The first crossing puts an adversary in front of a method built for honest
 error. These are methods for a context that is merely wrong --- out of date,
 or contradicted by what the model already believes --- and the question is
 what they do when someone chose the wrong text on purpose. That is most of
-what we ran, \NOursSafDefSecMech{} pairs.
+what we ran, \NCampSafDefSecMech{} pairs.
 
 The second crossing runs the other way. It gives a method built against an
 adversary a failure nobody wrote. The question is whether such a method needs
 an attacker to earn its place, or whether it helps whenever the context stops
-supporting the right answer. This is the smaller side, \NOursSecDefSafetyMech{}
-pairs.
+supporting the right answer. This is the smaller side,
+\NCampSecDefSafetyMech{} pairs.
 
 Inside each crossing the pairs vary along one axis, and it is a different
 axis in each. Going one way, what changes is how much the attacker controls:
@@ -114,6 +114,13 @@ should not be believed although no one wrote it to deceive, against a window
 whose contents all deserve belief and which stops working because there is
 simply more of everything.
 
+The four boxes are not spread evenly across the two rigs the campaign runs
+on. The retrieval cell holds all four. The agent cell holds one: every
+technique in it is a prompt-injection defense and every attack an AgentDojo
+injection, so all \NAgentPairs{} of its pairs are a security defense meeting
+a security mechanism. Every crossing we report is therefore a retrieval-cell
+result, and the agent cell tests no transfer at all.
+
 The two crossings together are \NOursCrossPairs{} of the \NOursPairs{}
 retrieval pairs, against the \PctCrossCommunity{}\% the literature manages,
 and \NRagImplSafety{} of our \NRagImpl{} retrieval defense implementations
@@ -123,7 +130,7 @@ Figure~\ref{fig:transferlit}, populated. Counted at registry-name level,
 \NPairsComposite{} the literature reports, and the two that are not are the
 home-ground pairs their own papers already ran.
 
-The campaign covers two rigs, the retrieval cell and the agent cell. The retrieval cell pairs defenses built for knowledge conflict against
+The retrieval cell pairs defenses built for knowledge conflict against
 attacks built to poison a retrieval corpus. The victim model is
 Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each defense
 released. The data is CoConflictQA~\cite{huang-2025-parammute} over Natural Questions, and open Natural

@@ -800,6 +800,21 @@ def main():
                            ("SafDefSafetyMech", "safety", "safety")):
         M["NOurs" + _lbl] = sum(1 for d, a in _op
                                 if _DT.get(d) == _dr and _AT.get(a) == _ar)
+    # The same four boxes over the WHOLE campaign, not the retrieval cell
+    # alone. Every agent-cell pair is a prompt-injection defense against an
+    # AgentDojo injection, so all of them land in one box: security defense
+    # against a security mechanism. That is worth a macro rather than a
+    # sentence, because it means every crossing we ran is in the retrieval
+    # cell and the agent cell tests no transfer at all.
+    M["NCampSecDefSecMech"] = M["NOursSecDefSecMech"] + M["NAgentPairs"]
+    M["NCampSecDefSafetyMech"] = M["NOursSecDefSafetyMech"]
+    M["NCampSafDefSecMech"] = M["NOursSafDefSecMech"]
+    M["NCampSafDefSafetyMech"] = M["NOursSafDefSafetyMech"]
+    _boxsum = (M["NCampSecDefSecMech"] + M["NCampSecDefSafetyMech"]
+               + M["NCampSafDefSecMech"] + M["NCampSafDefSafetyMech"])
+    if _boxsum != M["NCampaignPairs"]:
+        raise SystemExit(f"the four boxes hold {_boxsum} pairs but the "
+                         f"campaign has {M['NCampaignPairs']}")
     M["PctOursCross"] = f"{100*_oc/len(_op):.0f}"
 
     # ---- the citation graph, so figure 5's caption cannot drift from it
