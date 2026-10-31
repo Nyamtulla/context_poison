@@ -252,8 +252,9 @@ We then ran the same defense, same items, same doses, against false evidence.
 
 \begin{table}[t]
 \centering
-\caption{ACD against two payload classes, $n=\ECoiecdN{}$, mdr \ECoiecdMdr\pp. The defense is
-unchanged. Only the form of the planted passage differs.}
+\caption{ACD against two payload classes, $n=\EAcdN{}$, mdr \EAcdMdr\pp. The defense is
+unchanged. Only the form of the planted passage differs. $p$ is two-sided
+Fisher on the arm counts.}
 \label{tab:acd}
 \footnotesize
 \begin{tabular}{@{}l@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
@@ -261,8 +262,10 @@ unchanged. Only the form of the planted passage differs.}
 \textbf{Comparison, corrupted context} & \textbf{Corpus poisoning} &
 \textbf{False evidence} \\
 \midrule
-vs.\ undefended  & \textbf{+9.2} ($p{<}0.0001$) & +3.0 ($p{=}0.059$) \\
-vs.\ no retrieval & +0.5 ($p{=}0.91$) & \textbf{-4.0} ($p{=}0.0499$) \\
+vs.\ undefended  & \textbf{+\EAcdSatGain{}} ($p\PAcdCorpusVsUndef{}$) &
++\EAcdFalseVsUndef{} ($p\PAcdFalseVsUndef{}$) \\
+vs.\ no retrieval & +\EAcdCorpusVsNoRet{} ($p\PAcdCorpusVsNoRet{}$) &
+\textbf{\EAcdFalseVsNoRet{}} ($p\PAcdFalseVsNoRet{}$) \\
 \bottomrule
 \end{tabular}
 \end{table}

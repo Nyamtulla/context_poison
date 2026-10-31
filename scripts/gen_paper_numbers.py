@@ -55,6 +55,7 @@ _venue_bucket = _rtv.bucket
 
 
 from taxonomy import canon_consequence
+from transfer_stats import fisher_exact_p, min_detectable_change
 
 
 def main():
@@ -951,6 +952,7 @@ def main():
     CK, CO = "ckplug_vs_corpus_poisoning.json", "coiecd_vs_corpus_poisoning.json"
     ACD, SCRF = "acd_vs_corpus_poisoning.json", "scr_vs_corpus_poisoning.json"
     PMF, CKF = "parammute_vs_false_evidence.json", "ckplug_vs_false_evidence.json"
+    ACDF = "acd_vs_false_evidence.json"
     COF = "coiecd_vs_false_evidence.json"
     PMD = "parammute_vs_distractor_evidence.json"
     ACDD = "acd_vs_distractor_evidence.json"
@@ -986,6 +988,13 @@ def main():
         # ACD, the one method that resisted
         "EAcdSatGain": _xd(ACD, "ctx_acc", "acd", "rag", frac=1.0),
         "EAcdCleanVsNoRet": _xd(ACD, "ctx_acc", "acd", "closedbook", frac=0.0),
+        # The ACD payload-class table. Its four deltas and four p-values were
+        # typed into the LaTeX, and its caption borrowed COIECD's n and
+        # threshold macros, which happen to carry the same values and would
+        # have moved the ACD caption the next time COIECD was re-run.
+        "EAcdFalseVsUndef": _xd(ACDF, "ctx_acc", "acd", "rag", frac=1.0),
+        "EAcdCorpusVsNoRet": _xd(ACD, "ctx_acc", "acd", "closedbook", frac=1.0),
+        "EAcdFalseVsNoRet": _xd(ACDF, "ctx_acc", "acd", "closedbook", frac=1.0),
         # The undefended arm under each payload, in the authors' own
         # corrupted condition. These replace four readings taken at an
         # intermediate fraction of a context this item set does not divide.
@@ -1073,6 +1082,27 @@ def main():
             ("Ck", CKD, "ck", "base_rag")):
         E[f"E{nm}Resid"] = abs(_resid(f, dfn, base))
     # the controls that license the three-way reading
+    # The ACD table's own n and threshold, read from its own runs rather
+    # than borrowed, and its four p-values recomputed from the arm counts.
+    E["EAcdN"] = load(ACD)["n"]
+    E["EAcdMdr"] = load(ACD)["mdr_pp_at_n"]
+
+    def _pfisher(f1, a1, f2, a2, frac=1.0):
+        """Two-sided Fisher on two arms' success counts, formatted."""
+        def kn(f, a):
+            r = _rr(f, arm=a, frac=frac)[0]
+            return round(r["ctx_acc"] / 100 * r["n"]), r["n"]
+        (k1, n1), (k2, n2) = kn(f1, a1), kn(f2, a2)
+        pv = fisher_exact_p(k1, n1, k2, n2)
+        # The relation travels with the value, so every cell reads
+        # "$p \\PAcd...$" and a tiny p does not need its own LaTeX.
+        return "{<}0.0001" if pv < 0.0001 else "{=}" + f"{pv:.3g}"
+
+    E["PAcdCorpusVsUndef"] = _pfisher(ACD, "acd", ACD, "rag")
+    E["PAcdFalseVsUndef"] = _pfisher(ACDF, "acd", ACDF, "rag")
+    E["PAcdCorpusVsNoRet"] = _pfisher(ACD, "acd", ACD, "closedbook")
+    E["PAcdFalseVsNoRet"] = _pfisher(ACDF, "acd", ACDF, "closedbook")
+
     E["EDistCleanBase"] = _x(PMD, "dist_acc", arm="base", frac=0.0)
     E["EDistCleanDef"] = _x(PMD, "dist_acc", arm="parammute", frac=0.0)
     E["EDistCleanNoRet"] = _x(ACDD, "dist_acc", arm="closedbook", frac=0.0)
@@ -1102,7 +1132,6 @@ def main():
     # the rest of the paper uses, so a cell that moves less than its own
     # threshold counts as neither a gain nor a loss.
     import glob as _glob
-    from transfer_stats import min_detectable_change
     _UND = ("undefended", "base_rag", "rag", "base")
     _DEF = ("defended", "ck", "coiecd", "acd", "scr", "parammute", "dyprag")
     _cells, _gain, _lose, _freeclean, _costclean = [], 0, 0, 0, 0

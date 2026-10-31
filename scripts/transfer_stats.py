@@ -50,3 +50,34 @@ def min_detectable_change(n: int, p: float) -> float:
     z_a, z_b = 1.959963985, 0.8416212336
     p = min(max(p, 0.01), 0.99)
     return (z_a + z_b) * math.sqrt(2 * p * (1 - p) / n) * 100
+
+
+def fisher_exact_p(k1: int, n1: int, k2: int, n2: int) -> float:
+    """Two-sided Fisher exact p for a 2x2 of successes over trials.
+
+    The four p-values in the ACD payload-class table were typed into the
+    LaTeX by hand, which is the thing this project does not do with any
+    number the corpus or a run produces. They are recomputed from the arm
+    counts instead, and this is the test that recomputes them.
+
+    Two-sided by the usual convention: sum the probability of every table at
+    least as extreme as the observed one, where "as extreme" is measured by
+    the table's own hypergeometric probability.
+    """
+    a, b, c, d = k1, n1 - k1, k2, n2 - k2
+    row1, row2 = a + b, c + d
+    col1, n = a + c, n1 + n2
+
+    def prob(x):
+        return (math.comb(row1, x) * math.comb(row2, col1 - x)
+                / math.comb(n, col1))
+
+    lo = max(0, col1 - row2)
+    hi = min(col1, row1)
+    obs = prob(a)
+    # A strict > would drop tables of exactly equal probability, which for a
+    # symmetric table is the mirror of the observed one and belongs in the
+    # sum. The tolerance is what scipy uses for the same reason.
+    tot = sum(p for x in range(lo, hi + 1)
+              if (p := prob(x)) <= obs * (1 + 1e-7))
+    return min(1.0, tot)
