@@ -48,8 +48,7 @@ experiments that fall in it to answer the following research questions.
 \item[RQ1] \textbf{Do the two communities duplicate each other's work?} We read
   \NCorpus{} papers from both sides under one scheme, compare where each
   community's defenses intervene, and recover every (defense, attack) pair
-  the \NAnalysed{} papers that name a technique report. They are not, and
-  what they do instead is what leaves the region untested
+  the \NAnalysed{} papers that name a technique report
   (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 \item[RQ2] \textbf{Does a defense built for one literature's problem
   survive the other's?} We execute the pairs the literature skipped, from the
@@ -91,59 +90,45 @@ fails, and no evidence at all when one holds.
 
 \paragraph{Contributions.}
 \begin{itemize}
-\item \textbf{We show that the two communities divide the problem rather than
-  duplicate it (RQ1).} One side studies how the bad text arrives and defends
-  where it enters; the other studies why the model believes it and defends
-  where it reasons. That division, not duplication, is what leaves a region
-  neither side has tested: of every confirmed (defense, attack) pair either
-  community reports, only a handful cross between them, and a security
-  defense has been evaluated against a safety failure mechanism exactly
-  \NSecDefVsSafetyAttack{} time (Sections~\ref{sec:parallel},
-  \ref{sec:emptycell}).
+\item \textbf{A map of how the two communities share one problem.} We place
+  every mechanism and fix from both literatures in one taxonomy and along one
+  picture of the agent's pipeline. It shows where each community works:
+  security methods guard where text enters, and safety methods improve how
+  the model reasons about text already inside. It also shows what a system
+  built from either side alone leaves open at the stage the other side covers
+  (RQ1; Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 
-\item \textbf{We run \NCampaignPairs{} pairs neither community had run, and
-  find that methods built for honest error lose to an attacker (RQ2).} These
-  methods decide how far to trust the retrieved document, which is right when
-  the document is out of date and hands the answer to an attacker who wrote
-  it. Within the range of poisoned passages the attack authors evaluate,
-  \NGridGainTop{} of \NGridCells{} pairs help, all against an attack that
-  makes the model refuse (Sections~\ref{sec:campaign},
-  \ref{sec:results}).
+\item \textbf{The first evaluation across the two communities.} We run
+  \NCampaignPairs{} pairs that put a method from one community against a
+  failure from the other, each from its authors' released code and weights,
+  and report how each method holds up outside the setting it was built for
+  (RQ2; Sections~\ref{sec:campaign}, \ref{sec:results}).
 
-\item \textbf{We trace the failures to a single design choice (RQ3).}
-  Every method that fails weights the retrieved text against the model's
-  memory, and turning that weight relocates correctness instead of creating
-  it. What they take from memory the attacker receives,
-  and what they take from the attacker memory receives, so neither direction
-  moves anything toward the real document (Sections~\ref{sec:results},
-  \ref{sec:distractor}).
+\item \textbf{A test that tells copying from remembering.} We plant a passage
+  asserting an answer that is neither true nor the model's own, so every
+  output shows whether the model read the real document, recalled from
+  memory or copied the attacker. We use it to ask whether the failures belong
+  to individual methods or to a choice they share (RQ3;
+  Section~\ref{sec:distractor}).
 
-\item \textbf{We re-read every result against a score the field omits,
-  and one finding does not survive it (RQ4).} Without a no-document score, a
-  defense that never uses the document looks robust. A second base model and
-  a second implementation leave the other results unchanged
-  (Section~\ref{sec:controls}).
+\item \textbf{The measurements the field leaves out.} We add a no-document
+  score, a second base model and a second implementation to the results, and
+  show which conclusions depend on them (RQ4; Section~\ref{sec:controls}).
 
-\item \textbf{We build two adaptive attacks against the one defense that
-  resisted (RQ5).} It loses \PctAcdRemovedGradient{}\% of its
-  protection to an attacker who reads its rule, which prices the method rather
-  than dismissing it (Section~\ref{sec:adaptive}).
+\item \textbf{An adaptive test of the one defense that held.} We build two
+  attacks against that defense's own rule, one by rephrasing and one by
+  gradient search, and measure how much of its protection survives an
+  attacker who reads it (RQ5; Section~\ref{sec:adaptive}).
 
-\item \textbf{We derive the design rule a defense covering both regimes
-  would have to follow, and we have not yet built one.} Every signal inside
-  the context window belongs to whoever wrote the passage, which is why the
-  reasoning stage fails and why the one method that resisted fell to an
-  attacker who read its rule. Such a method has to key on something the
-  attacker does not hold --- provenance, agreement across independently
-  retrieved passages, or the decision to act rather than the decision to
-  believe --- and it still needs the reasoning stage for the stale document
-  nobody wrote as an attack. The experiment that tests this has started and
+\item \textbf{A design rule for covering both stages.} From the results we
+  derive what a defense would need in order to protect both where text enters
+  and where the model reasons. The experiment that tests it has started and
   is not finished, and we claim no result from it
   (Section~\ref{sec:discussion}).
 
-\item \textbf{We release a runnable artifact.} Every attack and defense
-  executes from its authors' released code at a pinned commit, verified
-  unmodified; the harness, the payloads and the full census ship with it.
+\item \textbf{A runnable artifact.} Every attack and defense executes from
+  its authors' released code at a pinned commit, verified unmodified; the
+  harness, the planted passages and the full census ship with it.
 \end{itemize}
 
 \paragraph{How the paper reads.} Section~\ref{sec:background} fixes the
