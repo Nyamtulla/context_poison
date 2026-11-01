@@ -11,61 +11,52 @@ Scholar Academic Graph and arXiv APIs with keyword clusters drawn from both
 vocabularies, and snowballed forward and backward. The discovery pool reached
 \NDiscovered{} papers. \NHopTwo{} of those are hop-2 records, discovered
 before the snowball depth was capped at one hop and kept in the database but
-outside the working pool, which leaves \NWorkingPool{}. Dual coding at that
-scale is not feasible for a small team, so we screened on title and abstract
-against written inclusion criteria, then read the survivors in full. The included corpus is \NCorpus{} papers, each carrying
-\NColumns{} recorded columns of which \NCodedFields{} are coded from the full
-text.
-
-Screening and synthesis are different sets, and we keep them apart.
-A paper can be about context poisoning and still name no attack and no
-defense: surveys, benchmarks, practitioner guides, applications of somebody
-else's method. \NNoTechnique{} of the \NCorpus{} do exactly that, so the
-census, the taxonomy cube and the coverage matrix are computed over the
-\NAnalysed{} papers that contributed a named technique, and the citation
-analysis is computed over all \NCorpus{}. Figure~\ref{fig:prisma} reports both counts at
-its last stage. AgentDojo~\cite{debenedetti-2024-agentdojo} is the
-clearest case. It is the environment \NAgentPairs{} of our own pairs run in, and it names
-neither an attack nor a defense, so it sits outside the analyzed set.
-
-Of the \NNoTechnique{}, \NNoTechSurvey{} are surveys or systematizations,
-\NNoTechBench{} are benchmarks and evaluations, \NNoTechFramework{} are
-framework or architecture papers and \NNoTechPosition{} are position papers.
-The remaining \NNoTechOther{} match none of those descriptions by title: they
-are applications, empirical studies of off-the-shelf methods, and practitioner
-guides. Section~\ref{sec:threats} reports a recall pass over that
-remainder.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig9_prisma}
-\caption{Corpus construction. Each stage reports what it removed on the
-left and what it passed to the next stage on the right. The queries, their
-dates and their hit counts ship with the artifact as a search log.}
-\label{fig:prisma}
-\end{figure}
+outside the working pool, which leaves \NWorkingPool{}. The artifact ships the
+\NQueries{} queries with their dates and hit counts.
 
 We follow PRISMA~\cite{page-2021-prisma} for identification, screening and
-inclusion, and Figure~\ref{fig:prisma} reports the count at every stage. The
-artifact ships the \NQueries{} queries with their dates and their hit counts.
-
-Screening ran as two passes over title and abstract. The first applied the
-written criteria to the whole working pool and removed \NAutoExcluded{}
-records. The second read the \NSurvived{} survivors and carried
-\NFullText{} of them forward to full-text retrieval. A record left at the
-second pass on either of two grounds. Its title and abstract placed it
+inclusion, and Figure~\ref{fig:prisma} reports the count at every stage. Dual
+coding at this scale is not feasible for a small team, so screening ran as two
+passes over title and abstract against written criteria. The first removed
+\NAutoExcluded{} records. The second read the \NSurvived{} survivors and
+carried \NFullText{} of them forward to full-text retrieval. A record left at
+the second pass on either of two grounds. Its title and abstract placed it
 outside the scope we had written down, or no full text was obtainable from a
 peer-reviewed venue or a recognized preprint server, which is the case for
 withdrawn papers and for records whose only version was an uncredentialed
 copy. Reading an uncredentialed copy would put a claim in the census that no
 venue stands behind.
 
-We then coded the \NFullText{} retrieved papers against the inclusion
-criteria and kept \NCorpus{}. The paper stays if it contributes an attack, a failure mechanism, a defense, or a fix.
-Benchmarks, surveys, measurement studies, and position papers stay even though
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig9_prisma}
+\caption{Corpus construction. Each stage reports what it removed on the
+left and what it passed to the next stage on the right.}
+\label{fig:prisma}
+\end{figure}
+
+We then read the \NFullText{} retrieved papers in full, coded them against
+the inclusion criteria and kept \NCorpus{}, each carrying \NColumns{} recorded
+columns of which \NCodedFields{} are coded from the full text. A paper stays
+if it contributes an attack, a failure mechanism, a defense or a fix.
+Benchmarks, surveys, measurement studies and position papers stay even though
 they propose no technique, because they are how the field is organized. That
 pass also recovered techniques the first extraction had missed, so the
 registry counts here are floors.
+
+Those papers with no technique are why screening and synthesis are different
+sets. \NNoTechnique{} of the \NCorpus{} name no attack and no defense:
+\NNoTechSurvey{} surveys or systematizations, \NNoTechBench{} benchmarks and
+evaluations, \NNoTechFramework{} framework or architecture papers and
+\NNoTechPosition{} position papers. The remaining \NNoTechOther{} match none of
+those descriptions by title; they are applications, empirical studies of
+off-the-shelf methods and practitioner guides, and Section~\ref{sec:threats}
+reports a recall pass over them. The census, the taxonomy and the pair matrix
+are computed over the \NAnalysed{} papers that name a technique, and the
+citation analysis over all \NCorpus{}. AgentDojo~\cite{debenedetti-2024-agentdojo}
+is the clearest case: it is the environment \NAgentPairs{} of our own pairs
+run in, and it names neither an attack nor a defense, so it sits outside the
+analyzed set.
 
 \begin{figure*}[t]
 \centering
@@ -82,12 +73,12 @@ A defense can intervene at one of three points between them.}
 
 
 
-We place every named mechanism and every named defense on three axes. Each
+We place every named mechanism and every named fix on three axes. Each
 axis value is named by the work that first identified it as a distinct
 surface or a distinct harm; we group the names rather than coin them. The axes let the two
 literatures land in the same space without forcing them into the same words. A
 security attack and a safety mechanism that enter by the same route
-and cause the same damage occupy the same cell. They differ only on intent. That is what makes our taxonomy a way of finding missing
+and cause the same damage occupy the same cell. They differ only in regime. That is what makes our taxonomy a way of finding missing
 experiments rather than a filing scheme.
 
 
@@ -148,8 +139,7 @@ each cell. Three things are visible there that a count of papers hides.
 The two panels barely overlap. The security literature holds \NMechSecurity{} of
 the \NMechanisms{} mechanisms and masses them in \meth{goal-hijack}; the safety literature holds \NMechSafety{} and masses them in
 \meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
-community works are nearly disjoint, which is the same separation the citation
-rates show, drawn as a picture.
+community works are nearly disjoint.
 
 Effort is concentrated rather than scarce. Four cells hold more than fifty
 fixes each --- \meth{tool-output} $\times$ \meth{goal-hijack} at
@@ -176,17 +166,14 @@ the routes by which an agent accepts capability from a third party, and they
 are the thinnest in the corpus.
 
 
-\textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
-\NMechSecurity{} from the security literature and \NMechSafety{} from the
-safety literature, and \NFixes{} named fixes, \NDefSecurity{} and
-\NDefSafety{} respectively. By consequence,
-\meth{goal-hijack} dominates the threat side at \NMechGoalHijack{}
+\textbf{Census.} The registry holds \NMechanisms{} named mechanisms and
+\NFixes{} named fixes, \NDefSecurity{} of them from the security literature
+and \NDefSafety{} from the safety literature. By consequence,
+\meth{goal-hijack} accounts for \NMechGoalHijack{} of the mechanisms
 (\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption} at
 \NMechReasoning{} (\PctMechReasoning{}\%). By channel, \meth{direct-input}
 (\NMechDirectInput{}) and \meth{tool-output} (\NMechToolOutput{}) together hold
-close to three fifths. Among fixes, \NDefPtReasoning{} act at
-reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
-\NDefPtExecution{} at execution, and \NDefPtNone{} specify no single point.
+close to three fifths.
 
 Almost every fix was tested in one regime only. \NDefenseFix{} were tested
 against an adversary, the defenses of Section~\ref{sec:twovocab}, and
@@ -194,21 +181,15 @@ against an adversary, the defenses of Section~\ref{sec:twovocab}, and
 (\PctBothValidated{}\%) were tested against both and \NNoValidation{} carry no
 test we could identify. So \PctOneRegime{}\% of published fixes carry an
 untested cross-regime question, which is the gap this paper measures and then
-fills.
-
-The regime a fix was tested in is coded separately from the literature it was
-published in, and the two turn out to be nearly the same partition. Of
-\NFixes{} fixes, only \NDefCrossRegime{} were ever tested in the other
-community's regime. So the empty cell of
+fills. The regime a fix was tested in is coded separately from the literature
+it was published in, and only \NDefCrossRegime{} fixes were ever tested in
+the other community's regime. So the empty cell of
 Section~\ref{sec:emptycell}, which is a statement about tested pairs, has a
 counterpart one level down in the methods themselves.
 
-The two sides are also not the same size. There are \NFixes{} fixes for
-\NMechanisms{} mechanisms, and yet \NMechUncovered{} of \NMechanismsBench{}
-named mechanisms (\PctMechUncovered{}\%) have no fix ever evaluated against
-them.
-Effort is concentrated rather than scarce: a single umbrella entry, indirect
-prompt injection, absorbs more tested pairs than any other entry by a wide
+Even so, \NMechUncovered{} of \NMechanismsBench{} named
+mechanisms (\PctMechUncovered{}\%) have no fix ever evaluated against them. A
+single umbrella entry, indirect prompt injection, absorbs more tested pairs than any other entry by a wide
 margin, while \NInjUncovered{} of \NInjVariants{} named injection variants have
 none at all. The field tests heavily against a category and lightly against its
 members.
@@ -222,11 +203,8 @@ members.
 \subsection{Regime versus venue}
 \label{sec:venue}
 
-The regime says what a paper is about, either security or safety. Venue says where its authors sent it. We
-code the two independently, which is what separates the division we draw
-from the field's own institutional one.
-
-The field does not divide itself this way institutionally. Of the
+We code regime and venue independently, and the field does not divide
+itself by venue. Of the
 \NRegimeSecNamedVenue{} security-regime papers that name a venue,
 \NRegimeSecAtAIVenue{} published at an AI venue and \NRegimeSecAtSecVenue{}
 at a security venue. Adversarial work on LLM agents goes to ACL, EMNLP,
@@ -243,11 +221,8 @@ security-regime papers and \NRegimeSafetyNamedVenue{} of
 \NRegimeSafety{} on the safety side. The rest are preprints with no venue
 recorded, and we draw no conclusion about where they will land.
 
-So the two bodies of work are not kept apart by their proceedings. They are
-kept apart by what they cite, which Section~\ref{sec:citation} measures.
-That is a stronger claim than a venue split would have been, and a harder
-one to explain away: these papers appear beside each other and still do not
-read each other.
+So the two bodies of work are not kept apart by where they publish. What
+keeps them apart is what they cite.
 
 \subsection{Cross-citation between the literatures}
 \label{sec:citation}
@@ -255,9 +230,7 @@ read each other.
 \textbf{Neither side reads the other.} \PctSecCitesSafety{}\% of
 security-regime papers (\NSecCitesSafety{} of \NAnalysedSec{}) cite a
 safety-regime paper, and \PctSafetyCitesSec{}\% of safety-regime papers
-(\NSafetyCitesSec{} of \NAnalysedSafety{}) cite a security one. About
-\PctSecNoCross{}\% of papers on each side were written without reference
-to the other community.
+(\NSafetyCitesSec{} of \NAnalysedSafety{}) cite a security one.
 
 What carries the cross-regime citations makes the rate look better
 than the engagement is. \NNetworkCross{} of the \NNetworkEdges{} resolved
@@ -289,7 +262,7 @@ omitted.}
 A (defense, attack) pair means some paper evaluated that defense against that
 attack. The registry's unit is the claim: a method enters it when its paper
 proposes it against a named failure mechanism, not when the paper
-demonstrates that it works. \emph{Defense} therefore means
+demonstrates that it works. A fix in a pair therefore means
 proposed-against, and the distance between proposing and demonstrating is
 part of what this section measures. We recovered pairs by four routes: reading defense papers, a
 citation-and-full-text recovery pass, resolving benchmark names to their
@@ -301,10 +274,10 @@ defense \emph{losing} to an attack published after it. The final matrix holds
 \textbf{The matrix is sparse in a specific way.} \NDefMatchedFull{} of
 \NFixes{} fixes (\PctDefMatched{}\%) appear in at least one pair, and
 \NDefOneFull{} of those (\PctDefOneFull{}\%) appear in exactly one. The
-most cross-tested defense appears in \NDefCeiling{} pairs, and \NDefFourPlus{}
+most cross-tested fix appears in \NDefCeiling{} pairs, and \NDefFourPlus{}
 appear in four or more. But of the pairs belonging to those \NDefFourPlus{},
 \PctBreadthFromAttack{}\% were contributed by attack papers rather than by
-the defenses' own evaluations; for the broadest case,
+the fixes' own evaluations; for the broadest case,
 \NBroadestFromAttack{} of its \NBroadestPairs{} pairs come from attack
 papers. Breadth here is not evidence a method was evaluated widely by its
 authors. It is evidence that attackers chose it as a target.
@@ -365,10 +338,8 @@ tested should state whether it means ``not done'' or ``not resolved''.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig3_who_reports}
-\caption{The same defenses and the same attacks, reported by the two sides of
-the field. A defense paper reports its defense winning in \NOutcomeDefWins{}
-of \NOutcomeDefPaper{} pairs. An attack paper reports the defense winning in
-none of \NOutcomeAtkPaper{}.}
+\caption{The outcome of each recovered pair, as reported by defense papers
+and by attack papers.}
 \label{fig:whoreports}
 \end{figure}
 
@@ -535,15 +506,12 @@ median lag where security leads is \MedianChannelLag{} year and the longest is
 \MaxChannelLag{}. The \meth{supply-chain} channel, excluded here for having no
 safety-regime entry at all, is the limit case of the same pattern.
 
-Set that beside the citation rates. A safety-regime paper naming a failure in
-a channel is, more often than not, working ground a security paper reached one
-to three years earlier, in a literature that only \PctSafetyCitesSec{}\% of
-safety-regime papers cite at all. It is not renaming that paper's mechanism --- the collision
-count above says it is not --- and arriving second at a surface is not a
-fault. We are claiming the obvious
-consequence, which is that neither side can tell whether the other has already
-answered its question, and Section~\ref{sec:emptycell} shows that nobody
-has checked.
+So a safety-regime paper naming a failure in a channel is usually working
+ground a security paper reached \MedianChannelLag{} to \MaxChannelLag{} years
+earlier, in a literature it rarely cites. It is not renaming that paper's
+mechanism --- the collision count above says it is not --- and arriving second
+is not a fault. It does mean neither side can tell whether the other has
+already answered its question.
 
 Two limits on this reading. The dates are publication dates in our corpus, so
 a channel that security reached first in work we did not include would move
@@ -551,17 +519,14 @@ the count. And the direction may partly reflect that security publishes
 attacks, which are discrete and nameable, while the safety side
 publishes degradations, which are noticed before they are named.
 
-Neither community can close the chain alone. The methods that keep bad text out and the methods that reason better about
+The methods that keep bad text out and the methods that reason better about
 text already present are built by different people, published at different
-venues, and evaluated against different problems; no single method in the
+venues and evaluated against different problems, and no single method in the
 census covers both stages. A system that wants coverage at ingestion and at
 reasoning therefore has to compose methods from both literatures, and the
 census holds no paper that does. Whether such a composition would help is a
 separate experiment, which this paper has started and not finished: every
-result in Section~\ref{sec:results} measures one method alone. What the census establishes
-is narrower and still unwelcome. The two halves exist, the stages they
-cover are complementary, and nobody has put them together or tested what
-happens when they are.
+result in Section~\ref{sec:results} measures one method alone.
 
 Answer to RQ1. No. The two communities divide the problem rather than
 duplicate it. Security guards where text enters and safety improves how the
