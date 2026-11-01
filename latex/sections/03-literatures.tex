@@ -1,7 +1,7 @@
 \section{Two literatures, one problem}
 \label{sec:literatures}
 
-Two communities work one problem and do not cite each other, which raises
+Two communities work one problem and rarely cite each other, which raises
 RQ1: are they doing each other's work twice?
 
 \subsection{Corpus}
@@ -154,9 +154,8 @@ And \NCellsAttackNoDef{} cells hold a named mechanism with no fix ever
 proposed against it. \NCellsAttackNoDefSec{} of them are in the security
 panel, \NCellsAttackNoDefBackdoor{} of those are
 \meth{persistence-backdoor}, and the last is \meth{memory} $\times$
-\meth{data-exfiltration} on the safety side. A cell one community has
-to itself is a gap; a cell with mechanisms and no fix is a different and
-sharper one.
+\meth{data-exfiltration} on the safety side. These cells lack any proposed
+fix, which is a stronger gap than a cell studied by one community only.
 
 The totals column collapses the consequence axis and reports it.
 \meth{multi-agent} and \meth{memory} carry several fixes
@@ -227,7 +226,7 @@ keeps them apart is what they cite.
 \subsection{Cross-citation between the literatures}
 \label{sec:citation}
 
-\textbf{Neither side reads the other.} \PctSecCitesSafety{}\% of
+\textbf{Cross-citation is low in both directions.} \PctSecCitesSafety{}\% of
 security-regime papers (\NSecCitesSafety{} of \NAnalysedSec{}) cite a
 safety-regime paper, and \PctSafetyCitesSec{}\% of safety-regime papers
 (\NSafetyCitesSec{} of \NAnalysedSafety{}) cite a security one.
@@ -282,9 +281,8 @@ the fixes' own evaluations; for the broadest case,
 papers. Breadth here is not evidence a method was evaluated widely by its
 authors. It is evidence that attackers chose it as a target.
 
-How much of this gap belongs to the field, and how much to our instrument?
-It is tempting to read the complement of the matrix as ``never tested'', and that
-reading is wrong. A defense evaluated on AgentDojo without naming which
+The complement of the matrix does not mean ``never tested'', because part of
+the gap reflects our instrument rather than the field. A defense evaluated on AgentDojo without naming which
 injection it faced was evaluated adversarially; it is simply not a named pair,
 because expanding a benchmark into its constituent attacks would manufacture
 coverage. So we classified every one of the \NDefEvalAudited{} fixes in the
@@ -385,30 +383,28 @@ safety failure mechanism; \NSafetyDefVsSecAttack{} safety methods have been
 run against security attacks. That is \NCrossCommunityPairs{} pairs in
 \NPureRegimePairs{}, \PctCrossCommunity{}\%.
 
-That near-empty off-diagonal is the untested region. It is not a
-claim that these methods fail outside their own regime. It is a claim that
-nobody has checked, and a deployed system does not sort its inputs into
+That near-empty off-diagonal is the untested region. It does not show that
+these methods fail outside their own regime. It shows that this has almost
+never been tested, although a deployed system does not sort its inputs into
 ``an attacker wrote this'' and ``this is merely stale''.
 
-One reading would make that gap uninteresting: that the communities never
-tested across the boundary because they already knew the answer, so running
-the experiment adds nothing. Three measurements above say otherwise. The
-communities rarely cite each other, so neither can know what the other found.
-No reported pair carries an account from both sides. And
-\NDefClaimExceedsTest{} defenses claim an adversarial threat model while
-putting no adversary in their experiment, which is not what withholding a
-test you expect to fail looks like.
+The absence of cross-community pairs does not show that such tests were never
+considered; authors may have omitted them because they expected them to fail.
+Our data cannot establish why a test was not run. Three observations are
+nonetheless hard to reconcile with deliberate omission. Cross-citation between
+the regimes is low (Section~\ref{sec:citation}), although citation counts
+measure acknowledgment rather than awareness. No reported pair carries an
+outcome from both a defense paper and an attack paper
+(Section~\ref{sec:whoran}). And \NDefClaimExceedsTest{} fixes state an
+adversarial threat model yet report no adversarial evaluation, which suggests
+that gaps in evaluation are not confined to tests across the boundary.
 
-The single crossing is worth naming, because it is the strongest evidence
-against our own framing and it is one pair.
-TRACE~\cite{hong-2026-trace} is a trajectory compressor for long-horizon
+The single crossing pair is TRACE~\cite{hong-2026-trace}, a trajectory compressor for long-horizon
 agents whose own evaluation is adversarial, which is what places it in the
 security regime, and it is reported against context-length-induced
-degradation, a safety mechanism. It comes from a paper whose subject matter
-spans both communities, which is precisely the kind of paper that would
-cross first. One instance in \NPureRegimePairs{} is not a literature that
-tests across the boundary; it is the exception that shows what crossing
-would look like.
+degradation, a safety mechanism. The paper's subject matter spans both
+communities. One pair in \NPureRegimePairs{} does not change the overall
+pattern.
 
 The boundary could be ours rather than the field's, and it is not drawn by
 exclusion. We assign the regime label per paper, every paper takes one of
@@ -434,16 +430,14 @@ Figure~\ref{fig:lag} shows the full distribution.
 \subsection{Division of labor, not duplication}
 \label{sec:parallel}
 
-If two communities work one problem without reading each other, the second
-to arrive should rebuild what the first already has. The decisive evidence
-is not what the methods are called but where in the pipeline they act, which
-is a coded field rather than a reading of names. Security defends where the
+If the two communities duplicated each other's work, their methods would act
+at the same stage of the pipeline. We test this with the coded intervention
+point of each fix rather than with method names. Security defends where the
 text enters: \NDefPtIngestionSec{} of its fixes act at ingestion.
 Safety defends where the text is used: \NDefPtReasoningSafety{} of its
 fixes act at reasoning. Figure~\ref{fig:pipeline} draws that split
-against the pipeline and Figure~\ref{fig:intervention} counts it. Two
-bodies of work that intervene at different stages are not building the same
-thing, whatever they name it.
+against the pipeline and Figure~\ref{fig:intervention} counts it. Methods
+that intervene at different stages do not duplicate each other.
 
 The names agree with the coding. Inside each taxonomy cell we looked for a
 security-regime name and a safety-regime name close enough to be the same
@@ -460,8 +454,9 @@ the safety entries are reasons the model believes bad text once it is there. The
 \meth{RAG} $\times$ \meth{silent-corruption} cell is the clearest case:
 PoisonedRAG, BadRAG~\cite{xue-2024-badrag} and their relatives on one side; over-trust in conflicting
 external evidence, lost-in-the-middle, and knowledge-conflict circuits on the
-other. One side builds the attack. The other side has already
-explained why it works and is not cited for it.
+other. The security papers build the attacks, the safety papers explain why
+the model is susceptible to them, and the two sets of papers cite each other
+rarely.
 
 The consequences each side names show the same division. Goal-hijacking, an
 attacker's objective, is \NGoalHijackSec{} security mechanisms to
@@ -508,10 +503,10 @@ safety-regime entry at all, is the limit case of the same pattern.
 
 So a safety-regime paper naming a failure in a channel is usually working
 ground a security paper reached \MedianChannelLag{} to \MaxChannelLag{} years
-earlier, in a literature it rarely cites. It is not renaming that paper's
-mechanism --- the collision count above says it is not --- and arriving second
-is not a fault. It does mean neither side can tell whether the other has
-already answered its question.
+earlier, in a literature it rarely cites. The collision count above shows
+that it is not renaming that paper's mechanism. It does show that work in
+these channels has proceeded largely without reference to the earlier results
+of the other community.
 
 Two limits on this reading. The dates are publication dates in our corpus, so
 a channel that security reached first in work we did not include would move

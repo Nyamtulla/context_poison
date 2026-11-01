@@ -28,17 +28,17 @@ Success means accuracy goes up.
 The two communities describe the same underlying failure: a passage the model
 should not trust enters the context window and changes the output. Only the
 provenance differs; the model sees tokens either way. The difference is more
-than vocabulary. If it were only vocabulary, a reader could translate between
-the two communities and lose nothing. They differ in what counts as a
+than vocabulary, which translation alone would resolve. They differ in what
+counts as a
 successful evaluation. The safety community measures a fix for the accidental
 case on an average-case benchmark, because nothing adapts to it. The security community measures a defense for the
 adversarial case against the worst case, because something does. Those are not two styles
 of the same test. A method can pass the first test convincingly and fail the second one
-completely. Neither community's publishing process catches this, because each
-reviews against its own convention.
+completely. Because each community evaluates against its own convention, a
+method is rarely tested against the other's.
 
-So the field publishes, adopts, and cites a method without anyone asking
-whether it survives the other community's test. We test that claim by
+So the field publishes, adopts and cites methods that are rarely evaluated
+against the other community's test. We test that claim by
 reading both literatures under one taxonomy and recovering every experiment
 either side has run. The test finds a gap. We then run the
 experiments that fall in it to answer the following research questions.
@@ -74,7 +74,7 @@ and the safety side on its own terms as a problem of knowledge
 conflict~\cite{xu-2024-knowledge}. None of it runs the experiment. A
 survey of one literature has only that literature's methods in hand, and the
 test we need takes a defense from one side and an attack from the other. So we
-read both, found the pairs nobody has run, and ran them from the authors'
+read both, found the pairs no paper reports, and ran them from the authors'
 released code and weights. To our knowledge this is the first evaluation
 in which published defenses from one of these communities meet published
 failure mechanisms from the other.
@@ -133,7 +133,7 @@ fails, and no evidence at all when one holds.
 
 \paragraph{How the paper reads.} Section~\ref{sec:background} fixes the
 terms and the threat model. Section~\ref{sec:literatures} answers RQ1 and
-ends at the region nobody has tested. Section~\ref{sec:experiments} describes
+ends at the region the literature has barely tested. Section~\ref{sec:experiments} describes
 the platform, Section~\ref{sec:campaign} the experiments we ran on it, and
 Section~\ref{sec:results} what they show, grouped under RQ2 to RQ5.
 Section~\ref{sec:discussion} turns what
