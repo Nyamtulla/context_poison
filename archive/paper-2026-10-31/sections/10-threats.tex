@@ -1,0 +1,181 @@
+\section{Threats to validity}
+\label{sec:threats}
+
+\textbf{Extraction error.} We produced the corpus coding with an LLM-assisted
+extraction pass over \NCorpus{} papers and \NCodedFields{} coded fields. Every count in
+Sections~\ref{sec:taxonomy} to~\ref{sec:coverage} depends on it. A human validation study is drawn and
+stratified by the coding's own confidence: \NValidationDraw{} papers,
+\NValidationFields{} fields each, designed for a \NValidationCI{}\pp{}
+confidence interval on overall accuracy. It has not been coded yet.
+We therefore report no measured extraction-error rate, and the counts in those
+sections should be read as unvalidated. The study is single-coded by decision
+of the project lead. When it returns it will bound extraction error without
+separating a coder's mistake from the extraction's, so it will carry no
+inter-rater agreement and we will claim none.
+
+\textbf{Regime assignment.} The cross-citation rates depend on classifying every
+cited paper into a regime. That classification is automated over the full
+discovery pool. A systematic bias in it would move the rates. We regard the
+direction of the finding as safe, because the gap between \PctSecCitesSafety{}\% citation and
+\PctSameRegime{}\% same-regime evaluation is far larger than any plausible classification
+error, but the exact rates should be read as estimates. Two further limits
+bound them. The denominator is the \NAnalysed{} papers that named a
+technique rather than every screened-in paper, because a survey cites
+widely and names nothing, so counting it would measure reading habits. And
+only citations to papers inside that set register, so a paper reaching
+across to work we did not include does not count: every cross-citation rate
+in this paper is a floor.
+
+\textbf{The reverse direction rests on one defense.} Most cross-regime pairs
+in the campaign take a safety-regime method and attack it. The other
+direction holds one family: RobustRAG against distractor evidence and against
+misretrieval, in Section~\ref{sec:transfer}. That is two mechanisms, one
+defense, one model and one dataset. The split result there --- it holds
+against the planted claim and costs accuracy against the retrieval error ---
+reads two cells, not a population. The other security defenses are absent
+because their released code does not run on our retrieval data, and nothing
+here says whether they would divide the same way.
+
+\textbf{Registry granularity.} What counts as one named mechanism is a
+judgement. ``Indirect prompt injection'' is one registry entry and absorbs
+\PctTopMechShare{}\% of all tested pairs. \NInjUncovered{} of the \NInjVariants{} named injection
+variants have no tested pair at all. A
+coarser registry would make coverage look better and a finer one would make it
+look worse. We chose the granularity the papers themselves use, which is the
+name each paper gives its own contribution.
+
+\textbf{Who-reports-what is observational.} Section~\ref{sec:whoran} reports a
+strong association between authorship and outcome. It is not a controlled
+comparison. The two sides largely write about different pairs. The
+association therefore reflects which pair each side chose to run, rather than
+differing conduct on the same pair. That selection is our interpretation.
+
+\textbf{The campaign is a sample, not a census.} We ran \NCampaignPairs{} pairs out of a space
+of thousands. They were selected by the taxonomy rather than at random, biased
+toward pairs where both artifacts run. Defenses whose artifacts do not run are
+absent, and nothing here says whether they transfer.
+
+\textbf{Attacks are non-adaptive, with one exception.} This is the criticism
+that invalidated DEEPSEC's defense rankings~\cite{carlini-2019-critique}, and
+we inherit it. An attack that was not built for a defense and defeats it
+anyway bounds attack strength from below, so our failure results are
+conservative. A resistance result drawn the same way is not evidence of
+robustness at all.
+Section~\ref{sec:adaptive} tests the one resistance result we report. Every
+other defense in the campaign would need the same treatment before any claim
+that it holds.
+
+\textbf{Variance.} Carlini lists ``no variance
+reported'' as one of five fatal flaws in DeepSec~\cite{carlini-2019-critique}.
+His own check found a standard deviation of 6.8 points on a reported attack
+success rate. That is enough to make many of DeepSec's pairwise comparisons
+meaningless. We avoid that a
+different way: we use greedy decoding everywhere except one cell, so there is
+no run-to-run noise to report. The exception is
+CheckRLM~\cite{xu-2026-checkrlm}, whose own recipe samples at a temperature
+its authors set per backbone. Our standard is to keep an author's
+configuration where it differs from ours, so that cell decodes as they
+specify and the replication below does not cover it.
+
+Rerunning one published cell that decodes greedily, three
+times from scratch with an identical command, produced \textbf{byte-identical
+results}: 72 numeric cells across 8 result rows, zero differences, the same
+hash after removing the timestamp. Error bars over a deterministic decoder
+would be zero-width and would say less than this does. The uncertainty that
+remains is sampling uncertainty, which the Wilson intervals~\cite{wilson-1927-probable} and the
+detectability threshold already carry.
+
+What this does \emph{not} show is insensitivity to item order, batch
+composition, or the few-shot examples a defense holds out. Those are untested,
+and a method whose result depended on them would pass this check and still be
+fragile.
+
+Nor does it show reproducibility across environments, and we have a
+measured example of the difference. The defenses in the retrieval cell cannot
+share one Python environment: ACD's released decoder imports symbols that
+newer \texttt{transformers} releases removed, and its authors pin a version
+the rest of the cell cannot use. The \emph{clean} arm plants no payload, so its result is a
+control. Re-running an earlier ACD cell under a rebuilt stack moved that arm
+by up to 0.3\pp{}. The closed-book arm moved too, and
+that arm never sees the context at all, so nothing but the environment can
+explain it. We therefore re-ran the earlier adaptive payload under the same
+stack as the gradient payload rather than comparing across the two; the
+attacked arms agreed to within 0.3\pp{} and the corrupted row agreed exactly.
+Determinism within a stack and reproducibility across stacks are different
+properties, and only the first is established by the replicates above.
+
+\textbf{We do not measure what the defenses cost.} Every number here is an
+accuracy, a copy rate or a refusal rate. We report no inference latency,
+no memory footprint and no throughput, so nothing in this paper says whether a
+defense is affordable to deploy. That matters for the contrastive-decoding
+family in particular, which runs two forward passes per token. A method could
+be useless on the evidence here and still be the right choice at a cost we
+never measured, or hold up well and be unaffordable.
+
+\textbf{Single dataset per cell.} The retrieval cell runs on CoConflictQA~\cite{huang-2025-parammute} and
+open Natural Questions~\cite{kwiatkowski-2019-natural}. The dosing model, which replaces a fraction of context
+with planted passages, is a simplification of a real retrieval pipeline under
+attack. It holds the retriever fixed, so it measures what the generator does
+with poisoned context rather than how hard the context is to poison.
+
+\textbf{Model coverage.} Most retrieval-cell results use Llama-3-8B-Instruct,
+with Mistral-7B-Instruct where a defense required it. A second-model check
+left the results unchanged within the evaluated range, but it covers only
+RobustRAG. The results should be read as holding for models of this class and
+size.
+
+\textbf{Scorer.} We reuse each defense's own evaluation rubric where one
+exists, and a shared recall-based rubric across the retrieval cell. Recall
+against a gold string rewards a model that produces the right tokens for the
+wrong reason. We report the rate of answers from memory and the refusal
+rate alongside it so that the failure modes stay visible.
+
+\textbf{One screening stage is not reconstructible.} Figure~\ref{fig:prisma}
+counts each stage of corpus construction from recorded provenance. The step
+from the \NSurvived{} screened survivors to the \NFullText{} papers read in
+full is the exception. The project kept no record of how that subset was
+chosen, so we cannot show it was unbiased. A reader should treat the corpus as
+a large and systematically discovered sample of the two literatures, not as
+their exhaustive intersection. The counts that follow from it are floors.
+
+\textbf{Most of the corpus is unrefereed, and the finding does not depend on
+that.} \NVenuePapers{} of \NCorpus{} papers carry a named publication venue;
+the rest are preprints, and the share falls with recency, from
+\PctVenueEarly{}\% of our \YearVenueEarly{} papers to \PctVenueLate{}\% of
+our \YearVenueLate{} ones. A corpus restricted to refereed work
+would therefore describe an earlier field than the one we set out to measure,
+so the restriction is a check and not the corpus. Resolving both sides of
+every pair back to a paper succeeds for \NVenueResolved{} of
+\NTimelinePairs{} pairs (\PctVenueResolved{}\%); of those, \NVenuePairs{} have
+a named venue on both sides, and \NVenueSecDefSafetyAtk{} of them is a security
+defense evaluated against a safety failure mechanism. The empty
+direction stays empty among refereed work alone.
+
+\textbf{Census recall.} \NNoTechnique{} papers contributed no attack and no defense, and
+\NNoTechOther{} of those match none of the survey, benchmark, framework or
+position descriptions by title. We re-read \NRecallRead{} papers --- that
+bucket as it stood before the pass --- and asked one question of each: does
+this paper name a technique we failed to register. \NRecallCandidates{}
+candidates came back. Two were genuine omissions and are now in the census. One was
+a defense already registered under a different name. One renamed a mechanism
+the registry carries three times. One was a payload form rather than a
+technique. The last was an attack a defense paper built for its own
+evaluation; Section~\ref{sec:literatures} registers it under the rule that
+bars a paper's own attack from pairing with its own defense. Two omissions in
+\NRecallRead{} papers is a rate, not a guarantee of completeness.
+
+\textbf{To be done.} Four items are not complete. We report none of them
+as complete.
+
+\begin{itemize}
+\item \textbf{Finish the campaign.} Some cells have not run. The counts
+  above are a snapshot. The artifact lists every cell that remains.
+\item \textbf{Code the validation study.} The draw is complete. No coder
+  has started. We give no extraction-error rate until the study returns.
+\item \textbf{Run the composition.} The experiment is queued. It puts one
+  ingestion-stage method in front of one reasoning-stage method. The design
+  rule stays a prediction until this run gives a result.
+\item \textbf{Read two published benefits from their papers.}
+  ACD and DyPRAG give no
+  figure in their text. Their controls stay directional.
+\end{itemize}

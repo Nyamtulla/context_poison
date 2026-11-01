@@ -1,0 +1,81 @@
+\section{Conclusion and future work}
+\label{sec:conclusion}
+
+Two research communities study one failure. An LLM agent reads content it
+should not trust, and it cannot tell which content that is. The security
+community calls the content an attack and builds defenses. The safety community calls it a mechanism and builds fixes.
+
+We measured the distance between them over \NCorpus{} papers read in full,
+of which \NAnalysed{} name an attack or a defense.
+\PctSecCitesSafety{}\% of security-regime papers cite a safety-regime one. Only \NBothValidated{} of \NDefenses{} defenses answer
+to both regimes. And \PctSameRegime{}\% of
+tested (defense, attack) pairs stay inside a single regime. One direction of the
+cross-testing matrix holds \NSecDefVsSafetyAttack{} pair in \NPureRegimePairs{}: a
+security defense has been evaluated against a safety failure
+mechanism exactly once.
+
+We then ran that experiment. \NCampaignPairs{} pairs, all on the authors'
+released artifacts. \PctCampCross{}\% of them cross the boundary the
+literature does not.
+
+One poisoned passage in ten gives a defense its best chance, because nine
+honest passages survive, and it is the attacks' own default.
+\NGridLowHelps{} of \NGridLowPairs{} (defense, attack) pairs show a
+resolvable benefit there.
+
+The finding is a mechanism, not a verdict. Context-reliance defenses do not
+fail because someone built them badly. They fail because of what they
+arbitrate. Each one decides between trusting the context and trusting memory,
+and that dial moves correctness around without creating any. Suppress memory
+and the attacker receives what memory held. Suppress the attacker and memory
+receives it back.
+
+A payload that plants a third answer separates copying from remembering, so
+we can add the two movements together. In the three defenses that suppress
+memory they cancel to within 8 points. Neither direction moves anything
+toward the real document, because the dial has no setting for it. The attack
+is inside the context.
+
+Two results bound that claim rather than soften it.
+
+First, protection depends on the \emph{form} of the planted passage, not only
+on whether an attacker is present. An evaluation built around optimized
+payloads therefore overstates how well a system holds. The fluent payload
+needs no gradient access and damages an undefended model roughly twice as
+hard.
+
+Second, one defense did resist. It loses \PctAcdRemovedGradient{}\% of that
+protection to an
+attacker who reads its rule and optimizes against the quantity it measures.
+
+\paragraph{Future work.}
+
+\textbf{Extend the adaptive case to the rest of the family.} We tested the
+one defense that resisted,
+with two optimizers. A best-of-five search over sentence forms took
+\PctAcdRemovedBestOf{}\% of
+its protection. A gradient search over token ids took
+\PctAcdRemovedGradient{}\%. Together they
+settle that the defense degrades rather than collapses.
+Every other context-reliance method in the campaign has had only the
+non-adaptive treatment, which Section~\ref{sec:experiments} states is no
+evidence of robustness at all. The same two optimizers transfer directly: each
+of these methods exposes a scalar the attacker can address.
+
+\textbf{Close the supply-chain and cross-modal gaps.} These channels have fewer
+than one named defense per named mechanism and are the routes by which agents
+accept third-party capability. They are the clearest place to build rather than
+to measure.
+
+\textbf{Separate the intervention-point finding from its confound.} Whether a
+defense generalizes appears to follow where in the pipeline it intervenes. A
+confound sits beside that finding. The ingestion defenses that generalize are
+also the ones whose harnesses model a text-classification victim, and the
+execution defenses we could not evaluate are the agent-shaped ones. Running all three intervention points
+inside one agent harness would resolve it.
+
+\textbf{Make the empty cell the default, not the exception.} The deepest
+problem this paper documents is not any single defense. It is that who runs an experiment predicts its
+outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair defenses with attacks that a
+taxonomy selects, not attacks that either author selects. Transfer then
+becomes a measured property rather than an assumed one. We release ours.

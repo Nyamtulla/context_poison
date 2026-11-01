@@ -1,0 +1,37 @@
+% longtable cannot break pages in two-column mode, which is what acmart
+% sigconf sets. The appendix therefore runs single-column, which also suits
+% six-column tables better than a 3.33in column would.
+\clearpage
+\onecolumn
+
+\section{The full census} \label{sec:census}
+
+Section~\ref{sec:taxonomy} describes the largest families and counts the rest.
+This appendix is the rest. It gives one row for every named mechanism and
+every named defense in the corpus, with the coding we gave each. The counts
+rest on a claim: that we read both literatures in full rather than sampling
+where convenient. This appendix lets a reader check that claim rather than
+trust it.
+
+Three conventions are worth stating before the tables.
+
+\textbf{Entries whose authors named nothing are included, in italics.} The
+tables in the body exclude them, because an unnamed row makes a poor example.
+A census is the opposite case: omitting them would undercount the corpus and
+overstate how much of the field names its own contributions. That share is
+itself a finding, and it differs between the two sides.
+
+\textbf{\emph{Validated against} is what each paper's own evaluation tested},
+read from its evaluation section, not what its abstract claims. Where the two
+disagreed we coded the evaluation. This is the field that carries
+Section~\ref{sec:emptycell}, so it was the one we checked hardest.
+
+\textbf{Every row cites its source.} All 715 distinct papers behind these
+entries resolve to a bibliography key, so no named contribution appears here
+without attribution. The machine-readable registries carry more than a
+citation can. Each entry holds its DOI or arXiv identifier, the quoted
+evidence behind its coding, and the coder's confidence.
+
+\input{tables/census_mechanisms}
+
+\input{tables/census_defenses}

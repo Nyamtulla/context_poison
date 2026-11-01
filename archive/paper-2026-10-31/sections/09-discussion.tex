@@ -1,0 +1,142 @@
+\section{Recommendations}
+\label{sec:discussion}
+
+For the mechanism that removes evidence rather than planting a lie, the
+campaign finds no difference between an optimized passage and an ordinary
+retrieval error. The citation gap of Section~\ref{sec:literatures} is
+therefore not two communities working on different problems, at least where
+that mechanism is concerned, and the recommendations below follow from
+treating it as one problem.
+
+\subsection{Controls both communities should report}
+
+Section~\ref{sec:controls} reports one result that reads the other way
+without a no-document score, and Section~\ref{sec:distractor} one that reads
+the other way when only accuracy is reported. Neither measurement is
+expensive and neither is standard. We propose three reporting requirements.
+
+\textbf{Report a no-retrieval arm.} Any defense that modifies how a model uses
+retrieved context must report what the same model scores with no retrieved
+context at all. Without it, a defense that has stopped reading the document is
+indistinguishable from a defense that has learned to resist a poisoned one.
+This is one extra arm and it costs one extra pass over the data.
+
+\textbf{Report where the answers went, not only accuracy.} Under a planted
+third answer, ParamMute moves accuracy by less than its threshold while the share of answers
+copied from the attacker rises by \EPmDistCopyGain{} points. Accuracy alone
+reports that defense as harmless. Classifying each output as the true
+answer, the model's own answer, the planted answer or a refusal costs nothing
+beyond reading the generations already produced.
+
+\textbf{Report at least two base models.} Our second-model check left the
+results unchanged within the range the attack authors evaluate, but it covers
+one defense design. A result on one model cannot show that it holds on
+another, so a single-model result should be read as specific to that model.
+
+\subsection{Conventions for measurable transfer}
+
+The controls above are about one experiment. These five are about what a
+paper says it covers.
+
+\textbf{State the regime the evaluation actually covers.} Our defense
+census codes each method by what its own paper evaluated, and
+\PctOneRegime{}\% cover one regime. Many of those papers describe their
+contribution in terms broad enough to imply the other. One required sentence
+would close this. Name the regime the experiments cover. A reader of the
+paper, and the maintainer of a system, then sees the gap without reading the
+appendix.
+
+\textbf{Gate claims on a detectability threshold.} Reporting a difference
+without the smallest difference the experiment could have detected makes "no
+effect" and "we could not tell" look identical. We computed this for every run
+and several of our own results moved from the first category to the second.
+
+\textbf{Say whether the attack was adapted to the defense.} A defense that
+holds against an attack built for a different target has been shown to resist
+that attack and nothing more. Every published evaluation of a
+context-reliance defense in our corpus is non-adaptive, and when we built an
+adaptive payload against the one method that had resisted,
+\PctAcdRemovedGradient{}\% of its protection went
+(Section~\ref{sec:adaptive}). One sentence naming whether the attacker knew
+the defense tells a reader which kind of claim they are reading.
+
+\textbf{Compose across the boundary, and measure the composition.}
+Section~\ref{sec:parallel} shows the two communities defending different
+stages of one pipeline, and Section~\ref{sec:results} shows the reasoning
+stage failing on its own once an adversary writes the input. The obvious
+next move is to put an ingestion-stage filter in front of a
+reasoning-stage method and see whether the pair holds where each half does
+not. We do not know that it works. Nothing in this paper tests a composed
+defense, and a filter that passes a fluent falsehood leaves the reasoning
+stage exactly where our results find it. The experiment is cheap, both halves are published with released code, and no paper in
+\NCorpus{} has run it.
+
+\textbf{Test a fix for accidental failure against a deliberate one.} A
+method aimed at stale or conflicting retrieval is evaluated on
+average-case benchmarks, which is the right choice for the problem it was
+built for and says nothing about the worst case. The cost of not checking
+is not a missing result: it is that the method ships with a benefit its
+users will read as general, and the worst case is where it reverses.
+Running one published poisoning attack against an existing evaluation is a
+day's work and needs no new data. A method that cannot be tested that way
+should say which regime its benefit holds in.
+
+\subsection{Artifacts}
+
+The reconstruction standard made artifact quality measurable as a side effect.
+Among the best-cited untested defenses in the cell we studied, two name
+empty repositories. Two more ship code without the trained weights it needs.
+One runs. Two further execution-stage defenses do not
+run reliably on any freely-available open-weight model. One more,
+FaithfulRAG, needs structured-output support
+that open weights do not provide in its harness. The ablated variant that
+does run shows none of its own benefit, so we report it as not reportable
+rather than as defeated.
+
+We note this without blame. Releasing a working artifact is harder than it
+looks and is rarely rewarded. But a defense nobody else can run is a defense
+nobody else will test, so part of the coverage gap this paper measures is an
+artifact gap.
+
+Only part of it. \NFixUnpaired{} of \NFixes{} fixes never appear in a
+confirmed pair, and Section~\ref{sec:literatures} separates that number into
+the two things it holds. \NFixUnpairedAttacked{} were run against an
+adversary whose attack carries no name the literature reuses, which pairing
+cannot see. \NDefEvalNoAdversary{} were never run against an adversary at
+all. The second group is the larger one, and it is the field rather than the
+measurement. The fixes left over
+are validated both ways, or carry no record of what they were validated
+against.
+
+\subsection{Implications for deployment}
+
+Three practical points follow from the results.
+
+A method that tunes how much the model trusts retrieved text is correct
+when the text is merely stale and dangerous when an attacker owns it. If the
+corpus an agent retrieves from is one an outsider can write to, the second
+case is the deployed case.
+
+Consider a system that uses a knowledge-conflict method to improve answer
+quality and retrieves from such a corpus. The method operates outside the
+regime its authors validated, and our measurements say it is more likely to
+increase damage than to reduce it: ParamMute is
+worth \NDefCellClean{} on a clean context and \NDefCellSat{} once the
+context is corrupted, below the undefended model on the same items. The
+claim is about a design choice rather than a community. A method that
+converts the document to weights has no dial to turn and does not show the
+reversal, and one method in the family resisted until an adaptive attacker
+priced it.
+
+A defense that holds against an optimized adversarial passage may fail against
+a fluent sentence that simply asserts a plausible falsehood. In our
+measurements no defense resisted both. The fluent attack is cheaper to produce. It needs no
+gradient access and no surrogate retriever, and it does roughly twice the
+damage to an undefended model at every dose. Evaluations built only around
+optimized payloads overstate protection. Do not call a defense tested on one
+payload class robust to context poisoning.
+
+Finally, the channel matters more than the method name. Supply-chain,
+cross-modal and tool-metadata have fewer than one named defense per named
+mechanism. If an agent accepts third-party components or machine-readable tool
+descriptions, almost nothing published defends that route.

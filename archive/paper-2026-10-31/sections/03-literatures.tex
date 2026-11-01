@@ -1,0 +1,576 @@
+\section{Two literatures, one problem}
+\label{sec:literatures}
+
+Two communities work one problem and do not cite each other. The obvious
+question, and RQ1, is whether they are doing each other's work twice. The answer is
+no, and what they are doing instead costs the field more than duplication
+would.
+Everything in this section is measurement over our corpus, and it ends at the
+cell of the matrix that is empty.
+
+\subsection{Corpus}
+
+We began from \NSeeds{} seed papers found during scoping, queried the Semantic
+Scholar Academic Graph and arXiv APIs with keyword clusters drawn from both
+vocabularies, and snowballed forward and backward. The discovery pool reached
+\NDiscovered{} papers. \NHopTwo{} of those are hop-2 records, discovered
+before the snowball depth was capped at one hop and kept in the database but
+outside the working pool, which leaves \NWorkingPool{}. Dual coding at that
+scale is not feasible for a small team, so we screened on title and abstract
+against written inclusion criteria, then read the survivors in full. The included corpus is \NCorpus{} papers, each carrying
+\NColumns{} recorded columns of which \NCodedFields{} are coded from the full
+text.
+
+Screening and synthesis are different sets, and we keep them apart.
+A paper can be about context poisoning and still name no attack and no
+defense: surveys, benchmarks, practitioner guides, applications of somebody
+else's method. \NNoTechnique{} of the \NCorpus{} do exactly that, so the
+census, the taxonomy cube and the coverage matrix are computed over the
+\NAnalysed{} papers that contributed a named technique, and the citation
+analysis is computed over all \NCorpus{}. Figure~\ref{fig:prisma} reports both counts at
+its last stage. AgentDojo~\cite{debenedetti-2024-agentdojo} is the
+clearest case. It is the environment \NAgentPairs{} of our own pairs run in,
+and it names neither an attack nor a defense. Coding it to a regime and a cell
+asserted something about it that is not true.
+
+Of the \NNoTechnique{}, \NNoTechSurvey{} are surveys or systematizations,
+\NNoTechBench{} are benchmarks and evaluations, \NNoTechFramework{} are
+framework or architecture papers and \NNoTechPosition{} are position papers.
+The remaining \NNoTechOther{} match none of those descriptions by title: they
+are applications, empirical studies of off-the-shelf methods, and practitioner
+guides. Section~\ref{sec:threats} reports a recall pass over that
+remainder.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig9_prisma}
+\caption{Corpus construction. Each stage reports what it removed on the
+left and what it passed to the next stage on the right. The queries, their
+dates and their hit counts ship with the artifact as a search log.}
+\label{fig:prisma}
+\end{figure}
+
+We follow PRISMA~\cite{page-2021-prisma} for identification, screening and
+inclusion, and Figure~\ref{fig:prisma} reports the count at every stage. The
+artifact ships the \NQueries{} queries with their dates and their hit counts.
+
+Screening ran as two passes over title and abstract. The first applied the
+written criteria to the whole working pool and removed \NAutoExcluded{}
+records. The second read the \NSurvived{} survivors and carried
+\NFullText{} of them forward to full-text retrieval. A record left at the
+second pass on either of two grounds. Its title and abstract placed it
+outside the scope we had written down, or no full text was obtainable from a
+peer-reviewed venue or a recognized preprint server, which is the case for
+withdrawn papers and for records whose only version was an uncredentialed
+copy. Reading an uncredentialed copy would put a claim in the census that no
+venue stands behind.
+
+We then coded the \NFullText{} retrieved papers against the inclusion
+criteria and kept \NCorpus{}. The paper stays if it contributes an attack, a failure mechanism, a defense, or a fix.
+Benchmarks, surveys, measurement studies, and position papers stay even though
+they propose no technique, because they are how the field is organized. That
+pass removed 53 papers and recovered 34 techniques the first extraction had
+missed, so the registry counts here are floors.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig0_pipeline}
+\caption{The taxonomy against the system it describes. Untrusted content
+arrives through one of \NChannelCats{} \textbf{channels}, enters one context
+window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
+A defense can intervene at one of three points between them.}
+\label{fig:pipeline}
+\end{figure*}
+
+\subsection{A joint taxonomy}
+\label{sec:taxonomy}
+
+
+
+We place every named mechanism and every named defense on three axes. Each
+axis value is named by the work that first identified it as a distinct
+surface or a distinct harm; we group the names rather than coin them. The axes let the two
+literatures land in the same space without forcing them into the same words. A
+security attack and a safety mechanism that enter by the same route
+and cause the same damage occupy the same cell. They differ only on intent. That is what makes our taxonomy a way of finding missing
+experiments rather than a filing scheme.
+
+
+\textbf{Channel} is the part of the context window at issue: the route the
+content took in for an insertion mechanism, and the stream that grew, shifted
+or was evicted for a degradation one. There are \NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
+or an upstream service~\cite{liu-2023-promptb}. \meth{RAG} is a passage a retriever selected from a
+corpus~\cite{zhong-2023-poisoning,zou-2024-poisonedrag}. \meth{tool-output} is whatever a called tool returned~\cite{greshake-2023-not}.
+\meth{tool-metadata} is the names, descriptions and schemas of the tools
+themselves, which the model reads before it calls anything~\cite{shi-2025-prompt}. \meth{memory} is
+what the agent stored from an earlier turn or session~\cite{chen-2024-agentpoison}. \meth{skill} is a file or
+instruction set the agent loads to extend itself~\cite{schmotz-2025-agent}. \meth{multi-agent} is a
+message from another agent~\cite{chen-2023-scalable}. \meth{cross-modal} is content that arrives as an
+image, audio or document and is rendered into text~\cite{zhu-2024-unraveling}. \meth{supply-chain} is
+content entering through a package, template or model the agent depends
+on~\cite{yan-2023-backdooring}.
+
+\textbf{Intent} is whether the content was placed deliberately: adversarial,
+safety, or studied as both.
+
+\textbf{Consequence} is what the agent then does wrong. There are \NConseqCats{}.
+\meth{goal-hijack} is pursuing an objective it was not
+given~\cite{greshake-2023-not}.
+\meth{reasoning-corruption} is reaching a wrong conclusion while pursuing the
+right goal~\cite{liu-2023-lost}. \meth{silent-corruption} is producing a wrong output with nothing
+to signal it~\cite{zhong-2023-poisoning}. \meth{data-exfiltration} is information crossing a boundary it
+should not~\cite{yu-2023-assessing}. \meth{persistence-backdoor} is corruption that survives into a
+later session~\cite{yan-2023-backdooring}. \meth{availability-loss} is the agent not delivering its work: either it
+fails to finish the task at all~\cite{xia-2026-diagnosing}, or it finishes
+only after spending compute, money or quota out of proportion to
+it~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
+Figure~\ref{fig:pipeline} sets the three axes against the system they
+describe.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/fig1_cube}
+\caption{Mechanisms against fixes in every channel $\times$ consequence
+cell, split by regime. One convention throughout: a solid bar is a mechanism
+and a hatched bar is a fix, in cells and in totals alike, each with its count
+printed above it on a fixed line. Hue is the regime, so a panel's own totals
+keep that panel's hue; only the last column, which adds the regimes together,
+leaves them. A cell that holds mechanisms and no fix is outlined in bold.
+Each panel's last row totals a consequence down that panel, the last column
+totals a channel across both, and totals carry their own scale. All
+\NMechanisms{} mechanisms and all \NFixes{} fixes place, so the two panels
+together are the whole census.}
+\label{fig:cube}
+\end{figure*}
+
+\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold
+no named attack and no named defense from either literature. The cube counts
+what the field has named, not which papers discuss a cell. A survey that
+ranges over six channels therefore occupies none of them. Emptiness is not uniform,
+and Figure~\ref{fig:cube} puts the named attacks beside the named defenses in
+each cell. Three things are visible there that a count of papers hides.
+
+The two panels barely overlap. The security literature holds \NMechSecurity{} of
+the \NMechanisms{} attacks and masses them in \meth{goal-hijack}; the safety literature holds \NMechSafety{} and masses them in
+\meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
+community works are nearly disjoint, which is the same separation the citation
+rates show, drawn as a picture.
+
+Effort is concentrated rather than scarce. Four cells hold more than fifty
+defenses each --- \meth{tool-output} $\times$ \meth{goal-hijack} at
+\NDefCellToolOutGoalHijack{}, \meth{direct-input} $\times$
+\meth{goal-hijack} at \NDefCellDirectInGoalHijack{}, \meth{RAG} $\times$
+\meth{silent-corruption} at \NDefCellRagSilent{} and \meth{memory}
+$\times$ \meth{reasoning-corruption} at \NDefCellMemReasoning{} --- and
+between them they absorb \PctTopFourDef{}\% of the \NDefenses{} defenses
+in the census.
+
+And \NCellsAttackNoDef{} cells hold a named attack with no defense ever
+proposed against it. \NCellsAttackNoDefSec{} of them are in the security
+panel, \NCellsAttackNoDefBackdoor{} of those are
+\meth{persistence-backdoor}, and the last is \meth{memory} $\times$
+\meth{data-exfiltration} on the safety side. A cell one community has
+to itself is a gap; a cell with attacks and no defense is a different and
+sharper one.
+
+The totals column collapses the consequence axis and reports it.
+\meth{multi-agent} and \meth{memory} carry several defenses
+per mechanism, while \meth{supply-chain} has fewer defenses than mechanisms
+and \meth{cross-modal}, \meth{tool-metadata} and \meth{skill} sit at parity. Those are
+the routes by which an agent accepts capability from a third party, and they
+are the thinnest in the corpus.
+
+
+\textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
+\NMechSecurity{} from the security literature and \NMechSafety{} from the safety literature, and \NDefenses{} named defenses and fixes, \NDefSecurity{}
+and \NDefSafety{} respectively. By consequence,
+\meth{goal-hijack} dominates the threat side at \NMechGoalHijack{}
+(\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption} at
+\NMechReasoning{} (\PctMechReasoning{}\%). By channel, \meth{direct-input}
+(\NMechDirectInput{}) and \meth{tool-output} (\NMechToolOutput{}) together hold
+close to three fifths. On the remedy side, \NDefPtReasoning{} methods act at
+reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
+\NDefPtExecution{} at execution, and \NDefPtNone{} specify no single point.
+
+Almost every defense answers to one validation regime. \NAdvOnly{} were
+validated in the security regime only and \NIncOnly{} in the safety regime only, leaving \NBothValidated{} (\PctBothValidated{}\%) validated
+against both and \NNoValidation{} with no validation we could identify. So
+\PctOneRegime{}\% of published defenses carry an untested cross-regime
+question, which is the gap this paper goes on to measure and then to fill.
+
+The regime a defense was validated in is coded separately from the literature it
+was published in, and the two turn out to be nearly the same partition. Of
+\NDefenses{} defenses, only \NDefCrossRegime{} were ever validated in the
+other community's regime. So the empty cell of
+Section~\ref{sec:emptycell}, which is a statement about tested pairs, has a
+counterpart one level down in the methods themselves.
+
+The two sides are also not the same size. There are \NDefenses{} remedies for
+\NMechanisms{} problems, and yet \NMechUncovered{} of \NMechanismsBench{} named
+mechanisms (\PctMechUncovered{}\%) have no defense ever evaluated against them.
+Effort is concentrated rather than scarce: a single umbrella entry, indirect
+prompt injection, absorbs more tested pairs than any other entry by a wide
+margin, while \NInjUncovered{} of \NInjVariants{} named injection variants have
+none at all. The field tests heavily against a category and lightly against its
+members.
+
+% APPENDIX-OFF: restore this paragraph with sections/A-census
+% Every entry behind these counts is listed in
+% Appendix~\ref{sec:census}: all \NMechanisms{} named mechanisms and all
+% \NDefenses{} named defenses, with the channel, consequence, regime and
+% validation coding we gave each, and the paper it came from. The counts in
+% this section are summaries of that table, not of a sample of it.
+\subsection{Regime versus venue}
+\label{sec:venue}
+
+The regime says what a paper is about, either security or safety. Venue says where its authors sent it. We
+code the two independently, which is what separates the division we draw
+from the field's own institutional one.
+
+The field does not divide itself this way institutionally. Of the
+\NRegimeSecNamedVenue{} security-regime papers that name a venue,
+\NRegimeSecAtAIVenue{} published at an AI venue and \NRegimeSecAtSecVenue{}
+at a security venue. Adversarial work on LLM agents goes to ACL, EMNLP,
+NeurIPS and AAAI about as readily as to S\&P and CCS.
+
+\textbf{The traffic runs one way.} Of the \NRegimeSafetyNamedVenue{}
+safety-regime papers that name a venue, \NRegimeSafetyAtSecVenue{}
+published at a security venue. Security researchers submit to AI
+conferences; the reverse does not happen in this corpus.
+
+One limit on the reading. A venue is coded only where the record carries
+one, so this covers \NRegimeSecNamedVenue{} of \NRegimeSecurity{}
+security-regime papers and \NRegimeSafetyNamedVenue{} of
+\NRegimeSafety{} on the safety side. The rest are preprints with no venue
+recorded, and we draw no conclusion about where they will land.
+
+So the two bodies of work are not kept apart by their proceedings. They are
+kept apart by what they cite, which Section~\ref{sec:citation} measures.
+That is a stronger claim than a venue split would have been, and a harder
+one to explain away: these papers appear beside each other and still do not
+read each other.
+
+\subsection{Cross-citation between the literatures}
+\label{sec:citation}
+
+\textbf{Neither side reads the other.} \PctSecCitesSafety{}\% of
+security-regime papers (\NSecCitesSafety{} of \NAnalysedSec{}) cite a
+safety-regime paper, and \PctSafetyCitesSec{}\% of safety-regime papers
+(\NSafetyCitesSec{} of \NAnalysedSafety{}) cite a security one. About
+\PctSecNoCross{}\% of papers on each side were written without reference
+to the other community.
+
+What carries the cross-regime citations makes the rate look better
+than the engagement is. \NNetworkCross{} of the \NNetworkEdges{} resolved
+edges (\PctNetworkCross{}\%) cross regimes, and they concentrate on a
+handful of papers either side can cite in an introduction without adopting
+anything from it. The four most-cited bridges are
+lost-in-the-middle~\cite{liu-2023-lost}, Greshake et
+al.~\cite{greshake-2023-not}, PoisonedRAG~\cite{zou-2024-poisonedrag} and
+Self-RAG~\cite{asai-2023-selfrag}. These are the papers that name the
+problem, and a citation to one places a paper in a setting rather than
+showing a method crossing the boundary. Figure~\ref{fig:network} shows the shape, two
+clusters joined by a narrow band.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_citation_network}
+\caption{The \NAnalysed{} papers that named a technique, as a citation
+graph. Security papers are red circles
+and safety papers are blue triangles, so the two regimes stay apart in a
+black-and-white print. Cross-regime edges are drawn dark against the pale
+same-regime ones. Papers with no resolved edge inside the corpus are
+omitted.}
+\label{fig:network}
+\end{figure}
+
+\subsection{Recovered defense--attack pairs}
+\label{sec:coverage}
+
+A (defense, attack) pair means some paper evaluated that defense against that
+attack. The registry's unit is the claim: a method enters it when its paper
+proposes it against a named failure mechanism, not when the paper
+demonstrates that it works. \emph{Defense} therefore means
+proposed-against, and the distance between proposing and demonstrating is
+part of what this section measures. We recovered pairs by four routes: reading defense papers, a
+citation-and-full-text recovery pass, resolving benchmark names to their
+constituent attacks where the paper named them, and a reverse scan of attack
+papers. The last route matters because it is the only one that can observe a
+defense \emph{losing} to an attack published after it. The final matrix holds
+\NPairsComposite{} confirmed pairs.
+
+\textbf{The matrix is sparse in a specific way.} \NDefMatchedFull{} of
+\NDefenses{} defenses (\PctDefMatched{}\%) appear in at least one pair, and
+\NDefOneFull{} of those (\PctDefOneFull{}\%) appear in exactly one. The
+most cross-tested defense appears in \NDefCeiling{} pairs, and \NDefFourPlus{}
+appear in four or more. But of the pairs belonging to those \NDefFourPlus{},
+\PctBreadthFromAttack{}\% were contributed by attack papers rather than by
+the defenses' own evaluations; for the broadest case,
+\NBroadestFromAttack{} of its \NBroadestPairs{} pairs come from attack
+papers. Breadth here is not evidence a method was evaluated widely by its
+authors. It is evidence that attackers chose it as a target.
+
+How much of this gap is the field and how much is our instrument. It
+is tempting to read the complement of the matrix as ``never tested'', and that
+reading is wrong. A defense evaluated on AgentDojo without naming which
+injection it faced was evaluated adversarially; it is simply not a named pair,
+because expanding a benchmark into its constituent attacks would manufacture
+coverage. So we classified every one of the \NDefEvalAudited{} defenses in the
+registry by what its own paper reports in its evaluation section, asking
+the coarser question: was this method run against an adversary at all?
+\NDefEvalAdversarial{} were (\PctDefEvalAdversarial{}\%):
+\NDefEvalPair{} appear in a confirmed pair, \NDefEvalProse{} carry an
+unambiguous adversarial signal inside their own evaluation section, and
+\NDefEvalBenchmark{} were run on an adversarial benchmark without naming
+the attack. \NDefEvalNoBaseline{} state that they ran no real
+comparison at all. \NDefEvalNoAdversary{} were evaluated with real
+baselines but never against an adversary, on capability and quality
+benchmarks instead. For the remaining \NDefEvalUnclear{} the coded fields
+do not say.
+
+That first group is exactly the set the matrix matches, so the rest of this
+audit partitions the \NFixUnpaired{} fixes the matrix leaves empty, and it
+answers the question the empty space raises. \NFixUnpairedAttacked{} of them
+met an adversary whose attack carries no name the literature reuses: they
+were tested, and pairing on names cannot see it. \NDefEvalNoAdversary{} met
+no adversary at all. The \NDefEvalNoBaseline{} without a real comparison and
+the \NDefEvalUnclear{} that do not say are the remainder. The empty space is
+therefore mostly the field and partly this instrument, in a ratio the audit
+fixes rather than leaves open.
+
+That \NDefEvalNoAdversary{} is two populations, and they read differently.
+\NDefNoAdvSafety{} are safety-regime fixes, most of them against
+\meth{silent-corruption} and \meth{reasoning-corruption}. These are not
+untested methods: a fix for a stale or conflicting passage is demonstrated
+by accuracy rising on cases where the context is wrong, and there is no
+adversary to put in the experiment. Their behavior under attack is
+unmeasured rather than unsound, and they are the population this paper's
+campaign probes. The other \NDefNoAdvSecurity{} sit in the security
+regime, and \NDefClaimsAdvNoAdv{} of them name an adversarial threat model
+in their own evaluation coding while putting no adversary in the
+experiment, most against \meth{goal-hijack}. That is a different failing
+from the first group. It is a defense whose evaluation does not meet its
+own stated threat model, and it is the one place in this audit where the
+gap is the paper's rather than the field's convention. The classification is conservative by construction --- anything
+ambiguous lands in that last group rather than in a positive one.
+
+Every count above is a positive finding: something the paper says, not
+something a pass failed to find. We report no number of the second kind, and
+the reason generalizes. We built three automated passes over these papers,
+and hand-checking each found the same asymmetry: what a pass flagged as
+present was reliable, and what it flagged as absent was about half wrong. A pattern can confirm that something is present in a paper;
+it cannot establish that something is absent, because absence of the phrasing
+it knows is not absence of the thing. A claim that something was never
+tested should state whether it means ``not done'' or ``not resolved''.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_who_reports}
+\caption{The same defenses and the same attacks, reported by the two sides of
+the field. A defense paper reports its defense winning in \NOutcomeDefWins{}
+of \NOutcomeDefPaper{} pairs. An attack paper reports the defense winning in
+none of \NOutcomeAtkPaper{}.}
+\label{fig:whoreports}
+\end{figure}
+
+\subsection{Reporter bias in recovered pairs}
+\label{sec:whoran}
+
+For every pair we also record which side of the field reported it and what
+outcome was reported. Figure~\ref{fig:whoreports} puts the two reporters
+side by side. Defense papers report their defense winning in \NOutcomeDefWins{} of
+\NOutcomeDefPaper{} pairs, with the remaining \NOutcomeDefIncon{}
+reporting no result we could resolve. Attack papers report a defense
+winning \NOutcomeAtkDefWins{} times in \NOutcomeAtkPaper{}: they report it
+losing in \NOutcomeAtkDefLoses{} and reach no directional verdict in
+\NOutcomeAtkIncon{}. No pair has been reported by both sides:
+\NOutcomeBothSides{} of the \NOutcomePairs{} pairs carrying a reported
+outcome carry an account from a defense paper and an attack paper alike.
+
+Neither number measures how often defenses work. The pair of numbers
+measures publication incentive, and the size of the gap is the reason the
+rest of this paper re-runs the defenses rather than citing either side's
+claim.
+
+\subsection{The untested region}
+\label{sec:emptycell}
+
+The axes so far describe what each community studies. The question this paper
+turns on is narrower: \emph{has either community ever tested its methods
+against the other's problems?}
+
+A pair is one defense run against one failure mechanism by some paper. Sort
+every pair into four boxes --- who built the defense, against whose problem
+it was run --- over the \NPureRegimePairs{} pairs whose two sides both sit
+in one regime.
+
+Along the diagonal, nearly everything is there.
+Each community tests its own defenses against its own problems:
+\NSecDefSecAttack{} security-on-security pairs and
+\NSafetyDefSafetyAttack{} safety-on-safety. The two off-diagonal boxes are
+the ones that would answer our question, and they are almost empty.
+\NSecDefVsSafetyAttack{} security defense has ever been run against a
+safety failure mechanism; \NSafetyDefVsSecAttack{} safety methods have been
+run against security attacks. That is \NCrossCommunityPairs{} pairs in
+\NPureRegimePairs{}, \PctCrossCommunity{}\%, and the other
+\PctSameRegime{}\% never leave their own community.
+
+That near-empty off-diagonal is the untested region. It is not a
+claim that these methods fail outside their own regime. It is a claim that
+nobody has checked, and a deployed system does not sort its inputs into
+``an attacker wrote this'' and ``this is merely stale''.
+
+One reading would make that gap uninteresting: that the communities never
+tested across the boundary because they already knew the answer, so running
+the experiment adds nothing. Three measurements say otherwise. The
+communities do not read each other, and a judgement cannot be informed by
+work nobody cites: \PctSecCitesSafety{}\% of security-regime papers cite a
+safety-regime paper, and \NOutcomeBothSides{} of \NOutcomePairs{} reported
+pairs carry an account from both sides. And
+\NDefClaimExceedsTest{} defenses claim an adversarial threat model in their
+own evaluation coding while putting no adversary in the experiment, which is
+not what withholding a test you expect to fail looks like.
+
+The single crossing is worth naming, because it is the strongest evidence
+against our own framing and it is one pair.
+TRACE~\cite{hong-2026-trace} is a trajectory compressor for long-horizon
+agents whose own evaluation is adversarial, which is what places it in the
+security regime, and it is reported against context-length-induced
+degradation, a safety mechanism. It comes from a paper whose subject matter
+spans both communities, which is precisely the kind of paper that would
+cross first. One instance in \NPureRegimePairs{} is not a literature that
+tests across the boundary; it is the exception that shows what crossing
+would look like.
+
+This is consistent with the citation rates and sharper than them. The
+communities do not read each other, so they do not test each other, so the
+question of whether either one's methods survive the other's regime has no
+answer in the published record.
+
+Nor is it answered by ordering. \NDefensePredates{} of
+\NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a defense that
+predates the attack it was tested on, so defenses do meet attacks their
+authors could not have designed against. But only \NPredatesAndCross{}
+pair is both earlier \emph{and} cross-community, so meeting an unforeseen
+attack and meeting the other community's attack are not the same event.
+Figure~\ref{fig:lag} shows the full distribution.
+
+\subsection{Division of labor, not duplication}
+\label{sec:parallel}
+
+If two communities work one problem without reading each other, the second
+to arrive should rebuild what the first already has. The decisive evidence
+is not what the methods are called but where in the pipeline they act, which
+is a coded field rather than a reading of names. Security defends where the
+text enters: \NDefPtIngestionSec{} of its defenses act at ingestion.
+Safety defends where the text is used: \NDefPtReasoningSafety{} of its
+defenses act at reasoning. Figure~\ref{fig:pipeline} draws that split
+against the pipeline and Figure~\ref{fig:intervention} counts it. Two
+bodies of work that intervene at different stages are not building the same
+thing, whatever they name it.
+
+The names agree with the coding. Inside each taxonomy cell we looked for a
+security-regime name and a safety-regime name close enough to be the same
+thing relabelled: among \NMechanisms{} named mechanisms there are
+\NMechNameClash{} such collisions, and among \NDefenses{} defenses there
+is \NDefNameClash{}. That test can only catch relabelling, so it confirms
+the division rather than establishing it.
+
+The two sides name different halves of one causal chain. \NSharedCells{} of our
+\NOccupiedCells{} occupied cells hold mechanisms from both regimes,
+\NMechSharedSec{} security and \NMechSharedSafety{} safety. Read them side by
+side, and the security entries are overwhelmingly ways of getting bad text in, while
+the safety entries are reasons the model believes bad text once it is there. The
+\meth{RAG} $\times$ \meth{silent-corruption} cell is the clearest case:
+PoisonedRAG, BadRAG~\cite{xue-2024-badrag} and their relatives on one side; over-trust in conflicting
+external evidence, lost-in-the-middle, and knowledge-conflict circuits on the
+other. One side builds the attack. The other side has already
+explained why it works and is not cited for it.
+
+The consequences each side names show the same division. Goal-hijacking, an
+attacker's objective, is \NGoalHijackSec{} security mechanisms to
+\NGoalHijackSafety{} safety ones. Reasoning corruption, a degradation, runs
+the other way: \NReasonSafety{} safety to \NReasonSec{} security.
+
+That last reading is ours, taken from the mechanism names and their papers
+rather than from a coded field, and it is not clean at the edges. A few
+safety-regime entries name a delivery route rather than a susceptibility,
+\meth{KV-cache contamination} and \meth{incidental prompt injection} among
+them. The intervention points the subsection opens with are coded, and the
+argument rests on them.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig10_intervention}
+\caption{Where each regime's fixes intervene. Security keeps the text out
+and contains what it does; safety improves reasoning over text already
+accepted. Points run in pipeline order. Safety carries a dotted fill and is
+the lower bar of every pair, so the two separate in print without colour.}
+\label{fig:intervention}
+\end{figure}
+
+If the two sides were duplicating each other, the cost would be wasted
+labor and the field would still end up holding two defenses that work.
+Dividing the problem costs something else: it leaves a chain with a gap in
+it. A reasoning-stage defense sits downstream of an adversary who already
+controls its input, and no amount of better reasoning recovers a document
+that was written to be believed. That is not a rhetorical point. It is the
+mechanism behind the sign flip in Section~\ref{sec:results}, where methods
+that shift trust toward the retrieved document help when the document is
+honest and hurt when it is written by someone else.
+
+Publication dates say the same thing from a second direction, and they say
+which way the division runs. \NSharedChannels{} of our nine channels have
+named mechanisms from both regimes, and we compare the first paper from
+each side in each of them.
+The security literature arrives first in \NChannelsSecFirst{} of
+\NSharedChannels{}. Both arrive in the same year in \NChannelsSameYear{}. The
+safety literature arrives first in \NChannelsSafetyFirst{}. The
+median lag where security leads is \MedianChannelLag{} year and the longest is
+\MaxChannelLag{}. The \meth{supply-chain} channel, excluded here for having no
+safety-regime entry at all, is the limit case of the same pattern.
+
+Set that beside the citation rates. A safety-regime paper naming a failure in
+a channel is, more often than not, working ground a security paper reached one
+to three years earlier, in a literature that only \PctSafetyCitesSec{}\% of
+safety-regime papers cite at all. It is not renaming that paper's mechanism --- the collision
+count above says it is not --- and arriving second at a surface is not a
+fault. We are claiming the obvious
+consequence, which is that neither side can tell whether the other has already
+answered its question, and Section~\ref{sec:emptycell} shows that nobody
+has checked.
+
+Two limits on this reading. The dates are publication dates in our corpus, so
+a channel that security reached first in work we did not include would move
+the count. And the direction may partly reflect that security publishes
+attacks, which are discrete and nameable, while the safety side
+publishes degradations, which are noticed before they are named.
+
+Neither community can close the chain alone, and this section says why.
+The methods that keep bad text out and the methods that reason better about
+text already present are built by different people, published at different
+venues, and evaluated against different problems; no single method in the
+census covers both stages. A system that wants coverage at ingestion and at
+reasoning therefore has to compose methods from both literatures, and the
+census holds no paper that does. Whether such a composition would help is a
+separate experiment, and not one this paper runs: every method in
+Section~\ref{sec:results} is measured alone. What the census establishes
+is narrower and still unwelcome. The two halves exist, the stages they
+cover are complementary, and nobody has put them together or tested what
+happens when they are.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig7_lag}
+\caption{Publication lag between a defense and the attack it was tested on.}
+\label{fig:lag}
+\end{figure}
+
+The boundary could be ours rather than the field's, and it is not drawn by
+exclusion. We assign the regime label per paper, every paper takes one of
+the two, and papers on the boundary take the regime their own evaluation
+adopts. A paper that spans both communities therefore still sits among the
+\NPureRegimePairs{} pairs; we set none aside. The single
+crossing above comes from one of them, which is what one would expect --- a
+paper that reaches across is the kind of paper that crosses.
+

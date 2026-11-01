@@ -1,0 +1,114 @@
+\section{Background and threat model} \label{sec:background}
+
+This section fixes the terms the rest of the paper uses. It defines the
+failure we study, shows that two communities name it twice, states the
+system and the adversary we assume, and explains the vocabulary the later
+sections depend on.
+
+\subsection{Context poisoning}
+
+Context poisoning is our term for three things happening together.
+Content enters an agent's context window. The agent should not have trusted
+it. The agent's behavior changes as a result. The definition says nothing
+about who put the content there, and that silence is deliberate: it is what
+lets both communities fit inside one term.
+
+A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower than ``LLM safety'', because the damage must arrive through the context
+window. Two things fall outside it. Training-time poisoning and weight attacks
+do not travel through the context. Jailbreaks in which the user is the
+attacker have no third-party content at all.
+
+\subsection{One failure, two vocabularies} \label{sec:twovocab}
+
+That one failure has two names, because two communities arrived at it
+separately. Figure~\ref{fig:vocab} puts the two vocabularies side by side.
+The slots are the same: the same channel, the same position in the context
+window, the same downstream consequence. Only the names differ, and one
+assumption behind them. We take that assumption from Lin et
+al.~\cite{lin-2025-safety-security}. \meth{Security} work assumes an
+adversary and asks whether a system resists ``intentional attacks \ldots\ in
+the presence of adversarial actors''. \meth{Safety} work assumes none and
+asks whether a system avoids ``unintended harmful outcomes \ldots\ despite
+uncertainties in inputs, goals, training data, or deployment conditions''.
+We call the condition a paper addresses its \textbf{regime}, and every paper
+in our corpus takes one of these two. A regime is not a \textbf{venue}, the
+conference or journal that published the paper. The two are easy to mix up,
+because security work often appears at a security venue, but
+Section~\ref{sec:venue} shows that adversarial work appears at AI venues just
+as often. We write \emph{security venue} or \emph{AI venue} for where a paper
+appeared, and plain \meth{security} or \meth{safety} for what it addresses.
+An adversary re-optimizes against whatever method is in place; a stale
+document does not. That difference is real, because a method tuned to the average case has no
+reason to hold at the worst case. It is also smaller than it looks, because
+the model reads tokens either way, and nothing in the text marks which hand
+wrote it. Section~\ref{sec:regime} tests the second half with payloads that
+assert the same false answer, in the same slots, in the same amount, and
+differ only in whether a person wrote the sentence to be believed.
+
+Two vocabularies for one failure force a choice of words, and this paper
+makes it once. We use \emph{mechanism} for anything that makes the context
+stop supporting the right answer, and \emph{fix} for anything meant to keep
+it supporting that answer, whatever either one's authors call it.
+
+Each word splits in two. A mechanism is an \emph{insertion} when content
+arrives in the window that should not be believed, and a \emph{degradation}
+when nothing arrives. In the second case the context stops working because it
+grew too long, because the decisive passage sits in the wrong place, or
+because compaction evicted the rule the agent needed. Accuracy falls with the
+right document present and correctly retrieved. \emph{Attack} sits inside
+insertion, not beside degradation. It names the \NAttack{} insertion
+mechanisms an adversary wrote, against the \NAccident{} that a retriever, a
+tool or the agent's own memory delivered with nobody behind them. Splitting on
+the adversary instead would have renamed the regime partition and added
+nothing, because every security-regime mechanism has one and no safety-regime
+mechanism does. Insertion cuts across the regimes instead: \NSecInsertion{}
+of the \NMechSecurity{} security-regime mechanisms are insertion and
+\NSecDegradation{} are degradation, while the safety regime splits
+\NSafInsertion{} to \NSafDegradation{}.
+
+A fix splits by what its own evaluation tested. A \emph{defense} met an
+adversary there. A \emph{remedy} met only incidental failure. That is
+\NDefenseFix{} defenses and \NRemedy{} remedies of \NFixes{}. The split
+records what a method has been pointed at, not how well it works, and a fix
+that filters what enters has nothing to act on against degradation.
+
+Two more words name where an answer comes from. The \textbf{context} is the document, tool
+output or message placed in front of the model. \textbf{Memory} is what the
+model learned in training and holds in its weights, which the safety
+literature calls \emph{parametric memory}. A large family of published
+fixes works by shifting the model from the second to the first.
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig8_vocab}
+\caption{The same five slots, named twice. The taxonomy in
+Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
+\label{fig:vocab}
+\end{figure}
+
+\subsection{System and threat model}
+\label{sec:securityregime}
+
+Both communities study the same system, and only one of them assumes an
+attacker inside it. The subject of the system is an LLM agent: a model that, within one task, repeatedly reads
+content it did not author, decides, and acts. Content from many sources shares one context window, with
+no trustworthy marking of where any of it came from. And an action taken in a corrupted context cannot be undone by fixing
+the context afterwards.
+
+\textbf{The adversary.} The adversary controls the content of at least one channel. They do not
+control the model weights, the decoding procedure, or the agent's code. This covers the realistic
+deployment cases. An adversary can write a document that a retriever may
+fetch~\cite{zou-2024-poisonedrag}. They can publish a tool whose description
+the agent reads~\cite{shi-2025-prompt}. They can post content that a browsing
+agent visits~\cite{greshake-2023-not} or contribute a skill file that the
+agent loads~\cite{schmotz-2025-agent}. The adversary knows the defense and may adapt the payload to it. The adversary does
+not need to know the user's query: every attack we run is query-agnostic by
+construction.
+
+\textbf{Where there is no adversary.} Without an attacker there is no threat
+model. The content goes wrong because the pipeline behaves normally. A retrieved document is out of date. A passage is close to the topic but
+does not answer the question~\cite{shi-2023-large}. Important text sits in
+the middle of a long input~\cite{liu-2023-lost}. A retrieved fact disagrees
+with what the model learned in training~\cite{xu-2024-knowledge}. These causes do not adapt, so this literature evaluates on
+average-case benchmarks.
