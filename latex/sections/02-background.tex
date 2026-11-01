@@ -74,6 +74,14 @@ model learned in training and holds in its weights, which the safety
 literature calls \emph{parametric memory}. A large family of published
 fixes works by shifting the model from the second to the first.
 
+Many of the systems we study fill the context by searching. Given a
+question, they search a large collection of documents and paste the closest
+matches into the context before the model answers. The search step is the
+\textbf{retriever}, and the arrangement as a whole is
+\textbf{retrieval-augmented generation} (RAG). Poisoning such a system takes
+two steps: getting a planted document into the collection and picked by the
+retriever, and then getting the model to believe it once it is in the context.
+
 
 \begin{figure}[t]
 \centering
