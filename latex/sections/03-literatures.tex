@@ -398,10 +398,11 @@ The axes so far describe what each community studies. The question this paper
 turns on is narrower: \emph{has either community ever tested its methods
 against the other's problems?}
 
-A pair is one defense run against one failure mechanism by some paper. Sort
-every pair into four boxes --- who built the defense, against whose problem
-it was run --- over the \NPureRegimePairs{} pairs whose two sides both sit
-in one regime.
+Sort every pair into four boxes --- who built the defense, against whose
+problem it was run --- over the \NPureRegimePairs{} pairs whose two sides both
+sit in one regime. The left panel of Figure~\ref{fig:transfer} shows these
+boxes; its right panel, discussed in Section~\ref{sec:campaign}, adds our
+campaign.
 
 Along the diagonal, nearly everything is there.
 Each community tests its own defenses against its own problems:
@@ -411,8 +412,7 @@ the ones that would answer our question, and they are almost empty.
 \NSecDefVsSafetyAttack{} security defense has ever been run against a
 safety failure mechanism; \NSafetyDefVsSecAttack{} safety methods have been
 run against security attacks. That is \NCrossCommunityPairs{} pairs in
-\NPureRegimePairs{}, \PctCrossCommunity{}\%, and the other
-\PctSameRegime{}\% never leave their own community.
+\NPureRegimePairs{}, \PctCrossCommunity{}\%.
 
 That near-empty off-diagonal is the untested region. It is not a
 claim that these methods fail outside their own regime. It is a claim that
@@ -421,14 +421,12 @@ nobody has checked, and a deployed system does not sort its inputs into
 
 One reading would make that gap uninteresting: that the communities never
 tested across the boundary because they already knew the answer, so running
-the experiment adds nothing. Three measurements say otherwise. The
-communities do not read each other, and a judgement cannot be informed by
-work nobody cites: \PctSecCitesSafety{}\% of security-regime papers cite a
-safety-regime paper, and \NOutcomeBothSides{} of \NOutcomePairs{} reported
-pairs carry an account from both sides. And
-\NDefClaimExceedsTest{} defenses claim an adversarial threat model in their
-own evaluation coding while putting no adversary in the experiment, which is
-not what withholding a test you expect to fail looks like.
+the experiment adds nothing. Three measurements above say otherwise. The
+communities rarely cite each other, so neither can know what the other found.
+No reported pair carries an account from both sides. And
+\NDefClaimExceedsTest{} defenses claim an adversarial threat model while
+putting no adversary in their experiment, which is not what withholding a
+test you expect to fail looks like.
 
 The single crossing is worth naming, because it is the strongest evidence
 against our own framing and it is one pair.
@@ -445,16 +443,9 @@ The boundary could be ours rather than the field's, and it is not drawn by
 exclusion. We assign the regime label per paper, every paper takes one of
 the two, and papers on the boundary take the regime their own evaluation
 adopts. A paper that spans both communities therefore still sits among the
-\NPureRegimePairs{} pairs; we set none aside. The single
-crossing above comes from one of them, which is what one would expect --- a
-paper that reaches across is the kind of paper that crosses.
+\NPureRegimePairs{} pairs; we set none aside.
 
-This is consistent with the citation rates and sharper than them. The
-communities do not read each other, so they do not test each other, so the
-question of whether either one's methods survive the other's regime has no
-answer in the published record.
-
-Nor is it answered by ordering. \NDefensePredates{} of
+Publication order does not close the gap either. \NDefensePredates{} of
 \NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a defense that
 predates the attack it was tested on, so defenses do meet attacks their
 authors could not have designed against. But only \NPredatesAndCross{}
