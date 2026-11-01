@@ -442,16 +442,6 @@ Figure~\ref{fig:lag} shows the full distribution.
 \subsection{Division of labor, not duplication}
 \label{sec:parallel}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig10_intervention}
-\caption{Where each regime's fixes intervene. Security keeps the text out
-and contains what it does; safety improves reasoning over text already
-accepted. Points run in pipeline order. Safety carries a dotted fill and is
-the lower bar of every pair, so the two separate in print without colour.}
-\label{fig:intervention}
-\end{figure}
-
 If the two communities duplicated each other's work, their methods would act
 at the same stage of the pipeline. We test this with the coded intervention
 point of each fix rather than with method names. Security defends where the
@@ -479,6 +469,16 @@ external evidence, lost-in-the-middle, and knowledge-conflict circuits on the
 other. The security papers build the attacks, the safety papers explain why
 the model is susceptible to them, and the two sets of papers cite each other
 rarely.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig10_intervention}
+\caption{Where each regime's fixes intervene. Security keeps the text out
+and contains what it does; safety improves reasoning over text already
+accepted. Points run in pipeline order. Safety carries a dotted fill and is
+the lower bar of every pair, so the two separate in print without colour.}
+\label{fig:intervention}
+\end{figure}
 
 The consequences each side names show the same division. Goal-hijacking, an
 attacker's objective, is \NGoalHijackSec{} security mechanisms to
