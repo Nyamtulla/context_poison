@@ -88,18 +88,21 @@ analyzed set.
 \subsection{A joint taxonomy}
 \label{sec:taxonomy}
 
-We place every named mechanism and every named fix on three axes. Each
-axis value is named by the work that first identified it as a distinct
-surface or a distinct harm; we group the names rather than coin them. The axes let the two
-literatures land in the same space without forcing them into the same words. A
-security attack and a safety mechanism that enter by the same route
-and cause the same damage occupy the same cell. They differ only in regime. That is what makes our taxonomy a way of finding missing
-experiments rather than a filing scheme.
+We place every named mechanism and every named fix on three axes: the
+\textbf{channel} it concerns, the \textbf{consequence} it produces or
+prevents, and the \textbf{regime} of the paper that names it. Each axis value
+is named by the work that first identified it as a distinct surface or a
+distinct harm; we group the names rather than coin them. The axes span a grid
+of \NChannelCats{} channels by \NConseqCats{} consequences by two regimes,
+\NCubeCells{} cells in all, which we call the \textbf{cube}. A security attack
+and a safety mechanism that enter by the same route and cause the same damage
+fall in the same channel and consequence and differ only in regime, so the
+cube shows where one community has named a problem and the other has not.
 
-
-\textbf{Channel} is the part of the context window at issue: the route the
-content took in for an insertion mechanism, and the stream that grew, shifted
-or was evicted for a degradation one. There are \NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
+\paragraph{Channel.} The channel is the part of the context window at issue:
+the route the content took in for an insertion mechanism, and the stream that
+grew, shifted or was evicted for a degradation one. There are
+\NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
 or an upstream service~\cite{liu-2023-promptb}. \meth{RAG} is a passage a retriever selected from a
 corpus~\cite{zhong-2023-poisoning,zou-2024-poisonedrag}. \meth{tool-output} is whatever a called tool returned~\cite{greshake-2023-not}.
 \meth{tool-metadata} is the names, descriptions and schemas of the tools
@@ -111,11 +114,8 @@ image, audio or document and is rendered into text~\cite{zhu-2024-unraveling}. \
 content entering through a package, template or model the agent depends
 on~\cite{yan-2023-backdooring}.
 
-\textbf{Regime}, defined in Section~\ref{sec:twovocab}, is whether the
-paper assumes an adversary.
-
-\textbf{Consequence} is what the agent then does wrong. There are \NConseqCats{}.
-\meth{goal-hijack} is pursuing an objective it was not
+\paragraph{Consequence.} The consequence is what the agent then does wrong.
+There are \NConseqCats{}. \meth{goal-hijack} is pursuing an objective it was not
 given~\cite{greshake-2023-not}.
 \meth{reasoning-corruption} is reaching a wrong conclusion while pursuing the
 right goal~\cite{liu-2023-lost}. \meth{silent-corruption} is producing a wrong output with nothing
@@ -125,19 +125,35 @@ later session~\cite{yan-2023-backdooring}. \meth{availability-loss} is the agent
 fails to finish the task at all~\cite{xia-2026-diagnosing}, or it finishes
 only after spending compute, money or quota out of proportion to
 it~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
-Figure~\ref{fig:pipeline} sets the three axes against the system they
-describe.
+Figure~\ref{fig:pipeline} places both axes on the system they describe:
+channels on the way in, consequences on the way out, and the three points
+at which a defense can intervene between them.
 
-\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold
-no named mechanism and no named fix from either literature. The cube counts
-what the field has named, not which papers discuss a cell. A survey that
-ranges over six channels therefore occupies none of them. Emptiness is not uniform,
-and Figure~\ref{fig:cube} puts the named mechanisms beside the named fixes in
-each cell. Three things are visible there that a count of papers hides.
+\paragraph{Regime.} The regime is the one assumption that separates the two
+vocabularies of Section~\ref{sec:twovocab}: a security paper assumes an
+adversary and a safety paper assumes none. Every paper takes exactly one.
 
-The two panels barely overlap. The security literature holds \NMechSecurity{} of
-the \NMechanisms{} mechanisms and masses them in \meth{goal-hijack}; the safety literature holds \NMechSafety{} and masses them in
-\meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
+\paragraph{What the census holds.} The registry holds \NMechanisms{} named
+mechanisms and \NFixes{} named fixes, \NDefSecurity{} of them from the
+security literature and \NDefSafety{} from the safety literature. By
+consequence, \meth{goal-hijack} accounts for \NMechGoalHijack{} of the
+mechanisms (\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption}
+at \NMechReasoning{} (\PctMechReasoning{}\%). By channel,
+\meth{direct-input} (\NMechDirectInput{}) and \meth{tool-output}
+(\NMechToolOutput{}) together hold close to three fifths.
+
+\paragraph{What the cube shows.} Figure~\ref{fig:cube} places every
+mechanism and every fix in its cell, one panel per regime.
+\NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold no named
+mechanism and no named fix from either literature. The cube counts what the
+field has named, not which papers discuss a cell, so a survey that ranges over
+six channels occupies none of them. Four further patterns are visible in the
+figure.
+
+The two panels barely overlap. The security literature holds
+\NMechSecurity{} of the \NMechanisms{} mechanisms and masses them in
+\meth{goal-hijack}; the safety literature holds \NMechSafety{} and masses them
+in \meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
 community works are nearly disjoint.
 
 Effort is concentrated rather than scarce. Four cells hold more than fifty
@@ -149,48 +165,39 @@ $\times$ \meth{reasoning-corruption} at \NDefCellMemReasoning{} --- and
 between them they hold \PctTopFourDef{}\% of the \NFixes{} fixes in the
 census.
 
-And \NCellsAttackNoDef{} cells hold a named mechanism with no fix ever
-proposed against it. \NCellsAttackNoDefSec{} of them are in the security
-panel, \NCellsAttackNoDefBackdoor{} of those are
-\meth{persistence-backdoor}, and the last is \meth{memory} $\times$
-\meth{data-exfiltration} on the safety side. These cells lack any proposed
-fix, which is a stronger gap than a cell studied by one community only.
+\NCellsAttackNoDef{} cells hold a named mechanism with no fix ever proposed
+against it. \NCellsAttackNoDefSec{} of them are in the security panel,
+\NCellsAttackNoDefBackdoor{} of those are \meth{persistence-backdoor}, and the
+last is \meth{memory} $\times$ \meth{data-exfiltration} on the safety side.
+These cells lack any proposed fix, which is a stronger gap than a cell
+studied by one community only.
 
-The totals column collapses the consequence axis and reports it.
-\meth{multi-agent} and \meth{memory} carry several fixes
-per mechanism, while \meth{supply-chain} has fewer fixes than mechanisms and
-\meth{cross-modal} and \meth{skill} sit near parity. Supply-chain and skill are
-routes by which an agent accepts capability from a third party, and they hold
-the fewest entries in the corpus.
+The totals column collapses the consequence axis.
+\meth{multi-agent} and \meth{memory} carry several fixes per mechanism, while
+\meth{supply-chain} has fewer fixes than mechanisms and \meth{cross-modal} and
+\meth{skill} sit near parity. Supply-chain and skill are routes by which an
+agent accepts capability from a third party, and they hold the fewest entries
+in the corpus.
 
+\paragraph{What the fixes were tested against.} Almost every fix was tested
+in one regime only. \NDefenseFix{} were tested against an adversary, the
+defenses of Section~\ref{sec:twovocab}, and \NRemedy{} against incidental
+failure, the remedies. \NBothValidated{} (\PctBothValidated{}\%) were tested
+against both and \NNoValidation{} carry no test we could identify. So
+\PctOneRegime{}\% of published fixes carry an untested cross-regime question,
+which is the gap this paper measures and then fills. The regime a fix was
+tested in is coded separately from the literature it was published in, and
+only \NDefCrossRegime{} fixes were ever tested in the other community's
+regime. So the empty cell of Section~\ref{sec:emptycell}, which is a
+statement about tested pairs, has a counterpart one level down in the methods
+themselves.
 
-\textbf{Census.} The registry holds \NMechanisms{} named mechanisms and
-\NFixes{} named fixes, \NDefSecurity{} of them from the security literature
-and \NDefSafety{} from the safety literature. By consequence,
-\meth{goal-hijack} accounts for \NMechGoalHijack{} of the mechanisms
-(\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption} at
-\NMechReasoning{} (\PctMechReasoning{}\%). By channel, \meth{direct-input}
-(\NMechDirectInput{}) and \meth{tool-output} (\NMechToolOutput{}) together hold
-close to three fifths.
-
-Almost every fix was tested in one regime only. \NDefenseFix{} were tested
-against an adversary, the defenses of Section~\ref{sec:twovocab}, and
-\NRemedy{} against incidental failure, the remedies. \NBothValidated{}
-(\PctBothValidated{}\%) were tested against both and \NNoValidation{} carry no
-test we could identify. So \PctOneRegime{}\% of published fixes carry an
-untested cross-regime question, which is the gap this paper measures and then
-fills. The regime a fix was tested in is coded separately from the literature
-it was published in, and only \NDefCrossRegime{} fixes were ever tested in
-the other community's regime. So the empty cell of
-Section~\ref{sec:emptycell}, which is a statement about tested pairs, has a
-counterpart one level down in the methods themselves.
-
-Even so, \NMechUncovered{} of \NMechanismsBench{} named
-mechanisms (\PctMechUncovered{}\%) have no fix ever evaluated against them. A
-single umbrella entry, indirect prompt injection, absorbs more tested pairs than any other entry by a wide
-margin, while \NInjUncovered{} of \NInjVariants{} named injection variants have
-none at all. The field tests heavily against a category and lightly against its
-members.
+Even so, \NMechUncovered{} of \NMechanismsBench{} named mechanisms
+(\PctMechUncovered{}\%) have no fix ever evaluated against them. A single
+umbrella entry, indirect prompt injection, absorbs more tested pairs than any
+other entry by a wide margin, while \NInjUncovered{} of \NInjVariants{} named
+injection variants have none at all. The field tests heavily against a
+category and lightly against its members.
 
 % APPENDIX-OFF: restore this paragraph with sections/A-census
 % Every entry behind these counts is listed in
