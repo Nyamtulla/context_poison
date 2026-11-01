@@ -9,21 +9,19 @@ about who put the content there. That is deliberate: it lets both communities
 fit inside one term.
 
 A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower than ``LLM safety'', because the damage must arrive through the context
-window. Figure~\ref{fig:pipeline} draws that path: the channels content enters
-through, the one context window, and the consequences for the output. Two
-things fall outside it. Training-time poisoning and weight attacks
+window. Two things fall outside it. Training-time poisoning and weight attacks
 do not travel through the context. Jailbreaks in which the user is the
 attacker have no third-party content at all.
 
 \subsection{One failure, two vocabularies} \label{sec:twovocab}
 
-\begin{table*}[t]
+\begin{table}[t]
 \centering
 \caption{The same five slots, named twice. The taxonomy in
 Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
 \label{tab:vocab}
 \small
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\columnwidth}>{\raggedright\arraybackslash}p{0.31\columnwidth}>{\raggedright\arraybackslash}p{0.33\columnwidth}@{}}
 \toprule
 Slot & Security & Safety \\
 \midrule
@@ -34,7 +32,7 @@ What success means & the adversary fails & accuracy rises \\
 Evaluation style & worst case & average case \\
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}
 
 That one failure has two names, because two communities arrived at it
 separately. Table~\ref{tab:vocab} puts the two vocabularies side by side.
