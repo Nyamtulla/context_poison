@@ -4,11 +4,10 @@ An LLM agent reads from many places. It reads retrieved documents and the output
 from other agents. It also reads its own stored memory~\cite{chu-2026-systematic,ma-2025-safety}. All of this arrives in one context window, and the model treats it as one body of
 text. The model has no reliable way to tell which part of that text is trustworthy and which part is not~\cite{greshake-2023-not}.
 
-It helps to picture the context window as a body of water fed by a fixed set
-of inflow streams. Whatever enters through any stream mixes into the same body
-and affects everything downstream, whether it was dumped in deliberately or
-arrived as runoff. The question this paper answers first is simply, how
-many streams are there, and how many consequences may arise because of this pollution? 
+Think of the context window as a pond fed by a fixed set of streams. Whatever
+enters through any stream mixes into the same water, whether someone dumped it
+in or it washed in on its own. So the first questions are how many streams
+there are and how many kinds of damage the pollution can do.
 
 Two research communities study what goes wrong when untrustworthy content gets
 in, and they use different words for it. The security community studies content that an attacker placed there on purpose. It names attacks such as indirect prompt
@@ -18,7 +17,7 @@ backdoors~\cite{dash-2026-untrusted}, and it publishes defenses against
 them~\cite{xiang-2024-certifiably,liu-2025-datasentinel,an-2025-ipiguard}.
 Success means the attacker fails to achieve a goal.
 
-The AI/ML community studies content that became wrong without any
+The safety community studies content that became wrong without any
 attacker. It names mechanisms such as lost-in-the-middle~\cite{liu-2023-lost} and
 context rot~\cite{xia-2026-diagnosing}. It also names knowledge conflict, where a retrieved passage
 disagrees with what the model already
@@ -28,33 +27,34 @@ Success means accuracy goes up.
 
 The two communities describe the same underlying failure: a passage the model
 should not trust enters the context window and changes the output. Only the
-provenance differs; the model sees tokens either way. The difference is not merely one of vocabulary. If it were, a reader could
-translate between the two communities and lose nothing. They differ in
-something load-bearing: what counts as a successful evaluation? The AI/ML community measures a fix for the accidental case on an average-case
-benchmark, because nothing adapts to it. The security community measures a defense for the
+provenance differs; the model sees tokens either way. The difference is more
+than vocabulary. If it were only vocabulary, a reader could translate between
+the two communities and lose nothing. They differ in what counts as a
+successful evaluation. The safety community measures a fix for the accidental
+case on an average-case benchmark, because nothing adapts to it. The security community measures a defense for the
 adversarial case against the worst case, because something does. Those are not two styles
 of the same test. A method can pass the first test convincingly and fail the second one
 completely. Neither community's publishing process catches this, because each
 reviews against its own convention.
 
 So the field publishes, adopts, and cites a method without anyone asking
-whether it survives the other community's test. That is a testable claim about the literature, not a complaint about it. We
-test it by reading both literatures under one taxonomy and recovering every
-experiment either side has run. The test finds a gap. We then run the
+whether it survives the other community's test. We test that claim by
+reading both literatures under one taxonomy and recovering every experiment
+either side has run. The test finds a gap. We then run the
 experiments that fall in it to answer the following research questions.
 
 \paragraph{Research questions.}
 \begin{description}
-\item[RQ1] \textbf{Are the two communities reinventing the wheel?} We read
+\item[RQ1] \textbf{Do the two communities duplicate each other's work?} We read
   \NCorpus{} papers from both sides under one scheme, compare where each
   community's defenses intervene, and recover every (defense, attack) pair
   the \NAnalysed{} papers that name a technique report. They are not, and
   what they do instead is what leaves the region untested
   (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
-\item[RQ2] \textbf{Does a defense built for one regime's problem survive
-  the other's?} We execute the pairs the literature skipped, from the
+\item[RQ2] \textbf{Does a defense built for one literature's problem
+  survive the other's?} We execute the pairs the literature skipped, from the
   authors' released code and weights
-  (Sections~\ref{sec:experiments}, \ref{sec:results}).
+  (Sections~\ref{sec:campaign}, \ref{sec:results}).
 \item[RQ3] \textbf{Is failure a property of individual methods or of a
   design choice they share?} We build a payload that separates the
   explanations rather than maximizes damage
@@ -71,7 +71,7 @@ experiments that fall in it to answer the following research questions.
 
 Both literatures have been systematized before: the security side
 repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
-and the AI/ML side on its own terms as a problem of knowledge
+and the safety side on its own terms as a problem of knowledge
 conflict~\cite{xu-2024-knowledge}. None of it runs the experiment. A
 survey of one literature has only that literature's methods in hand, and the
 test we need takes a defense from one side and an attack from the other. So we
@@ -81,11 +81,11 @@ in which published defenses from one of these communities meet published
 failure mechanisms from the other.
 
 \paragraph{Scope.}
-Three limits bound what follows. Each setting runs on one dataset, and we plant
-poisoned passages into the context rather than attack the retriever, so the
-numbers describe what a generator does with bad text. Most runs use one model
-family at one size, and our own control shows that a different model can reverse
-an outcome. Almost every attack we run knows nothing of the defense it meets,
+Three limits bound what follows. Each experiment runs on one dataset, and we
+plant poisoned passages into the context rather than attack the retriever, so
+the numbers describe what a model does with bad text once it has it. Most runs
+use one 8-billion-parameter model, and our check on a second model covers only
+one defense design. Almost every attack we run knows nothing of the defense it meets,
 which bounds attack strength from below: conservative evidence when a defense
 fails, and no evidence at all when one holds.
 
@@ -97,13 +97,18 @@ fails, and no evidence at all when one holds.
   where it reasons. That division, not duplication, is what leaves a region
   neither side has tested: of every confirmed (defense, attack) pair either
   community reports, only a handful cross between them, and a security
-  defense has been evaluated against an AI/ML failure mechanism exactly
+  defense has been evaluated against a safety failure mechanism exactly
   \NSecDefVsSafetyAttack{} time (Sections~\ref{sec:parallel},
   \ref{sec:emptycell}).
 
-\item \textbf{We build a platform and run \NCampaignPairs{} pairs on it
-  (RQ2).} Every method executes against an undefended arm on the same items,
-  under controls we fixed before any run (Section~\ref{sec:experiments}).
+\item \textbf{We run \NCampaignPairs{} pairs neither community had run, and
+  find that methods built for honest error lose to an attacker (RQ2).} These
+  methods decide how far to trust the retrieved document, which is right when
+  the document is out of date and hands the answer to an attacker who wrote
+  it. Within the range of poisoned passages the attack authors evaluate,
+  \NGridGainTop{} of \NGridCells{} pairs help, all against an attack that
+  makes the model refuse (Sections~\ref{sec:campaign},
+  \ref{sec:results}).
 
 \item \textbf{We trace the failures to a single design choice (RQ3).}
   Every method that fails weights the retrieved text against the model's
@@ -124,11 +129,6 @@ fails, and no evidence at all when one holds.
   protection to an attacker who reads its rule, which prices the method rather
   than dismissing it (Section~\ref{sec:adaptive}).
 
-\item \textbf{We state what a deployment inherits from these methods.} A
-  method that tunes how much the model trusts retrieved text is correct when
-  the text is merely stale and dangerous when an attacker owns it, and a
-  writable corpus is the second case (Section~\ref{sec:discussion}).
-
 \item \textbf{We derive the design rule a defense covering both regimes
   would have to follow, and we have not yet built one.} Every signal inside
   the context window belongs to whoever wrote the passage, which is why the
@@ -137,8 +137,8 @@ fails, and no evidence at all when one holds.
   attacker does not hold --- provenance, agreement across independently
   retrieved passages, or the decision to act rather than the decision to
   believe --- and it still needs the reasoning stage for the stale document
-  nobody wrote as an attack. The experiment that tests this is specified and
-  queued; it has not run, and we claim no result from it
+  nobody wrote as an attack. The experiment that tests this has started and
+  is not finished, and we claim no result from it
   (Section~\ref{sec:discussion}).
 
 \item \textbf{We release a runnable artifact.} Every attack and defense
@@ -148,11 +148,10 @@ fails, and no evidence at all when one holds.
 
 \paragraph{How the paper reads.} Section~\ref{sec:background} fixes the
 terms and the threat model. Section~\ref{sec:literatures} answers RQ1 and
-ends at the region nobody has tested. Section~\ref{sec:experiments} builds
-the harness and Section~\ref{sec:results} runs it. That section answers RQ2
-and, in Section~\ref{sec:distractor}, RQ3; it then tries to break its own
-results, with the controls the literature omits (RQ4) and with an adaptive
-attacker (RQ5). Section~\ref{sec:discussion} turns what
+ends at the region nobody has tested. Section~\ref{sec:experiments} describes
+the platform, Section~\ref{sec:campaign} the experiments we ran on it, and
+Section~\ref{sec:results} what they show, grouped under RQ2 to RQ5.
+Section~\ref{sec:discussion} turns what
 survives into conventions, into what a deployment inherits, and into the
 design rule a defense covering both regimes would have to follow.
 Section~\ref{sec:threats} states the limits and what is not finished.

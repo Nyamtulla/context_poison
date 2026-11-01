@@ -91,7 +91,7 @@ and a method whose result depended on them would pass this check and still be
 fragile.
 
 Nor does it show reproducibility across environments, and we have a
-measured example of the difference. The defenses in the retrieval cell cannot
+measured example of the difference. The defenses in the retrieval experiments cannot
 share one Python environment: ACD's released decoder imports symbols that
 newer \texttt{transformers} releases removed, and its authors pin a version
 the rest of the cell cannot use. The \emph{clean} arm plants no payload, so its result is a
@@ -112,20 +112,20 @@ family in particular, which runs two forward passes per token. A method could
 be useless on the evidence here and still be the right choice at a cost we
 never measured, or hold up well and be unaffordable.
 
-\textbf{Single dataset per cell.} The retrieval cell runs on CoConflictQA~\cite{huang-2025-parammute} and
+\textbf{One dataset per experiment.} The retrieval experiments run on CoConflictQA~\cite{huang-2025-parammute} and
 open Natural Questions~\cite{kwiatkowski-2019-natural}. The dosing model, which replaces a fraction of context
 with planted passages, is a simplification of a real retrieval pipeline under
 attack. It holds the retriever fixed, so it measures what the generator does
 with poisoned context rather than how hard the context is to poison.
 
-\textbf{Model coverage.} Most retrieval-cell results use Llama-3-8B-Instruct,
+\textbf{Model coverage.} Most retrieval results use Llama-3-8B-Instruct,
 with Mistral-7B-Instruct where a defense required it. A second-model check
 left the results unchanged within the evaluated range, but it covers only
 RobustRAG. The results should be read as holding for models of this class and
 size.
 
 \textbf{Scorer.} We reuse each defense's own evaluation rubric where one
-exists, and a shared recall-based rubric across the retrieval cell. Recall
+exists, and a shared recall-based rubric across the retrieval experiments. Recall
 against a gold string rewards a model that produces the right tokens for the
 wrong reason. We report the rate of answers from memory and the refusal
 rate alongside it so that the failure modes stay visible.
@@ -172,9 +172,10 @@ as complete.
   above are a snapshot. The artifact lists every cell that remains.
 \item \textbf{Code the validation study.} The draw is complete. No coder
   has started. We give no extraction-error rate until the study returns.
-\item \textbf{Run the composition.} The experiment is queued. It puts one
-  ingestion-stage method in front of one reasoning-stage method. The design
-  rule stays a prediction until this run gives a result.
+\item \textbf{Finish the composition.} It puts one method that acts where
+  text enters in front of one that acts where the model reasons. Each has run
+  on its own; the stacked result is not yet computed. The design rule stays a
+  prediction until it is.
 \item \textbf{Read two published benefits from their papers.}
   ACD and DyPRAG give no
   figure in their text. Their controls stay directional.

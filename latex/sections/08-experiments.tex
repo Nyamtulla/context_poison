@@ -39,17 +39,22 @@ cannot be blamed on our harness. Most of them are the agent experiment:
 injected-instruction attacks inside the AgentDojo banking
 suite~\cite{debenedetti-2024-agentdojo}.
 
-A third experiment holds the defense and the dose fixed and changes only the
-shape of the planted passage. The five shapes are a token sequence optimized
-to be retrieved, a fluent sentence asserting the answer the model would have
-given from memory, the same sentence asserting a third answer instead, a real
-passage retrieved for another question, and a real passage with its answer
-swapped. A defense that behaves differently across them is keying on the
-shape of the text rather than on the attack it was named for.
+A third experiment runs no defense at all. It puts five planted passages on
+the same items, in the same positions and the same number: PoisonedRAG once
+and repeated five times, a stale document, corpus poisoning and misretrieval.
+This measures how much an attacker gains over an honest mistake, which the
+research questions depend on.
 
-A fourth set of runs supplies the measurements published evaluations leave
-out. Every run above carries three arms on the same items: a clean arm with
-nothing planted, an undefended arm, and an arm that sees no document at all.
+A fourth experiment holds the defense fixed and changes only the planted
+passage. On CoConflictQA the same defenses meet corpus poisoning, false
+evidence and a planted third answer, which come from three of the four groups
+in Section~\ref{sec:payloadclasses}. A defense that behaves differently across
+them is reacting to the form of the text rather than to the attack it was
+named for.
+
+A fifth set of runs supplies the measurements published evaluations leave
+out. Every run above is measured three ways on the same items: with nothing
+planted, without the defense, and with no document at all.
 We also re-ran the retrieval experiment on a second base model, and we ran
 both released implementations of the one defense design that held, which
 share a principle and no code downstream of it.
@@ -57,6 +62,7 @@ share a principle and no code downstream of it.
 The last two experiments test the explanation rather than the methods. We
 built two attacks against the single defense that resisted, one searching
 over surface forms and one optimizing a suffix with gradients, both targeting
-the quantity that defense's own rule measures. And we stacked two defenses
-that act at different stages of the same pipeline, to test the design rule
-the observations below arrive at.
+the quantity that defense's own rule measures. We have also started an experiment that stacks two defenses acting at
+different stages of the same pipeline, to test the design rule of
+Section~\ref{sec:discussion}. Each defense has run on its own; the stacked
+result is not yet computed, and we report none.

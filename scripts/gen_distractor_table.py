@@ -84,13 +84,14 @@ def main():
 
     OUT.write_text(r"""\begin{table*}[t]
 \centering
-\caption{Context-reliance defenses against the distractor payload, at
-saturation, in percentage points against each run's own undefended arm, with
-the undefended and defended rates in brackets. Memory is the
-parametric-answer rate, copied is the planted answer, correct is the gold
-answer; the three are disjoint, so the residual is mass that leaves the
-partition altogether. $*$ clears both the run's detectability threshold and
-Fisher at $p<0.05$. Rates are rounded for display and deltas are computed
+\caption{Defenses that decide how far to trust the document, against a
+planted third answer on a corrupted context, in percentage points against
+each run's own undefended model, with the undefended and defended rates in
+brackets. Memory is how often the model gives its own answer, copied how
+often it gives the planted one, and correct how often it gives the true one.
+The three cannot overlap, so the residual is the share of answers that are
+none of them. $*$ clears both the run's detection threshold and Fisher's test
+at $p<0.05$. Rates are rounded for display and differences are computed
 before rounding.}
 \label{tab:distractor}
 \small

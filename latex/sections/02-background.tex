@@ -1,17 +1,12 @@
 \section{Background and threat model} \label{sec:background}
 
-This section fixes the terms the rest of the paper uses. It defines the
-failure we study, shows that two communities name it twice, states the
-system and the adversary we assume, and explains the vocabulary the later
-sections depend on.
-
 \subsection{Context poisoning}
 
 Context poisoning is our term for three things happening together.
 Content enters an agent's context window. The agent should not have trusted
 it. The agent's behavior changes as a result. The definition says nothing
-about who put the content there, and that silence is deliberate: it is what
-lets both communities fit inside one term.
+about who put the content there. That is deliberate: it lets both communities
+fit inside one term.
 
 A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower than ``LLM safety'', because the damage must arrive through the context
 window. Two things fall outside it. Training-time poisoning and weight attacks
@@ -38,12 +33,13 @@ Section~\ref{sec:venue} shows that adversarial work appears at AI venues just
 as often. We write \emph{security venue} or \emph{AI venue} for where a paper
 appeared, and plain \meth{security} or \meth{safety} for what it addresses.
 An adversary re-optimizes against whatever method is in place; a stale
-document does not. That difference is real, because a method tuned to the average case has no
-reason to hold at the worst case. It is also smaller than it looks, because
-the model reads tokens either way, and nothing in the text marks which hand
-wrote it. Section~\ref{sec:regime} tests the second half with payloads that
-assert the same false answer, in the same slots, in the same amount, and
-differ only in whether a person wrote the sentence to be believed.
+document does not. That difference is real, because a method tuned to the
+average case has no reason to hold at the worst case. How much it matters to
+the model is a separate question, since the model reads tokens either way and
+nothing in the text marks who wrote it. Section~\ref{sec:regime} measures
+it: when the bad text plants a false claim, writing it to persuade gives the
+attacker a measurable advantage, and when it only pushes the right evidence
+out, an attack and an honest error do the same damage.
 
 Two vocabularies for one failure force a choice of words, and this paper
 makes it once. We use \emph{mechanism} for anything that makes the context
@@ -102,9 +98,11 @@ deployment cases. An adversary can write a document that a retriever may
 fetch~\cite{zou-2024-poisonedrag}. They can publish a tool whose description
 the agent reads~\cite{shi-2025-prompt}. They can post content that a browsing
 agent visits~\cite{greshake-2023-not} or contribute a skill file that the
-agent loads~\cite{schmotz-2025-agent}. The adversary knows the defense and may adapt the payload to it. The adversary does
-not need to know the user's query: every attack we run is query-agnostic by
-construction.
+agent loads~\cite{schmotz-2025-agent}. The adversary knows the defense and
+may adapt the payload to it. Two of the attacks we run, corpus poisoning and
+BadRAG, use one fixed passage for every question. PoisonedRAG and the planted
+false answers are written for each question they target, so they assume the
+attacker can anticipate which questions will be asked.
 
 \textbf{Where there is no adversary.} Without an attacker there is no threat
 model. The content goes wrong because the pipeline behaves normally. A retrieved document is out of date. A passage is close to the topic but

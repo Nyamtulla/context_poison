@@ -5,8 +5,6 @@ Two communities work one problem and do not cite each other. The obvious
 question, and RQ1, is whether they are doing each other's work twice. The answer is
 no, and what they are doing instead costs the field more than duplication
 would.
-Everything in this section is measurement over our corpus, and it ends at the
-cell of the matrix that is empty.
 
 \subsection{Corpus}
 
@@ -29,9 +27,8 @@ census, the taxonomy cube and the coverage matrix are computed over the
 \NAnalysed{} papers that contributed a named technique, and the citation
 analysis is computed over all \NCorpus{}. Figure~\ref{fig:prisma} reports both counts at
 its last stage. AgentDojo~\cite{debenedetti-2024-agentdojo} is the
-clearest case. It is the environment \NAgentPairs{} of our own pairs run in,
-and it names neither an attack nor a defense. Coding it to a regime and a cell
-asserted something about it that is not true.
+clearest case. It is the environment \NAgentPairs{} of our own pairs run in, and it names
+neither an attack nor a defense, so it sits outside the analyzed set.
 
 Of the \NNoTechnique{}, \NNoTechSurvey{} are surveys or systematizations,
 \NNoTechBench{} are benchmarks and evaluations, \NNoTechFramework{} are
@@ -69,8 +66,8 @@ We then coded the \NFullText{} retrieved papers against the inclusion
 criteria and kept \NCorpus{}. The paper stays if it contributes an attack, a failure mechanism, a defense, or a fix.
 Benchmarks, surveys, measurement studies, and position papers stay even though
 they propose no technique, because they are how the field is organized. That
-pass removed 53 papers and recovered 34 techniques the first extraction had
-missed, so the registry counts here are floors.
+pass also recovered techniques the first extraction had missed, so the
+registry counts here are floors.
 
 \begin{figure*}[t]
 \centering
@@ -110,8 +107,8 @@ image, audio or document and is rendered into text~\cite{zhu-2024-unraveling}. \
 content entering through a package, template or model the agent depends
 on~\cite{yan-2023-backdooring}.
 
-\textbf{Intent} is whether the content was placed deliberately: adversarial,
-safety, or studied as both.
+\textbf{Regime}, defined in Section~\ref{sec:twovocab}, is whether the
+paper assumes an adversary.
 
 \textbf{Consequence} is what the agent then does wrong. There are \NConseqCats{}.
 \meth{goal-hijack} is pursuing an objective it was not
@@ -144,70 +141,74 @@ together are the whole census.}
 \end{figure*}
 
 \NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold
-no named attack and no named defense from either literature. The cube counts
+no named mechanism and no named fix from either literature. The cube counts
 what the field has named, not which papers discuss a cell. A survey that
 ranges over six channels therefore occupies none of them. Emptiness is not uniform,
-and Figure~\ref{fig:cube} puts the named attacks beside the named defenses in
+and Figure~\ref{fig:cube} puts the named mechanisms beside the named fixes in
 each cell. Three things are visible there that a count of papers hides.
 
 The two panels barely overlap. The security literature holds \NMechSecurity{} of
-the \NMechanisms{} attacks and masses them in \meth{goal-hijack}; the safety literature holds \NMechSafety{} and masses them in
+the \NMechanisms{} mechanisms and masses them in \meth{goal-hijack}; the safety literature holds \NMechSafety{} and masses them in
 \meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
 community works are nearly disjoint, which is the same separation the citation
 rates show, drawn as a picture.
 
 Effort is concentrated rather than scarce. Four cells hold more than fifty
-defenses each --- \meth{tool-output} $\times$ \meth{goal-hijack} at
+fixes each --- \meth{tool-output} $\times$ \meth{goal-hijack} at
 \NDefCellToolOutGoalHijack{}, \meth{direct-input} $\times$
 \meth{goal-hijack} at \NDefCellDirectInGoalHijack{}, \meth{RAG} $\times$
 \meth{silent-corruption} at \NDefCellRagSilent{} and \meth{memory}
 $\times$ \meth{reasoning-corruption} at \NDefCellMemReasoning{} --- and
-between them they absorb \PctTopFourDef{}\% of the \NDefenses{} defenses
-in the census.
+between them they hold \PctTopFourDef{}\% of the \NFixes{} fixes in the
+census.
 
-And \NCellsAttackNoDef{} cells hold a named attack with no defense ever
+And \NCellsAttackNoDef{} cells hold a named mechanism with no fix ever
 proposed against it. \NCellsAttackNoDefSec{} of them are in the security
 panel, \NCellsAttackNoDefBackdoor{} of those are
 \meth{persistence-backdoor}, and the last is \meth{memory} $\times$
 \meth{data-exfiltration} on the safety side. A cell one community has
-to itself is a gap; a cell with attacks and no defense is a different and
+to itself is a gap; a cell with mechanisms and no fix is a different and
 sharper one.
 
 The totals column collapses the consequence axis and reports it.
-\meth{multi-agent} and \meth{memory} carry several defenses
-per mechanism, while \meth{supply-chain} has fewer defenses than mechanisms
+\meth{multi-agent} and \meth{memory} carry several fixes
+per mechanism, while \meth{supply-chain} has fewer fixes than mechanisms
 and \meth{cross-modal}, \meth{tool-metadata} and \meth{skill} sit at parity. Those are
 the routes by which an agent accepts capability from a third party, and they
 are the thinnest in the corpus.
 
 
 \textbf{Census.} The registry holds \NMechanisms{} named mechanisms,
-\NMechSecurity{} from the security literature and \NMechSafety{} from the safety literature, and \NDefenses{} named defenses and fixes, \NDefSecurity{}
-and \NDefSafety{} respectively. By consequence,
+\NMechSecurity{} from the security literature and \NMechSafety{} from the
+safety literature, and \NFixes{} named fixes, \NDefSecurity{} and
+\NDefSafety{} respectively. By consequence,
 \meth{goal-hijack} dominates the threat side at \NMechGoalHijack{}
 (\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption} at
 \NMechReasoning{} (\PctMechReasoning{}\%). By channel, \meth{direct-input}
 (\NMechDirectInput{}) and \meth{tool-output} (\NMechToolOutput{}) together hold
-close to three fifths. On the remedy side, \NDefPtReasoning{} methods act at
+close to three fifths. Among fixes, \NDefPtReasoning{} act at
 reasoning time (\PctDefPtReasoning{}\%), \NDefPtIngestion{} at ingestion,
 \NDefPtExecution{} at execution, and \NDefPtNone{} specify no single point.
 
-Almost every defense answers to one validation regime. \NAdvOnly{} were
-validated in the security regime only and \NIncOnly{} in the safety regime only, leaving \NBothValidated{} (\PctBothValidated{}\%) validated
-against both and \NNoValidation{} with no validation we could identify. So
-\PctOneRegime{}\% of published defenses carry an untested cross-regime
-question, which is the gap this paper goes on to measure and then to fill.
+Almost every fix was tested in one regime only. \NDefenseFix{} were tested
+against an adversary, the defenses of Section~\ref{sec:twovocab}, and
+\NRemedy{} against incidental failure, the remedies. \NBothValidated{}
+(\PctBothValidated{}\%) were tested against both and \NNoValidation{} carry no
+test we could identify. So \PctOneRegime{}\% of published fixes carry an
+untested cross-regime question, which is the gap this paper measures and then
+fills.
 
-The regime a defense was validated in is coded separately from the literature it
-was published in, and the two turn out to be nearly the same partition. Of
-\NDefenses{} defenses, only \NDefCrossRegime{} were ever validated in the
-other community's regime. So the empty cell of
+The regime a fix was tested in is coded separately from the literature it was
+published in, and the two turn out to be nearly the same partition. Of
+\NFixes{} fixes, only \NDefCrossRegime{} were ever tested in the other
+community's regime. So the empty cell of
 Section~\ref{sec:emptycell}, which is a statement about tested pairs, has a
 counterpart one level down in the methods themselves.
 
-The two sides are also not the same size. There are \NDefenses{} remedies for
-\NMechanisms{} problems, and yet \NMechUncovered{} of \NMechanismsBench{} named
-mechanisms (\PctMechUncovered{}\%) have no defense ever evaluated against them.
+The two sides are also not the same size. There are \NFixes{} fixes for
+\NMechanisms{} mechanisms, and yet \NMechUncovered{} of \NMechanismsBench{}
+named mechanisms (\PctMechUncovered{}\%) have no fix ever evaluated against
+them.
 Effort is concentrated rather than scarce: a single umbrella entry, indirect
 prompt injection, absorbs more tested pairs than any other entry by a wide
 margin, while \NInjUncovered{} of \NInjVariants{} named injection variants have
@@ -300,7 +301,7 @@ defense \emph{losing} to an attack published after it. The final matrix holds
 \NPairsComposite{} confirmed pairs.
 
 \textbf{The matrix is sparse in a specific way.} \NDefMatchedFull{} of
-\NDefenses{} defenses (\PctDefMatched{}\%) appear in at least one pair, and
+\NFixes{} fixes (\PctDefMatched{}\%) appear in at least one pair, and
 \NDefOneFull{} of those (\PctDefOneFull{}\%) appear in exactly one. The
 most cross-tested defense appears in \NDefCeiling{} pairs, and \NDefFourPlus{}
 appear in four or more. But of the pairs belonging to those \NDefFourPlus{},
@@ -310,12 +311,12 @@ the defenses' own evaluations; for the broadest case,
 papers. Breadth here is not evidence a method was evaluated widely by its
 authors. It is evidence that attackers chose it as a target.
 
-How much of this gap is the field and how much is our instrument. It
-is tempting to read the complement of the matrix as ``never tested'', and that
+How much of this gap belongs to the field, and how much to our instrument?
+It is tempting to read the complement of the matrix as ``never tested'', and that
 reading is wrong. A defense evaluated on AgentDojo without naming which
 injection it faced was evaluated adversarially; it is simply not a named pair,
 because expanding a benchmark into its constituent attacks would manufacture
-coverage. So we classified every one of the \NDefEvalAudited{} defenses in the
+coverage. So we classified every one of the \NDefEvalAudited{} fixes in the
 registry by what its own paper reports in its evaluation section, asking
 the coarser question: was this method run against an adversary at all?
 \NDefEvalAdversarial{} were (\PctDefEvalAdversarial{}\%):
@@ -462,9 +463,9 @@ If two communities work one problem without reading each other, the second
 to arrive should rebuild what the first already has. The decisive evidence
 is not what the methods are called but where in the pipeline they act, which
 is a coded field rather than a reading of names. Security defends where the
-text enters: \NDefPtIngestionSec{} of its defenses act at ingestion.
+text enters: \NDefPtIngestionSec{} of its fixes act at ingestion.
 Safety defends where the text is used: \NDefPtReasoningSafety{} of its
-defenses act at reasoning. Figure~\ref{fig:pipeline} draws that split
+fixes act at reasoning. Figure~\ref{fig:pipeline} draws that split
 against the pipeline and Figure~\ref{fig:intervention} counts it. Two
 bodies of work that intervene at different stages are not building the same
 thing, whatever they name it.
@@ -472,7 +473,7 @@ thing, whatever they name it.
 The names agree with the coding. Inside each taxonomy cell we looked for a
 security-regime name and a safety-regime name close enough to be the same
 thing relabelled: among \NMechanisms{} named mechanisms there are
-\NMechNameClash{} such collisions, and among \NDefenses{} defenses there
+\NMechNameClash{} such collisions, and among \NFixes{} fixes there
 is \NDefNameClash{}. That test can only catch relabelling, so it confirms
 the division rather than establishing it.
 
@@ -514,8 +515,8 @@ labor and the field would still end up holding two defenses that work.
 Dividing the problem costs something else: it leaves a chain with a gap in
 it. A reasoning-stage defense sits downstream of an adversary who already
 controls its input, and no amount of better reasoning recovers a document
-that was written to be believed. That is not a rhetorical point. It is the
-mechanism behind the sign flip in Section~\ref{sec:results}, where methods
+that was written to be believed. This is the mechanism behind Observation~2
+in Section~\ref{sec:results}, where methods
 that shift trust toward the retrieved document help when the document is
 honest and hurt when it is written by someone else.
 
@@ -553,8 +554,8 @@ venues, and evaluated against different problems; no single method in the
 census covers both stages. A system that wants coverage at ingestion and at
 reasoning therefore has to compose methods from both literatures, and the
 census holds no paper that does. Whether such a composition would help is a
-separate experiment, and not one this paper runs: every method in
-Section~\ref{sec:results} is measured alone. What the census establishes
+separate experiment, which this paper has started and not finished: every
+result in Section~\ref{sec:results} measures one method alone. What the census establishes
 is narrower and still unwelcome. The two halves exist, the stages they
 cover are complementary, and nobody has put them together or tested what
 happens when they are.

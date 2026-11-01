@@ -1,25 +1,29 @@
-Large language models (LLM) became extremely powerful in this modern era. The capabilities of an LLM scale as the context gets bigger and better, as these agents answer from their context. An attacker who controls the context
-controls the answer. Two research communities study this failure, and neither tests the other's work. Security researchers study context an attacker changes on purpose; safety researchers study context that becomes wrong on its own. The model cannot tell the difference.
+LLM agents answer from their context, so an attacker who controls the context
+controls the answer. Two research communities study this failure, and neither
+tests the other's work. Security researchers study context an attacker changes
+on purpose; safety researchers study context that becomes wrong on its own. The
+model cannot tell the difference.
 
 We read \NCorpus{} papers in full and recovered every confirmed (defense,
 attack) pair either community reports. Only a handful cross between them, and
 \textbf{exactly \NSecDefVsSafetyAttack{} security defense has ever been
 evaluated against a safety failure mechanism}. The two sides do not duplicate
-each other. 
-%Across \NMechanisms{} named mechanisms we find \NMechNameClash{} cross-community name collisions. 
-They divide the problem instead. Security focuses on how the bad
-text arrives and defends at ingestion. Safety deals with why the model believes it
-and defends at reasoning. A defense at the reasoning stage judges text the
-attacker has already chosen.
+each other. They divide the problem instead. Security studies how the bad text
+arrives and defends where it enters. Safety studies why the model believes it
+and defends where the model reasons. A defense at the reasoning stage judges
+text the attacker has already chosen.
 
-We then ran the experiments neither community has run. Our campaign covers
-\NCampaignPairs{} pairs, each run from its authors' released code and weights
-against an undefended model on the same items. \textbf{Where a
-defense intervenes decides whether it survives.} Techniques that act at
-ingestion or at execution drive attack success to zero in \NAgentHolds{} of
-\NAgentConditions{} agent conditions, while no defense that reasons over text
-already in the window leaves the model better off than no defense at all. We
-report results for one model family and one retrieval setting.
+We then ran the experiments neither community has run: \NCampaignPairs{}
+pairs, each from its authors' released code and weights, against an
+undefended model on the same items. \textbf{Methods built for honest error
+decide how far to trust the document, and that choice hands the answer to an
+attacker who wrote it.} Within the range of poisoned passages the attack
+authors themselves evaluate, \NGridGainTop{} of \NGridCells{} defense and
+attack pairs help, and all \NGridGainTop{} help only by getting the model to
+answer again after an attack made it refuse. The one defense that resisted
+loses \PctAcdRemovedGradient{}\% of its protection to an attacker who reads
+its rule. We report results for models of 7 to 14 billion parameters, with
+one dataset per experiment.
 
 % ============================================================================
 % ALTERNATIVE ABSTRACT --- the number-heavy version, kept for later editing.

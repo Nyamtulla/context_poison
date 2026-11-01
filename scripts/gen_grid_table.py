@@ -44,12 +44,12 @@ DEFEND = ("defended", "ck", "coiecd", "acd", "scr", "parammute", "dyprag")
 
 PRETTY = {"acd": "ACD", "ckplug": "CK-PLUG", "coiecd": "COIECD",
           "dyprag": "DyPRAG", "parammute": "ParamMute", "scr": "SCR",
-          "spare": "SpARE", "robustrag-keyword": "RobustRAG (keyword)",
-          "robustrag-decoding": "RobustRAG (decoding)"}
-ATK = {"poisonedrag": "PoisonedRAG", "corpus_poisoning": "corpus poisoning",
-       "badrag_dos": "BadRAG DoS", "badrag_sentiment": "BadRAG sentiment",
-       "distractor_evidence": "distractor", "misretrieval": "misretrieval",
-       "incidental_stale": "stale document",
+          "spare": "SpARE", "robustrag-keyword": "RobustRAG-kw",
+          "robustrag-decoding": "RobustRAG-dec"}
+ATK = {"poisonedrag": "PoisonedRAG", "corpus_poisoning": "corpus pois.",
+       "badrag_dos": "refusal", "badrag_sentiment": "tone",
+       "distractor_evidence": "third answer", "misretrieval": "misretrieval",
+       "incidental_stale": "stale doc.",
        "context_dilution": "dilution"}
 # Column order is the attack's own regime: the four security payloads first,
 # then the safety ones, so the cross-regime block reads as a block.
@@ -105,10 +105,13 @@ def main():
          "arm on the same items: \\emph{clean} is dose 0, what the defense "
          "costs when nothing is planted, and \\emph{5/10} is five poisoned "
          "passages of ten, the largest corruption size these attacks' and "
-         "defenses' own authors evaluate. A dash "
+         "defenses' own authors evaluate. Refusal and tone are BadRAG's two "
+         "attacks, and the planted passages are those of "
+         "Section~\\ref{sec:payloadclasses}. A dash "
          "is a pair we have not run. This item set is not CoConflictQA and "
          "the two sets of numbers are not comparable.}",
          "\\label{tab:grid}", "\\footnotesize",
+         "\\setlength{\\tabcolsep}{3.2pt}",
          "\\begin{tabular}{@{}l" + "rr" * len(used) + "@{}}", "\\toprule"]
     L.append(" & " + " & ".join(
         f"\\multicolumn{{2}}{{c}}{{{ATK.get(a, a)}}}" for a in used) + " \\\\")
