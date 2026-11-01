@@ -4,10 +4,22 @@ An LLM agent reads from many places. It reads retrieved documents and the output
 from other agents. It also reads its own stored memory~\cite{chu-2026-systematic,ma-2025-safety}. All of this arrives in one context window, and the model treats it as one body of
 text. The model has no reliable way to tell which part of that text is trustworthy and which part is not~\cite{greshake-2023-not}.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig0_pipeline}
+\caption{The taxonomy against the system it describes. Untrusted content
+arrives through one of \NChannelCats{} \textbf{channels}, enters one context
+window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
+A defense can intervene at one of three points between them.}
+\label{fig:pipeline}
+\end{figure*}
+
 Think of the context window as a pond fed by a fixed set of streams. Whatever
 enters through any stream mixes into the same water, whether someone dumped it
 in or it washed in on its own. So the first questions are how many streams
-there are and how many kinds of damage the pollution can do.
+there are and how many kinds of damage the pollution can do. Figure~\ref{fig:pipeline} draws the pond as a system:
+the streams on the left, the one context window in the middle, and the kinds
+of damage on the right.
 
 Two research communities study what goes wrong when untrustworthy content gets
 in, and they use different words for it. The security community studies content that an attacker placed there on purpose. It names attacks such as indirect prompt

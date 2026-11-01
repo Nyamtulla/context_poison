@@ -31,43 +31,7 @@ retrieved for another question give the same results: \PctCorpusTop{}\% and
 number of poisoned passages. For this kind of attack, an attack and an
 ordinary retrieval error are the same event.
 
-\input{tables/regime_framing}
-
 \subsection{RQ2: Does a defense built for one literature's problem survive the other's?}
-
-\paragraph{Trusting the document under attack.}
-The methods built for honest error all decide how far
-to trust the retrieved document over what the model already knows. Trusting
-the document more is right when the document is out of date, and wrong when an
-attacker wrote it. Seven of the ten methods we ran on retrieved documents
-work this way: ACD, CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG.
-None of them uses any signal that separates a real document from a planted
-one. When the document is honest and newer than the model's memory, leaning
-on it helps. When an attacker wrote it, leaning on it moves the model toward
-the attacker's answer.
-
-Table~\ref{tab:family} shows the sign change. SpARE changes accuracy by
-+\ESpareClean{} points on a clean context and by \ESpareSat{} on a corrupted
-one, both beyond its threshold. ParamMute gains \EParamClean{} points on a clean context
-and ends \EParamSatGap{} points below the undefended model on a corrupted one.
-CK-PLUG goes furthest. Under BadRAG's tone attack, which tries to make the
-model answer in a negative tone, the undefended model takes on that tone at
-most \ECkSentUndefMax\% of the time. With CK-PLUG it takes it on
-\ECkSentOne\% of the time with one poisoned passage in ten and
-\ECkSentTop\% with five, so the defense increases the attack's effect
-rather than reducing it. SCR, the one method in this family that asks the
-model to judge between its own answer and the document's, gains
-\EScrSatGain{} points on a corrupted context and costs \EScrCleanCost{} on a
-clean one, roughly five times what it gains.
-
-The other three methods are why this is a claim about a design and not about
-all defenses. DyPRAG turns the document into model weights, so it has no
-trust setting to turn. The two RobustRAG implementations answer from each
-passage separately and take a vote, which asks which passages agree rather
-than how far to trust passages in general. Figure~\ref{fig:dose} shows the
-seven methods as the number of poisoned passages rises: CK-PLUG and DyPRAG
-sit more than twenty points below the undefended model before anything is
-planted and stay there, and the other four stay within a few points of it.
 
 \begin{table}[t]
 \centering
@@ -104,6 +68,33 @@ COIECD    & \ECoiecdN{} & \ECoiecdMdr{} &
 than accuracy, so its clean cell reports that metric.}
 \end{table}
 
+\input{tables/grid}
+
+\paragraph{Trusting the document under attack.}
+The methods built for honest error all decide how far
+to trust the retrieved document over what the model already knows. Trusting
+the document more is right when the document is out of date, and wrong when an
+attacker wrote it. Seven of the ten methods we ran on retrieved documents
+work this way: ACD, CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG.
+None of them uses any signal that separates a real document from a planted
+one. When the document is honest and newer than the model's memory, leaning
+on it helps. When an attacker wrote it, leaning on it moves the model toward
+the attacker's answer.
+
+Table~\ref{tab:family} shows the sign change. SpARE changes accuracy by
++\ESpareClean{} points on a clean context and by \ESpareSat{} on a corrupted
+one, both beyond its threshold. ParamMute gains \EParamClean{} points on a clean context
+and ends \EParamSatGap{} points below the undefended model on a corrupted one.
+CK-PLUG goes furthest. Under BadRAG's tone attack, which tries to make the
+model answer in a negative tone, the undefended model takes on that tone at
+most \ECkSentUndefMax\% of the time. With CK-PLUG it takes it on
+\ECkSentOne\% of the time with one poisoned passage in ten and
+\ECkSentTop\% with five, so the defense increases the attack's effect
+rather than reducing it. SCR, the one method in this family that asks the
+model to judge between its own answer and the document's, gains
+\EScrSatGain{} points on a corrupted context and costs \EScrCleanCost{} on a
+clean one, roughly five times what it gains.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig4_dose_response}
@@ -116,6 +107,15 @@ DyPRAG sit more than twenty points below zero before any passage is planted
 and stay there. The other four stay within a few points of zero.}
 \label{fig:dose}
 \end{figure}
+
+The other three methods are why this is a claim about a design and not about
+all defenses. DyPRAG turns the document into model weights, so it has no
+trust setting to turn. The two RobustRAG implementations answer from each
+passage separately and take a vote, which asks which passages agree rather
+than how far to trust passages in general. Figure~\ref{fig:dose} shows the
+seven methods as the number of poisoned passages rises: CK-PLUG and DyPRAG
+sit more than twenty points below the undefended model before anything is
+planted and stay there, and the other four stay within a few points of it.
 
 Suppressing the model's memory hurts only when the memory had the right
 answer. Under BadRAG's refusal attack, which makes the
@@ -142,8 +142,6 @@ plants a false answer is a loss. CK-PLUG and DyPRAG account for
 two methods that cost accuracy with nothing planted, more than twenty points
 each. The other \NGridFreeClean{} of \NGridCells{} pairs cost nothing
 measurable on a clean context.
-
-\input{tables/grid}
 
 \label{sec:lowdose}
 Even with nine of ten passages honest, almost nothing
@@ -201,20 +199,6 @@ false claim.
 
 \subsection{RQ3: Is failure a property of individual methods or of a design choice they share?}
 
-\paragraph{The form of the planted passage.}
-\label{sec:payloads}
-What a defense does depends on the form of the planted
-passage, not on which attack it came from. ACD is the only method that both
-uses a clean document and resists corpus poisoning: it ends
-\EAcdSatGain{} points above the undefended model on a corrupted context.
-Corpus poisoning, though, was optimized to fool a retriever, not ACD, so this
-shows only that ACD resists that one passage. We then planted a fluent false
-sentence instead, holding everything else fixed. Table~\ref{tab:acd} shows
-the protection disappear. ACD keys on how uncertain a passage makes the
-model. An optimized token string is incoherent and raises uncertainty, so ACD
-discounts it. A fluent false sentence lowers uncertainty, so ACD trusts it
-more, and the defended model ends below a model given no document at all.
-
 \begin{table}[t]
 \centering
 \caption{ACD against two planted passages, $n=\EAcdN{}$, threshold \EAcdMdr\pp. The defense is
@@ -235,17 +219,19 @@ vs.\ no retrieval & +\EAcdCorpusVsNoRet{} ($p\PAcdCorpusVsNoRet{}$) &
 \end{tabular}
 \end{table}
 
-Three more methods show the same dependence on form
-(Table~\ref{tab:payloads}). ParamMute is harmful against both forms, by
-\EParamExcessCorpus{} and \EParamExcessFalse{} points, but how well it
-suppresses the model's wrong memory falls from \EParamCorpusPmDrop{} to
-\EParamFalsePmDrop{} points. Under corpus poisoning the wrong answer lives
-only in memory, so suppressing memory removes it. Under false evidence it
-lives in memory and in the planted passage, and ParamMute reaches only the
-first. CK-PLUG's effect on accuracy moves from \ECkCleanCost{} to
-\ECkSatDelta{} points under corpus poisoning and stays near
-\ECkFalseOffset{} under false evidence.
-COIECD changes nothing measurable against either.
+\paragraph{The form of the planted passage.}
+\label{sec:payloads}
+What a defense does depends on the form of the planted
+passage, not on which attack it came from. ACD is the only method that both
+uses a clean document and resists corpus poisoning: it ends
+\EAcdSatGain{} points above the undefended model on a corrupted context.
+Corpus poisoning, though, was optimized to fool a retriever, not ACD, so this
+shows only that ACD resists that one passage. We then planted a fluent false
+sentence instead, holding everything else fixed. Table~\ref{tab:acd} shows
+the protection disappear. ACD keys on how uncertain a passage makes the
+model. An optimized token string is incoherent and raises uncertainty, so ACD
+discounts it. A fluent false sentence lowers uncertainty, so ACD trusts it
+more, and the defended model ends below a model given no document at all.
 
 \begin{table}[t]
 \centering
@@ -266,6 +252,20 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Three more methods show the same dependence on form
+(Table~\ref{tab:payloads}). ParamMute is harmful against both forms, by
+\EParamExcessCorpus{} and \EParamExcessFalse{} points, but how well it
+suppresses the model's wrong memory falls from \EParamCorpusPmDrop{} to
+\EParamFalsePmDrop{} points. Under corpus poisoning the wrong answer lives
+only in memory, so suppressing memory removes it. Under false evidence it
+lives in memory and in the planted passage, and ParamMute reaches only the
+first. CK-PLUG's effect on accuracy moves from \ECkCleanCost{} to
+\ECkSatDelta{} points under corpus poisoning and stays near
+\ECkFalseOffset{} under false evidence.
+COIECD changes nothing measurable against either.
+
+\input{tables/distractor}
 
 We do not rank the two forms. Before running them we wrote down the result
 that would contradict our explanation: a defense doing better against false
@@ -299,8 +299,6 @@ answers stay below the threshold. ACD does the reverse. It cuts copying from
 \EAcdDistCopyBase\% to \EAcdDistCopyDef\%, and the answers it refuses to copy
 go back to memory, not to the real document. CK-PLUG copies \ECkDistCopyDefCorrupt\% against its undefended
 model's \ECkDistCopyBaseCorrupt\% (Table~\ref{tab:distractor}).
-
-\input{tables/distractor}
 
 The two directions are one mechanism. Every one of these methods chooses
 between the document and the model's memory, and the attack is inside the
@@ -352,18 +350,6 @@ strength from below: it is conservative evidence when a defense fails and
 weak evidence when a defense holds. ACD was our only holding result, so we
 attacked it directly.
 
-ACD blends the model's answer with and without the document, weighted by how
-uncertain each one is. The attacker controls only the document, so the attack
-has one goal: make the document look certain. This also sets a limit. A
-perfect attack of this kind turns ACD into the undefended model and cannot
-push it below that. We committed to that limit, and five further predictions,
-before building the attack.
-
-We built two attacks. The first tries five phrasings of the same false claim
-for each item and keeps the one ACD finds most certain. The second appends a
-short suffix found by gradient search against the same goal. Both keep the
-false answer fixed, so any change comes from the form alone.
-
 \begin{table}[t]
 \centering
 \caption{ACD against the planted third answer in its plain form and in two forms
@@ -390,6 +376,18 @@ ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+ACD blends the model's answer with and without the document, weighted by how
+uncertain each one is. The attacker controls only the document, so the attack
+has one goal: make the document look certain. This also sets a limit. A
+perfect attack of this kind turns ACD into the undefended model and cannot
+push it below that. We committed to that limit, and five further predictions,
+before building the attack.
+
+We built two attacks. The first tries five phrasings of the same false claim
+for each item and keeps the one ACD finds most certain. The second appends a
+short suffix found by gradient search against the same goal. Both keep the
+false answer fixed, so any change comes from the form alone.
 
 All six predictions held (Table~\ref{tab:adaptive}). The fair measure is
 ACD's margin over the undefended model, because both attacks also hurt the

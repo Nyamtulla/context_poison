@@ -100,30 +100,6 @@ between the two sources and pushes toward the context.
 SCR makes the same trade through prompting rather
 than decoding.
 
-The agent experiments pair defenses that act before the agent reads or acts
-with prompt-injection attacks inside the AgentDojo banking
-suite~\cite{debenedetti-2024-agentdojo}, with a Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
-
-Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
-535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
-\texttt{transformers} 5.5.0. Two defenses cannot use that last version. ACD's
-released decoder imports symbols that \texttt{transformers} removed after
-4.44, which its own README pins, so it runs in a separate dependency set.
-CK-PLUG ships its own 4.49 fork and its README says to install it. We record this
-because it is a result as much as a configuration detail. The defenses in a
-single cell of this taxonomy cannot share one Python environment. That is the
-reproducibility problem of Section~\ref{sec:discussion}, one layer further
-down. The released artifact builds each set and verifies it.
-
-\subsection{Datasets}
-\label{sec:provenance}
-
-An \textbf{item} is one question, its gold answer, and the context the model
-is given to answer it from. Every item in this paper belongs to the authors
-of the method or the benchmark we are running, and Table~\ref{tab:provenance}
-lists each source and whose it is. Running each method on its own authors'
-data rules out a change of dataset as the explanation for its results.
-
 \begin{table}[t]
 \centering
 \caption{Item sets and payloads, by owner. No item set is ours. Three
@@ -159,6 +135,30 @@ another question \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The agent experiments pair defenses that act before the agent reads or acts
+with prompt-injection attacks inside the AgentDojo banking
+suite~\cite{debenedetti-2024-agentdojo}, with a Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
+
+Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
+535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
+\texttt{transformers} 5.5.0. Two defenses cannot use that last version. ACD's
+released decoder imports symbols that \texttt{transformers} removed after
+4.44, which its own README pins, so it runs in a separate dependency set.
+CK-PLUG ships its own 4.49 fork and its README says to install it. We record this
+because it is a result as much as a configuration detail. The defenses in a
+single cell of this taxonomy cannot share one Python environment. That is the
+reproducibility problem of Section~\ref{sec:discussion}, one layer further
+down. The released artifact builds each set and verifies it.
+
+\subsection{Datasets}
+\label{sec:provenance}
+
+An \textbf{item} is one question, its gold answer, and the context the model
+is given to answer it from. Every item in this paper belongs to the authors
+of the method or the benchmark we are running, and Table~\ref{tab:provenance}
+lists each source and whose it is. Running each method on its own authors'
+data rules out a change of dataset as the explanation for its results.
 
 Every comparison in this paper is between models measured on the same items.
 Rates computed on different item sets are incomparable rather than merely

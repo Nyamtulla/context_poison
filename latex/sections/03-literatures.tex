@@ -14,6 +14,14 @@ before the snowball depth was capped at one hop and kept in the database but
 outside the working pool, which leaves \NWorkingPool{}. The artifact ships the
 \NQueries{} queries with their dates and hit counts.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig9_prisma}
+\caption{Corpus construction. Each stage reports what it removed on the
+left and what it passed to the next stage on the right.}
+\label{fig:prisma}
+\end{figure}
+
 We follow PRISMA~\cite{page-2021-prisma} for identification, screening and
 inclusion, and Figure~\ref{fig:prisma} reports the count at every stage. Dual
 coding at this scale is not feasible for a small team, so screening ran as two
@@ -27,13 +35,21 @@ withdrawn papers and for records whose only version was an uncredentialed
 copy. Reading an uncredentialed copy would put a claim in the census that no
 venue stands behind.
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig9_prisma}
-\caption{Corpus construction. Each stage reports what it removed on the
-left and what it passed to the next stage on the right.}
-\label{fig:prisma}
-\end{figure}
+\includegraphics[width=0.92\textwidth]{figures/fig1_cube}
+\caption{Mechanisms against fixes in every channel $\times$ consequence
+cell, split by regime. One convention throughout: a solid bar is a mechanism
+and a hatched bar is a fix, in cells and in totals alike, each with its count
+printed above it on a fixed line. Hue is the regime, so a panel's own totals
+keep that panel's hue; only the last column, which adds the regimes together,
+leaves them. A cell that holds mechanisms and no fix is outlined in bold.
+Each panel's last row totals a consequence down that panel, the last column
+totals a channel across both, and totals carry their own scale. All
+\NMechanisms{} mechanisms and all \NFixes{} fixes place, so the two panels
+together are the whole census.}
+\label{fig:cube}
+\end{figure*}
 
 We then read the \NFullText{} retrieved papers in full, coded them against
 the inclusion criteria and kept \NCorpus{}, each carrying \NColumns{} recorded
@@ -58,20 +74,8 @@ is the clearest case: it is the environment \NAgentPairs{} of our own pairs
 run in, and it names neither an attack nor a defense, so it sits outside the
 analyzed set.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/fig0_pipeline}
-\caption{The taxonomy against the system it describes. Untrusted content
-arrives through one of \NChannelCats{} \textbf{channels}, enters one context
-window, and the output fails as one of \NConseqCats{} \textbf{consequences}.
-A defense can intervene at one of three points between them.}
-\label{fig:pipeline}
-\end{figure*}
-
 \subsection{A joint taxonomy}
 \label{sec:taxonomy}
-
-
 
 We place every named mechanism and every named fix on three axes. Each
 axis value is named by the work that first identified it as a distinct
@@ -112,22 +116,6 @@ only after spending compute, money or quota out of proportion to
 it~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
 Figure~\ref{fig:pipeline} sets the three axes against the system they
 describe.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.92\textwidth]{figures/fig1_cube}
-\caption{Mechanisms against fixes in every channel $\times$ consequence
-cell, split by regime. One convention throughout: a solid bar is a mechanism
-and a hatched bar is a fix, in cells and in totals alike, each with its count
-printed above it on a fixed line. Hue is the regime, so a panel's own totals
-keep that panel's hue; only the last column, which adds the regimes together,
-leaves them. A cell that holds mechanisms and no fix is outlined in bold.
-Each panel's last row totals a consequence down that panel, the last column
-totals a channel across both, and totals carry their own scale. All
-\NMechanisms{} mechanisms and all \NFixes{} fixes place, so the two panels
-together are the whole census.}
-\label{fig:cube}
-\end{figure*}
 
 \NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold
 no named mechanism and no named fix from either literature. The cube counts
@@ -214,6 +202,18 @@ safety-regime papers that name a venue, \NRegimeSafetyAtSecVenue{}
 published at a security venue. Security researchers submit to AI
 conferences; the reverse does not happen in this corpus.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_citation_network}
+\caption{The \NAnalysed{} papers that named a technique, as a citation
+graph. Security papers are red circles
+and safety papers are blue triangles, so the two regimes stay apart in a
+black-and-white print. Cross-regime edges are drawn dark against the pale
+same-regime ones. Papers with no resolved edge inside the corpus are
+omitted.}
+\label{fig:network}
+\end{figure}
+
 One limit on the reading. A venue is coded only where the record carries
 one, so this covers \NRegimeSecNamedVenue{} of \NRegimeSecurity{}
 security-regime papers and \NRegimeSafetyNamedVenue{} of
@@ -242,18 +242,6 @@ Self-RAG~\cite{asai-2023-selfrag}. These are the papers that name the
 problem, and a citation to one places a paper in a setting rather than
 showing a method crossing the boundary. Figure~\ref{fig:network} shows the shape, two
 clusters joined by a narrow band.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig5_citation_network}
-\caption{The \NAnalysed{} papers that named a technique, as a citation
-graph. Security papers are red circles
-and safety papers are blue triangles, so the two regimes stay apart in a
-black-and-white print. Cross-regime edges are drawn dark against the pale
-same-regime ones. Papers with no resolved edge inside the corpus are
-omitted.}
-\label{fig:network}
-\end{figure}
 
 \subsection{Recovered defense--attack pairs}
 \label{sec:coverage}
@@ -367,6 +355,20 @@ The axes so far describe what each community studies. The question this paper
 turns on is narrower: \emph{has either community ever tested its methods
 against the other's problems?}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig6_transfer}
+\caption{Who built the defense (rows) against whose problem it was run
+(columns). Left, every confirmed pair in the literature; right, every pair
+in this campaign. Shade is each cell's share of its own panel, so the two
+panels are not on one colour scale and the printed count is the value. The
+literature crosses between the communities in \NCrossCommunityPairs{} pairs
+of \NPureRegimePairs{} (\PctCrossCommunity{}\%); one of its two
+off-diagonal boxes holds a single pair. All four boxes are occupied on the
+right.}
+\label{fig:transfer}
+\end{figure}
+
 Sort every pair into four boxes --- who built the defense, against whose
 problem it was run --- over the \NPureRegimePairs{} pairs whose two sides both
 sit in one regime. The left panel of Figure~\ref{fig:transfer} shows these
@@ -412,6 +414,13 @@ the two, and papers on the boundary take the regime their own evaluation
 adopts. A paper that spans both communities therefore still sits among the
 \NPureRegimePairs{} pairs; we set none aside.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig7_lag}
+\caption{Publication lag between a defense and the attack it was tested on.}
+\label{fig:lag}
+\end{figure}
+
 Publication order does not close the gap either. \NDefensePredates{} of
 \NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a defense that
 predates the attack it was tested on, so defenses do meet attacks their
@@ -420,15 +429,18 @@ pair is both earlier \emph{and} cross-community, so meeting an unforeseen
 attack and meeting the other community's attack are not the same event.
 Figure~\ref{fig:lag} shows the full distribution.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig7_lag}
-\caption{Publication lag between a defense and the attack it was tested on.}
-\label{fig:lag}
-\end{figure}
-
 \subsection{Division of labor, not duplication}
 \label{sec:parallel}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig10_intervention}
+\caption{Where each regime's fixes intervene. Security keeps the text out
+and contains what it does; safety improves reasoning over text already
+accepted. Points run in pipeline order. Safety carries a dotted fill and is
+the lower bar of every pair, so the two separate in print without colour.}
+\label{fig:intervention}
+\end{figure}
 
 If the two communities duplicated each other's work, their methods would act
 at the same stage of the pipeline. We test this with the coded intervention
@@ -469,16 +481,6 @@ safety-regime entries name a delivery route rather than a susceptibility,
 \meth{KV-cache contamination} and \meth{incidental prompt injection} among
 them. The intervention points the subsection opens with are coded, and the
 argument rests on them.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig10_intervention}
-\caption{Where each regime's fixes intervene. Security keeps the text out
-and contains what it does; safety improves reasoning over text already
-accepted. Points run in pipeline order. Safety carries a dotted fill and is
-the lower bar of every pair, so the two separate in print without colour.}
-\label{fig:intervention}
-\end{figure}
 
 If the two sides were duplicating each other, the cost would be wasted
 labor and the field would still end up holding two defenses that work.

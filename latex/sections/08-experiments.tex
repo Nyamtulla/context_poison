@@ -6,20 +6,6 @@ defense implementations and \NCampaignEpisodes{} scored episodes. Every
 method ran from its authors' released code and weights.
 Figure~\ref{fig:transfer} sets the campaign beside the published literature.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig6_transfer}
-\caption{Who built the defense (rows) against whose problem it was run
-(columns). Left, every confirmed pair in the literature; right, every pair
-in this campaign. Shade is each cell's share of its own panel, so the two
-panels are not on one colour scale and the printed count is the value. The
-literature crosses between the communities in \NCrossCommunityPairs{} pairs
-of \NPureRegimePairs{} (\PctCrossCommunity{}\%); one of its two
-off-diagonal boxes holds a single pair. All four boxes are occupied on the
-right.}
-\label{fig:transfer}
-\end{figure}
-
 The main experiment puts a defense from one literature in front of an attack
 from the other. We ran \NCampCrossPairs{} such pairs, all on retrieval
 question answering over Natural Questions.
@@ -39,11 +25,14 @@ own problem. Most of them are the agent experiment:
 injected-instruction attacks inside the AgentDojo banking
 suite~\cite{debenedetti-2024-agentdojo}.
 
+\input{tables/regime_framing}
+
 A third experiment runs no defense at all. It puts five planted passages on
 the same items, in the same positions and the same number: PoisonedRAG once
 and repeated five times, a stale document, corpus poisoning and misretrieval.
 This measures how much an attacker gains over an honest mistake, which the
-research questions depend on.
+research questions depend on. Table~\ref{tab:regime} reports the result, which
+Section~\ref{sec:regime} reads.
 
 A fourth experiment holds the defense fixed and changes only the planted
 passage. On CoConflictQA the same defenses meet corpus poisoning, false

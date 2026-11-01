@@ -15,6 +15,14 @@ attacker have no third-party content at all.
 
 \subsection{One failure, two vocabularies} \label{sec:twovocab}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig8_vocab}
+\caption{The same five slots, named twice. The taxonomy in
+Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
+\label{fig:vocab}
+\end{figure}
+
 That one failure has two names, because two communities arrived at it
 separately. Figure~\ref{fig:vocab} puts the two vocabularies side by side.
 The slots are the same: the same channel, the same position in the context
@@ -81,15 +89,6 @@ matches into the context before the model answers. The search step is the
 \textbf{retrieval-augmented generation} (RAG). Poisoning such a system takes
 two steps: getting a planted document into the collection and picked by the
 retriever, and then getting the model to believe it once it is in the context.
-
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig8_vocab}
-\caption{The same five slots, named twice. The taxonomy in
-Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
-\label{fig:vocab}
-\end{figure}
 
 \subsection{System and threat model}
 \label{sec:securityregime}
