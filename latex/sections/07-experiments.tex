@@ -18,8 +18,8 @@ in the corpus had tested it. The same rule without its
 second condition picks the control pairs, which put each method against its
 own literature's failures.
 
-We are not proposing new defenses. Every method we run is published, and
-every attack we run is published. The contribution is the pairing.
+We propose no new defense or attack. Every method and every attack we run is
+published.
 
 \subsection{The reconstruction standard}
 
@@ -65,15 +65,13 @@ of poisoned passages and the same scorer.
 \textbf{Small differences are reported as unresolved.} For each run we
 compute the smallest difference it can detect at its sample size, with
 $\alpha = .05$ and power $.80$. A smaller difference is reported as
-unresolved, never as no effect. This matters because several
-published claims in this area rest on differences that a run of their size
-cannot resolve.
+unresolved, never as no effect.
 
 \textbf{Attacks are not adapted to the defenses they meet.} An attack that is not built for a defense and
 defeats it anyway is a lower bound on attack strength: if the
 cheapest payload wins, an adapted one also wins. So non-adaptive evaluation is
-conservative for a claim that a defense fails, and invalid for a claim that one
-holds. Every failure we report is of the first kind. The single resistance
+conservative evidence for a claim that a defense fails, and weak evidence for
+a claim that one holds. Every failure we report is of the first kind. The single resistance
 result we report is of the second, and we test it adaptively rather than
 asserting it.
 
@@ -89,7 +87,8 @@ Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or Mistral-7B-Instruct~\cite{
 released. The data is CoConflictQA~\cite{huang-2025-parammute} over Natural Questions, and open Natural
 Questions for the attacks that need a retrieval pool.
 
-Those defenses turn the same dial. ACD decodes from the no-context
+Each of these defenses adjusts how much the model relies on the retrieved
+text. ACD decodes from the no-context
 distribution and pulls it toward the with-context one by a weight computed
 from entropy. CK-PLUG interpolates the two
 distributions under a single parameter. ParamMute
@@ -121,10 +120,9 @@ down. The released artifact builds each set and verifies it.
 
 An \textbf{item} is one question, its gold answer, and the context the model
 is given to answer it from. Every item in this paper belongs to the authors
-of the method or the benchmark we are running. Table~\ref{tab:provenance} lists each source and whose it is. This is deliberate rather than convenient. A defense
-evaluated on the distribution it was designed for cannot blame its failure on
-an unfamiliar dataset. A result obtained that way is harder to dismiss than
-one obtained on data we chose ourselves.
+of the method or the benchmark we are running, and Table~\ref{tab:provenance}
+lists each source and whose it is. Running each method on its own authors'
+data rules out a change of dataset as the explanation for its results.
 
 \begin{table}[t]
 \centering
@@ -214,12 +212,12 @@ best of five phrasings, one by appending a suffix found by gradient search
 
 \paragraph{Dose, and the one item set that has none.}
 The \textbf{dose} is how many of the retrieved passages are planted. It is
-the axis every result in this paper is read along, because a defense that
+the main axis of the retrieval results, because a defense that
 holds against one poisoned passage and fails against five has not failed in
 the same way as one that never helped.
 
 We take the dose from the attacks rather than define one. Their released
-constructor is parameterised by how many of the top $k$ retrieved passages
+constructor is parameterized by how many of the top $k$ retrieved passages
 it replaces, where it places them and how often the planted sentence repeats
 inside its passage. We keep that construction and sweep the one parameter:
 $j$ of the top ten, for $j$ in $\{0, 1, 2, 3, 5\}$. Their own default is

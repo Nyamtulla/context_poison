@@ -39,10 +39,10 @@ to trust the retrieved document over what the model already knows. Trusting
 the document more is right when the document is out of date, and wrong when an
 attacker wrote it. Seven of the ten methods we ran on retrieved documents
 work this way: ACD, CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG.
-None of them can tell a real document from a planted one, because both are
-the document. When the document is honest and newer than the model's memory,
-leaning on it helps. When an attacker wrote it, leaning on it hands the
-attacker the answer.
+None of them uses any signal that separates a real document from a planted
+one. When the document is honest and newer than the model's memory, leaning
+on it helps. When an attacker wrote it, leaning on it moves the model toward
+the attacker's answer.
 
 Table~\ref{tab:family} shows the sign change. SpARE gains \ESpareClean{}
 points on a clean context and loses \ESpareSat{} on a corrupted one, both
@@ -52,8 +52,13 @@ CK-PLUG goes furthest. Under BadRAG's tone attack, which tries to make the
 model answer in a negative tone, the undefended model takes on that tone at
 most \ECkSentUndefMax\% of the time. With CK-PLUG it takes it on
 \ECkSentOne\% of the time with one poisoned passage in ten and
-\ECkSentTop\% with five. The defense does not fail to stop the attack; it
-carries it.
+\ECkSentTop\% with five, so the defense increases the attack's effect
+rather than reducing it.
+
+SCR is the one method in this family that asks the model to judge. It shows
+the model its own answer without the document, the document, and the answer
+the document supports. It gains \EScrSatGain{} points on a corrupted context
+and costs \EScrCleanCost{} on a clean one, roughly five times what it gains.
 
 The other three methods are why this is a claim about a design and not about
 all defenses. DyPRAG turns the document into model weights, so it has no
@@ -147,8 +152,8 @@ helps. One poisoned passage in ten is the default of the released attack and
 the setting most favorable to a defense, because it leaves the most honest
 evidence to work with. \NGridLowHelps{} of the \NGridLowPairs{} pairs help
 there, and both are again the refusal attack. We report the worst result
-for each defense rather than the average, since a defense beaten by one of
-three attacks is not two-thirds secure.
+for each defense rather than the average, because an average across attacks
+would hide a complete failure against one of them.
 
 \label{sec:transfer}
 \textbf{Observation 6.} Defenses built against an attacker help against an
@@ -180,21 +185,17 @@ it neither helps nor hurts: \ERobustDispOneDef\% against
 against \ERobustDispFiveUndef\% with five, both inside the
 \ERobustDispMdr{}-point threshold.
 
-Inside the tool-using agent, \NAgentHolds{} of \NAgentConditions{} defense
-and attack combinations drive the attack's success to zero, and every one of
-them acts before the agent reads the injected text or before it acts on it.
-None of the \NAgentTriedReasoning{} combinations that act while the model
-reasons holds. Where in the pipeline a defense acts predicts whether it
-survives better than which defense it is.
+The agent experiment pairs only security methods with security attacks, so
+it does not test transfer, but it shows where a defense has to act to hold.
+\NAgentHolds{} of \NAgentConditions{} defense and attack combinations drive
+the attack's success to zero, and every one of them acts before the agent
+reads the injected text or before it acts on it. None of the
+\NAgentTriedReasoning{} combinations that act while the model reasons holds.
+In this experiment, the stage at which a defense acts separates the defenses
+that hold from those that do not.
 
-SCR is the only method we ran that is designed with an attacker in mind. It
-shows the model its own answer without the document, the document, and the
-answer the document supports, and asks it to judge. It gains
-\EScrSatGain{} points on a corrupted context and costs \EScrCleanCost{} on a
-clean one, roughly five times what it gains.
-
-Answer to RQ2. No. Methods built for honest error lose to an attacker in
-proportion to how far they trust the document. Methods built against an
+Answer to RQ2. No. Methods built for honest error lose to an attacker when
+they shift the model's trust toward the document. Methods built against an
 attacker help with an honest mistake only briefly, and only when it plants a
 false claim.
 
@@ -264,17 +265,20 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 \end{tabular}
 \end{table}
 
-We do not rank the two forms. Before running them we wrote down the
-result that would contradict our explanation: a defense doing better against
-false evidence than against corpus poisoning. CK-PLUG does. But false evidence
-is roughly twice as damaging to the undefended model, which holds
-\ECkUndefFalseCorrupt\% against \ECkUndefCorpusCorrupt\% for CK-PLUG and
-\ECoiecdFalseCorrupt\% against \ECoiecdCorpusCorrupt\% for COIECD, so there is
-less left for a defense to lose. A comparison across forms measures the
-attack's strength as much as the defense, so we compare only within a form.
+We do not rank the two forms. Before running them we wrote down the result
+that would contradict our explanation: a defense doing better against false
+evidence than against corpus poisoning. CK-PLUG does, with \ECkExcessFalse{}
+points of excess damage against \ECkExcessCorpus{}. Both forms leave the
+undefended model near the floor, at \ECkUndefFalseCorrupt\% and
+\ECkUndefCorpusCorrupt\% for CK-PLUG and \ECoiecdFalseCorrupt\% and
+\ECoiecdCorpusCorrupt\% for COIECD, so excess damage compares two near-total
+collapses and has little room to separate them. We report CK-PLUG's result as
+an exception this data cannot resolve, and compare defenses only within one
+form.
 
 \label{sec:distractor}
-\textbf{Observation 8.} No defense moves any answers toward the real document.
+\textbf{Observation 8.} No defense moves a measurable share of answers toward
+the real document.
 When the planted passage repeats what the model already believes, a correct
 answer from memory and a copied answer look the same. We therefore built a
 passage asserting a third answer, neither the true one nor the model's own,
@@ -285,13 +289,12 @@ copied the planted passage. With nothing planted the third answer appears
 \EDistCleanBase\% of the time, and \EDistCleanNoRet\% of the time from a
 model given no document.
 
-ParamMute does its job and the attacker collects the result. It cuts answers
-from memory from \EPmDistPmBase\% to \EPmDistPmDef\%, and copying rises from
+ParamMute suppresses answers from memory, and the suppressed answers go to
+the attacker. It cuts answers from memory from \EPmDistPmBase\% to \EPmDistPmDef\%, and copying rises from
 \EPmDistCopyBase\% to \EPmDistCopyDef\% almost one for one, while correct
 answers stay below the threshold. ACD does the reverse. It cuts copying from
-\EAcdDistCopyBase\% to \EAcdDistCopyDef\%, the largest defensive effect in the
-campaign, and the answers it refuses to copy go back to memory, not to the
-real document. CK-PLUG copies \ECkDistCopyDefCorrupt\% against its undefended
+\EAcdDistCopyBase\% to \EAcdDistCopyDef\%, and the answers it refuses to copy
+go back to memory, not to the real document. CK-PLUG copies \ECkDistCopyDefCorrupt\% against its undefended
 model's \ECkDistCopyBaseCorrupt\% (Table~\ref{tab:distractor}).
 
 \input{tables/distractor}
@@ -306,8 +309,8 @@ of answers to neither outcome: \EAcdResid{}, \EScrResid{} and
 \ESpareResid{} points for ACD, SCR and SpARE.
 
 Answer to RQ3. A shared design choice. The methods fail in the same way
-because they make the same choice, and that choice does not contain the
-distinction an attacker exploits.
+because they make the same choice, between the document and memory, and that
+choice cannot separate a real document from a planted one.
 
 \subsection{RQ4: Do the measurements the field leaves out change the result?}
 
@@ -315,19 +318,19 @@ distinction an attacker exploits.
 \textbf{Observation 9.} Without a no-document score, a defense that ignores the
 document looks immune to the attack. DyPRAG holds \EDypragClean\% on a clean
 context and \EDypragSat\% on a corrupted one while the undefended model falls
-from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that is the strongest
-defensive result in the campaign. The same model with no document at all
-scores \EDypragNoRet\%, which is not measurably different. DyPRAG is unaffected
+from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that looks like
+complete resistance. The same model with no document at all scores
+\EDypragNoRet\%, which is not measurably different. DyPRAG is unaffected
 because it is not reading the document, and only a no-document score shows
-this. No paper in this family reports one.
+this.
 
 \textbf{Observation 10.} Where two implementations of one design agree, the
 result belongs to the design. RobustRAG ships two implementations that share
 the idea of answering from each passage and voting, and share no code after
 that. Under BadRAG's tone attack both stay at or below \NRobustToneMax\%,
 across both implementations and two base models, where CK-PLUG on the same
-attack reaches \ECkSentTop\%. Answering from each passage and voting does not
-open this hole; trusting the document does. Under the refusal attack neither
+attack reaches \ECkSentTop\%. The tone attack succeeds against methods that
+trust the document, not against methods that vote across passages. Under the refusal attack neither
 implementation changes the result measurably on either base model, within the
 range the attack authors evaluate.
 
@@ -341,9 +344,10 @@ model, leave the results inside the evaluated range unchanged.
 \label{sec:adaptive}
 \textbf{Observation 11.} The one method that resisted loses more than half of
 its protection to an attacker who reads its rule. Every attack above was
-built without knowledge of the defense it met, which is a fair test when a
-defense fails and no test at all when it holds. ACD was our only holding
-result, so we attacked it directly.
+built without knowledge of the defense it met. Such an attack bounds attack
+strength from below: it is conservative evidence when a defense fails and
+weak evidence when a defense holds. ACD was our only holding result, so we
+attacked it directly.
 
 ACD blends the model's answer with and without the document, weighted by how
 uncertain each one is. The attacker controls only the document, so the attack
@@ -397,5 +401,6 @@ protection, and it never falls below the undefended model.
 
 Answer to RQ5. The explanation survives, and the one exception shrinks. The
 method that resisted did so against attacks not built for it, and loses most
-of that resistance to one that is. Every published evaluation of these methods
-in our corpus uses attacks not built for the defense.
+of that resistance to one that is. In our coding of their papers, the methods
+in this family were validated only against incidental failure, so their
+published results contain no test of this kind.

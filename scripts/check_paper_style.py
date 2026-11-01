@@ -37,7 +37,7 @@ TAB = REPO / "latex" / "tables"
 
 BRIT = (r"\b(behaviour|favourable|modelled|modelling|organis\w*|centre|labelled"
         r"|summaris\w*|memoris\w*|synthesis\w*e\b|standardis\w*|minimis\w*|maximis\w*|optimis\w*|recognis\w*|analys(e|ed|ing)\b"
-        r"|characteris\w*|generalis\w*|normalis\w*|utilis\w*|prioritis\w*"
+        r"|characteris\w*|generalis\w*|normalis\w*|utilis\w*|prioritis\w*|parameteris\w*"
         r"|defence|licence|towards|whilst|amongst|learnt|spelt)\b")
 DEFENSIVE = (r"\b(we argue that|we believe|we feel|it should be noted"
              r"|it is worth noting|it is important to note|arguably"

@@ -32,9 +32,9 @@ has since changed.
 
 A second experiment pairs each method with the kind of attack its own authors
 used. These \NCampSecDefSecMech{} security pairs and
-\NCampSafDefSafetyMech{} safety pairs tell us nothing about whether a method
-carries across, and we ran them so that a failure in the paragraph above
-cannot be blamed on our harness. Most of them are the agent experiment:
+\NCampSafDefSafetyMech{} safety pairs do not test whether a method carries
+across. They check that our harness reproduces each method's behavior on its
+own problem. Most of them are the agent experiment:
 \NAgentPairs{} pairs in which eight prompt-injection defenses meet seven
 injected-instruction attacks inside the AgentDojo banking
 suite~\cite{debenedetti-2024-agentdojo}.
@@ -52,12 +52,11 @@ in Section~\ref{sec:payloadclasses}. A defense that behaves differently across
 them is reacting to the form of the text rather than to the attack it was
 named for.
 
-A fifth set of runs supplies the measurements published evaluations leave
-out. Every run above is measured three ways on the same items: with nothing
+A fifth set of runs adds three measurements. Every run above is measured three ways on the same items: with nothing
 planted, without the defense, and with no document at all.
-We also re-ran the retrieval experiment on a second base model, and we ran
-both released implementations of the one defense design that held, which
-share a principle and no code downstream of it.
+We also re-ran part of the retrieval experiment on a second base model, and
+we ran both released implementations of RobustRAG, which share a principle
+and no code downstream of it.
 
 The last two experiments test the explanation rather than the methods. We
 built two attacks against the single defense that resisted, one searching

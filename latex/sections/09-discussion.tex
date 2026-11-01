@@ -3,23 +3,21 @@
 
 For the mechanism that removes evidence rather than planting a lie, the
 campaign finds no difference between an optimized passage and an ordinary
-retrieval error. The citation gap of Section~\ref{sec:literatures} is
-therefore not two communities working on different problems, at least where
-that mechanism is concerned, and the recommendations below follow from
-treating it as one problem.
+retrieval error. For that mechanism the two communities study the same
+problem, and the recommendations below treat it as one.
 
 \subsection{Controls both communities should report}
 
 Section~\ref{sec:controls} reports one result that reads the other way
 without a no-document score, and Section~\ref{sec:distractor} one that reads
 the other way when only accuracy is reported. Neither measurement is
-expensive and neither is standard. We propose three reporting requirements.
+expensive. We propose three reporting requirements.
 
-\textbf{Report a no-retrieval arm.} Any defense that modifies how a model uses
+\textbf{Report a no-document score.} Any defense that modifies how a model uses
 retrieved context must report what the same model scores with no retrieved
 context at all. Without it, a defense that has stopped reading the document is
 indistinguishable from a defense that has learned to resist a poisoned one.
-This is one extra arm and it costs one extra pass over the data.
+It costs one extra pass over the data.
 
 \textbf{Report where the answers went, not only accuracy.} Under a planted
 third answer, ParamMute moves accuracy by less than its threshold while the share of answers
@@ -35,16 +33,14 @@ another, so a single-model result should be read as specific to that model.
 
 \subsection{Conventions for measurable transfer}
 
-The controls above are about one experiment. These five are about what a
-paper says it covers.
+The controls above concern one experiment. These five concern what a paper
+claims and what it tests.
 
 \textbf{State the regime the evaluation actually covers.} Our defense
 census codes each method by what its own paper evaluated, and
-\PctOneRegime{}\% cover one regime. Many of those papers describe their
-contribution in terms broad enough to imply the other. One required sentence
-would close this. Name the regime the experiments cover. A reader of the
-paper, and the maintainer of a system, then sees the gap without reading the
-appendix.
+\PctOneRegime{}\% cover one regime. One sentence naming the regime the
+experiments cover lets a reader, and the maintainer of a system, see that
+limit without inferring it.
 
 \textbf{Gate claims on a detectability threshold.} Reporting a difference
 without the smallest difference the experiment could have detected makes "no
@@ -53,10 +49,10 @@ and several of our own results moved from the first category to the second.
 
 \textbf{Say whether the attack was adapted to the defense.} A defense that
 holds against an attack built for a different target has been shown to resist
-that attack and nothing more. Every published evaluation of a
-context-reliance defense in our corpus is non-adaptive, and when we built an
-adaptive payload against the one method that had resisted,
-\PctAcdRemovedGradient{}\% of its protection went
+that attack and nothing more. In our coding, the context-reliance methods we
+ran were validated only against incidental failure, and when we built an
+adaptive attack against the one that had resisted, it removed
+\PctAcdRemovedGradient{}\% of that method's protection
 (Section~\ref{sec:adaptive}). One sentence naming whether the attacker knew
 the defense tells a reader which kind of claim they are reading.
 
@@ -66,20 +62,20 @@ stages of one pipeline, and Section~\ref{sec:results} shows the reasoning
 stage failing on its own once an adversary writes the input. The next step
 is to put an ingestion-stage filter in front of a
 reasoning-stage method and see whether the pair holds where each half does
-not. We do not know that it works. Nothing in this paper tests a composed
-defense, and a filter that passes a fluent falsehood leaves the reasoning
-stage exactly where our results find it. The experiment is cheap, both halves are published with released code, and no paper in
-\NCorpus{} has run it.
+not. We do not know that it works. This paper reports no result for a
+composed defense; the experiment has started and is not finished. A filter
+that passes a fluent falsehood would leave the reasoning stage where our
+results find it. Both halves are published with released code, and we found
+no paper in the corpus that combines them.
 
 \textbf{Test a fix for accidental failure against a deliberate one.} A
 method aimed at stale or conflicting retrieval is evaluated on
 average-case benchmarks, which is the right choice for the problem it was
-built for and says nothing about the worst case. The cost of not checking
-is not a missing result: it is that the method ships with a benefit its
-users will read as general, and the worst case is where it reverses.
-Running one published poisoning attack against an existing evaluation is a
-day's work and needs no new data. A method that cannot be tested that way
-should say which regime its benefit holds in.
+built for and says nothing about the worst case. Without such a test, a
+reader cannot tell whether the reported benefit holds under attack, and our
+results show that it can reverse. Running one published poisoning attack
+against an existing evaluation needs no new data. A method that cannot be
+tested this way should state which regime its benefit holds in.
 
 \subsection{Artifacts}
 
@@ -93,12 +89,10 @@ that open weights do not provide in its harness. The ablated variant that
 does run shows none of its own benefit, so we report it as not reportable
 rather than as defeated.
 
-We note this without blame. Releasing a working artifact is harder than it
-looks and is rarely rewarded. But a defense nobody else can run is a defense
-nobody else will test, so part of the coverage gap this paper measures is an
-artifact gap.
-
-Only part of it. \NFixUnpaired{} of \NFixes{} fixes never appear in a
+We report this as a property of the artifacts, not of the methods. A defense
+that others cannot run is unlikely to be tested by others, so part of the
+coverage gap this paper measures is an artifact gap. It is only part of it.
+\NFixUnpaired{} of \NFixes{} fixes never appear in a
 confirmed pair, and Section~\ref{sec:literatures} separates that number into
 the two things it holds. \NFixUnpairedAttacked{} were run against an
 adversary whose attack carries no name the literature reuses, which pairing
@@ -126,17 +120,16 @@ context is corrupted, below the undefended model on the same items. The
 claim is about a design choice rather than a community. A method that
 converts the document to weights has no dial to turn and does not show the
 reversal, and one method in the family resisted until an adaptive attacker
-priced it.
+lost most of its protection to an adaptive attacker.
 
 A defense that holds against an optimized adversarial passage may fail against
 a fluent sentence that simply asserts a plausible falsehood. In our
-measurements no defense resisted both. The fluent attack is cheaper to produce. It needs no
-gradient access and no surrogate retriever, and it does roughly twice the
-damage to an undefended model at every dose. Evaluations built only around
-optimized payloads overstate protection. Do not call a defense tested on one
+measurements no defense resisted both. The fluent attack is also cheaper to
+produce: it needs no gradient access and no surrogate retriever, and it does at
+least as much damage to an undefended model as the optimized passage.
+Evaluations built only around optimized passages can overstate protection. Do not call a defense tested on one
 payload class robust to context poisoning.
 
-Finally, the channel matters more than the method name. Supply-chain,
-cross-modal and tool-metadata have fewer than one named defense per named
-mechanism. If an agent accepts third-party components or machine-readable tool
-descriptions, almost nothing published defends that route.
+Finally, coverage differs by channel. Supply-chain and cross-modal content
+have fewer named fixes than named mechanisms. If an agent accepts third-party
+packages, templates or models, few published fixes address that route.
