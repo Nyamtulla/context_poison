@@ -1,125 +1,81 @@
 \section{Observations}
 \label{sec:results}
-
-This section reports what the experiments of Section~\ref{sec:campaign} show, grouped by the question each one
-answers. Observations are numbered so that the rest of the paper can
-cite them.
-
-One observation comes before the questions, because the questions
-depend on it. If an attacker's passage and an ordinary mistake do not
-produce the same failure, then asking whether a defense carries from
-one literature to the other is not a sensible question.
-
 \label{sec:regime}
 
-\textbf{Observation 1.} Where the attack works by removing the evidence, an
-attacker buys nothing. A passage retrieved for someone else's question does
-the same damage as an optimized one. Where the attack works by planting a
-false claim, writing that claim to be believed is worth a measurable amount.
+\textbf{Observation 1.} Planting a false claim gives an attacker a measurable
+advantage over an honest mistake. Pushing the right evidence out gives no
+advantage at all. The research questions below assume that a planted passage
+and an honest mistake do comparable damage, so we measured that first, with no
+defense in place. Table~\ref{tab:regime} runs five kinds of planted passage on
+the same items, with the same number of poisoned passages in the same
+positions, scored the same way.
 
-This is the one result here that is about the bad text rather than about a
-defense. Splitting the corpus into two regimes assumes that an attacker's
-passage and an honest mistake do the same damage. If that assumption is
-wrong the split is wrong, so we measure it.
+Where the passage plants a false answer, writing it to persuade helps the
+attacker. With one poisoned passage in ten, the model gives the planted answer
+\PctCraftLow{}\% of the time for PoisonedRAG's crafted passage and
+\PctStaleLow{}\% for a real passage whose answer has changed. The gap never
+falls below \NRegimeGapMin{} points, which is above the \NRegimeThresh{}-point
+detection threshold, and at five poisoned passages the crafted passage also
+costs more accuracy, \AccCraftTop{}\% against \AccStaleTop{}\%. The honest
+mistake still does real damage: it moves the model to the false answer
+\PctStaleTop{}\% of the time, against \PctStaleClean{}\% with nothing planted.
+Repeating the crafted passage five times, as the published attack does,
+changes these rates by at most \NRegimeRepeatMax{} points.
+
+Where the passage only pushes the right evidence out of the retrieved set, the
+attacker gains nothing. Zhong et al.'s optimized passage and a real passage
+retrieved for another question give the same results: \PctCorpusTop{}\% and
+\PctMisretrievalTop{}\% planted answers, \AccCorpusTop{}\% and
+\AccMisretrievalTop{}\% accuracy, with every gap below the threshold at every
+number of poisoned passages. For this kind of attack, an attack and an
+ordinary retrieval error are the same event.
 
 \input{tables/regime_framing}
 
-Table~\ref{tab:regime} crosses who wrote the payload against what the payload
-does. Two rows assert the attacker's false answer in prose written to be
-believed. One asserts \emph{the same false answer} using the item's own
-retrieved passage with the gold value replaced, which is what a superseded
-document looks like. Two rows assert nothing and displace the evidence
-instead, one an optimized artifact and one a real passage retrieved for a
-different question. Dose, slot positions and scorer are fixed across all of
-them. Predictions were registered before the run.
-
-The published construction's repetition buys nothing. PoisonedRAG repeats
-its passage five times in each slot it takes. Placed once it loses at most
-\NRegimeRepeatMax{}\pp{} of adoption, under threshold at every dose, so no
-number in this campaign needs a repetition caveat.
-
-Craft buys an attacker a real advantage, and it buys it at every dose. With
-one poisoned passage in ten, the crafted passage is adopted
-\PctCraftLow{}\% of the time against \PctStaleLow{}\% for the stale document,
-a gap of \NRegimeGapLow{}\pp{}. The gap never falls below
-\NRegimeGapMin{}\pp{} anywhere in the range, so it clears the
-\NRegimeThresh{}\pp{} threshold at every dose. Writing the sentence to be
-believed is worth something, and the campaign can measure it.
-
-\textbf{A document nobody wrote as an attack still carries the model onto the
-false answer \PctStaleTop{}\% of the time}, against \PctStaleClean{}\% on a
-clean context. It also costs more accuracy than the crafted passage does at
-that dose, \AccStaleTop{} against \AccCraftTop{}. The attacker optimizes for
-his own answer, not for damage.
-
-Against displacement the adversary buys nothing at all. Zhong et
-al.'s optimized artifact and a passage retrieved for someone else's question
-land on the same numbers: \PctCorpusTop{}\% and \PctMisretrievalTop{}\%
-adoption, \AccCorpusTop{} and \AccMisretrievalTop{} accuracy, every gap inside
-the threshold at every dose. For this mechanism, an attack and a retrieval error are the
-same event.
-
-Two readings follow, and they are different sizes. The narrow one is a scope
-condition on this campaign. The payloads here are not interchangeable with
-ordinary wrong documents, at any dose we report. A defense that handles one
-has not been shown to handle the other. The broad one holds for one mechanism and not the other. Where the attack
-removes the evidence rather than planting a lie, an optimized passage and an
-ordinary retrieval error are the same event, and no dose separates them.
-
-Every arm falls below the no-retrieval row by the last dose. Past some dose,
-whatever wrote the context has taken more from the model than retrieval gives
-it, and the model would do better not reading at all.
-
-
 \subsection{RQ2: Does a defense built for one literature's problem survive the other's?}
 
-\textbf{Observation 2.} These defenses all turn one dial: how far to trust the retrieved document
-over what the model already knows. Turning it toward the document is right
-when the document is merely out of date. It is dangerous when an attacker
-wrote the document. The rest of this subsection supports that.
+\textbf{Observation 2.} The methods built for honest error all decide how far
+to trust the retrieved document over what the model already knows. Trusting
+the document more is right when the document is out of date, and wrong when an
+attacker wrote it. Seven of the ten methods we ran on retrieved documents
+work this way: ACD, CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG.
+None of them can tell a real document from a planted one, because both are
+the document. When the document is honest and newer than the model's memory,
+leaning on it helps. When an attacker wrote it, leaning on it hands the
+attacker the answer.
 
-The family is defined by what it does: a method whose
-intervention is a weighting between the context-conditioned and the
-memory-conditioned prediction. It is large, and it is most of what we ran.
-Seven of the ten implementations in this cell are in it --- ACD, CK-PLUG,
-COIECD, ParamMute, SCR, SpARE and
-FaithfulRAG --- as is
-SHIFT. Two of them produce no attack result. We ran
-SHIFT on clean context only, and FaithfulRAG is the defense
-Section~\ref{sec:discussion} reports as not reportable. The published
-members we cite are ParamMute,
-CK-PLUG, SpARE,
-COIECD and SHIFT, all
-published as fixes for knowledge conflict and all validated in the safety regime only.
+Table~\ref{tab:family} shows the sign change. SpARE gains \ESpareClean{}
+points on a clean context and loses \ESpareSat{} on a corrupted one, both
+above its threshold. ParamMute gains \EParamClean{} points on a clean context
+and ends \EParamSatGap{} points below the undefended model on a corrupted one.
+CK-PLUG goes furthest. Under BadRAG's tone attack, which tries to make the
+model answer in a negative tone, the undefended model takes on that tone at
+most \ECkSentUndefMax\% of the time. With CK-PLUG it takes it on
+\ECkSentOne\% of the time with one poisoned passage in ten and
+\ECkSentTop\% with five. The defense does not fail to stop the attack; it
+carries it.
 
-The other three are outside the family and are the reason the claim is not
-vacuous. DyPRAG~\cite{tan-2025-dynamic} converts the retrieved passage into weights, so there is no
-context-versus-memory dial to turn. The two RobustRAG variants isolate each
-passage and aggregate across them, which asks \emph{which} passages agree
-rather than how far to trust passages in general. The
-family's shared idea is reasonable for the problem it was built for. The
-dial runs between \emph{believe the context} and \emph{believe memory}, and
-no setting on it separates a real document from a planted one, because both
-are context. When a
-retrieved document disagrees with the model's memory, the document is usually
-newer, so trust the document. The idea becomes a liability the moment the
-document is written by an adversary, because the defense instructs the model to
-trust the one thing the adversary controls.
+The other three methods are why this is a claim about a design and not about
+all defenses. DyPRAG turns the document into model weights, so it has no
+trust setting to turn. The two RobustRAG implementations answer from each
+passage separately and take a vote, which asks which passages agree rather
+than how far to trust passages in general.
 
 \begin{table}[t]
 \centering
-\caption{Context-reliance defenses against corpus poisoning, in percentage
+\caption{Defenses that decide how far to trust the document, against corpus poisoning, in percentage
 points against each defense's own undefended arm in the same run, with the
-undefended and defended rates in brackets. "Clean" is the defense's own
-published benefit. "Saturation" is 100\% poisoned context. Bold clears that
-run's minimum detectable change. Rates are rounded for display and deltas are
+undefended and defended rates in brackets. "Clean" is a context with
+nothing planted, where each defense should show its own published benefit.
+"Corrupted" is a context replaced by the planted passage. Bold clears that
+run's detection threshold. Rates are rounded for display and differences are
 computed before rounding.}
 \label{tab:family}
 \footnotesize
 \begin{tabular}{@{}l@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
 \toprule
-\textbf{Defense} & \textbf{$n$} & \textbf{mdr} & \textbf{Clean} &
-\textbf{Saturation} \\
+\textbf{Defense} & \textbf{$n$} & \textbf{threshold} & \textbf{Clean} &
+\textbf{Corrupted} \\
 \midrule
 ParamMute & \EParamN{} & \EParamMdr{} &
   \textbf{+\EParamClean} \scriptsize{$(\EParamCleanBase\!\to\!\EParamCleanDef)$} &
@@ -140,231 +96,122 @@ COIECD    & \ECoiecdN{} & \ECoiecdMdr{} &
 than accuracy, so its clean cell reports that metric.}
 \end{table}
 
-SpARE is the cleanest case because its control and its conviction are the same
-measurement. Steering toward the context is worth +\ESpareClean\pp when the context is
-honest and costs \ESpareSat\pp when it is attacked. Both ends clear the
-\ESpareMdr\pp threshold. The sign flips.
-
-ParamMute shows the same shape on a larger sample. Its benefit on clean context
-is +\EParamClean\pp. On a corrupted context it is \EParamSatGap\pp \emph{below} the
-undefended model, and between those two conditions it loses
-\EParamExcessCorpus\pp more accuracy than doing nothing at all.
-
-CK-PLUG's behavior is the most extreme we measured, and it appears on a
-different metric. Under BadRAG sentiment steering~\cite{xue-2024-badrag}, which
-tries to make the model answer in a negative tone, the undefended model never
-adopts the attacker's framing more than \ECkSentUndefMax\% of the time at any
-dose. CK-PLUG adopts it \ECkSentOne\% of the time with a single poisoned
-passage out of ten, and \ECkSentTop\% at five. The defense does not fail to stop the attack. It carries it.
-Figure~\ref{fig:dose} plots the safety-regime defenses of the retrieval cell
-against the attack's own dose ladder, each measured against its own
-undefended arm.
+Figure~\ref{fig:dose} shows the same methods as the number of poisoned
+passages rises. CK-PLUG and DyPRAG sit more than twenty points below the
+undefended model before anything is planted and stay there. The other four
+stay within a few points of it at every number of poisoned passages.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig4_dose_response}
-\caption{Every safety-regime defense in the retrieval cell against corpus
-poisoning, on the attack's own dose ladder, measured as the defended arm
-minus its own undefended arm in the same run. Zero means the defense changed
+\caption{Each safety-literature defense against corpus poisoning, by
+number of poisoned passages among the ten retrieved, measured as the
+defended model minus the undefended model in the same run. Zero means the defense changed
 nothing. Filled markers are resolvable at $p < .05$ by Fisher's exact
-test~\cite{fisher-1922-interpretation}; hollow markers are not. Three
-pattern is visible, and it is a separation rather than a trend. CK-PLUG and
+test~\cite{fisher-1922-interpretation}; hollow markers are not. CK-PLUG and
 DyPRAG sit more than twenty points below zero before any passage is planted
-and stay there. The other four track zero across the whole range. No line
-crosses zero, and inside this range the dose does not decide any of them.}
+and stay there. The other four stay within a few points of zero.}
 \label{fig:dose}
 \end{figure}
 
-\textbf{Observation 3.} The rule above does not say that suppressing the model's memory always
-hurts.
-
-It hurts in one case only: when that memory held the right answer. Against BadRAG's denial-of-service variant,
-which makes the model refuse rather than answer wrongly, ParamMute is strongly
-protective. With one poisoned passage in ten the undefended model refuses
-\EPmDosUndefRef\% of the time and holds \EPmDosUndefAcc\% accuracy.
-ParamMute drops refusal to \EPmDosDefRef\% and restores accuracy to
-\EPmDosDefAcc\%, within \EPmDosCleanGap{} points of its own clean baseline.
-Across the realistic range of one to five poisoned passages, the undefended
-model averages \EPmDosUndefAvg\% accuracy and ParamMute averages
-\EPmDosDefAvg\%.
-
-The mechanism is the same in both cases. ParamMute suppresses the model's
-memory. When memory held the correct answer, that suppression destroys it. When
-the attack works by driving the model into refusal, suppressing memory removes
-the conflict that triggered the refusal. One mechanism, two signs, and what picks the sign is whether the memory was
-right. We committed before this run to the prediction that suppressing memory
-would do little here. It is why the rule above has a boundary instead of
-applying everywhere.
+\textbf{Observation 3.} Suppressing the model's memory hurts only when the
+memory had the right answer. Under BadRAG's refusal attack, which makes the
+model refuse rather than answer wrongly, ParamMute protects strongly. With one
+poisoned passage in ten the undefended model refuses \EPmDosUndefRef\% of the
+time and answers \EPmDosUndefAcc\% correctly. ParamMute cuts refusals to
+\EPmDosDefRef\% and restores accuracy to \EPmDosDefAcc\%, within
+\EPmDosCleanGap{} points of its clean score. The mechanism is the same as in
+Observation~2. Suppressing memory removes a right answer when memory had one,
+and removes the conflict behind the refusal when it did not.
 
 \label{sec:grid}
-
-\textbf{Observation 4.} Across every defense against every attack, almost
-nothing helps. The observations above read one item set. This one reads the
-other, where a dose is $j$ of the top ten retrieved passages.
-Table~\ref{tab:grid} is that grid: \NGridCells{} cells, each read against
-its own undefended arm on the same items at the same dose. The two item sets
-are not comparable and we do not compare them. What the grid adds is breadth:
-the design rule above was read off one attack, and
-here it meets four.
-
-Across that breadth almost nothing helps. Of the \NGridCells{} cells,
-\NGridGainTop{} show the defended arm ahead at the top dose by more than
-that run's detectability threshold, \NGridLoseTop{} show it behind by more
-than the threshold, and \NGridFlatTop{} resolve to no difference. All
-\NGridGainTop{} gains are against the denial-of-service payload, where the
-undefended model refuses to answer and any method that restores an answer
-gains accuracy for a reason that is not robustness. Every cell that resolves
-against a payload which plants a false answer rather than suppressing one
-resolves downward.
-
-The losses are concentrated the way that rule predicts.
-CK-PLUG and DyPRAG hold \NGridLoseTopTwo{} of the \NGridLoseTop{}: both
-suppress the model's own parameters to force reliance on retrieved text, and
-both pay for it on every payload they meet.
-
-The clean column prices them. \NGridFreeClean{} of the \NGridCells{} cells
-cost nothing measurable when no passage is planted, so most of these methods
-are free to leave switched on. The \NGridCostClean{} that are not belong to
-the same two methods, and both pay more than twenty points before any
-passage is planted.
-
-Two mechanisms in this grid are not yet complete. A stale document and a
-diluted window are running, and we report no numbers for them here.
+\textbf{Observation 4.} Across every defense and every attack on open Natural
+Questions, almost nothing helps. Table~\ref{tab:grid} reads each pair against
+its own undefended model at five poisoned passages in ten. Of the
+\NGridCells{} pairs, \NGridGainTop{} help by more than their threshold,
+\NGridLoseTop{} hurt by more than their threshold, and \NGridFlatTop{} show
+no measurable difference. All \NGridGainTop{} gains are against the refusal
+attack, where the method helps by getting the model to answer again rather
+than by resisting anything. Every measurable result against an attack that
+plants a false answer is a loss. CK-PLUG and DyPRAG account for
+\NGridLoseTopTwo{} of the \NGridLoseTop{} losses, and they are also the only
+two methods that cost accuracy with nothing planted, more than twenty points
+each. The other \NGridFreeClean{} of \NGridCells{} pairs cost nothing
+measurable on a clean context.
 
 \input{tables/grid}
 
 \label{sec:lowdose}
-
-\textbf{Observation 5.} At the dose most favorable to a defense, almost
-nothing helps either. A result read at the top of the dose range is read
-where the attack is strongest, and that is also where the measurement is
-weakest. The fewer honest passages are left, the more a low score measures
-the attack rather than a failing defense.
-
-So we report the other end as well, and the attacks supply it. One poisoned
-passage in ten is the default in the released attack constructor, and it is
-the dose most favorable to a defense: nine honest passages remain for it to
-work with. If a method can discount a planted passage while still using a
-good one, this is where it shows.
-
-\NGridLowHelps{} of the \NGridLowPairs{} pairs in Table~\ref{tab:grid} show
-a resolvable benefit there. Every other defense is at or below its own
-undefended arm, at the dose that favors it most, against an attack run at
-its authors' own strength. Both exceptions are the denial-of-service payload,
-where the undefended model refuses to answer and any method that restores an
-answer gains accuracy for a reason that is not robustness.
-
-The table is also the worst-case reading that a security claim requires. A
-defense beaten by one of three payloads is not two-thirds robust, it is broken,
-and averaging across payloads would hide that. We therefore report the
-minimum rather than the mean: robustness is a property of the strongest
-attack a method has met, not of the attacks its authors chose.
+\textbf{Observation 5.} Even with nine of ten passages honest, almost nothing
+helps. One poisoned passage in ten is the default of the released attack and
+the setting most favorable to a defense, because it leaves the most honest
+evidence to work with. \NGridLowHelps{} of the \NGridLowPairs{} pairs help
+there, and both are again the refusal attack. We report the worst result
+for each defense rather than the average, since a defense beaten by one of
+three attacks is not two-thirds secure.
 
 \label{sec:transfer}
+\textbf{Observation 6.} Defenses built against an attacker help against an
+honest mistake only when the mistake plants a false claim. We ran RobustRAG,
+in both its released implementations, against four failures that no
+attacker wrote.
 
-\textbf{Observation 6.} Two methods do hold, and neither holds for the
-reason its paper gives. RobustRAG stops PoisonedRAG, which its own paper
-tested, and we reproduce that (+\ERobustPoisonedGain{}\pp). Against
-corpus poisoning it neither helps nor hurts anywhere in the range we report:
-\ERobustDispOneDef{}\% against the undefended arm's \ERobustDispOneUndef{}\%
-at one displaced passage and \ERobustDispFiveDef{}\% against
-\ERobustDispFiveUndef{}\% at five, both gaps inside the
-\ERobustDispMdr{}\pp{} threshold. Refilling the window from ranks the
-attacker does not hold moves it to \ERobustBackfillFive{}\% at five, also
-inside the threshold.
+Against a real passage whose answer has changed, RobustRAG helps with one or
+two such passages and then turns harmful. With one, the model gives the
+outdated answer \EStaleUndefAsrOne\% of the time undefended and
+\EStaleKeyAsrOne\% and \EStaleDecAsrOne\% with the two implementations. With
+five, the defended model gives it more often than the undefended one,
+\EStaleKeyAsrTop\% and \EStaleDecAsrTop\% against \EStaleUndefAsrTop\%, and
+answers correctly less often, \EStaleKeyAccTop\% and \EStaleDecAccTop\%
+against \EStaleUndefAccTop\%. A passage asserting a third, wrong answer shows
+the same pattern: \ERobustDistKeyTwo\% and \ERobustDistDecTwo\% against
+\ERobustDistUndefTwo\% undefended with two such passages, but
+\ERobustDistKeyFive\% and \ERobustDistDecFive\% against
+\ERobustDistUndefFive\% with five. Against a passage retrieved for the wrong
+question, which plants nothing, it never helps: both implementations start
+below the undefended model, \ERobustMisKeyClean\% and \ERobustMisDecClean\%
+against \ERobustMisUndefClean\%, and are still below it with five such
+passages.
 
-One condition past that range says why, and we report it as a diagnostic
-rather than as a result. When the attacker holds every retrieved passage both
-arms sit on the floor, \ERobustDispTenDef{}\% and
-\ERobustDispTenUndef{}\%, and the same refill restores
-\ERobustBackfillTen{}\%. What decides that cell is not the defense but the
-attacker's budget against the retrieval depth. Isolate-then-aggregate needs
-an honest passage to aggregate, and whether one exists is a property of the
-pipeline rather than of the method. The defense's own authors sweep a
-corruption size up to half the window and no further, so we draw no verdict
-about the defense from a condition they do not evaluate.
+Against attacks from its own literature, RobustRAG stops PoisonedRAG, as its
+own paper reports, by \ERobustPoisonedGain{} points. Against corpus poisoning
+it neither helps nor hurts: \ERobustDispOneDef\% against
+\ERobustDispOneUndef\% with one displaced passage and \ERobustDispFiveDef\%
+against \ERobustDispFiveUndef\% with five, both inside the
+\ERobustDispMdr{}-point threshold.
 
-The same defense meets the other regime twice, and the two cells disagree.
-Against distractor evidence --- a passage asserting a wrong answer, which is
-what RobustRAG's threat model describes with the attacker taken out --- it
-holds at low dose. At two planted passages in ten the keyword variant scores
-\ERobustDistKeyTwo{}\% and the decoding variant \ERobustDistDecTwo{}\%,
-against the undefended arm's \ERobustDistUndefTwo{}\%. The hold does not
-survive dosing: at ten in ten both sit near \ERobustDistKeyTen{}\% against
-\ERobustDistUndefTen{}\%. Against misretrieval it never helps. Both defended
-arms start below the undefended one, \ERobustMisKeyClean{}\% and
-\ERobustMisDecClean{}\% against \ERobustMisUndefClean{}\%, and both are
-still below it at five in ten, \ERobustMisKeyFive{}\% and
-\ERobustMisDecFive{}\% against \ERobustMisUndefFive{}\%. Misretrieval
-plants nothing, so isolate-then-aggregate has no dishonest passage to isolate
-and the defense pays its accuracy cost for nothing.
+Inside the tool-using agent, \NAgentHolds{} of \NAgentConditions{} defense
+and attack combinations drive the attack's success to zero, and every one of
+them acts before the agent reads the injected text or before it acts on it.
+None of the \NAgentTriedReasoning{} combinations that act while the model
+reasons holds. Where in the pipeline a defense acts predicts whether it
+survives better than which defense it is.
 
-A defense built for an adversary transfers on the shape of the stimulus, not
-on the presence of one. Where an incidental mechanism puts a wrong claim in
-the window it is worth running. Where it only degrades what the retriever
-returns it is a cost.
+SCR is the only method we ran that is designed with an attacker in mind. It
+shows the model its own answer without the document, the document, and the
+answer the document supports, and asks it to judge. It gains
+\EScrSatGain{} points on a corrupted context and costs \EScrCleanCost{} on a
+clean one, roughly five times what it gains.
 
-Across the agent cell, \NAgentHolds{} of \NAgentConditions{} conditions show
-the technique holding, with attack success driven to zero. A further 4 show a
-resolvable reduction. The rest divide between 19 with no resolvable effect at
-that sample size and 9 with no reduction at all.
-
-Every hold is at ingestion or at execution. Of the
-\NAgentHolds{} that hold, \NAgentHoldsIngestion{} act at ingestion and
-\NAgentHoldsExecution{} at execution, which is every execution-stage
-technique we ran. None of the \NAgentTriedReasoning{}
-reasoning-stage conditions holds. The stage a technique acts at, rather than
-the technique, predicts whether it survives here --- the division
-Section~\ref{sec:parallel} finds in the literature, reproduced in what the
-methods actually do.
-
-SCR is the only method we ran whose design anticipates
-an adversary. It shows the model its own no-context answer, the document, and
-the answer the document supports, and asks the model to judge which to believe.
-
-It does help on a corrupted context, +\EScrSatGain\pp over the undefended arm
-($p = 0.025$), and it does genuinely read the document, scoring
-\EScrCleanVsNoRet\pp above no-retrieval on clean context. It pays
-\EScrCleanCost\pp on a clean context to buy that \EScrSatGain{}. The cost is
-resolvable and is roughly five times the benefit. A defense deployed permanently and attacked occasionally is a poor
-trade at that exchange rate.
-
-SCR's parametric-answer rate climbs from \EScrPmClean{} on a clean
-context to \EScrPmSat{} on a corrupted one, moving toward the closed-book
-rate of \EScrNoRetPm{}. Both SCR and ACD slide from
-the document toward memory as the attack grows. SCR simply destroys more
-correct answers on the way.
-
+Answer to RQ2. No. Methods built for honest error lose to an attacker in
+proportion to how far they trust the document. Methods built against an
+attacker help with an honest mistake only briefly, and only when it plants a
+false claim.
 
 \subsection{RQ3: Is failure a property of individual methods or of a design choice they share?}
 
-\textbf{Observation 7.} What a defense does depends on the shape of the
-planted passage, not on which attack it came from. The observations above
-hold the passage fixed and vary the defense. This one does the reverse,
-starting with the method that resisted. ACD produced the strongest defensive result in our
-campaign. It discounts tokens the context makes uncertain, and against corpus
-poisoning it is the only method that both reads a clean document and declines a
-poisoned one. On a corrupted context it is +\EAcdSatGain\pp above the undefended arm
-($p < 0.0001$) and on clean context it is +\EAcdCleanVsNoRet\pp above
-answering with no document at all.
-
-That result is not a robustness claim. The corpus-poisoning passage is Zhong et
-al.'s released artefact, optimized against a \emph{retriever} and against no
-defense of ours. It is therefore oblivious to ACD. A defense evaluated only against attacks
-that were not built for it has been shown to resist those attacks and nothing
-more, so inferring robustness from this arm would be invalid.
-
-So we claim only what the arm supports: \emph{ACD resists this particular
-non-adaptive optimized passage.} An attacker who knew ACD's entropy rule and
-optimized against it is untested here. We expect such an attacker to do
-better, because the rule is public and differentiable.
-
-The caveat applies to this result alone. By the fourth rule of
-Section~\ref{sec:experiments}, a non-adaptive attack that defeats a defense
-is a lower bound on attack strength, so every other result in this section is
-unaffected.
-
-We then ran the same defense, same items, same doses, against false evidence.
+\label{sec:payloads}
+\textbf{Observation 7.} What a defense does depends on the form of the planted
+passage, not on which attack it came from. ACD is the only method that both
+uses a clean document and resists corpus poisoning: it ends
+\EAcdSatGain{} points above the undefended model on a corrupted context.
+Corpus poisoning, though, was optimized to fool a retriever, not ACD, so this
+shows only that ACD resists that one passage. We then planted a fluent false
+sentence instead, holding everything else fixed. Table~\ref{tab:acd} shows
+the protection disappear. ACD keys on how uncertain a passage makes the
+model. An optimized token string is incoherent and raises uncertainty, so ACD
+discounts it. A fluent false sentence lowers uncertainty, so ACD trusts it
+more, and the defended model ends below a model given no document at all.
 
 \begin{table}[t]
 \centering
@@ -386,37 +233,16 @@ vs.\ no retrieval & +\EAcdCorpusVsNoRet{} ($p\PAcdCorpusVsNoRet{}$) &
 \end{tabular}
 \end{table}
 
-The protection collapses, and Table~\ref{tab:acd} is where. Against the
-incoherent payload, ACD restores the no-retrieval floor exactly. Against the fluent payload it ends up
-resolvably \emph{below} that floor: the defended model does worse than a model
-given no document at all.
-
-Swapping the payload is the cheapest available step toward a worst-case
-evaluation, and one step was enough to remove the protection entirely. A
-defense whose guarantee does not survive a change of payload class would not be
-expected to survive an attacker optimizing against its rule.
-
-The reason is visible in the method. ACD keys on the uncertainty a passage
-induces. An optimized token string is incoherent and raises uncertainty, so ACD
-discounts it. A fluent sentence asserting a plausible wrong answer lowers
-uncertainty, so ACD trusts it more.
-
-This has a practical consequence. The cheaper and more natural-looking
-attack is the stronger one. For COIECD's undefended arm, false evidence cuts
-accuracy roughly twice as far as gradient-optimized corpus poisoning: a
-corrupted context leaves \ECoiecdFalseCorrupt\% against
-\ECoiecdCorpusCorrupt\% for corpus poisoning. The
-field's attention to optimized adversarial passages is not matched by their
-effectiveness.
-
-\label{sec:payloads}
-
-ACD is not the only method whose behavior depends on the form of the planted
-passage. We ran the three context-reliance defenses whose corpus-poisoning
-results are already in Table~\ref{tab:family} against false evidence as well,
-each against its own undefended arm over the same items at the same doses.
-Predictions for all three were committed to version control before any of them
-ran. Table~\ref{tab:payloads} puts the two payload classes side by side.
+Three more methods show the same dependence on form
+(Table~\ref{tab:payloads}). ParamMute is harmful against both forms, by
+\EParamExcessCorpus{} and \EParamExcessFalse{} points, but how well it
+suppresses the model's wrong memory falls from \EParamCorpusPmDrop{} to
+\EParamFalsePmDrop{} points. Under corpus poisoning the wrong answer lives
+only in memory, so suppressing memory removes it. Under false evidence it
+lives in memory and in the planted passage, and ParamMute reaches only the
+first. CK-PLUG's cost grows from \ECkCleanCost{} to \ECkSatDelta{} points
+under corpus poisoning and stays near \ECkFalseOffset{} under false evidence.
+COIECD changes nothing measurable against either.
 
 \begin{table}[t]
 \centering
@@ -438,271 +264,98 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 \end{tabular}
 \end{table}
 
-ParamMute is harmful against both, and the way it fails is the
-finding. On this run's honest context it is worth +\EParamFalseClean\pp,
-against the +\EParamClean\pp of the corpus-poisoning run beside it. It costs 12 to 13 points more
-than doing nothing once an adversary writes the context, and it does not matter
-whether the adversary writes gibberish or prose. What does change is how well
-ParamMute does its own job. Its suppression of the wrong parametric answer
-falls from \EParamCorpusPmDrop\pp under corpus poisoning to
-\EParamFalsePmDrop\pp under false evidence. The reason is structural. Under corpus poisoning the wrong
-answer has one source, the model's memory, so inhibiting memory removes it.
-Under false evidence it has two, memory and the planted passage, and ParamMute
-touches only one of them. The attack duplicated the answer into the
-channel the defense does not operate on.
-
-CK-PLUG is harmful against one payload and flat against the other, and
-the shape matters more than the sign. Under corpus poisoning its cost grows
-with the attack: \ECkCleanCost\pp on a clean context and \ECkSatDelta\pp
-once the context is corrupted. Under false evidence it is a constant offset
-of about \ECkFalseOffset\pp in both conditions, and no cell clears the
-\ECkMdr\pp threshold. CK-PLUG
-pays a fixed price for being switched on; corpus poisoning amplifies that price
-and false evidence does not.
-
-COIECD is inert against both. Of its eight comparisons the largest is
-\ECoiecdLargest\pp against a threshold of \ECoiecdMdr\pp, and no $p$-value
-falls below 0.20. Its memorization-rate
-suppression does shrink roughly threefold under false evidence. An entropy
-constraint should do exactly that when the planted passage agrees with the
-prior rather than contradicting it. The signal sits below the threshold, so
-we record it as directional and not as a result.
-
-The three results invite a ranking: which passage is worse for a defense.
-Before running them we wrote down the one result that would prove our
-explanation wrong. If a defense did \emph{better} against false evidence than
-against corpus poisoning, then ``these defenses fail because they trust the
-context'' could not be the reason. CK-PLUG does, at +\ECkExcessFalse\pp
-against +\ECkExcessCorpus\pp.
-
-That reading does not survive inspection. The two payloads are not equally strong on the
-undefended arm. False evidence is roughly twice as damaging: on a corrupted context
-CK-PLUG's undefended arm holds \ECkUndefFalseCorrupt\% against
-\ECkUndefCorpusCorrupt\%, and COIECD's \ECoiecdFalseCorrupt\% against
-\ECoiecdCorpusCorrupt\%. Excess damage is a difference of two collapses, and when
-the undefended arm has already collapsed there is less room left for a defense
-to make things worse.
-
-Excess-damage comparisons across payload classes are therefore
-confounded by attack strength and should not be read as a ranking. Within a
-payload, against the control measured beside it in the same run, every
-comparison in this section stands.
+We do not rank the two forms. Before running them we wrote down the
+result that would contradict our explanation: a defense doing better against
+false evidence than against corpus poisoning. CK-PLUG does. But false evidence
+is roughly twice as damaging to the undefended model, which holds
+\ECkUndefFalseCorrupt\% against \ECkUndefCorpusCorrupt\% for CK-PLUG and
+\ECoiecdFalseCorrupt\% against \ECoiecdCorpusCorrupt\% for COIECD, so there is
+less left for a defense to lose. A comparison across forms measures the
+attack's strength as much as the defense, so we compare only within a form.
 
 \label{sec:distractor}
+\textbf{Observation 8.} No defense moves any answers toward the real document.
+When the planted passage repeats what the model already believes, a correct
+answer from memory and a copied answer look the same. We therefore built a
+passage asserting a third answer, neither the true one nor the model's own,
+by changing one word in the item's own evidence sentence. An output can then
+be read three ways: the true answer means the model read the real document,
+its own answer means it recalled from memory, and the third answer means it
+copied the planted passage. With nothing planted the third answer appears
+\EDistCleanBase\% of the time, and \EDistCleanNoRet\% of the time from a
+model given no document.
 
-\textbf{Observation 8.} Neither the defense nor the attack moves anything
-toward the real document. Under false evidence the planted passage asserts the same string the model
-would have recalled, so the parametric-answer rate cannot distinguish a model
-that remembered from one that copied. They produce identical output. That is the attack's design rather than a flaw in the metric, but it leaves
-the central claim of this section resting on an ambiguous measurement.
-
-Planting the \emph{gold} answer does not fix it, because gold is already in the
-real context, so an output of gold stays two-ways ambiguous. A third answer
-does. We built a payload that plants a fluent sentence asserting an answer that
-is neither the gold nor the model's prior, by substituting a distractor into
-the item's own evidence sentence so the register is unchanged. Distractors are
-drawn from another item's parametric answer, matched on the question's wh-word
-and on digit count for numerics, so a person replaces a person and a year
-replaces a year. All three answers are checked disjoint per item at build
-time, so one output has three disjoint readings. Gold means the model read the
-real context. The parametric answer means it recalled from memory. The
-distractor means it copied the planted passage.
-
-Two controls license the reading. At clean dose the distractor rate is
-\EDistCleanBase\% undefended and \EDistCleanDef\% defended, so the answer
-essentially never appears unless it is planted. In the run that carries one, a
-no-retrieval arm holds at \EDistCleanNoRet\%:
-a model with no document never emits it.
-
-ParamMute succeeds at its stated job and hands the freed probability
-mass to the attacker. On a corrupted context it suppresses parametric recall from
-\EPmDistPmBase\% to \EPmDistPmDef\%, a \EPmDistPmDrop\pp{} reduction,
-resolvable at every dose. Accuracy against the gold answer does not rise with
-it; it moves \EPmDistGoldBase\% to \EPmDistGoldDef\%, under the
-\EPmDistMdr\pp{} threshold. The copy rate rises \EPmDistCopyBase\% to
-\EPmDistCopyDef\%, a \EPmDistCopyGain\pp{} gain that tracks the suppression
-almost one for one. This also settles the
-measurement limit above: ParamMute's residual parametric rate under false
-evidence was copying, not surviving memory.
-
-ACD succeeds at the opposite job and the mass goes to memory instead.
-ACD cuts the copy rate from \EAcdDistCopyBase\% to \EAcdDistCopyDef\% on a
-corrupted context ($p = 2\times 10^{-40}$, $n=\NAcdAdaptiveItems{}$), the largest defensive effect anywhere in this campaign and
-in the direction a defense is supposed to move. The refused mass does not go to
-the real document. Parametric recall rises \EAcdDistPmBase\% to \EAcdDistPmDef\% while gold
-accuracy moves \EAcdDistGoldBase\% to \EAcdDistGoldDef\%, which clears
-Fisher but not the \EAcdDistMdr\pp{} threshold, and sits below the
-no-retrieval arm's \EAcdDistNoRet\%. Resisting the attack
-did not make the pipeline better than switching retrieval off.
-
-The two results are one mechanism read from both ends. ParamMute
-suppresses memory and the attacker fills the vacancy; ACD suppresses the
-attacker and memory fills it. Neither moves probability mass toward the real
-document, because neither mechanism can tell the real document from the planted
-one. Both only choose between the \emph{document} and the model's
-\emph{memory}, and the attack is inside the document. So the problem is not
-that these defenses trust the document too much. It is that their one choice
-cannot separate a real document from a planted one, which is the only
-separation that would help.
+ParamMute does its job and the attacker collects the result. It cuts answers
+from memory from \EPmDistPmBase\% to \EPmDistPmDef\%, and copying rises from
+\EPmDistCopyBase\% to \EPmDistCopyDef\% almost one for one, while correct
+answers stay below the threshold. ACD does the reverse. It cuts copying from
+\EAcdDistCopyBase\% to \EAcdDistCopyDef\%, the largest defensive effect in the
+campaign, and the answers it refuses to copy go back to memory, not to the
+real document. CK-PLUG copies \ECkDistCopyDefCorrupt\% against its undefended
+model's \ECkDistCopyBaseCorrupt\% (Table~\ref{tab:distractor}).
 
 \input{tables/distractor}
 
-Two more defenses make it a pattern rather than a pair.
-Table~\ref{tab:distractor} adds CK-PLUG and COIECD on the same payload and the
-same dosing. CK-PLUG behaves as ParamMute does, and more sharply. It is the
-only defense in this campaign whose accuracy loss on this payload clears its
-own threshold. On a corrupted context it copies \ECkDistCopyDefCorrupt\% against its
-undefended arm's \ECkDistCopyBaseCorrupt\%, close to double. COIECD moves in the
-same direction at every dose and clears nothing, which is its behavior on both
-other payloads too.
+The two directions are one mechanism. Every one of these methods chooses
+between the document and the model's memory, and the attack is inside the
+document. Turning the setting toward the document gives answers to the
+attacker; turning it toward memory gives them back to memory. Neither setting
+reaches the real document, because the choice they make cannot separate a real
+document from a planted one. Methods that turn toward memory also lose a share
+of answers to neither outcome: \EAcdResid{}, \EScrResid{} and
+\ESpareResid{} points for ACD, SCR and SpARE.
 
-The mass is conserved in one direction only. The three outcomes are
-disjoint by construction, so the deltas can be summed, and the residual column
-reports what is left. For the three defenses that suppress memory, the memory
-lost and the copying gained cancel to within 8\pp{}. For CK-PLUG the residual
-is exactly its accuracy loss with the sign reversed. These methods do
-not create or destroy correctness; they relocate it, out of the model's
-parameters and into whatever owns the context.
-
-The defenses that push the other way do not balance. ACD, SCR and SpARE all
-move mass from the attacker back toward memory, and all three lose a large
-share of it on the way: $\EAcdResid$, $\EScrResid$ and $\ESpareResid$\pp{}
-leave the three-way partition altogether. In that fraction of cases the output is none of gold,
-memory or the distractor.
-
-The direction of the dial predicts whether mass is conserved. Turn it
-toward the context and the accounting closes. Turn it toward memory and a sixth
-to a quarter of the sample goes somewhere the partition cannot see. The
-residual is a property of the direction rather than of one implementation:
-SCR reaches almost the same figure by a different route, intervening by
-prompting where ACD intervenes by decoding. SpARE, which steers activations, loses more still. Whether
-the lost mass is abstention or degradation is not a question this payload can
-answer. We flag it as the next measurement on this arm rather than read it
-either way.
-
-SpARE's row needs one caution. Its run carries no undefended arm, so it compares
-steering toward memory against steering toward the context. That is a comparison
-between two settings of the same dial, not between a defense and its absence.
-
+Answer to RQ3. A shared design choice. The methods fail in the same way
+because they make the same choice, and that choice does not contain the
+distinction an attacker exploits.
 
 \subsection{RQ4: Do the measurements the field leaves out change the result?}
 
 \label{sec:controls}
+\textbf{Observation 9.} Without a no-document score, a defense that ignores the
+document looks immune to the attack. DyPRAG holds \EDypragClean\% on a clean
+context and \EDypragSat\% on a corrupted one while the undefended model falls
+from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that is the strongest
+defensive result in the campaign. The same model with no document at all
+scores \EDypragNoRet\%, which is not measurably different. DyPRAG is unaffected
+because it is not reading the document, and only a no-document score shows
+this. No paper in this family reports one.
 
-\textbf{Observation 9.} Each of the following reverses if the arm beside it is dropped, and in each
-case that arm is one the relevant literature does not report.
+\textbf{Observation 10.} Where two implementations of one design agree, the
+result belongs to the design. RobustRAG ships two implementations that share
+the idea of answering from each passage and voting, and share no code after
+that. Under BadRAG's tone attack both stay at or below \NRobustToneMax\%,
+across both implementations and two base models, where CK-PLUG on the same
+attack reaches \ECkSentTop\%. Answering from each passage and voting does not
+open this hole; trusting the document does. Under the refusal attack neither
+implementation changes the result measurably on either base model, within the
+range the attack authors evaluate.
 
-\textbf{A no-retrieval baseline.} DyPRAG is perfectly
-flat under an attack that destroys the undefended arm, scoring
-\EDypragClean\% on a clean context and \EDypragSat\% on a corrupted one, across
-the dose range while the undefended arm falls from \EDypragRagClean\% to
-\EDypragRagSat\%. Read alone, that is the strongest defense result in the
-campaign. The closed-book arm scores \EDypragNoRet\% and is statistically
-indistinguishable from it.
-DyPRAG is flat because it is not reading the document, not because it
-is resisting the attack. Only a no-retrieval arm separates immunity from
-inattention, and no paper in this family reports one.
-
-\textbf{An abstention axis.} COIECD is inert on accuracy at every dose. Dumping
-and classifying every generation shows it is not inert at all. On the items
-where the undefended model answered from memory, COIECD converts
-32.1\% of those answers into explicit abstentions, and does so only
-under attack; on clean context the same pairing moves almost nothing. Because
-the parametric answer is wrong by construction in this data, what it suppressed
-were confident wrong answers and what it produced instead was "not mentioned".
-That is a real safety gain, and it is invisible in the accuracy column that
-every paper in this family reports.
-
-\textbf{A model control.} RobustRAG ran on Mistral and the
-context-reliance family ran on Llama, because those are the models each
-paper released. Re-running RobustRAG on the other family's model changes
-outcomes. The tone-steering finding survives unchanged, which strengthens
-it. The implementation divergence below does not. At nine poisoned passages
-against refusal induction, KeywordAgg is \NKeywordNineMistral{}\pp{} on
-Mistral and \NKeywordNineLlama{}\pp{} on Llama: the variant that is
-resolvably protective on one model is not protective on the other, while
-DecodingAgg stays harmful on both (\NDecodingNineMistral{}\pp{} and
-\NDecodingNineLlama{}\pp{}). Holding defense and attack fixed and changing
-only the base model changes an effect's size, its existence, and in one case
-its sign.
-
-\textbf{Observation 10.} The result belongs to the design, not to one
-codebase. Run one implementation and you cannot tell which of the two you
-have found. RobustRAG
-ships two aggregation variants that share the isolate-then-aggregate principle
-and share no decision logic downstream of it. One extracts keywords and
-re-prompts; the other averages next-token distributions.
-
-Both show the same behavior under tone steering, at or below 0.3\% across
-four cells and two models, against CK-PLUG's 99.0\% on the same attack and
-model. Aggregation does not open the tone-steering hole; context-reliance
-does. Two implementations that share only the principle agree here, so the
-behavior belongs to the principle.
-
-The caution runs the other way too. Across fifteen dose levels the two
-implementations agree within noise on thirteen. On one they do not. At nine
-poisoned passages in ten, against refusal induction, KeywordAgg is
-\NKeywordNineMistral{}\pp{} and DecodingAgg is
-\NDecodingNineMistral{}\pp{}, with both ends clearing the \ERobustMdr\pp
-threshold at $n=300$. One implementation of isolate-then-aggregate is
-resolvably protective and the other is resolvably harmful, on the same
-attack, at the same dose, inside one codebase --- on this model. The control
-above shows the protective end does not survive a change of base model, so
-the divergence is a property of the pair, not of the principle.
-
-The gap grows as the honest minority of passages shrinks: 13.0 points at five
-in ten, 29.7 at nine in ten. It then collapses to 1.7 at ten in ten, where no
-honest passage remains and the two implementations have nothing left to
-disagree about. A survey reporting one number per published method would have
-missed all of this.
-
+Answer to RQ4. One omitted measurement reverses a result: a no-document score
+turns the campaign's apparently strongest defense into one that is not reading
+its input. Two further checks, a second implementation and a second base
+model, leave the results inside the evaluated range unchanged.
 
 \subsection{RQ5: Does that explanation survive an adaptive attacker?}
 
 \label{sec:adaptive}
+\textbf{Observation 11.} The one method that resisted loses more than half of
+its protection to an attacker who reads its rule. Every attack above was
+built without knowledge of the defense it met, which is a fair test when a
+defense fails and no test at all when it holds. ACD was our only holding
+result, so we attacked it directly.
 
-\textbf{Observation 11.} The one method that resisted loses most of that
-resistance to an attacker who reads it. Every result above comes from an
-attack that was not built for the defense it met. Section~\ref{sec:experiments} states why that is conservative for a
-failure and invalid for a resistance. ACD is our one resistance result, so it
-is the one that has to be tested properly.
+ACD blends the model's answer with and without the document, weighted by how
+uncertain each one is. The attacker controls only the document, so the attack
+has one goal: make the document look certain. This also sets a limit. A
+perfect attack of this kind turns ACD into the undefended model and cannot
+push it below that. We committed to that limit, and five further predictions,
+before building the attack.
 
-ACD mixes the no-context and with-context next-token distributions by
-\[
-d_\alpha = \frac{H}{H_{\mathrm{ctx}} + H},
-\qquad
-s \leftarrow s + d_\alpha\,(s_{\mathrm{ctx}} - s),
-\]
-where $H$ is the Shannon entropy of the no-context distribution and
-$H_{\mathrm{ctx}}$ that of the with-context one. $H$ is a property of the
-question. $H_{\mathrm{ctx}}$ is conditioned on the retrieved context, which an
-attacker who owns the corpus controls outright. So the attack has
-exactly one objective: minimize $H_{\mathrm{ctx}}$.
-
-The ceiling follows from the rule, not from an experiment. As
-$H_{\mathrm{ctx}} \to 0$, $d_\alpha \to 1$ and the update collapses to
-$s_{\mathrm{ctx}}$ unchanged, which is the undefended model. A perfect adaptive
-attack of this kind turns ACD into plain RAG and can do no better. It cannot
-drive ACD \emph{below} its own undefended arm. $d_\alpha$ is bounded in
-$(0,1)$, and the endpoints are closed-book and plain RAG. We committed that
-bound, and five further predictions, before building the payload. An ACD arm
-landing below the undefended arm would have falsified our account of the
-mechanism.
-
-The attack is white-box and query-based. Five candidate passages per item, all
-asserting the \emph{same} distractor answer and differing only in form, each
-scored by the $H_{\mathrm{ctx}}$ ACD itself would compute, keeping the
-minimum.
-
-The attacker optimizes on the items it then attacks. This is not training on
-the test set. The threat model gives the adversary the model and the defense rule, and an
-adversary who owns a corpus tunes the passage they are about to plant. A payload
-optimized on held-out items and transferred would measure something else, and
-something weaker. What is held out is the few-shot block: its demonstrations
-are drawn from items outside the evaluation slice and are never poisoned, so
-the defense is not shown the attack in its own prompt. Holding the asserted answer fixed is what makes any movement
-attributable to form rather than to a different claim. It is a deliberately
-weak optimizer, so what it achieves is again a lower bound.
+We built two attacks. The first tries five phrasings of the same false claim
+for each item and keeps the one ACD finds most certain. The second appends a
+short suffix found by gradient search against the same goal. Both keep the
+false answer fixed, so any change comes from the form alone.
 
 \begin{table}[t]
 \centering
@@ -731,63 +384,18 @@ ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \end{tabular}
 \end{table}
 
-All six predictions held, and Table~\ref{tab:adaptive} carries
-them. $H_{\mathrm{ctx}}$ falls 42\%, $d_\alpha$ rises toward 1, ACD's copy rate rises from \EAcdDistCopyDef\% to
-\EAcdAdaptCopy\% ($p = 9.5\times10^{-18}$), its parametric recall falls
-toward the undefended arm's, and its accuracy lands on \EAcdAdaptAcc\% ---
-exactly the undefended arm, and below the no-retrieval floor of
-\EAcdAdaptNoRet\%. ACD does not fall below the
-undefended arm on copy rate, as the ceiling requires.
+All six predictions held (Table~\ref{tab:adaptive}). The fair measure is
+ACD's margin over the undefended model, because both attacks also hurt the
+undefended model. The rephrasing attack removes \PctAcdRemovedBestOf\% of
+that margin. The gradient attack removes \PctAcdRemovedGradient\%, while doing
+less damage to the undefended model than the rephrasing attack, so it is
+attacking ACD's rule specifically. With nothing planted ACD and the
+undefended model differ by at most \NAcdGapCleanMax{} points under all three
+passages, so the attacks act only through the planted text. ACD
+degrades but does not collapse: by the bands we set in advance it keeps some
+protection, and it never falls below the undefended model.
 
-The honest size of the effect is the gap, not ACD's rise. The adaptive
-payload is stronger against the undefended arm as well, so reporting only
-ACD's change would credit the defense with damage the attack does to everyone.
-Against its own undefended arm the protection falls from \NAcdGapBase{}\pp{}
-to \NAcdGapBestOf{}\pp{}: \PctAcdRemovedBestOf{}\% of it removed by a
-best-of-five search over sentence templates. Not all of it. $d_\alpha$ reached 0.653 of a possible 1.0, which
-left a question the weak optimizer could not answer.
-
-A gradient search answers it. We ran a GCG-style~\cite{zou-2023-universal} coordinate search
-over a 20-token suffix against the same objective, appended to the passage
-best-of-five had already chosen so that the asserted answer stays fixed and
-any movement is the gradient's. Candidate tokens are restricted to
-space-leading printable ASCII, because a suffix that does not survive a
-decode and re-encode is not a passage an attacker can place in a corpus; the
-round trip is exact on all \NAcdAdaptiveItems{} items. A gradient passage is kept only where it
-beats the best-of-five passage on the reported measure, which it fails to do
-on 163 of \NAcdAdaptiveItems{}, so the payload is monotone by construction.
-
-It drives $H_{\mathrm{ctx}}$ to 0.614 and $d_\alpha$ to 0.708, and the
-defensive gap falls to \NAcdGapGradient{}\pp{}: \PctAcdRemovedGradient{}\% of ACD's protection removed,
-twice what sentence templates took. The \NAcdGradientBeyond{}\pp{} it takes beyond
-best-of-five clears the \NAcdAdaptiveMdr{}\pp{} detectability threshold at this
-sample size.
-
-The gradient payload is weaker in general and stronger against the
-defense. It damages the undefended arm \emph{less} than best-of-five
-does, \EAcdGradUndefCopy\% against \EAcdAdaptUndefCopy\%, while taking
-considerably more from ACD. The gap
-is what isolates the defense, and the gap is what moved. The search therefore attacks the method rather than simply producing a
-better payload.
-
-The two conditions agree. On a clean context the three payloads are
-indistinguishable: no gap between the arms exceeds \NAcdGapCleanMax{}\pp{},
-because there is nothing there to defend against. They separate only once
-the context is corrupted, which is what one expects of a rule keyed on a
-statistic computed over the whole context.
-
-ACD degrades under adaptive pressure; it does not collapse. We
-committed the bands in advance: below 10\pp{} of remaining gap we would have
-called it neutralized, and 10 to 25\pp{} degraded further while holding
-something back. The result is the second. A rule that gives up
-\PctAcdRemovedGradient{}\% of its
-protection to an attacker with gradients is a real obstacle that has now been
-priced, rather than either a solved problem or a broken one.
-
-What this licenses is still narrow. It does not show ACD is broken, and the
-ceiling in the rule says no attack of this kind could have driven it below the
-undefended arm. One defense in our campaign looked like a counterexample. It
-gives up most of its protection to an attacker who reads the method. Every
-published evaluation of a context-reliance defense in our corpus is
-non-adaptive. The gap between non-adaptive and adaptive
-evaluation is large enough to change the verdict.
+Answer to RQ5. The explanation survives, and the one exception shrinks. The
+method that resisted did so against attacks not built for it, and loses most
+of that resistance to one that is. Every published evaluation of these methods
+in our corpus uses attacks not built for the defense.

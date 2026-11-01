@@ -1274,12 +1274,35 @@ def main():
     RKM = "native_robustrag-keyword_misretrieval.json"
     RDM = "native_robustrag-decoding_misretrieval.json"
     for lbl, f in (("Key", RKD), ("Dec", RDD)):
-        for d, j in (("Two", 2), ("Ten", 10)):
+        for d, j in (("Two", 2), ("Ten", 10), ("Five", TOPDOSE)):
             E[f"ERobustDist{lbl}{d}"] = _x(f, "asr", arm="defended",
                                            n_poison=j)
     for d, j in (("Two", 2), ("Ten", 10)):
         E[f"ERobustDistUndef{d}"] = _x(RKD, "asr", arm="undefended",
                                        n_poison=j)
+    E["ERobustDistUndefFive"] = _x(RKD, "asr", arm="undefended",
+                                   n_poison=TOPDOSE)
+    # RobustRAG against a real passage whose answer has changed. Both
+    # implementations, one passage and the top of the ladder.
+    for lbl, f in (("Key", "native_robustrag-keyword_incidental_stale.json"),
+                   ("Dec", "native_robustrag-decoding_incidental_stale.json")):
+        for d, j in (("One", 1), ("Top", TOPDOSE)):
+            E[f"EStale{lbl}Asr{d}"] = _x(f, "asr", arm="defended", n_poison=j)
+            E[f"EStale{lbl}Acc{d}"] = _x(f, "acc", arm="defended", n_poison=j)
+    _sf = "native_robustrag-keyword_incidental_stale.json"
+    for d, j in (("One", 1), ("Top", TOPDOSE)):
+        E[f"EStaleUndefAsr{d}"] = _x(_sf, "asr", arm="undefended", n_poison=j)
+        E[f"EStaleUndefAcc{d}"] = _x(_sf, "acc", arm="undefended", n_poison=j)
+    # Tone steering against both RobustRAG implementations on both models,
+    # inside the ladder: the highest negative-framing rate any of the four
+    # cells reaches.
+    E["NRobustToneMax"] = max(
+        _x(f, "negative_framing_rate", arm="defended", n_poison=j)
+        for f in ("badrag_sentiment_robustrag.json",
+                  "badrag_sentiment_robustrag_decoding.json",
+                  "badrag_sentiment_robustrag_llama.json",
+                  "badrag_sentiment_robustrag_decoding_llama.json")
+        for j in (1, TOPDOSE))
     for lbl, f in (("Key", RKM), ("Dec", RDM)):
         for d, j in (("Clean", 0), ("Five", 5)):
             E[f"ERobustMis{lbl}{d}"] = _x(f, "acc", arm="defended",
