@@ -10,9 +10,10 @@ treating it as one problem.
 
 \subsection{Controls both communities should report}
 
-Section~\ref{sec:controls} reports three results that read the other way
-without the arm beside them. None of the three arms is expensive. None is
-currently standard. We propose all three as reporting requirements.
+Section~\ref{sec:controls} reports one result that reads the other way
+without a no-document score, and Section~\ref{sec:distractor} one that reads
+the other way when only accuracy is reported. Neither measurement is
+expensive and neither is standard. We propose three reporting requirements.
 
 \textbf{Report a no-retrieval arm.} Any defense that modifies how a model uses
 retrieved context must report what the same model scores with no retrieved
@@ -20,17 +21,17 @@ context at all. Without it, a defense that has stopped reading the document is
 indistinguishable from a defense that has learned to resist a poisoned one.
 This is one extra arm and it costs one extra pass over the data.
 
-\textbf{Report the abstention rate, not only accuracy.} A method that converts
-confident wrong answers into refusals has done something valuable and will
-score as inert on accuracy. In an agent setting, where a wrong answer becomes a
-wrong action, that difference is the whole point. Reporting where the
-probability mass went, rather than only whether it landed on the gold answer,
-costs nothing beyond classifying the generations already produced.
+\textbf{Report where the answers went, not only accuracy.} Under a planted
+third answer, ParamMute moves accuracy by less than its threshold while the share of answers
+copied from the attacker rises by \EPmDistCopyGain{} points. Accuracy alone
+reports that defense as harmless. Classifying each output as the true
+answer, the model's own answer, the planted answer or a refusal costs nothing
+beyond reading the generations already produced.
 
-\textbf{Report at least two base models.} Holding defense and attack fixed and
-changing only the model changed an effect's magnitude, its existence, and once
-its sign. A single-model result in this area should be read as a
-model-specific result until shown otherwise.
+\textbf{Report at least two base models.} Our second-model check left the
+results unchanged within the range the attack authors evaluate, but it covers
+one defense design. A result on one model cannot show that it holds on
+another, so a single-model result should be read as specific to that model.
 
 \subsection{Conventions for measurable transfer}
 

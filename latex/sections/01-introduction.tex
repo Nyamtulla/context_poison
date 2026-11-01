@@ -60,12 +60,10 @@ experiments that fall in it to answer the following research questions.
   explanations rather than maximizes damage
   (Section~\ref{sec:distractor}).
 \item[RQ4] \textbf{Do the measurements the field leaves out change the
-  result?} We re-read every result against three arms almost no paper
-  reports: what the model scores with no document at all, whether a defense
-  gained accuracy or only stopped answering, and whether the result holds on
-  a second base model. We also run two implementations of the one principle
-  that held, to tell a property of a design from a quirk of one codebase
-  (Section~\ref{sec:controls}).
+  result?} We re-read every result against a score almost no paper
+  reports: what the same model scores with no document at all. We also check
+  the results on a second base model and on a second implementation of the
+  one design that held (Section~\ref{sec:controls}).
 \item[RQ5] \textbf{Does that explanation survive an adaptive attacker?} We
   build two optimizers against the one method that resisted
   (Section~\ref{sec:adaptive}).
@@ -115,11 +113,10 @@ fails, and no evidence at all when one holds.
   moves anything toward the real document (Sections~\ref{sec:results},
   \ref{sec:distractor}).
 
-\item \textbf{We re-read every result against three arms the field
-  omits, and one finding does not survive them (RQ4).} Without a
-  no-retrieval arm a defense that never uses the document looks robust.
-  Without an abstention axis a method that stopped answering looks inert.
-  Without a second model an effect that reverses looks settled
+\item \textbf{We re-read every result against a score the field omits,
+  and one finding does not survive it (RQ4).} Without a no-document score, a
+  defense that never uses the document looks robust. A second base model and
+  a second implementation leave the other results unchanged
   (Section~\ref{sec:controls}).
 
 \item \textbf{We build two adaptive attacks against the one defense that
