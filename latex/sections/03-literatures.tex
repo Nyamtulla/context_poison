@@ -1,10 +1,8 @@
 \section{Two literatures, one problem}
 \label{sec:literatures}
 
-Two communities work one problem and do not cite each other. The obvious
-question, and RQ1, is whether they are doing each other's work twice. The answer is
-no, and what they are doing instead costs the field more than duplication
-would.
+Two communities work one problem and do not cite each other, which raises
+RQ1: are they doing each other's work twice?
 
 \subsection{Corpus}
 
@@ -443,6 +441,14 @@ cross first. One instance in \NPureRegimePairs{} is not a literature that
 tests across the boundary; it is the exception that shows what crossing
 would look like.
 
+The boundary could be ours rather than the field's, and it is not drawn by
+exclusion. We assign the regime label per paper, every paper takes one of
+the two, and papers on the boundary take the regime their own evaluation
+adopts. A paper that spans both communities therefore still sits among the
+\NPureRegimePairs{} pairs; we set none aside. The single
+crossing above comes from one of them, which is what one would expect --- a
+paper that reaches across is the kind of paper that crosses.
+
 This is consistent with the citation rates and sharper than them. The
 communities do not read each other, so they do not test each other, so the
 question of whether either one's methods survive the other's regime has no
@@ -455,6 +461,13 @@ authors could not have designed against. But only \NPredatesAndCross{}
 pair is both earlier \emph{and} cross-community, so meeting an unforeseen
 attack and meeting the other community's attack are not the same event.
 Figure~\ref{fig:lag} shows the full distribution.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig7_lag}
+\caption{Publication lag between a defense and the attack it was tested on.}
+\label{fig:lag}
+\end{figure}
 
 \subsection{Division of labor, not duplication}
 \label{sec:parallel}
@@ -547,8 +560,7 @@ the count. And the direction may partly reflect that security publishes
 attacks, which are discrete and nameable, while the safety side
 publishes degradations, which are noticed before they are named.
 
-Neither community can close the chain alone, and this section says why.
-The methods that keep bad text out and the methods that reason better about
+Neither community can close the chain alone. The methods that keep bad text out and the methods that reason better about
 text already present are built by different people, published at different
 venues, and evaluated against different problems; no single method in the
 census covers both stages. A system that wants coverage at ingestion and at
@@ -560,18 +572,8 @@ is narrower and still unwelcome. The two halves exist, the stages they
 cover are complementary, and nobody has put them together or tested what
 happens when they are.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig7_lag}
-\caption{Publication lag between a defense and the attack it was tested on.}
-\label{fig:lag}
-\end{figure}
-
-The boundary could be ours rather than the field's, and it is not drawn by
-exclusion. We assign the regime label per paper, every paper takes one of
-the two, and papers on the boundary take the regime their own evaluation
-adopts. A paper that spans both communities therefore still sits among the
-\NPureRegimePairs{} pairs; we set none aside. The single
-crossing above comes from one of them, which is what one would expect --- a
-paper that reaches across is the kind of paper that crosses.
-
+Answer to RQ1. No. The two communities divide the problem rather than
+duplicate it. Security guards where text enters and safety improves how the
+model reasons about text already inside, and since neither tests against the
+other's failures, a system built from either side alone stays open at the
+stage the other side covers.
