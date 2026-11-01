@@ -818,5 +818,4 @@ if __name__ == "__main__":
     fig_cube(); fig_who_reports(); fig_dose()
     fig_citation_network(); fig_transfer_matrix(); fig_lag()
     fig_intervention()
-    fig_vocab()
     print("done")

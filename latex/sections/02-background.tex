@@ -15,16 +15,27 @@ attacker have no third-party content at all.
 
 \subsection{One failure, two vocabularies} \label{sec:twovocab}
 
-\begin{figure}[t]
+\begin{table}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig8_vocab}
 \caption{The same five slots, named twice. The taxonomy in
 Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
-\label{fig:vocab}
-\end{figure}
+\label{tab:vocab}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\columnwidth}>{\raggedright\arraybackslash}p{0.31\columnwidth}>{\raggedright\arraybackslash}p{0.33\columnwidth}@{}}
+\toprule
+Slot & Security & Safety \\
+\midrule
+The content that gets in & attack, attack technique & mechanism, degradation mechanism \\
+Who placed it & an adversary, modeled explicitly & nobody; a property of the pipeline \\
+The countermeasure & defense, mitigation & fix, method \\
+What success means & the adversary fails & accuracy rises \\
+Evaluation style & worst case & average case \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 That one failure has two names, because two communities arrived at it
-separately. Figure~\ref{fig:vocab} puts the two vocabularies side by side.
+separately. Table~\ref{tab:vocab} puts the two vocabularies side by side.
 The slots are the same: the same channel, the same position in the context
 window, the same downstream consequence. Only the names differ, and one
 assumption behind them. We take that assumption from Lin et
