@@ -37,6 +37,9 @@ def counts():
     n["fwd"] = g("select count(*) from papers where hop<=1 and discovered_via='forward'")[0][0]
     n["bwd"] = g("select count(*) from papers where hop<=1 and discovered_via='backward'")[0][0]
     n["manual"] = g("select count(*) from papers where hop<=1 and discovered_via='manual'")[0][0]
+    n["manual_hop0"] = g("select count(*) from papers where hop=0 and discovered_via='manual'")[0][0]
+    assert n["seeds"] + n["manual_hop0"] + n["search"] == n["hop0"], \
+        "stage-one inputs no longer sum to hop 0; the figure's first box would not add up"
     n["pool"] = n["hop0"] + n["hop1"]
     for k in ("auto_include", "auto_exclude", "needs_review"):
         n[k] = g(f"select count(*) from papers where hop<=1 and screen_auto='{k}'")[0][0]
@@ -143,9 +146,12 @@ def figure(n):
                          "savefig.bbox": "tight", "savefig.pad_inches": 0.02})
 
     stages = [
+        # inputs on the left, in the order they came in; the right cell is
+        # their sum, so the hand-added record is named for the sum to close
         ("Seeds and database search",
-         f"{n['queries']} queries\nacross {n['apis']} APIs",
-         f"{n['seeds']} seeds + {n['search']:,} records\nn = {n['hop0']:,}"),
+         f"{n['seeds']} seeds, {n['manual_hop0']} added by hand\n"
+         f"{n['queries']} queries, {n['apis']} APIs: {n['search']:,} records",
+         f"total\nn = {n['hop0']:,}"),
         ("Snowballed, both directions",
          f"discovery pool {n['pool'] + n['hop2']:,}\n"
          f"hop-2, out of scope {n['hop2']:,}",
