@@ -94,64 +94,77 @@ def main():
     fig, ax = plt.subplots(figsize=(FULL, 3.6))
     ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
 
+    # Three titled columns of one shape: the axis name, then what it means,
+    # inside a frame around what it holds. The headings used to float above
+    # the stacks and ran past the figure's edges, and each axis was named
+    # twice, once at the top and again under a rule at the bottom with its
+    # count. No count appears now; the prose carries those as macros.
+    FRAME = "#b9b8b3"
+    top, bot, gap = 78.0, 4.5, 1.4      # extent of the stacks
+    head_y, sub_y, frame_top = 94.2, 86.4, 99.0
+
+    def column(x0, x1, name, what):
+        ax.add_patch(FancyBboxPatch((x0, 0.5), x1 - x0, frame_top - 0.5,
+                                    boxstyle="round,pad=0,rounding_size=1.6",
+                                    linewidth=0.6, facecolor="none",
+                                    edgecolor=FRAME, zorder=0))
+        xc = (x0 + x1) / 2
+        ax.text(xc, head_y, name, ha="center", va="center", fontsize=7.4,
+                color=INK, fontweight="bold")
+        ax.text(xc, sub_y, what, ha="center", va="center", fontsize=6.3,
+                color=INK2, fontstyle="italic", linespacing=1.15)
+
+    # each column holds its own fan-in or fan-out, so only the arrows
+    # between the columns cross a frame
+    column(0.5, 22.0, "Channel", "where untrusted\ncontent enters")
+    column(24.0, 74.8, "Intervention point", "where a defense\ncan act")
+    column(76.8, 99.5, "Consequence", "how the output\ngoes wrong")
+
     # ---- channels, left ----------------------------------------------------
     n = len(CHANNELS)
-    top, bot, gap = 88.0, 15.0, 1.4
     h = (top - bot - gap * (n - 1)) / n
-    ax.text(9, 96.4, "where untrusted content enters", ha="center",
-            fontsize=7, color=INK, fontweight="bold")
-    BUS, RBUS = 22.5, 76.0
+    BUS, RBUS = 19.8, 78.4
     for i, c in enumerate(CHANNELS):
         y = top - i * (h + gap) - h
-        box(ax, 1, y, 17, h, "", "#ffffff", INK)
-        ax.text(2.3, y + h / 2, c, ha="left", va="center", fontsize=6.3, color=INK)
+        box(ax, 2, y, 15.5, h, "", "#ffffff", INK)
+        ax.text(3.2, y + h / 2, c, ha="left", va="center", fontsize=6.3, color=INK)
         # short stub to a vertical bus, instead of nine lines crossing the page
-        ax.plot([18.2, BUS], [y + h / 2, y + h / 2], lw=0.4, color=INK,
-                zorder=0)
+        ax.plot([17.7, BUS], [y + h / 2, y + h / 2], lw=0.4, color=INK,
+                zorder=1)
     ax.plot([BUS, BUS], [bot + h / 2, top - h / 2], lw=0.6, color=INK,
-            zorder=0)
-    arrow(ax, BUS, 50, 30.4, 50, lw=1.0, color=INK2)
+            zorder=1)
+    mid = (top + bot) / 2
+    arrow(ax, BUS, mid, 32.6, mid, lw=1.0, color=INK2)
 
     # ---- the pipeline ------------------------------------------------------
-    box(ax, 31, 38, 15, 24, "context\nwindow", "#ffffff", INK, fs=7)
-    box(ax, 55, 38, 13, 24, "model", "#ffffff", INK, fs=7)
-    arrow(ax, 46.4, 50, 54.6, 50, lw=1.0, color=INK2)
-    arrow(ax, 68.4, 50, RBUS, 50, lw=1.0, color=INK2)
+    box(ax, 33, mid - 12, 14, 24, "context\nwindow", "#ffffff", INK, fs=7)
+    box(ax, 54, mid - 12, 12, 24, "model", "#ffffff", INK, fs=7)
+    arrow(ax, 47.4, mid, 53.6, mid, lw=1.0, color=INK2)
+    arrow(ax, 66.4, mid, RBUS, mid, lw=1.0, color=INK2)
 
     # ---- the three intervention points -------------------------------------
-    for (key, lab), xc in zip(POINTS, (27.5, 50.5, 70.2)):
-        ax.plot([xc, xc], [34, 74], ls=(0, (2.2, 1.8)), lw=0.6,
-                color=INK, zorder=0)
-        ax.text(xc, 30.0, lab, ha="center", fontsize=6.6, color=INK,
+    for (key, lab), xc in zip(POINTS, (28.6, 50.5, 70.4)):
+        ax.plot([xc, xc], [mid - 22, mid + 22], ls=(0, (2.2, 1.8)), lw=0.6,
+                color=INK, zorder=1)
+        ax.text(xc, mid - 26.5, lab, ha="center", fontsize=6.6, color=INK,
                 fontweight="bold")
-    ax.text(50, 76.5, f"where a defense can intervene "
-                      f"({len(POINTS)} intervention points)", ha="center",
-            fontsize=6.4, color=INK)
 
     # ---- consequences, right -----------------------------------------------
     n2 = len(CONSEQ)
     h2 = (top - bot - gap * (n2 - 1)) / n2
-    ax.text(88.5, 96.4, "how the output goes wrong", ha="center",
-            fontsize=7, color=INK, fontweight="bold")
     for i, c in enumerate(CONSEQ):
         y = top - i * (h2 + gap) - h2
-        box(ax, 77.5, y, 21.5, h2, "", "#ffffff", INK)
-        ax.text(78.7, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
+        box(ax, 79.7, y, 19.0, h2, "", "#ffffff", INK)
+        ax.text(80.8, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
                 color=INK)
         # the output fans out the way the input fanned in
-        ax.plot([RBUS, 77.3], [y + h2 / 2, y + h2 / 2], lw=0.4, color=INK,
-                zorder=0)
+        ax.plot([RBUS, 79.5], [y + h2 / 2, y + h2 / 2], lw=0.4, color=INK,
+                zorder=1)
     ax.plot([RBUS, RBUS], [bot + h2 / 2, top - h2 / 2], lw=0.6, color=INK,
-            zorder=0)
+            zorder=1)
 
-    # Only the two axes the flow actually lays out. Regime is carried by
-    # every entry wherever it sits, so it has no position here and the
-    # caption says so in one clause instead of the figure faking a slot.
-    ax.plot([1, 99], [10.5, 10.5], lw=0.5, color=INK)
-    ax.text(9.5, 5.5, f"channel  ({len(CHANNELS)} values)", ha="center",
-            fontsize=6.2, color=INK)
-    ax.text(88.5, 5.5, f"consequence  ({len(CONSEQ)} values)", ha="center",
-            fontsize=6.2, color=INK)
+    # Regime is carried by every entry wherever it sits, so it has no
+    # position here; the caption says so in one clause.
 
     OUT.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
