@@ -2,32 +2,31 @@
 \label{sec:experiments}
 
 To test the untested region of Section~\ref{sec:emptycell} we built one
-harness. It runs a published defense against a published attack, or against
-an honest failure, under one protocol, with the controls fixed before any run.
+harness. It runs a published fix against a mechanism under one protocol, with the controls fixed before any run.
 This section describes how the harness holds every run to the same
 conditions, how it picks the pairs, and the rules it enforces.
-Section~\ref{sec:setup} lists the models, data, defenses and attacks it ran,
+Section~\ref{sec:setup} lists the models, data, fixes and mechanisms it ran,
 and Section~\ref{sec:results} what they showed.
 
 \subsection{The harness}
 \label{sec:harness}
 
 The harness separates what varies between runs from what must not. A run is
-one defense, one attack or honest failure, one dose and one arm. Everything
+one fix, one mechanism, one dose and one arm. Everything
 else is fixed by the harness, not by the run.
 
 \textbf{One construction of the contexts.} The planted contexts come from one
-constructor, the attack's own (Section~\ref{sec:payloadclasses}), applied to
-one item list. Every defense in a pair reads the same contexts, and so do the
-undefended and no-document arms, so a difference between arms belongs to the
-defense and not to its input.
+constructor, the one the attacks released (Section~\ref{sec:payloadclasses}),
+applied to one item list. Every fix in a pair reads the same contexts, and so
+do the undefended and no-document arms, so a difference between arms belongs
+to the fix and not to its input.
 
-\textbf{Each defense in its own environment.} Every defense runs from its
+\textbf{Each fix in its own environment.} Every fix runs from its
 authors' code under the dependency versions its authors pinned, one
-environment per defense, and the harness reaches each through the same
+environment per fix, and the harness reaches each through the same
 interface: a question and its context in, an answer out. This is what lets
-defenses with conflicting dependencies meet the same attacks. They do
-conflict: the defenses in a single cell of this taxonomy cannot share one
+fixes with conflicting dependencies meet the same mechanisms. They do
+conflict: the fixes in a single cell of this taxonomy cannot share one
 Python environment. ACD's released decoder imports symbols that
 \texttt{transformers} removed after 4.44, which its own README pins, and
 CK-PLUG ships its own 4.49 fork, which its README says to install. That is the
@@ -50,29 +49,29 @@ attack label.
 
 \subsection{Pair selection}
 
-The taxonomy picks the (defense, attack) pair under two conditions. The defense and
-the attack must occupy the same taxonomy cell, which means the content enters
+The taxonomy picks the (fix, mechanism) pair under two conditions. The fix and
+the mechanism must occupy the same taxonomy cell, which means the content enters
 through the same channel and causes the same consequence. And no paper in the
-corpus may report having run them together. A defense that repairs quiet answer corruption arriving through retrieval
-ought to apply to an attack that arrives the same way and does the same
+corpus may report having run them together. A fix that repairs quiet answer corruption arriving through retrieval
+ought to apply to a mechanism that arrives the same way and does the same
 damage. The taxonomy predicts that such a pair should transfer, and no paper
 in the corpus had tested it. The same rule without its
-second condition picks the control pairs, which put each method against its
-own literature's failures.
+second condition picks the control pairs, which put each fix against its
+own literature's mechanisms.
 
-We propose no new defense or attack. Every method and every attack we run is
+We propose no new fix or attack. Every fix and every attack we run is
 published.
 
 \subsection{The reconstruction standard}
 
 The taxonomy decides which pairs we run, and this rule decides what counts as
-running one. Every number we report comes from running a defense's own released code and
+running one. Every number we report comes from running a fix's own released code and
 weights. We never cite a paper's reported numbers as evidence about that
 paper's method. Where a harness had to be adapted to our data, we adapted the
 harness and left the method and the evaluation rubric untouched. Where an
 author's rubric and ours differed, we used the author's.
 
-The standard cost us coverage. Several defenses could not be evaluated at
+The standard cost us coverage. Several fixes could not be evaluated at
 all, for reasons that lie in what their artifacts ship rather than in what
 their methods do, and we record those as roadblocks rather than as failures
 of the method.
@@ -83,7 +82,7 @@ Released code is not enough on its own. A negative result is easy to produce
 by accident, so four rules guard against that, and we fixed all four before
 any run.
 
-\textbf{The control fires first.} A defense that is broken in our hands
+\textbf{The control fires first.} A fix that is broken in our hands
 tells us nothing about transfer, so before any transfer number we check that
 the method still does, in a clean context, what its authors say it does. The check is directional, and it is set per method, because no two papers
 claim the same quantity. ParamMute~\cite{huang-2025-parammute} reports a gain in context
@@ -99,20 +98,20 @@ control was read on. Where no comparable published figure
 exists, we say so rather than manufacture a threshold.
 
 
-\textbf{The attack works first.} If the attack does not hurt the undefended
+\textbf{The mechanism works first.} If the mechanism does not hurt the undefended
 model in the same run, the defended result means nothing. Every result is
 reported next to the undefended model on the same items, with the same number
-of poisoned passages and the same scorer.
+of planted passages and the same scorer.
 
 \textbf{Small differences are reported as unresolved.} For each run we
 compute the smallest difference it can detect at its sample size, with
 $\alpha = .05$ and power $.80$. A smaller difference is reported as
 unresolved, never as no effect.
 
-\textbf{Attacks are not adapted to the defenses they meet.} An attack that is not built for a defense and
+\textbf{Attacks are not adapted to the fixes they meet.} An attack that is not built for a fix and
 defeats it anyway is a lower bound on attack strength: if the
 cheapest payload wins, an adapted one also wins. So non-adaptive evaluation is
-conservative evidence for a claim that a defense fails, and weak evidence for
+conservative evidence for a claim that a fix fails, and weak evidence for
 a claim that one holds. Every failure we report is of the first kind. The single resistance
 result we report is of the second, and we test it adaptively rather than
 asserting it.

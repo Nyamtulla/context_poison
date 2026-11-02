@@ -2,28 +2,28 @@
 \label{sec:setup}
 
 This section lists what the harness of Section~\ref{sec:experiments} ran:
-the models and hardware, the item sets, the defenses, and the attacks and
-honest failures, and then the experiments that combine them.
+the models and hardware, the item sets, the fixes and the mechanisms, and
+then the experiments that combine them.
 
 \subsection{Models and hardware}
 \label{sec:whatweran}
 
 The victim model in the retrieval experiments is
 Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
-Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each defense
+Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each fix
 released. The agent experiment uses a
 Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
 
 Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
 535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
-\texttt{transformers} 5.5.0, except for the defenses whose authors pin other
+\texttt{transformers} 5.5.0, except for the fixes whose authors pin other
 versions (Section~\ref{sec:harness}).
 
 \subsection{Datasets}
 \label{sec:provenance}
 
 The retrieval experiments use CoConflictQA~\cite{huang-2025-parammute} over
-Natural Questions, and open Natural Questions for the attacks that need a
+Natural Questions, and open Natural Questions for the mechanisms that need a
 retrieval pool. The agent experiment uses the AgentDojo banking
 suite~\cite{debenedetti-2024-agentdojo}.
 
@@ -52,7 +52,7 @@ PoisonedRAG, BadRAG & The published constructions \\
 False evidence & CoConflictQA's own parametric-evidence field \\
 Distractor evidence & \textbf{ours}: one substitution into that field \\
 Adaptive distractor & \textbf{ours}: the same claim, reshaped against one
-defense's rule \\
+fix's rule \\
 Gradient distractor & \textbf{ours}: that passage and a suffix optimized
 against the same rule \\
 Stale document & \textbf{ours}: a real retrieved passage, gold answer
@@ -88,10 +88,10 @@ distractors, so that the planted answer is a plausible example of its kind
 rather than an implausible value. The defended, undefended and no-document models in those runs are all
 measured on that same subset.
 
-\subsection{Defenses}
+\subsection{Fixes}
 \label{sec:defenses}
 
-The defenses from the safety literature were built for knowledge conflict.
+The fixes from the safety literature were built for knowledge conflict.
 Each adjusts how much the model relies on the
 retrieved text. ACD decodes from the no-context
 distribution and pulls it toward the with-context one by a weight computed
@@ -116,14 +116,14 @@ corrupted passages are few. We run both released implementations.
 The prompt-injection defenses of the agent experiment act before the agent
 reads its input or acts on it.
 
-\subsection{Attacks and honest failures}
+\subsection{Mechanisms}
 \label{sec:payloadclasses}
 
 Every run uses items whose context is at most 2000 characters. The cut is on
-length alone, never on an outcome, and it is applied once, so every defense
+length alone, never on an outcome, and it is applied once, so every fix
 and every planted passage meets the same items. It exists because
-contrastive-decoding defenses run the model twice at once, and the cut keeps
-every defense on one card at a shared batch size.
+contrastive-decoding fixes run the model twice at once, and the cut keeps
+every fix on one card at a shared batch size.
 
 The planted passages in Table~\ref{tab:provenance} fall into five groups by
 what they do to the evidence.
@@ -152,15 +152,15 @@ Two change the model's behavior rather than its answer. BadRAG's refusal
 attack makes the model decline to answer, and its tone attack makes it answer
 in a negative tone.
 
-Two are built against one defense. Both take the planted third answer and
+Two are built against one fix. Both take the planted third answer and
 reshape it to minimize the quantity ACD's rule measures: one by choosing the
 best of five phrasings, one by appending a suffix found by gradient search
 (Section~\ref{sec:adaptive}).
 
 \paragraph{Dose, and the one item set that has none.}
 The \textbf{dose} is how many of the retrieved passages are planted. It is
-the main axis of the retrieval results, because a defense that
-holds against one poisoned passage and fails against five has not failed in
+the main axis of the retrieval results, because a fix that
+holds against one planted passage and fails against five has not failed in
 the same way as one that never helped.
 
 We take the dose from the attacks rather than define one. Their released
@@ -171,7 +171,7 @@ $j$ of the top ten, for $j$ in $\{0, 1, 2, 3, 5\}$. Their own default is
 $j = 1$, and RobustRAG's authors sweep up to five of ten and no further, so
 every point we report is inside the range the attack and defense authors
 evaluate. Beyond five few honest passages remain, and a low score there
-measures the attack more than the defense. Dilution is the one exception to
+measures the mechanism more than the fix. Dilution is the one exception to
 replacement: its $j$ passages are added to the ten, so its context holds
 $10 + j$.
 
@@ -185,12 +185,12 @@ number.
 \subsection{The experiments}
 \label{sec:campaign}
 
-We executed \NCampaignPairs{} (defense, attack) pairs across \NCampaignImpl{}
-defense implementations and \NCampaignEpisodes{} scored episodes. Every
-method ran from its authors' released code and weights.
+We executed \NCampaignPairs{} (fix, mechanism) pairs across \NCampaignImpl{}
+fix implementations and \NCampaignEpisodes{} scored episodes. Every
+fix ran from its authors' released code and weights.
 Figure~\ref{fig:transfer} sets the campaign beside the published literature.
 
-The main experiment puts a defense from one literature in front of a failure
+The main experiment puts a fix from one literature in front of a mechanism
 from the other, in both directions. We ran \NCampCrossPairs{} such pairs, all
 on retrieval question answering over Natural Questions.
 
@@ -200,44 +200,44 @@ with corpus poisoning, PoisonedRAG or BadRAG.
 
 In the second direction, \NCampSecDefSafetyMech{} pairs take RobustRAG, a
 defense from the security literature, in both of its released
-implementations, and give it four failures that no attacker wrote: a real
+implementations, and give it four mechanisms that no attacker wrote: a real
 passage whose answer has since changed, a passage asserting a third wrong
 answer, a passage retrieved for the wrong question, and unrelated passages
 that lengthen the context.
 
-A second experiment pairs each method with the kind of attack its own authors
+A second experiment pairs each fix with the kind of mechanism its own authors
 used. These \NCampSecDefSecMech{} security pairs and
-\NCampSafDefSafetyMech{} safety pairs do not test whether a method carries
-across. They check that our harness reproduces each method's behavior on its
+\NCampSafDefSafetyMech{} safety pairs do not test whether a fix carries
+across. They check that our harness reproduces each fix's behavior on its
 own problem. Most of them are the agent experiment:
 \NAgentPairs{} pairs in which eight prompt-injection defenses meet seven
 injected-instruction attacks inside the AgentDojo banking
 suite~\cite{debenedetti-2024-agentdojo}.
 
-A third experiment runs no defense at all. It puts five planted passages on
+A third experiment runs no fix at all. It puts five planted passages on
 the same items, in the same positions and the same number: PoisonedRAG once
 and repeated five times, a stale document, corpus poisoning and misretrieval.
 This measures how much an attacker gains over an honest mistake, which the
 research questions depend on. Table~\ref{tab:regime} reports the result, which
 Section~\ref{sec:regime} reads.
 
-A fourth experiment holds the defense fixed and changes only the planted
-passage. On CoConflictQA the same defenses meet corpus poisoning, false
+A fourth experiment holds the fix constant and changes only the planted
+passage. On CoConflictQA the same fixes meet corpus poisoning, false
 evidence and a planted third answer, which come from three of the four groups
-in Section~\ref{sec:payloadclasses}. A defense that behaves differently across
-them is reacting to the form of the text rather than to the attack it was
+in Section~\ref{sec:payloadclasses}. A fix that behaves differently across
+them is reacting to the form of the text rather than to the mechanism it was
 named for.
 
 A fifth set of runs adds three measurements. Every run above is measured three ways on the same items: with nothing
-planted, without the defense, and with no document at all.
+planted, without the fix, and with no document at all.
 We also re-ran part of the retrieval experiment on a second base model, and
 we ran both released implementations of RobustRAG, which share a principle
 and no code downstream of it.
 
-The last two experiments test the explanation rather than the methods. We
-built two attacks against the single defense that resisted, one searching
+The last two experiments test the explanation rather than the fixes. We
+built two attacks against the single fix that resisted, one searching
 over surface forms and one optimizing a suffix with gradients, both targeting
-the quantity that defense's own rule measures. We have also started an experiment that stacks two defenses acting at
+the quantity that fix's own rule measures. We have also started an experiment that stacks two fixes acting at
 different stages of the same pipeline, to test the design rule of
-Section~\ref{sec:discussion}. Each defense has run on its own; the stacked
+Section~\ref{sec:discussion}. Each fix has run on its own; the stacked
 result is not yet computed, and we report none.

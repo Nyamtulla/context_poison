@@ -13,22 +13,22 @@ without a no-document score, and Section~\ref{sec:distractor} one that reads
 the other way when only accuracy is reported. Neither measurement is
 expensive. We propose three reporting requirements.
 
-\textbf{Report a no-document score.} Any defense that modifies how a model uses
+\textbf{Report a no-document score.} Any fix that modifies how a model uses
 retrieved context must report what the same model scores with no retrieved
-context at all. Without it, a defense that has stopped reading the document is
-indistinguishable from a defense that has learned to resist a poisoned one.
+context at all. Without it, a fix that has stopped reading the document is
+indistinguishable from a fix that has learned to resist a poisoned one.
 It costs one extra pass over the data.
 
 \textbf{Report where the answers went, not only accuracy.} Under a planted
 third answer, ParamMute moves accuracy by less than its threshold while the share of answers
 copied from the attacker rises by \EPmDistCopyGain{} points. Accuracy alone
-reports that defense as harmless. Classifying each output as the true
+reports that fix as harmless. Classifying each output as the true
 answer, the model's own answer, the planted answer or a refusal costs nothing
 beyond reading the generations already produced.
 
 \textbf{Report at least two base models.} Our second-model check left the
 results unchanged within the range the attack authors evaluate, but it covers
-one defense design. A result on one model cannot show that it holds on
+one fix design. A result on one model cannot show that it holds on
 another, so a single-model result should be read as specific to that model.
 
 \subsection{Conventions for measurable transfer}
@@ -36,8 +36,8 @@ another, so a single-model result should be read as specific to that model.
 The controls above concern one experiment. These five concern what a paper
 claims and what it tests.
 
-\textbf{State the regime the evaluation actually covers.} Our defense
-census codes each method by what its own paper evaluated, and
+\textbf{State the regime the evaluation actually covers.} Our census of
+fixes codes each one by what its own paper evaluated, and
 \PctOneRegime{}\% cover one regime. One sentence naming the regime the
 experiments cover lets a reader, and the maintainer of a system, see that
 limit without inferring it.
@@ -47,14 +47,14 @@ without the smallest difference the experiment could have detected makes "no
 effect" and "we could not tell" look identical. We computed this for every run
 and several of our own results moved from the first category to the second.
 
-\textbf{Say whether the attack was adapted to the defense.} A defense that
+\textbf{Say whether the attack was adapted to the fix.} A fix that
 holds against an attack built for a different target has been shown to resist
 that attack and nothing more. In our coding, the context-reliance methods we
 ran were validated only against incidental failure, and when we built an
 adaptive attack against the one that had resisted, it removed
 \PctAcdRemovedGradient{}\% of that method's protection
 (Section~\ref{sec:adaptive}). One sentence naming whether the attacker knew
-the defense tells a reader which kind of claim they are reading.
+the fix tells a reader which kind of claim they are reading.
 
 \textbf{Compose across the boundary, and measure the composition.}
 Section~\ref{sec:parallel} shows the two communities defending different
@@ -63,12 +63,12 @@ stage failing on its own once an adversary writes the input. The next step
 is to put an ingestion-stage filter in front of a
 reasoning-stage method and see whether the pair holds where each half does
 not. We do not know that it works. This paper reports no result for a
-composed defense; the experiment has started and is not finished. A filter
+composed fix; the experiment has started and is not finished. A filter
 that passes a fluent falsehood would leave the reasoning stage where our
 results find it. Both halves are published with released code, and we found
 no paper in the corpus that combines them.
 
-\textbf{Test each fix against the other regime's failure.} A
+\textbf{Test each fix against the other regime's mechanisms.} A
 method aimed at stale or conflicting retrieval is evaluated on
 average-case benchmarks, which is the right choice for the problem it was
 built for and says nothing about the worst case. Without such a test, a
@@ -76,7 +76,7 @@ reader cannot tell whether the reported benefit holds under attack, and our
 results show that it can reverse. Running one published poisoning attack
 against an existing evaluation needs no new data. The converse holds for a
 defense built against an attacker. Its evaluation bounds how many passages
-the attacker controls, and an honest failure is not bound by that number:
+the attacker controls, and an honest mistake is not bound by that number:
 RobustRAG turns harmful once half the retrieved passages are stale
 (Section~\ref{sec:neither}). A stale-document set needs only a retrieval
 pool and a list of answers that changed. A method that cannot be tested in
@@ -85,7 +85,7 @@ the other regime should state which regime its benefit holds in.
 \subsection{Artifacts}
 
 The reconstruction standard made artifact quality measurable as a side effect.
-Among the best-cited untested defenses in the cell we studied, two name
+Among the best-cited untested fixes in the cell we studied, two name
 empty repositories. Two more ship code without the trained weights it needs.
 One runs. Two further execution-stage defenses do not
 run reliably on any freely-available open-weight model. One more,
@@ -94,7 +94,7 @@ that open weights do not provide in its harness. The ablated variant that
 does run shows none of its own benefit, so we report it as not reportable
 rather than as defeated.
 
-We report this as a property of the artifacts, not of the methods. A defense
+We report this as a property of the artifacts, not of the methods. A fix
 that others cannot run is unlikely to be tested by others, so part of the
 coverage gap this paper measures is an artifact gap. It is only part of it.
 \NFixUnpaired{} of \NFixes{} fixes never appear in a
@@ -127,12 +127,12 @@ converts the document to weights has no dial to turn and does not show the
 reversal, and one method in the family resisted until an adaptive attacker
 lost most of its protection to an adaptive attacker.
 
-A defense that holds against an optimized adversarial passage may fail against
+A fix that holds against an optimized adversarial passage may fail against
 a fluent sentence that simply asserts a plausible falsehood. In our
-measurements no defense resisted both. The fluent attack is also cheaper to
+measurements no fix resisted both. The fluent attack is also cheaper to
 produce: it needs no gradient access and no surrogate retriever, and it does at
 least as much damage to an undefended model as the optimized passage.
-Evaluations built only around optimized passages can overstate protection. Do not call a defense tested on one
+Evaluations built only around optimized passages can overstate protection. Do not call a fix tested on one
 payload class robust to context poisoning.
 
 Finally, coverage differs by channel. Supply-chain and cross-modal content

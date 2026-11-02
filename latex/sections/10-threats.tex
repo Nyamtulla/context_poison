@@ -52,17 +52,17 @@ differing conduct on the same pair. That selection is our interpretation.
 
 \textbf{The campaign is a sample, not a census.} We ran \NCampaignPairs{} pairs out of a space
 of thousands. They were selected by the taxonomy rather than at random, biased
-toward pairs where both artifacts run. Defenses whose artifacts do not run are
+toward pairs where both artifacts run. Fixes whose artifacts do not run are
 absent, and nothing here says whether they transfer.
 
 \textbf{Attacks are non-adaptive, with one exception.} This is the criticism
 that invalidated DEEPSEC's defense rankings~\cite{carlini-2019-critique}, and
-we inherit it. An attack that was not built for a defense and defeats it
+we inherit it. An attack that was not built for a fix and defeats it
 anyway bounds attack strength from below, so our failure results are
 conservative. A resistance result drawn the same way is not evidence of
 robustness at all.
 Section~\ref{sec:adaptive} tests the one resistance result we report. Every
-other defense in the campaign would need the same treatment before any claim
+other fix in the campaign would need the same treatment before any claim
 that it holds.
 
 \textbf{Variance.} Carlini lists ``no variance
@@ -86,12 +86,12 @@ remains is sampling uncertainty, which the Wilson intervals~\cite{wilson-1927-pr
 detectability threshold already carry.
 
 What this does \emph{not} show is insensitivity to item order, batch
-composition, or the few-shot examples a defense holds out. Those are untested,
+composition, or the few-shot examples a fix holds out. Those are untested,
 and a method whose result depended on them would pass this check and still be
 fragile.
 
 Nor does it show reproducibility across environments, and we have a
-measured example of the difference. The defenses in the retrieval experiments cannot
+measured example of the difference. The fixes in the retrieval experiments cannot
 share one Python environment: ACD's released decoder imports symbols that
 newer \texttt{transformers} releases removed, and its authors pin a version
 the rest of the cell cannot use. The \emph{clean} arm plants no payload, so its result is a
@@ -104,10 +104,10 @@ attacked arms agreed to within 0.3\pp{} and the corrupted row agreed exactly.
 Determinism within a stack and reproducibility across stacks are different
 properties, and only the first is established by the replicates above.
 
-\textbf{We do not measure what the defenses cost.} Every number here is an
+\textbf{We do not measure what the fixes cost.} Every number here is an
 accuracy, a copy rate or a refusal rate. We report no inference latency,
 no memory footprint and no throughput, so nothing in this paper says whether a
-defense is affordable to deploy. That matters for the contrastive-decoding
+fix is affordable to deploy. That matters for the contrastive-decoding
 family in particular, which runs two forward passes per token. A method could
 be useless on the evidence here and still be the right choice at a cost we
 never measured, or hold up well and be unaffordable.
@@ -119,12 +119,12 @@ attack. It holds the retriever fixed, so it measures what the generator does
 with poisoned context rather than how hard the context is to poison.
 
 \textbf{Model coverage.} Most retrieval results use Llama-3-8B-Instruct,
-with Mistral-7B-Instruct where a defense required it. A second-model check
+with Mistral-7B-Instruct where a fix required it. A second-model check
 left the results unchanged within the evaluated range, but it covers only
 RobustRAG. The results should be read as holding for models of this class and
 size.
 
-\textbf{Scorer.} We reuse each defense's own evaluation rubric where one
+\textbf{Scorer.} We reuse each fix's own evaluation rubric where one
 exists, and a shared recall-based rubric across the retrieval experiments. Recall
 against a gold string rewards a model that produces the right tokens for the
 wrong reason. We report the rate of answers from memory and the refusal
@@ -148,16 +148,16 @@ so the restriction is a check and not the corpus. Resolving both sides of
 every pair back to a paper succeeds for \NVenueResolved{} of
 \NTimelinePairs{} pairs (\PctVenueResolved{}\%); of those, \NVenuePairs{} have
 a named venue on both sides, and \NVenueSecDefSafetyAtk{} of them is a security
-defense evaluated against a safety failure mechanism. The empty
+fix evaluated against a safety mechanism. The empty
 direction stays empty among refereed work alone.
 
-\textbf{Census recall.} \NNoTechnique{} papers contributed no attack and no defense, and
+\textbf{Census recall.} \NNoTechnique{} papers contributed no mechanism and no fix, and
 \NNoTechOther{} of those match none of the survey, benchmark, framework or
 position descriptions by title. We re-read \NRecallRead{} papers --- that
 bucket as it stood before the pass --- and asked one question of each: does
 this paper name a technique we failed to register. \NRecallCandidates{}
 candidates came back. Two were genuine omissions and are now in the census. One was
-a defense already registered under a different name. One renamed a mechanism
+a fix already registered under a different name. One renamed a mechanism
 the registry carries three times. One was a payload form rather than a
 technique. The last was an attack a defense paper built for its own
 evaluation; Section~\ref{sec:literatures} registers it under the rule that

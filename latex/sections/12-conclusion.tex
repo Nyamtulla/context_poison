@@ -6,12 +6,12 @@ should not trust, and it cannot tell which content that is. The security
 community calls the content an attack and builds defenses. The safety community calls it a mechanism and builds fixes.
 
 We measured the distance between them over \NCorpus{} papers read in full,
-of which \NAnalysed{} name an attack or a defense.
+of which \NAnalysed{} name a mechanism or a fix.
 \PctSecCitesSafety{}\% of security-regime papers cite a safety-regime one. Only \NBothValidated{} of \NFixes{} fixes were
 tested in both regimes. And \PctSameRegime{}\% of
-tested (defense, attack) pairs stay inside a single regime. One direction of the
+tested (fix, mechanism) pairs stay inside a single regime. One direction of the
 cross-testing matrix holds \NSecDefVsSafetyAttack{} pair in \NPureRegimePairs{}: a
-security defense has been evaluated against a safety failure
+security fix has been evaluated against a safety
 mechanism exactly once.
 
 We then ran that experiment. \NCampaignPairs{} pairs, all on the authors'
@@ -19,10 +19,10 @@ released artifacts. \PctCampCross{}\% of them cross the boundary the
 literature does not.
 
 In the first direction, fixes built for honest error meet attacks. One
-poisoned passage in ten gives a defense its best chance, because nine honest
+poisoned passage in ten gives a fix its best chance, because nine honest
 passages survive, and it is the attacks' own default. \NGridLowHelps{} of
-\NGridLowPairs{} (defense, attack) pairs show a resolvable benefit there.
-The finding is a mechanism, not a verdict. Context-reliance defenses do not
+\NGridLowPairs{} (fix, mechanism) pairs show a resolvable benefit there.
+The finding is an explanation, not a verdict. Context-reliance fixes do not
 fail because someone built them badly. They fail because of what they
 arbitrate. Each one decides between trusting the context and trusting memory,
 and that dial moves correctness around without creating any. Suppress memory
@@ -30,15 +30,15 @@ and the attacker receives what memory held. Suppress the attacker and memory
 receives it back.
 
 A payload that plants a third answer separates copying from remembering, so
-we can add the two movements together. In the three defenses that suppress
+we can add the two movements together. In the three fixes that suppress
 memory they cancel to within 8 points. Neither direction moves anything
 toward the real document, because the dial has no setting for it. The attack
 is inside the context.
 
-In the second direction, a defense built against an attacker meets honest
+In the second direction, a fix built against an attacker meets honest
 mistakes. RobustRAG's vote holds while wrong passages are few, which is the
 setting its threat model assumes. When half the retrieved passages are
-stale, it returns the outdated answer more often than no defense does, and
+stale, it returns the outdated answer more often than no fix does, and
 against a failure that plants nothing it has nothing to act on. The two
 directions fail for opposite reasons: the safety fixes assume the document
 is honest, and the security defense assumes wrong passages are few. Each
@@ -50,7 +50,7 @@ First, protection depends on the \emph{form} of the planted passage, not only
 on whether an attacker is present. An evaluation built around optimized
 payloads therefore overstates how well a system holds.
 
-Second, one defense did resist. It loses \PctAcdRemovedGradient{}\% of that
+Second, one fix did resist. It loses \PctAcdRemovedGradient{}\% of that
 protection to an
 attacker who reads its rule and optimizes against the quantity it measures.
 
@@ -62,23 +62,23 @@ wrong passages being a minority. Signals that need neither assumption exist
 in the retrieval setting, among them when a passage was written, whether it
 was retrieved for the question asked, and whether independent sources agree.
 The next experiments build a fix on such signals and test it in both
-directions on the same items, against the same attacks and honest failures
+directions on the same items, against the same mechanisms
 reported here and against an attacker who knows the fix.
 
 \textbf{Extend the adaptive case to the rest of the family.} We tested the
-one defense that resisted,
+one fix that resisted,
 with two optimizers. A best-of-five search over sentence forms took
 \PctAcdRemovedBestOf{}\% of
 its protection. A gradient search over token ids took
 \PctAcdRemovedGradient{}\%. Together they
-settle that the defense degrades rather than collapses.
+settle that the fix degrades rather than collapses.
 Every other context-reliance method in the campaign has had only the
 non-adaptive treatment, which Section~\ref{sec:experiments} states is no
 evidence of robustness at all. The same two optimizers transfer directly: each
 of these methods exposes a scalar the attacker can address.
 
 \textbf{Close the supply-chain and cross-modal gaps.} These channels have fewer
-than one named defense per named mechanism and are the routes by which agents
+than one named fix per named mechanism and are the routes by which agents
 accept third-party capability. They are the clearest place to build rather than
 to measure.
 
@@ -90,7 +90,7 @@ execution defenses we could not evaluate are the agent-shaped ones. Running all 
 inside one agent harness would resolve it.
 
 \textbf{Make the empty cell the default, not the exception.} The deepest
-problem this paper documents is not any single defense. It is that who runs an experiment predicts its
-outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair defenses with attacks that a
-taxonomy selects, not attacks that either author selects. Transfer then
+problem this paper documents is not any single fix. It is that who runs an experiment predicts its
+outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair fixes with mechanisms that a
+taxonomy selects, not mechanisms that either author selects. Transfer then
 becomes a measured property rather than an assumed one. We release ours.

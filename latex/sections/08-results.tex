@@ -7,16 +7,16 @@ Planting a false claim gives an attacker a measurable
 advantage over an honest mistake. Pushing the right evidence out gives no
 advantage at all. The research questions below assume that a planted passage
 and an honest mistake do comparable damage, so we measured that first, with no
-defense in place. Table~\ref{tab:regime} runs five kinds of planted passage on
-the same items, with the same number of poisoned passages in the same
+fix in place. Table~\ref{tab:regime} runs five kinds of planted passage on
+the same items, with the same number of planted passages in the same
 positions, scored the same way.
 
 \begin{table}[t]
 \centering
-\caption{Defenses that decide how far to trust the document, against corpus poisoning, in percentage
-points against each defense's own undefended model in the same run, with the
+\caption{Fixes that decide how far to trust the document, against corpus poisoning, in percentage
+points against each fix's own undefended model in the same run, with the
 undefended and defended rates in brackets. "Clean" is a context with
-nothing planted, where each defense should show its own published benefit.
+nothing planted, where each fix should show its own published benefit.
 "Corrupted" is a context replaced by the planted passage. Bold clears that
 run's detection threshold. Rates are rounded for display and differences are
 computed before rounding.}
@@ -24,7 +24,7 @@ computed before rounding.}
 \footnotesize
 \begin{tabular}{@{}l@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
 \toprule
-\textbf{Defense} & \textbf{$n$} & \textbf{threshold} & \textbf{Clean} &
+\textbf{Fix} & \textbf{$n$} & \textbf{threshold} & \textbf{Clean} &
 \textbf{Corrupted} \\
 \midrule
 ParamMute & \EParamN{} & \EParamMdr{} &
@@ -49,11 +49,11 @@ than accuracy, so its clean cell reports that metric.}
 \input{tables/grid}
 
 Where the passage plants a false answer, writing it to persuade helps the
-attacker. With one poisoned passage in ten, the model gives the planted answer
+attacker. With one planted passage in ten, the model gives the planted answer
 \PctCraftLow{}\% of the time for PoisonedRAG's crafted passage and
 \PctStaleLow{}\% for a real passage whose answer has changed. The gap clears the
-detection threshold at every number of poisoned passages, though only
-narrowly at two, and at five poisoned passages the crafted passage also
+detection threshold at every number of planted passages, though only
+narrowly at two, and at five planted passages the crafted passage also
 costs more accuracy, \AccCraftTop{}\% against \AccStaleTop{}\%. The honest
 mistake still does real damage: it moves the model to the false answer
 \PctStaleTop{}\% of the time, against \PctStaleClean{}\% with nothing planted.
@@ -65,10 +65,10 @@ attacker gains nothing. Zhong et al.'s optimized passage and a real passage
 retrieved for another question give the same results: \PctCorpusTop{}\% and
 \PctMisretrievalTop{}\% planted answers, \AccCorpusTop{}\% and
 \AccMisretrievalTop{}\% accuracy, with every gap below the threshold at every
-number of poisoned passages. For this kind of attack, an attack and an
+number of planted passages. For this kind of attack, an attack and an
 ordinary retrieval error are the same event.
 
-\subsection{RQ2: Does a defense built for one literature's problem survive the other's?}
+\subsection{RQ2: Does a fix built for one literature's problem survive the other's?}
 
 \paragraph{First direction: safety fixes facing an attacker.}
 The methods built for honest error all decide how far
@@ -89,7 +89,7 @@ CK-PLUG goes furthest. Under BadRAG's tone attack, which tries to make the
 model answer in a negative tone, the undefended model takes on that tone at
 most \ECkSentUndefMax\% of the time. With CK-PLUG it takes it on
 \ECkSentOne\% of the time with one poisoned passage in ten and
-\ECkSentTop\% with five, so the defense increases the attack's effect
+\ECkSentTop\% with five, so the fix increases the attack's effect
 rather than reducing it. SCR, the one method in this family that asks the
 model to judge between its own answer and the document's, gains
 \EScrSatGain{} points on a corrupted context and costs \EScrCleanCost{} on a
@@ -98,9 +98,9 @@ clean one, roughly five times what it gains.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig4_dose_response}
-\caption{Each safety-literature defense against corpus poisoning, by
+\caption{Each fix against corpus poisoning, by
 number of poisoned passages among the ten retrieved, measured as the
-defended model minus the undefended model in the same run. Zero means the defense changed
+defended model minus the undefended model in the same run. Zero means the fix changed
 nothing. Filled markers are resolvable at $p < .05$ by Fisher's exact
 test~\cite{fisher-1922-interpretation}; hollow markers are not. CK-PLUG and
 DyPRAG sit more than twenty points below zero before any passage is planted
@@ -109,7 +109,7 @@ and stay there. The other four stay within a few points of zero.}
 \end{figure}
 
 The other three methods are why this is a claim about a design and not about
-all defenses. DyPRAG turns the document into model weights, so it has no
+all fixes. DyPRAG turns the document into model weights, so it has no
 trust setting to turn. The two RobustRAG implementations answer from each
 passage separately and take a vote, which asks which passages agree rather
 than how far to trust passages in general. Figure~\ref{fig:dose} shows the
@@ -123,16 +123,16 @@ model refuse rather than answer wrongly, ParamMute protects strongly. With one
 poisoned passage in ten the undefended model refuses \EPmDosUndefRef\% of the
 time and answers \EPmDosUndefAcc\% correctly. ParamMute cuts refusals to
 \EPmDosDefRef\% and restores accuracy to \EPmDosDefAcc\%, within
-\EPmDosCleanGap{} points of its clean score. The mechanism is the same as
+\EPmDosCleanGap{} points of its clean score. The explanation is the same as
 above. Suppressing memory removes a right answer when memory had one,
 and removes the conflict behind the refusal when it did not.
 
-\paragraph{Second direction: a security defense facing honest mistakes.}
+\paragraph{Second direction: a security fix facing honest mistakes.}
 \label{sec:transfer}
-A defense built against an attacker helps against an
+A fix built against an attacker helps against an
 honest mistake only while the mistaken passages are few, and only when they
 plant a false claim. We ran RobustRAG, in both its released implementations,
-against four failures that no attacker wrote.
+against four mechanisms that no attacker wrote.
 
 Against a real passage whose answer has changed, RobustRAG helps with one or
 two such passages and then turns harmful. With one, the model gives the
@@ -164,11 +164,11 @@ it neither helps nor hurts: \ERobustDispOneDef\% against
 against \ERobustDispFiveUndef\% with five, both inside the
 \ERobustDispMdr{}-point threshold.
 
-\paragraph{Every defense against every attack.}
+\paragraph{Every fix against every mechanism.}
 \label{sec:grid}
-Across every defense and every attack on open Natural
+Across every fix and every mechanism on open Natural
 Questions, almost nothing helps. Table~\ref{tab:grid} reads each pair against
-its own undefended model at five poisoned passages in ten. Of the
+its own undefended model at five planted passages in ten. Of the
 \NGridCells{} pairs, \NGridGainTop{} help by more than their threshold,
 \NGridLoseTop{} hurt by more than their threshold, and \NGridFlatTop{} show
 no measurable difference. All \NGridGainTop{} gains are against the refusal
@@ -183,10 +183,10 @@ measurable on a clean context.
 \label{sec:lowdose}
 Even with nine of ten passages honest, almost nothing
 helps. One poisoned passage in ten is the default of the released attack and
-the setting most favorable to a defense, because it leaves the most honest
+the setting most favorable to a fix, because it leaves the most honest
 evidence to work with. \NGridLowHelps{} of the \NGridLowPairs{} pairs help
 there, and both are again the refusal attack. We report the worst result
-for each defense rather than the average, because an average across attacks
+for each fix rather than the average, because an average across mechanisms
 would hide a complete failure against one of them.
 
 The agent experiment pairs only security methods with security attacks, so
@@ -215,17 +215,17 @@ covers both regimes can therefore rely on neither assumption. It cannot trust
 the document by default, and it cannot count on wrong passages being a
 minority.
 
-Answer to RQ2. No, in neither direction. Methods built for honest error lose
+Answer to RQ2. No, in neither direction. Fixes built for honest error lose
 to an attacker when they shift the model's trust toward the document. A
-method built against an attacker helps with an honest mistake only while the
-mistaken passages are few, does more harm than no defense once they are
+fix built against an attacker helps with an honest mistake only while the
+mistaken passages are few, does more harm than no fix once they are
 many, and has nothing to act on when the mistake plants no claim.
 
 \subsection{RQ3: Is failure a property of individual methods or of a design choice they share?}
 
 \begin{table}[t]
 \centering
-\caption{ACD against two planted passages, $n=\EAcdN{}$, threshold \EAcdMdr\pp. The defense is
+\caption{ACD against two planted passages, $n=\EAcdN{}$, threshold \EAcdMdr\pp. The fix is
 unchanged. Only the form of the planted passage differs. $p$ is two-sided
 Fisher on the counts of correct answers.}
 \label{tab:acd}
@@ -245,15 +245,15 @@ vs.\ no retrieval & +\EAcdCorpusVsNoRet{} ($p\PAcdCorpusVsNoRet{}$) &
 
 \begin{table}[t]
 \centering
-\caption{The same three defenses against two planted passages. Excess damage
+\caption{The same three fixes against two planted passages. Excess damage
 is how much accuracy the defended model loses from a clean to a corrupted
 context, minus the same loss for the undefended model; positive means the
-defense lost more than doing nothing would have.}
+fix lost more than doing nothing would have.}
 \label{tab:payloads}
 \small
 \begin{tabular}{@{}lrrr@{}}
 \toprule
-\textbf{Defense} & \textbf{$n$} & \textbf{Corpus poisoning} &
+\textbf{Fix} & \textbf{$n$} & \textbf{Corpus poisoning} &
 \textbf{False evidence} \\
 \midrule
 ParamMute & \EParamN{} & \textbf{+\EParamExcessCorpus} & \textbf{+\EParamExcessFalse} \\
@@ -267,8 +267,8 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 
 \paragraph{The form of the planted passage.}
 \label{sec:payloads}
-What a defense does depends on the form of the planted
-passage, not on which attack it came from. ACD is the only method that both
+What a fix does depends on the form of the planted
+passage, not on which mechanism it came from. ACD is the only method that both
 uses a clean document and resists corpus poisoning: it ends
 \EAcdSatGain{} points above the undefended model on a corrupted context.
 Corpus poisoning, though, was optimized to fool a retriever, not ACD, so this
@@ -292,19 +292,19 @@ first. CK-PLUG's effect on accuracy moves from \ECkCleanCost{} to
 COIECD changes nothing measurable against either.
 
 We do not rank the two forms. Before running them we wrote down the result
-that would contradict our explanation: a defense doing better against false
+that would contradict our explanation: a fix doing better against false
 evidence than against corpus poisoning. CK-PLUG does, with \ECkExcessFalse{}
 points of excess damage against \ECkExcessCorpus{}. Both forms leave the
 undefended model near the floor, at \ECkUndefFalseCorrupt\% and
 \ECkUndefCorpusCorrupt\% for CK-PLUG and \ECoiecdFalseCorrupt\% and
 \ECoiecdCorpusCorrupt\% for COIECD, so excess damage compares two near-total
 collapses and has little room to separate them. We report CK-PLUG's result as
-an exception this data cannot resolve, and compare defenses only within one
+an exception this data cannot resolve, and compare fixes only within one
 form.
 
 \paragraph{Where the answers go.}
 \label{sec:distractor}
-No defense moves a measurable share of answers toward
+No fix moves a measurable share of answers toward
 the real document.
 When the planted passage repeats what the model already believes, a correct
 answer from memory and a copied answer look the same. We therefore built a
@@ -324,7 +324,7 @@ answers stay below the threshold. ACD does the reverse. It cuts copying from
 go back to memory, not to the real document. CK-PLUG copies \ECkDistCopyDefCorrupt\% against its undefended
 model's \ECkDistCopyBaseCorrupt\% (Table~\ref{tab:distractor}).
 
-The two directions are one mechanism. Every one of these methods chooses
+The two directions are one effect. Every one of these methods chooses
 between the document and the model's memory, and the attack is inside the
 document. Turning the setting toward the document gives answers to the
 attacker; turning it toward memory gives them back to memory. Neither setting
@@ -340,7 +340,7 @@ choice cannot separate a real document from a planted one.
 \subsection{RQ4: Do the measurements the field leaves out change the result?}
 
 \label{sec:controls}
-Without a no-document score, a defense that ignores the
+Without a no-document score, a fix that ignores the
 document looks immune to the attack. DyPRAG holds \EDypragClean\% on a clean
 context and \EDypragSat\% on a corrupted one while the undefended model falls
 from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that looks like
@@ -360,7 +360,7 @@ implementation changes the result measurably on either base model, within the
 range the attack authors evaluate.
 
 Answer to RQ4. One omitted measurement reverses a result: a no-document score
-turns the campaign's apparently strongest defense into one that is not reading
+turns the campaign's apparently strongest fix into one that is not reading
 its input. Two further checks, a second implementation and a second base
 model, leave the results inside the evaluated range unchanged.
 
@@ -369,7 +369,7 @@ model, leave the results inside the evaluated range unchanged.
 \caption{ACD against the planted third answer in its plain form and in two forms
 that minimize ACD's own entropy term, on a corrupted context, $n=\NAcdAdaptiveItems{}$. Both adaptive
 passages are stronger against the undefended model too, so the defensive gap is
-the quantity that isolates the defense. All three columns were scored in one
+the quantity that isolates the fix. All three columns were scored in one
 environment; see Section~\ref{sec:threats}.}
 \label{tab:adaptive}
 \small
@@ -396,9 +396,9 @@ ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \label{sec:adaptive}
 The one method that resisted loses more than half of
 its protection to an attacker who reads its rule. Every attack above was
-built without knowledge of the defense it met. Such an attack bounds attack
-strength from below: it is conservative evidence when a defense fails and
-weak evidence when a defense holds. ACD was our only holding result, so we
+built without knowledge of the fix it met. Such an attack bounds attack
+strength from below: it is conservative evidence when a fix fails and
+weak evidence when a fix holds. ACD was our only holding result, so we
 attacked it directly.
 
 ACD blends the model's answer with and without the document, weighted by how

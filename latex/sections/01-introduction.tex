@@ -47,10 +47,10 @@ experiments that fall in it to answer the following research questions.
 \begin{description}
 \item[RQ1] \textbf{Do the two communities duplicate each other's work?} We read
   \NCorpus{} papers from both sides under one scheme, compare where each
-  community's defenses intervene, and recover every (defense, attack) pair
+  community's fixes intervene, and recover every (fix, mechanism) pair
   the \NAnalysed{} papers that name a technique report
   (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
-\item[RQ2] \textbf{Does a defense built for one literature's problem
+\item[RQ2] \textbf{Does a fix built for one literature's problem
   survive the other's?} We execute the pairs the literature skipped, from the
   authors' released code and weights
   (Sections~\ref{sec:campaign}, \ref{sec:results}).
@@ -73,19 +73,19 @@ repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
 and the safety side on its own terms as a problem of knowledge
 conflict~\cite{xu-2024-knowledge}. None of it runs the experiment. A
 survey of one literature has only that literature's methods in hand, and the
-test we need takes a defense from one side and an attack from the other. So we
+test we need takes a fix from one side and a mechanism from the other. So we
 read both, found the pairs no paper reports, and ran them from the authors'
 released code and weights. To our knowledge this is the first evaluation
-in which published defenses from one of these communities meet published
-failure mechanisms from the other.
+in which published fixes from one of these communities meet published
+mechanisms from the other.
 
 \paragraph{Scope.}
 Three limits bound what follows. Each experiment runs on one dataset, and we
 plant poisoned passages into the context rather than attack the retriever, so
 the numbers describe what a model does with bad text once it has it. Most runs
 use one 8-billion-parameter model, and our check on a second model covers only
-one defense design. Almost every attack we run knows nothing of the defense it meets,
-which bounds attack strength from below: conservative evidence when a defense
+one fix design. Almost every attack we run knows nothing of the fix it meets,
+which bounds attack strength from below: conservative evidence when a fix
 fails, and no evidence at all when one holds.
 
 \paragraph{Contributions.}
@@ -93,15 +93,15 @@ fails, and no evidence at all when one holds.
 \item \textbf{A map of how the two communities share one problem.} We place
   every mechanism and fix from both literatures in one taxonomy and along one
   picture of the agent's pipeline. It shows where each community works:
-  security methods guard where text enters, and safety methods improve how
+  security fixes guard where text enters, and safety fixes improve how
   the model reasons about text already inside. It also shows what a system
   built from either side alone leaves open at the stage the other side covers
   (RQ1; Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 
 \item \textbf{The first evaluation across the two communities.} We run
-  \NCampaignPairs{} pairs that put a method from one community against a
-  failure from the other, each from its authors' released code and weights,
-  and report how each method holds up outside the setting it was built for
+  \NCampaignPairs{} pairs that put a fix from one community against a
+  mechanism from the other, each from its authors' released code and weights,
+  and report how each fix holds up outside the setting it was built for
   (RQ2; Sections~\ref{sec:campaign}, \ref{sec:results}).
 
 \item \textbf{A test that tells copying from remembering.} We plant a passage
@@ -115,19 +115,19 @@ fails, and no evidence at all when one holds.
   score, a second base model and a second implementation to the results, and
   show which conclusions depend on them (RQ4; Section~\ref{sec:controls}).
 
-\item \textbf{An adaptive test of the one defense that held.} We build two
-  attacks against that defense's own rule, one by rephrasing and one by
+\item \textbf{An adaptive test of the one fix that held.} We build two
+  attacks against that fix's own rule, one by rephrasing and one by
   gradient search, and measure how much of its protection survives an
   attacker who reads it (RQ5; Section~\ref{sec:adaptive}).
 
 \item \textbf{A design rule for covering both stages.} From the results we
-  derive what a defense would need in order to protect both where text enters
+  derive what a fix would need in order to protect both where text enters
   and where the model reasons. The experiment that tests it has started and
   is not finished, and we claim no result from it
   (Section~\ref{sec:discussion}).
 
-\item \textbf{A runnable artifact.} Every attack and defense executes from
-  its authors' released code at a pinned commit, verified unmodified; the
+\item \textbf{A runnable artifact.} Every fix and every published attack
+  executes from its authors' released code at a pinned commit, verified unmodified; the
   harness, the planted passages and the full census ship with it.
 \end{itemize}
 
@@ -138,5 +138,5 @@ the platform, Section~\ref{sec:setup} the setup and the experiments we ran on
 it, and Section~\ref{sec:results} what they show, grouped under RQ2 to RQ5.
 Section~\ref{sec:discussion} turns what
 survives into conventions, into what a deployment inherits, and into the
-design rule a defense covering both regimes would have to follow.
+design rule a fix covering both regimes would have to follow.
 Section~\ref{sec:threats} states the limits and what is not finished.

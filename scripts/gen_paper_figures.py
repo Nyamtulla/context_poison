@@ -351,16 +351,16 @@ def fig_who_reports():
     The legend sits above the plot rather than inside it: the defense-paper
     bar runs nearly the full width, so an inset legend lands on top of data.
     """
-    data = [("reported by\nattack papers", 0, 13, 24),
-            ("reported by\ndefense papers", 193, 1, 0)]
+    data = [("reported by\nmechanism papers", 0, 13, 24),
+            ("reported by\nfix papers", 193, 1, 0)]
     fig, ax = plt.subplots(figsize=(COL, 1.6), constrained_layout=True)
     for i, (lab, win, inc, lose) in enumerate(data):
         left = 0
         # three outcomes, three textures: the segment that used to be a grey
         # fill is now an open hatched bar, so the series separates in print
-        for v, col, hat, name in ((win, ALT_A, "", "defense wins"),
+        for v, col, hat, name in ((win, ALT_A, "", "fix wins"),
                                   (inc, "white", "...", "inconclusive"),
-                                  (lose, ALT_B, "///", "defense loses")):
+                                  (lose, ALT_B, "///", "fix loses")):
             ax.barh(i, v, left=left, color=col, height=.5, hatch=hat,
                     edgecolor=INK, linewidth=.3,
                     label=name if i == 0 else None)
@@ -378,7 +378,7 @@ def fig_who_reports():
     ax.set_yticklabels([d[0] for d in data], fontsize=6.5)
     ax.set_xlim(0, 225)
     ax.set_ylim(-0.6, 1.9)
-    ax.set_xlabel("(defense, attack) pairs")
+    ax.set_xlabel("(fix, mechanism) pairs")
     ax.legend(frameon=False, fontsize=6.2, loc="upper left",
               bbox_to_anchor=(0, 1.22), ncol=3, columnspacing=1.1,
               handlelength=1.2, handletextpad=0.5)
@@ -720,10 +720,10 @@ def fig_transfer_matrix():
         for lbls in (ax.get_xticklabels(), ax.get_yticklabels()):
             for lbl, t in zip(lbls, TR):
                 lbl.set_color(TRACK_SEC if t == "security" else TRACK_ML)
-        ax.set_xlabel("attack from", fontsize=5.6)
+        ax.set_xlabel("mechanism from", fontsize=5.6)
         # Only the left panel keeps the y label: side by side they share the
         # same rows, and repeating it put type in the gap between them.
-        ax.set_ylabel("defense from" if name.startswith("published") else "",
+        ax.set_ylabel("fix from" if name.startswith("published") else "",
                       fontsize=5.6)
         ax.set_title(f"{name} ({tot})", fontsize=6.4, color=INK)
         for i in range(2):
@@ -778,12 +778,12 @@ def fig_lag():
         ax.text(k, v + 1.5, str(v), ha="center", fontsize=6.5, color=INK2)
     ax.axvline(-0.5, color=MUTED, lw=0.6, ls=":")
     n_before = sum(v for k, v in g.items() if k < 0)
-    ax.set_xlabel("defense year minus attack year")
+    ax.set_xlabel("fix year minus mechanism year")
     ax.set_ylabel("pairs")
     ax.set_xticks(ks)
     ax.set_ylim(0, max(vals) * 1.22)
     ax.spines["top"].set_visible(False); ax.spines["right"].set_visible(False)
-    ax.annotate(f"{n_before} defenses\npredate the\nattack they met",
+    ax.annotate(f"{n_before} fixes\npredate the\nmechanism they met",
                 xy=(-2.42, max(vals) * 0.62), fontsize=6.0, color=ALT_A,
                 ha="left")
     print(f"    lag: {n_before} of {len(tl)} defenses predate their attack")

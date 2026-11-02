@@ -84,7 +84,7 @@ def main():
 
     OUT.write_text(r"""\begin{table*}[t]
 \centering
-\caption{Defenses that decide how far to trust the document, against a
+\caption{Fixes that decide how far to trust the document, against a
 planted third answer on a corrupted context, in percentage points against
 each run's own undefended model, with the undefended and defended rates in
 brackets. Memory is how often the model gives its own answer, copied how
@@ -97,7 +97,7 @@ before rounding.}
 \small
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
-defense & $n$ & memory & copied & correct & residual \\
+fix & $n$ & memory & copied & correct & residual \\
 \midrule
 """ + "\n".join(body) + r"""
 \midrule

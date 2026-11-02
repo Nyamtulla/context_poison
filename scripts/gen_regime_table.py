@@ -51,7 +51,7 @@ def main():
          r"Misretrieval is a real, unmodified passage retrieved for another "
          r"question. Left: how often the model gives the planted answer. "
          rf"Right: accuracy on the gold answer. Threshold {mdr:.1f}\pp{{}} at "
-         r"this sample size. No defense is involved; every row is the "
+         r"this sample size. No fix is involved; every row is the "
          r"undefended model.}",
          r"\label{tab:regime}", r"\footnotesize",
          r"\begin{tabular}{@{}llrrrrrr" + "c" + r"rrrrrr@{}}",

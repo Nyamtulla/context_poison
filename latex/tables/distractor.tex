@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering
-\caption{Defenses that decide how far to trust the document, against a
+\caption{Fixes that decide how far to trust the document, against a
 planted third answer on a corrupted context, in percentage points against
 each run's own undefended model, with the undefended and defended rates in
 brackets. Memory is how often the model gives its own answer, copied how
@@ -13,7 +13,7 @@ before rounding.}
 \small
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
-defense & $n$ & memory & copied & correct & residual \\
+fix & $n$ & memory & copied & correct & residual \\
 \midrule
 ParamMute &  781 & $-36.1^{*}$ \footnotesize{$(39.0\!\to\!2.9)$} & $+37.5^{*}$ \footnotesize{$(43.9\!\to\!81.4)$} & $-3.8$ \footnotesize{$(5.4\!\to\!1.5)$} & $+1.4$ \\
 CK-PLUG   &  781 & $-31.6^{*}$ \footnotesize{$(36.1\!\to\!4.5)$} & $+38.8^{*}$ \footnotesize{$(47.9\!\to\!86.7)$} & $-7.2^{*}$ \footnotesize{$(9.3\!\to\!2.2)$} & $+7.2$ \\

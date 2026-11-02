@@ -117,7 +117,7 @@ def main():
     # each column holds its own fan-in or fan-out, so only the arrows
     # between the columns cross a frame
     column(0.5, 22.0, "Channel", "where untrusted\ncontent enters")
-    column(24.0, 74.8, "Intervention point", "where a defense\ncan act")
+    column(24.0, 74.8, "Intervention point", "where a fix\ncan act")
     column(76.8, 99.5, "Consequence", "how the output\ngoes wrong")
 
     # ---- colour and icons ---------------------------------------------------
