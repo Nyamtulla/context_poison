@@ -17,7 +17,9 @@
 #              rag    spotlighting, piguard filter, datasentinel filter (one
 #                     lane: they share one cached undefended pipeline)
 #              ds     DataSentinel flags (the datasentinel filter waits on it)
-#              reli   ReliabilityRAG
+#              reli   ReliabilityRAG, with the card to itself: vLLM sizes its
+#                     cache as a share of the whole card and counts our other
+#                     jobs against it, so it fails to start beside them
 #              attn   AttnTrace
 #   stage D  AttnTrace's PoisonedRAG control again, with trace ranks logged
 #
@@ -35,7 +37,9 @@ ATT=envs/attntrace-venv/bin/python
 DSV=envs/datasentinel-venv/bin/python
 FAILURES="incidental_stale distractor_evidence misretrieval context_dilution"
 
-step() {  # name, GB needed, command...
+rm -f "$Q"/exclusive.*   # markers left by an earlier queue
+
+step() {  # name, GB needed (or "excl": the card to itself), command...
     local name=$1 need=$2 lk pid rc pat; shift 2
     if [ -f "$Q/$name.done" ]; then echo "[skip] $name"; return 0; fi
     # a job an earlier queue left running is watched, not started twice;
@@ -50,12 +54,22 @@ step() {  # name, GB needed, command...
         [ $rc -eq 0 ] && touch "$Q/$name.done"
         return $rc
     fi
+    # an exclusive step raises its marker first, so no lane starts another
+    # job while it waits for ours to drain; every other step waits it out
+    local owner=${EXCL_OWNER:-$name}
+    if [ "$need" = excl ]; then
+        touch "$Q/exclusive.$owner"; need=46
+    fi
+    while ls "$Q"/exclusive.* 2>/dev/null | grep -qv "/exclusive.$owner\$"; do
+        sleep 30
+    done
     # wait for room without the lock, so a smaller job behind a bigger one
     # still starts; then take the lock and re-check, since another lane may
     # have loaded in between
     exec {lk}>"$Q/gpu.lock"
     while true; do
-        python3 scripts/gpu_gate.py --need_gb "$need" > /dev/null || { exec {lk}>&-; return 1; }
+        python3 scripts/gpu_gate.py --need_gb "$need" > /dev/null \
+            || { exec {lk}>&-; [ -z "${EXCL_OWNER:-}" ] && rm -f "$Q/exclusive.$name"; return 1; }
         flock -x "$lk"
         python3 scripts/gpu_gate.py --need_gb "$need" --once && break
         flock -u "$lk"
@@ -67,6 +81,7 @@ step() {  # name, GB needed, command...
     python3 scripts/gpu_settle.py --pid "$pid" | sed "s/^/  $name /"
     flock -u "$lk"; exec {lk}>&-
     wait "$pid"; rc=$?
+    [ -z "${EXCL_OWNER:-}" ] && rm -f "$Q/exclusive.$name"
     echo "[done ] $name exit $rc $(date '+%m-%d %H:%M')"
     [ $rc -eq 0 ] && touch "$Q/$name.done"
     return $rc
@@ -115,9 +130,18 @@ lane_ds()   {
     step datasentinel_flags 10 $DSV scripts/sd_detect_datasentinel.py \
         || touch "$Q/datasentinel_flags.failed"
 }
-lane_reli() { for f in $FAILURES; do step "reliabilityrag_$f" 28 $RELI scripts/sd_reliabilityrag.py --failure "$f"; done; }
+# the whole lane holds the card, so other lanes do not refill it between cells
+lane_reli() {
+    EXCL_OWNER=reli; touch "$Q/exclusive.reli"
+    for f in $FAILURES; do
+        step "reliabilityrag_$f" excl $RELI scripts/sd_reliabilityrag.py --failure "$f"
+    done
+    rm -f "$Q/exclusive.reli"
+}
 lane_attn() { for f in $FAILURES; do step "attntrace_$f" 22 $ATT scripts/sd_attntrace.py --failure "$f"; done; }
 
+# raised before any lane starts, so none slips a job in ahead of it
+[ "$(ls "$Q"/reliabilityrag_*.done 2>/dev/null | wc -l)" -lt 4 ] && touch "$Q/exclusive.reli"
 lane_ds & lane_reli & lane_attn & lane_rag &
 wait
 
