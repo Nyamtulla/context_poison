@@ -180,8 +180,10 @@ def retrieval_runs():
         if stem in NOT_PAIR_RUNS:
             continue
         # smoke tests and dry runs of the second-direction runners check
-        # wiring on a handful of items; they are never a reportable pair
-        if stem.startswith(("smoke_", "dry_")):
+        # wiring on a handful of items; controls (a defense on its own
+        # paper's attack) and checks (AttnTrace's shuffled-order sample)
+        # qualify a pair's reading. None of them is a reportable pair.
+        if stem.startswith(("smoke_", "dry_", "control_", "check_")):
             continue
         # A registry written incrementally says when it is finished. Files
         # that predate incremental writing carry no flag and were only ever

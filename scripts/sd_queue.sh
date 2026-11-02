@@ -21,7 +21,8 @@
 #                     cache as a share of the whole card and counts our other
 #                     jobs against it, so it fails to start beside them
 #              attn   AttnTrace
-#   stage D  AttnTrace's PoisonedRAG control again, with trace ranks logged
+#   stage D  AttnTrace's PoisonedRAG control again, with trace ranks logged,
+#            and its stale-document trace on shuffled passage order
 #
 # Resumable: every cell logs each answer, a finished cell is skipped, and a
 # restarted queue picks up where it stopped, adopting any job still running.
@@ -151,4 +152,10 @@ wait
 step control_attntrace_ranked 22 $ATT scripts/sd_attntrace.py --failure poisonedrag $CT \
     --arms defended --log_suffix _ranked \
     --out data/registries/control_native_attntrace_poisonedrag_ranked.json
+# the stale passages hold the last slots in the shared contexts and attention
+# favours recent text; the same passages shuffled (build_sd_shuffled.py) show
+# whether the trace follows their content or their position
+step check_attntrace_shuffled 22 $ATT scripts/sd_attntrace.py --failure incidental_stale_shuffled \
+    --arms undefended defended \
+    --out data/registries/check_native_attntrace_incidental_stale_shuffled.json
 echo "[queue complete] $(date '+%m-%d %H:%M')"
