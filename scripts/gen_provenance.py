@@ -38,7 +38,8 @@ def counts():
     n["bwd"] = g("select count(*) from papers where hop<=1 and discovered_via='backward'")[0][0]
     n["manual"] = g("select count(*) from papers where hop<=1 and discovered_via='manual'")[0][0]
     n["manual_hop0"] = g("select count(*) from papers where hop=0 and discovered_via='manual'")[0][0]
-    assert n["seeds"] + n["manual_hop0"] + n["search"] == n["hop0"], \
+    # hand-added records would be a third input the first box does not show
+    assert n["manual_hop0"] == 0 and n["seeds"] + n["search"] == n["hop0"], \
         "stage-one inputs no longer sum to hop 0; the figure's first box would not add up"
     n["pool"] = n["hop0"] + n["hop1"]
     for k in ("auto_include", "auto_exclude", "needs_review"):
@@ -147,9 +148,9 @@ def figure(n):
 
     stages = [
         # inputs on the left, in the order they came in; the right cell is
-        # their sum, so the hand-added record is named for the sum to close
+        # their sum (counts() asserts that it is one)
         ("Seeds and database search",
-         f"{n['seeds']} seeds, {n['manual_hop0']} added by hand\n"
+         f"{n['seeds']} seeds\n"
          f"{n['queries']} queries, {n['apis']} APIs: {n['search']:,} records",
          f"total\nn = {n['hop0']:,}"),
         ("Snowballed, both directions",

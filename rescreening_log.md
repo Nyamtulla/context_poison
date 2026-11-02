@@ -948,3 +948,32 @@ now filters both registries to the included corpus.
 **What moved:** corpus 982->929, defenses 527->518, papers contributing nothing
 302->258, ML/AI track 384->336, cross-citation from ML/AI to security 9.4%->10.7%,
 citation network 932->878 nodes. The headline findings hold.
+
+## Addendum, 2026-11-02 — a hand-added seed-stage record removed
+
+**Discovery pool 25,922 -> 25,921. Working pool 14,947 -> 14,946. Hop 0
+5,121 -> 5,120. Auto-excluded 4,759 -> 4,758. Corpus unchanged at 929.**
+
+Removed: *Attention is All you Need* (Vaswani et al., NeurIPS 2017, S2
+`204e3073870fae3d05bcbc2f6a8e263d9b72e776`), the only record with
+`discovered_via = manual`. It sat in hop 0 beside the 51 seeds and the 5,069
+search records, added 2026-07-31.
+
+**Why.** It is the Transformer paper. It studies neither context poisoning
+nor context degradation and is not relevant to the corpus; the project lead
+asked for its removal. It never reached the corpus: the automated screen
+excluded it and its human screen was still `needs_review`.
+
+**How it was found.** Figure 1's first box listed 51 seeds and 5,069 records
+over a total of 5,121. The one-record gap was this paper.
+
+**What else it touched.** No record names it as `source_paper_id`, so nothing
+was snowballed from it. Its 61 citation edges (39 outgoing, 22 incoming) were
+deleted with it. It appears in no registry and no spreadsheet. A copy of the
+database before the deletion is in `data/backups/` (not tracked).
+
+Regenerated: `latex/numbers.tex` (the four counts above; nothing else moved)
+and Figure 1, whose first box now reads 51 seeds and 40 queries over two APIs
+returning 5,069 records, total 5,120. `gen_provenance.py` asserts that the
+first box's inputs sum to hop 0 and that no hand-added record remains, so a
+future one cannot reopen the gap silently.

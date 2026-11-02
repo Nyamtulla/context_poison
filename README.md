@@ -77,8 +77,8 @@ re-run search or PDF download. Findings and methodology write-ups live in
 
 ## Setup
 
-**Install Git LFS before cloning.** `data/context_sok.db` (~70 MB — the 25,922-record
-discovery pool and 42,123 citation edges) is stored in Git LFS. Without LFS you get a
+**Install Git LFS before cloning.** `data/context_sok.db` (~70 MB — the 25,921-record
+discovery pool and 45,800 citation edges) is stored in Git LFS. Without LFS you get a
 133-byte pointer file where the database should be, and every script that opens it
 fails with `sqlite3.DatabaseError: file is not a database`.
 
