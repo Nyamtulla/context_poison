@@ -110,8 +110,9 @@ def main():
         xc = (x0 + x1) / 2
         ax.text(xc, head_y, name, ha="center", va="center", fontsize=7.4,
                 color=INK, fontweight="bold")
-        ax.text(xc, sub_y, what, ha="center", va="center", fontsize=6.3,
-                color=INK2, fontstyle="italic", linespacing=1.15)
+        # full ink: a grey description fades in a black-and-white print
+        ax.text(xc, sub_y, what, ha="center", va="center", fontsize=6.4,
+                color=INK, fontstyle="italic", linespacing=1.15)
 
     # each column holds its own fan-in or fan-out, so only the arrows
     # between the columns cross a frame
@@ -261,10 +262,11 @@ def main():
     arrow(ax, 66.4, mid, RBUS, mid, lw=1.0, color=CQ)
 
     # ---- the three intervention points -------------------------------------
-    for (key, lab), xc in zip(POINTS, (28.0, 51.4, 70.4)):
+    # each label clears its column frame (24.0 and 74.8) by a margin
+    for (key, lab), xc in zip(POINTS, (29.0, 51.4, 69.6)):
         ax.plot([xc, xc], [mid - 22, mid + 22], ls=(0, (2.2, 1.8)), lw=0.6,
                 color=INK, zorder=1)
-        ax.text(xc, mid - 26.5, lab, ha="center", fontsize=6.6, color=INK,
+        ax.text(xc, mid - 26.5, lab, ha="center", fontsize=6.3, color=INK,
                 fontweight="bold")
 
     # ---- consequences, right -----------------------------------------------
