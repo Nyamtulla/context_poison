@@ -22,7 +22,8 @@
 #                     jobs against it, so it fails to start beside them
 #              attn   AttnTrace
 #   stage D  AttnTrace's PoisonedRAG control again, with trace ranks logged,
-#            and its stale-document trace on shuffled passage order
+#            and its stale-document trace on shuffled passage order;
+#            ReliabilityRAG's stale cell at 5/10 with its selection recorded
 #
 # Resumable: every cell logs each answer, a finished cell is skipped, and a
 # restarted queue picks up where it stopped, adopting any job still running.
@@ -158,4 +159,11 @@ step control_attntrace_ranked 22 $ATT scripts/sd_attntrace.py --failure poisoned
 step check_attntrace_shuffled 22 $ATT scripts/sd_attntrace.py --failure incidental_stale_shuffled \
     --arms undefended defended \
     --out data/registries/check_native_attntrace_incidental_stale_shuffled.json
+# ReliabilityRAG keeps the stale passages once half are stale; its query()
+# prints neither the per-passage answers nor the contradiction graph that say
+# why the honest ones fell out. Rerun that cell recording both; at temperature
+# 0 its answers should also match the first run's.
+step check_reliabilityrag_stale_trace excl $RELI scripts/sd_reliabilityrag.py \
+    --failure incidental_stale --doses 5 --arms defended --log_suffix _trace \
+    --out data/registries/check_native_reliabilityrag_incidental_stale_trace.json
 echo "[queue complete] $(date '+%m-%d %H:%M')"

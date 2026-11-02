@@ -64,6 +64,11 @@ def main():
     ap.add_argument("--err", type=float, default=0.0,
                     help="their NLI error-injection knob; main.py default 0")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--log_suffix", default="",
+                    help="separate answer log, so a rerun does not resume "
+                         "from (and reuse) an earlier run's answers")
+    ap.add_argument("--arms", nargs="+", default=None,
+                    help="subset of closedbook/undefended/defended")
     args = ap.parse_args()
 
     from sd_common import run_cell
@@ -97,20 +102,52 @@ def main():
     def undefended(q, ps):
         return str(base.query_undefended(item(q, ps)))
 
+    # Their query() prints neither the per-passage answers nor the
+    # contradiction graph, and both are needed to say why a passage was left
+    # out: it answered "I don't know" and was never a candidate, or the NLI
+    # model set it against the others. Both are recorded on the way through
+    # their own calls; neither call's input or output is changed.
+    seen = {}
+    _batch, _mis_set = llm.batch_query, mis._max_independent_set
+
+    def batch_query(prompts, *a, **k):
+        out = _batch(prompts, *a, **k)
+        seen["responses"] = [str(r) for r in out]
+        return out
+
+    def max_independent_set(graph, vertices):
+        best = _mis_set(graph, vertices)
+        seen.update(candidates=sorted(vertices),
+                    edges=sorted([i, j] for i in graph for j in graph[i] if i < j),
+                    selected=sorted(best) if best else [])
+        return best
+    llm.batch_query = batch_query
+    mis._max_independent_set = max_independent_set
+    trace = {}
+
     def defended(q, ps):
         if not ps:
             return undefended(q, ps)
-        return str(mis.query(item(q, ps)))
+        seen.clear()
+        pred = str(mis.query(item(q, ps)))
+        trace[(q, len(ps))] = dict(seen)
+        return pred
+
+    def extra_fn(arm, dose, row, pred):
+        if arm != "defended":
+            return None
+        return trace.get((row["question"], len(row["contexts"][str(dose)])))
 
     tag = "smoke_" if args.n else ""
     out = args.out or (REPO / "data" / "registries" /
                        f"{tag}native_reliabilityrag_{args.failure}.json")
     log = (REPO / "data" / "sd_logs" /
-           f"{tag}reliabilityrag_{args.failure}_mistral7b.jsonl")
+           f"{tag}reliabilityrag_{args.failure}_mistral7b{args.log_suffix}.jsonl")
     run_cell(defense="reliabilityrag", family="consistent-subset",
              failure=args.failure, model="mistral7b", undefended=undefended,
              defended=defended, closedbook=undefended, out_path=out,
-             log_path=log, n=args.n, doses=args.doses,
+             log_path=log, n=args.n, doses=args.doses, extra_fn=extra_fn,
+             **({"arms": tuple(args.arms)} if args.arms else {}),
              notes={"registry_row": 276, "method": "MISBasedRRAG",
                     "err": args.err,
                     "backend": "their VLLMModel, temperature 0, "
