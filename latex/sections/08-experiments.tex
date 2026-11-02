@@ -1,4 +1,188 @@
-\section{Experiments}
+\section{Experimental setup}
+\label{sec:setup}
+
+This section lists what the harness of Section~\ref{sec:experiments} ran:
+the models and hardware, the item sets, the defenses, and the attacks and
+honest failures, and then the experiments that combine them.
+
+\subsection{Models and hardware}
+\label{sec:whatweran}
+
+The victim model in the retrieval experiments is
+Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
+Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each defense
+released. The agent experiment uses a
+Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
+
+Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
+535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
+\texttt{transformers} 5.5.0, except for the defenses whose authors pin other
+versions (Section~\ref{sec:harness}).
+
+\subsection{Datasets}
+\label{sec:provenance}
+
+The retrieval experiments use CoConflictQA~\cite{huang-2025-parammute} over
+Natural Questions, and open Natural Questions for the attacks that need a
+retrieval pool. The agent experiment uses the AgentDojo banking
+suite~\cite{debenedetti-2024-agentdojo}.
+
+\begin{table}[t]
+\centering
+\caption{Item sets and payloads, by owner. No item set is ours. Three
+payloads come from the attack literature and five are ours, and none of the
+five is a new attack: three are edits of a field the benchmark already ships,
+and two reuse the item set's own retrieved passages, which is what makes them
+controls rather than attacks.}
+\label{tab:provenance}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.40\columnwidth}>{\raggedright\arraybackslash}p{0.52\columnwidth}@{}}
+\toprule
+\textbf{Item set} & \textbf{Released by} \\
+\midrule
+CoConflictQA~\cite{huang-2025-parammute} over Natural Questions & the ParamMute authors \\
+Open Natural Questions~\cite{kwiatkowski-2019-natural}, with its retrieval pool & the RobustRAG authors \\
+FaithEval~\cite{ming-2025-faitheval}, SQuAD~\cite{rajpurkar-2016-squad} negatives & the FaithfulRAG~\cite{zhang-2025-faithfulrag} authors \\
+AgentDojo banking suite & the AgentDojo authors \\
+\midrule
+\textbf{Payload} & \textbf{Origin} \\
+\midrule
+Corpus poisoning & Zhong et al.'s released passage, unmodified \\
+PoisonedRAG, BadRAG & The published constructions \\
+False evidence & CoConflictQA's own parametric-evidence field \\
+Distractor evidence & \textbf{ours}: one substitution into that field \\
+Adaptive distractor & \textbf{ours}: the same claim, reshaped against one
+defense's rule \\
+Gradient distractor & \textbf{ours}: that passage and a suffix optimized
+against the same rule \\
+Stale document & \textbf{ours}: a real retrieved passage, gold answer
+swapped \\
+Misretrieval & \textbf{ours}: a real passage, unmodified, retrieved for
+another question \\
+Dilution & \textbf{ours}: real passages, unmodified, retrieved for other
+questions and appended \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\input{tables/regime_framing}
+
+An \textbf{item} is one question, its gold answer, and the context the model
+is given to answer it from. Every item in this paper belongs to the authors
+of the method or the benchmark we are running, and Table~\ref{tab:provenance}
+lists each source and whose it is. Running each method on its own authors'
+data rules out a change of dataset as the explanation for its results.
+
+Every comparison in this paper is between models measured on the same items.
+Rates computed on different item sets are incomparable rather than merely
+noisy, so we checked this mechanically: no run in any result file compares
+two models measured on different items.
+
+The one place the item set narrows is the planted third answer, and it
+narrows for every model in that run together. It is defined on \NDistractorItems{} of CoConflictQA's
+\NCoConflictItems{} items. An item
+qualifies on two conditions. Its remembered answer must appear verbatim in its
+own evidence sentence, so that the substitution needs no rewriting. And its
+question type and answer magnitude must admit at least three candidate
+distractors, so that the planted answer is a plausible example of its kind
+rather than an implausible value. The defended, undefended and no-document models in those runs are all
+measured on that same subset.
+
+\subsection{Defenses}
+\label{sec:defenses}
+
+The defenses from the safety literature were built for knowledge conflict.
+Each adjusts how much the model relies on the
+retrieved text. ACD decodes from the no-context
+distribution and pulls it toward the with-context one by a weight computed
+from entropy. CK-PLUG interpolates the two
+distributions under a single parameter. ParamMute
+suppresses the feed-forward layers that carry parametric memory, forcing the
+model onto the retrieved text. SpARE~\cite{zhao-2024-steering} and
+SHIFT~\cite{li-2026-shift} steer along a context-faithfulness direction in
+activation space. COIECD detects a conflict
+between the two sources and pushes toward the context.
+SCR makes the same trade through prompting rather
+than decoding.
+
+The retrieval defense from the security literature is
+RobustRAG~\cite{xiang-2024-certifiably} answers from each retrieved passage in
+isolation and then aggregates the answers, so a corrupted passage can sway
+only its own. Its keyword variant keeps the keywords that recur across the
+isolated answers and answers from those; its decoding variant averages the
+isolated answers' next-token distributions. Its guarantee holds while the
+corrupted passages are few. We run both released implementations.
+
+The prompt-injection defenses of the agent experiment act before the agent
+reads its input or acts on it.
+
+\subsection{Attacks and honest failures}
+\label{sec:payloadclasses}
+
+Every run uses items whose context is at most 2000 characters. The cut is on
+length alone, never on an outcome, and it is applied once, so every defense
+and every planted passage meets the same items. It exists because
+contrastive-decoding defenses run the model twice at once, and the cut keeps
+every defense on one card at a shared batch size.
+
+The planted passages in Table~\ref{tab:provenance} fall into five groups by
+what they do to the evidence.
+
+Four plant a false answer. PoisonedRAG writes a passage asserting the
+attacker's answer. False evidence is a fluent sentence asserting the wrong
+answer the model would give from memory; it is the
+\texttt{parametric\_evidence} field that ships inside CoConflictQA, the
+ParamMute authors' own benchmark. A planted third answer is that sentence with
+one word changed, so it asserts an answer that is neither the truth nor the
+model's own. A stale document is a real retrieved passage with its answer
+swapped.
+
+Two push the right evidence out instead. Corpus
+poisoning~\cite{zhong-2023-poisoning,su-2024-corpus} is a token sequence
+optimized to be retrieved for many queries, incoherent to a human reader.
+Misretrieval is a real passage retrieved for a different question.
+
+One adds text and removes nothing. Dilution appends real passages retrieved
+for other questions to the ten retrieved, so the context grows while the
+original evidence stays in place. It reproduces the safety literature's
+context-length degradation~\cite{xia-2026-diagnosing} at the scale of a
+retrieval context.
+
+Two change the model's behavior rather than its answer. BadRAG's refusal
+attack makes the model decline to answer, and its tone attack makes it answer
+in a negative tone.
+
+Two are built against one defense. Both take the planted third answer and
+reshape it to minimize the quantity ACD's rule measures: one by choosing the
+best of five phrasings, one by appending a suffix found by gradient search
+(Section~\ref{sec:adaptive}).
+
+\paragraph{Dose, and the one item set that has none.}
+The \textbf{dose} is how many of the retrieved passages are planted. It is
+the main axis of the retrieval results, because a defense that
+holds against one poisoned passage and fails against five has not failed in
+the same way as one that never helped.
+
+We take the dose from the attacks rather than define one. Their released
+constructor is parameterized by how many of the top $k$ retrieved passages
+it replaces, where it places them and how often the planted sentence repeats
+inside its passage. We keep that construction and sweep the one parameter:
+$j$ of the top ten, for $j$ in $\{0, 1, 2, 3, 5\}$. Their own default is
+$j = 1$, and RobustRAG's authors sweep up to five of ten and no further, so
+every point we report is inside the range the attack and defense authors
+evaluate. Beyond five few honest passages remain, and a low score there
+measures the attack more than the defense. Dilution is the one exception to
+replacement: its $j$ passages are added to the ten, so its context holds
+$10 + j$.
+
+One item set has no such axis and we do not give it one. CoConflictQA
+supplies a single context passage per item, which either carries the
+conflicting claim or does not, and a single passage has no ranked list to
+dose. We report it in the two conditions its own authors run, a clean
+context and a corrupted one. The two item sets are never combined in one
+number.
+
+\subsection{The experiments}
 \label{sec:campaign}
 
 We executed \NCampaignPairs{} (defense, attack) pairs across \NCampaignImpl{}
