@@ -19,6 +19,7 @@
 #              ds     DataSentinel flags (the datasentinel filter waits on it)
 #              reli   ReliabilityRAG
 #              attn   AttnTrace
+#   stage D  AttnTrace's PoisonedRAG control again, with trace ranks logged
 #
 # Resumable: every cell logs each answer, a finished cell is skipped, and a
 # restarted queue picks up where it stopped, adopting any job still running.
@@ -119,4 +120,11 @@ lane_attn() { for f in $FAILURES; do step "attntrace_$f" 22 $ATT scripts/sd_attn
 
 lane_ds & lane_reli & lane_attn & lane_rag &
 wait
+
+# ---- stage D: AttnTrace's control again, logging trace ranks ---------------
+# the first control predates rank logging; the same seed should reproduce its
+# traced sets exactly, which the forensic analysis checks
+step control_attntrace_ranked 22 $ATT scripts/sd_attntrace.py --failure poisonedrag $CT \
+    --arms defended --log_suffix _ranked \
+    --out data/registries/control_native_attntrace_poisonedrag_ranked.json
 echo "[queue complete] $(date '+%m-%d %H:%M')"

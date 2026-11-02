@@ -45,6 +45,11 @@ def main():
     ap.add_argument("--K", type=int, default=5,
                     help="passages traced and removed; their main.py default")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--log_suffix", default="",
+                    help="separate answer log, so a rerun does not resume "
+                         "from (and reuse) an earlier run's answers")
+    ap.add_argument("--arms", nargs="+", default=None,
+                    help="subset of closedbook/undefended/defended")
     ap.add_argument("--device", default="cuda:0",
                     help="cpu runs a slow smoke test off the shared card")
     args = ap.parse_args()
@@ -101,11 +106,12 @@ def main():
     out = args.out or (REPO / "data" / "registries" /
                        f"{tag}native_attntrace_{args.failure}.json")
     log = (REPO / "data" / "sd_logs" /
-           f"{tag}attntrace_{args.failure}_{args.model_name}.jsonl")
+           f"{tag}attntrace_{args.failure}_{args.model_name}{args.log_suffix}.jsonl")
     run_cell(defense="attntrace", family="attribute-then-remove",
              failure=args.failure, model=args.model_name, undefended=answer,
              defended=defended, closedbook=answer, out_path=out,
              log_path=log, n=args.n, doses=args.doses, extra_fn=extra_fn,
+             **({"arms": tuple(args.arms)} if args.arms else {}),
              notes={"registry_row": 217,
                     "attribution": "AttnTraceAttribution segment K=%d avg_k=5 "
                                    "q=0.4 B=30 seed=12" % args.K,
