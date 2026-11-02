@@ -526,6 +526,18 @@ def fig_citation_network():
     pos = nx.spring_layout(giant, seed=11,
                            k=7.0 / max(giant.number_of_nodes() ** 0.5, .1),
                            iterations=400)
+    # Pull outliers in. A chain of papers cited only by each other -- four
+    # GUI- and web-agent papers, M2 -> MGA -> StructAgent -> GUI-PRA -- is
+    # flung far from the mass and stretched the canvas by a third, shrinking
+    # everything that matters. Distances beyond the 95th percentile from the
+    # centre are compressed to a quarter; the chain keeps its shape.
+    import numpy as _np
+    P = _np.array(list(pos.values())); c0 = P.mean(axis=0)
+    R = _np.percentile(_np.linalg.norm(P - c0, axis=1), 95)
+    for n, p_ in pos.items():
+        v = _np.asarray(p_) - c0; d = _np.linalg.norm(v)
+        if d > R:
+            pos[n] = c0 + v / d * (R + 0.25 * (d - R))
     xs = [p[0] for p in pos.values()]; ys = [p[1] for p in pos.values()]
     island = [n for c in comps[1:] for n in c]
     for i, n in enumerate(island):
@@ -536,7 +548,10 @@ def fig_citation_network():
     for u, v in G.edges():
         (cross if track.get(u) != track.get(v) else same).append((pos[u], pos[v]))
 
-    fig, ax = plt.subplots(figsize=(FULL * 0.56, 4.05))
+    # Column width, made tall: a full-width version could not print before
+    # its first mention without crowding the cube's page, so this one grows
+    # in height instead, and the trimmed tail gives the clusters that room.
+    fig, ax = plt.subplots(figsize=(FULL * 0.5, 4.6))
     fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
     from matplotlib.collections import LineCollection
     # Cross-track edges concentrate between the clusters. Drawn solid they
@@ -554,9 +569,37 @@ def fig_citation_network():
         # a thin surface ring keeps overlapping markers readable as separate
         # dots rather than a solid mass
         ax.scatter([pos[n][0] for n in ns], [pos[n][1] for n in ns],
-                   s=9 if mk != "o" else 7, marker=mk,
+                   s=10 if mk != "o" else 8, marker=mk,
                    c=col, linewidths=0.25, edgecolors="white", zorder=4,
                    label=f"{tr} ({len(ns)})")
+    # The four most-cited bridges, by cross-regime degree, ringed and named:
+    # the prose names them, and the same count picks them here, so the two
+    # cannot disagree.
+    cdeg = {n: sum(1 for m in G[n] if track.get(m) != track.get(n)) for n in G}
+    bridges = sorted(cdeg, key=lambda n: (-cdeg[n], n))[:4]
+    tcol = hdr.index("title")
+    title = {r[pi]: r[tcol] or "" for r in rows}
+    SHORT = {"Lost in the Middle": "Lost in the middle",
+             "Not What You've Signed Up For": "Greshake et al.",
+             "PoisonedRAG": "PoisonedRAG", "Self-RAG": "Self-RAG"}
+    cxy = _np.array([pos[n] for n in G]).mean(axis=0)
+    for n in bridges:
+        name = next((v for k, v in SHORT.items() if title[n].startswith(k)), None)
+        assert name, f"a top-4 bridge is not one the prose names: {title[n]!r}"
+        col, mk = COLORS[track[n]]
+        ax.scatter([pos[n][0]], [pos[n][1]], s=40 if mk != "o" else 34,
+                   marker=mk, c=col, linewidths=1.0, edgecolors=INK, zorder=6)
+        # label pushed away from the centre of the graph, clear of the band
+        v = _np.asarray(pos[n]) - cxy
+        v = v / (_np.linalg.norm(v) or 1)
+        ax.annotate(f"{name} ({cdeg[n]})", pos[n], textcoords="offset points",
+                    xytext=(v[0] * 22, v[1] * 26 + (12 if v[1] >= 0 else -12)),
+                    fontsize=6.2, color=INK, fontweight="bold",
+                    ha="left" if v[0] >= 0 else "right", va="center", zorder=7,
+                    bbox=dict(boxstyle="round,pad=0.18", fc="white", ec="none",
+                              alpha=0.85),
+                    arrowprops=dict(arrowstyle="-", color=INK, lw=0.6,
+                                    shrinkA=0, shrinkB=4))
     # The spring layout leaves the lower left of the canvas empty, so the
     # legend goes there instead of under the figure, where it cost a strip
     # of height and a three-column row the reader had to scan sideways.
