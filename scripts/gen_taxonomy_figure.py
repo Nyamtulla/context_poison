@@ -123,9 +123,12 @@ def main():
     # One hue per column: channels teal, consequences purple. Neither is the
     # paper's security red or safety blue, which mean the two regimes in every
     # other figure; this figure has no regime, so it must not borrow them.
-    # Both clear 4.5:1 on white (6.0 and 5.95), so the icons hold in print.
-    # Labels stay ink; colour marks which column a box belongs to and never
-    # carries meaning on its own.
+    # Both clear 4.5:1 on white (6.0 and 5.95) and print as dark greys (80
+    # and 102 of 255), so icons and outlines hold in black and white; the
+    # tints print near-white (237). Labels stay ink, columns are told apart
+    # by position and heading, and the one thing that matters -- which text
+    # is untrusted -- also has a dashed border. Colour never carries meaning
+    # on its own.
     CH, CH_T = "#0b6f65", "#e3f1ef"
     CQ, CQ_T = "#7d4ea8", "#f0e9f6"
     from matplotlib.font_manager import FontProperties
@@ -212,13 +215,15 @@ def main():
     y1 = y0 - 5.6
     icon(CW[0] + 1.7, y1, "person", INK2, 5.6)
     words(tx0, tx1, y1, (0.18, 0.26, 0.22), GREY)
-    # the retrieved passage: tinted block in the channel colour
+    # the retrieved passage: tinted block in the channel colour, with a
+    # dashed border, because the tint prints as near-white in greyscale and
+    # this is the one thing in the figure that must not depend on colour
     by = CW[1] + 1.6
     bh = y1 - 2.6 - by
     ax.add_patch(FancyBboxPatch((CW[0] + 0.9, by), CW[2] - 1.8, bh,
                                 boxstyle="round,pad=0,rounding_size=0.8",
-                                facecolor=CH_T, edgecolor=CH, linewidth=0.6,
-                                zorder=3))
+                                facecolor=CH_T, edgecolor=CH, linewidth=0.8,
+                                linestyle=(0, (2.4, 1.4)), zorder=3))
     icon(CW[0] + 1.9, by + bh - 2.0, "description", CH, 5.8)
     for k, L in enumerate(((0.24, 0.18, 0.30, 0.14), (0.20, 0.32, 0.16),
                            (0.28, 0.22))):
