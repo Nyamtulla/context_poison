@@ -29,7 +29,7 @@ import sys
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Rectangle, Ellipse
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 R = REPO / "data" / "registries"
@@ -134,12 +134,58 @@ def main():
     ax.plot([BUS, BUS], [bot + h / 2, top - h / 2], lw=0.6, color=INK,
             zorder=1)
     mid = (top + bot) / 2
-    arrow(ax, BUS, mid, 32.6, mid, lw=1.0, color=INK2)
+    arrow(ax, BUS, mid, 31.8, mid, lw=1.0, color=INK2)
 
     # ---- the pipeline ------------------------------------------------------
-    box(ax, 33, mid - 12, 14, 24, "context\nwindow", "#ffffff", INK, fs=7)
-    box(ax, 54, mid - 12, 12, 24, "model", "#ffffff", INK, fs=7)
-    arrow(ax, 47.4, mid, 53.6, mid, lw=1.0, color=INK2)
+    # Each box carries a glyph of what it is, label on top. The context
+    # window is a page of text lines, one of them hatched: untrusted content
+    # sits in the same window as everything else, which is the problem the
+    # taxonomy describes. The model is a small layered network. Both are
+    # ink only, so they survive a greyscale print.
+    CW = (32.2, mid - 13, 15.6, 26)      # x, y, w, h
+    MD = (54, mid - 13, 12, 26)
+    box(ax, *CW, "", "#ffffff", INK)
+    box(ax, *MD, "", "#ffffff", INK)
+    ax.text(CW[0] + CW[2] / 2, CW[1] + CW[3] - 3.6, "context window",
+            ha="center", va="center", fontsize=6.6, color=INK)
+    ax.text(MD[0] + MD[2] / 2, MD[1] + MD[3] - 3.6, "model",
+            ha="center", va="center", fontsize=6.6, color=INK)
+
+    # text lines; widths vary as a paragraph's do, the hatched one is the
+    # untrusted passage
+    widths = (0.92, 0.78, 0.88, 0.95, 0.70, 0.85)
+    lx, lw_ = CW[0] + 1.6, CW[2] - 3.2
+    ly, lh, lstep = CW[1] + CW[3] - 8.6, 1.7, 2.95
+    for k, wf in enumerate(widths):
+        y = ly - k * lstep
+        hatched = k == 3
+        ax.add_patch(Rectangle((lx, y), lw_ * wf, lh,
+                               facecolor="#ffffff" if hatched else "#9c9b97",
+                               edgecolor=INK if hatched else "none",
+                               hatch="//////" if hatched else None,
+                               linewidth=0.5))
+
+    # a 3-4-4-2 network; x and y units differ (7 in by 3.6 in), so nodes are
+    # ellipses in data units that render round
+    layers = (3, 4, 4, 2)
+    gx0, gx1 = MD[0] + 2.0, MD[0] + MD[2] - 2.0
+    gy0, gy1 = MD[1] + 2.6, MD[1] + MD[3] - 7.4
+    rx = 0.62
+    ry = rx * FULL / 3.6
+    pos = []
+    for li, m in enumerate(layers):
+        x = gx0 + li * (gx1 - gx0) / (len(layers) - 1)
+        ys = [gy0 + (gy1 - gy0) * (j + 0.5) / m for j in range(m)]
+        pos.append([(x, y) for y in ys])
+    for a, b in zip(pos, pos[1:]):
+        for (x1, y1) in a:
+            for (x2, y2) in b:
+                ax.plot([x1, x2], [y1, y2], lw=0.3, color="#9c9b97", zorder=2)
+    for layer in pos:
+        for (x, y) in layer:
+            ax.add_patch(Ellipse((x, y), 2 * rx, 2 * ry, facecolor="#ffffff",
+                                 edgecolor=INK, linewidth=0.55, zorder=3))
+    arrow(ax, 48.2, mid, 53.6, mid, lw=1.0, color=INK2)
     arrow(ax, 66.4, mid, RBUS, mid, lw=1.0, color=INK2)
 
     # ---- the three intervention points -------------------------------------
