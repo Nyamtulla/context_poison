@@ -330,6 +330,14 @@ own stated threat model, and it is the one place in this audit where the
 gap is the paper's rather than the field's convention. The classification is conservative by construction --- anything
 ambiguous lands in that last group rather than in a positive one.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_who_reports}
+\caption{The outcome of each recovered pair, as reported by the papers
+that propose fixes and by the papers that propose mechanisms.}
+\label{fig:whoreports}
+\end{figure}
+
 Every count above is a positive finding: something the paper says, not
 something a pass failed to find. We report no number of the second kind, and
 the reason generalizes. We built three automated passes over these papers,
@@ -339,13 +347,6 @@ it cannot establish that something is absent, because absence of the phrasing
 it knows is not absence of the thing. A claim that something was never
 tested should state whether it means ``not done'' or ``not resolved''.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig3_who_reports}
-\caption{The outcome of each recovered pair, as reported by the papers
-that propose fixes and by the papers that propose mechanisms.}
-\label{fig:whoreports}
-\end{figure}
 
 \subsection{Reporter bias in recovered pairs}
 \label{sec:whoran}
