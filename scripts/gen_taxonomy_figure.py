@@ -36,10 +36,9 @@ R = REPO / "data" / "registries"
 OUT = REPO / "latex" / "figures"
 
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
-# No fills. Every box here was washed in #f0efec, which is the shade that
-# makes a figure read as a slide and is the first thing to disappear in a
-# printed copy. Boxes are white with a hairline edge; the rules and stubs
-# are ink, thin.
+# No grey washes: #f0efec made the figure read as a slide and vanished in
+# print. The colour this figure does use is one hue per column, with icons,
+# set in main(); see the note there for why it avoids red and blue.
 # The track convention, the same hexes as gen_paper_figures.py: security is
 # red and safety is blue, in every figure in the paper. This file had them
 # the other way round, which made it the one figure where the colours meant
@@ -120,56 +119,122 @@ def main():
     column(24.0, 74.8, "Intervention point", "where a defense\ncan act")
     column(76.8, 99.5, "Consequence", "how the output\ngoes wrong")
 
+    # ---- colour and icons ---------------------------------------------------
+    # One hue per column: channels teal, consequences purple. Neither is the
+    # paper's security red or safety blue, which mean the two regimes in every
+    # other figure; this figure has no regime, so it must not borrow them.
+    # Both clear 4.5:1 on white (6.0 and 5.95), so the icons hold in print.
+    # Labels stay ink; colour marks which column a box belongs to and never
+    # carries meaning on its own.
+    CH, CH_T = "#0b6f65", "#e3f1ef"
+    CQ, CQ_T = "#7d4ea8", "#f0e9f6"
+    from matplotlib.font_manager import FontProperties
+    ICONS = REPO / "third_party" / "fonts" / "material-icons"
+    ifont = FontProperties(fname=ICONS / "MaterialIcons-Regular.ttf")
+    cp = dict(l.split() for l in
+              (ICONS / "MaterialIcons-Regular.codepoints").read_text().splitlines())
+
+    def icon(x, y, name, color, size):
+        ax.text(x, y, chr(int(cp[name], 16)), fontproperties=ifont,
+                fontsize=size, color=color, ha="center", va="center", zorder=4)
+
+    CH_ICON = {"direct-input": "keyboard", "tool-output": "terminal",
+               "RAG": "travel_explore", "memory": "history",
+               "multi-agent": "groups", "cross-modal": "image",
+               "tool-metadata": "data_object", "skill": "extension",
+               "supply-chain": "inventory_2"}
+    CQ_ICON = {"goal-hijack": "alt_route",
+               "reasoning-corruption": "psychology",
+               "silent-corruption": "visibility_off",
+               "data-exfiltration": "upload",
+               "persistence-backdoor": "lock_open",
+               "availability-loss": "block"}
+    assert set(CH_ICON) == set(CHANNELS) and set(CQ_ICON) == set(CONSEQ), \
+        "a channel or consequence has no icon; add one to the map"
+
     # ---- channels, left ----------------------------------------------------
     n = len(CHANNELS)
     h = (top - bot - gap * (n - 1)) / n
     BUS, RBUS = 19.8, 78.4
     for i, c in enumerate(CHANNELS):
         y = top - i * (h + gap) - h
-        box(ax, 2, y, 15.5, h, "", "#ffffff", INK)
-        ax.text(3.2, y + h / 2, c, ha="left", va="center", fontsize=6.3, color=INK)
+        box(ax, 2, y, 15.5, h, "", CH_T, CH)
+        icon(3.7, y + h / 2, CH_ICON[c], CH, 6.6)
+        ax.text(5.4, y + h / 2, c, ha="left", va="center", fontsize=6.2, color=INK)
         # short stub to a vertical bus, instead of nine lines crossing the page
-        ax.plot([17.7, BUS], [y + h / 2, y + h / 2], lw=0.4, color=INK,
+        ax.plot([17.7, BUS], [y + h / 2, y + h / 2], lw=0.5, color=CH,
                 zorder=1)
-    ax.plot([BUS, BUS], [bot + h / 2, top - h / 2], lw=0.6, color=INK,
+    ax.plot([BUS, BUS], [bot + h / 2, top - h / 2], lw=0.7, color=CH,
             zorder=1)
     mid = (top + bot) / 2
-    arrow(ax, BUS, mid, 31.8, mid, lw=1.0, color=INK2)
+    arrow(ax, BUS, mid, 31.2, mid, lw=1.0, color=CH)
 
     # ---- the pipeline ------------------------------------------------------
-    # Each box carries a glyph of what it is, label on top. The context
-    # window is a page of text lines, one of them hatched: untrusted content
-    # sits in the same window as everything else, which is the problem the
-    # taxonomy describes. The model is a small layered network. Both are
-    # ink only, so they survive a greyscale print.
-    CW = (32.2, mid - 13, 15.6, 26)      # x, y, w, h
-    MD = (54, mid - 13, 12, 26)
+    # The context window is drawn as a small application window: a title bar,
+    # an instruction line (gear), a user line (person), then a retrieved
+    # passage in the channel teal (document) -- untrusted content sitting in
+    # the same window as everything else, which is what the taxonomy is
+    # about. Text is drawn as runs of word-length strokes, not solid bars,
+    # so it reads as text rather than as a chart. The model is a small
+    # layered network.
+    CW = (31.6, mid - 14, 17.2, 28)      # x, y, w, h
+    MD = (54, mid - 14, 12, 28)
     box(ax, *CW, "", "#ffffff", INK)
     box(ax, *MD, "", "#ffffff", INK)
-    ax.text(CW[0] + CW[2] / 2, CW[1] + CW[3] - 3.6, "context window",
-            ha="center", va="center", fontsize=6.6, color=INK)
-    ax.text(MD[0] + MD[2] / 2, MD[1] + MD[3] - 3.6, "model",
-            ha="center", va="center", fontsize=6.6, color=INK)
+    tb = 3.4                              # title-bar height
+    ax.plot([CW[0], CW[0] + CW[2]], [CW[1] + CW[3] - tb] * 2, lw=0.5,
+            color=INK, zorder=3)
+    for k, col in enumerate(("#c9c8c3", "#c9c8c3", "#c9c8c3")):
+        ax.add_patch(Ellipse((CW[0] + 1.3 + k * 1.1, CW[1] + CW[3] - tb / 2),
+                             0.62, 0.62 * FULL / 3.6, facecolor=col,
+                             edgecolor="none", zorder=4))
+    # centred in the bar to the right of the three dots
+    ax.text(CW[0] + (4.0 + CW[2]) / 2, CW[1] + CW[3] - tb / 2, "context window",
+            ha="center", va="center", fontsize=5.6, color=INK, zorder=4)
 
-    # text lines; widths vary as a paragraph's do, the hatched one is the
-    # untrusted passage
-    widths = (0.92, 0.78, 0.88, 0.95, 0.70, 0.85)
-    lx, lw_ = CW[0] + 1.6, CW[2] - 3.2
-    ly, lh, lstep = CW[1] + CW[3] - 8.6, 1.7, 2.95
-    for k, wf in enumerate(widths):
-        y = ly - k * lstep
-        hatched = k == 3
-        ax.add_patch(Rectangle((lx, y), lw_ * wf, lh,
-                               facecolor="#ffffff" if hatched else "#9c9b97",
-                               edgecolor=INK if hatched else "none",
-                               hatch="//////" if hatched else None,
-                               linewidth=0.5))
+    def words(x0, x1, y, lengths, color, lw=1.6):
+        """A line of text as word strokes; lengths are fractions of the line."""
+        x, gapw = x0, 0.55
+        for L in lengths:
+            seg = (x1 - x0) * L
+            if x + seg > x1:
+                break
+            ax.plot([x, x + seg], [y, y], lw=lw, color=color,
+                    solid_capstyle="round", zorder=4)
+            x += seg + gapw
+
+    GREY = "#a8a7a2"
+    tx0, tx1 = CW[0] + 3.4, CW[0] + CW[2] - 1.2
+    y0 = CW[1] + CW[3] - tb - 3.0
+    icon(CW[0] + 1.7, y0, "settings", INK2, 5.6)
+    words(tx0, tx1, y0, (0.22, 0.30, 0.16, 0.20), GREY)
+    words(tx0, tx1, y0 - 2.3, (0.28, 0.18, 0.12), GREY)
+    y1 = y0 - 5.6
+    icon(CW[0] + 1.7, y1, "person", INK2, 5.6)
+    words(tx0, tx1, y1, (0.18, 0.26, 0.22), GREY)
+    # the retrieved passage: tinted block in the channel colour
+    by = CW[1] + 1.6
+    bh = y1 - 2.6 - by
+    ax.add_patch(FancyBboxPatch((CW[0] + 0.9, by), CW[2] - 1.8, bh,
+                                boxstyle="round,pad=0,rounding_size=0.8",
+                                facecolor=CH_T, edgecolor=CH, linewidth=0.6,
+                                zorder=3))
+    icon(CW[0] + 1.9, by + bh - 2.0, "description", CH, 5.8)
+    for k, L in enumerate(((0.24, 0.18, 0.30, 0.14), (0.20, 0.32, 0.16),
+                           (0.28, 0.22))):
+        words(tx0, tx1 - 0.3, by + bh - 2.0 - k * 2.3, L, CH, lw=1.4)
+
+    ax.text(MD[0] + MD[2] / 2, MD[1] + MD[3] - tb / 2, "model",
+            ha="center", va="center", fontsize=5.6, color=INK, zorder=4)
+    ax.plot([MD[0], MD[0] + MD[2]], [MD[1] + MD[3] - tb] * 2, lw=0.5,
+            color=INK, zorder=3)
 
     # a 3-4-4-2 network; x and y units differ (7 in by 3.6 in), so nodes are
-    # ellipses in data units that render round
+    # ellipses in data units that render round. Input nodes take the channel
+    # colour and output nodes the consequence colour: content in, failure out.
     layers = (3, 4, 4, 2)
     gx0, gx1 = MD[0] + 2.0, MD[0] + MD[2] - 2.0
-    gy0, gy1 = MD[1] + 2.6, MD[1] + MD[3] - 7.4
+    gy0, gy1 = MD[1] + 2.4, MD[1] + MD[3] - tb - 2.0
     rx = 0.62
     ry = rx * FULL / 3.6
     pos = []
@@ -177,19 +242,21 @@ def main():
         x = gx0 + li * (gx1 - gx0) / (len(layers) - 1)
         ys = [gy0 + (gy1 - gy0) * (j + 0.5) / m for j in range(m)]
         pos.append([(x, y) for y in ys])
-    for a, b in zip(pos, pos[1:]):
-        for (x1, y1) in a:
-            for (x2, y2) in b:
-                ax.plot([x1, x2], [y1, y2], lw=0.3, color="#9c9b97", zorder=2)
-    for layer in pos:
+    for a_, b_ in zip(pos, pos[1:]):
+        for (x1, y1) in a_:
+            for (x2, y2) in b_:
+                ax.plot([x1, x2], [y1, y2], lw=0.3, color="#b5b4af", zorder=2)
+    for li, layer in enumerate(pos):
+        fc, ec = ((CH_T, CH) if li == 0 else
+                  (CQ_T, CQ) if li == len(pos) - 1 else ("#ffffff", INK2))
         for (x, y) in layer:
-            ax.add_patch(Ellipse((x, y), 2 * rx, 2 * ry, facecolor="#ffffff",
-                                 edgecolor=INK, linewidth=0.55, zorder=3))
-    arrow(ax, 48.2, mid, 53.6, mid, lw=1.0, color=INK2)
-    arrow(ax, 66.4, mid, RBUS, mid, lw=1.0, color=INK2)
+            ax.add_patch(Ellipse((x, y), 2 * rx, 2 * ry, facecolor=fc,
+                                 edgecolor=ec, linewidth=0.6, zorder=3))
+    arrow(ax, 49.2, mid, 53.6, mid, lw=1.0, color=INK2)
+    arrow(ax, 66.4, mid, RBUS, mid, lw=1.0, color=CQ)
 
     # ---- the three intervention points -------------------------------------
-    for (key, lab), xc in zip(POINTS, (28.6, 50.5, 70.4)):
+    for (key, lab), xc in zip(POINTS, (28.0, 51.4, 70.4)):
         ax.plot([xc, xc], [mid - 22, mid + 22], ls=(0, (2.2, 1.8)), lw=0.6,
                 color=INK, zorder=1)
         ax.text(xc, mid - 26.5, lab, ha="center", fontsize=6.6, color=INK,
@@ -200,13 +267,14 @@ def main():
     h2 = (top - bot - gap * (n2 - 1)) / n2
     for i, c in enumerate(CONSEQ):
         y = top - i * (h2 + gap) - h2
-        box(ax, 79.7, y, 19.0, h2, "", "#ffffff", INK)
-        ax.text(80.8, y + h2 / 2, c, ha="left", va="center", fontsize=5.9,
+        box(ax, 79.7, y, 19.0, h2, "", CQ_T, CQ)
+        icon(81.1, y + h2 / 2, CQ_ICON[c], CQ, 6.8)
+        ax.text(82.6, y + h2 / 2, c, ha="left", va="center", fontsize=5.5,
                 color=INK)
         # the output fans out the way the input fanned in
-        ax.plot([RBUS, 79.5], [y + h2 / 2, y + h2 / 2], lw=0.4, color=INK,
+        ax.plot([RBUS, 79.5], [y + h2 / 2, y + h2 / 2], lw=0.5, color=CQ,
                 zorder=1)
-    ax.plot([RBUS, RBUS], [bot + h2 / 2, top - h2 / 2], lw=0.6, color=INK,
+    ax.plot([RBUS, RBUS], [bot + h2 / 2, top - h2 / 2], lw=0.7, color=CQ,
             zorder=1)
 
     # Regime is carried by every entry wherever it sits, so it has no
