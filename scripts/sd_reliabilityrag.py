@@ -87,8 +87,31 @@ def main():
         os.environ["C_INCLUDE_PATH"] = str(inc)
     sys.path.insert(0, str(RELI))
     os.chdir(RELI)       # their code opens configs by relative path
+    import src.models                                # their code
     from src.models import create_model              # their code
     from src.defense import RRAG, MISBasedRRAG       # their code
+
+    # Their VLLMModel passes gpu_memory_utilization=0.5. vLLM 0.8.3 reads
+    # that as half the card minus everything already on it, other
+    # processes included, so beside another job it had no room left for
+    # its cache and would only start on an empty card. Adding back what
+    # other processes hold gives the same budget their 0.5 gets on an empty
+    # card: the same cache, so the same scheduling, and greedy decoding
+    # either way.
+    import torch
+    _LLM = src.models.LLM
+    budget = {}
+
+    def LLM(*a, gpu_memory_utilization=0.5, **k):
+        free, total = torch.cuda.mem_get_info()
+        others = total - free
+        u = min(0.92, gpu_memory_utilization + others / total)
+        budget.update(theirs=gpu_memory_utilization, passed=round(u, 3),
+                      others_gb=round(others / 2**30, 1))
+        print(f"[budget] their {gpu_memory_utilization} -> {u:.3f} "
+              f"({others / 2**30:.1f} GB held by other processes)", flush=True)
+        return _LLM(*a, gpu_memory_utilization=u, **k)
+    src.models.LLM = LLM
 
     llm = create_model("mistral7b", MODEL_DIR, use_open_model_api=False)
     base = RRAG(llm)
@@ -152,6 +175,7 @@ def main():
                     "err": args.err,
                     "backend": "their VLLMModel, temperature 0, "
                                "gpu_memory_utilization 0.5",
+                    "memory_budget": budget,
                     "nli": f"{NLI_HUB} (their cluster path redirected)"})
 
 

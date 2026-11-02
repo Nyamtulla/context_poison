@@ -17,10 +17,10 @@
 #              rag    spotlighting, piguard filter, datasentinel filter (one
 #                     lane: they share one cached undefended pipeline)
 #              ds     DataSentinel flags (the datasentinel filter waits on it)
-#              reli   ReliabilityRAG, which starts only on an empty card: vLLM
-#                     sizes its cache as a share of the whole card and counts
-#                     our other jobs against it. While one waits to start, no
-#                     lane starts anything; once it has loaded, they resume.
+#              reli   ReliabilityRAG; sd_reliabilityrag.py adds back what
+#                     other jobs hold to vLLM's memory share, so it gets the
+#                     budget it would on an empty card and can start beside
+#                     them. ("excl" remains for a job that cannot.)
 #              attn   AttnTrace
 #   stage D  AttnTrace's PoisonedRAG control again, with trace ranks logged,
 #            and its stale-document trace on shuffled passage order;
@@ -143,7 +143,7 @@ lane_ds()   {
     step datasentinel_flags 10 $DSV scripts/sd_detect_datasentinel.py \
         || touch "$Q/datasentinel_flags.failed"
 }
-lane_reli() { for f in $FAILURES; do step "reliabilityrag_$f" excl $RELI scripts/sd_reliabilityrag.py --failure "$f"; done; }
+lane_reli() { for f in $FAILURES; do step "reliabilityrag_$f" 28 $RELI scripts/sd_reliabilityrag.py --failure "$f"; done; }
 lane_attn() { for f in $FAILURES; do step "attntrace_$f" 18 $ATT scripts/sd_attntrace.py --failure "$f"; done; }
 
 lane_ds & lane_reli & lane_attn & lane_rag &
@@ -165,7 +165,7 @@ step check_attntrace_shuffled 22 $ATT scripts/sd_attntrace.py --failure incident
 # prints neither the per-passage answers nor the contradiction graph that say
 # why the honest ones fell out. Rerun that cell recording both; at temperature
 # 0 its answers should also match the first run's.
-step check_reliabilityrag_stale_trace excl $RELI scripts/sd_reliabilityrag.py \
+step check_reliabilityrag_stale_trace 28 $RELI scripts/sd_reliabilityrag.py \
     --failure incidental_stale --doses 5 --arms defended --log_suffix _trace \
     --out data/registries/check_native_reliabilityrag_incidental_stale_trace.json
 echo "[queue complete] $(date '+%m-%d %H:%M')"
