@@ -11,28 +11,6 @@ defense in place. Table~\ref{tab:regime} runs five kinds of planted passage on
 the same items, with the same number of poisoned passages in the same
 positions, scored the same way.
 
-Where the passage plants a false answer, writing it to persuade helps the
-attacker. With one poisoned passage in ten, the model gives the planted answer
-\PctCraftLow{}\% of the time for PoisonedRAG's crafted passage and
-\PctStaleLow{}\% for a real passage whose answer has changed. The gap clears the
-detection threshold at every number of poisoned passages, though only
-narrowly at two, and at five poisoned passages the crafted passage also
-costs more accuracy, \AccCraftTop{}\% against \AccStaleTop{}\%. The honest
-mistake still does real damage: it moves the model to the false answer
-\PctStaleTop{}\% of the time, against \PctStaleClean{}\% with nothing planted.
-Repeating the crafted passage five times, as the published attack does,
-changes these rates by at most \NRegimeRepeatMax{} points.
-
-Where the passage only pushes the right evidence out of the retrieved set, the
-attacker gains nothing. Zhong et al.'s optimized passage and a real passage
-retrieved for another question give the same results: \PctCorpusTop{}\% and
-\PctMisretrievalTop{}\% planted answers, \AccCorpusTop{}\% and
-\AccMisretrievalTop{}\% accuracy, with every gap below the threshold at every
-number of poisoned passages. For this kind of attack, an attack and an
-ordinary retrieval error are the same event.
-
-\subsection{RQ2: Does a defense built for one literature's problem survive the other's?}
-
 \begin{table}[t]
 \centering
 \caption{Defenses that decide how far to trust the document, against corpus poisoning, in percentage
@@ -70,7 +48,29 @@ than accuracy, so its clean cell reports that metric.}
 
 \input{tables/grid}
 
-\paragraph{Trusting the document under attack.}
+Where the passage plants a false answer, writing it to persuade helps the
+attacker. With one poisoned passage in ten, the model gives the planted answer
+\PctCraftLow{}\% of the time for PoisonedRAG's crafted passage and
+\PctStaleLow{}\% for a real passage whose answer has changed. The gap clears the
+detection threshold at every number of poisoned passages, though only
+narrowly at two, and at five poisoned passages the crafted passage also
+costs more accuracy, \AccCraftTop{}\% against \AccStaleTop{}\%. The honest
+mistake still does real damage: it moves the model to the false answer
+\PctStaleTop{}\% of the time, against \PctStaleClean{}\% with nothing planted.
+Repeating the crafted passage five times, as the published attack does,
+changes these rates by at most \NRegimeRepeatMax{} points.
+
+Where the passage only pushes the right evidence out of the retrieved set, the
+attacker gains nothing. Zhong et al.'s optimized passage and a real passage
+retrieved for another question give the same results: \PctCorpusTop{}\% and
+\PctMisretrievalTop{}\% planted answers, \AccCorpusTop{}\% and
+\AccMisretrievalTop{}\% accuracy, with every gap below the threshold at every
+number of poisoned passages. For this kind of attack, an attack and an
+ordinary retrieval error are the same event.
+
+\subsection{RQ2: Does a defense built for one literature's problem survive the other's?}
+
+\paragraph{First direction: safety fixes facing an attacker.}
 The methods built for honest error all decide how far
 to trust the retrieved document over what the model already knows. Trusting
 the document more is right when the document is out of date, and wrong when an
@@ -127,6 +127,43 @@ time and answers \EPmDosUndefAcc\% correctly. ParamMute cuts refusals to
 above. Suppressing memory removes a right answer when memory had one,
 and removes the conflict behind the refusal when it did not.
 
+\paragraph{Second direction: a security defense facing honest mistakes.}
+\label{sec:transfer}
+A defense built against an attacker helps against an
+honest mistake only while the mistaken passages are few, and only when they
+plant a false claim. We ran RobustRAG, in both its released implementations,
+against four failures that no attacker wrote.
+
+Against a real passage whose answer has changed, RobustRAG helps with one or
+two such passages and then turns harmful. With one, the model gives the
+outdated answer \EStaleUndefAsrOne\% of the time undefended and
+\EStaleKeyAsrOne\% and \EStaleDecAsrOne\% with the two implementations. With
+five, the defended model gives it more often than the undefended one,
+\EStaleKeyAsrTop\% and \EStaleDecAsrTop\% against \EStaleUndefAsrTop\%, and
+answers correctly less often, \EStaleKeyAccTop\% and \EStaleDecAccTop\%
+against \EStaleUndefAccTop\%. A passage asserting a third, wrong answer shows
+the same pattern: \ERobustDistKeyTwo\% and \ERobustDistDecTwo\% against
+\ERobustDistUndefTwo\% undefended with two such passages, but
+\ERobustDistKeyFive\% and \ERobustDistDecFive\% against
+\ERobustDistUndefFive\% with five. Against a passage retrieved for the wrong
+question, which plants nothing, it never helps: both implementations start
+below the undefended model, \ERobustMisKeyClean\% and \ERobustMisDecClean\%
+against \ERobustMisUndefClean\%, and are still below it with five such
+passages. Against unrelated passages that lengthen the context,
+there is nothing to act on. Five of them lower the undefended model's
+accuracy by \NDilUndefDrop{} points, from \EDilUndefAccClean\% to
+\EDilUndefAccFive\%, and the defended model differs from the undefended one
+by at most \NDilGapMax{} points at any number of added passages, inside the
+\EDilMdr{}-point threshold. That difference is the cost RobustRAG shows with
+nothing added.
+
+Against attacks from its own literature, RobustRAG stops PoisonedRAG, as its
+own paper reports, by \ERobustPoisonedGain{} points. Against corpus poisoning
+it neither helps nor hurts: \ERobustDispOneDef\% against
+\ERobustDispOneUndef\% with one displaced passage and \ERobustDispFiveDef\%
+against \ERobustDispFiveUndef\% with five, both inside the
+\ERobustDispMdr{}-point threshold.
+
 \paragraph{Every defense against every attack.}
 \label{sec:grid}
 Across every defense and every attack on open Natural
@@ -152,37 +189,6 @@ there, and both are again the refusal attack. We report the worst result
 for each defense rather than the average, because an average across attacks
 would hide a complete failure against one of them.
 
-\paragraph{Defenses built against an attacker, facing honest mistakes.}
-\label{sec:transfer}
-Defenses built against an attacker help against an
-honest mistake only when the mistake plants a false claim. We ran RobustRAG,
-in both its released implementations, against four failures that no
-attacker wrote.
-
-Against a real passage whose answer has changed, RobustRAG helps with one or
-two such passages and then turns harmful. With one, the model gives the
-outdated answer \EStaleUndefAsrOne\% of the time undefended and
-\EStaleKeyAsrOne\% and \EStaleDecAsrOne\% with the two implementations. With
-five, the defended model gives it more often than the undefended one,
-\EStaleKeyAsrTop\% and \EStaleDecAsrTop\% against \EStaleUndefAsrTop\%, and
-answers correctly less often, \EStaleKeyAccTop\% and \EStaleDecAccTop\%
-against \EStaleUndefAccTop\%. A passage asserting a third, wrong answer shows
-the same pattern: \ERobustDistKeyTwo\% and \ERobustDistDecTwo\% against
-\ERobustDistUndefTwo\% undefended with two such passages, but
-\ERobustDistKeyFive\% and \ERobustDistDecFive\% against
-\ERobustDistUndefFive\% with five. Against a passage retrieved for the wrong
-question, which plants nothing, it never helps: both implementations start
-below the undefended model, \ERobustMisKeyClean\% and \ERobustMisDecClean\%
-against \ERobustMisUndefClean\%, and are still below it with five such
-passages.
-
-Against attacks from its own literature, RobustRAG stops PoisonedRAG, as its
-own paper reports, by \ERobustPoisonedGain{} points. Against corpus poisoning
-it neither helps nor hurts: \ERobustDispOneDef\% against
-\ERobustDispOneUndef\% with one displaced passage and \ERobustDispFiveDef\%
-against \ERobustDispFiveUndef\% with five, both inside the
-\ERobustDispMdr{}-point threshold.
-
 The agent experiment pairs only security methods with security attacks, so
 it does not test transfer, but it shows where a defense has to act to hold.
 \NAgentHolds{} of \NAgentConditions{} defense and attack combinations drive
@@ -192,10 +198,28 @@ reads the injected text or before it acts on it. None of the
 In this experiment, the stage at which a defense acts separates the defenses
 that hold from those that do not.
 
-Answer to RQ2. No. Methods built for honest error lose to an attacker when
-they shift the model's trust toward the document. Methods built against an
-attacker help with an honest mistake only briefly, and only when it plants a
-false claim.
+\paragraph{Why neither design covers both.}
+\label{sec:neither}
+The two directions fail for opposite reasons. Each design rests on an
+assumption that holds in its own regime and that the other regime breaks.
+The safety fixes assume the document is honest: they decide how far to trust
+it over the model's memory, and in the first direction an attacker writes the
+document. RobustRAG assumes that wrong passages are few: its vote is sound
+while honest passages outnumber corrupted ones, which holds when an attacker
+can plant only a few passages, the setting RobustRAG certifies. An honest
+mistake has no such limit. A fact that changes can leave many retrieved
+passages wrong in the same way at once, and with five such passages in ten
+the vote returns
+the outdated answer more often than the undefended model does. A fix that
+covers both regimes can therefore rely on neither assumption. It cannot trust
+the document by default, and it cannot count on wrong passages being a
+minority.
+
+Answer to RQ2. No, in neither direction. Methods built for honest error lose
+to an attacker when they shift the model's trust toward the document. A
+method built against an attacker helps with an honest mistake only while the
+mistaken passages are few, does more harm than no defense once they are
+many, and has nothing to act on when the mistake plants no claim.
 
 \subsection{RQ3: Is failure a property of individual methods or of a design choice they share?}
 
@@ -219,20 +243,6 @@ vs.\ no retrieval & +\EAcdCorpusVsNoRet{} ($p\PAcdCorpusVsNoRet{}$) &
 \end{tabular}
 \end{table}
 
-\paragraph{The form of the planted passage.}
-\label{sec:payloads}
-What a defense does depends on the form of the planted
-passage, not on which attack it came from. ACD is the only method that both
-uses a clean document and resists corpus poisoning: it ends
-\EAcdSatGain{} points above the undefended model on a corrupted context.
-Corpus poisoning, though, was optimized to fool a retriever, not ACD, so this
-shows only that ACD resists that one passage. We then planted a fluent false
-sentence instead, holding everything else fixed. Table~\ref{tab:acd} shows
-the protection disappear. ACD keys on how uncertain a passage makes the
-model. An optimized token string is incoherent and raises uncertainty, so ACD
-discounts it. A fluent false sentence lowers uncertainty, so ACD trusts it
-more, and the defended model ends below a model given no document at all.
-
 \begin{table}[t]
 \centering
 \caption{The same three defenses against two planted passages. Excess damage
@@ -254,6 +264,20 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 \end{table}
 
 \input{tables/distractor}
+
+\paragraph{The form of the planted passage.}
+\label{sec:payloads}
+What a defense does depends on the form of the planted
+passage, not on which attack it came from. ACD is the only method that both
+uses a clean document and resists corpus poisoning: it ends
+\EAcdSatGain{} points above the undefended model on a corrupted context.
+Corpus poisoning, though, was optimized to fool a retriever, not ACD, so this
+shows only that ACD resists that one passage. We then planted a fluent false
+sentence instead, holding everything else fixed. Table~\ref{tab:acd} shows
+the protection disappear. ACD keys on how uncertain a passage makes the
+model. An optimized token string is incoherent and raises uncertainty, so ACD
+discounts it. A fluent false sentence lowers uncertainty, so ACD trusts it
+more, and the defended model ends below a model given no document at all.
 
 Three more methods show the same dependence on form
 (Table~\ref{tab:payloads}). ParamMute is harmful against both forms, by
@@ -340,16 +364,6 @@ turns the campaign's apparently strongest defense into one that is not reading
 its input. Two further checks, a second implementation and a second base
 model, leave the results inside the evaluated range unchanged.
 
-\subsection{RQ5: Does that explanation survive an adaptive attacker?}
-
-\label{sec:adaptive}
-The one method that resisted loses more than half of
-its protection to an attacker who reads its rule. Every attack above was
-built without knowledge of the defense it met. Such an attack bounds attack
-strength from below: it is conservative evidence when a defense fails and
-weak evidence when a defense holds. ACD was our only holding result, so we
-attacked it directly.
-
 \begin{table}[t]
 \centering
 \caption{ACD against the planted third answer in its plain form and in two forms
@@ -376,6 +390,16 @@ ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{RQ5: Does that explanation survive an adaptive attacker?}
+
+\label{sec:adaptive}
+The one method that resisted loses more than half of
+its protection to an attacker who reads its rule. Every attack above was
+built without knowledge of the defense it met. Such an attack bounds attack
+strength from below: it is conservative evidence when a defense fails and
+weak evidence when a defense holds. ACD was our only holding result, so we
+attacked it directly.
 
 ACD blends the model's answer with and without the document, weighted by how
 uncertain each one is. The attacker controls only the document, so the attack

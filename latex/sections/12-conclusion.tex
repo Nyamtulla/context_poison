@@ -18,11 +18,10 @@ We then ran that experiment. \NCampaignPairs{} pairs, all on the authors'
 released artifacts. \PctCampCross{}\% of them cross the boundary the
 literature does not.
 
-One poisoned passage in ten gives a defense its best chance, because nine
-honest passages survive, and it is the attacks' own default.
-\NGridLowHelps{} of \NGridLowPairs{} (defense, attack) pairs show a
-resolvable benefit there.
-
+In the first direction, fixes built for honest error meet attacks. One
+poisoned passage in ten gives a defense its best chance, because nine honest
+passages survive, and it is the attacks' own default. \NGridLowHelps{} of
+\NGridLowPairs{} (defense, attack) pairs show a resolvable benefit there.
 The finding is a mechanism, not a verdict. Context-reliance defenses do not
 fail because someone built them badly. They fail because of what they
 arbitrate. Each one decides between trusting the context and trusting memory,
@@ -36,19 +35,35 @@ memory they cancel to within 8 points. Neither direction moves anything
 toward the real document, because the dial has no setting for it. The attack
 is inside the context.
 
-Two results bound that claim rather than soften it.
+In the second direction, a defense built against an attacker meets honest
+mistakes. RobustRAG's vote holds while wrong passages are few, which is the
+setting its threat model assumes. When half the retrieved passages are
+stale, it returns the outdated answer more often than no defense does, and
+against a failure that plants nothing it has nothing to act on. The two
+directions fail for opposite reasons: the safety fixes assume the document
+is honest, and the security defense assumes wrong passages are few. Each
+assumption holds in its own regime and fails in the other.
+
+Two results bound the first direction's claim rather than soften it.
 
 First, protection depends on the \emph{form} of the planted passage, not only
 on whether an attacker is present. An evaluation built around optimized
-payloads therefore overstates how well a system holds. The fluent payload
-needs no gradient access and damages an undefended model roughly twice as
-hard.
+payloads therefore overstates how well a system holds.
 
 Second, one defense did resist. It loses \PctAcdRemovedGradient{}\% of that
 protection to an
 attacker who reads its rule and optimizes against the quantity it measures.
 
 \paragraph{Future work.}
+
+\textbf{Build a fix that covers both regimes.} Section~\ref{sec:neither}
+states what such a fix cannot rely on: trusting the document by default, or
+wrong passages being a minority. Signals that need neither assumption exist
+in the retrieval setting, among them when a passage was written, whether it
+was retrieved for the question asked, and whether independent sources agree.
+The next experiments build a fix on such signals and test it in both
+directions on the same items, against the same attacks and honest failures
+reported here and against an attacker who knows the fix.
 
 \textbf{Extend the adaptive case to the rest of the family.} We tested the
 one defense that resisted,

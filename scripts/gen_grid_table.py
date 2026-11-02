@@ -107,11 +107,12 @@ def main():
          "passages of ten, the largest corruption size these attacks' and "
          "defenses' own authors evaluate. Refusal and tone are BadRAG's two "
          "attacks, and the planted passages are those of "
-         "Section~\\ref{sec:payloadclasses}. A dash "
+         "Section~\\ref{sec:payloadclasses}. Dilution adds its $j$ unrelated "
+         "passages to the ten rather than replacing any. A dash "
          "is a pair we have not run. This item set is not CoConflictQA and "
          "the two sets of numbers are not comparable.}",
          "\\label{tab:grid}", "\\footnotesize",
-         "\\setlength{\\tabcolsep}{3.2pt}",
+         "\\setlength{\\tabcolsep}{2.4pt}",
          "\\begin{tabular}{@{}l" + "rr" * len(used) + "@{}}", "\\toprule"]
     L.append(" & " + " & ".join(
         f"\\multicolumn{{2}}{{c}}{{{ATK.get(a, a)}}}" for a in used) + " \\\\")

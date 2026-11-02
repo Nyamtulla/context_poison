@@ -1293,6 +1293,23 @@ def main():
     for d, j in (("One", 1), ("Top", TOPDOSE)):
         E[f"EStaleUndefAsr{d}"] = _x(_sf, "asr", arm="undefended", n_poison=j)
         E[f"EStaleUndefAcc{d}"] = _x(_sf, "acc", arm="undefended", n_poison=j)
+    # RobustRAG against context dilution: j unrelated passages appended to
+    # the ten retrieved, so the window grows and nothing is replaced. The
+    # undefended model barely moves, and the defended arms keep the constant
+    # clean cost, so the largest defended-minus-undefended gap at any dose is
+    # the whole result.
+    _dk = "native_robustrag-keyword_context_dilution.json"
+    _dd = "native_robustrag-decoding_context_dilution.json"
+    for d, j in (("Clean", 0), ("Five", TOPDOSE)):
+        E[f"EDilUndefAcc{d}"] = _x(_dk, "acc", arm="undefended", n_poison=j)
+        for lbl, f in (("Key", _dk), ("Dec", _dd)):
+            E[f"EDil{lbl}Acc{d}"] = _x(f, "acc", arm="defended", n_poison=j)
+    E["NDilUndefDrop"] = round(E["EDilUndefAccClean"] - E["EDilUndefAccFive"], 1)
+    E["NDilGapMax"] = round(max(
+        abs(_x(f, "acc", arm="defended", n_poison=j)
+            - _x(_dk, "acc", arm="undefended", n_poison=j))
+        for f in (_dk, _dd) for j in DOSES), 1)
+    E["EDilMdr"] = json.load(open(R / _dk))["mdr_pp_at_n"]
     # Tone steering against both RobustRAG implementations on both models,
     # inside the ladder: the highest negative-framing rate any of the four
     # cells reaches.

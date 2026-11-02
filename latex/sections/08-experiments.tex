@@ -6,15 +6,20 @@ defense implementations and \NCampaignEpisodes{} scored episodes. Every
 method ran from its authors' released code and weights.
 Figure~\ref{fig:transfer} sets the campaign beside the published literature.
 
-The main experiment puts a defense from one literature in front of an attack
-from the other. We ran \NCampCrossPairs{} such pairs, all on retrieval
-question answering over Natural Questions.
-\NCampSafDefSecMech{} of them take a knowledge-conflict method, built for a
-document that is merely out of date, and attack it with corpus poisoning,
-PoisonedRAG or BadRAG. The remaining \NCampSecDefSafetyMech{} run the other
-way: a defense built against an attacker meets a failure nobody wrote, such
-as a passage retrieved for the wrong question or a real passage whose answer
-has since changed.
+The main experiment puts a defense from one literature in front of a failure
+from the other, in both directions. We ran \NCampCrossPairs{} such pairs, all
+on retrieval question answering over Natural Questions.
+
+In the first direction, \NCampSafDefSecMech{} pairs take a fix from the safety
+literature, built for a document that is merely out of date, and attack it
+with corpus poisoning, PoisonedRAG or BadRAG.
+
+In the second direction, \NCampSecDefSafetyMech{} pairs take RobustRAG, a
+defense from the security literature, in both of its released
+implementations, and give it four failures that no attacker wrote: a real
+passage whose answer has since changed, a passage asserting a third wrong
+answer, a passage retrieved for the wrong question, and unrelated passages
+that lengthen the context.
 
 A second experiment pairs each method with the kind of attack its own authors
 used. These \NCampSecDefSecMech{} security pairs and
