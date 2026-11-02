@@ -790,7 +790,11 @@ def main():
     _DT = {"ParamMute": "safety", "CK-PLUG": "safety", "COIECD": "safety",
            "ACD": "safety", "DyPRAG": "safety", "FaithfulRAG": "safety",
            "SpARE": "safety", "SCR": "safety",
-           "RobustRAG-DecodingAgg": "security", "RobustRAG-KeywordAgg": "security"}
+           "RobustRAG-DecodingAgg": "security", "RobustRAG-KeywordAgg": "security",
+           # the second direction's other security defenses
+           "ReliabilityRAG": "security", "AttnTrace": "security",
+           "DataSentinel": "security", "PIGuard": "security",
+           "Spotlighting": "security"}
     _AT = {"corpus poisoning": "security", "PoisonedRAG": "security",
            "BadRAG sentiment steering": "security",
            "BadRAG denial-of-service": "security",
@@ -817,6 +821,12 @@ def main():
     _un = {a for _, a in _op if a not in _AT}
     if _un:
         raise SystemExit(f"attack labels missing from _AT: {sorted(_un)}")
+    # The same guard for defenses: an unmapped one reads as cross against
+    # every attack, which is how a new defense would silently inflate the
+    # crossing count.
+    _und = {d for d, _ in _op if d not in _DT}
+    if _und:
+        raise SystemExit(f"defense labels missing from _DT: {sorted(_und)}")
     # The campaign's four boxes, by which literature each side came from.
     # Two are home ground and two are crossings; Section 4 is organised on
     # them, so all four are macros rather than one.

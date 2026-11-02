@@ -202,6 +202,46 @@
    "note": "Self-guided confidence reasoning",
    "license_file": null,
    "source_modified_by_us": false
+  },
+  {
+   "name": "ReliabilityRAG",
+   "url": "https://github.com/zeyushen-yo/ReliabilityRAG.git",
+   "commit": "e354aa91dd9bc44d082d706e2b5205fc85ce950c",
+   "role": "defense",
+   "we_run": "src/defense.py MISBasedRRAG.query, RRAG.query_undefended; src/models.py VLLMModel",
+   "note": "Maximum-independent-set over NLI contradictions; second-direction security defense",
+   "license_file": null,
+   "source_modified_by_us": false
+  },
+  {
+   "name": "AttnTrace",
+   "url": "https://github.com/Wang-Yanting/AttnTrace.git",
+   "commit": "d006ac7825dc1a6d63b7fef8f534a0ba72cfb65f",
+   "role": "defense",
+   "we_run": "src/attribution AttnTraceAttribution.attribute; src/models HF_model; src/prompts wrap_prompt",
+   "note": "Attention-based context traceback; the removal step after it is ours (scripts/sd_attntrace.py)",
+   "license_file": "LICENSE",
+   "source_modified_by_us": false
+  },
+  {
+   "name": "Open-Prompt-Injection",
+   "url": "https://github.com/liu00222/Open-Prompt-Injection.git",
+   "commit": "fbed5cca347488f88363790ae3ae97c56116da6a",
+   "role": "defense",
+   "we_run": "OpenPromptInjection.DataSentinelDetector.detect with the released detector_large/checkpoint-5000",
+   "note": "DataSentinel known-answer detector; checkpoint from the authors' Google Drive link",
+   "license_file": "LICENSE",
+   "source_modified_by_us": false
+  },
+  {
+   "name": "Instruction-detection",
+   "url": "https://github.com/MYVAE/Instruction-detection.git",
+   "commit": "bc1feb6845df80e6726e20f8755fa390c4162110",
+   "role": "defense",
+   "we_run": "nothing: no released detector, so not run",
+   "note": "InstructDetector; cloned and inspected, replaced by PIGuard -- see scripts/sd_queue.sh",
+   "license_file": "LICENSE",
+   "source_modified_by_us": false
   }
  ]
 }

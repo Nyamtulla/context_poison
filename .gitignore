@@ -62,6 +62,10 @@ context_sok_results_presentation.pdf
 # per-defense dependency sets, built by scripts/setup_envs.py from the pinned
 # requirements in envs/*-requirements.txt. Installed packages, not our code.
 envs/*-libs/
+# per-defense virtual environments, built by scripts/setup_sd_envs.sh
+envs/*-venv/
+envs/*-install.log
+envs/setup_sd*.log
 
 # the 125-paper validation study (2026-10-20). Same two rules as the
 # verification packets above, for the same two reasons.
@@ -75,3 +79,9 @@ data/exports/validation_study/packets/*.zip
 #
 # the confidence-group key: sending it to a coder biases the study it tests
 data/exports/validation_study/_key_DO_NOT_SHARE.json
+# second-direction campaign: regenerable inputs and downloaded weights
+# (scripts/build_sd_contexts.py, scripts/setup_sd_envs.sh, data/sd_models/fetch.py)
+data/sd_contexts/
+data/sd_models/
+data/sd_queue/
+data/sd_flags_*.log

@@ -74,6 +74,13 @@ NOT_PAIR_RUNS = {"regime_framing_test"}
 GRID_DOSES = (0, 1, 2, 3, 5, 10)
 
 DEFENSE_TOKENS = [
+    # the second direction's security defenses (scripts/sd_*.py); listed
+    # first so no shorter token below matches inside their names
+    ("reliabilityrag", "ReliabilityRAG", "reliabilityrag"),
+    ("attntrace", "AttnTrace", "attntrace"),
+    ("datasentinel", "DataSentinel", "datasentinel"),
+    ("piguard", "PIGuard", "piguard"),
+    ("spotlighting", "Spotlighting", "spotlighting"),
     ("robustrag_decoding", "RobustRAG-DecodingAgg", "robustrag"),
     ("robustrag", "RobustRAG-KeywordAgg", "robustrag"),
     ("faithfulrag", "FaithfulRAG", "faithfulrag"),
@@ -171,6 +178,10 @@ def retrieval_runs():
             continue
         stem = path.stem.lower()
         if stem in NOT_PAIR_RUNS:
+            continue
+        # smoke tests and dry runs of the second-direction runners check
+        # wiring on a handful of items; they are never a reportable pair
+        if stem.startswith(("smoke_", "dry_")):
             continue
         # A registry written incrementally says when it is finished. Files
         # that predate incremental writing carry no flag and were only ever

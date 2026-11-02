@@ -610,7 +610,11 @@ def fig_transfer_matrix():
     DT = {"ParamMute": "safety", "CK-PLUG": "safety", "COIECD": "safety",
           "ACD": "safety", "DyPRAG": "safety", "FaithfulRAG": "safety",
           "SpARE": "safety", "SCR": "safety",
-          "RobustRAG-DecodingAgg": "security", "RobustRAG-KeywordAgg": "security"}
+          "RobustRAG-DecodingAgg": "security", "RobustRAG-KeywordAgg": "security",
+          # the second direction's other security defenses
+          "ReliabilityRAG": "security", "AttnTrace": "security",
+          "DataSentinel": "security", "PIGuard": "security",
+          "Spotlighting": "security"}
     # The two adaptive payloads were missing here, so their pairs landed in
     # the panel's denominator and in none of its cells: the figure printed
     # "19 of 37" while the macro the prose uses said 21. They are gradient-

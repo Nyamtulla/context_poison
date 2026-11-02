@@ -55,6 +55,7 @@ from src.prompt_template import LLAMA_TMPL        # noqa: E402  (their code)
 from transfer_stats import min_detectable_change, wilson        # noqa: E402
 from spare_vs_corpus_poisoning import acc_score                 # noqa: E402
 import poisonedrag_transfer as pr                              # noqa: E402
+from sd_items import select_items, target_answer                 # noqa: E402
 from poisonedrag_transfer import (                              # noqa: E402
     build_poisoned, direct_input_question, is_negative, is_refusal)
 
@@ -126,8 +127,7 @@ def run_condition(defense, data, top_k, n_poison, attack, defended,
         correct += acc_score(pred, it["correct answer"])
         # the attacked outcome is "said the planted answer"; for the ML arm
         # that is the distractor, not PoisonedRAG's adversarial target.
-        target = (it["distractor_answer"] if attack == "distractor_evidence"
-                  else it.get("incorrect answer"))
+        target = target_answer(it, attack)
         attacked += acc_score(pred, target)
         refused += is_refusal(pred)
         negative += is_negative(pred)
@@ -197,49 +197,7 @@ def main():
                          "composition in scripts/compose_offline.py")
     args = ap.parse_args()
 
-    # The ML/AI arm runs on the same open_nq items with a distractor passage
-    # precomputed by scripts/build_open_nq_distractor.py. Same harness, same
-    # dosing; only the payload's intent differs.
-    src = (REPO / "data" / "payloads" / "open_nq_distractor.json"
-           if args.attack == "distractor_evidence"
-           else RRAG / "data" / "open_nq.json")
-    data = json.loads(src.read_text())[: args.n]
-    # Three of the mechanisms cannot be built for every item, and each is
-    # dropped on its own test rather than on a shared one, because the tests
-    # fail on different items: a clean donor is available for all of them, a
-    # stale passage for 80%, a locatable gold passage for 83%. Every drop is
-    # reported rather than silently shrinking n.
-    if args.attack in ("misretrieval", "context_dilution"):
-        # The donor pool is the item set itself.
-        pr.set_misretrieval_pool(json.loads(src.read_text()))
-        # context_dilution draws up to max(doses) distinct donors per item,
-        # so it has to be viable at the deepest dose, not just at one.
-        deep = max(args.poison_counts) if args.attack == "context_dilution" else 1
-        keep = [it for it in data
-                if all(pr.borrowed_passage(it, salt=k) is not None
-                       for k in range(deep))]
-    elif args.attack == "incidental_stale":
-        import regime_test as rt
-        keep = [it for it in data if rt.stale_passage(it, args.top_k) is not None]
-    elif args.attack == "lost_in_the_middle":
-        # An item needs a decisive passage to move and enough non-decisive
-        # ones to bury it among. Items whose every retrieved passage states
-        # the answer cannot be given a bad position at all, and items with
-        # none have nothing to move.
-        # Half the window, not a constant: an item needs a decisive passage
-        # to move and enough non-decisive ones to bury it among, and "enough"
-        # scales with how deep the window is. The mechanism is invisible at
-        # top-k 10 -- a pilot put every position inside 2.7 points, against a
-        # detectable change of 15.8 -- so the cell that tests it runs deeper,
-        # which is the range the effect was first reported in.
-        keep = [it for it in data
-                if 1 <= len(pr.gold_slots(it, args.top_k)) <= args.top_k // 2]
-    else:
-        keep = data
-    if len(keep) != len(data):
-        print(f"  {args.attack}: {len(data) - len(keep)} of {len(data)} "
-              "items cannot carry this mechanism and are dropped", flush=True)
-    data = keep
+    data = select_items(args.attack, args.n, args.top_k, args.poison_counts)
     suffix = "" if args.method == "keyword" else f"_{args.method}"
     suffix += "" if args.placement == "retrieval" else "_direct"
     out_path = args.out or f"data/registries/{args.attack}_robustrag{suffix}.json"
