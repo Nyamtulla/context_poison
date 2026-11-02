@@ -56,9 +56,14 @@ def main():
                             f"smoke_{d}_incidental_stale_{model}.jsonl"))
     ds = REPO / "data" / "sd_queue" / "datasentinel_smoke.log"
     txt = ds.read_text() if ds.exists() else ""
-    ctl = [l for l in txt.splitlines() if l.strip().startswith("control")]
-    if len(ctl) != 2 or "flag=0" not in ctl[0] or "flag=1" not in ctl[1]:
-        bad.append(f"DataSentinel controls not as expected: {ctl}")
+    ctl = {l.split()[1]: l for l in txt.splitlines()
+           if l.strip().startswith("control")}
+    if ("flag=0" not in ctl.get("clean", "")
+            or "flag=1" not in ctl.get("readme", "")):
+        bad.append(f"DataSentinel controls not as expected: {list(ctl.values())}")
+    elif "ours" in ctl:
+        print("  DataSentinel on our injected control:",
+              ctl["ours"].split("|")[0].split()[-1])
     for d in ("reliabilityrag", "attntrace"):
         p = REG / f"control_native_{d}_poisonedrag.json"
         if not p.exists():

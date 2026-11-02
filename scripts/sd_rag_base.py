@@ -97,8 +97,11 @@ def main():
         base = RRAGBase(create_model(args.model))
 
         def raw(question, passages):
+            # "answer" is read only by their debug log line; it never reaches
+            # the prompt, so the gold answer stays out of the pipeline
             return str(base.query_undefended(
-                {"question": question, "topk_content": passages}))
+                {"question": question, "topk_content": passages,
+                 "answer": []}))
         # every wrapper defense shares this pipeline's undefended answers
         tag0 = "smoke_" if args.n else ""
         answer = Memo(REPO / "data" / "sd_logs" /

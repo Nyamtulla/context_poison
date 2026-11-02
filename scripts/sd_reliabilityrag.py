@@ -68,6 +68,18 @@ def main():
 
     from sd_common import run_cell
     redirect_nli()
+    if args.out:
+        args.out = pathlib.Path(args.out).resolve()   # before the chdir below
+    # vLLM's V1 engine forks a worker process that failed CUDA init on this
+    # box; in-process runs the same engine, same sampling, without the fork
+    os.environ.setdefault("VLLM_ENABLE_V1_MULTIPROCESSING", "0")
+    # Triton compiles a small C helper at startup and needs Python.h, which
+    # this box lacks (no python3-dev). uv's standalone 3.10 ships the headers;
+    # they only let the helper build and change nothing the model computes.
+    inc = (pathlib.Path.home() / ".local/share/uv/python/"
+           "cpython-3.10-linux-x86_64-gnu/include/python3.10")
+    if inc.exists() and not os.path.exists("/usr/include/python3.10/Python.h"):
+        os.environ["C_INCLUDE_PATH"] = str(inc)
     sys.path.insert(0, str(RELI))
     os.chdir(RELI)       # their code opens configs by relative path
     from src.models import create_model              # their code
@@ -78,7 +90,9 @@ def main():
     mis = MISBasedRRAG(llm, err=args.err)
 
     def item(q, ps):
-        return {"question": q, "topk_content": ps}
+        # "answer" is read only by their debug log line; it never reaches
+        # the prompt, so the gold answer stays out of the pipeline
+        return {"question": q, "topk_content": ps, "answer": []}
 
     def undefended(q, ps):
         return str(base.query_undefended(item(q, ps)))

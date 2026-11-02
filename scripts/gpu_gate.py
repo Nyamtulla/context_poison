@@ -47,7 +47,12 @@ def main():
     ap.add_argument("--need_gb", type=float, required=True)
     ap.add_argument("--poll", type=int, default=120)
     ap.add_argument("--report_every", type=int, default=1800)
+    ap.add_argument("--once", action="store_true",
+                    help="check once, quietly: exit 0 if the card is ours, 2 if not")
     args = ap.parse_args()
+    if args.once:
+        free, others = card()
+        return 0 if not others and free >= args.need_gb else 2
     last = 0.0
     while True:
         free, others = card()

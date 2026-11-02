@@ -50,6 +50,8 @@ def main():
     args = ap.parse_args()
 
     from sd_common import run_cell
+    if args.out:
+        args.out = pathlib.Path(args.out).resolve()   # before the chdir below
     sys.path.insert(0, str(ATT))
     os.chdir(ATT)            # their configs are opened by relative path
     from src.models import create_model                     # their code
@@ -74,17 +76,26 @@ def main():
             # single passage into segments, and an empty context has none
             return answer(q, ps)
         first = answer(q, ps)
-        _, ids, _, _, _ = attr.attribute(q, newline_pad_contexts(ps), first)
-        drop = sorted(int(i) for i in ids)
-        traced[(q, len(ps))] = drop
-        keep = [p for i, p in enumerate(ps) if i not in set(drop)]
+        _, ids, scores, _, _ = attr.attribute(q, newline_pad_contexts(ps),
+                                              first)
+        # their top_k_indices come highest-scoring first, scores aligned
+        ranked = [int(i) for i in ids]
+        traced[(q, len(ps))] = {"first": first, "ranked": ranked,
+                                "scores": [float(s) for s in scores]}
+        keep = [p for i, p in enumerate(ps) if i not in set(ranked)]
         return answer(q, keep)
 
     def extra_fn(arm, dose, row, pred):
+        """What was traced, in rank order, so the forensic reading -- did the
+        top-ranked passage carry the bad answer -- needs no rerun."""
         if arm != "defended":
             return None
         ps = row["contexts"][str(dose)]
-        return {"dropped": traced.get((row["question"], len(ps)), [])}
+        t = traced.get((row["question"], len(ps)))
+        if t is None:     # fewer than two passages: nothing was traced
+            return {"dropped": []}
+        return {"dropped": sorted(t["ranked"]), "traced_ranked": t["ranked"],
+                "trace_scores": t["scores"], "first_answer": t["first"]}
 
     tag = "smoke_" if args.n else ""
     out = args.out or (REPO / "data" / "registries" /

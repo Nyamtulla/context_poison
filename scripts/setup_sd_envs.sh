@@ -13,6 +13,9 @@ set -u
 cd "$(dirname "$0")/.."
 E=envs
 UV="${UV:-$HOME/.local/bin/uv}"
+# Triton (under vLLM) compiles a C helper that needs Python.h; this box has no
+# python3-dev, so uv's standalone 3.10 supplies the headers (sd_reliabilityrag.py)
+"$UV" python install 3.10 >/dev/null
 
 build() {  # name, then pip arguments
     local name=$1; shift
