@@ -67,13 +67,14 @@ compute the smallest difference it can detect at its sample size, with
 $\alpha = .05$ and power $.80$. A smaller difference is reported as
 unresolved, never as no effect.
 
-\textbf{Attacks are not adapted to the defenses they meet.} An attack that is not built for a defense and
-defeats it anyway is a lower bound on attack strength: if the
-cheapest payload wins, an adapted one also wins. So non-adaptive evaluation is
-conservative evidence for a claim that a defense fails, and weak evidence for
-a claim that one holds. Every failure we report is of the first kind. The single resistance
-result we report is of the second, and we test it adaptively rather than
-asserting it.
+\textbf{Attacks are not adapted to the defenses they meet.} This makes the
+failures we report conservative. An attacker who studies a defense can always
+fall back on the off-the-shelf payload we used, so when that payload already
+defeats the defense, a tailored one does at least as well. The reverse does not
+hold: a defense that resists an off-the-shelf payload may still fall to a
+tailored one. Every failure we report is of the first kind. The single
+resistance result we report is of the second, and we test it adaptively rather
+than asserting it.
 
 Predictions were written into the runner scripts and committed to version
 control \emph{before} each run, and they ship with the artifact.
