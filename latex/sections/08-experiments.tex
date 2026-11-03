@@ -101,7 +101,7 @@ question, and a planted passage takes the place of one of them or, for
 dilution, is added to them. The question and its gold answer never change, so
 a difference in the answer comes from the planted passages and the fix.
 
-\paragraph{Dose, and the one item set that has none.}
+\paragraph{Dose.}
 The \textbf{dose} is how many of the retrieved passages are planted. It is
 the main axis of the retrieval results, because a fix that
 holds against one planted passage and fails against five has not failed in
@@ -115,23 +115,23 @@ every point we report is inside the range the attack and defense authors
 evaluate. Beyond five few honest passages remain, and a low score there
 measures the mechanism more than the fix. Dilution is the one exception to
 replacement: its $j$ passages are added to the ten, so its context holds
-$10 + j$.
-
-One item set has no such axis and we do not give it one. CoConflictQA
-supplies a single context passage per item, which either carries the
-conflicting claim or does not, and a single passage has no ranked list to
-dose. We report it in the two conditions its own authors run, a clean
-context and a corrupted one. The two item sets are never combined in one
-number.
+$10 + j$. CoConflictQA has no dose. It supplies a single context passage
+per item, which either carries the conflicting claim or does not, and a
+single passage has no ranked list to dose. We report it in the two conditions
+its own authors run, a clean context and a corrupted one. The two item sets
+are never combined in one number.
 
 
 \input{tables/regime_framing}
 
-Every run uses items whose context is at most 2000 characters. The cut is on
-length alone, never on an outcome, and it is applied once, so every fix
-and every planted passage meets the same items. It exists because
-contrastive-decoding fixes run the model twice at once, and the cut keeps
-every fix on one card at a shared batch size. Every comparison in this paper is between models measured on the same items.
+The CoConflictQA runs of ACD, COIECD, DyPRAG and SCR use only items whose
+context is at most 2000 characters; the runs of the other fixes, and every
+run on open Natural Questions, have no such cut. The cut was set so that the
+contrastive-decoding fixes, which run the model twice for every token, stay
+on one card at a shared batch size. It is on length alone, never on an
+outcome, and within a run it applies to every arm. It does exclude the
+longest contexts, so those four fixes' CoConflictQA results describe
+contexts of at most 2000 characters. Every comparison in this paper is between models measured on the same items.
 Rates computed on different item sets are incomparable rather than merely
 noisy, so we checked this mechanically: no run in any result file compares
 two models measured on different items. The one place the item set narrows is the planted third answer, and it
