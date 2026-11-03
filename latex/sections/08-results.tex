@@ -1,6 +1,11 @@
 \section{Results}
 \label{sec:results}
 
+This section answers RQ2 to RQ5 in turn, each subsection closing with its
+answer. One measurement comes first, because the research questions depend on
+it: how much damage a planted passage does with no fix in place, and whether
+it matters that an attacker wrote it.
+
 \paragraph{What an attacker gains over an honest mistake.}
 \label{sec:regime}
 Planting a false claim gives an attacker a measurable
@@ -70,6 +75,23 @@ ordinary retrieval error are the same event.
 
 \subsection{RQ2: Does a fix built for one literature's problem survive the other's?}
 
+We take the first direction, then the second, then every fix against every
+mechanism and the agent experiment, and end with why neither design covers
+both.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig4_dose_response}
+\caption{Each fix against corpus poisoning, by
+number of poisoned passages among the ten retrieved, measured as the
+defended model minus the undefended model in the same run. Zero means the fix changed
+nothing. Filled markers are resolvable at $p < .05$ by Fisher's exact
+test~\cite{fisher-1922-interpretation}; hollow markers are not. CK-PLUG and
+DyPRAG sit more than twenty points below zero before any passage is planted
+and stay there. The other four stay within a few points of zero.}
+\label{fig:dose}
+\end{figure}
+
 \paragraph{First direction: safety fixes facing an attacker.}
 The methods built for honest error all decide how far
 to trust the retrieved document over what the model already knows. Trusting
@@ -95,18 +117,6 @@ model to judge between its own answer and the document's, gains
 \EScrSatGain{} points on a corrupted context and costs \EScrCleanCost{} on a
 clean one, roughly five times what it gains.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig4_dose_response}
-\caption{Each fix against corpus poisoning, by
-number of poisoned passages among the ten retrieved, measured as the
-defended model minus the undefended model in the same run. Zero means the fix changed
-nothing. Filled markers are resolvable at $p < .05$ by Fisher's exact
-test~\cite{fisher-1922-interpretation}; hollow markers are not. CK-PLUG and
-DyPRAG sit more than twenty points below zero before any passage is planted
-and stay there. The other four stay within a few points of zero.}
-\label{fig:dose}
-\end{figure}
 
 The other three methods are why this is a claim about a design and not about
 all fixes. DyPRAG turns the document into model weights, so it has no
@@ -264,6 +274,9 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 \end{table}
 
 \input{tables/distractor}
+
+Two tests separate the explanations: changing only the form of the planted
+passage, and planting an answer that is neither true nor the model's own.
 
 \paragraph{The form of the planted passage.}
 \label{sec:payloads}

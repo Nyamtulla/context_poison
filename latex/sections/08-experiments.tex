@@ -8,7 +8,9 @@ then the experiments that combine them.
 \subsection{Models and hardware}
 \label{sec:whatweran}
 
-The victim model in the retrieval experiments is
+Every fix ran on the model its authors released it for, so the victim model
+varies by fix and the hardware does not. The victim model in the retrieval
+experiments is
 Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
 Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each fix
 released. The agent experiment uses a
@@ -21,6 +23,12 @@ versions (Section~\ref{sec:harness}).
 
 \subsection{Datasets}
 \label{sec:provenance}
+
+An \textbf{item} is one question, its gold answer, and the context the model
+is given to answer it from. Every item in this paper belongs to the authors
+of the method or the benchmark we are running, and Table~\ref{tab:provenance}
+lists each source and whose it is. Running each method on its own authors'
+data rules out a change of dataset as the explanation for its results.
 
 The retrieval experiments use CoConflictQA~\cite{huang-2025-parammute} over
 Natural Questions, and open Natural Questions for the mechanisms that need a
@@ -67,11 +75,11 @@ questions and appended \\
 
 \input{tables/regime_framing}
 
-An \textbf{item} is one question, its gold answer, and the context the model
-is given to answer it from. Every item in this paper belongs to the authors
-of the method or the benchmark we are running, and Table~\ref{tab:provenance}
-lists each source and whose it is. Running each method on its own authors'
-data rules out a change of dataset as the explanation for its results.
+Every run uses items whose context is at most 2000 characters. The cut is on
+length alone, never on an outcome, and it is applied once, so every fix
+and every planted passage meets the same items. It exists because
+contrastive-decoding fixes run the model twice at once, and the cut keeps
+every fix on one card at a shared batch size.
 
 Every comparison in this paper is between models measured on the same items.
 Rates computed on different item sets are incomparable rather than merely
@@ -91,6 +99,11 @@ measured on that same subset.
 \subsection{Fixes}
 \label{sec:defenses}
 
+The fixes we ran come from both literatures: the safety literature's
+knowledge-conflict fixes, the security literature's RobustRAG, and the
+prompt-injection defenses of the agent experiment. Each is described here by
+what it changes, which is what the results turn on.
+
 The fixes from the safety literature were built for knowledge conflict.
 Each adjusts how much the model relies on the
 retrieved text. ACD decodes from the no-context
@@ -106,8 +119,8 @@ SCR makes the same trade through prompting rather
 than decoding.
 
 The retrieval defense from the security literature is
-RobustRAG~\cite{xiang-2024-certifiably} answers from each retrieved passage in
-isolation and then aggregates the answers, so a corrupted passage can sway
+RobustRAG~\cite{xiang-2024-certifiably}. It answers from each retrieved passage
+in isolation and then aggregates the answers, so a corrupted passage can sway
 only its own. Its keyword variant keeps the keywords that recur across the
 isolated answers and answers from those; its decoding variant averages the
 isolated answers' next-token distributions. Its guarantee holds while the
@@ -119,14 +132,10 @@ reads its input or acts on it.
 \subsection{Mechanisms}
 \label{sec:payloadclasses}
 
-Every run uses items whose context is at most 2000 characters. The cut is on
-length alone, never on an outcome, and it is applied once, so every fix
-and every planted passage meets the same items. It exists because
-contrastive-decoding fixes run the model twice at once, and the cut keeps
-every fix on one card at a shared batch size.
-
-The planted passages in Table~\ref{tab:provenance} fall into five groups by
-what they do to the evidence.
+Every mechanism we run is a planted passage: text placed among the retrieved
+passages, either written by an attacker or reproducing an honest mistake. The
+planted passages in Table~\ref{tab:provenance} fall into five groups by what
+they do to the evidence.
 
 Four plant a false answer. PoisonedRAG writes a passage asserting the
 attacker's answer. False evidence is a fluent sentence asserting the wrong
