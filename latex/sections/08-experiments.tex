@@ -26,8 +26,9 @@ versions (Section~\ref{sec:harness}).
 
 The fixes we ran come from both literatures: the safety literature's
 knowledge-conflict fixes, the security literature's RobustRAG, and the
-prompt-injection defenses of the agent experiment. Each is described here by
-what it changes, which is what the results turn on.
+prompt-injection defenses of the agent experiment, which act before the agent
+reads its input or acts on it. Each is described here by what it changes,
+which is what the results turn on.
 
 The fixes from the safety literature were built for knowledge conflict.
 Each adjusts how much the model relies on the
@@ -43,16 +44,16 @@ between the two sources and pushes toward the context.
 SCR makes the same trade through prompting rather
 than decoding.
 
-The retrieval defense from the security literature is
-RobustRAG~\cite{xiang-2024-certifiably}. It answers from each retrieved passage
+The security literature has many retrieval defenses. The results reported here
+use RobustRAG~\cite{xiang-2024-certifiably}, whose authors released the open
+Natural Questions items and retrieval pool our retrieval experiments run on;
+further security defenses are still running and are not reported. RobustRAG
+answers from each retrieved passage
 in isolation and then aggregates the answers, so a corrupted passage can sway
 only its own. Its keyword variant keeps the keywords that recur across the
 isolated answers and answers from those; its decoding variant averages the
 isolated answers' next-token distributions. Its guarantee holds while the
 corrupted passages are few. We run both released implementations.
-
-The prompt-injection defenses of the agent experiment act before the agent
-reads its input or acts on it.
 
 \subsection{Mechanisms}
 \label{sec:payloadclasses}
