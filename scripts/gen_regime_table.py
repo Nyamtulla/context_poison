@@ -59,7 +59,7 @@ def main():
          r"& & \multicolumn{6}{c}{adopts the planted answer (\%)} & "
          r"& \multicolumn{6}{c}{accuracy on the gold answer (\%)} \\",
          r"\cmidrule(lr){3-8}\cmidrule(lr){10-15}",
-         r"payload & provenance & " + " & ".join(str(z) for z in DOSES)
+         r"planted passage & provenance & " + " & ".join(str(z) for z in DOSES)
          + r" & & " + " & ".join(str(z) for z in DOSES) + r" \\",
          r"\midrule"]
 
