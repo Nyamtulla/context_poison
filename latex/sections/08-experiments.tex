@@ -59,26 +59,28 @@ corrupted passages are few. We run both released implementations.
 Every mechanism we run is a planted passage: text placed among the retrieved
 passages, either written by an attacker or reproducing an honest mistake. The
 planted passages in Table~\ref{tab:provenance} fall into five groups by what
-they do to the evidence. Four plant a false answer. PoisonedRAG writes a passage asserting the
-attacker's answer. False evidence is a fluent sentence asserting the wrong
+they do to the evidence. Four plant a false answer: PoisonedRAG, false
+evidence, a planted third answer and a stale document. PoisonedRAG writes a
+passage asserting the attacker's answer. False evidence is a fluent sentence asserting the wrong
 answer the model would give from memory; it is the
 \texttt{parametric\_evidence} field that ships inside CoConflictQA, the
 ParamMute authors' own benchmark. A planted third answer is that sentence with
 one word changed, so it asserts an answer that is neither the truth nor the
 model's own. A stale document is a real retrieved passage with its answer
-swapped. Two push the right evidence out instead. Corpus
-poisoning~\cite{zhong-2023-poisoning,su-2024-corpus} is a token sequence
+swapped. Corpus poisoning and misretrieval push the right evidence out
+instead. Corpus poisoning~\cite{zhong-2023-poisoning,su-2024-corpus} is a
+token sequence
 optimized to be retrieved for many queries, incoherent to a human reader.
 Misretrieval is a real passage retrieved for a different question.
 
-One adds text and removes nothing. Dilution appends real passages retrieved
-for other questions to the ten retrieved, so the context grows while the
+Dilution alone adds text and removes nothing: it appends real passages
+retrieved for other questions to the ten retrieved, so the context grows while the
 original evidence stays in place. It reproduces the safety literature's
 context-length degradation~\cite{xia-2026-diagnosing} at the scale of a
-retrieval context. Two change the model's behavior rather than its answer. BadRAG's refusal
-attack makes the model decline to answer, and its tone attack makes it answer
-in a negative tone. Two are built against one fix. Both take the planted third answer and
-reshape it to minimize the quantity ACD's rule measures: one by choosing the
+retrieval context. BadRAG's two attacks change the model's behavior rather
+than its answer: its refusal attack makes the model decline to answer, and
+its tone attack makes it answer in a negative tone. The adaptive and gradient distractors are built against
+one fix, ACD. Both take the planted third answer and reshape it to minimize the quantity ACD's rule measures: one by choosing the
 best of five phrasings, one by appending a suffix found by gradient search
 (Section~\ref{sec:adaptive}).
 
