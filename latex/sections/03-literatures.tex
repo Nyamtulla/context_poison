@@ -149,15 +149,11 @@ mechanism and every fix in its cell, one panel per regime.
 mechanism and no named fix from either literature. The cube counts what the
 field has named, not which papers discuss a cell, so a survey that ranges over
 six channels occupies none of them. Four further patterns are visible in the
-figure.
-
-The two panels barely overlap. The security literature holds
+figure. First, the two panels barely overlap. The security literature holds
 \NMechSecurity{} of the \NMechanisms{} mechanisms and masses them in
 \meth{goal-hijack}; the safety literature holds \NMechSafety{} and masses them
 in \meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
-community works are nearly disjoint.
-
-Effort is concentrated rather than scarce. Four cells hold more than fifty
+community works are nearly disjoint. Second, effort is concentrated rather than scarce. Four cells hold more than fifty
 fixes each --- \meth{tool-output} $\times$ \meth{goal-hijack} at
 \NDefCellToolOutGoalHijack{}, \meth{direct-input} $\times$
 \meth{goal-hijack} at \NDefCellDirectInGoalHijack{}, \meth{RAG} $\times$
@@ -166,14 +162,12 @@ $\times$ \meth{reasoning-corruption} at \NDefCellMemReasoning{} --- and
 between them they hold \PctTopFourDef{}\% of the \NFixes{} fixes in the
 census.
 
-\NCellsAttackNoDef{} cells hold a named mechanism with no fix ever proposed
+Third, \NCellsAttackNoDef{} cells hold a named mechanism with no fix ever proposed
 against it. \NCellsAttackNoDefSec{} of them are in the security panel,
 \NCellsAttackNoDefBackdoor{} of those are \meth{persistence-backdoor}, and the
 last is \meth{memory} $\times$ \meth{data-exfiltration} on the safety side.
 These cells lack any proposed fix, which is a stronger gap than a cell
-studied by one community only.
-
-The totals column collapses the consequence axis.
+studied by one community only. Fourth, the totals column collapses the consequence axis.
 \meth{multi-agent} and \meth{memory} carry several fixes per mechanism, while
 \meth{supply-chain} has fewer fixes than mechanisms and \meth{cross-modal} and
 \meth{skill} sit near parity. Supply-chain and skill are routes by which an
@@ -191,9 +185,7 @@ tested in is coded separately from the literature it was published in, and
 only \NDefCrossRegime{} fixes were ever tested in the other community's
 regime. So the empty cell of Section~\ref{sec:emptycell}, which is a
 statement about tested pairs, has a counterpart one level down in the methods
-themselves.
-
-Even so, \NMechUncovered{} of \NMechanismsBench{} named mechanisms
+themselves. Even so, \NMechUncovered{} of \NMechanismsBench{} named mechanisms
 (\PctMechUncovered{}\%) have no fix ever evaluated against them. A single
 umbrella entry, indirect prompt injection, absorbs more tested pairs than any
 other entry by a wide margin, while \NInjUncovered{} of \NInjVariants{} named
@@ -214,9 +206,7 @@ itself by venue. Of the
 \NRegimeSecNamedVenue{} security-regime papers that name a venue,
 \NRegimeSecAtAIVenue{} published at an AI venue and \NRegimeSecAtSecVenue{}
 at a security venue. Adversarial work on LLM agents goes to ACL, EMNLP,
-NeurIPS and AAAI about as readily as to S\&P and CCS.
-
-\textbf{The traffic runs one way.} Of the \NRegimeSafetyNamedVenue{}
+NeurIPS and AAAI about as readily as to S\&P and CCS. The traffic runs one way. Of the \NRegimeSafetyNamedVenue{}
 safety-regime papers that name a venue, \NRegimeSafetyAtSecVenue{}
 published at a security venue. Security researchers submit to AI
 conferences; the reverse does not happen in this corpus.
@@ -236,9 +226,7 @@ One limit on the reading. A venue is coded only where the record carries
 one, so this covers \NRegimeSecNamedVenue{} of \NRegimeSecurity{}
 security-regime papers and \NRegimeSafetyNamedVenue{} of
 \NRegimeSafety{} on the safety side. The rest are preprints with no venue
-recorded, and we draw no conclusion about where they will land.
-
-So the two bodies of work are not kept apart by where they publish. What
+recorded, and we draw no conclusion about where they will land. So the two bodies of work are not kept apart by where they publish. What
 keeps them apart is what they cite.
 
 \subsection{Cross-citation between the literatures}
@@ -247,9 +235,7 @@ keeps them apart is what they cite.
 \textbf{Cross-citation is low in both directions.} \PctSecCitesSafety{}\% of
 security-regime papers (\NSecCitesSafety{} of \NAnalysedSec{}) cite a
 safety-regime paper, and \PctSafetyCitesSec{}\% of safety-regime papers
-(\NSafetyCitesSec{} of \NAnalysedSafety{}) cite a security one.
-
-What carries the cross-regime citations makes the rate look better
+(\NSafetyCitesSec{} of \NAnalysedSafety{}) cite a security one. What carries the cross-regime citations makes the rate look better
 than the engagement is. \NNetworkCross{} of the \NNetworkEdges{} resolved
 edges (\PctNetworkCross{}\%) cross regimes, and they concentrate on a
 handful of papers either side can cite in an introduction without adopting
@@ -269,9 +255,7 @@ so we recovered every pair the corpus reports: \NPairsComposite{} confirmed
 pairs. A (fix, mechanism) pair means some paper evaluated that fix against
 that mechanism. The registry's unit is the claim: a fix enters it when its
 paper proposes it against a named mechanism, not when the paper demonstrates
-that it works.
-
-We recovered pairs by four routes: reading the papers that propose fixes, a
+that it works. We recovered pairs by four routes: reading the papers that propose fixes, a
 citation-and-full-text recovery pass, resolving benchmark names to their
 constituent attacks where the paper named them, and a reverse scan of the
 papers that propose mechanisms. The last route matters because it is the only
@@ -293,9 +277,7 @@ defense evaluated on AgentDojo without naming which injection it faced was
 evaluated adversarially, but it is not a named pair, because expanding a
 benchmark into its constituent attacks would manufacture coverage.
 Section~\ref{sec:artifacts} separates the fixes the matrix leaves empty into
-those tested against an unnamed adversary and those never tested against one.
-
-The next two subsections read the matrix two ways: by who reported each pair,
+those tested against an unnamed adversary and those never tested against one. The next two subsections read the matrix two ways: by who reported each pair,
 and by whether its two sides come from different regimes.
 
 \begin{figure}[t]
@@ -318,12 +300,14 @@ fix winning \NOutcomeAtkDefWins{} times in \NOutcomeAtkPaper{}: they report it
 losing in \NOutcomeAtkDefLoses{} and reach no directional verdict in
 \NOutcomeAtkIncon{}. No pair has been reported by both sides:
 \NOutcomeBothSides{} of the \NOutcomePairs{} pairs carrying a reported
-outcome carry an account from both kinds of paper.
-
-Neither number measures how often fixes work. The pair of numbers
+outcome carry an account from both kinds of paper. Neither number measures how often fixes work. The pair of numbers
 measures publication incentive, and the size of the gap is the reason the
 rest of this paper re-runs the fixes rather than citing either side's
 claim.
+
+
+\subsection{The untested region}
+\label{sec:emptycell}
 
 \begin{figure}[t]
 \centering
@@ -339,15 +323,9 @@ right.}
 \label{fig:transfer}
 \end{figure}
 
-\subsection{The untested region}
-\label{sec:emptycell}
-
 The axes so far describe what each community studies. The question this paper
 turns on is narrower: \emph{has either community ever tested its methods
-against the other's problems?}
-
-
-Sort every pair into four boxes --- who built the fix, against whose
+against the other's problems?} Sort every pair into four boxes --- who built the fix, against whose
 problem it was run --- over the \NPureRegimePairs{} pairs whose two sides both
 sit in one regime. The left panel of Figure~\ref{fig:transfer} shows these
 boxes; its right panel, discussed in Section~\ref{sec:campaign}, adds our
@@ -361,9 +339,7 @@ the ones that would answer our question, and they are almost empty.
 \NSecDefVsSafetyAttack{} security fix has ever been run against a
 safety mechanism; \NSafetyDefVsSecAttack{} safety fixes have been
 run against security mechanisms. That is \NCrossCommunityPairs{} pairs in
-\NPureRegimePairs{}, \PctCrossCommunity{}\%.
-
-That near-empty off-diagonal is the untested region. It does not show that
+\NPureRegimePairs{}, \PctCrossCommunity{}\%. That near-empty off-diagonal is the untested region. It does not show that
 these methods fail outside their own regime. It shows that this has almost
 never been tested, although a deployed system does not sort its inputs into
 ``an attacker wrote this'' and ``this is merely stale''.
@@ -384,9 +360,7 @@ agents whose own evaluation is adversarial, which is what places it in the
 security regime, and it is reported against context-length-induced
 degradation, a safety mechanism. The paper's subject matter spans both
 communities. One pair in \NPureRegimePairs{} does not change the overall
-pattern.
-
-The boundary could be ours rather than the field's, and it is not drawn by
+pattern. The boundary could be ours rather than the field's, and it is not drawn by
 exclusion. We assign the regime label per paper, every paper takes one of
 the two, and papers on the boundary take the regime their own evaluation
 adopts. A paper that spans both communities therefore still sits among the
@@ -417,9 +391,7 @@ text enters: \NDefPtIngestionSec{} of its fixes act at ingestion.
 Safety acts where the text is used: \NDefPtReasoningSafety{} of its
 fixes act at reasoning. Figure~\ref{fig:pipeline} draws that split
 against the pipeline and Figure~\ref{fig:intervention} counts it. Methods
-that intervene at different stages do not duplicate each other.
-
-The names agree with the coding. Inside each taxonomy cell we looked for a
+that intervene at different stages do not duplicate each other. The names agree with the coding. Inside each taxonomy cell we looked for a
 security-regime name and a safety-regime name close enough to be the same
 thing relabelled: among \NMechanisms{} named mechanisms there are
 \NMechNameClash{} such collisions, and among \NFixes{} fixes there
@@ -446,15 +418,10 @@ PoisonedRAG, BadRAG~\cite{xue-2024-badrag} and their relatives on one side; over
 external evidence, lost-in-the-middle, and knowledge-conflict circuits on the
 other. The security papers build the attacks, the safety papers explain why
 the model is susceptible to them, and the two sets of papers cite each other
-rarely.
-
-
-The consequences each side names show the same division. Goal-hijacking, an
+rarely. The consequences each side names show the same division. Goal-hijacking, an
 attacker's objective, is \NGoalHijackSec{} security mechanisms to
 \NGoalHijackSafety{} safety ones. Reasoning corruption, a degradation, runs
-the other way: \NReasonSafety{} safety to \NReasonSec{} security.
-
-That last reading is ours, taken from the mechanism names and their papers
+the other way: \NReasonSafety{} safety to \NReasonSec{} security. That last reading is ours, taken from the mechanism names and their papers
 rather than from a coded field, and it is not clean at the edges. A few
 safety-regime entries name a delivery route rather than a susceptibility,
 \meth{KV-cache contamination} and \meth{incidental prompt injection} among
@@ -466,7 +433,7 @@ labor and the field would still end up holding two fixes that work.
 Dividing the problem costs something else: it leaves a chain with a gap in
 it. A reasoning-stage fix sits downstream of an adversary who already
 controls its input, and no amount of better reasoning recovers a document
-that was written to be believed. This is the mechanism behind the results of
+that was written to be believed. This is what lies behind the results of
 Section~\ref{sec:results}, where methods
 that shift trust toward the retrieved document help when the document is
 honest and hurt when it is written by someone else.
@@ -480,16 +447,12 @@ The security literature arrives first in \NChannelsSecFirst{} of
 safety literature arrives first in \NChannelsSafetyFirst{}. The
 median lag where security leads is \MedianChannelLag{} year and the longest is
 \MaxChannelLag{}. The \meth{supply-chain} channel, excluded here for having no
-safety-regime entry at all, is the limit case of the same pattern.
-
-So a safety-regime paper naming a failure in a channel is usually working
+safety-regime entry at all, is the limit case of the same pattern. So a safety-regime paper naming a failure in a channel is usually working
 ground a security paper reached \MedianChannelLag{} to \MaxChannelLag{} years
 earlier, in a literature it rarely cites. The collision count above shows
 that it is not renaming that paper's mechanism. It does show that work in
 these channels has proceeded largely without reference to the earlier results
-of the other community.
-
-Two limits on this reading. The dates are publication dates in our corpus, so
+of the other community. Two limits on this reading. The dates are publication dates in our corpus, so
 a channel that security reached first in work we did not include would move
 the count. And the direction may partly reflect that security publishes
 attacks, which are discrete and nameable, while the safety side
