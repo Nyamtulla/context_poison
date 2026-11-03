@@ -8,33 +8,6 @@ then the experiments that combine them.
 \subsection{Models and hardware}
 \label{sec:whatweran}
 
-Every fix ran on the model its authors released it for, so the victim model
-varies by fix and the hardware does not. The victim model in the retrieval
-experiments is
-Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
-Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each fix
-released. The agent experiment uses a
-Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
-
-Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
-535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
-\texttt{transformers} 5.5.0, except for the fixes whose authors pin other
-versions (Section~\ref{sec:harness}).
-
-\subsection{Datasets}
-\label{sec:provenance}
-
-An \textbf{item} is one question, its gold answer, and the context the model
-is given to answer it from. Every item in this paper belongs to the authors
-of the method or the benchmark we are running, and Table~\ref{tab:provenance}
-lists each source and whose it is. Running each method on its own authors'
-data rules out a change of dataset as the explanation for its results.
-
-The retrieval experiments use CoConflictQA~\cite{huang-2025-parammute} over
-Natural Questions, and open Natural Questions for the mechanisms that need a
-retrieval pool. The agent experiment uses the AgentDojo banking
-suite~\cite{debenedetti-2024-agentdojo}.
-
 \begin{table}[t]
 \centering
 \caption{Item sets and payloads, by owner. No item set is ours. Three
@@ -72,6 +45,35 @@ questions and appended \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Every fix ran on the model its authors released it for, so the victim model
+varies by fix and the hardware does not. The victim model in the retrieval
+experiments is
+Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
+Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each fix
+released. The agent experiment uses a
+Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent.
+
+
+Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
+535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
+\texttt{transformers} 5.5.0, except for the fixes whose authors pin other
+versions (Section~\ref{sec:harness}).
+
+\subsection{Datasets}
+\label{sec:provenance}
+
+An \textbf{item} is one question, its gold answer, and the context the model
+is given to answer it from. Every item in this paper belongs to the authors
+of the method or the benchmark we are running, and Table~\ref{tab:provenance}
+lists each source and whose it is. Running each method on its own authors'
+data rules out a change of dataset as the explanation for its results.
+
+The retrieval experiments use CoConflictQA~\cite{huang-2025-parammute} over
+Natural Questions, and open Natural Questions for the mechanisms that need a
+retrieval pool. The agent experiment uses the AgentDojo banking
+suite~\cite{debenedetti-2024-agentdojo}.
+
 
 \input{tables/regime_framing}
 

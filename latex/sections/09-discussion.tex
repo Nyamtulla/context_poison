@@ -51,6 +51,8 @@ limit without inferring it.
 without the smallest difference the experiment could have detected makes "no
 effect" and "we could not tell" look identical. We computed this for every run
 and several of our own results moved from the first category to the second.
+The same holds for a claim that something was never tested: it should state
+whether it means not done or not resolved.
 
 \textbf{Say whether the attack was adapted to the fix.} A fix that
 holds against an attack built for a different target has been shown to resist
@@ -88,6 +90,7 @@ pool and a list of answers that changed. A method that cannot be tested in
 the other regime should state which regime its benefit holds in.
 
 \subsection{Artifacts}
+\label{sec:artifacts}
 
 The reconstruction standard made artifact quality measurable as a side effect.
 Among the best-cited untested fixes in the cell we studied, two name
@@ -103,14 +106,15 @@ We report this as a property of the artifacts, not of the methods. A fix
 that others cannot run is unlikely to be tested by others, so part of the
 coverage gap this paper measures is an artifact gap. It is only part of it.
 \NFixUnpaired{} of \NFixes{} fixes never appear in a
-confirmed pair, and Section~\ref{sec:literatures} separates that number into
-the two things it holds. \NFixUnpairedAttacked{} were run against an
-adversary whose attack carries no name the literature reuses, which pairing
-cannot see. \NDefEvalNoAdversary{} were never run against an adversary at
-all. The second group is the larger one, and it is the field rather than the
-measurement. The fixes left over
-are validated both ways, or carry no record of what they were validated
-against.
+confirmed pair, and they are of two kinds. \NFixUnpairedAttacked{} were run
+against an adversary whose attack carries no name the literature reuses, which
+pairing cannot see. \NDefEvalNoAdversary{} were never run against an adversary
+at all. The second group is the larger one, and it is the field rather than
+the measurement. \NDefNoAdvSafety{} of those \NDefEvalNoAdversary{} are
+safety-regime fixes, demonstrated by accuracy rising on cases where the
+context is wrong, and they are the population this paper's campaign probes.
+Of the rest, \NDefEvalNoBaseline{} ran no real comparison and the records of
+\NDefEvalUnclear{} do not say what they were validated against.
 
 \subsection{Implications for deployment}
 

@@ -264,71 +264,39 @@ clusters joined by a narrow band.
 \subsection{Recovered fix--mechanism pairs}
 \label{sec:coverage}
 
-A (fix, mechanism) pair means some paper evaluated that fix against that
-mechanism. The registry's unit is the claim: a fix enters it when its paper
-proposes it against a named mechanism, not when the paper
-demonstrates that it works. A fix in a pair therefore means
-proposed-against, and the distance between proposing and demonstrating is
-part of what this section measures. We recovered pairs by four routes: reading the papers that propose fixes, a
+Whether either community tests the other's work is a question about pairs,
+so we recovered every pair the corpus reports: \NPairsComposite{} confirmed
+pairs. A (fix, mechanism) pair means some paper evaluated that fix against
+that mechanism. The registry's unit is the claim: a fix enters it when its
+paper proposes it against a named mechanism, not when the paper demonstrates
+that it works.
+
+We recovered pairs by four routes: reading the papers that propose fixes, a
 citation-and-full-text recovery pass, resolving benchmark names to their
 constituent attacks where the paper named them, and a reverse scan of the
 papers that propose mechanisms. The last route matters because it is the only
-one that can observe a fix \emph{losing} to a mechanism published after it. The final matrix holds
-\NPairsComposite{} confirmed pairs.
+one that can observe a fix \emph{losing} to a mechanism published after it.
 
-\textbf{The matrix is sparse in a specific way.} \NDefMatchedFull{} of
-\NFixes{} fixes (\PctDefMatched{}\%) appear in at least one pair, and
-\NDefOneFull{} of those (\PctDefOneFull{}\%) appear in exactly one. The
-most cross-tested fix appears in \NDefCeiling{} pairs, and \NDefFourPlus{}
-appear in four or more. But of the pairs belonging to those \NDefFourPlus{},
-\PctBreadthFromAttack{}\% were contributed by papers proposing a mechanism
-rather than by the fixes' own evaluations; for the broadest case,
-\NBroadestFromAttack{} of its \NBroadestPairs{} pairs come from such papers.
-Breadth here is not evidence a fix was evaluated widely by its authors. It is
-evidence that the authors of mechanisms chose it as a target.
+The matrix is sparse in a specific way. \NDefMatchedFull{} of \NFixes{}
+fixes (\PctDefMatched{}\%) appear in at least one pair, and \NDefOneFull{} of
+those (\PctDefOneFull{}\%) appear in exactly one. The most cross-tested fix
+appears in \NDefCeiling{} pairs, and \NDefFourPlus{} appear in four or more.
+Of the pairs belonging to those \NDefFourPlus{}, \PctBreadthFromAttack{}\%
+came from papers proposing a mechanism rather than from the fixes' own
+evaluations, and for the broadest case \NBroadestFromAttack{} of its
+\NBroadestPairs{} do. Breadth here is not evidence that a fix was evaluated
+widely by its authors. It is evidence that the authors of mechanisms chose it
+as a target.
 
-The complement of the matrix does not mean ``never tested'', because part of
-the gap reflects our instrument rather than the field. A defense evaluated on AgentDojo without naming which
-injection it faced was evaluated adversarially; it is simply not a named pair,
-because expanding a benchmark into its constituent attacks would manufacture
-coverage. So we classified every one of the \NDefEvalAudited{} fixes in the
-registry by what its own paper reports in its evaluation section, asking
-the coarser question: was this method run against an adversary at all?
-\NDefEvalAdversarial{} were (\PctDefEvalAdversarial{}\%):
-\NDefEvalPair{} appear in a confirmed pair, \NDefEvalProse{} carry an
-unambiguous adversarial signal inside their own evaluation section, and
-\NDefEvalBenchmark{} were run on an adversarial benchmark without naming
-the attack. \NDefEvalNoBaseline{} state that they ran no real
-comparison at all. \NDefEvalNoAdversary{} were evaluated with real
-baselines but never against an adversary, on capability and quality
-benchmarks instead. For the remaining \NDefEvalUnclear{} the coded fields
-do not say.
+An empty cell of the matrix does not always mean that nothing was tested. A
+defense evaluated on AgentDojo without naming which injection it faced was
+evaluated adversarially, but it is not a named pair, because expanding a
+benchmark into its constituent attacks would manufacture coverage.
+Section~\ref{sec:artifacts} separates the fixes the matrix leaves empty into
+those tested against an unnamed adversary and those never tested against one.
 
-That first group is exactly the set the matrix matches, so the rest of this
-audit partitions the \NFixUnpaired{} fixes the matrix leaves empty, and it
-answers the question the empty space raises. \NFixUnpairedAttacked{} of them
-met an adversary whose attack carries no name the literature reuses: they
-were tested, and pairing on names cannot see it. \NDefEvalNoAdversary{} met
-no adversary at all. The \NDefEvalNoBaseline{} without a real comparison and
-the \NDefEvalUnclear{} that do not say are the remainder. The empty space is
-therefore mostly the field and partly this instrument, in a ratio the audit
-fixes rather than leaves open.
-
-That \NDefEvalNoAdversary{} is two populations, and they read differently.
-\NDefNoAdvSafety{} are safety-regime fixes, most of them against
-\meth{silent-corruption} and \meth{reasoning-corruption}. These are not
-untested methods: a fix for a stale or conflicting passage is demonstrated
-by accuracy rising on cases where the context is wrong, and there is no
-adversary to put in the experiment. Their behavior under attack is
-unmeasured rather than unsound, and they are the population this paper's
-campaign probes. The other \NDefNoAdvSecurity{} sit in the security
-regime, and \NDefClaimsAdvNoAdv{} of them name an adversarial threat model
-in their own evaluation coding while putting no adversary in the
-experiment, most against \meth{goal-hijack}. That is a different failing
-from the first group. It is a defense whose evaluation does not meet its
-own stated threat model, and it is the one place in this audit where the
-gap is the paper's rather than the field's convention. The classification is conservative by construction --- anything
-ambiguous lands in that last group rather than in a positive one.
+The next two subsections read the matrix two ways: by who reported each pair,
+and by whether its two sides come from different regimes.
 
 \begin{figure}[t]
 \centering
@@ -337,16 +305,6 @@ ambiguous lands in that last group rather than in a positive one.
 that propose fixes and by the papers that propose mechanisms.}
 \label{fig:whoreports}
 \end{figure}
-
-Every count above is a positive finding: something the paper says, not
-something a pass failed to find. We report no number of the second kind, and
-the reason generalizes. We built three automated passes over these papers,
-and hand-checking each found the same asymmetry: what a pass flagged as
-present was reliable, and what it flagged as absent was about half wrong. A pattern can confirm that something is present in a paper;
-it cannot establish that something is absent, because absence of the phrasing
-it knows is not absence of the thing. A claim that something was never
-tested should state whether it means ``not done'' or ``not resolved''.
-
 
 \subsection{Reporter bias in recovered pairs}
 \label{sec:whoran}
@@ -367,13 +325,6 @@ measures publication incentive, and the size of the gap is the reason the
 rest of this paper re-runs the fixes rather than citing either side's
 claim.
 
-\subsection{The untested region}
-\label{sec:emptycell}
-
-The axes so far describe what each community studies. The question this paper
-turns on is narrower: \emph{has either community ever tested its methods
-against the other's problems?}
-
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig6_transfer}
@@ -387,6 +338,14 @@ off-diagonal boxes holds a single pair. All four boxes are occupied on the
 right.}
 \label{fig:transfer}
 \end{figure}
+
+\subsection{The untested region}
+\label{sec:emptycell}
+
+The axes so far describe what each community studies. The question this paper
+turns on is narrower: \emph{has either community ever tested its methods
+against the other's problems?}
+
 
 Sort every pair into four boxes --- who built the fix, against whose
 problem it was run --- over the \NPureRegimePairs{} pairs whose two sides both
@@ -467,6 +426,16 @@ thing relabelled: among \NMechanisms{} named mechanisms there are
 is \NDefNameClash{}. That test can only catch relabelling, so it confirms
 the division rather than establishing it.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig10_intervention}
+\caption{Where each regime's fixes intervene. Security keeps the text out
+and contains what it does; safety improves reasoning over text already
+accepted. Points run in pipeline order. Safety carries a dotted fill and is
+the lower bar of every pair, so the two separate in print without colour.}
+\label{fig:intervention}
+\end{figure}
+
 The two sides name different halves of one causal chain. \NSharedCells{} of our
 \NOccupiedCells{} occupied cells hold mechanisms from both regimes,
 \NMechSharedSec{} security and \NMechSharedSafety{} safety. Read them side by
@@ -479,15 +448,6 @@ other. The security papers build the attacks, the safety papers explain why
 the model is susceptible to them, and the two sets of papers cite each other
 rarely.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig10_intervention}
-\caption{Where each regime's fixes intervene. Security keeps the text out
-and contains what it does; safety improves reasoning over text already
-accepted. Points run in pipeline order. Safety carries a dotted fill and is
-the lower bar of every pair, so the two separate in print without colour.}
-\label{fig:intervention}
-\end{figure}
 
 The consequences each side names show the same division. Goal-hijacking, an
 attacker's objective, is \NGoalHijackSec{} security mechanisms to

@@ -167,6 +167,15 @@ evaluation; Section~\ref{sec:literatures} registers it under the rule that
 bars a paper's own attack from pairing with its own defense. Two omissions in
 \NRecallRead{} papers is a rate, not a guarantee of completeness.
 
+\textbf{Absence is not measured.} Every count in Section~\ref{sec:coverage}
+is a positive finding, something a paper says, not something a pass failed to
+find. We built three automated passes over these papers, and hand-checking
+each found the same asymmetry: what a pass flagged as present was reliable,
+and what it flagged as absent was about half wrong. A pattern can confirm
+that something is present in a paper; it cannot establish that something is
+absent, because absence of the phrasing it knows is not absence of the thing.
+We therefore report no count of the second kind.
+
 \textbf{To be done.} Four items are not complete. We report none of them
 as complete.
 
