@@ -31,12 +31,14 @@ toward the real document, because the dial has no setting for it. The attack
 is inside the context.
 
 In the second direction, a fix built against an attacker meets honest
-mistakes. RobustRAG's vote holds while wrong passages are few, which is the
-setting its threat model assumes. When half the retrieved passages are
-stale, it returns the outdated answer more often than no fix does, and
-against a failure that plants nothing it has nothing to act on. The two
-directions fail for opposite reasons: the safety fixes assume the document
-is honest, and the security defense assumes wrong passages are few. Each
+mistakes. RobustRAG's and ReliabilityRAG's votes hold while wrong passages
+are few, which is the setting their threat models assume. When half the
+retrieved passages are stale, both return the outdated answer more often than
+no fix does, and against a failure that plants nothing they have nothing to
+act on. The defenses that look for injected instructions find none in an
+honest mistake and change nothing. The two directions fail for opposite
+reasons: the safety fixes assume the document is honest, and the security
+defenses assume wrong passages are few or carry an instruction. Each
 assumption holds in its own regime and fails in the other.
 
 Two results bound the first direction's claim rather than soften it. First, protection depends on the \emph{form} of the planted passage, not only

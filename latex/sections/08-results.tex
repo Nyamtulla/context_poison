@@ -137,12 +137,11 @@ time and answers \EPmDosUndefAcc\% correctly. ParamMute cuts refusals to
 above. Suppressing memory removes a right answer when memory had one,
 and removes the conflict behind the refusal when it did not.
 
-\paragraph{Second direction: a security fix facing honest mistakes.}
+\paragraph{Second direction: security fixes facing honest mistakes.}
 \label{sec:transfer}
-A fix built against an attacker helps against an
-honest mistake only while the mistaken passages are few, and only when they
-plant a false claim. We ran RobustRAG, in both its released implementations,
-against four mechanisms that no attacker wrote. Against a real passage whose answer has changed, RobustRAG helps with one or
+We ran five security defenses against four mechanisms that no attacker
+wrote. RobustRAG, in both its released implementations, is the one whose
+authors released our retrieval data. Against a real passage whose answer has changed, RobustRAG helps with one or
 two such passages and then turns harmful. With one, the model gives the
 outdated answer \EStaleUndefAsrOne\% of the time undefended and
 \EStaleKeyAsrOne\% and \EStaleDecAsrOne\% with the two implementations. With
@@ -169,6 +168,58 @@ it neither helps nor hurts: \ERobustDispOneDef\% against
 \ERobustDispOneUndef\% with one displaced passage and \ERobustDispFiveDef\%
 against \ERobustDispFiveUndef\% with five, both inside the
 \ERobustDispMdr{}-point threshold.
+
+ReliabilityRAG fails the same way, and its traces show why. It passes its
+own control: against PoisonedRAG with one planted passage in ten it cuts the
+planted answer from \EReliCtlUndefAsrOne\% to \EReliCtlAsrOne\%. Against a
+stale passage it helps while such passages are few. With one, the outdated
+answer falls from \EReliStaleUndefAsrOne\% to \EReliStaleAsrOne\%. With five
+of ten, accuracy falls from \EReliStaleUndefAccTop\% undefended to
+\EReliStaleAccTop\% and the outdated answer rises from
+\EReliStaleUndefAsrTop\% to \EReliStaleAsrTop\%. A passage asserting a third
+answer gives the same shape: the wrong answer falls from
+\EReliDistUndefAsrTwo\% to \EReliDistAsrTwo\% with two such passages and
+rises from \EReliDistUndefAsrTop\% to \EReliDistAsrTop\% with five. Against
+misretrieval and dilution it stays within \NReliHonestGapMax{} points of the
+undefended model at every dose. Its trace records what each passage answered
+on its own and which passages it kept. At five stale passages of ten, the
+honest passages give the gold answer only \EReliHonestGold\% of the time;
+\EReliHonestOther\% answer in other words or wrongly, and \EReliHonestIdk\%
+say they do not know. The stale copies agree with one another, so they form
+the largest consistent set, and on \EReliKeptAllStale\% of items
+ReliabilityRAG keeps only stale passages. When the stale passages that agree
+outnumber the honest passages that give the gold answer, as on
+\NReliStaleLarger{} of \NReliTraceItems{} items, it returns the outdated
+answer \EReliStaleLargerWins\% of the time; otherwise \EReliNotLargerWins\%.
+Its control shows the same limit from the attacker's side: with five
+PoisonedRAG passages in ten it no longer lowers the planted answer,
+\EReliCtlUndefAsrTop\% undefended against \EReliCtlAsrTop\% defended on
+\NReliCtlN{} items.
+
+The three defenses that look for injected instructions have nothing to act
+on. Across their \NFilterCells{} cells, no dose moves accuracy more than
+\NFilterGapMax{} points from the undefended model, inside every cell's
+threshold of \EFilterMdrMin{} to \EFilterMdrMax{} points. The filters show
+why: of the \NFilterPassages{} distinct passages across the four mechanisms,
+PIGuard flags \NPiguardFlagged{} and DataSentinel \NDatasentinelFlagged{}. A
+stale or misretrieved passage contains no instruction. Both filters were
+checked first. PIGuard flags an injected instruction and passes the same
+sentence without it. DataSentinel flags the injected example from its own
+README but not our injected sentence. Spotlighting has no such check, so its
+null rests on the runs alone.
+
+AttnTrace answers a different question: not whether to keep a passage but
+which passage an answer came from. When the model gives the outdated answer,
+the passage AttnTrace ranks first is a stale one \ETraceTopStale\% of the
+time, over \NTraceStale{} such answers. When the model answers correctly it
+is a stale one \ETraceTopCorrect\% of the time, over \NTraceCorrect{}. These
+figures come from contexts whose passages were shuffled. In the grid's own
+order the stale passages come last, and AttnTrace favors late positions: with
+one stale passage in ten, it counts that passage among its five traced
+\ETraceEndCorrectOne\% of the time even when the answer is correct, against
+\ETraceShufCorrectOne\% once the order is shuffled. With position
+controlled, attribution still points at the passage behind an honest
+failure, on one model and \NTraceStale{} failures.
 
 \paragraph{Every fix against every mechanism.}
 \label{sec:grid}
@@ -209,22 +260,25 @@ The two directions fail for opposite reasons. Each design rests on an
 assumption that holds in its own regime and that the other regime breaks.
 The safety fixes assume the document is honest: they decide how far to trust
 it over the model's memory, and in the first direction an attacker writes the
-document. RobustRAG assumes that wrong passages are few: its vote is sound
-while honest passages outnumber corrupted ones, which holds when an attacker
-can plant only a few passages, the setting RobustRAG certifies. An honest
-mistake has no such limit. A fact that changes can leave many retrieved
-passages wrong in the same way at once, and with five such passages in ten
-the vote returns
-the outdated answer more often than the undefended model does. A fix that
-covers both regimes can therefore rely on neither assumption. It cannot trust
-the document by default, and it cannot count on wrong passages being a
-minority.
+document. RobustRAG and ReliabilityRAG assume that wrong passages are few:
+their votes are sound while honest passages outnumber corrupted ones, which
+holds when an attacker can plant only a few passages, the setting both
+certify. An honest mistake has no such limit. A fact that changes can leave
+many retrieved passages wrong in the same way at once, and with five such
+passages in ten both votes return the outdated answer more often than the
+undefended model does. The filters assume that a wrong passage carries an
+instruction, and an honest mistake carries none. A fix that covers both
+regimes can therefore rely on none of these assumptions. It cannot trust the
+document by default, it cannot count on wrong passages being a minority, and
+it cannot look for an instruction.
 
 Answer to RQ2. No, in neither direction. Fixes built for honest error lose
-to an attacker when they shift the model's trust toward the document. A
-fix built against an attacker helps with an honest mistake only while the
-mistaken passages are few, does more harm than no fix once they are
-many, and has nothing to act on when the mistake plants no claim.
+to an attacker when they shift the model's trust toward the document. The
+security defenses that vote across passages help with an honest mistake only
+while the mistaken passages are few, do more harm than no fix once they are
+many, and have nothing to act on when the mistake plants no claim. The ones
+that look for injected instructions do nothing, because an honest mistake
+contains none.
 
 \subsection{RQ3: Is failure a property of individual methods or of a design choice they share?}
 

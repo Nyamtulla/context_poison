@@ -185,6 +185,12 @@ def retrieval_runs():
         # qualify a pair's reading. None of them is a reportable pair.
         if stem.startswith(("smoke_", "dry_", "control_", "check_")):
             continue
+        # AttnTrace is an attribution method and is reported as tracing
+        # only. Its "defended" arm removes the traced passages and answers
+        # again, a step its authors do not propose, so its cells are not a
+        # defended-versus-undefended pair.
+        if stem.startswith("native_attntrace_"):
+            continue
         # A registry written incrementally says when it is finished. Files
         # that predate incremental writing carry no flag and were only ever
         # written complete, so absence means complete.

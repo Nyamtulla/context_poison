@@ -1224,6 +1224,9 @@ def main():
         # another cell of this grid, and it is discussed where placement is.
         if _f.endswith("_direct.json"):
             continue
+        # AttnTrace is reported as tracing only (pair_tally.retrieval_runs).
+        if "native_attntrace_" in _f:
+            continue
         _d = json.loads(pathlib.Path(_f).read_text())
         _rows = [r for r in (_d.get("results") or []) if isinstance(r, dict)]
         _arms = {r.get("arm") for r in _rows} - {None}
@@ -1351,6 +1354,65 @@ def main():
     E["EAcdGradUndefCopy"] = _x(GRAD, "dist_acc", arm="rag", frac=1.0)
     E["EAcdAdaptAcc"] = _x(ADAPT, "ctx_acc", arm="acd", frac=1.0)
     E["EAcdAdaptNoRet"] = _x(ADAPT, "ctx_acc", arm="closedbook", frac=1.0)
+
+    # The second direction beyond RobustRAG: four more security defenses
+    # against the same four honest failures (scripts/sd_*.py). ReliabilityRAG
+    # is the one that moves; the three filters are read as one bound.
+    def _sd(dfn, failure):
+        return f"native_{dfn}_{failure}.json"
+    RLS, RLD = _sd("reliabilityrag", "incidental_stale"), _sd("reliabilityrag", "distractor_evidence")
+    for lbl, f in (("Stale", RLS), ("Dist", RLD)):
+        for d, j in (("One", 1), ("Two", 2), ("Top", TOPDOSE)):
+            for m, key in (("Acc", "acc"), ("Asr", "asr")):
+                E[f"EReli{lbl}{m}{d}"] = _x(f, key, arm="defended", n_poison=j)
+                E[f"EReli{lbl}Undef{m}{d}"] = _x(f, key, arm="undefended", n_poison=j)
+    E["NReliHonestGapMax"] = round(max(
+        abs(_xd(_sd("reliabilityrag", fl), "acc", "defended", "undefended", n_poison=j))
+        for fl in ("misretrieval", "context_dilution") for j in DOSES), 1)
+    _rc = "control_native_reliabilityrag_poisonedrag.json"
+    for d, j in (("One", 1), ("Top", TOPDOSE)):
+        E[f"EReliCtlAsr{d}"] = _x(_rc, "asr", arm="defended", n_poison=j)
+        E[f"EReliCtlUndefAsr{d}"] = _x(_rc, "asr", arm="undefended", n_poison=j)
+    E["NReliCtlN"] = load(_rc)["n"]
+    _filters = [_sd(dfn, fl) for dfn in ("spotlighting", "piguard", "datasentinel")
+                for fl in ("incidental_stale", "distractor_evidence",
+                           "misretrieval", "context_dilution")]
+    M["NFilterCells"] = len(_filters)
+    E["NFilterGapMax"] = round(max(
+        abs(_xd(f, "acc", "defended", "undefended", n_poison=j))
+        for f in _filters for j in DOSES), 1)
+    _mdrs = [load(f)["mdr_pp_at_n"] for f in _filters]
+    E["EFilterMdrMin"], E["EFilterMdrMax"] = float(min(_mdrs)), float(max(_mdrs))
+    for name, key in (("piguard", "NPiguardFlagged"),
+                      ("datasentinel", "NDatasentinelFlagged")):
+        _fl = json.loads((REPO / "data" / "sd_flags" / f"{name}.json").read_text())["flags"]
+        M[key] = f'{sum(v["flag"] for v in _fl.values()):,}'
+        M["NFilterPassages"] = f"{len(_fl):,}"
+    # Stage D (scripts/analyze_stage_d.py): AttnTrace's tracing in shuffled
+    # order, how much of the stale document's effect is its position, and
+    # what ReliabilityRAG kept at five stale passages of ten.
+    _sdd = load("check_stage_d.json")
+    _tr = _sdd["attntrace_shuffled_top1"]
+    E["ETraceTopStale"] = _tr["stale"]["top1_planted"]
+    M["NTraceStale"] = _tr["stale"]["n"]
+    E["ETraceTopCorrect"] = _tr["correct"]["top1_planted"]
+    M["NTraceCorrect"] = _tr["correct"]["n"]
+    E["ETraceEndCorrectOne"] = _sdd["attntrace_end_recall"]["correct@1"]
+    E["ETraceShufCorrectOne"] = _sdd["attntrace_shuffled_recall"]["correct@1"]
+    _p = _sdd["position_stale_answers"]
+    M["NPosItems"] = _p["n"]
+    for d, j in (("One", "1"), ("Three", "3"), ("Five", "5")):
+        E[f"EPosEnd{d}"] = float(_p["end"][j])
+        E[f"EPosShuf{d}"] = float(_p["shuffled"][j])
+    _r = _sdd["reliabilityrag_dose5"]
+    M["NReliTraceItems"] = _r["n"]
+    E["EReliKeptAllStale"] = _r["kept_all_stale_pct"]
+    E["EReliHonestGold"] = _r["honest_passage_answers_pct"]["correct"]
+    E["EReliHonestOther"] = _r["honest_passage_answers_pct"]["other"]
+    E["EReliHonestIdk"] = _r["honest_passage_answers_pct"]["idk"]
+    M["NReliStaleLarger"] = _r["by_group_size"]["stale_larger"]["n"]
+    E["EReliStaleLargerWins"] = _r["by_group_size"]["stale_larger"]["stale_answer"]
+    E["EReliNotLargerWins"] = _r["by_group_size"]["not_larger"]["stale_answer"]
 
     # Python rounds halves to even, so 0.25 would print as 0.2 where the
     # paper has always printed 0.3. Round half up, as a reader expects.

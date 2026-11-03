@@ -14,7 +14,9 @@ experiments is
 Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
 Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each fix
 released. The agent experiment uses a
-Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent. Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
+Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent. AttnTrace ran on
+Qwen2.5-7B-Instruct, because the Llama-3.1 weights its released examples use
+are gated and access was not granted to us. Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
 535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
 \texttt{transformers} 5.5.0, except for the fixes whose authors pin other
 versions (Section~\ref{sec:harness}).
@@ -23,7 +25,7 @@ versions (Section~\ref{sec:harness}).
 \label{sec:defenses}
 
 The fixes we ran come from both literatures: the safety literature's
-knowledge-conflict fixes, the security literature's RobustRAG, and the
+knowledge-conflict fixes, the security literature's retrieval defenses, and the
 prompt-injection defenses of the agent experiment, which act before the agent
 reads its input or acts on it. Each is described here by what it changes,
 which is what the results turn on.
@@ -42,16 +44,34 @@ between the two sources and pushes toward the context.
 SCR makes the same trade through prompting rather
 than decoding.
 
-The security literature has many retrieval defenses. The results reported here
-use RobustRAG~\cite{xiang-2024-certifiably}, whose authors released the open
-Natural Questions items and retrieval pool our retrieval experiments run on;
-further security defenses are still running and are not reported. RobustRAG
-answers from each retrieved passage
+The security literature has many retrieval defenses, and we ran five. Two
+vote across passages. RobustRAG~\cite{xiang-2024-certifiably}, whose authors
+released the open Natural Questions items and retrieval pool our retrieval
+experiments run on, answers from each retrieved passage
 in isolation and then aggregates the answers, so a corrupted passage can sway
 only its own. Its keyword variant keeps the keywords that recur across the
 isolated answers and answers from those; its decoding variant averages the
 isolated answers' next-token distributions. Its guarantee holds while the
 corrupted passages are few. We run both released implementations.
+ReliabilityRAG~\cite{shen-2025-reliabilityrag} also answers from each passage
+alone, then links two passages when an NLI model finds their answers
+contradictory and keeps the largest set of passages that do not contradict
+one another, breaking ties toward the higher-ranked ones. Its guarantee too
+holds while the corrupted passages are a bounded few. Three look for injected
+instructions. Spotlighting~\cite{hines-2024-defending} marks the retrieved
+text with delimiters and tells the model not to follow instructions inside
+them; we run AgentDojo's implementation, whose sentence says ``tool
+outputs'', with ``retrieved passages'' in its place.
+PIGuard~\cite{li-2025-piguard} and DataSentinel~\cite{liu-2025-datasentinel}
+are released classifiers for injected instructions. Deployed as filters, each
+drops the passages it flags and the model answers from the rest. The fifth,
+AttnTrace~\cite{wang-2025-attntrace}, is an attribution method: it ranks the
+passages by how much the answer drew on them, and its authors use it to find
+the passages behind a corrupted answer. We report it as that, a tracer, and
+not as a defense with a defended accuracy. ReliabilityRAG, Spotlighting and
+the two filters answer with Mistral-7B-Instruct through RobustRAG's prompt.
+ReliabilityRAG's share of GPU memory was raised so that it could start beside
+other jobs on the shared card, which changes nothing it computes.
 
 \subsection{Mechanisms}
 \label{sec:payloadclasses}
@@ -101,6 +121,8 @@ question, and a planted passage takes the place of one of them or, for
 dilution, is added to them. The question and its gold answer never change, so
 a difference in the answer comes from the planted passages and the fix.
 
+\input{tables/regime_framing}
+
 \paragraph{Dose.}
 The \textbf{dose} is how many of the retrieved passages are planted. It is
 the main axis of the retrieval results, because a fix that
@@ -122,7 +144,6 @@ its own authors run, a clean context and a corrupted one. The two item sets
 are never combined in one number.
 
 
-\input{tables/regime_framing}
 
 The CoConflictQA runs of ACD, COIECD, DyPRAG and SCR use only items whose
 context is at most 2000 characters; the runs of the other fixes, and every
@@ -154,12 +175,16 @@ Figure~\ref{fig:transfer} sets the campaign beside the published literature. The
 from the other, in both directions. We ran \NCampCrossPairs{} such pairs, all
 on retrieval question answering over Natural Questions. In the first direction, \NCampSafDefSecMech{} pairs take a fix from the safety
 literature, built for a document that is merely out of date, and attack it
-with corpus poisoning, PoisonedRAG or BadRAG. In the second direction, \NCampSecDefSafetyMech{} pairs take RobustRAG, a
-defense from the security literature, in both of its released
-implementations, and give it four mechanisms that no attacker wrote: a real
+with corpus poisoning, PoisonedRAG or BadRAG. In the second direction, \NCampSecDefSafetyMech{} pairs take a defense from
+the security literature, RobustRAG in both of its released implementations,
+ReliabilityRAG, Spotlighting, or the PIGuard or DataSentinel filter, and give
+it four mechanisms that no attacker wrote: a real
 passage whose answer has since changed, a passage asserting a third wrong
 answer, a passage retrieved for the wrong question, and unrelated passages
-that lengthen the context.
+that lengthen the context. AttnTrace meets the same four mechanisms and is
+read for what it traces, so it is not counted as a pair. Before these runs,
+ReliabilityRAG and AttnTrace each met PoisonedRAG, and the two filters an
+injected instruction, to check that they work in our hands.
 
 A second experiment pairs each fix with the kind of mechanism its own authors
 used. These \NCampSecDefSecMech{} security pairs and

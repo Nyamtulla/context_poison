@@ -29,15 +29,27 @@ only citations to papers inside that set register, so a paper reaching
 across to work we did not include does not count: every cross-citation rate
 in this paper is a floor.
 
-\textbf{The reverse direction rests on one defense.} Most cross-regime pairs
-in the campaign take a safety-regime method and attack it. The other
-direction holds one family: RobustRAG against distractor evidence and against
-misretrieval, in Section~\ref{sec:transfer}. That is two mechanisms, one
-defense, one model and one dataset. The split result there --- it holds
-against the planted claim and costs accuracy against the retrieval error ---
-reads two cells, not a population. The other security defenses are absent
-because their released code does not run on our retrieval data, and nothing
-here says whether they would divide the same way.
+\textbf{The reverse direction rests on one model per defense.} Each security
+defense of Section~\ref{sec:transfer} meets the four honest failures on one
+model and one dataset, open Natural Questions. RobustRAG, ReliabilityRAG,
+Spotlighting and the two filters answer with Mistral-7B-Instruct, and
+AttnTrace with Qwen2.5-7B-Instruct rather than the Llama-3.1 model its
+examples use. AttnTrace's tracing result rests on \NTraceStale{} wrong
+answers. Spotlighting's null has no control behind it, and DataSentinel
+misses our injected sentence while catching its own README's, so a null for
+either could also mean the defense does not work in our hands.
+
+\textbf{Planted passages sit at the end of the context.} On open Natural
+Questions every planted passage takes the last of the ten retrieved slots, and
+models weigh late text more. On \NPosItems{} stale-document items with the
+same passages in shuffled order, the undefended model gives the outdated
+answer \EPosShufOne\% of the time with one stale passage instead of
+\EPosEndOne\%, \EPosShufThree\% with three instead of \EPosEndThree\%, and
+\EPosShufFive\% with five instead of \EPosEndFive\%. Every comparison we
+report sets a defended model against an undefended one on the same contexts,
+so both arms share the placement. The absolute rates, how often a mechanism
+succeeds at all, are higher than they would be at a random position. We
+measured this on one model and one mechanism.
 
 \textbf{Registry granularity.} What counts as one named mechanism is a
 judgement. ``Indirect prompt injection'' is one registry entry and absorbs

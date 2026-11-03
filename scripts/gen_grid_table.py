@@ -45,7 +45,9 @@ DEFEND = ("defended", "ck", "coiecd", "acd", "scr", "parammute", "dyprag")
 PRETTY = {"acd": "ACD", "ckplug": "CK-PLUG", "coiecd": "COIECD",
           "dyprag": "DyPRAG", "parammute": "ParamMute", "scr": "SCR",
           "spare": "SpARE", "robustrag-keyword": "RobustRAG-kw",
-          "robustrag-decoding": "RobustRAG-dec"}
+          "robustrag-decoding": "RobustRAG-dec",
+          "reliabilityrag": "ReliabilityRAG", "spotlighting": "Spotlighting",
+          "piguard": "PIGuard filter", "datasentinel": "DataSentinel filter"}
 ATK = {"poisonedrag": "PoisonedRAG", "corpus_poisoning": "corpus pois.",
        "badrag_dos": "refusal", "badrag_sentiment": "tone",
        "distractor_evidence": "third answer", "misretrieval": "misretrieval",
@@ -56,8 +58,11 @@ ATK = {"poisonedrag": "PoisonedRAG", "corpus_poisoning": "corpus pois.",
 COLS = ["poisonedrag", "corpus_poisoning", "badrag_dos", "badrag_sentiment",
         "distractor_evidence", "misretrieval", "incidental_stale",
         "context_dilution"]
+# AttnTrace is absent on purpose: it is reported as tracing only, and its
+# defended arm is a removal step its authors do not propose.
 ROWS = ["acd", "ckplug", "coiecd", "dyprag", "parammute", "scr",
-        "robustrag-keyword", "robustrag-decoding"]
+        "robustrag-keyword", "robustrag-decoding", "reliabilityrag",
+        "spotlighting", "piguard", "datasentinel"]
 
 
 def cell(path):
