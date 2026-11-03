@@ -3,9 +3,7 @@
 
 Two research communities study one failure. An LLM agent reads content it
 should not trust, and it cannot tell which content that is. The security
-community calls the content an attack and builds defenses. The safety community calls it a mechanism and builds fixes.
-
-We measured the distance between them over \NCorpus{} papers read in full,
+community calls the content an attack and builds defenses. The safety community calls it a mechanism and builds fixes. We measured the distance between them over \NCorpus{} papers read in full,
 of which \NAnalysed{} name a mechanism or a fix.
 \PctSecCitesSafety{}\% of security-regime papers cite a safety-regime one. Only \NBothValidated{} of \NFixes{} fixes were
 tested in both regimes. And \PctSameRegime{}\% of
@@ -16,9 +14,7 @@ mechanism exactly once.
 
 We then ran that experiment. \NCampaignPairs{} pairs, all on the authors'
 released artifacts. \PctCampCross{}\% of them cross the boundary the
-literature does not.
-
-In the first direction, fixes built for honest error meet attacks. One
+literature does not. In the first direction, fixes built for honest error meet attacks. One
 poisoned passage in ten gives a fix its best chance, because nine honest
 passages survive, and it is the attacks' own default. \NGridLowHelps{} of
 \NGridLowPairs{} (fix, mechanism) pairs show a resolvable benefit there.
@@ -27,9 +23,7 @@ fail because someone built them badly. They fail because of what they
 arbitrate. Each one decides between trusting the context and trusting memory,
 and that dial moves correctness around without creating any. Suppress memory
 and the attacker receives what memory held. Suppress the attacker and memory
-receives it back.
-
-A planted passage that asserts a third answer separates copying from
+receives it back. A planted passage that asserts a third answer separates copying from
 remembering, so
 we can add the two movements together. In the three fixes that suppress
 memory they cancel to within 8 points. Neither direction moves anything
@@ -45,13 +39,9 @@ directions fail for opposite reasons: the safety fixes assume the document
 is honest, and the security defense assumes wrong passages are few. Each
 assumption holds in its own regime and fails in the other.
 
-Two results bound the first direction's claim rather than soften it.
-
-First, protection depends on the \emph{form} of the planted passage, not only
+Two results bound the first direction's claim rather than soften it. First, protection depends on the \emph{form} of the planted passage, not only
 on whether an attacker is present. An evaluation built around optimized
-passages therefore overstates how well a system holds.
-
-Second, one fix did resist. It loses \PctAcdRemovedGradient{}\% of that
+passages therefore overstates how well a system holds. Second, one fix did resist. It loses \PctAcdRemovedGradient{}\% of that
 protection to an
 attacker who reads its rule and optimizes against the quantity it measures.
 

@@ -4,9 +4,7 @@
 This section turns the results into practice: the controls an evaluation
 should report, the conventions for what a paper claims and tests, what the
 released artifacts showed, and what a deployment inherits. Most of it
-addresses both communities at once.
-
-For the mechanism that removes evidence rather than planting a lie, the
+addresses both communities at once. For the mechanism that removes evidence rather than planting a lie, the
 campaign finds no difference between an optimized passage and an ordinary
 retrieval error. For that mechanism the two communities study the same
 problem, and the recommendations below treat it as one.
@@ -118,14 +116,10 @@ Of the rest, \NDefEvalNoBaseline{} ran no real comparison and the records of
 
 \subsection{Implications for deployment}
 
-Three practical points follow from the results.
-
-A method that tunes how much the model trusts retrieved text is correct
+Three practical points follow from the results. First, a method that tunes how much the model trusts retrieved text is correct
 when the text is merely stale and dangerous when an attacker owns it. If the
 corpus an agent retrieves from is one an outsider can write to, the second
-case is the deployed case.
-
-Consider a system that uses a knowledge-conflict method to improve answer
+case is the deployed case. Consider a system that uses a knowledge-conflict method to improve answer
 quality and retrieves from such a corpus. The method operates outside the
 regime its authors validated, and our measurements say it is more likely to
 increase damage than to reduce it: ParamMute is
@@ -136,14 +130,12 @@ converts the document to weights has no dial to turn and does not show the
 reversal, and one method in the family resisted until an adaptive attacker
 lost most of its protection to an adaptive attacker.
 
-A fix that holds against an optimized adversarial passage may fail against
+Second, a fix that holds against an optimized adversarial passage may fail against
 a fluent sentence that simply asserts a plausible falsehood. In our
 measurements no fix resisted both. The fluent attack is also cheaper to
 produce: it needs no gradient access and no surrogate retriever, and it does at
 least as much damage to an undefended model as the optimized passage.
 Evaluations built only around optimized passages can overstate protection. Do not call a fix tested on one
-kind of planted passage robust to context poisoning.
-
-Finally, coverage differs by channel. Supply-chain and cross-modal content
+kind of planted passage robust to context poisoning. Finally, coverage differs by channel. Supply-chain and cross-modal content
 have fewer named fixes than named mechanisms. If an agent accepts third-party
 packages, templates or models, few published fixes address that route.

@@ -2,9 +2,7 @@
 
 An LLM agent reads from many places. It reads retrieved documents and the output of the tools it calls. It reads the descriptions of those tools, the files and skills it loads, and messages
 from other agents. It also reads its own stored memory~\cite{chu-2026-systematic,ma-2025-safety}. All of this arrives in one context window, and the model treats it as one body of
-text. The model has no reliable way to tell which part of that text is trustworthy and which part is not~\cite{greshake-2023-not}.
-
-Think of the context window as a pond fed by a fixed set of streams. Whatever
+text. The model has no reliable way to tell which part of that text is trustworthy and which part is not~\cite{greshake-2023-not}. Think of the context window as a pond fed by a fixed set of streams. Whatever
 enters through any stream mixes into the same water, whether someone dumped it
 in or it washed in on its own. So the first questions are how many streams
 there are and how many kinds of damage the pollution can do.
