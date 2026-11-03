@@ -105,7 +105,7 @@ Table~\ref{tab:family} shows the sign change. SpARE changes accuracy by
 +\ESpareClean{} points on a clean context and by \ESpareSat{} on a corrupted
 one, both beyond its threshold. ParamMute gains \EParamClean{} points on a clean context
 and ends \EParamSatGap{} points below the undefended model on a corrupted one.
-CK-PLUG goes furthest. Under BadRAG's tone attack, which tries to make the
+CK-PLUG goes furthest (Table~\ref{tab:grid}a). Under BadRAG's tone attack, which tries to make the
 model answer in a negative tone, the undefended model takes on that tone at
 most \ECkSentUndefMax\% of the time. With CK-PLUG it takes it on
 \ECkSentOne\% of the time with one poisoned passage in ten and
@@ -142,7 +142,7 @@ and removes the conflict behind the refusal when it did not.
 We ran five security defenses against four mechanisms that no attacker
 wrote. RobustRAG, in both its released implementations, is the one whose
 authors released our retrieval data. Against a real passage whose answer has changed, RobustRAG helps with one or
-two such passages and then turns harmful. With one, the model gives the
+two such passages and then turns harmful (Table~\ref{tab:grid}b). With one, the model gives the
 outdated answer \EStaleUndefAsrOne\% of the time undefended and
 \EStaleKeyAsrOne\% and \EStaleDecAsrOne\% with the two implementations. With
 five, the defended model gives it more often than the undefended one,
@@ -221,17 +221,18 @@ one stale passage in ten, it counts that passage among its five traced
 controlled, attribution still points at the passage behind an honest
 failure, on one model and \NTraceStale{} failures.
 
-\paragraph{Every fix against every mechanism.}
+\paragraph{Across the grid.}
 \label{sec:grid}
-Across every fix and every mechanism on open Natural
+Across both directions on open Natural
 Questions, almost nothing helps. Table~\ref{tab:grid} reads each pair against
 its own undefended model at five planted passages in ten. Of the
 \NGridCells{} pairs, \NGridGainTop{} help by more than their threshold,
 \NGridLoseTop{} hurt by more than their threshold, and \NGridFlatTop{} show
 no measurable difference. All \NGridGainTop{} gains are against the refusal
 attack, where the method helps by getting the model to answer again rather
-than by resisting anything. Every measurable result against an attack that
-plants a false answer is a loss. CK-PLUG and DyPRAG account for
+than by resisting anything. Every measurable result against a planted passage
+that asserts a false answer is a loss, whether an attacker or an honest
+mistake put it there. CK-PLUG and DyPRAG account for
 \NGridLoseTopTwo{} of the \NGridLoseTop{} losses, and they are also the only
 two methods that cost accuracy with nothing planted, more than twenty points
 each. The other \NGridFreeClean{} of \NGridCells{} pairs cost nothing
