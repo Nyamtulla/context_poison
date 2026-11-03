@@ -85,14 +85,12 @@ def main():
     OUT.write_text(r"""\begin{table*}[t]
 \centering
 \caption{Fixes that decide how far to trust the document, against a
-planted third answer on a corrupted context, in percentage points against
-each run's own undefended model, with the undefended and defended rates in
-brackets. Memory is how often the model gives its own answer, copied how
-often it gives the planted one, and correct how often it gives the true one.
-The three cannot overlap, so the residual is the share of answers that are
-none of them. $*$ clears both the run's detection threshold and Fisher's test
-at $p<0.05$. Rates are rounded for display and differences are computed
-before rounding.}
+planted third answer on a corrupted context. Cells are percentage points
+against each run's undefended model, with undefended and defended rates in
+brackets. Memory, copied and correct are how often the model gives its own
+answer, the planted one and the true one; the residual is none of the three.
+$*$: beyond the run's detection threshold and Fisher's $p<0.05$. Differences
+are computed before rounding.}
 \label{tab:distractor}
 \small
 \begin{tabular}{@{}lrrrrr@{}}
