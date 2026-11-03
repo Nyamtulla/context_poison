@@ -2,9 +2,15 @@
 \label{sec:results}
 
 This section answers RQ2 to RQ5 in turn, each subsection closing with its
-answer. One measurement comes first, because the research questions depend on
-it: how much damage a planted passage does with no fix in place, and whether
-it matters that an attacker wrote it.
+answer. RQ2 takes the main experiment in each direction, then every fix
+against every mechanism and the agent experiment, and ends with why neither
+design covers both. RQ3 separates the explanations with two tests, one that
+changes only the form of the planted passage and one that plants an answer
+neither true nor the model's own. RQ4 adds the measurements the field leaves
+out, and RQ5 attacks the one fix that resisted. One measurement comes first,
+because the research questions depend on it: how much damage a planted
+passage does with no fix in place, and whether it matters that an attacker
+wrote it.
 
 \paragraph{What an attacker gains over an honest mistake.}
 \label{sec:regime}
@@ -63,9 +69,7 @@ costs more accuracy, \AccCraftTop{}\% against \AccStaleTop{}\%. The honest
 mistake still does real damage: it moves the model to the false answer
 \PctStaleTop{}\% of the time, against \PctStaleClean{}\% with nothing planted.
 Repeating the crafted passage five times, as the published attack does,
-changes these rates by at most \NRegimeRepeatMax{} points.
-
-Where the passage only pushes the right evidence out of the retrieved set, the
+changes these rates by at most \NRegimeRepeatMax{} points. Where the passage only pushes the right evidence out of the retrieved set, the
 attacker gains nothing. Zhong et al.'s optimized passage and a real passage
 retrieved for another question give the same results: \PctCorpusTop{}\% and
 \PctMisretrievalTop{}\% planted answers, \AccCorpusTop{}\% and
@@ -74,10 +78,6 @@ number of planted passages. For this kind of attack, an attack and an
 ordinary retrieval error are the same event.
 
 \subsection{RQ2: Does a fix built for one literature's problem survive the other's?}
-
-We take the first direction, then the second, then every fix against every
-mechanism and the agent experiment, and end with why neither design covers
-both.
 
 \begin{figure}[t]
 \centering
@@ -142,9 +142,7 @@ and removes the conflict behind the refusal when it did not.
 A fix built against an attacker helps against an
 honest mistake only while the mistaken passages are few, and only when they
 plant a false claim. We ran RobustRAG, in both its released implementations,
-against four mechanisms that no attacker wrote.
-
-Against a real passage whose answer has changed, RobustRAG helps with one or
+against four mechanisms that no attacker wrote. Against a real passage whose answer has changed, RobustRAG helps with one or
 two such passages and then turns harmful. With one, the model gives the
 outdated answer \EStaleUndefAsrOne\% of the time undefended and
 \EStaleKeyAsrOne\% and \EStaleDecAsrOne\% with the two implementations. With
@@ -165,9 +163,7 @@ accuracy by \NDilUndefDrop{} points, from \EDilUndefAccClean\% to
 \EDilUndefAccFive\%, and the defended model differs from the undefended one
 by at most \NDilGapMax{} points at any number of added passages, inside the
 \EDilMdr{}-point threshold. That difference is the cost RobustRAG shows with
-nothing added.
-
-Against attacks from its own literature, RobustRAG stops PoisonedRAG, as its
+nothing added. Against attacks from its own literature, RobustRAG stops PoisonedRAG, as its
 own paper reports, by \ERobustPoisonedGain{} points. Against corpus poisoning
 it neither helps nor hurts: \ERobustDispOneDef\% against
 \ERobustDispOneUndef\% with one displaced passage and \ERobustDispFiveDef\%
@@ -189,7 +185,6 @@ plants a false answer is a loss. CK-PLUG and DyPRAG account for
 two methods that cost accuracy with nothing planted, more than twenty points
 each. The other \NGridFreeClean{} of \NGridCells{} pairs cost nothing
 measurable on a clean context.
-
 \label{sec:lowdose}
 Even with nine of ten passages honest, almost nothing
 helps. One poisoned passage in ten is the default of the released attack and
@@ -275,9 +270,6 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 
 \input{tables/distractor}
 
-Two tests separate the explanations: changing only the form of the planted
-passage, and planting an answer that is neither true nor the model's own.
-
 \paragraph{The form of the planted passage.}
 \label{sec:payloads}
 What a fix does depends on the form of the planted
@@ -355,9 +347,7 @@ choice cannot separate a real document from a planted one.
 \label{sec:controls}
 We re-read the results against a score almost no paper reports, what the
 same model scores with no document at all, and check them on a second
-implementation of one design and on a second base model.
-
-DyPRAG holds \EDypragClean\% on a clean
+implementation of one design and on a second base model. Start with the no-document score. DyPRAG holds \EDypragClean\% on a clean
 context and \EDypragSat\% on a corrupted one while the undefended model falls
 from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that looks like
 complete resistance. The same model with no document at all scores
