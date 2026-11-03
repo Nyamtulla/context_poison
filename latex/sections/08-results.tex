@@ -353,8 +353,11 @@ choice cannot separate a real document from a planted one.
 \subsection{RQ4: Do the measurements the field leaves out change the result?}
 
 \label{sec:controls}
-Without a no-document score, a fix that ignores the
-document looks immune to the attack. DyPRAG holds \EDypragClean\% on a clean
+We re-read the results against a score almost no paper reports, what the
+same model scores with no document at all, and check them on a second
+implementation of one design and on a second base model.
+
+DyPRAG holds \EDypragClean\% on a clean
 context and \EDypragSat\% on a corrupted one while the undefended model falls
 from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that looks like
 complete resistance. The same model with no document at all scores
@@ -407,8 +410,7 @@ ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \subsection{RQ5: Does that explanation survive an adaptive attacker?}
 
 \label{sec:adaptive}
-The one method that resisted loses more than half of
-its protection to an attacker who reads its rule. Every attack above was
+Every attack above was
 built without knowledge of the fix it met. Such an attack bounds attack
 strength from below: it is conservative evidence when a fix fails and
 weak evidence when a fix holds. ACD was our only holding result, so we
