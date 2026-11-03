@@ -57,9 +57,7 @@ ought to apply to a mechanism that arrives the same way and does the same
 damage. The taxonomy predicts that such a pair should transfer, and no paper
 in the corpus had tested it. The same rule without its
 second condition picks the control pairs, which put each fix against its
-own literature's mechanisms.
-
-We propose no new fix or attack. Every fix and every attack we run is
+own literature's mechanisms. We propose no new fix or attack. Every fix and every attack we run is
 published.
 
 \subsection{The reconstruction standard}
@@ -69,9 +67,7 @@ running one. Every number we report comes from running a fix's own released code
 weights. We never cite a paper's reported numbers as evidence about that
 paper's method. Where a harness had to be adapted to our data, we adapted the
 harness and left the method and the evaluation rubric untouched. Where an
-author's rubric and ours differed, we used the author's.
-
-The standard cost us coverage. Several fixes could not be evaluated at
+author's rubric and ours differed, we used the author's. The standard cost us coverage. Several fixes could not be evaluated at
 all, for reasons that lie in what their artifacts ship rather than in what
 their methods do, and we record those as roadblocks rather than as failures
 of the method.
@@ -80,7 +76,9 @@ of the method.
 
 Released code is not enough on its own. A negative result is easy to produce
 by accident, so four rules guard against that, and we fixed all four before
-any run.
+any run. The predictions each run tests were written into the runner scripts and
+committed to version control \emph{before} it ran, and they ship with the
+artifact.
 
 \textbf{The control fires first.} A fix that is broken in our hands
 tells us nothing about transfer, so before any transfer number we check that
@@ -108,6 +106,45 @@ compute the smallest difference it can detect at its sample size, with
 $\alpha = .05$ and power $.80$. A smaller difference is reported as
 unresolved, never as no effect.
 
+\begin{table}[t]
+\centering
+\caption{Item sets and planted passages, by owner. No item set is ours.
+Corpus poisoning, PoisonedRAG and BadRAG come from the attack literature and
+false evidence from the benchmark itself; the rest are ours, and none of them
+is a new attack: three are edits of a field the benchmark already ships, and
+three reuse the item set's own retrieved passages, which is what makes them
+controls rather than attacks.}
+\label{tab:provenance}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.40\columnwidth}>{\raggedright\arraybackslash}p{0.52\columnwidth}@{}}
+\toprule
+\textbf{Item set} & \textbf{Released by} \\
+\midrule
+CoConflictQA~\cite{huang-2025-parammute} over Natural Questions & the ParamMute authors \\
+Open Natural Questions~\cite{kwiatkowski-2019-natural}, with its retrieval pool & the RobustRAG authors \\
+FaithEval~\cite{ming-2025-faitheval}, SQuAD~\cite{rajpurkar-2016-squad} negatives & the FaithfulRAG~\cite{zhang-2025-faithfulrag} authors \\
+AgentDojo banking suite & the AgentDojo authors \\
+\midrule
+\textbf{Planted passage} & \textbf{Origin} \\
+\midrule
+Corpus poisoning & Zhong et al.'s released passage, unmodified \\
+PoisonedRAG, BadRAG & The published constructions \\
+False evidence & CoConflictQA's own parametric-evidence field \\
+Distractor evidence & \textbf{ours}: one substitution into that field \\
+Adaptive distractor & \textbf{ours}: the same claim, reshaped against one
+fix's rule \\
+Gradient distractor & \textbf{ours}: that passage and a suffix optimized
+against the same rule \\
+Stale document & \textbf{ours}: a real retrieved passage, gold answer
+swapped \\
+Misretrieval & \textbf{ours}: a real passage, unmodified, retrieved for
+another question \\
+Dilution & \textbf{ours}: real passages, unmodified, retrieved for other
+questions and appended \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \textbf{Attacks are not adapted to the fixes they meet.} An attack that is not built for a fix and
 defeats it anyway is a lower bound on attack strength: if the
 cheapest payload wins, an adapted one also wins. So non-adaptive evaluation is
@@ -115,6 +152,3 @@ conservative evidence for a claim that a fix fails, and weak evidence for
 a claim that one holds. Every failure we report is of the first kind. The single resistance
 result we report is of the second, and we test it adaptively rather than
 asserting it.
-
-Predictions were written into the runner scripts and committed to version
-control \emph{before} each run, and they ship with the artifact.
