@@ -18,8 +18,7 @@ else is fixed by the harness, not by the run.
 \textbf{One construction of the contexts.} The planted contexts come from one
 constructor, the one the attacks released (Section~\ref{sec:payloadclasses}),
 applied to one item list. Every fix in a pair reads the same contexts, and so
-do the undefended and no-document arms, so a difference between arms belongs
-to the fix and not to its input.
+do the undefended and no-document arms, so any difference between arms comes from the fix, not from its input.
 
 \textbf{Each fix in its own environment.} Every fix runs from its
 authors' code under the dependency versions its authors pinned, one
@@ -29,9 +28,8 @@ fixes with conflicting dependencies meet the same mechanisms. They do
 conflict: the fixes in a single cell of this taxonomy cannot share one
 Python environment. ACD's released decoder imports symbols that
 \texttt{transformers} removed after 4.44, which its own README pins, and
-CK-PLUG ships its own 4.49 fork, which its README says to install. That is the
-reproducibility problem of Section~\ref{sec:discussion}, one layer further
-down. The released artifact builds each environment and verifies it. The agent
+CK-PLUG ships its own 4.49 fork, which its README says to install. This is the reproducibility problem of Section~\ref{sec:discussion} again,
+this time in the software each fix depends on. The released artifact builds each environment and verifies it. The agent
 experiment is the one exception to the interface: it runs inside AgentDojo's
 own harness.
 
@@ -55,10 +53,10 @@ through the same channel and causes the same consequence. And no paper in the
 corpus may report having run them together. A fix that repairs quiet answer corruption arriving through retrieval
 ought to apply to a mechanism that arrives the same way and does the same
 damage. The taxonomy predicts that such a pair should transfer, and no paper
-in the corpus had tested it. The same rule without its
-second condition picks the control pairs, which put each fix against its
-own literature's mechanisms. We propose no new fix or attack. Every fix and every attack we run is
-published.
+in the corpus had tested it. Dropping the second condition gives the control pairs, which put each fix against its
+own literature's mechanisms. We propose no new fix. Every attack we run is published, except the two
+adaptive attacks we built against one fix to test it
+(Section~\ref{sec:adaptive}).
 
 \subsection{The reconstruction standard}
 
@@ -82,8 +80,9 @@ artifact.
 
 \textbf{The control fires first.} A fix that is broken in our hands
 tells us nothing about transfer, so before any transfer number we check that
-the method still does, in a clean context, what its authors say it does. The check is directional, and it is set per method, because no two papers
-claim the same quantity. ParamMute~\cite{huang-2025-parammute} reports a gain in context
+the method still does, in a clean context, what its authors say it does. The check asks only whether the change goes the way the paper reports,
+and it is set separately for each method, because no two papers report the
+same quantity. ParamMute~\cite{huang-2025-parammute} reports a gain in context
 recall, not in accuracy. CK-PLUG~\cite{bi-2025-parameters} claims no accuracy gain at all: its
 contribution is a knob that moves memorization rate while accuracy is held,
 so its control fires on that rate instead. ACD~\cite{kim-2024-adaptive} states its improvement
@@ -110,10 +109,9 @@ unresolved, never as no effect.
 \centering
 \caption{Item sets and planted passages, by owner. No item set is ours.
 Corpus poisoning, PoisonedRAG and BadRAG come from the attack literature and
-false evidence from the benchmark itself; the rest are ours, and none of them
-is a new attack: three are edits of a field the benchmark already ships, and
-three reuse the item set's own retrieved passages, which is what makes them
-controls rather than attacks.}
+false evidence from the benchmark itself; the rest are ours: three are edits of a field the benchmark already ships,
+two of them reshaped against one fix (Section~\ref{sec:adaptive}), and
+three reuse the item set's own retrieved passages.}
 \label{tab:provenance}
 \small
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.40\columnwidth}>{\raggedright\arraybackslash}p{0.52\columnwidth}@{}}
