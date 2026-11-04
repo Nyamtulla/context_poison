@@ -191,6 +191,11 @@ def retrieval_runs():
         # defended-versus-undefended pair.
         if stem.startswith("native_attntrace_"):
             continue
+        # The reworded stale copies are a variant of the stale document, run
+        # on one defense to probe a limit of that mechanism, not another
+        # (fix, mechanism) pair.
+        if stem.endswith("_reworded"):
+            continue
         # A registry written incrementally says when it is finished. Files
         # that predate incremental writing carry no flag and were only ever
         # written complete, so absence means complete.

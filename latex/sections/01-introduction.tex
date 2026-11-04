@@ -66,6 +66,22 @@ experiments that fall in it to answer the following research questions.
   (Section~\ref{sec:adaptive}).
 \end{description}
 
+\paragraph{What we find.} Methods from each community fail on the other
+community's problem, and they fail for opposite reasons. The safety fixes
+decide how much to trust the retrieved document compared with what the model
+already knows. That choice cannot tell an honest document from a planted
+one. Against an attacker, these fixes either hand answers to the attacker or
+send them back to the model's memory. They never move them to the true
+document. The security defenses that take a vote across passages work while
+most passages are correct. That is true when an attacker can plant only a
+few passages. It is not true when a fact goes out of date, because many
+retrieved passages can then be wrong at the same time. With five copies of
+an out-of-date page among ten passages, the vote gives the outdated answer
+more often than no defense does. The defenses that look for injected
+instructions find none in an honest mistake, and change nothing. Each design
+relies on an assumption that is true for the problem it was built for and
+false for the other one.
+
 Both literatures have been systematized before: the security side
 repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
 and the safety side on its own terms as a problem of knowledge
@@ -80,9 +96,9 @@ mechanisms from the other.
 \paragraph{Scope.}
 Three limits bound what follows. Each experiment runs on one dataset, and we
 plant poisoned passages into the context rather than attack the retriever, so
-the numbers describe what a model does with bad text once it has it. Most runs
-use one 8-billion-parameter model, and our check on a second model covers only
-one fix design. Almost every attack we run knows nothing of the fix it meets,
+the numbers describe what a model does with bad text once it has it. Each fix runs
+on one base model of 7 to 14 billion parameters, chosen by what its authors
+released, and only RobustRAG also runs on a second. Almost every attack we run knows nothing of the fix it meets,
 which bounds attack strength from below: conservative evidence when a fix
 fails, and no evidence at all when one holds.
 
@@ -99,7 +115,10 @@ fails, and no evidence at all when one holds.
 \item \textbf{The first evaluation across the two communities.} We run
   \NCampaignPairs{} pairs that put a fix from one community against a
   mechanism from the other, each from its authors' released code and weights,
-  and report how each fix holds up outside the setting it was built for
+  and report how each fix holds up outside the setting it was built for. For
+  the defenses that vote, we read their own traces to show which passages
+  decided the answer, and we test whether attribution finds the passage
+  behind an honest failure
   (RQ2; Sections~\ref{sec:campaign}, \ref{sec:results}).
 
 \item \textbf{A test that tells copying from remembering.} We plant a passage
@@ -118,11 +137,13 @@ fails, and no evidence at all when one holds.
   gradient search, and measure how much of its protection survives an
   attacker who reads it (RQ5; Section~\ref{sec:adaptive}).
 
-\item \textbf{A design rule for covering both stages.} From the results we
-  derive what a fix would need in order to protect both where text enters
-  and where the model reasons. The experiment that tests it has started and
-  is not finished, and we claim no result from it
-  (Section~\ref{sec:discussion}).
+\item \textbf{What a fix covering both regimes cannot assume.} From the two
+  directions we derive three assumptions such a fix must do without: that the
+  document is honest, that wrong passages are few, and that a wrong passage
+  contains an instruction (Section~\ref{sec:neither}). We have also started an
+  experiment that stacks a fix acting where text enters in front of one
+  acting where the model reasons. It is not finished, and we claim no result
+  from it (Section~\ref{sec:discussion}).
 
 \item \textbf{A runnable artifact.} Every fix and every published attack
   executes from its authors' released code at a pinned commit, verified unmodified; the

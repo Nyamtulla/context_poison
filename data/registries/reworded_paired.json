@@ -1,0 +1,62 @@
+{
+ "n": 381,
+ "source_n": 403,
+ "rates": {
+  "undefended_0_stale": {
+   "identical": 0.52,
+   "reworded": 0.52,
+   "only_reworded": 0,
+   "only_identical": 0,
+   "mcnemar_p": 1.0
+  },
+  "undefended_0_correct": {
+   "identical": 67.72,
+   "reworded": 67.72,
+   "only_reworded": 0,
+   "only_identical": 0,
+   "mcnemar_p": 1.0
+  },
+  "undefended_5_stale": {
+   "identical": 32.28,
+   "reworded": 53.81,
+   "only_reworded": 101,
+   "only_identical": 19,
+   "mcnemar_p": 1.0754075870962743e-14
+  },
+  "undefended_5_correct": {
+   "identical": 54.86,
+   "reworded": 31.76,
+   "only_reworded": 2,
+   "only_identical": 90,
+   "mcnemar_p": 1.7282743364816433e-24
+  },
+  "defended_0_stale": {
+   "identical": 0.26,
+   "reworded": 0.26,
+   "only_reworded": 0,
+   "only_identical": 0,
+   "mcnemar_p": 1.0
+  },
+  "defended_0_correct": {
+   "identical": 64.57,
+   "reworded": 64.57,
+   "only_reworded": 0,
+   "only_identical": 0,
+   "mcnemar_p": 1.0
+  },
+  "defended_5_stale": {
+   "identical": 59.58,
+   "reworded": 58.27,
+   "only_reworded": 26,
+   "only_identical": 31,
+   "mcnemar_p": 0.5966417603730826
+  },
+  "defended_5_correct": {
+   "identical": 19.16,
+   "reworded": 21.52,
+   "only_reworded": 23,
+   "only_identical": 14,
+   "mcnemar_p": 0.18774155899882317
+  }
+ }
+}

@@ -13,17 +13,22 @@ arrives and defends where it enters. Safety studies why the model believes it
 and intervenes where the model reasons. A fix at the reasoning stage judges
 text the attacker has already chosen.
 
-We then ran the experiments neither community has run: \NCampaignPairs{}
-pairs, each from its authors' released code and weights, against an
-undefended model on the same items. \textbf{Methods built for honest error
-decide how far to trust the document, and that choice hands the answer to an
-attacker who wrote it.} Within the range of poisoned passages the attack
+We then ran the experiments neither community has run, in both directions:
+\NCampaignPairs{} pairs, each from its authors' released code and weights,
+against an undefended model on the same items. Both directions fail, for opposite
+reasons. \textbf{Methods built for honest error decide how far to trust the
+document, and that choice hands the answer to an attacker who wrote it.} The
+one that resisted loses \PctAcdRemovedGradient{}\% of its protection to an
+attacker who knows how it works. \textbf{Defenses built against attackers
+assume that wrong passages are few, or that they contain instructions, and an
+honest mistake can break both assumptions.} When half the retrieved passages
+are copies of one out-of-date page, ReliabilityRAG gives the outdated answer
+\EReliStaleAsrTop{}\% of the time, against \EReliStaleUndefAsrTop{}\% with no
+defense. The defenses that look for injected instructions change nothing. Within the range of planted passages the attack
 authors themselves evaluate, \NGridGainTop{} of \NGridCells{} fix and
-mechanism pairs help, and all \NGridGainTop{} help only by getting the model to
-answer again after an attack made it refuse. The one fix that resisted
-loses \PctAcdRemovedGradient{}\% of its protection to an attacker who reads
-its rule. We report results for models of 7 to 14 billion parameters, with
-one dataset per experiment.
+mechanism pairs help, all by getting the model to answer again after an
+attack made it refuse. We report results for models of 7 to 14 billion
+parameters, with one dataset per experiment.
 
 % ============================================================================
 % ALTERNATIVE ABSTRACT --- the number-heavy version, kept for later editing.

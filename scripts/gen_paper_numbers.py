@@ -1138,6 +1138,11 @@ def main():
             ("Param", PMD, "parammute", "base"),
             ("Ck", CKD, "ck", "base_rag")):
         E[f"E{nm}Resid"] = abs(_resid(f, dfn, base))
+    # The conclusion's "the two movements cancel": for the three fixes that
+    # suppress memory, the largest |memory delta + copy delta|.
+    E["NDistCancelMax"] = max(abs(_resid(f, dfn, base)) for f, dfn, base in (
+        (PMD, "parammute", "base"), (CKD, "ck", "base_rag"),
+        ("coiecd_vs_distractor_evidence.json", "coiecd", "base_rag")))
     # the controls that license the three-way reading
     # The ACD table's own n and threshold, read from its own runs rather
     # than borrowed, and its four p-values recomputed from the arm counts.
@@ -1226,6 +1231,9 @@ def main():
             continue
         # AttnTrace is reported as tracing only (pair_tally.retrieval_runs).
         if "native_attntrace_" in _f:
+            continue
+        # Reworded stale copies probe the stale document; not a grid cell.
+        if _f.endswith("_reworded.json"):
             continue
         _d = json.loads(pathlib.Path(_f).read_text())
         _rows = [r for r in (_d.get("results") or []) if isinstance(r, dict)]
@@ -1413,6 +1421,20 @@ def main():
     M["NReliStaleLarger"] = _r["by_group_size"]["stale_larger"]["n"]
     E["EReliStaleLargerWins"] = _r["by_group_size"]["stale_larger"]["stale_answer"]
     E["EReliNotLargerWins"] = _r["by_group_size"]["not_larger"]["stale_answer"]
+    # Stale copies reworded instead of copied word for word, on the items the
+    # rewriter could build (scripts/sd_reworded_paired.py), and the
+    # reworded run's own defended-minus-undefended gap and threshold.
+    _rw = json.loads((R / "reworded_paired.json").read_text())
+    M["NRwItems"], M["NRwSource"] = _rw["n"], _rw["source_n"]
+    for arm, nm in (("undefended", "Undef"), ("defended", "Reli")):
+        for form, fn in (("identical", "Copy"), ("reworded", "Reworded")):
+            E[f"ERw{nm}{fn}"] = float(_rw["rates"][f"{arm}_5_stale"][form])
+    _rwr = {(r["arm"], r["n_poison"]): r for r in json.loads(
+        (R / "native_reliabilityrag_incidental_stale_reworded.json").read_text())["results"]}
+    E["ERwReliGap"] = round(_rwr[("defended", 5)]["wrong_answer_rate"]
+                            - _rwr[("undefended", 5)]["wrong_answer_rate"], 1)
+    E["ERwMdr"] = float(json.loads((R / "native_reliabilityrag_incidental_stale_reworded.json")
+                                   .read_text())["mdr_pp_at_n"])
 
     # Python rounds halves to even, so 0.25 would print as 0.2 where the
     # paper has always printed 0.3. Round half up, as a reader expects.

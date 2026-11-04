@@ -12,31 +12,41 @@ cross-testing matrix holds \NSecDefVsSafetyAttack{} pair in \NPureRegimePairs{}:
 security fix has been evaluated against a safety
 mechanism exactly once.
 
-We then ran that experiment. \NCampaignPairs{} pairs, all on the authors'
-released artifacts. \PctCampCross{}\% of them cross the boundary the
-literature does not. In the first direction, fixes built for honest error meet attacks. One
-poisoned passage in ten gives a fix its best chance, because nine honest
-passages survive, and it is the attacks' own default. \NGridLowHelps{} of
-\NGridLowPairs{} (fix, mechanism) pairs show a resolvable benefit there.
-The finding is an explanation, not a verdict. Context-reliance fixes do not
-fail because someone built them badly. They fail because of what they
+We then ran that experiment, in both directions. \NCampaignPairs{} pairs,
+all on the authors' released artifacts. \PctCampCross{}\% of them cross the
+boundary the literature does not. One planted passage in ten gives a fix its
+best chance, because nine honest passages survive, and it is the attacks' own
+default. Across both directions, \NGridLowHelps{} of \NGridLowPairs{} (fix,
+mechanism) pairs show a resolvable benefit there, both against the refusal
+attack. The finding is an explanation, not a verdict.
+
+In the first direction, fixes built for honest error meet attackers.
+Context-reliance fixes do not fail because someone built them badly. They fail because of what they
 arbitrate. Each one decides between trusting the context and trusting memory,
 and that dial moves correctness around without creating any. Suppress memory
 and the attacker receives what memory held. Suppress the attacker and memory
 receives it back. A planted passage that asserts a third answer separates copying from
 remembering, so
 we can add the two movements together. In the three fixes that suppress
-memory they cancel to within 8 points. Neither direction moves anything
+memory they cancel to within \NDistCancelMax{} points. Neither direction moves anything
 toward the real document, because the dial has no setting for it. The attack
 is inside the context.
 
 In the second direction, a fix built against an attacker meets honest
-mistakes. RobustRAG's and ReliabilityRAG's votes hold while wrong passages
-are few, which is the setting their threat models assume. When half the
-retrieved passages are stale, both return the outdated answer more often than
-no fix does, and against a failure that plants nothing they have nothing to
-act on. The defenses that look for injected instructions find none in an
-honest mistake and change nothing. The two directions fail for opposite
+mistakes. RobustRAG's and ReliabilityRAG's votes work while wrong passages
+are few, which is the setting their authors assume. When half the retrieved
+passages are copies of one out-of-date page, both give the outdated answer
+more often than no fix does. When the copies are reworded, ReliabilityRAG
+still gives it more than half the time, but the model with no defense
+catches up. Against a failure that plants no false answer, they have nothing
+to act on. The defenses that look for injected instructions find none in an
+honest mistake and change nothing. One method did work on honest
+mistakes: AttnTrace, which traces an answer back to the passages it came
+from. With the passages in random order, when the model gave the outdated
+answer, the passage AttnTrace ranked first was a stale one \ETraceTopStale\%
+of the time. When the model answered correctly, it was a stale one
+\ETraceTopCorrect\% of the time. This rests on one model and \NTraceStale{}
+wrong answers. The two directions fail for opposite
 reasons: the safety fixes assume the document is honest, and the security
 defenses assume wrong passages are few or carry an instruction. Each
 assumption holds in its own regime and fails in the other.
@@ -75,12 +85,13 @@ than one named fix per named mechanism and are the routes by which agents
 accept third-party capability. They are the clearest place to build rather than
 to measure.
 
-\textbf{Separate the intervention-point finding from its confound.} Whether a
-defense generalizes appears to follow where in the pipeline it intervenes. A
-confound sits beside that finding. The ingestion defenses that generalize are
-also the ones whose harnesses model a text-classification victim, and the
-execution defenses we could not evaluate are the agent-shaped ones. Running all three intervention points
-inside one agent harness would resolve it.
+\textbf{Test the stage finding across regimes.} In the agent experiment,
+every defense that held acts before the agent reads the injected text or
+before it acts, and none that acts while the model reasons holds. That
+experiment pairs only security defenses with security attacks, on one agent
+model. Whether the stage at which a fix acts also predicts which fixes work on
+the other community's problem needs fixes from both communities, run inside
+one agent harness.
 
 \textbf{Make the empty cell the default, not the exception.} The deepest
 problem this paper documents is not any single fix. It is that who runs an experiment predicts its

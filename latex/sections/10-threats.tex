@@ -51,6 +51,24 @@ so both arms share the placement. The absolute rates, how often a mechanism
 succeeds at all, are higher than they would be at a random position. We
 measured this on one model and one mechanism.
 
+\textbf{Our stale passages are exact copies.} In the second direction, a
+stale document is one real passage copied word for word into each planted
+slot. Out-of-date pages on the web are more often copied with changes. We
+tested this on ReliabilityRAG. A second model, Qwen2.5-7B-Instruct, rewrote
+each stale passage five times, keeping the outdated answer and changing the
+wording, and we put the five rewrites where the copies had been. This worked
+for \NRwItems{} of the \NRwSource{} questions. On those questions, with five
+stale passages in ten, the model with no defense gives the outdated answer
+\ERwUndefCopy\% of the time with copies and \ERwUndefReworded\% with
+rewrites. ReliabilityRAG gives it \ERwReliCopy\% and \ERwReliReworded\%.
+Rewording makes the stale passages far more convincing to an undefended
+model, and leaves ReliabilityRAG about where it was. With rewrites, the
+difference between ReliabilityRAG and no defense is \ERwReliGap{} points,
+below the \ERwMdr{}-point threshold that run can detect. So our finding that
+ReliabilityRAG does more harm than no defense holds for exact copies and is
+unresolved for rewrites. In both cases it gives the outdated answer more
+than half the time. We ran this check on one defense and one model.
+
 \textbf{Registry granularity.} What counts as one named mechanism is a
 judgement. ``Indirect prompt injection'' is one registry entry and absorbs
 \PctTopMechShare{}\% of all tested pairs. \NInjUncovered{} of the \NInjVariants{} named injection
@@ -133,9 +151,11 @@ with planted passages, is a simplification of a real retrieval pipeline under
 attack. It holds the retriever fixed, so it measures what the generator does
 with poisoned context rather than how hard the context is to poison.
 
-\textbf{Model coverage.} Most retrieval results use Llama-3-8B-Instruct,
-with Mistral-7B-Instruct where a fix required it. A second-model check
-left the results unchanged within the evaluated range, but it covers only
+\textbf{Model coverage.} Each fix runs on the model its authors released
+it for. The safety fixes run on Llama-3-8B-Instruct and the security
+defenses on Mistral-7B-Instruct, so the two directions also use different
+models. The agent experiment runs on Qwen2.5-14B-Instruct. A second-model check left the
+results unchanged within the evaluated range, but it covers only
 RobustRAG. The results should be read as holding for models of this class and
 size.
 
@@ -188,12 +208,10 @@ that something is present in a paper; it cannot establish that something is
 absent, because absence of the phrasing it knows is not absence of the thing.
 We therefore report no count of the second kind.
 
-\textbf{To be done.} Four items are not complete. We report none of them
+\textbf{To be done.} Three items are not complete. We report none of them
 as complete.
 
 \begin{itemize}
-\item \textbf{Finish the campaign.} Some cells have not run. The counts
-  above are a snapshot. The artifact lists every cell that remains.
 \item \textbf{Code the validation study.} The draw is complete. No coder
   has started. We give no extraction-error rate until the study returns.
 \item \textbf{Finish the composition.} It puts one method that acts where

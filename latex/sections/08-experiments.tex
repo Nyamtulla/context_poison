@@ -39,12 +39,14 @@ distributions under a single parameter. ParamMute
 suppresses the feed-forward layers that carry parametric memory, forcing the
 model onto the retrieved text. SpARE~\cite{zhao-2024-steering} and
 SHIFT~\cite{li-2026-shift} steer along a context-faithfulness direction in
-activation space. COIECD detects a conflict
+activation space; SHIFT showed no measurable benefit in its own check when we
+ran it, so we tested it no further. COIECD detects a conflict
 between the two sources and pushes toward the context.
 SCR makes the same trade through prompting rather
 than decoding.
 
-The security literature has many retrieval defenses, and we ran five. Two
+The security literature has many retrieval defenses. We ran five, and one
+attribution method beside them. Two
 vote across passages. RobustRAG~\cite{xiang-2024-certifiably}, whose authors
 released the open Natural Questions items and retrieval pool our retrieval
 experiments run on, answers from each retrieved passage
@@ -64,8 +66,8 @@ them; we run AgentDojo's implementation, whose sentence says ``tool
 outputs'', with ``retrieved passages'' in its place.
 PIGuard~\cite{li-2025-piguard} and DataSentinel~\cite{liu-2025-datasentinel}
 are released classifiers for injected instructions. Deployed as filters, each
-drops the passages it flags and the model answers from the rest. The fifth,
-AttnTrace~\cite{wang-2025-attntrace}, is an attribution method: it ranks the
+drops the passages it flags and the model answers from the rest. The attribution
+method, AttnTrace~\cite{wang-2025-attntrace}, ranks the
 passages by how much the answer drew on them, and its authors use it to find
 the passages behind a corrupted answer. We report it as that, a tracer, and
 not as a defense with a defended accuracy. ReliabilityRAG, Spotlighting and
@@ -104,6 +106,8 @@ one fix, ACD. Both take the planted third answer and reshape it to minimize the 
 best of five phrasings, one by appending a suffix found by gradient search
 (Section~\ref{sec:adaptive}).
 
+\input{tables/regime_framing}
+
 \subsection{Datasets}
 \label{sec:provenance}
 
@@ -121,7 +125,6 @@ question, and a planted passage takes the place of one of them or, for
 dilution, is added to them. The question and its gold answer never change, so
 a difference in the answer comes from the planted passages and the fix.
 
-\input{tables/regime_framing}
 
 \paragraph{Dose.}
 The \textbf{dose} is how many of the retrieved passages are planted. It is

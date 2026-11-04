@@ -94,8 +94,8 @@ and stay there. The other four stay within a few points of zero.}
 The methods built for honest error all decide how far
 to trust the retrieved document over what the model already knows. Trusting
 the document more is right when the document is out of date, and wrong when an
-attacker wrote it. Seven of the ten methods we ran on retrieved documents
-work this way: ACD, CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG.
+attacker wrote it. Seven of the eight safety fixes we ran work this
+way: ACD, CK-PLUG, COIECD, ParamMute, SCR, SpARE and FaithfulRAG.
 None of them uses any signal that separates a real document from a planted
 one. When the document is honest and newer than the model's memory, leaning
 on it helps. When an attacker wrote it, leaning on it moves the model toward
@@ -116,12 +116,12 @@ model to judge between its own answer and the document's, gains
 clean one, roughly five times what it gains.
 
 
-The other three methods are why this is a claim about a design and not about
-all fixes. DyPRAG turns the document into model weights, so it has no
+Three methods we ran against these attacks do not work this way, and they
+are why this is a claim about a design and not about all fixes. DyPRAG turns the document into model weights, so it has no
 trust setting to turn. The two RobustRAG implementations answer from each
 passage separately and take a vote, which asks which passages agree rather
-than how far to trust passages in general. Figure~\ref{fig:dose} shows the
-seven methods as the number of poisoned passages rises: CK-PLUG and DyPRAG
+than how far to trust passages in general. Figure~\ref{fig:dose} shows six
+of these methods as the number of poisoned passages rises: CK-PLUG and DyPRAG
 sit more than twenty points below the undefended model before anything is
 planted and stay there, and the other four stay within a few points of it.
 
@@ -194,7 +194,10 @@ answer \EReliStaleLargerWins\% of the time; otherwise \EReliNotLargerWins\%.
 Its control shows the same limit from the attacker's side: with five
 PoisonedRAG passages in ten it no longer lowers the planted answer,
 \EReliCtlUndefAsrTop\% undefended against \EReliCtlAsrTop\% defended on
-\NReliCtlN{} items.
+\NReliCtlN{} items. The stale passages in these runs are word-for-word
+copies of one page. When the copies are reworded instead, ReliabilityRAG
+fails about as often, but the model with no defense fails much more often,
+so the gap between them closes (Section~\ref{sec:threats}).
 
 The three defenses that look for injected instructions have nothing to act
 on. Across their \NFilterCells{} cells, no dose moves accuracy more than
@@ -255,34 +258,6 @@ reads the injected text or before it acts on it. None of the
 In this experiment, the stage at which a defense acts separates the defenses
 that hold from those that do not.
 
-\paragraph{Why neither design covers both.}
-\label{sec:neither}
-The two directions fail for opposite reasons. Each design rests on an
-assumption that holds in its own regime and that the other regime breaks.
-The safety fixes assume the document is honest: they decide how far to trust
-it over the model's memory, and in the first direction an attacker writes the
-document. RobustRAG and ReliabilityRAG assume that wrong passages are few:
-their votes are sound while honest passages outnumber corrupted ones, which
-holds when an attacker can plant only a few passages, the setting both
-certify. An honest mistake has no such limit. A fact that changes can leave
-many retrieved passages wrong in the same way at once, and with five such
-passages in ten both votes return the outdated answer more often than the
-undefended model does. The filters assume that a wrong passage carries an
-instruction, and an honest mistake carries none. A fix that covers both
-regimes can therefore rely on none of these assumptions. It cannot trust the
-document by default, it cannot count on wrong passages being a minority, and
-it cannot look for an instruction.
-
-Answer to RQ2. No, in neither direction. Fixes built for honest error lose
-to an attacker when they shift the model's trust toward the document. The
-security defenses that vote across passages help with an honest mistake only
-while the mistaken passages are few, do more harm than no fix once they are
-many, and have nothing to act on when the mistake plants no claim. The ones
-that look for injected instructions do nothing, because an honest mistake
-contains none.
-
-\subsection{RQ3: Is failure a property of individual methods or of a design choice they share?}
-
 \begin{table}[t]
 \centering
 \caption{ACD against two planted passages, $n=\EAcdN{}$, threshold \EAcdMdr\pp. The fix is
@@ -324,6 +299,40 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 \end{table}
 
 \input{tables/distractor}
+
+\paragraph{Why neither design covers both.}
+\label{sec:neither}
+The two directions fail for opposite reasons. Each design rests on an
+assumption that holds in its own regime and that the other regime breaks.
+The safety fixes assume the document is honest: they decide how far to trust
+it over the model's memory, and in the first direction an attacker writes the
+document. RobustRAG and ReliabilityRAG assume that wrong passages are few:
+their votes are sound while honest passages outnumber corrupted ones, which
+holds when an attacker can plant only a few passages, the setting both
+certify. An honest mistake has no such limit. A fact that changes can leave
+many retrieved passages wrong in the same way at once. With five copies of
+an out-of-date page among ten passages, both votes give the outdated answer
+more often than the undefended model does. The filters assume that a wrong passage carries an
+instruction, and an honest mistake carries none. A fix that covers both
+regimes can therefore rely on none of these assumptions. It cannot trust the
+document by default, it cannot count on wrong passages being a minority, and
+it cannot look for an instruction.
+
+Answer to RQ2. No, in neither direction. Fixes built for honest error lose
+to an attacker when they shift the model's trust toward the document. The
+security defenses that vote across passages help with an honest mistake only
+while the mistaken passages are few. Once they are many, the vote gives the
+wrong answer more than half the time, which is more often than no defense
+when the mistaken passages are copies of one page. When the mistake plants
+no false answer, these defenses have nothing to act on. The ones
+that look for injected instructions do nothing, because an honest mistake
+contains none.
+
+
+\subsection{RQ3: Is failure a property of individual methods or of a design choice they share?}
+
+
+
 
 \paragraph{The form of the planted passage.}
 \label{sec:payloads}
@@ -395,7 +404,10 @@ of answers to neither outcome: \EAcdResid{}, \EScrResid{} and
 
 Answer to RQ3. A shared design choice. The methods fail in the same way
 because they make the same choice, between the document and memory, and that
-choice cannot separate a real document from a planted one.
+choice cannot separate a real document from a planted one. The second
+direction has the same structure: RobustRAG and ReliabilityRAG share no
+code, and both turn harmful once five of ten passages are stale, because both
+assume that most passages are correct (Section~\ref{sec:neither}).
 
 \subsection{RQ4: Do the measurements the field leaves out change the result?}
 

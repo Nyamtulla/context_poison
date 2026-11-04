@@ -116,7 +116,7 @@ Of the rest, \NDefEvalNoBaseline{} ran no real comparison and the records of
 
 \subsection{Implications for deployment}
 
-Three practical points follow from the results. First, a method that tunes how much the model trusts retrieved text is correct
+Four practical points follow from the results. First, a method that tunes how much the model trusts retrieved text is correct
 when the text is merely stale and dangerous when an attacker owns it. If the
 corpus an agent retrieves from is one an outsider can write to, the second
 case is the deployed case. Consider a system that uses a knowledge-conflict method to improve answer
@@ -127,10 +127,20 @@ worth \NDefCellClean{} on a clean context and \NDefCellSat{} once the
 context is corrupted, below the undefended model on the same items. The
 claim is about a design choice rather than a community. A method that
 converts the document to weights has no dial to turn and does not show the
-reversal, and one method in the family resisted until an adaptive attacker
-lost most of its protection to an adaptive attacker.
+reversal, and the one method in the family that resisted lost most of its
+protection to an adaptive attacker.
 
-Second, a fix that holds against an optimized adversarial passage may fail against
+Second, the reverse holds for a defense built against an attacker. A vote
+across passages works while most passages are correct. An attacker who can
+plant only a few passages cannot break that, but an honest mistake can. When
+a fact changes, many retrieved passages can go out of date together. With
+five copies of an out-of-date page among ten passages, ReliabilityRAG gives
+the outdated answer \EReliStaleAsrTop{}\% of the time, against
+\EReliStaleUndefAsrTop{}\% with no defense. A filter that looks for injected
+instructions protects against injected instructions and nothing else. An
+honest mistake contains no instruction, so it passes the filter unchanged.
+
+Third, a fix that holds against an optimized adversarial passage may fail against
 a fluent sentence that simply asserts a plausible falsehood. In our
 measurements no fix resisted both. The fluent attack is also cheaper to
 produce: it needs no gradient access and no surrogate retriever, and it does at
