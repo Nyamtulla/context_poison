@@ -27,8 +27,7 @@ versions (Section~\ref{sec:harness}).
 The fixes we ran come from both literatures: the safety literature's
 knowledge-conflict fixes, the security literature's retrieval defenses, and the
 prompt-injection defenses of the agent experiment, which act before the agent
-reads its input or acts on it. Each is described here by what it changes,
-which is what the results turn on.
+reads its input or acts on it. We describe each by what it changes, because the results depend on that.
 
 The fixes from the safety literature were built for knowledge conflict.
 Each adjusts how much the model relies on the
@@ -159,8 +158,8 @@ longest contexts, so those four fixes' CoConflictQA results describe
 contexts of at most 2000 characters. Every comparison in this paper is between models measured on the same items.
 Rates computed on different item sets are incomparable rather than merely
 noisy, so we checked this mechanically: no run in any result file compares
-two models measured on different items. The one place the item set narrows is the planted third answer, and it
-narrows for every model in that run together. It is defined on \NDistractorItems{} of CoConflictQA's
+two models measured on different items. The one place we use fewer items is the planted third answer, and there
+every model in the run uses the same smaller set. It is defined on \NDistractorItems{} of CoConflictQA's
 \NCoConflictItems{} items. An item
 qualifies on two conditions. Its remembered answer must appear verbatim in its
 own evidence sentence, so that the substitution needs no rewriting. And its
@@ -212,8 +211,7 @@ them is reacting to the form of the text rather than to the mechanism it was
 named for. A fifth set of runs adds three measurements. Every run above is measured three ways on the same items: with nothing
 planted, without the fix, and with no document at all.
 We also re-ran part of the retrieval experiment on a second base model, and
-we ran both released implementations of RobustRAG, which share a principle
-and no code downstream of it. The last two experiments test the explanation rather than the fixes. We
+we ran both released implementations of RobustRAG, which share one idea and no code after that point. The last two experiments test the explanation rather than the fixes. We
 built two attacks against the single fix that resisted, one searching
 over surface forms and one optimizing a suffix with gradients, both targeting
 the quantity that fix's own rule measures. We have also started an experiment that stacks two fixes acting at
