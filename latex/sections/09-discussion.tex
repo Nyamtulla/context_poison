@@ -11,9 +11,9 @@ problem, and the recommendations below treat it as one.
 
 \subsection{Controls both communities should report}
 
-Section~\ref{sec:controls} reports one result that reads the other way
-without a no-document score, and Section~\ref{sec:distractor} one that reads
-the other way when only accuracy is reported. Neither measurement is
+Section~\ref{sec:controls} reports one result that reverses
+without a no-document score, and Section~\ref{sec:distractor} one that
+reverses when only accuracy is reported. Neither measurement is
 expensive. We propose three reporting requirements.
 
 \textbf{Report a no-document score.} Any fix that modifies how a model uses
@@ -49,8 +49,8 @@ limit without inferring it.
 without the smallest difference the experiment could have detected makes "no
 effect" and "we could not tell" look identical. We computed this for every run
 and several of our own results moved from the first category to the second.
-The same holds for a claim that something was never tested: it should state
-whether it means not done or not resolved.
+A claim that something was never tested should likewise say whether the
+test was not run, or was run and could not tell.
 
 \textbf{Say whether the attack was adapted to the fix.} A fix that
 holds against an attack built for a different target has been shown to resist
@@ -68,9 +68,8 @@ stage failing on its own once an adversary writes the input. The next step
 is to put an ingestion-stage filter in front of a
 reasoning-stage method and see whether the pair holds where each half does
 not. We do not know that it works. This paper reports no result for a
-composed fix; the experiment has started and is not finished. A filter
-that passes a fluent falsehood would leave the reasoning stage where our
-results find it. Both halves are published with released code, and we found
+composed fix; the experiment has started and is not finished. If the filter lets a fluent false sentence through, the reasoning stage is
+left as weak as our results show. Both halves are published with released code, and we found
 no paper in the corpus that combines them.
 
 \textbf{Test each fix against the other regime's mechanisms.} A
@@ -79,10 +78,11 @@ average-case benchmarks, which is the right choice for the problem it was
 built for and says nothing about the worst case. Without such a test, a
 reader cannot tell whether the reported benefit holds under attack, and our
 results show that it can reverse. Running one published poisoning attack
-against an existing evaluation needs no new data. The converse holds for a
-defense built against an attacker. Its evaluation bounds how many passages
-the attacker controls, and an honest mistake is not bound by that number:
-RobustRAG and ReliabilityRAG turn harmful once half the retrieved passages are stale
+against an existing evaluation needs no new data. The reverse holds for a
+defense built against an attacker. Its evaluation limits how many passages
+the attacker controls, and an honest mistake has no such limit: RobustRAG
+and ReliabilityRAG turn harmful once half the retrieved passages are stale
+copies of one page
 (Section~\ref{sec:neither}). A stale-document set needs only a retrieval
 pool and a list of answers that changed. A method that cannot be tested in
 the other regime should state which regime its benefit holds in.
@@ -105,12 +105,12 @@ that others cannot run is unlikely to be tested by others, so part of the
 coverage gap this paper measures is an artifact gap. It is only part of it.
 \NFixUnpaired{} of \NFixes{} fixes never appear in a
 confirmed pair, and they are of two kinds. \NFixUnpairedAttacked{} were run
-against an adversary whose attack carries no name the literature reuses, which
-pairing cannot see. \NDefEvalNoAdversary{} were never run against an adversary
-at all. The second group is the larger one, and it is the field rather than
-the measurement. \NDefNoAdvSafety{} of those \NDefEvalNoAdversary{} are
+against an adversary whose attack carries no name the literature reuses, which our pair matching cannot detect. \NDefEvalNoAdversary{} were never run against an adversary
+at all. The second group is the larger one, and it
+reflects how the field evaluates, not a limit of our measurement. \NDefNoAdvSafety{} of those \NDefEvalNoAdversary{} are
 safety-regime fixes, demonstrated by accuracy rising on cases where the
-context is wrong, and they are the population this paper's campaign probes.
+context is wrong, and they are the kind of fix this paper's first
+direction tests.
 Of the rest, \NDefEvalNoBaseline{} ran no real comparison and the records of
 \NDefEvalUnclear{} do not say what they were validated against.
 
