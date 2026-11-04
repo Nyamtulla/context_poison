@@ -1,6 +1,6 @@
 \section{Background and threat model} \label{sec:background}
 
-This section fixes the terms the rest of the paper uses. It defines context
+This section defines the terms the rest of the paper uses. It defines context
 poisoning, sets the two communities' vocabularies side by side and chooses one
 for statements that span both, and states the system and threat model the
 experiments assume.
@@ -65,8 +65,8 @@ it: when the bad text plants a false claim, writing it to persuade gives the
 attacker a measurable advantage, and when it only pushes the right evidence
 out, an attack and an honest error do the same damage.
 
-Two vocabularies for one failure force a choice of words, and this paper
-makes it once. We use \emph{mechanism} for anything that makes the context
+Because the two communities use different words for one failure, we choose
+one set of words for this paper. We use \emph{mechanism} for anything that makes the context
 stop supporting the right answer, and \emph{fix} for anything meant to keep
 it supporting that answer, whatever either one's authors call it. We use these two words wherever a statement spans both regimes: the corpus
 as a whole, a pair whose two sides come from different regimes, and the
@@ -74,27 +74,29 @@ campaign. A statement about one regime alone keeps that regime's own words
 from Table~\ref{tab:vocab}. A security method is a defense and what it meets
 is an attack; a safety method is a fix and what it meets is a mechanism.
 
-Each word splits in two. A mechanism is an \emph{insertion} when content
+Each of these two words covers two kinds. A mechanism is an \emph{insertion} when content
 arrives in the window that should not be believed, and a \emph{degradation}
 when nothing arrives. In the second case the context stops working because it
 grew too long, because the decisive passage sits in the wrong place, or
 because compaction evicted the rule the agent needed. Accuracy falls with the
-right document present and correctly retrieved. \emph{Attack} sits inside
-insertion, not beside degradation. It names the \NAttack{} insertion
+right document present and correctly retrieved. Every attack is an
+insertion. \emph{Attack} is not a third kind beside insertion and
+degradation. It names the \NAttack{} insertion
 mechanisms an adversary wrote, against the \NAccident{} that a retriever, a
-tool or the agent's own memory delivered with nobody behind them. Splitting on
-the adversary instead would have renamed the regime partition and added
-nothing, because every security-regime mechanism has one and no safety-regime
-mechanism does. Insertion cuts across the regimes instead: \NSecInsertion{}
+tool or the agent's own memory delivered with nobody behind them. We do not split mechanisms by whether an adversary wrote them, because that
+split is the same as the regime split: every security-regime mechanism has an
+adversary and no safety-regime mechanism does. Insertion and degradation, by
+contrast, occur in both regimes: \NSecInsertion{}
 of the \NMechSecurity{} security-regime mechanisms are insertion and
 \NSecDegradation{} are degradation, while the safety regime splits
 \NSafInsertion{} to \NSafDegradation{}.
 
-A fix splits by what its own evaluation tested. A \emph{defense} met an
+Fixes also come in two kinds, set by what their own evaluation tested. A \emph{defense} met an
 adversary there. A \emph{remedy} met only incidental failure. That is
 \NDefenseFix{} defenses and \NRemedy{} remedies of \NFixes{}. The split
-records what a method has been pointed at, not how well it works, and a fix
-that filters what enters has nothing to act on against degradation.
+records what a method was tested against, not how well it works. A fix that
+filters incoming text has nothing to act on against a degradation, because
+nothing new enters.
 
 Two more words name where an answer comes from. The \textbf{context} is the document, tool
 output or message placed in front of the model. \textbf{Memory} is what the
@@ -114,7 +116,7 @@ retriever, and then getting the model to believe it once it is in the context.
 \label{sec:securityregime}
 
 Both communities study the same system, and only one of them assumes an
-attacker inside it. The subject of the system is an LLM agent: a model that, within one task, repeatedly reads
+attacker inside it. The system is an LLM agent: a model that, within one task, repeatedly reads
 content it did not author, decides, and acts. Content from many sources shares one context window, with
 no trustworthy marking of where any of it came from. And an action taken in a corrupted context cannot be undone by fixing
 the context afterwards.
@@ -132,7 +134,7 @@ false answers are written for each question they target, so they assume the
 attacker can anticipate which questions will be asked.
 
 \textbf{Where there is no adversary.} Without an attacker there is no threat
-model. The content goes wrong because the pipeline behaves normally. A retrieved document is out of date. A passage is close to the topic but
+model. The content goes wrong through the pipeline's normal operation. A retrieved document is out of date. A passage is close to the topic but
 does not answer the question~\cite{shi-2023-large}. Important text sits in
 the middle of a long input~\cite{liu-2023-lost}. A retrieved fact disagrees
 with what the model learned in training~\cite{xu-2024-knowledge}. These causes do not adapt, so this literature evaluates on

@@ -4,18 +4,20 @@ tests the other's work. Security researchers study context an attacker changes
 on purpose; safety researchers study context that becomes wrong on its own. To the
 model, both are text in the same context window.
 
-We read \NCorpus{} papers in full and recovered every confirmed (fix,
-mechanism) pair either community reports. Only a handful cross between them, and
+We read \NCorpus{} papers in full and listed every case where a paper
+tested a fix against a named problem. Only a handful test one community's
+method against the other community's problem, and
 \textbf{exactly \NSecDefVsSafetyAttack{} security fix has ever been
 evaluated against a safety mechanism}. The two sides do not duplicate
 each other. They divide the problem instead. Security studies how the bad text
 arrives and defends where it enters. Safety studies why the model believes it
-and intervenes where the model reasons. A fix at the reasoning stage judges
-text the attacker has already chosen.
+and intervenes where the model reasons. A fix that works on the model's
+reasoning only sees text the attacker has already written.
 
-We then ran the experiments neither community has run, in both directions:
-\NCampaignPairs{} pairs, each from its authors' released code and weights,
-against an undefended model on the same items. Both directions fail, for opposite
+We then ran these missing tests in both directions: \NCampaignPairs{}
+combinations of a method and a problem. Each uses the authors' own released
+code and model weights, and each is compared with the same model running
+with no defense on the same questions. Both directions fail, for opposite
 reasons. \textbf{Methods built for honest error decide how far to trust the
 document, and that choice hands the answer to an attacker who wrote it.} The
 one that resisted loses \PctAcdRemovedGradient{}\% of its protection to an
@@ -24,10 +26,10 @@ assume that wrong passages are few, or that they contain instructions, and an
 honest mistake can break both assumptions.} When half the retrieved passages
 are copies of one out-of-date page, ReliabilityRAG gives the outdated answer
 \EReliStaleAsrTop{}\% of the time, against \EReliStaleUndefAsrTop{}\% with no
-defense. The defenses that look for injected instructions change nothing. Within the range of planted passages the attack
-authors themselves evaluate, \NGridGainTop{} of \NGridCells{} fix and
-mechanism pairs help, all by getting the model to answer again after an
-attack made it refuse. We report results for models of 7 to 14 billion
+defense. The defenses that look for injected instructions change nothing. In the settings the attack authors themselves
+test, only \NGridGainTop{} of \NGridCells{} combinations help, and all
+\NGridGainTop{} help only by making the model answer again after an attack
+made it refuse. We report results for models of 7 to 14 billion
 parameters, with one dataset per experiment.
 
 % ============================================================================

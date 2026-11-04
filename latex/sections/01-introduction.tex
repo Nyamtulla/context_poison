@@ -25,12 +25,11 @@ Success means accuracy goes up.
 
 The two communities describe the same underlying failure: a passage the model
 should not trust enters the context window and changes the output. Only the
-provenance differs; the model sees tokens either way. The difference is more
-than vocabulary, which translation alone would resolve. They differ in what
-counts as a
+provenance differs; the model sees tokens either way. The two communities
+differ in more than vocabulary. They also differ in what counts as a
 successful evaluation. The safety community measures a fix for the accidental
-case on an average-case benchmark, because nothing adapts to it. The security community measures a defense for the
-adversarial case against the worst case, because something does. Those are not two styles
+case on an average-case benchmark, because an accident does not adapt to the fix. The security community measures a defense for the
+adversarial case against the worst case, because an attacker does adapt. Those are not two styles
 of the same test. A method can pass the first test convincingly and fail the second one
 completely. Because each community evaluates against its own convention, a
 method is rarely tested against the other's.
@@ -38,8 +37,9 @@ method is rarely tested against the other's.
 So the field publishes, adopts and cites methods that are rarely evaluated
 against the other community's test. We test that claim by
 reading both literatures under one taxonomy and recovering every experiment
-either side has run. The test finds a gap. We then run the
-experiments that fall in it to answer the following research questions.
+either side has run. Almost none of those experiments cross
+between the communities. We then run the missing ones to answer the
+following research questions.
 
 \paragraph{Research questions.}
 \begin{description}
@@ -98,9 +98,9 @@ Three limits bound what follows. Each experiment runs on one dataset, and we
 plant poisoned passages into the context rather than attack the retriever, so
 the numbers describe what a model does with bad text once it has it. Each fix runs
 on one base model of 7 to 14 billion parameters, chosen by what its authors
-released, and only RobustRAG also runs on a second. Almost every attack we run knows nothing of the fix it meets,
-which bounds attack strength from below: conservative evidence when a fix
-fails, and no evidence at all when one holds.
+released, and only RobustRAG also runs on a second. Almost every attack we run was not designed against the fix it
+meets. If a fix loses to such an attack, it would also lose to a stronger
+one. If it holds, that tells us little.
 
 \paragraph{Contributions.}
 \begin{itemize}
@@ -108,8 +108,9 @@ fails, and no evidence at all when one holds.
   every mechanism and fix from both literatures in one taxonomy and along one
   picture of the agent's pipeline. It shows where each community works:
   security fixes guard where text enters, and safety fixes improve how
-  the model reasons about text already inside. It also shows what a system
-  built from either side alone leaves open at the stage the other side covers
+  the model reasons about text already inside. It also shows that a system
+  built only from one community's methods is unprotected at the stage the
+  other community covers
   (RQ1; Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 
 \item \textbf{The first evaluation across the two communities.} We run
@@ -132,10 +133,11 @@ fails, and no evidence at all when one holds.
   score, a second base model and a second implementation to the results, and
   show which conclusions depend on them (RQ4; Section~\ref{sec:controls}).
 
-\item \textbf{An adaptive test of the one fix that held.} We build two
+\item \textbf{A test of the one fix that held, against an attacker who
+  knows it.} We build two
   attacks against that fix's own rule, one by rephrasing and one by
   gradient search, and measure how much of its protection survives an
-  attacker who reads it (RQ5; Section~\ref{sec:adaptive}).
+  attacker who knows its rule (RQ5; Section~\ref{sec:adaptive}).
 
 \item \textbf{What a fix covering both regimes cannot assume.} From the two
   directions we derive three assumptions such a fix must do without: that the
@@ -146,16 +148,17 @@ fails, and no evidence at all when one holds.
   from it (Section~\ref{sec:discussion}).
 
 \item \textbf{A runnable artifact.} Every fix and every published attack
-  executes from its authors' released code at a pinned commit, verified unmodified; the
-  harness, the planted passages and the full census ship with it.
+  executes from its authors' released code at a pinned commit, and we checked that the code is unchanged. We
+  release our test code, the planted passages and the full list of coded
+  papers.
 \end{itemize}
 
-\paragraph{How the paper reads.} Section~\ref{sec:background} fixes the
+\paragraph{How the paper reads.} Section~\ref{sec:background} defines the
 terms and the threat model. Section~\ref{sec:literatures} answers RQ1 and
 ends at the region the literature has barely tested. Section~\ref{sec:experiments} describes
 the platform, Section~\ref{sec:setup} the setup and the experiments we ran on
 it, and Section~\ref{sec:results} what they show, grouped under RQ2 to RQ5.
-Section~\ref{sec:discussion} turns what
-survives into conventions, into what a deployment inherits, and into the
-design rule a fix covering both regimes would have to follow.
+Section~\ref{sec:discussion} turns the
+results into conventions for evaluation, into advice for deployment, and
+into the design rule a fix covering both regimes would have to follow.
 Section~\ref{sec:threats} states the limits and what is not finished.
