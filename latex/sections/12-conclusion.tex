@@ -21,8 +21,7 @@ mechanism) pairs show a resolvable benefit there, both against the refusal
 attack. The finding is an explanation, not a verdict.
 
 In the first direction, fixes built for honest error meet attackers.
-Context-reliance fixes do not fail because someone built them badly. They fail because of what they
-arbitrate. Each one decides between trusting the context and trusting memory,
+Context-reliance fixes do not fail because someone built them badly. They fail because of the choice they make. Each one decides between trusting the context and trusting memory,
 and that dial moves correctness around without creating any. Suppress memory
 and the attacker receives what memory held. Suppress the attacker and memory
 receives it back. A planted passage that asserts a third answer separates copying from
@@ -50,7 +49,7 @@ reasons: the safety fixes assume the document is honest, and the security
 defenses assume wrong passages are few or carry an instruction. Each
 assumption holds in its own regime and fails in the other.
 
-Two results bound the first direction's claim rather than soften it. First, protection depends on the \emph{form} of the planted passage, not only
+Two further results sharpen the first direction's claim. First, protection depends on the \emph{form} of the planted passage, not only
 on whether an attacker is present. An evaluation built around optimized
 passages therefore overstates how well a system holds. Second, one fix did resist. It loses \PctAcdRemovedGradient{}\% of that
 protection to an
@@ -81,8 +80,7 @@ of these methods exposes a scalar the attacker can address.
 
 \textbf{Close the supply-chain and cross-modal gaps.} These channels have fewer
 than one named fix per named mechanism and are the routes by which agents
-accept third-party capability. They are the clearest place to build rather than
-to measure.
+accept third-party capability. They are where new fixes are most needed.
 
 \textbf{Test the stage finding across regimes.} In the agent experiment,
 every defense that held acts before the agent reads the injected text or
@@ -92,7 +90,7 @@ model. Whether the stage at which a fix acts also predicts which fixes work on
 the other community's problem needs fixes from both communities, run inside
 one agent harness.
 
-\textbf{Make the empty cell the default, not the exception.} The deepest
+\textbf{Make cross-community testing routine.} The deepest
 problem this paper documents is not any single fix. It is that who runs an experiment predicts its
 outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair fixes with mechanisms that a
 taxonomy selects, not mechanisms that either author selects. Transfer then

@@ -1,8 +1,7 @@
 \section{Threats to validity}
 \label{sec:threats}
 
-Each item below names a way the results could be wrong and how far it
-reaches. The last lists the work that is not finished.
+Each item below names a way the results could be wrong and how much of the paper it affects. The last lists the work that is not finished.
 
 \textbf{Extraction error.} We produced the corpus coding with an LLM-assisted
 extraction pass over \NCorpus{} papers and \NCodedFields{} coded fields. Every count in
@@ -24,7 +23,8 @@ direction of the finding as safe, because the gap between \PctSecCitesSafety{}\%
 error, but the exact rates should be read as estimates. Two further limits
 bound them. The denominator is the \NAnalysed{} papers that named a
 technique rather than every screened-in paper, because a survey cites
-widely and names nothing, so counting it would measure reading habits. And
+widely and names nothing, so counting it would measure how widely surveys cite, not whether methods
+cross. And
 only citations to papers inside that set register, so a paper reaching
 across to work we did not include does not count: every cross-citation rate
 in this paper is a floor.
@@ -37,7 +37,7 @@ AttnTrace with Qwen2.5-7B-Instruct rather than the Llama-3.1 model its
 examples use. AttnTrace's tracing result rests on \NTraceStale{} wrong
 answers. Spotlighting's null has no control behind it, and DataSentinel
 misses our injected sentence while catching its own README's, so a null for
-either could also mean the defense does not work in our hands.
+either could also mean the defense does not work in our setup.
 
 \textbf{Planted passages sit at the end of the context.} On open Natural
 Questions every planted passage takes the last of the ten retrieved slots, and
@@ -141,9 +141,9 @@ properties, and only the first is established by the replicates above.
 accuracy, a copy rate or a refusal rate. We report no inference latency,
 no memory footprint and no throughput, so nothing in this paper says whether a
 fix is affordable to deploy. That matters for the contrastive-decoding
-family in particular, which runs two forward passes per token. A method could
-be useless on the evidence here and still be the right choice at a cost we
-never measured, or hold up well and be unaffordable.
+family in particular, which runs two forward passes per token. A method that looks useless here could still be the best choice once
+cost is counted, and one that holds up well could be too expensive to
+deploy.
 
 \textbf{One dataset per experiment.} The retrieval experiments run on CoConflictQA~\cite{huang-2025-parammute} and
 open Natural Questions~\cite{kwiatkowski-2019-natural}. The dosing model, which replaces a fraction of context
@@ -179,7 +179,7 @@ the rest are preprints, and the share falls with recency, from
 \PctVenueEarly{}\% of our \YearVenueEarly{} papers to \PctVenueLate{}\% of
 our \YearVenueLate{} ones. A corpus restricted to refereed work
 would therefore describe an earlier field than the one we set out to measure,
-so the restriction is a check and not the corpus. Resolving both sides of
+so we use the refereed subset as a check, not as the corpus. Resolving both sides of
 every pair back to a paper succeeds for \NVenueResolved{} of
 \NTimelinePairs{} pairs (\PctVenueResolved{}\%); of those, \NVenuePairs{} have
 a named venue on both sides, and \NVenueSecDefSafetyAtk{} of them is a security
