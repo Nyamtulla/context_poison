@@ -104,54 +104,40 @@ one. If it holds, that tells us little.
 
 \paragraph{Contributions.}
 \begin{itemize}
-\item \textbf{A map of how the two communities share one problem.} We place
-  every mechanism and fix from both literatures in one taxonomy and along one
-  picture of the agent's pipeline. It shows where each community works:
-  security fixes guard where text enters, and safety fixes improve how
-  the model reasons about text already inside. It also shows that a system
-  built only from one community's methods is unprotected at the stage the
-  other community covers
+\item \textbf{We show that the two communities divide the problem rather than
+  duplicate it.} Security fixes act where text enters the context window, and
+  safety fixes act where the model reasons about text already inside. No
+  earlier survey could show this, because each covers only one community
   (RQ1; Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 
-\item \textbf{The first evaluation across the two communities.} We run
-  \NCampaignPairs{} pairs that put a fix from one community against a
-  mechanism from the other, each from its authors' released code and weights,
-  and report how each fix holds up outside the setting it was built for. For
-  the defenses that vote, we read their own traces to show which passages
-  decided the answer, and we test whether attribution finds the passage
-  behind an honest failure
+\item \textbf{We identify the region neither community has tested.} Of
+  \NPureRegimePairs{} tested (fix, mechanism) pairs, only
+  \NCrossCommunityPairs{} cross between the communities, and a security fix
+  has been tested against a safety mechanism exactly
+  \NSecDefVsSafetyAttack{} time (RQ1; Section~\ref{sec:emptycell}).
+
+\item \textbf{We run the experiments neither community has run, in both
+  directions.} \NCampaignPairs{} pairs put safety fixes against attacks and
+  security defenses against honest mistakes, each from its authors' released
+  code and weights and against an undefended model on the same items
   (RQ2; Sections~\ref{sec:campaign}, \ref{sec:results}).
 
-\item \textbf{A test that tells copying from remembering.} We plant a passage
-  asserting an answer that is neither true nor the model's own, so every
-  output shows whether the model read the real document, recalled from
-  memory or copied the attacker. We use it to ask whether the failures belong
-  to individual methods or to a choice they share (RQ3;
-  Section~\ref{sec:distractor}).
+\item \textbf{We show that each community's methods fail on the other's
+  problem, for opposite reasons.} Safety fixes decide how much to trust the
+  document, which hands the answer to an attacker who wrote it. Security
+  defenses assume that wrong passages are few or contain instructions, and an
+  honest mistake breaks both assumptions (RQ2--RQ5;
+  Section~\ref{sec:results}).
 
-\item \textbf{The measurements the field leaves out.} We add a no-document
-  score, a second base model and a second implementation to the results, and
-  show which conclusions depend on them (RQ4; Section~\ref{sec:controls}).
-
-\item \textbf{A test of the one fix that held, against an attacker who
-  knows it.} We build two
-  attacks against that fix's own rule, one by rephrasing and one by
-  gradient search, and measure how much of its protection survives an
-  attacker who knows its rule (RQ5; Section~\ref{sec:adaptive}).
-
-\item \textbf{What a fix covering both regimes cannot assume.} From the two
-  directions we derive three assumptions such a fix must do without: that the
-  document is honest, that wrong passages are few, and that a wrong passage
-  contains an instruction (Section~\ref{sec:neither}). We have also started an
-  experiment that stacks a fix acting where text enters in front of one
-  acting where the model reasons. It is not finished, and we claim no result
-  from it (Section~\ref{sec:discussion}).
-
-\item \textbf{A runnable artifact.} Every fix and every published attack
-  executes from its authors' released code at a pinned commit, and we checked that the code is unchanged. We
-  release our test code, the planted passages and the full list of coded
-  papers.
+\item \textbf{We propose a fix that holds in both regimes.} It relies on none
+  of those assumptions. It counts passages that say the same thing as one
+  source, lets the model's own answer object but never vote, and reports a
+  conflict instead of answering when credible sources disagree.
+  % Results sentence to be added once the fix is evaluated in both regimes.
 \end{itemize}
+
+We release the code, the planted passages and the coded papers, so that
+every result can be re-run.
 
 \paragraph{How the paper reads.} Section~\ref{sec:background} defines the
 terms and the threat model. Section~\ref{sec:literatures} answers RQ1 and
