@@ -49,6 +49,16 @@ case "$CMD" in
       fi
       echo "differences (mirror vs latex/):"; echo "$d" | sed 's/^/  /'
       [ "$CMD" = status ] && exit 0
+      # pull copies the mirror over every differing file. With uncommitted
+      # edits in latex/ that silently discards them, even when no co-author
+      # has touched the mirror; it happened once. Commit first.
+      if ! git -C "$REPO" diff --quiet HEAD -- latex/; then
+          echo
+          echo "REFUSING TO PULL: latex/ has uncommitted changes that the"
+          echo "mirror's copies would overwrite. Commit them first:"
+          git -C "$REPO" diff --stat HEAD -- latex/ | sed 's/^/  /'
+          exit 1
+      fi
       echo
       echo "applying the mirror's version of each differing file into latex/"
       echo "REVIEW THE DIFF BEFORE COMMITTING: git diff latex/"
