@@ -50,37 +50,20 @@ following research questions.
   (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 \item[RQ2] \textbf{Does a fix built for one literature's problem
   survive the other's?} We execute the pairs the literature skipped, from the
-  authors' released code and weights
-  (Sections~\ref{sec:campaign}, \ref{sec:results}).
-\item[RQ3] \textbf{Is failure a property of individual methods or of a
-  design choice they share?} We build a planted passage that separates the
-  explanations rather than maximizes damage
-  (Section~\ref{sec:distractor}).
-\item[RQ4] \textbf{Do the measurements the field leaves out change the
-  result?} We re-read every result against a score almost no paper
-  reports: what the same model scores with no document at all. We also check
-  the results on a second base model and on a second implementation of the
-  one design that held (Section~\ref{sec:controls}).
-\item[RQ5] \textbf{Does that explanation survive an adaptive attacker?} We
-  build two optimizers against the one method that resisted
-  (Section~\ref{sec:adaptive}).
+  authors' released code and weights, and check the results against what the
+  same model scores with no document, on a second base model and on a second
+  implementation (Sections~\ref{sec:campaign}, \ref{sec:results}).
+\item[RQ3] \textbf{Why do the fixes fail, and does the explanation hold
+  against an attacker who knows the fix?} We ask whether failure belongs to
+  individual methods or to an assumption each design shares. We plant a
+  passage that tells the explanations apart, read the voting defenses' own
+  traces, and build two attacks against the one fix that resisted
+  (Sections~\ref{sec:distractor}, \ref{sec:adaptive}, \ref{sec:neither}).
+\item[RQ4] \textbf{Can one fix hold whether an attacker planted the bad text
+  or it went wrong on its own?} We propose a fix that relies on none of the
+  assumptions RQ3 finds, and test it against both. Its evaluation is not yet
+  complete.
 \end{description}
-
-\paragraph{What we find.} Methods from each community fail on the other
-community's problem, and they fail for opposite reasons. The safety fixes
-decide how much to trust the retrieved document compared with what the model
-already knows. That choice cannot tell an honest document from a planted
-one. Against an attacker, these fixes either hand answers to the attacker or
-send them back to the model's memory. They never move them to the true
-document. The security defenses that take a vote across passages work while
-most passages are correct. That is true when an attacker can plant only a
-few passages. It is not true when a fact goes out of date, because many
-retrieved passages can then be wrong at the same time. With five copies of
-an out-of-date page among ten passages, the vote gives the outdated answer
-more often than no defense does. The defenses that look for injected
-instructions find none in an honest mistake, and change nothing. Each design
-relies on an assumption that is true for the problem it was built for and
-false for the other one.
 
 Both literatures have been systematized before: the security side
 repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
@@ -126,14 +109,15 @@ one. If it holds, that tells us little.
   problem, for opposite reasons.} Safety fixes decide how much to trust the
   document, which hands the answer to an attacker who wrote it. Security
   defenses assume that wrong passages are few or contain instructions, and an
-  honest mistake breaks both assumptions (RQ2--RQ5;
+  honest mistake breaks both assumptions (RQ3;
   Section~\ref{sec:results}).
 
-\item \textbf{We propose a fix that holds in both regimes.} It relies on none
+\item \textbf{We propose a fix that holds whether an attacker planted the
+  bad text or it went wrong on its own (RQ4).} It relies on none
   of those assumptions. It counts passages that say the same thing as one
   source, lets the model's own answer object but never vote, and reports a
   conflict instead of answering when credible sources disagree.
-  % Results sentence to be added once the fix is evaluated in both regimes.
+  % Results sentence to be added once the fix is evaluated against both.
 \end{itemize}
 
 We release the code, the planted passages and the coded papers, so that
@@ -143,8 +127,9 @@ every result can be re-run.
 terms and the threat model. Section~\ref{sec:literatures} answers RQ1 and
 ends at the region the literature has barely tested. Section~\ref{sec:experiments} describes
 the platform, Section~\ref{sec:setup} the setup and the experiments we ran on
-it, and Section~\ref{sec:results} what they show, grouped under RQ2 to RQ5.
+it, and Section~\ref{sec:results} what they show, grouped under RQ2 and RQ3.
 Section~\ref{sec:discussion} turns the
 results into conventions for evaluation, into advice for deployment, and
-into the design rule a fix covering both regimes would have to follow.
+into the design rule a fix covering both attacks and honest mistakes would
+have to follow.
 Section~\ref{sec:threats} states the limits and what is not finished.

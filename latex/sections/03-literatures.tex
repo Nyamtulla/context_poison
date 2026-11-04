@@ -129,6 +129,17 @@ at which a fix can intervene between them.
 vocabularies of Section~\ref{sec:twovocab}: a security paper assumes an
 adversary and a safety paper assumes none. Every paper takes exactly one.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_citation_network}
+\caption{The \NAnalysed{} papers that named a technique as a citation
+graph. Security papers are red circles and safety papers are blue triangles, so the two regimes stay apart in a
+black-and-white print. Cross-regime edges are drawn dark against the pale
+same-regime ones. The four most-cited bridges are ringed and named, with
+the number of cross-regime citations each carries.}
+\label{fig:network}
+\end{figure}
+
 \paragraph{What the census holds.} The registry holds \NMechanisms{} named
 mechanisms and \NFixes{} named fixes, \NDefSecurity{} of them from the
 security literature and \NDefSafety{} from the safety literature. By
@@ -169,6 +180,7 @@ studied by one community only. Fourth, the totals column adds up each channel ov
 agent accepts capability from a third party, and they hold the fewest entries
 in the corpus.
 
+
 \paragraph{What the fixes were tested against.} Almost every fix was tested
 in one regime only. \NDefenseFix{} were tested against an adversary, the
 defenses of Section~\ref{sec:twovocab}, and \NRemedy{} against incidental
@@ -205,16 +217,6 @@ safety-regime papers that name a venue, \NRegimeSafetyAtSecVenue{}
 published at a security venue. Security researchers submit to AI
 conferences; the reverse does not happen in this corpus.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig5_citation_network}
-\caption{The \NAnalysed{} papers that named a technique as a citation
-graph. Security papers are red circles and safety papers are blue triangles, so the two regimes stay apart in a
-black-and-white print. Cross-regime edges are drawn dark against the pale
-same-regime ones. The four most-cited bridges are ringed and named, with
-the number of cross-regime citations each carries.}
-\label{fig:network}
-\end{figure}
 
 One limit on the reading. A venue is coded only where the record carries
 one, so this covers \NRegimeSecNamedVenue{} of \NRegimeSecurity{}

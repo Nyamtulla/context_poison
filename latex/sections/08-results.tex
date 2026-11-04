@@ -1,13 +1,12 @@
 \section{Results}
 \label{sec:results}
 
-This section answers RQ2 to RQ5 in turn, each subsection closing with its
-answer. RQ2 takes the main experiment in each direction, then every fix
-against every mechanism and the agent experiment, and ends with why neither
-design covers both. RQ3 separates the explanations with two tests, one that
-changes only the form of the planted passage and one that plants an answer
-neither true nor the model's own. RQ4 adds the measurements the field leaves
-out, and RQ5 attacks the one fix that resisted. One measurement comes first,
+This section answers RQ2 and RQ3, each subsection closing with its answer.
+RQ2 takes the main experiment in each direction, then every fix against
+every mechanism and the agent experiment, and ends with three checks on
+those results. RQ3 asks why the fixes fail: it explains each direction, tests
+the first explanation against an attacker who knows the fix, and ends with
+what a fix covering both would have to do without. One measurement comes first,
 because the research questions depend on it: how much damage a planted
 passage does with no fix in place, and whether it matters that an attacker
 wrote it.
@@ -223,7 +222,48 @@ one stale passage in ten, it counts that passage among its five traced
 controlled, attribution still points at the passage behind an honest
 failure, on one model and \NTraceStale{} failures.
 
+\begin{table}[t]
+\centering
+\caption{ACD against two planted passages, $n=\EAcdN{}$, threshold \EAcdMdr\pp. The fix is
+unchanged. Only the form of the planted passage differs. $p$ is two-sided
+Fisher on the counts of correct answers.}
+\label{tab:acd}
+\footnotesize
+\begin{tabular}{@{}l@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
+\toprule
+\textbf{Comparison, corrupted context} & \textbf{Corpus poisoning} &
+\textbf{False evidence} \\
+\midrule
+vs.\ undefended  & \textbf{+\EAcdSatGain{}} ($p\PAcdCorpusVsUndef{}$) &
++\EAcdFalseVsUndef{} ($p\PAcdFalseVsUndef{}$) \\
+vs.\ no retrieval & +\EAcdCorpusVsNoRet{} ($p\PAcdCorpusVsNoRet{}$) &
+\textbf{\EAcdFalseVsNoRet{}} ($p\PAcdFalseVsNoRet{}$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \input{tables/distractor}
+
+
+\begin{table}[t]
+\centering
+\caption{The same three fixes against two planted passages. Excess damage
+is how much accuracy the defended model loses from a clean to a corrupted
+context, minus the same loss for the undefended model; positive means the
+fix lost more than doing nothing would have.}
+\label{tab:payloads}
+\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Fix} & \textbf{$n$} & \textbf{Corpus poisoning} &
+\textbf{False evidence} \\
+\midrule
+ParamMute & \EParamN{} & \textbf{+\EParamExcessCorpus} & \textbf{+\EParamExcessFalse} \\
+CK-PLUG   & \ECkN{} & \textbf{+\ECkExcessCorpus}  & +\ECkExcessFalse \\
+COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \paragraph{Across the grid.}
 \label{sec:grid}
@@ -259,64 +299,35 @@ reads the injected text or before it acts on it. None of the
 In this experiment, the stage at which a defense acts separates the defenses
 that hold from those that do not.
 
-\begin{table}[t]
-\centering
-\caption{ACD against two planted passages, $n=\EAcdN{}$, threshold \EAcdMdr\pp. The fix is
-unchanged. Only the form of the planted passage differs. $p$ is two-sided
-Fisher on the counts of correct answers.}
-\label{tab:acd}
-\footnotesize
-\begin{tabular}{@{}l@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
-\toprule
-\textbf{Comparison, corrupted context} & \textbf{Corpus poisoning} &
-\textbf{False evidence} \\
-\midrule
-vs.\ undefended  & \textbf{+\EAcdSatGain{}} ($p\PAcdCorpusVsUndef{}$) &
-+\EAcdFalseVsUndef{} ($p\PAcdFalseVsUndef{}$) \\
-vs.\ no retrieval & +\EAcdCorpusVsNoRet{} ($p\PAcdCorpusVsNoRet{}$) &
-\textbf{\EAcdFalseVsNoRet{}} ($p\PAcdFalseVsNoRet{}$) \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[t]
-\centering
-\caption{The same three fixes against two planted passages. Excess damage
-is how much accuracy the defended model loses from a clean to a corrupted
-context, minus the same loss for the undefended model; positive means the
-fix lost more than doing nothing would have.}
-\label{tab:payloads}
-\small
-\begin{tabular}{@{}lrrr@{}}
-\toprule
-\textbf{Fix} & \textbf{$n$} & \textbf{Corpus poisoning} &
-\textbf{False evidence} \\
-\midrule
-ParamMute & \EParamN{} & \textbf{+\EParamExcessCorpus} & \textbf{+\EParamExcessFalse} \\
-CK-PLUG   & \ECkN{} & \textbf{+\ECkExcessCorpus}  & +\ECkExcessFalse \\
-COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 
-\paragraph{Why neither design covers both.}
-\label{sec:neither}
-The two directions fail for opposite reasons. Each design rests on an
-assumption that holds in its own regime and that the other regime breaks.
-The safety fixes assume the document is honest: they decide how far to trust
-it over the model's memory, and in the first direction an attacker writes the
-document. RobustRAG and ReliabilityRAG assume that wrong passages are few:
-their votes are sound while honest passages outnumber corrupted ones, which
-holds when an attacker can plant only a few passages, the setting both
-certify. An honest mistake has no such limit. A fact that changes can leave
-many retrieved passages wrong in the same way at once. With five copies of
-an out-of-date page among ten passages, both votes give the outdated answer
-more often than the undefended model does. The filters assume that a wrong passage carries an
-instruction, and an honest mistake carries none. A fix that covers both
-regimes can therefore rely on none of these assumptions. It cannot trust the
-document by default, it cannot count on wrong passages being a minority, and
-it cannot look for an instruction.
+
+\paragraph{Checks on these results.}
+\label{sec:controls}
+We re-read the results against a score almost no paper reports, what the
+same model scores with no document at all, and check them on a second
+implementation of one design and on a second base model. Start with the no-document score. DyPRAG holds \EDypragClean\% on a clean
+context and \EDypragSat\% on a corrupted one while the undefended model falls
+from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that looks like
+complete resistance. The same model with no document at all scores
+\EDypragNoRet\%, which is not measurably different. DyPRAG is unaffected
+because it is not reading the document, and only a no-document score shows
+this.
+
+Where two implementations of one design agree, the
+result belongs to the design. RobustRAG ships two implementations that share
+the idea of answering from each passage and voting, and share no code after
+that. Under BadRAG's tone attack both stay at or below \NRobustToneMax\%,
+across both implementations and two base models, where CK-PLUG on the same
+attack reaches \ECkSentTop\%. The tone attack succeeds against methods that
+trust the document, not against methods that vote across passages. Under the refusal attack neither
+implementation changes the result measurably on either base model, within the
+range the attack authors evaluate.
+
+One omitted measurement reverses a result: a no-document score
+turns the campaign's apparently strongest fix into one that is not reading
+its input. Two further checks, a second implementation and a second base
+model, leave the results inside the evaluated range unchanged.
 
 Answer to RQ2. No, in neither direction. Fixes built for honest error lose
 to an attacker when they shift the model's trust toward the document. The
@@ -329,7 +340,7 @@ that look for injected instructions do nothing, because an honest mistake
 contains none.
 
 
-\subsection{RQ3: Is failure a property of individual methods or of a design choice they share?}
+\subsection{RQ3: Why do the fixes fail, and does the explanation hold against an attacker who knows the fix?}
 
 
 
@@ -401,41 +412,6 @@ document from a planted one. Methods that turn toward memory also lose a share
 of answers to neither outcome: \EAcdResid{}, \EScrResid{} and
 \ESpareResid{} points for ACD, SCR and SpARE.
 
-Answer to RQ3. A shared design choice. The methods fail in the same way
-because they make the same choice, between the document and memory, and that
-choice cannot separate a real document from a planted one. The second
-direction has the same structure: RobustRAG and ReliabilityRAG share no
-code, and both turn harmful once five of ten passages are stale, because both
-assume that most passages are correct (Section~\ref{sec:neither}).
-
-\subsection{RQ4: Do the measurements the field leaves out change the result?}
-
-\label{sec:controls}
-We re-read the results against a score almost no paper reports, what the
-same model scores with no document at all, and check them on a second
-implementation of one design and on a second base model. Start with the no-document score. DyPRAG holds \EDypragClean\% on a clean
-context and \EDypragSat\% on a corrupted one while the undefended model falls
-from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that looks like
-complete resistance. The same model with no document at all scores
-\EDypragNoRet\%, which is not measurably different. DyPRAG is unaffected
-because it is not reading the document, and only a no-document score shows
-this.
-
-Where two implementations of one design agree, the
-result belongs to the design. RobustRAG ships two implementations that share
-the idea of answering from each passage and voting, and share no code after
-that. Under BadRAG's tone attack both stay at or below \NRobustToneMax\%,
-across both implementations and two base models, where CK-PLUG on the same
-attack reaches \ECkSentTop\%. The tone attack succeeds against methods that
-trust the document, not against methods that vote across passages. Under the refusal attack neither
-implementation changes the result measurably on either base model, within the
-range the attack authors evaluate.
-
-Answer to RQ4. One omitted measurement reverses a result: a no-document score
-turns the campaign's apparently strongest fix into one that is not reading
-its input. Two further checks, a second implementation and a second base
-model, leave the results inside the evaluated range unchanged.
-
 \begin{table}[t]
 \centering
 \caption{ACD against the planted third answer in its plain form and in two forms
@@ -463,8 +439,7 @@ ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \end{tabular}
 \end{table}
 
-\subsection{RQ5: Does that explanation survive an adaptive attacker?}
-
+\paragraph{An attacker who knows the fix.}
 \label{sec:adaptive}
 Every attack above was
 built without knowledge of the fix it met. If a fix loses to such an attack, it would also lose to
@@ -494,9 +469,31 @@ passages, so the attacks act only through the planted text. ACD
 degrades but does not collapse: by the bands we set in advance it keeps some
 protection, and it never falls below the undefended model.
 
-Answer to RQ5. The explanation holds, and the one fix that resisted
-loses most of its protection. The
-method that resisted did so against attacks not built for it, and loses most
-of that resistance to one that is. In our coding of their papers, the methods
+\paragraph{Why neither design covers both.}
+\label{sec:neither}
+The two directions fail for opposite reasons. Each design rests on an
+assumption that holds in its own regime and that the other regime breaks.
+The safety fixes assume the document is honest: they decide how far to trust
+it over the model's memory, and in the first direction an attacker writes the
+document. RobustRAG and ReliabilityRAG assume that wrong passages are few:
+their votes are sound while honest passages outnumber corrupted ones, which
+holds when an attacker can plant only a few passages, the setting both
+certify. An honest mistake has no such limit. A fact that changes can leave
+many retrieved passages wrong in the same way at once. With five copies of
+an out-of-date page among ten passages, both votes give the outdated answer
+more often than the undefended model does. The filters assume that a wrong passage carries an
+instruction, and an honest mistake carries none. A fix that covers both
+regimes can therefore rely on none of these assumptions. It cannot trust the
+document by default, it cannot count on wrong passages being a minority, and
+it cannot look for an instruction.
+
+Answer to RQ3. A shared assumption in each direction, not a defect of
+individual methods. The safety fixes all choose between the document and the
+model's memory, and that choice cannot separate a real document from a
+planted one. The security defenses all assume that wrong passages are few or
+contain instructions, and an honest mistake breaks both assumptions. The
+first explanation also holds against an attacker who knows the fix: the one
+fix that resisted did so against attacks not built for it, and loses most of
+that resistance to one that is. In our coding of their papers, the methods
 in this family were validated only against incidental failure, so their
 published results contain no test of this kind.
