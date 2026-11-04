@@ -1,0 +1,98 @@
+{
+ "generated": "2026-11-04",
+ "defense": "specvote",
+ "defense_family": "source-count vote (ours)",
+ "attack": "incidental_stale",
+ "placement": "retrieval",
+ "dataset": "open_nq",
+ "n": 20,
+ "top_k": 10,
+ "model": "mistral7b",
+ "contexts_sha256": "ac9b71d17cb1f03d76c39c3ee5382f6e470b3144e0ead9914e6d4e6284e41fb6",
+ "mdr_pp_at_n": 44.3,
+ "notes": {
+  "method": "specvote.decide (frozen in Phase 0e)",
+  "specifics_jaccard": 0.4,
+  "per_passage_answers": "ReliabilityRAG wrap_prompt(seperate=True) + batch_query",
+  "backend": "their VLLMModel, temperature 0",
+  "memory_budget": {
+   "theirs": 0.5,
+   "passed": 0.506,
+   "others_gb": 0.3
+  }
+ },
+ "results": [
+  {
+   "n": 20,
+   "acc": 25.0,
+   "asr": 5.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 5.0,
+   "asr_ci_low": 0.9,
+   "asr_ci_high": 23.6,
+   "arm": "closedbook",
+   "n_poison": 0
+  },
+  {
+   "n": 20,
+   "acc": 25.0,
+   "asr": 5.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 5.0,
+   "asr_ci_low": 0.9,
+   "asr_ci_high": 23.6,
+   "arm": "closedbook",
+   "n_poison": 5
+  },
+  {
+   "n": 20,
+   "acc": 70.0,
+   "asr": 0.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 0.0,
+   "asr_ci_low": 0.0,
+   "asr_ci_high": 16.1,
+   "arm": "undefended",
+   "n_poison": 0
+  },
+  {
+   "n": 20,
+   "acc": 60.0,
+   "asr": 45.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 45.0,
+   "asr_ci_low": 25.8,
+   "asr_ci_high": 65.8,
+   "arm": "undefended",
+   "n_poison": 5
+  },
+  {
+   "n": 20,
+   "acc": 75.0,
+   "asr": 0.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 0.0,
+   "asr_ci_low": 0.0,
+   "asr_ci_high": 16.1,
+   "arm": "defended",
+   "n_poison": 0
+  },
+  {
+   "n": 20,
+   "acc": 75.0,
+   "asr": 0.0,
+   "refusal_rate": 0.0,
+   "negative_framing_rate": 0.0,
+   "wrong_answer_rate": 0.0,
+   "asr_ci_low": 0.0,
+   "asr_ci_high": 16.1,
+   "arm": "defended",
+   "n_poison": 5
+  }
+ ]
+}
