@@ -6,7 +6,7 @@
 an attacker wrote, \emph{inc.}\ an honest mistake or conflict. In the column
 of our data, $=$ marks the release its authors used, $\approx$ the same
 questions (Natural Questions) in a different release, so with different
-passages, and $\neq$ a different dataset. A star marks what we built. A mechanism has no model of its own: its row lists every model that read it. NQ-Open is the
+passages, and $\neq$ a different dataset. A star marks what we built; it has no authors, so its authors' columns are empty. A mechanism has no model of its own: its row lists every model that read it. NQ-Open is the
 open-domain release of Natural Questions; open NQ is RobustRAG's copy of it,
 with ten retrieved passages per question.}
 \label{tab:provenance}
@@ -95,7 +95,7 @@ Adaptive, gradient$^\star$ & adv. & --- &
   CoConflictQA & --- &
   Llama-3-8B-Instruct & the third answer, reshaped against ACD \\
 False evidence & inc. & CoConflictQA &
-  $=$ CoConflictQA & --- &
+  $=$ CoConflictQA & Llama-3-8B-Instruct &
   Llama-3-8B & a fluent sentence stating the model's own wrong answer \\
 Third answer$^\star$ & inc. & --- &
   open NQ; CoConflictQA & --- &
