@@ -14,7 +14,7 @@ experiments is
 Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
 Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each fix
 released. The agent experiment uses a
-Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent. AttnTrace ran on
+Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent. The tracing method AttnTrace ran on
 Qwen2.5-7B-Instruct, because the Llama-3.1 weights its released examples use
 are gated and access was not granted to us. Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
 535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
@@ -61,7 +61,7 @@ one another, breaking ties toward the higher-ranked ones. Its guarantee too
 holds while the corrupted passages are a bounded few. Three look for injected
 instructions. Spotlighting~\cite{hines-2024-defending} marks the retrieved
 text with delimiters and tells the model not to follow instructions inside
-them; we run AgentDojo's implementation, whose sentence says ``tool
+them; we run the implementation in the agent benchmark AgentDojo, whose sentence says ``tool
 outputs'', with ``retrieved passages'' in its place.
 PIGuard~\cite{li-2025-piguard} and DataSentinel~\cite{liu-2025-datasentinel}
 are released classifiers for injected instructions. Deployed as filters, each
@@ -82,12 +82,12 @@ other jobs on the shared card, which changes nothing it computes.
 Every mechanism we run is a planted passage: text placed among the retrieved
 passages, either written by an attacker or reproducing an honest mistake. The
 planted passages in Table~\ref{tab:provenance} fall into five groups by what
-they do to the evidence. Four plant a false answer: PoisonedRAG, false
+they do to the evidence. Four plant a false answer: the attack PoisonedRAG, false
 evidence, a planted third answer and a stale document. PoisonedRAG writes a
 passage asserting the attacker's answer. False evidence is a fluent sentence asserting the wrong
 answer the model would give from memory; it is the
 \texttt{parametric\_evidence} field that ships inside CoConflictQA, the
-ParamMute authors' own benchmark. A planted third answer is that sentence with
+benchmark released by the authors of the safety fix ParamMute. A planted third answer is that sentence with
 one word changed, so it asserts an answer that is neither the truth nor the
 model's own. A stale document is a real retrieved passage with its answer
 swapped. Corpus poisoning and misretrieval push the right evidence out
@@ -115,10 +115,9 @@ An \textbf{item} is one question, its gold answer, and the context the model
 is given to answer it from. Every item in this paper belongs to the authors
 of the method or the benchmark we are running, and Table~\ref{tab:provenance}
 lists each source and whose it is. Running each method on its own authors'
-data rules out a change of dataset as the explanation for its results. The retrieval experiments use CoConflictQA~\cite{huang-2025-parammute} over
-Natural Questions, and open Natural Questions for the mechanisms that need a
-retrieval pool. The agent experiment uses the AgentDojo banking
-suite~\cite{debenedetti-2024-agentdojo}.
+data rules out a change of dataset as the explanation for its results. The retrieval experiments use the dataset CoConflictQA~\cite{huang-2025-parammute}, built over Natural Questions, and the dataset open Natural Questions for the mechanisms that need a
+retrieval pool. The agent experiment uses the banking suite of the agent benchmark
+AgentDojo~\cite{debenedetti-2024-agentdojo}.
 A mechanism reaches an item only through its context. Each item on open
 Natural Questions comes with the ten passages a retriever found for its
 question, and a planted passage takes the place of one of them or, for
@@ -135,12 +134,12 @@ constructor is parameterized by how many of the top $k$ retrieved passages
 it replaces, where it places them and how often the planted sentence repeats
 inside its passage. We keep that construction and sweep the one parameter:
 $j$ of the top ten, for $j$ in $\{0, 1, 2, 3, 5\}$. Their own default is
-$j = 1$, and RobustRAG's authors sweep up to five of ten and no further, so
+$j = 1$, and the authors of the security defense RobustRAG sweep up to five of ten and no further, so
 every point we report is inside the range the attack and defense authors
 evaluate. Beyond five few honest passages remain, and a low score there
 measures the mechanism more than the fix. Dilution is the one exception to
 replacement: its $j$ passages are added to the ten, so its context holds
-$10 + j$. CoConflictQA has no dose. It supplies a single context passage
+$10 + j$. The dataset CoConflictQA has no dose. It supplies a single context passage
 per item, which either carries the conflicting claim or does not, and a
 single passage has no ranked list to dose. We report it in the two conditions
 its own authors run, a clean context and a corrupted one. The two item sets
@@ -148,8 +147,8 @@ are never combined in one number.
 
 
 
-The CoConflictQA runs of ACD, COIECD, DyPRAG and SCR use only items whose
-context is at most 2000 characters; the runs of the other fixes, and every
+The runs of the safety fixes ACD, COIECD, DyPRAG and SCR on the dataset CoConflictQA use only items whose
+context is at most 2000 characters. The runs of the other fixes, and every
 run on open Natural Questions, have no such cut. The cut was set so that the
 contrastive-decoding fixes, which run the model twice for every token, stay
 on one card at a shared batch size. It is on length alone, never on an
@@ -176,15 +175,15 @@ fix implementations and \NCampaignEpisodes{} scored episodes. Every
 fix ran from its authors' released code and weights.
 Figure~\ref{fig:transfer} sets the campaign beside the published literature. The main experiment puts a fix from one literature in front of a mechanism
 from the other, in both directions. We ran \NCampCrossPairs{} such pairs, all
-on retrieval question answering over Natural Questions. In the first direction, \NCampSafDefSecMech{} pairs take a fix from the safety
+on retrieval question answering over the dataset Natural Questions. In the first direction, \NCampSafDefSecMech{} pairs take a fix from the safety
 literature, built for a document that is merely out of date, and attack it
-with corpus poisoning, PoisonedRAG or BadRAG. In the second direction, \NCampSecDefSafetyMech{} pairs take a defense from
+with the attacks corpus poisoning, PoisonedRAG or BadRAG. In the second direction, \NCampSecDefSafetyMech{} pairs take a defense from
 the security literature, RobustRAG in both of its released implementations,
 ReliabilityRAG, Spotlighting, or the PIGuard or DataSentinel filter, and give
 it four mechanisms that no attacker wrote: a real
 passage whose answer has since changed, a passage asserting a third wrong
 answer, a passage retrieved for the wrong question, and unrelated passages
-that lengthen the context. AttnTrace meets the same four mechanisms and is
+that lengthen the context. The tracing method AttnTrace meets the same four mechanisms and is
 read for what it traces, so it is not counted as a pair. Before these runs,
 ReliabilityRAG and AttnTrace each met PoisonedRAG, and the two filters an
 injected instruction, to check that they work in our hands.
@@ -195,23 +194,23 @@ used. These \NCampSecDefSecMech{} security pairs and
 across. They check that our harness reproduces each fix's behavior on its
 own problem. Most of them are the agent experiment:
 \NAgentPairs{} pairs in which eight prompt-injection defenses meet seven
-injected-instruction attacks inside the AgentDojo banking
-suite~\cite{debenedetti-2024-agentdojo}. A third experiment runs no fix at all. It puts five planted passages on
-the same items, in the same positions and the same number: PoisonedRAG once
+injected-instruction attacks inside the banking suite of the agent
+benchmark AgentDojo~\cite{debenedetti-2024-agentdojo}. A third experiment runs no fix at all. It puts five planted passages on
+the same items, in the same positions and the same number: the attack PoisonedRAG once
 and repeated five times, a stale document, corpus poisoning and misretrieval.
 This measures how much an attacker gains over an honest mistake, which the
 research questions depend on. Table~\ref{tab:regime} reports the result, which
 Section~\ref{sec:regime} reads.
 
 A fourth experiment holds the fix constant and changes only the planted
-passage. On CoConflictQA the same fixes meet corpus poisoning, false
+passage. On the dataset CoConflictQA the same fixes meet corpus poisoning, false
 evidence and a planted third answer, which come from three of the four groups
 in Section~\ref{sec:payloadclasses}. A fix that behaves differently across
 them is reacting to the form of the text rather than to the mechanism it was
 named for. A fifth set of runs adds three measurements. Every run above is measured three ways on the same items: with nothing
 planted, without the fix, and with no document at all.
 We also re-ran part of the retrieval experiment on a second base model, and
-we ran both released implementations of RobustRAG, which share one idea and no code after that point. The last two experiments test the explanation rather than the fixes. We
+we ran both released implementations of the security defense RobustRAG, which share one idea and no code after that point. The last two experiments test the explanation rather than the fixes. We
 built two attacks against the single fix that resisted, one searching
 over surface forms and one optimizing a suffix with gradients, both targeting
 the quantity that fix's own rule measures. We have also started an experiment that stacks two fixes acting at

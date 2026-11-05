@@ -23,7 +23,7 @@ indistinguishable from a fix that has learned to resist a poisoned one.
 It costs one extra pass over the data.
 
 \textbf{Report where the answers went, not only accuracy.} Under a planted
-third answer, ParamMute moves accuracy by less than its threshold while the share of answers
+third answer, the safety fix ParamMute moves accuracy by less than its threshold while the share of answers
 copied from the attacker rises by \EPmDistCopyGain{} points. Accuracy alone
 reports that fix as harmless. Classifying each output as the true
 answer, the model's own answer, the planted answer or a refusal costs nothing
@@ -80,7 +80,7 @@ reader cannot tell whether the reported benefit holds under attack, and our
 results show that it can reverse. Running one published poisoning attack
 against an existing evaluation needs no new data. The reverse holds for a
 defense built against an attacker. Its evaluation limits how many passages
-the attacker controls, and an honest mistake has no such limit: RobustRAG
+the attacker controls, and an honest mistake has no such limit: the security defenses RobustRAG
 and ReliabilityRAG turn harmful once half the retrieved passages are stale
 copies of one page
 (Section~\ref{sec:neither}). A stale-document set needs only a retrieval
@@ -95,7 +95,7 @@ Among the best-cited untested fixes in the cell we studied, two name
 empty repositories. Two more ship code without the trained weights it needs.
 One runs. Two further execution-stage defenses do not
 run reliably on any freely-available open-weight model. One more,
-FaithfulRAG, needs structured-output support
+the safety fix FaithfulRAG, needs structured-output support
 that open weights do not provide in its harness. The ablated variant that
 does run shows none of its own benefit, so we report it as not reportable
 rather than as defeated.
@@ -122,7 +122,7 @@ corpus an agent retrieves from is one an outsider can write to, the second
 case is the deployed case. Consider a system that uses a knowledge-conflict method to improve answer
 quality and retrieves from such a corpus. The method operates outside the
 regime its authors validated, and our measurements say it is more likely to
-increase damage than to reduce it: ParamMute is
+increase damage than to reduce it: the safety fix ParamMute is
 worth \NDefCellClean{} on a clean context and \NDefCellSat{} once the
 context is corrupted, below the undefended model on the same items. The
 claim is about a design choice rather than a community. A method that
@@ -134,7 +134,7 @@ Second, the reverse holds for a defense built against an attacker. A vote
 across passages works while most passages are correct. An attacker who can
 plant only a few passages cannot break that, but an honest mistake can. When
 a fact changes, many retrieved passages can go out of date together. With
-five copies of an out-of-date page among ten passages, ReliabilityRAG gives
+five copies of an out-of-date page among ten passages, the security defense ReliabilityRAG gives
 the outdated answer \EReliStaleAsrTop{}\% of the time, against
 \EReliStaleUndefAsrTop{}\% with no defense. A filter that looks for injected
 instructions protects against injected instructions and nothing else. An

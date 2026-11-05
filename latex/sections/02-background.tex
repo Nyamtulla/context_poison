@@ -61,9 +61,9 @@ document does not. That difference is real, because a method tuned to the
 average case has no reason to hold at the worst case. How much it matters to
 the model is a separate question, since the model reads tokens either way and
 nothing in the text marks who wrote it. Section~\ref{sec:regime} measures
-it: when the bad text plants a false claim, writing it to persuade gives the
-attacker a measurable advantage, and when it only pushes the right evidence
-out, an attack and an honest error do the same damage.
+it. When the bad text states a wrong answer, a passage an attacker wrote to win
+does more damage than a real outdated one. When it only takes the place
+of the right evidence, an attack and an honest error do the same damage.
 
 Because the two communities use different words for one failure, we choose
 one set of words for this paper. We use \emph{mechanism} for anything that makes the context
@@ -129,7 +129,7 @@ the agent reads~\cite{shi-2025-prompt}. They can post content that a browsing
 agent visits~\cite{greshake-2023-not} or contribute a skill file that the
 agent loads~\cite{schmotz-2025-agent}. The adversary knows the defense and
 may adapt the payload to it. Two of the attacks we run, corpus poisoning and
-BadRAG, use one fixed passage for every question. PoisonedRAG and the planted
+BadRAG, use one fixed passage for every question. The attack PoisonedRAG and the planted
 false answers are written for each question they target, so they assume the
 attacker can anticipate which questions will be asked.
 

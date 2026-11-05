@@ -26,14 +26,13 @@ environment per fix, and the harness reaches each through the same
 interface: a question and its context in, an answer out. This is what lets
 fixes with conflicting dependencies meet the same mechanisms. They do
 conflict: the fixes in a single cell of this taxonomy cannot share one
-Python environment. ACD's released decoder imports symbols that
+Python environment. The released decoder of the safety fix ACD imports symbols that
 \texttt{transformers} removed after 4.44, which its own README pins, and
-CK-PLUG ships its own 4.49 fork, which its README says to install. This is the reproducibility problem of Section~\ref{sec:discussion} again,
+the safety fix CK-PLUG ships its own 4.49 fork, which its README says to install. This is the reproducibility problem of Section~\ref{sec:discussion} again,
 this time in the software each fix depends on. The released artifact builds each environment and verifies it. The agent
-experiment is the one exception to the interface: it runs inside AgentDojo's
-own harness.
+experiment is the one exception to the interface: it runs inside the harness of AgentDojo, the agent benchmark it uses.
 
-\textbf{One grid.} Every pair on open Natural Questions is run at the same
+\textbf{One grid.} Every pair on the dataset open Natural Questions is run at the same
 doses, 0, 1, 2, 3 and 5 planted passages out of ten, and every dose in three
 arms: no document, undefended and defended. Two pairs from different
 literatures are therefore measured at the same points.
@@ -82,12 +81,12 @@ artifact.
 tells us nothing about transfer, so before any transfer number we check that
 the method still does, in a clean context, what its authors say it does. The check asks only whether the change goes the way the paper reports,
 and it is set separately for each method, because no two papers report the
-same quantity. ParamMute~\cite{huang-2025-parammute} reports a gain in context
-recall, not in accuracy. CK-PLUG~\cite{bi-2025-parameters} claims no accuracy gain at all: its
+same quantity. The safety fix ParamMute~\cite{huang-2025-parammute} reports a gain in context
+recall, not in accuracy. The safety fix CK-PLUG~\cite{bi-2025-parameters} claims no accuracy gain at all: its
 contribution is a knob that moves memorization rate while accuracy is held,
-so its control fires on that rate instead. ACD~\cite{kim-2024-adaptive} states its improvement
-without a figure. SCR's~\cite{huang-2024-trust} own authors report it underperforming their
-baseline on Llama-3-8B, the model we run it on, so on this model there is no
+so its control fires on that rate instead. The safety fix ACD~\cite{kim-2024-adaptive} states its improvement
+without a figure. The authors of the safety fix SCR~\cite{huang-2024-trust} report it underperforming their
+baseline on Llama-3-8B, the model we run it on. On this model there is therefore no
 published gain to reproduce, and agreement with them means moving the same
 way they report. For each method, we therefore check the direction of the change, on the metric
 that paper uses for the model it used. We record which quantity each

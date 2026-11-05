@@ -49,7 +49,7 @@ literature is not in its corpus.
 \subsection{Attack--defense evaluation platforms}
 
 The closest precedent is not a survey but a platform.
-DEEPSEC~\cite{ling-2019-deepsec} ran 16 adversarial-example attacks against 13
+The evaluation platform DEEPSEC~\cite{ling-2019-deepsec} ran 16 adversarial-example attacks against 13
 defenses in one harness, which is structurally what we do here. It was also
 taken apart in public~\cite{carlini-2019-critique}. The criticisms are worth
 naming, because they define what such a platform has to get right. DEEPSEC
@@ -60,7 +60,7 @@ variance at all.
 
 We treated those criticisms as requirements. We do not reimplement: every method runs
 from its authors' released code and weights. The control-fires-first rule
-automates the check Carlini had to run by hand. It fired on FaithfulRAG, which
+automates the check Carlini had to run by hand. It fired on the safety fix FaithfulRAG, which
 we therefore report as not reportable rather than as defeated. We report per
 cell and never average across regimes. We also say where a comparison across planted
 passages is confounded. We use greedy decoding everywhere except the one cell whose authors

@@ -76,7 +76,7 @@ those descriptions by title; they are applications, empirical studies of
 off-the-shelf methods and practitioner guides, and Section~\ref{sec:threats}
 reports a recall pass over them. The census, the taxonomy and the pair matrix
 are computed over the \NAnalysed{} papers that name a technique, and the
-citation analysis over all \NCorpus{}. AgentDojo~\cite{debenedetti-2024-agentdojo}
+citation analysis over all \NCorpus{}. The agent benchmark AgentDojo~\cite{debenedetti-2024-agentdojo}
 is the clearest case: it is the environment \NAgentPairs{} of our own pairs
 run in, and it names neither an attack nor a defense, so it sits outside the
 analyzed set.
@@ -237,9 +237,7 @@ cross-regime citations. \NNetworkCross{} of the \NNetworkEdges{} resolved
 edges (\PctNetworkCross{}\%) cross regimes, and they concentrate on a
 handful of papers either side can cite in an introduction without adopting
 anything from it. The four most-cited bridges are
-lost-in-the-middle~\cite{liu-2023-lost}, Greshake et
-al.~\cite{greshake-2023-not}, PoisonedRAG~\cite{zou-2024-poisonedrag} and
-Self-RAG~\cite{asai-2023-selfrag}. These papers name the problem. Citing one sets the scene; it does not show
+the lost-in-the-middle finding~\cite{liu-2023-lost}, Greshake et al.'s indirect prompt injection~\cite{greshake-2023-not}, the attack PoisonedRAG~\cite{zou-2024-poisonedrag} and the retrieval method Self-RAG~\cite{asai-2023-selfrag}. These papers name the problem. Citing one sets the scene; it does not show
 that a method from the other community was used. Figure~\ref{fig:network} shows the shape, two
 clusters joined by a narrow band.
 
@@ -269,7 +267,7 @@ widely by its authors. It is evidence that the authors of mechanisms chose it
 as a target.
 
 An empty cell of the matrix does not always mean that nothing was tested. A
-defense evaluated on AgentDojo without naming which injection it faced was
+defense evaluated on the agent benchmark AgentDojo without naming which injection it faced was
 evaluated adversarially, but it is not a named pair, because expanding a
 benchmark into its constituent attacks would manufacture coverage.
 Section~\ref{sec:artifacts} separates the fixes the matrix leaves empty into
@@ -408,7 +406,7 @@ The two sides name different halves of one causal chain. \NSharedCells{} of our
 side, and the security entries are overwhelmingly ways of getting bad text in, while
 the safety entries are reasons the model believes bad text once it is there. The
 \meth{RAG} $\times$ \meth{silent-corruption} cell is the clearest case:
-PoisonedRAG, BadRAG~\cite{xue-2024-badrag} and their relatives on one side; over-trust in conflicting
+the attacks PoisonedRAG, BadRAG~\cite{xue-2024-badrag} and their relatives on one side; over-trust in conflicting
 external evidence, lost-in-the-middle, and knowledge-conflict circuits on the
 other. The security papers build the attacks, the safety papers explain why
 the model is susceptible to them, and the two sets of papers cite each other

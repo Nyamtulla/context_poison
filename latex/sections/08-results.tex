@@ -13,9 +13,12 @@ wrote it.
 
 \paragraph{What an attacker gains over an honest mistake.}
 \label{sec:regime}
-Planting a false claim gives an attacker a measurable
-advantage over an honest mistake. Pushing the right evidence out gives no
-advantage at all. The research questions below assume that a planted passage
+We compared each attack with an honest mistake of the same kind. When the
+passage states a wrong answer, the attacker's passage does more damage than
+a real outdated one: with one planted passage in ten, the model gives the
+wrong answer \PctCraftLow{}\% of the time against \PctStaleLow{}\%. When the
+passage states no answer and only takes the place of the right evidence, the
+attack and an ordinary retrieval error do the same damage. The research questions below assume that a planted passage
 and an honest mistake do comparable damage, so we measured that first, with no
 fix in place. Table~\ref{tab:regime} runs five kinds of planted passage on
 the same items, with the same number of planted passages in the same
@@ -56,9 +59,10 @@ COIECD    & \ECoiecdN{} & \ECoiecdMdr{} &
 than accuracy, so its clean cell reports that metric.}
 \end{table}
 
-Where the passage plants a false answer, writing it to persuade helps the
-attacker. With one planted passage in ten, the model gives the planted answer
-\PctCraftLow{}\% of the time for PoisonedRAG's crafted passage and
+When the passage states a wrong answer, a passage an attacker wrote to win
+does more damage than a real outdated one. With one planted passage in ten,
+the model gives the planted answer \PctCraftLow{}\% of the time for the
+passage written by the attack PoisonedRAG and
 \PctStaleLow{}\% for a real passage whose answer has changed. The gap clears the
 detection threshold at every number of planted passages, though only
 narrowly at two, and at five planted passages the crafted passage also
@@ -67,10 +71,10 @@ mistake still does real damage: it moves the model to the false answer
 \PctStaleTop{}\% of the time, against \PctStaleClean{}\% with nothing planted.
 Repeating the crafted passage five times, as the published attack does,
 changes these rates by at most \NRegimeRepeatMax{} points. Where the passage only pushes the right evidence out of the retrieved set, the
-attacker gains nothing. Zhong et al.'s optimized passage and a real passage
-retrieved for another question give the same results: \PctCorpusTop{}\% and
-\PctMisretrievalTop{}\% planted answers, \AccCorpusTop{}\% and
-\AccMisretrievalTop{}\% accuracy, with every gap below the threshold at every
+attacker gains nothing. The passage optimized by Zhong et al.'s corpus-poisoning attack and a real passage
+retrieved for another question give the same results. They lead to
+\PctCorpusTop{}\% and \PctMisretrievalTop{}\% planted answers and
+\AccCorpusTop{}\% and \AccMisretrievalTop{}\% accuracy, with every gap below the threshold at every
 number of planted passages. For this kind of attack, an attack and an ordinary retrieval error do the same damage.
 
 \subsection{RQ2: Does a fix built for one literature's problem survive the other's?}
@@ -82,7 +86,7 @@ number of planted passages. For this kind of attack, an attack and an ordinary r
 number of poisoned passages among the ten retrieved, measured as the
 defended model minus the undefended model in the same run. Zero means the fix changed
 nothing. Filled markers are resolvable at $p < .05$ by Fisher's exact
-test~\cite{fisher-1922-interpretation}; hollow markers are not. CK-PLUG and
+test~\cite{fisher-1922-interpretation}; hollow markers are not. The safety fixes CK-PLUG and
 DyPRAG sit more than twenty points below zero before any passage is planted
 and stay there. The other four stay within a few points of zero.}
 \label{fig:dose}
@@ -99,11 +103,11 @@ one. When the document is honest and newer than the model's memory, leaning
 on it helps. When an attacker wrote it, leaning on it moves the model toward
 the attacker's answer.
 
-Table~\ref{tab:family} shows the benefit turning into a loss. SpARE changes accuracy by
+Table~\ref{tab:family} shows the benefit turning into a loss. The safety fix SpARE changes accuracy by
 +\ESpareClean{} points on a clean context and by \ESpareSat{} on a corrupted
-one, both beyond its threshold. ParamMute gains \EParamClean{} points on a clean context
+one, both beyond its threshold. The safety fix ParamMute gains \EParamClean{} points on a clean context
 and ends \EParamSatGap{} points below the undefended model on a corrupted one.
-CK-PLUG goes furthest (Table~\ref{tab:grid}a). Under BadRAG's tone attack, which tries to make the
+The safety fix CK-PLUG goes furthest (Table~\ref{tab:grid}a). Under BadRAG's tone attack, which tries to make the
 model answer in a negative tone, the undefended model takes on that tone at
 most \ECkSentUndefMax\% of the time. With CK-PLUG it takes it on
 \ECkSentOne\% of the time with one poisoned passage in ten and
@@ -115,8 +119,8 @@ clean one, roughly five times what it gains.
 
 
 Three methods we ran against these attacks do not work this way, and they
-are why this is a claim about a design and not about all fixes. DyPRAG turns the document into model weights, so it has no
-trust setting to turn. The two RobustRAG implementations answer from each
+are why this is a claim about a design and not about all fixes. The safety fix DyPRAG turns the document into model weights, so it has no
+trust setting to turn. The two implementations of the security defense RobustRAG answer from each
 passage separately and take a vote, which asks which passages agree rather
 than how far to trust passages in general. Figure~\ref{fig:dose} shows six
 of these methods as the number of poisoned passages rises: CK-PLUG and DyPRAG
@@ -125,7 +129,7 @@ planted and stay there, and the other four stay within a few points of it.
 
 Suppressing the model's memory hurts only when the memory had the right
 answer. Under BadRAG's refusal attack, which makes the
-model refuse rather than answer wrongly, ParamMute protects strongly. With one
+model refuse rather than answer wrongly, the safety fix ParamMute protects strongly. With one
 poisoned passage in ten the undefended model refuses \EPmDosUndefRef\% of the
 time and answers \EPmDosUndefAcc\% correctly. ParamMute cuts refusals to
 \EPmDosDefRef\% and restores accuracy to \EPmDosDefAcc\%, within
@@ -160,15 +164,15 @@ accuracy by \NDilUndefDrop{} points, from \EDilUndefAccClean\% to
 \EDilUndefAccFive\%, and the defended model differs from the undefended one
 by at most \NDilGapMax{} points at any number of added passages, inside the
 \EDilMdr{}-point threshold. That difference is the cost RobustRAG shows with
-nothing added. Against attacks from its own literature, RobustRAG stops PoisonedRAG, as its
+nothing added. Against attacks from its own literature, RobustRAG stops the attack PoisonedRAG, as its
 own paper reports, by \ERobustPoisonedGain{} points. Against corpus poisoning
 it neither helps nor hurts: \ERobustDispOneDef\% against
 \ERobustDispOneUndef\% with one displaced passage and \ERobustDispFiveDef\%
 against \ERobustDispFiveUndef\% with five, both inside the
 \ERobustDispMdr{}-point threshold.
 
-ReliabilityRAG fails the same way, and its traces show why. It passes its
-own control: against PoisonedRAG with one planted passage in ten it cuts the
+The security defense ReliabilityRAG fails the same way, and its traces show why. It passes its
+own control: against the attack PoisonedRAG with one planted passage in ten it cuts the
 planted answer from \EReliCtlUndefAsrOne\% to \EReliCtlAsrOne\%. Against a
 stale passage it helps while such passages are few. With one, the outdated
 answer falls from \EReliStaleUndefAsrOne\% to \EReliStaleAsrOne\%. With five
@@ -206,10 +210,10 @@ PIGuard flags \NPiguardFlagged{} and DataSentinel \NDatasentinelFlagged{}. A
 stale or misretrieved passage contains no instruction. Both filters were
 checked first. PIGuard flags an injected instruction and passes the same
 sentence without it. DataSentinel flags the injected example from its own
-README but not our injected sentence. Spotlighting has no such check, so its
+README but not our injected sentence. The defense Spotlighting has no such check, so its
 null rests on the runs alone.
 
-AttnTrace answers a different question: not whether to keep a passage but
+The tracing method AttnTrace answers a different question: not whether to keep a passage but
 which passage an answer came from. When the model gives the outdated answer,
 the passage AttnTrace ranks first is a stale one \ETraceTopStale\% of the
 time, over \NTraceStale{} such answers. When the model answers correctly it
@@ -276,7 +280,7 @@ no measurable difference. All \NGridGainTop{} gains are against the refusal
 attack, where the method helps by getting the model to answer again rather
 than by resisting anything. Every measurable result against a planted passage
 that asserts a false answer is a loss, whether an attacker or an honest
-mistake put it there. CK-PLUG and DyPRAG account for
+mistake put it there. The safety fixes CK-PLUG and DyPRAG account for
 \NGridLoseTopTwo{} of the \NGridLoseTop{} losses, and they are also the only
 two methods that cost accuracy with nothing planted, more than twenty points
 each. The other \NGridFreeClean{} of \NGridCells{} pairs cost nothing
@@ -306,7 +310,7 @@ that hold from those that do not.
 \label{sec:controls}
 We re-read the results against a score almost no paper reports, what the
 same model scores with no document at all, and check them on a second
-implementation of one design and on a second base model. Start with the no-document score. DyPRAG holds \EDypragClean\% on a clean
+implementation of one design and on a second base model. Start with the no-document score. The safety fix DyPRAG holds \EDypragClean\% on a clean
 context and \EDypragSat\% on a corrupted one while the undefended model falls
 from \EDypragRagClean\% to \EDypragRagSat\%. Read alone, that looks like
 complete resistance. The same model with no document at all scores
@@ -315,10 +319,10 @@ because it is not reading the document, and only a no-document score shows
 this.
 
 Where two implementations of one design agree, the
-result belongs to the design. RobustRAG ships two implementations that share
+result belongs to the design. The security defense RobustRAG ships two implementations that share
 the idea of answering from each passage and voting, and share no code after
 that. Under BadRAG's tone attack both stay at or below \NRobustToneMax\%,
-across both implementations and two base models, where CK-PLUG on the same
+across both implementations and two base models, where the safety fix CK-PLUG on the same
 attack reaches \ECkSentTop\%. The tone attack succeeds against methods that
 trust the document, not against methods that vote across passages. Under the refusal attack neither
 implementation changes the result measurably on either base model, within the
@@ -348,7 +352,7 @@ contains none.
 \paragraph{The form of the planted passage.}
 \label{sec:payloads}
 What a fix does depends on the form of the planted
-passage, not on which mechanism it came from. ACD is the only method that both
+passage, not on which mechanism it came from. The safety fix ACD is the only method that both
 uses a clean document and resists corpus poisoning: it ends
 \EAcdSatGain{} points above the undefended model on a corrupted context.
 Corpus poisoning, though, was optimized to fool a retriever, not ACD, so this
@@ -359,24 +363,24 @@ discounts it. A fluent false sentence lowers uncertainty, so ACD trusts it
 more, and the defended model ends below a model given no document at all.
 
 Three more methods show the same dependence on form
-(Table~\ref{tab:payloads}). ParamMute is harmful against both forms, by
+(Table~\ref{tab:payloads}). The safety fix ParamMute is harmful against both forms, by
 \EParamExcessCorpus{} and \EParamExcessFalse{} points, but how well it
 suppresses the model's wrong memory falls from \EParamCorpusPmDrop{} to
 \EParamFalsePmDrop{} points. Under corpus poisoning the wrong answer lives
 only in memory, so suppressing memory removes it. Under false evidence it
 lives in memory and in the planted passage, and ParamMute reaches only the
-first. CK-PLUG's effect on accuracy moves from \ECkCleanCost{} to
+first. For the safety fix CK-PLUG, the effect on accuracy moves from \ECkCleanCost{} to
 \ECkSatDelta{} points under corpus poisoning and stays near
 \ECkFalseOffset{} under false evidence.
-COIECD changes nothing measurable against either.
+The safety fix COIECD changes nothing measurable against either.
 
 We do not rank the two forms. Before running them we wrote down the result
 that would contradict our explanation: a fix doing better against false
-evidence than against corpus poisoning. CK-PLUG does, with \ECkExcessFalse{}
+evidence than against corpus poisoning. The safety fix CK-PLUG does, with \ECkExcessFalse{}
 points of excess damage against \ECkExcessCorpus{}. Both forms leave the
 undefended model near the floor, at \ECkUndefFalseCorrupt\% and
 \ECkUndefCorpusCorrupt\% for CK-PLUG and \ECoiecdFalseCorrupt\% and
-\ECoiecdCorpusCorrupt\% for COIECD, so excess damage compares two near-total
+\ECoiecdCorpusCorrupt\% for the safety fix COIECD, so excess damage compares two near-total
 collapses and has little room to separate them. We report CK-PLUG's result as
 an exception this data cannot resolve, and compare fixes only within one
 form.
@@ -395,12 +399,12 @@ copied the planted passage. With nothing planted the third answer appears
 \EDistCleanBase\% of the time, and \EDistCleanNoRet\% of the time from a
 model given no document.
 
-ParamMute suppresses answers from memory, and the suppressed answers go to
+The safety fix ParamMute suppresses answers from memory, and the suppressed answers go to
 the attacker. It cuts answers from memory from \EPmDistPmBase\% to \EPmDistPmDef\%, and copying rises from
 \EPmDistCopyBase\% to \EPmDistCopyDef\% almost one for one, while correct
-answers stay below the threshold. ACD does the reverse. It cuts copying from
+answers stay below the threshold. The safety fix ACD does the reverse. It cuts copying from
 \EAcdDistCopyBase\% to \EAcdDistCopyDef\%, and the answers it refuses to copy
-go back to memory, not to the real document. CK-PLUG copies \ECkDistCopyDefCorrupt\% against its undefended
+go back to memory, not to the real document. The safety fix CK-PLUG copies \ECkDistCopyDefCorrupt\% against its undefended
 model's \ECkDistCopyBaseCorrupt\% (Table~\ref{tab:distractor}).
 
 The two movements are one effect. Every one of these methods chooses
@@ -410,11 +414,11 @@ attacker; turning it toward memory gives them back to memory. Neither setting
 reaches the real document, because the choice they make cannot separate a real
 document from a planted one. Methods that turn toward memory also lose a share
 of answers to neither outcome: \EAcdResid{}, \EScrResid{} and
-\ESpareResid{} points for ACD, SCR and SpARE.
+\ESpareResid{} points for the safety fixes ACD, SCR and SpARE.
 
 \begin{table}[t]
 \centering
-\caption{ACD against the planted third answer in its plain form and in two forms
+\caption{The safety fix ACD against the planted third answer in its plain form and in two forms
 that minimize ACD's own entropy term, on a corrupted context, $n=\NAcdAdaptiveItems{}$. Both adaptive
 passages are stronger against the undefended model too, so the defensive gap is
 the quantity that isolates the fix. All three columns were scored in one
@@ -443,7 +447,7 @@ ACD answers correctly & 5.0 & 3.2 & 2.6 \\
 \label{sec:adaptive}
 Every attack above was
 built without knowledge of the fix it met. If a fix loses to such an attack, it would also lose to
-a stronger one. If it holds, that shows little. ACD was our only holding result, so we
+a stronger one. If it holds, that shows little. The safety fix ACD was our only holding result, so we
 attacked it directly.
 
 ACD blends the model's answer with and without the document, weighted by how
@@ -475,7 +479,7 @@ The two directions fail for opposite reasons. Each design rests on an
 assumption that holds in its own regime and that the other regime breaks.
 The safety fixes assume the document is honest: they decide how far to trust
 it over the model's memory, and in the first direction an attacker writes the
-document. RobustRAG and ReliabilityRAG assume that wrong passages are few:
+document. The security defenses RobustRAG and ReliabilityRAG assume that wrong passages are few:
 their votes are sound while honest passages outnumber corrupted ones, which
 holds when an attacker can plant only a few passages, the setting both
 certify. An honest mistake has no such limit. A fact that changes can leave
