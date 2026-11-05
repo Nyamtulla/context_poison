@@ -11,7 +11,7 @@ because the research questions depend on it: how much damage a planted
 passage does with no fix in place, and whether it matters that an attacker
 wrote it.
 
-\paragraph{What an attacker gains over an honest mistake.}
+\paragraph{Attacker-written passages compared with honest mistakes.}
 \label{sec:regime}
 We compared each attack with an honest mistake of the same kind. When the
 passage states a wrong answer, the attacker's passage does more damage than
@@ -71,7 +71,7 @@ mistake still does real damage: it moves the model to the false answer
 \PctStaleTop{}\% of the time, against \PctStaleClean{}\% with nothing planted.
 Repeating the crafted passage five times, as the published attack does,
 changes these rates by at most \NRegimeRepeatMax{} points. Where the passage only pushes the right evidence out of the retrieved set, the
-attacker gains nothing. The passage optimized by Zhong et al.'s corpus-poisoning attack and a real passage
+attack does no more damage than the honest mistake. The passage optimized by Zhong et al.'s corpus-poisoning attack and a real passage
 retrieved for another question give the same results. They lead to
 \PctCorpusTop{}\% and \PctMisretrievalTop{}\% planted answers and
 \AccCorpusTop{}\% and \AccMisretrievalTop{}\% accuracy, with every gap below the threshold at every
