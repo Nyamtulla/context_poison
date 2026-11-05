@@ -58,8 +58,7 @@ reported robustness as an average over attacks, not against the strongest. It
 reimplemented several attacks and one defense incorrectly. And it reported no
 variance at all.
 
-We treated those criticisms as requirements. We do not reimplement: every method runs
-from its authors' released code and weights. The control-fires-first rule
+We treated those criticisms as requirements. We do not reimplement the retrieval methods: each runs from its authors' released code and weights. The agent experiment, a control rather than a test of transfer, also uses our implementations of published techniques, which Table~\ref{tab:provenance} marks. The control-fires-first rule
 automates the check Carlini had to run by hand. It fired on the safety fix FaithfulRAG, which
 we therefore report as not reportable rather than as defeated. We report per
 cell and never average across regimes. We also say where a comparison across planted

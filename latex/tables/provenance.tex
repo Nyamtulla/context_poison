@@ -1,0 +1,120 @@
+% Hand-kept: the "authors'" columns come from each paper's evaluation
+% section (checked 2026-11-04), not from our result files.
+\begin{table*}[t]
+\centering
+\caption{What we ran, beside what its authors ran. Regime: \emph{adv.}\ text
+an attacker wrote, \emph{inc.}\ an honest mistake or conflict. In the column
+of our data, $=$ marks the release its authors used, $\approx$ the same
+questions (Natural Questions) in a different release, so with different
+passages, and $\neq$ a different dataset. A star marks what we built. A mechanism has no model of its own: its row lists every model that read it. NQ-Open is the
+open-domain release of Natural Questions; open NQ is RobustRAG's copy of it,
+with ten retrieved passages per question.}
+\label{tab:provenance}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.13\textwidth}
+>{\raggedright\arraybackslash}p{0.035\textwidth}
+>{\raggedright\arraybackslash}p{0.17\textwidth}
+>{\raggedright\arraybackslash}p{0.12\textwidth}
+>{\raggedright\arraybackslash}p{0.17\textwidth}
+>{\raggedright\arraybackslash}p{0.10\textwidth}
+>{\raggedright\arraybackslash}p{0.19\textwidth}@{}}
+\toprule
+\textbf{Method} & \textbf{Reg.} & \textbf{Authors' data} & \textbf{Our data} &
+\textbf{Authors' models} & \textbf{Our model} & \textbf{What it does} \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Fixes}} \\
+ACD~\cite{kim-2024-adaptive} & inc. & NQ-Open, TriviaQA, PopQA &
+  $\approx$ open NQ; CoConflictQA & Llama-2-7B/13B, Llama-3-8B, Mistral-7B, base only &
+  Llama-3-8B-Instruct & weighs document against memory by uncertainty \\
+CK-PLUG~\cite{bi-2025-parameters} & inc. & NQ (counterfactual; KILT), ConFiQA, MQuAKE &
+  $\approx$ open NQ; CoConflictQA & Llama-2-7B-Chat, Llama-3-8B-Instruct, Mistral-7B, Qwen2.5-7B &
+  Llama-3-8B-Instruct & one setting trades memory against document \\
+COIECD~\cite{yuan-2024-discerning} & inc. & NQ, SQuAD, StrategyQA, Counterfacts &
+  $\approx$ open NQ; CoConflictQA & Llama-2-7B/13B, OPT, FLAN-T5 &
+  Llama-3-8B-Instruct & detects a conflict, then favors the document \\
+DyPRAG~\cite{tan-2025-dynamic} & inc. & 2WikiMQA, HotpotQA, PopQA, CWQ &
+  $\neq$ open NQ; CoConflictQA & Qwen2.5-1.5B, Llama-3.2-1B, Llama-3-8B-Instruct &
+  Llama-3-8B-Instruct & turns the document into weights \\
+ParamMute~\cite{huang-2025-parammute} & inc. & CoConflictQA (its own), ConFiQA, FaithEval &
+  $=$ CoConflictQA; $\approx$ open NQ & Llama-3-8B-Instruct &
+  Llama-3-8B-Instruct & switches off the layers that hold memory \\
+SCR~\cite{huang-2024-trust} & inc. & NQ, TriviaQA, PopQA, FreshQA, RedditQA, ClashEval &
+  $\approx$ open NQ; CoConflictQA & GPT-4o, GPT-4o mini, Llama-3-8B &
+  Llama-3-8B-Instruct & asks the model to judge memory against document \\
+SpARE~\cite{zhao-2024-steering} & inc. & NQ-Swap, Macnoise &
+  $\approx$ open NQ; CoConflictQA & Llama-3-8B, Llama-2-7B, Gemma-2-9B &
+  Llama-3-8B & steers activations toward one source \\
+RobustRAG~\cite{xiang-2024-certifiably}, 2 versions & adv. & NQ, RealtimeQA, Bio &
+  $=$ open NQ & Mistral-7B-Instruct, Llama-2-7B-Chat, GPT-3.5 &
+  Mistral-7B-Instruct; Llama-3-8B-Instruct & answers from each passage, then aggregates \\
+ReliabilityRAG~\cite{shen-2025-reliabilityrag} & adv. & NQ-Open, RealtimeQA, TriviaQA, Bio &
+  $=$ open NQ & Mistral-7B-Instruct, Llama-3.2-3B, GPT-4o-mini &
+  Mistral-7B-Instruct & keeps the largest set of passages that agree \\
+Spotlighting~\cite{hines-2024-defending} & adv. & injected documents (summaries, questions) &
+  $\neq$ open NQ & GPT-3.5, GPT-4 &
+  Mistral-7B-Instruct & marks passages as data, not instructions \\
+PIGuard~\cite{li-2025-piguard} & adv. & PINT, BIPIA, NotInject &
+  $\neq$ open NQ & DeBERTa-v3 classifier &
+  same; Mistral-7B answers & drops passages it flags as injected \\
+DataSentinel~\cite{liu-2025-datasentinel} & adv. & MRPC, SST2 and five more text tasks &
+  $\neq$ open NQ & Mistral-7B detector &
+  same; Mistral-7B answers & drops passages it flags as injected \\
+AttnTrace~\cite{wang-2025-attntrace} (tracing) & adv. & NQ (PoisonedRAG's), HotpotQA, MS MARCO &
+  $\approx$ open NQ & Llama-3.1-8B; Qwen2.5-7B among others &
+  Qwen2.5-7B-Instruct & ranks passages by how much the answer used them \\
+AgentDojo's defenses~\cite{debenedetti-2024-agentdojo} & adv. & AgentDojo &
+  $=$ banking suite & GPT-4o and nine others &
+  Qwen2.5-14B-Instruct & detect, delimit, or repeat the user's prompt \\
+SHIFT~\cite{li-2026-shift}, FaithfulRAG~\cite{zhang-2025-faithfulrag} & inc. & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.80\textwidth}}{Run, not reported: SHIFT showed no benefit in its own check, and FaithfulRAG failed its control (Section~\ref{sec:defenses}).} \\
+Technique defenses$^\star$ & adv. & --- &
+  banking suite & --- &
+  Qwen2.5-14B-Instruct & our implementations of five published techniques \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Mechanisms}} \\
+PoisonedRAG~\cite{zou-2024-poisonedrag} & adv. & NQ, HotpotQA, MS MARCO &
+  $\approx$ open NQ & PaLM 2, GPT-3.5, GPT-4, Llama-2, Vicuna &
+  Llama-3-8B, Mistral-7B, Qwen2.5-7B & a passage stating the attacker's answer \\
+Corpus poisoning~\cite{zhong-2023-poisoning} & adv. & NQ, MS MARCO (BEIR) &
+  $\approx$ open NQ; CoConflictQA & retrievers only &
+  Llama-3-8B, Mistral-7B & a token string optimized to be retrieved \\
+BadRAG refusal~\cite{xue-2024-badrag} & adv. & NQ, MS MARCO, SQuAD &
+  $\approx$ open NQ & Llama-2-7B-Chat, GPT-4, Claude-3 &
+  Llama-3-8B, Mistral-7B & makes the model refuse to answer \\
+BadRAG tone~\cite{xue-2024-badrag} & adv. & WikiASP (writing task) &
+  $\neq$ open NQ & Llama-2-7B-Chat, GPT-4, Claude-3 &
+  Llama-3-8B, Mistral-7B & makes the answer negative in tone \\
+Prompt injection & adv. & AgentDojo &
+  $=$ banking suite & GPT-4o and nine others &
+  Qwen2.5-14B-Instruct & AgentDojo's own attack and its variants \\
+ChatInject$^\star$ & adv. & --- &
+  banking suite & --- &
+  Qwen2.5-14B-Instruct & our rebuild of a published attack \\
+Adaptive, gradient$^\star$ & adv. & --- &
+  CoConflictQA & --- &
+  Llama-3-8B-Instruct & the third answer, reshaped against ACD \\
+False evidence & inc. & CoConflictQA &
+  $=$ CoConflictQA & --- &
+  Llama-3-8B & a fluent sentence stating the model's own wrong answer \\
+Third answer$^\star$ & inc. & --- &
+  open NQ; CoConflictQA & --- &
+  Llama-3-8B, Mistral-7B, Qwen2.5-7B & one word changed to a new wrong answer \\
+Stale document$^\star$ & inc. & --- &
+  open NQ & --- &
+  Llama-3-8B, Mistral-7B, Qwen2.5-7B & a real passage with its answer swapped \\
+Misretrieval$^\star$ & inc. & --- &
+  open NQ & --- &
+  Llama-3-8B, Mistral-7B, Qwen2.5-7B & a real passage retrieved for another question \\
+Dilution$^\star$ & inc. & --- &
+  open NQ & --- &
+  Mistral-7B, Qwen2.5-7B & real passages for other questions, appended \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Datasets}} \\
+Open NQ & adv. & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.80\textwidth}}{Released by the RobustRAG authors: NQ-Open questions, ten retrieved passages each, and PoisonedRAG's passages. Used for the regime comparison, both grid directions and the tracing runs.} \\
+CoConflictQA & inc. & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.80\textwidth}}{Released by the ParamMute authors; their paper's latest version calls it CoFaithfulQA. We use its Natural Questions part: one passage per question, and the model's own wrong answer as false evidence. Used for the fixes' second dataset and all of RQ3.} \\
+AgentDojo banking & adv. & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.80\textwidth}}{Released by the AgentDojo authors: banking tasks for a tool-using agent, with slots for injected text. Used for the agent experiment.} \\
+FaithEval, SQuAD & inc. & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.80\textwidth}}{Released by the FaithfulRAG authors, as negative contexts. Used only for FaithfulRAG's control.} \\
+\bottomrule
+\end{tabular}
+\end{table*}

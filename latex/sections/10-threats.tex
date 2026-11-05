@@ -150,10 +150,9 @@ deploy.
 open Natural Questions~\cite{kwiatkowski-2019-natural}. The dosing model, which replaces a fraction of context
 with planted passages, is a simplification of a real retrieval pipeline under
 attack. It holds the retriever fixed, so it measures what the generator does
-with poisoned context rather than how hard the context is to poison.
+with poisoned context rather than how hard the context is to poison. Most fixes also meet a different release of Natural Questions than their authors used, which pairs the same questions with different passages. BadRAG's tone attack moves from the writing task its authors used to question answering.
 
-\textbf{Model coverage.} Each fix runs on the model its authors released
-it for. The safety fixes run on Llama-3-8B-Instruct and the security
+\textbf{Model coverage.} Most fixes run on a model their paper reports, and Table~\ref{tab:provenance} names the exceptions. The safety fixes run on Llama-3-8B-Instruct and the security
 defenses on Mistral-7B-Instruct, so the two directions also use different
 models. The agent experiment runs on Qwen2.5-14B-Instruct. A second-model check left the
 results unchanged within the evaluated range, but it covers only

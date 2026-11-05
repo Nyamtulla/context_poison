@@ -8,14 +8,10 @@ meet, and then the experiments that combine them.
 \subsection{Models and hardware}
 \label{sec:whatweran}
 
-Every fix ran on the model its authors released it for, so the victim model
-varies by fix and the hardware does not. The victim model in the retrieval
-experiments is
+The victim model varies by fix, and the hardware does not. The victim model in the retrieval experiments is
 Llama-3-8B-Instruct~\cite{grattafiori-2024-llama3} or
-Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each fix
-released. The agent experiment uses a
-Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent. The tracing method AttnTrace ran on
-Qwen2.5-7B-Instruct, because the Llama-3.1 weights its released examples use
+Mistral-7B-Instruct~\cite{jiang-2023-mistral}, depending on what each fix released, and Table~\ref{tab:provenance} sets it beside the models each paper reports. Most fixes ran on a model their paper reports. The exceptions are the safety fix COIECD, whose authors report Llama-2, OPT and FLAN-T5; the safety fix ACD, whose authors report base models where we ran the instruction-tuned one; and the security defense Spotlighting, whose authors report GPT models. The agent experiment uses a
+Qwen2.5-14B-Instruct~\cite{qwen-2024-qwen25} agent. The tracing method AttnTrace ran on Qwen2.5-7B-Instruct, one of the models its paper reports, because the Llama-3.1 weights its released examples use
 are gated and access was not granted to us. Every run in this paper used one NVIDIA RTX A6000 with 48\,GB, driver
 535.274.02 and CUDA 12.8, under Python 3.10.12, PyTorch 2.10.0 and
 \texttt{transformers} 5.5.0, except for the fixes whose authors pin other
@@ -102,7 +98,7 @@ original evidence stays in place. It reproduces the safety literature's
 context-length degradation~\cite{xia-2026-diagnosing} at the scale of a
 retrieval context. BadRAG's two attacks change the model's behavior rather
 than its answer: its refusal attack makes the model decline to answer, and
-its tone attack makes it answer in a negative tone. The adaptive and gradient distractors are built against
+its tone attack makes it answer in a negative tone. Its authors ran the tone attack on a writing task; we run it on the same questions as every other attack. The adaptive and gradient distractors are built against
 one fix, ACD. Both take the planted third answer and reshape it to minimize the quantity ACD's rule measures: one by choosing the
 best of five phrasings, one by appending a suffix found by gradient search
 (Section~\ref{sec:adaptive}).
@@ -112,11 +108,7 @@ best of five phrasings, one by appending a suffix found by gradient search
 \label{sec:provenance}
 
 An \textbf{item} is one question, its gold answer, and the context the model
-is given to answer it from. Every item in this paper belongs to the authors
-of the method or the benchmark we are running, and Table~\ref{tab:provenance}
-lists each source and whose it is. Running each method on its own authors'
-data rules out a change of dataset as the explanation for its results. The retrieval experiments use the dataset CoConflictQA~\cite{huang-2025-parammute}, built over Natural Questions, and the dataset open Natural Questions for the mechanisms that need a
-retrieval pool. The agent experiment uses the banking suite of the agent benchmark
+is given to answer it from. No item set is ours: each was released by the authors of a method or benchmark we run, and Table~\ref{tab:provenance} lists who released it. The retrieval experiments use two. The dataset open Natural Questions is RobustRAG's release of the open-domain Natural Questions~\cite{kwiatkowski-2019-natural}, with ten retrieved passages per question. The dataset CoConflictQA~\cite{huang-2025-parammute}\footnote{The benchmark is released under this name; the latest version of its paper calls it CoFaithfulQA.} gives one passage per question, and we use its Natural Questions part. Every question-answering fix we report except the safety fix DyPRAG was evaluated by its authors on Natural Questions, but in different releases, which pair the same questions with different passages. We run every fix on one release, so that all of them see the same questions and the same passages. Only the security defenses RobustRAG and ReliabilityRAG, and the safety fix ParamMute on CoConflictQA, therefore run on the exact data their authors used. Table~\ref{tab:provenance} marks how far each other method is from it. The agent experiment uses the banking suite of the agent benchmark
 AgentDojo~\cite{debenedetti-2024-agentdojo}.
 A mechanism reaches an item only through its context. Each item on open
 Natural Questions comes with the ten passages a retriever found for its
@@ -171,8 +163,7 @@ measured on that same subset.
 \label{sec:campaign}
 
 We executed \NCampaignPairs{} (fix, mechanism) pairs across \NCampaignImpl{}
-fix implementations and \NCampaignEpisodes{} scored episodes. Every
-fix ran from its authors' released code and weights.
+fix implementations and \NCampaignEpisodes{} scored episodes. Every fix in the retrieval experiments ran from its authors' released code and weights.
 Figure~\ref{fig:transfer} sets the campaign beside the published literature. The main experiment puts a fix from one literature in front of a mechanism
 from the other, in both directions. We ran \NCampCrossPairs{} such pairs, all
 on retrieval question answering over the dataset Natural Questions. In the first direction, \NCampSafDefSecMech{} pairs take a fix from the safety
@@ -194,8 +185,7 @@ used. These \NCampSecDefSecMech{} security pairs and
 across. They check that our harness reproduces each fix's behavior on its
 own problem. Most of them are the agent experiment:
 \NAgentPairs{} pairs in which eight prompt-injection defenses meet seven
-injected-instruction attacks inside the banking suite of the agent
-benchmark AgentDojo~\cite{debenedetti-2024-agentdojo}. A third experiment runs no fix at all. It puts five planted passages on
+injected-instruction attacks inside the banking suite of the agent benchmark AgentDojo~\cite{debenedetti-2024-agentdojo}. AgentDojo ships some of these defenses and most of the attacks; the rest are our implementations of published techniques (Table~\ref{tab:provenance}). A third experiment runs no fix at all. It puts five planted passages on
 the same items, in the same positions and the same number: the attack PoisonedRAG once
 and repeated five times, a stale document, corpus poisoning and misretrieval.
 This measures whether a passage an attacker wrote does more damage than an
