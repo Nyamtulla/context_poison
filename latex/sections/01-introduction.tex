@@ -50,7 +50,7 @@ following research questions.
   (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 \item[RQ2] \textbf{Does a fix built for one literature's problem
   survive the other's?} We execute the pairs the literature skipped, from the
-  authors' released code and weights, and check the results against what the
+  authors' released code and weights, and compare the results with what the
   same model scores with no document, on a second base model and on a second
   implementation (Sections~\ref{sec:campaign}, \ref{sec:results}).
 \item[RQ3] \textbf{Why do the fixes fail, and does the explanation hold
@@ -102,7 +102,7 @@ one. If it holds, that tells us little.
 \item \textbf{We run the experiments neither community has run, in both
   directions.} \NCampaignPairs{} pairs put safety fixes against attacks and
   security defenses against honest mistakes, each from its authors' released
-  code and weights and against an undefended model on the same items
+  code and weights and compared with an undefended model on the same items
   (RQ2; Sections~\ref{sec:campaign}, \ref{sec:results}).
 
 \item \textbf{We show that each community's methods fail on the other's

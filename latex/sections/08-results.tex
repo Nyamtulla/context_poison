@@ -16,7 +16,7 @@ wrote it.
 We compared each attack with an honest mistake of the same kind. When the
 passage states a wrong answer, the attacker's passage does more damage than
 a real outdated one: with one planted passage in ten, the model gives the
-wrong answer \PctCraftLow{}\% of the time against \PctStaleLow{}\%. When the
+wrong answer \PctCraftLow{}\% of the time, compared with \PctStaleLow{}\%. When the
 passage states no answer and only takes the place of the right evidence, the
 attack and an ordinary retrieval error do the same damage. The research questions below assume that a planted passage
 and an honest mistake do comparable damage, so we measured that first, with no
@@ -26,8 +26,7 @@ positions, scored the same way.
 
 \begin{table}[t]
 \centering
-\caption{Fixes that decide how far to trust the document, against corpus poisoning, in percentage
-points against each fix's own undefended model in the same run, with the
+\caption{Fixes that decide how far to trust the document, against corpus poisoning, in percentage points relative to each fix's own undefended model in the same run, with the
 undefended and defended rates in brackets. "Clean" is a context with
 nothing planted, where each fix should show its own published benefit.
 "Corrupted" is a context replaced by the planted passage. Bold clears that
@@ -66,9 +65,9 @@ passage written by the attack PoisonedRAG and
 \PctStaleLow{}\% for a real passage whose answer has changed. The gap clears the
 detection threshold at every number of planted passages, though only
 narrowly at two, and at five planted passages the crafted passage also
-costs more accuracy, \AccCraftTop{}\% against \AccStaleTop{}\%. The honest
+costs more accuracy, \AccCraftTop{}\% compared with \AccStaleTop{}\%. The honest
 mistake still does real damage: it moves the model to the false answer
-\PctStaleTop{}\% of the time, against \PctStaleClean{}\% with nothing planted.
+\PctStaleTop{}\% of the time, compared with \PctStaleClean{}\% with nothing planted.
 Repeating the crafted passage five times, as the published attack does,
 changes these rates by at most \NRegimeRepeatMax{} points. Where the passage only pushes the right evidence out of the retrieved set, the
 attack does no more damage than the honest mistake. The passage optimized by Zhong et al.'s corpus-poisoning attack and a real passage
@@ -148,16 +147,14 @@ two such passages and then turns harmful (Table~\ref{tab:grid}b). With one, the 
 outdated answer \EStaleUndefAsrOne\% of the time undefended and
 \EStaleKeyAsrOne\% and \EStaleDecAsrOne\% with the two implementations. With
 five, the defended model gives it more often than the undefended one,
-\EStaleKeyAsrTop\% and \EStaleDecAsrTop\% against \EStaleUndefAsrTop\%, and
-answers correctly less often, \EStaleKeyAccTop\% and \EStaleDecAccTop\%
-against \EStaleUndefAccTop\%. A passage asserting a third, wrong answer shows
-the same pattern: \ERobustDistKeyTwo\% and \ERobustDistDecTwo\% against
+\EStaleKeyAsrTop\% and \EStaleDecAsrTop\%, compared with \EStaleUndefAsrTop\%, and
+answers correctly less often, \EStaleKeyAccTop\% and \EStaleDecAccTop\%, compared with \EStaleUndefAccTop\%. A passage asserting a third, wrong answer shows
+the same pattern: \ERobustDistKeyTwo\% and \ERobustDistDecTwo\%, compared with
 \ERobustDistUndefTwo\% undefended with two such passages, but
-\ERobustDistKeyFive\% and \ERobustDistDecFive\% against
+\ERobustDistKeyFive\% and \ERobustDistDecFive\%, compared with
 \ERobustDistUndefFive\% with five. Against a passage retrieved for the wrong
 question, which plants nothing, it never helps: both implementations start
-below the undefended model, \ERobustMisKeyClean\% and \ERobustMisDecClean\%
-against \ERobustMisUndefClean\%, and are still below it with five such
+below the undefended model, \ERobustMisKeyClean\% and \ERobustMisDecClean\%, compared with \ERobustMisUndefClean\%, and are still below it with five such
 passages. Against unrelated passages that lengthen the context,
 there is nothing to act on. Five of them lower the undefended model's
 accuracy by \NDilUndefDrop{} points, from \EDilUndefAccClean\% to
@@ -166,9 +163,10 @@ by at most \NDilGapMax{} points at any number of added passages, inside the
 \EDilMdr{}-point threshold. That difference is the cost RobustRAG shows with
 nothing added. Against attacks from its own literature, RobustRAG stops the attack PoisonedRAG, as its
 own paper reports, by \ERobustPoisonedGain{} points. Against corpus poisoning
-it neither helps nor hurts: \ERobustDispOneDef\% against
-\ERobustDispOneUndef\% with one displaced passage and \ERobustDispFiveDef\%
-against \ERobustDispFiveUndef\% with five, both inside the
+it neither helps nor hurts. With one displaced passage the defended model
+scores \ERobustDispOneDef\%, compared with \ERobustDispOneUndef\% undefended,
+and with five it scores \ERobustDispFiveDef\%, compared with
+\ERobustDispFiveUndef\%. Both differences are inside the
 \ERobustDispMdr{}-point threshold.
 
 The security defense ReliabilityRAG fails the same way, and its traces show why. It passes its
@@ -195,7 +193,7 @@ outnumber the honest passages that give the gold answer, as on
 answer \EReliStaleLargerWins\% of the time; otherwise \EReliNotLargerWins\%.
 Its control shows the same limit from the attacker's side: with five
 PoisonedRAG passages in ten it no longer lowers the planted answer,
-\EReliCtlUndefAsrTop\% undefended against \EReliCtlAsrTop\% defended on
+\EReliCtlUndefAsrTop\% undefended versus \EReliCtlAsrTop\% defended on
 \NReliCtlN{} items. The stale passages in these runs are word-for-word
 copies of one page. When the copies are reworded instead, ReliabilityRAG
 fails about as often, but the model with no defense fails much more often,
@@ -221,8 +219,7 @@ is a stale one \ETraceTopCorrect\% of the time, over \NTraceCorrect{}. These
 figures come from contexts whose passages were shuffled. In the grid's own
 order the stale passages come last, and AttnTrace favors late positions: with
 one stale passage in ten, it counts that passage among its five traced
-\ETraceEndCorrectOne\% of the time even when the answer is correct, against
-\ETraceShufCorrectOne\% once the order is shuffled. With position
+\ETraceEndCorrectOne\% of the time even when the answer is correct, compared with \ETraceShufCorrectOne\% once the order is shuffled. With position
 controlled, attribution still points at the passage behind an honest
 failure, on one model and \NTraceStale{} failures.
 
@@ -272,8 +269,7 @@ COIECD    & \ECoiecdN{} & +\ECoiecdExcessCorpus & \ECoiecdExcessFalse \\
 \paragraph{Across the grid.}
 \label{sec:grid}
 Across both directions on open Natural
-Questions, almost nothing helps. Table~\ref{tab:grid} reads each pair against
-its own undefended model at five planted passages in ten. Of the
+Questions, almost nothing helps. Table~\ref{tab:grid} compares each pair with its own undefended model at five planted passages in ten. Of the
 \NGridCells{} pairs, \NGridGainTop{} help by more than their threshold,
 \NGridLoseTop{} hurt by more than their threshold, and \NGridFlatTop{} show
 no measurable difference. All \NGridGainTop{} gains are against the refusal
@@ -308,7 +304,7 @@ that hold from those that do not.
 
 \paragraph{Checks on these results.}
 \label{sec:controls}
-We re-read the results against a score almost no paper reports, what the
+We compare the results with a score almost no paper reports, what the
 same model scores with no document at all, and check them on a second
 implementation of one design and on a second base model. Start with the no-document score. The safety fix DyPRAG holds \EDypragClean\% on a clean
 context and \EDypragSat\% on a corrupted one while the undefended model falls
@@ -377,7 +373,7 @@ The safety fix COIECD changes nothing measurable against either.
 We do not rank the two forms. Before running them we wrote down the result
 that would contradict our explanation: a fix doing better against false
 evidence than against corpus poisoning. The safety fix CK-PLUG does, with \ECkExcessFalse{}
-points of excess damage against \ECkExcessCorpus{}. Both forms leave the
+points of excess damage, compared with \ECkExcessCorpus{}. Both forms leave the
 undefended model near the floor, at \ECkUndefFalseCorrupt\% and
 \ECkUndefCorpusCorrupt\% for CK-PLUG and \ECoiecdFalseCorrupt\% and
 \ECoiecdCorpusCorrupt\% for the safety fix COIECD, so excess damage compares two near-total
@@ -404,7 +400,7 @@ the attacker. It cuts answers from memory from \EPmDistPmBase\% to \EPmDistPmDef
 \EPmDistCopyBase\% to \EPmDistCopyDef\% almost one for one, while correct
 answers stay below the threshold. The safety fix ACD does the reverse. It cuts copying from
 \EAcdDistCopyBase\% to \EAcdDistCopyDef\%, and the answers it refuses to copy
-go back to memory, not to the real document. The safety fix CK-PLUG copies \ECkDistCopyDefCorrupt\% against its undefended
+go back to memory, not to the real document. The safety fix CK-PLUG copies \ECkDistCopyDefCorrupt\%, compared with its undefended
 model's \ECkDistCopyBaseCorrupt\% (Table~\ref{tab:distractor}).
 
 The two movements are one effect. Every one of these methods chooses
