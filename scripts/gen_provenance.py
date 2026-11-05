@@ -206,7 +206,7 @@ def figure(n):
         y -= bh + gap
 
     out = REPO / "latex" / "figures" / "fig9_prisma.pdf"
-    fig.savefig(out); fig.savefig("/tmp/fig9_prisma.png", dpi=300)
+    fig.savefig(out); fig.savefig(out.with_suffix(".png"), dpi=300)
     plt.close(fig)
     print(f"wrote {out.relative_to(REPO)}")
 

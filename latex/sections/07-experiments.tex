@@ -13,7 +13,16 @@ and Section~\ref{sec:results} what they showed.
 
 The harness separates what varies between runs from what must not. A run is
 one fix, one mechanism, one dose and one arm. Everything
-else is fixed by the harness, not by the run.
+else is fixed by the harness, not by the run. Figure~\ref{fig:run} shows one
+run, from the pair to its verdict.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig11_run}
+\caption{One run of the harness, from pair to verdict. A pair runs only if
+its control passes, and all three arms read the same contexts.}
+\label{fig:run}
+\end{figure}
 
 \textbf{One construction of the contexts.} The planted contexts come from one
 constructor, the one the attacks released (Section~\ref{sec:payloadclasses}),

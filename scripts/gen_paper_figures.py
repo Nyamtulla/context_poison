@@ -112,8 +112,10 @@ def corpus():
 
 def save(fig, name):
     fig.savefig(OUT / f"{name}.pdf")
+    # an image copy beside every PDF, for slides and for reading in Overleaf
+    fig.savefig(OUT / f"{name}.png", dpi=300)
     plt.close(fig)
-    print(f"  wrote latex/figures/{name}.pdf")
+    print(f"  wrote latex/figures/{name}.pdf (+ .png)")
 
 
 # ---------------------------------------------------------------- figure 1
@@ -791,78 +793,153 @@ def fig_lag():
 
 
 # ---------------------------------------------------------------- figure 8
-VOCAB = [
-    ("The content that gets in", "attack,\nattack technique",
-     "mechanism,\ndegradation mechanism"),
-    ("Who placed it", "an adversary,\nmodeled explicitly",
-     "nobody; a property\nof the pipeline"),
-    ("The countermeasure", "defense, mitigation", "fix, method"),
-    ("What success means", "the adversary fails", "accuracy rises"),
-    ("Evaluation style", "worst case", "average case"),
-]
+def _box(ax, x, y, w, h, title, sub=None, accent=None, fs=6.6):
+    """A flat box with a title and an optional smaller second line."""
+    from matplotlib.patches import Rectangle
+    ax.add_patch(Rectangle((x, y), w, h, facecolor="white", edgecolor=INK2,
+                           linewidth=0.5))
+    if accent:
+        ax.plot([x, x], [y, y + h], color=accent, lw=1.8, solid_capstyle="butt")
+    if sub:
+        two = "\n" in sub
+        ax.text(x + w / 2, y + h * (0.76 if two else 0.66), title, ha="center",
+                va="center", fontsize=fs, color=INK, fontweight="bold")
+        ax.text(x + w / 2, y + h * (0.34 if two else 0.30), sub, ha="center", va="center",
+                fontsize=fs - 0.9, color=INK2, linespacing=1.15)
+    else:
+        ax.text(x + w / 2, y + h / 2, title, ha="center", va="center",
+                fontsize=fs, color=INK, linespacing=1.2)
+
+
+def _arrow(ax, x0, y0, x1, y1):
+    ax.annotate("", xy=(x1, y1), xytext=(x0, y0),
+                arrowprops=dict(arrowstyle="-|>", lw=0.6, color=INK,
+                                mutation_scale=6, shrinkA=0, shrinkB=0))
 
 
 def fig_vocab():
-    """The same slots, named twice. Replaces the old tab:vocab."""
-    from matplotlib.patches import FancyBboxPatch
-
-    nl = [max(s.count("\n"), m.count("\n")) + 1 for _, s, m in VOCAB]
-    head_in = 0.30
-    strip_in = 0.155
-    pad_in = 0.085
-    line_in = 0.125
-    gap_in = 0.075
-    rows_in = [strip_in + 2 * pad_in + n * line_in for n in nl]
-    H = head_in + sum(rows_in) + gap_in * (len(VOCAB) - 1) + 0.04
-
-    fig = plt.figure(figsize=(COL, H))
+    """The two regimes' words for the same slots, and which fix meets which
+    mechanism. Replaces the old tab:vocab; names no method, since none has
+    been introduced where it sits."""
+    W, H = COL, 2.55
+    fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
-    ax.set_xlim(0, 1); ax.set_ylim(0, H)
-    ax.axis("off")
+    ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis("off")
+    L0, R0, cw = 0.78, 2.19, 1.30           # column starts and width
+    lab = dict(ha="right", va="center", fontsize=6.0, color=INK2, style="italic")
 
-    LX0, LX1 = 0.015, 0.487
-    RX0, RX1 = 0.513, 0.985
-    SEC, ML = TRACK_SEC, TRACK_ML
+    # header: the regime, and who places the content
+    y = H - 0.42
+    for x0, name, who, col in ((L0, "Security", "an adversary,\nmodeled explicitly", TRACK_SEC),
+                               (R0, "Safety", "nobody; a property\nof the pipeline", TRACK_ML)):
+        ax.text(x0 + cw / 2, y + 0.30, name, ha="center", va="center",
+                fontsize=7.2, fontweight="bold", color=INK)
+        ax.plot([x0, x0 + cw], [y + 0.20, y + 0.20], color=col, lw=1.8,
+                solid_capstyle="butt")
+        ax.text(x0 + cw / 2, y + 0.04, who, ha="center", va="center",
+                fontsize=6.0, color=INK2, linespacing=1.15)
+    ax.text(L0 - 0.06, y + 0.04, "who places it", **lab)
 
-    # column headers, each with its own colour bar: identity is never
-    # carried by colour alone.
-    y = H - 0.115
-    for x0, x1, lab, col in ((LX0, LX1, "SECURITY", SEC),
-                             (RX0, RX1, "MACHINE LEARNING", ML)):
-        ax.text((x0 + x1) / 2, y + 0.035, lab, ha="center", va="bottom",
-                fontsize=6.8, color=INK, fontweight="bold")
-        ax.plot([x0, x1], [y, y], color=col, lw=1.8,
-                solid_capstyle="butt", clip_on=False)
+    # what gets in, and the countermeasure, with the arrows between them
+    ym, hm = H - 0.88, 0.32
+    _box(ax, L0, ym, cw, hm, "attack,\nattack technique", accent=TRACK_SEC)
+    _box(ax, R0, ym, cw, hm, "mechanism,\ndegradation mechanism", accent=TRACK_ML)
+    ax.text(L0 - 0.06, ym + hm / 2, "what gets in", **lab)
+    yf, hf = ym - 0.50 - 0.26, 0.26
+    _box(ax, L0, yf, cw, hf, "defense, mitigation", accent=TRACK_SEC)
+    _box(ax, R0, yf, cw, hf, "fix, method", accent=TRACK_ML)
+    ax.text(L0 - 0.06, yf + hf / 2, "the countermeasure", **lab)
+    top_f, bot_m = yf + hf, ym
+    xa, xb = L0 + 0.30, R0 + cw - 0.30      # each fix meets its own mechanism
+    _arrow(ax, xa, top_f, xa, bot_m)
+    _arrow(ax, xb, top_f, xb, bot_m)
+    ax.text(xa + 0.05, top_f + 0.09, "built against", ha="left", va="center",
+            fontsize=5.6, color=INK2)
+    ax.text(xb - 0.05, top_f + 0.09, "built for", ha="right", va="center",
+            fontsize=5.6, color=INK2)
+    x1, x2 = L0 + cw - 0.22, R0 + 0.22      # our experiments cross them
+    _arrow(ax, x2, top_f, x1, bot_m)
+    _arrow(ax, x1, top_f, x2, bot_m)
+    ax.text(x1 - 0.04, bot_m - 0.08, "first direction", ha="right",
+            va="center", fontsize=5.6, color=INK, style="italic")
+    ax.text(x2 + 0.04, bot_m - 0.08, "second direction", ha="left",
+            va="center", fontsize=5.6, color=INK, style="italic")
 
-    top = H - head_in
-    for (slot, sec, ml), nlines, rh in zip(VOCAB, nl, rows_in):
-        bot = top - rh
-        # the shared slot: a hairline rule across both columns, with the
-        # slot name sitting on it. A filled band here was decoration -- the
-        # rule already says "this spans both".
-        ax.plot([LX0, RX1], [top - strip_in, top - strip_in],
-                color=MUTED, lw=0.5, solid_capstyle="butt", clip_on=False)
-        ax.text((LX0 + RX1) / 2, top - strip_in / 2, slot, ha="center",
-                va="center", fontsize=6.5, color=INK2, style="italic")
-
-        bh = rh - strip_in
-        for x0, x1, txt, col in ((LX0, LX1, sec, SEC), (RX0, RX1, ml, ML)):
-            ax.add_patch(FancyBboxPatch(
-                (x0, bot), x1 - x0, bh - 0.02,
-                boxstyle="round,pad=0,rounding_size=0.006",
-                facecolor="white", edgecolor=MUTED, linewidth=0.5,
-                mutation_aspect=0.35))
-            ax.plot([x0, x0], [bot, bot + bh - 0.02], color=col, lw=1.6,
-                    solid_capstyle="butt")
-            ax.text((x0 + x1) / 2, bot + (bh - 0.02) / 2, txt, ha="center",
-                    va="center", fontsize=6.6, color=INK, linespacing=1.35)
-        top = bot - gap_in
-
+    # how each side judges a countermeasure
+    ys = yf - 0.12
+    ax.plot([0.05, W - 0.02], [ys, ys], color=MUTED, lw=0.4)
+    for k, (slot, sec, saf) in enumerate((("what success means", "the adversary fails", "accuracy rises"),
+                                          ("evaluation style", "worst case", "average case"))):
+        yy = ys - 0.17 - k * 0.24
+        ax.text(L0 - 0.06, yy, slot, **lab)
+        ax.text(L0 + cw / 2, yy, sec, ha="center", va="center", fontsize=6.4, color=INK)
+        ax.text(R0 + cw / 2, yy, saf, ha="center", va="center", fontsize=6.4, color=INK)
     save(fig, "fig8_vocab")
+
+
+# --------------------------------------------------------------- figure 11
+def fig_run():
+    """One run of the harness, from pair to verdict. Names no method or
+    dataset: it sits in the platform section, before either is introduced."""
+    W, H = COL, 3.74
+    fig = plt.figure(figsize=(W, H))
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis("off")
+    x0, w, h, g = 0.10, 2.50, 0.30, 0.15
+    cx = x0 + w / 2
+    steps = [("Pick a pair", "one fix, one mechanism"),
+             ("Control", "the fix works on its own literature's mechanism"),
+             ("Take the items", "each question with its top ten retrieved passages"),
+             ("Build the contexts", "replace j of the ten passages, j = 0, 1, 2, 3, 5")]
+    y = H - 0.05 - h
+    tops = []
+    for k, (t, u) in enumerate(steps):
+        _box(ax, x0, y, w, h, t, u)
+        tops.append(y)
+        if k:
+            _arrow(ax, cx, y + h + g, cx, y + h)
+        y -= h + g
+    # a pair whose control fails is not run
+    yc = tops[1]
+    _box(ax, x0 + w + 0.12, yc, W - (x0 + w + 0.12) - 0.03, h, "if not:", "pair not run", fs=6.0)
+    _arrow(ax, x0 + w, yc + h / 2, x0 + w + 0.12, yc + h / 2)
+
+    def three(ytop, items):
+        """Fan one box into three side by side, joined by a bus."""
+        bw, bg = (w - 2 * 0.09) / 3, 0.09
+        ybus = ytop + 0.07
+        ax.plot([x0 + bw / 2, x0 + w - bw / 2], [ybus, ybus], color=INK, lw=0.6)
+        ax.plot([cx, cx], [ybus + g - 0.07, ybus], color=INK, lw=0.6)
+        xs = []
+        for i, (t, u) in enumerate(items):
+            bx = x0 + i * (bw + bg)
+            _box(ax, bx, ytop - h, bw, h, t, u, fs=6.2)
+            _arrow(ax, bx + bw / 2, ybus, bx + bw / 2, ytop)
+            xs.append(bx + bw / 2)
+        return xs
+
+    ya = y + h                              # top of the arms row
+    xs = three(ya, [("No document", "memory only"), ("Undefended", "fix off"),
+                    ("Defended", "fix on")])
+    ys = ya - h - 0.14 - h
+    _box(ax, x0, ys, w, h, "Score every answer", "correct, the planted answer, or a refusal")
+    yj = ya - h - 0.14
+    ax.plot([xs[0], xs[-1]], [yj + 0.02, yj + 0.02], color=INK, lw=0.6)
+    for xx in xs:
+        ax.plot([xx, xx], [ya - h, yj + 0.02], color=INK, lw=0.6)
+    _arrow(ax, cx, yj + 0.02, cx, ys + h)
+    hk = 0.42
+    yk = ys - g - hk
+    _box(ax, x0, yk, w, hk, "Compare at each dose",
+         "defended minus undefended, against the smallest\ndifference the run can detect")
+    _arrow(ax, cx, ys, cx, yk + hk)
+    three(yk - g, [("helps", "gain beyond it"), ("hurts", "loss beyond it"),
+                   ("cannot tell", "within it")])
+    save(fig, "fig11_run")
 
 
 if __name__ == "__main__":
     fig_cube(); fig_who_reports(); fig_dose()
     fig_citation_network(); fig_transfer_matrix(); fig_lag()
-    fig_intervention()
+    fig_intervention(); fig_vocab(); fig_run()
     print("done")
