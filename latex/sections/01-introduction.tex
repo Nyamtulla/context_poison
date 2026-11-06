@@ -59,9 +59,9 @@ following research questions.
   answer against an attacker who knows the fix, with two attacks built
   against the one fix that resisted
   (Sections~\ref{sec:distractor}, \ref{sec:adaptive}, \ref{sec:neither}).
-\item[RQ4] \textbf{When a fix does help on the other community's problem,
-  why?} We take the few cases where a method helped outside its own regime
-  and ask what it acted on, and whether that depends on who wrote the text
+\item[RQ4] \textbf{When and why do some fixes help on the other community's
+  problem?} We take the few cases where a fix helped outside its own regime,
+  find what it acted on, and ask whether that depends on who wrote the text
   (Section~\ref{sec:helps}).
 \item[RQ5] \textbf{Taken together, do the two communities solve context
   poisoning?} We combine the census with the campaign: where each
@@ -110,17 +110,18 @@ one. If it holds, that tells us little.
   code and weights and compared with an undefended model on the same items
   (RQ2; Sections~\ref{sec:campaign}, \ref{sec:results}).
 
-\item \textbf{We explain why methods fail on the other community's
-  problem, and why the few that help do.} They fail for opposite reasons.
-  Safety fixes decide how much to trust the document, which hands the answer
-  to an attacker who wrote it. Security defenses assume that wrong passages
-  are few or contain instructions, and an honest mistake breaks both
-  assumptions (RQ3; Section~\ref{sec:neither}). Where they help, the reason
-  decides whether the help lasts. The gains of the safety fix ACD and those
-  against the refusal attack come from the form of the planted passage and
-  vanish when it changes. The gain of the security method AttnTrace holds,
-  because what it reads, where the answer came from, does not depend on who
-  wrote the text (RQ4; Section~\ref{sec:helps}).
+\item \textbf{We explain why fixes fail on the other community's problem,
+  and why some of them help.} Failure comes from an assumption each side's
+  designs share, not from individual methods. Safety fixes decide how far to
+  trust the document, which hands the answer to an attacker who wrote it.
+  Security defenses assume wrong passages are few or carry instructions, and
+  an honest mistake breaks both assumptions (RQ3;
+  Section~\ref{sec:neither}). Success depends on what a fix reads. The gains
+  of the safety fix ACD, and those against the refusal attack, come from the
+  form of the planted passage and disappear when that form changes. The
+  security method AttnTrace keeps its gain because it traces where an answer
+  came from, and that does not depend on who wrote the text (RQ4;
+  Section~\ref{sec:helps}).
 
 \item \textbf{We show that the two communities, taken together, do not
   solve context poisoning.} Their fixes act at different stages, no
