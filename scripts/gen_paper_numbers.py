@@ -507,6 +507,10 @@ def main():
     _wide = {d for d, c in per_def.items() if c >= 4}
     _wp = [x for x in pairs if x[0] in _wide]
     M["PctBreadthFromAttack"] = f"{100 * sum(1 for x in _wp if x in _atk) / len(_wp):.0f}"
+    # the counts behind that share; a percentage of 67 reads as more than it is
+    M["NBreadthPairs"] = len(_wp)
+    M["NBreadthFromAttack"] = sum(1 for x in _wp if x in _atk)
+    M["NBreadthOwnPaper"] = len(_wp) - M["NBreadthFromAttack"]
     _top = max(per_def, key=lambda d: per_def[d])
     M["NBroadestPairs"] = per_def[_top]
     M["NBroadestFromAttack"] = sum(1 for x in pairs
