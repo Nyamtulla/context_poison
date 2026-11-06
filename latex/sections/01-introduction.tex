@@ -110,12 +110,17 @@ one. If it holds, that tells us little.
   code and weights and compared with an undefended model on the same items
   (RQ2; Sections~\ref{sec:campaign}, \ref{sec:results}).
 
-\item \textbf{We show that each community's methods fail on the other's
-  problem, for opposite reasons.} Safety fixes decide how much to trust the
-  document, which hands the answer to an attacker who wrote it. Security
-  defenses assume that wrong passages are few or contain instructions, and an
-  honest mistake breaks both assumptions (RQ3;
-  Section~\ref{sec:results}).
+\item \textbf{We explain why methods fail on the other community's
+  problem, and why the few that help do.} They fail for opposite reasons.
+  Safety fixes decide how much to trust the document, which hands the answer
+  to an attacker who wrote it. Security defenses assume that wrong passages
+  are few or contain instructions, and an honest mistake breaks both
+  assumptions (RQ3; Section~\ref{sec:neither}). Where they help, the reason
+  decides whether the help lasts. The gains of the safety fix ACD and those
+  against the refusal attack come from the form of the planted passage and
+  vanish when it changes. The gain of the security method AttnTrace holds,
+  because what it reads, where the answer came from, does not depend on who
+  wrote the text (RQ4; Section~\ref{sec:helps}).
 
 \item \textbf{We show that the two communities, taken together, do not
   solve context poisoning.} Their fixes act at different stages, no
