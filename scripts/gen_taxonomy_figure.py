@@ -196,7 +196,7 @@ def main():
                              edgecolor="none", zorder=4))
     # centred in the bar to the right of the three dots
     ax.text(CW[0] + (4.0 + CW[2]) / 2, CW[1] + CW[3] - tb / 2, "context window",
-            ha="center", va="center", fontsize=5.6, color=INK, zorder=4)
+            ha="center", va="center", fontsize=6.2, color=INK, zorder=4)
 
     def words(x0, x1, y, lengths, color, lw=1.6):
         """A line of text as word strokes; lengths are fractions of the line."""
@@ -233,7 +233,7 @@ def main():
         words(tx0, tx1 - 0.3, by + bh - 2.0 - k * 2.3, L, CH, lw=1.4)
 
     ax.text(MD[0] + MD[2] / 2, MD[1] + MD[3] - tb / 2, "model",
-            ha="center", va="center", fontsize=5.6, color=INK, zorder=4)
+            ha="center", va="center", fontsize=6.2, color=INK, zorder=4)
     ax.plot([MD[0], MD[0] + MD[2]], [MD[1] + MD[3] - tb] * 2, lw=0.5,
             color=INK, zorder=3)
 
@@ -278,7 +278,7 @@ def main():
         y = top - i * (h2 + gap) - h2
         box(ax, 79.7, y, 19.0, h2, "", CQ_T, CQ)
         icon(81.1, y + h2 / 2, CQ_ICON[c], CQ, 6.8)
-        ax.text(82.6, y + h2 / 2, c, ha="left", va="center", fontsize=5.5,
+        ax.text(82.6, y + h2 / 2, c, ha="left", va="center", fontsize=6.2,
                 color=INK)
         # the output fans out the way the input fanned in
         ax.plot([RBUS, 79.5], [y + h2 / 2, y + h2 / 2], lw=0.5, color=CQ,

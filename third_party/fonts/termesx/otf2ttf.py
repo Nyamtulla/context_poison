@@ -31,8 +31,9 @@ def convert(src, dst, max_err=1.0):
     f["loca"] = newTable("loca")
     f["glyf"] = glyf
     del f["CFF "]
-    if "VORG" in f:
-        del f["VORG"]
+    for t in ("VORG", "TeX "):               # "TeX " is newtx's own table; fontTools
+        if t in f:                           # cannot subset it and warns on every save
+            del f[t]
     glyf.compile(f)
     for name in order:                       # left side bearings follow the new outlines
         g = glyf[name]

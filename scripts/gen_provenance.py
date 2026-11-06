@@ -152,8 +152,8 @@ def figure(n):
         # inputs on the left, in the order they came in; the right cell is
         # their sum (counts() asserts that it is one)
         ("Seeds and database search",
-         f"{n['seeds']} seeds\n"
-         f"{n['queries']} queries, {n['apis']} APIs: {n['search']:,} records",
+         f"{n['seeds']} seeds; {n['queries']} queries\n"
+         f"on {n['apis']} APIs: {n['search']:,} records",
          f"total\nn = {n['hop0']:,}"),
         ("Snowballed, both directions",
          f"discovery pool {n['pool'] + n['hop2']:,}\n"
@@ -171,10 +171,11 @@ def figure(n):
          f"{n['analysed']:,} name a technique"),
     ]
 
-    bh, gap, W, X = 0.545, 0.24, 0.988, 0.006
+    # sized for 9 pt headings and 8 pt cells, the caption size in print
+    bh, gap, W, X = 0.68, 0.20, 0.988, 0.006
     pad, mid = 0.018, 0.058          # inset from the outer box, gap between
     cw = (W - 2 * pad - mid) / 2     # width of one inner cell
-    head_in, cell_in = 0.17, 0.33    # heading band, inner cell height
+    head_in, cell_in = 0.22, 0.40    # heading band, inner cell height
 
     H = len(stages) * bh + (len(stages) - 1) * gap + 0.04
     fig = plt.figure(figsize=(COL, H))
@@ -186,14 +187,14 @@ def figure(n):
         ax.add_patch(Rectangle((X, y - bh), W, bh, facecolor="none",
                                edgecolor=INK, linewidth=0.7))
         ax.text(X + W / 2, y - head_in / 2 - 0.02, head, ha="center",
-                va="center", fontsize=6.5, color=INK, fontweight="bold")
+                va="center", fontsize=9, color=INK, fontweight="bold")
         cy = y - head_in - cell_in
         for k, txt in enumerate((left, right)):
             cx = X + pad + k * (cw + mid)
             ax.add_patch(Rectangle((cx, cy), cw, cell_in, facecolor="none",
                                    edgecolor=MUTED, linewidth=0.45))
             ax.text(cx + cw / 2, cy + cell_in / 2, txt, ha="center",
-                    va="center", fontsize=6.0, color=INK, linespacing=1.4)
+                    va="center", fontsize=8, color=INK, linespacing=1.3)
         # left cell is what the stage removed, right is what it passed on;
         # the arrow is the "and so we were left with" between them
         ax.add_patch(FancyArrowPatch(

@@ -71,12 +71,15 @@ INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 COL, FULL = 3.49, 7.14
 
 plt.rcParams.update({
-    "font.size": 7.5,
-    "axes.labelsize": 7.5,
-    "axes.titlesize": 8,
-    "xtick.labelsize": 7,
-    "ytick.labelsize": 7,
-    "legend.fontsize": 7,
+    # 8 pt in print, the caption size. Figures are drawn at the width LaTeX
+    # includes them at, so a size here is the printed size; the cube is
+    # included at 0.92 of its width and scales its own sizes up to match.
+    "font.size": 8,
+    "axes.labelsize": 8,
+    "axes.titlesize": 8.5,
+    "xtick.labelsize": 8,
+    "ytick.labelsize": 8,
+    "legend.fontsize": 8,
     "axes.edgecolor": MUTED,
     "axes.linewidth": 0.6,
     "xtick.color": INK, "ytick.color": INK,
@@ -172,7 +175,8 @@ def fig_cube():
     # inside it. The earlier version switched the label in or out depending
     # on bar height, which put white type on four different backgrounds and
     # collided in the cells that matter most.
-    LBL_Y, BAR_Y, HMAX = -.34, .42, .60
+    LBL_Y, BAR_Y, HMAX = -.27, .42, .52
+    CS = 1 / 0.92                 # included at 0.92 textwidth: size * CS prints at size
 
     # one bar-drawing routine, used by the cells and by the margins. The
     # rule does not change between them: the mechanism bar is solid and the
@@ -187,7 +191,7 @@ def fig_cube():
             h = .05 + HMAX * np.sqrt(v / scale)
             ax.add_patch(plt.Rectangle((j + x0, i + BAR_Y - h), .36, h, **kw))
             ax.text(j + x0 + (.14 if x0 < 0 else .22), i + LBL_Y,
-                    str(int(v)), ha="center", va="center", fontsize=4.9,
+                    str(int(v)), ha="center", va="center", fontsize=CS * 8,
                     color=INK)
 
     MI = len(CHANNELS) + 0.42   # the totals row, a gap below the grid
@@ -204,9 +208,9 @@ def fig_cube():
     # its cell, which left the two panels at a fifth of the figure width
     # with a canyon between them. savefig's tight bbox still catches the
     # overhang, so the labels are not clipped.
-    fig, axes = plt.subplots(1, 3, figsize=(FULL, 4.35),
+    fig, axes = plt.subplots(1, 3, figsize=(FULL, 5.6),
                              gridspec_kw={"width_ratios": [6, 6, 1.15]})
-    fig.subplots_adjust(left=0.082, right=0.995, top=0.945, bottom=0.215,
+    fig.subplots_adjust(left=0.105, right=0.995, top=0.95, bottom=0.2,
                         wspace=0.07)
     for ax, (track, (A, D)) in zip(axes[:2], G.items()):
         col, pale = hue[track]
@@ -241,7 +245,7 @@ def fig_cube():
             pair(ax, MI, j, A[:, j].sum(), D[:, j].sum(), col, pale, rmax)
         if track == "security":
             ax.text(-.62, MI, "all channels", ha="right", va="center",
-                    fontsize=6, color=INK)
+                    fontsize=CS * 8, color=INK)
         ax.set_xlim(-.6, len(CONSEQ) - .4)
         ax.set_ylim(MI + .6, -.6)
         ax.set_xticks(range(len(CONSEQ)))
@@ -249,13 +253,13 @@ def fig_cube():
         # the size, because "reasoning-corruption" is wider than its column
         # once the margins have taken their share of the width; shrinking
         # until it fit put the axis labels below five point.
-        ax.set_xticklabels(CONSEQ, fontsize=5.4, rotation=32,
+        ax.set_xticklabels(CONSEQ, fontsize=CS * 8, rotation=32,
                            ha="right", rotation_mode="anchor")
         ax.set_yticks(range(len(CHANNELS)))
-        ax.set_yticklabels(CHANNELS if track == "security" else [], fontsize=6.5)
+        ax.set_yticklabels(CHANNELS if track == "security" else [], fontsize=CS * 8)
         ax.set_title("security regime" if track == "security"
                      else "safety regime",
-                     fontsize=7.5, color=col)
+                     fontsize=CS * 9, color=col)
         for sp in ax.spines.values():
             sp.set_visible(False)
         ax.tick_params(length=0)
@@ -276,7 +280,7 @@ def fig_cube():
     mg.set_xlim(-.6, .6)
     mg.set_ylim(MI + .6, -.6)
     mg.set_xticks([0])
-    mg.set_xticklabels(["both regimes"], fontsize=5.4, rotation=32,
+    mg.set_xticklabels(["both regimes"], fontsize=CS * 8, rotation=32,
                        ha="right", rotation_mode="anchor")
     mg.set_yticks([])
     for sp in mg.spines.values():
@@ -294,8 +298,8 @@ def fig_cube():
               label="mechanisms"),
         Patch(facecolor=SEQ_SEC[1], edgecolor=TRACK_SEC, hatch="///",
               linewidth=.5, label="fixes")],
-        fontsize=6.5, frameon=False, loc="lower left",
-        bbox_to_anchor=(0, -.26), ncol=2, columnspacing=1.0)
+        fontsize=CS * 8, frameon=False, loc="lower left",
+        bbox_to_anchor=(0, -.27), ncol=2, columnspacing=1.0)
     save(fig, "fig1_cube")
 
 
@@ -322,7 +326,7 @@ def fig_intervention():
                              (e.get("regime") or "").strip()) for e in r4)
     y = np.arange(len(POINTS))[::-1]
     h = 0.38
-    fig, ax = plt.subplots(figsize=(COL, 1.75), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(COL, 2.05), constrained_layout=True)
     for off, reg, col, hatch in ((h / 2, "security", TRACK_SEC, None),
                                  (-h / 2, "safety", TRACK_ML, "....")):
         vals = [c[(p, reg)] for p in POINTS]
@@ -333,12 +337,12 @@ def fig_intervention():
                 edgecolor="#ffffff" if hatch else col,
                 hatch=hatch, linewidth=.3, label=reg)
         for yy, v in zip(y + off, vals):
-            ax.text(v + 3, yy, str(v), va="center", fontsize=6, color=INK)
+            ax.text(v + 3, yy, str(v), va="center", fontsize=8, color=INK)
     ax.set_yticks(y)
-    ax.set_yticklabels(POINTS, fontsize=6.5)
+    ax.set_yticklabels(POINTS)
     ax.set_xlabel("named fixes")
     ax.set_xlim(0, max(c.values()) * 1.16)
-    ax.legend(frameon=False, fontsize=6.5, loc="lower right")
+    ax.legend(frameon=False, loc="lower right")
     ax.grid(axis="x", color="#eceae6", linewidth=0.5)
     ax.set_axisbelow(True)
     for s in ("top", "right", "left"):
@@ -356,7 +360,7 @@ def fig_who_reports():
     """
     data = [("reported by\nmechanism papers", 0, 13, 24),
             ("reported by\nfix papers", 193, 1, 0)]
-    fig, ax = plt.subplots(figsize=(COL, 1.6), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(COL, 1.85), constrained_layout=True)
     for i, (lab, win, inc, lose) in enumerate(data):
         left = 0
         # three outcomes, three textures: the segment that used to be a grey
@@ -369,20 +373,20 @@ def fig_who_reports():
                     label=name if i == 0 else None)
             if v >= 20:
                 ax.text(left + v / 2, i, str(v), ha="center", va="center",
-                        fontsize=6.5, color="white" if col != "white" else INK)
+                        fontsize=8, color="white" if col != "white" else INK)
             elif v:
                 # too narrow to hold the number; set it above the segment
                 ax.text(left + v / 2, i + .33, str(v), ha="center",
-                        va="bottom", fontsize=6.2, color=INK)
+                        va="bottom", fontsize=8, color=INK)
             left += v
-        ax.text(left + 5, i, f"n={win+inc+lose}", va="center", fontsize=6.5,
+        ax.text(left + 5, i, f"n={win+inc+lose}", va="center", fontsize=8,
                 color=INK)
     ax.set_yticks([0, 1])
-    ax.set_yticklabels([d[0] for d in data], fontsize=6.5)
+    ax.set_yticklabels([d[0] for d in data])
     ax.set_xlim(0, 225)
     ax.set_ylim(-0.6, 1.9)
     ax.set_xlabel("(fix, mechanism) pairs")
-    ax.legend(frameon=False, fontsize=6.2, loc="upper left",
+    ax.legend(frameon=False, loc="upper left",
               bbox_to_anchor=(0, 1.22), ncol=3, columnspacing=1.1,
               handlelength=1.2, handletextpad=0.5)
     for s in ("top", "right", "left"):
@@ -430,7 +434,7 @@ def fig_dose():
     DOSE_BLUES = [SEQ[2], SEQ[3], SEQ[4], SEQ[5], SEQ[7], SEQ[9]]
     # Drawn at column width: the paper places this one in a single column, so
     # drawing it wider and letting LaTeX scale it down shrinks every label.
-    fig, ax = plt.subplots(figsize=(COL, 2.6), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(COL, 3.0), constrained_layout=True)
     ax.axhline(0, color=INK2, linewidth=0.8, zorder=2)
     for i, (name, fn) in enumerate(RUNS):
         path = R / fn
@@ -464,8 +468,8 @@ def fig_dose():
     ax.set_xlabel("poisoned passages, of the top ten retrieved")
     ax.set_ylabel("defended minus undefended (pp)")
     ax.set_xlim(-0.12, len(doses) - 0.88)
-    ax.legend(frameon=False, fontsize=5.8, loc="upper center",
-              bbox_to_anchor=(0.5, -0.22), ncol=3, handlelength=1.4,
+    ax.legend(frameon=False, loc="upper center",
+              bbox_to_anchor=(0.5, -0.2), ncol=2, handlelength=1.4,
               columnspacing=1.0, handletextpad=0.4)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
@@ -554,7 +558,10 @@ def fig_citation_network():
     # Column width, made tall: a full-width version could not print before
     # its first mention without crowding the cube's page, so this one grows
     # in height instead, and the trimmed tail gives the clusters that room.
-    fig, ax = plt.subplots(figsize=(FULL * 0.5, 4.6))
+    # Drawn at column width, with the margins wide enough to hold the bridge
+    # labels: a label outside the canvas widened the saved PDF, and LaTeX then
+    # scaled the whole figure down to fit the column, shrinking every label.
+    fig, ax = plt.subplots(figsize=(COL, 4.6))
     fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
     from matplotlib.collections import LineCollection
     # Cross-track edges concentrate between the clusters. Drawn solid they
@@ -597,7 +604,7 @@ def fig_citation_network():
         v = v / (_np.linalg.norm(v) or 1)
         ax.annotate(f"{name} ({cdeg[n]})", pos[n], textcoords="offset points",
                     xytext=(v[0] * 22, v[1] * 26 + (12 if v[1] >= 0 else -12)),
-                    fontsize=6.2, color=INK, fontweight="bold",
+                    fontsize=8.4, color=INK, fontweight="bold",
                     ha="left" if v[0] >= 0 else "right", va="center", zorder=7,
                     bbox=dict(boxstyle="round,pad=0.18", fc="white", ec="none",
                               alpha=0.85),
@@ -612,7 +619,7 @@ def fig_citation_network():
           Line2D([], [], color="#111111", lw=1.4)]
     l += [f"same-regime citation ({len(same)})",
           f"cross-regime citation ({len(cross)})"]
-    ax.legend(h, l, frameon=False, fontsize=6, loc="lower left", ncol=1,
+    ax.legend(h, l, frameon=False, fontsize=8.4, loc="lower left", ncol=1,
               handlelength=1.4, handletextpad=0.5, labelspacing=0.45,
               borderaxespad=0.2)
     if island:
@@ -620,11 +627,11 @@ def fig_citation_network():
         cy = sum(pos[n][1] for n in island) / len(island)
         ax.annotate("deep-research agents:\ncite neither literature",
                     (cx, cy), textcoords="offset points", xytext=(13, 0),
-                    fontsize=5.6, color=INK2, ha="left", va="center",
+                    fontsize=8.4, color=INK2, ha="left", va="center",
                     arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.5,
                                     shrinkA=1, shrinkB=3))
     ax.set_axis_off()
-    ax.margins(0.04)
+    ax.margins(x=0.25, y=0.04)   # the saved PDF still overhangs a little; 8.4 pt prints at 8
     print(f"    network: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges, "
           f"{len(cross)} cross-track ({100*len(cross)/G.number_of_edges():.1f}%)")
     save(fig, "fig5_citation_network")
@@ -705,7 +712,7 @@ def fig_transfer_matrix():
     # split across two floats three sections apart a reader had to carry the
     # left-hand numbers in their head to read the right-hand ones.
     panels = [("published literature", lit), ("this campaign", ours)]
-    fig, axes = plt.subplots(1, 2, figsize=(COL, 1.75),
+    fig, axes = plt.subplots(1, 2, figsize=(COL, 2.1),
                              constrained_layout=True)
     for ax, (name, data) in zip(axes, panels):
         tot = sum(data.values())
@@ -718,27 +725,26 @@ def fig_transfer_matrix():
         S = M / max(tot, 1)
         vmax = 1.0
         ax.imshow(np.where(M > 0, S, np.nan), cmap=cmap, vmin=0, vmax=vmax)
-        ax.set_xticks(range(2)); ax.set_xticklabels(TR, fontsize=5.4)
-        ax.set_yticks(range(2)); ax.set_yticklabels(TR, fontsize=5.4)
+        ax.set_xticks(range(2)); ax.set_xticklabels(TR)
+        ax.set_yticks(range(2)); ax.set_yticklabels(TR)
         for lbls in (ax.get_xticklabels(), ax.get_yticklabels()):
             for lbl, t in zip(lbls, TR):
                 lbl.set_color(TRACK_SEC if t == "security" else TRACK_ML)
-        ax.set_xlabel("mechanism from", fontsize=5.6)
+        ax.set_xlabel("mechanism from")
         # Only the left panel keeps the y label: side by side they share the
         # same rows, and repeating it put type in the gap between them.
-        ax.set_ylabel("fix from" if name.startswith("published") else "",
-                      fontsize=5.6)
-        ax.set_title(f"{name} ({tot})", fontsize=6.4, color=INK)
+        ax.set_ylabel("fix from" if name.startswith("published") else "")
+        ax.set_title(f"{name} ({tot})", fontsize=8, color=INK)
         for i in range(2):
             for j in range(2):
                 v = int(M[i, j])
                 dark = v > 0 and S[i, j] > 0.55 * vmax
                 ax.text(j, i, str(v), ha="center", va="center",
-                        fontsize=7.5, fontweight="bold",
+                        fontsize=9, fontweight="bold",
                         color="#ffffff" if dark else INK)
                 if v == 0:
                     ax.text(j, i + 0.3, "never tested", ha="center",
-                            va="center", fontsize=4.6, color=INK)
+                            va="center", fontsize=7.5, color=INK)
         for s in ax.spines.values():
             s.set_visible(False)
         ax.set_xticks(np.arange(-.5, 2, 1), minor=True)
@@ -771,14 +777,14 @@ def fig_lag():
     cols = ["none" if k == 0 else (ALT_A if k < 0 else ALT_B) for k in ks]
     edges = [INK for k in ks]
     widths = [0.8 if k == 0 else 0.4 for k in ks]
-    fig, ax = plt.subplots(figsize=(COL, 1.8))
+    fig, ax = plt.subplots(figsize=(COL, 2.0))
     hats = ["" if k < 0 else ("" if k == 0 else "///") for k in ks]
     bars = ax.bar(ks, vals, color=cols, edgecolor=edges, linewidth=widths,
                   width=0.78)
     for b, hh in zip(bars, hats):
         b.set_hatch(hh)
     for k, v in zip(ks, vals):
-        ax.text(k, v + 1.5, str(v), ha="center", fontsize=6.5, color=INK2)
+        ax.text(k, v + 1.5, str(v), ha="center", fontsize=8, color=INK2)
     ax.axvline(-0.5, color=MUTED, lw=0.6, ls=":")
     n_before = sum(v for k, v in g.items() if k < 0)
     ax.set_xlabel("fix year minus mechanism year")
@@ -786,16 +792,18 @@ def fig_lag():
     ax.set_xticks(ks)
     ax.set_ylim(0, max(vals) * 1.22)
     ax.spines["top"].set_visible(False); ax.spines["right"].set_visible(False)
-    ax.annotate(f"{n_before} fixes\npredate the\nmechanism they met",
-                xy=(-2.42, max(vals) * 0.62), fontsize=6.0, color=ALT_A,
-                ha="left")
+    # set high, over the two short bars, so the note clears the dotted line
+    ax.annotate(f"{n_before} fixes\npredate the\nmechanism\nthey met",
+                xy=(-2.45, max(vals) * 1.17), fontsize=8, color=ALT_A,
+                ha="left", va="top", linespacing=1.1)
     print(f"    lag: {n_before} of {len(tl)} defenses predate their attack")
     save(fig, "fig7_lag")
 
 
 # ---------------------------------------------------------------- figure 8
-def _box(ax, x, y, w, h, title, sub=None, accent=None, fs=6.6):
-    """A flat box with a title and an optional smaller second line."""
+def _box(ax, x, y, w, h, title, sub=None, accent=None, fs=9):
+    """A flat box with a title and an optional smaller second line. The
+    defaults print at 9 pt and 8 pt, the caption size, at column width."""
     from matplotlib.patches import Rectangle
     ax.add_patch(Rectangle((x, y), w, h, facecolor="white", edgecolor=INK2,
                            linewidth=0.5))
@@ -806,7 +814,7 @@ def _box(ax, x, y, w, h, title, sub=None, accent=None, fs=6.6):
         ax.text(x + w / 2, y + h * (0.76 if two else 0.66), title, ha="center",
                 va="center", fontsize=fs, color=INK, fontweight="bold")
         ax.text(x + w / 2, y + h * (0.34 if two else 0.30), sub, ha="center", va="center",
-                fontsize=fs - 0.9, color=INK2, linespacing=1.15)
+                fontsize=fs - 1, color=INK2, linespacing=1.15)
     else:
         ax.text(x + w / 2, y + h / 2, title, ha="center", va="center",
                 fontsize=fs, color=INK, linespacing=1.2)
@@ -826,48 +834,48 @@ def fig_vocab():
     where it sits. The words in each community's boxes are among the most
     frequent in that regime's titles and abstracts (checked 2026-11-05), chosen
     by the lead; "fix" and "mechanism" in our sense are ours."""
-    W, H = COL, 1.60
+    h, rg = 0.44, 0.40                      # box height, gap between rows
+    W, H = COL, 0.40 + 2 * h + rg + 0.08
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis("off")
-    cw, gap, pad = 1.08, 0.10, 0.06         # the two communities' columns
+    gap, pad, wo, ga = 0.10, 0.06, 0.66, 0.20   # column gap, frame pad, our column, arrow
+    cw = (W - 0.04 - 2 * pad - gap - ga - wo - 0.03) / 2   # the two communities' columns
     xs = 0.04 + pad
     xf = xs + cw + gap
     fr = xf + cw + pad                      # right edge of their frame
-    wo = 0.74                               # our column
     xo = W - 0.03 - wo
-    h, rg = 0.34, 0.38                      # box height, gap between rows
-    y1 = H - 0.36 - h                       # the bad content
+    y1 = H - 0.40 - h                       # the bad content
     y2 = y1 - rg - h                        # the countermeasure
 
     for x0, w, name, col in ((xs, cw, "Security", TRACK_SEC), (xf, cw, "Safety", TRACK_ML),
                              (xo, wo, "Ours", INK)):
-        ax.text(x0 + w / 2, H - 0.13, name, ha="center", va="center",
-                fontsize=7.2, fontweight="bold", color=INK)
-        ax.plot([x0, x0 + w], [H - 0.23, H - 0.23], color=col, lw=1.8,
+        ax.text(x0 + w / 2, H - 0.14, name, ha="center", va="center",
+                fontsize=9.5, fontweight="bold", color=INK)
+        ax.plot([x0, x0 + w], [H - 0.27, H - 0.27], color=col, lw=1.8,
                 solid_capstyle="butt")
 
-    _box(ax, xs, y1, cw, h, "attack, vulnerability,\nthreat", accent=TRACK_SEC, fs=6.2)
-    _box(ax, xf, y1, cw, h, "degradation, failure,\nconflict, hallucination", accent=TRACK_ML, fs=6.2)
-    _box(ax, xs, y2, cw, h, "defense, guardrail,\nsafeguard, protection", accent=TRACK_SEC, fs=6.2)
-    _box(ax, xf, y2, cw, h, "mitigation, method,\nframework, strategy", accent=TRACK_ML, fs=6.2)
+    _box(ax, xs, y1, cw, h, "attack, vulnerability,\nthreat", accent=TRACK_SEC, fs=8)
+    _box(ax, xf, y1, cw, h, "degradation, failure,\nconflict, hallucination", accent=TRACK_ML, fs=8)
+    _box(ax, xs, y2, cw, h, "defense, guardrail,\nsafeguard, protection", accent=TRACK_SEC, fs=8)
+    _box(ax, xf, y2, cw, h, "mitigation, method,\nframework, strategy", accent=TRACK_ML, fs=8)
 
     # each countermeasure is built for its own column's content
     top, bot = y2 + h, y1
-    xa, xb = xs + 0.30, xf + cw - 0.30
+    xa, xb = xs + 0.25, xf + cw - 0.25
     _arrow(ax, xa, top, xa, bot)
     _arrow(ax, xb, top, xb, bot)
-    ax.text(xa + 0.05, top + 0.09, "built against", ha="left", va="center",
-            fontsize=5.6, color=INK2)
-    ax.text(xb - 0.05, top + 0.09, "built for", ha="right", va="center",
-            fontsize=5.6, color=INK2)
+    ax.text(xa + 0.05, (top + bot) / 2, "built against", ha="left", va="center",
+            fontsize=8, color=INK2)
+    ax.text(xb - 0.05, (top + bot) / 2, "built for", ha="right", va="center",
+            fontsize=8, color=INK2)
 
     # both communities' words fold into one word per row
     from matplotlib.patches import Rectangle
     ax.add_patch(Rectangle((0.04, y2 - pad), fr - 0.04, y1 + h + pad - (y2 - pad),
                            facecolor="none", edgecolor=MUTED, lw=0.6, ls=(0, (3, 2))))
     for y, word in ((y1, "mechanism"), (y2, "fix")):
-        _box(ax, xo, y, wo, h, word, fs=6.8)
+        _box(ax, xo, y, wo, h, word, fs=9)
         _arrow(ax, fr, y + h / 2, xo, y + h / 2)
     save(fig, "fig8_vocab")
 
@@ -876,14 +884,15 @@ def fig_vocab():
 def fig_run():
     """One run of the harness, from pair to verdict. Names no method or
     dataset: it sits in the platform section, before either is introduced."""
-    W, H = COL, 3.74
+    x0, h, g, hk = 0.04, 0.36, 0.12, 0.52   # hk: the two-line Compare box
+    # top margin, four steps, arms, score, compare, verdicts, bottom margin
+    W, H = COL, 0.05 + 4 * h + 4 * g + h + 0.14 + h + g + hk + g + h + 0.03
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis("off")
-    x0, h, g = 0.04, 0.30, 0.15
     w = W - 2 * x0                          # every row spans the full column
     cx = x0 + w / 2
-    wn, gn = 0.74, 0.14                     # the "if not" box and its gap
+    wn, gn = 0.80, 0.14                     # the "if not" box and its gap
     steps = [("Pick a pair", "one fix, one mechanism"),
              ("Control", "the fix works on its own literature's mechanism"),
              ("Take the items", "each question with its top ten retrieved passages"),
@@ -899,7 +908,7 @@ def fig_run():
         y -= h + g
     # a pair whose control fails is not run
     yc = tops[1]
-    _box(ax, x0 + w - wn, yc, wn, h, "if not:", "pair not run", fs=6.0)
+    _box(ax, x0 + w - wn, yc, wn, h, "if not:", "pair not run")
     _arrow(ax, x0 + w - wn - gn, yc + h / 2, x0 + w - wn, yc + h / 2)
 
     def three(ytop, items):
@@ -911,7 +920,7 @@ def fig_run():
         xs = []
         for i, (t, u) in enumerate(items):
             bx = x0 + i * (bw + bg)
-            _box(ax, bx, ytop - h, bw, h, t, u, fs=6.2)
+            _box(ax, bx, ytop - h, bw, h, t, u)
             _arrow(ax, bx + bw / 2, ybus, bx + bw / 2, ytop)
             xs.append(bx + bw / 2)
         return xs
@@ -926,7 +935,6 @@ def fig_run():
     for xx in xs:
         ax.plot([xx, xx], [ya - h, yj + 0.02], color=INK, lw=0.6)
     _arrow(ax, cx, yj + 0.02, cx, ys + h)
-    hk = 0.42
     yk = ys - g - hk
     _box(ax, x0, yk, w, hk, "Compare at each dose",
          "defended minus undefended, against the smallest\ndifference the run can detect")
