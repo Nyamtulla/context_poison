@@ -49,6 +49,13 @@ reasons: the safety fixes assume the document is honest, and the security
 defenses assume wrong passages are few or carry an instruction. Each
 assumption holds in its own regime and fails in the other.
 
+Taken together, the two communities do not solve context poisoning. Security
+defends where text enters and safety where the model reasons, no published
+work joins the two stages, and each stage's fixes fail on the failures the
+other stage is built for. A system assembled from both literatures places
+each failure in front of a fix that was not built for it. We have not yet
+measured such a stack, so this rests on each stage measured alone.
+
 Two further results sharpen the first direction's claim. First, protection depends on the \emph{form} of the planted passage, not only
 on whether an attacker is present. An evaluation built around optimized
 passages therefore overstates how well a system holds. Second, one fix did resist. It loses \PctAcdRemovedGradient{}\% of that
@@ -56,15 +63,6 @@ protection to an
 attacker who reads its rule and optimizes against the quantity it measures.
 
 \paragraph{Future work.}
-
-\textbf{Build a fix that covers both regimes.} Section~\ref{sec:neither}
-states what such a fix cannot rely on: trusting the document by default, or
-wrong passages being a minority. Signals that need neither assumption exist
-in the retrieval setting, among them when a passage was written, whether it
-was retrieved for the question asked, and whether independent sources agree.
-The next experiments build a fix on such signals and test it in both
-directions on the same items, against the same mechanisms
-reported here and against an attacker who knows the fix.
 
 \textbf{Extend the adaptive case to the rest of the family.} We tested the
 one fix that resisted,

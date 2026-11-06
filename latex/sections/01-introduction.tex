@@ -59,10 +59,11 @@ following research questions.
   passage that tells the explanations apart, read the voting defenses' own
   traces, and build two attacks against the one fix that resisted
   (Sections~\ref{sec:distractor}, \ref{sec:adaptive}, \ref{sec:neither}).
-\item[RQ4] \textbf{Can one fix hold whether an attacker planted the bad text
-  or it went wrong on its own?} We propose a fix that relies on none of the
-  assumptions RQ3 finds, and test it against both. Its evaluation is not yet
-  complete.
+\item[RQ4] \textbf{Taken together, do the two communities solve context
+  poisoning?} We combine the census with the campaign: where each
+  community's fixes act, whether any published work joins the two stages,
+  and what each stage's fixes do with the failures the other stage is built
+  for (Section~\ref{sec:together}).
 \end{description}
 
 Both literatures have been systematized before: the security side
@@ -112,12 +113,12 @@ one. If it holds, that tells us little.
   honest mistake breaks both assumptions (RQ3;
   Section~\ref{sec:results}).
 
-\item \textbf{We propose a fix that holds whether an attacker planted the
-  bad text or it went wrong on its own (RQ4).} It relies on none
-  of those assumptions. It counts passages that say the same thing as one
-  source, lets the model's own answer object but never vote, and reports a
-  conflict instead of answering when credible sources disagree.
-  % Results sentence to be added once the fix is evaluated against both.
+\item \textbf{We show that the two communities, taken together, do not
+  solve context poisoning.} Their fixes act at different stages, no
+  published work joins the stages, and each stage's fixes fail on the
+  failures the other stage is built for. A failure that passes one stage
+  meets, at the next, a fix that was not built for it (RQ4;
+  Section~\ref{sec:together}).
 \end{itemize}
 
 We release the code, the planted passages and the coded papers, so that
@@ -127,9 +128,7 @@ every result can be re-run.
 terms and the threat model. Section~\ref{sec:literatures} answers RQ1 and
 ends at the region the literature has barely tested. Section~\ref{sec:experiments} describes
 the platform, Section~\ref{sec:setup} the setup and the experiments we ran on
-it, and Section~\ref{sec:results} what they show, grouped under RQ2 and RQ3.
+it, and Section~\ref{sec:results} what they show, grouped under RQ2 to RQ4.
 Section~\ref{sec:discussion} turns the
-results into conventions for evaluation, into advice for deployment, and
-into the design rule a fix covering both attacks and honest mistakes would
-have to follow.
+results into conventions for evaluation and into advice for deployment.
 Section~\ref{sec:threats} states the limits and what is not finished.
