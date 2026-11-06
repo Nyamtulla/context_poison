@@ -1,0 +1,60 @@
+{
+ "rulings": [
+  {
+   "date": "2026-11-05",
+   "registry": "rq3_pollution_registry.json",
+   "paper_id": "37665dd5ae7245f087d663785c17eef068578676",
+   "row": 1015,
+   "name": "Virtual Prompt Injection (VPI)",
+   "channel_was": "supply-chain",
+   "consequence": "persistence-backdoor",
+   "reason": "Poisons instruction-tuning data: a training-time attack, outside context poisoning by Section 2's definition.",
+   "action": "removed"
+  },
+  {
+   "date": "2026-11-05",
+   "registry": "rq3_pollution_registry.json",
+   "paper_id": "e3aaa5e8a177a0b629408aadaf096a03b04cb014",
+   "row": 1060,
+   "name": "PoisonedAlign",
+   "channel_was": "supply-chain",
+   "consequence": "goal-hijack",
+   "reason": "Poisons alignment data so the model obeys injections more readily: training-time.",
+   "action": "removed"
+  },
+  {
+   "date": "2026-11-05",
+   "registry": "rq3_pollution_registry.json",
+   "paper_id": "9832eb62e0b3d826d21445fc1fd2fcf6ced7d41a",
+   "row": 829,
+   "name": "UNNAMED: backdoor-based RAG data extraction attack",
+   "channel_was": "supply-chain",
+   "consequence": "data-exfiltration",
+   "reason": "Fine-tunes a backdoor into the model to leak retrieved data: training-time.",
+   "action": "removed"
+  },
+  {
+   "date": "2026-11-05",
+   "registry": "rq4_defense_registry.json",
+   "paper_id": "98b790d195d775ee82c42fd596d588a792c6eab3",
+   "row": null,
+   "name": "UNNAMED: You've Changed: Detecting Modification of Black-Box Large La",
+   "channel_was": "supply-chain",
+   "consequence": "silent-corruption",
+   "reason": "Detects that an API model's weights were changed; no content enters the context, so it is a weight-level fix.",
+   "action": "removed"
+  },
+  {
+   "date": "2026-11-05",
+   "registry": "rq4_defense_registry.json",
+   "paper_id": "cce1b13eebe88e5051d329a95616c9df646fb08c",
+   "row": 166,
+   "name": "Unified Security Orchestration Framework (USOF)",
+   "channel_was": "supply-chain",
+   "consequence": "goal-hijack",
+   "reason": "Its supply-chain component (MISCV) targets poisoned model weights, BadNets-style: weight-level. Its in-scope part screens prompt-injected input, so the entry moves to direct-input.",
+   "action": "recoded to {'channel': 'direct-input'}"
+  }
+ ],
+ "definition": "supply-chain: content that a third-party component the agent depends on (a package or tool it installs, a template shipped with the model, a service on the response path) inserts into the context at run time."
+}

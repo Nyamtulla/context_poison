@@ -107,8 +107,12 @@ what the agent stored from an earlier turn or session~\cite{chen-2024-agentpoiso
 instruction set the agent loads to extend itself~\cite{schmotz-2025-agent}. \meth{multi-agent} is a
 message from another agent~\cite{chen-2023-scalable}. \meth{cross-modal} is content that arrives as an
 image, audio or document and is rendered into text~\cite{zhu-2024-unraveling}. \meth{supply-chain} is
-content entering through a package, template or model the agent depends
-on~\cite{yan-2023-backdooring}.
+content that a third-party component the agent depends on inserts into the
+context at run time: a package or tool it installs~\cite{spira-2026-beware},
+a template shipped with the model~\cite{fogel-2026-inferencetime}, or a
+service on the response path~\cite{luo-2026-rewriting}. Poisoning the model's
+training data or weights stays outside it, as Section~\ref{sec:background}
+sets out.
 
 \paragraph{Consequence.} The consequence is what the agent then does wrong.
 There are \NConseqCats{}. \meth{goal-hijack} is pursuing an objective it was not
@@ -117,7 +121,7 @@ given~\cite{greshake-2023-not}.
 right goal~\cite{liu-2023-lost}. \meth{silent-corruption} is producing a wrong output with nothing
 to signal it~\cite{zhong-2023-poisoning}. \meth{data-exfiltration} is information crossing a boundary it
 should not~\cite{yu-2023-assessing}. \meth{persistence-backdoor} is corruption that survives into a
-later session~\cite{yan-2023-backdooring}. \meth{availability-loss} is the agent not delivering its work: either it
+later session~\cite{dash-2026-untrusted}. \meth{availability-loss} is the agent not delivering its work: either it
 fails to finish the task at all~\cite{xia-2026-diagnosing}, or it finishes
 only after spending compute, money or quota out of proportion to
 it~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.

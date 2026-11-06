@@ -43,9 +43,14 @@ def sha(text: str) -> str:
     return hashlib.sha1(text.encode()).hexdigest()
 
 
-def passages(n=None):
+# The planted passages of the attacks, which the stacked experiment
+# (scripts/stack_run.py) puts through the same filters as the honest mistakes.
+ATTACKS = ["p1_poisonedrag_distinct", "p1_badrag_dos", "p1_corpus_poisoning"]
+
+
+def passages(n=None, also=()):
     seen = {}
-    for f in FAILURES:
+    for f in list(FAILURES) + list(also):
         for row in load_contexts(f, n)["items"]:
             for ctx in row["contexts"].values():
                 for p in ctx:
@@ -58,6 +63,8 @@ def main():
     ap.add_argument("detector", choices=sorted(DETECTORS))
     ap.add_argument("--n", type=int, default=None, help="smoke: first n items")
     ap.add_argument("--batch", type=int, default=32)
+    ap.add_argument("--attacks", action="store_true",
+                    help="also flag the attack contexts' passages (stack_run.py)")
     ap.add_argument("--device", default=None,
                     help="cpu or cuda; default cpu -- an 86M-184M classifier "
                          "does not need the shared card")
@@ -98,7 +105,7 @@ def main():
             print(f"  control {k:6s} flag={int(v['flag'])}  | {v['text'][:60]}")
         return
 
-    todo = passages(args.n)
+    todo = passages(args.n, ATTACKS if args.attacks else ())
     out = pathlib.Path(args.out or FLAG_DIR / f"{args.detector}.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     flags = json.loads(out.read_text())["flags"] if out.exists() else {}

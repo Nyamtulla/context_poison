@@ -977,3 +977,35 @@ and Figure 1, whose first box now reads 51 seeds and 40 queries over two APIs
 returning 5,069 records, total 5,120. `gen_provenance.py` asserts that the
 first box's inputs sum to hop 0 and that no hand-added record remains, so a
 future one cannot reopen the gap silently.
+
+## Addendum, 2026-11-05 — the supply-chain channel, redefined
+
+**The ruling.** `supply-chain` now means content that a third-party component
+the agent depends on (a package or tool it installs, a template shipped with
+the model, a service on the response path) inserts into the context at run
+time. Section 2 already puts training-time poisoning and weight attacks
+outside context poisoning; the old definition ("a package, template or model
+the agent depends on") let weight-level work in through the word "model".
+
+**What a full-text check of all ten supply-chain entries found.** Five fit
+the new definition and stay: HalluSquatting, the chat-template backdoor,
+RTA-PostForge, sign-c and ShieldNet. Four are training-time or weight-level and
+are removed from the registries: Virtual Prompt Injection (poisons
+instruction-tuning data), PoisonedAlign (poisons alignment data), the
+backdoor-based RAG data-extraction attack (fine-tunes a backdoor) and the
+fix from "You've Changed" (detects swapped API weights). USOF stays, moved to
+`direct-input`: its supply-chain component targets poisoned weights, and its
+in-scope part screens prompt-injected input. The papers stay in the corpus;
+the three whose only technique was removed now count among the papers that
+name no technique.
+
+Applied by `scripts/apply_scope_rulings.py`, which records each ruling and its
+reason in `data/registries/scope_rulings.json`. No recovered pair involved a
+removed entry, so the pair counts (349, 5 crossing) do not move.
+
+**What moved.** Mechanisms 236 → 233, fixes 541 → 540, papers naming a
+technique 709 → 705, empty cube cells 51 → 53 (47.2% → 49.1%), cells with a
+mechanism and no fix 8 → 7, named mechanisms with no tested fix 132 of 250 →
+129 of 247. Section 3's channel definition and its two citations of the VPI
+paper were rewritten. Regenerated: `latex/numbers.tex`, the cube, the
+intervention, citation-network and PRISMA figures, and the census tables.

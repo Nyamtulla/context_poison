@@ -38,12 +38,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=None, help="smoke: first n items")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--attacks", action="store_true",
+                    help="also flag the attack contexts' passages (stack_run.py)")
     ap.add_argument("--controls", action="store_true",
                     help="also score two texts with a known answer: one clean "
                          "and one carrying an injected instruction")
     args = ap.parse_args()
 
-    from sd_detect_classifier import FLAG_DIR, passages   # stdlib-only import
+    from sd_detect_classifier import ATTACKS, FLAG_DIR, passages   # stdlib-only
     sys.path.insert(0, str(OPI))
     os.chdir(OPI)   # their config paths are relative to the repo root
     import OpenPromptInjection as PI                       # their code
@@ -67,7 +69,7 @@ def main():
             print(f"  control {tag:6s} flag={det.detect(t)}  | {t[:60]}",
                   flush=True)
 
-    todo = passages(args.n)
+    todo = passages(args.n, ATTACKS if args.attacks else ())
     out = pathlib.Path(args.out or FLAG_DIR / "datasentinel.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     flags = json.loads(out.read_text())["flags"] if out.exists() else {}

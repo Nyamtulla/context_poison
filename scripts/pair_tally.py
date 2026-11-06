@@ -185,6 +185,10 @@ def retrieval_runs():
         # qualify a pair's reading. None of them is a reportable pair.
         if stem.startswith(("smoke_", "dry_", "control_", "check_")):
             continue
+        # The RQ5 stacked runs (scripts/stack_run.py) compose two fixes; they
+        # are reported in their own subsection, not as (fix, mechanism) pairs.
+        if stem.startswith("stack_"):
+            continue
         # AttnTrace is an attribution method and is reported as tracing
         # only. Its "defended" arm removes the traced passages and answers
         # again, a step its authors do not propose, so its cells are not a

@@ -1391,9 +1391,14 @@ def main():
         for f in _filters for j in DOSES), 1)
     _mdrs = [load(f)["mdr_pp_at_n"] for f in _filters]
     E["EFilterMdrMin"], E["EFilterMdrMax"] = float(min(_mdrs)), float(max(_mdrs))
+    # Counted over the honest-mistake passages only: the flag files also hold
+    # the attacks' passages, flagged for the RQ5 stacked runs (stack_run.py).
+    from sd_detect_classifier import passages as _sd_passages
+    _honest = set(_sd_passages())
     for name, key in (("piguard", "NPiguardFlagged"),
                       ("datasentinel", "NDatasentinelFlagged")):
         _fl = json.loads((REPO / "data" / "sd_flags" / f"{name}.json").read_text())["flags"]
+        _fl = {k: v for k, v in _fl.items() if k in _honest}
         M[key] = f'{sum(v["flag"] for v in _fl.values()):,}'
         M["NFilterPassages"] = f"{len(_fl):,}"
     # Stage D (scripts/analyze_stage_d.py): AttnTrace's tracing in shuffled

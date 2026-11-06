@@ -1736,20 +1736,6 @@
   "regime": "security"
  },
  {
-  "row": 829,
-  "paper_id": "9832eb62e0b3d826d21445fc1fd2fcf6ced7d41a",
-  "title": "Data Extraction Attacks in Retrieval-Augmented Generation via Backdoors",
-  "has_technique": "Y",
-  "technique_name": "UNNAMED: backdoor-based RAG data extraction attack",
-  "channel": "supply-chain",
-  "consequence": "data-exfiltration",
-  "is_extension_of": "",
-  "confidence": "high",
-  "notes": "First backdoor-based (rather than prompt-injection-based) data extraction attack against RAG knowledge databases, explicitly addressing the model-dependence weakness of prior instruction-following-based extraction attacks",
-  "name": "UNNAMED: backdoor-based RAG data extraction attack",
-  "regime": "security"
- },
- {
   "row": 1009,
   "paper_id": "8ba7f2d66ab1cb40af28d1889ffa21f298fa0c52",
   "title": "Just Testing, Move Along: Evasion of LLM-based System Log Interpretation by Prompt Injection",
@@ -2548,20 +2534,6 @@
   "regime": "security"
  },
  {
-  "row": 1015,
-  "paper_id": "37665dd5ae7245f087d663785c17eef068578676",
-  "title": "Backdooring Instruction-Tuned Large Language Models with Virtual Prompt Injection",
-  "has_technique": "Y",
-  "technique_name": "Virtual Prompt Injection (VPI)",
-  "channel": "supply-chain",
-  "consequence": "persistence-backdoor",
-  "is_extension_of": "",
-  "confidence": "low",
-  "notes": "FLAG FOR REVIEW. The backdoor is installed by poisoning instruction-tuning data, which the screening criteria exclude as training-time-only. It manifests at runtime with no input injection, so it is genuinely borderline. Recommend excluding to stay consistent with the stated criteria, and recording the call.",
-  "name": "Virtual Prompt Injection (VPI)",
-  "regime": "security"
- },
- {
   "row": 1016,
   "paper_id": "e56f14ced9f7ce344ed14bdcb46860ccac72ac83",
   "title": "Optimization-based Prompt Injection Attack to LLM-as-a-Judge",
@@ -2811,20 +2783,6 @@
   "confidence": "high",
   "notes": "Named universal (cross-prompt) goal-hijacking attack combining a semantics-guided prompt sampling/ranking strategy with an efficient gradient-based suffix optimizer; ablations isolate the prompt-organization contribution from the optimization algorithm.",
   "name": "POUGH",
-  "regime": "security"
- },
- {
-  "row": 1060,
-  "paper_id": "e3aaa5e8a177a0b629408aadaf096a03b04cb014",
-  "title": "Enhancing Prompt Injection Attacks to LLMs via Poisoning Alignment",
-  "has_technique": "Y",
-  "technique_name": "PoisonedAlign",
-  "channel": "supply-chain",
-  "consequence": "goal-hijack",
-  "is_extension_of": "",
-  "confidence": "high",
-  "notes": "Named training-time supply-chain attack: crafts poisoned alignment/SFT samples that systemically bias a model toward following injected instructions, amplifying later inference-time prompt injection success while remaining stealthy on standard capability benchmarks; large multi-model, multi-dataset evaluation.",
-  "name": "PoisonedAlign",
   "regime": "security"
  },
  {

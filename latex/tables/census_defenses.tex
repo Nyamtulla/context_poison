@@ -2,8 +2,8 @@
 \begingroup
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}lllll@{}}
-\caption{Every named defense in the corpus (541 entries). \emph{Validated vs} is the threat model the paper's own evaluation tested, not the one it claims. Conventions otherwise as in Table~\ref{tab:census-mech}.}\\
+\begin{longtable}{@{}p{0.30\textwidth}lllll@{}}
+\caption{Every named defense in the corpus (540 entries). \emph{Validated vs} is the threat model the paper's own evaluation tested, not the one it claims. Conventions otherwise as in Table~\ref{tab:census-mech}.}\\
 \toprule
 \textbf{Defense or fix} & \textbf{Channel} & \textbf{Acts at} & \textbf{Regime} & \textbf{Validated vs} & \textbf{Source} \\
 \midrule
@@ -116,6 +116,7 @@ SPRA (Scaffold-Preserving Representation Alignment) & direct-input & reasoning &
 StruQ (structured queries) & direct-input & ingestion & security & adversarial & \cite{chen-2024-struq} \\
 TIVS-O agentic defense pipeline (Front-End Agent + Guard-Sanitizer + Policy Enforcer with semantic caching) & direct-input & reasoning & security & adversarial & \cite{gosmar-2026-prompt} \\
 unified Prompt Assembling + State Management + Safety Validation framework & direct-input & execution & security & adversarial & \cite{zhang-2025-enhancing} \\
+Unified Security Orchestration Framework (USOF) & direct-input & ingestion & security & adversarial & \cite{muthu-2026-unified} \\
 UniGuardian & direct-input & ingestion & security & adversarial & \cite{lin-2025-uniguardian} \\
 \emph{domain-specific multi-layer safeguard pipeline (pattern filters + structural validation + contextual sandboxing + session-level behavioral checks)} & direct-input & reasoning & security & adversarial & \cite{maiorano-2026-evaluating} \\
 \emph{Embedding-based traditional-ML classifiers for PI detection} & direct-input & ingestion & security & adversarial & \cite{ayub-2024-embeddingbased} \\
@@ -547,10 +548,8 @@ SecureGov-Agent & multi-agent & execution & security & adversarial & \cite{chen-
 SentinelAgent & multi-agent & execution & security & adversarial & \cite{he-2025-sentinelagent} \\
 Token-Level Round-Robin (RR) Collaboration / RRMaj & multi-agent & reasoning & security & adversarial & \cite{liu-2026-consensus} \\
 \emph{off-the-shelf LLM behavioral overseer (non-verbal interaction-trace adversarial-intent detection)} & multi-agent & reasoning & security & adversarial & \cite{musaffar-2026-detection} \\
-\emph{You've Changed: Detecting Modification of Black-Box Large La} & supply-chain & execution & safety &  & \cite{dima-2025-you} \\
 ShieldNet & supply-chain & ingestion & security & adversarial & \cite{yuan-2026-shieldnet} \\
 sign-c (server-side signing of execution-bearing response fields) & supply-chain & execution & security & adversarial & \cite{luo-2026-rewriting} \\
-Unified Security Orchestration Framework (USOF) & supply-chain & ingestion & security & adversarial & \cite{muthu-2026-unified} \\
 SafeClaw-R & skill & execution & safety & both & \cite{wang-2026-safeclawr} \\
 \emph{detailed external checklist restatement (vs generic self-check) for long-context skill-following} & skill & none & safety & incidental & \cite{xue-2026-agent} \\
 DASGuard & skill & execution & security & adversarial & \cite{tan-2026-prompt} \\
