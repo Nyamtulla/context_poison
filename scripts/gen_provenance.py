@@ -143,8 +143,10 @@ def figure(n):
     INK, MUTED = "#0b0b0b", "#6b6a66"
     COL = 3.49  # IEEEtran \columnwidth, see gen_paper_figures.py
 
-    plt.rcParams.update({"font.family": "serif", "pdf.fonttype": 42,
+    plt.rcParams.update({"pdf.fonttype": 42,
                          "savefig.bbox": "tight", "savefig.pad_inches": 0.02})
+    from paper_fonts import use_paper_font
+    use_paper_font(plt.rcParams)            # the paper's text face, not DejaVu
 
     stages = [
         # inputs on the left, in the order they came in; the right cell is

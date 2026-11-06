@@ -71,7 +71,6 @@ INK, INK2, MUTED = "#0b0b0b", "#52514e", "#8a8984"
 COL, FULL = 3.49, 7.14
 
 plt.rcParams.update({
-    "font.family": "serif",
     "font.size": 7.5,
     "axes.labelsize": 7.5,
     "axes.titlesize": 8,
@@ -91,6 +90,8 @@ plt.rcParams.update({
     "savefig.pad_inches": 0.02,
     "pdf.fonttype": 42,
 })
+from paper_fonts import use_paper_font
+use_paper_font(plt.rcParams)                # the paper's text face, not DejaVu
 
 from taxonomy import CHANNELS, CONSEQ, canon_consequence
 

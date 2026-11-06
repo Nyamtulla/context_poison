@@ -47,10 +47,12 @@ SEC, ML = "#d6452a", "#2a78d6"
 FULL = 7.0
 
 plt.rcParams.update({
-    "font.family": "serif", "font.size": 7.5,
+    "font.size": 7.5,
     "text.color": INK, "figure.dpi": 200,
     "savefig.bbox": "tight", "savefig.pad_inches": 0.02, "pdf.fonttype": 42,
 })
+from paper_fonts import use_paper_font
+use_paper_font(plt.rcParams)                # the paper's text face, not DejaVu
 
 from taxonomy import CHANNELS, CONSEQ
 POINTS = [("ingestion", "ingestion"), ("reasoning", "reasoning"),
