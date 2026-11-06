@@ -16,7 +16,8 @@ fit inside one term.
 A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower than ``LLM safety'', because the damage must arrive through the context
 window. Two things fall outside it. Training-time poisoning and weight attacks
 do not travel through the context. Jailbreaks in which the user is the
-attacker have no third-party content at all.
+attacker have no third-party content at all, which is the line Greshake et al.\ draw
+between direct and indirect prompt injection~\cite{greshake-2023-not}.
 
 \subsection{One failure, two vocabularies} \label{sec:twovocab}
 
