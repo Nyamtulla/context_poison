@@ -713,6 +713,19 @@ def main():
     _pre = [r for r in tl if r["defense_predates_attack"]]
     M["NDefensePredates"] = len(_pre)
     M["PctDefensePredates"] = f"{100*len(_pre)/len(tl):.1f}"
+    # Section 3 says every such pair was reported by the mechanism's own paper
+    # (the attack-paper reverse scan). The nine defense-paper matches that once
+    # broke this were rejected; see rq5_rejected_matches.json.
+    _rev = {(p["defense"], p["mechanism"])
+            for f in ("attack_paper_evaluations.json",
+                      "attack_paper_evaluations_pass3.json")
+            for p in load(f)["confirmed_pairs"]}
+    _pre_def = [r for r in _pre if (r["defense"], r["attack"]) not in _rev]
+    if _pre_def:
+        raise SystemExit(
+            f"{len(_pre_def)} fix-predates-mechanism pair(s) not from the "
+            "mechanism's paper; Section 3's 'every one' no longer holds: "
+            + "; ".join(f'{r["defense"]} / {r["attack"]}' for r in _pre_def))
     _pure = [r for r in tl if r["defense_regime"] in ("security", "safety")
              and r["attack_regime"] in ("security", "safety")]
     _x = [r for r in _pure if r["defense_regime"] != r["attack_regime"]]
