@@ -1,13 +1,14 @@
 \section{Results}
 \label{sec:results}
 
-This section answers RQ2 to RQ4, each subsection closing with its answer.
+This section answers RQ2 to RQ5, each subsection closing with its answer.
 RQ2 takes the main experiment in each direction, then every fix against
 every mechanism and the agent experiment, and ends with three checks on
 those results. RQ3 asks whether the failure belongs to individual methods or
 to an assumption their designs share: it explains each direction, checks the
 first explanation against an attacker who knows the fix, and ends with why
-neither design covers both. RQ4 then asks whether the two communities
+neither design covers both. RQ4 asks why the few fixes that helped did, and
+RQ5 whether the two communities
 cover the problem together. One measurement comes first,
 because the research questions depend on it: how much damage a planted
 passage does with no fix in place, and whether it matters that an attacker
@@ -497,11 +498,50 @@ that resistance to one that is. In our coding of their papers, the methods
 in this family were validated only against incidental failure, so their
 published results contain no test of this kind.
 
-\subsection{RQ4: Taken together, do the two communities solve context poisoning?}
+\subsection{RQ4: When a fix does help on the other community's problem, why?}
+\label{sec:helps}
+
+Not every result across the boundary is a failure. In three places a method
+helped on the other community's problem, and an explanation of the failures
+has to account for them too. For each, we ask what the method acted on.
+
+The safety fix ACD resisted corpus poisoning, ending \EAcdSatGain{} points
+above the undefended model. Its rule discounts a passage that raises the
+model's uncertainty, and an optimized token string is incoherent, so it
+raises uncertainty. The benefit comes from the form of that passage, not from
+recognizing an attack. A fluent false sentence lowers uncertainty and the
+protection disappears (Section~\ref{sec:payloads}), and an attacker who
+optimizes against the rule removes \PctAcdRemovedGradient{}\% of it
+(Section~\ref{sec:adaptive}).
+
+All \NGridGainTop{} gains in the grid are against the refusal attack. There a
+method helps by getting the model to answer again, not by resisting the
+planted passage (Section~\ref{sec:grid}).
+
+The security method AttnTrace traces which passage an answer came from. On
+honest mistakes it points at the stale passage: \ETraceTopStale\% of the time
+when the model gives the outdated answer, against \ETraceTopCorrect\% when
+it answers correctly (Section~\ref{sec:transfer}). Unlike the filters and the
+votes, it assumes nothing about how many passages are wrong or whether they
+carry an instruction. It reads which passage the answer drew on, and that does
+not depend on who wrote the passage. This rests on one model and
+\NTraceStale{} wrong answers, and AttnTrace only traces: it does not change
+the answer.
+
+Answer to RQ4. Two of the three benefits come from the form of the planted
+text, not from the method recognizing a problem, and they disappear when the
+form changes. The one that holds is the method whose signal makes neither
+regime's assumption: AttnTrace reads where the answer came from, not who
+wrote the passage. This is RQ3 seen from the other side, since a method that
+relies on no assumption about the text's author leaves the other regime
+nothing to break. One method on one model suggests this rather than
+establishes it.
+
+\subsection{RQ5: Taken together, do the two communities solve context poisoning?}
 \label{sec:together}
 
 RQ1 found that the two communities divide the problem, and RQ2 and RQ3 that
-each side's methods fail on the other's. RQ4 asks what follows for the field
+each side's methods fail on the other's. RQ5 asks what follows for the field
 as a whole: whether a system built from both literatures would hold where
 neither holds alone. Three findings say it would not, as the two literatures
 stand.
@@ -530,7 +570,7 @@ We have not measured such a stack. The experiment has started and is not
 finished (Section~\ref{sec:threats}), so this answer rests on each stage
 measured alone.
 
-Answer to RQ4. No. Taken together, the two communities cover two stages of
+Answer to RQ5. No. Taken together, the two communities cover two stages of
 one pipeline but do not connect them. Their fixes act at different places,
 neither community tests its fixes against the other's failures, and no
 published work combines them, so the field holds no method shown to stop

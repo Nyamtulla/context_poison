@@ -59,7 +59,11 @@ following research questions.
   answer against an attacker who knows the fix, with two attacks built
   against the one fix that resisted
   (Sections~\ref{sec:distractor}, \ref{sec:adaptive}, \ref{sec:neither}).
-\item[RQ4] \textbf{Taken together, do the two communities solve context
+\item[RQ4] \textbf{When a fix does help on the other community's problem,
+  why?} We take the few cases where a method helped outside its own regime
+  and ask what it acted on, and whether that depends on who wrote the text
+  (Section~\ref{sec:helps}).
+\item[RQ5] \textbf{Taken together, do the two communities solve context
   poisoning?} We combine the census with the campaign: where each
   community's fixes act, whether any published work joins the two stages,
   and what each stage's fixes do with the failures the other stage is built
@@ -117,7 +121,7 @@ one. If it holds, that tells us little.
   solve context poisoning.} Their fixes act at different stages, no
   published work joins the stages, and each stage's fixes fail on the
   failures the other stage is built for. A failure that passes one stage
-  meets, at the next, a fix that was not built for it (RQ4;
+  meets, at the next, a fix that was not built for it (RQ5;
   Section~\ref{sec:together}).
 \end{itemize}
 
@@ -128,7 +132,7 @@ every result can be re-run.
 terms and the threat model. Section~\ref{sec:literatures} answers RQ1 and
 ends at the region the literature has barely tested. Section~\ref{sec:experiments} describes
 the platform, Section~\ref{sec:setup} the setup and the experiments we ran on
-it, and Section~\ref{sec:results} what they show, grouped under RQ2 to RQ4.
+it, and Section~\ref{sec:results} what they show, grouped under RQ2 to RQ5.
 Section~\ref{sec:discussion} turns the
 results into conventions for evaluation and into advice for deployment.
 Section~\ref{sec:threats} states the limits and what is not finished.
