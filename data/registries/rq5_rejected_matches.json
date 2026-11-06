@@ -1,0 +1,69 @@
+{
+ "date": "2026-11-06",
+ "reason": "Defense-paper matches to a mechanism first named in a later paper. The fix paper tests the general problem; the matcher tied it to the later, specifically named mechanism. Neither paper evaluates the other, so the pair is not a tested pair.",
+ "rejected": [
+  {
+   "defense_row": 484,
+   "defense_name": "AgentFold (folding - granular condensation / deep consolidation context management)",
+   "mechanism_name": "context rot (agentic/long-horizon search)",
+   "match_confidence": "medium",
+   "evidence": "Fix paper arXiv 2510.24699 (v1 2025-10-28, latest 2025-10-28); mechanism paper arXiv 2606.29718 (v1 2026-06-29). Every version of the fix paper predates the mechanism paper. The mechanism paper does not name the fix."
+  },
+  {
+   "defense_row": 506,
+   "defense_name": "AgentProg (program-guided context management with Execution Tree and global belief state)",
+   "mechanism_name": "context rot (agentic/long-horizon search)",
+   "match_confidence": "medium",
+   "evidence": "Fix paper arXiv 2512.10371 (v1 2025-12-11, latest 2026-05-08); mechanism paper arXiv 2606.29718 (v1 2026-06-29). Every version of the fix paper predates the mechanism paper. The mechanism paper does not name the fix."
+  },
+  {
+   "defense_row": 420,
+   "defense_name": "COMPASS (Context-Organized Multi-Agent Planning and Strategy System)",
+   "mechanism_name": "Constraint Drift (under long tool traces)",
+   "match_confidence": "medium",
+   "evidence": "Fix paper arXiv 2510.08790 (v1 2025-10-09, latest 2025-10-09); mechanism paper arXiv 2603.04750 (v1 2026-03-05). Every version of the fix paper predates the mechanism paper. The mechanism paper does not name the fix."
+  },
+  {
+   "defense_row": 791,
+   "defense_name": "Discern-and-Answer",
+   "mechanism_name": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
+   "match_confidence": "medium",
+   "evidence": "Fix paper arXiv 2305.01579 (v1 2023-05-02, latest 2024-06-09); mechanism paper arXiv 2402.14409 (v1 2024-02-22). Fix paper's last revision postdates the mechanism paper but does not mention it. The mechanism paper does not name the fix."
+  },
+  {
+   "defense_row": 460,
+   "defense_name": "HiAgent",
+   "mechanism_name": "context rot (agentic/long-horizon search)",
+   "match_confidence": "medium",
+   "evidence": "Fix paper arXiv 2408.09559 (v1 2024-08-18, latest 2024-08-18); mechanism paper arXiv 2606.29718 (v1 2026-06-29). Every version of the fix paper predates the mechanism paper. The mechanism paper does not name the fix."
+  },
+  {
+   "defense_row": 514,
+   "defense_name": "MEM1",
+   "mechanism_name": "observation over-ingestion",
+   "match_confidence": "medium",
+   "evidence": "Fix paper arXiv 2506.15841 (v1 2025-06-18, latest 2025-07-17); mechanism paper arXiv 2606.06708 (v1 2026-06-04). Every version of the fix paper predates the mechanism paper. The mechanism paper does not name the fix."
+  },
+  {
+   "defense_row": 488,
+   "defense_name": "MemAct (Memory-as-Action) with Dynamic Context Policy Optimization",
+   "mechanism_name": "observation over-ingestion",
+   "match_confidence": "low",
+   "evidence": "Fix paper arXiv 2510.12635 (v1 2025-10-14, latest 2026-05-07); mechanism paper arXiv 2606.06708 (v1 2026-06-04). Every version of the fix paper predates the mechanism paper. The mechanism paper does not name the fix."
+  },
+  {
+   "defense_row": 198,
+   "defense_name": "PromptSleuth",
+   "mechanism_name": "Cross-Session Stored Prompt Injection (XSPI)",
+   "match_confidence": "low",
+   "evidence": "Fix paper arXiv 2508.20890 (v1 2025-08-28, latest 2025-09-16); mechanism paper arXiv 2606.04425 (v1 2026-06-03). Every version of the fix paper predates the mechanism paper. The mechanism paper does not name the fix."
+  },
+  {
+   "defense_row": 35,
+   "defense_name": "Self-RAG",
+   "mechanism_name": "distraction by irrelevant context (graded by semantic relatedness)",
+   "match_confidence": "low",
+   "evidence": "Fix paper arXiv 2310.11511 (v1 2023-10-17, latest 2023-10-17); mechanism paper arXiv 2404.03302 (v1 2024-04-04). Every version of the fix paper predates the mechanism paper. The mechanism paper does not name the fix."
+  }
+ ]
+}

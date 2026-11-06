@@ -37,12 +37,6 @@
    "confidence": "low"
   },
   {
-   "defense_row": 35,
-   "defense_name": "Self-RAG",
-   "mechanism_name": "distraction by irrelevant context (graded by semantic relatedness)",
-   "confidence": "low"
-  },
-  {
    "defense_row": 36,
    "defense_name": "Corrective Retrieval Augmented Generation (CRAG)",
    "mechanism_name": "distraction by irrelevant context (graded by semantic relatedness)",
@@ -427,12 +421,6 @@
    "confidence": "high"
   },
   {
-   "defense_row": 198,
-   "defense_name": "PromptSleuth",
-   "mechanism_name": "Cross-Session Stored Prompt Injection (XSPI)",
-   "confidence": "low"
-  },
-  {
    "defense_row": 199,
    "defense_name": "PIShield",
    "mechanism_name": "Indirect Prompt Injection (IPI)",
@@ -781,12 +769,6 @@
    "confidence": "high"
   },
   {
-   "defense_row": 420,
-   "defense_name": "COMPASS (Context-Organized Multi-Agent Planning and Strategy System)",
-   "mechanism_name": "Constraint Drift (under long tool traces)",
-   "confidence": "medium"
-  },
-  {
    "defense_row": 422,
    "defense_name": "END (Early Noise Dropping)",
    "mechanism_name": "distraction by irrelevant context",
@@ -808,12 +790,6 @@
    "defense_row": 438,
    "defense_name": "GRACE (Graph-Regularized Agentic Context Evolution)",
    "mechanism_name": "Governance Decay",
-   "confidence": "medium"
-  },
-  {
-   "defense_row": 460,
-   "defense_name": "HiAgent",
-   "mechanism_name": "context rot (agentic/long-horizon search)",
    "confidence": "medium"
   },
   {
@@ -841,18 +817,6 @@
    "confidence": "medium"
   },
   {
-   "defense_row": 484,
-   "defense_name": "AgentFold (folding - granular condensation / deep consolidation context management)",
-   "mechanism_name": "context rot (agentic/long-horizon search)",
-   "confidence": "medium"
-  },
-  {
-   "defense_row": 488,
-   "defense_name": "MemAct (Memory-as-Action) with Dynamic Context Policy Optimization",
-   "mechanism_name": "observation over-ingestion",
-   "confidence": "low"
-  },
-  {
    "defense_row": 496,
    "defense_name": "SAM (State-Adaptive Memory)",
    "mechanism_name": "context rot (agentic/long-horizon search)",
@@ -877,22 +841,10 @@
    "confidence": "low"
   },
   {
-   "defense_row": 506,
-   "defense_name": "AgentProg (program-guided context management with Execution Tree and global belief state)",
-   "mechanism_name": "context rot (agentic/long-horizon search)",
-   "confidence": "medium"
-  },
-  {
    "defense_row": 512,
    "defense_name": "ID-RAG (Identity Retrieval-Augmented Generation)",
    "mechanism_name": "identity drift (persona coherence decay in generative agents)",
    "confidence": "high"
-  },
-  {
-   "defense_row": 514,
-   "defense_name": "MEM1",
-   "mechanism_name": "observation over-ingestion",
-   "confidence": "medium"
   },
   {
    "defense_row": 535,
@@ -995,12 +947,6 @@
    "defense_name": "UNNAMED: Uncertainty-based Random Forest attack detector (chimera/Xmera)",
    "mechanism_name": "Xmera (chimera MitM framework)",
    "confidence": "high"
-  },
-  {
-   "defense_row": 791,
-   "defense_name": "Discern-and-Answer",
-   "mechanism_name": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
-   "confidence": "medium"
   },
   {
    "defense_row": 798,
@@ -1399,17 +1345,18 @@
    "confidence": "high"
   }
  ],
- "n_matched_pairs": 233,
- "n_defenses_matched": 197,
- "n_defenses_total": 529,
+ "n_matched_pairs": 224,
+ "n_defenses_matched": 189,
+ "n_defenses_total": 540,
  "n_mechs_covered": 79,
- "n_mechs_total": 221,
+ "n_mechs_total": 233,
  "uncovered_mechanisms": [
   "AGGD (Approximate Greedy Gradient Descent)",
   "AIShellJack (coding-rule/config-file prompt injection against agentic IDE editors)",
   "ASPI (Ambiguous-State Prompt Injection)",
   "ASTRA (and ASTRA++)",
   "Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given)",
+  "Actor-Critic attack",
   "AdapTools",
   "Adversarial HalluSquatting",
   "Agent Data Injection (ADI)",
@@ -1425,6 +1372,8 @@
   "Brain-Prompt Injection",
   "Branded Whisper Attack / Vault Whisper Attack (from 'Whispers of Wealth')",
   "COMA",
+  "Chain-of-Trigger Backdoor (CoTri)",
+  "ChainFuzzer",
   "Checkpoint-GCG",
   "Cliopatra",
   "CoT Forgery (Chain-of-Thought Forgery)",
@@ -1445,7 +1394,9 @@
   "HARE (Hybrid Agent Roleplay Exploitation) / Token Economy Poisoning",
   "HOUYI",
   "IKEA (Implicit Knowledge Extraction Attack)",
+  "Ignore; Detect; Exploit (hidden prompt injection attacks)",
   "Image-based Prompt Injection (IPI)",
+  "Injection Paradox",
   "Inter-Agent Trust Exploitation (AI agent privilege escalation)",
   "IterInject",
   "JudgeDeceiver",
@@ -1460,7 +1411,9 @@
   "MIRAGE (Masked Injection via Residual And Generative Exploitation)",
   "MUZZLE",
   "Mandate Salience Decay (MSD)",
+  "MemVenom",
   "Mind Mapping Prompt Injection",
+  "NeuroGenPoisoning",
   "OMNI-LEAK (Orchestrator Multi-Agent Network Induced Data Leakage)",
   "ObliInjection",
   "Oracle Poisoning",
@@ -1476,7 +1429,7 @@
   "Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD)",
   "Physical Prompt Injection Attack (PPIA)",
   "Plan Injection",
-  "PoisonedAlign",
+  "Plan-of-Thought (PoT) Backdoor Attack",
   "PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution)",
   "Prompt Infection",
   "Prompt-Injected Data Extraction",
@@ -1493,6 +1446,7 @@
   "Silent Egress (implicit prompt injection via URL preview/metadata)",
   "SkillJect",
   "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
+  "SpAIware",
   "StruPhantom",
   "System Prompt Poisoning (SPP)",
   "TIP (Tree-structured Injection for Payloads) / stealthy update attack",
@@ -1508,7 +1462,6 @@
   "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
   "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
   "UNNAMED: automatic universal gradient-based prompt injection",
-  "UNNAMED: backdoor-based RAG data extraction attack",
   "UNNAMED: chat-template inference-time backdoor",
   "UNNAMED: diverse RL red-teaming (auto-generated rewards + multi-step RL)",
   "UNNAMED: getting lost in multi-turn conversation (premature-answer unreliability under underspecification)",
@@ -1526,10 +1479,11 @@
   "UNNAMED: tree-of-attacks ranking manipulation for conversational search",
   "VATS (Error-Path Injection via Implicit Authority)",
   "VeriGrey (grey-box agent fuzzing for IPI)",
-  "Virtual Prompt Injection (VPI)",
   "VortexPIA",
   "WebInject",
   "ZombAI",
+  "Zombie Agent",
+  "autonomy tax",
   "backdoor-powered prompt injection attack",
   "classifier context rot",
   "context poisoning (self-induced, non-adversarial)",
@@ -1542,15 +1496,19 @@
   "mechanistic refinement of lost-in-the-middle (threshold-dependent onset at ~50% of context window; effect vanishes near window limits)",
   "message history forging (direct prompt injection via forged system/assistant roles)",
   "multi-target memory interference",
+  "multimodal retrieval heads (sparse heads carrying retrieval)",
   "plan anchor",
   "query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing)",
   "reasoning token overflow (RTO) / practical reasoning interruption attack",
   "self-interpreting images via adversarial meta-instructions",
-  "situation-driven contextual adversarial prompt attack"
+  "situation-driven contextual adversarial prompt attack",
+  "structured attack generation framework",
+  "temporal memory contamination",
+  "unintended long-term state poisoning"
  ],
  "mechs_per_defense_distribution": {
-  "1": 163,
-  "2": 32,
+  "1": 156,
+  "2": 31,
   "3": 2
  },
  "top_mechanisms": [
@@ -1704,20 +1662,6 @@
    ]
   ],
   [
-   "context rot (agentic/long-horizon search)",
-   [
-    32,
-    387,
-    388,
-    460,
-    484,
-    496,
-    501,
-    506,
-    567
-   ]
-  ],
-  [
    "distraction by irrelevant context",
    [
     28,
@@ -1730,30 +1674,24 @@
    ]
   ],
   [
+   "context rot (agentic/long-horizon search)",
+   [
+    32,
+    387,
+    388,
+    496,
+    501,
+    567
+   ]
+  ],
+  [
    "distraction by irrelevant context (graded by semantic relatedness)",
    [
     33,
-    35,
     36,
     37,
     402,
     405
-   ]
-  ],
-  [
-   "Cross-Session Stored Prompt Injection (XSPI)",
-   [
-    85,
-    125,
-    198
-   ]
-  ],
-  [
-   "observation over-ingestion",
-   [
-    395,
-    488,
-    514
    ]
   ],
   [
@@ -1772,13 +1710,6 @@
    ]
   ],
   [
-   "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
-   [
-    37,
-    791
-   ]
-  ],
-  [
    "Neural Exec",
    [
     56,
@@ -1786,10 +1717,31 @@
    ]
   ],
   [
+   "Cross-Session Stored Prompt Injection (XSPI)",
+   [
+    85,
+    125
+   ]
+  ],
+  [
    "Cross-Tool Description Poisoning",
    [
     123,
     232
+   ]
+  ],
+  [
+   "Governance Decay",
+   [
+    438,
+    536
+   ]
+  ],
+  [
+   "context drift",
+   [
+    498,
+    916
    ]
   ]
  ],
@@ -1900,24 +1852,19 @@
    32,
    387,
    388,
-   460,
-   484,
    496,
    501,
-   506,
    567
   ],
   "distraction by irrelevant context (graded by semantic relatedness)": [
    33,
-   35,
    36,
    37,
    402,
    405
   ],
   "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs": [
-   37,
-   791
+   37
   ],
   "Neural Exec": [
    56,
@@ -1928,8 +1875,7 @@
   ],
   "Cross-Session Stored Prompt Injection (XSPI)": [
    85,
-   125,
-   198
+   125
   ],
   "Cross-Tool Description Poisoning": [
    123,
@@ -2011,16 +1957,10 @@
    394
   ],
   "observation over-ingestion": [
-   395,
-   488,
-   514
+   395
   ],
   "mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings)": [
    417
-  ],
-  "Constraint Drift (under long tool traces)": [
-   420,
-   500
   ],
   "Governance Decay": [
    438,
@@ -2035,6 +1975,9 @@
   "context drift": [
    498,
    916
+  ],
+  "Constraint Drift (under long tool traces)": [
+   500
   ],
   "identity drift (persona coherence decay in generative agents)": [
    512
@@ -2201,9 +2144,6 @@
    "context rot (agentic/long-horizon search)"
   ],
   "33": [
-   "distraction by irrelevant context (graded by semantic relatedness)"
-  ],
-  "35": [
    "distraction by irrelevant context (graded by semantic relatedness)"
   ],
   "36": [
@@ -2389,7 +2329,6 @@
    "Indirect Prompt Injection (IPI)"
   ],
   "198": [
-   "Cross-Session Stored Prompt Injection (XSPI)",
    "Indirect Prompt Injection (IPI)"
   ],
   "199": [
@@ -2550,9 +2489,6 @@
   "418": [
    "lost in the middle"
   ],
-  "420": [
-   "Constraint Drift (under long tool traces)"
-  ],
   "422": [
    "distraction by irrelevant context"
   ],
@@ -2564,9 +2500,6 @@
   ],
   "438": [
    "Governance Decay"
-  ],
-  "460": [
-   "context rot (agentic/long-horizon search)"
   ],
   "461": [
    "cognitive bandwidth bottleneck (action-space scaling)"
@@ -2580,12 +2513,6 @@
   "482": [
    "distraction by irrelevant context"
   ],
-  "484": [
-   "context rot (agentic/long-horizon search)"
-  ],
-  "488": [
-   "observation over-ingestion"
-  ],
   "496": [
    "context rot (agentic/long-horizon search)"
   ],
@@ -2598,14 +2525,8 @@
   "501": [
    "context rot (agentic/long-horizon search)"
   ],
-  "506": [
-   "context rot (agentic/long-horizon search)"
-  ],
   "512": [
    "identity drift (persona coherence decay in generative agents)"
-  ],
-  "514": [
-   "observation over-ingestion"
   ],
   "535": [
    "UNNAMED: abrupt persona/tone instability from lack of affective state inertia"
@@ -2657,9 +2578,6 @@
   ],
   "762": [
    "Xmera (chimera MitM framework)"
-  ],
-  "791": [
-   "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs"
   ],
   "798": [
    "memory misevolution"

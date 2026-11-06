@@ -37,6 +37,10 @@ OUTPUT_MD = REPO_ROOT / "rq5_coverage_matrix.md"
 # kind of undercount this matrix exists to measure.
 MATCH_BATCH_FILES = ([RAW_DIR / f"rq5_batch{i}.csv" for i in (1, 2, 3, 4)]
                      + sorted(RAW_DIR.glob("rq5_delta_batch*.csv")))
+# Matches checked by hand and found not to be tests: the defense paper predates
+# the paper that named the mechanism, and neither evaluates the other. Applied
+# after reconciliation so a rebuild from the raw batches cannot restore them.
+REJECTED_JSON = REGISTRY_DIR / "rq5_rejected_matches.json"
 FUZZY_RECOVERY_THRESHOLD = 90  # only auto-recover near-exact (likely truncation) mismatches
 
 
@@ -149,6 +153,14 @@ def main():
     if dropped:
         for d in dropped:
             print(f"  dropped: defense row {d['defense_row']} -> '{d['mechanism_name']}' (no confident registry match)")
+
+    if REJECTED_JSON.exists():
+        rej = {(r["defense_row"], r["mechanism_name"])
+               for r in json.loads(REJECTED_JSON.read_text())["rejected"]}
+        before = len(clean)
+        clean = [m for m in clean
+                 if (m["defense_row"], m["mechanism_name"]) not in rej]
+        print(f"Rejected by hand check: {before - len(clean)} of {len(rej)} listed")
 
     stats = compute_stats(clean, registry_names, n_defenses_total)
 

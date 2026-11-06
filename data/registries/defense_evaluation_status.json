@@ -1,17 +1,17 @@
 {
- "generated": "2026-10-25",
+ "generated": "2026-11-06",
  "purpose": "For every RQ4 defense, record what its paper actually evaluated it against.",
- "n_defenses": 541,
+ "n_defenses": 540,
  "counts": {
-  "named_mechanism": 215,
-  "no_baseline": 19,
+  "named_mechanism": 209,
+  "no_baseline": 18,
   "benchmark_only": 37,
   "adversarial_prose": 59,
-  "non_adversarial": 197,
+  "non_adversarial": 203,
   "unclear": 14
  },
- "n_evaluated_adversarially": 311,
- "pct_evaluated_adversarially": 57.5,
+ "n_evaluated_adversarially": 305,
+ "pct_evaluated_adversarially": 56.5,
  "defenses": [
   {
    "defense_name": "MELON (Masked re-Execution and TooL comparisON)",
@@ -1603,8 +1603,8 @@
    "row": 420,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "END (Early Noise Dropping)",
@@ -1738,8 +1738,8 @@
    "row": 460,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Planning with Schemas (PwS)",
@@ -1810,8 +1810,8 @@
    "row": 488,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "SAM (State-Adaptive Memory)",
@@ -1882,8 +1882,8 @@
    "row": 506,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "ID-RAG (Identity Retrieval-Augmented Generation)",
@@ -1900,8 +1900,8 @@
    "row": 514,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "FoldAct",
@@ -3097,8 +3097,8 @@
    "row": 791,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "+ModTool (memory correction tool for MemEvoBench)",
@@ -4854,15 +4854,6 @@
    "validated_against": "",
    "status": "named_mechanism",
    "evidence": "appears in a confirmed coverage pair"
-  },
-  {
-   "defense_name": "UNNAMED: You've Changed: Detecting Modification of Black-Box Large La",
-   "paper_id": "98b790d195d775ee82c42fd596d588a792c6eab3",
-   "row": null,
-   "track": null,
-   "validated_against": "",
-   "status": "no_baseline",
-   "evidence": "paper states no real comparison: None "
   },
   {
    "defense_name": "soft begging",

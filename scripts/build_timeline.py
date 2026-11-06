@@ -52,8 +52,12 @@ def load(name):
     return json.loads((REG / name).read_text())
 
 
+_REGIME = {"Security": "security", "ML/AI": "safety",
+           "security": "security", "safety": "safety"}
+
+
 def _index(entries, namekeys, papers):
-    """name -> {year, track, paper_id, title}, from the paper the entry cites."""
+    """name -> {year, regime, paper_id, title}, from the paper the entry cites."""
     out = {}
     for e in entries:
         nm = next((e.get(k) for k in namekeys if (e.get(k) or "").strip()), None)
@@ -64,9 +68,11 @@ def _index(entries, namekeys, papers):
         out[norm(nm)] = {
             "name": nm.strip(),
             "year": int(year) if year else None,
-            # the registry's own track wins; it was assigned per entry, while
-            # the paper's track is per paper and a paper can carry both
-            "track": (e.get("track") or p.get("track") or "").strip(),
+            # the registry's own regime wins; it was assigned per entry, while
+            # the paper's is per paper. The benchmark-only entries still carry
+            # the retired track vocabulary, so it is mapped, not read raw.
+            "regime": (e.get("regime") or _REGIME.get(e.get("track") or "")
+                       or p.get("regime") or "").strip(),
             "paper_id": e.get("paper_id"),
             "title": p.get("title") or e.get("title"),
             "internal_to_defense_paper": bool(
@@ -115,12 +121,12 @@ def build():
         if A.get("internal_to_defense_paper") and \
                 A.get("paper_id") and A["paper_id"] == D.get("paper_id"):
             continue
-        cross = bool(D["track"] and A["track"] and D["track"] != A["track"])
+        cross = bool(D["regime"] and A["regime"] and D["regime"] != A["regime"])
         rows.append({
             "defense": D["name"], "defense_year": D["year"],
-            "defense_track": D["track"],
+            "defense_regime": D["regime"],
             "attack": A["name"], "attack_year": A["year"],
-            "attack_track": A["track"],
+            "attack_regime": A["regime"],
             "gap_years": D["year"] - A["year"],
             "defense_predates_attack": D["year"] < A["year"],
             "cross_community": cross,
@@ -143,8 +149,8 @@ def report(rows, unresolved):
           f"{len(both):>3} ({100*len(both)/n:.1f}%)")
 
     print("\n== who tests whom ==")
-    m = collections.Counter((r["defense_track"], r["attack_track"]) for r in rows)
-    tracks = sorted({t for r in rows for t in (r["defense_track"], r["attack_track"])})
+    m = collections.Counter((r["defense_regime"], r["attack_regime"]) for r in rows)
+    tracks = sorted({t for r in rows for t in (r["defense_regime"], r["attack_regime"])})
     hdr = "defense vs attack"
     print(f"  {hdr:<22}" + "".join(f"{t:>12}" for t in tracks))
     for dt in tracks:
@@ -159,9 +165,9 @@ def report(rows, unresolved):
     if both:
         print("\n== the cross-community, defense-first pairs ==")
         for r in sorted(both, key=lambda x: x["gap_years"]):
-            print(f"  {r['defense_track']:<9}{r['defense_year']} "
+            print(f"  {r['defense_regime']:<9}{r['defense_year']} "
                   f"{r['defense'][:38]:<40} vs  "
-                  f"{r['attack_track']:<9}{r['attack_year']} {r['attack'][:36]}")
+                  f"{r['attack_regime']:<9}{r['attack_year']} {r['attack'][:36]}")
 
     if unresolved:
         print(f"\n== {len(unresolved)} undated, kept out of every rate above ==")
