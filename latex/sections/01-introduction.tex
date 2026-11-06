@@ -53,11 +53,11 @@ following research questions.
   authors' released code and weights, and compare the results with what the
   same model scores with no document, on a second base model and on a second
   implementation (Sections~\ref{sec:campaign}, \ref{sec:results}).
-\item[RQ3] \textbf{Why do the fixes fail, and does the explanation hold
-  against an attacker who knows the fix?} We ask whether failure belongs to
-  individual methods or to an assumption each design shares. We plant a
-  passage that tells the explanations apart, read the voting defenses' own
-  traces, and build two attacks against the one fix that resisted
+\item[RQ3] \textbf{Does the failure belong to individual methods, or to
+  an assumption their designs share?} We plant a passage that tells the
+  explanations apart, read the voting defenses' own traces, and check the
+  answer against an attacker who knows the fix, with two attacks built
+  against the one fix that resisted
   (Sections~\ref{sec:distractor}, \ref{sec:adaptive}, \ref{sec:neither}).
 \item[RQ4] \textbf{Taken together, do the two communities solve context
   poisoning?} We combine the census with the campaign: where each
