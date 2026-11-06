@@ -885,8 +885,10 @@ def fig_run():
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis("off")
-    x0, w, h, g = 0.10, 2.50, 0.30, 0.15
+    x0, h, g = 0.04, 0.30, 0.15
+    w = W - 2 * x0                          # every row spans the full column
     cx = x0 + w / 2
+    wn, gn = 0.74, 0.14                     # the "if not" box and its gap
     steps = [("Pick a pair", "one fix, one mechanism"),
              ("Control", "the fix works on its own literature's mechanism"),
              ("Take the items", "each question with its top ten retrieved passages"),
@@ -894,15 +896,16 @@ def fig_run():
     y = H - 0.05 - h
     tops = []
     for k, (t, u) in enumerate(steps):
-        _box(ax, x0, y, w, h, t, u)
+        # Control shares its row with "if not", so the pair spans the column
+        _box(ax, x0, y, w - wn - gn if k == 1 else w, h, t, u)
         tops.append(y)
         if k:
             _arrow(ax, cx, y + h + g, cx, y + h)
         y -= h + g
     # a pair whose control fails is not run
     yc = tops[1]
-    _box(ax, x0 + w + 0.12, yc, W - (x0 + w + 0.12) - 0.03, h, "if not:", "pair not run", fs=6.0)
-    _arrow(ax, x0 + w, yc + h / 2, x0 + w + 0.12, yc + h / 2)
+    _box(ax, x0 + w - wn, yc, wn, h, "if not:", "pair not run", fs=6.0)
+    _arrow(ax, x0 + w - wn - gn, yc + h / 2, x0 + w - wn, yc + h / 2)
 
     def three(ytop, items):
         """Fan one box into three side by side, joined by a bus."""
