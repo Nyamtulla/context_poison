@@ -180,6 +180,12 @@ def load_all(root=None, include_supplementary: bool = True,
     numbers exactly, without the Stage 1 recovery pass; include_corrections=False
     additionally restores entries later retracted as duplicates."""
     mechs, defs, cov = load_raw_registries(root)
+    # Entries backfilled after the workbook pass (e7dfeb2) have no paper row.
+    # Every join below keys defenses by row, so give each a unique key rather
+    # than letting them collapse onto the string "None".
+    for d in defs:
+        if d.get("row") is None:
+            d["row"] = f"norow:{d.get('paper_id')}:{d.get('defense_name')}"
 
     if include_benchmark_mechanisms:
         bm = load_benchmark_mechanisms(root)
@@ -232,10 +238,11 @@ def load_all(root=None, include_supplementary: bool = True,
                 raise ValueError(
                     f"recovered pair names defense {p['defense']!r}, which is not in the "
                     f"RQ4 registry - fix the name in the {p['_source_tag']} file to match exactly")
-            mech_to_defenses.setdefault(p["mechanism"], []).append(int(row))
+            key = int(row) if row.isdigit() else row
+            mech_to_defenses.setdefault(p["mechanism"], []).append(key)
             defense_to_mechs.setdefault(row, []).append(p["mechanism"])
             uncovered.discard(p["mechanism"])
-            supp_pairs.append({"defense_row": int(row), "defense_name": p["defense"],
+            supp_pairs.append({"defense_row": key, "defense_name": p["defense"],
                                "mechanism_name": p["mechanism"], "confidence": "high",
                                "justification": p.get("evidence", ""),
                                "outcome": p.get("outcome", ""),
