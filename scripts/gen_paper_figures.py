@@ -820,12 +820,12 @@ def _arrow(ax, x0, y0, x1, y1):
 def fig_vocab():
     """Each community's own words for the bad content and for the
     countermeasure, which countermeasure each builds against which content,
-    the two directions our experiments cross, and the one pair of words this
+    and the one pair of words this
     paper uses across both. Names no method, since none has been introduced
     where it sits. The words in each community's boxes are among the most
     frequent in that regime's titles and abstracts (checked 2026-11-05), chosen
     by the lead; "fix" and "mechanism" in our sense are ours."""
-    W, H = COL, 1.80
+    W, H = COL, 1.60
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis("off")
@@ -835,7 +835,7 @@ def fig_vocab():
     fr = xf + cw + pad                      # right edge of their frame
     wo = 0.74                               # our column
     xo = W - 0.03 - wo
-    h, rg = 0.34, 0.58                      # box height, gap between rows
+    h, rg = 0.34, 0.38                      # box height, gap between rows
     y1 = H - 0.36 - h                       # the bad content
     y2 = y1 - rg - h                        # the countermeasure
 
@@ -853,21 +853,13 @@ def fig_vocab():
 
     # each countermeasure is built for its own column's content
     top, bot = y2 + h, y1
-    xa, xb = xs + 0.18, xf + cw - 0.18
+    xa, xb = xs + 0.30, xf + cw - 0.30
     _arrow(ax, xa, top, xa, bot)
     _arrow(ax, xb, top, xb, bot)
     ax.text(xa + 0.05, top + 0.09, "built against", ha="left", va="center",
             fontsize=5.6, color=INK2)
     ax.text(xb - 0.05, top + 0.09, "built for", ha="right", va="center",
             fontsize=5.6, color=INK2)
-    # our experiments cross them
-    x1, x2 = xs + cw - 0.20, xf + 0.20
-    _arrow(ax, x2, top, x1, bot)
-    _arrow(ax, x1, top, x2, bot)
-    ax.text(x1 - 0.04, bot - 0.08, "first direction", ha="right",
-            va="center", fontsize=5.6, color=INK, style="italic")
-    ax.text(x2 + 0.04, bot - 0.08, "second direction", ha="left",
-            va="center", fontsize=5.6, color=INK, style="italic")
 
     # both communities' words fold into one word per row
     from matplotlib.patches import Rectangle
