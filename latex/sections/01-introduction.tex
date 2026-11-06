@@ -110,6 +110,15 @@ one. If it holds, that tells us little.
   code and weights and compared with an undefended model on the same items
   (RQ2; Sections~\ref{sec:campaign}, \ref{sec:results}).
 
+\item \textbf{We build a benchmark of honest mistakes for retrieval.}
+  Existing datasets of honest mistakes give one passage per question, and a
+  defense that votes across passages needs a retrieved set. We build the
+  mistakes from real retrieved passages: an out-of-date page, a passage that states a third
+  answer, a passage retrieved for another question, and a context diluted
+  with other questions' passages. Each is dosed the way the attacks are, so a
+  defense can meet an attack and an honest mistake on the same items. We
+  release it (Section~\ref{sec:payloadclasses}).
+
 \item \textbf{We explain why fixes fail on the other community's problem,
   and why some of them help.} Failure comes from an assumption each side's
   designs share, not from individual methods. Safety fixes decide how far to
