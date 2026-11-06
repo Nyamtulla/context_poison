@@ -123,7 +123,13 @@ only after spending compute, money or quota out of proportion to
 it~\cite{debi-2026-whispers,feiglin-2026-benchoverflow}.
 Figure~\ref{fig:pipeline} places both axes on the system they describe:
 channels on the way in, consequences on the way out, and the three points
-at which a fix can intervene between them.
+at which a fix can intervene between them. A fix acts at \textbf{ingestion}
+when it inspects or removes content before it enters the context window, at
+\textbf{reasoning} when it changes how the model weighs content already
+inside, and at \textbf{execution} when it checks what the model produces, a
+response or an action, before that output takes effect. A fix that acts at
+none of these, such as an agent architecture that restructures the whole
+pipeline or an audit run afterwards, is coded \emph{none}.
 
 \paragraph{Regime.} The regime is the one assumption that separates the two
 vocabularies of Section~\ref{sec:twovocab}: a security paper assumes an
