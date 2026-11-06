@@ -511,6 +511,17 @@ def main():
     M["NBreadthPairs"] = len(_wp)
     M["NBreadthFromAttack"] = sum(1 for x in _wp if x in _atk)
     M["NBreadthOwnPaper"] = len(_wp) - M["NBreadthFromAttack"]
+    # and what those attack papers report, on build_pair_outcomes.py's lexicon
+    _loss = ("fail", "broken", "degraded", "insufficient", "exploited",
+             "evaded", "assumption")
+    _atk_out = {}
+    for _f in ("attack_paper_evaluations.json",
+               "attack_paper_evaluations_pass3.json"):
+        for x in _pl(_f)["confirmed_pairs"]:
+            _atk_out[(x["defense"], x["mechanism"])] = x["outcome"].lower()
+    M["NBreadthAtkLoses"] = sum(1 for x in _wp if x in _atk
+                                and any(w in _atk_out[x] for w in _loss))
+    M["NBreadthAtkNoVerdict"] = M["NBreadthFromAttack"] - M["NBreadthAtkLoses"]
     _top = max(per_def, key=lambda d: per_def[d])
     M["NBroadestPairs"] = per_def[_top]
     M["NBroadestFromAttack"] = sum(1 for x in pairs

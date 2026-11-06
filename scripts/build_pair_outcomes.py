@@ -152,8 +152,17 @@ def main() -> None:
                                if path and Path(path).exists() else "")
         return body_cache[pid]
 
+    # pairs rejected on a hand check (fix predates the paper naming the
+    # mechanism, neither evaluates the other); see rq5_rejected_matches.json
+    rej_path = REPO / "data/registries/rq5_rejected_matches.json"
+    rejected = ({(r["defense_name"], r["mechanism_name"])
+                 for r in json.loads(rej_path.read_text())["rejected"]}
+                if rej_path.exists() else set())
+
     rows = []
     for i, pair in enumerate(reg["pairs"], 1):
+        if (pair["defense_name"], pair["mechanism_name"]) in rejected:
+            continue
         if i % 50 == 0:
             print(f"  [{i}/{len(reg['pairs'])}]", flush=True)
         caveat = ""

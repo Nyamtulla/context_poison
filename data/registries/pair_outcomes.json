@@ -177,24 +177,6 @@
   "pair_source": "rq5"
  },
  {
-  "defense_name": "Self-RAG",
-  "mechanism_name": "distraction by irrelevant context (graded by semantic relatedness)",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "ddbd8fe782ac98e9c64dd98710687a962195dd9b",
-  "claim_source_paper_title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [],
-  "evidence": "SELF-RAG 13B outperforms ChatGPT and retrieval-augmented Llama2-chat on most tasks (e.g. PopQA 55.8 vs ChatGPT 29.3 acc; Bio FactScore 80.2), with citation precision/recall exceeding all non-proprietary baselines and even ChatGPT on some metrics",
-  "defense_track": "ML/AI",
-  "mechanism_track": "ML/AI",
-  "defense_intervention_point": "reasoning",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
   "defense_name": "Corrective Retrieval Augmented Generation (CRAG)",
   "mechanism_name": "distraction by irrelevant context (graded by semantic relatedness)",
   "reported_by": "defense_paper",
@@ -2430,30 +2412,6 @@
   "pair_source": "rq5"
  },
  {
-  "defense_name": "PromptSleuth",
-  "mechanism_name": "Cross-Session Stored Prompt Injection (XSPI)",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "f16917914c847b8e03594ccedc233e8f88cb3ccd",
-  "claim_source_paper_title": "PromptSleuth: Detecting Prompt Injection via Semantic Intent Invariance",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [
-   {
-    "kind": "accuracy",
-    "value": "100%",
-    "quote": "emember that X' achieved 100%"
-   }
-  ],
-  "evidence": "On PromptSleuth-Bench, PromptSleuth-5-mini outperforms all baselines with a near-zero false negative rate (FNR) of 0.0008 and false positive rate (FPR) of 0.0007, while DataSentinel generalizes poorly off its native benchmark (FNR=0.6669), SecAlign performs poorly (FPR=0.4547, FNR=0.4947), and PromptArmor is more balanced but still weaker (FPR=0.0926, FNR=0.0825). On the existing DataSentinel-Bench, PromptSleuth matches the near-perfect accuracy of the dataset-specific fine-tuned DataSentinel defense (both near 0.0000/0.0000 FPR/FNR) without any dataset-specific fine-tuning, while SecAlign shows very high FNR (0.5967) despite zero FPR. On AgentDojo, PromptSleuth continues to perform strongly while DataSentinel (FNR=0.4878) and especially SecAlign (FPR=0.3855, FNR=0.8664) degrade substantially, confirming that defenses relying on locally fine-tuned models or syntactic rules collapse under",
-  "defense_track": "Security",
-  "mechanism_track": "Security",
-  "defense_intervention_point": "ingestion",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
   "defense_name": "PIShield",
   "mechanism_name": "Indirect Prompt Injection (IPI)",
   "reported_by": "defense_paper",
@@ -4237,35 +4195,6 @@
   "pair_source": "rq5"
  },
  {
-  "defense_name": "COMPASS (Context-Organized Multi-Agent Planning and Strategy System)",
-  "mechanism_name": "Constraint Drift (under long tool traces)",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "bed6e0c90748faf13e8e091d1ce420bf0d2256df",
-  "claim_source_paper_title": "COMPASS: Enhancing Agent Long-Horizon Reasoning with Evolving Context",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [
-   {
-    "kind": "reduction",
-    "value": "35.4% -> 15.2%",
-    "quote": "drops from 35.4% to 15.2%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "26.4%",
-    "quote": "emoving the Context Manager drops Pass@1 to 26.4%"
-   }
-  ],
-  "evidence": "With Gemini 2.5 Pro, COMPASS achieves Pass@1 of 35.4% on BrowseComp, 67.8% on GAIA, and 31.7% on HLE, outperforming both single-agent baselines (Search-and-Browse-only: 16.8/58.6/14.8; +Meta-Thinking: 26.4/61.6/20.6; +Context: 29.8/63.1/28.4) and multi-agent baselines (Agent-as-a-Tool: 31.8/65.5/28.6; Decentralized Handoffs: 28.1/64.8/28.3; Iterative Refinement: 30.5/65.3/27.9) across all three benchmarks -- roughly 4-20% relative improvement depending on baseline and benchmark, with gains most pronounced on BrowseComp. The same pattern holds with Gemini 2.5 Flash (COMPASS: 26.1/60.2/24.6 vs. 12.1-23.4 for baselines). The test-time-scaling extension COMPASS-TTS (Gemini 2.5 Pro) reaches 43.7% on BrowseComp, 72.1% on GAIA, and 35.2% on HLE, exceeding or matching established research agents including OpenAI's DeepResearch-o3 (51.1/67.4/26.6, notably higher on BrowseComp but lower on HLE), D",
-  "defense_track": "ML/AI",
-  "mechanism_track": "ML/AI",
-  "defense_intervention_point": "reasoning",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
   "defense_name": "END (Early Noise Dropping)",
   "mechanism_name": "distraction by irrelevant context",
   "reported_by": "defense_paper",
@@ -4331,35 +4260,6 @@
   "stated_limitation": "",
   "metrics": [],
   "evidence": "Across five independent replications, GRACE improves strict reliability (pass^3, requiring all 3 trials per task to succeed) from the shared initial instruction value of 0.091 to 0.530+/-0.086 at checkpoint l6, 0.594+/-0.135 at l8, and 0.673+/-0.136 at the final checkpoint l10, with pass@3 remaining near ceiling (0.979+/-0.025 at l10); this final pass^3 exceeds the zero-shot Gemini 3.1 Pro reference of 0.242 on the same held-out set. In contrast, HCE (flat-text maintenance) improves initially (0.215 at l6) but fails to sustain the gain, finishing at only 0.191+/-0.051 pass^3 (with pass@3 dropping from 0.618 at l6 to 0.479 at l10), while GRACE without structural analysis improves to 0.458 at l6 but then degrades to 0.248+/-0.144 pass^3 by l10 (pass@3 falling from 0.845 to 0.685), showing that graph structure alone, without the structural-analysis consolidation step, is insufficient for su",
-  "defense_track": "ML/AI",
-  "mechanism_track": "ML/AI",
-  "defense_intervention_point": "reasoning",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
-  "defense_name": "HiAgent",
-  "mechanism_name": "context rot (agentic/long-horizon search)",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "a7fb4245b412f0e54ec26d5973f041d52c83c0ad",
-  "claim_source_paper_title": "HiAgent: Hierarchical Working Memory Management for Solving Long-Horizon Agent Tasks with Large Language Model",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [
-   {
-    "kind": "accuracy",
-    "value": "42.00%",
-    "quote": "success rate over the STANDARD baseline (42.00%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "50%",
-    "quote": "success rate is unchanged (50%"
-   }
-  ],
-  "evidence": "HiAgent roughly doubles overall success rate over the STANDARD baseline (42.00% vs. 21.00%) and improves progress rate by 23.94 points (62.55% vs. 38.61%), while reducing average steps by 3.8 (22.61 vs. 26.41), context token usage by 35.02% (64.98% of baseline), and runtime by 19.42% (80.58% of baseline). Per-task gains include Tyreworld (+50pp success rate, 9.4 fewer steps), Blocksworld (+30pp), and Barman (+20pp); Gripper success rate is unchanged (50% vs. 50%) but context usage drops by over 50%. Ablations on Tyreworld show removing Observation Summarization drops success rate by 30pp and progress rate by 7.6pp; removing Trajectory Retrieval drops success rate by 10pp; removing both drops success rate by 30pp. A 'task decomposition only' variant (generates subgoals but keeps the full trajectory rather than summarizing/hiding it) improves over STANDARD (+30pp success rate) but still un",
   "defense_track": "ML/AI",
   "mechanism_track": "ML/AI",
   "defense_intervention_point": "reasoning",
@@ -4502,58 +4402,6 @@
   "pair_source": "rq5"
  },
  {
-  "defense_name": "AgentFold (folding - granular condensation / deep consolidation context management)",
-  "mechanism_name": "context rot (agentic/long-horizon search)",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "d61dea1dcdf159f226b90287f8899bb9c98d2ef4",
-  "claim_source_paper_title": "AgentFold: Long-Horizon Web Agents with Proactive Context Management",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [],
-  "evidence": "AgentFold-30B-A3B scores 36.2% on BrowseComp, 47.3% on BrowseComp-ZH, 62.1% on WideSearch, and 67.0% on GAIA, outperforming the 671B-parameter DeepSeek-V3.1-A37B (30.0% BrowseComp) and the 355B GLM-4.5-A32B, and beating proprietary OpenAI o4-mini (28.3% BrowseComp) and matching/exceeding Claude-4-Sonnet/Opus and OpenAI o3 on WideSearch (62.1% vs o3's 60.0%). Context grows sub-linearly, from ~3.5k to only ~7k tokens over 100 turns (vs. ReAct's near-linear growth), yielding an 84k-token (92%) context reduction and ~7GB memory savings per inference instance by turn 100. At a 256-turn limit, AgentFold continues improving accuracy on BrowseComp while GLM-4.5-355B saturates and degrades beyond 64 turns; extended to 500 turns, context stays below 20k tokens due to non-monotonic deep-consolidation resets.",
-  "defense_track": "ML/AI",
-  "mechanism_track": "ML/AI",
-  "defense_intervention_point": "ingestion",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
-  "defense_name": "MemAct (Memory-as-Action) with Dynamic Context Policy Optimization",
-  "mechanism_name": "observation over-ingestion",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "5f0f0c762c094bb6e1deba3222331ee51b98d1fc",
-  "claim_source_paper_title": "Memory as Action: Autonomous Context Curation for Long-Horizon Agentic Tasks",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [
-   {
-    "kind": "accuracy",
-    "value": "59.1%",
-    "quote": "emAct-RL-14B achieves the highest multi-objective accuracy (59.1%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "39.3%",
-    "quote": "accuracy versus Search-R1's 39.3%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "40%",
-    "quote": "emAct-RL-7B reduces total inference duration by 40%"
-   }
-  ],
-  "evidence": "MemAct-RL-14B achieves the highest multi-objective accuracy (59.1% average across 2/4/6/8-objective tasks) among all compared methods, outperforming the 16x larger Qwen3-235B (53.1%/0.531 avg) and the specialized Tongyi-DeepResearch (56.0%), while using an average context of only 3,500 tokens per step (about 50% shorter than Qwen3-235B, 60% shorter than Search-R1-14B) and total token cost of 8.2x10^4 (51% lower than Qwen3-235B's 16.7x10^4, 57% lower than Search-R1-14B's 19.3x10^4). MemAct variants occupy the Pareto frontier of accuracy vs. context efficiency (Figure 3/Table 1). RL training over SFT substantially improves multi-objective accuracy (0.485 to 0.591), and a rigid Fixed-Interval memory-update baseline underperforms learned MemAct especially on complex 8-objective tasks, showing static schedules delete critical information at the wrong times. MemAct-RL generalizes well beyond i",
-  "defense_track": "ML/AI",
-  "mechanism_track": "ML/AI",
-  "defense_intervention_point": "reasoning",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
   "defense_name": "SAM (State-Adaptive Memory)",
   "mechanism_name": "context rot (agentic/long-horizon search)",
   "reported_by": "defense_paper",
@@ -4642,50 +4490,6 @@
   "pair_source": "rq5"
  },
  {
-  "defense_name": "AgentProg (program-guided context management with Execution Tree and global belief state)",
-  "mechanism_name": "context rot (agentic/long-horizon search)",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "420c63cc0480a1990a348b741612cbde516b3f30",
-  "claim_source_paper_title": "AgentProg: Empowering Long-Horizon GUI Agents with Program-guided Context Management",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [
-   {
-    "kind": "reduction",
-    "value": "78.0% -> 53.9%",
-    "quote": "drops AndroidWorld success from 78.0% to 53.9%"
-   },
-   {
-    "kind": "reduction",
-    "value": "68.4% -> 39.5%",
-    "quote": "drops AW-Extend success from 68.4% to 39.5%"
-   },
-   {
-    "kind": "reduction",
-    "value": "78.0% -> 64.2%",
-    "quote": "drops AndroidWorld from 78.0% to 64.2%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "78.0%",
-    "quote": "emoving it drops AndroidWorld success from 78.0%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "78.0%",
-    "quote": "emoving Explicit Variables drops AndroidWorld from 78.0%"
-   }
-  ],
-  "evidence": "AgentProg achieves a new state-of-the-art 78.0% success rate on AndroidWorld, surpassing the prior best (Mobile-Agent-v3 with GUI-Owl-32B, 73.3%) by 4.7 percentage points, and outperforms all baselines at every task difficulty level, with the largest margin on medium-difficulty tasks (+25.0 points over MobileUse). On the new AW-Extend long-horizon suite, AgentProg reaches 68.4% success versus the best baseline UI-TARS at 36.8% -- nearly double -- while baseline methods that perform reasonably on AndroidWorld (e.g., UI-TARS at 64.2%, Mobile-Agent-v3-32B at 73.3%) show catastrophic degradation on AW-Extend (down to 36.8% and 28.9% respectively), confirming the paper's central claim that existing context-management strategies (sliding window, summarization, hierarchical planning) fail to scale to long-horizon tasks. Component ablations show global belief state contributes the largest single",
-  "defense_track": "ML/AI",
-  "mechanism_track": "ML/AI",
-  "defense_intervention_point": "ingestion",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
   "defense_name": "ID-RAG (Identity Retrieval-Augmented Generation)",
   "mechanism_name": "identity drift (persona coherence decay in generative agents)",
   "reported_by": "defense_paper",
@@ -4697,30 +4501,6 @@
   "stated_limitation": "",
   "metrics": [],
   "evidence": "HAis using ID-RAG outperformed baseline generative agents in long-horizon persona coherence, achieving higher identity recall across all three tested models by the fourth simulation timestep, with baseline identity recall degrading over time to just 0.56, 0.53, and 0.51 for GPT-4o, GPT-4o mini, and Qwen2.5-7B respectively, while ID-RAG substantially mitigated this decline. Action alignment also consistently improved with ID-RAG for both GPT-4o and GPT-4o mini (statistically significant improvements by simulation step, e.g., step 4 for GPT-4o mini when comparing baseline vs. full-retrieval conditions), though the open-source Qwen2.5-7B model struggled with overall simulation stability and exhibited minimal action variance, limiting its ability to benefit as clearly. ID-RAG also reduced simulation convergence time (time to successfully progress through 7 simulation episodes) by 19% for GPT",
-  "defense_track": "ML/AI",
-  "mechanism_track": "ML/AI",
-  "defense_intervention_point": "reasoning",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
-  "defense_name": "MEM1",
-  "mechanism_name": "observation over-ingestion",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "6c5f3dd82ee674d929a8eb4b256ca2045e02ae60",
-  "claim_source_paper_title": "MEM1: Learning to Synergize Memory and Reasoning for Efficient Long-Horizon Agents",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [
-   {
-    "kind": "accuracy",
-    "value": "27.1%",
-    "quote": "EM1's peak token usage stays almost constant, requiring only 27.1%"
-   }
-  ],
-  "evidence": "On multi-objective multi-hop QA, MEM1-QA (trained only on 2-objective composites) achieves the best EM/F1 scores among all 7B-scale models at 2-, 8-, and 16-objective task levels, and eventually surpasses Qwen2.5-14B-Instruct (double the parameter count) as the number of objectives grows, while all baseline methods' peak token usage scales nearly linearly with the number of objectives - MEM1's peak token usage stays almost constant, requiring only 27.1% of the peak tokens and 29.3% of the total inference time of Qwen2.5-14B-Instruct at the 16-objective level. On WebShop, MEM1-WebShop achieves the highest average final reward (70.87) among all evaluated models, including GPT-4o (25.48) and AgentLM-13B (70.80, twice the parameter count), while using dramatically less peak token usage (0.81K vs. GPT-4o's 5.30K), lower dependency length, and faster inference. On single-objective Wikipedia RA",
   "defense_track": "ML/AI",
   "mechanism_track": "ML/AI",
   "defense_intervention_point": "reasoning",
@@ -5201,50 +4981,6 @@
   "evidence": "The chimera framework's three attack variants achieve substantially different average attack success rates (1 - accuracy) across all models and datasets: alpha-chimera (instruction-based, e.g., appending 'Respond with a wrong answer') is the most impactful despite being the simplest, at ~55.3% average ASR; beta-chimera (injecting factually incorrect but topically relevant context) achieves ~42.9-45.4% ASR; and gamma-chimera (injecting semantically irrelevant but well-formed noise context) achieves ~26.3-30.2% ASR. Attack impact varies notably by model: with beta-chimera, accuracy degrades steadily as model size decreases (larger models more robust), but alpha-chimera shows a counterintuitive pattern -- GPT-4o-mini, despite being more capable than several smaller open models on baseline QA accuracy, plummets to just 14.7-14.9% accuracy under alpha-chimera (the worst result of any model on",
   "defense_track": "Security",
   "mechanism_track": "Security",
-  "defense_intervention_point": "none",
-  "cross_track": false,
-  "pair_source": "rq5"
- },
- {
-  "defense_name": "Discern-and-Answer",
-  "mechanism_name": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
-  "reported_by": "defense_paper",
-  "reported_verdict": "defense_wins_claimed",
-  "outcome_as_adjudicated": "",
-  "claim_source_paper_id": "66cca7a055ee9278d0439654f474cbfa4135aff0",
-  "claim_source_paper_title": "Why So Gullible? Enhancing the Robustness of Retrieval-Augmented Models against Counterfactual Noise",
-  "mechanism_named_in_text": false,
-  "stated_limitation": "",
-  "metrics": [
-   {
-    "kind": "reduction",
-    "value": "62.5%/63.3% -> 28.1%/30.6%",
-    "quote": "drops from 62.5%/63.3% (0%) to 28.1%/30.6%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "62.5%",
-    "quote": "emi-Parametric EM drops from 62.5%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "22.7%",
-    "quote": "emi-Parametric EM falls to 22.7%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "35%",
-    "quote": "EM points at 35%"
-   },
-   {
-    "kind": "accuracy",
-    "value": "35%",
-    "quote": "EM at 35%"
-   }
-  ],
-  "evidence": "Both FiD and GPT-3.5 degrade sharply as perturbation increases: FiD's Semi-Parametric EM drops from 62.5%/63.3% (0%) to 28.1%/30.6% (35%, dev/test), and GPT-3.5's Semi-Parametric EM falls to 22.7%/24.2% at 35%, actually underperforming its no-retrieval Parametric baseline (32.0%/36.8%). Adding the fine-tuned discriminator (Semi-Parametric w/ Disc-FiD) recovers substantial performance: FiD gains up to +10.2/+5.8 EM points at 35% perturbation (avg +4.7/+3.9 across levels), and GPT-3.5 with FiD's injected discriminator output gains +4.6/+4.4 EM at 35% (avg +2.5/+3.8). The discriminator achieves high classification precision (93.5-97.1% across 15-35% perturbation on NQ-Open) but GPT-3.5's own instruction-based discrimination (Disc-Inst) shows much weaker precision (21.0-43.4%) and provides little to no improvement, motivating the hybrid Disc-FiD-into-prompt approach. On MacNoise, gains are e",
-  "defense_track": "ML/AI",
-  "mechanism_track": "ML/AI",
   "defense_intervention_point": "none",
   "cross_track": false,
   "pair_source": "rq5"

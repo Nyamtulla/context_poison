@@ -358,8 +358,16 @@ def fig_who_reports():
     The legend sits above the plot rather than inside it: the defense-paper
     bar runs nearly the full width, so an inset legend lands on top of data.
     """
-    data = [("reported by\nmechanism papers", 0, 13, 24),
-            ("reported by\nfix papers", 193, 1, 0)]
+    # read, not typed: the typed counts went stale when nine pairs were
+    # rejected (rq5_rejected_matches.json)
+    c = collections.defaultdict(collections.Counter)
+    for o in load("pair_outcomes.json"):
+        c[o["reported_by"]][o["reported_verdict"]] += 1
+    a, d = c["attack_paper"], c["defense_paper"]
+    data = [("reported by\nmechanism papers", a["defense_wins_claimed"],
+             a["evaluated_no_directional_verdict"], a["defense_loses_reported"]),
+            ("reported by\nfix papers", d["defense_wins_claimed"],
+             d["no_reported_result_found"], d["defense_loses_reported"])]
     fig, ax = plt.subplots(figsize=(COL, 1.85), constrained_layout=True)
     for i, (lab, win, inc, lose) in enumerate(data):
         left = 0
