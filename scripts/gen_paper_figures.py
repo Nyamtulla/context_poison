@@ -822,9 +822,9 @@ def fig_vocab():
     countermeasure, which countermeasure each builds against which content,
     the two directions our experiments cross, and the one pair of words this
     paper uses across both. Names no method, since none has been introduced
-    where it sits. The safety column is the safety abstracts' usage: they name
-    the failure mode and call the countermeasure a method; "fix" and
-    "mechanism" in that sense are ours."""
+    where it sits. The words in each community's boxes are among the most
+    frequent in that regime's titles and abstracts (checked 2026-11-05), chosen
+    by the lead; "fix" and "mechanism" in our sense are ours."""
     W, H = COL, 1.80
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
@@ -846,10 +846,10 @@ def fig_vocab():
         ax.plot([x0, x0 + w], [H - 0.23, H - 0.23], color=col, lw=1.8,
                 solid_capstyle="butt")
 
-    _box(ax, xs, y1, cw, h, "attack,\nattack technique", accent=TRACK_SEC, fs=6.2)
-    _box(ax, xf, y1, cw, h, "failure mode, e.g.\nknowledge conflict", accent=TRACK_ML, fs=6.2)
-    _box(ax, xs, y2, cw, h, "defense, mitigation", accent=TRACK_SEC, fs=6.2)
-    _box(ax, xf, y2, cw, h, "method, mitigation", accent=TRACK_ML, fs=6.2)
+    _box(ax, xs, y1, cw, h, "attack, vulnerability,\nthreat", accent=TRACK_SEC, fs=6.2)
+    _box(ax, xf, y1, cw, h, "degradation, failure,\nconflict, hallucination", accent=TRACK_ML, fs=6.2)
+    _box(ax, xs, y2, cw, h, "defense, guardrail,\nsafeguard, protection", accent=TRACK_SEC, fs=6.2)
+    _box(ax, xf, y2, cw, h, "mitigation, method,\nframework, strategy", accent=TRACK_ML, fs=6.2)
 
     # each countermeasure is built for its own column's content
     top, bot = y2 + h, y1
