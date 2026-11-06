@@ -23,11 +23,10 @@ attacker have no third-party content at all.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig8_vocab}
-\caption{The same slots, named twice. Each column is one regime's own words;
-across both regimes we write \emph{mechanism} and \emph{fix}. Each fix is
-built for its own regime's mechanism, and our experiments cross the two in
-two directions (Section~\ref{sec:results}). The taxonomy in
-Section~\ref{sec:taxonomy} uses neutral terms so that both sides fit.}
+\caption{One vocabulary from two. The top row names the content that should
+not be trusted and the bottom row names the countermeasure, first in each
+community's own words and then in ours. Across both regimes we write
+\emph{mechanism} and \emph{fix}.}
 \label{fig:vocab}
 \end{figure}
 
@@ -50,7 +49,11 @@ as often. We write \emph{security venue} or \emph{AI venue} for where a paper
 appeared, and plain \meth{security} or \meth{safety} for what it addresses.
 An adversary re-optimizes against whatever method is in place; a stale
 document does not. That difference is real, because a method tuned to the
-average case has no reason to hold at the worst case. How much it matters to
+average case has no reason to hold at the worst case. It is also why the
+two regimes judge a countermeasure differently. Security counts it a success
+when the adversary fails and tests it against the worst case. Safety counts
+it a success when accuracy rises and tests it on average-case benchmarks.
+How much the difference matters to
 the model is a separate question, since the model reads tokens either way and
 nothing in the text marks who wrote it. Section~\ref{sec:regime} measures
 it. When the bad text states a wrong answer, a passage an attacker wrote to win
@@ -58,7 +61,8 @@ does more damage than a real outdated one. When it only takes the place
 of the right evidence, an attack and an honest error do the same damage.
 
 Because the two communities use different words for one failure, we choose
-one set of words for this paper. We use \emph{mechanism} for anything that makes the context
+one set of words for this paper, shown in the last column of
+Figure~\ref{fig:vocab}. We use \emph{mechanism} for anything that makes the context
 stop supporting the right answer, and \emph{fix} for anything meant to keep
 it supporting that answer, whatever either one's authors call it. We use these two words wherever a statement spans both regimes: the corpus
 as a whole, a pair whose two sides come from different regimes, and the

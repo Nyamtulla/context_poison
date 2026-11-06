@@ -818,62 +818,42 @@ def _arrow(ax, x0, y0, x1, y1):
 
 
 def fig_vocab():
-    """The two regimes' words for the same slots, and which fix meets which
-    mechanism. Replaces the old tab:vocab; names no method, since none has
-    been introduced where it sits."""
-    W, H = COL, 2.55
+    """Each community's words for the bad content and for the countermeasure,
+    and the one pair of words this paper uses across both. Names no method,
+    since none has been introduced where it sits."""
+    W, H = COL, 1.32
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis("off")
-    L0, R0, cw = 0.78, 2.19, 1.30           # column starts and width
-    lab = dict(ha="right", va="center", fontsize=6.0, color=INK2, style="italic")
+    cw, gap, pad = 1.08, 0.10, 0.06         # the two communities' columns
+    xs = 0.04 + pad
+    xf = xs + cw + gap
+    fr = xf + cw + pad                      # right edge of their frame
+    wo = 0.74                               # our column
+    xo = W - 0.03 - wo
+    h, rg = 0.34, 0.16                      # box height, gap between rows
+    y1 = H - 0.36 - h                       # the bad content
+    y2 = y1 - rg - h                        # the countermeasure
 
-    # header: the regime, and who places the content
-    y = H - 0.42
-    for x0, name, who, col in ((L0, "Security", "an adversary,\nmodeled explicitly", TRACK_SEC),
-                               (R0, "Safety", "nobody; a property\nof the pipeline", TRACK_ML)):
-        ax.text(x0 + cw / 2, y + 0.30, name, ha="center", va="center",
+    for x0, w, name, col in ((xs, cw, "Security", TRACK_SEC), (xf, cw, "Safety", TRACK_ML),
+                             (xo, wo, "Ours", INK)):
+        ax.text(x0 + w / 2, H - 0.13, name, ha="center", va="center",
                 fontsize=7.2, fontweight="bold", color=INK)
-        ax.plot([x0, x0 + cw], [y + 0.20, y + 0.20], color=col, lw=1.8,
+        ax.plot([x0, x0 + w], [H - 0.23, H - 0.23], color=col, lw=1.8,
                 solid_capstyle="butt")
-        ax.text(x0 + cw / 2, y + 0.04, who, ha="center", va="center",
-                fontsize=6.0, color=INK2, linespacing=1.15)
-    ax.text(L0 - 0.06, y + 0.04, "who places it", **lab)
 
-    # what gets in, and the countermeasure, with the arrows between them
-    ym, hm = H - 0.88, 0.32
-    _box(ax, L0, ym, cw, hm, "attack,\nattack technique", accent=TRACK_SEC)
-    _box(ax, R0, ym, cw, hm, "mechanism,\ndegradation mechanism", accent=TRACK_ML)
-    ax.text(L0 - 0.06, ym + hm / 2, "what gets in", **lab)
-    yf, hf = ym - 0.50 - 0.26, 0.26
-    _box(ax, L0, yf, cw, hf, "defense, mitigation", accent=TRACK_SEC)
-    _box(ax, R0, yf, cw, hf, "fix, method", accent=TRACK_ML)
-    ax.text(L0 - 0.06, yf + hf / 2, "the countermeasure", **lab)
-    top_f, bot_m = yf + hf, ym
-    xa, xb = L0 + 0.30, R0 + cw - 0.30      # each fix meets its own mechanism
-    _arrow(ax, xa, top_f, xa, bot_m)
-    _arrow(ax, xb, top_f, xb, bot_m)
-    ax.text(xa + 0.05, top_f + 0.09, "built against", ha="left", va="center",
-            fontsize=5.6, color=INK2)
-    ax.text(xb - 0.05, top_f + 0.09, "built for", ha="right", va="center",
-            fontsize=5.6, color=INK2)
-    x1, x2 = L0 + cw - 0.22, R0 + 0.22      # our experiments cross them
-    _arrow(ax, x2, top_f, x1, bot_m)
-    _arrow(ax, x1, top_f, x2, bot_m)
-    ax.text(x1 - 0.04, bot_m - 0.08, "first direction", ha="right",
-            va="center", fontsize=5.6, color=INK, style="italic")
-    ax.text(x2 + 0.04, bot_m - 0.08, "second direction", ha="left",
-            va="center", fontsize=5.6, color=INK, style="italic")
+    _box(ax, xs, y1, cw, h, "attack,\nattack technique", accent=TRACK_SEC, fs=6.2)
+    _box(ax, xf, y1, cw, h, "mechanism,\ndegradation mechanism", accent=TRACK_ML, fs=6.2)
+    _box(ax, xs, y2, cw, h, "defense, mitigation", accent=TRACK_SEC, fs=6.2)
+    _box(ax, xf, y2, cw, h, "fix, method", accent=TRACK_ML, fs=6.2)
 
-    # how each side judges a countermeasure
-    ys = yf - 0.12
-    ax.plot([0.05, W - 0.02], [ys, ys], color=MUTED, lw=0.4)
-    for k, (slot, sec, saf) in enumerate((("what success means", "the adversary fails", "accuracy rises"),
-                                          ("evaluation style", "worst case", "average case"))):
-        yy = ys - 0.17 - k * 0.24
-        ax.text(L0 - 0.06, yy, slot, **lab)
-        ax.text(L0 + cw / 2, yy, sec, ha="center", va="center", fontsize=6.4, color=INK)
-        ax.text(R0 + cw / 2, yy, saf, ha="center", va="center", fontsize=6.4, color=INK)
+    # both communities' words fold into one word per row
+    from matplotlib.patches import Rectangle
+    ax.add_patch(Rectangle((0.04, y2 - pad), fr - 0.04, y1 + h + pad - (y2 - pad),
+                           facecolor="none", edgecolor=MUTED, lw=0.6, ls=(0, (3, 2))))
+    for y, word in ((y1, "mechanism"), (y2, "fix")):
+        _box(ax, xo, y, wo, h, word, fs=6.8)
+        _arrow(ax, fr, y + h / 2, xo, y + h / 2)
     save(fig, "fig8_vocab")
 
 
