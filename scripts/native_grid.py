@@ -123,6 +123,12 @@ def main():
                     default=[0, 1, 2, 3, 5, 10])
     ap.add_argument("--model", default="NousResearch/Meta-Llama-3-8B-Instruct")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--shots", type=int, default=0, choices=[0, 5],
+                    help="ACD only: 5 gives it the same five CoConflictQA "
+                         "shots its control ran with (PAPER_PLAN A2). The "
+                         "first ACD cells ran zero-shot, so the control "
+                         "certified a different prompt; the 5-shot cells go "
+                         "to their own files and leave those as they are.")
     ap.add_argument("--closedbook_only", action="store_true",
                     help="measure only the no-retrieval arm and merge it into "
                          "an existing registry. Eight cells were finished "
@@ -142,6 +148,7 @@ def main():
     out = REPO / (a.out or
                   f"data/registries/native_{a.defense}_{a.attack}"
                   + ("" if a.placement == "retrieval" else "_direct")
+                  + (f"_{a.shots}shot" if a.shots else "")
                   + ".json")
     doc = json.loads(out.read_text()) if out.exists() else {}
     done = {r["n_poison"] for r in doc.get("results", [])}
@@ -156,7 +163,13 @@ def main():
     print(f"{a.defense} vs {a.attack}: {len(data)} items, top_k={a.top_k}")
 
     import defenses
-    d = defenses.load(a.defense, a.model)
+    kw = {}
+    if a.shots:
+        if a.defense != "acd":
+            sys.exit("--shots applies to ACD only")
+        from stack_run import acd_shots    # the draw scripts/control_gate.py makes
+        kw["shots"] = acd_shots()
+    d = defenses.load(a.defense, a.model, **kw)
     print(f"  arms: {', '.join(d.arms)}")
 
     results = doc.get("results", [])
@@ -213,6 +226,7 @@ def main():
                "attack": a.attack, "placement": a.placement,
                "dataset": "open_nq", "top_k": a.top_k,
                "model": a.model, "n": len(data), "protocol": "native: j of k",
+               "shots": a.shots,
                "mdr_pp_at_n": round(min_detectable_change(len(data), 0.5), 1),
                "doses_done": sorted({r["n_poison"] for r in results}),
                # a reader must be able to tell a finished cell from one still
