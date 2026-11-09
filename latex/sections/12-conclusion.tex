@@ -53,8 +53,10 @@ Taken together, the two communities do not solve context poisoning. Security
 defends where text enters and safety where the model reasons, no published
 work joins the two stages, and each stage's fixes fail on the failures the
 other stage is built for. A system assembled from both literatures places
-each failure in front of a fix that was not built for it. We have not yet
-measured such a stack, so this rests on each stage measured alone.
+each failure in front of a fix that was not built for it. We measured one
+such system, a security filter in front of a safety fix. It did no better
+than its stronger half on any case, and the attack PoisonedRAG passed both
+halves.
 
 Two further results sharpen the first direction's claim. First, protection depends on the \emph{form} of the planted passage, not only
 on whether an attacker is present. An evaluation built around optimized

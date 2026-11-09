@@ -204,7 +204,9 @@ We also re-ran part of the retrieval experiment on a second base model, and
 we ran both released implementations of the security defense RobustRAG, which share one idea and no code after that point. The last two experiments test the explanation rather than the fixes. We
 built two attacks against the single fix that resisted, one searching
 over surface forms and one optimizing a suffix with gradients, both targeting
-the quantity that fix's own rule measures. We have also started an experiment that stacks two fixes acting at
-different stages of the same pipeline, to measure RQ5 directly: whether
-the pair holds where each half does not. Each fix has run on its own; the
-stacked result is not yet computed, and we report none.
+the quantity that fix's own rule measures. A final experiment stacks two fixes acting at different stages of the same
+pipeline, to measure RQ5 directly: whether the pair holds where each half
+does not. The safety fix ACD, with the five examples its control used, and
+the security filters DataSentinel and PIGuard each run alone, and each
+filter runs in front of ACD, on the same items, against three attacks and
+three honest mistakes.

@@ -566,13 +566,30 @@ document, and that choice hands the answer to whoever wrote it. A pipeline
 that stacks one fix from each side therefore puts each failure in front of a
 fix that was not built for it.
 
-We have not measured such a stack. The experiment has started and is not
-finished (Section~\ref{sec:threats}), so this answer rests on each stage
-measured alone.
+We measured one such stack (Table~\ref{tab:stack}). The safety fix ACD ran
+alone, the security filters DataSentinel and PIGuard each ran alone, and each
+filter ran in front of ACD, all on the same items with five of the ten
+retrieved passages bad. In all \NStackCells{} comparisons, the stack scored
+at most \EStackGainMax{} points above and \EStackLossMax{} points below the
+better of its two halves. It did what its stronger half did and nothing more.
+
+Each half covered different cases. Neither filter moved the correct or the
+planted rate on any honest mistake by more than \EStackFilterHonestMax{}
+points, while ACD cut the planted third answer from
+\EStackDistUndefAsr\% to \EStackDistAcdAsr\%. BadRAG's refusal attack cut
+correct answers to \EStackRefUndefAcc\% with no defense. PIGuard brought them
+back to \EStackRefPgAcc\% and ACD to \EStackRefAcdAcc\%, and DataSentinel
+left them at \EStackRefDsAcc\%. Against PoisonedRAG no arm brought the planted
+answer below \EStackPrBestAsr\%, from \EStackPrUndefAsr\% with no defense, so
+an attack that passes both halves also passes the stack.
+
+\input{tables/stack}
 
 Answer to RQ5. No. Taken together, the two communities cover two stages of
 one pipeline but do not connect them. Their fixes act at different places,
 neither community tests its fixes against the other's failures, and no
-published work combines them, so the field holds no method shown to stop
+published work combines them. Stacking one fix from each side gives each
+case the better of the two fixes and adds nothing, so the field holds no
+method shown to stop
 context poisoning whether an attacker or an honest mistake put the bad text
 there.

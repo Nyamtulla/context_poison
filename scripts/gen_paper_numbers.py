@@ -1469,6 +1469,36 @@ def main():
     E["ERwMdr"] = float(json.loads((R / "native_reliabilityrag_incidental_stale_reworded.json")
                                    .read_text())["mdr_pp_at_n"])
 
+    # RQ5's stack (scripts/stack_run.py, Table tab:stack): ACD alone, each
+    # filter alone, and the filter in front of ACD, at five bad passages of
+    # ten. The stacked arm against the better of its two halves, over every
+    # case, dose and filter, is the whole result.
+    import gen_stack_table as _gst
+    _gap = _gst.stack_vs_best()
+    E["EStackGainMax"] = round(max(_gap), 1)
+    E["EStackLossMax"] = round(-min(_gap), 1)
+    M["NStackCells"] = len(_gap)
+
+    def _st(stem, key, arm):
+        return _gst.load(stem)[1][(arm, _gst.DOSE)][key]
+    _bd = "p1_badrag_dos"
+    E["EStackRefUndefAcc"] = _st(_bd, "acc", "undefended")
+    E["EStackRefUndefRefusal"] = _st(_bd, "refusal_rate", "undefended")
+    E["EStackRefDsAcc"] = _st(_bd, "acc", "filter:datasentinel")
+    E["EStackRefPgAcc"] = _st(_bd, "acc", "filter:piguard")
+    E["EStackRefAcdAcc"] = _st(_bd, "acc", "fix")
+    E["EStackRefStackPgAcc"] = _st(_bd, "acc", "stack:piguard")
+    _pr = "p1_poisonedrag_distinct"
+    E["EStackPrUndefAsr"] = _st(_pr, "asr", "undefended")
+    E["EStackPrBestAsr"] = min(_st(_pr, "asr", a) for a, _ in _gst.ARMS[1:])
+    E["EStackDistUndefAsr"] = _st("distractor_evidence", "asr", "undefended")
+    E["EStackDistAcdAsr"] = _st("distractor_evidence", "asr", "fix")
+    # the filters on the honest mistakes: largest move in either rate
+    E["EStackFilterHonestMax"] = round(max(
+        abs(_st(s, k, f"filter:{f}") - _st(s, k, "undefended"))
+        for s, _, _, _, atk in _gst.CASES if not atk
+        for f in _gst.FILTERS for k in ("acc", "asr")), 1)
+
     # Python rounds halves to even, so 0.25 would print as 0.2 where the
     # paper has always printed 0.3. Round half up, as a reader expects.
     from decimal import Decimal, ROUND_HALF_UP
