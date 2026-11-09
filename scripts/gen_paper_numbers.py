@@ -1247,6 +1247,7 @@ def main():
     # the rest of the paper uses, so a cell that moves less than its own
     # threshold counts as neither a gain nor a loss.
     import glob as _glob
+    from pair_tally import superseded as _pt_superseded
     _UND = ("undefended", "base_rag", "rag", "base")
     _DEF = ("defended", "ck", "coiecd", "acd", "scr", "parammute", "dyprag")
     _cells, _gain, _lose, _freeclean, _costclean = [], 0, 0, 0, 0
@@ -1262,6 +1263,9 @@ def main():
             continue
         # Reworded stale copies probe the stale document; not a grid cell.
         if _f.endswith("_reworded.json"):
+            continue
+        # A zero-shot ACD cell is replaced by its 5-shot rerun (PAPER_PLAN A2).
+        if _pt_superseded(_f):
             continue
         _d = json.loads(pathlib.Path(_f).read_text())
         _rows = [r for r in (_d.get("results") or []) if isinstance(r, dict)]

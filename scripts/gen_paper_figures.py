@@ -257,8 +257,8 @@ def fig_cube():
                            ha="right", rotation_mode="anchor")
         ax.set_yticks(range(len(CHANNELS)))
         ax.set_yticklabels(CHANNELS if track == "security" else [], fontsize=CS * 8)
-        ax.set_title("security papers" if track == "security"
-                     else "safety papers",
+        ax.set_title("security" if track == "security"
+                     else "safety",
                      fontsize=CS * 9, color=col)
         for sp in ax.spines.values():
             sp.set_visible(False)
@@ -425,10 +425,11 @@ def fig_dose():
     # was a dose we built for an item set that has none. Open NQ ships a
     # ranked pool, so the dose is the attack's own parameter: j of the top
     # ten, where j=1 is the default in its released constructor.
+    from pair_tally import grid_file as pt_grid_file
     RUNS = [("ParamMute", "native_parammute_corpus_poisoning.json"),
             ("CK-PLUG", "native_ckplug_corpus_poisoning.json"),
             ("COIECD", "native_coiecd_corpus_poisoning.json"),
-            ("ACD", "native_acd_corpus_poisoning.json"),
+            ("ACD", pt_grid_file("native_acd_corpus_poisoning").name),  # 5-shot rerun
             ("SCR", "native_scr_corpus_poisoning.json"),
             ("DyPRAG", "native_dyprag_corpus_poisoning.json")]
     UND = ("undefended", "base_rag", "rag", "base")

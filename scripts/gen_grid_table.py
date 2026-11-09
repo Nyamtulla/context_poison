@@ -30,6 +30,8 @@ from __future__ import annotations
 import json
 import pathlib
 
+from pair_tally import grid_file
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 REG = REPO / "data" / "registries"
 OUT = REPO / "latex" / "tables" / "grid.tex"
@@ -101,7 +103,7 @@ def main():
     grid, pending = {}, []
     for dfn in ROWS:
         for atk in COLS:
-            p = REG / f"native_{dfn}_{atk}.json"
+            p = grid_file(f"native_{dfn}_{atk}")   # 5-shot ACD rerun if present
             if not p.exists():
                 continue
             c = cell(p)
@@ -120,7 +122,9 @@ def main():
          "causes, for reference. Cells are percentage points against the "
          "run's undefended arm on the same items, with nothing planted "
          "(\\emph{clean}) and with five of the top ten retrieved passages "
-         "planted (\\emph{5/10}). Refusal and tone are BadRAG's two attacks.}",
+         "planted (\\emph{5/10}). Refusal and tone are BadRAG's two attacks. "
+         "ACD runs with the five example questions its control used, and "
+         "its code gives the same examples to the undefended model.}",
          "\\label{tab:grid}", "\\footnotesize",
          "\\setlength{\\tabcolsep}{1.5pt}",
          "\\begin{tabular}{@{}l" + "rr" * width + "@{}}", "\\toprule"]

@@ -147,6 +147,26 @@ def _tight(s):
 VARIANTS = ("crossover", "mistral", "llama", "greedy", "pilot", "dose", "alpha")
 
 
+def superseded(path) -> bool:
+    """True for a grid file whose rerun under its authors' own setting exists.
+
+    The open-NQ ACD cells first ran zero-shot while ACD's control ran with
+    five CoConflictQA shots (PAPER_PLAN A2). The 5-shot reruns sit beside them
+    as *_5shot.json and replace them; the zero-shot files stay on disk as the
+    record of what ran first. Every reader of the native_* files skips a file
+    this returns True for, so a pair is never counted twice.
+    """
+    p = pathlib.Path(path)
+    return (not p.stem.endswith("_5shot")
+            and p.with_name(p.stem + "_5shot.json").exists())
+
+
+def grid_file(stem: str) -> pathlib.Path:
+    """The registry file to report for a grid cell: its 5-shot rerun if any."""
+    p = R / f"{stem}_5shot.json"
+    return p if p.exists() else R / f"{stem}.json"
+
+
 def _token(stem, table):
     stem = _sep(stem)
     for tok, label, key in table:
@@ -177,6 +197,8 @@ def retrieval_runs():
                 and isinstance(rows[0], dict) and "arm" in rows[0]):
             continue
         stem = path.stem.lower()
+        if superseded(path):
+            continue
         if stem in NOT_PAIR_RUNS:
             continue
         # smoke tests and dry runs of the second-direction runners check
