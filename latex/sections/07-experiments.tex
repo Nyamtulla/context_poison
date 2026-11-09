@@ -2,17 +2,17 @@
 \label{sec:experiments}
 
 To test the untested region of Section~\ref{sec:emptycell} we built one
-harness. It runs a published fix against a mechanism under one protocol, with the controls fixed before any run.
+harness. It runs a published fix against a cause under one protocol, with the controls fixed before any run.
 This section describes how the harness holds every run to the same
 conditions, how it picks the pairs, and the rules it enforces.
-Section~\ref{sec:setup} lists the models, data, fixes and mechanisms it ran,
+Section~\ref{sec:setup} lists the models, data, fixes and causes it ran,
 and Section~\ref{sec:results} what they showed.
 
 \subsection{The harness}
 \label{sec:harness}
 
 The harness separates what varies between runs from what must not. A run is
-one fix, one mechanism, one dose and one arm. Everything
+one fix, one cause, one dose and one arm. Everything
 else is fixed by the harness, not by the run. Figure~\ref{fig:run} shows one
 run, from the pair to its verdict.
 
@@ -33,7 +33,7 @@ do the undefended and no-document arms, so any difference between arms comes fro
 authors' code under the dependency versions its authors pinned, one
 environment per fix, and the harness reaches each through the same
 interface: a question and its context in, an answer out. This is what lets
-fixes with conflicting dependencies meet the same mechanisms. They do
+fixes with conflicting dependencies meet the same causes. They do
 conflict: the fixes in a single cell of this taxonomy cannot share one
 Python environment. The released decoder of the safety fix ACD imports symbols that
 \texttt{transformers} removed after 4.44, which its own README pins, and
@@ -51,18 +51,18 @@ functions and written to a result file in one schema, which records the pair,
 the dose, the arm, the accuracy, the rate of the planted answer and the
 smallest difference the run can detect. Each file also carries a fingerprint
 of the planted passage it was produced with, so a run cannot be read under
-the wrong mechanism label.
+the wrong cause label.
 
 \subsection{Pair selection}
 
-The taxonomy picks the (fix, mechanism) pair under two conditions. The fix and
-the mechanism must occupy the same taxonomy cell, which means the content enters
+The taxonomy picks the (fix, cause) pair under two conditions. The fix and
+the cause must occupy the same taxonomy cell, which means the content enters
 through the same channel and causes the same consequence. And no paper in the
 corpus may report having run them together. A fix that repairs quiet answer corruption arriving through retrieval
-ought to apply to a mechanism that arrives the same way and does the same
+ought to apply to a cause that arrives the same way and does the same
 damage. The taxonomy predicts that such a pair should transfer, and no paper
 in the corpus had tested it. Dropping the second condition gives the control pairs, which put each fix against its
-own literature's mechanisms. Every fix and every attack in the campaign is published, except those Table~\ref{tab:provenance} (Appendix~\ref{app:provenance}) marks as ours. These are the two adaptive attacks we built against one fix to test it (Section~\ref{sec:adaptive}), and, in the agent experiment, one attack and some of the defenses, which we implemented from published techniques.
+own literature's causes. Every fix and every attack in the campaign is published, except those Table~\ref{tab:provenance} (Appendix~\ref{app:provenance}) marks as ours. These are the two adaptive attacks we built against one fix to test it (Section~\ref{sec:adaptive}), and, in the agent experiment, one attack and some of the defenses, which we implemented from published techniques.
 
 \subsection{The reconstruction standard}
 
@@ -100,7 +100,7 @@ control was read on. Where no comparable published figure
 exists, we say so rather than manufacture a threshold.
 
 
-\textbf{The mechanism works first.} If the mechanism does not hurt the undefended
+\textbf{The cause works first.} If the cause does not hurt the undefended
 model in the same run, the defended result means nothing. Every result is
 reported next to the undefended model on the same items, with the same number
 of planted passages and the same scorer.

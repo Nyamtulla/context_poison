@@ -257,8 +257,8 @@ def fig_cube():
                            ha="right", rotation_mode="anchor")
         ax.set_yticks(range(len(CHANNELS)))
         ax.set_yticklabels(CHANNELS if track == "security" else [], fontsize=CS * 8)
-        ax.set_title("security regime" if track == "security"
-                     else "safety regime",
+        ax.set_title("security papers" if track == "security"
+                     else "safety papers",
                      fontsize=CS * 9, color=col)
         for sp in ax.spines.values():
             sp.set_visible(False)
@@ -280,7 +280,7 @@ def fig_cube():
     mg.set_xlim(-.6, .6)
     mg.set_ylim(MI + .6, -.6)
     mg.set_xticks([0])
-    mg.set_xticklabels(["both regimes"], fontsize=CS * 8, rotation=32,
+    mg.set_xticklabels(["both"], fontsize=CS * 8, rotation=32,
                        ha="right", rotation_mode="anchor")
     mg.set_yticks([])
     for sp in mg.spines.values():
@@ -295,7 +295,7 @@ def fig_cube():
     # last column's label instead.
     axes[0].legend(handles=[
         Patch(facecolor=TRACK_SEC, edgecolor=TRACK_SEC, linewidth=.4,
-              label="mechanisms"),
+              label="causes"),
         Patch(facecolor=SEQ_SEC[1], edgecolor=TRACK_SEC, hatch="///",
               linewidth=.5, label="fixes")],
         fontsize=CS * 8, frameon=False, loc="lower left",
@@ -364,7 +364,7 @@ def fig_who_reports():
     for o in load("pair_outcomes.json"):
         c[o["reported_by"]][o["reported_verdict"]] += 1
     a, d = c["attack_paper"], c["defense_paper"]
-    data = [("reported by\nmechanism papers", a["defense_wins_claimed"],
+    data = [("reported by\nattack papers", a["defense_wins_claimed"],
              a["evaluated_no_directional_verdict"], a["defense_loses_reported"]),
             ("reported by\nfix papers", d["defense_wins_claimed"],
              d["no_reported_result_found"], d["defense_loses_reported"])]
@@ -393,7 +393,7 @@ def fig_who_reports():
     ax.set_yticklabels([d[0] for d in data])
     ax.set_xlim(0, 225)
     ax.set_ylim(-0.6, 1.9)
-    ax.set_xlabel("(fix, mechanism) pairs")
+    ax.set_xlabel("(fix, cause) pairs")
     ax.legend(frameon=False, loc="upper left",
               bbox_to_anchor=(0, 1.22), ncol=3, columnspacing=1.1,
               handlelength=1.2, handletextpad=0.5)
@@ -625,8 +625,8 @@ def fig_citation_network():
     h, l = ax.get_legend_handles_labels()
     h += [Line2D([], [], color="#dcdbd6", lw=1.2),
           Line2D([], [], color="#111111", lw=1.4)]
-    l += [f"same-regime citation ({len(same)})",
-          f"cross-regime citation ({len(cross)})"]
+    l += [f"citation within one literature ({len(same)})",
+          f"citation across literatures ({len(cross)})"]
     ax.legend(h, l, frameon=False, fontsize=8.4, loc="lower left", ncol=1,
               handlelength=1.4, handletextpad=0.5, labelspacing=0.45,
               borderaxespad=0.2)
@@ -738,7 +738,7 @@ def fig_transfer_matrix():
         for lbls in (ax.get_xticklabels(), ax.get_yticklabels()):
             for lbl, t in zip(lbls, TR):
                 lbl.set_color(TRACK_SEC if t == "security" else TRACK_ML)
-        ax.set_xlabel("mechanism from")
+        ax.set_xlabel("cause from")
         # Only the left panel keeps the y label: side by side they share the
         # same rows, and repeating it put type in the gap between them.
         ax.set_ylabel("fix from" if name.startswith("published") else "")
@@ -795,13 +795,13 @@ def fig_lag():
         ax.text(k, v + 1.5, str(v), ha="center", fontsize=8, color=INK2)
     ax.axvline(-0.5, color=MUTED, lw=0.6, ls=":")
     n_before = sum(v for k, v in g.items() if k < 0)
-    ax.set_xlabel("fix year minus mechanism year")
+    ax.set_xlabel("fix year minus cause year")
     ax.set_ylabel("pairs")
     ax.set_xticks(ks)
     ax.set_ylim(0, max(vals) * 1.22)
     ax.spines["top"].set_visible(False); ax.spines["right"].set_visible(False)
     # set high, over the two short bars, so the note clears the dotted line
-    ax.annotate(f"{n_before} fixes\npredate the\nmechanism\nthey met",
+    ax.annotate(f"{n_before} fixes\npredate the\ncause\nthey met",
                 xy=(-2.45, max(vals) * 1.17), fontsize=8, color=ALT_A,
                 ha="left", va="top", linespacing=1.1)
     print(f"    lag: {n_before} of {len(tl)} defenses predate their attack")
@@ -835,13 +835,13 @@ def _arrow(ax, x0, y0, x1, y1):
 
 
 def fig_vocab():
-    """Each community's own words for the bad content and for the
+    """Each literature's own words for the bad content and for the
     countermeasure, which countermeasure each builds against which content,
     and the one pair of words this
     paper uses across both. Names no method, since none has been introduced
-    where it sits. The words in each community's boxes are among the most
-    frequent in that regime's titles and abstracts (checked 2026-11-05), chosen
-    by the lead; "fix" and "mechanism" in our sense are ours."""
+    where it sits. The words in each literature's boxes are among the most
+    frequent in its titles and abstracts (checked 2026-11-05), chosen
+    by the lead; "fix" and "cause" are the words we use across both."""
     h, rg = 0.44, 0.40                      # box height, gap between rows
     W, H = COL, 0.40 + 2 * h + rg + 0.08
     fig = plt.figure(figsize=(W, H))
@@ -882,7 +882,7 @@ def fig_vocab():
     from matplotlib.patches import Rectangle
     ax.add_patch(Rectangle((0.04, y2 - pad), fr - 0.04, y1 + h + pad - (y2 - pad),
                            facecolor="none", edgecolor=MUTED, lw=0.6, ls=(0, (3, 2))))
-    for y, word in ((y1, "mechanism"), (y2, "fix")):
+    for y, word in ((y1, "cause"), (y2, "fix")):
         _box(ax, xo, y, wo, h, word, fs=9)
         _arrow(ax, fr, y + h / 2, xo, y + h / 2)
     save(fig, "fig8_vocab")
@@ -901,8 +901,8 @@ def fig_run():
     w = W - 2 * x0                          # every row spans the full column
     cx = x0 + w / 2
     wn, gn = 0.80, 0.14                     # the "if not" box and its gap
-    steps = [("Pick a pair", "one fix, one mechanism"),
-             ("Control", "the fix works on its own literature's mechanism"),
+    steps = [("Pick a pair", "one fix, one cause"),
+             ("Control", "the fix works on a cause from its own literature"),
              ("Take the items", "each question with its top ten retrieved passages"),
              ("Build the contexts", "replace j of the ten passages, j = 0, 1, 2, 3, 5")]
     y = H - 0.05 - h

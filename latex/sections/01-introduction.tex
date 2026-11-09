@@ -7,45 +7,45 @@ enters through any stream mixes into the same water, whether someone dumped it
 in or it washed in on its own. So the first questions are how many streams
 there are and how many kinds of damage the pollution can do.
 
-Two research communities study what goes wrong when untrustworthy content gets
-in, and they use different words for it. The security community studies content that an attacker placed there on purpose. It names attacks such as indirect prompt
+Two literatures study what goes wrong when untrustworthy content gets
+in, and they use different words for it. Security papers study content that an attacker placed there on purpose. They name attacks such as indirect prompt
 injection~\cite{greshake-2023-not}, retrieval
 poisoning~\cite{zou-2024-poisonedrag,zhong-2023-poisoning} and memory
-backdoors~\cite{dash-2026-untrusted}, and it publishes defenses against
+backdoors~\cite{dash-2026-untrusted}, and they publish defenses against
 them~\cite{xiang-2024-certifiably,liu-2025-datasentinel,an-2025-ipiguard}.
 Success means the attacker fails to achieve a goal.
 
-The safety community studies content that became wrong without any
-attacker. It names mechanisms such as lost-in-the-middle~\cite{liu-2023-lost} and
-context rot~\cite{xia-2026-diagnosing}. It also names knowledge conflict, where a retrieved passage
+Safety papers study content that became wrong without any
+attacker. They name causes such as lost-in-the-middle~\cite{liu-2023-lost} and
+context rot~\cite{xia-2026-diagnosing}. They also name knowledge conflict, where a retrieved passage
 disagrees with what the model already
-learned~\cite{xie-2023-adaptive}. It publishes fixes for
+learned~\cite{xie-2023-adaptive}. They publish fixes for
 them~\cite{huang-2025-parammute,bi-2025-parameters,yuan-2024-discerning}.
 Success means accuracy goes up.
 
-The two communities describe the same underlying failure: a passage the model
+The two literatures describe the same underlying failure: a passage the model
 should not trust enters the context window and changes the output. Only the
-provenance differs; the model sees tokens either way. The two communities
+provenance differs; the model sees tokens either way. The two literatures
 differ in more than vocabulary. They also differ in what counts as a
-successful evaluation. The safety community measures a fix for the accidental
-case on an average-case benchmark, because an accident does not adapt to the fix. The security community measures a defense for the
+successful evaluation. Safety papers measure a fix for the accidental
+case on an average-case benchmark, because an accident does not adapt to the fix. Security papers measure a defense for the
 adversarial case against the worst case, because an attacker does adapt. Those are not two styles
 of the same test. A method can pass the first test convincingly and fail the second one
-completely. Because each community evaluates against its own convention, a
+completely. Because each literature evaluates against its own convention, a
 method is rarely tested against the other's.
 
-So the field publishes, adopts and cites methods that are rarely evaluated
-against the other community's test. We test that claim by
+So both literatures publish, adopt and cite methods that are rarely evaluated
+against the other's test. We test that claim by
 reading both literatures under one taxonomy and recovering every experiment
 either side has run. Almost none of those experiments cross
-between the communities. We then run the missing ones to answer the
+between the two literatures. We then run the missing ones to answer the
 following research questions.
 
 \paragraph{Research questions.}
 \begin{description}
-\item[RQ1] \textbf{Do the two communities duplicate each other's work?} We read
+\item[RQ1] \textbf{Do the two literatures duplicate each other's work?} We read
   \NCorpus{} papers from both sides under one scheme, compare where each
-  community's fixes intervene, and recover every (fix, mechanism) pair
+  literature's fixes intervene, and recover every (fix, cause) pair
   the \NAnalysed{} papers that name a technique report
   (Sections~\ref{sec:literatures}, \ref{sec:parallel}).
 \item[RQ2] \textbf{Does a fix built for one literature's problem
@@ -59,13 +59,13 @@ following research questions.
   answer against an attacker who knows the fix, with two attacks built
   against the one fix that resisted
   (Sections~\ref{sec:distractor}, \ref{sec:adaptive}, \ref{sec:neither}).
-\item[RQ4] \textbf{When and why do some fixes help on the other community's
-  problem?} We take the few cases where a fix helped outside its own regime,
+\item[RQ4] \textbf{When and why do some fixes help on the other literature's
+  problem?} We take the few cases where a fix helped on a problem it was not built for,
   find what it acted on, and ask whether that depends on who wrote the text
   (Section~\ref{sec:helps}).
-\item[RQ5] \textbf{Taken together, do the two communities solve context
+\item[RQ5] \textbf{Taken together, do the two literatures solve context
   poisoning?} We combine the census with the campaign: where each
-  community's fixes act, whether any published work joins the two stages,
+  literature's fixes act, whether any published work joins the two stages,
   and what each stage's fixes do with the failures the other stage is built
   for (Section~\ref{sec:together}).
 \end{description}
@@ -75,11 +75,11 @@ repeatedly~\cite{dehghantanha-2026-sok,chu-2026-systematic,jiang-2026-sok},
 and the safety side on its own terms as a problem of knowledge
 conflict~\cite{xu-2024-knowledge}. None of it runs the experiment. A
 survey of one literature has only that literature's methods in hand, and the
-test we need takes a fix from one side and a mechanism from the other. So we
+test we need takes a fix from one side and a cause from the other. So we
 read both, found the pairs no paper reports, and ran them from the authors'
 released code and weights. To our knowledge this is the first evaluation
-in which published fixes from one of these communities meet published
-mechanisms from the other.
+in which published fixes from one of these literatures meet published
+causes from the other.
 
 \paragraph{Scope.}
 Three limits bound what follows. Each experiment runs on one dataset, and we
@@ -93,20 +93,20 @@ one. If it holds, that tells us little.
 \paragraph{Contributions.}
 \begin{itemize}
 \item \textbf{We map both literatures onto one taxonomy.} Over \NCorpus{}
-  papers read in full, we place every named mechanism and fix by channel,
-  consequence and regime, and find where each community's fixes act: security
+  papers read in full, we place every named cause and fix by channel,
+  consequence and whether a security or a safety paper names it. We then find where each literature's fixes act: security
   where text enters the context window, safety where the model reasons about
   text already inside. No earlier survey could show this, because each covers
-  only one community (RQ1; Sections~\ref{sec:literatures},
+  only one literature (RQ1; Sections~\ref{sec:literatures},
   \ref{sec:parallel}).
 
-\item \textbf{We identify the region neither community has tested.} Of
-  \NPureRegimePairs{} tested (fix, mechanism) pairs, only
-  \NCrossCommunityPairs{} cross between the communities, and a security fix
-  has been tested against a safety mechanism exactly
+\item \textbf{We identify the region neither literature has tested.} Of
+  \NPureRegimePairs{} tested (fix, cause) pairs, only
+  \NCrossCommunityPairs{} cross between the two literatures, and a security fix
+  has been tested against a cause from a safety paper exactly
   \NSecDefVsSafetyAttack{} time (RQ1; Section~\ref{sec:emptycell}).
 
-\item \textbf{We run the experiments neither community has run, in both
+\item \textbf{We run the experiments neither literature reports, in both
   directions.} \NCampaignPairs{} pairs put safety fixes against attacks and
   security defenses against honest mistakes, each from its authors' released
   code and weights and compared with an undefended model on the same items
@@ -121,7 +121,7 @@ one. If it holds, that tells us little.
   defense can meet an attack and an honest mistake on the same items. We
   release it (Section~\ref{sec:payloadclasses}).
 
-\item \textbf{We trace the failures on the other community's problem to a
+\item \textbf{We trace the failures on the other literature's problem to a
   shared design assumption, and find why some fixes help.} The failures do not
   belong to individual methods. Safety fixes decide how far to
   trust the document, which hands the answer to an attacker who wrote it.
@@ -134,7 +134,7 @@ one. If it holds, that tells us little.
   came from, and that does not depend on who wrote the text (RQ4;
   Section~\ref{sec:helps}).
 
-\item \textbf{We show that the two communities, taken together, do not
+\item \textbf{We show that the two literatures, taken together, do not
   solve context poisoning.} Their fixes act at different stages, no
   published work joins the stages, and each stage's fixes fail on the
   failures the other stage is built for. A failure that passes one stage

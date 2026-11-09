@@ -2,7 +2,7 @@
 \label{sec:setup}
 
 This section lists what the harness of Section~\ref{sec:experiments} ran:
-the models and hardware, the fixes, the mechanisms and the item sets they
+the models and hardware, the fixes, the causes and the item sets they
 meet, and then the experiments that combine them.
 
 \subsection{Models and hardware}
@@ -72,10 +72,10 @@ other jobs on the shared card, which changes nothing it computes.
 
 \input{tables/regime_framing}
 
-\subsection{Mechanisms}
+\subsection{Causes}
 \label{sec:payloadclasses}
 
-Every mechanism we run is a planted passage: text placed among the retrieved
+Every cause we run is a planted passage: text placed among the retrieved
 passages, either written by an attacker or reproducing an honest mistake. The
 planted passages in Table~\ref{tab:provenance} fall into five groups by what
 they do to the evidence. Four plant a false answer: the attack PoisonedRAG, false
@@ -110,7 +110,7 @@ best of five phrasings, one by appending a suffix found by gradient search
 An \textbf{item} is one question, its gold answer, and the context the model
 is given to answer it from. No item set is ours: each was released by the authors of a method or benchmark we run, and Table~\ref{tab:provenance} lists who released it. The retrieval experiments use two. The dataset open Natural Questions is RobustRAG's release of the open-domain Natural Questions~\cite{kwiatkowski-2019-natural}, with ten retrieved passages per question. The dataset CoConflictQA~\cite{huang-2025-parammute}\footnote{The benchmark is released under this name; the latest version of its paper calls it CoFaithfulQA.} gives one passage per question, and we use its Natural Questions part. Every question-answering fix we report except the safety fix DyPRAG was evaluated by its authors on Natural Questions, but in different releases, which pair the same questions with different passages. We run every fix on one release, so that all of them see the same questions and the same passages. Only the security defenses RobustRAG and ReliabilityRAG, and the safety fix ParamMute on CoConflictQA, therefore run on the exact data their authors used. Table~\ref{tab:provenance} marks how far each other method is from it. The agent experiment uses the banking suite of the agent benchmark
 AgentDojo~\cite{debenedetti-2024-agentdojo}.
-A mechanism reaches an item only through its context. Each item on open
+A cause reaches an item only through its context. Each item on open
 Natural Questions comes with the ten passages a retriever found for its
 question, and a planted passage takes the place of one of them or, for
 dilution, is added to them. The question and its gold answer never change, so
@@ -129,7 +129,7 @@ $j$ of the top ten, for $j$ in $\{0, 1, 2, 3, 5\}$. Their own default is
 $j = 1$, and the authors of the security defense RobustRAG sweep up to five of ten and no further, so
 every point we report is inside the range the attack and defense authors
 evaluate. Beyond five few honest passages remain, and a low score there
-measures the mechanism more than the fix. Dilution is the one exception to
+measures the cause more than the fix. Dilution is the one exception to
 replacement: its $j$ passages are added to the ten, so its context holds
 $10 + j$. The dataset CoConflictQA has no dose. It supplies a single context passage
 per item, which either carries the conflicting claim or does not, and a
@@ -162,24 +162,24 @@ measured on that same subset.
 \subsection{The experiments}
 \label{sec:campaign}
 
-We executed \NCampaignPairs{} (fix, mechanism) pairs across \NCampaignImpl{}
+We executed \NCampaignPairs{} (fix, cause) pairs across \NCampaignImpl{}
 fix implementations and \NCampaignEpisodes{} scored episodes. Every fix in the retrieval experiments ran from its authors' released code and weights.
-Figure~\ref{fig:transfer} sets the campaign beside the published literature. The main experiment puts a fix from one literature in front of a mechanism
+Figure~\ref{fig:transfer} sets the campaign beside the published literature. The main experiment puts a fix from one literature in front of a cause
 from the other, in both directions. We ran \NCampCrossPairs{} such pairs, all
 on retrieval question answering over the dataset Natural Questions. In the first direction, \NCampSafDefSecMech{} pairs take a fix from the safety
 literature, built for a document that is merely out of date, and attack it
 with the attacks corpus poisoning, PoisonedRAG or BadRAG. In the second direction, \NCampSecDefSafetyMech{} pairs take a defense from
 the security literature, RobustRAG in both of its released implementations,
 ReliabilityRAG, Spotlighting, or the PIGuard or DataSentinel filter, and give
-it four mechanisms that no attacker wrote: a real
+it four causes that no attacker wrote: a real
 passage whose answer has since changed, a passage asserting a third wrong
 answer, a passage retrieved for the wrong question, and unrelated passages
-that lengthen the context. The tracing method AttnTrace meets the same four mechanisms and is
+that lengthen the context. The tracing method AttnTrace meets the same four causes and is
 read for what it traces, so it is not counted as a pair. Before these runs,
 ReliabilityRAG and AttnTrace each met PoisonedRAG, and the two filters an
 injected instruction, to check that they work in our hands.
 
-A second experiment pairs each fix with the kind of mechanism its own authors
+A second experiment pairs each fix with the kind of cause its own authors
 used. These \NCampSecDefSecMech{} security pairs and
 \NCampSafDefSafetyMech{} safety pairs do not test whether a fix carries
 across. They check that our harness reproduces each fix's behavior on its
@@ -197,7 +197,7 @@ A fourth experiment holds the fix constant and changes only the planted
 passage. On the dataset CoConflictQA the same fixes meet corpus poisoning, false
 evidence and a planted third answer, which come from three of the four groups
 in Section~\ref{sec:payloadclasses}. A fix that behaves differently across
-them is reacting to the form of the text rather than to the mechanism it was
+them is reacting to the form of the text rather than to the cause it was
 named for. A fifth set of runs adds three measurements. Every run above is measured three ways on the same items: with nothing
 planted, without the fix, and with no document at all.
 We also re-ran part of the retrieval experiment on a second base model, and

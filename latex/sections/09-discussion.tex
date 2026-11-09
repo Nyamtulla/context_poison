@@ -4,12 +4,12 @@
 This section turns the results into practice: the controls an evaluation
 should report, the conventions for what a paper claims and tests, what the
 released artifacts showed, and what a deployment inherits. Most of it
-addresses both communities at once. For the mechanism that removes evidence rather than planting a lie, the
+applies to security and safety papers alike. For the cause that removes evidence rather than planting a lie, the
 campaign finds no difference between an optimized passage and an ordinary
-retrieval error. For that mechanism the two communities study the same
+retrieval error. For that cause security and safety papers study the same
 problem, and the recommendations below treat it as one.
 
-\subsection{Controls both communities should report}
+\subsection{Controls both literatures should report}
 
 Section~\ref{sec:controls} reports one result that reverses
 without a no-document score, and Section~\ref{sec:distractor} one that
@@ -39,9 +39,9 @@ another, so a single-model result should be read as specific to that model.
 The controls above concern one experiment. These five concern what a paper
 claims and what it tests.
 
-\textbf{State the regime the evaluation actually covers.} Our census of
+\textbf{State whether the evaluation covers attackers, honest mistakes or both.} Our census of
 fixes codes each one by what its own paper evaluated, and
-\PctOneRegime{}\% cover one regime. One sentence naming the regime the
+\PctOneRegime{}\% cover only one of the two. One sentence naming which one the
 experiments cover lets a reader, and the maintainer of a system, see that
 limit without inferring it.
 
@@ -62,7 +62,7 @@ adaptive attack against the one that had resisted, it removed
 the fix tells a reader which kind of claim they are reading.
 
 \textbf{Compose across the boundary, and measure the composition.}
-Section~\ref{sec:parallel} shows the two communities defending different
+Section~\ref{sec:parallel} shows the two literatures defending different
 stages of one pipeline, and Section~\ref{sec:results} shows the reasoning
 stage failing on its own once an adversary writes the input. The next step
 is to put an ingestion-stage filter in front of a
@@ -72,7 +72,7 @@ composed fix; the experiment has started and is not finished. If the filter lets
 left as weak as our results show. Both halves are published with released code, and we found
 no paper in the corpus that combines them.
 
-\textbf{Test each fix against the other regime's mechanisms.} A
+\textbf{Test each fix against the other literature's causes.} A
 method aimed at stale or conflicting retrieval is evaluated on
 average-case benchmarks, which is the right choice for the problem it was
 built for and says nothing about the worst case. Without such a test, a
@@ -84,8 +84,8 @@ the attacker controls, and an honest mistake has no such limit: the security def
 and ReliabilityRAG turn harmful once half the retrieved passages are stale
 copies of one page
 (Section~\ref{sec:neither}). A stale-document set needs only a retrieval
-pool and a list of answers that changed. A method that cannot be tested in
-the other regime should state which regime its benefit holds in.
+pool and a list of answers that changed. A method that cannot be tested against
+the other kind of failure should state which kind its benefit holds for.
 
 \subsection{Artifacts}
 \label{sec:artifacts}
@@ -108,7 +108,7 @@ confirmed pair, and they are of two kinds. \NFixUnpairedAttacked{} were run
 against an adversary whose attack carries no name the literature reuses, which our pair matching cannot detect. \NDefEvalNoAdversary{} were never run against an adversary
 at all. The second group is the larger one, and it
 reflects how the field evaluates, not a limit of our measurement. \NDefNoAdvSafety{} of those \NDefEvalNoAdversary{} are
-safety-regime fixes, demonstrated by accuracy rising on cases where the
+fixes from safety papers, demonstrated by accuracy rising on cases where the
 context is wrong, and they are the kind of fix this paper's first
 direction tests.
 Of the rest, \NDefEvalNoBaseline{} ran no real comparison and the records of
@@ -121,11 +121,11 @@ when the text is merely stale and dangerous when an attacker owns it. If the
 corpus an agent retrieves from is one an outsider can write to, the second
 case is the deployed case. Consider a system that uses a knowledge-conflict method to improve answer
 quality and retrieves from such a corpus. The method operates outside the
-regime its authors validated, and our measurements say it is more likely to
+conditions its authors validated, and our measurements say it is more likely to
 increase damage than to reduce it: the safety fix ParamMute is
 worth \NDefCellClean{} on a clean context and \NDefCellSat{} once the
 context is corrupted, below the undefended model on the same items. The
-claim is about a design choice rather than a community. A method that
+claim is about a design choice, not about safety papers as a whole. A method that
 converts the document to weights has no dial to turn and does not show the
 reversal, and the one method in the family that resisted lost most of its
 protection to an adaptive attacker.
@@ -147,5 +147,5 @@ produce: it needs no gradient access and no surrogate retriever, and it does at
 least as much damage to an undefended model as the optimized passage.
 Evaluations built only around optimized passages can overstate protection. Do not call a fix tested on one
 kind of planted passage robust to context poisoning. Finally, coverage differs by channel. Supply-chain and cross-modal content
-have fewer named fixes than named mechanisms. If an agent accepts third-party
+have fewer named fixes than named causes. If an agent accepts third-party
 packages, templates or models, few published fixes address that route.

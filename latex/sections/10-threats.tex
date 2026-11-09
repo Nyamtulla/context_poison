@@ -15,12 +15,12 @@ of the project lead. When it returns it will bound extraction error without
 separating a coder's mistake from the extraction's, so it will carry no
 inter-rater agreement and we will claim none.
 
-\textbf{Regime assignment.} The cross-citation rates depend on classifying every
-cited paper into a regime. That classification is automated over the full
+\textbf{Assigning papers to security or safety.} The cross-citation rates depend on classifying every
+cited paper as a security or a safety paper. That classification is automated over the full
 discovery pool. A systematic bias in it would move the rates. We regard the
 direction of the finding as safe, because the gap between \PctSecCitesSafety{}\% citation and
-\PctSameRegime{}\% same-regime evaluation is far larger than any plausible classification
-error, but the exact rates should be read as estimates. Two further limits
+\PctSameRegime{}\% of tested pairs staying inside one literature is far larger than any plausible classification
+error. The exact rates should still be read as estimates. Two further limits
 bound them. The denominator is the \NAnalysed{} papers that named a
 technique rather than every screened-in paper, because a survey cites
 widely and names nothing, so counting it would measure how widely surveys cite, not whether methods
@@ -47,9 +47,9 @@ answer \EPosShufOne\% of the time with one stale passage instead of
 \EPosEndOne\%, \EPosShufThree\% with three instead of \EPosEndThree\%, and
 \EPosShufFive\% with five instead of \EPosEndFive\%. Every comparison we
 report compares a defended model with an undefended one on the same contexts,
-so both arms share the placement. The absolute rates, how often a mechanism
+so both arms share the placement. The absolute rates, how often a cause
 succeeds at all, are higher than they would be at a random position. We
-measured this on one model and one mechanism.
+measured this on one model and one cause.
 
 \textbf{Our stale passages are exact copies.} In the second direction, a
 stale document is one real passage copied word for word into each planted
@@ -69,7 +69,7 @@ ReliabilityRAG does more harm than no defense holds for exact copies and is
 unresolved for rewrites. In both cases it gives the outdated answer more
 than half the time. We ran this check on one defense and one model.
 
-\textbf{Registry granularity.} What counts as one named mechanism is a
+\textbf{Registry granularity.} What counts as one named cause is a
 judgement. ``Indirect prompt injection'' is one registry entry and absorbs
 \PctTopMechShare{}\% of all tested pairs. \NInjUncovered{} of the \NInjVariants{} named injection
 variants have no tested pair at all. A
@@ -183,16 +183,16 @@ so we use the refereed subset as a check, not as the corpus. Resolving both side
 every pair back to a paper succeeds for \NVenueResolved{} of
 \NTimelinePairs{} pairs (\PctVenueResolved{}\%); of those, \NVenuePairs{} have
 a named venue on both sides, and \NVenueSecDefSafetyAtk{} of them is a security
-fix evaluated against a safety mechanism. The empty
+fix evaluated against a cause from a safety paper. The empty
 direction stays empty among refereed work alone.
 
-\textbf{Census recall.} \NNoTechnique{} papers contributed no mechanism and no fix, and
+\textbf{Census recall.} \NNoTechnique{} papers contributed no cause and no fix, and
 \NNoTechOther{} of those match none of the survey, benchmark, framework or
 position descriptions by title. We re-read \NRecallRead{} papers --- that
 bucket as it stood before the pass --- and asked one question of each: does
 this paper name a technique we failed to register. \NRecallCandidates{}
 candidates came back. Two were genuine omissions and are now in the census. One was
-a fix already registered under a different name. One renamed a mechanism
+a fix already registered under a different name. One renamed a cause
 the registry carries three times. One was a form of planted passage rather than a
 technique. The last was an attack a defense paper built for its own
 evaluation; Section~\ref{sec:literatures} registers it under the rule that

@@ -162,18 +162,18 @@ def main():
 
     OUT.mkdir(parents=True, exist_ok=True)
     emit(OUT / "census_mechanisms.tex", mrows,
-         ["Mechanism or attack", "Channel", "Consequence", "Regime", "Source"],
+         ["Cause", "Channel", "Consequence", "Literature", "Source"],
          r"p{0.33\textwidth}llll",
-         f"Every named mechanism in the corpus ({len(mrows)} entries). Rows in "
+         f"Every named cause in the corpus ({len(mrows)} entries). Rows in "
          r"\emph{italics} are entries whose authors gave their contribution no "
          "name; they are counted here because excluding them would overstate "
-         "how much of the field names what it finds. Every row cites the paper "
-         "that named the mechanism; full records with DOI or arXiv identifiers "
+         "how much of the literature names what it finds. Every row cites the paper "
+         "that named the cause; full records with DOI or arXiv identifiers "
          "ship with the artifact.",
          "tab:census-mech",
-         f"Table~\\ref{{tab:census-mech}}: named mechanisms, continued")
+         f"Table~\\ref{{tab:census-mech}}: named causes, continued")
     emit(OUT / "census_defenses.tex", drows,
-         ["Defense or fix", "Channel", "Acts at", "Regime", "Validated vs",
+         ["Defense or fix", "Channel", "Acts at", "Literature", "Validated vs",
           "Source"],
          r"p{0.30\textwidth}lllll",
          f"Every named defense in the corpus ({len(drows)} entries). "

@@ -1,23 +1,23 @@
 \section{Conclusion and future work}
 \label{sec:conclusion}
 
-Two research communities study one failure. An LLM agent reads content it
-should not trust, and it cannot tell which content that is. The security
-community calls the content an attack and builds defenses. The safety community speaks of failures and conflicts and builds methods to mitigate them. We call the content a mechanism and the countermeasure a fix. We measured the distance between them over \NCorpus{} papers read in full,
-of which \NAnalysed{} name a mechanism or a fix.
-\PctSecCitesSafety{}\% of security-regime papers cite a safety-regime one. Only \NBothValidated{} of \NFixes{} fixes were
-tested in both regimes. And \PctSameRegime{}\% of
-tested (fix, mechanism) pairs stay inside a single regime. One direction of the
+Two literatures study one failure. An LLM agent reads content it
+should not trust, and it cannot tell which content that is. Security
+papers call the content an attack and build defenses. Safety papers speak of failures and conflicts and build methods to mitigate them. We call the content a cause and the countermeasure a fix. We measured the distance between them over \NCorpus{} papers read in full,
+of which \NAnalysed{} name a cause or a fix.
+\PctSecCitesSafety{}\% of security papers cite a safety paper. Only \NBothValidated{} of \NFixes{} fixes were
+tested both against an attacker and against an honest mistake. And \PctSameRegime{}\% of
+tested (fix, cause) pairs stay inside a single literature. One direction of the
 cross-testing matrix holds \NSecDefVsSafetyAttack{} pair in \NPureRegimePairs{}: a
-security fix has been evaluated against a safety
-mechanism exactly once.
+security fix has been evaluated against a cause from a safety
+paper exactly once.
 
 We then ran that experiment, in both directions. \NCampaignPairs{} pairs,
 all on the authors' released artifacts. \PctCampCross{}\% of them cross the
 boundary the literature does not. One planted passage in ten gives a fix its
 best chance, because nine honest passages survive, and it is the attacks' own
 default. Across both directions, \NGridLowHelps{} of \NGridLowPairs{} (fix,
-mechanism) pairs show a resolvable benefit there, both against the refusal
+cause) pairs show a resolvable benefit there, both against the refusal
 attack. The finding is an explanation, not a verdict.
 
 In the first direction, fixes built for honest error meet attackers.
@@ -47,9 +47,9 @@ of the time. When the model answered correctly, it was a stale one
 wrong answers. The two directions fail for opposite
 reasons: the safety fixes assume the document is honest, and the security
 defenses assume wrong passages are few or carry an instruction. Each
-assumption holds in its own regime and fails in the other.
+assumption holds for the problem it was built for and fails on the other.
 
-Taken together, the two communities do not solve context poisoning. Security
+Taken together, the two literatures do not solve context poisoning. Security
 defends where text enters and safety where the model reasons, no published
 work joins the two stages, and each stage's fixes fail on the failures the
 other stage is built for. A system assembled from both literatures places
@@ -79,19 +79,19 @@ evidence of robustness at all. The same two optimizers transfer directly: each
 of these methods exposes a scalar the attacker can address.
 
 \textbf{Close the supply-chain and cross-modal gaps.} These channels have fewer
-than one named fix per named mechanism and are the routes by which agents
+than one named fix per named cause and are the routes by which agents
 accept third-party capability. They are where new fixes are most needed.
 
-\textbf{Test the stage finding across regimes.} In the agent experiment,
+\textbf{Test the stage finding across both literatures.} In the agent experiment,
 every defense that held acts before the agent reads the injected text or
 before it acts, and none that acts while the model reasons holds. That
 experiment pairs only security defenses with security attacks, on one agent
 model. Whether the stage at which a fix acts also predicts which fixes work on
-the other community's problem needs fixes from both communities, run inside
+the other literature's problem needs fixes from both literatures, run inside
 one agent harness.
 
-\textbf{Make cross-community testing routine.} The deepest
+\textbf{Make testing across the two literatures routine.} The deepest
 problem this paper documents is not any single fix. It is that who runs an experiment predicts its
-outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair fixes with mechanisms that a
-taxonomy selects, not mechanisms that either author selects. Transfer then
+outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair fixes with causes that a
+taxonomy selects, not causes that either author selects. Transfer then
 becomes a measured property rather than an assumed one. We release ours.

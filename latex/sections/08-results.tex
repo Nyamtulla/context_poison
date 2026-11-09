@@ -3,12 +3,12 @@
 
 This section answers RQ2 to RQ5, each subsection closing with its answer.
 RQ2 takes the main experiment in each direction, then every fix against
-every mechanism and the agent experiment, and ends with three checks on
+every cause and the agent experiment, and ends with three checks on
 those results. RQ3 asks whether the failure belongs to individual methods or
 to an assumption their designs share: it explains each direction, checks the
 first explanation against an attacker who knows the fix, and ends with why
 neither design covers both. RQ4 asks why the few fixes that helped did, and
-RQ5 whether the two communities
+RQ5 whether the two literatures
 cover the problem together. One measurement comes first,
 because the research questions depend on it: how much damage a planted
 passage does with no fix in place, and whether it matters that an attacker
@@ -143,7 +143,7 @@ and removes the conflict behind the refusal when it did not.
 
 \paragraph{Second direction: security fixes facing honest mistakes.}
 \label{sec:transfer}
-We ran five security defenses against four mechanisms that no attacker
+We ran five security defenses against four causes that no attacker
 wrote. RobustRAG, in both its released implementations, is the one whose
 authors released our retrieval data. Against a real passage whose answer has changed, RobustRAG helps with one or
 two such passages and then turns harmful (Table~\ref{tab:grid}b). With one, the model gives the
@@ -206,7 +206,7 @@ The three defenses that look for injected instructions have nothing to act
 on. Across their \NFilterCells{} cells, no dose moves accuracy more than
 \NFilterGapMax{} points from the undefended model, inside every cell's
 threshold of \EFilterMdrMin{} to \EFilterMdrMax{} points. The filters show
-why: of the \NFilterPassages{} distinct passages across the four mechanisms,
+why: of the \NFilterPassages{} distinct passages across the four causes,
 PIGuard flags \NPiguardFlagged{} and DataSentinel \NDatasentinelFlagged{}. A
 stale or misretrieved passage contains no instruction. Both filters were
 checked first. PIGuard flags an injected instruction and passes the same
@@ -290,7 +290,7 @@ helps. One poisoned passage in ten is the default of the released attack and
 the setting most favorable to a fix, because it leaves the most honest
 evidence to work with. \NGridLowHelps{} of the \NGridLowPairs{} pairs help
 there, and both are again the refusal attack. We report the worst result
-for each fix rather than the average, because an average across mechanisms
+for each fix rather than the average, because an average across causes
 would hide a complete failure against one of them.
 
 The agent experiment pairs only security methods with security attacks, so
@@ -351,7 +351,7 @@ contains none.
 \paragraph{The form of the planted passage.}
 \label{sec:payloads}
 What a fix does depends on the form of the planted
-passage, not on which mechanism it came from. The safety fix ACD is the only method that both
+passage, not on which cause it came from. The safety fix ACD is the only method that both
 uses a clean document and resists corpus poisoning: it ends
 \EAcdSatGain{} points above the undefended model on a corrupted context.
 Corpus poisoning, though, was optimized to fool a retriever, not ACD, so this
@@ -475,7 +475,8 @@ protection, and it never falls below the undefended model.
 \paragraph{Why neither design covers both.}
 \label{sec:neither}
 The two directions fail for opposite reasons. Each design rests on an
-assumption that holds in its own regime and that the other regime breaks.
+assumption that holds for the failure it was built for and that the other
+kind of failure breaks.
 The safety fixes assume the document is honest: they decide how far to trust
 it over the model's memory, and in the first direction an attacker writes the
 document. The security defenses RobustRAG and ReliabilityRAG assume that wrong passages are few:
@@ -498,11 +499,11 @@ that resistance to one that is. In our coding of their papers, the methods
 in this family were validated only against incidental failure, so their
 published results contain no test of this kind.
 
-\subsection{RQ4: When and why do some fixes help on the other community's problem?}
+\subsection{RQ4: When and why do some fixes help on the other literature's problem?}
 \label{sec:helps}
 
 Not every result across the boundary is a failure. In three places a method
-helped on the other community's problem, and an explanation of the failures
+helped on the other literature's problem, and an explanation of the failures
 has to account for them too. For each, we ask what the method acted on.
 
 The safety fix ACD resisted corpus poisoning, ending \EAcdSatGain{} points
@@ -531,16 +532,16 @@ the answer.
 Answer to RQ4. Two of the three benefits come from the form of the planted
 text, not from the method recognizing a problem, and they disappear when the
 form changes. The one that holds is the method whose signal makes neither
-regime's assumption: AttnTrace reads where the answer came from, not who
+side's assumption: AttnTrace reads where the answer came from, not who
 wrote the passage. This is RQ3 seen from the other side, since a method that
-relies on no assumption about the text's author leaves the other regime
+relies on no assumption about the text's author leaves the other kind of failure
 nothing to break. One method on one model suggests this rather than
 establishes it.
 
-\subsection{RQ5: Taken together, do the two communities solve context poisoning?}
+\subsection{RQ5: Taken together, do the two literatures solve context poisoning?}
 \label{sec:together}
 
-RQ1 found that the two communities divide the problem, and RQ2 and RQ3 that
+RQ1 found that the two literatures divide the problem, and RQ2 and RQ3 that
 each side's methods fail on the other's. RQ5 asks what follows for the field
 as a whole: whether a system built from both literatures would hold where
 neither holds alone. Three findings say it would not, as the two literatures
@@ -555,7 +556,7 @@ it: \NDefPtIngestionSec{} security fixes act at ingestion and
 Second, nothing joins the stages. No fix in the census acts at both, no paper
 in the corpus combines a fix from each side, and only
 \NCrossCommunityPairs{} of \NPureRegimePairs{} tested pairs cross between
-the communities (Section~\ref{sec:emptycell}).
+the two literatures (Section~\ref{sec:emptycell}).
 
 Third, each stage fails on the failure the other stage is built for. An
 honest mistake carries no instruction, so the filters that look for one pass
@@ -585,9 +586,9 @@ an attack that passes both halves also passes the stack.
 
 \input{tables/stack}
 
-Answer to RQ5. No. Taken together, the two communities cover two stages of
+Answer to RQ5. No. Taken together, the two literatures cover two stages of
 one pipeline but do not connect them. Their fixes act at different places,
-neither community tests its fixes against the other's failures, and no
+neither literature tests its fixes against the other's failures, and no
 published work combines them. Stacking one fix from each side gives each
 case the better of the two fixes and adds nothing, so the field holds no
 method shown to stop

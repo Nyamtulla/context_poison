@@ -1,14 +1,14 @@
 LLM agents answer from their context, so an attacker who controls the context
-controls the answer. Two research communities study this failure, and neither
+controls the answer. Two literatures study this failure, and neither
 tests the other's work. Security researchers study context an attacker changes
 on purpose; safety researchers study context that becomes wrong on its own. To the
 model, both are text in the same context window.
 
 We read \NCorpus{} papers in full and listed every case where a paper
-tested a fix against a named problem. Only a handful test one community's
-method against the other community's problem, and
+tested a fix against a named problem. Only a handful test a method from one literature
+against a problem from the other, and
 \textbf{exactly \NSecDefVsSafetyAttack{} security fix has ever been
-evaluated against a safety mechanism}. The two sides do not duplicate
+evaluated against a cause named in a safety paper}. The two sides do not duplicate
 each other. They divide the problem instead. Security studies how the bad text
 arrives and defends where it enters. Safety studies why the model believes it
 and intervenes where the model reasons. A fix that works on the model's
@@ -23,7 +23,7 @@ Defenses built against attackers assume that wrong passages are few or
 contain instructions, and an honest mistake can break both assumptions.}
 When an out-of-date page is copied many times, a defense that votes across
 passages gives the outdated answer more often than no defense at all. No
-method we tested protects against both, and the two communities taken
+method we tested protects against both, and the two literatures taken
 together do not close the gap: their methods act at different stages of the
 pipeline, neither is tested against the other's failures, and no published
 work combines them. We report results for models of 7 to 14 billion

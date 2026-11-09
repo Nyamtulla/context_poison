@@ -1,7 +1,7 @@
 \section{Background and threat model} \label{sec:background}
 
 This section defines the terms the rest of the paper uses. It defines context
-poisoning, sets the two communities' vocabularies side by side and chooses one
+poisoning, sets the two literatures' vocabularies side by side and chooses one
 for statements that span both, and states the system and threat model the
 experiments assume.
 
@@ -10,7 +10,7 @@ experiments assume.
 Context poisoning is our term for three things happening together.
 Content enters an agent's context window. The agent should not have trusted
 it. The agent's behavior changes as a result. The definition says nothing
-about who put the content there. That is deliberate: it lets both communities
+about who put the content there. That is deliberate: it lets both literatures
 fit inside one term.
 
 A poisoned agent's output becomes another agent's input~\cite{lee-2025-prompt}, and poisoned memory reactivates in a later session~\cite{dash-2026-untrusted}. The term is wider than prompt injection, which is one channel and one intent. It is wider than knowledge conflict, which is one consequence. It is narrower than ``LLM safety'', because the damage must arrive through the context
@@ -26,12 +26,12 @@ between direct and indirect prompt injection~\cite{greshake-2023-not}.
 \includegraphics[width=\columnwidth]{figures/fig8_vocab}
 \caption{One vocabulary from two. The top row names the content that should
 not be trusted and the bottom row the countermeasure, first in each
-community's own words and then in ours. Each community builds its
+literature's own words and then in ours. Each literature builds its
 countermeasure for its own content.}
 \label{fig:vocab}
 \end{figure}
 
-That one failure has two names, because two communities arrived at it
+That one failure has two names, because two literatures arrived at it
 separately. Figure~\ref{fig:vocab} puts the two vocabularies side by side,
 with the one we use beside them.
 The slots are the same: the same channel, the same position in the context
@@ -42,17 +42,21 @@ adversary and asks whether a system resists ``intentional attacks \ldots\ in
 the presence of adversarial actors''. \meth{Safety} work assumes none and
 asks whether a system avoids ``unintended harmful outcomes \ldots\ despite
 uncertainties in inputs, goals, training data, or deployment conditions''.
-We call the condition a paper addresses its \textbf{regime}, and every paper
-in our corpus takes one of these two. A regime is not a \textbf{venue}, the
-conference or journal that published the paper. The two are easy to mix up,
-because security work often appears at a security venue, but
-Section~\ref{sec:venue} shows that adversarial work appears at AI venues just
+We sort each paper in our corpus by which of these two conditions it
+addresses: a \textbf{security paper} assumes an adversary, and a
+\textbf{safety paper} assumes none. Every paper is one or the other. We sort
+papers and not their authors, because the same researchers write both kinds
+and no strict line separates two groups of people. The kind of a paper is not
+its \textbf{venue}, the conference or journal that published it. The two are
+easy to mix up, because security papers often appear at a security venue, but
+Section~\ref{sec:venue} shows that security papers appear at AI venues just
 as often. We write \emph{security venue} or \emph{AI venue} for where a paper
-appeared, and plain \meth{security} or \meth{safety} for what it addresses.
+appeared, and \meth{security} paper or \meth{safety} paper for what it
+addresses.
 An adversary re-optimizes against whatever method is in place; a stale
 document does not. That difference is real, because a method tuned to the
-average case has no reason to hold at the worst case. It is also why the
-two regimes judge a countermeasure differently. Security counts it a success
+average case has no reason to hold at the worst case. It is also why
+security and safety papers judge a countermeasure differently. Security counts it a success
 when the adversary fails and tests it against the worst case. Safety counts
 it a success when accuracy rises and tests it on average-case benchmarks.
 How much the difference matters to
@@ -62,23 +66,30 @@ it. When the bad text states a wrong answer, a passage an attacker wrote to win
 does more damage than a real outdated one. When it only takes the place
 of the right evidence, an attack and an honest error do the same damage.
 
-Because the two communities use different words for one failure, we choose
+Because the two literatures use different words for one failure, we choose
 one set of words for this paper, shown in the last column of
-Figure~\ref{fig:vocab}. We use \emph{mechanism} for anything that makes the context
+Figure~\ref{fig:vocab}. We use \emph{cause} for anything that makes the context
 stop supporting the right answer, and \emph{fix} for anything meant to keep
-it supporting that answer, whatever either one's authors call it. We use these two words wherever a statement spans both regimes: the corpus
-as a whole, a pair whose two sides come from different regimes, and the
-campaign. A statement about one regime alone may keep that regime's own
-words from Figure~\ref{fig:vocab}. Security calls the content an attack, a
+it supporting that answer, whatever either one's authors call it. A cause may
+be content that enters the context, as every attack does, or a weakness of
+the model that the context sets off, such as lost in the
+middle~\cite{liu-2023-lost}. Neither literature's own words cover both:
+security papers name the input, and safety papers name the weakness. We use
+these two words wherever a statement spans both literatures: the corpus
+as a whole, a pair whose two sides come from different literatures, and the
+campaign. A statement about one literature alone may keep that literature's own
+words from Figure~\ref{fig:vocab}. Security papers call the content an attack, a
 vulnerability or a threat, and the countermeasure a defense, guardrail,
-safeguard or protection. Safety has no single word for the content: it speaks
-of degradation, failure, conflict or hallucination, and often names the
-failure itself, such as knowledge conflict or noisy context. It calls the
-countermeasure a mitigation, method, framework or strategy. Safety papers rarely say \emph{fix},
-and use \emph{mechanism} mostly for a part of the model, such as an attention
-mechanism, so in the sense used here both words are ours.
+safeguard or protection. Safety papers have no single word for the content: they speak
+of degradation, failure, conflict or hallucination, and often name the
+failure itself, such as knowledge conflict or noisy context. They call the
+countermeasure a mitigation, method, framework or strategy. Neither literature
+uses \emph{fix} or \emph{cause} as its general term. The closest precedent for
+\emph{cause} is Xu et al.'s survey of knowledge
+conflicts~\cite{xu-2024-knowledge}, which lists both misinformation and
+outdated information as causes of conflict between passages.
 
-Each of these two words covers two kinds. A mechanism is an \emph{insertion} when content
+Each of these two words covers two kinds. A cause is an \emph{insertion} when content
 arrives in the window that should not be believed, and a \emph{degradation}
 when nothing arrives. In the second case the context stops working because it
 grew too long, because the decisive passage sits in the wrong place, or
@@ -86,14 +97,14 @@ because compaction evicted the rule the agent needed. Accuracy falls with the
 right document present and correctly retrieved. Every attack is an
 insertion. \emph{Attack} is not a third kind beside insertion and
 degradation. It names the \NAttack{} insertion
-mechanisms an adversary wrote, and the \NAccident{} that a retriever, a
-tool or the agent's own memory delivered with nobody behind them. We do not split mechanisms by whether an adversary wrote them, because that
-split is the same as the regime split: every security-regime mechanism has an
-adversary and no safety-regime mechanism does. Insertion and degradation, by
-contrast, occur in both regimes: \NSecInsertion{}
-of the \NMechSecurity{} security-regime mechanisms are insertion and
-\NSecDegradation{} are degradation, while the safety regime splits
-\NSafInsertion{} to \NSafDegradation{}.
+causes an adversary wrote, and the \NAccident{} that a retriever, a
+tool or the agent's own memory delivered with nobody behind them. We do not split causes by whether an adversary wrote them, because that
+split is the same as the split between security and safety papers. Every cause
+named in a security paper has an adversary, and no cause named in a safety paper
+does. Insertion and degradation, by contrast, occur in both literatures:
+\NSecInsertion{} of the \NMechSecurity{} causes from security papers are
+insertion and \NSecDegradation{} are degradation, while the causes from safety
+papers split \NSafInsertion{} to \NSafDegradation{}.
 
 Fixes also come in two kinds, set by what their own evaluation tested. A \emph{defense} met an
 adversary there. A \emph{remedy} met only incidental failure. That is
@@ -119,7 +130,7 @@ retriever, and then getting the model to believe it once it is in the context.
 \subsection{System and threat model}
 \label{sec:securityregime}
 
-Both communities study the same system, and only one of them assumes an
+Both literatures study the same system, and only one of them assumes an
 attacker inside it. The system is an LLM agent: a model that, within one task, repeatedly reads
 content it did not author, decides, and acts. Content from many sources shares one context window, with
 no trustworthy marking of where any of it came from. And an action taken in a corrupted context cannot be undone by fixing

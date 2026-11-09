@@ -1,9 +1,9 @@
 \section{Two literatures, one problem}
 \label{sec:literatures}
 
-Comparing the two communities requires reading both under one scheme. We
-built one corpus from both, coded every named mechanism and fix on the same
-axes, and recovered every (fix, mechanism) pair either side reports.
+Comparing the two literatures requires reading both under one scheme. We
+built one corpus from both, coded every named cause and fix on the same
+axes, and recovered every (fix, cause) pair either side reports.
 
 \subsection{Corpus}
 
@@ -49,11 +49,11 @@ A fix can intervene at one of three points between them.}
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig1_cube}
-\caption{Mechanisms and fixes in every channel $\times$ consequence
-cell, split by regime: all \NMechanisms{} mechanisms and all \NFixes{}
-fixes. Solid bars are mechanisms and hatched bars fixes. Hue is the regime,
+\caption{Causes and fixes in every channel $\times$ consequence
+cell, split into security and safety papers: all \NMechanisms{} causes and all \NFixes{}
+fixes. Solid bars are causes and hatched bars fixes. Hue marks security or safety papers,
 except in the last column, which sums both. A bold outline marks a cell with
-mechanisms and no fix. Each panel's last row totals a consequence; the last
+causes and no fix. Each panel's last row totals a consequence; the last
 column totals a channel across both panels. Totals have their own scale.}
 \label{fig:cube}
 \end{figure*}
@@ -61,14 +61,14 @@ column totals a channel across both panels. Totals have their own scale.}
 We then read the \NFullText{} retrieved papers in full, coded them against
 the inclusion criteria and kept \NCorpus{}, each carrying \NColumns{} recorded
 columns of which \NCodedFields{} are coded from the full text. A paper stays
-if it contributes an attack, a failure mechanism, a defense or a fix.
+if it contributes an attack, another cause of failure, a defense or a fix.
 Benchmarks, surveys, measurement studies and position papers stay even though
 they propose no technique, because they are how the field is organized. That
 pass also recovered techniques the first extraction had missed, so the
 registry counts here are floors.
 
 Papers that name no technique are why the screened set and the analyzed set
-differ. \NNoTechnique{} of the \NCorpus{} name no mechanism and no fix:
+differ. \NNoTechnique{} of the \NCorpus{} name no cause and no fix:
 \NNoTechSurvey{} surveys or systematizations, \NNoTechBench{} benchmarks and
 evaluations, \NNoTechFramework{} framework or architecture papers and
 \NNoTechPosition{} position papers. The remaining \NNoTechOther{} match none of
@@ -84,19 +84,19 @@ analyzed set.
 \subsection{A joint taxonomy}
 \label{sec:taxonomy}
 
-We place every named mechanism and every named fix on three axes: the
+We place every named cause and every named fix on three axes: the
 \textbf{channel} it concerns, the \textbf{consequence} it produces or
-prevents, and the \textbf{regime} of the paper that names it. Each axis value
+prevents, and the \textbf{literature} of the paper that names it. Each axis value
 is named by the work that first identified it as a distinct surface or a
 distinct harm; we group the names rather than coin them. The axes span a grid
-of \NChannelCats{} channels by \NConseqCats{} consequences by two regimes,
+of \NChannelCats{} channels by \NConseqCats{} consequences by two literatures,
 \NCubeCells{} cells in all, which we call the \textbf{cube}. A security attack
-and a safety mechanism that enter by the same route and cause the same damage
-fall in the same channel and consequence and differ only in regime, so the
-cube shows where one community has named a problem and the other has not.
+and a cause from a safety paper that enter by the same route and do the same damage
+fall in the same channel and consequence. They differ only in literature, so the
+cube shows where one literature has named a problem and the other has not.
 
 \paragraph{Channel.} The channel is the part of the context window at issue:
-the route the content took in for an insertion mechanism, and the stream that
+the route the content took in for an insertion cause, and the stream that
 grew, shifted or was evicted for a degradation one. There are
 \NChannelCats{}. \meth{direct-input} is content placed in the prompt by the user
 or an upstream service~\cite{liu-2023-promptb}. \meth{RAG} is a passage a retriever selected from a
@@ -135,41 +135,41 @@ response or an action, before that output takes effect. A fix that acts at
 none of these, such as an agent architecture that restructures the whole
 pipeline or an audit run afterwards, is coded \emph{none}.
 
-\paragraph{Regime.} The regime is the one assumption that separates the two
+\paragraph{Literature.} The literature is set by the one assumption that separates the two
 vocabularies of Section~\ref{sec:twovocab}: a security paper assumes an
-adversary and a safety paper assumes none. Every paper takes exactly one.
+adversary and a safety paper assumes none. Every paper is exactly one of the two.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig5_citation_network}
 \caption{The \NAnalysed{} papers that named a technique as a citation
-graph. Security papers are red circles and safety papers are blue triangles, so the two regimes stay apart in a
-black-and-white print. Cross-regime edges are drawn dark against the pale
-same-regime ones. The four most-cited bridges are ringed and named, with
-the number of cross-regime citations each carries.}
+graph. Security papers are red circles and safety papers are blue triangles, so the two literatures stay apart in a
+black-and-white print. Edges between a security and a safety paper are drawn dark against the pale
+edges within one literature. The four most-cited bridges are ringed and named, with
+the number of citations across the two literatures each carries.}
 \label{fig:network}
 \end{figure}
 
 \paragraph{What the census holds.} The registry holds \NMechanisms{} named
-mechanisms and \NFixes{} named fixes, \NDefSecurity{} of them from the
+causes and \NFixes{} named fixes, \NDefSecurity{} of them from the
 security literature and \NDefSafety{} from the safety literature. By
 consequence, \meth{goal-hijack} accounts for \NMechGoalHijack{} of the
-mechanisms (\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption}
+causes (\PctMechGoalHijack{}\%), followed by \meth{reasoning-corruption}
 at \NMechReasoning{} (\PctMechReasoning{}\%). By channel,
 \meth{direct-input} (\NMechDirectInput{}) and \meth{tool-output}
 (\NMechToolOutput{}) together hold close to three fifths.
 
 \paragraph{What the cube shows.} Figure~\ref{fig:cube} places every
-mechanism and every fix in its cell, one panel per regime.
+cause and every fix in its cell, one panel for security papers and one for safety papers.
 \NCubeEmpty{} of the \NCubeCells{} cells (\PctCubeEmpty{}\%) hold no named
-mechanism and no named fix from either literature. The cube counts what the
+cause and no named fix from either literature. The cube counts what the
 field has named, not which papers discuss a cell, so a survey that ranges over
 six channels occupies none of them. Four further patterns are visible in the
 figure. First, the two panels barely overlap. The security literature holds
-\NMechSecurity{} of the \NMechanisms{} mechanisms and masses them in
+\NMechSecurity{} of the \NMechanisms{} causes and masses them in
 \meth{goal-hijack}; the safety literature holds \NMechSafety{} and masses them
 in \meth{reasoning-corruption} and \meth{silent-corruption}. The columns each
-community works are nearly disjoint. Second, effort is concentrated rather than scarce. Four cells hold more than fifty
+literature works are nearly disjoint. Second, effort is concentrated rather than scarce. Four cells hold more than fifty
 fixes each --- \meth{tool-output} $\times$ \meth{goal-hijack} at
 \NDefCellToolOutGoalHijack{}, \meth{direct-input} $\times$
 \meth{goal-hijack} at \NDefCellDirectInGoalHijack{}, \meth{RAG} $\times$
@@ -178,30 +178,30 @@ $\times$ \meth{reasoning-corruption} at \NDefCellMemReasoning{} --- and
 between them they hold \PctTopFourDef{}\% of the \NFixes{} fixes in the
 census.
 
-Third, \NCellsAttackNoDef{} cells hold a named mechanism with no fix ever proposed
+Third, \NCellsAttackNoDef{} cells hold a named cause with no fix ever proposed
 against it. \NCellsAttackNoDefSec{} of them are in the security panel,
 \NCellsAttackNoDefBackdoor{} of those are \meth{persistence-backdoor}, and the
 last is \meth{memory} $\times$ \meth{data-exfiltration} on the safety side.
 These cells lack any proposed fix, which is a stronger gap than a cell
-studied by one community only. Fourth, the totals column adds up each channel over all consequences.
-\meth{multi-agent} and \meth{memory} carry several fixes per mechanism, while
-\meth{supply-chain} has fewer fixes than mechanisms and \meth{cross-modal} and
+studied in one literature only. Fourth, the totals column adds up each channel over all consequences.
+\meth{multi-agent} and \meth{memory} carry several fixes per cause, while
+\meth{supply-chain} has fewer fixes than causes and \meth{cross-modal} and
 \meth{skill} sit near parity. Supply-chain and skill are routes by which an
 agent accepts capability from a third party, and they hold the fewest entries
 in the corpus.
 
 
 \paragraph{What the fixes were tested against.} Almost every fix was tested
-in one regime only. \NDefenseFix{} were tested against an adversary, the
+either with an attacker or with honest mistakes, not both. \NDefenseFix{} were tested against an adversary, the
 defenses of Section~\ref{sec:twovocab}, and \NRemedy{} against incidental
 failure, the remedies. \NBothValidated{} (\PctBothValidated{}\%) were tested
 against both and \NNoValidation{} carry no test we could identify. So
-\PctOneRegime{}\% of published fixes carry an untested cross-regime question,
-which is the gap this paper measures and then fills. The regime a fix was
-tested in is coded separately from the literature it was published in, and
-only \NDefCrossRegime{} fixes were ever tested in the other community's
-regime. So the gap that Section~\ref{sec:emptycell} shows for tested pairs also
-appears for individual methods. Even so, \NMechUncovered{} of \NMechanismsBench{} named mechanisms
+\PctOneRegime{}\% of published fixes were never tested both with an attacker and with honest mistakes,
+which is the gap this paper measures and then fills. Whether a fix was
+tested with an attacker or with honest mistakes is coded separately from the literature it was published in, and
+only \NDefCrossRegime{} fixes were ever tested on the kind of failure the other
+literature studies. So the gap that Section~\ref{sec:emptycell} shows for tested pairs also
+appears for individual methods. Even so, \NMechUncovered{} of \NMechanismsBench{} named causes
 (\PctMechUncovered{}\%) have no fix ever evaluated against them. A single
 umbrella entry, indirect prompt injection, absorbs more tested pairs than any
 other entry by a wide margin, while \NInjUncovered{} of \NInjVariants{} named
@@ -214,23 +214,23 @@ category and lightly against its members.
 % \NDefenses{} named defenses, with the channel, consequence, regime and
 % validation coding we gave each, and the paper it came from. The counts in
 % this section are summaries of that table, not of a sample of it.
-\subsection{Regime versus venue}
+\subsection{Literature versus venue}
 \label{sec:venue}
 
-We code regime and venue independently, and the field does not divide
+We code the literature and the venue independently, and the field does not divide
 itself by venue. Of the
-\NRegimeSecNamedVenue{} security-regime papers that name a venue,
+\NRegimeSecNamedVenue{} security papers that name a venue,
 \NRegimeSecAtAIVenue{} published at an AI venue and \NRegimeSecAtSecVenue{}
 at a security venue. Adversarial work on LLM agents goes to ACL, EMNLP,
-NeurIPS and AAAI about as readily as to S\&P and CCS. Only one community crosses over. Of the \NRegimeSafetyNamedVenue{}
-safety-regime papers that name a venue, \NRegimeSafetyAtSecVenue{}
+NeurIPS and AAAI about as readily as to S\&P and CCS. Only one literature crosses over. Of the \NRegimeSafetyNamedVenue{}
+safety papers that name a venue, \NRegimeSafetyAtSecVenue{}
 published at a security venue. Security researchers submit to AI
 conferences; the reverse does not happen in this corpus.
 
 
 One limit on the reading. A venue is coded only where the record carries
 one, so this covers \NRegimeSecNamedVenue{} of \NRegimeSecurity{}
-security-regime papers and \NRegimeSafetyNamedVenue{} of
+security papers and \NRegimeSafetyNamedVenue{} of
 \NRegimeSafety{} on the safety side. The rest are preprints with no venue
 recorded, and we draw no conclusion about where they will land. So the two bodies of work are not kept apart by where they publish. What
 keeps them apart is what they cite.
@@ -239,41 +239,41 @@ keeps them apart is what they cite.
 \label{sec:citation}
 
 Cross-citation is low in both directions. \PctSecCitesSafety{}\% of
-security-regime papers (\NSecCitesSafety{} of \NAnalysedSec{}) cite a
-safety-regime paper, and \PctSafetyCitesSec{}\% of safety-regime papers
+security papers (\NSecCitesSafety{} of \NAnalysedSec{}) cite a
+safety paper, and \PctSafetyCitesSec{}\% of safety papers
 (\NSafetyCitesSec{} of \NAnalysedSafety{}) cite a security one. Even this low rate overstates how much
 each side uses the other's work, because of which papers receive the
-cross-regime citations. \NNetworkCross{} of the \NNetworkEdges{} resolved
-edges (\PctNetworkCross{}\%) cross regimes, and they concentrate on a
+citations between the two literatures. \NNetworkCross{} of the \NNetworkEdges{} resolved
+edges (\PctNetworkCross{}\%) run from one literature to the other, and they concentrate on a
 handful of papers either side can cite in an introduction without adopting
 anything from it. The four most-cited bridges are
 the lost-in-the-middle finding~\cite{liu-2023-lost}, Greshake et al.'s indirect prompt injection~\cite{greshake-2023-not}, the attack PoisonedRAG~\cite{zou-2024-poisonedrag} and the retrieval method Self-RAG~\cite{asai-2023-selfrag}. These papers name the problem. Citing one sets the scene; it does not show
-that a method from the other community was used. Figure~\ref{fig:network} shows the shape, two
+that a method from the other literature was used. Figure~\ref{fig:network} shows the shape, two
 clusters joined by a narrow band.
 
-\subsection{Recovered fix--mechanism pairs}
+\subsection{Recovered fix--cause pairs}
 \label{sec:coverage}
 
-Whether either community tests the other's work is a question about pairs,
+Whether either literature tests the other's work is a question about pairs,
 so we recovered every pair the corpus reports: \NPairsComposite{} confirmed
-pairs. A (fix, mechanism) pair means some paper evaluated that fix against
-that mechanism. The registry's unit is the claim: a fix enters it when its
-paper proposes it against a named mechanism, not when the paper demonstrates
+pairs. A (fix, cause) pair means some paper evaluated that fix against
+that cause. The registry's unit is the claim: a fix enters it when its
+paper proposes it against a named cause, not when the paper demonstrates
 that it works. We recovered pairs by four routes: reading the papers that propose fixes, a
 citation-and-full-text recovery pass, resolving benchmark names to their
 constituent attacks where the paper named them, and a reverse scan of the
-papers that propose mechanisms. The last route matters because it is the only
-one that can observe a fix \emph{losing} to a mechanism published after it.
+papers that name causes. The last route matters because it is the only
+one that can observe a fix \emph{losing} to a cause published after it.
 
 The matrix is sparse in a specific way. \NDefMatchedFull{} of \NFixes{}
 fixes (\PctDefMatched{}\%) appear in at least one pair, and \NDefOneFull{} of
 those (\PctDefOneFull{}\%) appear in exactly one. The most cross-tested fix
 appears in \NDefCeiling{} pairs, and \NDefFourPlus{} appear in four or more.
 Of the pairs belonging to those \NDefFourPlus{}, \PctBreadthFromAttack{}\%
-came from papers proposing a mechanism rather than from the fixes' own
+came from papers naming a cause rather than from the fixes' own
 evaluations, and for the broadest case \NBroadestFromAttack{} of its
 \NBroadestPairs{} do. Breadth here is not evidence that a fix was evaluated
-widely by its authors. It is evidence that the authors of mechanisms chose it
+widely by its authors. It is evidence that the authors of papers naming a cause chose it
 as a target.
 
 An empty cell of the matrix does not always mean that nothing was tested. A
@@ -282,13 +282,13 @@ evaluated adversarially, but it is not a named pair, because expanding a
 benchmark into its constituent attacks would manufacture coverage.
 Section~\ref{sec:artifacts} separates the fixes the matrix leaves empty into
 those tested against an unnamed adversary and those never tested against one. The next two subsections read the matrix two ways: by who reported each pair,
-and by whether its two sides come from different regimes.
+and by whether its two sides come from different literatures.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig3_who_reports}
 \caption{The outcome of each recovered pair, as reported by the papers
-that propose fixes and by the papers that propose mechanisms.}
+that propose fixes and by the papers that name causes.}
 \label{fig:whoreports}
 \end{figure}
 
@@ -308,7 +308,7 @@ For every pair we also record which side of the field reported it and what
 outcome was reported. Figure~\ref{fig:whoreports} puts the two reporters
 side by side. Papers proposing a fix report it winning in \NOutcomeDefWins{} of
 \NOutcomeDefPaper{} pairs, with the remaining \NOutcomeDefIncon{}
-reporting no result we could resolve. Papers proposing a mechanism report the
+reporting no result we could resolve. Papers naming a cause report the
 fix winning \NOutcomeAtkDefWins{} times in \NOutcomeAtkPaper{}: they report it
 losing in \NOutcomeAtkDefLoses{} and reach no directional verdict in
 \NOutcomeAtkIncon{}. No pair has been reported by both sides:
@@ -323,60 +323,60 @@ claim.
 \label{sec:emptycell}
 
 
-The axes so far describe what each community studies. The question this paper
-turns on is narrower: \emph{has either community ever tested its methods
+The axes so far describe what each literature studies. The question this paper
+turns on is narrower: \emph{have security or safety papers ever tested their methods
 against the other's problems?} Sort every pair into four boxes --- who built the fix, against whose
-problem it was run --- over the \NPureRegimePairs{} pairs whose two sides both
-sit in one regime. The left panel of Figure~\ref{fig:transfer} shows these
+problem it was run --- over the \NPureRegimePairs{} pairs whose two sides each
+come from one literature. The left panel of Figure~\ref{fig:transfer} shows these
 boxes; its right panel, discussed in Section~\ref{sec:campaign}, adds our
 campaign.
 
 Nearly every pair sits on the diagonal.
-Each community tests its own fixes against its own problems:
+Each literature tests its own fixes against its own problems:
 \NSecDefSecAttack{} security-on-security pairs and
 \NSafetyDefSafetyAttack{} safety-on-safety. The two off-diagonal boxes are
 the ones that would answer our question, and they are almost empty.
 \NSecDefVsSafetyAttack{} security fix has ever been run against a
-safety mechanism; \NSafetyDefVsSecAttack{} safety fixes have been
-run against security mechanisms. That is \NCrossCommunityPairs{} pairs in
+cause from a safety paper; \NSafetyDefVsSecAttack{} safety fixes have been
+run against causes from security papers. That is \NCrossCommunityPairs{} pairs in
 \NPureRegimePairs{}, \PctCrossCommunity{}\%. That near-empty off-diagonal is the untested region. It does not show that
-these methods fail outside their own regime. It shows that this has almost
+these methods fail on the other literature's problems. It shows that this has almost
 never been tested, although a deployed system does not sort its inputs into
 ``an attacker wrote this'' and ``this is merely stale''.
 
-The absence of cross-community pairs does not show that such tests were never
+The absence of pairs that cross the two literatures does not show that such tests were never
 considered; authors may have omitted them because they expected them to fail.
 Our data cannot establish why a test was not run. Three observations make
 deliberate omission unlikely. Cross-citation between
-the regimes is low (Section~\ref{sec:citation}), although citation counts
+the two literatures is low (Section~\ref{sec:citation}), although citation counts
 measure acknowledgment rather than awareness. No reported pair carries an
-outcome from both the paper proposing the fix and the paper proposing the
-mechanism (Section~\ref{sec:whoran}). And \NDefClaimExceedsTest{} fixes state an
+outcome from both the paper proposing the fix and the paper naming the
+cause (Section~\ref{sec:whoran}). And \NDefClaimExceedsTest{} fixes state an
 adversarial threat model yet report no adversarial evaluation, which suggests
 that gaps in evaluation are not confined to tests across the boundary.
 
 The single crossing pair is TRACE~\cite{hong-2026-trace}, a trajectory compressor for long-horizon
-agents whose own evaluation is adversarial, which is what places it in the
-security regime, and it is reported against context-length-induced
-degradation, a safety mechanism. The paper's subject matter spans both
-communities. One pair in \NPureRegimePairs{} does not change the overall
-pattern. The regime boundary is ours, not the field's, but drawing it left no paper
-out. We assign the regime label per paper, every paper takes one of
-the two, and papers on the boundary take the regime their own evaluation
-adopts. A paper that spans both communities therefore still sits among the
+agents whose own evaluation is adversarial, which is what places it among the
+security papers, and it is reported against context-length-induced
+degradation, a cause from a safety paper. The paper's subject matter spans both
+literatures. One pair in \NPureRegimePairs{} does not change the overall
+pattern. The boundary between security and safety papers is ours, not the field's, but drawing it left no paper
+out. We assign the label per paper, every paper takes one of
+the two, and papers on the boundary take the label their own evaluation
+adopts. A paper that spans both literatures therefore still sits among the
 \NPureRegimePairs{} pairs; we set none aside.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig7_lag}
-\caption{Publication lag between a fix and the mechanism it was tested on.}
+\caption{Publication lag between a fix and the cause it was tested on.}
 \label{fig:lag}
 \end{figure}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig10_intervention}
-\caption{Where each regime's fixes intervene. Security keeps the text out
+\caption{Where the fixes from each literature intervene. Security keeps the text out
 and contains what it does; safety improves reasoning over text already
 accepted. Points run in pipeline order. Safety carries a dotted fill and is
 the lower bar of every pair, so the two separate in print without color.}
@@ -385,32 +385,32 @@ the lower bar of every pair, so the two separate in print without color.}
 
 Publication order does not close the gap either. \NDefensePredates{} of
 \NTimelinePairs{} pairs (\PctDefensePredates{}\%) have a fix that
-predates the mechanism it was tested on, so fixes do meet mechanisms their
+predates the cause it was tested on, so fixes do meet causes their
 authors could not have designed against. Every one of these tests was run by
-the authors of the later mechanism paper, not by the authors of the fix. But only \NPredatesAndCross{}
-pair is both earlier \emph{and} cross-community, so meeting an unforeseen
-mechanism and meeting the other community's mechanism are not the same event.
+the authors of the later paper naming the cause, not by the authors of the fix. But only \NPredatesAndCross{}
+pair is both earlier \emph{and} crosses the two literatures, so meeting an unforeseen
+cause and meeting a cause from the other literature are not the same event.
 Figure~\ref{fig:lag} shows the full distribution.
 
 \subsection{Division of labor, not duplication}
 \label{sec:parallel}
 
-If the two communities duplicated each other's work, their methods would act
+If the two literatures duplicated each other's work, their methods would act
 at the same stage of the pipeline. We test this with the coded intervention
 point of each fix rather than with method names. Security acts where the
 text enters: \NDefPtIngestionSec{} of its fixes act at ingestion.
 Safety acts where the text is used: \NDefPtReasoningSafety{} of its
 fixes act at reasoning. Figure~\ref{fig:pipeline} draws that split on the pipeline and Figure~\ref{fig:intervention} counts it. Methods
 that intervene at different stages do not duplicate each other. The names agree with the coding. Inside each taxonomy cell we looked for a
-security-regime name and a safety-regime name close enough to be the same
-thing relabelled: among \NMechanisms{} named mechanisms there are
+name from a security paper and a name from a safety paper close enough to be the same
+thing relabelled. Among \NMechanisms{} named causes there are
 \NMechNameClash{} such collisions, and among \NFixes{} fixes there
 is \NDefNameClash{}. That test can only catch relabelling, so it confirms
 the division rather than establishing it.
 
 
 The two sides name different halves of one causal chain. \NSharedCells{} of our
-\NOccupiedCells{} occupied cells hold mechanisms from both regimes,
+\NOccupiedCells{} occupied cells hold causes from both literatures,
 \NMechSharedSec{} security and \NMechSharedSafety{} safety. Read them side by
 side, and the security entries are overwhelmingly ways of getting bad text in, while
 the safety entries are reasons the model believes bad text once it is there. The
@@ -420,11 +420,11 @@ external evidence, lost-in-the-middle, and knowledge-conflict circuits on the
 other. The security papers build the attacks, the safety papers explain why
 the model is susceptible to them, and the two sets of papers cite each other
 rarely. The consequences each side names show the same division. Goal-hijacking, an
-attacker's objective, is \NGoalHijackSec{} security mechanisms to
-\NGoalHijackSafety{} safety ones. Reasoning corruption, a degradation, runs
-the other way: \NReasonSafety{} safety to \NReasonSec{} security. That last reading is ours, taken from the mechanism names and their papers
+attacker's objective, is \NGoalHijackSec{} causes from security papers to
+\NGoalHijackSafety{} from safety papers. Reasoning corruption, a degradation, runs
+the other way: \NReasonSafety{} safety to \NReasonSec{} security. That last reading is ours, taken from the cause names and their papers
 rather than from a coded field, and some entries do not fit it cleanly. A few
-safety-regime entries name a delivery route rather than a susceptibility,
+entries from safety papers name a delivery route rather than a susceptibility,
 \meth{KV-cache contamination} and \meth{incidental prompt injection} among
 them. The intervention points the subsection opens with are coded, and the
 argument rests on them.
@@ -441,19 +441,19 @@ honest and hurt when it is written by someone else.
 
 Publication dates say the same thing from a second direction, and they say
 which way the division runs. \NSharedChannels{} of our nine channels have
-named mechanisms from both regimes, and we compare the first paper from
+named causes from both literatures, and we compare the first paper from
 each side in each of them.
 The security literature arrives first in \NChannelsSecFirst{} of
 \NSharedChannels{}. Both arrive in the same year in \NChannelsSameYear{}. The
 safety literature arrives first in \NChannelsSafetyFirst{}. The
 median lag where security leads is \MedianChannelLag{} year and the longest is
 \MaxChannelLag{}. The \meth{supply-chain} channel, left out here because it has no
-safety-regime entry at all, is the extreme case: security reached it and
-safety has not. So a safety-regime paper naming a failure in a channel is usually studying a channel a security paper reached \MedianChannelLag{} to \MaxChannelLag{} years
+entry from a safety paper at all, is the extreme case: security reached it and
+safety has not. So a safety paper naming a failure in a channel is usually studying a channel a security paper reached \MedianChannelLag{} to \MaxChannelLag{} years
 earlier, in a literature it rarely cites. The name-collision count above shows that the later paper is not renaming
-the earlier one's mechanism. The dates show that work in these channels has
+the earlier one's cause. The dates show that work in these channels has
 mostly gone ahead without reference to the earlier results
-of the other community. Two limits on this reading. The dates are publication dates in our corpus, so
+of the other literature. Two limits on this reading. The dates are publication dates in our corpus, so
 a channel that security reached first in work we did not include would move
 the count. And the direction may partly reflect that security publishes
 attacks, which are discrete and nameable, while the safety side
@@ -468,7 +468,7 @@ census holds no paper that does. Whether the two together cover the problem
 is RQ5, which Section~\ref{sec:together} answers once the experiments have
 shown what each side's fixes do on the other's problem.
 
-Answer to RQ1. No. The two communities divide the problem rather than
+Answer to RQ1. No. The two literatures divide the problem rather than
 duplicate it. Security guards where text enters and safety improves how the
 model reasons about text already inside. Whether the two halves add up to a
 defense is RQ5.

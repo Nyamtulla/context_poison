@@ -2,14 +2,14 @@
 % section (checked 2026-11-04), not from our result files.
 \begin{table*}[t]
 \centering
-\caption{What we ran, beside what its authors ran. Regime: \emph{security}
-if an attacker wrote the text, \emph{safety} if it is an honest mistake or
-conflict. Our data: $=$ the authors' release; $\approx$ the same questions
+\caption{What we ran, beside what its authors ran. Literature: \emph{security}
+if the method's paper has an attacker write the text, \emph{safety} if it
+has an honest mistake or conflict. Our data: $=$ the authors' release; $\approx$ the same questions
 (Natural Questions) in another release, with different passages; $\neq$ a
 different dataset. $^\star$Built by us, so it has no authors' columns.
 $^\dagger$Run but not reported: SHIFT showed no benefit in its own check, and
 FaithfulRAG failed its control. Our models are instruction-tuned unless
-marked base; a mechanism's row lists every model that read it. NQ-Open is
+marked base; a cause's row lists every model that read it. NQ-Open is
 the open-domain release of Natural Questions; open NQ is RobustRAG's copy,
 with ten retrieved passages per question.}
 \label{tab:provenance}
@@ -24,7 +24,7 @@ l
 >{\raggedright\arraybackslash}p{0.17\textwidth}
 >{\raggedright\arraybackslash}p{0.145\textwidth}@{}}
 \toprule
-\textbf{Method} & \textbf{Regime} & \textbf{What it does} & \textbf{Authors' data} &
+\textbf{Method} & \textbf{Literature} & \textbf{What it does} & \textbf{Authors' data} &
 \textbf{Our data} & \textbf{Authors' models} & \textbf{Our model} \\
 \midrule
 \multicolumn{7}{@{}l}{\emph{Fixes}} \\
@@ -77,7 +77,7 @@ AgentDojo's defenses~\cite{debenedetti-2024-agentdojo} & security & detect, deli
 Technique defenses$^\star$ & security & five published techniques, in our code &
   --- & banking suite & --- & Qwen2.5-14B \\
 \midrule
-\multicolumn{7}{@{}l}{\emph{Mechanisms}} \\
+\multicolumn{7}{@{}l}{\emph{Causes}} \\
 PoisonedRAG~\cite{zou-2024-poisonedrag} & security & a passage stating the attacker's answer &
   NQ, HotpotQA, MS MARCO & $\approx$ open NQ &
   PaLM 2, GPT-3.5, GPT-4, Llama-2, Vicuna & Llama-3-8B, Mistral-7B, Qwen2.5-7B \\
@@ -108,7 +108,7 @@ Dilution$^\star$ & safety & other questions' passages, appended &
   --- & open NQ & --- & Mistral-7B, Qwen2.5-7B \\
 \midrule
 \multicolumn{7}{@{}l}{\emph{Datasets}} \\
-Open NQ & security & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.81\textwidth}}{Released by the RobustRAG authors: NQ-Open questions, ten retrieved passages each, and PoisonedRAG's passages. Used for the regime comparison, both grid directions and the tracing runs.} \\
+Open NQ & security & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.81\textwidth}}{Released by the RobustRAG authors: NQ-Open questions, ten retrieved passages each, and PoisonedRAG's passages. Used for the attack-versus-mistake comparison, both grid directions and the tracing runs.} \\
 CoConflictQA & safety & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.81\textwidth}}{Released by the ParamMute authors; their paper's latest version calls it CoFaithfulQA. We use its Natural Questions part: one passage per question, with the model's own wrong answer as false evidence. Used for the fixes' second dataset and all of RQ3.} \\
 AgentDojo banking & security & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.81\textwidth}}{Released by the AgentDojo authors: banking tasks for a tool-using agent, with slots for injected text. Used for the agent experiment.} \\
 FaithEval, SQuAD & safety & \multicolumn{5}{>{\raggedright\arraybackslash}p{0.81\textwidth}}{Released by the FaithfulRAG authors, as negative contexts. Used only for FaithfulRAG's control.} \\

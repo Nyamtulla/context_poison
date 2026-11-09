@@ -42,8 +42,8 @@ Against these, our contribution is not a better enumeration of either side. We
 apply one search protocol, one screening pass and one taxonomy to both. That
 makes the distance between them measurable, and it gives us the experiments in
 Section~\ref{sec:experiments}. A systematization drawn from one literature cannot report that
-\PctSecCitesSafety{}\% of security-regime papers cite a safety-regime one,
-or that \PctSameRegime{}\% of tested pairs stay inside one regime. The other
+\PctSecCitesSafety{}\% of security papers cite a safety paper,
+or that \PctSameRegime{}\% of tested pairs stay inside one literature. The other
 literature is not in its corpus.
 
 \subsection{Attack--defense evaluation platforms}
@@ -61,7 +61,7 @@ variance at all.
 We treated those criticisms as requirements. We do not reimplement the retrieval methods: each runs from its authors' released code and weights. The agent experiment, a control rather than a test of transfer, also uses our implementations of published techniques, which Table~\ref{tab:provenance} marks. The control-fires-first rule
 automates the check Carlini had to run by hand. It fired on the safety fix FaithfulRAG, which
 we therefore report as not reportable rather than as defeated. We report per
-cell and never average across regimes. We also say where a comparison across planted
+cell and never average attacks together with honest mistakes. We also say where a comparison across planted
 passages is confounded. We use greedy decoding everywhere except the one cell whose authors
 specify sampling, so we report no error bars over a stochastic decoder. We
 verified that choice: a greedy cell rerun three times gives byte-identical
@@ -77,7 +77,7 @@ not run from their released artifacts, which agrees with what they found.
 
 The difference from both precedents is that we execute. Existing
 systematizations in this space report what papers claim their methods
-achieve. Section~\ref{sec:whoran} shows why we do not. The side of the
-community that wrote the paper almost determines the reported outcome of a
-(fix, mechanism) pair. A systematization that aggregates those reports inherits that
+achieve. Section~\ref{sec:whoran} shows why we do not. Whether the paper
+reporting a (fix, cause) pair proposed the fix or named the cause almost
+determines the reported outcome. A systematization that aggregates those reports inherits that
 bias. Running the artifacts is the only way we found to avoid it.
