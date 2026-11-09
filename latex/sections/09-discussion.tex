@@ -64,13 +64,15 @@ the fix tells a reader which kind of claim they are reading.
 \textbf{Compose across the boundary, and measure the composition.}
 Section~\ref{sec:parallel} shows the two literatures defending different
 stages of one pipeline, and Section~\ref{sec:results} shows the reasoning
-stage failing on its own once an adversary writes the input. The next step
-is to put an ingestion-stage filter in front of a
-reasoning-stage method and see whether the pair holds where each half does
-not. We do not know that it works. This paper reports no result for a
-composed fix; the experiment has started and is not finished. If the filter lets a fluent false sentence through, the reasoning stage is
-left as weak as our results show. Both halves are published with released code, and we found
-no paper in the corpus that combines them.
+stage failing on its own once an adversary writes the input. The obvious
+next step is to put an ingestion-stage filter in front of a reasoning-stage
+fix, and we measured that pair (Table~\ref{tab:stack}). On every case it did
+what its stronger half did and nothing more: it scored at most
+\EStackGainMax{} points above the better half, and the attack PoisonedRAG
+passed both halves and so passed the stack. A composed fix therefore needs
+its own measurement, not an argument from its halves. Both halves are
+published with released code, and we found no paper in the corpus that
+combines them.
 
 \textbf{Test each fix against the other literature's causes.} A
 method aimed at stale or conflicting retrieval is evaluated on
