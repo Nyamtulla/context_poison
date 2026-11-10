@@ -173,6 +173,19 @@ satisfy (S3), design and pilot it (S4-S5), build and check it (S6), controls
   of COIECD. Fix in S8 by keeping COIECD inside its limit (its own paper skips
   contexts over 2,000 characters); until then, mark or drop those cells.
 
+- [ ] **S5 finding: about 45% of the released PoisonedRAG passages deny their
+  own target.** RobustRAG's `incorrect_context` (5 per question, 500
+  questions): a keyword screen flags 1,132 of 2,500 passages for hedging or
+  negation ("Tom Hanks was not part of A Christmas Story", "even though this
+  figure is not accurate"); 337 questions have at least one, 75 have all
+  five. Who generated them is undocumented; PoisonedRAG's paper asks GPT-4
+  for passages that support the target. Every PoisonedRAG cell in the paper
+  used these passages, so the attack may be weaker than designed. Measure
+  the true rate by hand in the pilot; the new dataset keeps only passages
+  that assert the target (CONSTRUCTION_RULES.md section 2.1).
+  GPT-4 generation (added questions, and regenerating the core) is deferred
+  until an OpenAI key is available (decided 2026-11-10).
+
 Affected until S8 lands: Table VI (grid), the second-direction results,
 Table VIII (stack), the attack-versus-mistake table, and the benchmark
 contribution bullet. Items A1, A3, A4, A6, A7, B2-B6 and C6 are resolved by
