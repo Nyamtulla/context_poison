@@ -118,6 +118,18 @@ satisfy (S3), design and pilot it (S4-S5), build and check it (S6), controls
   - Licences: SituatedQA and RealtimeQA state none; ask the authors before
     redistributing anything derived from them.
 
+- **S5 decision 2026-11-10: the truth is fixed at 2018**, the date of the
+  passage pool. Gold = the answer that held at the end of 2018; outdated =
+  the different answer before it; an answer that started after 2018 is the
+  model's later memory (an R3 condition), not an outdated mistake. Built by
+  `scripts/build_shared_questions.py` into
+  `data/registries/shared_dataset/questions.jsonl`: 1,237 questions (500
+  core, 29 of them with an outdated answer; 737 added from SituatedQA), 766
+  with an outdated answer, annotators agreeing on 734. Cost of the 2018
+  anchor: the ~880 SituatedQA questions whose answer changed only after 2018
+  have no known pre-2018 answer and drop out. SituatedQA has annotation
+  errors (it gives 2002, a Winter Games, as the last US Summer Olympics), so
+  every outdated item is hand-checked in the pilot.
 - [ ] **S5. Design document and a 50-question pilot.** Construction rules for
   each cause in both forms; build 50 questions; read every item by hand for
   realism and leakage (a gold answer surviving, type mismatch, broken
