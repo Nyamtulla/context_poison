@@ -89,16 +89,34 @@ satisfy (S3), design and pilot it (S4-S5), build and check it (S6), controls
     Check released code before choosing.
   Cost: `text`.
 
-- [ ] **S4. Pick the base data.** Candidates, each to verify before use:
-  - open NQ (RobustRAG's release): 30 passages per question and
-    PoisonedRAG's passages exist for it; no real old answers.
-  - RealtimeQA: used by RobustRAG and ReliabilityRAG (security) and by
-    FaithfulRAG (safety); answers change over time. Check whether old and
-    new answers and passages for both are available.
-  - SituatedQA (temporal part, built on NQ-Open): check that it gives
-    answers with dates and how many overlap open NQ.
-  - FreshQA (used by SCR): check the same.
-  Output: a one-page choice with counts. Cost: `CPU`.
+- [x] **S4. Base data chosen 2026-11-10** (counts and sources in
+  `data/registries/design_choices/S4_DATA_REPORT.md`; fix code in
+  `S4_FIXES_REPORT.md`). No release gives real outdated passages for
+  questions both literatures use, so we build them:
+  - Questions: NQ-open. Core = RobustRAG's 500 (PoisonedRAG's released
+    passages exist only for these); 132 are in SituatedQA, 50 with a dated
+    previous answer. **Decided:** add SituatedQA questions whose answer
+    changed (1,644 have a previous answer), with their PoisonedRAG passages
+    built by PoisonedRAG's own released generation code, so the matched
+    attack-versus-mistake pairs cover a few hundred items, not 50.
+  - Gold answers from SituatedQA where it has them: for 9 of the 50, open
+    NQ's gold is SituatedQA's previous answer.
+  - Passages: our own retrieval over DPR's Dec 2018 Wikipedia
+    (`psgs_w100.tsv.gz`, 100-word passages; downloaded to
+    data/s4_sources/dpr_wiki/, git-ignored). Gives real retrieval for R7 and
+    real outdated passages for the 711 SituatedQA questions whose answer
+    changed after 2018. Older changes: Wikipedia revisions from inside the
+    old answer's period, found through the NQ example id, not search; every
+    kept passage hand-checked in S5 (about half of string hits do not state
+    the answer).
+  - **Decided honest causes at launch:** outdated (above), misretrieval (real
+    retrieval for near-miss queries, distinct passages), conflict
+    (WikiContradict), swapped-answer control (type-checked). Lost in the
+    middle in a second wave.
+  - Fixes joining the rerun: BordaRAG (two one-line fixes to released code,
+    disclosed) and CRAG with web search off (our configuration, disclosed).
+  - Licences: SituatedQA and RealtimeQA state none; ask the authors before
+    redistributing anything derived from them.
 
 - [ ] **S5. Design document and a 50-question pilot.** Construction rules for
   each cause in both forms; build 50 questions; read every item by hand for
