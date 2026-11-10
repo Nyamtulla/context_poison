@@ -86,3 +86,11 @@ data/sd_models/
 data/sd_queue/
 data/sd_flags_*.log
 data/backups/
+
+# Full-text extractions of the surveyed papers (S1-S2 design coding) carry the
+# papers' own redistribution terms, like data/papers/. Rebuild with pdftotext
+# from data/registries/design_choices/s2_worklist.json.
+data/registries/design_choices/text/
+data/registries/design_choices/text_flow/
+# S4 downloads and cloned third-party repos (untrusted, some unlicensed).
+data/s4_sources/

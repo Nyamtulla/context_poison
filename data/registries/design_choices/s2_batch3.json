@@ -1,0 +1,211 @@
+[
+ {
+  "id": "f03",
+  "row": 36,
+  "name": "Corrective Retrieval Augmented Generation (CRAG)",
+  "title": "Corrective Retrieval Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Corrective Retrieval Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f03.txt",
+  "words": 9109
+ },
+ {
+  "id": "f27",
+  "row": 412,
+  "name": "MAL-RAG (Multiple Abstraction Level RAG)",
+  "title": "Multiple Abstraction Level Retrieve Augment Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Multiple Abstraction Level Retrieve Augment Generation.pdf",
+  "text": "data/registries/design_choices/text/f27.txt",
+  "words": 6592
+ },
+ {
+  "id": "f32",
+  "row": 480,
+  "name": "Mobile-Agent-RAG (Manager-RAG / Operator-RAG dual-level retrieval augmentation)",
+  "title": "Mobile-Agent-RAG: Driving Smart Multi-Agent Coordination with Contextual Knowledge Empowerment for Long-Horizon Mobile Automation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Mobile-Agent-RAG - Driving Smart Multi-Agent Coordination with Contextual Knowledge Empowerment for Long-Horizon Mobile Automation.pdf",
+  "text": "data/registries/design_choices/text/f32.txt",
+  "words": 20251
+ },
+ {
+  "id": "f37",
+  "row": 654,
+  "name": "TCR (Transparent Conflict Resolution)",
+  "title": "Seeing through the Conflict: Transparent Knowledge Conflict Handling in Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Seeing through the Conflict - Transparent Knowledge Conflict Handling in Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f37.txt",
+  "words": 6128
+ },
+ {
+  "id": "f42",
+  "row": 659,
+  "name": "TruthfulRAG (knowledge-graph-based factual conflict resolution)",
+  "title": "TruthfulRAG: Resolving Factual-level Conflicts in Retrieval-Augmented Generation with Knowledge Graphs",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/TruthfulRAG - Resolving Factual-level Conflicts in Retrieval-Augmented Generation with Knowledge Graphs.pdf",
+  "text": "data/registries/design_choices/text/f42.txt",
+  "words": 7697
+ },
+ {
+  "id": "f47",
+  "row": 664,
+  "name": "MACR (multi-agent conflict resolution)",
+  "title": "Navigating Unreliable Parametric and Contextual Knowledge: Explicit Knowledge Conflict Resolution for LLM Inference",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Navigating Unreliable Parametric and Contextual Knowledge - Explicit Knowledge Conflict Resolution for LLM Inference.pdf",
+  "text": "data/registries/design_choices/text/f47.txt",
+  "words": 9803
+ },
+ {
+  "id": "f52",
+  "row": 669,
+  "name": "Cross-Validation Re-ranking (inter-context conflict-aware re-ranking)",
+  "title": "Eliminating Retrieval Knowledge Conflicts: Cross-Validation Re-ranking with Large Language Models",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Eliminating Retrieval Knowledge Conflicts - Cross-Validation Re-ranking with Large Language Models.pdf",
+  "text": "data/registries/design_choices/text/f52.txt",
+  "words": 6475
+ },
+ {
+  "id": "f64",
+  "row": 828,
+  "name": "SpARE (Sparse Auto-Encoder Representation Engineering)",
+  "title": "Steering Knowledge Selection Behaviours in LLMs via SAE-Based Representation Engineering",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Steering Knowledge Selection Behaviours in LLMs via SAE-Based Representation Engineering.pdf",
+  "text": "data/registries/design_choices/text/f64.txt",
+  "words": 13210
+ },
+ {
+  "id": "f70",
+  "row": 925,
+  "name": "RADIANT (DPO-ECD, Entity-Context Divergence alignment)",
+  "title": "RADIANT: Retrieval AugmenteD entIty-context AligNmenT - Introducing RAG-ability and Entity-Context Divergence",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/RADIANT - Retrieval AugmenteD entIty-context AligNmenT - Introducing RAG-ability and Entity-Context Divergence.pdf",
+  "text": "data/registries/design_choices/text/f70.txt",
+  "words": 10503
+ },
+ {
+  "id": "f75",
+  "row": 980,
+  "name": "RAPS-DA (Regime-Aware Peer Specialization)",
+  "title": "Regime-Aware Peer Specialization for Robust RAG under Heterogeneous Knowledge Conflicts",
+  "literature": "safety",
+  "validated_against": "both",
+  "pdf": "data/papers/Regime-Aware Peer Specialization for Robust RAG under Heterogeneous Knowledge Conflicts.pdf",
+  "text": "data/registries/design_choices/text/f75.txt",
+  "words": 9693
+ },
+ {
+  "id": "f80",
+  "row": 997,
+  "name": "UniKnow / LM-UniKnow",
+  "title": "UniKnow: A Unified Framework for Reliable Language Model Behavior across Parametric and External Knowledge",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/UniKnow - A Unified Framework for Reliable Language Model Behavior across Parametric and External Knowledge.pdf",
+  "text": "data/registries/design_choices/text/f80.txt",
+  "words": 12437
+ },
+ {
+  "id": "f85",
+  "row": 1007,
+  "name": "XoT (explanation-based thinking framework)",
+  "title": "Exploring Knowledge Conflicts for Faithful LLM Reasoning: Benchmark and Method",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Exploring Knowledge Conflicts for Faithful LLM Reasoning - Benchmark and Method.pdf",
+  "text": "data/registries/design_choices/text/f85.txt",
+  "words": 8951
+ },
+ {
+  "id": "f92",
+  "row": null,
+  "name": "LongFaith",
+  "title": "LongFaith: Enhancing Long-Context Reasoning in LLMs with Faithful Synthetic Data",
+  "literature": "safety",
+  "validated_against": "",
+  "pdf": "data/papers/LongFaith - Enhancing Long-Context Reasoning in LLMs with Faithful Synthetic Data.pdf",
+  "text": "data/registries/design_choices/text/f92.txt",
+  "words": 10635
+ },
+ {
+  "id": "f08",
+  "row": 148,
+  "name": "CachePrune",
+  "title": "CachePrune: Teaching LLMs What Not to Follow via KV-Cache Editing",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/CachePrune - Teaching LLMs What Not to Follow via KV-Cache Editing.pdf",
+  "text": "data/registries/design_choices/text/f08.txt",
+  "words": 13183
+ },
+ {
+  "id": "f13",
+  "row": 251,
+  "name": "ControlNet (ControlNET)",
+  "title": "ControlNET: A Firewall for RAG-based LLM System",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/ControlNET - A Firewall for RAG-based LLM System.pdf",
+  "text": "data/registries/design_choices/text/f13.txt",
+  "words": 13320
+ },
+ {
+  "id": "f18",
+  "row": 258,
+  "name": "MedRAGShield",
+  "title": "MedRAGShield: A Three-Tier Defense Framework Against Document Poisoning and Adversarial Attacks in Medical Retrieval-Augmented Generation Systems",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/MedRAGShield - A Three-Tier Defense Framework Against Document Poisoning and Adversarial Attacks in Medical Retrieval-Augmented Generation Systems.pdf",
+  "text": "data/registries/design_choices/text/f18.txt",
+  "words": 4252
+ },
+ {
+  "id": "f23",
+  "row": 278,
+  "name": "TracLLM",
+  "title": "TracLLM: A Generic Framework for Attributing Long Context LLMs",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/TracLLM - A Generic Framework for Attributing Long Context LLMs.pdf",
+  "text": "data/registries/design_choices/text/f23.txt",
+  "words": 17205
+ },
+ {
+  "id": "f60",
+  "row": 766,
+  "name": "LeakSealer",
+  "title": "LeakSealer: A Semisupervised Defense for LLMs Against Prompt Injection and Leakage Attacks",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/LeakSealer - A Semisupervised Defense for LLMs Against Prompt Injection and Leakage Attacks.pdf",
+  "text": "data/registries/design_choices/text/f60.txt",
+  "words": 13577
+ },
+ {
+  "id": "f90",
+  "row": 1088,
+  "name": "chain-of-defensive-thought (CoDT)",
+  "title": "Chain-of-Defensive-Thought: Structured Reasoning Elicits Robustness in Large Language Models against Reference Corruption",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Chain-of-Defensive-Thought - Structured Reasoning Elicits Robustness in Large Language Models against Reference Corruption.pdf",
+  "text": "data/registries/design_choices/text/f90.txt",
+  "words": 9375
+ }
+]

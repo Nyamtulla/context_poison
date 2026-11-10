@@ -1,0 +1,200 @@
+[
+ {
+  "id": "f04",
+  "row": 37,
+  "name": "Astute RAG",
+  "title": "Astute RAG: Overcoming Imperfect Retrieval Augmentation and Knowledge Conflicts for Large Language Models",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Astute RAG - Overcoming Imperfect Retrieval Augmentation and Knowledge Conflicts for Large Language Models.pdf",
+  "text": "data/registries/design_choices/text/f04.txt",
+  "words": 8604
+ },
+ {
+  "id": "f28",
+  "row": 413,
+  "name": "KV-Fusion",
+  "title": "Parallel Key-Value Cache Fusion for Position Invariant RAG",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Parallel Key-Value Cache Fusion for Position Invariant RAG.pdf",
+  "text": "data/registries/design_choices/text/f28.txt",
+  "words": 7211
+ },
+ {
+  "id": "f33",
+  "row": 650,
+  "name": "Taxonomy-Aware / Pipeline conflict-type-aware response generation (from the CONFLICTS benchmark)",
+  "title": "DRAGged into Conflicts: Detecting and Addressing Conflicting Sources in Search-Augmented LLMs",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/DRAGged into Conflicts - Detecting and Addressing Conflicting Sources in Search-Augmented LLMs.pdf",
+  "text": "data/registries/design_choices/text/f33.txt",
+  "words": 10961
+ },
+ {
+  "id": "f38",
+  "row": 655,
+  "name": "FaithfulRAG (fact-level conflict modeling + Self-Think)",
+  "title": "FaithfulRAG: Fact-Level Conflict Modeling for Context-Faithful Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/FaithfulRAG - Fact-Level Conflict Modeling for Context-Faithful Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f38.txt",
+  "words": 10778
+ },
+ {
+  "id": "f43",
+  "row": 660,
+  "name": "PH3 (Pruning Head via PatH PatcHing)",
+  "title": "Cutting Off the Head Ends the Conflict: A Mechanism for Interpreting and Mitigating Knowledge Conflicts in Language Models",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Cutting Off the Head Ends the Conflict - A Mechanism for Interpreting and Mitigating Knowledge Conflicts in Language Models.pdf",
+  "text": "data/registries/design_choices/text/f43.txt",
+  "words": 11156
+ },
+ {
+  "id": "f48",
+  "row": 665,
+  "name": "ConflictRAG (two-stage detection + Entropy-TOPSIS credibility + CARS metric)",
+  "title": "ConflictRAG: Detecting and Resolving Knowledge Conflicts in Retrieval Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/ConflictRAG - Detecting and Resolving Knowledge Conflicts in Retrieval Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f48.txt",
+  "words": 3680
+ },
+ {
+  "id": "f53",
+  "row": 670,
+  "name": "KnowPO (Knowledge-aware Preference Optimization)",
+  "title": "KnowPO: Knowledge-aware Preference Optimization for Controllable Knowledge Selection in Retrieval-Augmented Language Models",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/KnowPO - Knowledge-aware Preference Optimization for Controllable Knowledge Selection in Retrieval-Augmented Language Models.pdf",
+  "text": "data/registries/design_choices/text/f53.txt",
+  "words": 9684
+ },
+ {
+  "id": "f66",
+  "row": 832,
+  "name": "RE-IAG (Reasoning-Evidence Interactive Augmented Graph)",
+  "title": "Decomposition, Think and Action: Alleviating Hallucinations of Large Language Models with Reasoning\u2013Evidence Interactive Augmented Graph",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Decomposition, Think and Action - Alleviating Hallucinations of Large Language Models with Reasoning\u2013Evidence Interactive Augmented Graph.pdf",
+  "text": "data/registries/design_choices/text/f66.txt",
+  "words": 19996
+ },
+ {
+  "id": "f71",
+  "row": 926,
+  "name": "Knowledgeable-R1",
+  "title": "Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement.pdf",
+  "text": "data/registries/design_choices/text/f71.txt",
+  "words": 11199
+ },
+ {
+  "id": "f76",
+  "row": 983,
+  "name": "SABER (Self-Aware Belief Estimator for RAG)",
+  "title": "Trust or Abstain? A Self-Aware RAG Approach",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Trust or Abstain A Self-Aware RAG Approach.pdf",
+  "text": "data/registries/design_choices/text/f76.txt",
+  "words": 13708
+ },
+ {
+  "id": "f81",
+  "row": 999,
+  "name": "ACD (Adaptive Contrastive Decoding)",
+  "title": "Adaptive Contrastive Decoding in Retrieval-Augmented Generation for Handling Noisy Contexts",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Adaptive Contrastive Decoding in Retrieval-Augmented Generation for Handling Noisy Contexts.pdf",
+  "text": "data/registries/design_choices/text/f81.txt",
+  "words": 6494
+ },
+ {
+  "id": "f86",
+  "row": 1008,
+  "name": "CK-PLUG (Controllable Knowledge Plug-in)",
+  "title": "Parameters vs. Context: Fine-Grained Control of Knowledge Reliance in Language Models",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Parameters vs. Context - Fine-Grained Control of Knowledge Reliance in Language Models.pdf",
+  "text": "data/registries/design_choices/text/f86.txt",
+  "words": 12201
+ },
+ {
+  "id": "f00",
+  "row": 23,
+  "name": "RobustRAG",
+  "title": "Certifiably Robust RAG against Retrieval Corruption",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Certifiably Robust RAG against Retrieval Corruption.pdf",
+  "text": "data/registries/design_choices/text/f00.txt",
+  "words": 17404
+ },
+ {
+  "id": "f09",
+  "row": 201,
+  "name": "UNNAMED: Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)",
+  "title": "Securing AI Agents Against Prompt Injection Attacks",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Securing AI Agents Against Prompt Injection Attacks.pdf",
+  "text": "data/registries/design_choices/text/f09.txt",
+  "words": 3320
+ },
+ {
+  "id": "f14",
+  "row": 252,
+  "name": "FilterRAG / ML-FilterRAG",
+  "title": "Defending Against Knowledge Poisoning Attacks During Retrieval-Augmented Generation",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Defending Against Knowledge Poisoning Attacks During Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f14.txt",
+  "words": 8252
+ },
+ {
+  "id": "f19",
+  "row": 269,
+  "name": "BiRD (Bidirectional Ranking Defense)",
+  "title": "BiRD: A Bidirectional Ranking Defense Mechanism for Retrieval Augmented Generation",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/BiRD - A Bidirectional Ranking Defense Mechanism for Retrieval Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f19.txt",
+  "words": 10104
+ },
+ {
+  "id": "f56",
+  "row": 692,
+  "name": "PARSE (Provenance-Aware Retrieval Sanitization)",
+  "title": "PARSE: Provenance-Aware Retrieval Sanitization for Professional Domain LLM Agents",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/PARSE - Provenance-Aware Retrieval Sanitization for Professional Domain LLM Agents.pdf",
+  "text": "data/registries/design_choices/text/f56.txt",
+  "words": 3963
+ },
+ {
+  "id": "f61",
+  "row": 782,
+  "name": "TaskTracker (activation-delta task-drift detection)",
+  "title": "Get My Drift? Catching LLM Task Drift with Activation Deltas",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Get My Drift Catching LLM Task Drift with Activation Deltas.pdf",
+  "text": "data/registries/design_choices/text/f61.txt",
+  "words": 15669
+ }
+]

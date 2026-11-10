@@ -1,0 +1,74 @@
+[
+ {
+  "name": "PoisonedRAG",
+  "literature": "security",
+  "pdf": "data/papers/PoisonedRAG - Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models.pdf",
+  "code": "third_party/RobustRAG (ships PoisonedRAG passages for open NQ)"
+ },
+ {
+  "name": "Corpus poisoning",
+  "literature": "security",
+  "pdf": "data/papers/Poisoning Retrieval Corpora by Injecting Adversarial Passages.pdf",
+  "code": "(find our construction under scripts/, e.g. *corpus_poisoning*)"
+ },
+ {
+  "name": "BadRAG (refusal and tone)",
+  "literature": "security",
+  "pdf": "data/papers/BadRAG - Identifying Vulnerabilities in Retrieval Augmented Generation of Large Language Models.pdf",
+  "code": "(find our construction under scripts/, e.g. stage3_badrag_robustrag.py, spare_badrag_transfer.py)"
+ },
+ {
+  "name": "AgentDojo prompt injection",
+  "literature": "security",
+  "pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "code": "envs/agentdojo-libs"
+ },
+ {
+  "name": "ChatInject",
+  "literature": "security",
+  "pdf": "data/papers/ChatInject - Abusing Chat Templates for Prompt Injection in LLM Agents.pdf",
+  "code": "(our implementation; find under scripts/)"
+ },
+ {
+  "name": "False evidence (CoConflictQA)",
+  "literature": "safety",
+  "pdf": "data/papers/ParamMute - Suppressing Knowledge-Critical FFNs for Faithful Retrieval-Augmented Generation.pdf",
+  "code": "third_party/ParamMute (dataset)"
+ },
+ {
+  "name": "Lost in the middle",
+  "literature": "safety",
+  "pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "code": "(paper only; check whether we ran it)"
+ },
+ {
+  "name": "Irrelevant-context distraction",
+  "literature": "safety",
+  "pdf": "data/papers/Large Language Models Can Be Easily Distracted by Irrelevant Context.pdf",
+  "code": "(paper only; the published source closest to our misretrieval/dilution causes)"
+ },
+ {
+  "name": "Third answer (ours)",
+  "literature": "safety",
+  "pdf": null,
+  "code": "scripts/build_open_nq_distractor.py, scripts/build_distractor_payload.py"
+ },
+ {
+  "name": "Stale document (ours)",
+  "literature": "safety",
+  "pdf": null,
+  "code": "scripts/sd_items.py, scripts/build_sd_*.py"
+ },
+ {
+  "name": "Misretrieval (ours)",
+  "literature": "safety",
+  "pdf": null,
+  "code": "scripts/sd_items.py"
+ },
+ {
+  "name": "Dilution (ours)",
+  "literature": "safety",
+  "pdf": null,
+  "code": "scripts/sd_items.py"
+ }
+]

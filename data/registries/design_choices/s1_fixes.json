@@ -1,0 +1,98 @@
+[
+ {
+  "name": "ACD",
+  "literature": "safety",
+  "pdf": "data/papers/Adaptive Contrastive Decoding in Retrieval-Augmented Generation for Handling Noisy Contexts.pdf",
+  "code": "third_party/ACD"
+ },
+ {
+  "name": "CK-PLUG",
+  "literature": "safety",
+  "pdf": "data/papers/Parameters vs. Context - Fine-Grained Control of Knowledge Reliance in Language Models.pdf",
+  "code": "third_party/CK-PLUG"
+ },
+ {
+  "name": "COIECD",
+  "literature": "safety",
+  "pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "code": "third_party/COIECD"
+ },
+ {
+  "name": "DyPRAG",
+  "literature": "safety",
+  "pdf": "data/papers/Dynamic Parametric Retrieval Augmented Generation for Test-time Knowledge Enhancement.pdf",
+  "code": "third_party/DyPRAG"
+ },
+ {
+  "name": "ParamMute",
+  "literature": "safety",
+  "pdf": "data/papers/ParamMute - Suppressing Knowledge-Critical FFNs for Faithful Retrieval-Augmented Generation.pdf",
+  "code": "third_party/ParamMute"
+ },
+ {
+  "name": "SCR",
+  "literature": "safety",
+  "pdf": "data/papers/To Trust or Not to Trust Enhancing Large Language Models' Situated Faithfulness to External Contexts.pdf",
+  "code": "third_party/situated_faithfulness"
+ },
+ {
+  "name": "SpARE",
+  "literature": "safety",
+  "pdf": "data/papers/Steering Knowledge Selection Behaviours in LLMs via SAE-Based Representation Engineering.pdf",
+  "code": "third_party/SAE-based-representation-engineering"
+ },
+ {
+  "name": "SHIFT",
+  "literature": "safety",
+  "pdf": "data/papers/SHIFT - Gate-Modulated Activation Steering for Knowledge Conflict Mitigation in Retrieval-Augmented Generation.pdf",
+  "code": "(no repo vendored; check scripts/shift_vs_corpus_poisoning.py)"
+ },
+ {
+  "name": "FaithfulRAG",
+  "literature": "safety",
+  "pdf": "data/papers/FaithfulRAG - Fact-Level Conflict Modeling for Context-Faithful Retrieval-Augmented Generation.pdf",
+  "code": "(check scripts/faithfulrag_vs_corpus_poisoning.py for where it was cloned)"
+ },
+ {
+  "name": "RobustRAG",
+  "literature": "security",
+  "pdf": "data/papers/Certifiably Robust RAG against Retrieval Corruption.pdf",
+  "code": "third_party/RobustRAG"
+ },
+ {
+  "name": "ReliabilityRAG",
+  "literature": "security",
+  "pdf": "data/papers/ReliabilityRAG - Effective and Provably Robust Defense for RAG-based Web-Search.pdf",
+  "code": "third_party/ReliabilityRAG"
+ },
+ {
+  "name": "Spotlighting",
+  "literature": "security",
+  "pdf": "data/papers/Defending Against Indirect Prompt Injection Attacks With Spotlighting.pdf",
+  "code": "(no repo; our implementation in the AgentDojo technique-defense scripts)"
+ },
+ {
+  "name": "PIGuard",
+  "literature": "security",
+  "pdf": "data/papers/PIGuard - Prompt Injection Guardrail via Mitigating Overdefense for Free.pdf",
+  "code": "(HF model leolee99/PIGuard; see scripts that log data/sd_flags_piguard.log)"
+ },
+ {
+  "name": "DataSentinel",
+  "literature": "security",
+  "pdf": "data/papers/DataSentinel - A Game-Theoretic Detection of Prompt Injection Attacks.pdf",
+  "code": "third_party/Open-Prompt-Injection"
+ },
+ {
+  "name": "AttnTrace",
+  "literature": "security",
+  "pdf": "data/papers/AttnTrace - Contextual Attribution of Prompt Injection and Knowledge Corruption.pdf",
+  "code": "third_party/AttnTrace"
+ },
+ {
+  "name": "AgentDojo defenses",
+  "literature": "security",
+  "pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "code": "envs/agentdojo-libs (pip package)"
+ }
+]

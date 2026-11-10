@@ -107,7 +107,7 @@ were assessed; six were attempted end-to-end.
 | SABER | blocked — required prompt file absent from repo |
 | KScope | blocked — README states datasets cannot be uploaded |
 | **COMBO** (EMNLP 2023) | blocked — trains two discriminators from silver labels via slurm; **no released checkpoints**, confirming what RQ6 found independently |
-| **Knowledgeable-R1** (2025) | blocked — eval expects a locally-trained RL checkpoint (`global_step_9`); **no released weights**, data on Google Drive, needs the verl GRPO stack |
+| **Knowledgeable-R1** (2025) | runnable on its own checkpoints — trained weights were posted on Hugging Face on 2025-09-26 (`chenyu666/*knowledgeable-r1`: Qwen2.5-3B/7B/14B and Llama-3.1-8B, for ConFiQA, ConflictQA and HotpotQA), though neither the README nor the paper links them; the eval script still expects a local `global_step_9` path. Reads 5 passages joined into one text and replaces the generator, so it cannot run on Llama-3-8B (checked 2026-11-10, PAPER_PLAN S4) |
 | JUICE | deprioritised — NQ-Swap splits need rebuilding in an undocumented format; same family as four already measured |
 | **DCD** (2024) | **out of scope** — cross-modality (vision-language). Our attack is text-only, so the channel does not match; forcing it would test something else |
 | **VideoSEAL** (2026) | **out of scope** — video |
@@ -130,7 +130,7 @@ what made FaithfulRAG unreadable.
 3. **JUICE** (ICML 2025) — dual-run attention-head intervention.
 4. **SpARE** (NAACL 2024) — sparse-autoencoder representation engineering.
 5. **KScope** (NeurIPS 2025) — constrained context summarization. Notebook-driven.
-6. **Knowledgeable-R1** (arXiv 2025) — RL-trained; needs a trained checkpoint.
+6. **Knowledgeable-R1** (arXiv 2025) — RL-trained; its trained checkpoints are on Hugging Face (posted 2025-09-26, not linked from the README).
 7. **SHIFT** (arXiv 2026) — gate-modulated activation steering.
 8. **COMBO** (EMNLP 2023) — RQ6 previously found no released checkpoint.
 9. **DCD** (arXiv 2024) — cross-modal VLM; different channel, likely out of scope.

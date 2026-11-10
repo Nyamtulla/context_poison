@@ -1,0 +1,211 @@
+[
+ {
+  "id": "f02",
+  "row": 35,
+  "name": "Self-RAG",
+  "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Self-RAG - Learning to Retrieve, Generate, and Critique through Self-Reflection.pdf",
+  "text": "data/registries/design_choices/text/f02.txt",
+  "words": 16961
+ },
+ {
+  "id": "f26",
+  "row": 405,
+  "name": "LDAR (Learning Distraction-Aware Retrieval)",
+  "title": "Beyond RAG vs. Long-Context: Learning Distraction-Aware Retrieval for Efficient Knowledge Grounding",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Beyond RAG vs. Long-Context - Learning Distraction-Aware Retrieval for Efficient Knowledge Grounding.pdf",
+  "text": "data/registries/design_choices/text/f26.txt",
+  "words": 18233
+ },
+ {
+  "id": "f31",
+  "row": 458,
+  "name": "UNNAMED: pre-research and post-research verification defenses (verification-enhanced prompting + search-enabled verifier agent) for Deep Research agents",
+  "title": "Is Deep Research Reliable? Misleading Knowledge Induces False Conclusions",
+  "literature": "safety",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Is Deep Research Reliable Misleading Knowledge Induces False Conclusions.pdf",
+  "text": "data/registries/design_choices/text/f31.txt",
+  "words": 10855
+ },
+ {
+  "id": "f36",
+  "row": 653,
+  "name": "SHIFT (gate-modulated activation steering)",
+  "title": "SHIFT: Gate-Modulated Activation Steering for Knowledge Conflict Mitigation in Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/SHIFT - Gate-Modulated Activation Steering for Knowledge Conflict Mitigation in Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f36.txt",
+  "words": 10255
+ },
+ {
+  "id": "f41",
+  "row": 658,
+  "name": "CARE-RAG (Conflict-Aware and Reliable Evidence for RAG)",
+  "title": "Rethinking All Evidence: Enhancing Trustworthy Retrieval-Augmented Generation via Conflict-Driven Summarization",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Rethinking All Evidence - Enhancing Trustworthy Retrieval-Augmented Generation via Conflict-Driven Summarization.pdf",
+  "text": "data/registries/design_choices/text/f41.txt",
+  "words": 9453
+ },
+ {
+  "id": "f46",
+  "row": 663,
+  "name": "Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking)",
+  "title": "Conflict-Aware RAG: Multi-Stage Learning with Conflict Signals for Robust Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Conflict-Aware RAG - Multi-Stage Learning with Conflict Signals for Robust Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f46.txt",
+  "words": 10273
+ },
+ {
+  "id": "f51",
+  "row": 668,
+  "name": "Swin-VIB (variational information bottleneck pipeline)",
+  "title": "Accommodate Knowledge Conflicts in Retrieval-augmented LLMs: Towards Robust Response Generation in the Wild",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Accommodate Knowledge Conflicts in Retrieval-augmented LLMs - Towards Robust Response Generation in the Wild.pdf",
+  "text": "data/registries/design_choices/text/f51.txt",
+  "words": 12669
+ },
+ {
+  "id": "f62",
+  "row": 791,
+  "name": "Discern-and-Answer",
+  "title": "Why So Gullible? Enhancing the Robustness of Retrieval-Augmented Models against Counterfactual Noise",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Why So Gullible Enhancing the Robustness of Retrieval-Augmented Models against Counterfactual Noise.pdf",
+  "text": "data/registries/design_choices/text/f62.txt",
+  "words": 14530
+ },
+ {
+  "id": "f69",
+  "row": 896,
+  "name": "EHR-RAG",
+  "title": "EHR-RAG: Bridging Long-Horizon Structured Electronic Health Records and Large Language Models via Enhanced Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/EHR-RAG - Bridging Long-Horizon Structured Electronic Health Records and Large Language Models via Enhanced Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f69.txt",
+  "words": 12362
+ },
+ {
+  "id": "f74",
+  "row": 979,
+  "name": "CheckRLM",
+  "title": "CheckRLM: Effective Knowledge\u2013Thought Coherence Checking in Retrieval-Augmented Reasoning",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/CheckRLM - Effective Knowledge\u2013Thought Coherence Checking in Retrieval-Augmented Reasoning.pdf",
+  "text": "data/registries/design_choices/text/f74.txt",
+  "words": 13211
+ },
+ {
+  "id": "f79",
+  "row": 995,
+  "name": "GenDiE (Generate, Discriminate, Evolve)",
+  "title": "Generate, Discriminate, Evolve: Enhancing Context Faithfulness via Fine-Grained Sentence-Level Self-Evolution",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Generate, Discriminate, Evolve - Enhancing Context Faithfulness via Fine-Grained Sentence-Level Self-Evolution.pdf",
+  "text": "data/registries/design_choices/text/f79.txt",
+  "words": 9414
+ },
+ {
+  "id": "f84",
+  "row": 1006,
+  "name": "UNNAMED: Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG)",
+  "title": "Multi-Route Search and Adaptive Fusion for Power QA with Small Language Model Guidance",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Multi-Route Search and Adaptive Fusion for Power QA with Small Language Model Guidance.pdf",
+  "text": "data/registries/design_choices/text/f84.txt",
+  "words": 10448
+ },
+ {
+  "id": "f91",
+  "row": 1121,
+  "name": "KVEraser",
+  "title": "KVEraser: Learning to Steer KV Cache for Efficient Localized Context Erasing",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/KVEraser - Learning to Steer KV Cache for Efficient Localized Context Erasing.pdf",
+  "text": "data/registries/design_choices/text/f91.txt",
+  "words": 8833
+ },
+ {
+  "id": "f07",
+  "row": 98,
+  "name": "UNNAMED: Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)",
+  "title": "A Layered Security Framework Against Prompt Injection in RAG-Based Chatbots",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/A Layered Security Framework Against Prompt Injection in RAG-Based Chatbots.pdf",
+  "text": "data/registries/design_choices/text/f07.txt",
+  "words": 10816
+ },
+ {
+  "id": "f12",
+  "row": 219,
+  "name": "UNNAMED: Three-tier compositional runtime-verification fabric (MonPoly/RTLola-based) for LLM-assisted ISR swarms",
+  "title": "Mission-Level Runtime Assurance for LLM-Assisted ISR Swarms over a Verification-Aware Fabric",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Mission-Level Runtime Assurance for LLM-Assisted ISR Swarms over a Verification-Aware Fabric.pdf",
+  "text": "data/registries/design_choices/text/f12.txt",
+  "words": 10347
+ },
+ {
+  "id": "f17",
+  "row": 256,
+  "name": "UNNAMED: policy-first Hybrid RAG architecture (pre-reranking access control + BM25/dense fusion via RRF + evidence-pack citation-grounded generation)",
+  "title": "Enterprise Search Portals: Hybrid RAG at Scale for Compliance-Sensitive Knowledge Work",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Enterprise Search Portals - Hybrid RAG at Scale for Compliance-Sensitive Knowledge Work.pdf",
+  "text": "data/registries/design_choices/text/f17.txt",
+  "words": 4558
+ },
+ {
+  "id": "f22",
+  "row": 276,
+  "name": "ReliabilityRAG",
+  "title": "ReliabilityRAG: Effective and Provably Robust Defense for RAG-based Web-Search",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/ReliabilityRAG - Effective and Provably Robust Defense for RAG-based Web-Search.pdf",
+  "text": "data/registries/design_choices/text/f22.txt",
+  "words": 18884
+ },
+ {
+  "id": "f59",
+  "row": 754,
+  "name": "UNNAMED: Randomized/Adversarial Suffix Augmentation Training for task-drift probes",
+  "title": "Bypassing Prompt Injection Detectors through Evasive Injections",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Bypassing Prompt Injection Detectors through Evasive Injections.pdf",
+  "text": "data/registries/design_choices/text/f59.txt",
+  "words": 5895
+ },
+ {
+  "id": "f88",
+  "row": 1075,
+  "name": "UGCBuster",
+  "title": "When AI Meets the Web: Prompt Injection Risks in Third-Party AI Chatbot Plugins",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/When AI Meets the Web - Prompt Injection Risks in Third-Party AI Chatbot Plugins.pdf",
+  "text": "data/registries/design_choices/text/f88.txt",
+  "words": 17873
+ }
+]

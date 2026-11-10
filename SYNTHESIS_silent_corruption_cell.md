@@ -175,7 +175,7 @@ scope mismatches (one cross-modal, one video). **Five are artefact problems:**
 | SABER | `prompts/multipath_prompts.yaml` — the three self-evaluation templates that *are* the method — absent from the repo |
 | KScope | README states outright the datasets cannot be uploaded |
 | COMBO | no released checkpoints; trains two discriminators from silver labels via slurm |
-| Knowledgeable-R1 | eval expects a locally-trained RL checkpoint (`global_step_9`); no weights released |
+| Knowledgeable-R1 | trained weights posted on Hugging Face 2025-09-26 (`chenyu666/*knowledgeable-r1`, Qwen2.5-3B/7B/14B and Llama-3.1-8B; not linked from the README or paper); eval script still expects a local `global_step_9` path. Corrected 2026-11-10 |
 
 And the four that *did* run needed roughly twenty fixes between them. The
 pattern worth reporting is not that setup is hard — it is that **most of these

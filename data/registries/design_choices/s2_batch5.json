@@ -1,0 +1,200 @@
+[
+ {
+  "id": "f24",
+  "row": 399,
+  "name": "DualGraph",
+  "title": "A Tale of Two Graphs: Separating Knowledge Exploration from Outline Structure for Open-Ended Deep Research",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/A Tale of Two Graphs - Separating Knowledge Exploration from Outline Structure for Open-Ended Deep Research.pdf",
+  "text": "data/registries/design_choices/text/f24.txt",
+  "words": 17725
+ },
+ {
+  "id": "f29",
+  "row": 414,
+  "name": "LongRAG",
+  "title": "LongRAG: A Dual-Perspective Retrieval-Augmented Generation Paradigm for Long-Context Question Answering",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/LongRAG - A Dual-Perspective Retrieval-Augmented Generation Paradigm for Long-Context Question Answering.pdf",
+  "text": "data/registries/design_choices/text/f29.txt",
+  "words": 15154
+ },
+ {
+  "id": "f34",
+  "row": 651,
+  "name": "BordaRAG (Borda Voting-based document selection)",
+  "title": "BordaRAG: Resolving Knowledge Conflict in Retrieval-Augmented Generation via Borda Voting Process",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/BordaRAG - Resolving Knowledge Conflict in Retrieval-Augmented Generation via Borda Voting Process.pdf",
+  "text": "data/registries/design_choices/text/f34.txt",
+  "words": 10109
+ },
+ {
+  "id": "f39",
+  "row": 656,
+  "name": "KCM (Knowledge Conflict Mitigation)",
+  "title": "Enhancing Retrieval-Augmented Large Vision Language Models via Knowledge Conflict Mitigation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Enhancing Retrieval-Augmented Large Vision Language Models via Knowledge Conflict Mitigation.pdf",
+  "text": "data/registries/design_choices/text/f39.txt",
+  "words": 6500
+ },
+ {
+  "id": "f44",
+  "row": 661,
+  "name": "DyPRAG (Dynamic Parametric RAG)",
+  "title": "Dynamic Parametric Retrieval Augmented Generation for Test-time Knowledge Enhancement",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Dynamic Parametric Retrieval Augmented Generation for Test-time Knowledge Enhancement.pdf",
+  "text": "data/registries/design_choices/text/f44.txt",
+  "words": 12188
+ },
+ {
+  "id": "f49",
+  "row": 666,
+  "name": "CD2 (Conflict-Disentangle Contrastive Decoding)",
+  "title": "Tug-of-War between Knowledge: Exploring and Resolving Knowledge Conflicts in Retrieval-Augmented Language Models",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Tug-of-War between Knowledge - Exploring and Resolving Knowledge Conflicts in Retrieval-Augmented Language Models.pdf",
+  "text": "data/registries/design_choices/text/f49.txt",
+  "words": 7688
+ },
+ {
+  "id": "f54",
+  "row": 673,
+  "name": "RPO (Retrieval Preference Optimization)",
+  "title": "RPO: Retrieval Preference Optimization for Robust Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/RPO - Retrieval Preference Optimization for Robust Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f54.txt",
+  "words": 7610
+ },
+ {
+  "id": "f67",
+  "row": 833,
+  "name": "SCR & CR-DPO (Situated Faithfulness)",
+  "title": "To Trust or Not to Trust? Enhancing Large Language Models' Situated Faithfulness to External Contexts",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/To Trust or Not to Trust Enhancing Large Language Models' Situated Faithfulness to External Contexts.pdf",
+  "text": "data/registries/design_choices/text/f67.txt",
+  "words": 17663
+ },
+ {
+  "id": "f72",
+  "row": 929,
+  "name": "ITEM (Integrated Term Enhancement Methodology)",
+  "title": "Manufacturing Domain QA with Integrated Term Enhanced RAG",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Manufacturing Domain QA with Integrated Term Enhanced RAG.pdf",
+  "text": "data/registries/design_choices/text/f72.txt",
+  "words": 6728
+ },
+ {
+  "id": "f77",
+  "row": 990,
+  "name": "ERA (Evidence-based Reliability Alignment)",
+  "title": "ERA: Evidence-based Reliability Alignment for Honest Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/ERA - Evidence-based Reliability Alignment for Honest Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f77.txt",
+  "words": 8734
+ },
+ {
+  "id": "f82",
+  "row": 1000,
+  "name": "RAT (Retrieval Augmented Thoughts)",
+  "title": "RAT: Retrieval Augmented Thoughts Elicit Context-Aware Reasoning in Long-Horizon Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/RAT - Retrieval Augmented Thoughts Elicit Context-Aware Reasoning in Long-Horizon Generation.pdf",
+  "text": "data/registries/design_choices/text/f82.txt",
+  "words": 13939
+ },
+ {
+  "id": "f87",
+  "row": 1040,
+  "name": "COIECD (contextual information-entropy constraint decoding)",
+  "title": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "text": "data/registries/design_choices/text/f87.txt",
+  "words": 13113
+ },
+ {
+  "id": "f05",
+  "row": 53,
+  "name": "InstructDetector",
+  "title": "Defending against Indirect Prompt Injection by Instruction Detection",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Defending against Indirect Prompt Injection by Instruction Detection.pdf",
+  "text": "data/registries/design_choices/text/f05.txt",
+  "words": 8727
+ },
+ {
+  "id": "f10",
+  "row": 210,
+  "name": "LLM Firewall (Validator Agent)",
+  "title": "LLM Firewall Using Validator Agent for Prevention Against Prompt Injection Attacks",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/LLM Firewall Using Validator Agent for Prevention Against Prompt Injection Attacks.pdf",
+  "text": "data/registries/design_choices/text/f10.txt",
+  "words": 12552
+ },
+ {
+  "id": "f15",
+  "row": 254,
+  "name": "RAG-H",
+  "title": "RAG-H: A RAG-Hardened SOC Framework for Trustworthy Threat Intelligence and AI Defence",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/RAG-H - A RAG-Hardened SOC Framework for Trustworthy Threat Intelligence and AI Defence.pdf",
+  "text": "data/registries/design_choices/text/f15.txt",
+  "words": 5176
+ },
+ {
+  "id": "f20",
+  "row": 270,
+  "name": "TriShieldRAG",
+  "title": "TriShieldRAG: A Three-Ring Defense-in-Depth Framework Against Knowledge Corruption in Retrieval-Augmented Generation",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/TriShieldRAG - A Three-Ring Defense-in-Depth Framework Against Knowledge Corruption in Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f20.txt",
+  "words": 10084
+ },
+ {
+  "id": "f57",
+  "row": 703,
+  "name": "AgentSecBench Combined defense stack (filtering + projection + redaction + delimiter annotation)",
+  "title": "AgentSecBench: Measuring Prompt Injection, Privacy Leakage, and Tool-Use Integrity in LLM Agents",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/AgentSecBench - Measuring Prompt Injection, Privacy Leakage, and Tool-Use Integrity in LLM Agents.pdf",
+  "text": "data/registries/design_choices/text/f57.txt",
+  "words": 9635
+ },
+ {
+  "id": "f63",
+  "row": 817,
+  "name": "SD-RAG (Selective Disclosure RAG)",
+  "title": "SD-RAG: A Prompt-Injection-Resilient Framework for Selective Disclosure in Retrieval-Augmented Generation",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/SD-RAG - A Prompt-Injection-Resilient Framework for Selective Disclosure in Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f63.txt",
+  "words": 8258
+ }
+]

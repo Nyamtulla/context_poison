@@ -1,0 +1,211 @@
+[
+ {
+  "id": "f01",
+  "row": 33,
+  "name": "AttnComp (Attention-guided Context Compression)",
+  "title": "AttnComp: Attention-Guided Adaptive Context Compression for Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/AttnComp - Attention-Guided Adaptive Context Compression for Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f01.txt",
+  "words": 10944
+ },
+ {
+  "id": "f25",
+  "row": 402,
+  "name": "Dynamic Context Selection (classifier-based adaptive k-selection + reranking)",
+  "title": "Dynamic Context Selection for Retrieval-Augmented Generation: Mitigating Distractors and Positional Bias",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Dynamic Context Selection for Retrieval-Augmented Generation - Mitigating Distractors and Positional Bias.pdf",
+  "text": "data/registries/design_choices/text/f25.txt",
+  "words": 4673
+ },
+ {
+  "id": "f30",
+  "row": 422,
+  "name": "END (Early Noise Dropping)",
+  "title": "END: Early Noise Dropping for Efficient and Effective Context Denoising",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/END - Early Noise Dropping for Efficient and Effective Context Denoising.pdf",
+  "text": "data/registries/design_choices/text/f30.txt",
+  "words": 8301
+ },
+ {
+  "id": "f35",
+  "row": 652,
+  "name": "CDD (Context-Driven Decomposition)",
+  "title": "Does RAG Know When Retrieval Is Wrong? Diagnosing Context Compliance under Knowledge Conflict",
+  "literature": "safety",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Does RAG Know When Retrieval Is Wrong Diagnosing Context Compliance under Knowledge Conflict.pdf",
+  "text": "data/registries/design_choices/text/f35.txt",
+  "words": 8426
+ },
+ {
+  "id": "f40",
+  "row": 657,
+  "name": "Micro-Act (hierarchical action-space decomposition)",
+  "title": "Micro-Act: Mitigating Knowledge Conflict in LLM-based RAG via Actionable Self-Reasoning",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Micro-Act - Mitigating Knowledge Conflict in LLM-based RAG via Actionable Self-Reasoning.pdf",
+  "text": "data/registries/design_choices/text/f40.txt",
+  "words": 13949
+ },
+ {
+  "id": "f45",
+  "row": 662,
+  "name": "CRVA-TGRAG (Conflict Resolution in Vulnerability Analysis via Teacher-Guided RAG)",
+  "title": "Tug-of-War within A Decade: Conflict Resolution in Vulnerability Analysis via Teacher-Guided Retrieval-Augmented Generations",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Tug-of-War within A Decade - Conflict Resolution in Vulnerability Analysis via Teacher-Guided Retrieval-Augmented Generations.pdf",
+  "text": "data/registries/design_choices/text/f45.txt",
+  "words": 7477
+ },
+ {
+  "id": "f50",
+  "row": 667,
+  "name": "ParamMute (Parametric Knowledge Muting through FFN Suppression)",
+  "title": "ParamMute: Suppressing Knowledge-Critical FFNs for Faithful Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/ParamMute - Suppressing Knowledge-Critical FFNs for Faithful Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f50.txt",
+  "words": 18472
+ },
+ {
+  "id": "f55",
+  "row": 675,
+  "name": "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)",
+  "title": "Beyond Black-Box Interventions: Latent Probing for Faithful Retrieval-Augmented Generation",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Beyond Black-Box Interventions - Latent Probing for Faithful Retrieval-Augmented Generation.pdf",
+  "text": "data/registries/design_choices/text/f55.txt",
+  "words": 13102
+ },
+ {
+  "id": "f68",
+  "row": 864,
+  "name": "CKG-RAG",
+  "title": "CKG-RAG: Enhancing LLM Reasoning in Medical Domain Using Contextual Knowledge Graphs",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/CKG-RAG - Enhancing LLM Reasoning in Medical Domain Using Contextual Knowledge Graphs.pdf",
+  "text": "data/registries/design_choices/text/f68.txt",
+  "words": 5230
+ },
+ {
+  "id": "f73",
+  "row": 944,
+  "name": "SUGAR (Semantic Uncertainty Guided Adaptive Retrieval)",
+  "title": "SUGAR: Leveraging Contextual Confidence for Smarter Retrieval",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/SUGAR - Leveraging Contextual Confidence for Smarter Retrieval.pdf",
+  "text": "data/registries/design_choices/text/f73.txt",
+  "words": 4008
+ },
+ {
+  "id": "f78",
+  "row": 991,
+  "name": "A-RAG (hierarchical retrieval interfaces)",
+  "title": "A-RAG: Scaling Agentic Retrieval-Augmented Generation via Hierarchical Retrieval Interfaces",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/A-RAG - Scaling Agentic Retrieval-Augmented Generation via Hierarchical Retrieval Interfaces.pdf",
+  "text": "data/registries/design_choices/text/f78.txt",
+  "words": 7363
+ },
+ {
+  "id": "f83",
+  "row": 1004,
+  "name": "COMBO (Compatibility-Oriented knowledge Merging)",
+  "title": "Merging Generated and Retrieved Knowledge for Open-Domain QA",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/Merging Generated and Retrieved Knowledge for Open-Domain QA.pdf",
+  "text": "data/registries/design_choices/text/f83.txt",
+  "words": 13325
+ },
+ {
+  "id": "f89",
+  "row": 1087,
+  "name": "Reconstruct to Discriminate (RtD)",
+  "title": "How does Misinformation Affect Large Language Model Behaviors and Preferences?",
+  "literature": "safety",
+  "validated_against": "incidental",
+  "pdf": "data/papers/How does Misinformation Affect Large Language Model Behaviors and Preferences.pdf",
+  "text": "data/registries/design_choices/text/f89.txt",
+  "words": 19961
+ },
+ {
+  "id": "f06",
+  "row": 56,
+  "name": "Rennervate",
+  "title": "Attention is All You Need to Defend Against Indirect Prompt Injection Attacks in LLMs",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Attention is All You Need to Defend Against Indirect Prompt Injection Attacks in LLMs.pdf",
+  "text": "data/registries/design_choices/text/f06.txt",
+  "words": 14808
+ },
+ {
+  "id": "f11",
+  "row": 217,
+  "name": "AttnTrace",
+  "title": "AttnTrace: Contextual Attribution of Prompt Injection and Knowledge Corruption",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/AttnTrace - Contextual Attribution of Prompt Injection and Knowledge Corruption.pdf",
+  "text": "data/registries/design_choices/text/f11.txt",
+  "words": 17256
+ },
+ {
+  "id": "f16",
+  "row": 255,
+  "name": "Salience Normalization (SN-1)",
+  "title": "Salience Induction against Multi-Hop RAG Agents: Threat and Defense",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Salience Induction against Multi-Hop RAG Agents - Threat and Defense.pdf",
+  "text": "data/registries/design_choices/text/f16.txt",
+  "words": 14245
+ },
+ {
+  "id": "f21",
+  "row": 271,
+  "name": "UNNAMED: two-plane OPA-based governance architecture for secure RAG (provenance + ABAC + policy-as-code across ingestion/indexing/retrieval/generation)",
+  "title": "Secure Retrieval-Augmented Generation: Preventing Data Leakage with Provenance and Policy Enforcement",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/Secure Retrieval-Augmented Generation - Preventing Data Leakage with Provenance and Policy Enforcement.pdf",
+  "text": "data/registries/design_choices/text/f21.txt",
+  "words": 4449
+ },
+ {
+  "id": "f58",
+  "row": 744,
+  "name": "UNNAMED: security-aware RAG framework (evidence-based abstention + prompt-injection defense + multi-source agreement verification + trust-weighted retrieval)",
+  "title": "Security-Aware Retrieval-Augmented Generation System for Post-Quantum Cryptography Intelligence",
+  "literature": "security",
+  "validated_against": "both",
+  "pdf": "data/papers/Security-Aware Retrieval-Augmented Generation System for Post-Quantum Cryptography Intelligence.pdf",
+  "text": "data/registries/design_choices/text/f58.txt",
+  "words": 4259
+ },
+ {
+  "id": "f65",
+  "row": 831,
+  "name": "SecureRag",
+  "title": "SecureRag: Preventing Sensitive Information Leakage In Rag Pipelines",
+  "literature": "security",
+  "validated_against": "adversarial",
+  "pdf": "data/papers/SecureRag - Preventing Sensitive Information Leakage In Rag Pipelines.pdf",
+  "text": "data/registries/design_choices/text/f65.txt",
+  "words": 4958
+ }
+]
