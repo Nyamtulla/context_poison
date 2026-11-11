@@ -180,8 +180,10 @@ satisfy (S3), design and pilot it (S4-S5), build and check it (S6), controls
   figure is not accurate"); 337 questions have at least one, 75 have all
   five. Who generated them is undocumented; PoisonedRAG's paper asks GPT-4
   for passages that support the target. Every PoisonedRAG cell in the paper
-  used these passages, so the attack may be weaker than designed. Measure
-  the true rate by hand in the pilot; the new dataset keeps only passages
+  used these passages, so the attack may be weaker than designed.
+  **Pilot hand reading (2026-11-10): 73 of 100 deny or hedge the target**
+  (keyword screen: precision 100%, catches 70% of deniers). Measure the rate
+  over all 2,500 with the validated assertion judge (pilot/PILOT_REPORT.md); the new dataset keeps only passages
   that assert the target (CONSTRUCTION_RULES.md section 2.1).
   GPT-4 generation (added questions, and regenerating the core) is deferred
   until an OpenAI key is available (decided 2026-11-10).
