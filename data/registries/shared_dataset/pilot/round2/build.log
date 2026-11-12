@@ -1,0 +1,303 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 242.40it/s]
+nq342 core_out usable {'poisonedrag': 2, 'swapped': 0, 'outdated': 3, 'misretrieval': 1}
+nq050 core_out usable {'poisonedrag': 0, 'swapped': 2, 'outdated': 1, 'misretrieval': 4}
+nq220 core_out usable {'poisonedrag': 0, 'swapped': 0, 'outdated': 2, 'misretrieval': 0}
+nq251 core_out usable {'poisonedrag': 0, 'swapped': 0, 'outdated': 1, 'misretrieval': 0}
+nq366 core_out dropped: no clean passage judged to state the gold {}
+nq333 core_out usable {'poisonedrag': 0, 'swapped': 1, 'outdated': 0, 'misretrieval': 0}
+nq115 core_out usable {'poisonedrag': 0, 'swapped': 0, 'outdated': 0, 'misretrieval': 2}
+nq450 core_rest dropped: no clean passage judged to state the gold {}
+nq160 core_rest dropped: no clean passage judged to state the gold {}
+nq057 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq125 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 3}
+nq448 core_rest dropped: no clean passage judged to state the gold {}
+nq362 core_rest dropped: no clean passage judged to state the gold {}
+nq185 core_rest usable {'poisonedrag': 0, 'swapped': 1, 'misretrieval': 1}
+nq157 core_rest dropped: no clean passage judged to state the gold {}
+nq373 core_rest dropped: no clean passage judged to state the gold {}
+nq005 core_rest dropped: no clean passage judged to state the gold {}
+nq257 core_rest dropped: no clean passage judged to state the gold {}
+nq147 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq211 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq480 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq072 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 2}
+nq265 core_rest usable {'poisonedrag': 0, 'swapped': 1, 'misretrieval': 0}
+nq310 core_rest dropped: no clean passage judged to state the gold {}
+nq073 core_rest dropped: no clean passage judged to state the gold {}
+nq466 core_rest usable {'poisonedrag': 5, 'swapped': 3, 'misretrieval': 5}
+nq230 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq162 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 2}
+nq244 core_rest dropped: no clean passage judged to state the gold {}
+nq161 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq054 core_rest dropped: no clean passage judged to state the gold {}
+nq456 core_rest dropped: no clean passage judged to state the gold {}
+nq207 core_rest dropped: no clean passage judged to state the gold {}
+nq262 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq130 core_rest dropped: no clean passage judged to state the gold {}
+nq419 core_rest usable {'poisonedrag': 3, 'swapped': 3, 'misretrieval': 5}
+nq426 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq202 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq212 core_rest dropped: no clean passage judged to state the gold {}
+nq075 core_rest dropped: no clean passage judged to state the gold {}
+nq353 core_rest usable {'poisonedrag': 3, 'swapped': 0, 'misretrieval': 0}
+nq234 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq338 core_rest dropped: no clean passage judged to state the gold {}
+nq101 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 2}
+nq227 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq175 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 2}
+nq226 core_rest dropped: no clean passage judged to state the gold {}
+nq331 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 4}
+nq117 core_rest dropped: no clean passage judged to state the gold {}
+nq079 core_rest dropped: no clean passage judged to state the gold {}
+nq116 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq294 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq058 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq326 core_rest dropped: no clean passage judged to state the gold {}
+nq033 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq037 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq335 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq471 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq171 core_rest dropped: no clean passage judged to state the gold {}
+nq031 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq463 core_rest dropped: no clean passage judged to state the gold {}
+nq484 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq406 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 2}
+nq135 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 1}
+nq149 core_rest usable {'poisonedrag': 0, 'swapped': 2, 'misretrieval': 1}
+sqa2380437240337440901 added dropped: no clean passage judged to state the gold {}
+sqa6941993254369956277 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa-4422393868868092763 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa6875959602758173887 added dropped: no clean passage judged to state the gold {}
+sqa4617631458298630030 added usable {'outdated': 0, 'misretrieval': 2}
+sqa3539941079129261555 added dropped: no clean passage judged to state the gold {}
+sqa3633271167425225514 added usable {'outdated': 1, 'misretrieval': 0}
+sqa1344788280879036824 added dropped: no clean passage judged to state the gold {}
+sqa-1210946677908817161 added usable {'outdated': 0, 'misretrieval': 3}
+sqa-2576507331893021303 added dropped: no clean passage judged to state the gold {}
+sqa408606783188469337 added dropped: no clean passage judged to state the gold {}
+sqa-4742439731455437009 added usable {'outdated': 0, 'misretrieval': 5}
+sqa-8141549891411597928 added dropped: no clean passage judged to state the gold {}
+sqa-5484905092631515040 added usable {'outdated': 2, 'misretrieval': 1}
+sqa5153412854745122443 added usable {'outdated': 13, 'misretrieval': 2}
+sqa8781618535910787549 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa2133016068307615793 added dropped: no clean passage judged to state the gold {}
+sqa-1823848472590357927 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa-8049695851713697163 added dropped: no clean passage judged to state the gold {}
+sqa-4961319983743864887 added dropped: no clean passage judged to state the gold {}
+sqa2831153710042163207 added usable {'outdated': 2, 'misretrieval': 1}
+sqa-5702695746894157483 added usable {'outdated': 3, 'misretrieval': 3}
+sqa5229535274467836243 added dropped: no clean passage judged to state the gold {}
+sqa-9077531202315370019 added usable {'outdated': 7, 'misretrieval': 1}
+sqa-8594889199400051 added dropped: no clean passage judged to state the gold {}
+sqa8702113196720831343 added usable {'outdated': 0, 'misretrieval': 5}
+sqa-1894419621034219015 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa1485752534773006057 added usable {'outdated': 0, 'misretrieval': 3}
+sqa-316679721397270253 added dropped: no clean passage judged to state the gold {}
+sqa-2040293408787954805 added dropped: no clean passage judged to state the gold {}
+sqa3266482288575470496 added dropped: no clean passage judged to state the gold {}
+sqa-9041509413210520868 added dropped: no clean passage judged to state the gold {}
+sqa3857191778995264647 added dropped: no clean passage judged to state the gold {}
+sqa-2162391145049066060 added dropped: no clean passage judged to state the gold {}
+sqa-8756977320246087074 added dropped: no clean passage judged to state the gold {}
+sqa-4767786471135006230 added dropped: no clean passage judged to state the gold {}
+sqa-7924170207595297549 added usable {'outdated': 3, 'misretrieval': 1}
+sqa601063550691400285 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa7912522447294730596 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa-5701495405917057501 added dropped: no clean passage judged to state the gold {}
+sqa6130600421580765688 added dropped: no clean passage judged to state the gold {}
+sqa8876175157500803872 added usable {'outdated': 2, 'misretrieval': 2}
+sqa-4706280673787911936 added usable {'outdated': 2, 'misretrieval': 0}
+sqa-8676218748957784671 added usable {'outdated': 0, 'misretrieval': 2}
+sqa-8765658120834178461 added dropped: no clean passage judged to state the gold {}
+sqa-8935044164938101402 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa-4352771238918801643 added dropped: no clean passage judged to state the gold {}
+sqa3615871734488243184 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa8078504481398353414 added usable {'outdated': 3, 'misretrieval': 2}
+sqa1922567092251879685 added usable {'outdated': 3, 'misretrieval': 1}
+sqa4533986705809424782 added dropped: no clean passage judged to state the gold {}
+sqa-157589509221431661 added dropped: no clean passage judged to state the gold {}
+sqa-4726363016166772094 added usable {'outdated': 2, 'misretrieval': 2}
+sqa-6118878938511397050 added usable {'outdated': 0, 'misretrieval': 1}
+sqa-7193335753082880040 added usable {'outdated': 0, 'misretrieval': 2}
+wc229 wc dropped: context1 not found in the 2018 dump {}
+wc174 wc dropped: context1 not found in the 2018 dump {}
+wc26 wc dropped: context1 not found in the 2018 dump {}
+wc117 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc6 wc dropped: both contexts fall in one dump passage {}
+wc150 wc dropped: context1 not found in the 2018 dump {}
+wc19 wc dropped: context1 not found in the 2018 dump {}
+wc102 wc dropped: context1 not found in the 2018 dump {}
+wc201 wc dropped: context1 not found in the 2018 dump {}
+wc228 wc dropped: context1 not found in the 2018 dump {}
+wc200 wc dropped: context1 not found in the 2018 dump {}
+wc37 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc1 wc dropped: context1 not found in the 2018 dump {}
+wc226 wc dropped: context1 not found in the 2018 dump {}
+wc103 wc dropped: context1 not found in the 2018 dump {}
+wc32 wc dropped: context1 not found in the 2018 dump {}
+wc16 wc dropped: context2 not found in the 2018 dump {}
+wc141 wc dropped: context1 not found in the 2018 dump {}
+wc45 wc dropped: context1 not found in the 2018 dump {}
+wc219 wc dropped: context1 not found in the 2018 dump {}
+wc89 wc dropped: context1 not found in the 2018 dump {}
+wc29 wc dropped: context1 not found in the 2018 dump {}
+wc159 wc dropped: context1 not found in the 2018 dump {}
+wc88 wc dropped: context1 not found in the 2018 dump {}
+wc36 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc230 wc dropped: context1 not found in the 2018 dump {}
+wc104 wc dropped: context1 not found in the 2018 dump {}
+wc145 wc dropped: context1 not found in the 2018 dump {}
+wc116 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc105 wc dropped: context1 not found in the 2018 dump {}
+wc12 wc dropped: context1 not found in the 2018 dump {}
+wc223 wc dropped: context1 not found in the 2018 dump {}
+wc81 wc dropped: context1 not found in the 2018 dump {}
+wc64 wc dropped: context1 not found in the 2018 dump {}
+wc183 wc dropped: context1 not found in the 2018 dump {}
+wc156 wc dropped: context1 not found in the 2018 dump {}
+wc154 wc dropped: context1 not found in the 2018 dump {}
+wc198 wc dropped: context1 not found in the 2018 dump {}
+wc31 wc dropped: context1 not found in the 2018 dump {}
+wc112 wc dropped: context2 not found in the 2018 dump {}
+wc152 wc dropped: context1 not found in the 2018 dump {}
+wc245 wc dropped: context1 not found in the 2018 dump {}
+wc87 wc dropped: context1 not found in the 2018 dump {}
+wc93 wc dropped: context2 not found in the 2018 dump {}
+wc238 wc dropped: context1 not found in the 2018 dump {}
+wc221 wc dropped: context1 not found in the 2018 dump {}
+wc47 wc dropped: context2 not found in the 2018 dump {}
+wc208 wc dropped: context1 not found in the 2018 dump {}
+wc53 wc dropped: context1 not found in the 2018 dump {}
+wc67 wc dropped: context1 not found in the 2018 dump {}
+wc239 wc dropped: context1 not found in the 2018 dump {}
+wc252 wc dropped: context2 not found in the 2018 dump {}
+wc139 wc dropped: context1 not found in the 2018 dump {}
+wc2 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc61 wc dropped: context1 not found in the 2018 dump {}
+wc122 wc dropped: context2 not found in the 2018 dump {}
+wc184 wc dropped: context1 not found in the 2018 dump {}
+wc195 wc dropped: context1 not found in the 2018 dump {}
+wc192 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc44 wc dropped: context1 not found in the 2018 dump {}
+wc130 wc dropped: context1 not found in the 2018 dump {}
+wc18 wc dropped: context1 not found in the 2018 dump {}
+wc242 wc dropped: context1 not found in the 2018 dump {}
+wc153 wc dropped: context1 not found in the 2018 dump {}
+wc82 wc dropped: context1 not found in the 2018 dump {}
+wc231 wc dropped: context1 not found in the 2018 dump {}
+wc17 wc dropped: context1 not found in the 2018 dump {}
+wc22 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc77 wc dropped: context2 not found in the 2018 dump {}
+wc199 wc dropped: context1 not found in the 2018 dump {}
+wc41 wc dropped: context2 not found in the 2018 dump {}
+wc11 wc dropped: context1 not found in the 2018 dump {}
+wc142 wc dropped: context1 not found in the 2018 dump {}
+wc197 wc dropped: context1 not found in the 2018 dump {}
+wc143 wc dropped: context1 not found in the 2018 dump {}
+wc7 wc dropped: context1 not found in the 2018 dump {}
+wc75 wc dropped: context2 not found in the 2018 dump {}
+wc206 wc dropped: context1 not found in the 2018 dump {}
+wc207 wc dropped: context1 not found in the 2018 dump {}
+wc28 wc dropped: context1 not found in the 2018 dump {}
+wc237 wc dropped: context1 not found in the 2018 dump {}
+wc232 wc dropped: context1 not found in the 2018 dump {}
+wc73 wc dropped: context1 not found in the 2018 dump {}
+wc54 wc dropped: context1 not found in the 2018 dump {}
+wc98 wc dropped: context1 not found in the 2018 dump {}
+wc46 wc dropped: context2 not found in the 2018 dump {}
+wc190 wc dropped: context2 not found in the 2018 dump {}
+wc14 wc dropped: context1 not found in the 2018 dump {}
+wc78 wc usable {'conflict': 2}
+wc233 wc dropped: context1 not found in the 2018 dump {}
+wc144 wc dropped: context1 not found in the 2018 dump {}
+wc110 wc dropped: context1 not found in the 2018 dump {}
+wc220 wc dropped: context1 not found in the 2018 dump {}
+wc71 wc dropped: context2 not found in the 2018 dump {}
+wc85 wc dropped: context1 not found in the 2018 dump {}
+wc191 wc dropped: context2 not found in the 2018 dump {}
+wc188 wc usable {'conflict': 2}
+wc115 wc dropped: context1 not found in the 2018 dump {}
+wc83 wc dropped: context1 not found in the 2018 dump {}
+wc121 wc dropped: context1 not found in the 2018 dump {}
+wc74 wc dropped: context1 not found in the 2018 dump {}
+wc30 wc dropped: context1 not found in the 2018 dump {}
+wc25 wc dropped: both contexts fall in one dump passage {}
+wc84 wc dropped: context1 not found in the 2018 dump {}
+wc34 wc dropped: context1 not found in the 2018 dump {}
+wc120 wc dropped: context1 not found in the 2018 dump {}
+wc125 wc dropped: context1 not found in the 2018 dump {}
+wc13 wc dropped: context2 not found in the 2018 dump {}
+wc86 wc dropped: context1 not found in the 2018 dump {}
+wc33 wc dropped: context1 not found in the 2018 dump {}
+wc3 wc dropped: context1 not found in the 2018 dump {}
+wc175 wc dropped: both contexts fall in one dump passage {}
+wc48 wc dropped: context1 not found in the 2018 dump {}
+wc236 wc dropped: context1 not found in the 2018 dump {}
+wc15 wc usable {'conflict': 2}
+wc119 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc235 wc dropped: context1 not found in the 2018 dump {}
+wc227 wc dropped: context1 not found in the 2018 dump {}
+wc129 wc dropped: context1 not found in the 2018 dump {}
+wc253 wc dropped: context2 not found in the 2018 dump {}
+wc243 wc dropped: context1 not found in the 2018 dump {}
+wc113 wc dropped: context2 not found in the 2018 dump {}
+wc58 wc dropped: context1 not found in the 2018 dump {}
+wc186 wc dropped: context1 not found in the 2018 dump {}
+wc66 wc dropped: context1 not found in the 2018 dump {}
+wc247 wc dropped: context1 not found in the 2018 dump {}
+wc225 wc dropped: context1 not found in the 2018 dump {}
+wc173 wc dropped: context1 not found in the 2018 dump {}
+wc20 wc dropped: context1 not found in the 2018 dump {}
+wc50 wc dropped: context1 not found in the 2018 dump {}
+wc62 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc218 wc dropped: context1 not found in the 2018 dump {}
+wc51 wc dropped: context1 not found in the 2018 dump {}
+wc194 wc dropped: context1 not found in the 2018 dump {}
+wc249 wc dropped: context1 not found in the 2018 dump {}
+wc100 wc dropped: context1 not found in the 2018 dump {}
+wc127 wc dropped: context2 not found in the 2018 dump {}
+wc72 wc dropped: context1 not found in the 2018 dump {}
+wc27 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc248 wc dropped: context1 not found in the 2018 dump {}
+wc118 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc109 wc dropped: context1 not found in the 2018 dump {}
+wc59 wc dropped: context1 not found in the 2018 dump {}
+wc108 wc dropped: context1 not found in the 2018 dump {}
+wc160 wc dropped: context1 not found in the 2018 dump {}
+wc49 wc dropped: context1 not found in the 2018 dump {}
+wc189 wc usable {'conflict': 2}
+wc10 wc dropped: context1 not found in the 2018 dump {}
+wc128 wc dropped: context2 not found in the 2018 dump {}
+wc101 wc dropped: context1 not found in the 2018 dump {}
+wc176 wc dropped: both contexts fall in one dump passage {}
+wc185 wc dropped: context1 not found in the 2018 dump {}
+wc114 wc dropped: context1 not found in the 2018 dump {}
+wc155 wc dropped: context1 not found in the 2018 dump {}
+wc21 wc dropped: context1 not found in the 2018 dump {}
+wc70 wc dropped: context2 not found in the 2018 dump {}
+wc92 wc dropped: context2 not found in the 2018 dump {}
+wc40 wc dropped: context2 not found in the 2018 dump {}
+wc76 wc dropped: context2 not found in the 2018 dump {}
+wc151 wc dropped: context1 not found in the 2018 dump {}
+wc224 wc dropped: context1 not found in the 2018 dump {}
+wc222 wc dropped: context1 not found in the 2018 dump {}
+wc234 wc dropped: context1 not found in the 2018 dump {}
+wc60 wc dropped: context1 not found in the 2018 dump {}
+wc246 wc dropped: context1 not found in the 2018 dump {}
+wc99 wc dropped: context1 not found in the 2018 dump {}
+wc193 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc124 wc dropped: context1 not found in the 2018 dump {}
+wc123 wc dropped: context2 not found in the 2018 dump {}
+wc63 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc8 wc dropped: context1 not found in the 2018 dump {}
+wc111 wc dropped: context1 not found in the 2018 dump {}
+wc196 wc dropped: context1 not found in the 2018 dump {}
+wc80 wc dropped: context1 not found in the 2018 dump {}
+wc172 wc dropped: context1 not found in the 2018 dump {}
+wc79 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc4 wc dropped: context1 not found in the 2018 dump {}
+wc244 wc dropped: context1 not found in the 2018 dump {}
+wc241 wc dropped: context1 not found in the 2018 dump {}
+wc240 wc dropped: context1 not found in the 2018 dump {}
+kept {'core_out': 6, 'core': 20, 'added': 20, 'wc': 4}
