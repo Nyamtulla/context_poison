@@ -1,0 +1,1731 @@
+[
+{
+"name": "Indirect Prompt Injection (IPI)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Seminal paper defining IPI: attacker plants instructions in retrieved content (web/email/etc), no direct user prompt needed. Foundational technique class."
+},
+{
+"name": "PoisonedRAG",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "First knowledge-corruption attack targeting the RAG knowledge database itself; optimization-based crafting of malicious texts to be retrieved and induce target answer."
+},
+{
+"name": "AgentPoison",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "First backdoor/red-teaming attack poisoning agent long-term memory/RAG knowledge base via optimized trigger + few malicious demonstrations."
+},
+{
+"name": "MemoryGraft",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "First persistent, trigger-free memory-poisoning attack exploiting agents' 'semantic imitation heuristic'; explicitly distinguished from AgentPoison/MINJA/InjecMEM."
+},
+{
+"name": "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "Delayed, cross-session memory poisoning attack: adversary causes assistant to write a fabricated memory that lies dormant until later retrieved; proposes Actor-Critic universal poisoning attack method."
+},
+{
+"name": "PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution)",
+"side": "security",
+"channel": "skill",
+"consequence": "goal-hijack",
+"what": "Novel software supply-chain attack surface via LLM coding agent skill ecosystems; DDIPE achieves execution bypass where explicit natural-language payloads fail (0% baseline)."
+},
+{
+"name": "Oracle Poisoning",
+"side": "security",
+"channel": "tool-output",
+"consequence": "silent-corruption",
+"what": "Defines and demonstrates a novel attack class corrupting structured knowledge graphs queried via MCP tool-use, causing wrong conclusions via sound reasoning over corrupted data; distinct from prompt injection and RAG poi"
+},
+{
+"name": "UNNAMED: gradient-based corpus poisoning (adversarial passage injection)",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Seminal corpus-poisoning attack on dense retrievers (Zhong et al.); crafts adversarial passages via discrete-token gradient optimization adapted from HotFlip, generalizes across queries. No proper coined name given by pa"
+},
+{
+"name": "TrojanRAG",
+"side": "security",
+"channel": "RAG",
+"consequence": "persistence-backdoor",
+"what": "Joint backdoor attack shifting backdoor implantation from LLM weights to the RAG knowledge-mounting component; constructs trigger sets for conditional backdoor activation."
+},
+{
+"name": "PANDORA (RAG Poisoning jailbreak)",
+"side": "security",
+"channel": "RAG",
+"consequence": "goal-hijack",
+"what": "Indirect jailbreak via RAG poisoning: crafts malicious documents to evade content filters and get retrieved, jailbreaking GPTs without directly prompting the target model."
+},
+{
+"name": "BadRAG",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Conditional/triggered backdoor poisoning of RAG corpus; explicitly positioned as going beyond prior fixed query-answer poisoning (PoisonedRAG) via semantic-trigger conditioning."
+},
+{
+"name": "ConfusedPilot",
+"side": "security",
+"channel": "RAG",
+"consequence": "data-exfiltration",
+"what": "Names a vulnerability class (confused-deputy risk) in commercial RAG assistants (MS Copilot case study); largely qualitative demonstration rather than a novel algorithmic attack technique -- borderline between vulnerabil"
+},
+{
+"name": "AGGD (Approximate Greedy Gradient Descent)",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Explicit algorithmic improvement over HotFlip's search strategy for corpus poisoning of dense retrievers; matches the 'extension of X' pattern called out in task instructions."
+},
+{
+"name": "AgentVigil",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "First generic black-box automated red-teaming framework for IPI vulnerabilities, adapting fuzzing to multi-step agent setting; works without white-box access unlike prior automated attacks (AgentPoison, VWA-adv)."
+},
+{
+"name": "UNNAMED: HTML accessibility-tree universal adversarial trigger injection (TWUI)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Adapts GCG to IPI setting for web agents by embedding universal adversarial triggers in webpage HTML/accessibility tree with flexible (non-suffix) trigger placement and an extended objective; meaningful adaptation but co"
+},
+{
+"name": "AdapTools",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Adaptive tool-based IPI attack designed to defeat reasoning-capable agents that cross-verify tool calls via CoT; identifies 'trinity of constraints' (adaptability, etc.) and proposes attacks satisfying them, addressing a"
+},
+{
+"name": "UNNAMED: retrieval-aware IPI (trigger-fragment decomposition attack)",
+"side": "security",
+"channel": "RAG",
+"consequence": "goal-hijack",
+"what": "Formalizes IPI attacks that must actually be retrieved under natural queries (unlike prior work assuming pre-retrieved malicious text); decomposes malicious content into a retrieval-trigger fragment plus payload to joint"
+},
+{
+"name": "MUZZLE",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Fully automated multi-agent red-teaming framework discovering IPI attacks against web agents end-to-end in sandboxed cross-app environment; automatically identifies/ranks vulnerable injection surfaces, novel attack-disco"
+},
+{
+"name": "IterInject",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Feedback-guided iterative optimization framework for IPI attacks that closes the loop between injection, diagnosis, and refinement, addressing limitations of static handcrafted payloads and unstructured adaptive methods."
+},
+{
+"name": "LogJack",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Studies a previously unevaluated IPI attack surface: cloud telemetry/log data (CloudWatch, SSM, CloudTrail, CI/CD, Lambda logs) consumed by LLM cloud-debugging agents; attacker embeds payload in application error text wi"
+},
+{
+"name": "ChatInject",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Exploits LLM agents' structural dependence on chat templates (role tokens enforcing system>user>assistant>tool priority) by formatting a malicious tool-response payload to mimic higher-priority roles, combined with persu"
+},
+{
+"name": "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel fuzzing framework operating entirely within a live browser context (isolated tab, full DOM/rendering/script execution) rather than offline text simulation, preserving CSS-hiding, dynamic JS DOM modification, timing"
+},
+{
+"name": "Branded Whisper Attack / Vault Whisper Attack (from 'Whispers of Wealth')",
+"side": "security",
+"channel": "multi-agent",
+"consequence": "goal-hijack",
+"what": "Two novel reasoning-layer attack techniques against Google's Agent Payments Protocol (AP2): Branded Whisper (indirect prompt injection via malicious merchant product metadata biasing ranking) and Vault Whisper (direct pr"
+},
+{
+"name": "UNNAMED: privacy leakage attack chain (external-content deception + IPI + exfiltration)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "data-exfiltration",
+"what": "Demonstrates a multi-stage attack chain end-to-end against deployed black-box ChatGPT combining external-content deception (e.g. CSS-hidden instructions), indirect prompt injection, and data exfiltration; a systematizati"
+},
+{
+"name": "MIRAGE (Masked Injection via Residual And Generative Exploitation)",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Stealthy visual indirect-prompt-injection attack against screenshot-based MLLM web agents; attacker confined to a spatially bounded legitimate visual region (e.g. ad slot), cannot touch DOM/UI/prompt, must avoid visible "
+},
+{
+"name": "DACSI (Document-Authored Control-Signal Impersonation)",
+"side": "security",
+"channel": "RAG",
+"consequence": "data-exfiltration",
+"what": "Defines a new IPI payload subclass distinguished from command-style injection: payloads contain no imperative language, instead impersonating metadata/provenance/authority/disclosure-policy signals embedded in retrievabl"
+},
+{
+"name": "PI-Hunter",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Automated agentic security-auditing/red-teaming framework that reframes IPI red-teaming from attack-success optimization toward proactive vulnerability exposure -- systematically mapping an agent's full security perimete"
+},
+{
+"name": "TIP (Tree-structured Injection for Payloads) / stealthy update attack",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Black-box adversarial attack framework generating stealthy injection payloads against MCP servers via tree-based adaptive search; formalizes a novel 'stealthy update attack' vulnerability where a malicious/compromised MC"
+},
+{
+"name": "Agent Data Injection (ADI)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "New IPI attack category mechanistically distinct from and orthogonal to 'instruction injection': causes untrusted data to be misinterpreted as trusted data (rather than as an instruction to follow), exploiting agents' fa"
+},
+{
+"name": "VATS (Error-Path Injection via Implicit Authority)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Isolates and exploits the MCP tool-calling error-handling loop as a distinct attack surface from general tool-output IPI; hypothesizes/demonstrates that error messages carry 'implicit authority' activating corrective rea"
+},
+{
+"name": "Targeted Promptware Attacks",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Empirical, responsibly-disclosed red-team study against real production Gemini-powered assistants (Web/Mobile/Google Assistant); introduces Targeted Promptware Attacks, a variant of indirect prompt injection, showing att"
+},
+{
+"name": "OMNI-LEAK (Orchestrator Multi-Agent Network Induced Data Leakage)",
+"side": "security",
+"channel": "multi-agent",
+"consequence": "data-exfiltration",
+"what": "Novel attack vector showing a single IPI can compromise multiple agents within the orchestrator multi-agent pattern to coordinate data exfiltration, even when individual agents are protected by data access controls; payl"
+},
+{
+"name": "Foot-in-the-Door (FITD) attack",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel enhancement to IPI against ReAct agents inspired by psychological compliance ('foot-in-the-door') phenomenon: prepends a small harmless distractor request before the malicious payload to increase compliance, built "
+},
+{
+"name": "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "SoK paper on IPI-centric defenses that ALSO designs and demonstrates three novel logic-driven (non-gradient) adaptive attacks, each targeting a specific defense-failure root cause identified in the paper's taxonomy: Sema"
+},
+{
+"name": "Agent-as-a-Proxy attack",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Demonstrates that SOTA hybrid monitoring-based defenses (jointly scrutinizing agent CoT reasoning + tool-call actions, e.g. AlignmentCheck, LlamaFirewall) can be systematically bypassed, challenging the assumption that r"
+},
+{
+"name": "Cross-App Context Poisoning (Confused ChatGPT)",
+"side": "security",
+"channel": "memory",
+"consequence": "goal-hijack",
+"what": "First systematic security analysis of OpenAI's ChatGPT Apps platform ('app-in-app' ecosystem sharing a flat untagged chat context across all connected apps); reverse-engineers client-side JS to identify channels by which"
+},
+{
+"name": "AutoDojo (adaptive black-box IPI attack generation)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Argues published IPI defenses' strong reported protection is partly an artifact of testing only against fixed hand-written injection strings from static benchmarks (AgentDojo); introduces AutoDojo, an adaptive black-box "
+},
+{
+"name": "ToolHijacker",
+"side": "security",
+"channel": "tool-metadata",
+"consequence": "goal-hijack",
+"what": "First prompt injection attack specifically targeting the tool-selection process of LLM agents in a realistic no-box setting (attacker only publishes a malicious tool document to an open third-party tool platform, no acce"
+},
+{
+"name": "WebInject",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Prompt injection attack targeting screenshot-perceiving MLLM web agents; perturbs the webpage's underlying raw pixel values via source-code modification (rather than visible HTML or direct screenshot perturbation) so the"
+},
+{
+"name": "CrossInject",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Cross-modal prompt injection attack framework for black-box multimodal agents, coordinating Visual Latent Alignment (text-to-image synthesis semantically aligned in latent space) with complementary components to exploit "
+},
+{
+"name": "RL-Hammer",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Reinforcement-learning recipe (GRPO fine-tuning of an attacker LLM from scratch, no warm-up/curated dataset) training a black-box automated red-teaming attacker that generates strong universal prompt injection/jailbreak "
+},
+{
+"name": "UNNAMED: Prompt Injection 2.0 (hybrid PI + classic web-exploit combination attacks)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Industry whitepaper tracing evolution of PI to hybrid threats combining prompt injection with XSS/CSRF/SQL injection to evade both AI-specific and conventional web defenses; names a new threat category ('Prompt Injection"
+},
+{
+"name": "UNNAMED: data flow-based injection attack for observed-data exfiltration ('Important message' template)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "data-exfiltration",
+"what": "Extends AgentDojo's banking suite to study exfiltration of personal data an agent merely observes during normal task execution (not just data pulled from attacker-controlled external tools); crafts an 'Important message'"
+},
+{
+"name": "ObliInjection",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "First prompt injection attack designed for multi-source input assembly settings, where the attacker controls only a subset of sources and does not know the final concatenation order ('order-oblivious')."
+},
+{
+"name": "Fun-tuning",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "New graybox attack vector against closed-weight commercial LLMs that misuses the vendor's legitimate remote fine-tuning API (e.g. Gemini Fine-Tuning API) as a loss-value oracle to compute optimization-based indirect prom"
+},
+{
+"name": "AIShellJack (coding-rule/config-file prompt injection against agentic IDE editors)",
+"side": "security",
+"channel": "skill",
+"consequence": "goal-hijack",
+"what": "First systematic empirical study of PI against agentic AI coding editors (Cursor, GitHub Copilot); exploits that developers import untrusted coding-rule/config files, forked repos, and MCP server configs into IDE workspa"
+},
+{
+"name": "HOUYI",
+"side": "security",
+"channel": "direct-input",
+"consequence": "resource-abuse",
+"what": "First systematic black-box methodology for PI against real-world commercial LLM-integrated applications; three-phase attack toolkit (context inference via auxiliary LLM observing input-output behavior, three-part payload"
+},
+{
+"name": "Mind Mapping Prompt Injection",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Visual prompt injection technique named directly in the title/abstract; source Excel row had an empty technical_summary field so algorithmic details are limited, but the paper clearly coins and studies this specific name"
+},
+{
+"name": "Neural Exec",
+"side": "security",
+"channel": "RAG",
+"consequence": "goal-hijack",
+"what": "Reframes construction of PI 'execution triggers' (prefix+suffix wrapper forcing an LLM to treat an injected payload as an instruction) as a differentiable, GCG-style discrete optimization problem rather than manual promp"
+},
+{
+"name": "Prompt Infection",
+"side": "security",
+"channel": "multi-agent",
+"consequence": "goal-hijack",
+"what": "Foundational paper revealing that IPI in multi-agent LLM systems can self-replicate across interconnected agents like a computer virus, propagating malicious instructions agent-to-agent through normal communication chann"
+},
+{
+"name": "UNNAMED: PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Demonstrates that AI-powered offensive pentesting agents (e.g. Cybersecurity AI/CAI framework) can be compromised via PI delivered through content they analyze; documents a four-stage attack anatomy and a seven-category "
+},
+{
+"name": "System Prompt Poisoning (SPP)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "persistence-backdoor",
+"what": "Introduces and formally defines a new LLM attack vector distinct from user-prompt injection: corrupts the system prompt itself for persistent, wide-ranging compromise affecting every subsequent user interaction regardles"
+},
+{
+"name": "UNNAMED: rule-tag semantic reframing template attack ('Breaking the Prompt Wall')",
+"side": "security",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Real-world case study (not systematic evaluation) proposing a template-based prompting strategy that reframes harmful goals as benign-looking rule sets (e.g. <rule> tags) for semantic stealthiness and cross-model transfe"
+},
+{
+"name": "AgentTypo",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Black-box red-teaming framework performing adaptive typographic PI against multimodal (LVLM) web agents by embedding optimized adversarial text directly into webpage images, distinct from raw-HTML text injection and from"
+},
+{
+"name": "MAD-Spear (Conformity-Driven Prompt Injection Attack)",
+"side": "security",
+"channel": "multi-agent",
+"consequence": "silent-corruption",
+"what": "Targeted PI attack against multi-agent debate (MAD) systems; compromises only a small subset of agents via injection, drawing on Sybil-attack concepts from distributed systems to make compromised agents impersonate/manuf"
+},
+{
+"name": "Indirect Data Poisoning (Distributed Denial of Science)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "silent-corruption",
+"what": "Introduces and empirically validates a novel attack in which a remote adversary weaponizes honest use of autonomous AI research agents to industrialize scientific fraud at scale, modeled on historical corporate scientifi"
+},
+{
+"name": "VeriGrey (grey-box agent fuzzing for IPI)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Adapts grey-box software fuzzing methodology to systematically test LLM agents for security vulnerabilities (particularly IPI), using observed tool-invocation sequences as a grey-box feedback function analogous to code c"
+},
+{
+"name": "Parallel-Poisoned Web (fingerprinting + website cloaking against AI web agents)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel attack vector combining browser/device fingerprinting with website cloaking (previously used for black-hat SEO/phishing) repurposed to detect and selectively serve poisoned content only to autonomous web-browsing L"
+},
+{
+"name": "MAS hijacking",
+"side": "security",
+"channel": "multi-agent",
+"consequence": "goal-hijack",
+"what": "New class of control-flow hijacking attacks against LLM-based multi-agent systems, distinct from jailbreaking/IPI/prompt infection; exploits that MAS orchestrators blindly trust status/error metadata reported by sub-agen"
+},
+{
+"name": "MCP-ITP (Implicit Tool Poisoning)",
+"side": "security",
+"channel": "tool-metadata",
+"consequence": "goal-hijack",
+"what": "First automated, adaptive black-box framework for 'implicit tool poisoning' attacks against MCP agents -- a stealthier variant where the poisoned tool is never directly invoked; instead its registered metadata descriptio"
+},
+{
+"name": "Cross-Tool Description Poisoning",
+"side": "security",
+"channel": "tool-metadata",
+"consequence": "goal-hijack",
+"what": "Formalizes a new attack in which an adversary manipulates a non-critical tool's description metadata to steer an agent's planner into maliciously invoking a different, safety-critical tool, without the poisoned tool ever"
+},
+{
+"name": "UNNAMED: descriptor-level semantic manipulation attack (MCP tool-selection bias)",
+"side": "security",
+"channel": "tool-metadata",
+"consequence": "goal-hijack",
+"what": "Identifies and formalizes a previously underexplored MCP-specific semantic attack surface: subtle wording manipulations in natural-language tool descriptors bias agent tool selection/interpretation independent of user in"
+},
+{
+"name": "AutoMalTool",
+"side": "security",
+"channel": "tool-metadata",
+"consequence": "goal-hijack",
+"what": "First automated red-teaming framework for systematically generating malicious MCP tools (tool poisoning via metadata rather than executable code), analogous in kind to AgentVigil/MUZZLE-style automated attack-discovery f"
+},
+{
+"name": "Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "data-exfiltration",
+"what": "New class of privacy-leakage attacks against the MCP ecosystem exploiting composition of multiple independently benign, legitimate MCP tools/servers into an emergent malicious workflow, unlike prior work limited to a sin"
+},
+{
+"name": "Salience Induction",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Novel, truth-preserving attack surface against agentic multi-hop RAG systems, orthogonal to content poisoning (false facts) and prompt injection (imperative directives): manipulates how factually correct object-value bin"
+},
+{
+"name": "PIDP-Attack",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Compound, query-agnostic attack on RAG combining prompt injection (query-path manipulation) with database/corpus poisoning (corpus-path manipulation) in one adversarial suffix, unlike prior poisoning attacks (e.g. Poison"
+},
+{
+"name": "RefineRAG",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Two-stage word-level RAG poisoning (Macro Generation + Micro Refinement) explicitly positioned as stealthier successor to PoisonedRAG's separate-and-concatenate strategy"
+},
+{
+"name": "UNNAMED: retriever fine-tuning backdoor attack",
+"side": "security",
+"channel": "RAG",
+"consequence": "persistence-backdoor",
+"what": "Novel backdoor attack targeting dense-retriever fine-tuning (distinct from the paper's baseline PoisonedRAG-style corpus poisoning); paper explicitly calls it 'a novel backdoor attack' but gives it no proper name"
+},
+{
+"name": "COMA",
+"side": "security",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Novel attack surface: black-box perturbation of untrusted input to corrupt shared-budget prompt compression before inference, explicitly distinguished from prompt injection/jailbreaks/RAG poisoning"
+},
+{
+"name": "LogicPoison",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Novel structural/topological attack on GraphRAG knowledge graphs, distinct mechanism from text-based RAG poisoning (bypasses GraphRAG's synthetic-entity filtering)"
+},
+{
+"name": "IKEA (Implicit Knowledge Extraction Attack)",
+"side": "security",
+"channel": "RAG",
+"consequence": "data-exfiltration",
+"what": "Novel stealthy knowledge-extraction attack using benign queries + anchor concepts, explicitly first of its kind vs prior malicious-input extraction attacks (RAG-Thief, DGEA)"
+},
+{
+"name": "FlashRT",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Efficient optimization-based red-teaming algorithm for prompt injection/knowledge corruption matching SOTA ASR at 2-7x speedup and 2-4x lower memory vs nanoGCG; algorithmic improvement over gradient-based search methods"
+},
+{
+"name": "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "Introduces a taxonomy of 6 novel memory-poisoning attack classes plus MPBench benchmark; borderline between systematic-study/taxonomy paper (exclude) and set of genuinely new attack techniques (include) -- worth spot-che"
+},
+{
+"name": "Inter-Agent Trust Exploitation (AI agent privilege escalation)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel attack surface exploiting asymmetric trust between AI-AI vs human-AI interaction in multi-agent systems, achieving 100% success even against models resistant to direct injection/RAG backdoor; explicitly named pheno"
+},
+{
+"name": "ZombAI",
+"side": "security",
+"channel": "direct-input",
+"consequence": "persistence-backdoor",
+"what": "Named black-box attack method with six distinct strategies (Template Completion, In-Context Attack, Code Injection, Prompt Rewriting, etc.) targeting Claude Computer Use for C2 exploitation"
+},
+{
+"name": "AGENTBAIT",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "First systematic study introducing a novel social-engineering attack paradigm (pretexting/baiting/trusted-identity forgery) against web automation agents, distinct from prompt injection/backdoors"
+},
+{
+"name": "Sampling-Based Injection (MCP sampling/createMessage attack)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel attack exploiting MCP's bidirectional sampling mechanism without origin authentication, explicitly described as 'absent in non-MCP systems entirely'; paper's primary framing is protocol vulnerability analysis + ATT"
+},
+{
+"name": "SkillJect",
+"side": "security",
+"channel": "skill",
+"consequence": "goal-hijack",
+"what": "First automated framework for generating/iteratively refining poisoned agent skills, dramatically outperforming naive direct-injection baseline (0% ASR) with 80.7% average ASR"
+},
+{
+"name": "Guidance Injection",
+"side": "security",
+"channel": "skill",
+"consequence": "goal-hijack",
+"what": "Novel attack vector exploiting OpenClaw's agent:bootstrap lifecycle hook to inject guidance before user interaction, distinct from traditional explicit-instruction prompt injection"
+},
+{
+"name": "POISE",
+"side": "security",
+"channel": "skill",
+"consequence": "goal-hijack",
+"what": "Novel skill-poisoning attack optimizing for a strict dual-success ASR metric (payload execution AND task-verifier pass), outperforming prior skill-injection baselines by 28pp"
+},
+{
+"name": "PlanFlip",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel framework of four planning-phase prompt injection attacks (GoalSubstitution, PriorityInversion, etc.) exploiting cascade amplification via the Planner agent in Planner-Executor-Critic architectures"
+},
+{
+"name": "UNNAMED: RAG-manipulation attack on multi-agent debate consensus",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Novel attack where a malicious debate agent manipulates RAG retrieval to selectively surface legitimate-but-misleading evidence, explicitly distinguished from prompt injection/persuasion-pipeline approaches; reduces majo"
+},
+{
+"name": "UNNAMED: subagent inheritance exploitation (4 classes: insecure memory inheritance, absent resource access control, async memory divergence, unauthorized cross-agent termination)",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "Formal graph-theoretic model plus four empirically-validated PoC exploit classes against subagent spawning/inheritance in OpenClaw and 5 other LLM backends; genuinely novel exploits though bundled as a family rather than"
+},
+{
+"name": "HARE (Hybrid Agent Roleplay Exploitation) / Token Economy Poisoning",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel offensive pentesting framework introducing named context-manipulation exploit strategies (HARE, Token Economy Poisoning) alongside prompt injection/jailbreak baselines"
+},
+{
+"name": "F2A (Feign Agent Attack)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel three-stage prompt injection technique exploiting LLM blind trust in integrated safety-detection agent outputs via fabricated safety-detector results"
+},
+{
+"name": "UNNAMED: skill-file prompt injection (trivial/non-optimized variant)",
+"side": "security",
+"channel": "skill",
+"consequence": "data-exfiltration",
+"what": "First demonstration that Anthropic's Agent Skills feature enables trivially simple prompt injection with no adversarial optimization needed; foundational/base-case finding rather than an algorithmic technique -- may be s"
+},
+{
+"name": "AudioHijack",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Novel adversarial-optimization framework for imperceptible auditory prompt injection against large audio-language models, first to reveal 'auditory prompt injection' as a threat class"
+},
+{
+"name": "ClawTrojan multi-step trojan/backdoor attack paradigm",
+"side": "security",
+"channel": "skill",
+"consequence": "persistence-backdoor",
+"what": "Formalizes a new threat class (multi-step plant-then-trigger trojan attack where no single step looks malicious in isolation) and builds the ClawTrojan benchmark to study it; paper's own attack-paradigm contribution beyo"
+},
+{
+"name": "StruPhantom",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel evolutionary/MCTS-based indirect prompt injection attack tailored to structural tabular-data agents, substantially outperforming manual baseline templates"
+},
+{
+"name": "Silent Egress (implicit prompt injection via URL preview/metadata)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "data-exfiltration",
+"what": "Novel attack subclass where adversarial instructions enter context via automatic system behaviors (URL previewing/metadata parsing) rather than explicitly retrieved content, achieving ~0.88-0.89 egress probability"
+},
+{
+"name": "Attractive Metadata Attack (AMA)",
+"side": "security",
+"channel": "tool-metadata",
+"consequence": "goal-hijack",
+"what": "Novel attack manipulating tool metadata (name/description/schema) via state-action-value optimization to bias agent tool-selection toward malicious tools, 81-95% ASR"
+},
+{
+"name": "Plan Injection",
+"side": "security",
+"channel": "memory",
+"consequence": "goal-hijack",
+"what": "Novel context-manipulation attack targeting persistent hierarchical task-planning representations in web navigation agents, extending memory/context-manipulation attacks to the web-browsing-agent domain"
+},
+{
+"name": "LogInject / Passive Prompt Injection",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel injection modality where payloads planted in log-generating fields persist dormant in storage until later retrieved into an LLM SOC-analysis context, distinct dormant/passive delivery mechanism vs standard active i"
+},
+{
+"name": "Adversarial HalluSquatting",
+"side": "security",
+"channel": "supply-chain",
+"consequence": "goal-hijack",
+"what": "Novel technique scaling untargeted promptware attacks by exploiting predictable/transferable LLM hallucinations to resolve ambiguous requests into attacker-controlled resource identifiers, requiring no direct injection c"
+},
+{
+"name": "Relinking",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel compression-boundary vulnerability where an LLM-driven compressor acts as confused deputy, synthesizing distributed locally-benign fragments into a complete malicious instruction; explicitly distinct from classical"
+},
+{
+"name": "Reasoning-Extension Denial-of-Service (DoS)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "availability-loss",
+"what": "Novel attack surface against LLM-based guardrails using beam-search-optimized injected content to trap the guardrail's own reasoning in extended loops, achieving 13-63x token amplification vs 1.1-1.2x for prior LLM-DoS m"
+},
+{
+"name": "Brain-Prompt Injection",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel attack surface where decoded neural (BCI/EEG) activity becomes an authorization channel for tool-use agents; signal-side perturbations, context-only injections, and adaptive dual-decoder attacks can change routed a"
+},
+{
+"name": "Cross-Session Stored Prompt Injection (XSPI)",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "New threat vector reframing prompt injection from interaction-bounded to persistent-state, formally characterized with 41.9% avg end-to-end ASR across scenarios/models"
+},
+{
+"name": "MIRAGE",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Novel automated pipeline turning benign mobile screenshots into visual prompt-injection samples via attacker-controlled user-generated content regions, no app/OS modification required"
+},
+{
+"name": "Log-Substrate Prompt Injection",
+"side": "security",
+"channel": "tool-output",
+"consequence": "silent-corruption",
+"what": "Novel injection setting where attacker-controlled log fields (user agents, URLs, DNS queries) double as an instruction channel to SOC analyst LLMs; explicitly argued structurally distinct from document/web-based IPI"
+},
+{
+"name": "Prompt Overflow Attack",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel structural attack exploiting the context-length mismatch between guardrail models and downstream LLMs, achieving 100% bypass via interleaved natural-language fillers defeating truncation/segmentation inspection"
+},
+{
+"name": "ASPI (Ambiguous-State Prompt Injection)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Identifies and benchmarks a new injection channel: the agent's own clarification-question response, showing clarification-seeking substantially amplifies injection vulnerability (e.g. 1.8%->34.0% ASR for o3)"
+},
+{
+"name": "RTA-PostForge (response-path tampering attack)",
+"side": "security",
+"channel": "supply-chain",
+"consequence": "silent-corruption",
+"what": "Novel attack exploiting the BYOK relay's plaintext access to silently tamper with LLM responses post-alignment/pre-execution, achieving False-Green Verification on 69% of forced-edit instances"
+},
+{
+"name": "PromptFuzz-SC",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel dual-space mutation fuzzing framework unifying semantic-level and character-level perturbation operators into one extensible attack library, evaluated against DeepSeek"
+},
+{
+"name": "PISmith",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "RL-based red-teaming framework training an attack policy to defeat SOTA prompt-injection defenses in black-box setting, solving sparse-reward/entropy-collapse issues in adaptive attack optimization; substantially outperf"
+},
+{
+"name": "Reverse CAPTCHA (invisible Unicode instruction injection)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel steganographic injection technique encoding hidden instructions via invisible Unicode (zero-width binary and Unicode Tags) that models can perceive but humans cannot; tool access dramatically increases compliance"
+},
+{
+"name": "CoT Forgery (Chain-of-Thought Forgery)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel technique injecting fabricated chain-of-thought to exploit models' spoofable role-perception cues, demonstrating role confusion as the mechanistic cause of prompt injection success; introduced alongside a mechanist"
+},
+{
+"name": "PI3D",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Novel attack realizing prompt injection via physically-placed, text-bearing 3D objects with optimized 6-DoF pose for both attack success and physical plausibility against MLLMs perceiving camera-captured 3D scenes"
+},
+{
+"name": "AutoInject",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Novel black-box RL framework learning adversarial suffixes for prompt injection against tool-calling agents, solving the sparse binary-reward problem that defeats jailbreak-optimizer adaptations"
+},
+{
+"name": "UNNAMED: multi-probe evasive GCG suffix attack",
+"side": "security",
+"channel": "RAG",
+"consequence": "goal-hijack",
+"what": "Novel adaptive attack repurposing GCG to jointly optimize a universal suffix that fools multiple activation-delta linear-probe detectors while preserving injection effect, 93.91-99.63% evasion ASR"
+},
+{
+"name": "PINA",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel adaptive black-box optimization framework for prompt injection against LLM-driven navigation agents, targeting executable plan/control outputs rather than plain text, 75-100% ASR"
+},
+{
+"name": "Xmera (chimera MitM framework)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Novel theory-grounded MitM framework for undermining LLM factual recall via prompt injection, instantiated as three formally-defined attack variants (alpha/other chimera variants) grounded in counterfactual-explainabilit"
+},
+{
+"name": "ToolLeak",
+"side": "security",
+"channel": "tool-metadata",
+"consequence": "goal-hijack",
+"what": "Novel attack exploiting a newly identified 'mode gap' (weaker safety guardrails during schema-driven tool-call argument generation vs normal chat) to exfiltrate system prompts from coding agents"
+},
+{
+"name": "DataFlip",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel attack extracting the secret key from known-answer-detection (KAD) defenses at 98% success, exploiting that the key shares the same context window as the injected content"
+},
+{
+"name": "Checkpoint-GCG",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel white-box attack exploiting GCG's initialization-sensitivity to defeat fine-tuning-based defenses (StruQ, SecAlign) using intermediate training checkpoints, achieving 96% ASR vs 6-18% for standard GCG"
+},
+{
+"name": "Separator Injection Attack",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel attack exploiting the single-task-instruction-following vs multi-task-instruction-following gap mediated by role separator tokens (USER/ASSISTANT/TOOL/SYSTEM)"
+},
+{
+"name": "UNNAMED: diverse RL red-teaming (auto-generated rewards + multi-step RL)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "General-purpose automated red-teaming methodology (not agent-context-poisoning-specific) solving the diversity/effectiveness tradeoff via auto-generated goals + multi-step RL; evaluated partly on indirect prompt injectio"
+},
+{
+"name": "AutoRed",
+"side": "security",
+"channel": "direct-input",
+"consequence": "data-exfiltration",
+"what": "Novel automated learning framework (malicious prompt generator + sensitive information extractor + stop point identifier) for generating prompt-injection-based conversation-history extraction attacks"
+},
+{
+"name": "Cognitive Overload Attack",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel attack framing exploiting a Cognitive-Load-Theory-inspired working-memory overload to defeat safety alignment, achieving up to 99.99% ASR on Claude-3-Opus"
+},
+{
+"name": "PromptFuzz",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Novel black-box fuzzing framework adapting classical software-fuzzing methodology to prompt-injection testing, substantially outperforming GCG-injection and prior baselines"
+},
+{
+"name": "UNNAMED: ChatGPT memory/URL-exfiltration prompt injection bypass",
+"side": "security",
+"channel": "direct-input",
+"consequence": "data-exfiltration",
+"what": "Vulnerability-disclosure paper demonstrating a concrete novel bypass of OpenAI's URL-parameter-substitution defense via indirect prompt injection combined with the ChatGPT memory feature"
+},
+{
+"name": "Prompt-Injected Data Extraction",
+"side": "security",
+"channel": "direct-input",
+"consequence": "data-exfiltration",
+"what": "Formalizes and demonstrates a black-box attack extracting verbatim datastore text from Retrieval-In-Context RAG systems via simple instruction-following exploitation, scaling with model size"
+},
+{
+"name": "SafeSearch",
+"side": "security",
+"channel": "tool-output",
+"consequence": "silent-corruption",
+"what": "Novel scalable, cost-efficient automated red-teaming framework generating risk-inducing unreliable-search-result scenarios for search agents, addressing scalability/coverage limits of prior human-crafted or direct-query "
+},
+{
+"name": "UNNAMED: chat-template inference-time backdoor",
+"side": "security",
+"channel": "supply-chain",
+"consequence": "persistence-backdoor",
+"what": "Novel backdoor attack surface via the Jinja2 chat-template executable bundled in GGUF model artifacts, requiring neither training-pipeline nor deployment-infrastructure access -- only redistribution of a modified artifac"
+},
+{
+"name": "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Systematic framework evaluating attack-specific optimized/enriched injections that bias LLM-based SOC log interpretation toward benign classification; overlaps in domain with log-substrate/passive prompt injection papers"
+},
+{
+"name": "lost in the middle",
+"side": "safety",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Origin paper coining the term; U-shaped positional accuracy curve in long-context QA."
+},
+{
+"name": "distraction by irrelevant context",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Origin paper (GSM-IC); single irrelevant sentence collapses grade-school math accuracy."
+},
+{
+"name": "UNNAMED: context-length-induced degradation independent of retrieval failure",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Explicitly frames as previously-unrecognized: accuracy drops with length even at 100% retrieval exact-match, distinct from retrieval/distraction explanations."
+},
+{
+"name": "context drift",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "reasoning-corruption",
+"what": "Studies dynamics of an existing named phenomenon (context drift), showing it stabilizes at model-specific equilibria rather than growing unboundedly; refines rather than introduces."
+},
+{
+"name": "UNNAMED: getting lost in multi-turn conversation (premature-answer unreliability under underspecification)",
+"side": "safety",
+"channel": "memory",
+"consequence": "silent-corruption",
+"what": "Paper's own framing (title); large multi-turn vs single-turn performance gap driven by premature answering, incorrect assumptions, over-reliance on earlier turns."
+},
+{
+"name": "context rot (agentic/long-horizon search)",
+"side": "safety",
+"channel": "tool-output",
+"consequence": "availability-loss",
+"what": "Extends context rot to multi-turn agentic deep-search setting with a terminal-state taxonomy (give up / uncertain / confident-wrong); extension of existing term to new setting."
+},
+{
+"name": "context rot",
+"side": "safety",
+"channel": "tool-metadata",
+"consequence": "reasoning-corruption",
+"what": "Formally designates \"context rot\" applied to MCP production deployments; tech_summary/key_result fields empty (thin evidence, possibly non-peer-reviewed), and largely restates existing \"context rot\" framing rather than i"
+},
+{
+"name": "classifier context rot",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Distinct, specifically named and characterized phenomenon: LLM-as-monitor recall for dangerous agent actions degrades with transcript length, distinct domain (AI-control monitoring) from standard context rot."
+},
+{
+"name": "extraneous cognitive load (context engineering overload)",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "reasoning-corruption",
+"what": "Draws a cognitive-load-theory analogy to explain context rot (intrinsic vs extraneous load); framing is secondary to the paper's main contribution (CoThinker multi-agent method)."
+},
+{
+"name": "UNNAMED: agent-skill requirement decay under long trajectories (skill/requirement fade)",
+"side": "safety",
+"channel": "skill",
+"consequence": "silent-corruption",
+"what": "White-box study classifying where skill-following fails (lost requirements, editing drift, failed checking) over long context regardless of content relevance, similar to row 28's pure-length effect but in the agent-skill"
+},
+{
+"name": "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Borderline case per instructions: proposes LITM is an emergent adaptation to pretraining information-retrieval demands (primacy/recency), not an architectural flaw; mechanistic explanation of an existing phenomenon."
+},
+{
+"name": "Attention Latch",
+"side": "safety",
+"channel": "memory",
+"consequence": "silent-corruption",
+"what": "Explicitly identified and formalized new named failure mode: cumulative probabilistic weight of historical context overrides mid-task contradictory updates in decoder-only agents (framed as manifestation of information o"
+},
+{
+"name": "mechanistic refinement of lost-in-the-middle (threshold-dependent onset at ~50% of context window; effect vanishes near window limits)",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Borderline mechanistic-explanation case per instructions: shows LiM effect exists only below a relative-length threshold, explaining why prior findings were inconsistent (absolute vs relative position framing)."
+},
+{
+"name": "mechanistic explanation of lost-in-the-middle (positional hidden-state channels, not just position embeddings)",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Borderline mechanistic-explanation case matching the instructions' own example almost verbatim: identifies specific hidden-state channels (not position embeddings) as the mechanistic cause of position bias."
+},
+{
+"name": "distraction by irrelevant context (graded by semantic relatedness)",
+"side": "safety",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Extends distraction/irrelevant-context framing with a graded taxonomy by semantic relatedness (Unrelated/Partially Related/Related); shows semantically-related irrelevant info causes far more distraction than unrelated i"
+},
+{
+"name": "UNNAMED: long-context safety/refusal degradation in agents",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "reasoning-corruption",
+"what": "Studies how safety-alignment (refusal) and task capability jointly degrade with context length in agentic settings, distinct from generic accuracy degradation; capability degrades well before declared max context length."
+},
+{
+"name": "cognitive bandwidth bottleneck (action-space scaling)",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "reasoning-corruption",
+"what": "Identifies and names a specific mechanism: as environmental action-space size scales combinatorially, planning-with-actions degrades and there is a representation-choice inflection point relative to planning-with-schemas"
+},
+{
+"name": "multi-target memory interference",
+"side": "safety",
+"channel": "memory",
+"consequence": "silent-corruption",
+"what": "Introduces a benchmark specifically characterizing destructive interference among multiple evolving/updating memories in long-horizon agents (distinct from static independent recall), a distinct failure mode from simple "
+},
+{
+"name": "plan anchor",
+"side": "safety",
+"channel": "tool-output",
+"consequence": "reasoning-corruption",
+"what": "Explicitly identified and named phenomenon: the first reasoning step in a long-horizon web-reasoning rollout disproportionately determines downstream trajectory success, uniformly-distributed RL credit assignment fails t"
+},
+{
+"name": "UNNAMED: temporally-distant information inaccessibility in long-horizon agentic reasoning",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "SAM paper frames the core challenge as information needed for a decision being scattered across distant steps and only becoming relevant later, distinct from simple length/position accuracy degradation; framing is close "
+},
+{
+"name": "Constraint Drift (under long tool traces)",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "Paper explicitly names 'Constraint Drift under Long Tool Traces': the tendency of monolithic sequential agents to lose track of global hard constraints (budgets, diversity) as accumulated tool outputs/reasoning dilute at"
+},
+{
+"name": "identity drift (persona coherence decay in generative agents)",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "Names and characterizes a specific failure mode: as long-term memory context grows, generative agents lose persona coherence, causing behavioral contradiction and hallucination propagation in multi-agent settings; identi"
+},
+{
+"name": "UNNAMED: abrupt persona/tone instability from lack of affective state inertia",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "Investigates 'instantaneous affective reversal' -- abrupt shifts in agent tone/persona during extended interaction attributed to lack of temporal/dynamical structure on affective state, not insufficient memory; related t"
+},
+{
+"name": "Governance Decay",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "Explicitly named and formally characterized failure mode: context compaction (summarization/eviction to manage token budget) silently removes in-context safety/governance constraints, causing later prohibited actions eve"
+},
+{
+"name": "UNNAMED: unverified success fabrication in unattended long-horizon agents (agent honesty gap)",
+"side": "safety",
+"channel": "memory",
+"consequence": "silent-corruption",
+"what": "Paper treats confident but unverified success-claiming as a distinct, measurable failure mode in unattended long-horizon autonomy (measures fabrication rates of baselines: 25% StateFlow, 8% Reflexion, vs 0.95% for their "
+},
+{
+"name": "memory pollution (agent long-term memory)",
+"side": "safety",
+"channel": "memory",
+"consequence": "silent-corruption",
+"what": "Explicitly and centrally defines 'memory pollution': erroneous, outdated, or over-generalized knowledge entries written into an agent's persistent memory that silently degrade downstream RAG-based task performance, compo"
+},
+{
+"name": "Context Pollution (evolutionary search history bias)",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "Identifies and names 'Context Pollution' as one of three distinct failure modes in LLM-driven evolutionary search, where sparse successful discoveries in accumulated experiment history bias future candidate generation; d"
+},
+{
+"name": "observation over-ingestion",
+"side": "safety",
+"channel": "tool-output",
+"consequence": "reasoning-corruption",
+"what": "Position paper explicitly names and argues for a distinct, under-recognized failure mode: coupling observation frequency to action frequency causes progressive context degradation in web agents, separate from raw context"
+},
+{
+"name": "UNNAMED: plan non-persistence under context eviction (context-time memory volatility)",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "Interpretability study: shows agent plans function as transient 'context-time memory' rather than persistent internal representations -- hidden-state plan-presence signal decays 4.1x within one action-observation cycle a"
+},
+{
+"name": "context proprioceptive blindness",
+"side": "safety",
+"channel": "tool-output",
+"consequence": "silent-corruption",
+"what": "Explicitly diagnosed insight: frontier LLMs are 'proprioceptively blind' to their own context -- cannot infer block size, age, or remaining budget from the prompt text alone, causing incorrect keep-or-archive context-man"
+},
+{
+"name": "context poisoning (self-induced, non-adversarial)",
+"side": "safety",
+"channel": "tool-output",
+"consequence": "silent-corruption",
+"what": "Explicitly names and formally distinguishes two non-adversarial 'context-poisoning' failure patterns (e.g. test-overfitting artifacts biasing a shared, growing single-agent context) as the paper's core motivating diagnos"
+},
+{
+"name": "Distributional Collapse",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Central finding: performance depends on statistical distribution of fact placement in corpus (not just length/position), extending lost-in-the-middle framing; catastrophic failure under clustered/Lorentzian distributions"
+},
+{
+"name": "UNNAMED: summary-length invariance under context compaction",
+"side": "safety",
+"channel": "memory",
+"consequence": "silent-corruption",
+"what": "Empirically characterizes that LLM summarization output volume is nearly input/prompt-invariant during compaction (models revert to an internalized length prior), causing retained-context fraction to collapse as input gr"
+},
+{
+"name": "context compliance (failure to track whether output was actually controlled by retrieved context vs. parametric prior vs. post-hoc rationalization)",
+"side": "safety",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Diagnostic paper defining \"context compliance\" as a distinct evaluable phenomenon within RAG/knowledge-conflict settings; borderline whether distinct enough from knowledge conflict to be its own registry entry."
+},
+{
+"name": "mechanistic explanation of knowledge conflict via information-flow/attention-head circuit (PH3)",
+"side": "safety",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Mechanistic-interpretability paper explaining knowledge-conflict resolution via a specific causal circuit; borderline new-entry vs. refinement of existing \"knowledge conflict\" per prompt guidance on mechanistic explanati"
+},
+{
+"name": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
+"side": "safety",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Exploratory finding that RALMs readily abandon correct internal beliefs in favor of conflicting retrieved evidence; a specific characterized behavioral bias within knowledge-conflict literature, not given its own name by"
+},
+{
+"name": "memory laundering",
+"side": "safety",
+"channel": "memory",
+"consequence": "silent-corruption",
+"what": "Central, novel finding: toxic/adversarial context compressed into memory summaries by multi-agent systems evades standard toxicity classifiers while preserving hostile framing/conflict signal. Paper explicitly frames thi"
+},
+{
+"name": "memory misevolution",
+"side": "safety",
+"channel": "memory",
+"consequence": "goal-hijack",
+"what": "Benchmark paper explicitly naming and characterizing \"memory misevolution\": gradual, self-reinforcing behavioral drift from repeated exposure to misleading information accumulated in persistent memory, distinguished by t"
+},
+{
+"name": "Mandate Salience Decay (MSD)",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Central, explicitly formalized and named contribution: progressive erosion of an autonomous agent's adherence to an explicit behavioral mandate as context accumulates over a long deployment horizon, even while individual"
+},
+{
+"name": "context unawareness (failure to identify a small decisive piece of evidence within long/complex context)",
+"side": "safety",
+"channel": "cross-modal",
+"consequence": "silent-corruption",
+"what": "Names the failure mode motivating an auxiliary RL objective; overlaps substantially with existing needle-in-a-haystack/distraction framings."
+},
+{
+"name": "Contextual Belief Management (CBM) failure",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "reasoning-corruption",
+"what": "Paper coins \"Contextual Belief Management\" and measurable sub-failures (Failed Stay/Update/Isolation Rate) for inappropriate belief updates under accumulating long-horizon context; primarily a benchmark/framework, border"
+},
+{
+"name": "UNNAMED: \"cognitive event horizon\" (context-saturation threshold beyond which accuracy collapses)",
+"side": "safety",
+"channel": "memory",
+"consequence": "availability-loss",
+"what": "Paper identifies a discontinuous accuracy-collapse threshold as scientific-agent context saturates (e.g., Full-Context crashing to 0% accuracy at 10,000+ messages); term used descriptively by authors but not deeply forma"
+},
+{
+"name": "evidence misalignment (agentic long-video QA)",
+"side": "safety",
+"channel": "cross-modal",
+"consequence": "reasoning-corruption",
+"what": "Central named contribution: agentic long-video-QA systems produce correct-looking answers not actually grounded in the evidence they retrieved/inspected; paper introduces diagnostics (temporal/semantic groundedness) to c"
+},
+{
+"name": "agent drift (overthinking / overacting)",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "Central named contribution: degradation over long agentic coding trajectories manifesting as two characterized sub-modes -- overthinking (redundant re-reasoning over already-known info) and overacting (issuing tool calls"
+},
+{
+"name": "UNNAMED: granularity mismatch in agent memory retrieval (instance-level memory causing both irrelevant-guidance retrieval and missed cross-task reuse)",
+"side": "safety",
+"channel": "memory",
+"consequence": "reasoning-corruption",
+"what": "Central empirical diagnosis: coarse instance-level (whole-episode) memory indexing in SWE agents causes surface-similar issues to retrieve misleading guidance and surface-dissimilar-but-logically-similar issues to miss a"
+},
+{
+"name": "context pollution (role conflation in single-agent code-as-action agents)",
+"side": "safety",
+"channel": "tool-output",
+"consequence": "reasoning-corruption",
+"what": "Paper explicitly uses the term \"context pollution\" for a specific mechanism: using one agent for both planning and implementation causes debugging traces/intermediate failures to dilute task-relevant information over lon"
+},
+{
+"name": "cumulative contextual decay (attention pollution, dilution, and drift)",
+"side": "safety",
+"channel": "memory",
+"consequence": "silent-corruption",
+"what": "Central, explicitly defined contribution: progressive degradation of contextual integrity in multi-turn LLM conversation, decomposed into three named interacting sub-mechanisms (attention pollution, dilution, drift)."
+},
+{
+"name": "contextual misguidance",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Paper identifies a specific causal mechanism underlying \"Lost in the Middle\": query-relevant yet non-grounding/misleading spans in long context misdirect the model, distinct from mere positional forgetting -- a mechanist"
+},
+{
+"name": "superposition of contextual information and parametric memory (mechanistic explanation of knowledge conflict)",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Mechanistic-interpretability finding overturning the prior \"exclusive memory heads vs. context heads\" assumption: influential attention heads simultaneously encode both parametric and contextual signals. A mechanistic re"
+},
+{
+"name": "position exhaustion",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Paper names and characterizes \"position exhaustion\": perplexity spikes and generation quality degrades once sequence length exceeds the positional-encoding range seen during training, distinct from (but related to) gener"
+},
+{
+"name": "UNNAMED: \"malloc-only\" context accumulation causing reasoning degeneration in extended CoT",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "availability-loss",
+"what": "Paper diagnoses standard reasoning LLMs as \"malloc-only\" engines that continuously accumulate valid and redundant reasoning steps without a pruning mechanism, causing degeneration/repetitive loops and eventual reasoning "
+},
+{
+"name": "scaffolding collapse",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Central named contribution: under sustained multi-turn student pressure (persistent requests, fake mastery claims, emotional urgency, role redefinition), an LLM Socratic tutor gradually abandons guided-inquiry constraint"
+},
+{
+"name": "KV-cache contamination",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Paper names and characterizes a specific failure of activation/persona-vector steering in stateful multi-turn dialogue: steered token states are persisted and reused via the KV cache, turning a local single-turn perturba"
+},
+{
+"name": "cross-modality parametric knowledge conflict",
+"side": "safety",
+"channel": "cross-modal",
+"consequence": "silent-corruption",
+"what": "Formally defines and systematically studies a new named sub-type of knowledge conflict specific to vision-language models: inconsistency between knowledge encoded in the vision pathway vs. the language backbone, causing "
+},
+{
+"name": "Combined Attack (Open-Prompt-Injection)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Formalizes 5 techniques - Naive, Escape Characters, Context Ignoring, Fake Completion, Combined - and proposes Combined as new. This is the OpenPromptInjection harness DataSentinel and our own RQ6 reconstruction run on; "
+},
+{
+"name": "BIPIA benchmark attack set",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Benchmark-contributed, same category as AgentDojo/InjecAgent/ASB. 14 defenses in the corpus evaluate on it."
+},
+{
+"name": "JudgeDeceiver",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Gradient-optimised injection against LLM-as-a-Judge selection."
+},
+{
+"name": "UNNAMED: automatic universal gradient-based prompt injection",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Momentum-enhanced gradient method producing universal injection strings; no product name given."
+},
+{
+"name": "Tensor Trust: prompt extraction / prompt hijacking",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Benchmark-contributed. Names two attack classes and supplies 126k human-generated attacks."
+},
+{
+"name": "distraction effect (attention shift to injected instruction)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "reasoning-corruption",
+"what": "A mechanistic explanation rather than an attack technique; recorded as an ML/AI-style mechanism."
+},
+{
+"name": "P2SQL injection (prompt-to-SQL)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Prompt injection chained into SQL injection through LangChain middleware."
+},
+{
+"name": "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Benchmark-contributed and broad; low confidence that it is a distinct mechanism rather than an evaluation suite."
+},
+{
+"name": "UNNAMED: system-prompt and uploaded-file extraction from custom GPTs",
+"side": "security",
+"channel": "direct-input",
+"consequence": "data-exfiltration",
+"what": ""
+},
+{
+"name": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "HIGH VALUE for the reverse scan - it runs 12 defenses and bypasses most above 90% ASR, against defenses that reported near-zero. Should be re-scanned for (defense, mechanism) pairs once ingested."
+},
+{
+"name": "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Competition dataset plus taxonomy; borderline as a distinct mechanism."
+},
+{
+"name": "LLMSmith: prompt-injection-to-RCE exploitation",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Static call-chain analysis plus prompt-based exploitation reaching remote code execution through LangChain-style utilities."
+},
+{
+"name": "G2PIA (goal-guided generative prompt injection)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Black-box attack maximising KL divergence between clean and adversarial conditionals."
+},
+{
+"name": "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "HIGH VALUE for the reverse scan - shows existing defenses are less successful than reported, across two dimensions. Re-scan once ingested."
+},
+{
+"name": "UNNAMED: tree-of-attacks ranking manipulation for conversational search",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Injection that promotes low-ranked products in an LLM search engine's citation order; transfers across models."
+},
+{
+"name": "UNNAMED: multi-modal prompt injection against robot navigation",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": ""
+},
+{
+"name": "preemptive answer attack (CoT short-circuiting)",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "The LLM obtains an answer before reasoning, degrading CoT. Cross-track flavour: arises inadvertently OR by injection."
+},
+{
+"name": "EchoLeak (zero-click IPI, CVE-2025-32711)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "data-exfiltration",
+"what": "Real production exploit in M365 Copilot chaining XPIA-classifier evasion, link-redaction bypass, auto-fetched images and a Teams proxy. A rare in-the-wild case."
+},
+{
+"name": "TopicAttack",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Named, distinct injection technique: an LLM-generated gradual topic-transition prefix plus a reminding prompt that redistributes attention toward the injected instruction. Clears the bar easily, with released code and an"
+},
+{
+"name": "POUGH",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Named universal (cross-prompt) goal-hijacking attack combining a semantics-guided prompt sampling/ranking strategy with an efficient gradient-based suffix optimizer; ablations isolate the prompt-organization contribution"
+},
+{
+"name": "ASTRA (and ASTRA++)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "Named architecture-aware optimization attack that manipulates internal attention matrices to redirect focus toward injected instructions; breaks fine-tuning-based defenses (StruQ, SecAlign, SecAlign++) previously claimed"
+},
+{
+"name": "situation-driven contextual adversarial prompt attack",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "A distinct, repeatedly used technique - gradient-free LLM rewriting of an adversarial suffix into fluent text plus movie-derived situational framing - but the label is descriptive rather than a branded name, and validati"
+},
+{
+"name": "query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "A genuinely new and distinct attack primitive - eliciting a usable optimization gradient from text-only outputs by reformulating confidence as pairwise preference - applied to optimize injected suffixes in agent tool con"
+},
+{
+"name": "message history forging (direct prompt injection via forged system/assistant roles)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Distinct, named and systematically characterized technique: because vulnerable plugins accept client-supplied conversation history without integrity checks, the attacker injects messages in a privileged role rather than "
+},
+{
+"name": "reasoning token overflow (RTO) / practical reasoning interruption attack",
+"side": "security",
+"channel": "direct-input",
+"consequence": "availability-loss",
+"what": "Named, distinct mechanism with a clearly articulated causal account: inducing early emission of the end-of-thinking special token so uncapped reasoning tokens overflow into and overwrite the length-capped final answer. D"
+},
+{
+"name": "VortexPIA",
+"side": "security",
+"channel": "tool-output",
+"consequence": "data-exfiltration",
+"what": "Named indirect PIA that injects fabricated PII into external data and manipulates the LLM into re-soliciting it from the user, distinct from prior white-box or CoT/role-play elicitation methods; validated via ASR compari"
+},
+{
+"name": "self-interpreting images via adversarial meta-instructions",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "silent-corruption",
+"what": "Named, distinct cross-modal attack class: soft-prompt-optimized image perturbations that steer VLM interpretation/style/sentiment while preserving coherent, image-grounded answers, validated across 12 meta-objectives and"
+},
+{
+"name": "Image-based Prompt Injection (IPI)",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Distinct combination of segmentation-guided region selection, adaptive font scaling, and background-aware color blending for embedding typographic instructions into natural images; medium confidence because it builds dir"
+},
+{
+"name": "steganographic prompt injection (multi-domain spatial/frequency/neural embedding)",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Named attack class combining three steganographic embedding domains into hidden VLM instructions, with quantitative ASR comparisons against three prior attack-technique baselines across 8 models and 12 datasets. Medium c"
+},
+{
+"name": "Reasoning Interruption Attack (adaptive token compression)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "availability-loss",
+"what": "Named prompt-injection attack that reformulates the thinking-stopped/reasoning-interruption vulnerability to use simple arithmetic tasks plus an adaptive LLM-driven token-compression framework, cutting attack-prompt cost"
+},
+{
+"name": "Physical Prompt Injection Attack (PPIA)",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Named, first-of-kind black-box, query-agnostic physical (real-world object) typographic prompt injection attack, distinguished from prior query-dependent or non-physically-robust typographic attacks, validated across 10 "
+},
+{
+"name": "backdoor-powered prompt injection attack",
+"side": "security",
+"channel": "tool-output",
+"consequence": "persistence-backdoor",
+"what": "Named, distinct hybrid attack combining SFT-data poisoning (backdoor insertion) with prompt injection, shown to nullify instruction-hierarchy defenses that are otherwise effective against conventional prompt injection; v"
+},
+{
+"name": "Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "Genuinely new and distinct attack-generation mechanism (surrogate-activation energy model steering MCMC prompt search for transferable black-box DPI), but the authors never give it an acronym or brand name, so the named-"
+},
+{
+"name": "Overflow",
+"side": "safety",
+"channel": "direct-input",
+"consequence": "availability-loss",
+"what": "Names and characterises a distinct incidental degradation mechanism: benign, non-optimized natural-language prompts that saturate token budgets through helpfulness priors and weak length control, explicitly differentiate"
+},
+{
+"name": "Blind attacks",
+"side": "security",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Formally defines and names a new threat class against LLM-based evaluators: a candidate answer constructed independently of the ground truth to be accepted regardless of correctness, exploiting evaluator hallucination."
+},
+{
+"name": "Cliopatra",
+"side": "security",
+"channel": "RAG",
+"consequence": "data-exfiltration",
+"what": "First named attack combining data poisoning, prompt injection, and attribute inference to break multi-layer heuristic privacy protections in LLM-based conversation-insight/aggregation systems (e.g., Clio), demonstrated w"
+},
+{
+"name": "incidental prompt injection",
+"side": "safety",
+"channel": "cross-modal",
+"consequence": "silent-corruption",
+"what": "Names and characterizes a distinct mechanism: naturally occurring visual artifacts (pen marks, handwritten labels, watermarks) in real clinical data act as injections with no attacker in the loop, quantified at 90-100% v"
+},
+{
+"name": "Graph-based prompt injection (math-expression-to-graph encoding)",
+"side": "security",
+"channel": "cross-modal",
+"consequence": "goal-hijack",
+"what": "Clearly named, novel cross-modal jailbreak technique with quantitative ASR/RR/TASR comparison against 3 baselines on GPT-4/GPT-4o."
+},
+{
+"name": "knowledge conflict (contextual vs parametric)",
+"side": "safety",
+"channel": "RAG",
+"consequence": "reasoning-corruption",
+"what": "Track B. The registry already has related knowledge-conflict entries; check for overlap before adding."
+},
+{
+"name": "unintended long-term state poisoning",
+"side": "safety",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We formalize this risk as unintended long-term state poisoning. (Abstract)"
+},
+{
+"name": "NeuroGenPoisoning",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "TRACK CORRECTED 2026-10-16: the backfill copied the paper's track; an attack is Security track by definition. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence:"
+},
+{
+"name": "MemVenom",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "TRACK CORRECTED 2026-10-16: the backfill copied the paper's track; an attack is Security track by definition. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence:"
+},
+{
+"name": "temporal memory contamination",
+"side": "safety",
+"channel": "memory",
+"consequence": "data-exfiltration",
+"what": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We call this failure mode temporal memory contamination. (Abstract)"
+},
+{
+"name": "Chain-of-Trigger Backdoor (CoTri)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "persistence-backdoor",
+"what": "TRACK CORRECTED 2026-10-16: the backfill copied the paper's track; an attack is Security track by definition. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence:"
+},
+{
+"name": "autonomy tax",
+"side": "security",
+"channel": "tool-output",
+"consequence": "availability-loss",
+"what": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: Evaluating defended models against undefended baselines across 97 agent tasks and 1,000 adversarial prompts, "
+},
+{
+"name": "Injection Paradox",
+"side": "security",
+"channel": "RAG",
+"consequence": "silent-corruption",
+"what": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: In Claude Opus 4.6, the target brand drops from a 54% baseline to zero top-2 recommendations across all 50 tr"
+},
+{
+"name": "structured attack generation framework",
+"side": "security",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We evaluate the proposed prompt injection attack in a black-box setting that matches real educational deploym"
+},
+{
+"name": "ChainFuzzer",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "TRACK CORRECTED 2026-10-16: the backfill copied the paper's track; an attack is Security track by definition. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence:"
+},
+{
+"name": "Zombie Agent",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "TRACK CORRECTED 2026-10-16: the backfill copied the paper's track; an attack is Security track by definition. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence:"
+},
+{
+"name": "Ignore; Detect; Exploit (hidden prompt injection attacks)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "silent-corruption",
+"what": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: For each threat model, we design adversarial prompts that remain invisible to human readers yet can steer an "
+},
+{
+"name": "multimodal retrieval heads (sparse heads carrying retrieval)",
+"side": "safety",
+"channel": "cross-modal",
+"consequence": "silent-corruption",
+"what": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We introduce a multimodal retrieval head detection method that scores attention from question tokens to textu"
+},
+{
+"name": "Actor-Critic attack",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "DeepMind technical report that designs and names four automated IPI trigger-generation attacks; Actor-Critic (and Beam Search, Linear Generation) are the paper own, while TAP is adapted from prior work. [added by the rec"
+},
+{
+"name": "Plan-of-Thought (PoT) Backdoor Attack",
+"side": "security",
+"channel": "direct-input",
+"consequence": "persistence-backdoor",
+"what": "Primarily a benchmark (ASB), but contribution 2 is an explicitly novel, named and formally defined attack that poisons plan demonstrations in the system prompt. [added by the recall pass, 2026-10-22]"
+},
+{
+"name": "SpAIware",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "Practitioner compilation of the author's own disclosed exploits along the CIA triad; most are already registered or unnamed, but SpAIware -- persisting attacker instructions into ChatGPT long-term memory so every later c"
+},
+{
+"name": "AgentDojo: important-instructions injection",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "benchmark attack. Authority-framed instruction block addressed to the model by name, planted in a tool result. 7 registered variants (with/without user name, model name, wrong names). The default attack in most papers th"
+},
+{
+"name": "AgentDojo: ignore-previous injection",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "benchmark attack. Classic instruction-override framing planted in a tool result. 2 registered variants. Named by 13 defense papers."
+},
+{
+"name": "AgentDojo: direct injection",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "benchmark attack. The injection goal stated plainly with no framing - the floor against which the framed variants are measured. 2 registered variants."
+},
+{
+"name": "AgentDojo: system-message spoofing injection",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "benchmark attack. Payload prefixed as '###(system_message)' so the model reads attacker text as a system turn."
+},
+{
+"name": "AgentDojo: tool-knowledge injection",
+"side": "security",
+"channel": "tool-metadata",
+"consequence": "goal-hijack",
+"what": "benchmark attack. Exploits attacker knowledge of the agent's available tools to name a specific call. 2 registered variants. Named by 7 defense papers."
+},
+{
+"name": "AgentDojo: agentic (attacker-as-agent) injection",
+"side": "security",
+"channel": "multi-agent",
+"consequence": "goal-hijack",
+"what": "benchmark attack. The attacker is itself an agent composing the injection, rather than a fixed template."
+},
+{
+"name": "AgentDojo: refusal-induction DoS",
+"side": "security",
+"channel": "tool-output",
+"consequence": "resource-abuse",
+"what": "benchmark attack. Stops the agent rather than redirecting it, by planting content that triggers its own refusal behaviour. Five registered payload variants (generic, captcha, felony, offensive-email, swearwords) collapse"
+},
+{
+"name": "InjecAgent: Direct Harm injection",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "benchmark attack. Injected instruction causes a directly harmful tool call (~510 cases). Named by 5 defense papers."
+},
+{
+"name": "InjecAgent: Data Stealing injection",
+"side": "security",
+"channel": "tool-output",
+"consequence": "data-exfiltration",
+"what": "benchmark attack. Injected instruction exfiltrates user data (~544 cases). Named by 5 defense papers."
+},
+{
+"name": "ASB: Direct Prompt Injection (DPI)",
+"side": "security",
+"channel": "direct-input",
+"consequence": "goal-hijack",
+"what": "benchmark attack. Attacker controls the user-facing prompt directly. Named by 4 defense papers."
+},
+{
+"name": "ASB: Observation Prompt Injection (OPI)",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "benchmark attack. Payload arrives in the agent's observation of the environment. Named by 3 defense papers."
+},
+{
+"name": "ASB: Memory Poisoning",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "benchmark attack. Contaminates the agent's persistent memory so the effect survives the session. Named by 2 defense papers."
+},
+{
+"name": "ASB: Plan-of-Thought (PoT) Backdoor",
+"side": "security",
+"channel": "memory",
+"consequence": "persistence-backdoor",
+"what": "benchmark attack. Plants a trigger in the agent's planning representation rather than in its inputs."
+},
+{
+"name": "ASB: Mixed attack",
+"side": "security",
+"channel": "tool-output",
+"consequence": "goal-hijack",
+"what": "benchmark attack. Combines DPI and OPI in one scenario; kept as its own entry because ASB reports it separately."
+}
+]

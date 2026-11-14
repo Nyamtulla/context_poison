@@ -1,0 +1,452 @@
+[
+ {
+  "defense": "PromptShield (fine-tuned deployable PI detector)",
+  "cause": "Combined Attack (Open-Prompt-Injection)",
+  "fix_paper": "PromptShield: Deployable Detection for Prompt Injection Attacks",
+  "fix_pdf": "data/papers/PromptShield - Deployable Detection for Prompt Injection Attacks.pdf",
+  "cause_paper": "Formalizing and Benchmarking Prompt Injection Attacks and Defenses",
+  "cause_pdf": "data/papers/Formalizing and Benchmarking Prompt Injection Attacks and Defenses.pdf",
+  "id": "v3-00"
+ },
+ {
+  "defense": "Agent Privilege Separation (Reader/Actor two-agent isolation + JSON formatting)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Agent Privilege Separation in OpenClaw: A Structural Defense Against Prompt Injection",
+  "fix_pdf": "data/papers/Agent Privilege Separation in OpenClaw - A Structural Defense Against Prompt Injection.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-01"
+ },
+ {
+  "defense": "DP-Fusion",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "DP-Fusion: Token-Level Differentially Private Inference for Large Language Models",
+  "fix_pdf": "data/papers/DP-Fusion - Token-Level Differentially Private Inference for Large Language Models.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-02"
+ },
+ {
+  "defense": "KnowPO (Knowledge-aware Preference Optimization)",
+  "cause": "distraction by irrelevant context",
+  "fix_paper": "KnowPO: Knowledge-aware Preference Optimization for Controllable Knowledge Selection in Retrieval-Augmented Language Models",
+  "fix_pdf": "data/papers/KnowPO - Knowledge-aware Preference Optimization for Controllable Knowledge Selection in Retrieval-Augmented Language Models.pdf",
+  "cause_paper": "Large Language Models Can Be Easily Distracted by Irrelevant Context",
+  "cause_pdf": "data/papers/Large Language Models Can Be Easily Distracted by Irrelevant Context.pdf",
+  "id": "v3-03"
+ },
+ {
+  "defense": "Zero-Shot Embedding Drift Detection (ZEDD)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Zero-Shot Embedding Drift Detection: A Lightweight Defense Against Prompt Injections in LLMs",
+  "fix_pdf": "data/papers/Zero-Shot Embedding Drift Detection - A Lightweight Defense Against Prompt Injections in LLMs.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-04"
+ },
+ {
+  "defense": "Discern-and-Answer",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Why So Gullible? Enhancing the Robustness of Retrieval-Augmented Models against Counterfactual Noise",
+  "fix_pdf": "data/papers/Why So Gullible Enhancing the Robustness of Retrieval-Augmented Models against Counterfactual Noise.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-05"
+ },
+ {
+  "defense": "KnowPO (Knowledge-aware Preference Optimization)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "KnowPO: Knowledge-aware Preference Optimization for Controllable Knowledge Selection in Retrieval-Augmented Language Models",
+  "fix_pdf": "data/papers/KnowPO - Knowledge-aware Preference Optimization for Controllable Knowledge Selection in Retrieval-Augmented Language Models.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-06"
+ },
+ {
+  "defense": "CoCoA (Confidence- and Context-Aware Adaptive Decoding)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "CoCoA: Confidence and Context-Aware Adaptive Decoding for Resolving Knowledge Conflicts in Large Language Models",
+  "fix_pdf": "data/papers/CoCoA - Confidence and Context-Aware Adaptive Decoding for Resolving Knowledge Conflicts in Large Language Models.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-07"
+ },
+ {
+  "defense": "LOOC (Leave-One-Out Compression)",
+  "cause": "lost in the middle",
+  "fix_paper": "Alleviating Contextual Misguidance: Response-Aware Prompt Compression for Long-Context Question Answering",
+  "fix_pdf": "data/papers/Alleviating Contextual Misguidance - Response-Aware Prompt Compression for Long-Context Question Answering.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "v3-08"
+ },
+ {
+  "defense": "SecInfer",
+  "cause": "InjecAgent: Data Stealing injection",
+  "fix_paper": "SecInfer: Preventing Prompt Injection via Inference-time Scaling",
+  "fix_pdf": "data/papers/SecInfer - Preventing Prompt Injection via Inference-time Scaling.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v3-09"
+ },
+ {
+  "defense": "DataSentinel",
+  "cause": "MUZZLE",
+  "fix_paper": "DataSentinel: A Game-Theoretic Detection of Prompt Injection Attacks",
+  "fix_pdf": "data/papers/DataSentinel - A Game-Theoretic Detection of Prompt Injection Attacks.pdf",
+  "cause_paper": "MUZZLE: Adaptive Agentic Red-Teaming of Web Agents Against Indirect Prompt Injection Attacks",
+  "cause_pdf": "data/papers/MUZZLE - Adaptive Agentic Red-Teaming of Web Agents Against Indirect Prompt Injection Attacks.pdf",
+  "id": "v3-10"
+ },
+ {
+  "defense": "QwenLong-CPRS",
+  "cause": "lost in the middle",
+  "fix_paper": "QwenLong-CPRS: Towards $\\infty$-LLMs with Dynamic Context Optimization",
+  "fix_pdf": "data/papers/QwenLong-CPRS - Towards $-infty$-LLMs with Dynamic Context Optimization.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "v3-11"
+ },
+ {
+  "defense": "SecureClaw (dual-boundary: effect-sink authorization + read-boundary plaintext confinement)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "SecureClaw: Clawing Back Control of LLM Agents",
+  "fix_pdf": "data/papers/SecureClaw - Clawing Back Control of LLM Agents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-12"
+ },
+ {
+  "defense": "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+  "cause": "AgentDojo: important-instructions injection",
+  "fix_paper": "Beyond Injection Detection: A Positive-Security Prompt Firewall that Closes the Scope and PHI Gap SOTA Classifiers Miss in Healthcare",
+  "fix_pdf": "data/papers/Beyond Injection Detection - A Positive-Security Prompt Firewall that Closes the Scope and PHI Gap SOTA Classifiers Miss in Healthcare.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "v3-13"
+ },
+ {
+  "defense": "END (Early Noise Dropping)",
+  "cause": "distraction by irrelevant context",
+  "fix_paper": "END: Early Noise Dropping for Efficient and Effective Context Denoising",
+  "fix_pdf": "data/papers/END - Early Noise Dropping for Efficient and Effective Context Denoising.pdf",
+  "cause_paper": "Large Language Models Can Be Easily Distracted by Irrelevant Context",
+  "cause_pdf": "data/papers/Large Language Models Can Be Easily Distracted by Irrelevant Context.pdf",
+  "id": "v3-14"
+ },
+ {
+  "defense": "ContractGuard",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "The Gate Is Only as Honest as Its Contracts: ContractGuard for the Contract Layer of Risk-Aware Causal Gating",
+  "fix_pdf": "data/papers/The Gate Is Only as Honest as Its Contracts - ContractGuard for the Contract Layer of Risk-Aware Causal Gating.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-15"
+ },
+ {
+  "defense": "TCR (Transparent Conflict Resolution)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Seeing through the Conflict: Transparent Knowledge Conflict Handling in Retrieval-Augmented Generation",
+  "fix_pdf": "data/papers/Seeing through the Conflict - Transparent Knowledge Conflict Handling in Retrieval-Augmented Generation.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-16"
+ },
+ {
+  "defense": "Self-RAG",
+  "cause": "PoisonedRAG",
+  "fix_paper": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+  "fix_pdf": "data/papers/Self-RAG - Learning to Retrieve, Generate, and Critique through Self-Reflection.pdf",
+  "cause_paper": "PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models",
+  "cause_pdf": "data/papers/PoisonedRAG - Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models.pdf",
+  "id": "v3-17"
+ },
+ {
+  "defense": "ProjGuard",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "ProjGuard: Safety Monitoring for Computer-Use Agents via Low-Dimensional Projections",
+  "fix_pdf": "data/papers/ProjGuard - Safety Monitoring for Computer-Use Agents via Low-Dimensional Projections.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-18"
+ },
+ {
+  "defense": "Knowledgeable-R1",
+  "cause": "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs",
+  "fix_paper": "Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement",
+  "fix_pdf": "data/papers/Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement.pdf",
+  "cause_paper": "Tug-of-War between Knowledge: Exploring and Resolving Knowledge Conflicts in Retrieval-Augmented Language Models",
+  "cause_pdf": "data/papers/Tug-of-War between Knowledge - Exploring and Resolving Knowledge Conflicts in Retrieval-Augmented Language Models.pdf",
+  "id": "v3-19"
+ },
+ {
+  "defense": "AgentFold (folding - granular condensation / deep consolidation context management)",
+  "cause": "UNNAMED: temporally-distant information inaccessibility in long-horizon agentic reasoning",
+  "fix_paper": "AgentFold: Long-Horizon Web Agents with Proactive Context Management",
+  "fix_pdf": "data/papers/AgentFold - Long-Horizon Web Agents with Proactive Context Management.pdf",
+  "cause_paper": "SAM: State-Adaptive Memory for Long-Horizon Reasoning Agent",
+  "cause_pdf": "data/papers/SAM - State-Adaptive Memory for Long-Horizon Reasoning Agent.pdf",
+  "id": "v3-20"
+ },
+ {
+  "defense": "InjectDefuser",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Clouding the Mirror: Stealthy Prompt Injection Attacks Targeting LLM-based Phishing Detection",
+  "fix_pdf": "data/papers/Clouding the Mirror - Stealthy Prompt Injection Attacks Targeting LLM-based Phishing Detection.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-21"
+ },
+ {
+  "defense": "User-Tool Aligned Safety RL Framework",
+  "cause": "InjecAgent: Data Stealing injection",
+  "fix_paper": "Agent Safety Alignment via Reinforcement Learning",
+  "fix_pdf": "data/papers/Agent Safety Alignment via Reinforcement Learning.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v3-22"
+ },
+ {
+  "defense": "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
+  "cause": "Brain-Prompt Injection",
+  "fix_paper": "Brain-Prompt Injection: A Route-Safety Audit for BCI-LLM Agents",
+  "fix_pdf": "data/papers/Brain-Prompt Injection - A Route-Safety Audit for BCI-LLM Agents.pdf",
+  "cause_paper": "Brain-Prompt Injection: A Route-Safety Audit for BCI-LLM Agents",
+  "cause_pdf": "data/papers/Brain-Prompt Injection - A Route-Safety Audit for BCI-LLM Agents.pdf",
+  "id": "v3-23"
+ },
+ {
+  "defense": "CK-PLUG (Controllable Knowledge Plug-in)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Parameters vs. Context: Fine-Grained Control of Knowledge Reliance in Language Models",
+  "fix_pdf": "data/papers/Parameters vs. Context - Fine-Grained Control of Knowledge Reliance in Language Models.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-24"
+ },
+ {
+  "defense": "f-secure LLM system (information flow control)",
+  "cause": "InjecAgent: Data Stealing injection",
+  "fix_paper": "System-Level Defense against Indirect Prompt Injection Attacks: An Information Flow Control Perspective",
+  "fix_pdf": "data/papers/System-Level Defense against Indirect Prompt Injection Attacks - An Information Flow Control Perspective.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v3-25"
+ },
+ {
+  "defense": "DCP (Device Context Protocol)",
+  "cause": "AgentDojo: important-instructions injection",
+  "fix_paper": "Device Context Protocol: A Compact, Safety-First Architecture for LLM-Driven Control of Constrained Devices",
+  "fix_pdf": "data/papers/Device Context Protocol - A Compact, Safety-First Architecture for LLM-Driven Control of Constrained Devices.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "v3-26"
+ },
+ {
+  "defense": "Spotlighting (delimiting / datamarking / encoding)",
+  "cause": "Prompt Infection",
+  "fix_paper": "Defending Against Indirect Prompt Injection Attacks With Spotlighting",
+  "fix_pdf": "data/papers/Defending Against Indirect Prompt Injection Attacks With Spotlighting.pdf",
+  "cause_paper": "Prompt Infection: LLM-to-LLM Prompt Injection within Multi-agent Systems",
+  "cause_pdf": "data/papers/Prompt Infection - LLM-to-LLM Prompt Injection within Multi-agent Systems.pdf",
+  "id": "v3-27"
+ },
+ {
+  "defense": "CaMeL",
+  "cause": "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI",
+  "fix_paper": "Defeating Prompt Injections by Design",
+  "fix_pdf": "data/papers/Defeating Prompt Injections by Design.pdf",
+  "cause_paper": "Taxonomy, Evaluation and Exploitation of IPI-Centric LLM Agent Defense Frameworks",
+  "cause_pdf": "data/papers/Taxonomy, Evaluation and Exploitation of IPI-Centric LLM Agent Defense Frameworks.pdf",
+  "id": "v3-28"
+ },
+ {
+  "defense": "ReCAP (Recursive Context-Aware Reasoning and Planning)",
+  "cause": "context drift",
+  "fix_paper": "ReCAP: Recursive Context-Aware Reasoning and Planning for Large Language Model Agents",
+  "fix_pdf": "data/papers/ReCAP - Recursive Context-Aware Reasoning and Planning for Large Language Model Agents.pdf",
+  "cause_paper": "Drift No More? Context Equilibria in Multi-Turn LLM Interactions",
+  "cause_pdf": "data/papers/Drift No More Context Equilibria in Multi-Turn LLM Interactions.pdf",
+  "id": "v3-29"
+ },
+ {
+  "defense": "CXI (Context-to-Execution Integrity)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Context-to-Execution Integrity for LLM Agents",
+  "fix_pdf": "data/papers/Context-to-Execution Integrity for LLM Agents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-30"
+ },
+ {
+  "defense": "GenDiE (Generate, Discriminate, Evolve)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Generate, Discriminate, Evolve: Enhancing Context Faithfulness via Fine-Grained Sentence-Level Self-Evolution",
+  "fix_pdf": "data/papers/Generate, Discriminate, Evolve - Enhancing Context Faithfulness via Fine-Grained Sentence-Level Self-Evolution.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-31"
+ },
+ {
+  "defense": "Dual-Process Memory Architecture (episodic-semantic memory for scientific agents)",
+  "cause": "UNNAMED: \"cognitive event horizon\" (context-saturation threshold beyond which accuracy collapses)",
+  "fix_paper": "Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents",
+  "fix_pdf": "data/papers/Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents.pdf",
+  "cause_paper": "Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents",
+  "cause_pdf": "data/papers/Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents.pdf",
+  "id": "v3-32"
+ },
+ {
+  "defense": "DefensiveToken (test-time optimized special tokens)",
+  "cause": "InjecAgent: Direct Harm injection",
+  "fix_paper": "Defending Against Prompt Injection With a Few DefensiveTokens",
+  "fix_pdf": "data/papers/Defending Against Prompt Injection With a Few DefensiveTokens.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v3-33"
+ },
+ {
+  "defense": "User-Tool Aligned Safety RL Framework",
+  "cause": "InjecAgent: Direct Harm injection",
+  "fix_paper": "Agent Safety Alignment via Reinforcement Learning",
+  "fix_pdf": "data/papers/Agent Safety Alignment via Reinforcement Learning.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v3-34"
+ },
+ {
+  "defense": "PlanGuard",
+  "cause": "InjecAgent: Data Stealing injection",
+  "fix_paper": "PlanGuard: Defending Agents against Indirect Prompt Injection via Planning-based Consistency Verification",
+  "fix_pdf": "data/papers/PlanGuard - Defending Agents against Indirect Prompt Injection via Planning-based Consistency Verification.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v3-35"
+ },
+ {
+  "defense": "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Beyond Black-Box Interventions: Latent Probing for Faithful Retrieval-Augmented Generation",
+  "fix_pdf": "data/papers/Beyond Black-Box Interventions - Latent Probing for Faithful Retrieval-Augmented Generation.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-36"
+ },
+ {
+  "defense": "PARSE (Provenance-Aware Retrieval Sanitization)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "PARSE: Provenance-Aware Retrieval Sanitization for Professional Domain LLM Agents",
+  "fix_pdf": "data/papers/PARSE - Provenance-Aware Retrieval Sanitization for Professional Domain LLM Agents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-37"
+ },
+ {
+  "defense": "SABER (Self-Aware Belief Estimator for RAG)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Trust or Abstain? A Self-Aware RAG Approach",
+  "fix_pdf": "data/papers/Trust or Abstain A Self-Aware RAG Approach.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-38"
+ },
+ {
+  "defense": "SkillSec-Eval defenses (hybrid admission validation, retrieval validation layer, metadata sanitizer, LifecycleGuard taint-tracking, continuous re-validation)",
+  "cause": "UNNAMED: skill-file prompt injection (trivial/non-optimized variant)",
+  "fix_paper": "Agent Skill Security: Threat Models, Attacks, Defenses, and Evaluation",
+  "fix_pdf": "data/papers/Agent Skill Security - Threat Models, Attacks, Defenses, and Evaluation.pdf",
+  "cause_paper": "Agent Skills Enable a New Class of Realistic and Trivially Simple Prompt Injections",
+  "cause_pdf": "data/papers/Agent Skills Enable a New Class of Realistic and Trivially Simple Prompt Injections.pdf",
+  "id": "v3-39"
+ },
+ {
+  "defense": "Micro-Act (hierarchical action-space decomposition)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Micro-Act: Mitigating Knowledge Conflict in LLM-based RAG via Actionable Self-Reasoning",
+  "fix_pdf": "data/papers/Micro-Act - Mitigating Knowledge Conflict in LLM-based RAG via Actionable Self-Reasoning.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-40"
+ },
+ {
+  "defense": "Salience Normalization (SN-1)",
+  "cause": "Salience Induction",
+  "fix_paper": "Salience Induction against Multi-Hop RAG Agents: Threat and Defense",
+  "fix_pdf": "data/papers/Salience Induction against Multi-Hop RAG Agents - Threat and Defense.pdf",
+  "cause_paper": "Salience Induction against Multi-Hop RAG Agents: Threat and Defense",
+  "cause_pdf": "data/papers/Salience Induction against Multi-Hop RAG Agents - Threat and Defense.pdf",
+  "id": "v3-41"
+ },
+ {
+  "defense": "FATE (on-policy self-evolving repair framework) with Pareto-Front Policy Optimization (PFPO)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "On-Policy Self-Evolution via Failure Trajectories for Agentic Safety Alignment",
+  "fix_pdf": "data/papers/On-Policy Self-Evolution via Failure Trajectories for Agentic Safety Alignment.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-42"
+ },
+ {
+  "defense": "Attention Tracker",
+  "cause": "distraction effect (attention shift to injected instruction)",
+  "fix_paper": "Attention Tracker: Detecting Prompt Injection Attacks in LLMs",
+  "fix_pdf": "data/papers/Attention Tracker - Detecting Prompt Injection Attacks in LLMs.pdf",
+  "cause_paper": "Attention Tracker: Detecting Prompt Injection Attacks in LLMs",
+  "cause_pdf": "data/papers/Attention Tracker - Detecting Prompt Injection Attacks in LLMs.pdf",
+  "id": "v3-43"
+ },
+ {
+  "defense": "UNNAMED: Multi-agent PI defense pipeline (Chain-of-Agents / Coordinator-based)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "A Multi-Agent LLM Defense Pipeline Against Prompt Injection Attacks",
+  "fix_pdf": "data/papers/A Multi-Agent LLM Defense Pipeline Against Prompt Injection Attacks.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v3-44"
+ },
+ {
+  "defense": "Spotlighting (delimiting / datamarking / encoding)",
+  "cause": "Sleeper Memory Poisoning (Actor-Critic universal poisoning attack)",
+  "fix_paper": "Defending Against Indirect Prompt Injection Attacks With Spotlighting",
+  "fix_pdf": "data/papers/Defending Against Indirect Prompt Injection Attacks With Spotlighting.pdf",
+  "cause_paper": "Hidden in Memory: Sleeper Memory Poisoning in LLM Agents",
+  "cause_pdf": "data/papers/Hidden in Memory - Sleeper Memory Poisoning in LLM Agents.pdf",
+  "id": "v3-45"
+ },
+ {
+  "defense": "Swin-VIB (variational information bottleneck pipeline)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Accommodate Knowledge Conflicts in Retrieval-augmented LLMs: Towards Robust Response Generation in the Wild",
+  "fix_pdf": "data/papers/Accommodate Knowledge Conflicts in Retrieval-augmented LLMs - Towards Robust Response Generation in the Wild.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-46"
+ },
+ {
+  "defense": "DefensiveToken (test-time optimized special tokens)",
+  "cause": "InjecAgent: Data Stealing injection",
+  "fix_paper": "Defending Against Prompt Injection With a Few DefensiveTokens",
+  "fix_pdf": "data/papers/Defending Against Prompt Injection With a Few DefensiveTokens.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v3-47"
+ },
+ {
+  "defense": "UniKnow / LM-UniKnow",
+  "cause": "distraction by irrelevant context (graded by semantic relatedness)",
+  "fix_paper": "UniKnow: A Unified Framework for Reliable Language Model Behavior across Parametric and External Knowledge",
+  "fix_pdf": "data/papers/UniKnow - A Unified Framework for Reliable Language Model Behavior across Parametric and External Knowledge.pdf",
+  "cause_paper": "How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?",
+  "cause_pdf": "data/papers/How Easily do Irrelevant Inputs Skew the Responses of Large Language Models.pdf",
+  "id": "v3-48"
+ },
+ {
+  "defense": "KCM (Knowledge Conflict Mitigation)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Enhancing Retrieval-Augmented Large Vision Language Models via Knowledge Conflict Mitigation",
+  "fix_pdf": "data/papers/Enhancing Retrieval-Augmented Large Vision Language Models via Knowledge Conflict Mitigation.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v3-49"
+ }
+]

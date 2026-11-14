@@ -1,0 +1,407 @@
+{
+ "generated": "2026-11-12",
+ "method": "Full-text adjudication of the 100 defenses that untested_defense_classification.json put in 'names_registry_attack' (no confirmed pair, but the paper names a registry attack). Three readers, one label each with a verbatim quote: ran_named_attack / evaluated_other / no_evaluation / unsure. Precision-first: a pair needs the paper's own experiment to run the defense against the named attack.",
+ "counts": {
+  "ran_named_attack": 45,
+  "strong": 36,
+  "weak": 9,
+  "evaluated_other": 44,
+  "no_evaluation": 10,
+  "unsure": 1
+ },
+ "confirmed_pairs": [
+  {
+   "defense": "APPA (Agentic Permissions Policy Algebra)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "a627218ebc531a61b3f43df433c8034165e32ba9",
+   "evidence": "Sec. 7 Evaluation: 'Five scenarios embed indirect prompt injections in public forum content' ... APPA 'dropping Attack Success Rate (ASR) from 31%-' ; also 'We instrumented AgentDojo (all four suites, tool_knowledge attack)'",
+   "note": "Own bench-corp benchmark with embedded IPI scenarios, ASR reported per arm across four models; AgentDojo tool_knowledge also run."
+  },
+  {
+   "defense": "Agent Privilege Separation (Reader/Actor two-agent isolation + JSON formatting)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "ec46ec24c252cfa46a0d4a4128855b91cb7c5f31",
+   "evidence": "Sec. 4 Results / abstract: 'We replicate Microsoft's LLMail-Inject ... full pipeline achieves 0% ASR on the evaluated benchmark (attack success rate); two-agent isolation alone achieves 0.31% ASR'",
+   "note": "Evaluated on LLMail-Inject, an indirect prompt injection benchmark where the injection lives in an email body."
+  },
+  {
+   "defense": "CK-PLUG (Controllable Knowledge Plug-in)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "f0b199b7b9939cfd3d8bd69149d5bed7af40e0d2",
+   "evidence": "Sec. 4 Experiments: 'we modify the retrieved contexts in the NQ dataset to contain factually [conflicting] ... incorporate ConFiQA (Bi et al., 2024a) and MQuAKE ... These tasks introduce counterfactual information that conflicts with the model's parametric knowledge.'",
+   "note": "Quantitative knowledge-conflict evaluation (NQ counterfactual, ConFiQA, MQuAKE; ConR/MR metrics)."
+  },
+  {
+   "defense": "Chain-of-Memory (CoM) - verifiable retrieval + causal tracing",
+   "mechanism": "lost in the middle",
+   "paper_id": "d3c9e1b9a6f4847efd8fd382fdb36e6a7536f655",
+   "evidence": "Sec. V.C Causal Tracing Analysis: '68% of hallucinations originate from information in the 40-60% context region ... CoM reduces middle-context hallucinations by 81%.'",
+   "note": "Six long-context benchmarks (LongBench-QA, InfiniteBench, ...) with a position-resolved middle-context hallucination measurement; thin short paper, numbers not tied to a controlled position sweep."
+  },
+  {
+   "defense": "ControlNet (ControlNET)",
+   "mechanism": "PoisonedRAG",
+   "paper_id": "32f24af87e890011ed3e11194ba53e8dd53afbe0",
+   "evidence": "Sec. 6.1 Experimental setup: 'Knowledge Poisoning. Our knowledge poisoning setup is adapted from PoisonedRAG [62].' (attack table lists Knowledge Poisoning / PoisonedRAG [62])",
+   "note": "Detection AUROC/MAcc reported for knowledge-poisoning queries built from PoisonedRAG on MS MARCO/HotpotQA etc. Adapted (not verbatim) PoisonedRAG."
+  },
+  {
+   "defense": "ERA (Evidence-based Reliability Alignment)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "d926c21fb1aa15d19dd1dba8a944c76948e41581",
+   "evidence": "Sec. 4 (quadrants) / Experiment: 'Known-Noisy (KN, q in Kparam \\ Kretr): The model possesses the correct answer, but retrieval fails or provides noisy context ... Ideally, the model should prioritize internal knowledge'; Wiki Event: 'we also synthesize counterfactual contexts by systematically perturbing key entities in the gold contexts to simulate realistic scenarios of noisy or conflicting retrieval.'",
+   "note": "Borderline: conflict is measured via a stratified Known-Noisy quadrant on NQ/TriviaQA/WebQ (natural retrieval) and perturbed counterfactual contexts, not a standard conflict benchmark."
+  },
+  {
+   "defense": "FaithfulRAG (fact-level conflict modeling + Self-Think)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "e9fa27d3eab2c682afad207c6c35803a0656b6e6",
+   "evidence": "Experiment Settings: 'MuSiQue and SQuAD ... are from KRE (Ying et al., 2024) which introduce fact-level knowledge conflicts ... FaithEval (Ming et al., 2025) introduces logical-level conflicts'",
+   "note": "Main evaluation is on counterfactual knowledge-conflict benchmarks (KRE MuSiQue/SQuAD, FaithEval, RealtimeQA)."
+  },
+  {
+   "defense": "Jatmo",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "6a6f6070e765f77422c6d6c14c1e6b41a9ed562a",
+   "evidence": "Sec. 5 Security metrics: 'we inject the test sets with these prompts. Each test sample and prompt injection pair yields three test cases: one with the prompt injection added to the start of the input, one at the end of the input, and one at a random position in the middle'",
+   "note": "Injections (HackAPrompt + hand-crafted) are placed in the task's untrusted data input (reviews, code, etc.), i.e., indirect-style injection; ASR drops from 87% to <0.5%."
+  },
+  {
+   "defense": "LOOC (Leave-One-Out Compression)",
+   "mechanism": "lost in the middle",
+   "paper_id": "1bb6703e03c66fc8591d05cf1d2797a0b01757b7",
+   "evidence": "Experiments, Datasets and Metrics: 'We adopt NaturalQuestions-Open following LITM setting ... [golden document] placed at 0%, 25%, 50%, 75% and 100% positions in the prompt to simulate the positional variation.'",
+   "note": "Runs the Lost-in-the-Middle protocol directly (NQ-Open, gold-position sweep) plus LongBench; contextual misguidance is the paper's own named failure."
+  },
+  {
+   "defense": "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "4dc7dca2c5101e68f200b29d733c752ab3e92171",
+   "evidence": "Datasets: 'We evaluate ProbeRAG on three datasets. ConFiQA (Bi et al., 2025a) is a benchmark designed to assess contextual faithfulness in ... tasks in which the context includes one and multiple counterfactuals. FaithEval ...'",
+   "note": "Main evaluation on counterfactual knowledge-conflict benchmarks (ConFiQA MC/MR/QA, FaithEval) plus SQuAD."
+  },
+  {
+   "defense": "SHIFT (gate-modulated activation steering)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "43767015c51be5095a148c3ea666b321e2324100",
+   "evidence": "Datasets: 'We further evaluate our model on ConfiQA (Bi et al., 2024) to examine its generalization capabilities, including three subsets: Question Answering (QA), Multi-hop Reasoning (MR), and MultiConflicts (MC).'",
+   "note": "Knowledge-conflict pair holds (ConFiQA MC/MR/QA plus a counterfactual case study); the other named attack, self-induced context poisoning, is not run."
+  },
+  {
+   "defense": "SpARE (Sparse Auto-Encoder Representation Engineering)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "d2c1b1a8ac40fbd45e8a91504b1a131f99bad02f",
+   "evidence": "Datasets: 'We use two widely adopted open-domain question-answering datasets with knowledge conflicts NQSwap (Longpre et al., 2021) and Macnoise (Hong et al., 2024)'",
+   "note": "Steering control measured on knowledge-conflict sets NQSwap and Macnoise."
+  },
+  {
+   "defense": "UNNAMED: Digital forensic analysis framework for post-hoc IPI attack identification from agent execution logs",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "9aa8ef5683aa8f81d3e0a826c076b45ff0f2d270",
+   "evidence": "Experimental testbed: 'we use gpt-4o-2024-05-13 and important_instructions_no_names non-adaptive IPI attack to execute the benign and injection tasks'; 'preliminary results are shown in Table I' (precision/recall/F1 per suite)",
+   "note": "Post-hoc forensic detector scored on AgentDojo logs generated with the important_instructions IPI attack; preliminary, but quantitative."
+  },
+  {
+   "defense": "Agent Sentry (structural classifier + allowlist + LLM judge)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "5820789dfe6afa80ed0674223576d98bc3297e24",
+   "evidence": "6.8 Delivery Mechanism Invariance, Table 8: \"ImportantInstructions 532 [attacks] 91.5 [ABR]; DirectAttack 78 92.3; InjecAgentAttack 65 90.8\"",
+   "note": "Evaluated on AgentDojo/AgentDyn and its Agent-Sentry Bench with indirect prompt injection (important-instructions, InjecAgent attacks); attack block rate reported. Missed pair."
+  },
+  {
+   "defense": "CASCADE",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "b874b9a07cc89ff9501f87daddb54c9fff48bfa8",
+   "evidence": "Appendix B, Table 17 (Recall by attack type): \"indirect 2,676 ... 67.34% ... 97.12%\"; \"two labels, direct and indirect, account for 3,393 of the 3,479 malicious records\"",
+   "note": "Detector evaluated on a 5,000-sample corpus whose largest malicious class is labelled indirect injection (embedded in MCP tool-response framings); per-type recall reported. Missed pair, though corpus labels are inherited and loosely defined."
+  },
+  {
+   "defense": "Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "01a8565a4529187bf9b51f28f0959f00a4fe8fd5",
+   "evidence": "4.3 Effectiveness under Knowledge Conflicts: \"To further investigate the effectiveness of Conflict-Aware RAG in knowledge conflict scenarios, we compare Vanilla RAG ... Figure 3: Performance comparison on SQuAD under knowledge conflict scenarios\"",
+   "note": "Reports per-category results (Supplemented by Document / Interfered by Document) where retrieved context and parametric answer disagree; natural conflicts partitioned, not a constructed counterfactual set. Missed pair."
+  },
+  {
+   "defense": "MAScope",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "150116ef37b7560697c1c475465bdb3c9bd9b072",
+   "evidence": "Appendix C: \"Agent Goal Hijack The attacker hosts a spoofed website embedding a malicious prompt. When the agent ingests the page during task execution, the prompt hijacks the agent's goal\"; Table 4 rows S1/S2/S4 (1+2+8) report path- and node-level TP/FP/FN for MAScope",
+   "note": "Detection evaluated on 10 self-built LangGraph scenarios (14,927 log records); several attack cases are indirect prompt injection via web pages/resumes (Fig. 8). Missed pair; own-built attacks, small n. Self-induced context poisoning not tested."
+  },
+  {
+   "defense": "Maris",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "b99bf346a634338688ffe89878505bdc07bfe1c6",
+   "evidence": "5.1 Threat Emulator: \"we also consider a proactive attack scenario where an attacker injects a prompt in their response to request sensitive data. Here, four prompt injection strategies from the AgentDojo benchmark are used ... 'Ignore previous instructions,' InjecAgent-style overrides, 'TODO' instructions, and important diversion messages\"; Table 1 Proactive PVR 75%->0% (HospitalGPT), 100%->0% (TravelAgent)",
+   "note": "Injections arrive in responses from a compromised peer agent (or tool), using AgentDojo/InjecAgent payloads; policy-violation rate reported. Counts as IPI if peer-agent messages are treated as untrusted context; small n (20 tasks)."
+  },
+  {
+   "defense": "PARSE (Provenance-Aware Retrieval Sanitization)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "a60572700b8f268d67cb0e375adee07551c30a29",
+   "evidence": "4.1 Real-Document Benchmark: \"We construct a benchmark of 122 tasks spanning five professional domains. Each task pairs a real retrieved document with a domain-camouflaged payload targeting a distinct malicious goal\"; Abstract: PARSE \"achieves 15.6% attack success rate\"",
+   "note": "ASR of injections embedded in retrieved documents (domain-camouflaged IPI variant) across eight defense conditions. Missed pair."
+  },
+  {
+   "defense": "PRISM (activation-conditioned instruction-set interpreter)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "263a7f25698640876b6cab4deafc11989cb7461b",
+   "evidence": "5.1 Experiment Setup: \"Adversarial Prompts (AP) pair a legitimate surface task with an indirect prompt injection embedded in a realistic carrier such as a document, web page, tool output, email, or CRM record\"; Security-relevant recovery: \"The gain is largest on AP, where coverage rises from 0.520 to 0.652\"",
+   "note": "Interpretability monitor: measured how well it recovers injected instructions from activations on 250 self-built IPI examples. It measures detection/recovery, not attack prevention. Missed pair if a monitor counts as a defense."
+  },
+  {
+   "defense": "QwenLong-CPRS",
+   "mechanism": "lost in the middle",
+   "paper_id": "arxiv:2505.18092",
+   "evidence": "4 Experimental Results, Depth-Robust Needle Retrieval: \"Figure 4 demonstrates QwenLong-CPRS-enhanced Qwen2.5-7b-Instruct's performance in the Needle-in-a-Haystack paradigm across full-spectrum depth variations (0% to 100%) and context lengths (32K to 1M tokens)\"",
+   "note": "Abstract frames the method against 'lost in the middle'; the NIAH depth sweep varies evidence position, which is the positional test. Single-needle NIAH rather than Liu et al.'s multi-document QA; counts if a depth sweep is accepted as the lost-in-the-middle test."
+  },
+  {
+   "defense": "RPO (Retrieval Preference Optimization)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "fc7143c7bc1830ef998419c1c708de42dd200840",
+   "evidence": "6.7 Knowledge Selection Performance: \"Further analysis is conducted on the issue of knowledge conflict before and after RPO ... In Cluster B and C, which involve knowledge conflicts, SFT does not achieve a positive advancement, while RPO has shown a significant improvement in knowledge selection\"",
+   "note": "Main results are end-task QA on PopQA etc.; Sec. 6.7/Fig. 3 partitions instances where parametric and retrieved answers conflict and reports knowledge-selection accuracy. Natural conflicts, not a constructed counterfactual set. Missed pair."
+  },
+  {
+   "defense": "SABER (Self-Aware Belief Estimator for RAG)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "adfa867f286dddcb20b4e989f32d6209ec3559a5",
+   "evidence": "2 A Knowledge-Conflict Benchmark: \"We construct the query-context pool from five conflict-QA datasets, including ConFiQA with three sub-tasks (QA, MR, MC), ConflictQA-PopQA [30] (abbr. ConflictQA), ConflictBank, and the TriviaQA and Natural Questions (NQ) subsets\"; 4 Experiments reports Acc/CF/KF/MFS",
+   "note": "PDF found by title (Trust or Abstain A Self-Aware RAG Approach.pdf). Core evaluation is PK-vs-CK conflict on ConFiQA/ConflictBank etc. Clear missed pair."
+  },
+  {
+   "defense": "TCR (Transparent Conflict Resolution)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "4c78b5e846a9de2f2fcfd854ad52641f1b2ced41",
+   "evidence": "Abstract: \"Across seven benchmarks TCR improves conflict detection (+5-18 F1), raises knowledge-gap recovery by +21.4 pp and cuts misleading-context overrides by -29.3 pp\"; Benchmarks: \"... ConflictBank ... and a single-document NQ setting\"",
+   "note": "Context-memory conflict is the evaluated condition (ConflictBank, built ConflictTQA, KILT). Clear missed pair."
+  },
+  {
+   "defense": "UNNAMED: Embedding-based semantic context analysis detector for IPI",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "dfc9d7ad54c197d239cb473f3ae7a64ab50d0e90",
+   "evidence": "Abstract: \"We also provide a dataset of 70,000 samples, constructed using 35,000 malicious instances from the Benchmark for Indirect Prompt Injection Attacks (BIPIA) and 35,000 benign instances generated using ChatGPT-4o-mini\"",
+   "note": "Detector classification results on BIPIA indirect injections (Section 4). Clear missed pair."
+  },
+  {
+   "defense": "CD2 (Conflict-Disentangle Contrastive Decoding)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "812b87876b22260fe046af447c5f40a4ce2906ea",
+   "evidence": "6.3 Results: 'CD2 leads to a 2.05% and 2.70% Recall improvement on NQ-Inco and TriviaQA-Inco ... For knowledge conflicts between internal memory and external sources, we create NQ-Inco and TriviaQA-Inco datasets'",
+   "note": "CD2 is evaluated directly on self-built context-vs-memory conflict sets (NQ/TriviaQA-Inco, -Conf); the named failure is the paper's own test condition."
+  },
+  {
+   "defense": "CRVA-TGRAG (Conflict Resolution in Vulnerability Analysis via Teacher-Guided RAG)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "a2de6faaa98252c163c088613a04ad2dceb284a4",
+   "evidence": "Sec. 5 Experiments: 'we integrated and designed evaluation metrics to effectively assess the system's ability to resolve knowledge conflicts'; contributions: 'The dataset includes 1,260 pairwise conflict CVE items that have been published and modified over the past decade.'",
+   "note": "Evaluated on its own CVE conflict dataset (stale parametric CVE knowledge vs updated retrieved records); accuracy/faithfulness gains reported. Domain-specific, but the named conflict is the test condition."
+  },
+  {
+   "defense": "FATE (on-policy self-evolving repair framework) with Pareto-Front Policy Optimization (PFPO)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "621e920e2eee0c7fe8140804493062130587070f",
+   "evidence": "Task settings: 'We evaluate on AgentDojo and AgentHarm [9, 3], covering indirect prompt injection and harmful agentic requests.' Abstract: 'reduces attack success rate by 33.5%'",
+   "note": "Clear missed pair: FATE is measured on AgentDojo injection tasks (ASR/TSR) against Tool Filter and PI Detector baselines."
+  },
+  {
+   "defense": "GenDiE (Generate, Discriminate, Evolve)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "cbd822d674f38c2da8ec4a979772d288b9ad0756",
+   "evidence": "Datasets & Metrics: 'ConFiQA (Bi et al., 2024), a dataset designed for retrieval-augmented generation (RAG) scenarios, incorporating knowledge conflicts through counterfactual passages ... evaluate it on ConFiQA'",
+   "note": "GenDiE is scored on ConFiQA counterfactual-context conflicts (Table 1)."
+  },
+  {
+   "defense": "ISE (Instructional Segment Embedding)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "687acbf39c6b36b0ad776647d5864f329c2989dd",
+   "evidence": "Sec. 4.2 (Structured Query benchmark): 'Following the approach of Chen et al. (2024), we evaluate indirect prompt injection attacks on models trained on the Alpaca dataset'; results: 'achieves an average robust accuracy improvement of up to 15.75% against indirect prompt injection'",
+   "note": "ISE is measured on in-domain and OOD indirect prompt injection (StruQ-style Naive/Ignore/Escape/Completion) on both benchmarks."
+  },
+  {
+   "defense": "Micro-Act (hierarchical action-space decomposition)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "b8ebfcdb3409fd79ba2dba267d7fc2d75c418d7b",
+   "evidence": "Datasets: 'benchmark datasets drawn from two comprehensive collections: ConflictBank and KRE. ConflictBank (Su et al., 2024) provides three specialized ...'; Intro: 'Extensive experiments on five widely-used knowledge conflict benchmark datasets'",
+   "note": "Micro-Act is scored on ConflictBank (misinformation/temporal/semantic) and KRE context-vs-memory conflicts."
+  },
+  {
+   "defense": "PromptLocate (injected-prompt localization)",
+   "mechanism": "Combined Attack (Open-Prompt-Injection)",
+   "paper_id": "532f88e78c96a7efb418c6fedd428b741a73e9af",
+   "evidence": "5.1.1 Benchmarks: 'We use the widely adopted OpenPromptInjection [6] and AgentDojo [37] benchmarks.'; Table 1: 'Results of PromptLocate and the baselines for seven attacks in the OpenPromptInjection benchmark' (row: Combined Attack)",
+   "note": "Clear missed pair for Combined Attack (main results + adaptive Combined Attack in 5.3). Relinking is not run (Relinking post-dates/cites PromptLocate as a baseline)."
+  },
+  {
+   "defense": "SecureClaw (dual-boundary: effect-sink authorization + read-boundary plaintext confinement)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "cb002afee0f72bd9c25d00c192660df2290ae6ad",
+   "evidence": "Sec. 5 / Table 2: 'Benchmark evaluation on same-harness baselines (gpt-4o-mini)' ... 'On effectful benchmarks it reaches 0% ASR on ASB and 0.64% ASR on AgentDojo (4/629).'",
+   "note": "Clear missed pair: SecureClaw measured on AgentDojo and ASB indirect-injection tasks vs IPIGuard, DRIFT, Faramesh."
+  },
+  {
+   "defense": "Swin-VIB (variational information bottleneck pipeline)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "8e8f35f80eeba5ffdd55a2a9fde149460f26348b",
+   "evidence": "4.1 Datasets: 'ConflictQA (Xie et al. 2023) (2,839 samples): Each q contains internal knowledge \"parametric memory\" and conflicting external context \"counter memory\"'",
+   "note": "Swin-VIB scored on ConflictQA, DRUID and TruthfulQA conflicting-context settings."
+  },
+  {
+   "defense": "TruthfulRAG (knowledge-graph-based factual conflict resolution)",
+   "mechanism": "knowledge conflict (contextual vs parametric)",
+   "paper_id": "4e0a7b531728d3baaceec7c96245f1badce52fd6",
+   "evidence": "Datasets: 'We conduct experiments on four datasets that encompass various knowledge-intensive tasks and conflict scenarios. FaithEval ... counterfactual contexts ... MuSiQue and SQuAD come from [KRE] ... fact-level knowledge conflicts ... RealtimeQA focuses on temporal conflicts'",
+   "note": "TruthfulRAG is scored on context-vs-memory conflict sets (FaithEval counterfactual, KRE MuSiQue/SQuAD, RealtimeQA)."
+  },
+  {
+   "defense": "Zero-Shot Embedding Drift Detection (ZEDD)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "af78d8c99e56cecfed5dec09ca9b54c24f0eed2e",
+   "evidence": "Threat model: 'This reflects indirect prompt injection ... LLMail-Inject captures and tests this threat model'; Abstract: 'we assemble and re-annotate the comprehensive LLMail-Inject dataset ... greater than 93% accuracy in classifying prompt injections'",
+   "note": "Detector scored on LLMail-Inject email-borne indirect injection payloads (offline classification of payload text, no agent loop)."
+  }
+ ],
+ "weak_pairs_not_counted": [
+  {
+   "defense": "PACEvolve - Hierarchical Context Management (HCM) component specifically",
+   "mechanism": "Context Pollution (evolutionary search history bias)",
+   "paper_id": "230ab088432e2fcc7e34b6148fd08fef30cb2077",
+   "evidence": "Sec. 4.3 Ablation studies: 'The vanilla implementation appends a summary of the proposed solution and experiment results of each iteration ... We then gradually add hierarchical context management ... Adding hierarchical context erasure significantly improves the mean and best-performing evolutionary processes.'",
+   "note": "Self-pair: the attack is PACEvolve's own coined failure mode; HCM is ablated against the polluting vanilla history (10 runs, Symbolic Regression). Effect measured by task score, not a direct pollution metric."
+  },
+  {
+   "defense": "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
+   "mechanism": "Brain-Prompt Injection",
+   "paper_id": "1f517e201e63cb9a4cd87c289ed41f0cd367d42c",
+   "evidence": "Abstract: 'We instantiate the contract on EEGMMI native left/right command-control over 5,400 events ... Provenance blocks C2 routes (0.000); agreement-plus-provenance routes C3 flips (1.000); confirmation-plus-provenance routes them (0.000).' C2 = 'context-only injections, analogous to indirect prompt injection'",
+   "note": "Self-pair: brain-prompt injection is the paper's own attack family; its C2 (context-only, IPI-analogous) and C3 variants are run with route rates reported. Generic IPI benchmarks themselves are not run."
+  },
+  {
+   "defense": "UMA (Unified Memory Agent)",
+   "mechanism": "context rot",
+   "paper_id": "58f06a469e693919434151b1269a01b355cc2b61",
+   "evidence": "Fig. 4: 'Performance comparison on Ledger-QA across varying session counts ... (simulating increasing time horizons)'; ablation: 'MemAgent eventually succumbs to context rot and error accumulation, dropping to ~20%.'",
+   "note": "Weak/generic pair: measures accuracy as the horizon grows (length-resolved) on its own Ledger-QA and names context rot as what it mitigates; it does not reproduce the registry variants' channels (MCP tool metadata, agentic search tool output)."
+  },
+  {
+   "defense": "icat-agent (decentralized event-based multi-agent scaffold)",
+   "mechanism": "context poisoning (self-induced, non-adversarial)",
+   "paper_id": "arxiv:2606.25514",
+   "evidence": "Sec. 3.3: 'the Claude Code baseline coordinates agents through a central shared planning context, whereas icat-agent uses synchronous, event-based communication ... icat-agent resolves 67.4% compared with 61.1% by Claude Code'",
+   "note": "Weak self-pair: the failure is the paper's own coinage (test/patch overfitting from a shared trace); measured only indirectly via SWE-bench Verified/Pro resolve rate against shared-context baselines; overfitting is never counted directly."
+  },
+  {
+   "defense": "OpenClaw-SRT (Semantic Routing & Trust)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "a00030f261b800f4156c88d01e0173f872962b99",
+   "evidence": "4.3 Security Assessment: \"In the Indirect Prompt Injection test, the baseline model suffered a 96% success rate in SSH key theft, whereas OpenClaw-SRT intercepted 49 out of 50 attempts through its Privacy Gateway's PII masking mechanism\"",
+   "note": "Short workshop paper; IPI test is 50 attempts with sparse description (Cisco Talos attack dataset), but it is a quantitative run against IPI. Missed pair, weak evidence."
+  },
+  {
+   "defense": "AgentSight (eBPF boundary tracing)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "0e465e7e8502cc8ff9c8272d1cc74ec034353ecb",
+   "evidence": "5.2.1 Case Study 1: 'We tested AgentSight's ability to detect indirect prompt injection attacks[30]. ... The observer LLM analyzed this trace, returned a high-confidence attack score'",
+   "note": "Weak pair: a single hand-built IPI instance (README -> hidden prompt -> /etc/passwd exfil), detected once; only quantitative numbers are runtime overhead (Table 1)."
+  },
+  {
+   "defense": "ContextRL",
+   "mechanism": "context unawareness (failure to identify a small decisive piece of evidence within long/complex context)",
+   "paper_id": "72b5e6023db3b5af8e8f27f8b4a52bc5f1f32ba7",
+   "evidence": "Mechanism check (Sec. 4/5): 'we evaluate every method on the held-out test set introduced in Fig. 2, and plot selection accuracy'; 3.2: 'On NIAH, standard outcome-based GRPO regresses relative to the base model, whereas CONTEXTRL surpasses the base'",
+   "note": "The paper coins 'context unawareness' and measures the fix on its own contrastive context probe plus NIAH/LongBench v2; same-paper failure and fix."
+  },
+  {
+   "defense": "TRACER-AI",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "dacd135992e586b5a2b27c9134985d56cc4a20fb",
+   "evidence": "Sec. VII (Table 9): 'TRACER-AI detects all held-out indirect and chained attacks'; Limitations: 'The reported TRACER-AI numerical results are from a controlled synthetic proof-of-concept dataset, not from AgentDojo, InjecAgent, AgentDyn'",
+   "note": "Weak pair: 500 synthetic template IPI cases scored by a TF-IDF/rule pipeline with no LLM agent executed; it is a quantitative IPI test, but self-built and agent-free."
+  },
+  {
+   "defense": "Unified Security Orchestration Framework (USOF)",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "cce1b13eebe88e5051d329a95616c9df646fb08c",
+   "evidence": "7.2: 'The dataset containing 200 interactions was produced with the help of a custom script ... controlled injection of multi-vector attacks (direct, indirect, multiturn, etc.)'; 7.4.1: 'it performed particularly badly at detecting indirect prompt injections and multi-turn attacks.'",
+   "note": "Weak pair: tiny self-generated 200-sample set (82 attacks) scored by a TF-IDF classifier and rule engines; IPI is one category, with no per-category number given, only that detection was poor."
+  }
+ ],
+ "no_evaluation_defenses": [
+  {
+   "defense": "Neural Paging / Page Controller",
+   "paper_id": "arxiv:2603.02228",
+   "evidence": "Limitations: 'No end-to-end evaluation. The synthetic experiments validate theoretical bounds on abstract paging traces. They do not demonstrate that Neural Paging improves task accuracy when integrated with a real LLM.'",
+   "note": "Theory paper; the only experiments run classical paging heuristics (Belady/LRU/LFU/FIFO/Random) on synthetic Zipf traces; the proposed Page Controller is never trained or measured; lost-in-the-middle is motivation only."
+  },
+  {
+   "defense": "PRIMA (context-boundary discipline + reference-material sandboxing + poisoned-output rejection)",
+   "paper_id": "arxiv:2605.24775",
+   "evidence": "Conclusion: 'Quantitative evaluation of the meta-optimization loop, ... domains are left to future work.'; Contributions: 'we describe the design and report architectural properties but leave quantitative effectiveness evaluation to future work.'",
+   "note": "Known reference case: operational-patterns paper with a qualitative Graph Isomorphism case study; IPI countermeasures (context-boundary discipline, sandboxing, poisoned-output rejection) are described, never measured."
+  },
+  {
+   "defense": "SentinelAgent",
+   "paper_id": "99296c88c1470c2f20cf34f2e9708eab4f34fa2c",
+   "evidence": "Sec. 6.1 Case Study I: 'We successfully detected two attack scenarios.'; Sec. 6.3: 'These comprehensive case studies validate our framework's effectiveness across diverse multi-agent architectures'",
+   "note": "PRIMA-style: two qualitative case studies (CrewAI email assistant with IPI-like email content, Magentic-One) with hand-traced detections; no detection rates, ASR, baselines or trace counts are reported."
+  },
+  {
+   "defense": "Ebbinghaus Forgetting Curve Memory Enhancement Framework",
+   "paper_id": "32743a56cf5a28f45d9fdf237450095b1ec9efe9",
+   "evidence": "1 Introduction: \"the main purpose of this article is to propose a new memory management framework and explain its design principles and verification schemes in detail. Complete system implementation and large-scale empirical evaluation ... will be carried out in the next stage of this study\"",
+   "note": "Design + planned LongBench-E protocol (incl. a position-sensitive 'lost in the middle' metric) with only expected gains ('expected to increase by 15-25%'); no results."
+  },
+  {
+   "defense": "FASA (zero-trust, full-lifecycle defense philosophy)",
+   "paper_id": "ec338413be097a8f6de120397411e86952c475ca",
+   "evidence": "Abstract: \"we introduce the Full-Lifecycle Agent Security Architecture (FASA). This theoretical defense blueprint advocates for zero-trust agentic execution ... we present Project ClawGuard, our ongoing engineering initiative\"",
+   "note": "Threat analysis + risk taxonomy + theoretical architecture; ClawGuard prototype is 'ongoing'; no experiments or numbers."
+  },
+  {
+   "defense": "Memory Sandbox (user-controlled memory objects)",
+   "paper_id": "048e0a6fa601f6f87865a054f1dca95b2e28e51d",
+   "evidence": "Abstract: \"we present Memory Sandbox, an interactive system and design probe that allows users to manage the conversational memory of LLM-powered agents\"; sections are system features (2.1-2.5) and 3 Discussion, no study or measurements",
+   "note": "2-page HCI demo/design probe: UI affordances to view, hide, edit, summarize and share memory objects; lost in the middle only cited."
+  },
+  {
+   "defense": "Skills Architecture (vs. MCP)",
+   "paper_id": "08511b5e1be93152829e91f34907e586b787a129",
+   "evidence": "2.1 Research Design: \"The benchmark uses calibrated simulation: task success probabilities and decay constants are derived from the theoretical decay model (Definition 2) and author system observation, applied to synthetic sessions\"; 2.2: failure modes \"are presented as a theoretically grounded conceptual framework rather than as conclusions of a formal empirical study\"",
+   "note": "Reports numbers (42% entropy reduction, TCR tables), but they come from a simulation whose success rates and decay constants are set by the authors' own model, not from running agents. Likely the registry's own 'context rot' source paper. Hard call: evaluated_other if simulated numbers count."
+  },
+  {
+   "defense": "UNNAMED: Authorization framework for autonomous LLM agent threat mitigation",
+   "paper_id": "156e8e6a9f11d3a3c9136dfc53211b9fb0d51699",
+   "evidence": "Abstract: \"we propose a theoretical authorization framework, the Context-Aware Agentic Verifiable Policy (CA2P) ... This analysis relies on established cryptographic principles and existing security literature to map the trajectory of agent security\"",
+   "note": "Threat model + theoretical authorization design (crypto identity assertions, intent verification); sections are background, threat modeling, framework, discussion, future work; no experiments."
+  },
+  {
+   "defense": "MAT-based Assurance Framework (Message-Action Traces + governance layer: capability limits + action mediation)",
+   "paper_id": "e7eee295a7aba7ce0aef3b83a1b964e6bd10169d",
+   "evidence": "Sec. I: 'The paper focuses on the methodology, definitions, and metrics required to instantiate an executable evaluation protocol; a full empirical study is ongoing but is not reported here.'",
+   "note": "Methodology/framework paper: defines Message-Action Traces, contracts, stress-testing and fault-injection protocol (incl. IPI as bounded perturbation) and metrics; no results."
+  },
+  {
+   "defense": "SDO (Signal-Driven Observation)",
+   "paper_id": "efd0c320f1c24b5beb87a531a4ad1a82f66ec00d",
+   "evidence": "Conclusion/limitations: 'We also note that this paper does not include experiments. Whether SDO prevents the failures we describe in practice is a question that can only be answered by building and evaluating it'",
+   "note": "Position paper: proposes SDO design and walks through a hypothetical e-commerce case study (Sec. 3.3); nothing is implemented or measured."
+  }
+ ],
+ "unsure": [
+  {
+   "defense": "IDE-Sanitizer",
+   "mechanism": "Indirect Prompt Injection (IPI)",
+   "paper_id": "0b8b141e8d1300b9b8910aecb4617c66b2127417",
+   "evidence": "III.A Indirect Injection Attack Surface: \"the context xc is an aggregation of the authoritative system rules Psys, a logical separator z, and the untrusted user input Puser ... An indirect PIA constitutes the adversarial construction of a contaminated input sequence P*user\"; Sec. IV reports Base ASR 70.0% vs Defense ASR <1%",
+   "note": "Quantitative ASR evaluation (10 .cursorrules x 9 payloads) which the authors call indirect PIA, but payloads are placed in the user-input slot, not in retrieved/external content; Limitations admit payloads in README/JSON files are not covered. Ran-named only if user-slot payloads count as IPI."
+  }
+ ],
+ "adjudication_files": [
+  "data/registries/untested_check/adjudicated1.jsonl",
+  "data/registries/untested_check/adjudicated2.jsonl",
+  "data/registries/untested_check/adjudicated3.jsonl"
+ ]
+}

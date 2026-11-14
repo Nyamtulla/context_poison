@@ -1,0 +1,652 @@
+[
+ {
+  "cause": "Plan-of-Thought (PoT) Backdoor Attack",
+  "side": "security",
+  "paper_id": "5f4efbe3aae1d8f44ceab1da257ae685d6beb00b",
+  "paper_title": "Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents",
+  "pdf": "data/papers/Agent Security Bench (ASB) - Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents.pdf",
+  "channel": "direct-input",
+  "consequence": "persistence-backdoor",
+  "registry_notes": "Primarily a benchmark (ASB), but contribution 2 is an explicitly novel, named and formally defined attack that poisons plan demonstrations in the system prompt. [added by the recall pass, 2026-10-22]"
+ },
+ {
+  "cause": "ASB: Plan-of-Thought (PoT) Backdoor",
+  "side": "security",
+  "paper_id": "5f4efbe3aae1d8f44ceab1da257ae685d6beb00b",
+  "paper_title": "Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents",
+  "pdf": "data/papers/Agent Security Bench (ASB) - Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents.pdf",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "registry_notes": "Plants a trigger in the agent's planning representation rather than in its inputs."
+ },
+ {
+  "cause": "ASB: Mixed attack",
+  "side": "security",
+  "paper_id": "5f4efbe3aae1d8f44ceab1da257ae685d6beb00b",
+  "paper_title": "Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents",
+  "pdf": "data/papers/Agent Security Bench (ASB) - Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Combines DPI and OPI in one scenario; kept as its own entry because ASB reports it separately."
+ },
+ {
+  "cause": "Oracle Poisoning",
+  "side": "security",
+  "paper_id": "33bceaac7888ac8c08e35b6045a7a2619e210e4e",
+  "paper_title": "Oracle Poisoning: Corrupting Knowledge Graphs to Weaponise AI Agent Reasoning",
+  "pdf": "data/papers/Oracle Poisoning - Corrupting Knowledge Graphs to Weaponise AI Agent Reasoning.pdf",
+  "channel": "tool-output",
+  "consequence": "silent-corruption",
+  "registry_notes": "Defines and demonstrates a novel attack class corrupting structured knowledge graphs queried via MCP tool-use, causing wrong conclusions via sound reasoning over corrupted data; distinct from prompt injection and RAG poisoning."
+ },
+ {
+  "cause": "TrojanRAG",
+  "side": "security",
+  "paper_id": "d8d0d704446ffaf09b9722360ed76341934ec3a3",
+  "paper_title": "TrojanRAG: Retrieval-Augmented Generation Can Be Backdoor Driver in Large Language Models",
+  "pdf": "data/papers/TrojanRAG - Retrieval-Augmented Generation Can Be Backdoor Driver in Large Language Models.pdf",
+  "channel": "RAG",
+  "consequence": "persistence-backdoor",
+  "registry_notes": "Joint backdoor attack shifting backdoor implantation from LLM weights to the RAG knowledge-mounting component; constructs trigger sets for conditional backdoor activation."
+ },
+ {
+  "cause": "BadRAG",
+  "side": "security",
+  "paper_id": "1027d120189fd6cd9aec1af273cd9a5baaf645d7",
+  "paper_title": "BadRAG: Identifying Vulnerabilities in Retrieval Augmented Generation of Large Language Models",
+  "pdf": "data/papers/BadRAG - Identifying Vulnerabilities in Retrieval Augmented Generation of Large Language Models.pdf",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Conditional/triggered backdoor poisoning of RAG corpus; explicitly positioned as going beyond prior fixed query-answer poisoning (PoisonedRAG) via semantic-trigger conditioning."
+ },
+ {
+  "cause": "AGGD (Approximate Greedy Gradient Descent)",
+  "side": "security",
+  "paper_id": "19afd7b97061fdf0dd4a4726bef4ed8acd31a0a8",
+  "paper_title": "Corpus Poisoning via Approximate Greedy Gradient Descent",
+  "pdf": "data/papers/Corpus Poisoning via Approximate Greedy Gradient Descent.pdf",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Explicit algorithmic improvement over HotFlip's search strategy for corpus poisoning of dense retrievers; matches the 'extension of X' pattern called out in task instructions."
+ },
+ {
+  "cause": "UNNAMED: retrieval-aware IPI (trigger-fragment decomposition attack)",
+  "side": "security",
+  "paper_id": "81eb760ebbe224ae52cd7aea8f7f2865e4134908",
+  "paper_title": "Overcoming the Retrieval Barrier: Indirect Prompt Injection in the Wild for LLM Systems",
+  "pdf": "data/papers/Overcoming the Retrieval Barrier - Indirect Prompt Injection in the Wild for LLM Systems.pdf",
+  "channel": "RAG",
+  "consequence": "goal-hijack",
+  "registry_notes": "Formalizes IPI attacks that must actually be retrieved under natural queries (unlike prior work assuming pre-retrieved malicious text); decomposes malicious content into a retrieval-trigger fragment plus payload to jointly satisfy retrievability and injection, closing the 'retrieval barrier' gap."
+ },
+ {
+  "cause": "IterInject",
+  "side": "security",
+  "paper_id": "7eccc944154275a6ecd2f7cc379a3798ff855a30",
+  "paper_title": "IterInject: Indirect Prompt Injection Against LLM Agents via Feedback-Guided Iterative Optimization",
+  "pdf": "data/papers/IterInject - Indirect Prompt Injection Against LLM Agents via Feedback-Guided Iterative Optimization.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Feedback-guided iterative optimization framework for IPI attacks that closes the loop between injection, diagnosis, and refinement, addressing limitations of static handcrafted payloads and unstructured adaptive methods."
+ },
+ {
+  "cause": "UNNAMED: in-browser LLM-guided fuzzing for agentic-browser IPI",
+  "side": "security",
+  "paper_id": "8b9011b256c4819d47721efc3f9522a721b92735",
+  "paper_title": "In-Browser LLM-Guided Fuzzing for Real-Time Prompt Injection Testing in Agentic AI Browsers",
+  "pdf": "data/papers/In-Browser LLM-Guided Fuzzing for Real-Time Prompt Injection Testing in Agentic AI Browsers.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel fuzzing framework operating entirely within a live browser context (isolated tab, full DOM/rendering/script execution) rather than offline text simulation, preserving CSS-hiding, dynamic JS DOM modification, timing side-channel, and browser-API attack vectors invisible to prior offline approaches. No proper name coined by the paper."
+ },
+ {
+  "cause": "UNNAMED: privacy leakage attack chain (external-content deception + IPI + exfiltration)",
+  "side": "security",
+  "paper_id": "0d3726b27797f667331480e3a25baeec8df7beca",
+  "paper_title": "An Empirical Study of Privacy Leakage Chains via Prompt Injection in Black-Box Chatbot Environments",
+  "pdf": "data/papers/An Empirical Study of Privacy Leakage Chains via Prompt Injection in Black-Box Chatbot Environments.pdf",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Demonstrates a multi-stage attack chain end-to-end against deployed black-box ChatGPT combining external-content deception (e.g. CSS-hidden instructions), indirect prompt injection, and data exfiltration; a systematization/combination of known primitives into a proven real-world chain rather than a single novel algorithmic technique -- borderline, similar to ConfusedPilot (row 21)."
+ },
+ {
+  "cause": "TIP (Tree-structured Injection for Payloads) / stealthy update attack",
+  "side": "security",
+  "paper_id": "4ee49d7be0b3e20ca27fe05ef99170d1b37664db",
+  "paper_title": "Invisible Threats from Model Context Protocol: Generating Stealthy Injection Payload via Tree-based Adaptive Search",
+  "pdf": "data/papers/Invisible Threats from Model Context Protocol - Generating Stealthy Injection Payload via Tree-based Adaptive Search.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Black-box adversarial attack framework generating stealthy injection payloads against MCP servers via tree-based adaptive search; formalizes a novel 'stealthy update attack' vulnerability where a malicious/compromised MCP server injects adversarial payloads into response fields post-approval."
+ },
+ {
+  "cause": "Targeted Promptware Attacks",
+  "side": "security",
+  "paper_id": "19f4bb442c551929118eeddaf92f594602f9e3ec",
+  "paper_title": "Invitation Is All You Need! Promptware Attacks Against LLM-Powered Assistants in Production Are Practical and Dangerous",
+  "pdf": "data/papers/Invitation Is All You Need! Promptware Attacks Against LLM-Powered Assistants in Production Are Practical and Dangerous.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Empirical, responsibly-disclosed red-team study against real production Gemini-powered assistants (Web/Mobile/Google Assistant); introduces Targeted Promptware Attacks, a variant of indirect prompt injection, showing attacks are practical without adversarial-ML expertise or white-box access."
+ },
+ {
+  "cause": "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI",
+  "side": "security",
+  "paper_id": "66c8e83ed0fc215dc8be0e44715a692ef27f005b",
+  "paper_title": "Taxonomy, Evaluation and Exploitation of IPI-Centric LLM Agent Defense Frameworks",
+  "pdf": "data/papers/Taxonomy, Evaluation and Exploitation of IPI-Centric LLM Agent Defense Frameworks.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "SoK paper on IPI-centric defenses that ALSO designs and demonstrates three novel logic-driven (non-gradient) adaptive attacks, each targeting a specific defense-failure root cause identified in the paper's taxonomy: Semantic-Masquerading IPI (adapts payloads to functionally-similar tools evading access control), Cascading IPI (head/body/end if-then-else payload structure targeting auxiliary judge-LLM defenses like Task Shield/MELON), and Isolation-Breach IPI (exploits error-message/feedback chan"
+ },
+ {
+  "cause": "CrossInject",
+  "side": "security",
+  "paper_id": "6da58f1bf1a4873c15f0862dd58ecdde4fe6a029",
+  "paper_title": "Manipulating Multimodal Agents via Cross-Modal Prompt Injection",
+  "pdf": "data/papers/Manipulating Multimodal Agents via Cross-Modal Prompt Injection.pdf",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "registry_notes": "Cross-modal prompt injection attack framework for black-box multimodal agents, coordinating Visual Latent Alignment (text-to-image synthesis semantically aligned in latent space) with complementary components to exploit cross-modal fusion, unlike prior single-modality attacks."
+ },
+ {
+  "cause": "Fun-tuning",
+  "side": "security",
+  "paper_id": "7c7ba94eb5d96b665397db77f765910e5acde5c6",
+  "paper_title": "Fun-tuning: Characterizing the Vulnerability of Proprietary LLMs to Optimization-Based Prompt Injection Attacks via the Fine-Tuning Interface",
+  "pdf": "data/papers/Fun-tuning - Characterizing the Vulnerability of Proprietary LLMs to Optimization-Based Prompt Injection Attacks via the Fine-Tuning Interface.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "New graybox attack vector against closed-weight commercial LLMs that misuses the vendor's legitimate remote fine-tuning API (e.g. Gemini Fine-Tuning API) as a loss-value oracle to compute optimization-based indirect prompt injection attacks, despite no logprob/gradient access via the normal inference endpoint."
+ },
+ {
+  "cause": "HOUYI",
+  "side": "security",
+  "paper_id": "db4cf9f6a653d5c15973e836c800ea47743251ae",
+  "paper_title": "Prompt Injection attack against LLM-integrated Applications",
+  "pdf": "data/papers/Prompt Injection attack against LLM-integrated Applications.pdf",
+  "channel": "direct-input",
+  "consequence": "resource-abuse",
+  "registry_notes": "First systematic black-box methodology for PI against real-world commercial LLM-integrated applications; three-phase attack toolkit (context inference via auxiliary LLM observing input-output behavior, three-part payload generation with novel Separator Component, and iterative refinement), explicitly analogized to classical SQL injection/XSS, more powerful than prior ad hoc 'ignore previous context' heuristics."
+ },
+ {
+  "cause": "Prompt Infection",
+  "side": "security",
+  "paper_id": "165921d2aa4f1d110d25d488ea8b205d134b16e6",
+  "paper_title": "Prompt Infection: LLM-to-LLM Prompt Injection within Multi-agent Systems",
+  "pdf": "data/papers/Prompt Infection - LLM-to-LLM Prompt Injection within Multi-agent Systems.pdf",
+  "channel": "multi-agent",
+  "consequence": "goal-hijack",
+  "registry_notes": "Foundational paper revealing that IPI in multi-agent LLM systems can self-replicate across interconnected agents like a computer virus, propagating malicious instructions agent-to-agent through normal communication channels rather than compromising just one agent."
+ },
+ {
+  "cause": "UNNAMED: rule-tag semantic reframing template attack ('Breaking the Prompt Wall')",
+  "side": "security",
+  "paper_id": "8c72e098e53eddb8e1e8fb05601a03a7b0ca57e0",
+  "paper_title": "Breaking the Prompt Wall (I): A Real-World Case Study of Attacking ChatGPT via Lightweight Prompt Injection",
+  "pdf": "data/papers/Breaking the Prompt Wall (I) - A Real-World Case Study of Attacking ChatGPT via Lightweight Prompt Injection.pdf",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "registry_notes": "Real-world case study (not systematic evaluation) proposing a template-based prompting strategy that reframes harmful goals as benign-looking rule sets (e.g. <rule> tags) for semantic stealthiness and cross-model transferability, demonstrated via three real-world ChatGPT/GPTs injection vectors; borderline since the paper itself cites prior work on near-universal single-template attacks, so novelty of the core template mechanism vs. application is unclear."
+ },
+ {
+  "cause": "MAD-Spear (Conformity-Driven Prompt Injection Attack)",
+  "side": "security",
+  "paper_id": "1115a843e8f3d142180f807c97f71cde65d2ad12",
+  "paper_title": "MAD-Spear: A Conformity-Driven Prompt Injection Attack on Multi-Agent Debate Systems",
+  "pdf": "data/papers/MAD-Spear - A Conformity-Driven Prompt Injection Attack on Multi-Agent Debate Systems.pdf",
+  "channel": "multi-agent",
+  "consequence": "silent-corruption",
+  "registry_notes": "Targeted PI attack against multi-agent debate (MAD) systems; compromises only a small subset of agents via injection, drawing on Sybil-attack concepts from distributed systems to make compromised agents impersonate/manufacture apparent majority consensus."
+ },
+ {
+  "cause": "Parallel-Poisoned Web (fingerprinting + website cloaking against AI web agents)",
+  "side": "security",
+  "paper_id": "arxiv:2509.00124",
+  "paper_title": "A Whole New World: Creating a Parallel-Poisoned Web Only AI-Agents Can See",
+  "pdf": "data/papers/A Whole New World - Creating a Parallel-Poisoned Web Only AI-Agents Can See.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel attack vector combining browser/device fingerprinting with website cloaking (previously used for black-hat SEO/phishing) repurposed to detect and selectively serve poisoned content only to autonomous web-browsing LLM agents, exploiting agents' unusually homogeneous digital fingerprints relative to human browsers."
+ },
+ {
+  "cause": "MCP-ITP (Implicit Tool Poisoning)",
+  "side": "security",
+  "paper_id": "f49a3d773c41cb6943f94e26147f60fc51648d4e",
+  "paper_title": "MCP-ITP: An Automated Framework for Implicit Tool Poisoning in MCP",
+  "pdf": "data/papers/MCP-ITP - An Automated Framework for Implicit Tool Poisoning in MCP.pdf",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "registry_notes": "First automated, adaptive black-box framework for 'implicit tool poisoning' attacks against MCP agents -- a stealthier variant where the poisoned tool is never directly invoked; instead its registered metadata description is crafted purely to manipulate agent behavior toward other legitimate tools."
+ },
+ {
+  "cause": "Parasitic Toolchain Attacks (MCP Unintended Privacy Disclosure, MCP-UPD)",
+  "side": "security",
+  "paper_id": "1763949de4f182019fdf2f21a101f60df339dd59",
+  "paper_title": "Parasites in the Toolchain: A Large-Scale Analysis of Attacks on the MCP Ecosystem",
+  "pdf": "data/papers/Parasites in the Toolchain - A Large-Scale Analysis of Attacks on the MCP Ecosystem.pdf",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "registry_notes": "New class of privacy-leakage attacks against the MCP ecosystem exploiting composition of multiple independently benign, legitimate MCP tools/servers into an emergent malicious workflow, unlike prior work limited to a single compromised server."
+ },
+ {
+  "cause": "RefineRAG",
+  "side": "security",
+  "paper_id": "5dc3693b68a1d749d985b31bb6de7656a08caee6",
+  "paper_title": "RefineRAG: Word-Level Poisoning Attacks via Retriever-Guided Text Refinement",
+  "pdf": "data/papers/RefineRAG - Word-Level Poisoning Attacks via Retriever-Guided Text Refinement.pdf",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Two-stage word-level RAG poisoning (Macro Generation + Micro Refinement) explicitly positioned as stealthier successor to PoisonedRAG's separate-and-concatenate strategy"
+ },
+ {
+  "cause": "LogicPoison",
+  "side": "security",
+  "paper_id": "d29b631cd6072f3854cf100c3e6ca688233a23be",
+  "paper_title": "LogicPoison: Logical Attacks on Graph Retrieval-Augmented Generation",
+  "pdf": "data/papers/LogicPoison - Logical Attacks on Graph Retrieval-Augmented Generation.pdf",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Novel structural/topological attack on GraphRAG knowledge graphs, distinct mechanism from text-based RAG poisoning (bypasses GraphRAG's synthetic-entity filtering)"
+ },
+ {
+  "cause": "Inter-Agent Trust Exploitation (AI agent privilege escalation)",
+  "side": "security",
+  "paper_id": "c4ecc7fc2e1342dabec05c750735d70f2a61b30f",
+  "paper_title": "The Dark Side of LLMs: Agent-based Attack Vectors for System-level Compromise",
+  "pdf": "data/papers/The Dark Side of LLMs - Agent-based Attack Vectors for System-level Compromise.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel attack surface exploiting asymmetric trust between AI-AI vs human-AI interaction in multi-agent systems, achieving 100% success even against models resistant to direct injection/RAG backdoor; explicitly named phenomenon 'AI agent privilege escalation'"
+ },
+ {
+  "cause": "Sampling-Based Injection (MCP sampling/createMessage attack)",
+  "side": "security",
+  "paper_id": "a4acc9e39473f642ab9cf1f05201effe95600fba",
+  "paper_title": "Breaking the Protocol: Security Analysis of the Model Context Protocol Specification and Prompt Injection Vulnerabilities in Tool-Integrated LLM Agents",
+  "pdf": "data/papers/Breaking the Protocol - Security Analysis of the Model Context Protocol Specification and Prompt Injection Vulnerabilities in Tool-Integrated LLM Agen.pdf",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel attack exploiting MCP's bidirectional sampling mechanism without origin authentication, explicitly described as 'absent in non-MCP systems entirely'; paper's primary framing is protocol vulnerability analysis + ATTESTMCP defense, but this specific attack vector is newly introduced"
+ },
+ {
+  "cause": "UNNAMED: RAG-manipulation attack on multi-agent debate consensus",
+  "side": "security",
+  "paper_id": "4f6bc1797993f1ff1ddb1fccb9111bc424fa2242",
+  "paper_title": "RAG-Induced Failures in Multi-Agent Large Language Model Debate",
+  "pdf": "data/source_pdfs_manual/RAG-Induced_Failures_in_Multi-Agent_Large_Language_Model_Debate.pdf",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Novel attack where a malicious debate agent manipulates RAG retrieval to selectively surface legitimate-but-misleading evidence, explicitly distinguished from prompt injection/persuasion-pipeline approaches; reduces majority-vote accuracy by up to 38%"
+ },
+ {
+  "cause": "AudioHijack",
+  "side": "security",
+  "paper_id": "369148e6a920001cdc29e651a5019f096600f1f4",
+  "paper_title": "Hijacking Large Audio-Language Models via Context-Agnostic and Imperceptible Auditory Prompt Injection",
+  "pdf": "data/papers/Hijacking Large Audio-Language Models via Context-Agnostic and Imperceptible Auditory Prompt Injection.pdf",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel adversarial-optimization framework for imperceptible auditory prompt injection against large audio-language models, first to reveal 'auditory prompt injection' as a threat class"
+ },
+ {
+  "cause": "Silent Egress (implicit prompt injection via URL preview/metadata)",
+  "side": "security",
+  "paper_id": "5b77cfb3a7d902911dce1b9db57fec8c439845ae",
+  "paper_title": "Silent Egress: When Implicit Prompt Injection Makes LLM Agents Leak Without a Trace",
+  "pdf": "data/papers/Silent Egress - When Implicit Prompt Injection Makes LLM Agents Leak Without a Trace.pdf",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Novel attack subclass where adversarial instructions enter context via automatic system behaviors (URL previewing/metadata parsing) rather than explicitly retrieved content, achieving ~0.88-0.89 egress probability"
+ },
+ {
+  "cause": "Plan Injection",
+  "side": "security",
+  "paper_id": "e086e2f5c47a0f3acd45577bad937ee699c4a570",
+  "paper_title": "Context manipulation attacks : Web agents are susceptible to corrupted memory",
+  "pdf": "data/papers/Context manipulation attacks - Web agents are susceptible to corrupted memory.pdf",
+  "channel": "memory",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel context-manipulation attack targeting persistent hierarchical task-planning representations in web navigation agents, extending memory/context-manipulation attacks to the web-browsing-agent domain"
+ },
+ {
+  "cause": "Brain-Prompt Injection",
+  "side": "security",
+  "paper_id": "1f517e201e63cb9a4cd87c289ed41f0cd367d42c",
+  "paper_title": "Brain-Prompt Injection: A Route-Safety Audit for BCI-LLM Agents",
+  "pdf": "data/papers/Brain-Prompt Injection - A Route-Safety Audit for BCI-LLM Agents.pdf",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel attack surface where decoded neural (BCI/EEG) activity becomes an authorization channel for tool-use agents; signal-side perturbations, context-only injections, and adaptive dual-decoder attacks can change routed actions undetected"
+ },
+ {
+  "cause": "Log-Substrate Prompt Injection",
+  "side": "security",
+  "paper_id": "974ca97f815234d7bff52e212d2f9abf225af2e4",
+  "paper_title": "Poisoning the Watchtower: Prompt Injection Attacks Against LLM-Augmented Security Operations Through Adversarial Log Content",
+  "pdf": "data/papers/Poisoning the Watchtower - Prompt Injection Attacks Against LLM-Augmented Security Operations Through Adversarial Log Content.pdf",
+  "channel": "tool-output",
+  "consequence": "silent-corruption",
+  "registry_notes": "Novel injection setting where attacker-controlled log fields (user agents, URLs, DNS queries) double as an instruction channel to SOC analyst LLMs; explicitly argued structurally distinct from document/web-based IPI"
+ },
+ {
+  "cause": "Reverse CAPTCHA (invisible Unicode instruction injection)",
+  "side": "security",
+  "paper_id": "20de9e55b6c846184380423f3092d02f7318a0cf",
+  "paper_title": "Reverse CAPTCHA: Evaluating LLM Susceptibility to Invisible Unicode Instruction Injection",
+  "pdf": "data/papers/Reverse CAPTCHA - Evaluating LLM Susceptibility to Invisible Unicode Instruction Injection.pdf",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel steganographic injection technique encoding hidden instructions via invisible Unicode (zero-width binary and Unicode Tags) that models can perceive but humans cannot; tool access dramatically increases compliance"
+ },
+ {
+  "cause": "PI3D",
+  "side": "security",
+  "paper_id": "a209860c510bc26c0a7493db9006762240d3fc8c",
+  "paper_title": "Extended to Reality: Prompt Injection in 3D Environments",
+  "pdf": "data/papers/Extended to Reality - Prompt Injection in 3D Environments.pdf",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel attack realizing prompt injection via physically-placed, text-bearing 3D objects with optimized 6-DoF pose for both attack success and physical plausibility against MLLMs perceiving camera-captured 3D scenes"
+ },
+ {
+  "cause": "ToolLeak",
+  "side": "security",
+  "paper_id": "add98c38c95c9639e0f7d07ca0087b087e1d00d1",
+  "paper_title": "Red-Teaming Coding Agents from a Tool-Invocation Perspective: An Empirical Security Assessment",
+  "pdf": "data/papers/Red-Teaming Coding Agents from a Tool-Invocation Perspective - An Empirical Security Assessment.pdf",
+  "channel": "tool-metadata",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel attack exploiting a newly identified 'mode gap' (weaker safety guardrails during schema-driven tool-call argument generation vs normal chat) to exfiltrate system prompts from coding agents"
+ },
+ {
+  "cause": "AutoRed",
+  "side": "security",
+  "paper_id": "fb1bc7f717df24bef2a98d1dab26b0d86f069dd2",
+  "paper_title": "AutoRed: Automated Attack Scenario Generation Framework for Red Teaming of LLMs",
+  "pdf": "data/papers/AutoRed - Automated Attack Scenario Generation Framework for Red Teaming of LLMs.pdf",
+  "channel": "direct-input",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Novel automated learning framework (malicious prompt generator + sensitive information extractor + stop point identifier) for generating prompt-injection-based conversation-history extraction attacks"
+ },
+ {
+  "cause": "PromptFuzz",
+  "side": "security",
+  "paper_id": "3f0ca570bfd749d73b1bd302ec8d2d55ce959c80",
+  "paper_title": "PromptFuzz: Harnessing Fuzzing Techniques for Robust Testing of Prompt Injection in LLMs",
+  "pdf": "data/papers/PromptFuzz - Harnessing Fuzzing Techniques for Robust Testing of Prompt Injection in LLMs.pdf",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Novel black-box fuzzing framework adapting classical software-fuzzing methodology to prompt-injection testing, substantially outperforming GCG-injection and prior baselines"
+ },
+ {
+  "cause": "Prompt-Injected Data Extraction",
+  "side": "security",
+  "paper_id": "7b00cb1fe1773f964d123dab6d4812c7bc63de06",
+  "paper_title": "Follow My Instruction and Spill the Beans: Scalable Data Extraction from Retrieval-Augmented Generation Systems",
+  "pdf": "data/papers/Follow My Instruction and Spill the Beans - Scalable Data Extraction from Retrieval-Augmented Generation Systems.pdf",
+  "channel": "direct-input",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Formalizes and demonstrates a black-box attack extracting verbatim datastore text from Retrieval-In-Context RAG systems via simple instruction-following exploitation, scaling with model size"
+ },
+ {
+  "cause": "UNNAMED: getting lost in multi-turn conversation (premature-answer unreliability under underspecification)",
+  "side": "safety",
+  "paper_id": "bb5d81576c113f0b16234fd0db4238a4281c8388",
+  "paper_title": "LLMs Get Lost In Multi-Turn Conversation",
+  "pdf": "data/papers/LLMs Get Lost In Multi-Turn Conversation.pdf",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "registry_notes": "Paper's own framing (title); large multi-turn vs single-turn performance gap driven by premature answering, incorrect assumptions, over-reliance on earlier turns."
+ },
+ {
+  "cause": "mechanistic explanation of lost-in-the-middle (training-induced primacy/recency from retrieval-demand adaptation)",
+  "side": "safety",
+  "paper_id": "47878fc606ace61368776bf9407466cc19ea7a9b",
+  "paper_title": "Lost in the Middle: An Emergent Property from Information Retrieval Demands in LLMs",
+  "pdf": "data/papers/Lost in the Middle - An Emergent Property from Information Retrieval Demands in LLMs.pdf",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "registry_notes": "Borderline case per instructions: proposes LITM is an emergent adaptation to pretraining information-retrieval demands (primacy/recency), not an architectural flaw; mechanistic explanation of an existing phenomenon."
+ },
+ {
+  "cause": "UNNAMED: long-context safety/refusal degradation in agents",
+  "side": "safety",
+  "paper_id": "febb0d38c39219f39d5325345882b5148a84b79e",
+  "paper_title": "When Refusals Fail: Unstable Safety Mechanisms in Long-Context LLM Agents",
+  "pdf": "data/papers/When Refusals Fail - Unstable Safety Mechanisms in Long-Context LLM Agents.pdf",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Studies how safety-alignment (refusal) and task capability jointly degrade with context length in agentic settings, distinct from generic accuracy degradation; capability degrades well before declared max context length."
+ },
+ {
+  "cause": "plan anchor",
+  "side": "safety",
+  "paper_id": "5d930fcf06f911ff99ca509135faf8144ee8e86d",
+  "paper_title": "WebAnchor: Anchoring Agent Planning to Stabilize Long-Horizon Web Reasoning",
+  "pdf": "data/papers/WebAnchor - Anchoring Agent Planning to Stabilize Long-Horizon Web Reasoning.pdf",
+  "channel": "tool-output",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Explicitly identified and named phenomenon: the first reasoning step in a long-horizon web-reasoning rollout disproportionately determines downstream trajectory success, uniformly-distributed RL credit assignment fails to account for it."
+ },
+ {
+  "cause": "UNNAMED: plan non-persistence under context eviction (context-time memory volatility)",
+  "side": "safety",
+  "paper_id": "929e9b30474e7fe4e4bb16504f04f1756d0a959e",
+  "paper_title": "Plans Don't Persist: Why Context Management Is Load Bearing for LLM Agents",
+  "pdf": "data/papers/Plans Don't Persist - Why Context Management Is Load Bearing for LLM Agents.pdf",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Interpretability study: shows agent plans function as transient 'context-time memory' rather than persistent internal representations -- hidden-state plan-presence signal decays 4.1x within one action-observation cycle after the plan is written and evicted, a mechanistic finding about why context eviction silently breaks plan-following."
+ },
+ {
+  "cause": "Distributional Collapse",
+  "side": "safety",
+  "paper_id": "arxiv:2601.02023",
+  "paper_title": "Not All Needles Are Found: How Fact Distribution and Don't Make It Up Prompts Shape Retrieval, Reasoning, and Hallucination in Long-Context LLMs",
+  "pdf": "data/papers/Not All Needles Are Found - How Fact Distribution and Don't Make It Up Prompts Shape Retrieval, Reasoning, and Hallucination in Long-Context LLMs.pdf",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "registry_notes": "Central finding: performance depends on statistical distribution of fact placement in corpus (not just length/position), extending lost-in-the-middle framing; catastrophic failure under clustered/Lorentzian distributions."
+ },
+ {
+  "cause": "Mandate Salience Decay (MSD)",
+  "side": "safety",
+  "paper_id": "317d2659a28f8444d297f5020315bcdfc2509ab1",
+  "paper_title": "FinPersona-Bench: A Benchmark for Longitudinal Psychometric Stability of Autonomous Financial Agents",
+  "pdf": "data/papers/FinPersona-Bench - A Benchmark for Longitudinal Psychometric Stability of Autonomous Financial Agents.pdf",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Central, explicitly formalized and named contribution: progressive erosion of an autonomous agent's adherence to an explicit behavioral mandate as context accumulates over a long deployment horizon, even while individual decisions remain locally coherent."
+ },
+ {
+  "cause": "contextual misguidance",
+  "side": "safety",
+  "paper_id": "1bb6703e03c66fc8591d05cf1d2797a0b01757b7",
+  "paper_title": "Alleviating Contextual Misguidance: Response-Aware Prompt Compression for Long-Context Question Answering",
+  "pdf": "data/papers/Alleviating Contextual Misguidance - Response-Aware Prompt Compression for Long-Context Question Answering.pdf",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "registry_notes": "Paper identifies a specific causal mechanism underlying \"Lost in the Middle\": query-relevant yet non-grounding/misleading spans in long context misdirect the model, distinct from mere positional forgetting -- a mechanistic refinement of the established phenomenon."
+ },
+ {
+  "cause": "UNNAMED: automatic universal gradient-based prompt injection",
+  "side": "security",
+  "paper_id": "0a6a350653369dc92fde4cf9992951534ed1f169",
+  "paper_title": "Automatic and Universal Prompt Injection Attacks against Large Language Models",
+  "pdf": "data/papers/Automatic and Universal Prompt Injection Attacks against Large Language Models.pdf",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Momentum-enhanced gradient method producing universal injection strings; no product name given."
+ },
+ {
+  "cause": "UNNAMED: system-prompt and uploaded-file extraction from custom GPTs",
+  "side": "security",
+  "paper_id": "910a4623f7732b1ea32dc2cdda7a30a227b89a11",
+  "paper_title": "Assessing Prompt Injection Risks in 200+ Custom GPTs",
+  "pdf": "data/papers/Assessing Prompt Injection Risks in 200+ Custom GPTs.pdf",
+  "channel": "direct-input",
+  "consequence": "data-exfiltration",
+  "registry_notes": ""
+ },
+ {
+  "cause": "G2PIA (goal-guided generative prompt injection)",
+  "side": "security",
+  "paper_id": "4d1f37057fd008317d634d3f10ff73c81b442035",
+  "paper_title": "Goal-Guided Generative Prompt Injection Attack on Large Language Models",
+  "pdf": "data/papers/Goal-Guided Generative Prompt Injection Attack on Large Language Models.pdf",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Black-box attack maximising KL divergence between clean and adversarial conditionals."
+ },
+ {
+  "cause": "EchoLeak (zero-click IPI, CVE-2025-32711)",
+  "side": "security",
+  "paper_id": "68132d7cf87e6e0357757c5ff0bb55105eb9980d",
+  "paper_title": "EchoLeak: The First Real-World Zero-Click Prompt Injection Exploit in a Production LLM System",
+  "pdf": "data/papers/EchoLeak - The First Real-World Zero-Click Prompt Injection Exploit in a Production LLM System.pdf",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Real production exploit in M365 Copilot chaining XPIA-classifier evasion, link-redaction bypass, auto-fetched images and a Teams proxy. A rare in-the-wild case."
+ },
+ {
+  "cause": "query-based black-box optimization via LLM-expressed confidence (binary-comparison hill climbing)",
+  "side": "security",
+  "paper_id": "98616ac01f3b3f25cf510afad96f577be7f7e92f",
+  "paper_title": "Black-box Optimization of LLM Outputs by Asking for Directions",
+  "pdf": "data/papers/Black-box Optimization of LLM Outputs by Asking for Directions.pdf",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "A genuinely new and distinct attack primitive - eliciting a usable optimization gradient from text-only outputs by reformulating confidence as pairwise preference - applied to optimize injected suffixes in agent tool content. Medium rather than high confidence only because the authors give it no brand name or acronym, describing it by method."
+ },
+ {
+  "cause": "reasoning token overflow (RTO) / practical reasoning interruption attack",
+  "side": "security",
+  "paper_id": "80581658e7c708c40e635a5360b5eca9a31eee1d",
+  "paper_title": "Practical Reasoning Interruption Attacks on Reasoning Large Language Models",
+  "pdf": "data/papers/Practical Reasoning Interruption Attacks on Reasoning Large Language Models.pdf",
+  "channel": "direct-input",
+  "consequence": "availability-loss",
+  "registry_notes": "Named, distinct mechanism with a clearly articulated causal account: inducing early emission of the end-of-thinking special token so uncapped reasoning tokens overflow into and overwrite the length-capped final answer. Distinguished explicitly from the prior special-token-suppression attack and validated against it on both cost and ASR."
+ },
+ {
+  "cause": "self-interpreting images via adversarial meta-instructions",
+  "side": "security",
+  "paper_id": "271266265fa50cde314ebdd428a3d63353c117ba",
+  "paper_title": "Self-interpreting Adversarial Images",
+  "pdf": "data/papers/Self-interpreting Adversarial Images.pdf",
+  "channel": "cross-modal",
+  "consequence": "silent-corruption",
+  "registry_notes": "Named, distinct cross-modal attack class: soft-prompt-optimized image perturbations that steer VLM interpretation/style/sentiment while preserving coherent, image-grounded answers, validated across 12 meta-objectives and three VLMs with quantitative attack-success comparisons against an explicit-instruction oracle."
+ },
+ {
+  "cause": "Reasoning Interruption Attack (adaptive token compression)",
+  "side": "security",
+  "paper_id": "88637a2c392f1c185bc282d4abaccc221a0bb291",
+  "paper_title": "Token-Efficient Prompt Injection Attack: Provoking Cessation in LLM Reasoning via Adaptive Token Compression",
+  "pdf": "data/papers/Token-Efficient Prompt Injection Attack - Provoking Cessation in LLM Reasoning via Adaptive Token Compression.pdf",
+  "channel": "direct-input",
+  "consequence": "availability-loss",
+  "registry_notes": "Named prompt-injection attack that reformulates the thinking-stopped/reasoning-interruption vulnerability to use simple arithmetic tasks plus an adaptive LLM-driven token-compression framework, cutting attack-prompt cost by ~40% versus the prior mathematical-word-problem-based method it is explicitly compared against on both token cost and attack success rate."
+ },
+ {
+  "cause": "Activation-guided MCMC direct prompt injection (EBM-guided token-level MCMC; no acronym given)",
+  "side": "security",
+  "paper_id": "2ec84999ddecd420c0e4b215e524e7a7f38e9944",
+  "paper_title": "Transferable Direct Prompt Injection via Activation-Guided MCMC Sampling",
+  "pdf": "data/papers/Transferable Direct Prompt Injection via Activation-Guided MCMC Sampling.pdf",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Genuinely new and distinct attack-generation mechanism (surrogate-activation energy model steering MCMC prompt search for transferable black-box DPI), but the authors never give it an acronym or brand name, so the named-contribution bar is met only descriptively."
+ },
+ {
+  "cause": "Cliopatra",
+  "side": "security",
+  "paper_id": "d45e2718c4ae41fb90436d97eb89542f525dbc1f",
+  "paper_title": "CLIOPATRA: Extracting Private Information from LLM Insights",
+  "pdf": "data/papers/CLIOPATRA - Extracting Private Information from LLM Insights.pdf",
+  "channel": "RAG",
+  "consequence": "data-exfiltration",
+  "registry_notes": "First named attack combining data poisoning, prompt injection, and attribute inference to break multi-layer heuristic privacy protections in LLM-based conversation-insight/aggregation systems (e.g., Clio), demonstrated with concrete, high attack success rates."
+ },
+ {
+  "cause": "Graph-based prompt injection (math-expression-to-graph encoding)",
+  "side": "security",
+  "paper_id": "4b6793d43e7527b152ce0700204a8f3f3dee7928",
+  "paper_title": "Graph-Based Prompt Injection Attacks Against Large Language Models",
+  "pdf": "data/papers/Graph-Based Prompt Injection Attacks Against Large Language Models.pdf",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "registry_notes": "Clearly named, novel cross-modal jailbreak technique with quantitative ASR/RR/TASR comparison against 3 baselines on GPT-4/GPT-4o."
+ },
+ {
+  "cause": "NeuroGenPoisoning",
+  "side": "security",
+  "paper_id": "a776dcb6b3c4d50cd149ff39c9ac18de31572b95",
+  "paper_title": "NeuroGenPoisoning: Neuron-Guided Attacks on Retrieval-Augmented Generation of LLM via Genetic Optimization of External Knowledge",
+  "pdf": "data/papers/NeuroGenPoisoning - Neuron-Guided Attacks on Retrieval-Augmented Generation of LLM via Genetic Optimization of External Knowledge.pdf",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "TRACK CORRECTED 2026-10-16: the backfill copied the paper's track; an attack is Security track by definition. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: In this work, we propose NeuroGenPoisoning, a novel attack framework that generates adversarial external knowledge in RAG guided by LLM internal neuron attribution and genetic optimization. (Abstract)"
+ },
+ {
+  "cause": "temporal memory contamination",
+  "side": "safety",
+  "paper_id": "70c860c7a318c6b01fa84356c1afb3ff1de2e37b",
+  "paper_title": "Remembering More, Risking More: Longitudinal Safety Risks in Memory-Equipped LLM Agents",
+  "pdf": "data/papers/Remembering More, Risking More - Longitudinal Safety Risks in Memory-Equipped LLM Agents.pdf",
+  "channel": "memory",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We call this failure mode temporal memory contamination. (Abstract)"
+ },
+ {
+  "cause": "autonomy tax",
+  "side": "security",
+  "paper_id": "064e99edb10404a43f0aa04813a68ae6da2728e2",
+  "paper_title": "The Autonomy Tax: Defense Training Breaks LLM Agents",
+  "pdf": "data/papers/The Autonomy Tax - Defense Training Breaks LLM Agents.pdf",
+  "channel": "tool-output",
+  "consequence": "availability-loss",
+  "registry_notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: Evaluating defended models against undefended baselines across 97 agent tasks and 1,000 adversarial prompts, we uncover three systematic biases unique to multi-step agents. (Abstract)"
+ },
+ {
+  "cause": "structured attack generation framework",
+  "side": "security",
+  "paper_id": "b3d4488ddeda4aa364fab31468a3dc728f396cab",
+  "paper_title": "Prompt injection attacks on educational large language models for higher and vocational education",
+  "pdf": "data/papers/Prompt injection attacks on educational large language models for higher and vocational education.pdf",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "registry_notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We evaluate the proposed prompt injection attack in a black-box setting that matches real educational deployments, where the adversary only controls student-facing inputs and has no access to system prompts, model parameters, hidden rubrics, or safety configurations. (Section 5.1 Experimental Setup)"
+ },
+ {
+  "cause": "Zombie Agent",
+  "side": "security",
+  "paper_id": "5dce672edae58beb9b150718f0f15c13c8a3d4a6",
+  "paper_title": "Zombie Agents: Persistent Control of Self-Evolving LLM Agents via Self-Reinforcing Injections",
+  "pdf": "data/papers/Zombie Agents - Persistent Control of Self-Evolving LLM Agents via Self-Reinforcing Injections.pdf",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "registry_notes": "TRACK CORRECTED 2026-10-16: the backfill copied the paper's track; an attack is Security track by definition. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: Our results show that memory evolution can convert one-time indirect injection into persistent compromise, which suggests that defenses focused only on per-session prompt filtering are not sufficient for self-evolving agents. (Abstract)"
+ },
+ {
+  "cause": "multimodal retrieval heads (sparse heads carrying retrieval)",
+  "side": "safety",
+  "paper_id": "75bd9e32591e367259d4f91f7611212e892adb23",
+  "paper_title": "Can Retrieval Heads See Images? Multimodal Retrieval Heads in Long-Context Vision-Language Models",
+  "pdf": "data/papers/Can Retrieval Heads See Images Multimodal Retrieval Heads in Long-Context Vision-Language Models.pdf",
+  "channel": "cross-modal",
+  "consequence": "silent-corruption",
+  "registry_notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: We introduce a multimodal retrieval head detection method that scores attention from question tokens to textual or visual evidence. (Abstract)"
+ },
+ {
+  "cause": "SpAIware",
+  "side": "security",
+  "paper_id": "be6724eff8c5795f9ab6e17c9cf8a28aeaf7f1ee",
+  "paper_title": "Trust No AI: Prompt Injection Along The CIA Security Triad",
+  "pdf": "data/papers/Trust No AI - Prompt Injection Along The CIA Security Triad.pdf",
+  "channel": "memory",
+  "consequence": "persistence-backdoor",
+  "registry_notes": "Practitioner compilation of the author's own disclosed exploits along the CIA triad; most are already registered or unnamed, but SpAIware -- persisting attacker instructions into ChatGPT long-term memory so every later conversation is quietly exfiltrated, extended into a C2 channel -- is named, distinct and absent from the registry. ZombAI from the same paper is already registered under another paper; Terminal DiLLMa and ASCII Smuggling are also named here but are output-rendering/terminal-escap"
+ }
+]

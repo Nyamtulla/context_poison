@@ -42,6 +42,24 @@ def composite_pairs():
     for p in load("attack_paper_evaluations_pass3.json")["confirmed_pairs"]:
         pairs.add((p["defense"], p["mechanism"]))
         provenance["ATTACK-paper reverse scan (pass 3)"] += 1
+    for name, label in (("untested_named_attack_pairs.json", "untested-defense full-text check (2026-11-12)"),
+                        ("full_pair_pass_pairs.json", "full pair pass over unpaired fixes and causes (2026-11-12)")):
+        for p in load(name)["confirmed_pairs"]:
+            pairs.add((p["defense"], p["mechanism"]))
+            provenance[label] += 1
+    # Every candidate pair, old and new, was read against PAIR_CHECKLIST.md
+    # (2026-11-12/13). Only a pair judged "strong" counts. A pair judged
+    # not_a_pair because the run belongs under another registry name counts
+    # under that name when the reader found every other check passed
+    # (pair_pass/verified_pairs.json, built by verify_pairs.py).
+    vf = R / "pair_pass" / "verified_pairs.json"
+    if vf.exists():
+        v = json.loads(vf.read_text())
+        keep = {tuple(x) for x in v["strong"]}
+        dropped = pairs - keep
+        pairs = (pairs & keep) | {tuple(x) for x in v["renamed"]}
+        provenance["dropped by the checklist (not strong)"] = -len(dropped)
+        provenance["re-filed under the correct registry name"] = len(v["renamed"])
     return pairs, provenance
 
 

@@ -1,0 +1,1186 @@
+{
+ "n_read": 452,
+ "strong": [
+  [
+   "+ModTool (memory correction tool for MemEvoBench)",
+   "memory misevolution"
+  ],
+  [
+   "ACD (Adaptive Contrastive Decoding)",
+   "distraction by irrelevant context"
+  ],
+  [
+   "ACE (Abstract-Concrete-Execute)",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "ACE (Abstract-Concrete-Execute)",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "AIR (Augmented Intermediate Representations)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "ARLAS (Adversarial Reinforcement Learning for Agent Safety)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "ASIDE (Architecturally Separated Instruction-Data Embeddings)",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "ASIDE (Architecturally Separated Instruction-Data Embeddings)",
+   "Tensor Trust: prompt extraction / prompt hijacking"
+  ],
+  [
+   "Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "AgenTRIM",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "AgenTRIM",
+   "AgentDojo: tool-knowledge injection"
+  ],
+  [
+   "Agent Privilege Separation (Reader/Actor two-agent isolation + JSON formatting)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Agent Sentry (structural classifier + allowlist + LLM judge)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "AgentArmor",
+   "ASB: Observation Prompt Injection (OPI)"
+  ],
+  [
+   "AgentArmor",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "AgentArmor",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "AgentArmor",
+   "AgentDojo: tool-knowledge injection"
+  ],
+  [
+   "AgentArmor",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "AgentRedGuard",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "AgentSentry",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "AgentSentry",
+   "AgentDojo: tool-knowledge injection"
+  ],
+  [
+   "AgentShield",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "AgentSys",
+   "ASB: Observation Prompt Injection (OPI)"
+  ],
+  [
+   "AgentSys",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "AgentVisor",
+   "AgentDojo: direct injection"
+  ],
+  [
+   "AgentVisor",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "AgentVisor",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "AgentWatcher",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "AgentWatcher",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "Attention Tracker",
+   "Actor-Critic attack"
+  ],
+  [
+   "Attention Tracker",
+   "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)"
+  ],
+  [
+   "AttnTrace",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "AttnTrace",
+   "PoisonedRAG"
+  ],
+  [
+   "AttnTrace",
+   "Relinking"
+  ],
+  [
+   "AttriGuard",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "AttriGuard",
+   "AgentDojo: tool-knowledge injection"
+  ],
+  [
+   "AttriGuard",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "AuthGraph",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Autopilot (gated finite-state-machine execution firewall)",
+   "UNNAMED: unverified success fabrication in unattended long-horizon agents (agent honesty gap)"
+  ],
+  [
+   "BiRD (Bidirectional Ranking Defense)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "BiRD (Bidirectional Ranking Defense)",
+   "PoisonedRAG"
+  ],
+  [
+   "Boundary awareness + explicit reminder",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "CD2 (Conflict-Disentangle Contrastive Decoding)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "CK-PLUG (Controllable Knowledge Plug-in)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "COIECD (contextual information-entropy constraint decoding)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "CaMeL",
+   "Agent Data Injection (ADI)"
+  ],
+  [
+   "CaMeL",
+   "RTA-PostForge (response-path tampering attack)"
+  ],
+  [
+   "CaMeL",
+   "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI"
+  ],
+  [
+   "CachePrune",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "CaptureGuard",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "ChannelGuard",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "ClawGuard",
+   "ChatInject"
+  ],
+  [
+   "ClawGuard",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "CoCoA (Confidence- and Context-Aware Adaptive Decoding)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Cognitive Control Architecture (CCA)",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "CommandSans",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "CommandSans",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "CommandSans",
+   "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)"
+  ],
+  [
+   "Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "ConflictRAG (two-stage detection + Entropy-TOPSIS credibility + CARS metric)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Constraint Pinning",
+   "Governance Decay"
+  ],
+  [
+   "ControlNet (ControlNET)",
+   "PoisonedRAG"
+  ],
+  [
+   "Corrective Retrieval Augmented Generation (CRAG)",
+   "PoisonedRAG"
+  ],
+  [
+   "DASGuard",
+   "ClawTrojan multi-step trojan/backdoor attack paradigm"
+  ],
+  [
+   "DMPI-PMHFE",
+   "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set"
+  ],
+  [
+   "DP-Fusion",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
+   "AutoDojo (adaptive black-box IPI attack generation)"
+  ],
+  [
+   "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "DRIP",
+   "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus"
+  ],
+  [
+   "DRIP",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "DataFilter",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "DataFilter",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "DataFilter",
+   "AgentDojo: tool-knowledge injection"
+  ],
+  [
+   "DataFilter",
+   "AutoDojo (adaptive black-box IPI attack generation)"
+  ],
+  [
+   "DataFilter",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "DataFilter",
+   "PISmith"
+  ],
+  [
+   "DataFilter",
+   "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)"
+  ],
+  [
+   "DataSentinel",
+   "DataFlip"
+  ],
+  [
+   "DataSentinel",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "DataSentinel",
+   "MUZZLE"
+  ],
+  [
+   "DataSentinel",
+   "ObliInjection"
+  ],
+  [
+   "DataSentinel",
+   "PISmith"
+  ],
+  [
+   "DataSentinel",
+   "ToolHijacker"
+  ],
+  [
+   "DefensiveToken (test-time optimized special tokens)",
+   "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set"
+  ],
+  [
+   "DefensiveToken (test-time optimized special tokens)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Differential Transformer (DIFF Transformer)",
+   "distraction by irrelevant context"
+  ],
+  [
+   "DualView",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "END (Early Noise Dropping)",
+   "distraction by irrelevant context"
+  ],
+  [
+   "ERA (Evidence-based Reliability Alignment)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "FATE (on-policy self-evolving repair framework) with Pareto-Front Policy Optimization (PFPO)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "FATH (Formatting AuThentication with Hash-based tags)",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "FGHM (Failure-Gated Hierarchical Memory) with Failure Critic and LTM Pollution Rate (LPR) metric",
+   "memory pollution (agent long-term memory)"
+  ],
+  [
+   "FaithfulRAG (fact-level conflict modeling + Self-Think)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "FilterRAG / ML-FilterRAG",
+   "PoisonedRAG"
+  ],
+  [
+   "FocusAgent / DefenseFocusAgent",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Free()LM (Free-Module LoRA adapter)",
+   "UNNAMED: \"malloc-only\" context accumulation causing reasoning degeneration in extended CoT"
+  ],
+  [
+   "GIF (Geometric Information Flow)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "GPT-OSSafeGuard + structured-representations + GSPO defense pipeline",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "GenDiE (Generate, Discriminate, Evolve)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "GoalAnchorCheck (D1) / CrossAgentConsensus (D2)",
+   "PlanFlip"
+  ],
+  [
+   "HiMAP-Travel (day-level context isolation + transactional monitor + bargaining protocol)",
+   "Constraint Drift (under long tool traces)"
+  ],
+  [
+   "ICON (Inference-Time Correction)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "ID-RAG (Identity Retrieval-Augmented Generation)",
+   "identity drift (persona coherence decay in generative agents)"
+  ],
+  [
+   "IH-Challenge (RL training dataset with online adversarial example generation)",
+   "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set"
+  ],
+  [
+   "IPIGuard",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "IPIGuard",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "ISE (Instructional Segment Embedding)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "InjectDefuser",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "InstruCoT",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "InstruCoT",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "InstruCoT",
+   "TopicAttack"
+  ],
+  [
+   "InstructDetector",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "InstructDetector",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Instruction Hierarchy (privileged-instruction training)",
+   "Tensor Trust: prompt extraction / prompt hijacking"
+  ],
+  [
+   "IntentGuard",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Jatmo",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "KBRA (Keyed Binding Reassembly Audit)",
+   "Relinking"
+  ],
+  [
+   "KCM (Knowledge Conflict Mitigation)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "KScope-guided Constrained Context Summarization",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "KV-Fusion",
+   "lost in the middle"
+  ],
+  [
+   "KnowPO (Knowledge-aware Preference Optimization)",
+   "distraction by irrelevant context"
+  ],
+  [
+   "KnowPO (Knowledge-aware Preference Optimization)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Knowledgeable-R1",
+   "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs"
+  ],
+  [
+   "Knowledgeable-R1",
+   "distraction by irrelevant context"
+  ],
+  [
+   "Knowledgeable-R1",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "LGA (Layered Governance Architecture)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "LLM+DPP (Principled Content Selection pipeline)",
+   "lost in the middle"
+  ],
+  [
+   "LOOC (Leave-One-Out Compression)",
+   "contextual misguidance"
+  ],
+  [
+   "LOOC (Leave-One-Out Compression)",
+   "lost in the middle"
+  ],
+  [
+   "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
+   "Agent-as-a-Proxy attack"
+  ],
+  [
+   "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "LongAgent",
+   "lost in the middle"
+  ],
+  [
+   "LongCrafter",
+   "lost in the middle"
+  ],
+  [
+   "MELON (Masked re-Execution and TooL comparisON)",
+   "AdapTools"
+  ],
+  [
+   "MELON (Masked re-Execution and TooL comparisON)",
+   "ClawTrojan multi-step trojan/backdoor attack paradigm"
+  ],
+  [
+   "MELON (Masked re-Execution and TooL comparisON)",
+   "PI-Hunter"
+  ],
+  [
+   "MELON (Masked re-Execution and TooL comparisON)",
+   "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI"
+  ],
+  [
+   "MIPIAD",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "MOSAIC (plan-check-act/refuse post-training framework)",
+   "ASB: Direct Prompt Injection (DPI)"
+  ],
+  [
+   "Micro-Act (hierarchical action-space decomposition)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Mixture of Encodings",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "NeuroTaint",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Oblivion (decay-driven memory control)",
+   "distraction by irrelevant context"
+  ],
+  [
+   "P-RoPE / MiniWin (Periodic RoPE)",
+   "position exhaustion"
+  ],
+  [
+   "PACT (Provenance-Aware Capability Contracts)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "PARSE (Provenance-Aware Retrieval Sanitization)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "PIGuard (Mitigating Over-defense for Free)",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "PISanitizer",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "PISanitizer",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "PIShield",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "PRISM (activation-conditioned instruction-set interpreter)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Parallel Compaction",
+   "UNNAMED: summary-length invariance under context compaction"
+  ],
+  [
+   "ParamMute (Parametric Knowledge Muting through FFN Suppression)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "PhantomLint",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "PlanGuard",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "PlanGuard",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Progent",
+   "Agent Data Injection (ADI)"
+  ],
+  [
+   "Progent",
+   "AutoDojo (adaptive black-box IPI attack generation)"
+  ],
+  [
+   "Progent",
+   "Cross-Tool Description Poisoning"
+  ],
+  [
+   "Progent",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "ProjGuard",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "PromptArmor",
+   "AgentVigil"
+  ],
+  [
+   "PromptArmor",
+   "PISmith"
+  ],
+  [
+   "PromptArmor",
+   "UNNAMED: memory-poisoning attack taxonomy (6 classes incl. Conditional Command Insertion, Policy-Conformant Fact Injection, False Precedent Insertion)"
+  ],
+  [
+   "PromptGuard",
+   "MUZZLE"
+  ],
+  [
+   "PromptLocate",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "PromptLocate (injected-prompt localization)",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "PromptSentinel-X",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "PromptSleuth",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "QwenLong-CPRS",
+   "lost in the middle"
+  ],
+  [
+   "RAPS-DA (Regime-Aware Peer Specialization)",
+   "distraction by irrelevant context"
+  ],
+  [
+   "RAPS-DA (Regime-Aware Peer Specialization)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "RETA (Reasoning-Enabled Task Alignment)",
+   "AutoInject"
+  ],
+  [
+   "RETA (Reasoning-Enabled Task Alignment)",
+   "PISmith"
+  ],
+  [
+   "RETA (Reasoning-Enabled Task Alignment)",
+   "RL-Hammer"
+  ],
+  [
+   "RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation)",
+   "Contextual Belief Management (CBM) failure"
+  ],
+  [
+   "RPO (Retrieval Preference Optimization)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "RTBAS (Robust Tool-Based Agent System)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "ReasAlign",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "RedVisor",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "ReliabilityRAG",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Rennervate",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Rennervate",
+   "Neural Exec"
+  ],
+  [
+   "Retrieve-then-Solve",
+   "UNNAMED: context-length-induced degradation independent of retrieval failure"
+  ],
+  [
+   "RobustRAG",
+   "PoisonedRAG"
+  ],
+  [
+   "Robustness via Referencing (instruction-referencing defense)",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "Robustness via Referencing (instruction-referencing defense)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
+   "Brain-Prompt Injection"
+  ],
+  [
+   "RouteGuard",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "SABER (Self-Aware Belief Estimator for RAG)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "SCR & CR-DPO (Situated Faithfulness)",
+   "UNNAMED: over-trust bias toward conflicting external evidence over correct parametric memory in RALMs"
+  ],
+  [
+   "SCR & CR-DPO (Situated Faithfulness)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "SE+CFE (Standard Evaluation + Counterfactual Evaluation)",
+   "Blind attacks"
+  ],
+  [
+   "SHIFT (gate-modulated activation steering)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "SIC (Soft Instruction Control)",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "SIC (Soft Instruction Control)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "SPRA (Scaffold-Preserving Representation Alignment)",
+   "scaffolding collapse"
+  ],
+  [
+   "SUPERVISOR",
+   "AGENTBAIT"
+  ],
+  [
+   "SafeAgent",
+   "ASB: Direct Prompt Injection (DPI)"
+  ],
+  [
+   "SafeAgent",
+   "ASB: Memory Poisoning"
+  ],
+  [
+   "Safety-guided Chain-of-Thought (SCoT)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Salience Normalization (SN-1)",
+   "Salience Induction"
+  ],
+  [
+   "Scale Positional Hidden States (single-dimension scaling)",
+   "lost in the middle"
+  ],
+  [
+   "SecAlign (preference optimization)",
+   "ASTRA (and ASTRA++)"
+  ],
+  [
+   "SecAlign (preference optimization)",
+   "COMA"
+  ],
+  [
+   "SecAlign (preference optimization)",
+   "Checkpoint-GCG"
+  ],
+  [
+   "SecAlign (preference optimization)",
+   "Neural Exec"
+  ],
+  [
+   "SecAlign (preference optimization)",
+   "TopicAttack"
+  ],
+  [
+   "SecAlign (preference optimization)",
+   "UNNAMED: adaptive prompt-injection attacks for defense evaluation (PIEval)"
+  ],
+  [
+   "SecAlign (preference optimization)",
+   "backdoor-powered prompt injection attack"
+  ],
+  [
+   "SecAlign++ / Meta-SecAlign",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "SecInfer",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "SecInfer",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "SecInfer",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "SecInfer",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "SecInfer",
+   "Neural Exec"
+  ],
+  [
+   "SecureCAI",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Self-RAG",
+   "PoisonedRAG"
+  ],
+  [
+   "SkillScan",
+   "PoisonedSkills / DDIPE (Document-Driven Implicit Payload Execution)"
+  ],
+  [
+   "SnapGuard (visual stability indicator + action-oriented textual signal recovery)",
+   "WebInject"
+  ],
+  [
+   "SpARE (Sparse Auto-Encoder Representation Engineering)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Spotlighting (delimiting / datamarking / encoding)",
+   "Actor-Critic attack"
+  ],
+  [
+   "Spotlighting (delimiting / datamarking / encoding)",
+   "DACSI (Document-Authored Control-Signal Impersonation)"
+  ],
+  [
+   "Spotlighting (delimiting / datamarking / encoding)",
+   "IterInject"
+  ],
+  [
+   "Spotlighting (delimiting / datamarking / encoding)",
+   "Prompt Infection"
+  ],
+  [
+   "Spotlighting (delimiting / datamarking / encoding)",
+   "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses"
+  ],
+  [
+   "Spotlighting (delimiting / datamarking / encoding)",
+   "UNNAMED: chat-template inference-time backdoor"
+  ],
+  [
+   "Spotlighting (delimiting / datamarking / encoding)",
+   "VeriGrey (grey-box agent fuzzing for IPI)"
+  ],
+  [
+   "Spotlighting (delimiting / datamarking / encoding)",
+   "Zombie Agent"
+  ],
+  [
+   "StruQ (structured queries)",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "StruQ (structured queries)",
+   "HackAPrompt: prompt-hacking taxonomy and 600k-prompt corpus"
+  ],
+  [
+   "Swin-VIB (variational information bottleneck pipeline)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "TAG (Tagging-Augmented Generation)",
+   "context rot"
+  ],
+  [
+   "TCR (Transparent Conflict Resolution)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Task Shield",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "Task Shield",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "Task Shield",
+   "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI"
+  ],
+  [
+   "TaskTracker (activation-delta task-drift detection)",
+   "UNNAMED: multi-probe evasive GCG suffix attack"
+  ],
+  [
+   "Tool-Guard",
+   "Cross-Tool Description Poisoning"
+  ],
+  [
+   "ToolSafe (TS-Guard + TS-Flow)",
+   "ASB: Direct Prompt Injection (DPI)"
+  ],
+  [
+   "TracLLM",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "TracLLM",
+   "PoisonedRAG"
+  ],
+  [
+   "Tree of Agents (TOA)",
+   "lost in the middle"
+  ],
+  [
+   "TruthfulRAG (knowledge-graph-based factual conflict resolution)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Twin Agent (Explore Agent / Safe Agent residual-hint privilege separation)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "Type-directed privilege separation",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "UNNAMED: DPO-based faithfulness-improvement training for GUI agents against environmental distraction",
+   "distraction by irrelevant context"
+  ],
+  [
+   "UNNAMED: Explanation-based secondary detection signal for log-injection evasion",
+   "UNNAMED: log-interpretation evasion prompt injection (malicious-as-benign misclassification)"
+  ],
+  [
+   "UNNAMED: Four-layer guardrail system for offensive-security AI agents",
+   "UNNAMED: PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)"
+  ],
+  [
+   "UNNAMED: IPI detection + post-detection removal pipeline",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "UNNAMED: Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection",
+   "LogInject / Passive Prompt Injection"
+  ],
+  [
+   "UNNAMED: Policy Enforcement Point (PEP) for MCP tool-call boundary",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "UNNAMED: Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "UNNAMED: Randomized/Adversarial Suffix Augmentation Training for task-drift probes",
+   "UNNAMED: multi-probe evasive GCG suffix attack"
+  ],
+  [
+   "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
+   "Foot-in-the-Door (FITD) attack"
+  ],
+  [
+   "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "UNNAMED: Reflection-based defenses against Foot-in-the-Door IPI (Self-Reflection / Hesitation Reflection / Safe Reflection)",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "UNNAMED: Scientist Persona + Provenance Audit mitigations against indirect data poisoning",
+   "Indirect Data Poisoning (Distributed Denial of Science)"
+  ],
+  [
+   "UNNAMED: Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "UNNAMED: Uncertainty-based Random Forest attack detector (chimera/Xmera)",
+   "Xmera (chimera MitM framework)"
+  ],
+  [
+   "UNNAMED: layered MCP descriptor defense (descriptor integrity verification + pre-context semantic vetting + runtime guardrails)",
+   "UNNAMED: descriptor-level semantic manipulation attack (MCP tool-selection bias)"
+  ],
+  [
+   "UNNAMED: secure prompt strategies for robotic navigation",
+   "UNNAMED: multi-modal prompt injection against robot navigation"
+  ],
+  [
+   "UNNAMED: two preemptive-answer mitigations",
+   "preemptive answer attack (CoT short-circuiting)"
+  ],
+  [
+   "UniKnow / LM-UniKnow",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "VIGIL",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "VISTA (Visible Internal State for Tool Agents)",
+   "context proprioceptive blindness"
+  ],
+  [
+   "VISTA (Visible Internal State for Tool Agents)",
+   "context rot"
+  ],
+  [
+   "VideoSEAL (decoupled planner-inspector)",
+   "evidence misalignment (agentic long-video QA)"
+  ],
+  [
+   "Windowed HTML content filtering (128/64-token chunking + PromptGuard/DeBERTaV3 classification)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Write-gate sanitization (pre-summarization redaction/rewrite) for memory laundering",
+   "memory laundering"
+  ],
+  [
+   "Zero-Shot Embedding Drift Detection (ZEDD)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "chain-of-defensive-thought (CoDT)",
+   "PoisonedRAG"
+  ],
+  [
+   "f-secure LLM system (information flow control)",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "f-secure LLM system (information flow control)",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "prompt-shield (Seven Cross-Domain Detection Techniques)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "sign-c (server-side signing of execution-bearing response fields)",
+   "RTA-PostForge (response-path tampering attack)"
+  ],
+  [
+   "unified Prompt Assembling + State Management + Safety Validation framework",
+   "UNNAMED: multi-modal prompt injection against robot navigation"
+  ]
+ ],
+ "renamed": [
+  [
+   "AgentSandbox",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "CaMeL",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "ClinQueryAgent (Retrieval Agent sub-agent delegation)",
+   "context rot"
+  ],
+  [
+   "Cognitive Control Architecture (CCA)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "DE-FIVE",
+   "self-interpreting images via adversarial meta-instructions"
+  ],
+  [
+   "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "MAGE (Memory As Guardrail Enforcement)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "MELON (Masked re-Execution and TooL comparisON)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "PH3 (Pruning Head via PatH PatcHing)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "SafeAgent",
+   "ASB: Observation Prompt Injection (OPI)"
+  ],
+  [
+   "Tool Result Parsing (ParseData/CheckTool)",
+   "AgentDojo: important-instructions injection"
+  ]
+ ],
+ "renamings_not_counted": 20,
+ "verdicts": {
+  "strong": 282,
+  "weak": 53,
+  "not_a_pair": 109,
+  "unsure": 8
+ }
+}

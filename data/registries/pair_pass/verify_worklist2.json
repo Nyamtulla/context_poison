@@ -1,0 +1,461 @@
+[
+ {
+  "defense": "UNNAMED: Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "A Layered Security Framework Against Prompt Injection in RAG-Based Chatbots",
+  "fix_pdf": "data/papers/A Layered Security Framework Against Prompt Injection in RAG-Based Chatbots.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-00"
+ },
+ {
+  "defense": "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+  "cause": "InjecAgent: Data Stealing injection",
+  "fix_paper": "Beyond Injection Detection: A Positive-Security Prompt Firewall that Closes the Scope and PHI Gap SOTA Classifiers Miss in Healthcare",
+  "fix_pdf": "data/papers/Beyond Injection Detection - A Positive-Security Prompt Firewall that Closes the Scope and PHI Gap SOTA Classifiers Miss in Healthcare.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v2-01"
+ },
+ {
+  "defense": "SCR & CR-DPO (Situated Faithfulness)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "To Trust or Not to Trust? Enhancing Large Language Models' Situated Faithfulness to External Contexts",
+  "fix_pdf": "data/papers/To Trust or Not to Trust Enhancing Large Language Models' Situated Faithfulness to External Contexts.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v2-02"
+ },
+ {
+  "defense": "Aura",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Blind Gods and Broken Screens: Architecting a Secure, Intent-Centric Mobile Agent Operating System",
+  "fix_pdf": "data/papers/Blind Gods and Broken Screens - Architecting a Secure, Intent-Centric Mobile Agent Operating System.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-03"
+ },
+ {
+  "defense": "TruthfulRAG (knowledge-graph-based factual conflict resolution)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "TruthfulRAG: Resolving Factual-level Conflicts in Retrieval-Augmented Generation with Knowledge Graphs",
+  "fix_pdf": "data/papers/TruthfulRAG - Resolving Factual-level Conflicts in Retrieval-Augmented Generation with Knowledge Graphs.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v2-04"
+ },
+ {
+  "defense": "InstruCoT",
+  "cause": "TopicAttack",
+  "fix_paper": "Know Thy Enemy: Securing LLMs Against Prompt Injection via Diverse Data Synthesis and Instruction-Level Chain-of-Thought Learning",
+  "fix_pdf": "data/papers/Know Thy Enemy - Securing LLMs Against Prompt Injection via Diverse Data Synthesis and Instruction-Level Chain-of-Thought Learning.pdf",
+  "cause_paper": "TopicAttack: An Indirect Prompt Injection Attack via Topic Transition",
+  "cause_pdf": "data/papers/TopicAttack - An Indirect Prompt Injection Attack via Topic Transition.pdf",
+  "id": "v2-05"
+ },
+ {
+  "defense": "Conflict-Aware RAG (ConScore signal + multi-stage SFT/DPO/reranking)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Conflict-Aware RAG: Multi-Stage Learning with Conflict Signals for Robust Retrieval-Augmented Generation",
+  "fix_pdf": "data/papers/Conflict-Aware RAG - Multi-Stage Learning with Conflict Signals for Robust Retrieval-Augmented Generation.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v2-06"
+ },
+ {
+  "defense": "FGHM (Failure-Gated Hierarchical Memory) with Failure Critic and LTM Pollution Rate (LPR) metric",
+  "cause": "memory pollution (agent long-term memory)",
+  "fix_paper": "Failure-Gated Hierarchical Memory: Preventing Memory Pollution in Long-Horizon LLM Agents via Critic-Guided Write Control",
+  "fix_pdf": "data/papers/Failure-Gated Hierarchical Memory - Preventing Memory Pollution in Long-Horizon LLM Agents via Critic-Guided Write Control.pdf",
+  "cause_paper": "Failure-Gated Hierarchical Memory: Preventing Memory Pollution in Long-Horizon LLM Agents via Critic-Guided Write Control",
+  "cause_pdf": "data/papers/Failure-Gated Hierarchical Memory - Preventing Memory Pollution in Long-Horizon LLM Agents via Critic-Guided Write Control.pdf",
+  "id": "v2-07"
+ },
+ {
+  "defense": "ESLD (External Surrogate Latent Defense)",
+  "cause": "InjecAgent: Direct Harm injection",
+  "fix_paper": "ESLD (External Surrogate Latent Defense): A Latent-Space Architecture for Faster, Stronger Prompt-Injection Defense",
+  "fix_pdf": "data/papers/ESLD (External Surrogate Latent Defense) - A Latent-Space Architecture for Faster, Stronger Prompt-Injection Defense.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v2-08"
+ },
+ {
+  "defense": "PhantomLint",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "PhantomLint: Principled Detection of Hidden LLM Prompts in Structured Documents",
+  "fix_pdf": "data/papers/PhantomLint - Principled Detection of Hidden LLM Prompts in Structured Documents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-09"
+ },
+ {
+  "defense": "LLMbda / Randori (dynamic information-flow-control lambda calculus with verified interpreter)",
+  "cause": "AgentDojo: important-instructions injection",
+  "fix_paper": "The LLMbda Calculus: AI Agents, Conversations, and Information Flow",
+  "fix_pdf": "data/papers/The LLMbda Calculus - AI Agents, Conversations, and Information Flow.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "v2-10"
+ },
+ {
+  "defense": "VISTA (Visible Internal State for Tool Agents)",
+  "cause": "context proprioceptive blindness",
+  "fix_paper": "LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via State Proprioception",
+  "fix_pdf": "data/papers/LLM Agents Are Latent Context Managers - Eliciting Self-Managed Context via State Proprioception.pdf",
+  "cause_paper": "LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via State Proprioception",
+  "cause_pdf": "data/papers/LLM Agents Are Latent Context Managers - Eliciting Self-Managed Context via State Proprioception.pdf",
+  "id": "v2-11"
+ },
+ {
+  "defense": "ID-RAG (Identity Retrieval-Augmented Generation)",
+  "cause": "identity drift (persona coherence decay in generative agents)",
+  "fix_paper": "ID-RAG: Identity Retrieval-Augmented Generation for Long-Horizon Persona Coherence in Generative Agents",
+  "fix_pdf": "data/papers/ID-RAG - Identity Retrieval-Augmented Generation for Long-Horizon Persona Coherence in Generative Agents.pdf",
+  "cause_paper": "ID-RAG: Identity Retrieval-Augmented Generation for Long-Horizon Persona Coherence in Generative Agents",
+  "cause_pdf": "data/papers/ID-RAG - Identity Retrieval-Augmented Generation for Long-Horizon Persona Coherence in Generative Agents.pdf",
+  "id": "v2-12"
+ },
+ {
+  "defense": "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+  "cause": "InjecAgent: Direct Harm injection",
+  "fix_paper": "Verifying Intent and Harm: A Unified Defense Against LLM-Generated Threats",
+  "fix_pdf": "data/papers/Verifying Intent and Harm - A Unified Defense Against LLM-Generated Threats.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v2-13"
+ },
+ {
+  "defense": "RPO (Retrieval Preference Optimization)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "RPO: Retrieval Preference Optimization for Robust Retrieval-Augmented Generation",
+  "fix_pdf": "data/papers/RPO - Retrieval Preference Optimization for Robust Retrieval-Augmented Generation.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v2-14"
+ },
+ {
+  "defense": "DefensiveToken (test-time optimized special tokens)",
+  "cause": "CyberSecEval 2: prompt-injection + code-interpreter-abuse test set",
+  "fix_paper": "Defending Against Prompt Injection With a Few DefensiveTokens",
+  "fix_pdf": "data/papers/Defending Against Prompt Injection With a Few DefensiveTokens.pdf",
+  "cause_paper": "CyberSecEval 2: A Wide-Ranging Cybersecurity Evaluation Suite for Large Language Models",
+  "cause_pdf": "data/papers/CyberSecEval 2 - A Wide-Ranging Cybersecurity Evaluation Suite for Large Language Models.pdf",
+  "id": "v2-15"
+ },
+ {
+  "defense": "Attention Tracker",
+  "cause": "Combined Attack (Open-Prompt-Injection)",
+  "fix_paper": "Attention Tracker: Detecting Prompt Injection Attacks in LLMs",
+  "fix_pdf": "data/papers/Attention Tracker - Detecting Prompt Injection Attacks in LLMs.pdf",
+  "cause_paper": "Formalizing and Benchmarking Prompt Injection Attacks and Defenses",
+  "cause_pdf": "data/papers/Formalizing and Benchmarking Prompt Injection Attacks and Defenses.pdf",
+  "id": "v2-16"
+ },
+ {
+  "defense": "Jatmo",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Jatmo: Prompt Injection Defense by Task-Specific Finetuning",
+  "fix_pdf": "data/papers/Jatmo - Prompt Injection Defense by Task-Specific Finetuning.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-17"
+ },
+ {
+  "defense": "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+  "cause": "InjecAgent: Data Stealing injection",
+  "fix_paper": "Verifying Intent and Harm: A Unified Defense Against LLM-Generated Threats",
+  "fix_pdf": "data/papers/Verifying Intent and Harm - A Unified Defense Against LLM-Generated Threats.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v2-18"
+ },
+ {
+  "defense": "Knowledgeable-R1",
+  "cause": "distraction by irrelevant context",
+  "fix_paper": "Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement",
+  "fix_pdf": "data/papers/Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement.pdf",
+  "cause_paper": "Large Language Models Can Be Easily Distracted by Irrelevant Context",
+  "cause_pdf": "data/papers/Large Language Models Can Be Easily Distracted by Irrelevant Context.pdf",
+  "id": "v2-19"
+ },
+ {
+  "defense": "UNNAMED: Policy Enforcement Point (PEP) for MCP tool-call boundary",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Runtime Policy Enforcement for MCP-Based LLM Agents",
+  "fix_pdf": "data/papers/Runtime Policy Enforcement for MCP-Based LLM Agents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-20"
+ },
+ {
+  "defense": "DataFilter",
+  "cause": "AutoDojo (adaptive black-box IPI attack generation)",
+  "fix_paper": "Defending Against Prompt Injection with DataFilter",
+  "fix_pdf": "data/papers/Defending Against Prompt Injection with DataFilter.pdf",
+  "cause_paper": "AutoDojo: Adaptive Black-Box Attacks Reveal the Limits of IPI Defenses and Task-Specification Effects in LLM Agents",
+  "cause_pdf": "data/papers/AutoDojo - Adaptive Black-Box Attacks Reveal the Limits of IPI Defenses and Task-Specification Effects in LLM Agents.pdf",
+  "id": "v2-21"
+ },
+ {
+  "defense": "AprielGuard",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "AprielGuard",
+  "fix_pdf": "data/papers/AprielGuard.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-22"
+ },
+ {
+  "defense": "ActiveContext (ContextCurator + TaskExecutor)",
+  "cause": "context proprioceptive blindness",
+  "fix_paper": "Escaping the Context Bottleneck: Active Context Curation for LLM Agents via Reinforcement Learning",
+  "fix_pdf": "data/papers/Escaping the Context Bottleneck - Active Context Curation for LLM Agents via Reinforcement Learning.pdf",
+  "cause_paper": "LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via State Proprioception",
+  "cause_pdf": "data/papers/LLM Agents Are Latent Context Managers - Eliciting Self-Managed Context via State Proprioception.pdf",
+  "id": "v2-23"
+ },
+ {
+  "defense": "RL Belief-State Reward Training + Representation-Level Steering (CBM mitigation)",
+  "cause": "Contextual Belief Management (CBM) failure",
+  "fix_paper": "When Should Models Change Their Minds? Contextual Belief Management in Large Language Models",
+  "fix_pdf": "data/papers/When Should Models Change Their Minds Contextual Belief Management in Large Language Models.pdf",
+  "cause_paper": "When Should Models Change Their Minds? Contextual Belief Management in Large Language Models",
+  "cause_pdf": "data/papers/When Should Models Change Their Minds Contextual Belief Management in Large Language Models.pdf",
+  "id": "v2-24"
+ },
+ {
+  "defense": "BiRD (Bidirectional Ranking Defense)",
+  "cause": "PoisonedRAG",
+  "fix_paper": "BiRD: A Bidirectional Ranking Defense Mechanism for Retrieval Augmented Generation",
+  "fix_pdf": "data/papers/BiRD - A Bidirectional Ranking Defense Mechanism for Retrieval Augmented Generation.pdf",
+  "cause_paper": "PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models",
+  "cause_pdf": "data/papers/PoisonedRAG - Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models.pdf",
+  "id": "v2-25"
+ },
+ {
+  "defense": "MELON (Masked re-Execution and TooL comparisON)",
+  "cause": "Semantic-Masquerading IPI; Cascading IPI; Isolation-Breach IPI",
+  "fix_paper": "MELON: Provable Defense Against Indirect Prompt Injection Attacks in AI Agents",
+  "fix_pdf": "data/papers/MELON - Provable Defense Against Indirect Prompt Injection Attacks in AI Agents.pdf",
+  "cause_paper": "Taxonomy, Evaluation and Exploitation of IPI-Centric LLM Agent Defense Frameworks",
+  "cause_pdf": "data/papers/Taxonomy, Evaluation and Exploitation of IPI-Centric LLM Agent Defense Frameworks.pdf",
+  "id": "v2-26"
+ },
+ {
+  "defense": "f-secure LLM system (information flow control)",
+  "cause": "InjecAgent: Direct Harm injection",
+  "fix_paper": "System-Level Defense against Indirect Prompt Injection Attacks: An Information Flow Control Perspective",
+  "fix_pdf": "data/papers/System-Level Defense against Indirect Prompt Injection Attacks - An Information Flow Control Perspective.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "v2-27"
+ },
+ {
+  "defense": "MELON (Masked re-Execution and TooL comparisON)",
+  "cause": "AdapTools",
+  "fix_paper": "MELON: Provable Defense Against Indirect Prompt Injection Attacks in AI Agents",
+  "fix_pdf": "data/papers/MELON - Provable Defense Against Indirect Prompt Injection Attacks in AI Agents.pdf",
+  "cause_paper": "AdapTools: Adaptive Tool-based Indirect Prompt Injection Attacks on Agentic LLMs",
+  "cause_pdf": "data/papers/AdapTools - Adaptive Tool-based Indirect Prompt Injection Attacks on Agentic LLMs.pdf",
+  "id": "v2-28"
+ },
+ {
+  "defense": "KBRA (Keyed Binding Reassembly Audit)",
+  "cause": "Relinking",
+  "fix_paper": "Safe to Check, Unsafe to Use: Relinking at the Compression Boundary of LLM Agents",
+  "fix_pdf": "data/papers/Safe to Check, Unsafe to Use - Relinking at the Compression Boundary of LLM Agents.pdf",
+  "cause_paper": "Safe to Check, Unsafe to Use: Relinking at the Compression Boundary of LLM Agents",
+  "cause_pdf": "data/papers/Safe to Check, Unsafe to Use - Relinking at the Compression Boundary of LLM Agents.pdf",
+  "id": "v2-29"
+ },
+ {
+  "defense": "ERA (Evidence-based Reliability Alignment)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "ERA: Evidence-based Reliability Alignment for Honest Retrieval-Augmented Generation",
+  "fix_pdf": "data/papers/ERA - Evidence-based Reliability Alignment for Honest Retrieval-Augmented Generation.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v2-30"
+ },
+ {
+  "defense": "ISE (Instructional Segment Embedding)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Instructional Segment Embedding: Improving LLM Safety with Instruction Hierarchy",
+  "fix_pdf": "data/papers/Instructional Segment Embedding - Improving LLM Safety with Instruction Hierarchy.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-31"
+ },
+ {
+  "defense": "ControlNet (ControlNET)",
+  "cause": "PoisonedRAG",
+  "fix_paper": "ControlNET: A Firewall for RAG-based LLM System",
+  "fix_pdf": "data/papers/ControlNET - A Firewall for RAG-based LLM System.pdf",
+  "cause_paper": "PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models",
+  "cause_pdf": "data/papers/PoisonedRAG - Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models.pdf",
+  "id": "v2-32"
+ },
+ {
+  "defense": "Knowledgeable-R1",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement",
+  "fix_pdf": "data/papers/Resisting Contextual Interference in RAG via Parametric-Knowledge Reinforcement.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v2-33"
+ },
+ {
+  "defense": "Windowed HTML content filtering (128/64-token chunking + PromptGuard/DeBERTaV3 classification)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Disrupting Large Language Models with hidden prompt injection attacks embedded in HTML pages",
+  "fix_pdf": "data/papers/Disrupting Large Language Models with Hidden Prompt Injection Attacks Embedded in HTML Pages.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-34"
+ },
+ {
+  "defense": "Chain-of-Memory (CoM) - verifiable retrieval + causal tracing",
+  "cause": "lost in the middle",
+  "fix_paper": "Chain-of-Memory: Taming Hallucinations in Million-Token Models with Verifiable Retrieval and Causal Tracing",
+  "fix_pdf": "data/papers/Chain-of-Memory - Taming Hallucinations in Million-Token Models with Verifiable Retrieval and Causal Tracing.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "v2-35"
+ },
+ {
+  "defense": "RAPS-DA (Regime-Aware Peer Specialization)",
+  "cause": "distraction by irrelevant context",
+  "fix_paper": "Regime-Aware Peer Specialization for Robust RAG under Heterogeneous Knowledge Conflicts",
+  "fix_pdf": "data/papers/Regime-Aware Peer Specialization for Robust RAG under Heterogeneous Knowledge Conflicts.pdf",
+  "cause_paper": "Large Language Models Can Be Easily Distracted by Irrelevant Context",
+  "cause_pdf": "data/papers/Large Language Models Can Be Easily Distracted by Irrelevant Context.pdf",
+  "id": "v2-36"
+ },
+ {
+  "defense": "VISTA (Visible Internal State for Tool Agents)",
+  "cause": "context rot",
+  "fix_paper": "LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via State Proprioception",
+  "fix_pdf": "data/papers/LLM Agents Are Latent Context Managers - Eliciting Self-Managed Context via State Proprioception.pdf",
+  "cause_paper": "Context Rot: Why MCP is Breaking in Production and How the Skills Architecture Fixes It",
+  "cause_pdf": "data/papers/Context Rot - Why MCP is Breaking in Production and How the Skills Architecture Fixes It.pdf",
+  "id": "v2-37"
+ },
+ {
+  "defense": "SecAlign (preference optimization)",
+  "cause": "FlashRT",
+  "fix_paper": "SecAlign: Defending Against Prompt Injection with Preference Optimization",
+  "fix_pdf": "data/papers/SecAlign - Defending Against Prompt Injection with Preference Optimization.pdf",
+  "cause_paper": "FlashRT: Towards Computationally and Memory Efficient Red-Teaming for Prompt Injection and Knowledge Corruption",
+  "cause_pdf": "data/papers/FlashRT - Towards Computationally and Memory Efficient Red-Teaming for Prompt Injection and Knowledge Corruption.pdf",
+  "id": "v2-38"
+ },
+ {
+  "defense": "MMPO (Metacognitive Memory Policy Optimization) with Belief Entropy",
+  "cause": "memory misevolution",
+  "fix_paper": "Meta-Cognitive Memory Policy Optimization for Long-Horizon LLM Agents",
+  "fix_pdf": "data/papers/Meta-Cognitive Memory Policy Optimization for Long-Horizon LLM Agents.pdf",
+  "cause_paper": "MemEvoBench: Benchmarking Memory MisEvolution in LLM Agents",
+  "cause_pdf": "data/papers/MemEvoBench - Benchmarking Memory MisEvolution in LLM Agents.pdf",
+  "id": "v2-39"
+ },
+ {
+  "defense": "Attention Tracker",
+  "cause": "Actor-Critic attack",
+  "fix_paper": "Attention Tracker: Detecting Prompt Injection Attacks in LLMs",
+  "fix_pdf": "data/papers/Attention Tracker - Detecting Prompt Injection Attacks in LLMs.pdf",
+  "cause_paper": "Lessons from Defending Gemini Against Indirect Prompt Injections",
+  "cause_pdf": "data/papers/Lessons from Defending Gemini Against Indirect Prompt Injections.pdf",
+  "id": "v2-40"
+ },
+ {
+  "defense": "DefensiveToken (test-time optimized special tokens)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Defending Against Prompt Injection With a Few DefensiveTokens",
+  "fix_pdf": "data/papers/Defending Against Prompt Injection With a Few DefensiveTokens.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-41"
+ },
+ {
+  "defense": "MAScope",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Beyond Input Guardrails: Reconstructing Cross-Agent Semantic Flows for Execution-Aware Attack Detection",
+  "fix_pdf": "data/papers/Beyond Input Guardrails - Reconstructing Cross-Agent Semantic Flows for Execution-Aware Attack Detection.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-42"
+ },
+ {
+  "defense": "ParamMute (Parametric Knowledge Muting through FFN Suppression)",
+  "cause": "knowledge conflict (contextual vs parametric)",
+  "fix_paper": "ParamMute: Suppressing Knowledge-Critical FFNs for Faithful Retrieval-Augmented Generation",
+  "fix_pdf": "data/papers/ParamMute - Suppressing Knowledge-Critical FFNs for Faithful Retrieval-Augmented Generation.pdf",
+  "cause_paper": "Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint",
+  "cause_pdf": "data/papers/Discerning and Resolving Knowledge Conflicts through Adaptive Decoding with Contextual Information-Entropy Constraint.pdf",
+  "id": "v2-43"
+ },
+ {
+  "defense": "NeuroTaint",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Ghost in the Agent: Redefining Information Flow Tracking for LLM Agents",
+  "fix_pdf": "data/papers/Ghost in the Agent - Redefining Information Flow Tracking for LLM Agents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-44"
+ },
+ {
+  "defense": "SecureCAI",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "SecureCAI: Injection-Resilient LLM Assistants for Cybersecurity Operations",
+  "fix_pdf": "data/papers/SecureCAI - Injection-Resilient LLM Assistants for Cybersecurity Operations.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-45"
+ },
+ {
+  "defense": "APPA (Agentic Permissions Policy Algebra)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Agentic Permissions Policy Algebra for Taint Confinement in LLM Agents",
+  "fix_pdf": "data/papers/Agentic Permissions Policy Algebra for Taint Confinement in LLM Agents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-46"
+ },
+ {
+  "defense": "GPT-OSSafeGuard + structured-representations + GSPO defense pipeline",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Prompt Injection Vulnerability of Consensus Generating Applications in Digital Democracy",
+  "fix_pdf": "data/papers/Prompt Injection Vulnerability of Consensus Generating Applications in Digital Democracy.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "v2-47"
+ },
+ {
+  "defense": "Spotlighting (delimiting / datamarking / encoding)",
+  "cause": "Zombie Agent",
+  "fix_paper": "Defending Against Indirect Prompt Injection Attacks With Spotlighting",
+  "fix_pdf": "data/papers/Defending Against Indirect Prompt Injection Attacks With Spotlighting.pdf",
+  "cause_paper": "Zombie Agents: Persistent Control of Self-Evolving LLM Agents via Self-Reinforcing Injections",
+  "cause_pdf": "data/papers/Zombie Agents - Persistent Control of Self-Evolving LLM Agents via Self-Reinforcing Injections.pdf",
+  "id": "v2-48"
+ },
+ {
+  "defense": "PromptGuard",
+  "cause": "UNNAMED: adaptive attack suite bypassing 12 PI/jailbreak defenses",
+  "fix_paper": "PromptGuard a structured framework for injection resilient language models",
+  "fix_pdf": "data/papers/PromptGuard a structured framework for injection resilient language models.pdf",
+  "cause_paper": "The Attacker Moves Second: Stronger Adaptive Attacks Bypass Defenses Against Llm Jailbreaks and Prompt Injections",
+  "cause_pdf": "data/papers/The Attacker Moves Second - Stronger Adaptive Attacks Bypass Defenses Against Llm Jailbreaks and Prompt Injections.pdf",
+  "id": "v2-49"
+ },
+ {
+  "defense": "Spotlighting (delimiting / datamarking / encoding)",
+  "cause": "Actor-Critic attack",
+  "fix_paper": "Defending Against Indirect Prompt Injection Attacks With Spotlighting",
+  "fix_pdf": "data/papers/Defending Against Indirect Prompt Injection Attacks With Spotlighting.pdf",
+  "cause_paper": "Lessons from Defending Gemini Against Indirect Prompt Injections",
+  "cause_pdf": "data/papers/Lessons from Defending Gemini Against Indirect Prompt Injections.pdf",
+  "id": "v2-50"
+ }
+]

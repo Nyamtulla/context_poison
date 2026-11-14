@@ -1,0 +1,497 @@
+[
+ {
+  "defense": "APPA (Agentic Permissions Policy Algebra)",
+  "paper_id": "a627218ebc531a61b3f43df433c8034165e32ba9",
+  "paper_title": "Agentic Permissions Policy Algebra for Taint Confinement in LLM Agents",
+  "pdf": "data/papers/Agentic Permissions Policy Algebra for Taint Confinement in LLM Agents.pdf",
+  "named_attacks": [
+   "Indirect Prompt Injection (IPI)"
+  ],
+  "defends_against": [
+   "data exfiltration",
+   "hallucination",
+   "indirect prompt injection",
+   "privilege escalation",
+   "prompt injection"
+  ],
+  "registry_notes": "Formal information-flow-control (IFC) security framework with a fully stated threat model (policy-untrusted LLM, indirect prompt injection or hallucinated reasoning); proven security guarantees (parent label preservation, merge confinement) and empirically evaluated on a multi-turn tool-chaining exfiltration benchmark, reducing attack success rate from 31-50% to 0-7% across four models, with causal ablation isolating the branching mechanism's utility contribution. Compared directly against Microsoft Agent Framework's Fides IFC system.",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "Agent Privilege Separation (Reader/Actor two-agent isolation + JSON formatting)",
+  "paper_id": "ec46ec24c252cfa46a0d4a4128855b91cb7c5f31",
+  "paper_title": "Agent Privilege Separation in OpenClaw: A Structural Defense Against Prompt Injection",
+  "pdf": "data/papers/Agent Privilege Separation in OpenClaw - A Structural Defense Against Prompt Injection.pdf",
+  "named_attacks": [
+   "Indirect Prompt Injection (IPI)"
+  ],
+  "defends_against": [
+   "data exfiltration",
+   "indirect prompt injection",
+   "prompt injection"
+  ],
+  "registry_notes": "Structural defense combining privilege-separated two-agent tool partitioning and structured JSON output; replicates Microsoft LLMail-Inject benchmark inside OpenClaw, matches 5-defense-combined-stack performance from original challenge with fewer mechanisms",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "AprielGuard",
+  "paper_id": "c8bbbde5345092e81bfd17ad60456cd1f1ca4fdc",
+  "paper_title": "AprielGuard",
+  "pdf": "data/papers/AprielGuard.pdf",
+  "named_attacks": [
+   "context poisoning (self-induced, non-adversarial)"
+  ],
+  "defends_against": [
+   "indirect prompt injection",
+   "jailbreaking",
+   "long-context degradation",
+   "prompt injection"
+  ],
+  "registry_notes": "Unified 8B safeguard model for safety risks + adversarial threats (PI/jailbreaks); toxicity/bias eval less relevant to context poisoning so classified primarily adversarial.",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "CARE-RAG (Conflict-Aware and Reliable Evidence for RAG)",
+  "paper_id": "0a06adbce02a4f5db3b3f08f23394e3acfc9a573",
+  "paper_title": "Rethinking All Evidence: Enhancing Trustworthy Retrieval-Augmented Generation via Conflict-Driven Summarization",
+  "pdf": "data/papers/Rethinking All Evidence - Enhancing Trustworthy Retrieval-Augmented Generation via Conflict-Driven Summarization.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [
+   "hallucination"
+  ],
+  "registry_notes": "Named three-stage conflict-driven-summarization framework (parameter-aware evidence, context-aware evidence refinement, distilled conflict-driven summarizer); ablations isolate each stage's contribution, largest from retrieved-evidence refinement. Paper briefly notes relevance to 'adversarial or noisy retrieval settings' but evaluation itself is non-adversarial.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "CK-PLUG (Controllable Knowledge Plug-in)",
+  "paper_id": "f0b199b7b9939cfd3d8bd69149d5bed7af40e0d2",
+  "paper_title": "Parameters vs. Context: Fine-Grained Control of Knowledge Reliance in Language Models",
+  "pdf": "data/papers/Parameters vs. Context - Fine-Grained Control of Knowledge Reliance in Language Models.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [
+   "hallucination"
+  ],
+  "registry_notes": "Confidence-Gain-based token-level fusion of parametric/contextual distributions.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "Chain-of-Memory (CoM) - verifiable retrieval + causal tracing",
+  "paper_id": "d3c9e1b9a6f4847efd8fd382fdb36e6a7536f655",
+  "paper_title": "Chain-of-Memory: Taming Hallucinations in Million-Token Models with Verifiable Retrieval and Causal Tracing",
+  "pdf": "data/papers/Chain-of-Memory - Taming Hallucinations in Million-Token Models with Verifiable Retrieval and Causal Tracing.pdf",
+  "named_attacks": [
+   "lost in the middle"
+  ],
+  "defends_against": [
+   "hallucination",
+   "long-context degradation"
+  ],
+  "registry_notes": "Distinct paper from row-903's differently-designed 'CoM'; name collision flagged for dedup. Reduces hallucination in million-token models via memory-anchored reasoning; technical_summary null.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "ControlNet (ControlNET)",
+  "paper_id": "32f24af87e890011ed3e11194ba53e8dd53afbe0",
+  "paper_title": "ControlNET: A Firewall for RAG-based LLM System",
+  "pdf": "data/papers/ControlNET - A Firewall for RAG-based LLM System.pdf",
+  "named_attacks": [
+   "PoisonedRAG"
+  ],
+  "defends_against": [
+   "data exfiltration",
+   "knowledge-base poisoning",
+   "prompt injection"
+  ],
+  "registry_notes": "AI firewall for RAG using LLM internal-activation-pattern detection across 5 risk categories (reconnaissance, exfiltration, unauthorized access, knowledge poisoning, conversation hijacking); compared vs Sandwich Prevention, Instructional Prevention, Known-answer Detection",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "ERA (Evidence-based Reliability Alignment)",
+  "paper_id": "d926c21fb1aa15d19dd1dba8a944c76948e41581",
+  "paper_title": "ERA: Evidence-based Reliability Alignment for Honest Retrieval-Augmented Generation",
+  "pdf": "data/papers/ERA - Evidence-based Reliability Alignment for Honest Retrieval-Augmented Generation.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [
+   "hallucination"
+  ],
+  "registry_notes": "Dirichlet evidence distributions + Dempster-Shafer conflict quantification for RAG abstention.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "EvoDS - Adaptive Context Compression (ACC) component specifically",
+  "paper_id": "arxiv:2606.03841",
+  "paper_title": "EvoDS: Self-Evolving Autonomous Data Science Agent with Skill Learning and Context Management",
+  "pdf": "data/papers/EvoDS - Self-Evolving Autonomous Data Science Agent with Skill Learning and Context Management.pdf",
+  "named_attacks": [
+   "Overflow"
+  ],
+  "defends_against": [],
+  "registry_notes": "Named component (ACC) treating context management as a learned control problem rather than passive truncation, explicitly eliminating out-of-token failures (0 samples exceed limits vs. multiple failures without it per Table 3 ablation); paired with a separate skill-acquisition mechanism (ASA) in the same paper. No adversarial evaluation.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "FaithfulRAG (fact-level conflict modeling + Self-Think)",
+  "paper_id": "e9fa27d3eab2c682afad207c6c35803a0656b6e6",
+  "paper_title": "FaithfulRAG: Fact-Level Conflict Modeling for Context-Faithful Retrieval-Augmented Generation",
+  "pdf": "data/papers/FaithfulRAG - Fact-Level Conflict Modeling for Context-Faithful Retrieval-Augmented Generation.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [
+   "hallucination"
+  ],
+  "registry_notes": "Named knowledge-conflict-resolution framework explicitly diagnosing/reconciling parametric-vs-retrieved discrepancies at the fact level rather than suppressing parametric knowledge; extensive ablations isolate Self-Think module contribution. No adversarial evaluation.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "GT-MCP (Game-Theoretic Multi-Agent Control)",
+  "paper_id": "03ebfea35124ed27f7f954332794209a96fff7c5",
+  "paper_title": "Game-Theoretic Multi-Agent Control for Robust Contextual Reasoning in LLMs",
+  "pdf": "data/papers/Game-Theoretic Multi-Agent Control for Robust Contextual Reasoning in LLMs.pdf",
+  "named_attacks": [
+   "context poisoning (self-induced, non-adversarial)"
+  ],
+  "defends_against": [
+   "RAG poisoning",
+   "prompt injection"
+  ],
+  "registry_notes": "Treats prompt injection/context poisoning as trajectory-steering problem with closed-loop rollback-based recovery under adaptive adversarial minimax threat model; evaluated across 500 interaction turns with adaptive adversary (retrieval-poisoning-chain, semantic-paraphrase-drift, consensus mimicry, delayed trigger, persistent memory corruption)",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "HMT (Hierarchical Memory Tree)",
+  "paper_id": "bddff0e7853344b7f8e2bccc7e9145630b6e8b3e",
+  "paper_title": "Enhancing Web Agents with a Hierarchical Memory Tree",
+  "pdf": "data/papers/Enhancing Web Agents with a Hierarchical Memory Tree.pdf",
+  "named_attacks": [
+   "Context Pollution (evolutionary search history bias)",
+   "context pollution (role conflation in single-agent code-as-action agents)"
+  ],
+  "defends_against": [],
+  "registry_notes": "Three-level Intent/Stage/Action memory decoupling logic from execution for web agents; addresses workflow mismatch.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "Jatmo",
+  "paper_id": "6a6f6070e765f77422c6d6c14c1e6b41a9ed562a",
+  "paper_title": "Jatmo: Prompt Injection Defense by Task-Specific Finetuning",
+  "pdf": "data/papers/Jatmo - Prompt Injection Defense by Task-Specific Finetuning.pdf",
+  "named_attacks": [
+   "Indirect Prompt Injection (IPI)"
+  ],
+  "defends_against": [
+   "data exfiltration",
+   "goal hijacking",
+   "indirect prompt injection",
+   "jailbreaking",
+   "prompt injection"
+  ],
+  "registry_notes": "Task-specific fine-tuning defense (base model, no instruction tuning) against PI.",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "LOOC (Leave-One-Out Compression)",
+  "paper_id": "1bb6703e03c66fc8591d05cf1d2797a0b01757b7",
+  "paper_title": "Alleviating Contextual Misguidance: Response-Aware Prompt Compression for Long-Context Question Answering",
+  "pdf": "data/papers/Alleviating Contextual Misguidance - Response-Aware Prompt Compression for Long-Context Question Answering.pdf",
+  "named_attacks": [
+   "contextual misguidance",
+   "lost in the middle"
+  ],
+  "defends_against": [
+   "long-context degradation"
+  ],
+  "registry_notes": "Response-aware prompt compression addressing 'contextual misguidance'/lost-in-the-middle; technical_summary null.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "MAL-RAG (Multiple Abstraction Level RAG)",
+  "paper_id": "arxiv:2501.16952",
+  "paper_title": "Multiple Abstraction Level Retrieve Augment Generation",
+  "pdf": "data/papers/Multiple Abstraction Level Retrieve Augment Generation.pdf",
+  "named_attacks": [
+   "lost in the middle"
+  ],
+  "defends_against": [
+   "long-context degradation"
+  ],
+  "registry_notes": "Hierarchical multi-granularity retrieval (document/section/paragraph/sentence) combating lost-in-the-middle from single-granularity chunking; outperforms Vanilla RAG and single-abstraction-level RAG baselines",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "Mantis",
+  "paper_id": "b67a6181fad5c5838945583ccdc7f39187e29332",
+  "paper_title": "Hacking Back the AI-Hacker: Prompt Injection as a Defense Against LLM-driven Cyberattacks",
+  "pdf": "data/papers/Hacking Back the AI-Hacker - Prompt Injection as a Defense Against LLM-driven Cyberattacks.pdf",
+  "named_attacks": [
+   "Indirect Prompt Injection (IPI)"
+  ],
+  "defends_against": [
+   "data exfiltration",
+   "indirect prompt injection",
+   "prompt injection"
+  ],
+  "registry_notes": "Hack-back defense using PI against LLM-driven cyberattack agents; tested vs real pentesting agent frameworks on CTF machines.",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "Memex / MemexRL (indexed experience memory)",
+  "paper_id": "d1ed5cf8419f2e0d78a3511ae37596427e4efcbc",
+  "paper_title": "Memex(RL): Scaling Long-Horizon LLM Agents via Indexed Experience Memory",
+  "pdf": "data/papers/Memex(RL) - Scaling Long-Horizon LLM Agents via Indexed Experience Memory.pdf",
+  "named_attacks": [
+   "Overflow"
+  ],
+  "defends_against": [],
+  "registry_notes": "Named indexed-memory technique explicitly addressing lossy information loss from truncation/summarization-based context compression, allowing exact evidence recovery via dereferenceable indices; RL-optimized read/write policy evaluated via before/after training comparison. No adversarial evaluation.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "Neural Paging / Page Controller",
+  "paper_id": "arxiv:2603.02228",
+  "paper_title": "Neural Paging: Learning Context Management Policies for Turing-Complete Agents",
+  "pdf": "data/papers/Neural Paging - Learning Context Management Policies for Turing-Complete Agents.pdf",
+  "named_attacks": [
+   "lost in the middle"
+  ],
+  "defends_against": [
+   "long-context degradation"
+  ],
+  "registry_notes": "Formalizes context management as a caching/paging problem with a proposed learned Page Controller and formal complexity/robustness bounds, but the empirical validation only tests classical caching heuristics (Belady, LRU, LFU, FIFO, Random) on synthetic Zipf paging traces -- the proposed Page Controller itself is not empirically evaluated on real LLM agent tasks in the extracted results, limiting confidence that this is a validated working defense versus a theoretical proposal.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "PACEvolve - Hierarchical Context Management (HCM) component specifically",
+  "paper_id": "230ab088432e2fcc7e34b6148fd08fef30cb2077",
+  "paper_title": "PACEvolve: Enabling Long-Horizon Progress-Aware Consistent Evolution",
+  "pdf": "data/papers/PACEvolve - Enabling Long-Horizon Progress-Aware Consistent Evolution.pdf",
+  "named_attacks": [
+   "Context Pollution (evolutionary search history bias)",
+   "context poisoning (self-induced, non-adversarial)",
+   "context pollution (role conflation in single-agent code-as-action agents)"
+  ],
+  "defends_against": [],
+  "registry_notes": "Paper explicitly coins and names 'Context Pollution' as one of three core failure modes (experiment history biasing future candidate generation) and proposes Hierarchical Context Management with pruning as the named mitigation, with dedicated ablation isolating HCM's contribution. No adversarial evaluation; failure mode explicitly framed as a non-adversarial analog of context poisoning.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "PRIMA (context-boundary discipline + reference-material sandboxing + poisoned-output rejection)",
+  "paper_id": "arxiv:2605.24775",
+  "paper_title": "PRIMA: Operational Patterns for Resilient Multi-Agent Research with Verifiable Identity and Convergent Feedback",
+  "pdf": "data/papers/PRIMA - Operational Patterns for Resilient Multi-Agent Research with Verifiable Identity and Convergent Feedback.pdf",
+  "named_attacks": [
+   "Indirect Prompt Injection (IPI)"
+  ],
+  "defends_against": [
+   "indirect prompt injection",
+   "prompt injection"
+  ],
+  "registry_notes": "Explicit structural threat model targeting 'indirect prompt injection through inter-step context' with concrete named countermeasures (context-boundary discipline marking upstream content as non-directive, anti-SSRF/filesystem sandboxing for fetched material, a resilience layer that 'rejects poisoned outputs'); however, the paper explicitly states quantitative evaluation and baseline comparisons are left to future work -- only a qualitative case study is reported, so defense efficacy is architecturally claimed but not empirically validated.",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)",
+  "paper_id": "4dc7dca2c5101e68f200b29d733c752ab3e92171",
+  "paper_title": "Beyond Black-Box Interventions: Latent Probing for Faithful Retrieval-Augmented Generation",
+  "pdf": "data/papers/Beyond Black-Box Interventions - Latent Probing for Faithful Retrieval-Augmented Generation.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [],
+  "registry_notes": "Named three-stage technique operating on internal latent representations (linearly separable conflicting/aligned knowledge states) rather than black-box prompting/decoding; extensively benchmarked against FaithfulRAG, CANOE, ParamMute, CAD, COIECD, AdaCAD with per-module ablations. No adversarial evaluation.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "QUITO-X",
+  "paper_id": "arxiv:2408.10497",
+  "paper_title": "QUITO-X: A New Perspective on Context Compression from the Information Bottleneck Theory",
+  "pdf": "data/papers/QUITO-X - A New Perspective on Context Compression from the Information Bottleneck Theory.pdf",
+  "named_attacks": [
+   "lost in the middle"
+  ],
+  "defends_against": [
+   "long-context degradation"
+  ],
+  "registry_notes": "Information-Bottleneck-theoretic context compression correcting entropy-based methods' misalignment that exacerbates lost-in-the-middle; outperforms Selective-Context, LLMLingua/LongLLMLingua/LLMLingua2, and QUITO across compression ratios",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "RE-IAG (Reasoning-Evidence Interactive Augmented Graph)",
+  "paper_id": "6db401bb9e8afddf06290f64b9d0df7a67719ca3",
+  "paper_title": "Decomposition, Think and Action: Alleviating Hallucinations of Large Language Models with Reasoning\u2013Evidence Interactive Augmented Graph",
+  "pdf": "data/papers/Decomposition, Think and Action - Alleviating Hallucinations of Large Language Models with Reasoning\u2013Evidence Interactive Augmented Graph.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [
+   "hallucination"
+  ],
+  "registry_notes": "Couples reasoning with evidence via staged triggering + graph structures for hallucination mitigation; technical_summary null.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
+  "paper_id": "1f517e201e63cb9a4cd87c289ed41f0cd367d42c",
+  "paper_title": "Brain-Prompt Injection: A Route-Safety Audit for BCI-LLM Agents",
+  "pdf": "data/papers/Brain-Prompt Injection - A Route-Safety Audit for BCI-LLM Agents.pdf",
+  "named_attacks": [
+   "Brain-Prompt Injection",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  "defends_against": [
+   "indirect prompt injection",
+   "prompt injection"
+  ],
+  "registry_notes": "Formal audit-contract defense for a novel niche threat model (BCI-to-agent 'brain-prompt injection'); confirmation-plus-provenance routing empirically blocks the adaptive dual-decoder (C3) attack class to 0.000 rate versus 1.000 for agreement-plus-provenance alone, with formal proofs and conformal calibration, though the domain (EEG/BCI agents) is a narrow slice of the broader context-pollution literature.",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "SHIFT (gate-modulated activation steering)",
+  "paper_id": "43767015c51be5095a148c3ea666b321e2324100",
+  "paper_title": "SHIFT: Gate-Modulated Activation Steering for Knowledge Conflict Mitigation in Retrieval-Augmented Generation",
+  "pdf": "data/papers/SHIFT - Gate-Modulated Activation Steering for Knowledge Conflict Mitigation in Retrieval-Augmented Generation.pdf",
+  "named_attacks": [
+   "context poisoning (self-induced, non-adversarial)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [],
+  "registry_notes": "Named lightweight learnable-gate technique for knowledge-conflict resolution in RAG, replacing brittle neuron-level editing; extensive ablations and cross-model generalization tests, including an explicit counterfactual/misleading-context case study. No external adversary, but directly tests resistance to misleading injected context.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "SentinelAgent",
+  "paper_id": "99296c88c1470c2f20cf34f2e9708eab4f34fa2c",
+  "paper_title": "SentinelAgent: Graph-based Anomaly Detection in Multi-Agent Systems",
+  "pdf": "data/papers/SentinelAgent - Graph-based Anomaly Detection in Multi-Agent Systems.pdf",
+  "named_attacks": [
+   "Indirect Prompt Injection (IPI)"
+  ],
+  "defends_against": [
+   "data exfiltration",
+   "hallucination",
+   "indirect prompt injection",
+   "jailbreaking",
+   "multi-agent compromise",
+   "privilege escalation",
+   "prompt injection"
+  ],
+  "registry_notes": "System-level graph-based anomaly detection framework for MAS (path-deviation analysis, content-constraint validation) addressing systemic/multi-point failures beyond single-agent guardrails; validated via crafted attack case studies, no quantitative baseline ASR comparison reported",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "SpARE (Sparse Auto-Encoder Representation Engineering)",
+  "paper_id": "d2c1b1a8ac40fbd45e8a91504b1a131f99bad02f",
+  "paper_title": "Steering Knowledge Selection Behaviours in LLMs via SAE-Based Representation Engineering",
+  "pdf": "data/papers/Steering Knowledge Selection Behaviours in LLMs via SAE-Based Representation Engineering.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [],
+  "registry_notes": "Training-free representation-engineering method for context-memory knowledge conflict resolution; explicitly non-adversarial.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "TAG (Tagging-Augmented Generation)",
+  "paper_id": "1aae24f958ecadab48113d1257352ce229ace391",
+  "paper_title": "Tagging-Augmented Generation: Assisting Language Models in Finding Intricate Knowledge In Long Contexts",
+  "pdf": "data/papers/Tagging-Augmented Generation - Assisting Language Models in Finding Intricate Knowledge In Long Contexts.pdf",
+  "named_attacks": [
+   "lost in the middle"
+  ],
+  "defends_against": [
+   "context degradation",
+   "long-context degradation"
+  ],
+  "registry_notes": "Lightweight semantic tagging of long-context documents to mitigate attention degradation, RAG-free alternative.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "Taxonomy-Aware / Pipeline conflict-type-aware response generation (from the CONFLICTS benchmark)",
+  "paper_id": "a51fcc29f90d3910b348f8f0fee1e2852a7fabf0",
+  "paper_title": "DRAGged into Conflicts: Detecting and Addressing Conflicting Sources in Search-Augmented LLMs",
+  "pdf": "data/papers/DRAGged into Conflicts - Detecting and Addressing Conflicting Sources in Search-Augmented LLMs.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [],
+  "registry_notes": "Primarily a benchmark/taxonomy paper (CONFLICTS), but also proposes and evaluates two knowledge-conflict-resolution strategies (Pipeline: predict-then-generate; Taxonomy-Aware: joint single-pass) that improve conflict-appropriate response quality by 5.5-9 points over vanilla RAG; a genuine but relatively simple prompting-based mitigation rather than a heavily engineered novel architecture. No adversarial evaluation -- conflicts studied are naturally occurring (temporal shifts, subjective disagreement, complementary answers).",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "UMA (Unified Memory Agent)",
+  "paper_id": "58f06a469e693919434151b1269a01b355cc2b61",
+  "paper_title": "Learning to Remember: End-to-End Training of Memory Agents for Long-Context Reasoning",
+  "pdf": "data/papers/Learning to Remember - End-to-End Training of Memory Agents for Long-Context Reasoning.pdf",
+  "named_attacks": [
+   "context rot",
+   "context rot (agentic/long-horizon search)"
+  ],
+  "defends_against": [
+   "context degradation",
+   "long-context degradation"
+  ],
+  "registry_notes": "Named end-to-end RL framework with dual memory (core summary + structured CRUD Memory Bank) explicitly addressing passive processing causing 'context rot' and brittleness under frequently-updated long streams; directly extends and outperforms prior SOTA MemAlpha across 13 benchmarks. No adversarial evaluation.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "UNNAMED: Digital forensic analysis framework for post-hoc IPI attack identification from agent execution logs",
+  "paper_id": "9aa8ef5683aa8f81d3e0a826c076b45ff0f2d270",
+  "paper_title": "[Short Paper] Forensic Analysis of Indirect Prompt Injection Attacks on LLM Agents",
+  "pdf": "data/papers/[Short Paper] Forensic Analysis of Indirect Prompt Injection Attacks on LLM Agents.pdf",
+  "named_attacks": [
+   "Indirect Prompt Injection (IPI)"
+  ],
+  "defends_against": [
+   "indirect prompt injection",
+   "prompt injection"
+  ],
+  "registry_notes": "Short paper, most fields empty in export; abstract indicates a novel forensic-analysis approach (using LLMs to analyze agent logs) to identify IPI attacks, preliminary results only",
+  "validated_against": "adversarial"
+ },
+ {
+  "defense": "UNNAMED: Multi-Route Search and Adaptive Fusion (Power QA SLM-guided RAG)",
+  "paper_id": "986fc8d841425a81947838425ea292685ef8325a",
+  "paper_title": "Multi-Route Search and Adaptive Fusion for Power QA with Small Language Model Guidance",
+  "pdf": "data/papers/Multi-Route Search and Adaptive Fusion for Power QA with Small Language Model Guidance.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [],
+  "registry_notes": "Terminology-standardized indexing + SLM-guided adaptive fusion for power-domain RAG; technical_summary null.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "XoT (explanation-based thinking framework)",
+  "paper_id": "eeb8cc61135f5d3032da26888d7a2882b6704765",
+  "paper_title": "Exploring Knowledge Conflicts for Faithful LLM Reasoning: Benchmark and Method",
+  "pdf": "data/papers/Exploring Knowledge Conflicts for Faithful LLM Reasoning - Benchmark and Method.pdf",
+  "named_attacks": [
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  "defends_against": [
+   "data poisoning"
+  ],
+  "registry_notes": "Two-stage candidate-enumeration-then-selection framework for cross-source (text vs KG) conflict; explicitly non-adversarial though flagged as security-relevant.",
+  "validated_against": "incidental"
+ },
+ {
+  "defense": "icat-agent (decentralized event-based multi-agent scaffold)",
+  "paper_id": "arxiv:2606.25514",
+  "paper_title": "Unlocking Model Potentials Through Adaptive Multi-Agent Scaffolding for Efficient Issue Resolution",
+  "pdf": "data/papers/Unlocking Model Potentials Through Adaptive Multi-Agent Scaffolding for Efficient Issue Resolution.pdf",
+  "named_attacks": [
+   "context poisoning (self-induced, non-adversarial)"
+  ],
+  "defends_against": [
+   "context degradation"
+  ],
+  "registry_notes": "Paper explicitly names and formally defines 'context poisoning' (test-overfitting and patch-overfitting from a single contaminated shared reasoning trace across localization/patching/validation) as its target failure mode; icat-agent's isolated-context event-based architecture is designed to structurally prevent this self-referential contamination, validated via a controlled communication-design ablation. Purely incidental/self-inflicted contamination, no external adversary.",
+  "validated_against": "incidental"
+ }
+]

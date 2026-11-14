@@ -1,0 +1,677 @@
+[
+ {
+  "defense": "AgentSentry",
+  "cause": "AgentDojo: tool-knowledge injection",
+  "fix_paper": "AgentSentry: Mitigating Indirect Prompt Injection in LLM Agents via Temporal Causal Diagnostics and Context Purification",
+  "fix_pdf": "data/papers/AgentSentry - Mitigating Indirect Prompt Injection in LLM Agents via Temporal Causal Diagnostics and Context Purification.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-000"
+ },
+ {
+  "defense": "AgentWatcher",
+  "cause": "AgentDojo: important-instructions injection",
+  "fix_paper": "AgentWatcher: A Rule-based Prompt Injection Monitor",
+  "fix_pdf": "data/papers/AgentWatcher - A Rule-based Prompt Injection Monitor.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-001"
+ },
+ {
+  "defense": "SafeAgent",
+  "cause": "ASB: Memory Poisoning",
+  "fix_paper": "SafeAgent: A Runtime Protection Architecture for Agentic Systems",
+  "fix_pdf": "data/papers/SafeAgent - A Runtime Protection Architecture for Agentic Systems.pdf",
+  "cause_paper": "Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents",
+  "cause_pdf": "data/papers/Agent Security Bench (ASB) - Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents.pdf",
+  "id": "o3-002"
+ },
+ {
+  "defense": "PromptArmor",
+  "cause": "AgentDojo: tool-knowledge injection",
+  "fix_paper": "PromptArmor: Simple yet Effective Prompt Injection Defenses",
+  "fix_pdf": "data/papers/PromptArmor - Simple yet Effective Prompt Injection Defenses.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-003"
+ },
+ {
+  "defense": "LongCrafter",
+  "cause": "lost in the middle",
+  "fix_paper": "LongCrafter: Towards Diverse Long-Context Understanding via Evidence-Graph-Guided Instruction Synthesis",
+  "fix_pdf": "data/papers/LongCrafter - Towards Diverse Long-Context Understanding via Evidence-Graph-Guided Instruction Synthesis.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "o3-004"
+ },
+ {
+  "defense": "GoalAnchorCheck (D1) / CrossAgentConsensus (D2)",
+  "cause": "PlanFlip",
+  "fix_paper": "PlanFlip: Attacking Multi-Agent LLM Systems via Planning-Phase Prompt Injection",
+  "fix_pdf": "data/papers/PlanFlip - Attacking Multi-Agent LLM Systems via Planning-Phase Prompt Injection.pdf",
+  "cause_paper": "PlanFlip: Attacking Multi-Agent LLM Systems via Planning-Phase Prompt Injection",
+  "cause_pdf": "data/papers/PlanFlip - Attacking Multi-Agent LLM Systems via Planning-Phase Prompt Injection.pdf",
+  "id": "o3-005"
+ },
+ {
+  "defense": "GCAD (Gated Cropped Attention-Delta steering)",
+  "cause": "KV-cache contamination",
+  "fix_paper": "Prompt-Activation Duality: Improving Activation Steering via Attention-Level Interventions",
+  "fix_pdf": "data/papers/Prompt-Activation Duality - Improving Activation Steering via Attention-Level Interventions.pdf",
+  "cause_paper": "Prompt-Activation Duality: Improving Activation Steering via Attention-Level Interventions",
+  "cause_pdf": "data/papers/Prompt-Activation Duality - Improving Activation Steering via Attention-Level Interventions.pdf",
+  "id": "o3-006"
+ },
+ {
+  "defense": "VIGIL",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "VIGIL: Defending LLM Agents Against Tool Stream Injection via Verify-Before-Commit",
+  "fix_pdf": "data/papers/VIGIL - Defending LLM Agents Against Tool Stream Injection via Verify-Before-Commit.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-007"
+ },
+ {
+  "defense": "BlindGuard",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "BlindGuard: Safeguarding LLM-based Multi-Agent Systems under Unknown Attacks",
+  "fix_pdf": "data/papers/BlindGuard - Safeguarding LLM-based Multi-Agent Systems under Unknown Attacks.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-008"
+ },
+ {
+  "defense": "CaMeL",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Defeating Prompt Injections by Design",
+  "fix_pdf": "data/papers/Defeating Prompt Injections by Design.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-009"
+ },
+ {
+  "defense": "ClawGuard",
+  "cause": "ChatInject",
+  "fix_paper": "ClawGuard: A Runtime Security Framework for Tool-Augmented LLM Agents Against Indirect Prompt Injection",
+  "fix_pdf": "data/papers/ClawGuard - A Runtime Security Framework for Tool-Augmented LLM Agents Against Indirect Prompt Injection.pdf",
+  "cause_paper": "ChatInject: Abusing Chat Templates for Prompt Injection in LLM Agents",
+  "cause_pdf": "data/papers/ChatInject - Abusing Chat Templates for Prompt Injection in LLM Agents.pdf",
+  "id": "o3-010"
+ },
+ {
+  "defense": "CaMeL",
+  "cause": "ClawTrojan multi-step trojan/backdoor attack paradigm",
+  "fix_paper": "Defeating Prompt Injections by Design",
+  "fix_pdf": "data/papers/Defeating Prompt Injections by Design.pdf",
+  "cause_paper": "From Prompt Injection to Persistent Control: Defending Agentic Harness Against Trojan Backdoors",
+  "cause_pdf": "data/papers/From Prompt Injection to Persistent Control - Defending Agentic Harness Against Trojan Backdoors.pdf",
+  "id": "o3-011"
+ },
+ {
+  "defense": "AuthGraph",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Aligning Provenance with Authorization: A Dual-Graph Defense for LLM Agents",
+  "fix_pdf": "data/papers/Aligning Provenance with Authorization - A Dual-Graph Defense for LLM Agents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-012"
+ },
+ {
+  "defense": "AgentArmor",
+  "cause": "AgentDojo: tool-knowledge injection",
+  "fix_paper": "AgentArmor: Enforcing Program Analysis on Agent Runtime Trace to Defend Against Prompt Injection",
+  "fix_pdf": "data/papers/AgentArmor - Enforcing Program Analysis on Agent Runtime Trace to Defend Against Prompt Injection.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-013"
+ },
+ {
+  "defense": "NeuroTaint",
+  "cause": "Cross-Session Stored Prompt Injection (XSPI)",
+  "fix_paper": "Ghost in the Agent: Redefining Information Flow Tracking for LLM Agents",
+  "fix_pdf": "data/papers/Ghost in the Agent - Redefining Information Flow Tracking for LLM Agents.pdf",
+  "cause_paper": "What If Prompt Injection Never Left? Exploring Cross-Session Stored Prompt Injection in Agentic Systems",
+  "cause_pdf": "data/papers/What If Prompt Injection Never Left Exploring Cross-Session Stored Prompt Injection in Agentic Systems.pdf",
+  "id": "o3-014"
+ },
+ {
+  "defense": "UNNAMED: Attack-derived shield-prompt defenses (Ignore/Escape/Fake-Completion/Combined Defense)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Defense Against Prompt Injection Attack by Leveraging Attack Techniques",
+  "fix_pdf": "data/papers/Defense Against Prompt Injection Attack by Leveraging Attack Techniques.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-015"
+ },
+ {
+  "defense": "Plan-Then-Execute (PTE) architecture for web agents",
+  "cause": "Agent Data Injection (ADI)",
+  "fix_paper": "Web Agents Should Adopt the Plan-Then-Execute Paradigm",
+  "fix_pdf": "data/papers/Web Agents Should Adopt the Plan-Then-Execute Paradigm.pdf",
+  "cause_paper": "Agent Data Injection Attacks are Realistic Threats to AI Agents",
+  "cause_pdf": "data/papers/Agent Data Injection Attacks are Realistic Threats to AI Agents.pdf",
+  "id": "o3-016"
+ },
+ {
+  "defense": "SecInfer",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "SecInfer: Preventing Prompt Injection via Inference-time Scaling",
+  "fix_pdf": "data/papers/SecInfer - Preventing Prompt Injection via Inference-time Scaling.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-017"
+ },
+ {
+  "defense": "ActiveContext (ContextCurator + TaskExecutor)",
+  "cause": "lost in the middle",
+  "fix_paper": "Escaping the Context Bottleneck: Active Context Curation for LLM Agents via Reinforcement Learning",
+  "fix_pdf": "data/papers/Escaping the Context Bottleneck - Active Context Curation for LLM Agents via Reinforcement Learning.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "o3-018"
+ },
+ {
+  "defense": "TRACE (Trajectory Risk-Aware Compression)",
+  "cause": "UNNAMED: context-length-induced degradation independent of retrieval failure",
+  "fix_paper": "TRACE: Trajectory Risk-Aware Compression for Long-Horizon Agent Safety",
+  "fix_pdf": "data/papers/TRACE - Trajectory Risk-Aware Compression for Long-Horizon Agent Safety.pdf",
+  "cause_paper": "Context Length Alone Hurts LLM Performance Despite Perfect Retrieval",
+  "cause_pdf": "data/papers/Context Length Alone Hurts LLM Performance Despite Perfect Retrieval.pdf",
+  "id": "o3-019"
+ },
+ {
+  "defense": "Dynamic Contrastive Decoding (DCD) for cross-modality knowledge conflict",
+  "cause": "cross-modality parametric knowledge conflict",
+  "fix_paper": "Unraveling Cross-Modality Knowledge Conflicts in Large Vision-Language Models",
+  "fix_pdf": "data/papers/Unraveling Cross-Modality Knowledge Conflicts in Large Vision-Language Models.pdf",
+  "cause_paper": "Unraveling Cross-Modality Knowledge Conflicts in Large Vision-Language Models",
+  "cause_pdf": "data/papers/Unraveling Cross-Modality Knowledge Conflicts in Large Vision-Language Models.pdf",
+  "id": "o3-020"
+ },
+ {
+  "defense": "DataFilter",
+  "cause": "AgentDojo: ignore-previous injection",
+  "fix_paper": "Defending Against Prompt Injection with DataFilter",
+  "fix_pdf": "data/papers/Defending Against Prompt Injection with DataFilter.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-021"
+ },
+ {
+  "defense": "SecInfer",
+  "cause": "Combined Attack (Open-Prompt-Injection)",
+  "fix_paper": "SecInfer: Preventing Prompt Injection via Inference-time Scaling",
+  "fix_pdf": "data/papers/SecInfer - Preventing Prompt Injection via Inference-time Scaling.pdf",
+  "cause_paper": "Formalizing and Benchmarking Prompt Injection Attacks and Defenses",
+  "cause_pdf": "data/papers/Formalizing and Benchmarking Prompt Injection Attacks and Defenses.pdf",
+  "id": "o3-022"
+ },
+ {
+  "defense": "CachePrune",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "CachePrune: Teaching LLMs What Not to Follow via KV-Cache Editing",
+  "fix_pdf": "data/papers/CachePrune - Teaching LLMs What Not to Follow via KV-Cache Editing.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-023"
+ },
+ {
+  "defense": "IPIGuard",
+  "cause": "AgentDojo: important-instructions injection",
+  "fix_paper": "IPIGuard: A Novel Tool Dependency Graph-Based Defense Against Indirect Prompt Injection in LLM Agents",
+  "fix_pdf": "data/papers/IPIGuard - A Novel Tool Dependency Graph-Based Defense Against Indirect Prompt Injection in LLM Agents.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-024"
+ },
+ {
+  "defense": "UNNAMED: layered MCP descriptor defense (descriptor integrity verification + pre-context semantic vetting + runtime guardrails)",
+  "cause": "UNNAMED: descriptor-level semantic manipulation attack (MCP tool-selection bias)",
+  "fix_paper": "Semantic Attacks on Tool-Augmented LLMs: Securing the Model Context Protocol Against Descriptor-Level Manipulation",
+  "fix_pdf": "data/papers/Semantic Attacks on Tool-Augmented LLMs - Securing the Model Context Protocol Against Descriptor-Level Manipulation.pdf",
+  "cause_paper": "Semantic Attacks on Tool-Augmented LLMs: Securing the Model Context Protocol Against Descriptor-Level Manipulation",
+  "cause_pdf": "data/papers/Semantic Attacks on Tool-Augmented LLMs - Securing the Model Context Protocol Against Descriptor-Level Manipulation.pdf",
+  "id": "o3-025"
+ },
+ {
+  "defense": "RedVisor",
+  "cause": "AgentDojo: important-instructions injection",
+  "fix_paper": "RedVisor: Reasoning-Aware Prompt Injection Defense via Zero-Copy KV Cache Reuse",
+  "fix_pdf": "data/papers/RedVisor - Reasoning-Aware Prompt Injection Defense via Zero-Copy KV Cache Reuse.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-026"
+ },
+ {
+  "defense": "MELON (Masked re-Execution and TooL comparisON)",
+  "cause": "Reasoning-Extension Denial-of-Service (DoS)",
+  "fix_paper": "MELON: Provable Defense Against Indirect Prompt Injection Attacks in AI Agents",
+  "fix_pdf": "data/papers/MELON - Provable Defense Against Indirect Prompt Injection Attacks in AI Agents.pdf",
+  "cause_paper": "From Shield to Target: Denial-of-Service Attacks on LLM-Based Agent Guardrails",
+  "cause_pdf": "data/papers/From Shield to Target - Denial-of-Service Attacks on LLM-Based Agent Guardrails.pdf",
+  "id": "o3-027"
+ },
+ {
+  "defense": "UNNAMED: Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection",
+  "cause": "LogInject / Passive Prompt Injection",
+  "fix_paper": "Context Contamination in LLM Analysis of Network Security Logs: Poison with Passive Prompt Injection and Mitigation Evaluation",
+  "fix_pdf": "data/papers/Context Contamination in LLM Analysis of Network Security Logs - Poison with Passive Prompt Injection and Mitigation Evaluation.pdf",
+  "cause_paper": "Context Contamination in LLM Analysis of Network Security Logs: Poison with Passive Prompt Injection and Mitigation Evaluation",
+  "cause_pdf": "data/papers/Context Contamination in LLM Analysis of Network Security Logs - Poison with Passive Prompt Injection and Mitigation Evaluation.pdf",
+  "id": "o3-028"
+ },
+ {
+  "defense": "LDAR (Learning Distraction-Aware Retrieval)",
+  "cause": "distraction by irrelevant context (graded by semantic relatedness)",
+  "fix_paper": "Beyond RAG vs. Long-Context: Learning Distraction-Aware Retrieval for Efficient Knowledge Grounding",
+  "fix_pdf": "data/papers/Beyond RAG vs. Long-Context - Learning Distraction-Aware Retrieval for Efficient Knowledge Grounding.pdf",
+  "cause_paper": "How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?",
+  "cause_pdf": "data/papers/How Easily do Irrelevant Inputs Skew the Responses of Large Language Models.pdf",
+  "id": "o3-029"
+ },
+ {
+  "defense": "AgenTRIM",
+  "cause": "AgentDojo: tool-knowledge injection",
+  "fix_paper": "AgenTRIM: Tool Risk Mitigation for Agentic AI",
+  "fix_pdf": "data/papers/AgenTRIM - Tool Risk Mitigation for Agentic AI.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-030"
+ },
+ {
+  "defense": "ASIDE (Architecturally Separated Instruction-Data Embeddings)",
+  "cause": "BIPIA benchmark attack set",
+  "fix_paper": "ASIDE: Architectural Separation of Instructions and Data in Language Models",
+  "fix_pdf": "data/papers/ASIDE - Architectural Separation of Instructions and Data in Language Models.pdf",
+  "cause_paper": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models",
+  "cause_pdf": "data/papers/Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models.pdf",
+  "id": "o3-031"
+ },
+ {
+  "defense": "UNNAMED: Three-layer defense pipeline for RAG PI (embedding content filtering + hierarchical guardrails + response verification)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Securing AI Agents Against Prompt Injection Attacks",
+  "fix_pdf": "data/papers/Securing AI Agents Against Prompt Injection Attacks.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-032"
+ },
+ {
+  "defense": "Polymorphic Prompt Assembling (PPA)",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "To Protect the LLM Agent Against the Prompt Injection Attack with Polymorphic Prompt",
+  "fix_pdf": "data/papers/To Protect the LLM Agent Against the Prompt Injection Attack with Polymorphic Prompt.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-033"
+ },
+ {
+  "defense": "SecAlign (preference optimization)",
+  "cause": "backdoor-powered prompt injection attack",
+  "fix_paper": "SecAlign: Defending Against Prompt Injection with Preference Optimization",
+  "fix_pdf": "data/papers/SecAlign - Defending Against Prompt Injection with Preference Optimization.pdf",
+  "cause_paper": "Backdoor-Powered Prompt Injection Attacks Nullify Defense Methods",
+  "cause_pdf": "data/papers/Backdoor-Powered Prompt Injection Attacks Nullify Defense Methods.pdf",
+  "id": "o3-034"
+ },
+ {
+  "defense": "KV-Fusion",
+  "cause": "lost in the middle",
+  "fix_paper": "Parallel Key-Value Cache Fusion for Position Invariant RAG",
+  "fix_pdf": "data/papers/Parallel Key-Value Cache Fusion for Position Invariant RAG.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "o3-035"
+ },
+ {
+  "defense": "UI-Copilot (memory decoupling + Tool-Integrated Policy Optimization / TIPO)",
+  "cause": "context rot (agentic/long-horizon search)",
+  "fix_paper": "UI-Copilot: Advancing Long-Horizon GUI Automation via Tool-Integrated Policy Optimization",
+  "fix_pdf": "data/papers/UI-Copilot - Advancing Long-Horizon GUI Automation via Tool-Integrated Policy Optimization.pdf",
+  "cause_paper": "Diagnosing and Mitigating Context Rot in Long-horizon Search",
+  "cause_pdf": "data/papers/Diagnosing and Mitigating Context Rot in Long-horizon Search.pdf",
+  "id": "o3-036"
+ },
+ {
+  "defense": "ACE (Abstract-Concrete-Execute)",
+  "cause": "InjecAgent: Data Stealing injection",
+  "fix_paper": "ACE: A Security Architecture for LLM-Integrated App Systems",
+  "fix_pdf": "data/papers/ACE - A Security Architecture for LLM-Integrated App Systems.pdf",
+  "cause_paper": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Models",
+  "cause_pdf": "data/papers/InjecAgent - Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents.pdf",
+  "id": "o3-037"
+ },
+ {
+  "defense": "AttnTrace",
+  "cause": "PoisonedRAG",
+  "fix_paper": "AttnTrace: Contextual Attribution of Prompt Injection and Knowledge Corruption",
+  "fix_pdf": "data/papers/AttnTrace - Contextual Attribution of Prompt Injection and Knowledge Corruption.pdf",
+  "cause_paper": "PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models",
+  "cause_pdf": "data/papers/PoisonedRAG - Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models.pdf",
+  "id": "o3-038"
+ },
+ {
+  "defense": "DataSentinel",
+  "cause": "DataFlip",
+  "fix_paper": "DataSentinel: A Game-Theoretic Detection of Prompt Injection Attacks",
+  "fix_pdf": "data/papers/DataSentinel - A Game-Theoretic Detection of Prompt Injection Attacks.pdf",
+  "cause_paper": "How Not to Detect Prompt Injections with an LLM",
+  "cause_pdf": "data/papers/How Not to Detect Prompt Injections with an LLM.pdf",
+  "id": "o3-039"
+ },
+ {
+  "defense": "PIGuard (Mitigating Over-defense for Free)",
+  "cause": "BIPIA benchmark attack set",
+  "fix_paper": "PIGuard: Prompt Injection Guardrail via Mitigating Overdefense for Free",
+  "fix_pdf": "data/papers/PIGuard - Prompt Injection Guardrail via Mitigating Overdefense for Free.pdf",
+  "cause_paper": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models",
+  "cause_pdf": "data/papers/Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models.pdf",
+  "id": "o3-040"
+ },
+ {
+  "defense": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
+  "cause": "Agent Data Injection (ADI)",
+  "fix_paper": "LlamaFirewall: An open source guardrail system for building secure AI agents",
+  "fix_pdf": "data/papers/LlamaFirewall - An open source guardrail system for building secure AI agents.pdf",
+  "cause_paper": "Agent Data Injection Attacks are Realistic Threats to AI Agents",
+  "cause_pdf": "data/papers/Agent Data Injection Attacks are Realistic Threats to AI Agents.pdf",
+  "id": "o3-041"
+ },
+ {
+  "defense": "StruQ (structured queries)",
+  "cause": "BIPIA benchmark attack set",
+  "fix_paper": "StruQ: Defending Against Prompt Injection with Structured Queries",
+  "fix_pdf": "data/papers/StruQ - Defending Against Prompt Injection with Structured Queries.pdf",
+  "cause_paper": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models",
+  "cause_pdf": "data/papers/Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models.pdf",
+  "id": "o3-042"
+ },
+ {
+  "defense": "Task Shield",
+  "cause": "AgentDojo: ignore-previous injection",
+  "fix_paper": "The Task Shield: Enforcing Task Alignment to Defend Against Indirect Prompt Injection in LLM Agents",
+  "fix_pdf": "data/papers/The Task Shield - Enforcing Task Alignment to Defend Against Indirect Prompt Injection in LLM Agents.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-043"
+ },
+ {
+  "defense": "ReliabilityRAG",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "ReliabilityRAG: Effective and Provably Robust Defense for RAG-based Web-Search",
+  "fix_pdf": "data/papers/ReliabilityRAG - Effective and Provably Robust Defense for RAG-based Web-Search.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-044"
+ },
+ {
+  "defense": "AttnComp (Attention-guided Context Compression)",
+  "cause": "distraction by irrelevant context (graded by semantic relatedness)",
+  "fix_paper": "AttnComp: Attention-Guided Adaptive Context Compression for Retrieval-Augmented Generation",
+  "fix_pdf": "data/papers/AttnComp - Attention-Guided Adaptive Context Compression for Retrieval-Augmented Generation.pdf",
+  "cause_paper": "How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?",
+  "cause_pdf": "data/papers/How Easily do Irrelevant Inputs Skew the Responses of Large Language Models.pdf",
+  "id": "o3-045"
+ },
+ {
+  "defense": "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
+  "cause": "AgentDojo: ignore-previous injection",
+  "fix_paper": "DRIFT: Dynamic Rule-Based Defense with Injection Isolation for Securing LLM Agents",
+  "fix_pdf": "data/papers/DRIFT - Dynamic Rule-Based Defense with Injection Isolation for Securing LLM Agents.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-046"
+ },
+ {
+  "defense": "Cognitive Control Architecture (CCA)",
+  "cause": "AgentDojo: ignore-previous injection",
+  "fix_paper": "Cognitive Control Architecture (CCA): A Lifecycle Supervision Framework for Robustly Aligned AI Agents",
+  "fix_pdf": "data/papers/Cognitive Control Architecture (CCA) - A Lifecycle Supervision Framework for Robustly Aligned AI Agents.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-047"
+ },
+ {
+  "defense": "unified Prompt Assembling + State Management + Safety Validation framework",
+  "cause": "UNNAMED: multi-modal prompt injection against robot navigation",
+  "fix_paper": "Enhancing reliability in LLM-integrated robotic systems: A unified approach to security and safety",
+  "fix_pdf": "data/papers/Enhancing reliability in LLM-integrated robotic systems - A unified approach to security and safety.pdf",
+  "cause_paper": "A Study on Prompt Injection Attack Against LLM-Integrated Mobile Robotic Systems",
+  "cause_pdf": "data/papers/A Study on Prompt Injection Attack Against LLM-Integrated Mobile Robotic Systems.pdf",
+  "id": "o3-048"
+ },
+ {
+  "defense": "AgenTRIM",
+  "cause": "Cross-Tool Description Poisoning",
+  "fix_paper": "AgenTRIM: Tool Risk Mitigation for Agentic AI",
+  "fix_pdf": "data/papers/AgenTRIM - Tool Risk Mitigation for Agentic AI.pdf",
+  "cause_paper": "Think Twice Before You Act: Protecting LLM Agents Against Tool Description Poisoning via Isolated Planning",
+  "cause_pdf": "data/papers/Think Twice Before You Act - Protecting LLM Agents Against Tool Description Poisoning via Isolated Planning.pdf",
+  "id": "o3-049"
+ },
+ {
+  "defense": "HIPIF (Hierarchical Planning and Information Folding)",
+  "cause": "context rot (agentic/long-horizon search)",
+  "fix_paper": "HIPIF: Hierarchical Planning and Information Folding for Long-Horizon LLM Agent Learning",
+  "fix_pdf": "data/papers/HIPIF - Hierarchical Planning and Information Folding for Long-Horizon LLM Agent Learning.pdf",
+  "cause_paper": "Diagnosing and Mitigating Context Rot in Long-horizon Search",
+  "cause_pdf": "data/papers/Diagnosing and Mitigating Context Rot in Long-horizon Search.pdf",
+  "id": "o3-050"
+ },
+ {
+  "defense": "TaskTracker (activation-delta task-drift detection)",
+  "cause": "UNNAMED: multi-probe evasive GCG suffix attack",
+  "fix_paper": "Get My Drift? Catching LLM Task Drift with Activation Deltas",
+  "fix_pdf": "data/papers/Get My Drift Catching LLM Task Drift with Activation Deltas.pdf",
+  "cause_paper": "Bypassing Prompt Injection Detectors through Evasive Injections",
+  "cause_pdf": "data/papers/Bypassing Prompt Injection Detectors through Evasive Injections.pdf",
+  "id": "o3-051"
+ },
+ {
+  "defense": "MIPIAD",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "MIPIAD: Multilingual Indirect Prompt Injection Attack Defense with Qwen - TF-IDF Hybrid and Meta-Ensemble Learning",
+  "fix_pdf": "data/papers/MIPIAD - Multilingual Indirect Prompt Injection Attack Defense with Qwen - TF-IDF Hybrid and Meta-Ensemble Learning.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-052"
+ },
+ {
+  "defense": "Contiguity-gate defense (for guardrail sliding-window aggregation)",
+  "cause": "Prompt Overflow Attack",
+  "fix_paper": "Prompt Overflow: What the Guardrail Inspects Is Not What the Model Infers",
+  "fix_pdf": "data/papers/Prompt Overflow - What the Guardrail Inspects Is Not What the Model Infers.pdf",
+  "cause_paper": "Prompt Overflow: What the Guardrail Inspects Is Not What the Model Infers",
+  "cause_pdf": "data/papers/Prompt Overflow - What the Guardrail Inspects Is Not What the Model Infers.pdf",
+  "id": "o3-053"
+ },
+ {
+  "defense": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
+  "cause": "AgentDojo: important-instructions injection",
+  "fix_paper": "LlamaFirewall: An open source guardrail system for building secure AI agents",
+  "fix_pdf": "data/papers/LlamaFirewall - An open source guardrail system for building secure AI agents.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-054"
+ },
+ {
+  "defense": "Activation-based (linear probe) prompt-injection classifier, evaluated under Leave-One-Dataset-Out (LODO) protocol",
+  "cause": "BIPIA benchmark attack set",
+  "fix_paper": "When Benchmarks Lie: Evaluating Malicious Prompt Classifiers Under True Distribution Shift",
+  "fix_pdf": "data/papers/When Benchmarks Lie - Evaluating Malicious Prompt Classifiers Under True Distribution Shift.pdf",
+  "cause_paper": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models",
+  "cause_pdf": "data/papers/Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models.pdf",
+  "id": "o3-055"
+ },
+ {
+  "defense": "SkillScan",
+  "cause": "Guidance Injection",
+  "fix_paper": "Agent Skills in the Wild: An Empirical Study of Security Vulnerabilities at Scale",
+  "fix_pdf": "data/papers/Agent Skills in the Wild - An Empirical Study of Security Vulnerabilities at Scale.pdf",
+  "cause_paper": "Trojan's Whisper: Stealthy Manipulation of OpenClaw through Injected Bootstrapped Guidance",
+  "cause_pdf": "data/papers/Trojan's Whisper - Stealthy Manipulation of OpenClaw through Injected Bootstrapped Guidance.pdf",
+  "id": "o3-056"
+ },
+ {
+  "defense": "InstructDetector",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Defending against Indirect Prompt Injection by Instruction Detection",
+  "fix_pdf": "data/papers/Defending against Indirect Prompt Injection by Instruction Detection.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-057"
+ },
+ {
+  "defense": "UNNAMED: Four-layer guardrail system for offensive-security AI agents",
+  "cause": "UNNAMED: PI-based counter-attack on offensive AI cybersecurity agents (four-stage attack anatomy + seven-category taxonomy incl. Unicode homograph exploitation)",
+  "fix_paper": "Cybersecurity AI: Hacking the AI Hackers via Prompt Injection",
+  "fix_pdf": "data/papers/Cybersecurity AI - Hacking the AI Hackers via Prompt Injection.pdf",
+  "cause_paper": "Cybersecurity AI: Hacking the AI Hackers via Prompt Injection",
+  "cause_pdf": "data/papers/Cybersecurity AI - Hacking the AI Hackers via Prompt Injection.pdf",
+  "id": "o3-058"
+ },
+ {
+  "defense": "SecAlign (preference optimization)",
+  "cause": "ASTRA (and ASTRA++)",
+  "fix_paper": "SecAlign: Defending Against Prompt Injection with Preference Optimization",
+  "fix_pdf": "data/papers/SecAlign - Defending Against Prompt Injection with Preference Optimization.pdf",
+  "cause_paper": "May I have your Attention? Breaking Fine-Tuning based Prompt Injection Defenses using Architecture-Aware Attacks",
+  "cause_pdf": "data/papers/May I have your Attention Breaking Fine-Tuning based Prompt Injection Defenses using Architecture-Aware Attacks.pdf",
+  "id": "o3-059"
+ },
+ {
+  "defense": "MELON (Masked re-Execution and TooL comparisON)",
+  "cause": "ClawTrojan multi-step trojan/backdoor attack paradigm",
+  "fix_paper": "MELON: Provable Defense Against Indirect Prompt Injection Attacks in AI Agents",
+  "fix_pdf": "data/papers/MELON - Provable Defense Against Indirect Prompt Injection Attacks in AI Agents.pdf",
+  "cause_paper": "From Prompt Injection to Persistent Control: Defending Agentic Harness Against Trojan Backdoors",
+  "cause_pdf": "data/papers/From Prompt Injection to Persistent Control - Defending Agentic Harness Against Trojan Backdoors.pdf",
+  "id": "o3-060"
+ },
+ {
+  "defense": "Progent",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "Progent: Securing AI Agents with Privilege Control",
+  "fix_pdf": "data/papers/Progent - Securing AI Agents with Privilege Control.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-061"
+ },
+ {
+  "defense": "CommandSans",
+  "cause": "BIPIA benchmark attack set",
+  "fix_paper": "CommandSans: Securing AI Agents with Surgical Precision Prompt Sanitization",
+  "fix_pdf": "data/papers/CommandSans - Securing AI Agents with Surgical Precision Prompt Sanitization.pdf",
+  "cause_paper": "Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models",
+  "cause_pdf": "data/papers/Benchmarking and Defending against Indirect Prompt Injection Attacks on Large Language Models.pdf",
+  "id": "o3-062"
+ },
+ {
+  "defense": "MELON (Masked re-Execution and TooL comparisON)",
+  "cause": "PI-Hunter",
+  "fix_paper": "MELON: Provable Defense Against Indirect Prompt Injection Attacks in AI Agents",
+  "fix_pdf": "data/papers/MELON - Provable Defense Against Indirect Prompt Injection Attacks in AI Agents.pdf",
+  "cause_paper": "PI-Hunter: Automated Red-Teaming for Exposing and Localizing Prompt Injections",
+  "cause_pdf": "data/papers/PI-Hunter - Automated Red-Teaming for Exposing and Localizing Prompt Injections.pdf",
+  "id": "o3-063"
+ },
+ {
+  "defense": "Tool-Guard",
+  "cause": "Cross-Tool Description Poisoning",
+  "fix_paper": "Think Twice Before You Act: Protecting LLM Agents Against Tool Description Poisoning via Isolated Planning",
+  "fix_pdf": "data/papers/Think Twice Before You Act - Protecting LLM Agents Against Tool Description Poisoning via Isolated Planning.pdf",
+  "cause_paper": "Think Twice Before You Act: Protecting LLM Agents Against Tool Description Poisoning via Isolated Planning",
+  "cause_pdf": "data/papers/Think Twice Before You Act - Protecting LLM Agents Against Tool Description Poisoning via Isolated Planning.pdf",
+  "id": "o3-064"
+ },
+ {
+  "defense": "AttriGuard",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "AttriGuard: Defeating Indirect Prompt Injection in LLM Agents via Causal Attribution of Tool Invocations",
+  "fix_pdf": "data/papers/AttriGuard - Defeating Indirect Prompt Injection in LLM Agents via Causal Attribution of Tool Invocations.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-065"
+ },
+ {
+  "defense": "DRIP",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "DRIP: Defending Prompt Injection via Token-wise Representation Editing and Residual Instruction Fusion",
+  "fix_pdf": "data/papers/DRIP - Defending Prompt Injection via Token-wise Representation Editing and Residual Instruction Fusion.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-066"
+ },
+ {
+  "defense": "UNNAMED: Uncertainty-based Random Forest attack detector (chimera/Xmera)",
+  "cause": "Xmera (chimera MitM framework)",
+  "fix_paper": "Injecting Falsehoods: Adversarial Man-in-the-Middle Attacks Undermining Factual Recall in LLMs",
+  "fix_pdf": "data/papers/Injecting Falsehoods - Adversarial Man-in-the-Middle Attacks Undermining Factual Recall in LLMs.pdf",
+  "cause_paper": "Injecting Falsehoods: Adversarial Man-in-the-Middle Attacks Undermining Factual Recall in LLMs",
+  "cause_pdf": "data/papers/Injecting Falsehoods - Adversarial Man-in-the-Middle Attacks Undermining Factual Recall in LLMs.pdf",
+  "id": "o3-067"
+ },
+ {
+  "defense": "Focus (slime-mold-inspired active context compression)",
+  "cause": "lost in the middle",
+  "fix_paper": "Active Context Compression: Autonomous Memory Management in LLM Agents",
+  "fix_pdf": "data/papers/Active Context Compression - Autonomous Memory Management in LLM Agents.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "o3-068"
+ },
+ {
+  "defense": "FocusAgent / DefenseFocusAgent",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "FocusAgent: Simple Yet Effective Ways of Trimming the Large Context of Web Agents",
+  "fix_pdf": "data/papers/FocusAgent - Simple Yet Effective Ways of Trimming the Large Context of Web Agents.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-069"
+ },
+ {
+  "defense": "AttnTrace",
+  "cause": "Relinking",
+  "fix_paper": "AttnTrace: Contextual Attribution of Prompt Injection and Knowledge Corruption",
+  "fix_pdf": "data/papers/AttnTrace - Contextual Attribution of Prompt Injection and Knowledge Corruption.pdf",
+  "cause_paper": "Safe to Check, Unsafe to Use: Relinking at the Compression Boundary of LLM Agents",
+  "cause_pdf": "data/papers/Safe to Check, Unsafe to Use - Relinking at the Compression Boundary of LLM Agents.pdf",
+  "id": "o3-070"
+ },
+ {
+  "defense": "Scale Positional Hidden States (single-dimension scaling)",
+  "cause": "lost in the middle",
+  "fix_paper": "Mitigate Position Bias in Large Language Models via Scaling a Single Dimension",
+  "fix_pdf": "data/papers/Mitigate Position Bias in Large Language Models via Scaling a Single Dimension.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "o3-071"
+ },
+ {
+  "defense": "Tree of Agents (TOA)",
+  "cause": "lost in the middle",
+  "fix_paper": "Tree of Agents: Improving Long-Context Capabilities of Large Language Models through Multi-Perspective Reasoning",
+  "fix_pdf": "data/papers/Tree of Agents - Improving Long-Context Capabilities of Large Language Models through Multi-Perspective Reasoning.pdf",
+  "cause_paper": "Lost in the Middle: How Language Models Use Long Contexts",
+  "cause_pdf": "data/papers/Lost in the Middle - How Language Models Use Long Contexts.pdf",
+  "id": "o3-072"
+ },
+ {
+  "defense": "UNNAMED: Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)",
+  "cause": "AgentDojo: important-instructions injection",
+  "fix_paper": "Data Leakage Prevention in Agentic Applications via Preemptive Hardening",
+  "fix_pdf": "data/papers/Data Leakage Prevention in Agentic Applications via Preemptive Hardening.pdf",
+  "cause_paper": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+  "cause_pdf": "data/papers/AgentDojo - A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents.pdf",
+  "id": "o3-073"
+ },
+ {
+  "defense": "CommandSans",
+  "cause": "Indirect Prompt Injection (IPI)",
+  "fix_paper": "CommandSans: Securing AI Agents with Surgical Precision Prompt Sanitization",
+  "fix_pdf": "data/papers/CommandSans - Securing AI Agents with Surgical Precision Prompt Sanitization.pdf",
+  "cause_paper": "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+  "cause_pdf": "data/papers/Not What You've Signed Up For - Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection.pdf",
+  "id": "o3-074"
+ }
+]

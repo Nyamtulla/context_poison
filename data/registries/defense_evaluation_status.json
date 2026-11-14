@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-06",
+ "generated": "2026-11-13",
  "purpose": "For every RQ4 defense, record what its paper actually evaluated it against.",
  "n_defenses": 540,
  "counts": {
-  "named_mechanism": 209,
+  "named_mechanism": 196,
+  "non_adversarial": 211,
   "no_baseline": 18,
-  "benchmark_only": 37,
-  "adversarial_prose": 59,
-  "non_adversarial": 203,
+  "benchmark_only": 41,
+  "adversarial_prose": 60,
   "unclear": 14
  },
- "n_evaluated_adversarially": 305,
- "pct_evaluated_adversarially": 56.5,
+ "n_evaluated_adversarially": 297,
+ "pct_evaluated_adversarially": 55.0,
  "defenses": [
   {
    "defense_name": "MELON (Masked re-Execution and TooL comparisON)",
@@ -46,8 +46,8 @@
    "row": 32,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "AttnComp (Attention-guided Context Compression)",
@@ -55,8 +55,8 @@
    "row": 33,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Self-RAG",
@@ -82,8 +82,8 @@
    "row": 37,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "IPIGuard",
@@ -208,8 +208,8 @@
    "row": 73,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: ASR"
   },
   {
    "defense_name": "CodeSentinel",
@@ -217,8 +217,8 @@
    "row": 80,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: attack success rate"
   },
   {
    "defense_name": "MIPIAD",
@@ -262,8 +262,8 @@
    "row": 94,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: AgentDojo"
   },
   {
    "defense_name": "RETA (Reasoning-Enabled Task Alignment)",
@@ -280,8 +280,8 @@
    "row": 98,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: Undefended"
   },
   {
    "defense_name": "TRACER-AI",
@@ -325,8 +325,8 @@
    "row": 112,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: jailbreak"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "UNNAMED: Representation Engineering-based Probing for IPI detection",
@@ -334,8 +334,8 @@
    "row": 113,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: AgentDojo"
   },
   {
    "defense_name": "Secure Prompt Engineering Patterns (SPEP)",
@@ -397,8 +397,8 @@
    "row": 126,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Safety-guided Chain-of-Thought (SCoT)",
@@ -424,8 +424,8 @@
    "row": 138,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: ASR"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "MAScope",
@@ -442,8 +442,8 @@
    "row": 140,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: undefended"
   },
   {
    "defense_name": "AuthGraph",
@@ -460,8 +460,8 @@
    "row": 143,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: Attack Success Rate"
   },
   {
    "defense_name": "PACT (Provenance-Aware Capability Contracts)",
@@ -505,8 +505,8 @@
    "row": 151,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: TensorTrust"
   },
   {
    "defense_name": "RouteGuard",
@@ -577,8 +577,8 @@
    "row": 165,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: injection experiment"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Unified Security Orchestration Framework (USOF)",
@@ -667,8 +667,8 @@
    "row": 185,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: injection attack"
   },
   {
    "defense_name": "UNNAMED: Multi-agent PI defense pipeline (Chain-of-Agents / Coordinator-based)",
@@ -676,8 +676,8 @@
    "row": 188,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: undefended"
   },
   {
    "defense_name": "PISanitizer",
@@ -712,8 +712,8 @@
    "row": 197,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: Jailbreak"
   },
   {
    "defense_name": "PromptSleuth",
@@ -784,8 +784,8 @@
    "row": 206,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "LLM Firewall (Validator Agent)",
@@ -829,8 +829,8 @@
    "row": 219,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: attack scenario"
   },
   {
    "defense_name": "UNNAMED: Scientist Persona + Provenance Audit mitigations against indirect data poisoning",
@@ -937,8 +937,8 @@
    "row": 251,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: OpenPromptInjection"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "FilterRAG / ML-FilterRAG",
@@ -1000,8 +1000,8 @@
    "row": 270,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: PoisonedRAG"
   },
   {
    "defense_name": "UNNAMED: two-plane OPA-based governance architecture for secure RAG (provenance + ABAC + policy-as-code across ingestion/indexing/retrieval/generation)",
@@ -1027,8 +1027,8 @@
    "row": 277,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: InjecAgent"
   },
   {
    "defense_name": "TracLLM",
@@ -1054,8 +1054,8 @@
    "row": 289,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "MemLineage",
@@ -1063,8 +1063,8 @@
    "row": 290,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: AgentDojo"
   },
   {
    "defense_name": "SecureGov-Agent",
@@ -1153,8 +1153,8 @@
    "row": 318,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: InjecAgent"
   },
   {
    "defense_name": "Maris",
@@ -1279,8 +1279,8 @@
    "row": 351,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: ASR"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Defe-Prompt",
@@ -1288,8 +1288,8 @@
    "row": 353,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: attack prompt"
   },
   {
    "defense_name": "DASGuard",
@@ -1306,8 +1306,8 @@
    "row": 364,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: AgentDojo"
   },
   {
    "defense_name": "LlamaFirewall (PromptGuard 2 + AlignmentCheck + modular guardrail engine)",
@@ -1378,8 +1378,8 @@
    "row": 380,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "ARC (Active and Reflection-driven Context management)",
@@ -1405,8 +1405,8 @@
    "row": 386,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "FinLongDocAgent",
@@ -1414,8 +1414,8 @@
    "row": 387,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "ClinQueryAgent (Retrieval Agent sub-agent delegation)",
@@ -1432,8 +1432,8 @@
    "row": 389,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "LongCrafter",
@@ -1450,8 +1450,8 @@
    "row": 394,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: ASB"
   },
   {
    "defense_name": "ActiveContext (ContextCurator + TaskExecutor)",
@@ -1459,8 +1459,8 @@
    "row": 395,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "DualGraph",
@@ -1495,8 +1495,8 @@
    "row": 402,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "GUI-PRA (Process Reward Agent)",
@@ -1504,8 +1504,8 @@
    "row": 404,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "LDAR (Learning Distraction-Aware Retrieval)",
@@ -1513,8 +1513,8 @@
    "row": 405,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Tree of Agents (TOA)",
@@ -1540,8 +1540,8 @@
    "row": 410,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "MAL-RAG (Multiple Abstraction Level RAG)",
@@ -1639,8 +1639,8 @@
    "row": 426,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Context-Folding (FoldGRPO)",
@@ -1648,8 +1648,8 @@
    "row": 427,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "SUPO (summarization-based context management for RL)",
@@ -1693,8 +1693,8 @@
    "row": 438,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "CoCortex",
@@ -1747,8 +1747,8 @@
    "row": 461,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "OCR-Memory (Optical Context Retrieval Memory)",
@@ -1765,8 +1765,8 @@
    "row": 329,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: AgentDojo"
   },
   {
    "defense_name": "DRIFT (Dynamic Rule-based Isolation Framework for Trustworthy agentic systems)",
@@ -1792,8 +1792,8 @@
    "row": 482,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "AgentFold (folding - granular condensation / deep consolidation context management)",
@@ -1801,8 +1801,8 @@
    "row": 484,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "MemAct (Memory-as-Action) with Dynamic Context Policy Optimization",
@@ -1819,8 +1819,8 @@
    "row": 496,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "ColorBrowserAgent (knowledge-aligned progressive summarization + human-in-the-loop knowledge adaptation)",
@@ -1828,8 +1828,8 @@
    "row": 498,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Agent-BRACE (Agent Belief state Representation via Abstraction and Confidence Estimation)",
@@ -1855,8 +1855,8 @@
    "row": 501,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "ROMA (Recursive Open Meta-Agents) with GEPA+",
@@ -1945,8 +1945,8 @@
    "row": 535,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Constraint Pinning",
@@ -2035,8 +2035,8 @@
    "row": 564,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "UI-Copilot (memory decoupling + Tool-Integrated Policy Optimization / TIPO)",
@@ -2044,8 +2044,8 @@
    "row": 567,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "MMPO (Metacognitive Memory Policy Optimization) with Belief Entropy",
@@ -2053,8 +2053,8 @@
    "row": 570,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Slipstream (asynchronous, judge-validated trajectory-grounded compaction)",
@@ -2206,8 +2206,8 @@
    "row": 617,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "icat-agent (decentralized event-based multi-agent scaffold)",
@@ -2314,8 +2314,8 @@
    "row": 637,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "CompactionRL",
@@ -2422,8 +2422,8 @@
    "row": 652,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: adversarial benchmark"
   },
   {
    "defense_name": "SHIFT (gate-modulated activation steering)",
@@ -2431,8 +2431,8 @@
    "row": 653,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "TCR (Transparent Conflict Resolution)",
@@ -2440,8 +2440,8 @@
    "row": 654,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "FaithfulRAG (fact-level conflict modeling + Self-Think)",
@@ -2449,8 +2449,8 @@
    "row": 655,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "KCM (Knowledge Conflict Mitigation)",
@@ -2458,8 +2458,8 @@
    "row": 656,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Micro-Act (hierarchical action-space decomposition)",
@@ -2467,8 +2467,8 @@
    "row": 657,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "CARE-RAG (Conflict-Aware and Reliable Evidence for RAG)",
@@ -2485,8 +2485,8 @@
    "row": 659,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "PH3 (Pruning Head via PatH PatcHing)",
@@ -2521,8 +2521,8 @@
    "row": 663,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "MACR (multi-agent conflict resolution)",
@@ -2539,8 +2539,8 @@
    "row": 665,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "CD2 (Conflict-Disentangle Contrastive Decoding)",
@@ -2548,8 +2548,8 @@
    "row": 666,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "ParamMute (Parametric Knowledge Muting through FFN Suppression)",
@@ -2557,8 +2557,8 @@
    "row": 667,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Swin-VIB (variational information bottleneck pipeline)",
@@ -2566,8 +2566,8 @@
    "row": 668,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Cross-Validation Re-ranking (inter-context conflict-aware re-ranking)",
@@ -2584,8 +2584,8 @@
    "row": 670,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "RPO (Retrieval Preference Optimization)",
@@ -2593,8 +2593,8 @@
    "row": 673,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "ProbeRAG (knowledge pruning + latent conflict probing + conflict-aware attention)",
@@ -2602,8 +2602,8 @@
    "row": 675,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "APPA (Agentic Permissions Policy Algebra)",
@@ -2638,8 +2638,8 @@
    "row": 679,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: jailbreak"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "UNNAMED: Layered defense (input filtering + prompt hardening/spotlighting + output validation) against passive prompt injection",
@@ -2665,8 +2665,8 @@
    "row": 683,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: AgentDojo"
   },
   {
    "defense_name": "Pattern D: Inference-boundary redaction proxy (PII extraction/tokenization before model inference)",
@@ -2692,8 +2692,8 @@
    "row": 687,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: AgentDojo"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "KBRA (Keyed Binding Reassembly Audit)",
@@ -2719,8 +2719,8 @@
    "row": 692,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: injection bench"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Route-Safety Audit Contract (confirmation-plus-provenance routing)",
@@ -2728,8 +2728,8 @@
    "row": 695,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: injection bench"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "SecureClaw (dual-boundary: effect-sink authorization + read-boundary plaintext confinement)",
@@ -2746,8 +2746,8 @@
    "row": 698,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: injection bench"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "AgentSecBench Combined defense stack (filtering + projection + redaction + delimiter annotation)",
@@ -2764,8 +2764,8 @@
    "row": 704,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: AgentDojo"
   },
   {
    "defense_name": "UNNAMED: Hybrid SIEM + One-Class SVM prompt-injection detection framework",
@@ -2791,8 +2791,8 @@
    "row": 708,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: adversarial prompt"
   },
   {
    "defense_name": "ESLD (External Surrogate Latent Defense)",
@@ -2818,8 +2818,8 @@
    "row": 714,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "FATE (on-policy self-evolving repair framework) with Pareto-Front Policy Optimization (PFPO)",
@@ -2827,8 +2827,8 @@
    "row": 716,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: AgentDojo"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "sign-c (server-side signing of execution-bearing response fields)",
@@ -2890,8 +2890,8 @@
    "row": 733,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: AgentDojo"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "PCFI (Prompt Control-Flow Integrity)",
@@ -2953,8 +2953,8 @@
    "row": 747,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: OpenPromptInjection"
   },
   {
    "defense_name": "Authenticated Prompts / Authenticated Context (cryptographic provenance + policy algebra)",
@@ -2971,8 +2971,8 @@
    "row": 752,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: undefended"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "RedVisor",
@@ -3043,8 +3043,8 @@
    "row": 771,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: injection attack"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Mantis",
@@ -3061,8 +3061,8 @@
    "row": 779,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: Jailbreak"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "TaskTracker (activation-delta task-drift detection)",
@@ -3088,8 +3088,8 @@
    "row": 788,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: undefended"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Discern-and-Answer",
@@ -3214,8 +3214,8 @@
    "row": 828,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "SecureRag",
@@ -3241,8 +3241,8 @@
    "row": 833,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "AttriMem",
@@ -3304,8 +3304,8 @@
    "row": 845,
    "track": null,
    "validated_against": "both",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: adversarial prompt"
   },
   {
    "defense_name": "LRE (Learned Relevance Eviction)",
@@ -3403,8 +3403,8 @@
    "row": 862,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "RS-Claw (hierarchical skill trees for remote-sensing agents)",
@@ -3412,8 +3412,8 @@
    "row": 863,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "CKG-RAG",
@@ -3457,8 +3457,8 @@
    "row": 874,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Gated Coordination (Partitioned Information Architecture + Cost-Sensitive Gated Escalation)",
@@ -3502,8 +3502,8 @@
    "row": 884,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "D-Mem (Dual-Process Memory System, Quality Gating)",
@@ -3529,8 +3529,8 @@
    "row": 891,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Hippocampus (Dynamic Wavelet Matrix memory)",
@@ -3592,8 +3592,8 @@
    "row": 901,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "STITCH (Structured Intent Tracking in Contextual History)",
@@ -3619,8 +3619,8 @@
    "row": 904,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "StackPlanner",
@@ -3655,8 +3655,8 @@
    "row": 910,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Chain-of-Memory (CoM) - verifiable retrieval + causal tracing",
@@ -3691,8 +3691,8 @@
    "row": 915,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "ReCAP (Recursive Context-Aware Reasoning and Planning)",
@@ -3700,8 +3700,8 @@
    "row": 916,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "State-Update Multi-turn Dialogue Strategy",
@@ -3736,8 +3736,8 @@
    "row": 925,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "unclear",
+   "evidence": "coded fields do not say"
   },
   {
    "defense_name": "Knowledgeable-R1",
@@ -3745,8 +3745,8 @@
    "row": 926,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "RAG-Modulo",
@@ -3799,8 +3799,8 @@
    "row": 935,
    "track": null,
    "validated_against": "incidental",
-   "status": "unclear",
-   "evidence": "coded fields do not say"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Cognitive Scaffold",
@@ -3844,8 +3844,8 @@
    "row": 943,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "SUGAR (Semantic Uncertainty Guided Adaptive Retrieval)",
@@ -3970,8 +3970,8 @@
    "row": 976,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "PAACE (Plan-Aware Automated Context Engineering)",
@@ -3997,8 +3997,8 @@
    "row": 980,
    "track": null,
    "validated_against": "both",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "SABER (Self-Aware Belief Estimator for RAG)",
@@ -4006,8 +4006,8 @@
    "row": 983,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "MAGIC-Video (multimodal memory graph + narrative chain)",
@@ -4051,8 +4051,8 @@
    "row": 990,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "A-RAG (hierarchical retrieval interfaces)",
@@ -4069,8 +4069,8 @@
    "row": 992,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "KScope-guided Constrained Context Summarization",
@@ -4078,8 +4078,8 @@
    "row": 994,
    "track": null,
    "validated_against": "incidental",
-   "status": "unclear",
-   "evidence": "coded fields do not say"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "GenDiE (Generate, Discriminate, Evolve)",
@@ -4087,8 +4087,8 @@
    "row": 995,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "UniKnow / LM-UniKnow",
@@ -4096,8 +4096,8 @@
    "row": 997,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "ReMEmbR (Retrieval-augmented Memory for Embodied Robots)",
@@ -4132,8 +4132,8 @@
    "row": 1002,
    "track": null,
    "validated_against": "incidental",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "unclear",
+   "evidence": "coded fields do not say"
   },
   {
    "defense_name": "COMBO (Compatibility-Oriented knowledge Merging)",
@@ -4168,8 +4168,8 @@
    "row": 1008,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "UNNAMED: Explanation-based secondary detection signal for log-injection evasion",
@@ -4240,8 +4240,8 @@
    "row": 1021,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "no_baseline",
+   "evidence": "paper states no real comparison: None "
   },
   {
    "defense_name": "f-secure LLM system (information flow control)",
@@ -4249,8 +4249,8 @@
    "row": 1024,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: injection bench"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Signed-Prompt",
@@ -4294,8 +4294,8 @@
    "row": 1038,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: injection bench"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "COIECD (contextual information-entropy constraint decoding)",
@@ -4321,8 +4321,8 @@
    "row": 1045,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: AgentDojo"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "UNNAMED: two preemptive-answer mitigations",
@@ -4411,8 +4411,8 @@
    "row": 1079,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: attack success rate"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Multi-Layer Defense Framework (preprocessing + statistical + neural detection + behavioral monitoring)",
@@ -4420,8 +4420,8 @@
    "row": 1086,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: injection dataset"
   },
   {
    "defense_name": "Reconstruct to Discriminate (RtD)",
@@ -4447,8 +4447,8 @@
    "row": 1091,
    "track": null,
    "validated_against": "adversarial",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "data defenses",
@@ -4465,8 +4465,8 @@
    "row": 1095,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: attack success rate"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Zero-Shot Embedding Drift Detection (ZEDD)",
@@ -4474,8 +4474,8 @@
    "row": 1098,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: Inject dataset"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "PhantomLint",
@@ -4483,8 +4483,8 @@
    "row": 1101,
    "track": null,
    "validated_against": "adversarial",
-   "status": "no_baseline",
-   "evidence": "paper states no real comparison: None "
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "CaptureGuard",
@@ -4510,8 +4510,8 @@
    "row": 1109,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "benchmark_only",
+   "evidence": "names an adversarial benchmark: injection bench"
   },
   {
    "defense_name": "CASCADE",
@@ -4528,8 +4528,8 @@
    "row": 1115,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: adversarial dataset"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "LLM-as-a-Judge (taxonomy-guided structured-reasoning judge) with Mixture-of-Models aggregation",
@@ -4546,8 +4546,8 @@
    "row": 1120,
    "track": null,
    "validated_against": "adversarial",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "KVEraser",
@@ -4636,8 +4636,8 @@
    "row": 1150,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: ASR"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Hybrid Constitutional Classifier",
@@ -4654,8 +4654,8 @@
    "row": 1157,
    "track": null,
    "validated_against": "adversarial",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "non_adversarial",
+   "evidence": "real baselines, no adversarial signal in the coded fields"
   },
   {
    "defense_name": "Prompt Injection Threat Analysis + LLM Output Risk Monitoring framework",
@@ -4852,8 +4852,8 @@
    "row": null,
    "track": null,
    "validated_against": "",
-   "status": "named_mechanism",
-   "evidence": "appears in a confirmed coverage pair"
+   "status": "adversarial_prose",
+   "evidence": "evaluation describes attacked vs undefended: no-defense baseline"
   },
   {
    "defense_name": "soft begging",

@@ -1,0 +1,462 @@
+[
+ {
+  "defense": "Secure Prompt Engineering Patterns (SPEP)",
+  "paper_id": "08e6079c73649ba405826d9ea5da1c18645fcdb6",
+  "paper_title": "Secure Prompt Engineering Patterns for Cloud LLM Agents",
+  "pdf": "data/source_pdfs_manual/Secure_Prompt_Engineering_Patterns_for_Cloud_LLM_Agents.pdf",
+  "validated_against": "adversarial",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Data fields empty in export except abstract; abstract describes proposing cloud-specific secure prompt engineering patterns against PI"
+ },
+ {
+  "defense": "Meticulous Thought Defender",
+  "paper_id": "06fa2b9d40f97bd093aa3d21f42828ed82d8f55e",
+  "paper_title": "Meticulous Thought Defender: Fine-Grained Chain-of-Thought (CoT) for Detecting Prompt Injection Attacks of Large Language Models",
+  "pdf": "data/source_pdfs_manual/Meticulous_Thought_Defender_Fine-Grained_Chain-of-Thought_CoT_for_Detecting_Prompt_Injection_Attacks_of_Large_Language_Models.pdf",
+  "validated_against": "adversarial",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Data fields empty in export except abstract; abstract describes a fine-grained CoT-based detection framework for PI"
+ },
+ {
+  "defense": "ShieldNet",
+  "paper_id": "cc8a1ebd5ce98084b9f1fa2768d3a6535caf6fae",
+  "paper_title": "ShieldNet: Network-Level Guardrails against Emerging Supply-Chain Injections in Agentic Systems",
+  "pdf": "data/papers/ShieldNet - Network-Level Guardrails against Emerging Supply-Chain Injections in Agentic Systems.pdf",
+  "validated_against": "adversarial",
+  "channel": "supply-chain",
+  "consequence": "goal-hijack",
+  "registry_notes": "Network-level guardrail against MCP supply-chain injections; evaluated on SC-Inject-Bench (10,000+ malicious MCP tools) vs static scanners (Cisco AI, Ramparts, Invariant Labs) and semantic-trajectory baselines"
+ },
+ {
+  "defense": "SecureGov-Agent",
+  "paper_id": "e2e5529df48fe6cf893da483360958b32d829724",
+  "paper_title": "SecureGov-Agent: A Governance-Centric Multi-Agent Framework for Privacy-Preserving and Attack-Resilient LLM Agents",
+  "pdf": "data/papers/SecureGov-Agent - A Governance-Centric Multi-Agent Framework for Privacy-Preserving and Attack-Resilient LLM Agents.pdf",
+  "validated_against": "adversarial",
+  "channel": "multi-agent",
+  "consequence": "goal-hijack",
+  "registry_notes": "Governance-centric MAS framework with dedicated Governance Agent (risk scoring + adversarial training on synthesized attacks) monitoring inter-agent communication/tool invocation; reduces ASR 73.2% and privacy leakage 81.4% vs unprotected systems across medical/financial/document scenarios"
+ },
+ {
+  "defense": "UNNAMED: ICL-based multi-LLM agent harmfulness-detection framework",
+  "paper_id": "c30673d667b2875f2a7563c4755520d6961783f8",
+  "paper_title": "Addressing Prompt Injection in Large Language Models via In-Context Learning",
+  "pdf": "data/papers/Addressing Prompt Injection in Large Language Models via In-Context Learning.pdf",
+  "validated_against": "adversarial",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "In-context-learning-based multi-LLM agent framework for prompt-injection/jailbreak detection without fine-tuning; outperforms four baselines with average +16.6 F1 points across three target LLMs"
+ },
+ {
+  "defense": "UNNAMED: off-the-shelf LLM behavioral overseer (non-verbal interaction-trace adversarial-intent detection)",
+  "paper_id": "18f0a52f091f3863670ea503bfd320d4bcb902a3",
+  "paper_title": "Detection of adversarial intent in Human-AI teams using LLMs",
+  "pdf": "data/papers/Detection of adversarial intent in Human-AI teams using LLMs.pdf",
+  "validated_against": "adversarial",
+  "channel": "multi-agent",
+  "consequence": "silent-corruption",
+  "registry_notes": "Feasibility study showing off-the-shelf/lightly-fine-tuned LLMs can detect a malicious AI teammate's adversarial intent purely from behavioral (non-linguistic) interaction traces in a trivia-game human-AI team setting; narrow single-scenario evaluation, more proof-of-concept than a coined reusable technique"
+ },
+ {
+  "defense": "ARC (Active and Reflection-driven Context management)",
+  "paper_id": "883670bdd662f19ef5822b20d6136f75e8de1f3b",
+  "paper_title": "ARC: Active and Reflection-driven Context Management for Long-Horizon Information Seeking Agents",
+  "pdf": "data/papers/ARC - Active and Reflection-driven Context Management for Long-Horizon Information Seeking Agents.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Dual-component (Actor/Context Manager) framework combating context rot in long-horizon information-seeking agents; outperforms ReAct and ReSum across 5 actor models and 5 benchmarks"
+ },
+ {
+  "defense": "LongRAG",
+  "paper_id": "arxiv:2410.18050",
+  "paper_title": "LongRAG: A Dual-Perspective Retrieval-Augmented Generation Paradigm for Long-Context Question Answering",
+  "pdf": "data/papers/LongRAG - A Dual-Perspective Retrieval-Augmented Generation Paradigm for Long-Context Question Answering.pdf",
+  "validated_against": "incidental",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Dual-perspective plug-and-play RAG paradigm (hybrid retriever + global-structure preservation) addressing chunking-induced lost-in-the-middle; outperforms LongAlign/LongLoRA, CRAG/Self-RAG/CFIC, and Vanilla RAG baselines"
+ },
+ {
+  "defense": "AgentSwing",
+  "paper_id": "9c8c4c9afa5759716a6bfe1d9ec4c32ba046b7b0",
+  "paper_title": "AgentSwing: Adaptive Parallel Context Management Routing for Long-Horizon Web Agents",
+  "pdf": "data/papers/AgentSwing - Adaptive Parallel Context Management Routing for Long-Horizon Web Agents.pdf",
+  "validated_against": "incidental",
+  "channel": "tool-output",
+  "consequence": "availability-loss",
+  "registry_notes": "Adaptive parallel context-management routing (vs single fixed strategy) for long-horizon web agents; outperforms no-CM baseline and static Discard-All/Keep-Last-N/Summary strategies"
+ },
+ {
+  "defense": "HiAgent",
+  "paper_id": "a7fb4245b412f0e54ec26d5973f041d52c83c0ad",
+  "paper_title": "HiAgent: Hierarchical Working Memory Management for Solving Long-Horizon Agent Tasks with Large Language Model",
+  "pdf": "data/papers/HiAgent - Hierarchical Working Memory Management for Solving Long-Horizon Agent Tasks with Large Language Model.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Hierarchical working-memory management using subgoal-based chunking and LLM-based Observation Summarization to counter context redundancy degradation; roughly doubles success rate over STANDARD ReAct-style baseline"
+ },
+ {
+  "defense": "Prometheus (memory-centric context engine with working memory over a repository knowledge graph)",
+  "paper_id": "a14e146c8ee39a21546e71fd1bf4193b3e178748",
+  "paper_title": "Prometheus: Towards Long-Horizon Codebase Navigation for Repository-Level Problem Solving",
+  "pdf": "data/papers/Prometheus - Towards Long-Horizon Codebase Navigation for Repository-Level Problem Solving.pdf",
+  "validated_against": "incidental",
+  "channel": "tool-output",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Explicitly targets the Needle-in-a-Haystack problem (relevant evidence overwhelmed by irrelevant code) via persistent working memory and knowledge-graph context engine, with dedicated ablation showing working-memory's accuracy and cost benefits. No adversarial evaluation."
+ },
+ {
+  "defense": "SearchSwarm (delegation-intelligence harness/training for main-agent-to-subagent task decomposition)",
+  "paper_id": "25bb43f9e14b7d157a84736ee63352c6227766e0",
+  "paper_title": "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research",
+  "pdf": "data/papers/SearchSwarm - Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research.pdf",
+  "validated_against": "incidental",
+  "channel": "multi-agent",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Proposes an active delegation paradigm explicitly contrasted with passive context-management approaches (summarization/truncation) that wait until context budget is exhausted; core contribution is training data/harness for delegation skill rather than a pure architectural mechanism, so borderline as a citable context-pollution defense vs. a capability-training method."
+ },
+ {
+  "defense": "TDP (Task-Decoupled Planning)",
+  "paper_id": "7ea4430ffe6177a3722373bdc697227a883f3181",
+  "paper_title": "Beyond Entangled Planning: Task-Decoupled Planning for Long-Horizon Agents",
+  "pdf": "data/papers/Beyond Entangled Planning - Task-Decoupled Planning for Long-Horizon Agents.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Named training-free framework explicitly targeting 'entangled contexts' where monolithic history causes local errors to propagate across sub-tasks; isolates reasoning/replanning to scoped sub-task contexts to prevent error propagation, evaluated against ReAct/CoT/Plan-and-Act. No adversarial evaluation."
+ },
+ {
+  "defense": "ToolScope (Perceive tool within Global Navigator / Agentic Executor / Response Synthesizer)",
+  "paper_id": "607d050bb4b11be7d9f6a1dfe0625e4939df1f86",
+  "paper_title": "ToolScope: An Agentic Framework for Vision-Guided and Long-Horizon Tool Use",
+  "pdf": "data/papers/ToolScope - An Agentic Framework for Vision-Guided and Long-Horizon Tool Use.pdf",
+  "validated_against": "incidental",
+  "channel": "cross-modal",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Explicitly designed to 'mitigate visual context degradation in long-horizon VQA' via a dedicated Perceive tool maintaining situational visual awareness across iterative perception-action loops; evaluated against several baselines across four VQA benchmarks. No adversarial evaluation; borderline since the paper's broader framing (global planning + tool use) is a general capability contribution beyond just the visual-context-degradation fix."
+ },
+ {
+  "defense": "PRO-LONG (programmatic memory framework)",
+  "paper_id": "arxiv:2607.20064",
+  "paper_title": "PRO-LONG: Programmatic Memory Enables Long-Horizon Reasoning",
+  "pdf": "data/papers/PRO-LONG - Programmatic Memory Enables Long-Horizon Reasoning.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "registry_notes": "Named context-management framework explicitly addressing the 'fidelity-tractability tradeoff' and citing 'context rot' as core motivation; keeps a complete structured log and uses coding-agent search rather than lossy summarization. Evaluated against multiple named harness baselines (WorldModeler, Arcgentica, Schema). No adversarial evaluation."
+ },
+ {
+  "defense": "Context-Agent (dynamic discourse tree)",
+  "paper_id": "arxiv:2604.05552",
+  "paper_title": "Context-Agent: Dynamic Discourse Trees for Non-Linear Dialogue",
+  "pdf": "data/papers/Context-Agent - Dynamic Discourse Trees for Non-Linear Dialogue.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Named technique modeling dialogue history as a dynamic tree rather than flat sequence, explicitly addressing loss of coherence and inefficient context utilization from linear history treatment; ablations isolate tree structure vs. retrieval components. No adversarial evaluation."
+ },
+ {
+  "defense": "Parallel Compaction",
+  "paper_id": "3dd46c0ab602825f50b522ca9f96d22c3c6925b4",
+  "paper_title": "Parallel Context Compaction for Long-Horizon LLM Agent Serving",
+  "pdf": "data/papers/Parallel Context Compaction for Long-Horizon LLM Agent Serving.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "registry_notes": "Named technique explicitly addressing lossy, unpredictable (high run-to-run-variance) sequential summarization compaction that discards task-relevant information unpredictably; primary framing/evaluation is throughput/latency/predictability rather than information-preservation quality per se, though improved retained-context fraction is reported as a secondary benefit. No adversarial evaluation."
+ },
+ {
+  "defense": "LWM-Planner (Fact Extraction and Compression / FEC)",
+  "paper_id": "93f50fbd4ed8303e86ebb5946339bb103a234ab5",
+  "paper_title": "Fact-Augmented Lookahead Planning for LLM Agents",
+  "pdf": "data/papers/Fact-Augmented Lookahead Planning for LLM Agents.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Named fact-distillation mechanism explicitly aimed at reducing state aliasing from raw or insufficiently compressed interaction history; ablation (ReAct+FEC) isolates the fact-compression component's contribution separately from lookahead search. No adversarial evaluation; borderline since primary framing is planning-quality improvement rather than context-pollution defense per se."
+ },
+ {
+  "defense": "DyPRAG (Dynamic Parametric RAG)",
+  "paper_id": "8a2acc213b370c342cff3fa0301935612b403b21",
+  "paper_title": "Dynamic Parametric Retrieval Augmented Generation for Test-time Knowledge Enhancement",
+  "pdf": "data/papers/Dynamic Parametric Retrieval Augmented Generation for Test-time Knowledge Enhancement.pdf",
+  "validated_against": "incidental",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Named technique using a lightweight parameter translator to convert documents into parametric knowledge at test time, explicitly resolving knowledge conflicts in a plug-and-play manner; directly extends and reduces cost versus prior PRAG method. No adversarial evaluation."
+ },
+ {
+  "defense": "PromptSentinel-X",
+  "paper_id": "3fdd6bd75acec6e9e54a439a0f8c878c3656397f",
+  "paper_title": "PromptSentinel-X: A Leakage-Aware and Context-Aware Framework for Prompt-Injection Detection in Large Language Model-Powered Web Agents",
+  "pdf": "data/papers/PromptSentinel-X - A Leakage-Aware and Context-Aware Framework for Prompt-Injection Detection in Large Language Model-Powered Web Agents.pdf",
+  "validated_against": "adversarial",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Named leakage-aware, context-aware prompt-injection screening framework with detailed reported metrics (0.9849 accuracy, 0.9851 attack recall) in the abstract, though key_result/baselines/threat_model extraction fields were empty in source data, limiting confidence in the full evaluation methodology."
+ },
+ {
+  "defense": "AgentSecBench Combined defense stack (filtering + projection + redaction + delimiter annotation)",
+  "paper_id": "7761142d2760d74f0870cabe24176356e32198e0",
+  "paper_title": "AgentSecBench: Measuring Prompt Injection, Privacy Leakage, and Tool-Use Integrity in LLM Agents",
+  "pdf": "data/papers/AgentSecBench - Measuring Prompt Injection, Privacy Leakage, and Tool-Use Integrity in LLM Agents.pdf",
+  "validated_against": "adversarial",
+  "channel": "RAG",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Formal security-evaluation framework (three noninterference games) whose core contribution is a channel-closure measurement methodology rather than one single novel defense; however the evaluated Combined defense stack (composing four techniques) achieves 100% channel closure and 0.000 ASR/advantage across all games, the paper's own strongest proposed configuration."
+ },
+ {
+  "defense": "Token-Level Round-Robin (RR) Collaboration / RRMaj",
+  "paper_id": "2322a9616b069e2d0f27e736ff688840194332dd",
+  "paper_title": "The Consensus Trap: Rescuing Multi-Agent LLMs from Adversarial Majorities via Token-Level Collaboration",
+  "pdf": "data/papers/The Consensus Trap - Rescuing Multi-Agent LLMs from Adversarial Majorities via Token-Level Collaboration.pdf",
+  "validated_against": "adversarial",
+  "channel": "multi-agent",
+  "consequence": "silent-corruption",
+  "registry_notes": "Named collaboration architecture with a formal dynamical-systems proof that token-level interleaving lets an honest model's 'restorative pull' overcome adversarial majority corruption, unlike response-level majority voting which collapses; empirically validated across corruption ratios, attack strengths, and ensemble compositions with large recovered-accuracy gains."
+ },
+ {
+  "defense": "InjectDefuser",
+  "paper_id": "ee9dca5745032dea194209e3ad73b7ddae721ad7",
+  "paper_title": "Clouding the Mirror: Stealthy Prompt Injection Attacks Targeting LLM-based Phishing Detection",
+  "pdf": "data/papers/Clouding the Mirror - Stealthy Prompt Injection Attacks Targeting LLM-based Phishing Detection.pdf",
+  "validated_against": "adversarial",
+  "channel": "tool-output",
+  "consequence": "silent-corruption",
+  "registry_notes": "Prompt hardening + allowlist RAG + output validation defense against PI for phishing detection."
+ },
+ {
+  "defense": "SmoothVLM",
+  "paper_id": "f41109b24c24ecccf26cda9ceacad9167d197028",
+  "paper_title": "Safeguarding Vision-Language Models Against Patched Visual Prompt Injectors",
+  "pdf": "data/papers/Safeguarding Vision-Language Models Against Patched Visual Prompt Injectors.pdf",
+  "validated_against": "adversarial",
+  "channel": "cross-modal",
+  "consequence": "goal-hijack",
+  "registry_notes": "Randomized-smoothing defense against patched visual PI; tested vs JIP/VAE attacks incl. adaptive EOT."
+ },
+ {
+  "defense": "EquiMem",
+  "paper_id": "1ad06ca131f6e83a0dc16cb42495dd29a98522ad",
+  "paper_title": "EquiMem: Calibrating Shared Memory in Multi-Agent Debate via Game-Theoretic Equilibrium",
+  "pdf": "data/papers/EquiMem - Calibrating Shared Memory in Multi-Agent Debate via Game-Theoretic Equilibrium.pdf",
+  "validated_against": "adversarial",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Game-theoretic memory calibration for multi-agent debate; tested vs Memory Poisoning and Audit Collusion adaptive attacks."
+ },
+ {
+  "defense": "Program-Guided (PG) Runtime / Compile-then-Page SOP compiler",
+  "paper_id": "62e953c40357cfb93027ef8e55b60eacd76bc963",
+  "paper_title": "Compile, Then Page: Executable SOP Programs and a Capability-Gated Runtime for Procedural LLM Agents",
+  "pdf": "data/papers/Compile, Then Page - Executable SOP Programs and a Capability-Gated Runtime for Procedural LLM Agents.pdf",
+  "validated_against": "incidental",
+  "channel": "direct-input",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Compiles SOP into executable pseudocode + capability-gated stack-machine paging; addresses lost-in-the-middle style interference for procedure compliance."
+ },
+ {
+  "defense": "SING (Synthetic Intention Graph)",
+  "paper_id": "7c0c35da97d46615866416c0ef4a9de646f0a321",
+  "paper_title": "SING: Synthetic Intention Graph for Scalable Active Tool Discovery in LLM Agents",
+  "pdf": "data/papers/SING - Synthetic Intention Graph for Scalable Active Tool Discovery in LLM Agents.pdf",
+  "validated_against": "incidental",
+  "channel": "tool-metadata",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Intention-aware active tool discovery addressing context overload from tool-schema injection."
+ },
+ {
+  "defense": "MemTrace (memory evolution graph tracing + closed-loop correction)",
+  "paper_id": "49acf1e90f335385f6f4e5fb384ce47915cdf1c3",
+  "paper_title": "MemTrace: Tracing and Attributing Errors in Large Language Model Memory Systems",
+  "pdf": "data/papers/MemTrace - Tracing and Attributing Errors in Large Language Model Memory Systems.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "registry_notes": "Diagnostic/attribution tool for memory failures with closed-loop automatic prompt-optimization correction; non-adversarial."
+ },
+ {
+  "defense": "TSUBASA (evolving memory + context distillation)",
+  "paper_id": "84e59205e4350c9596e4a03583fdfd114112586b",
+  "paper_title": "TSUBASA: Improving Long-Horizon Personalization via Evolving Memory and Self-Learning with Context Distillation",
+  "pdf": "data/papers/TSUBASA - Improving Long-Horizon Personalization via Evolving Memory and Self-Learning with Context Distillation.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "silent-corruption",
+  "registry_notes": "Two-winged memory-writing + internalized memory-reading for long-horizon personalization; non-adversarial."
+ },
+ {
+  "defense": "EHR-RAG",
+  "paper_id": "a19c40320dee38dcd49a45b67e9b9c2f9a8438fd",
+  "paper_title": "EHR-RAG: Bridging Long-Horizon Structured Electronic Health Records and Large Language Models via Enhanced Retrieval-Augmented Generation",
+  "pdf": "data/papers/EHR-RAG - Bridging Long-Horizon Structured Electronic Health Records and Large Language Models via Enhanced Retrieval-Augmented Generation.pdf",
+  "validated_against": "incidental",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Event/time-aware hybrid retrieval + adaptive iterative retrieval + dual-path evidence reasoning for long-horizon EHR; addresses truncation/vanilla-RAG info loss."
+ },
+ {
+  "defense": "StackPlanner",
+  "paper_id": "eb76537f7195b0bae885bf181b73d2948c0755fd",
+  "paper_title": "StackPlanner: A Centralized Hierarchical Multi-Agent System with Task-Experience Memory Management",
+  "pdf": "data/papers/StackPlanner - A Centralized Hierarchical Multi-Agent System with Task-Experience Memory Management.pdf",
+  "validated_against": "incidental",
+  "channel": "multi-agent",
+  "consequence": "silent-corruption",
+  "registry_notes": "Hierarchical multi-agent framework with RL-optimized task-memory REVISE actions + experience memory; addresses context bloat/error accumulation."
+ },
+ {
+  "defense": "State-Update Multi-turn Dialogue Strategy",
+  "paper_id": "2aa22206048ff82676d0428b5c8d0d48cafbda62",
+  "paper_title": "A State-Update Prompting Strategy for Efficient and Robust Multi-turn Dialogue",
+  "pdf": "data/papers/A State-Update Prompting Strategy for Efficient and Robust Multi-turn Dialogue.pdf",
+  "validated_against": "incidental",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "registry_notes": "State Reconstruction + History Reminder training-free prompt strategy; addresses recency-bias 'forgetting phenomenon'."
+ },
+ {
+  "defense": "HMAS-2 (Hybrid Multi-Agent System with feedback re-planning)",
+  "paper_id": "1ad735714ad2e4ee5b94ce26c976e5ee5c7cde3b",
+  "paper_title": "Scalable Multi-Robot Collaboration with Large Language Models: Centralized or Decentralized Systems?",
+  "pdf": "data/papers/Scalable Multi-Robot Collaboration with Large Language Models - Centralized or Decentralized Systems.pdf",
+  "validated_against": "incidental",
+  "channel": "multi-agent",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Hybrid centralized/decentralized communication framework mitigating context dilution in multi-robot planning."
+ },
+ {
+  "defense": "Still (amortized KV cache compaction, Perceiver-based)",
+  "paper_id": "40ea97427c4750b1dee547f6c7b433733a80c38c",
+  "paper_title": "Still: Amortized KV Cache Compaction in a Single Forward Pass",
+  "pdf": "data/papers/Still - Amortized KV Cache Compaction in a Single Forward Pass.pdf",
+  "validated_against": "incidental",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "registry_notes": "Trained-once per-layer Perceiver compactor combining expressiveness+amortization."
+ },
+ {
+  "defense": "Multi2 (hierarchical multi-agent decision-making)",
+  "paper_id": "d588dd2028336d8b62cb5bebbecfa105ab5d5d82",
+  "paper_title": "Multi$^2$: Hierarchical Multi-Agent Decision-Making with LLM-Based Agents in Interactive Environments",
+  "pdf": "data/papers/Multi$^2$ - Hierarchical Multi-Agent Decision-Making with LLM-Based Agents in Interactive Environments.pdf",
+  "validated_against": "incidental",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "System1/System2 role decomposition mitigating 'objective drift' in long-horizon agents."
+ },
+ {
+  "defense": "MAGIC-Video (multimodal memory graph + narrative chain)",
+  "paper_id": "bd685d88d79a24126e21957625006d39e6e492c4",
+  "paper_title": "Bridging Modalities, Spanning Time: Structured Memory for Ultra-Long Agentic Video Reasoning",
+  "pdf": "data/papers/Bridging Modalities, Spanning Time - Structured Memory for Ultra-Long Agentic Video Reasoning.pdf",
+  "validated_against": "incidental",
+  "channel": "cross-modal",
+  "consequence": "silent-corruption",
+  "registry_notes": "Cross-modal + cross-time structured memory for ultra-long video reasoning."
+ },
+ {
+  "defense": "KScope-guided Constrained Context Summarization",
+  "paper_id": "60c9fbcba72112937aba067ead90727f43108634",
+  "paper_title": "KScope: A Framework for Characterizing the Knowledge Status of Language Models",
+  "pdf": "data/papers/KScope - A Framework for Characterizing the Knowledge Status of Language Models.pdf",
+  "validated_against": "incidental",
+  "channel": "direct-input",
+  "consequence": "silent-corruption",
+  "registry_notes": "Primary contribution is diagnostic knowledge-status framework; also proposes feature-informed constrained summarization + credibility signaling as downstream mitigation."
+ },
+ {
+  "defense": "XoT (explanation-based thinking framework)",
+  "paper_id": "eeb8cc61135f5d3032da26888d7a2882b6704765",
+  "paper_title": "Exploring Knowledge Conflicts for Faithful LLM Reasoning: Benchmark and Method",
+  "pdf": "data/papers/Exploring Knowledge Conflicts for Faithful LLM Reasoning - Benchmark and Method.pdf",
+  "validated_against": "incidental",
+  "channel": "RAG",
+  "consequence": "silent-corruption",
+  "registry_notes": "Two-stage candidate-enumeration-then-selection framework for cross-source (text vs KG) conflict; explicitly non-adversarial though flagged as security-relevant."
+ },
+ {
+  "defense": "Prompt Injection as a Defense (against LLM-based PIE)",
+  "paper_id": "1c8bb4dc619933b7ee170b86eb9e1e3ecb01086d",
+  "paper_title": "Evaluating LLM-based Personal Information Extraction and Countermeasures",
+  "pdf": "data/papers/Evaluating LLM-based Personal Information Extraction and Countermeasures.pdf",
+  "validated_against": "adversarial",
+  "channel": "direct-input",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Repurposes prompt injection defensively: profile owner embeds invisible instructions in their own published content to mislead an extracting LLM. Characterized and evaluated as a distinct contribution ('a novel one based on prompt injection'), outperforming existing real-world defenses (symbol/hyperlink/keyword replacement) and generalizing across PII categories, though it lacks a specific proper-noun name and shows only limited robustness to adaptive counter-attacks."
+ },
+ {
+  "defense": "data defenses",
+  "paper_id": "0d889de54cb47863416cd0f2562c32744631de53",
+  "paper_title": "Data Defenses Against Large Language Models",
+  "pdf": "data/papers/Data Defenses Against Large Language Models.pdf",
+  "validated_against": "adversarial",
+  "channel": "direct-input",
+  "consequence": "data-exfiltration",
+  "registry_notes": "Named, novel technique: automatically generated adversarial text insertions that block unwanted LLM inference over a data owner's content, validated against multiple attacker LLMs, a news-RAG benchmark, and explicit removal countermeasures. Medium confidence because the defended party is the data owner rather than the LLM-application operator - an unusual, direction-flipped framing relative to most registry defenses - flagged for reviewer judgment on whether it fits the registry's intended scope"
+ },
+ {
+  "defense": "InstruCoT",
+  "paper_id": "e0dbb0ec29db851bbd36e75326a0bc3bf2a607cb",
+  "paper_title": "Know Thy Enemy: Securing LLMs Against Prompt Injection via Diverse Data Synthesis and Instruction-Level Chain-of-Thought Learning",
+  "pdf": "data/papers/Know Thy Enemy - Securing LLMs Against Prompt Injection via Diverse Data Synthesis and Instruction-Level Chain-of-Thought Learning.pdf",
+  "validated_against": "adversarial",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Named, released (code+data), rigorously evaluated instruction-level CoT fine-tuning defense across 4 open LLMs, 3 threat dimensions, and multiple baselines with large, consistent Defense Rate improvements."
+ },
+ {
+  "defense": "Chunk-based hash + embedding prompt injection detection scheme (with optional blockchain audit logging)",
+  "paper_id": "646f950f41530e196f83033d21dfaefb27dd7b85",
+  "paper_title": "Privacy-Preserving Prompt Injection Detection for Smart Cloud-Deployed Large Language Models",
+  "pdf": "data/papers/Privacy-Preserving Prompt Injection Detection for Smart Cloud-Deployed Large Language Models.pdf",
+  "validated_against": "adversarial",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "Named/characterized as the paper's core contribution with a dedicated algorithm (Algorithm 1) and quantitative F1 comparison against two baselines; no fancy acronym given, but real evaluation grounds it as a genuine contribution.  [stage and validated_against filled 2026-09-21: the agent omitted both keys; stage taken from the paper-level defense_intervention_point (ingestion), validated_against=adversarial because the evaluation runs known injection templates (ignore-previous-instructions, info"
+ },
+ {
+  "defense": "four layer defense in depth architecture",
+  "paper_id": "540ba347afa82e8437754c15b58eb1d365aa11f0",
+  "paper_title": "Caging the Agents: A Zero Trust Security Architecture for Autonomous AI in Healthcare",
+  "pdf": "data/papers/Caging the Agents - A Zero Trust Security Architecture for Autonomous AI in Healthcare.pdf",
+  "validated_against": "",
+  "channel": "tool-output",
+  "consequence": "data-exfiltration",
+  "registry_notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: The prompt integrity framework (Layer 4) is the most brittle of the four defense layers. (Section 8.1, Limitations of the Prompt Integrity Layer)"
+ },
+ {
+  "defense": "CoMIC",
+  "paper_id": "ad439c4e967aa0bdee70b5f95ec09a3d2149e5e4",
+  "paper_title": "CoMIC: Collaborative Memory and Insights Circulation for Long-Horizon LLM Agents in Cloud-Edge Systems",
+  "pdf": "data/papers/CoMIC - Collaborative Memory and Insights Circulation for Long-Horizon LLM Agents in Cloud-Edge Systems.pdf",
+  "validated_against": "",
+  "channel": "memory",
+  "consequence": "reasoning-corruption",
+  "registry_notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: Deploying lightweight Large Language Model (LLM) agents on edge servers can reduce latency and move agentic services closer to users, but resource-constrained edge models often struggle with long-horizon tasks that require persistent memory, subgoal tracking, and reflection. (Abstract)"
+ },
+ {
+  "defense": "LIMBOSH",
+  "paper_id": "0099c9c109c3516f0bf0d7d67502e99e86c78130",
+  "paper_title": "A Modular Generative Honeypot Shell",
+  "pdf": "data/papers/A Modular Generative Honeypot Shell.pdf",
+  "validated_against": "",
+  "channel": "direct-input",
+  "consequence": "goal-hijack",
+  "registry_notes": "VALIDATION BLANKED 2026-10-16: derived by keyword and wrong in 3 of 13 cases. Needs coding from the paper. Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: For this purpose, we deploy an input guard (see Figure 2) employing a random forest text classification model trained on n-grams of size 1-3. (Section IV-C, Prompt Injection Mitigation)"
+ },
+ {
+  "defense": "Encrypted Prompt",
+  "paper_id": "63f183b8f1fe0d87b605ad60fea393f13afdbd00",
+  "paper_title": "Encrypted Prompt: Securing LLM Applications Against Unauthorized Actions",
+  "pdf": "data/papers/Encrypted Prompt - Securing LLM Applications Against Unauthorized Actions.pdf",
+  "validated_against": "",
+  "channel": "tool-output",
+  "consequence": "goal-hijack",
+  "registry_notes": "Added from the contribution screen; the original registry pass recorded no technique for this paper. Evidence: This approach guarantees that only actions within the scope of the current permissions from the LLM can proceed. (Abstract)"
+ }
+]
