@@ -12,7 +12,7 @@ and Section~\ref{sec:results} what they showed.
 \label{sec:harness}
 
 The harness separates what varies between runs from what must not. A run is
-one fix, one cause, one dose and one arm. Everything
+one fix, one cause, one condition and one arm. Everything
 else is fixed by the harness, not by the run. Figure~\ref{fig:run} shows one
 run, from the pair to its verdict.
 
@@ -24,10 +24,9 @@ its control passes, and all three arms read the same contexts.}
 \label{fig:run}
 \end{figure}
 
-\textbf{One construction of the contexts.} The planted contexts come from one
-constructor, the one the attacks released (Section~\ref{sec:payloadclasses}),
-applied to one item list. Every fix in a pair reads the same contexts, and so
-do the undefended and no-document arms, so any difference between arms comes from the fix, not from its input.
+\textbf{One set of contexts per pair.} Every fix in a pair reads the same
+contexts, and so do the undefended and no-document arms, so any difference
+between arms comes from the fix, not from its input.
 
 \textbf{Each fix in its own environment.} Every fix runs from its
 authors' code under the dependency versions its authors pinned, one
@@ -41,14 +40,9 @@ the safety fix CK-PLUG ships its own 4.49 fork, which its README says to install
 this time in the software each fix depends on. The released artifact builds each environment and verifies it. The agent
 experiment is the one exception to the interface: it runs inside the harness of AgentDojo, the agent benchmark it uses.
 
-\textbf{One grid.} Every pair on the dataset open Natural Questions is run at the same
-doses, 0, 1, 2, 3 and 5 planted passages out of ten, and every dose in three
-arms: no document, undefended and defended. Two pairs from different
-literatures are therefore measured at the same points.
-
 \textbf{One scorer and one result format.} Every run is scored by the same
 functions and written to a result file in one schema, which records the pair,
-the dose, the arm, the accuracy, the rate of the planted answer and the
+the condition, the arm, the accuracy, the rate of the planted answer and the
 smallest difference the run can detect. Each file also carries a fingerprint
 of the planted passage it was produced with, so a run cannot be read under
 the wrong cause label.
@@ -62,7 +56,7 @@ corpus may report having run them together. A fix that repairs quiet answer corr
 ought to apply to a cause that arrives the same way and does the same
 damage. The taxonomy predicts that such a pair should transfer, and no paper
 in the corpus had tested it. Dropping the second condition gives the control pairs, which put each fix against its
-own literature's causes. Every fix and every attack in the campaign is published, except those Table~\ref{tab:provenance} (Appendix~\ref{app:provenance}) marks as ours. These are the two adaptive attacks we built against one fix to test it (Section~\ref{sec:adaptive}), and, in the agent experiment, one attack and some of the defenses, which we implemented from published techniques.
+own literature's causes. Every fix and every attack we ran is published, except those Table~\ref{tab:provenance} (Appendix~\ref{app:provenance}) marks as ours. These are the two adaptive attacks we built against one fix to test it (Section~\ref{sec:adaptive}), and, in the agent experiment, one attack and some of the defenses, which we implemented from published techniques.
 
 \subsection{The reconstruction standard}
 

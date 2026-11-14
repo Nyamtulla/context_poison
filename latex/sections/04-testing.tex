@@ -1,0 +1,76 @@
+\section{How each literature tests}
+\label{sec:testing}
+
+A test across the two literatures puts one side's fix in front of the
+other's problem. Whether that test is fair depends on how each fix was built
+and evaluated, so we coded this for all \NDesignFixes{} fixes in the corpus
+that act on retrieved text. For each we recorded, from the full text, how
+many passages one test item hands the fix, what the misleading text competes
+with, whether results are split by what the model already knew, and whether
+the attacker adapts to the fix. Every coded field carries a verbatim quote,
+\PctDesignQuotes{}\% of which an automated check finds in the paper's text,
+and a hand check of \NDesignHand{} papers agreed on the passage count in
+every case. \NDesignInScope{} of the fixes test with misleading text,
+\NDesignSec{} from security papers and \NDesignSaf{} from safety papers; the
+counts below are over those.
+
+\begin{table}[t]
+\centering
+\caption{What each fix is tested on, by the question it asks, over the
+\NDesignInScope{} retrieval fixes whose evaluation contains misleading text.}
+\label{tab:units}
+\footnotesize
+\begin{tabular}{@{}p{0.34\columnwidth}p{0.24\columnwidth}p{0.32\columnwidth}@{}}
+\toprule
+\textbf{Question the fix asks} & \textbf{Tested on} & \textbf{Fixes} \\
+\midrule
+Document or memory? & one passage & \NDesignMemOne{} of the
+  \NDesignMemCounted{} safety fixes that state a count \\
+Which passage is right? & a set of passages & \NDesignSetSec{} security,
+  \NDesignSetSaf{} safety \\
+Is there an injected instruction? & one text & \NDesignInstrOne{} of the
+  \NDesignInstrCounted{} security fixes that state a count \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The number of passages follows the question, not the literature.}
+Table~\ref{tab:units} groups the fixes by what they decide. A fix that asks
+whether to trust the document or the model's own memory is tested on one
+passage, because one is enough to set against memory; every such fix comes
+from a safety paper. A fix that asks which retrieved passage to trust is
+tested on a set, in both literatures: the security defenses that vote across
+passages and the safety fixes for noisy or conflicting retrieval. Detectors
+for injected instructions read one text at a time. Where a set is used, its
+median size is \NDesignMedianK{} on both sides.
+
+\paragraph{Three choices separate the literatures.} What does split them is
+what the bad text is assumed to do. No security fix sets the misleading text
+against the model's memory (\NDesignMemSec{} of \NDesignSec{}); in the
+safety literature this is the most common design. Only safety papers report
+results split by whether the model already knew the answer
+(\NDesignSplitSaf{} against \NDesignSplitSec{}). Only security papers test an
+attacker who knows the fix (\NDesignAdaptSec{} against
+\NDesignAdaptSaf{}). A document that has gone out of date, the standard example of an honest
+mistake, is almost never tested with real stale text: \NDesignOutdated{} of the \NDesignSaf{} safety fixes do, and no
+security fix does.
+
+\paragraph{What a test across the literatures needs.} A fix has to receive
+the input its question requires, or the test measures the format and not the
+method. Our first cross tests did not meet this. They joined ten retrieved
+passages into one long document for the safety fixes built on one passage,
+and some fixes broke on that input: the released code of the safety fix
+COIECD cuts prompts beyond 2,048 tokens from the end, which removes the
+question, and our runner shortened the safety fix SpARE's context so far that
+the planted passages were cut. We withdrew those results. What remains, and
+what Section~\ref{sec:results} reports, runs every safety fix on one
+passage, its own format. The reverse direction needs what neither literature
+has: ranked sets that contain real honest mistakes, with a per-model record
+of what the model already knew. Section~\ref{sec:dataset} builds it.
+
+Answer to RQ2. Each fix is tested on the input its question needs: one
+passage when it weighs a document against memory, a set when it chooses
+among passages. The literatures differ in what the bad text competes with,
+in whether they split results by prior knowledge, and in whether the
+attacker adapts. A fair test across them gives each fix its own format and
+reports both literatures' measures.

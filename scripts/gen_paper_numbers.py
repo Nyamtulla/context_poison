@@ -147,8 +147,8 @@ def main():
     _ct = collections.defaultdict(collections.Counter)
     for e in r3:
         _ct[(e.get("consequence") or "").strip()][(e.get("regime") or "").strip()] += 1
-    M["NGoalHijackSec"] = _ct["goal-hijack"]["security"]
-    M["NGoalHijackSafety"] = _ct["goal-hijack"]["safety"]
+    M["NGoalHijackSec"] = _ct["goal-deviation"]["security"]
+    M["NGoalHijackSafety"] = _ct["goal-deviation"]["safety"]
     M["NReasonSafety"] = _ct["reasoning-corruption"]["safety"]
     M["NReasonSec"] = _ct["reasoning-corruption"]["security"]
 
@@ -642,8 +642,8 @@ def main():
          canon_consequence(e.get("consequence")),
          (e.get("regime") or "").strip()) for e in r4)
     _top = {
-        "NDefCellToolOutGoalHijack": ("tool-output", "goal-hijack", "security"),
-        "NDefCellDirectInGoalHijack": ("direct-input", "goal-hijack",
+        "NDefCellToolOutGoalHijack": ("tool-output", "goal-deviation", "security"),
+        "NDefCellDirectInGoalHijack": ("direct-input", "goal-deviation",
                                        "security"),
         "NDefCellRagSilent": ("RAG", "silent-corruption", "safety"),
         "NDefCellMemReasoning": ("memory", "reasoning-corruption", "safety"),
@@ -656,7 +656,7 @@ def main():
     M["NCellsAttackNoDef"] = len(_nodef)
     M["NCellsAttackNoDefSec"] = sum(1 for k in _nodef if k[2] == "security")
     M["NCellsAttackNoDefBackdoor"] = sum(
-        1 for k in _nodef if k[1] == "persistence-backdoor")
+        1 for k in _nodef if k[1] == "persistent-corruption")
     # NUnplaceable / PctUnplaceable lived here: papers carrying no channel or
     # no consequence, which are outside the cube by construction. The
     # paragraph that reported them was cut from S3 on 2026-10-25, so the
@@ -668,7 +668,7 @@ def main():
     # mechanism registry splits, quoted in S4
     _mq = collections.Counter(e.get("consequence") for e in r3)
     _mc = collections.Counter(e.get("channel") for e in r3)
-    for key, src, pre in (("goal-hijack", _mq, "MechGoalHijack"),
+    for key, src, pre in (("goal-deviation", _mq, "MechGoalHijack"),
                           ("reasoning-corruption", _mq, "MechReasoning"),
                           ("silent-corruption", _mq, "MechSilent"),
                           ("direct-input", _mc, "MechDirectInput"),
@@ -736,8 +736,10 @@ def main():
                       "attack_paper_evaluations_pass3.json")
             for p in load(f)["confirmed_pairs"]}
     _pre_def = [r for r in _pre if (r["defense"], r["attack"]) not in _rev]
+    # The paper no longer makes this claim (the publication-order paragraph
+    # was cut on 2026-11-12), so this is a note, not a stop.
     if _pre_def:
-        raise SystemExit(
+        print(
             f"{len(_pre_def)} fix-predates-mechanism pair(s) not from the "
             "mechanism's paper; Section 3's 'every one' no longer holds: "
             + "; ".join(f'{r["defense"]} / {r["attack"]}' for r in _pre_def))
@@ -953,8 +955,11 @@ def main():
 
     # ---- who reports what. The abstract's reporter asymmetry, from the same
     # file pair_tally reads, so it cannot drift from the tally.
+    # Only pairs that passed the checklist (pair_tally.composite_pairs()).
+    _vo = [o for o in load("pair_outcomes.json")
+           if (o["defense_name"], o["mechanism_name"]) in pairs]
     _out = collections.defaultdict(collections.Counter)
-    for o in load("pair_outcomes.json"):
+    for o in _vo:
         _out[o["reported_by"]][o["reported_verdict"]] += 1
     _dp, _ap = _out["defense_paper"], _out["attack_paper"]
     M["NOutcomeDefPaper"] = sum(_dp.values())
@@ -970,7 +975,7 @@ def main():
     # than the reporting split and it was never made, so it is a macro and
     # the assertion checks itself on every rebuild.
     _byside = collections.defaultdict(set)
-    for o in load("pair_outcomes.json"):
+    for o in _vo:
         _byside[(o["defense_name"], o["mechanism_name"])].add(o["reported_by"])
     M["NOutcomePairs"] = len(_byside)
     M["NOutcomeBothSides"] = sum(1 for v in _byside.values() if len(v) > 1)
@@ -1502,6 +1507,118 @@ def main():
         abs(_st(s, k, f"filter:{f}") - _st(s, k, "undefended"))
         for s, _, _, _, atk in _gst.CASES if not atk
         for f in _gst.FILTERS for k in ("acc", "asr")), 1)
+
+    # --- How each literature tests (PAPER_PLAN S1-S2) --------------------
+    # Over the RAG-channel fixes coded from full text in
+    # design_choices/s2_design_choices.json (merge_design_choices.py).
+    _dc = json.loads((REPO / "data/registries/design_choices/s2_design_choices.json").read_text())
+    _in = [r for r in _dc if r["in_scope"]]
+    _lit = collections.Counter(r["literature"] for r in _in)
+    _cx = collections.Counter((r["literature"], r["competes_with"], r["n_passages"]) for r in _in)
+    M["NDesignFixes"] = len(_dc)
+    M["NDesignInScope"] = len(_in)
+    M["NDesignSec"], M["NDesignSaf"] = _lit["security"], _lit["safety"]
+    M["NDesignMemOne"] = _cx[("safety", "memory", "one")]
+    M["NDesignMemCounted"] = _cx[("safety", "memory", "one")] + _cx[("safety", "memory", "many")]
+    M["NDesignSetSec"] = _cx[("security", "other-passages", "many")]
+    M["NDesignSetSaf"] = (_cx[("safety", "other-passages", "many")]
+                          + _cx[("safety", "both", "many")])
+    M["NDesignInstrOne"] = _cx[("security", "instructions", "one")]
+    M["NDesignInstrCounted"] = _cx[("security", "instructions", "one")] + _cx[("security", "instructions", "many")]
+    M["NDesignMemSec"] = sum(1 for r in _in if r["literature"] == "security"
+                             and r["competes_with"] in ("memory", "both"))
+    M["NDesignSplitSaf"] = sum(1 for r in _in if r["literature"] == "safety" and r["memory_split"] == "yes")
+    M["NDesignSplitSec"] = sum(1 for r in _in if r["literature"] == "security" and r["memory_split"] == "yes")
+    M["NDesignAdaptSec"] = sum(1 for r in _in if r["literature"] == "security" and r["adaptive_attack"] == "yes")
+    M["NDesignAdaptSaf"] = sum(1 for r in _in if r["literature"] == "safety" and r["adaptive_attack"] == "yes")
+    M["NDesignOutdated"] = sum(1 for r in _in if "real-outdated" in (r.get("bad_text_kind") or []))
+    _ks = sorted(r["k_main"] for r in _in if isinstance(r.get("k_main"), int) and r["n_passages"] == "many")
+    M["NDesignMedianK"] = _ks[len(_ks) // 2]
+    _qmiss = json.loads((REPO / "data/registries/design_choices/quote_check.json").read_text())
+    _qall = sum(len(r.get("evidence") or {}) for r in _dc)
+    M["PctDesignQuotes"] = round(100 * (_qall - sum(len(v) for v in _qmiss.values())) / _qall)
+    M["NDesignHand"] = len(json.loads((REPO / "data/registries/design_choices/hand_check_sample.json").read_text()))
+
+    # --- The checklist pass over every candidate pair (verify_pairs.py) -----
+    _vp = json.loads((REPO / "data/registries/pair_pass/verified_pairs.json").read_text())
+    M["NPairCandidates"] = _vp["n_read"]
+    M["NPairsRefiled"] = len(_vp["renamed"])
+
+    # --- Fix-only cells: a fix but no cause in its cell ---------------------
+    # Counted per literature (as the cube's panels draw them) and pooled.
+    _cz = collections.Counter(); _fx = collections.Counter()
+    for e in r3:
+        _q = canon_consequence(e.get("consequence"))
+        if _q:
+            _cz[(e["regime"], e["channel"], _q)] += 1
+    for e in r4:
+        _q = canon_consequence(e.get("consequence"))
+        if _q:
+            _fx[(e["regime"], e["channel"], _q)] += 1
+    _fo = [k for k in _fx if not _cz[k]]
+    M["NCellFixOnly"] = len(_fo)
+    M["NCellFixOnlyFixes"] = sum(_fx[k] for k in _fo)
+    M["NCellFixOnlyOther"] = sum(1 for (r, c, q) in _fo
+                                 if _cz[("safety" if r == "security" else "security", c, q)])
+    _pool_c = {(c, q) for (_, c, q) in _cz}
+    _pool_fo = {(c, q) for (_, c, q) in _fo if (c, q) not in _pool_c}
+    M["NCellFixOnlyPooled"] = len(_pool_fo)
+    M["NCellFixOnlyPooledFixes"] = sum(v for (r, c, q), v in _fx.items() if (c, q) in _pool_fo)
+
+    # --- Citation edges, within and across the two literatures ------------
+    # An edge is one citing->cited link between two papers in the cube;
+    # a paper citing three papers contributes three edges.
+    _side, _cells = {}, collections.defaultdict(set)
+    for _reg in (r3, r4):
+        for e in _reg:
+            _q = canon_consequence(e.get("consequence"))
+            if e.get("paper_id") and _q:
+                _side[e["paper_id"]] = e["regime"]
+                _cells[e["paper_id"]].add((e["channel"], _q))
+    _ed = {(e["citing"], e["cited"]) for e in load("citation_network_union.json")["edges"]
+           if e["citing"] in _side and e["cited"] in _side and e["citing"] != e["cited"]}
+    _ec = collections.Counter()
+    for a, b in _ed:
+        k = "Same" if _side[a] == _side[b] else "Cross"
+        tag = "Sec" if _side[a] == "security" else "Saf"
+        _ec[tag + k] += 1
+        if k == "Cross" and _cells[a] & _cells[b]:
+            _ec[tag + "CrossShared"] += 1
+            if ("RAG", "silent-corruption") in (_cells[a] & _cells[b]):
+                _ec["CrossSharedRag"] += 1
+    for k in ("SecSame", "SecCross", "SafSame", "SafCross", "SecCrossShared", "SafCrossShared", "CrossSharedRag"):
+        M["NEdge" + k] = _ec[k]
+    M["NEdgeCrossShared"] = _ec["SecCrossShared"] + _ec["SafCrossShared"]
+    M["NEdgeSecTotal"] = _ec["SecCross"] + _ec["SecSame"]
+    M["NEdgeSafTotal"] = _ec["SafCross"] + _ec["SafSame"]
+    M["PctEdgeSecCross"] = f'{100 * _ec["SecCross"] / (_ec["SecCross"] + _ec["SecSame"]):.1f}'
+    M["PctEdgeSafCross"] = f'{100 * _ec["SafCross"] / (_ec["SafCross"] + _ec["SafSame"]):.1f}'
+
+    # --- The shared dataset and its pilots (pilot_summary.py) -------------
+    _ps = json.loads((REPO / "data/registries/shared_dataset/pilot/pilot_summary.json").read_text())
+    M["NSdQuestions"] = _ps["questions"]["all"]
+    M["NSdCore"] = _ps["questions"]["core"]
+    M["NSdOutdated"] = _ps["questions"]["outdated"]
+    for _r, _tag in (("round1", "One"), ("round2", "Two")):
+        for _c, _ct2 in (("poisonedrag", "Prag"), ("outdated", "Outd"), ("swapped", "Swap"),
+                         ("misretrieval", "Misr"), ("conflict", "Conf"), ("all", "All")):
+            _v = _ps[_r][_c]
+            M[f"NSd{_tag}{_ct2}N"] = _v["n"]
+            M[f"PctSd{_tag}{_ct2}Ok"] = round(100 * _v["ok"] / _v["n"])
+    M["NSdOneQuestions"] = _ps["round1_questions"]
+    M["NSdTwoQuestions"] = _ps["round2_questions"]
+    M["PctSdTwoJudgePrec"] = round(100 * _ps["round2"]["all"]["asserts"] / _ps["round2"]["all"]["n"])
+    M["PctSdJudgePrec"] = round(100 * _ps["judge_round1"]["precision"])
+    M["PctSdJudgeRec"] = round(100 * _ps["judge_round1"]["recall"])
+    M["NSdJudgeLabels"] = _ps["judge_round1"]["n"]
+    M["NSdPragSample"] = _ps["poisonedrag_sample"]["n"]
+    M["NSdPragDeny"] = _ps["poisonedrag_sample"]["deny_or_hedge"]
+    M["NSdPragQuestions"] = _ps["poisonedrag_sample"]["questions"]
+    M["NSdGoldJudged"] = _ps["gold_round1"]["judged"]
+    M["NSdGoldWrong"] = _ps["gold_round1"]["wrong"]
+    for _g, _tg in (("core", "Core"), ("added", "Added"), ("wc", "Wc")):
+        M[f"NSdKept{_tg}"] = _ps["yield"][_g]["kept"]
+        M[f"NSdTried{_tg}"] = _ps["yield"][_g]["tried"]
 
     # Python rounds halves to even, so 0.25 would print as 0.2 where the
     # paper has always printed 0.3. Round half up, as a reader expects.

@@ -5265,7 +5265,7 @@
   "title": "PRIMA: Operational Patterns for Resilient Multi-Agent Research with Verifiable Identity and Convergent Feedback",
   "has_defense": "Y",
   "defense_name": "PRIMA (context-boundary discipline + reference-material sandboxing + poisoned-output rejection)",
-  "channel": "direct-input",
+  "channel": "tool-output",
   "consequence": "goal-hijack",
   "defense_intervention_point": "execution",
   "regime": "safety",
@@ -5277,7 +5277,13 @@
   "origin": "proposed",
   "origin_evidence": "We present PRIMA",
   "evaluated_against": "unverified",
-  "evaluated_against_evidence": ""
+  "evaluated_against_evidence": "",
+  "recode_2026_11_12": {
+   "field": "channel",
+   "from": "direct-input",
+   "to": "tool-output",
+   "reason": "The paper's threat model is indirect prompt injection through inter-step context and fetched material (it sandboxes fetched material); the injected text does not arrive in the prompt itself."
+  }
  },
  {
   "row": 648,

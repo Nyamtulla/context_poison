@@ -18,9 +18,10 @@ inter-rater agreement and we will claim none.
 \textbf{Assigning papers to security or safety.} The cross-citation rates depend on classifying every
 cited paper as a security or a safety paper. That classification is automated over the full
 discovery pool. A systematic bias in it would move the rates. We regard the
-direction of the finding as safe, because the gap between \PctSecCitesSafety{}\% citation and
-\PctSameRegime{}\% of tested pairs staying inside one literature is far larger than any plausible classification
-error. The exact rates should still be read as estimates. Two further limits
+direction of the finding as safe, because the gap between \PctEdgeSecCross{}\% of
+security papers' citations going to safety papers and \PctSameRegime{}\% of
+tested pairs staying inside one literature is far larger than any plausible
+classification error. The exact rates should still be read as estimates. Two further limits
 bound them. The denominator is the \NAnalysed{} papers that named a
 technique rather than every screened-in paper, because a survey cites
 widely and names nothing, so counting it would measure how widely surveys cite, not whether methods
@@ -28,46 +29,6 @@ cross. And
 only citations to papers inside that set register, so a paper reaching
 across to work we did not include does not count: every cross-citation rate
 in this paper is a floor.
-
-\textbf{The reverse direction rests on one model per defense.} Each security
-defense of Section~\ref{sec:transfer} meets the four honest failures on one
-model and one dataset, open Natural Questions. RobustRAG, ReliabilityRAG,
-Spotlighting and the two filters answer with Mistral-7B-Instruct, and
-the tracing method AttnTrace with Qwen2.5-7B-Instruct rather than the Llama-3.1 model its
-examples use. AttnTrace's tracing result rests on \NTraceStale{} wrong
-answers. Spotlighting's null has no control behind it, and DataSentinel
-misses our injected sentence while catching its own README's, so a null for
-either could also mean the defense does not work in our setup.
-
-\textbf{Planted passages sit at the end of the context.} On open Natural
-Questions every planted passage takes the last of the ten retrieved slots, and
-models weigh late text more. On \NPosItems{} stale-document items with the
-same passages in shuffled order, the undefended model gives the outdated
-answer \EPosShufOne\% of the time with one stale passage instead of
-\EPosEndOne\%, \EPosShufThree\% with three instead of \EPosEndThree\%, and
-\EPosShufFive\% with five instead of \EPosEndFive\%. Every comparison we
-report compares a defended model with an undefended one on the same contexts,
-so both arms share the placement. The absolute rates, how often a cause
-succeeds at all, are higher than they would be at a random position. We
-measured this on one model and one cause.
-
-\textbf{Our stale passages are exact copies.} In the second direction, a
-stale document is one real passage copied word for word into each planted
-slot. Out-of-date pages on the web are more often copied with changes. We
-tested this on the security defense ReliabilityRAG. A second model, Qwen2.5-7B-Instruct, rewrote
-each stale passage five times, keeping the outdated answer and changing the
-wording, and we put the five rewrites where the copies had been. This worked
-for \NRwItems{} of the \NRwSource{} questions. On those questions, with five
-stale passages in ten, the model with no defense gives the outdated answer
-\ERwUndefCopy\% of the time with copies and \ERwUndefReworded\% with
-rewrites. ReliabilityRAG gives it \ERwReliCopy\% and \ERwReliReworded\%.
-Rewording makes the stale passages far more convincing to an undefended
-model, and leaves ReliabilityRAG about where it was. With rewrites, the
-difference between ReliabilityRAG and no defense is \ERwReliGap{} points,
-below the \ERwMdr{}-point threshold that run can detect. So our finding that
-ReliabilityRAG does more harm than no defense holds for exact copies and is
-unresolved for rewrites. In both cases it gives the outdated answer more
-than half the time. We ran this check on one defense and one model.
 
 \textbf{Registry granularity.} What counts as one named cause is a
 judgement. ``Indirect prompt injection'' is one registry entry and absorbs
@@ -83,9 +44,9 @@ comparison. The two sides largely write about different pairs. The
 association therefore reflects which pair each side chose to run, rather than
 differing conduct on the same pair. That selection is our interpretation.
 
-\textbf{The campaign is a sample, not a census.} We ran \NCampaignPairs{} pairs out of a space
-of thousands. They were selected by the taxonomy rather than at random, biased
-toward pairs where both artifacts run. Fixes whose artifacts do not run are
+\textbf{Our experiments are a sample, not a census.} The pairs we ran were
+selected by the taxonomy rather than at random, biased toward pairs where
+both artifacts run. Fixes whose artifacts do not run are
 absent, and nothing here says whether they transfer.
 
 \textbf{Attacks are non-adaptive, with one exception.} This is the criticism
@@ -96,7 +57,7 @@ anyway bounds attack strength from below, so our failure results are
 conservative. A resistance result drawn the same way is not evidence of
 robustness at all.
 Section~\ref{sec:adaptive} tests the one resistance result we report. Every
-other fix in the campaign would need the same treatment before any claim
+other fix we ran would need the same treatment before any claim
 that it holds.
 
 \textbf{Variance.} Carlini lists ``no variance
@@ -146,18 +107,26 @@ family in particular, which runs two forward passes per token. A method that loo
 cost is counted, and one that holds up well could be too expensive to
 deploy.
 
-\textbf{One dataset per experiment.} The retrieval experiments run on the datasets CoConflictQA~\cite{huang-2025-parammute} and
-open Natural Questions~\cite{kwiatkowski-2019-natural}. The dosing model, which replaces a fraction of context
-with planted passages, is a simplification of a real retrieval pipeline under
-attack. It holds the retriever fixed, so it measures what the generator does
-with poisoned context rather than how hard the context is to poison. Most fixes also meet a different release of Natural Questions than their authors used, which pairs the same questions with different passages. BadRAG's tone attack moves from the writing task its authors used to question answering.
+\textbf{One dataset and one model per experiment.} The retrieval experiments
+run on CoConflictQA~\cite{huang-2025-parammute}, one passage per question,
+which is the format of the safety fixes but a different release of Natural
+Questions than most of their authors used. Each fix runs on one base model of
+7 to 14 billion parameters, and the results should be read as holding for
+models of this class and size.
 
-\textbf{Model coverage.} Most fixes run on a model their paper reports, and Table~\ref{tab:provenance} names the exceptions. The safety fixes run on Llama-3-8B-Instruct and the security
-defenses on Mistral-7B-Instruct, so the two directions also use different
-models. The agent experiment runs on Qwen2.5-14B-Instruct. A second-model check left the
-results unchanged within the evaluated range, but it covers only
-the security defense RobustRAG. The results should be read as holding for models of this class and
-size.
+\textbf{Pairs rest on reading.} Every pair counts only after a reader
+confirms it against the checklist of Section~\ref{sec:coverage}, and the
+readers are LLM-assisted passes over the full text. The checklist is strict:
+a result pooled across attacks, or a failure only cited as motivation, does
+not count, so the counts are floors. The checklist and every quote ship with the artifact, so a
+reader can re-check any pair.
+
+\textbf{The dataset is a pilot.} Its construction rules are not frozen. The
+judge's precision falls from \PctSdJudgePrec{}\% on the labels it was tuned on
+to \PctSdTwoJudgePrec{}\% on new questions, so the full build needs a
+hand-checked sample from every cause. Requiring a clean passage that states
+the gold answer drops most questions, which may favor questions with clear
+evidence.
 
 \textbf{Scorer.} We reuse each fix's own evaluation rubric where one
 exists, and a shared recall-based rubric across the retrieval experiments. Recall
@@ -182,9 +151,8 @@ would therefore describe an earlier field than the one we set out to measure,
 so we use the refereed subset as a check, not as the corpus. Resolving both sides of
 every pair back to a paper succeeds for \NVenueResolved{} of
 \NTimelinePairs{} pairs (\PctVenueResolved{}\%); of those, \NVenuePairs{} have
-a named venue on both sides, and \NVenueSecDefSafetyAtk{} of them is a security
-fix evaluated against a cause from a safety paper. The empty
-direction stays empty among refereed work alone.
+a named venue on both sides, and none of them is a security fix evaluated
+against a cause from a safety paper.
 
 \textbf{Census recall.} \NNoTechnique{} papers contributed no cause and no fix, and
 \NNoTechOther{} of those match none of the survey, benchmark, framework or
@@ -208,13 +176,16 @@ that something is present in a paper; it cannot establish that something is
 absent, because absence of the phrasing it knows is not absence of the thing.
 We therefore report no count of the second kind.
 
-\textbf{To be done.} Two items are not complete. We report none of them
+\textbf{To be done.} Three items are not complete, and we report none of them
 as complete.
 
 \begin{itemize}
-\item \textbf{Code the validation study.} The draw is complete. No coder
-  has started. We give no extraction-error rate until the study returns.
-\item \textbf{Read two published benefits from their papers.}
-  The safety fixes ACD and DyPRAG give no
-  figure in their text. Their controls stay directional.
+\item \textbf{Code the validation study.} The draw is complete. We give no
+  extraction-error rate until the study returns.
+\item \textbf{Read two published benefits from their papers.} The safety
+  fixes ACD and DyPRAG give no figure in their text, so their controls stay
+  directional.
+\item \textbf{Build the shared dataset and run both directions on it.}
+  Until then the reverse direction, security defenses against honest
+  mistakes, is untested here.
 \end{itemize}

@@ -1,0 +1,107 @@
+\section{A dataset both literatures can run on}
+\label{sec:dataset}
+
+Section~\ref{sec:testing} showed that a fair test across the two literatures
+gives each fix the input it was built for, and that no existing dataset does
+this for both sides. We build one. It has six requirements.
+
+\begin{enumerate}
+\item \textbf{One false claim, three formats.} Each false claim appears as
+  one passage, for fixes that weigh a document against memory; inside a
+  ranked set of ten, the setting of the security defenses that vote across
+  passages; and inside a set of five, the median size in the corpus.
+\item \textbf{An attacker version and honest versions of each claim}, so an
+  attack and an honest mistake can be compared at the same number of planted
+  passages.
+\item \textbf{Real honest mistakes}: an outdated fact, a passage retrieved for
+  a nearby question, a real conflict between sources, and the swapped answer
+  that safety papers use as a control.
+\item \textbf{A per-model label} for whether the model already knows the
+  answer, so results can be split the way safety papers split them.
+\item \textbf{Every prompt checked against each fix's documented length
+  limit}, so no fix silently loses part of its input.
+\item \textbf{Every planted passage checked to state its false answer.}
+\end{enumerate}
+
+\paragraph{Questions and passages.} The questions come from open Natural
+Questions, with RobustRAG's \NSdCore{} items as the core because the attack
+PoisonedRAG released passages for them, and from SituatedQA~\cite{zhang-2021-situatedqa},
+which records how an answer changed over time. Passages come from the
+December 2018 Wikipedia dump released with DPR~\cite{karpukhin-2020-dense}, so we fix the truth at the
+end of 2018: the gold answer is the one that held then, and the outdated
+answer is the one before it. This gives \NSdQuestions{} questions,
+\NSdOutdated{} of them with a real outdated answer. Clean passages are each
+question's real retrieved passages: the top 100 by BM25, re-ranked by
+Contriever~\cite{izacard-2022-unsupervised}.
+
+\paragraph{Building each cause.} The attacker version uses PoisonedRAG's
+released passages, or its released generation code for questions it did not
+cover. An outdated passage is a real passage, from the 2018 dump or from a
+Wikipedia revision written while the old answer held, that states the old
+answer. A misretrieved passage is a real passage retrieved for a nearby
+question with a different subject, and it answers that question. A conflict
+is a pair of real sources from WikiContradict~\cite{hou-2024-wikicontradict}
+located in the 2018 dump. A swapped passage replaces one mention of the gold
+answer with an answer of the same kind.
+
+\begin{table}[t]
+\centering
+\caption{Share of planted passages that state their false answer and pass
+every check, read by hand. Round 1 was built by string matching; round 2
+adds the judge and the other rules, on new questions, read blind to the
+judge's scores.}
+\label{tab:pilot}
+\footnotesize
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+& \multicolumn{2}{c}{\textbf{Round 1}} & \multicolumn{2}{c}{\textbf{Round 2}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+\textbf{Cause} & $n$ & pass & $n$ & pass \\
+\midrule
+PoisonedRAG (released) & \NSdOnePragN{} & \PctSdOnePragOk\% & \NSdTwoPragN{} & \PctSdTwoPragOk\% \\
+Outdated fact & \NSdOneOutdN{} & \PctSdOneOutdOk\% & \NSdTwoOutdN{} & \PctSdTwoOutdOk\% \\
+Swapped answer & \NSdOneSwapN{} & \PctSdOneSwapOk\% & \NSdTwoSwapN{} & \PctSdTwoSwapOk\% \\
+Misretrieval & \NSdOneMisrN{} & \PctSdOneMisrOk\% & \NSdTwoMisrN{} & \PctSdTwoMisrOk\% \\
+Real conflict & \NSdOneConfN{} & \PctSdOneConfOk\% & \NSdTwoConfN{} & \PctSdTwoConfOk\% \\
+\midrule
+All & \NSdOneAllN{} & \PctSdOneAllOk\% & \NSdTwoAllN{} & \PctSdTwoAllOk\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Checking every planted passage.} String matching cannot tell a
+passage that states an answer from one that only mentions it: an old answer
+turns up as some other date, or as a name in a cast list. In a first pilot
+built that way, we read all \NSdOneAllN{} planted passages by hand and
+\PctSdOneAllOk{}\% passed (Table~\ref{tab:pilot}). We therefore added a judge,
+Qwen2.5-14B-Instruct, a model none of the fixes is tested on, which decides
+whether a passage states the answer as fact. On the \NSdJudgeLabels{} hand
+labels of the first pilot it reaches \PctSdJudgePrec{}\% precision and
+\PctSdJudgeRec{}\% recall; we favor precision, since a rejected passage only
+shrinks the data. We also swap only one span of a passage, require the
+substitute to be the same kind of answer, require at least one clean passage
+to state the gold answer, and drop passages from which the dump deleted a year
+or number. In a second pilot on new questions, read blind to the judge,
+\PctSdTwoAllOk{}\% of planted passages pass. When the judge keeps a passage,
+the readers agree \PctSdTwoJudgePrec{}\% of the time, so its precision falls
+on questions it was not tuned on. Misretrieval is the weakest cause: its
+passages often name the right year without saying it was the last time.
+
+\paragraph{What building it found.} Two findings concern data both
+literatures use. First, in a sample of \NSdPragSample{} released PoisonedRAG
+passages from \NSdPragQuestions{} questions, \NSdPragDeny{} hedge or deny the
+answer they are meant to plant, for example ``the incorrect assertion that
+the Broncos beat the Patriots''. A run on the released passages therefore
+measures a weaker attack than the one its paper describes; we keep only
+passages judged to state their target. Second, many open Natural Questions
+items are not supported by the 2018 passages they come with, and some gold
+answers are wrong: \NSdGoldWrong{} of the \NSdGoldJudged{} we checked by
+hand. Requiring a clean passage that states the gold answer keeps
+\NSdKeptCore{} of \NSdTriedCore{} core questions tried and \NSdKeptAdded{}
+of \NSdTriedAdded{} added ones. WikiContradict keeps only \NSdKeptWc{} of
+\NSdTriedWc{}, because most of its contradictions were written after 2018.
+
+\paragraph{Status.} The construction rules are not yet frozen. The next steps
+are a full build with a hand-checked sample from every cause, a check that
+each fix reproduces its own published benefit on the new data, and then both
+directions run on it, each fix in its own format.

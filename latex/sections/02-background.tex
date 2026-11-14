@@ -46,25 +46,16 @@ We sort each paper in our corpus by which of these two conditions it
 addresses: a \textbf{security paper} assumes an adversary, and a
 \textbf{safety paper} assumes none. Every paper is one or the other. We sort
 papers and not their authors, because the same researchers write both kinds
-and no strict line separates two groups of people. The kind of a paper is not
-its \textbf{venue}, the conference or journal that published it. The two are
-easy to mix up, because security papers often appear at a security venue, but
-Section~\ref{sec:venue} shows that security papers appear at AI venues just
-as often. We write \emph{security venue} or \emph{AI venue} for where a paper
-appeared, and \meth{security} paper or \meth{safety} paper for what it
-addresses.
+and no strict line separates two groups of people. The kind of a paper is not its venue: security papers appear at AI venues
+about as often as at security venues (Section~\ref{sec:venue}).
 An adversary re-optimizes against whatever method is in place; a stale
 document does not. That difference is real, because a method tuned to the
 average case has no reason to hold at the worst case. It is also why
 security and safety papers judge a countermeasure differently. Security counts it a success
 when the adversary fails and tests it against the worst case. Safety counts
 it a success when accuracy rises and tests it on average-case benchmarks.
-How much the difference matters to
-the model is a separate question, since the model reads tokens either way and
-nothing in the text marks who wrote it. Section~\ref{sec:regime} measures
-it. When the bad text states a wrong answer, a passage an attacker wrote to win
-does more damage than a real outdated one. When it only takes the place
-of the right evidence, an attack and an honest error do the same damage.
+The model, by contrast, reads tokens either way, and nothing in the text
+marks who wrote it.
 
 Because the two literatures use different words for one failure, we choose
 one set of words for this paper, shown in the last column of
@@ -76,8 +67,8 @@ the model that the context sets off, such as lost in the
 middle~\cite{liu-2023-lost}. Neither literature's own words cover both:
 security papers name the input, and safety papers name the weakness. We use
 these two words wherever a statement spans both literatures: the corpus
-as a whole, a pair whose two sides come from different literatures, and the
-campaign. A statement about one literature alone may keep that literature's own
+as a whole, a pair whose two sides come from different literatures, and our
+experiments. A statement about one literature alone may keep that literature's own
 words from Figure~\ref{fig:vocab}. Security papers call the content an attack, a
 vulnerability or a threat, and the countermeasure a defense, guardrail,
 safeguard or protection. Safety papers have no single word for the content: they speak
@@ -143,10 +134,7 @@ fetch~\cite{zou-2024-poisonedrag}. They can publish a tool whose description
 the agent reads~\cite{shi-2025-prompt}. They can post content that a browsing
 agent visits~\cite{greshake-2023-not} or contribute a skill file that the
 agent loads~\cite{schmotz-2025-agent}. The adversary knows the defense and
-may adapt the payload to it. Two of the attacks we run, corpus poisoning and
-BadRAG, use one fixed passage for every question. The attack PoisonedRAG and the planted
-false answers are written for each question they target, so they assume the
-attacker can anticipate which questions will be asked.
+may adapt the payload to it.
 
 \textbf{Where there is no adversary.} Without an attacker there is no threat
 model. The content goes wrong through the pipeline's normal operation. A retrieved document is out of date. A passage is close to the topic but

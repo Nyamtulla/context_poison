@@ -4,14 +4,11 @@
 This section turns the results into practice: the controls an evaluation
 should report, the conventions for what a paper claims and tests, what the
 released artifacts showed, and what a deployment inherits. Most of it
-applies to security and safety papers alike. For the cause that removes evidence rather than planting a lie, the
-campaign finds no difference between an optimized passage and an ordinary
-retrieval error. For that cause security and safety papers study the same
-problem, and the recommendations below treat it as one.
+applies to security and safety papers alike.
 
 \subsection{Controls both literatures should report}
 
-Section~\ref{sec:controls} reports one result that reverses
+Section~\ref{sec:firstdir} reports one result that reverses
 without a no-document score, and Section~\ref{sec:distractor} one that
 reverses when only accuracy is reported. Neither measurement is
 expensive. We propose three reporting requirements.
@@ -29,10 +26,10 @@ reports that fix as harmless. Classifying each output as the true
 answer, the model's own answer, the planted answer or a refusal costs nothing
 beyond reading the generations already produced.
 
-\textbf{Report at least two base models.} Our second-model check left the
-results unchanged within the range the attack authors evaluate, but it covers
-one fix design. A result on one model cannot show that it holds on
-another, so a single-model result should be read as specific to that model.
+\textbf{Report at least two base models.} Each of our retrieval results
+rests on one base model, as most published fixes do. A result on one model
+cannot show that it holds on another, so it should be read as specific to
+that model.
 
 \subsection{Conventions for measurable transfer}
 
@@ -61,33 +58,22 @@ adaptive attack against the one that had resisted, it removed
 (Section~\ref{sec:adaptive}). One sentence naming whether the attacker knew
 the fix tells a reader which kind of claim they are reading.
 
-\textbf{Compose across the boundary, and measure the composition.}
-Section~\ref{sec:parallel} shows the two literatures defending different
-stages of one pipeline, and Section~\ref{sec:results} shows the reasoning
-stage failing on its own once an adversary writes the input. The obvious
-next step is to put an ingestion-stage filter in front of a reasoning-stage
-fix, and we measured that pair (Table~\ref{tab:stack}). On every case it did
-what its stronger half did and nothing more: it scored at most
-\EStackGainMax{} points above the better half, and the attack PoisonedRAG
-passed both halves and so passed the stack. A composed fix therefore needs
-its own measurement, not an argument from its halves. Both halves are
-published with released code, and we found no paper in the corpus that
-combines them.
+\textbf{Test each fix on the other literature's causes, in its own
+format.} A method aimed at stale or conflicting retrieval is evaluated on
+average-case benchmarks, which says nothing about the worst case, and our
+results show that its benefit can reverse under attack. A defense built
+against an attacker certifies its answer while few passages are corrupted,
+and an honest mistake has no such limit. Each test should give the fix the
+input its question needs (Section~\ref{sec:testing}) and report both
+literatures' measures: accuracy and the attacker's success rate, split by
+whether the model already knew the answer. The dataset of
+Section~\ref{sec:dataset} is built for this.
 
-\textbf{Test each fix against the other literature's causes.} A
-method aimed at stale or conflicting retrieval is evaluated on
-average-case benchmarks, which is the right choice for the problem it was
-built for and says nothing about the worst case. Without such a test, a
-reader cannot tell whether the reported benefit holds under attack, and our
-results show that it can reverse. Running one published poisoning attack
-against an existing evaluation needs no new data. The reverse holds for a
-defense built against an attacker. Its evaluation limits how many passages
-the attacker controls, and an honest mistake has no such limit: the security defenses RobustRAG
-and ReliabilityRAG turn harmful once half the retrieved passages are stale
-copies of one page
-(Section~\ref{sec:neither}). A stale-document set needs only a retrieval
-pool and a list of answers that changed. A method that cannot be tested against
-the other kind of failure should state which kind its benefit holds for.
+\textbf{Compose across the boundary, and measure the composition.} The two
+literatures defend different stages of one pipeline
+(Section~\ref{sec:parallel}), and no paper in the corpus combines a fix from
+each. A composed system needs its own measurement, not an argument from its
+halves.
 
 \subsection{Artifacts}
 \label{sec:artifacts}
@@ -118,7 +104,7 @@ Of the rest, \NDefEvalNoBaseline{} ran no real comparison and the records of
 
 \subsection{Implications for deployment}
 
-Four practical points follow from the results. First, a method that tunes how much the model trusts retrieved text is correct
+Three practical points follow from the results. First, a method that tunes how much the model trusts retrieved text is correct
 when the text is merely stale and dangerous when an attacker owns it. If the
 corpus an agent retrieves from is one an outsider can write to, the second
 case is the deployed case. Consider a system that uses a knowledge-conflict method to improve answer
@@ -132,22 +118,24 @@ converts the document to weights has no dial to turn and does not show the
 reversal, and the one method in the family that resisted lost most of its
 protection to an adaptive attacker.
 
-Second, the reverse holds for a defense built against an attacker. A vote
-across passages works while most passages are correct. An attacker who can
-plant only a few passages cannot break that, but an honest mistake can. When
-a fact changes, many retrieved passages can go out of date together. With
-five copies of an out-of-date page among ten passages, the security defense ReliabilityRAG gives
-the outdated answer \EReliStaleAsrTop{}\% of the time, compared with
-\EReliStaleUndefAsrTop{}\% with no defense. A filter that looks for injected
-instructions protects against injected instructions and nothing else. An
-honest mistake contains no instruction, so it passes the filter unchanged.
-
-Third, a fix that holds against an optimized adversarial passage may fail against
+Second, a fix that holds against an optimized adversarial passage may fail against
 a fluent sentence that simply asserts a plausible falsehood. In our
 measurements no fix resisted both. The fluent attack is also cheaper to
 produce: it needs no gradient access and no surrogate retriever, and it does at
 least as much damage to an undefended model as the optimized passage.
 Evaluations built only around optimized passages can overstate protection. Do not call a fix tested on one
-kind of planted passage robust to context poisoning. Finally, coverage differs by channel. Supply-chain and cross-modal content
+kind of planted passage robust to context poisoning. Third, coverage differs by channel. Supply-chain and cross-modal content
 have fewer named fixes than named causes. If an agent accepts third-party
 packages, templates or models, few published fixes address that route.
+
+\subsection{Safety's causes as attack surface}
+
+The census suggests where new attacks may come from. Reasoning corruption is
+almost entirely a safety topic: \NReasonSafety{} causes come from safety
+papers and \NReasonSec{} from security papers. Turning a documented safety
+failure into an attack has happened twice: Salience Induction exploits the
+position effect of lost-in-the-middle~\cite{zhou-2026-salience}, and a
+denial-of-service attack on guardrails exploits overthinking~\cite{zhou-2026-shield}. The other safety
+causes in that column, such as context rot and agent drift, describe failures
+an attacker could try to trigger on purpose. A security evaluation that
+ignores them may miss the next attack.

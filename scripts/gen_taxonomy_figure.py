@@ -149,11 +149,11 @@ def main():
                "multi-agent": "groups", "cross-modal": "image",
                "tool-metadata": "data_object", "skill": "extension",
                "supply-chain": "inventory_2"}
-    CQ_ICON = {"goal-hijack": "alt_route",
+    CQ_ICON = {"goal-deviation": "alt_route",
                "reasoning-corruption": "psychology",
                "silent-corruption": "visibility_off",
-               "data-exfiltration": "upload",
-               "persistence-backdoor": "lock_open",
+               "information-disclosure": "upload",
+               "persistent-corruption": "lock_open",
                "availability-loss": "block"}
     assert set(CH_ICON) == set(CHANNELS) and set(CQ_ICON) == set(CONSEQ), \
         "a channel or consequence has no icon; add one to the map"

@@ -1,97 +1,55 @@
 \section{Conclusion and future work}
 \label{sec:conclusion}
 
-Two literatures study one failure. An LLM agent reads content it
-should not trust, and it cannot tell which content that is. Security
-papers call the content an attack and build defenses. Safety papers speak of failures and conflicts and build methods to mitigate them. We call the content a cause and the countermeasure a fix. We measured the distance between them over \NCorpus{} papers read in full,
-of which \NAnalysed{} name a cause or a fix.
-\PctSecCitesSafety{}\% of security papers cite a safety paper. Only \NBothValidated{} of \NFixes{} fixes were
-tested both against an attacker and against an honest mistake. And \PctSameRegime{}\% of
-tested (fix, cause) pairs stay inside a single literature. One direction of the
-cross-testing matrix holds \NSecDefVsSafetyAttack{} pair in \NPureRegimePairs{}: a
-security fix has been evaluated against a cause from a safety
-paper exactly once.
+Two literatures study one failure: an LLM agent reads content it should not
+trust and cannot tell which content that is. Security papers call the
+content an attack; safety papers speak of failures and conflicts. Over
+\NCorpus{} papers read in full, the two divide the problem rather than
+duplicate it. Security fixes act where text enters the context and safety
+fixes where the model reasons about it, \PctSameRegime{}\% of tested (fix,
+cause) pairs stay inside one literature, and none tests a security fix
+against a cause from a safety paper.
 
-We then ran that experiment, in both directions. \NCampaignPairs{} pairs,
-all on the authors' released artifacts. \PctCampCross{}\% of them cross the
-boundary the literature does not. One planted passage in ten gives a fix its
-best chance, because nine honest passages survive, and it is the attacks' own
-default. Across both directions, \NGridLowHelps{} of \NGridLowPairs{} (fix,
-cause) pairs show a resolvable benefit there, both against the refusal
-attack. The finding is an explanation, not a verdict.
+How each literature tests explains part of the gap. A fix is tested on the
+input its question needs, one passage when it weighs a document against
+memory and a set when it chooses among passages, and the literatures differ
+in what the bad text competes with, whether they split results by what the
+model already knew, and whether the attacker adapts. A test across them has
+to respect all of this, and our first attempt did not: joining ten passages
+into one broke some safety fixes, and we withdrew those runs.
 
-In the first direction, fixes built for honest error meet attackers.
-Context-reliance fixes do not fail because someone built them badly. They fail because of the choice they make. Each one decides between trusting the context and trusting memory,
-and that dial moves correctness around without creating any. Suppress memory
-and the attacker receives what memory held. Suppress the attacker and memory
-receives it back. A planted passage that asserts a third answer separates copying from
-remembering, so
-we can add the two movements together. In the three fixes that suppress
-memory they cancel to within \NDistCancelMax{} points. Neither movement shifts anything toward the real document, because the dial has no setting for it. The attack
-is inside the context.
+Run on its own format, a safety fix that decides how far to trust the
+document cannot separate a real document from a planted one. Leaning toward
+the document hands answers to the attacker who wrote it, and leaning toward
+memory gives them back to memory, never to the real document. The one fix that resisted did so because of the form of the
+attack text, and an attacker who knows its rule removes
+\PctAcdRemovedGradient{}\% of that protection. Taken together, the two
+literatures do not close the gap: their fixes act at different stages, no
+published work joins them, and in an agent experiment only defenses acting
+before the model reads the bad text, or before it acts, hold.
 
-In the second direction, a fix built against an attacker meets honest
-mistakes. The votes of the security defenses RobustRAG and ReliabilityRAG work while wrong passages
-are few, which is the setting their authors assume. When half the retrieved
-passages are copies of one out-of-date page, both give the outdated answer
-more often than no fix does. When the copies are reworded, ReliabilityRAG
-still gives it more than half the time, but the model with no defense
-catches up. Against a failure that plants no false answer, they have nothing
-to act on. The defenses that look for injected instructions find none in an
-honest mistake and change nothing. One method did work on honest
-mistakes: AttnTrace, which traces an answer back to the passages it came
-from. With the passages in random order, when the model gave the outdated
-answer, the passage AttnTrace ranked first was a stale one \ETraceTopStale\%
-of the time. When the model answered correctly, it was a stale one
-\ETraceTopCorrect\% of the time. This rests on one model and \NTraceStale{}
-wrong answers. The two directions fail for opposite
-reasons: the safety fixes assume the document is honest, and the security
-defenses assume wrong passages are few or carry an instruction. Each
-assumption holds for the problem it was built for and fails on the other.
-
-Taken together, the two literatures do not solve context poisoning. Security
-defends where text enters and safety where the model reasons, no published
-work joins the two stages, and each stage's fixes fail on the failures the
-other stage is built for. A system assembled from both literatures places
-each failure in front of a fix that was not built for it. We measured one
-such system, a security filter in front of a safety fix. It did no better
-than its stronger half on any case, and the attack PoisonedRAG passed both
-halves.
-
-Two further results sharpen the first direction's claim. First, protection depends on the \emph{form} of the planted passage, not only
-on whether an attacker is present. An evaluation built around optimized
-passages therefore overstates how well a system holds. Second, one fix did resist. It loses \PctAcdRemovedGradient{}\% of that
-protection to an
-attacker who reads its rule and optimizes against the quantity it measures.
+The reverse test needs data neither side has, so we built it: each false
+claim as one passage and inside ranked sets, in an attacker version and in
+versions of real honest mistakes, with every planted passage checked to state
+its false answer. Building it also showed that most released PoisonedRAG
+passages in our sample deny their own target.
 
 \paragraph{Future work.}
 
-\textbf{Extend the adaptive case to the rest of the family.} We tested the
-one fix that resisted,
-with two optimizers. A best-of-five search over sentence forms took
-\PctAcdRemovedBestOf{}\% of
-its protection. A gradient search over token ids took
-\PctAcdRemovedGradient{}\%. Together they
-settle that the fix degrades rather than collapses.
-Every other context-reliance method in the campaign has had only the
-non-adaptive treatment, which Section~\ref{sec:experiments} states is no
-evidence of robustness at all. The same two optimizers transfer directly: each
-of these methods exposes a scalar the attacker can address.
+\textbf{Run both directions on the shared dataset.} Freeze the construction
+rules, build the full dataset with a hand-checked sample, confirm that every
+fix reproduces its own published benefit on it, and then run security
+defenses against honest mistakes and safety fixes against attacks, each in
+its own format.
 
-\textbf{Close the supply-chain and cross-modal gaps.} These channels have fewer
-than one named fix per named cause and are the routes by which agents
-accept third-party capability. They are where new fixes are most needed.
+\textbf{Measure a composed system.} Put a fix from each stage in one
+pipeline and measure whether it holds where each half fails.
 
-\textbf{Test the stage finding across both literatures.} In the agent experiment,
-every defense that held acts before the agent reads the injected text or
-before it acts, and none that acts while the model reasons holds. That
-experiment pairs only security defenses with security attacks, on one agent
-model. Whether the stage at which a fix acts also predicts which fixes work on
-the other literature's problem needs fixes from both literatures, run inside
-one agent harness.
+\textbf{Extend the adaptive case.} Every context-reliance fix other than ACD
+has had only non-adaptive attacks, which is no evidence of robustness. Each
+exposes a quantity an attacker can address, and the same two optimizers
+apply.
 
-\textbf{Make testing across the two literatures routine.} The deepest
-problem this paper documents is not any single fix. It is that who runs an experiment predicts its
-outcome, and that nothing in current practice corrects for this. A shared harness would fix this. It should pair fixes with causes that a
-taxonomy selects, not causes that either author selects. Transfer then
-becomes a measured property rather than an assumed one. We release ours.
+\textbf{Close the supply-chain and cross-modal gaps.} These channels have
+fewer named fixes than named causes and are the routes by which agents accept
+third-party capability.

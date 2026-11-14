@@ -360,9 +360,14 @@ def fig_who_reports():
     """
     # read, not typed: the typed counts went stale when nine pairs were
     # rejected (rq5_rejected_matches.json)
+    import sys as _s
+    _s.path.insert(0, str(REPO / "scripts"))
+    from pair_tally import composite_pairs
+    _ok, _ = composite_pairs()          # only pairs that passed the checklist
     c = collections.defaultdict(collections.Counter)
     for o in load("pair_outcomes.json"):
-        c[o["reported_by"]][o["reported_verdict"]] += 1
+        if (o["defense_name"], o["mechanism_name"]) in _ok:
+            c[o["reported_by"]][o["reported_verdict"]] += 1
     a, d = c["attack_paper"], c["defense_paper"]
     data = [("reported by\nattack papers", a["defense_wins_claimed"],
              a["evaluated_no_directional_verdict"], a["defense_loses_reported"]),
@@ -720,9 +725,12 @@ def fig_transfer_matrix():
     # One figure, two panels. The comparison between them is the point, and
     # split across two floats three sections apart a reader had to carry the
     # left-hand numbers in their head to read the right-hand ones.
-    panels = [("published literature", lit), ("this campaign", ours)]
-    fig, axes = plt.subplots(1, 2, figsize=(COL, 2.1),
-                             constrained_layout=True)
+    # The campaign panel is withdrawn until the open-NQ runs are redone on the
+    # shared dataset (PAPER_PLAN section S); only the literature is shown.
+    panels = [("published literature", lit)]
+    fig, ax0 = plt.subplots(1, 1, figsize=(COL * 0.6, 2.1),
+                            constrained_layout=True)
+    axes = [ax0]
     for ax, (name, data) in zip(axes, panels):
         tot = sum(data.values())
         M = np.array([[data.get((d, a), 0) for a in TR] for d in TR], float)
@@ -904,8 +912,8 @@ def fig_run():
     wn, gn = 0.80, 0.14                     # the "if not" box and its gap
     steps = [("Pick a pair", "one fix, one cause"),
              ("Control", "the fix works on a cause from its own literature"),
-             ("Take the items", "each question with its top ten retrieved passages"),
-             ("Build the contexts", "replace j of the ten passages, j = 0, 1, 2, 3, 5")]
+             ("Take the items", "each question with its context, in the fix's own format"),
+             ("Build the contexts", "plant the cause, or leave the context clean")]
     y = H - 0.05 - h
     tops = []
     for k, (t, u) in enumerate(steps):
@@ -945,7 +953,7 @@ def fig_run():
         ax.plot([xx, xx], [ya - h, yj + 0.02], color=INK, lw=0.6)
     _arrow(ax, cx, yj + 0.02, cx, ys + h)
     yk = ys - g - hk
-    _box(ax, x0, yk, w, hk, "Compare at each dose",
+    _box(ax, x0, yk, w, hk, "Compare in each condition",
          "defended minus undefended, against the smallest\ndifference the run can detect")
     _arrow(ax, cx, ys, cx, yk + hk)
     three(yk - g, [("helps", "gain beyond it"), ("hurts", "loss beyond it"),
