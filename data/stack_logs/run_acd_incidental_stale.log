@@ -1,0 +1,33 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:07,  2.48s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:04<00:04,  2.39s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:06<00:02,  2.09s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:06<00:00,  1.43s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:06<00:00,  1.74s/it]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+  dose 0: 50/403
+  dose 0: 100/403
+  dose 0: 150/403
+  dose 0: 200/403
+  dose 0: 250/403
+  dose 0: 300/403
+  dose 0: 350/403
+  dose 0: 400/403
+dose 0 done 11-05 21:30
+  dose 1: 50/403
+  dose 1: 100/403
+  dose 1: 150/403
+  dose 1: 200/403
+  dose 1: 250/403
+  dose 1: 300/403
+  dose 1: 350/403
+  dose 1: 400/403
+dose 1 done 11-05 22:05
+  dose 5: 50/403
+  dose 5: 100/403
+  dose 5: 150/403
+  dose 5: 200/403
+  dose 5: 250/403
+  dose 5: 300/403
+  dose 5: 350/403
+  dose 5: 400/403
+dose 5 done 11-05 22:39
+wrote data/registries/stack_acd_incidental_stale.json
+  dose 0 (correct/planted %): closedbook=40/4  filter:datasentinel=72/3  filter:piguard=71/3  fix=70/2  stack:datasentinel=71/2  stack:piguard=71/2  undefended=71/3
+  dose 1 (correct/planted %): closedbook=40/4  filter:datasentinel=70/9  filter:piguard=70/9  fix=69/3  stack:datasentinel=69/3  stack:piguard=69/3  undefended=70/9
+  dose 5 (correct/planted %): closedbook=40/4  filter:datasentinel=66/14  filter:piguard=66/13  fix=66/11  stack:datasentinel=67/11  stack:piguard=66/11  undefended=66/13
