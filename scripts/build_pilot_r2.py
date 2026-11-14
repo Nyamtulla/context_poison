@@ -132,6 +132,30 @@ def content(q):
     return {w for w in norm(q).split() if w not in STOP}
 
 
+def same_answer(a, b):
+    """Two answer strings name the same thing if either contains the other
+    after normalizing ("British Columbia" and "British Columbia, Canada").
+    Exact matching let the gold through as a false answer in round 2."""
+    a, b = norm(a), norm(b)
+    return bool(a and b) and (a == b or f" {a} " in f" {b} " or f" {b} " in f" {a} ")
+
+
+def overlaps(answers, others):
+    return any(same_answer(a, o) for a in answers for o in others)
+
+
+def gold_tokens(answers):
+    """Distinctive words of the gold aliases (names, not function words), so a
+    swapped passage that still says "Dench" or "Dylan's" is caught."""
+    out = set()
+    for a in answers:
+        for w in re.findall(r"[A-Za-z][A-Za-z'-]{3,}", a):
+            w = w.split("'")[0]
+            if w[:1].isupper() and w.lower() not in STOP:
+                out.add(w)
+    return out
+
+
 # ------------------------------------------------------------------ select
 def select():
     used = {r["qid"] for r in jl_read(D / "pilot/selection.jsonl")}
@@ -184,6 +208,10 @@ def sources(t):
         s = cache[r["qid"]]
         ok = s.get("usable", False) and any(c["passages"] for c in s["causes"].values())
         why = s.get("drop") or "no cause has a bad passage"
+        cs = content(s.get("question", ""))
+        if ok and any(len(cs & content(k["question"])) / max(1, len(cs | content(k["question"]))) >= 0.8
+                      for k in keep):
+            ok, why = False, "near-duplicate of a kept question"
         print(r["qid"], r["want"], "usable" if ok else f"dropped: {why}",
               {k: len(v["passages"]) for k, v in s.get("causes", {}).items()}, flush=True)
         if ok:
@@ -199,19 +227,31 @@ def question_sources(q, retr, nq, neigh, t):
     rt = retr[q["qid"]]
     top = clean_top(rt)
     golds = [p for p in top if p["has_answer"]]
-    pg = p_assert_any([(q["question"], p["title"] + "\n" + p["text"], q["answers"]) for p in golds])
-    support = [p for p, s in zip(golds, pg) if s >= t]
+    aliases = [a for a in q["answers"] if a.strip()][:3]
+    flat = [(q["question"], p["title"] + "\n" + p["text"], a) for p in golds for a in aliases]
+    sc = p_assert(flat) if flat else []
+    confirmed = [a for k, a in enumerate(aliases)
+                 if any(sc[i * len(aliases) + k] >= t for i in range(len(golds)))]
+    support = [p for i, p in enumerate(golds)
+               if any(sc[i * len(aliases) + k] >= t for k in range(len(aliases)))]
+    # a gold alias no clean passage states is dropped from the gold (rule E):
+    # round 2 kept "Salt Lake City", a Winter host, beside the right "1996"
     s = {"qid": q["qid"], "kind": "core" if q["core"] else "added", "question": q["question"],
-         "gold": q["answers"], "gold_support": len(support), "gold_candidates": len(golds),
-         "causes": {}}
+         "gold": confirmed or q["answers"], "gold_all": q["answers"],
+         "gold_support": len(support), "gold_candidates": len(golds), "causes": {}}
     if not support:                                                     # rule E
         return {**s, "usable": False, "drop": "no clean passage judged to state the gold"}
     s["gold_type"] = answer_type(q["answers"][0], support[0]["text"])
     s["usable"] = True
     if q["core"]:
         it = nq[int(q["qid"][2:])]
-        s["causes"]["poisonedrag"] = poisonedrag_sources(q, it, t)
-        s["causes"]["swapped"] = swapped_sources(q, rt, it, s["gold_type"], t)
+        if overlaps([it["incorrect answer"]], q["answers"]):
+            # the attacker's target is itself a right answer (nq406: Bernstein)
+            s["causes"]["poisonedrag"] = {"false_answer": it["incorrect answer"], "passages": [],
+                                          "note": "target is a gold alias"}
+        else:
+            s["causes"]["poisonedrag"] = poisonedrag_sources(q, it, t)
+            s["causes"]["swapped"] = swapped_sources(q, rt, it, s["gold_type"], t)
     if q["prev_answers"]:
         s["causes"]["outdated"] = outdated_sources(q, rt, t)
     s["causes"]["misretrieval"] = misretrieval_sources(q, s["gold_type"], neigh.get(q["qid"]), retr, t)
@@ -268,6 +308,9 @@ def swapped_sources(q, rt, it, gtype, t):
         if re.match(r"the ", new, re.I) and re.search(r"\bthe\s+$", before, re.I):
             new = new[4:]                                   # "the The Moody Blues"
         txt = before + new + p["text"][m.end():]
+        left = gold_tokens(q["answers"]) - gold_tokens([tgt])
+        if any(re.search(rf"\b{re.escape(w)}\b", txt) for w in left):
+            continue                     # "Dench had also portrayed Victoria"
         cands.append({"text": txt, "title": p["title"], "pid": p["pid"], "source": "swapped-pool"})
         if len(cands) == 8:
             break
@@ -289,7 +332,7 @@ def outdated_sources(q, rt, t):
     cands = []
     for p in rt["passages"]:                                            # rule D
         txt = p["title"] + " " + p["text"]
-        if not has_answer(txt, prev) or has_answer(txt, q["answers"]) or GAP.search(p["text"]):
+        if not has_answer(p["text"], prev) or has_answer(txt, q["answers"]) or GAP.search(p["text"]):
             continue
         if change and any(y >= change for y in years(p["text"])):
             continue
@@ -315,13 +358,12 @@ def outdated_sources(q, rt, t):
 
 def misretrieval_sources(q, gtype, neighbours, retr, t):
     qs = {r["qid"]: r for r in jl_read(D / "questions.jsonl")}
-    own = {norm(a) for a in q["answers"] + q["prev_answers"] + q["newer_answers"]}
     cq = content(q["question"])
     tried = 0
     for nid in neighbours or []:
         n = qs[nid]
-        if {norm(a) for a in n["answers"]} & own:                       # rule C
-            continue
+        if overlaps(n["answers"], q["answers"] + q["prev_answers"] + q["newer_answers"]):
+            continue                                                    # rule C
         cn = content(n["question"])
         if len(cq & cn) / max(1, len(cq | cn)) >= 0.5:
             continue

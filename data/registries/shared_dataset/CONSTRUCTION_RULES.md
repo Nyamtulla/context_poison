@@ -195,3 +195,29 @@ positions, k = 10 and 20.
 - **Later.** When a key is available, generate with PoisonedRAG's released
   prompt for the added questions. Regenerate the core too, so every question
   keeps 5 asserting passages, and compare the old and new passages.
+
+## Fixes after the round-2 reading (2026-11-12)
+
+Each fix answers a failure the blind round-2 reading found. They are applied
+in `scripts/build_pilot_r2.py` and take effect from the next build.
+
+- **Answers match by containment, not exactly.** A false answer that contains,
+  or is contained in, a gold, older or newer answer is rejected.
+  - Example: nq135's misretrieval answer "British Columbia" was the gold
+    "British Columbia, Canada".
+  - Example: nq406's PoisonedRAG target "Leonard Bernstein" is one of its gold
+    answers.
+  - A PoisonedRAG or swap target that is a gold alias removes both causes for
+    that question.
+- **Gold aliases must be supported (rule E).** Only gold aliases that a clean
+  passage is judged to state are kept as the gold. The full list stays in
+  `gold_all`. This drops wrong aliases such as "Salt Lake City" (a Winter
+  host) for the last US Summer Olympics.
+- **No gold left after a swap (rule B).** A swapped passage is rejected if it
+  still contains a distinctive word of the gold, such as a surname ("Dench
+  had also portrayed Victoria") or "Dylan's version".
+- **Outdated: in the text (rule D).** The old answer must appear in the
+  passage text, not only in its title.
+- **No duplicate questions.** A question whose content words overlap a kept
+  question's by 0.8 or more is dropped. Two SituatedQA questions in round 2
+  asked the same thing.

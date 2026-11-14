@@ -1,0 +1,101 @@
+{
+ "round1": {
+  "poisonedrag": {
+   "n": 100,
+   "ok": 27,
+   "asserts": 27
+  },
+  "outdated": {
+   "n": 64,
+   "ok": 10,
+   "asserts": 16
+  },
+  "swapped": {
+   "n": 54,
+   "ok": 16,
+   "asserts": 27
+  },
+  "misretrieval": {
+   "n": 115,
+   "ok": 38,
+   "asserts": 57
+  },
+  "conflict": {
+   "n": 20,
+   "ok": 16,
+   "asserts": 17
+  },
+  "all": {
+   "n": 353,
+   "ok": 107,
+   "asserts": 144
+  }
+ },
+ "round2": {
+  "poisonedrag": {
+   "n": 25,
+   "ok": 22,
+   "asserts": 22
+  },
+  "outdated": {
+   "n": 40,
+   "ok": 30,
+   "asserts": 33
+  },
+  "swapped": {
+   "n": 13,
+   "ok": 9,
+   "asserts": 13
+  },
+  "misretrieval": {
+   "n": 76,
+   "ok": 47,
+   "asserts": 56
+  },
+  "conflict": {
+   "n": 8,
+   "ok": 6,
+   "asserts": 6
+  },
+  "all": {
+   "n": 162,
+   "ok": 114,
+   "asserts": 130
+  }
+ },
+ "round1_questions": 49,
+ "round2_questions": 44,
+ "poisonedrag_sample": {
+  "n": 100,
+  "deny_or_hedge": 73,
+  "questions": 20
+ },
+ "gold_round1": {
+  "judged": 49,
+  "wrong": 2
+ },
+ "judge_round1": {
+  "n": 353,
+  "precision": 0.9333333333333333,
+  "recall": 0.6805555555555556
+ },
+ "yield": {
+  "core": {
+   "kept": 20,
+   "tried": 65
+  },
+  "added": {
+   "kept": 20,
+   "tried": 55
+  },
+  "wc": {
+   "kept": 4,
+   "tried": 180
+  }
+ },
+ "questions": {
+  "all": 1237,
+  "core": 500,
+  "outdated": 766
+ }
+}
