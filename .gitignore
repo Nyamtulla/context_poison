@@ -94,3 +94,8 @@ data/registries/design_choices/text/
 data/registries/design_choices/text_flow/
 # S4 downloads and cloned third-party repos (untrusted, some unlicensed).
 data/s4_sources/
+
+# generated code map (rebuild with graphify update .) and private meeting
+# slides; this repo is public
+graphify-out/
+advisor_decks/
