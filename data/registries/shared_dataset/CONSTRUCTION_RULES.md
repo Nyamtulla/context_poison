@@ -221,3 +221,28 @@ in `scripts/build_pilot_r2.py` and take effect from the next build.
 - **No duplicate questions.** A question whose content words overlap a kept
   question's by 0.8 or more is dropped. Two SituatedQA questions in round 2
   asked the same thing.
+
+## 7. Decisions and freeze (2026-11-14)
+
+The rules above, with the fixes after the round-2 reading, are **frozen** for
+the full build (S6). Three questions left open by the pilot were decided:
+
+1. **Freeze now; no further round on misretrieval.** Round-2 blind pass rates
+   were 62% (misretrieval) to 88% (PoisonedRAG), below the 90% target set
+   before the pilot. The full build reports a pass rate per cause from a
+   blind hand-read sample instead of raising the bar further.
+2. **Conflict is not anchored to 2018 (rule G replaced).** 158 of 180
+   WikiContradict contexts were not in the 2018 dump. The conflict subset
+   uses WikiContradict's own contexts and gold labels, is still screened by
+   the judge (rule A), and is reported on its own, never pooled with the 2018
+   questions. Forms (b) and (c) put both contexts in the lowest-ranked slots
+   of a set retrieved for the question from the 2018 dump, with fillers that
+   name neither answer. Caveat to report: the fillers are 2018 passages and
+   the contexts are later, and WikiContradict contexts are shorter than a
+   100-word passage.
+3. **Gold check stays strict (rule E).** A question is used only if a clean
+   passage is judged to state its gold. The drop (51 of 300 in round 2) is
+   reported, with its likely bias toward questions Wikipedia answers plainly.
+
+Run: `PYTHONPATH=envs/retrieval-libs:envs/judge-libs:scripts python3
+scripts/build_pilot_r2.py all --full` writes `shared_dataset/full/`.

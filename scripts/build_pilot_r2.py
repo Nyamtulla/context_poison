@@ -22,7 +22,12 @@ reading is not of passages the judge was validated on:
      clean top 10 is the first 10 passages without one
   G  WikiContradict: each context must be found in the 2018 dump; the dump
      passage holding it is the conflict passage, so items whose text is
-     newer than 2018 drop out
+     newer than 2018 drop out. REPLACED 2026-11-14 (CONSTRUCTION_RULES.md
+     section 7): the conflict subset uses WikiContradict's own contexts and
+     labels, is not anchored to 2018, and is reported on its own
+
+  --full builds the whole dataset (S6) into shared_dataset/full/: every
+  question, no quotas, pilot questions included.
 
   PYTHONPATH=envs/retrieval-libs:envs/judge-libs python3 scripts/build_pilot_r2.py all --t 0.5
 """
@@ -38,6 +43,7 @@ from build_pilot import (DENY, D, NQ, RETR, SEED, WC, answer_type, chunk, gold_t
 from build_retrieval_index import INDEX, _query_text, has_answer, norm
 
 OUT = D / "pilot/round2"
+FULL = False
 DOSES = (0, 1, 2, 3)
 N_CORE, N_ADDED, N_WC = 20, 20, 10
 
@@ -158,7 +164,7 @@ def gold_tokens(answers):
 
 # ------------------------------------------------------------------ select
 def select():
-    used = {r["qid"] for r in jl_read(D / "pilot/selection.jsonl")}
+    used = set() if FULL else {r["qid"] for r in jl_read(D / "pilot/selection.jsonl")}
     qs = {r["qid"]: r for r in jl_read(D / "questions.jsonl")}
     retr = {r["qid"]: r for r in jl_read(RETR)}
     ans10 = lambda q: any(p["has_answer"] for p in clean_top(retr[q]))
@@ -170,9 +176,10 @@ def select():
     # candidates in a fixed order; sources() takes them until each quota passes rule E
     for xs in (core_out, core_rest, added):
         rng.shuffle(xs)
-    rows = [{"qid": q["qid"], "kind": "core", "want": "core_out"} for q in core_out[:20]]
-    rows += [{"qid": q["qid"], "kind": "core", "want": "core_rest"} for q in core_rest[:80]]
-    rows += [{"qid": q["qid"], "kind": "added", "want": "added"} for q in added[:100]]
+    n = (None, None, None) if FULL else (20, 80, 100)
+    rows = [{"qid": q["qid"], "kind": "core", "want": "core_out"} for q in core_out[:n[0]]]
+    rows += [{"qid": q["qid"], "kind": "core", "want": "core_rest"} for q in core_rest[:n[1]]]
+    rows += [{"qid": q["qid"], "kind": "added", "want": "added"} for q in added[:n[2]]]
     wc = [w for w in csv.DictReader(open(WC)) if w["samepassage"] == "Different"
           and f"wc{w['question_ID']}" not in used]
     rng.shuffle(wc)
@@ -192,6 +199,8 @@ def sources(t):
     cache = {r["qid"]: r for r in jl_read(OUT / "sources_all.jsonl")}
     neigh = nearest_questions(qs, retr)
     quota = {"core_out": 10, "core": N_CORE, "added": N_ADDED, "wc": N_WC}
+    if FULL:
+        quota = {k: float("inf") for k in quota}
     got = {"core_out": 0, "core": 0, "added": 0, "wc": 0}
     keep = []
     for r in cands:
@@ -412,18 +421,11 @@ def conflict_sources(w, t):
     s = {"qid": f"wc{w['question_ID']}", "kind": "wikicontradict", "question": w["question"],
          "gold": w["ref_answer"].split("|"), "contradict_type": w["contradictType"],
          "usable": False}
-    ps = []
-    for k in ("context1", "context2"):                                  # rule G
-        ctx, a = w[k], w["answer1" if k == "context1" else "answer2"]
-        keys = [norm(x)[:60] for x in re.split(r"(?<=[.!?])\s+", ctx) if len(norm(x)) >= 40]
-        hit = next((p for p in dump_search(" ".join(ctx.split()[:40]))
-                    if any(kk in norm(p["title"] + " " + p["text"]) for kk in keys)), None)
-        if not hit:
-            return {**s, "drop": f"{k} not found in the 2018 dump"}
-        ps.append({"text": hit["text"], "title": hit["title"], "pid": hit["pid"],
-                   "source": "wikicontradict-dump2018", "original": ctx, "asserts": a})
-    if ps[0]["pid"] == ps[1]["pid"]:
-        return {**s, "drop": "both contexts fall in one dump passage"}
+    # rule G replaced (2026-11-14): WikiContradict's own contexts, not the
+    # 2018 dump passage holding them. 158 of 180 contexts were not in the dump.
+    ps = [{"text": " ".join(w[k].split()), "title": w["WikipediaArticleTitle"],
+           "source": "wikicontradict", "asserts": w["answer1" if k == "context1" else "answer2"]}
+          for k in ("context1", "context2")]
     pa = p_assert([(w["question"], p["title"] + "\n" + p["text"], p["asserts"]) for p in ps])
     for p, a in zip(ps, pa):
         p["p_assert"] = a
@@ -446,6 +448,20 @@ def assemble():
                               "passages": [p], "bad_slots": [0]})
             items.append({"qid": s["qid"], "cause": "conflict", "form": "pair", "dose": 2,
                           "passages": ps, "bad_slots": [0, 1]})
+            # forms b and c (section 3.3): both passages in the lowest-ranked
+            # slots of a set retrieved for the question from the 2018 dump,
+            # with fillers that name neither answer
+            ans_ = [a for p in s["causes"]["conflict"]["passages"] for a in [p["asserts"]]] + s["gold"]
+            fill = [p for p in dump_search(s["question"], k=40)
+                    if not GAP.search(p["text"])
+                    and not any(f" {norm(a)} " in f" {norm(p['title'] + ' ' + p['text'])} "
+                                for a in ans_ if norm(a))]
+            fill = distinct(fill)
+            for form, k in (("b", 10), ("c", 5)):
+                if len(fill) >= k - 2:
+                    items.append({"qid": s["qid"], "cause": "conflict", "form": form, "dose": 2,
+                                  "passages": [p["title"] + "\n" + p["text"] for p in fill[:k - 2]] + ps,
+                                  "bad_slots": [k - 2, k - 1]})
             continue
         top = clean_top(retr[s["qid"]])
         clean = [p["title"] + "\n" + p["text"] for p in top]
@@ -509,8 +525,12 @@ if __name__ == "__main__":
     ap.add_argument("step", choices=["select", "sources", "assemble", "sheet", "all"])
     ap.add_argument("--t", type=float, default=0.5, help="judge threshold on P(states it)")
     ap.add_argument("--device", default="cuda:0", help='"cpu" when the shared GPU is full')
+    ap.add_argument("--full", action="store_true", help="whole dataset into shared_dataset/full/")
     a = ap.parse_args()
     DEVICE = a.device
+    if a.full:
+        FULL, OUT = True, D / "full"
+        OUT.mkdir(exist_ok=True)
     sys.setrecursionlimit(10000)
     for name, fn in (("select", select), ("sources", lambda: sources(a.t)),
                      ("assemble", assemble), ("sheet", sheet)):
