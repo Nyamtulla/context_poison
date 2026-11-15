@@ -1130,6 +1130,104 @@
    "UNNAMED: multi-modal prompt injection against robot navigation"
   ]
  ],
+ "pooled": [
+  [
+   "Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "AprielGuard",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "Attention Tracker",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "CASCADE",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "DCP (Device Context Protocol)",
+   "AgentDojo: important-instructions injection"
+  ],
+  [
+   "DefensiveToken (test-time optimized special tokens)",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "DefensiveToken (test-time optimized special tokens)",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "ESLD (External Surrogate Latent Defense)",
+   "BIPIA benchmark attack set"
+  ],
+  [
+   "ESLD (External Surrogate Latent Defense)",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "ESLD (External Surrogate Latent Defense)",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "MACR (multi-agent conflict resolution)",
+   "knowledge conflict (contextual vs parametric)"
+  ],
+  [
+   "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "PromptArmor",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "PromptArmor",
+   "AgentDojo: tool-knowledge injection"
+  ],
+  [
+   "PromptShield (fine-tuned deployable PI detector)",
+   "Combined Attack (Open-Prompt-Injection)"
+  ],
+  [
+   "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "UNNAMED: Representation Engineering-based Probing for IPI detection",
+   "AgentDojo: ignore-previous injection"
+  ],
+  [
+   "UNNAMED: Representation Engineering-based Probing for IPI detection",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "UNNAMED: Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)",
+   "Indirect Prompt Injection (IPI)"
+  ],
+  [
+   "UniKnow / LM-UniKnow",
+   "distraction by irrelevant context (graded by semantic relatedness)"
+  ],
+  [
+   "User-Tool Aligned Safety RL Framework",
+   "InjecAgent: Data Stealing injection"
+  ],
+  [
+   "User-Tool Aligned Safety RL Framework",
+   "InjecAgent: Direct Harm injection"
+  ],
+  [
+   "lambda-RLM",
+   "context rot"
+  ]
+ ],
  "renamed": [
   [
    "AgentSandbox",

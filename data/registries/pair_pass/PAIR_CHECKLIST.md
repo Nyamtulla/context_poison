@@ -28,8 +28,14 @@ rebuild the list themselves.
 | Checks passed | Verdict |
 |---|---|
 | All seven | **strong** (counted) |
-| 1–5, but not 6 or 7 | **weak** (kept, not counted) |
+| 1–5 and 7, but not 6 | **pooled** (counted as tested; left out of outcome counts) |
+| 1–5, but not 7 | **weak** (kept, not counted) |
 | Any of 1–5 fails | **not a pair** |
+
+A pooled pair was run, but its number is combined with other causes. It
+answers "was this fix tested against this cause?" (yes) but not "did the fix
+hold against it?", so it counts in coverage and is left out of every outcome
+count. Ruling of 2026-11-14.
 
 ## Evidence
 

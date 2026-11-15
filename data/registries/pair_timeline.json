@@ -1,7 +1,7 @@
 {
  "generated": "2026-10-16",
  "purpose": "temporal and cross-community structure of every confirmed (defense, attack) pair",
- "n_pairs_dated": 293,
+ "n_pairs_dated": 317,
  "n_pairs_undated": 0,
  "pairs": [
   {
@@ -365,6 +365,30 @@
    "match": "exact/exact"
   },
   {
+   "defense": "Agentic Immune System (AIS) -- CIFT + DP-HONEY + cumulative leakage tracking",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "BIPIA benchmark attack set",
+   "attack_year": 2023,
+   "attack_regime": "security",
+   "gap_years": 3,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "AprielGuard",
+   "defense_year": 2025,
+   "defense_regime": "security",
+   "attack": "Indirect Prompt Injection (IPI)",
+   "attack_year": 2023,
+   "attack_regime": "security",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
    "defense": "Attention Tracker",
    "defense_year": 2024,
    "defense_regime": "security",
@@ -373,6 +397,18 @@
    "attack_regime": "security",
    "gap_years": -1,
    "defense_predates_attack": true,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "Attention Tracker",
+   "defense_year": 2024,
+   "defense_regime": "security",
+   "attack": "Combined Attack (Open-Prompt-Injection)",
+   "attack_year": 2023,
+   "attack_regime": "security",
+   "gap_years": 1,
+   "defense_predates_attack": false,
    "cross_community": false,
    "match": "exact/exact"
   },
@@ -516,6 +552,18 @@
    "attack_year": 2023,
    "attack_regime": "security",
    "gap_years": 0,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "CASCADE",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "Indirect Prompt Injection (IPI)",
+   "attack_year": 2023,
+   "attack_regime": "security",
+   "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
    "match": "exact/exact"
@@ -821,6 +869,18 @@
    "match": "exact/exact"
   },
   {
+   "defense": "DCP (Device Context Protocol)",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "AgentDojo: important-instructions injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
    "defense": "DE-FIVE",
    "defense_year": 2026,
    "defense_regime": "security",
@@ -1097,6 +1157,30 @@
    "match": "exact/exact"
   },
   {
+   "defense": "DefensiveToken (test-time optimized special tokens)",
+   "defense_year": 2025,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Data Stealing injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 1,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "DefensiveToken (test-time optimized special tokens)",
+   "defense_year": 2025,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Direct Harm injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 1,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
    "defense": "Differential Transformer (DIFF Transformer)",
    "defense_year": 2024,
    "defense_regime": "safety",
@@ -1139,6 +1223,42 @@
    "attack": "knowledge conflict (contextual vs parametric)",
    "attack_year": 2024,
    "attack_regime": "safety",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "ESLD (External Surrogate Latent Defense)",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "BIPIA benchmark attack set",
+   "attack_year": 2023,
+   "attack_regime": "security",
+   "gap_years": 3,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "ESLD (External Surrogate Latent Defense)",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Data Stealing injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "ESLD (External Surrogate Latent Defense)",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Direct Harm injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
    "gap_years": 2,
    "defense_predates_attack": false,
    "cross_community": false,
@@ -1673,6 +1793,18 @@
    "match": "exact/exact"
   },
   {
+   "defense": "MACR (multi-agent conflict resolution)",
+   "defense_year": 2026,
+   "defense_regime": "safety",
+   "attack": "knowledge conflict (contextual vs parametric)",
+   "attack_year": 2024,
+   "attack_regime": "safety",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
    "defense": "MAGE (Memory As Guardrail Enforcement)",
    "defense_year": 2026,
    "defense_regime": "security",
@@ -2057,6 +2189,54 @@
    "match": "exact/exact"
   },
   {
+   "defense": "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Data Stealing injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "Prompt-response verification framework (Task Analyst + Safety Analyst + Judge)",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Direct Harm injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "PromptArmor",
+   "defense_year": 2025,
+   "defense_regime": "security",
+   "attack": "AgentDojo: ignore-previous injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 1,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "PromptArmor",
+   "defense_year": 2025,
+   "defense_regime": "security",
+   "attack": "AgentDojo: tool-knowledge injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 1,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
    "defense": "PromptArmor",
    "defense_year": 2025,
    "defense_regime": "security",
@@ -2136,6 +2316,18 @@
    "attack_year": 2023,
    "attack_regime": "security",
    "gap_years": 3,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "PromptShield (fine-tuned deployable PI detector)",
+   "defense_year": 2024,
+   "defense_regime": "security",
+   "attack": "Combined Attack (Open-Prompt-Injection)",
+   "attack_year": 2023,
+   "attack_regime": "security",
+   "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
    "match": "exact/exact"
@@ -3221,6 +3413,18 @@
    "match": "exact/exact"
   },
   {
+   "defense": "UNNAMED: Positive-Security Prompt Firewall for healthcare PI/PHI protection",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Direct Harm injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
    "defense": "UNNAMED: Pre-deployment scan/harden/validate pipeline (Analyzer/Modifier/Validator)",
    "defense_year": 2026,
    "defense_regime": "security",
@@ -3281,6 +3485,30 @@
    "match": "exact/exact"
   },
   {
+   "defense": "UNNAMED: Representation Engineering-based Probing for IPI detection",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "AgentDojo: ignore-previous injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "UNNAMED: Representation Engineering-based Probing for IPI detection",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "Indirect Prompt Injection (IPI)",
+   "attack_year": 2023,
+   "attack_regime": "security",
+   "gap_years": 3,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
    "defense": "UNNAMED: Scientist Persona + Provenance Audit mitigations against indirect data poisoning",
    "defense_year": 2026,
    "defense_regime": "security",
@@ -3300,6 +3528,18 @@
    "attack_year": 2023,
    "attack_regime": "security",
    "gap_years": 2,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "UNNAMED: Three-layer middleware defense for RAG chatbots (Input Screening + Privilege-Constrained Context Assembly + Output Auditing)",
+   "defense_year": 2026,
+   "defense_regime": "security",
+   "attack": "Indirect Prompt Injection (IPI)",
+   "attack_year": 2023,
+   "attack_regime": "security",
+   "gap_years": 3,
    "defense_predates_attack": false,
    "cross_community": false,
    "match": "exact/exact"
@@ -3356,9 +3596,45 @@
    "defense": "UniKnow / LM-UniKnow",
    "defense_year": 2025,
    "defense_regime": "safety",
+   "attack": "distraction by irrelevant context (graded by semantic relatedness)",
+   "attack_year": 2024,
+   "attack_regime": "safety",
+   "gap_years": 1,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "UniKnow / LM-UniKnow",
+   "defense_year": 2025,
+   "defense_regime": "safety",
    "attack": "knowledge conflict (contextual vs parametric)",
    "attack_year": 2024,
    "attack_regime": "safety",
+   "gap_years": 1,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "User-Tool Aligned Safety RL Framework",
+   "defense_year": 2025,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Data Stealing injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
+   "gap_years": 1,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "User-Tool Aligned Safety RL Framework",
+   "defense_year": 2025,
+   "defense_regime": "security",
+   "attack": "InjecAgent: Direct Harm injection",
+   "attack_year": 2024,
+   "attack_regime": "security",
    "gap_years": 1,
    "defense_predates_attack": false,
    "cross_community": false,
@@ -3479,6 +3755,18 @@
    "attack": "InjecAgent: Direct Harm injection",
    "attack_year": 2024,
    "attack_regime": "security",
+   "gap_years": 0,
+   "defense_predates_attack": false,
+   "cross_community": false,
+   "match": "exact/exact"
+  },
+  {
+   "defense": "lambda-RLM",
+   "defense_year": 2026,
+   "defense_regime": "safety",
+   "attack": "context rot",
+   "attack_year": 2026,
+   "attack_regime": "safety",
    "gap_years": 0,
    "defense_predates_attack": false,
    "cross_community": false,

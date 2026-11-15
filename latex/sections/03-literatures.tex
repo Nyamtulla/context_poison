@@ -274,10 +274,12 @@ cause still without a pair. The reverse scan matters because it is the only
 route that can observe a fix \emph{losing} to a cause published after it.
 Every candidate pair, whatever its route, was then read against a written
 checklist: a measured result, the registered fix and the named cause in the
-same run, a separate number for that cause, and more than a single example.
-Of \NPairCandidates{} candidates, \NPairsComposite{} pass, \NPairsRefiled{} of
-them re-filed under the registry name the run actually used. The checklist
-and every verdict ship with the artifact.
+same run, and more than a single example. Of \NPairCandidates{} candidates,
+\NPairsComposite{} pass, \NPairsRefiled{} of them re-filed under the registry
+name the run actually used. In \NPairsPooled{} of them the cause ran but its
+number is pooled with other causes; these count as tested and are left out of
+every count of who wins. The checklist and every verdict ship with the
+artifact.
 
 The matrix is sparse in a specific way. \NDefMatchedFull{} of \NFixes{}
 fixes (\PctDefMatched{}\%) appear in at least one pair, and \NDefOneFull{} of

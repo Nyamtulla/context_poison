@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-13",
+ "generated": "2026-11-14",
  "purpose": "For every RQ4 defense, record what its paper actually evaluated it against.",
  "n_defenses": 540,
  "counts": {
-  "named_mechanism": 196,
-  "non_adversarial": 211,
+  "named_mechanism": 208,
+  "non_adversarial": 209,
   "no_baseline": 18,
-  "benchmark_only": 41,
-  "adversarial_prose": 60,
+  "benchmark_only": 34,
+  "adversarial_prose": 57,
   "unclear": 14
  },
- "n_evaluated_adversarially": 297,
- "pct_evaluated_adversarially": 55.0,
+ "n_evaluated_adversarially": 299,
+ "pct_evaluated_adversarially": 55.4,
  "defenses": [
   {
    "defense_name": "MELON (Masked re-Execution and TooL comparisON)",
@@ -280,8 +280,8 @@
    "row": 98,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: Undefended"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "TRACER-AI",
@@ -334,8 +334,8 @@
    "row": 113,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: AgentDojo"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Secure Prompt Engineering Patterns (SPEP)",
@@ -505,8 +505,8 @@
    "row": 151,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: TensorTrust"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "RouteGuard",
@@ -1378,8 +1378,8 @@
    "row": 380,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "ARC (Active and Reflection-driven Context management)",
@@ -2530,8 +2530,8 @@
    "row": 664,
    "track": null,
    "validated_against": "incidental",
-   "status": "non_adversarial",
-   "evidence": "real baselines, no adversarial signal in the coded fields"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "ConflictRAG (two-stage detection + Entropy-TOPSIS credibility + CARS metric)",
@@ -2683,8 +2683,8 @@
    "row": 686,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: JailbreakBench"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "GIF (Geometric Information Flow)",
@@ -2764,8 +2764,8 @@
    "row": 704,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: AgentDojo"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "UNNAMED: Hybrid SIEM + One-Class SVM prompt-injection detection framework",
@@ -2800,8 +2800,8 @@
    "row": 710,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: red-team"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "Write-gate sanitization (pre-summarization redaction/rewrite) for memory laundering",
@@ -3133,8 +3133,8 @@
    "row": 804,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: HarmBench"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "AgentSight (eBPF boundary tracing)",
@@ -3151,8 +3151,8 @@
    "row": 808,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: ASB"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "ToolSafe (TS-Guard + TS-Flow)",
@@ -4276,8 +4276,8 @@
    "row": 1031,
    "track": null,
    "validated_against": "adversarial",
-   "status": "adversarial_prose",
-   "evidence": "evaluation describes attacked vs undefended: injection attack"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "PIGuard (Mitigating Over-defense for Free)",
@@ -4519,8 +4519,8 @@
    "row": 1111,
    "track": null,
    "validated_against": "adversarial",
-   "status": "benchmark_only",
-   "evidence": "names an adversarial benchmark: injection dataset"
+   "status": "named_mechanism",
+   "evidence": "appears in a confirmed coverage pair"
   },
   {
    "defense_name": "SecureCAI",

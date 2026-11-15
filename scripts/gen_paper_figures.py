@@ -362,8 +362,9 @@ def fig_who_reports():
     # rejected (rq5_rejected_matches.json)
     import sys as _s
     _s.path.insert(0, str(REPO / "scripts"))
-    from pair_tally import composite_pairs
+    from pair_tally import composite_pairs, pooled_pairs
     _ok, _ = composite_pairs()          # only pairs that passed the checklist
+    _ok -= pooled_pairs()               # pooled pairs have no outcome of their own
     c = collections.defaultdict(collections.Counter)
     for o in load("pair_outcomes.json"):
         if (o["defense_name"], o["mechanism_name"]) in _ok:

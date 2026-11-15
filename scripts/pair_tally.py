@@ -55,12 +55,22 @@ def composite_pairs():
     vf = R / "pair_pass" / "verified_pairs.json"
     if vf.exists():
         v = json.loads(vf.read_text())
-        keep = {tuple(x) for x in v["strong"]}
+        keep = {tuple(x) for x in v["strong"]} | {tuple(x) for x in v.get("pooled", [])}
         dropped = pairs - keep
         pairs = (pairs & keep) | {tuple(x) for x in v["renamed"]}
         provenance["dropped by the checklist (not strong)"] = -len(dropped)
         provenance["re-filed under the correct registry name"] = len(v["renamed"])
+        provenance["of which pooled (tested; no separate number)"] = len(v.get("pooled", []))
     return pairs, provenance
+
+
+def pooled_pairs():
+    """Tested pairs whose result is pooled with other causes. They count as
+    tested but carry no outcome of their own, so outcome counts drop them."""
+    vf = R / "pair_pass" / "verified_pairs.json"
+    if not vf.exists():
+        return set()
+    return {tuple(x) for x in json.loads(vf.read_text()).get("pooled", [])}
 
 
 def attack_universe():

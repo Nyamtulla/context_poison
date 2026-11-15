@@ -955,9 +955,13 @@ def main():
 
     # ---- who reports what. The abstract's reporter asymmetry, from the same
     # file pair_tally reads, so it cannot drift from the tally.
-    # Only pairs that passed the checklist (pair_tally.composite_pairs()).
+    # Only pairs that passed the checklist with a separate number for the
+    # cause: pooled pairs are tested but have no outcome of their own.
+    from pair_tally import pooled_pairs
+    _pooled = pooled_pairs()
     _vo = [o for o in load("pair_outcomes.json")
-           if (o["defense_name"], o["mechanism_name"]) in pairs]
+           if (o["defense_name"], o["mechanism_name"]) in pairs
+           and (o["defense_name"], o["mechanism_name"]) not in _pooled]
     _out = collections.defaultdict(collections.Counter)
     for o in _vo:
         _out[o["reported_by"]][o["reported_verdict"]] += 1
@@ -1543,6 +1547,7 @@ def main():
     _vp = json.loads((REPO / "data/registries/pair_pass/verified_pairs.json").read_text())
     M["NPairCandidates"] = _vp["n_read"]
     M["NPairsRefiled"] = len(_vp["renamed"])
+    M["NPairsPooled"] = len(_vp.get("pooled", []))
 
     # --- Fix-only cells: a fix but no cause in its cell ---------------------
     # Counted per literature (as the cube's panels draw them) and pooled.
