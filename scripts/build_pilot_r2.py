@@ -430,7 +430,7 @@ def conflict_sources(w, t):
     for p, a in zip(ps, pa):
         p["p_assert"] = a
     if min(pa) < t:
-        return {**s, "drop": "a dump passage is not judged to state its answer",
+        return {**s, "drop": "a WikiContradict context is not judged to state its answer",
                 "causes": {"conflict": {"false_answer": None, "passages": ps}}}
     return {**s, "usable": True, "causes": {"conflict": {"false_answer": None, "passages": ps}}}
 
