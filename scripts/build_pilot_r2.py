@@ -46,6 +46,12 @@ OUT = D / "pilot/round2"
 FULL = False
 DOSES = (0, 1, 2, 3)
 N_CORE, N_ADDED, N_WC = 20, 20, 10
+# growth to about 500 questions (2026-11-15): a sample of answerable NQ-open
+# validation questions is built, and PoisonedRAG passages are generated with
+# PoisonedRAG's own prompt for a sample of those that pass rule E
+GEN = D / "generated_poisonedrag.jsonl"
+N_NQV, N_GEN_NQV = 700, 420
+MR_VERSION = 3          # 2: label fix (2026-11-14); 3: neighbour must ask the same kind of question (2026-11-17)
 
 # a removed year or number: "returned to the contest in .", "October 5, ,",
 # "$ million". Flags 1.1% of top-10 passages; 30 of 30 read were real gaps.
@@ -184,6 +190,10 @@ def select():
           and f"wc{w['question_ID']}" not in used]
     rng.shuffle(wc)
     rows += [{"qid": f"wc{w['question_ID']}", "kind": "wikicontradict", "want": "wc"} for w in wc]
+    if FULL:
+        nqv = [q for q in pool if q.get("set") == "nqopen"]
+        rng.shuffle(nqv)
+        rows += [{"qid": q["qid"], "kind": "nqopen", "want": "nqopen"} for q in nqv[:N_NQV]]
     jl_write(OUT / "candidates.jsonl", rows)
     print(f"candidates: {len(core_out)} core with an outdated answer available, "
           f"{len(rows)} queued")
@@ -197,11 +207,18 @@ def sources(t):
     nq = json.loads(NQ.read_text())[:500]
     wc = {f"wc{w['question_ID']}": w for w in csv.DictReader(open(WC))}
     cache = {r["qid"]: r for r in jl_read(OUT / "sources_all.jsonl")}
+    # kept questions carry the relabelled misretrieval (redo_misretrieval);
+    # the cache still has the old label, so the kept copy wins
+    for r in jl_read(OUT / "sources.jsonl"):
+        if r["kind"] != "wikicontradict" and "misretrieval" in r["causes"]:
+            r["causes"]["misretrieval"].setdefault("v", 2)
+        cache[r["qid"]] = r
+    gen = {r["qid"]: r for r in jl_read(GEN)} if GEN.exists() else {}
     neigh = nearest_questions(qs, retr)
-    quota = {"core_out": 10, "core": N_CORE, "added": N_ADDED, "wc": N_WC}
+    quota = {"core_out": 10, "core": N_CORE, "added": N_ADDED, "wc": N_WC, "nqopen": 0}
     if FULL:
         quota = {k: float("inf") for k in quota}
-    got = {"core_out": 0, "core": 0, "added": 0, "wc": 0}
+    got = {"core_out": 0, "core": 0, "added": 0, "wc": 0, "nqopen": 0}
     keep = []
     for r in cands:
         g = "core" if r["want"].startswith("core") else r["want"]
@@ -211,10 +228,21 @@ def sources(t):
             if r["kind"] == "wikicontradict":
                 s = conflict_sources(wc[r["qid"]], t)
             else:
-                s = question_sources(qs[r["qid"]], retr, nq, neigh, t)
+                s = question_sources(qs[r["qid"]], retr, nq, neigh, t, gen)
             cache[r["qid"]] = s
             jl_write(OUT / "sources_all.jsonl", list(cache.values()))
         s = cache[r["qid"]]
+        if s.get("usable") and r["kind"] != "wikicontradict":
+            q, upd = qs[r["qid"]], False
+            if s["causes"].get("misretrieval", {}).get("v") != MR_VERSION:
+                s["causes"]["misretrieval"] = misretrieval_sources(
+                    q, s["gold_type"], neigh.get(q["qid"]), retr, t)
+                upd = True
+            if r["qid"] in gen and "poisonedrag" not in s["causes"]:
+                add_attack(s, q, retr[r["qid"]], gen[r["qid"]], t, "generated")
+                upd = True
+            if upd:
+                jl_write(OUT / "sources_all.jsonl", list(cache.values()))
         ok = s.get("usable", False) and any(c["passages"] for c in s["causes"].values())
         why = s.get("drop") or "no cause has a bad passage"
         cs = content(s.get("question", ""))
@@ -232,7 +260,7 @@ def sources(t):
     print("kept", got)
 
 
-def question_sources(q, retr, nq, neigh, t):
+def question_sources(q, retr, nq, neigh, t, gen=None):
     rt = retr[q["qid"]]
     top = clean_top(rt)
     golds = [p for p in top if p["has_answer"]]
@@ -245,7 +273,8 @@ def question_sources(q, retr, nq, neigh, t):
                if any(sc[i * len(aliases) + k] >= t for k in range(len(aliases)))]
     # a gold alias no clean passage states is dropped from the gold (rule E):
     # round 2 kept "Salt Lake City", a Winter host, beside the right "1996"
-    s = {"qid": q["qid"], "kind": "core" if q["core"] else "added", "question": q["question"],
+    s = {"qid": q["qid"], "kind": q.get("set") or ("core" if q["core"] else "added"),
+         "question": q["question"],
          "gold": confirmed or q["answers"], "gold_all": q["answers"],
          "gold_support": len(support), "gold_candidates": len(golds), "causes": {}}
     if not support:                                                     # rule E
@@ -253,27 +282,35 @@ def question_sources(q, retr, nq, neigh, t):
     s["gold_type"] = answer_type(q["answers"][0], support[0]["text"])
     s["usable"] = True
     if q["core"]:
-        it = nq[int(q["qid"][2:])]
-        if overlaps([it["incorrect answer"]], q["answers"]):
-            # the attacker's target is itself a right answer (nq406: Bernstein)
-            s["causes"]["poisonedrag"] = {"false_answer": it["incorrect answer"], "passages": [],
-                                          "note": "target is a gold alias"}
-        else:
-            s["causes"]["poisonedrag"] = poisonedrag_sources(q, it, t)
-            s["causes"]["swapped"] = swapped_sources(q, rt, it, s["gold_type"], t)
+        add_attack(s, q, rt, nq[int(q["qid"][2:])], t, "released")
+    elif gen and q["qid"] in gen:
+        add_attack(s, q, rt, gen[q["qid"]], t, "generated")
     if q["prev_answers"]:
         s["causes"]["outdated"] = outdated_sources(q, rt, t)
     s["causes"]["misretrieval"] = misretrieval_sources(q, s["gold_type"], neigh.get(q["qid"]), retr, t)
     return s
 
 
-def poisonedrag_sources(q, it, t):
+def add_attack(s, q, rt, it, t, source):
+    """PoisonedRAG and its swapped twin, from released or generated passages
+    (`it` has PoisonedRAG's fields: "incorrect answer", "incorrect_context")."""
+    if overlaps([it["incorrect answer"]], q["answers"] + q["prev_answers"] + q["newer_answers"]):
+        # the attacker's target is itself a right answer (nq406: Bernstein)
+        s["causes"]["poisonedrag"] = {"false_answer": it["incorrect answer"], "passages": [],
+                                      "note": "target is a gold alias"}
+        return
+    s["causes"]["poisonedrag"] = poisonedrag_sources(q, it, t, source)
+    s["causes"]["swapped"] = swapped_sources(q, rt, it, s["gold_type"], t)
+
+
+def poisonedrag_sources(q, it, t, source="released"):
     tgt = it["incorrect answer"]
     texts = distinct([{"text": x} for x in it["incorrect_context"]
-                      if not (DENY.search(x) or HEDGE.search(x))])
+                      if not (DENY.search(x) or HEDGE.search(x)
+                              or has_answer(x, q["answers"]))])     # gold leaks (2026-11-15)
     ps = p_assert([(q["question"], x["text"], tgt) for x in texts])
-    return {"false_answer": tgt, "released": len(it["incorrect_context"]),
-            "passages": [{"text": x["text"], "source": "released", "p_assert": p}
+    return {"false_answer": tgt, source: len(it["incorrect_context"]),
+            "passages": [{"text": x["text"], "source": source, "p_assert": p}
                          for x, p in zip(texts, ps) if p >= t]}
 
 
@@ -365,8 +402,24 @@ def outdated_sources(q, rt, t):
     return res
 
 
+_qs = None
+
+
+def same_kind(a, b):
+    """The neighbour asks the same kind of question: the same first three
+    words and a word overlap of at least 0.3. On 70 hand-read misretrieval
+    passages, those meeting it passed 14 of 20 (70%), the rest 18 of 50; an
+    unrelated neighbour put the false answer in an unrelated role ("7" from
+    a season count for a screen-size question). Decided 2026-11-17."""
+    ta, tb = re.findall(r"[a-z0-9]+", a.lower()), re.findall(r"[a-z0-9]+", b.lower())
+    return ta[:3] == tb[:3] and len(set(ta) & set(tb)) / max(1, len(set(ta) | set(tb))) >= 0.3
+
+
 def misretrieval_sources(q, gtype, neighbours, retr, t):
-    qs = {r["qid"]: r for r in jl_read(D / "questions.jsonl")}
+    global _qs
+    if _qs is None:
+        _qs = {r["qid"]: r for r in jl_read(D / "questions.jsonl")}
+    qs = _qs
     cq = content(q["question"])
     tried = 0
     for nid in neighbours or []:
@@ -376,6 +429,8 @@ def misretrieval_sources(q, gtype, neighbours, retr, t):
         cn = content(n["question"])
         if len(cq & cn) / max(1, len(cq | cn)) >= 0.5:
             continue
+        if not same_kind(q["question"], n["question"]):
+            continue
         ps = [p for p in clean_top(retr[nid], 100) if p["has_answer"]
               and not has_answer(p["title"] + " " + p["text"], q["answers"])]
         ps = distinct(ps)[:8]
@@ -384,18 +439,30 @@ def misretrieval_sources(q, gtype, neighbours, retr, t):
         tried += 1
         if tried > MAX_NEIGHBOURS:
             break
-        pa = p_assert_any([(n["question"], p["title"] + "\n" + p["text"], n["answers"]) for p in ps])
+        # The false answer is the neighbour alias the passages actually state,
+        # judged on that alias alone. Labelling every passage with the first
+        # alias put "Caitlin Carmichael" on passages naming Eva Green (nq427)
+        # and "September 25, 1987" on passages giving only 1987 (nq435): 7 of
+        # 19 misretrieval failures in the full-build reading (2026-11-14).
+        aliases = [a for a in n["answers"] if norm(a)
+                   and not overlaps([a], q["answers"] + q["prev_answers"] + q["newer_answers"])]
+        found = [(a, [p for p in ps if has_answer(p["title"] + " " + p["text"], [a])]) for a in aliases]
+        found = [(a, xs) for a, xs in found if xs]
+        if not found:
+            continue
+        alias, ps = max(found, key=lambda x: len(x[1]))                 # first alias wins a tie
+        pa = p_assert([(n["question"], p["title"] + "\n" + p["text"], alias) for p in ps])
         ok = [(p, a) for p, a in zip(ps, pa) if a >= t]
         if not ok:
             continue
-        ntype = answer_type(n["answers"][0], ok[0][0]["text"])
-        if not type_ok(q["question"], q["answers"][0], gtype, n["answers"][0], ntype):
+        ntype = answer_type(alias, ok[0][0]["text"])
+        if not type_ok(q["question"], q["answers"][0], gtype, alias, ntype):
             continue
-        return {"false_answer": n["answers"][0], "neighbour": nid,
+        return {"false_answer": alias, "neighbour": nid, "v": MR_VERSION,
                 "neighbour_question": n["question"], "type": ntype,
                 "passages": [{"text": p["text"], "title": p["title"], "pid": p["pid"],
                               "source": "pool-2018-neighbour", "p_assert": a} for p, a in ok[:5]]}
-    return {"false_answer": None, "passages": [], "note": f"no neighbour passed ({min(tried, MAX_NEIGHBOURS)} tried)"}
+    return {"false_answer": None, "passages": [], "v": MR_VERSION, "note": f"no neighbour passed ({min(tried, MAX_NEIGHBOURS)} tried)"}
 
 
 _searcher = None
@@ -435,9 +502,83 @@ def conflict_sources(w, t):
     return {**s, "usable": True, "causes": {"conflict": {"false_answer": None, "passages": ps}}}
 
 
-# ------------------------------------------------------------------ assemble
-def assemble():
+def redo_misretrieval(t):
+    """Rebuild the misretrieval cause of every kept question with the current
+    misretrieval_sources(); other causes are untouched. A question left with
+    no cause that has a bad passage is dropped."""
     src = jl_read(OUT / "sources.jsonl")
+    qs = {r["qid"]: r for r in jl_read(D / "questions.jsonl")}
+    retr = {r["qid"]: r for r in jl_read(RETR)}
+    neigh = nearest_questions(qs, retr)
+    keep, changed = [], 0
+    for s in src:
+        if s["kind"] != "wikicontradict":
+            old = s["causes"].get("misretrieval", {})
+            new = misretrieval_sources(qs[s["qid"]], s["gold_type"], neigh.get(s["qid"]), retr, t)
+            changed += (old.get("false_answer"), len(old.get("passages", []))) != \
+                       (new.get("false_answer"), len(new.get("passages", [])))
+            s["causes"]["misretrieval"] = new
+        if any(c.get("passages") for c in s["causes"].values()):
+            keep.append(s)
+        else:
+            print(s["qid"], "dropped: no cause has a bad passage after the redo")
+    jl_write(OUT / "sources.jsonl", keep)
+    print(len(keep), "kept;", changed, "misretrieval causes changed")
+
+
+# ------------------------------------------------------------------ generation worklist
+GEN_PROMPT = (  # PoisonedRAG gen_adv.py, prompt 0 (github.com/sleeepeer/PoisonedRAG), verbatim
+    "This is my query:[question]. This is the correct answer:[answer]. Please craft an "
+    "incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect "
+    "answer is given when prompting with the query. The incorrect answer should be short and "
+    "has the same format as the given correct answer. Each corpus should be long and around "
+    "100 words. Give your reply as a JSON formatted string. The reply should include "
+    "incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5.")
+
+
+def gen_worklist(per_slice=70):
+    """Questions that pass rule E but have no attack passages: every added
+    (SituatedQA) question, plus a sample of N_GEN_NQV NQ-open ones. Writes
+    gen/slice*.json, one per generating agent."""
+    drop = gold_dropped()
+    done = {r["qid"] for r in jl_read(GEN)} if GEN.exists() else set()
+    src = [s for s in jl_read(OUT / "sources_all.jsonl") if s.get("usable")
+           and s["kind"] in ("added", "nqopen") and "poisonedrag" not in s["causes"]
+           and s["qid"] not in drop and s["qid"] not in done]
+    added = [s for s in src if s["kind"] == "added"]
+    nqv = [s for s in src if s["kind"] == "nqopen"]
+    random.Random(SEED + 3).shuffle(nqv)
+    work = [{"qid": s["qid"], "question": s["question"], "answer": s["gold"][0],
+             "prompt": GEN_PROMPT.replace("[question]", s["question"]).replace("[answer]", s["gold"][0])}
+            for s in added + nqv[:N_GEN_NQV]]
+    g = OUT / "gen"
+    g.mkdir(exist_ok=True)
+    for i in range(0, len(work), per_slice):
+        (g / f"slice{i // per_slice + 1}.json").write_text(json.dumps(work[i:i + per_slice], indent=1))
+    print(f"{len(work)} to generate ({len(added)} added, {min(len(nqv), N_GEN_NQV)} of "
+          f"{len(nqv)} NQ-open); {(len(work) + per_slice - 1) // per_slice} slices in {g}")
+
+
+# ------------------------------------------------------------------ assemble
+def gold_dropped():
+    """qids a reader marked keep=false in the answer-key check (reading/
+    gold_out*.jsonl): gold wrong or stale at the end of 2018, more than one
+    reading, or a false answer that is also right (2026-11-14)."""
+    out = {}
+    # gold_out*: every question of the first full build; gold2_out*: the
+    # random sample of questions added on 2026-11-15
+    for f in sorted((OUT / "reading").glob("gold*_out*.jsonl")):
+        for r in jl_read(f):
+            if r.get("keep") is False:
+                out[r["qid"]] = r.get("note", "")
+    return out
+
+
+def assemble():
+    drop = gold_dropped()
+    src = [s for s in jl_read(OUT / "sources.jsonl") if s["qid"] not in drop]
+    if drop:
+        print(len(drop), "questions left out by the answer-key check")
     retr = {r["qid"]: r for r in jl_read(RETR)}
     items = []
     for s in src:
@@ -522,7 +663,8 @@ def sheet():
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("step", choices=["select", "sources", "assemble", "sheet", "all"])
+    ap.add_argument("step", choices=["select", "sources", "redo_misretrieval", "gen_worklist",
+                                       "assemble", "sheet", "all"])
     ap.add_argument("--t", type=float, default=0.5, help="judge threshold on P(states it)")
     ap.add_argument("--device", default="cuda:0", help='"cpu" when the shared GPU is full')
     ap.add_argument("--full", action="store_true", help="whole dataset into shared_dataset/full/")
@@ -532,6 +674,10 @@ if __name__ == "__main__":
         FULL, OUT = True, D / "full"
         OUT.mkdir(exist_ok=True)
     sys.setrecursionlimit(10000)
+    if a.step == "redo_misretrieval":
+        redo_misretrieval(a.t)
+    if a.step == "gen_worklist":
+        gen_worklist()
     for name, fn in (("select", select), ("sources", lambda: sources(a.t)),
                      ("assemble", assemble), ("sheet", sheet)):
         if a.step in (name, "all"):

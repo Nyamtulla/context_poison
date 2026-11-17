@@ -20,7 +20,9 @@ These rules carry out the agreed requirements (R1–R9 in PAPER_PLAN S3 and
 - **Stated once, stated plainly.** Each bad passage must assert the false
   answer as true. A passage that hedges, denies it or calls it a mistake does
   not count as bad (§2.1 gives the reason).
-- **Length.** Every passage is 60–140 words. Every prompt is checked against
+- **Length.** Every real passage (clean, outdated, misretrieval) is 60–140
+  words. Attack passages keep the attacker's length: released PoisonedRAG
+  passages run 17–51 words (median 30); generated ones about 45–120. Every prompt is checked against
   each fix's limits before any run (R2): COIECD 2,048 tokens and 2,000
   characters; ParamMute 1,024 tokens.
 
@@ -246,3 +248,50 @@ the full build (S6). Three questions left open by the pilot were decided:
 
 Run: `PYTHONPATH=envs/retrieval-libs:envs/judge-libs:scripts python3
 scripts/build_pilot_r2.py all --full` writes `shared_dataset/full/`.
+
+## 8. Growth to about 500 questions (2026-11-15)
+
+The full build gave 166 questions on 2018 truth plus 63 conflict items. The
+user decided to grow it to about 500 questions:
+
+1. **More questions.** The rest of NQ-open validation (2,979 questions not
+   already in the set, qid `nqv####`) joins the pool with the same gold
+   source as the core. They have no outdated answer. A random sample of 700
+   that are answerable from the 2018 top 10 is built with every rule above.
+2. **Attack passages are generated, by Claude agents.** No released passages
+   exist for these questions or for the SituatedQA questions. They are
+   written with PoisonedRAG's own prompt, used verbatim (`gen_adv.py`, prompt
+   0: one call writes the incorrect answer and five ~100-word passages).
+   PoisonedRAG used GPT-4. Here Claude agents are the generator, so this is
+   a labelled deviation: each passage records `source: generated` (released
+   passages keep `released`), and results are reported for released and
+   generated passages separately as well as together. The same assertion
+   check (rule A) applies. Generation covers every SituatedQA question that
+   passes rule E and a random sample of 420 NQ-open questions that pass it.
+   The swapped control uses the generated incorrect answer as its target.
+3. **Answer check by sample.** Questions already read (the 192 of the first
+   full build) keep their verdicts. For the new questions, a random sample is
+   read for the answer check; the failure rate is reported, and failures in
+   the sample are dropped. This replaces the every-question reading of
+   section 7.3 for the new questions only.
+4. **Answer check on every new question after all (2026-11-17).** The
+   200-question sample failed 44 times (22%, twice the first build's 11%),
+   so the remaining 190 were read too. 86 of the 390 new questions fail
+   (22%) and are dropped. Most are NQ-open questions that are ambiguous, ask
+   for a list, or carry a wrong key (FIFA no. 1 at the end of 2018 was
+   Belgium, not Germany).
+5. **Misretrieval neighbours must ask the same kind of question
+   (2026-11-17).** On the new NQ-open questions, misretrieval passed 11 of
+   30 blind reads (37%): the nearest neighbour was often unrelated, and its
+   answer appeared in an unrelated role. A neighbour is now used only if it
+   shares the question's first three words and a word overlap of at least
+   0.3 (`same_kind` in `build_pilot_r2.py`). On the 70 misretrieval passages
+   read so far, those meeting this rule passed 14 of 20 (70%), the rest 18
+   of 50. The rule applies to every question, old and new.
+6. **Generation outcome.** Claude agents wrote passages for 567 questions.
+   Three were not generated or were removed: a medical question (false
+   emergency advice), a spelling question, and one whose distractor was true.
+   First drafts of three slices were templated and were rewritten until no
+   sentence occurs three or more times across the set. The judge kept 1,735
+   of 2,835 passages; 87 targets were a past or later correct answer and were
+   rejected. Generated passages passed 88 of 90 blind reads.

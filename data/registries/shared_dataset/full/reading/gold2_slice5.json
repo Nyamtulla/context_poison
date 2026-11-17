@@ -1,0 +1,1109 @@
+[
+ {
+  "qid": "sqa957815482588836299",
+  "question": "what is the name of the newest lamborghini",
+  "gold": [
+   "Urus"
+  ],
+  "gold_all": [
+   "Urus"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Revuelto"
+   ]
+  }
+ },
+ {
+  "qid": "sqa1585316578999504970",
+  "question": "when was the last time the united states hosted the olympics",
+  "gold": [
+   "1984"
+  ],
+  "gold_all": [
+   "1984"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "1996"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-1671753368343269049",
+  "question": "who is the captain of india in cricket",
+  "gold": [
+   "Virat Kohli"
+  ],
+  "gold_all": [
+   "Virat Kohli"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "MS Dhoni"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-6118878938511397050",
+  "question": "who had the most assists in a game",
+  "gold": [
+   "Scott Skiles"
+  ],
+  "gold_all": [
+   "Scott Skiles"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Magic Johnson"
+   ],
+   "swapped": [
+    "Magic Johnson"
+   ]
+  }
+ },
+ {
+  "qid": "sqa1168611404834933720",
+  "question": "who scored the most goals in real madrid",
+  "gold": [
+   "Cristiano Ronaldo"
+  ],
+  "gold_all": [
+   "Cristiano Ronaldo"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Ra\u00fal"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-2017278020944823335",
+  "question": "who is the head of the church in england",
+  "gold": [
+   "Elizabeth II"
+  ],
+  "gold_all": [
+   "Elizabeth II"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Justin Welby"
+   ]
+  }
+ },
+ {
+  "qid": "sqa2221300476080572999",
+  "question": "who won a million on deal or no deal",
+  "gold": [
+   "Tomorrow Rodriguez"
+  ],
+  "gold_all": [
+   "Tomorrow Rodriguez"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Michelle Falco"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8019311571340961322",
+  "question": "who won the most gold medals in one olympic games",
+  "gold": [
+   "Michael Phelps"
+  ],
+  "gold_all": [
+   "Michael Phelps"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Mark Spitz"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2874",
+  "question": "when was the first star wars film released",
+  "gold": [
+   "1977",
+   "May\u00a025,\u00a01977"
+  ],
+  "gold_all": [
+   "1977",
+   "May\u00a025,\u00a01977"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1979"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1706",
+  "question": "who sings the christmas song all i want for christmas is you",
+  "gold": [
+   "Mariah Carey"
+  ],
+  "gold_all": [
+   "Mariah Carey"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Whitney Houston"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1472",
+  "question": "when do they put the rockefeller tree up",
+  "gold": [
+   "mid November",
+   "late November or early December"
+  ],
+  "gold_all": [
+   "mid November",
+   "late November or early December"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "by June 15, 2018"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1641",
+  "question": "when does canada switch to daylight savings time",
+  "gold": [
+   "the second Sunday of March"
+  ],
+  "gold_all": [
+   "the second Sunday of March"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "March 9, 2018"
+   ],
+   "poisonedrag": [
+    "the first Sunday of April"
+   ],
+   "swapped": [
+    "the first Sunday of April"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2259",
+  "question": "what is the oasis in ready player one",
+  "gold": [
+   "a virtual reality simulator"
+  ],
+  "gold_all": [
+   "a virtual reality simulator"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "a social media website"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3332",
+  "question": "what was the religion in persia before islam",
+  "gold": [
+   "the Zoroastrian religion",
+   "Zoroastrian"
+  ],
+  "gold_all": [
+   "the Zoroastrian religion",
+   "Zoroastrian"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Manichaeism"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0328",
+  "question": "when was the canadian pacific railway started and finished",
+  "gold": [
+   "between 1881 and 1885"
+  ],
+  "gold_all": [
+   "between 1881 and 1885"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "between 1891 and 1895"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0162",
+  "question": "who won the mens single ice skating 2018",
+  "gold": [
+   "Yuzuru Hanyu"
+  ],
+  "gold_all": [
+   "Yuzuru Hanyu",
+   "Javier Fern\u00e1ndez",
+   "Shoma Uno"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Nathan Chen"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0113",
+  "question": "when did the movie varsity blues come out",
+  "gold": [
+   "1999"
+  ],
+  "gold_all": [
+   "1999",
+   "January\u00a015,\u00a01999"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1984"
+   ],
+   "poisonedrag": [
+    "1997"
+   ],
+   "swapped": [
+    "1997"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1882",
+  "question": "the assassination of gianni versace american crime story season 2 episode 2",
+  "gold": [
+   "Manhunt"
+  ],
+  "gold_all": [
+   "Manhunt"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Creator/Destroyer"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1859",
+  "question": "who wrote the song be thankful for what you got",
+  "gold": [
+   "William DeVaughn"
+  ],
+  "gold_all": [
+   "William DeVaughn"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Curtis Mayfield"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3259",
+  "question": "when was catch me if you can made",
+  "gold": [
+   "2002"
+  ],
+  "gold_all": [
+   "2002"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1956"
+   ],
+   "poisonedrag": [
+    "1999"
+   ],
+   "swapped": [
+    "1999"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2500",
+  "question": "in the dynastic cycle what is the right to rule called",
+  "gold": [
+   "the Mandate of Heaven",
+   "Mandate of Heaven"
+  ],
+  "gold_all": [
+   "the Mandate of Heaven",
+   "Mandate of Heaven"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "the Divine Right of Kings"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1805",
+  "question": "what is dj's boyfriends name on full house",
+  "gold": [
+   "Steve Hale",
+   "Steven \"Steve\" Hale"
+  ],
+  "gold_all": [
+   "Steve Hale",
+   "Steven \"Steve\" Hale",
+   "rich kid Nelson",
+   "Viper"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Kevin Hamilton"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0403",
+  "question": "when does season 6 of the next step start",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "2019"
+   ],
+   "swapped": [
+    "2019"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2027",
+  "question": "when was nepal declared a secular state in bs",
+  "gold": [
+   "January 15, 2007"
+  ],
+  "gold_all": [
+   "January 15, 2007"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "December 1985"
+   ],
+   "poisonedrag": [
+    "December 28, 2006"
+   ],
+   "swapped": [
+    "December 28, 2006"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0116",
+  "question": "where do you get a cashiers check from",
+  "gold": [
+   "a bank",
+   "bank"
+  ],
+  "gold_all": [
+   "a bank",
+   "bank"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "a credit union"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0592",
+  "question": "who played major hochstetter in hogan's heroes",
+  "gold": [
+   "Howard Caine"
+  ],
+  "gold_all": [
+   "Howard Caine"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Leon Askin"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3077",
+  "question": "when did the passion of the christ come out",
+  "gold": [
+   "2004"
+  ],
+  "gold_all": [
+   "February 25, 2004",
+   "February\u00a025,\u00a02004",
+   "2004"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "August\u00a022,\u00a01980"
+   ],
+   "poisonedrag": [
+    "2003"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0883",
+  "question": "how long were the pyramids the tallest structure",
+  "gold": [
+   "over 3,800",
+   "over 3,800 years"
+  ],
+  "gold_all": [
+   "over 3,800",
+   "over 3,800 years"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "over 2,000"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2860",
+  "question": "who sings god gave rock and roll to you",
+  "gold": [
+   "the British band Argent",
+   "Kiss"
+  ],
+  "gold_all": [
+   "the British band Argent",
+   "Petra",
+   "Kiss"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "German rock band Scorpions"
+   ],
+   "poisonedrag": [
+    "Deep Purple"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1880",
+  "question": "what type of business is chamber of commerce",
+  "gold": [
+   "a form of business network"
+  ],
+  "gold_all": [
+   "a form of business network"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "a government agency"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0161",
+  "question": "epidemiologists attempt to explain the link between health and variables such as",
+  "gold": [
+   "smoking"
+  ],
+  "gold_all": [
+   "biological agents",
+   "disease conditions in defined populations",
+   "smoking",
+   "stress",
+   "chemicals",
+   "alcohol"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "diet"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1506",
+  "question": "when was the electronic funds transfer act signed into law",
+  "gold": [
+   "in 1978",
+   "1978"
+  ],
+  "gold_all": [
+   "in 1978",
+   "November 10, 1978",
+   "1978"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "in 1985"
+   ],
+   "swapped": [
+    "in 1985"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1922",
+  "question": "who was it that described the structure of dna",
+  "gold": [
+   "James Watson and Francis Crick"
+  ],
+  "gold_all": [
+   "James Watson and Francis Crick",
+   "James Watson",
+   "Francis Crick"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Rosalind Franklin and Maurice Wilkins"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3412",
+  "question": "when did we decide to leave the eu",
+  "gold": [
+   "23 June 2016"
+  ],
+  "gold_all": [
+   "23 June 2016"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "4 January 2011"
+   ],
+   "poisonedrag": [
+    "23 June 2018"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2125",
+  "question": "how many points are scored for a touchdown in american football",
+  "gold": [
+   "six",
+   "six points"
+  ],
+  "gold_all": [
+   "six",
+   "six points"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "seven"
+   ],
+   "poisonedrag": [
+    "seven"
+   ],
+   "swapped": [
+    "seven"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0127",
+  "question": "who plays dusty in the movie pure country",
+  "gold": [
+   "George Strait"
+  ],
+  "gold_all": [
+   "George Strait"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Kenny Rogers"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2462",
+  "question": "who was the first to say i'm going to disney world",
+  "gold": [
+   "Phil Simms"
+  ],
+  "gold_all": [
+   "Jeana Yeager",
+   "Phil Simms",
+   "Dick Rutan"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Joe Montana"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3559",
+  "question": "who sang with eternal on i wanna be the only one",
+  "gold": [
+   "BeBe Winans"
+  ],
+  "gold_all": [
+   "BeBe Winans"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Ronnie Dyson"
+   ],
+   "poisonedrag": [
+    "Whitney Houston"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2573",
+  "question": "where does new crust come from in sea floor spreading",
+  "gold": [
+   "basaltic magma",
+   "volcanic activity"
+  ],
+  "gold_all": [
+   "basaltic magma",
+   "volcanic activity"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "granitic magma"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1591",
+  "question": "who came up with the idea of the transcontinental railroad",
+  "gold": [
+   "Dr. Hartwell Carver"
+  ],
+  "gold_all": [
+   "Dr. Hartwell Carver"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Asa Whitney"
+   ],
+   "swapped": [
+    "Asa Whitney"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2253",
+  "question": "who challenged the aristotelian model of a geocentric universe",
+  "gold": [
+   "Copernicus"
+  ],
+  "gold_all": [
+   "Copernicus"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Galileo"
+   ],
+   "swapped": [
+    "Galileo"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2232",
+  "question": "how many characters are present in icd-10 codes",
+  "gold": [
+   "7"
+  ],
+  "gold_all": [
+   "7"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "seven"
+   ],
+   "poisonedrag": [
+    "5"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2221",
+  "question": "when is the world consumer right day celebrated",
+  "gold": [
+   "15 March every year",
+   "15 March"
+  ],
+  "gold_all": [
+   "15 March every year",
+   "15 March"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "10 December every year"
+   ],
+   "swapped": [
+    "10 December every year"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2882",
+  "question": "who did puss in boots grew up with",
+  "gold": [
+   "Humpty Alexander Dumpty"
+  ],
+  "gold_all": [
+   "Humpty Dumpty",
+   "Kitty Softpaws",
+   "Humpty Alexander Dumpty"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Billy Bartholomew Goose"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1408",
+  "question": "what is mercy mercy me by marvin gaye about",
+  "gold": [
+   "sorrow regarding the environment",
+   "the environment"
+  ],
+  "gold_all": [
+   "sorrow regarding the environment",
+   "the environment"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "heartbreak over a failed love affair"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3246",
+  "question": "who wrote the song after you've gone",
+  "gold": [
+   "Turner Layton",
+   "Henry Creamer",
+   "lyrics by Henry Creamer"
+  ],
+  "gold_all": [
+   "Turner Layton",
+   "Henry Creamer",
+   "lyrics by Henry Creamer",
+   "composed by Turner Layton"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Irving Berlin"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2591",
+  "question": "who played the detective in little boy blue",
+  "gold": [
+   "Stephen Graham"
+  ],
+  "gold_all": [
+   "Stephen Graham"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Ben Whishaw"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1978",
+  "question": "where is the eagle creek fire located in oregon",
+  "gold": [
+   "Cascade Locks",
+   "Columbia River Gorge"
+  ],
+  "gold_all": [
+   "Cascade Locks",
+   "Columbia River Gorge"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Hood River"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2023",
+  "question": "when does south by southwest start in austin texas",
+  "gold": [
+   "mid-March"
+  ],
+  "gold_all": [
+   "mid-March"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "early April"
+   ],
+   "swapped": [
+    "early April"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2076",
+  "question": "who plays janie in the search for santa paws",
+  "gold": [
+   "G. Hannelius"
+  ],
+  "gold_all": [
+   "G. Hannelius"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Max"
+   ],
+   "poisonedrag": [
+    "Bailee Madison"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1628",
+  "question": "who was the first english child born in north america",
+  "gold": [
+   "Virginia Dare"
+  ],
+  "gold_all": [
+   "Virginia Dare"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Peregrine White"
+   ],
+   "swapped": [
+    "Peregrine White"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3083",
+  "question": "where was the movie the glass castle filmed",
+  "gold": [
+   "in Welch, West Virginia",
+   "Welch, West Virginia"
+  ],
+  "gold_all": [
+   "in Welch, West Virginia",
+   "Welch, West Virginia"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "in Charleston, West Virginia"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2594",
+  "question": "who gets to race in the daytona clash",
+  "gold": [
+   "Daytona Pole Award winners",
+   "former Clash race winners"
+  ],
+  "gold_all": [
+   "Daytona Pole Award winners",
+   "former Clash race winners"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "previous year's Cup champions"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0411",
+  "question": "what is the setting of the book hoot",
+  "gold": [
+   "Florida"
+  ],
+  "gold_all": [
+   "Florida"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Texas"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0856",
+  "question": "at what age are you no longer a toddler",
+  "gold": [
+   "36 months"
+  ],
+  "gold_all": [
+   "36 months"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "January 2017"
+   ],
+   "poisonedrag": [
+    "24 months"
+   ],
+   "swapped": [
+    "24 months"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3129",
+  "question": "who wrote the theme song to law and order",
+  "gold": [
+   "Mike Post"
+  ],
+  "gold_all": [
+   "Mike Post"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Dick Wolf"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2440",
+  "question": "when did brent barry won the dunk contest",
+  "gold": [
+   "1996"
+  ],
+  "gold_all": [
+   "1996"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2016"
+   ],
+   "poisonedrag": [
+    "1998"
+   ],
+   "swapped": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1285",
+  "question": "when did 10 shilling note go out of circulation",
+  "gold": [
+   "22 November 1970",
+   "1970"
+  ],
+  "gold_all": [
+   "22 November 1970",
+   "1970"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "31 October 1969"
+   ],
+   "swapped": [
+    "31 October 1969"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3527",
+  "question": "how many episodes in season 2 of fargo",
+  "gold": [
+   "10",
+   "ten"
+  ],
+  "gold_all": [
+   "10",
+   "ten"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "7"
+   ],
+   "poisonedrag": [
+    "12"
+   ],
+   "swapped": [
+    "12"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2893",
+  "question": "when did the nfl start playing in london",
+  "gold": [
+   "since 2007",
+   "2007"
+  ],
+  "gold_all": [
+   "since 2007",
+   "October 28, 2007",
+   "2007"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "since 2005"
+   ],
+   "swapped": [
+    "since 2005"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2496",
+  "question": "itai-itai disease was a form of poisoning associated with ingestion of",
+  "gold": [
+   "cadmium",
+   "Cadmium"
+  ],
+  "gold_all": [
+   "cadmium",
+   "Cadmium"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "mercury"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2669",
+  "question": "who won the most stanley cups in history",
+  "gold": [
+   "Montreal Canadiens"
+  ],
+  "gold_all": [
+   "Montreal Canadiens"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Detroit Red Wings"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1070",
+  "question": "who won the most medals in the 1924 winter olympics",
+  "gold": [
+   "Norway"
+  ],
+  "gold_all": [
+   "Norway"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Finland"
+   ]
+  }
+ }
+]

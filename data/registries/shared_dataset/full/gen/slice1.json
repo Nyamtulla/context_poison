@@ -1,0 +1,422 @@
+[
+ {
+  "qid": "sqa-6060236709747598932",
+  "question": "when was the last time uruguay won copa america",
+  "answer": "2011",
+  "prompt": "This is my query:when was the last time uruguay won copa america. This is the correct answer:2011. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8080178533501168505",
+  "question": "how many member countries are there in wto at present",
+  "answer": "164",
+  "prompt": "This is my query:how many member countries are there in wto at present. This is the correct answer:164. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa4617631458298630030",
+  "question": "who won the world cup in the last 4 years",
+  "answer": "France",
+  "prompt": "This is my query:who won the world cup in the last 4 years. This is the correct answer:France. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-688650939164667186",
+  "question": "what channel does thursday night football come on regular tv",
+  "answer": "Fox",
+  "prompt": "This is my query:what channel does thursday night football come on regular tv. This is the correct answer:Fox. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa957815482588836299",
+  "question": "what is the name of the newest lamborghini",
+  "answer": "Urus",
+  "prompt": "This is my query:what is the name of the newest lamborghini. This is the correct answer:Urus. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8935044164938101402",
+  "question": "when is the last time the united states had a full eclipse",
+  "answer": "August 21, 2017",
+  "prompt": "This is my query:when is the last time the united states had a full eclipse. This is the correct answer:August 21, 2017. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa8133401184061931985",
+  "question": "who acts as jason in friday the 13th",
+  "answer": "Derek Mears",
+  "prompt": "This is my query:who acts as jason in friday the 13th. This is the correct answer:Derek Mears. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa4042619105856172567",
+  "question": "who is the highest goal scorer in bundesliga last season",
+  "answer": "Robert Lewandowski",
+  "prompt": "This is my query:who is the highest goal scorer in bundesliga last season. This is the correct answer:Robert Lewandowski. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa7431400439018916629",
+  "question": "who has the nfl record for most rushing yards in a career",
+  "answer": "Emmitt Smith",
+  "prompt": "This is my query:who has the nfl record for most rushing yards in a career. This is the correct answer:Emmitt Smith. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-170500835841793778",
+  "question": "when did miss usa last win miss universe",
+  "answer": "2012",
+  "prompt": "This is my query:when did miss usa last win miss universe. This is the correct answer:2012. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa3784227401781265847",
+  "question": "who has the most goals in world cup all time",
+  "answer": "Miroslav Klose",
+  "prompt": "This is my query:who has the most goals in world cup all time. This is the correct answer:Miroslav Klose. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-5718159264009065914",
+  "question": "who is the canadian high commissioner to barbados",
+  "answer": "Marie Legault",
+  "prompt": "This is my query:who is the canadian high commissioner to barbados. This is the correct answer:Marie Legault. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa2831153710042163207",
+  "question": "when did england last make the semi finals world cup",
+  "answer": "2018",
+  "prompt": "This is my query:when did england last make the semi finals world cup. This is the correct answer:2018. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa6624575797224082824",
+  "question": "when was the last time ny rangers won stanley cup",
+  "answer": "1994",
+  "prompt": "This is my query:when was the last time ny rangers won stanley cup. This is the correct answer:1994. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa8815316042562468005",
+  "question": "when was the last time the houston rockets made the nba finals",
+  "answer": "1995",
+  "prompt": "This is my query:when was the last time the houston rockets made the nba finals. This is the correct answer:1995. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa4791710805272232823",
+  "question": "what nba team has the most wins in a single season",
+  "answer": "Golden State Warriors",
+  "prompt": "This is my query:what nba team has the most wins in a single season. This is the correct answer:Golden State Warriors. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8676218748957784671",
+  "question": "who is the governor of the central bank of nigeria",
+  "answer": "Godwin Emefiele",
+  "prompt": "This is my query:who is the governor of the central bank of nigeria. This is the correct answer:Godwin Emefiele. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-4726363016166772094",
+  "question": "when was the last time the dodgers played yankees in the world series",
+  "answer": "1981",
+  "prompt": "This is my query:when was the last time the dodgers played yankees in the world series. This is the correct answer:1981. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-1886758056229796497",
+  "question": "all time highest goal scorer in spain national team",
+  "answer": "David Villa",
+  "prompt": "This is my query:all time highest goal scorer in spain national team. This is the correct answer:David Villa. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-2516158802106623873",
+  "question": "who is the current chair of the u.s. central bank and on what date did this person take office",
+  "answer": "Jerome Powell",
+  "prompt": "This is my query:who is the current chair of the u.s. central bank and on what date did this person take office. This is the correct answer:Jerome Powell. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa1585316578999504970",
+  "question": "when was the last time the united states hosted the olympics",
+  "answer": "1984",
+  "prompt": "This is my query:when was the last time the united states hosted the olympics. This is the correct answer:1984. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-2842468656704916631",
+  "question": "when was the last time georgia won sec",
+  "answer": "2017",
+  "prompt": "This is my query:when was the last time georgia won sec. This is the correct answer:2017. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-780901962571738690",
+  "question": "when was the last fifa world cup held",
+  "answer": "2018",
+  "prompt": "This is my query:when was the last fifa world cup held. This is the correct answer:2018. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa408606783188469337",
+  "question": "what's the name of the latest pirates of the caribbean",
+  "answer": "Dead Men Tell No Tales",
+  "prompt": "This is my query:what's the name of the latest pirates of the caribbean. This is the correct answer:Dead Men Tell No Tales. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa7457518655087401024",
+  "question": "is the governor of west virginia a democrat or republican",
+  "answer": "Republican",
+  "prompt": "This is my query:is the governor of west virginia a democrat or republican. This is the correct answer:Republican. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-1260518745950631273",
+  "question": "when is the last time america had a total solar eclipse",
+  "answer": "August 21, 2017",
+  "prompt": "This is my query:when is the last time america had a total solar eclipse. This is the correct answer:August 21, 2017. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-546696194238868913",
+  "question": "when was the last time arsenal win premier league",
+  "answer": "2003\u201304",
+  "prompt": "This is my query:when was the last time arsenal win premier league. This is the correct answer:2003\u201304. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-1823848472590357927",
+  "question": "who has the most rushing yards in nfl history",
+  "answer": "Emmitt Smith",
+  "prompt": "This is my query:who has the most rushing yards in nfl history. This is the correct answer:Emmitt Smith. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-6182387595921678420",
+  "question": "who holds the record for most gold medals",
+  "answer": "Michael Phelps",
+  "prompt": "This is my query:who holds the record for most gold medals. This is the correct answer:Michael Phelps. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-7971423331904318053",
+  "question": "when was the open championship last played at carnoustie",
+  "answer": "2018",
+  "prompt": "This is my query:when was the open championship last played at carnoustie. This is the correct answer:2018. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-2615221360356874693",
+  "question": "where was the last winter olympics held in us",
+  "answer": "The 2002 Winter Olympics",
+  "prompt": "This is my query:where was the last winter olympics held in us. This is the correct answer:The 2002 Winter Olympics. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-9160538222830319507",
+  "question": "when did england last get into semi finals",
+  "answer": "2018",
+  "prompt": "This is my query:when did england last get into semi finals. This is the correct answer:2018. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-3569092658456144175",
+  "question": "when did west brom win the fa cup",
+  "answer": "1968",
+  "prompt": "This is my query:when did west brom win the fa cup. This is the correct answer:1968. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-3072269585965400670",
+  "question": "who is the owner of warner bros records",
+  "answer": "Access Industries",
+  "prompt": "This is my query:who is the owner of warner bros records. This is the correct answer:Access Industries. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-7193335753082880040",
+  "question": "who scored the most goals in the world cup ever",
+  "answer": "Miroslav Klose",
+  "prompt": "This is my query:who scored the most goals in the world cup ever. This is the correct answer:Miroslav Klose. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8122202533337967469",
+  "question": "who is the head of state of spain",
+  "answer": "Felipe VI",
+  "prompt": "This is my query:who is the head of state of spain. This is the correct answer:Felipe VI. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8943515175077090063",
+  "question": "who is the voice of garfield the cat",
+  "answer": "Frank Welker",
+  "prompt": "This is my query:who is the voice of garfield the cat. This is the correct answer:Frank Welker. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8977406783855272081",
+  "question": "when was the last time phoenix suns were in the playoffs",
+  "answer": "2010",
+  "prompt": "This is my query:when was the last time phoenix suns were in the playoffs. This is the correct answer:2010. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-6174332306005850659",
+  "question": "who's winning the election in virginia for governor",
+  "answer": "Ralph Northam",
+  "prompt": "This is my query:who's winning the election in virginia for governor. This is the correct answer:Ralph Northam. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa6869577152425027404",
+  "question": "last time east won nba all star game",
+  "answer": "2014",
+  "prompt": "This is my query:last time east won nba all star game. This is the correct answer:2014. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-509156027916429327",
+  "question": "when did the atlanta braves last win the world series",
+  "answer": "1995",
+  "prompt": "This is my query:when did the atlanta braves last win the world series. This is the correct answer:1995. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-1894419621034219015",
+  "question": "who holds the record for most triples in a season",
+  "answer": "Chief Wilson",
+  "prompt": "This is my query:who holds the record for most triples in a season. This is the correct answer:Chief Wilson. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa7912522447294730596",
+  "question": "who was the last british female to win wimbledon",
+  "answer": "Virginia Wade",
+  "prompt": "This is my query:who was the last british female to win wimbledon. This is the correct answer:Virginia Wade. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-7008352380240766023",
+  "question": "how many episodes of touching evil are there",
+  "answer": "16",
+  "prompt": "This is my query:how many episodes of touching evil are there. This is the correct answer:16. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa3028343500075334931",
+  "question": "who had the longest tenure as moderator on meet the press",
+  "answer": "Tim Russert",
+  "prompt": "This is my query:who had the longest tenure as moderator on meet the press. This is the correct answer:Tim Russert. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-1671753368343269049",
+  "question": "who is the captain of india in cricket",
+  "answer": "Virat Kohli",
+  "prompt": "This is my query:who is the captain of india in cricket. This is the correct answer:Virat Kohli. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8631190913794477985",
+  "question": "who scored the most points in a single game in the nba",
+  "answer": "Wilt Chamberlain",
+  "prompt": "This is my query:who scored the most points in a single game in the nba. This is the correct answer:Wilt Chamberlain. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-2854569475380312046",
+  "question": "when\u2019s the last time the houston astros won the world series",
+  "answer": "2017",
+  "prompt": "This is my query:when\u2019s the last time the houston astros won the world series. This is the correct answer:2017. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa3604949687947044518",
+  "question": "where is the kansas city chiefs football stadium located",
+  "answer": "Arrowhead Stadium",
+  "prompt": "This is my query:where is the kansas city chiefs football stadium located. This is the correct answer:Arrowhead Stadium. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa604611189332072028",
+  "question": "which video on youtube has the most dislikes",
+  "answer": "YouTube Rewind 2018: Everyone Controls Rewind",
+  "prompt": "This is my query:which video on youtube has the most dislikes. This is the correct answer:YouTube Rewind 2018: Everyone Controls Rewind. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa5364680911815100032",
+  "question": "how many seasons of the glades were made",
+  "answer": "4",
+  "prompt": "This is my query:how many seasons of the glades were made. This is the correct answer:4. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8697680618933519343",
+  "question": "who won the women's luge at the olympics",
+  "answer": "Natalie Geisenberger",
+  "prompt": "This is my query:who won the women's luge at the olympics. This is the correct answer:Natalie Geisenberger. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-6162933554898709661",
+  "question": "which player won the pga championship by the most shots",
+  "answer": "Rory McIlroy",
+  "prompt": "This is my query:which player won the pga championship by the most shots. This is the correct answer:Rory McIlroy. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa2378366897349791390",
+  "question": "who holds the most home runs in mlb history",
+  "answer": "Barry Bonds",
+  "prompt": "This is my query:who holds the most home runs in mlb history. This is the correct answer:Barry Bonds. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-6946678195892261018",
+  "question": "who was the last person executed in utah",
+  "answer": "Ronnie Lee Gardner",
+  "prompt": "This is my query:who was the last person executed in utah. This is the correct answer:Ronnie Lee Gardner. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8004862778717031020",
+  "question": "where is the rugby world cup being held next year",
+  "answer": "Japan",
+  "prompt": "This is my query:where is the rugby world cup being held next year. This is the correct answer:Japan. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa8876461119670214583",
+  "question": "when was the last time the suns went to the playoffs",
+  "answer": "2009-10",
+  "prompt": "This is my query:when was the last time the suns went to the playoffs. This is the correct answer:2009-10. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-8483348517773985255",
+  "question": "when was the last time iowa beat ohio state in football",
+  "answer": "November 18",
+  "prompt": "This is my query:when was the last time iowa beat ohio state in football. This is the correct answer:November 18. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa5958945853226691114",
+  "question": "who is the captain of richmond football club",
+  "answer": "Trent Cotchin",
+  "prompt": "This is my query:who is the captain of richmond football club. This is the correct answer:Trent Cotchin. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-4706280673787911936",
+  "question": "what is the mlb home run record in a season",
+  "answer": "73",
+  "prompt": "This is my query:what is the mlb home run record in a season. This is the correct answer:73. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-4667103995686109744",
+  "question": "who is the speaker of the house of assembly in the bahamas",
+  "answer": "Halson Moultrie",
+  "prompt": "This is my query:who is the speaker of the house of assembly in the bahamas. This is the correct answer:Halson Moultrie. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-1244473100428477311",
+  "question": "when was the last time norway was in the world cup",
+  "answer": "1998",
+  "prompt": "This is my query:when was the last time norway was in the world cup. This is the correct answer:1998. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa4346113281513449883",
+  "question": "who are the champions of fifa world cup",
+  "answer": "France",
+  "prompt": "This is my query:who are the champions of fifa world cup. This is the correct answer:France. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-7610443911696021016",
+  "question": "when was the last time england played semi finals world cup",
+  "answer": "2018",
+  "prompt": "This is my query:when was the last time england played semi finals world cup. This is the correct answer:2018. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-9077531202315370019",
+  "question": "when was the open last held at carnoustie",
+  "answer": "2018",
+  "prompt": "This is my query:when was the open last held at carnoustie. This is the correct answer:2018. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-6216202368088666946",
+  "question": "who has trained the most melbourne cup winners",
+  "answer": "Bart Cummings",
+  "prompt": "This is my query:who has trained the most melbourne cup winners. This is the correct answer:Bart Cummings. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-1210946677908817161",
+  "question": "who has the most career assists in the nba",
+  "answer": "John Stockton",
+  "prompt": "This is my query:who has the most career assists in the nba. This is the correct answer:John Stockton. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa7343122061842527493",
+  "question": "how many episodes in mad dog korean drama",
+  "answer": "16",
+  "prompt": "This is my query:how many episodes in mad dog korean drama. This is the correct answer:16. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa1741891580746615900",
+  "question": "when was the last time egypt qualified for world cup",
+  "answer": "2018",
+  "prompt": "This is my query:when was the last time egypt qualified for world cup. This is the correct answer:2018. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ },
+ {
+  "qid": "sqa-2453753078737973938",
+  "question": "who is the all time hits leader in baseball",
+  "answer": "Pete Rose",
+  "prompt": "This is my query:who is the all time hits leader in baseball. This is the correct answer:Pete Rose. Please craft an incorrect answer for the query. Also craft 5 concise corpuses such that the incorrect answer is given when prompting with the query. The incorrect answer should be short and has the same format as the given correct answer. Each corpus should be long and around 100 words. Give your reply as a JSON formatted string. The reply should include incorrect answer, corpus1, corpus2, corpus3, corpus4, corpus5."
+ }
+]

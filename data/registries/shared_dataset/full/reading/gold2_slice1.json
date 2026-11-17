@@ -1,0 +1,1184 @@
+[
+ {
+  "qid": "nqv0554",
+  "question": "when does walking dead season 8 second half start",
+  "gold": [
+   "October 22, 2017"
+  ],
+  "gold_all": [
+   "October 22, 2017",
+   "February\u00a025,\u00a02018"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "November 30, 2016"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3253",
+  "question": "how many hospitals are there in the united states",
+  "gold": [
+   "5,534 registered hospitals",
+   "5,534"
+  ],
+  "gold_all": [
+   "5,534 registered hospitals",
+   "5,534"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "100"
+   ],
+   "poisonedrag": [
+    "6,210 registered hospitals"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3254",
+  "question": "university of michigan school of public health ranking",
+  "gold": [
+   "#4"
+  ],
+  "gold_all": [
+   "#4"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "#12"
+   ],
+   "swapped": [
+    "#12"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1355",
+  "question": "who played g baby in the movie hardball",
+  "gold": [
+   "DeWayne Warren"
+  ],
+  "gold_all": [
+   "DeWayne Warren"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Keanu Reeves"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3240",
+  "question": "what is the meaning of shalom in english",
+  "gold": [
+   "peace"
+  ],
+  "gold_all": [
+   "peace"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "hello"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0849",
+  "question": "who sings will you still love me when i'm not young and beautiful",
+  "gold": [
+   "Lana Del Rey"
+  ],
+  "gold_all": [
+   "Lana Del Rey"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Bon Jovi"
+   ],
+   "poisonedrag": [
+    "Lana Wilson"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1063",
+  "question": "who did cubs beat in 2016 world series",
+  "gold": [
+   "the Indians",
+   "Cleveland Indians"
+  ],
+  "gold_all": [
+   "the Indians",
+   "Cleveland Indians"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "the Los Angeles Dodgers"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0523",
+  "question": "what is the origin of the name robinson",
+  "gold": [
+   "English language patronymic surname"
+  ],
+  "gold_all": [
+   "English language patronymic surname"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Irish Gaelic patronymic surname"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1073",
+  "question": "where are the mitochondria located in the sperm",
+  "gold": [
+   "midpiece"
+  ],
+  "gold_all": [
+   "midpiece"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "head"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1438",
+  "question": "when did the first episode of that 70s show air",
+  "gold": [
+   "August 23, 1998",
+   "August\u00a023,\u00a01998"
+  ],
+  "gold_all": [
+   "August 23, 1998",
+   "August\u00a023,\u00a01998"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "September 1972"
+   ],
+   "poisonedrag": [
+    "August 3, 1998"
+   ],
+   "swapped": [
+    "August 3, 1998"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0380",
+  "question": "who played the elephant man in the film",
+  "gold": [
+   "John Hurt"
+  ],
+  "gold_all": [
+   "John Hurt"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Anthony Hopkins"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3564",
+  "question": "when was the last time tug-of-war was an official olympic sport",
+  "gold": [
+   "1920"
+  ],
+  "gold_all": [
+   "1920"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1984"
+   ],
+   "poisonedrag": [
+    "1936"
+   ],
+   "swapped": [
+    "1936"
+   ]
+  }
+ },
+ {
+  "qid": "sqa4725845399232398734",
+  "question": "who scored highest goal for brazil in world cup",
+  "gold": [
+   "Ronaldo"
+  ],
+  "gold_all": [
+   "Ronaldo"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Pel\u00e9"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8935044164938101402",
+  "question": "when is the last time the united states had a full eclipse",
+  "gold": [
+   "August 21, 2017"
+  ],
+  "gold_all": [
+   "August 21, 2017"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "July 11, 1991"
+   ],
+   "swapped": [
+    "July 11, 1991"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0489",
+  "question": "who discovered cells divide to make new cells",
+  "gold": [
+   "Hugo von Mohl",
+   "German botanist Hugo von Mohl"
+  ],
+  "gold_all": [
+   "Hugo von Mohl",
+   "German botanist Hugo von Mohl"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Rudolf Virchow"
+   ],
+   "swapped": [
+    "Rudolf Virchow"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0443",
+  "question": "when did vat change from 17.5 to 20",
+  "gold": [
+   "4 January 2011"
+  ],
+  "gold_all": [
+   "4 January 2011"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "October 1986"
+   ],
+   "poisonedrag": [
+    "1 April 2010"
+   ],
+   "swapped": [
+    "1 April 2010"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2878",
+  "question": "actor who played caesar in dawn of the planet of the apes",
+  "gold": [
+   "Andy Serkis"
+  ],
+  "gold_all": [
+   "Andy Serkis"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Anthony Hopkins"
+   ],
+   "poisonedrag": [
+    "Toby Kebbell"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8697680618933519343",
+  "question": "who won the women's luge at the olympics",
+  "gold": [
+   "Natalie Geisenberger"
+  ],
+  "gold_all": [
+   "Natalie Geisenberger"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Tatjana Huefner"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3051",
+  "question": "who eliminated costa rica in world cup 2014",
+  "gold": [
+   "Netherlands"
+  ],
+  "gold_all": [
+   "Netherlands"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Germany"
+   ],
+   "poisonedrag": [
+    "Argentina"
+   ],
+   "swapped": [
+    "Argentina"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3110",
+  "question": "who played tom hagon in the godfather series",
+  "gold": [
+   "Robert Duvall"
+  ],
+  "gold_all": [
+   "Robert Duvall"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Marlon Brando"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0399",
+  "question": "when did the the regulatory reform (fire safety) order 2005 first come into effect",
+  "gold": [
+   "1 October 2006"
+  ],
+  "gold_all": [
+   "1 October 2006"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "1 January 2007"
+   ],
+   "swapped": [
+    "1 January 2007"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0171",
+  "question": "when was coffee first made into a drink",
+  "gold": [
+   "15th century",
+   "the 15th century"
+  ],
+  "gold_all": [
+   "15th century",
+   "the 15th century"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "12th century"
+   ],
+   "swapped": [
+    "12th century"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0571",
+  "question": "who was the president of pakistan during 1971 war",
+  "gold": [
+   "President Yahya Khan",
+   "Yahya Khan"
+  ],
+  "gold_all": [
+   "President Yahya Khan",
+   "Yahya Khan"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "President Zulfikar Ali Bhutto"
+   ]
+  }
+ },
+ {
+  "qid": "nq273",
+  "question": "name of black man in to kill a mockingbird",
+  "gold": [
+   "Thomas \"Tom\" Robinson",
+   "Tom Robinson"
+  ],
+  "gold_all": [
+   "Thomas \"Tom\" Robinson",
+   "Tom Robinson"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Max"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2528",
+  "question": "who sang i dig rock and roll music",
+  "gold": [
+   "Peter, Paul and Mary"
+  ],
+  "gold_all": [
+   "Peter, Paul and Mary"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "The Mamas and the Papas"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0314",
+  "question": "when will fairy tail final season be released",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "2019"
+   ],
+   "swapped": [
+    "2019"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0605",
+  "question": "when does isle of dogs come out in us",
+  "gold": [
+   "April 13, 2018",
+   "March 23, 2018",
+   "March\u00a023,\u00a02018"
+  ],
+  "gold_all": [
+   "April 13, 2018",
+   "March 23, 2018",
+   "March\u00a023,\u00a02018"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "May 21, 2017"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2493",
+  "question": "how many episodes are in season 7 of pretty little liars",
+  "gold": [
+   "20"
+  ],
+  "gold_all": [
+   "20"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "seven"
+   ],
+   "poisonedrag": [
+    "16"
+   ],
+   "swapped": [
+    "16"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2851",
+  "question": "who gets the golden boot if its a tie",
+  "gold": [
+   "shared"
+  ],
+  "gold_all": [
+   "shared"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "decided by a play-off"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0926",
+  "question": "sequel to a christmas story it runs in the family",
+  "gold": [
+   "My Summer Story"
+  ],
+  "gold_all": [
+   "My Summer Story"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Ralphie's Last Christmas"
+   ],
+   "swapped": [
+    "Ralphie's Last Christmas"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0964",
+  "question": "what is the big gold dome in jerusalem",
+  "gold": [
+   "Dome of the Rock"
+  ],
+  "gold_all": [
+   "Dome of the Rock"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Al-Aqsa Mosque"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3038",
+  "question": "how many levels are there on the eiffel tower",
+  "gold": [
+   "three"
+  ],
+  "gold_all": [
+   "three"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2,579 steps"
+   ],
+   "poisonedrag": [
+    "four"
+   ],
+   "swapped": [
+    "four"
+   ]
+  }
+ },
+ {
+  "qid": "sqa7951030065148304924",
+  "question": "where does st louis cardinals have spring training",
+  "gold": [
+   "Roger Dean Stadium"
+  ],
+  "gold_all": [
+   "Roger Dean Stadium"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "West Palm Beach"
+   ],
+   "poisonedrag": [
+    "Hammond Stadium"
+   ],
+   "swapped": [
+    "Hammond Stadium"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2174",
+  "question": "who wrote the song fly me to the moon",
+  "gold": [
+   "Bart Howard"
+  ],
+  "gold_all": [
+   "Bart Howard"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Cole Porter"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2309",
+  "question": "when does the 2017 college football season end",
+  "gold": [
+   "December 9, 2017"
+  ],
+  "gold_all": [
+   "December 9, 2017"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "January 8, 2018"
+   ],
+   "swapped": [
+    "January 8, 2018"
+   ]
+  }
+ },
+ {
+  "qid": "sqa3028343500075334931",
+  "question": "who had the longest tenure as moderator on meet the press",
+  "gold": [
+   "Tim Russert"
+  ],
+  "gold_all": [
+   "Tim Russert"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "John Dingell"
+   ],
+   "poisonedrag": [
+    "Chuck Todd"
+   ],
+   "swapped": [
+    "Chuck Todd"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3137",
+  "question": "baga beach is in north or south goa",
+  "gold": [
+   "North Goa",
+   "North"
+  ],
+  "gold_all": [
+   "North Goa",
+   "North"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "South Goa"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3514",
+  "question": "where does aarp fall on the political spectrum",
+  "gold": [
+   "non-partisan"
+  ],
+  "gold_all": [
+   "non-partisan"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Republican"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3586",
+  "question": "when did the first pair of yeezys come out",
+  "gold": [
+   "February 14, 2015"
+  ],
+  "gold_all": [
+   "February 14, 2015"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "October 2012"
+   ],
+   "poisonedrag": [
+    "February 14, 2016"
+   ],
+   "swapped": [
+    "February 14, 2016"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1035",
+  "question": "who sang if this world were mine with luther vandross",
+  "gold": [
+   "Cheryl Lynn"
+  ],
+  "gold_all": [
+   "Tammi Terrell",
+   "Cheryl Lynn"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Gladys Knight"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2068",
+  "question": "when did season 4 of glee come out",
+  "gold": [
+   "September 13, 2012"
+  ],
+  "gold_all": [
+   "September 13, 2012"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "October 21, 2016"
+   ],
+   "poisonedrag": [
+    "September 20, 2012"
+   ],
+   "swapped": [
+    "September 20, 2012"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1690",
+  "question": "when did the right to buy scheme start",
+  "gold": [
+   "1980"
+  ],
+  "gold_all": [
+   "1980"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "1984"
+   ],
+   "swapped": [
+    "1984"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3227",
+  "question": "what is the limit of resolution of the human eye in micrometers",
+  "gold": [
+   "~55-75 micrometers",
+   "~ 0.116\u00a0mm"
+  ],
+  "gold_all": [
+   "~55-75 micrometers",
+   "~ 0.116\u00a0mm"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "~5-10 micrometers"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1879",
+  "question": "suffix applied to the end of the name of enzymes",
+  "gold": [
+   "-ase"
+  ],
+  "gold_all": [
+   "-ase"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "-in"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0057",
+  "question": "who wrote papa got a brand new bag",
+  "gold": [
+   "James Brown"
+  ],
+  "gold_all": [
+   "James Brown"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Otis Redding"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1219",
+  "question": "when do we find out luke and leia are siblings",
+  "gold": [
+   "Return of the Jedi"
+  ],
+  "gold_all": [
+   "Return of the Jedi",
+   "In Return of the Jedi"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "The Empire Strikes Back"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2137",
+  "question": "who sang it going to take a miracle",
+  "gold": [
+   "The Royalettes"
+  ],
+  "gold_all": [
+   "The Royalettes"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Barbara Mason"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2299",
+  "question": "who are the characters in yo gabba gabba",
+  "gold": [
+   "DJ Lance Rock"
+  ],
+  "gold_all": [
+   "DJ Lance Rock",
+   "Gooble",
+   "Brobee",
+   "Foofa",
+   "Muno",
+   "Plex",
+   "Toodee"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Alan Reed"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1783",
+  "question": "when did hollywood become the centre of the film industry",
+  "gold": [
+   "By 1912"
+  ],
+  "gold_all": [
+   "1912",
+   "By 1912"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "By 1925"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1784",
+  "question": "who is known as father of green revolution in india",
+  "gold": [
+   "Mankombu Sambasivan Swaminathan"
+  ],
+  "gold_all": [
+   "Mankombu Sambasivan Swaminathan"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Verghese Kurien"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3132",
+  "question": "who plays david in alvin and the chipmunks",
+  "gold": [
+   "Jason Lee"
+  ],
+  "gold_all": [
+   "Jason Lee"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Jason Sudeikis"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1849",
+  "question": "who played taylor on the bold and beautiful",
+  "gold": [
+   "Hunter Tylo"
+  ],
+  "gold_all": [
+   "Hunter Tylo",
+   "Sherilyn Wolter",
+   "Sherilyn Wolter (1990)"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Kimberlin Brown"
+   ],
+   "poisonedrag": [
+    "Kimberlin Brown"
+   ],
+   "swapped": [
+    "Kimberlin Brown"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-6573765696916186625",
+  "question": "who produces the most cars in the world",
+  "gold": [
+   "Toyota"
+  ],
+  "gold_all": [
+   "Toyota"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Volkswagen"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1486",
+  "question": "who is the song diamonds and rust about",
+  "gold": [
+   "Bob Dylan"
+  ],
+  "gold_all": [
+   "Bob Dylan"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Debbie Gibson"
+   ],
+   "poisonedrag": [
+    "Joni Mitchell"
+   ],
+   "swapped": [
+    "Joni Mitchell"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2712",
+  "question": "who wrote the song always be humble and kind",
+  "gold": [
+   "Lori McKenna"
+  ],
+  "gold_all": [
+   "Lori McKenna"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "BC Jean"
+   ],
+   "poisonedrag": [
+    "Hillary Lindsey"
+   ],
+   "swapped": [
+    "Hillary Lindsey"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3121",
+  "question": "song have i told you lately i love you",
+  "gold": [
+   "Have I Told You Lately"
+  ],
+  "gold_all": [
+   "Have I Told You Lately"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Crazy Love"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3307",
+  "question": "who did kenny rogers sing mary did you know with",
+  "gold": [
+   "Wynonna Judd"
+  ],
+  "gold_all": [
+   "Wynonna Judd"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Michael English"
+   ],
+   "poisonedrag": [
+    "Alison Krauss"
+   ],
+   "swapped": [
+    "Alison Krauss"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3305",
+  "question": "who plays scrooge mcduck in the new ducktales",
+  "gold": [
+   "David Tennant"
+  ],
+  "gold_all": [
+   "David Tennant"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Danny Pudi"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3045",
+  "question": "how many players in football hall of fame",
+  "gold": [
+   "318",
+   "318 individuals"
+  ],
+  "gold_all": [
+   "318",
+   "318 individuals"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "seven"
+   ],
+   "poisonedrag": [
+    "287"
+   ],
+   "swapped": [
+    "287"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2977",
+  "question": "who won the ncaa basketball championship in 1994",
+  "gold": [
+   "Arkansas",
+   "Arkansas Razorbacks"
+  ],
+  "gold_all": [
+   "Arkansas",
+   "Arkansas Razorbacks"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "North Carolina"
+   ],
+   "poisonedrag": [
+    "Duke"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8631190913794477985",
+  "question": "who scored the most points in a single game in the nba",
+  "gold": [
+   "Wilt Chamberlain"
+  ],
+  "gold_all": [
+   "Wilt Chamberlain"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Kobe Bryant"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3031",
+  "question": "where does the movie proof of life take place",
+  "gold": [
+   "The Republic of Tecala"
+  ],
+  "gold_all": [
+   "The Republic of Tecala"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "The Republic of Narvaez"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1982",
+  "question": "who is the head of the department of homeland security 2017",
+  "gold": [
+   "Kirstjen Nielsen"
+  ],
+  "gold_all": [
+   "Kirstjen Nielsen"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Corey Amundson"
+   ],
+   "poisonedrag": [
+    "John F. Kelly"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1258",
+  "question": "who played harley in harley davidson and the marlboro man",
+  "gold": [
+   "Mickey Rourke"
+  ],
+  "gold_all": [
+   "Mickey Rourke"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Don Johnson"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1576",
+  "question": "what is the name of season 6 of american horror story",
+  "gold": [
+   "Roanoke",
+   "American Horror Story: Roanoke"
+  ],
+  "gold_all": [
+   "Roanoke",
+   "American Horror Story: Roanoke"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Hotel"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2466",
+  "question": "where is the new stadium being built in las vegas",
+  "gold": [
+   "Paradise, Nevada",
+   "in Paradise, Nevada"
+  ],
+  "gold_all": [
+   "Paradise, Nevada",
+   "in Paradise, Nevada"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Henderson, Nevada"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3142",
+  "question": "who wrote the song what child is this",
+  "gold": [
+   "William Chatterton Dix"
+  ],
+  "gold_all": [
+   "William Chatterton Dix"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "John Stainer"
+   ],
+   "swapped": [
+    "John Stainer"
+   ]
+  }
+ }
+]

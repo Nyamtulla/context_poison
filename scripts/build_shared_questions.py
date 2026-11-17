@@ -108,6 +108,25 @@ def main():
                      "gold_source": "situatedqa_2018", **{kk: s[kk] for kk in (
                          "prev_answers", "answer_since", "prev_since", "newer_answers",
                          "sqa_id", "annotators_agree")}})
+    # the rest of NQ-open validation (decided 2026-11-15, to grow the set to
+    # about 500): same gold source as the core, no released attack passages,
+    # so PoisonedRAG passages are generated for a sample (generated_poisonedrag.jsonl)
+    import pandas as pd
+    seen |= {norm_q(r["question"]) for r in rows}
+    val = pd.read_parquet(REPO / "data/s4_sources/nq_open/validation.parquet")
+    for i, (qq, aa) in enumerate(zip(val["question"], val["answer"])):
+        k = norm_q(qq)
+        if k in seen:
+            continue
+        seen.add(k)
+        row = {"qid": f"nqv{i:04d}", "question": qq, "core": False, "set": "nqopen",
+               "answers": list(aa), "open_nq_answers": list(aa), "poisonedrag_target": None,
+               "gold_source": "open_nq", "prev_answers": [], "answer_since": None,
+               "prev_since": None, "newer_answers": [], "sqa_id": None, "annotators_agree": None}
+        s = sqa.get(k)
+        if s:            # time-dependent; its prev answer is used only via the sqa row
+            row.update({"newer_answers": s["newer_answers"], "sqa_id": s["sqa_id"]})
+        rows.append(row)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT, "w") as f:
         for r in rows:

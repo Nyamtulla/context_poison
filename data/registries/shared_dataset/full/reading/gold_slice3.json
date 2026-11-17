@@ -1,0 +1,1049 @@
+[
+ {
+  "qid": "nq300",
+  "question": "who lasted the longest in the royal rumble",
+  "gold": [
+   "Daniel Bryan"
+  ],
+  "gold_all": [
+   "Daniel Bryan"
+  ],
+  "false_answers": {
+   "poisonedrag": "John Cena",
+   "misretrieval": [
+    "Bill Russell"
+   ]
+  }
+ },
+ {
+  "qid": "nq458",
+  "question": "who won the gold for the men's figure skating",
+  "gold": [
+   "Yuzuru Hanyu"
+  ],
+  "gold_all": [
+   "Yuzuru Hanyu"
+  ],
+  "false_answers": {
+   "poisonedrag": "Nathan Chen",
+   "swapped": "Nathan Chen"
+  }
+ },
+ {
+  "qid": "nq355",
+  "question": "how many seasons of vampire diaries r there",
+  "gold": [
+   "eight",
+   "8"
+  ],
+  "gold_all": [
+   "eight",
+   "8"
+  ],
+  "false_answers": {
+   "swapped": "Ten",
+   "misretrieval": [
+    "24"
+   ]
+  }
+ },
+ {
+  "qid": "nq291",
+  "question": "when was the debating club established in almora",
+  "gold": [
+   "1871 A.D.",
+   "1871"
+  ],
+  "gold_all": [
+   "1871 A.D.",
+   "1871"
+  ],
+  "false_answers": {
+   "poisonedrag": "1854 A.D."
+  }
+ },
+ {
+  "qid": "nq107",
+  "question": "turkey stuffed with a duck stuffed with a chicken",
+  "gold": [
+   "Turducken"
+  ],
+  "gold_all": [
+   "Turducken"
+  ],
+  "false_answers": {
+   "poisonedrag": "Duckenchick"
+  }
+ },
+ {
+  "qid": "nq101",
+  "question": "when did michael jordan return to the nba",
+  "gold": [
+   "2001",
+   "1995",
+   "March 1995"
+  ],
+  "gold_all": [
+   "2001",
+   "1995",
+   "March 1995",
+   "in March 1995"
+  ],
+  "false_answers": {
+   "poisonedrag": "July 1997",
+   "misretrieval": [
+    "2018"
+   ]
+  }
+ },
+ {
+  "qid": "nq106",
+  "question": "who sings good night on the beatles white album",
+  "gold": [
+   "Ringo Starr"
+  ],
+  "gold_all": [
+   "Ringo Starr"
+  ],
+  "false_answers": {
+   "swapped": "John Lennon"
+  }
+ },
+ {
+  "qid": "nq000",
+  "question": "when did the newest macbook pro come out",
+  "gold": [
+   "October 27, 2016"
+  ],
+  "gold_all": [
+   "June 5, 2017",
+   "October 27, 2016",
+   "June\u00a05,\u00a02017"
+  ],
+  "false_answers": {
+   "poisonedrag": "22nd of March, 2019",
+   "swapped": "22nd of March, 2019",
+   "misretrieval": [
+    "March 31, 2016",
+    "March 21, 2016"
+   ]
+  }
+ },
+ {
+  "qid": "nq111",
+  "question": "how many strong verbs are there in german",
+  "gold": [
+   "more than 200",
+   "more than 200 strong"
+  ],
+  "gold_all": [
+   "more than 200",
+   "more than 200 strong"
+  ],
+  "false_answers": {
+   "poisonedrag": "Around 50",
+   "swapped": "Around 50"
+  }
+ },
+ {
+  "qid": "nq427",
+  "question": "who played the virgin in conan the destroyer",
+  "gold": [
+   "Olivia d'Abo"
+  ],
+  "gold_all": [
+   "Olivia d'Abo"
+  ],
+  "false_answers": {
+   "poisonedrag": "Alicia Silverstone",
+   "misretrieval": [
+    "Caitlin Carmichael",
+    "Eva Green",
+    "Jade Chynoweth"
+   ]
+  }
+ },
+ {
+  "qid": "nq303",
+  "question": "where was the tv show in the heat of the night filmed",
+  "gold": [
+   "Covington, Georgia"
+  ],
+  "gold_all": [
+   "Decatur in Dekalb County",
+   "Atlanta",
+   "Covington, Georgia",
+   "Hammond, Louisiana"
+  ],
+  "false_answers": {
+   "poisonedrag": "Savannah, Georgia"
+  }
+ },
+ {
+  "qid": "nq376",
+  "question": "who plays the voice of john smith in pocahontas",
+  "gold": [
+   "Mel Gibson"
+  ],
+  "gold_all": [
+   "Mel Gibson"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Seth MacFarlane"
+   ]
+  }
+ },
+ {
+  "qid": "nq150",
+  "question": "when does sloan come into grey's anatomy",
+  "gold": [
+   "season two"
+  ],
+  "gold_all": [
+   "season two"
+  ],
+  "false_answers": {
+   "poisonedrag": "during the fifth season",
+   "swapped": "during the fifth season",
+   "misretrieval": [
+    "September 27, 2017"
+   ]
+  }
+ },
+ {
+  "qid": "nq466",
+  "question": "who plays the queen in victoria and abdul",
+  "gold": [
+   "Judi Dench"
+  ],
+  "gold_all": [
+   "Judi Dench"
+  ],
+  "false_answers": {
+   "poisonedrag": "Meryl Streep",
+   "swapped": "Meryl Streep",
+   "misretrieval": [
+    "Glenn Close"
+   ]
+  }
+ },
+ {
+  "qid": "nq432",
+  "question": "when was the last time it snowed in england on christmas day",
+  "gold": [
+   "2009"
+  ],
+  "gold_all": [
+   "2009"
+  ],
+  "false_answers": {
+   "poisonedrag": "2015",
+   "swapped": "2015"
+  }
+ },
+ {
+  "qid": "nq172",
+  "question": "when was hitchhiker's guide to the galaxy made",
+  "gold": [
+   "2005"
+  ],
+  "gold_all": [
+   "2005",
+   "1978"
+  ],
+  "false_answers": {
+   "poisonedrag": "AD 1984",
+   "misretrieval": [
+    "1939",
+    "August\u00a025,\u00a01939"
+   ]
+  }
+ },
+ {
+  "qid": "nq417",
+  "question": "who wrote hallelujah i just love her so",
+  "gold": [
+   "Ray Charles"
+  ],
+  "gold_all": [
+   "Ray Charles"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Billy Joel",
+    "Joel"
+   ]
+  }
+ },
+ {
+  "qid": "nq419",
+  "question": "when's the last time michigan won a national championship in basketball",
+  "gold": [
+   "1989"
+  ],
+  "gold_all": [
+   "1989"
+  ],
+  "false_answers": {
+   "poisonedrag": "2003",
+   "swapped": "2003",
+   "misretrieval": [
+    "1980"
+   ]
+  }
+ },
+ {
+  "qid": "nq192",
+  "question": "who played cruella de vil in 101 dalmatians",
+  "gold": [
+   "Glenn Close"
+  ],
+  "gold_all": [
+   "Glenn Close"
+  ],
+  "false_answers": {
+   "swapped": "Meryl Streep",
+   "misretrieval": [
+    "Caitlin Carmichael",
+    "Eva Green",
+    "Jade Chynoweth"
+   ]
+  }
+ },
+ {
+  "qid": "nq061",
+  "question": "when did skiing halfpipe become an olympic event",
+  "gold": [
+   "2014"
+  ],
+  "gold_all": [
+   "2014"
+  ],
+  "false_answers": {
+   "poisonedrag": "2006",
+   "swapped": "2006"
+  }
+ },
+ {
+  "qid": "nq126",
+  "question": "what is the name of the weapon the grim reaper carries",
+  "gold": [
+   "scythe"
+  ],
+  "gold_all": [
+   "scythe"
+  ],
+  "false_answers": {
+   "poisonedrag": "Spear"
+  }
+ },
+ {
+  "qid": "nq267",
+  "question": "when did martial law in the philippines end",
+  "gold": [
+   "1981",
+   "81"
+  ],
+  "gold_all": [
+   "1981",
+   "81"
+  ],
+  "false_answers": {
+   "poisonedrag": "1988",
+   "swapped": "1988",
+   "misretrieval": [
+    "1689",
+    "16 December 1689"
+   ]
+  }
+ },
+ {
+  "qid": "nq345",
+  "question": "who appoints the members of the board of governors of the federal reserve",
+  "gold": [
+   "the President"
+  ],
+  "gold_all": [
+   "the President"
+  ],
+  "false_answers": {
+   "poisonedrag": "The United States Congress"
+  }
+ },
+ {
+  "qid": "nq198",
+  "question": "where did they film the show the crossing",
+  "gold": [
+   "British Columbia, Canada"
+  ],
+  "gold_all": [
+   "British Columbia, Canada"
+  ],
+  "false_answers": {
+   "poisonedrag": "New South Wales, Australia"
+  }
+ },
+ {
+  "qid": "nq027",
+  "question": "when does wentworth season 6 start in australia",
+  "gold": [
+   "19 June 2018"
+  ],
+  "gold_all": [
+   "2019",
+   "19 June 2018"
+  ],
+  "false_answers": {
+   "poisonedrag": "2017",
+   "swapped": "2017"
+  }
+ },
+ {
+  "qid": "nq055",
+  "question": "vikram samvat calender is official in which country",
+  "gold": [
+   "Nepal"
+  ],
+  "gold_all": [
+   "Nepal"
+  ],
+  "false_answers": {
+   "swapped": "India"
+  }
+ },
+ {
+  "qid": "nq029",
+  "question": "when did jack mccoy join law and order",
+  "gold": [
+   "1994"
+  ],
+  "gold_all": [
+   "1994"
+  ],
+  "false_answers": {
+   "poisonedrag": "2001",
+   "swapped": "2001"
+  }
+ },
+ {
+  "qid": "nq482",
+  "question": "when does middle-earth shadow of mordor come out",
+  "gold": [
+   "September 2014"
+  ],
+  "gold_all": [
+   "September 2014"
+  ],
+  "false_answers": {
+   "poisonedrag": "2015-11",
+   "misretrieval": [
+    "16 November 2001",
+    "2001"
+   ]
+  }
+ },
+ {
+  "qid": "nq036",
+  "question": "who is the founder of el pollo loco",
+  "gold": [
+   "Juan Francisco Ochoa"
+  ],
+  "gold_all": [
+   "Juan Francisco Ochoa"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Frank Ferrer"
+   ]
+  }
+ },
+ {
+  "qid": "nq447",
+  "question": "what is the final season of downton abbey",
+  "gold": [
+   "the sixth",
+   "sixth",
+   "six"
+  ],
+  "gold_all": [
+   "the sixth",
+   "sixth",
+   "six",
+   "the sixth series",
+   "Six"
+  ],
+  "false_answers": {
+   "poisonedrag": "Eight"
+  }
+ },
+ {
+  "qid": "sqa-8080178533501168505",
+  "question": "how many member countries are there in wto at present",
+  "gold": [
+   "164"
+  ],
+  "gold_all": [
+   "164"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "seven"
+   ]
+  }
+ },
+ {
+  "qid": "sqa7431400439018916629",
+  "question": "who has the nfl record for most rushing yards in a career",
+  "gold": [
+   "Emmitt Smith"
+  ],
+  "gold_all": [
+   "Emmitt Smith"
+  ],
+  "false_answers": {
+   "outdated": [
+    "Walter Payton"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-5718159264009065914",
+  "question": "who is the canadian high commissioner to barbados",
+  "gold": [
+   "Marie Legault"
+  ],
+  "gold_all": [
+   "Marie Legault"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Halson Moultrie"
+   ]
+  }
+ },
+ {
+  "qid": "sqa8815316042562468005",
+  "question": "when was the last time the houston rockets made the nba finals",
+  "gold": [
+   "1995"
+  ],
+  "gold_all": [
+   "1995"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1994"
+   ],
+   "misretrieval": [
+    "2010"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-4726363016166772094",
+  "question": "when was the last time the dodgers played yankees in the world series",
+  "gold": [
+   "1981"
+  ],
+  "gold_all": [
+   "1981"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1978"
+   ],
+   "misretrieval": [
+    "1992"
+   ]
+  }
+ },
+ {
+  "qid": "sqa408606783188469337",
+  "question": "what's the name of the latest pirates of the caribbean",
+  "gold": [
+   "Dead Men Tell No Tales"
+  ],
+  "gold_all": [
+   "Dead Men Tell No Tales"
+  ],
+  "false_answers": {
+   "outdated": [
+    "On Stranger Tides"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-7971423331904318053",
+  "question": "when was the open championship last played at carnoustie",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2007"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-3569092658456144175",
+  "question": "when did west brom win the fa cup",
+  "gold": [
+   "1968"
+  ],
+  "gold_all": [
+   "1968"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1954"
+   ],
+   "misretrieval": [
+    "2018"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8977406783855272081",
+  "question": "when was the last time phoenix suns were in the playoffs",
+  "gold": [
+   "2010"
+  ],
+  "gold_all": [
+   "2010"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1995"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-7008352380240766023",
+  "question": "how many episodes of touching evil are there",
+  "gold": [
+   "16"
+  ],
+  "gold_all": [
+   "16"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "eight",
+    "8"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-6162933554898709661",
+  "question": "which player won the pga championship by the most shots",
+  "gold": [
+   "Rory McIlroy"
+  ],
+  "gold_all": [
+   "Rory McIlroy"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Joe Malone"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-4667103995686109744",
+  "question": "who is the speaker of the house of assembly in the bahamas",
+  "gold": [
+   "Halson Moultrie"
+  ],
+  "gold_all": [
+   "Halson Moultrie"
+  ],
+  "false_answers": {
+   "outdated": [
+    "Kendal Major"
+   ],
+   "misretrieval": [
+    "Marie Legault"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-7610443911696021016",
+  "question": "when was the last time england played semi finals world cup",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1990"
+   ],
+   "misretrieval": [
+    "1986"
+   ]
+  }
+ },
+ {
+  "qid": "sqa7343122061842527493",
+  "question": "how many episodes in mad dog korean drama",
+  "gold": [
+   "16"
+  ],
+  "gold_all": [
+   "16"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "131"
+   ]
+  }
+ },
+ {
+  "qid": "sqa4426606128408476924",
+  "question": "when was the last time italy did not qualify for the world cup",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1958"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa1922567092251879685",
+  "question": "when did brazil last host the fifa world cup",
+  "gold": [
+   "2014"
+  ],
+  "gold_all": [
+   "2014"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1950"
+   ],
+   "misretrieval": [
+    "2002"
+   ]
+  }
+ },
+ {
+  "qid": "sqa405265048112486945",
+  "question": "when did scotland last qualify for world cup",
+  "gold": [
+   "1998"
+  ],
+  "gold_all": [
+   "1998"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1990"
+   ],
+   "misretrieval": [
+    "2018"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-5702695746894157483",
+  "question": "when was the last time northern ireland were in the world cup",
+  "gold": [
+   "1986"
+  ],
+  "gold_all": [
+   "1986"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1982"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-5484905092631515040",
+  "question": "who won the gold medal in men's snowboarding",
+  "gold": [
+   "Shaun White"
+  ],
+  "gold_all": [
+   "Shaun White"
+  ],
+  "false_answers": {
+   "outdated": [
+    "Iouri Podladtchikov"
+   ]
+  }
+ },
+ {
+  "qid": "sqa1485752534773006057",
+  "question": "when was the last time loyola was in the tournament",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2012"
+   ]
+  }
+ },
+ {
+  "qid": "sqa1031269957054547192",
+  "question": "when was the last time the winter olympics was held in the united states",
+  "gold": [
+   "2002"
+  ],
+  "gold_all": [
+   "2002"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1980"
+   ],
+   "misretrieval": [
+    "1993"
+   ]
+  }
+ },
+ {
+  "qid": "sqa5153412854745122443",
+  "question": "where is the chick fil a peach bowl being played",
+  "gold": [
+   "Mercedes-Benz Stadium"
+  ],
+  "gold_all": [
+   "Mercedes-Benz Stadium"
+  ],
+  "false_answers": {
+   "outdated": [
+    "Georgia Dome"
+   ],
+   "misretrieval": [
+    "Hard Rock Stadium"
+   ]
+  }
+ },
+ {
+  "qid": "sqa6979384824093855823",
+  "question": "when did the us host the womens world cup",
+  "gold": [
+   "2003"
+  ],
+  "gold_all": [
+   "2003"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1999"
+   ],
+   "misretrieval": [
+    "2018"
+   ]
+  }
+ },
+ {
+  "qid": "sqa1858642786804276526",
+  "question": "when was the world cup last held in france",
+  "gold": [
+   "1998"
+  ],
+  "gold_all": [
+   "1998"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1938"
+   ],
+   "misretrieval": [
+    "2002"
+   ]
+  }
+ },
+ {
+  "qid": "sqa3895510272033333545",
+  "question": "what is the name of governor of abia state",
+  "gold": [
+   "Okezie Ikpeazu"
+  ],
+  "gold_all": [
+   "Okezie Ikpeazu"
+  ],
+  "false_answers": {
+   "outdated": [
+    "Theodore A. Orji"
+   ],
+   "misretrieval": [
+    "Sophia Akuffo"
+   ]
+  }
+ },
+ {
+  "qid": "sqa8101049886323594757",
+  "question": "when was the last time croatia played in the world cup",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2014"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa6203839542590166972",
+  "question": "who is the coach of university of kentucky basketball",
+  "gold": [
+   "John Calipari"
+  ],
+  "gold_all": [
+   "John Calipari"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Brian Dutcher"
+   ]
+  }
+ },
+ {
+  "qid": "sqa6998803685289972081",
+  "question": "when was the last time the united states hosted the olympic games",
+  "gold": [
+   "2002"
+  ],
+  "gold_all": [
+   "2002"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1996"
+   ],
+   "misretrieval": [
+    "2018"
+   ]
+  }
+ },
+ {
+  "qid": "sqa806337555667215134",
+  "question": "who was the last person executed in the state of nebraska",
+  "gold": [
+   "Carey Dean Moore"
+  ],
+  "gold_all": [
+   "Carey Dean Moore"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Ronnie Lee Gardner"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-5086865199142729318",
+  "question": "when was the last time montreal canadiens won the stanley cup",
+  "gold": [
+   "1993"
+  ],
+  "gold_all": [
+   "1993"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1967"
+   ]
+  }
+ },
+ {
+  "qid": "sqa199561851133275930",
+  "question": "when did the cubs won a world series",
+  "gold": [
+   "2016"
+  ],
+  "gold_all": [
+   "2016"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1908"
+   ],
+   "misretrieval": [
+    "1995"
+   ]
+  }
+ },
+ {
+  "qid": "sqa7041662135146892950",
+  "question": "when did hull fc win the challenge cup",
+  "gold": [
+   "2017"
+  ],
+  "gold_all": [
+   "2017"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2016"
+   ],
+   "misretrieval": [
+    "1968"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8081431644783557175",
+  "question": "how many episodes of greys anatomy season 14",
+  "gold": [
+   "24"
+  ],
+  "gold_all": [
+   "24"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "eight",
+    "8"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-1020319297551247593",
+  "question": "when is the last time the united states had a solar eclipse",
+  "gold": [
+   "August 21, 2017"
+  ],
+  "gold_all": [
+   "August 21, 2017"
+  ],
+  "false_answers": {
+   "outdated": [
+    "May 20, 2012"
+   ]
+  }
+ }
+]

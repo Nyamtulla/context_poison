@@ -1,0 +1,1130 @@
+[
+ {
+  "qid": "sqa8133401184061931985",
+  "question": "who acts as jason in friday the 13th",
+  "gold": [
+   "Derek Mears"
+  ],
+  "gold_all": [
+   "Derek Mears"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Ledger"
+   ],
+   "poisonedrag": [
+    "Kane Hodder"
+   ]
+  }
+ },
+ {
+  "qid": "sqa7457518655087401024",
+  "question": "is the governor of west virginia a democrat or republican",
+  "gold": [
+   "Republican"
+  ],
+  "gold_all": [
+   "Republican"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Democrat"
+   ]
+  }
+ },
+ {
+  "qid": "sqa8876461119670214583",
+  "question": "when was the last time the suns went to the playoffs",
+  "gold": [
+   "2009-10"
+  ],
+  "gold_all": [
+   "2009-10"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "2011\u201312"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-5337262445977966782",
+  "question": "who scored the most points in one nba basketball game",
+  "gold": [
+   "Wilt Chamberlain"
+  ],
+  "gold_all": [
+   "Wilt Chamberlain"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Kobe Bryant"
+   ]
+  }
+ },
+ {
+  "qid": "sqa6107811068253620269",
+  "question": "who has won the most monaco grand prix",
+  "gold": [
+   "Ayrton Senna"
+  ],
+  "gold_all": [
+   "Ayrton Senna"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Michael Schumacher"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-404802678667633084",
+  "question": "who is the president of the republic of zambia",
+  "gold": [
+   "Edgar Lungu"
+  ],
+  "gold_all": [
+   "Edgar Lungu"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Michael Sata"
+   ]
+  }
+ },
+ {
+  "qid": "sqa7894730886324432751",
+  "question": "how many games in a row have the uconn women's basketball team won",
+  "gold": [
+   "90"
+  ],
+  "gold_all": [
+   "90"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "five"
+   ],
+   "poisonedrag": [
+    "111"
+   ],
+   "swapped": [
+    "111"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8236587859923457961",
+  "question": "who was the last person executed in nebraska",
+  "gold": [
+   "Carey Dean Moore"
+  ],
+  "gold_all": [
+   "Carey Dean Moore"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Nathan Hale"
+   ],
+   "poisonedrag": [
+    "John Joubert"
+   ],
+   "swapped": [
+    "John Joubert"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1288",
+  "question": "when did the flash first appear on arrow",
+  "gold": [
+   "second season"
+  ],
+  "gold_all": [
+   "second season"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "third season"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0373",
+  "question": "who wrote old flames cant hold a candle to you",
+  "gold": [
+   "Pebe Sebert",
+   "Pebe Sebert and Hugh Moffatt"
+  ],
+  "gold_all": [
+   "Pebe Sebert",
+   "Pebe Sebert and Hugh Moffatt",
+   "Patricia Rose Sebert",
+   "Hugh Moffatt"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Dolly Parton"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0013",
+  "question": "who was the actor that played ben stone on law and order",
+  "gold": [
+   "Michael Moriarty"
+  ],
+  "gold_all": [
+   "Michael Moriarty"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Sam Waterston"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1201",
+  "question": "how many inches is the iphone 5s screen",
+  "gold": [
+   "4\u00a0in",
+   "4-inch screen size"
+  ],
+  "gold_all": [
+   "4\u00a0in",
+   "4-inch screen size"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "7"
+   ],
+   "poisonedrag": [
+    "3.5 in"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2538",
+  "question": "who developed the first printing press in 1430s",
+  "gold": [
+   "Johannes Gutenberg"
+  ],
+  "gold_all": [
+   "Johannes Gutenberg"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Laurens Janszoon Coster"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0736",
+  "question": "who plays brad pitt's daughter in moneyball",
+  "gold": [
+   "Kerris Lilla Dorsey"
+  ],
+  "gold_all": [
+   "Kerris Lilla Dorsey"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Emma Thompson"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2962",
+  "question": "where did remember the titans camp take place",
+  "gold": [
+   "Gettysburg College"
+  ],
+  "gold_all": [
+   "Gettysburg College"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Virginia Military Institute"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2370",
+  "question": "a 58-story skyscraper in san francisco is tilting and sinking",
+  "gold": [
+   "Millennium Tower"
+  ],
+  "gold_all": [
+   "Millennium Tower"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Transamerica Pyramid"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1613",
+  "question": "where do the greasers live in the outsiders",
+  "gold": [
+   "Tulsa, Oklahoma"
+  ],
+  "gold_all": [
+   "Tulsa, Oklahoma"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Dallas, Texas"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0952",
+  "question": "when was i don't like mondays released",
+  "gold": [
+   "1979"
+  ],
+  "gold_all": [
+   "1979",
+   "21 July 1979"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1945"
+   ],
+   "poisonedrag": [
+    "1980"
+   ],
+   "swapped": [
+    "1980"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3410",
+  "question": "what is the name of the dragon in eragon",
+  "gold": [
+   "Saphira"
+  ],
+  "gold_all": [
+   "Saphira"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Glaedr"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0630",
+  "question": "two examples where low voltage transformers are used",
+  "gold": [
+   "doorbell installations"
+  ],
+  "gold_all": [
+   "doorbell installations",
+   "toys"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "phone chargers"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2463",
+  "question": "who is considered as architect of india constitution",
+  "gold": [
+   "B. R. Ambedkar"
+  ],
+  "gold_all": [
+   "B. R. Ambedkar"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Jawaharlal Nehru"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2207",
+  "question": "when is season 4 of flash coming out",
+  "gold": [
+   "October 10, 2017",
+   "on October 10, 2017"
+  ],
+  "gold_all": [
+   "October 10, 2017",
+   "on October 10, 2017"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "March\u00a016,\u00a02015"
+   ],
+   "poisonedrag": [
+    "October 3, 2017"
+   ],
+   "swapped": [
+    "October 3, 2017"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2387",
+  "question": "when does ellen's new game show start",
+  "gold": [
+   "December 18, 2017"
+  ],
+  "gold_all": [
+   "December 18, 2017"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "May 29, 2018"
+   ],
+   "poisonedrag": [
+    "September 4, 2017"
+   ],
+   "swapped": [
+    "September 4, 2017"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0358",
+  "question": "how much for a passport in the philippines",
+  "gold": [
+   "$60 abroad",
+   "\u20b1950"
+  ],
+  "gold_all": [
+   "$60 abroad",
+   "\u20b1950"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "$30 abroad"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1037",
+  "question": "which gene segments code for the variable region of the heavy chain",
+  "gold": [
+   "V"
+  ],
+  "gold_all": [
+   "V"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "C"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2052",
+  "question": "who plays steve's wife on my three sons",
+  "gold": [
+   "Beverly Garland"
+  ],
+  "gold_all": [
+   "Beverly Garland"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Darlene Cates"
+   ],
+   "poisonedrag": [
+    "Meredith MacRae"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0631",
+  "question": "what is the center of heredity in a cell",
+  "gold": [
+   "nucleus",
+   "Cell nuclei",
+   "the nucleus"
+  ],
+  "gold_all": [
+   "nucleus",
+   "Cell nuclei",
+   "the nucleus",
+   "chromosome"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "mitochondria"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0307",
+  "question": "when were the winnie the pooh books written",
+  "gold": [
+   "1926"
+  ],
+  "gold_all": [
+   "1924",
+   "1926",
+   "1927",
+   "1928"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1813"
+   ],
+   "poisonedrag": [
+    "1932"
+   ],
+   "swapped": [
+    "1932"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0823",
+  "question": "who wrote there's a guy works down the chip shop lyrics",
+  "gold": [
+   "Kirsty MacColl"
+  ],
+  "gold_all": [
+   "Philip Rambow",
+   "Kirsty MacColl/Philip Rambow",
+   "Kirsty MacColl"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Sandy Denny"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0308",
+  "question": "what is final season of game of thrones",
+  "gold": [
+   "The eighth",
+   "eighth",
+   "the eighth season"
+  ],
+  "gold_all": [
+   "The eighth",
+   "eighth",
+   "the eighth season"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "December 12, 2017"
+   ],
+   "poisonedrag": [
+    "The seventh"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1420",
+  "question": "when did we find out the smoking man was mulder's father",
+  "gold": [
+   "Later in the sixth season",
+   "in the sixth season"
+  ],
+  "gold_all": [
+   "Later in the sixth season",
+   "in the sixth season"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "May 21, 2017"
+   ],
+   "poisonedrag": [
+    "in the third season"
+   ],
+   "swapped": [
+    "in the third season"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1287",
+  "question": "when did the song rapper's delight come out",
+  "gold": [
+   "1979"
+  ],
+  "gold_all": [
+   "1979",
+   "September 16, 1979"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1973"
+   ],
+   "poisonedrag": [
+    "1981"
+   ],
+   "swapped": [
+    "1981"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1330",
+  "question": "who played stonewall jackson in gods and generals",
+  "gold": [
+   "Stephen Lang"
+  ],
+  "gold_all": [
+   "Stephen Lang"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Howard Caine"
+   ],
+   "poisonedrag": [
+    "Robert Duvall"
+   ],
+   "swapped": [
+    "Robert Duvall"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0843",
+  "question": "who played ashley on the young and the restless",
+  "gold": [
+   "Brenda Epperson",
+   "Eileen Davidson"
+  ],
+  "gold_all": [
+   "Brenda Epperson",
+   "Shari Shattuck",
+   "Eileen Davidson"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Hunter Tylo"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1530",
+  "question": "when did korea separate into north and south",
+  "gold": [
+   "1945"
+  ],
+  "gold_all": [
+   "1945",
+   "17 August 1945"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1922"
+   ],
+   "poisonedrag": [
+    "1948"
+   ],
+   "swapped": [
+    "1948"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0001",
+  "question": "who wrote he ain't heavy he's my brother lyrics",
+  "gold": [
+   "Bob Russell"
+  ],
+  "gold_all": [
+   "Bobby Scott",
+   "Bob Russell"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Neil Diamond"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2244",
+  "question": "who played big enos in smokey and the bandit",
+  "gold": [
+   "Pat McCormick"
+  ],
+  "gold_all": [
+   "Pat McCormick"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Walter Brennan"
+   ],
+   "poisonedrag": [
+    "Paul Williams"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2738",
+  "question": "who wrote the song city of new orleans",
+  "gold": [
+   "Steve Goodman"
+  ],
+  "gold_all": [
+   "Steve Goodman"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "John Prine"
+   ],
+   "swapped": [
+    "John Prine"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1444",
+  "question": "who was the main character in their eyes were watching god",
+  "gold": [
+   "Janie Crawford"
+  ],
+  "gold_all": [
+   "Janie Crawford"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Mandy"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1449",
+  "question": "how much venom can a king cobra produce",
+  "gold": [
+   "420\u00a0mg",
+   "up to 7\u00a0ml",
+   "200 to 500\u00a0mg"
+  ],
+  "gold_all": [
+   "420\u00a0mg",
+   "up to 7\u00a0ml",
+   "200 to 500\u00a0mg"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "50 mg"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1905",
+  "question": "where was the witch of blackbird pond published",
+  "gold": [
+   "1958"
+  ],
+  "gold_all": [
+   "United States",
+   "1958",
+   "Houghton Mifflin"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "1962"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0291",
+  "question": "where did the battle of corinth take place",
+  "gold": [
+   "in Corinth, Mississippi",
+   "Corinth, Mississippi"
+  ],
+  "gold_all": [
+   "in Corinth, Mississippi",
+   "Corinth, Mississippi"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "in Corinth, Greece"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1162",
+  "question": "when did sierra nevada brewery open in asheville",
+  "gold": [
+   "early 2014",
+   "January 2012"
+  ],
+  "gold_all": [
+   "early 2014",
+   "January 2012",
+   "2014"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "late 2011"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1589",
+  "question": "the german princes who chose the holy roman empire were called",
+  "gold": [
+   "prince-electors",
+   "the Prince-Electors"
+  ],
+  "gold_all": [
+   "prince-electors",
+   "the Prince-Electors"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "grand dukes"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1155",
+  "question": "how many games does a team have to win for the world series",
+  "gold": [
+   "best-of-seven"
+  ],
+  "gold_all": [
+   "best-of-seven"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "best-of-nine"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0677",
+  "question": "mark who went to golf majors in 1998",
+  "gold": [
+   "Mark O'Meara",
+   "O'Meara"
+  ],
+  "gold_all": [
+   "Mark O'Meara",
+   "O'Meara"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Mark Calcavecchia"
+   ],
+   "swapped": [
+    "Mark Calcavecchia"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0444",
+  "question": "when did seattle slew win the triple crown",
+  "gold": [
+   "1977",
+   "in 1977"
+  ],
+  "gold_all": [
+   "1977",
+   "in 1977"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2016"
+   ],
+   "poisonedrag": [
+    "1978"
+   ],
+   "swapped": [
+    "1978"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0821",
+  "question": "who died in the plane crash greys anatomy",
+  "gold": [
+   "Dr. Lexie Grey",
+   "Lexie"
+  ],
+  "gold_all": [
+   "Dr. Lexie Grey",
+   "Lexie"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Dr. Meredith Grey"
+   ],
+   "swapped": [
+    "Dr. Meredith Grey"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1991",
+  "question": "who plays the walking boss in cool hand luke",
+  "gold": [
+   "Morgan Woodward"
+  ],
+  "gold_all": [
+   "Morgan Woodward"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Lou Antonio"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0938",
+  "question": "who designed the earth day flag in 1969",
+  "gold": [
+   "John McConnell"
+  ],
+  "gold_all": [
+   "John McConnell"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Gaylord Nelson"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2281",
+  "question": "what allows chyme to enter the small intestine",
+  "gold": [
+   "pyloric valve",
+   "the pyloric valve"
+  ],
+  "gold_all": [
+   "pyloric valve",
+   "the pyloric valve"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "the ileocecal valve"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2185",
+  "question": "who is the actress who plays baker on blue bloods",
+  "gold": [
+   "Abigail Hawk"
+  ],
+  "gold_all": [
+   "Abigail Hawk"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Marisa Ramirez"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2064",
+  "question": "what is the population of the tri-cities washington",
+  "gold": [
+   "283,846",
+   "over 300,000"
+  ],
+  "gold_all": [
+   "283,846",
+   "over 300,000"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "538"
+   ],
+   "poisonedrag": [
+    "198,402"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2265",
+  "question": "what are the toll roads called in mexico",
+  "gold": [
+   "autopistas"
+  ],
+  "gold_all": [
+   "autopistas"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "carreteras libres"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1703",
+  "question": "when did this season of american idol start",
+  "gold": [
+   "March 11, 2018"
+  ],
+  "gold_all": [
+   "March 11, 2018"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "May 29, 2018"
+   ],
+   "poisonedrag": [
+    "March 4, 2018"
+   ],
+   "swapped": [
+    "March 4, 2018"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2904",
+  "question": "where is the nfl game in london played",
+  "gold": [
+   "Wembley Stadium"
+  ],
+  "gold_all": [
+   "Twickenham Stadium",
+   "Wembley Stadium"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Hard Rock Stadium"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1868",
+  "question": "who is considered the father of modern behaviorism",
+  "gold": [
+   "John B. Watson"
+  ],
+  "gold_all": [
+   "John B. Watson"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "B. F. Skinner"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2330",
+  "question": "blood alcohol concentration means the parts of alcohol in the blood in relation to what",
+  "gold": [
+   "ethanol"
+  ],
+  "gold_all": [
+   "volume of blood",
+   "ethanol"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "water"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0338",
+  "question": "how many languages in harry potter translated into",
+  "gold": [
+   "over 74",
+   "over 74 languages"
+  ],
+  "gold_all": [
+   "over 74",
+   "over 74 languages"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "6ft 1in"
+   ],
+   "poisonedrag": [
+    "over 40"
+   ],
+   "swapped": [
+    "over 40"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0763",
+  "question": "season 2 attack on titan how many episodes",
+  "gold": [
+   "12"
+  ],
+  "gold_all": [
+   "12"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "10"
+   ],
+   "poisonedrag": [
+    "25"
+   ],
+   "swapped": [
+    "25"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0352",
+  "question": "who holds the world record for the most world records",
+  "gold": [
+   "Ashrita Furman"
+  ],
+  "gold_all": [
+   "Ashrita Furman"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "David Rush"
+   ],
+   "swapped": [
+    "David Rush"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3399",
+  "question": "when was the dome of the rock completed",
+  "gold": [
+   "691 CE",
+   "in 691 CE"
+  ],
+  "gold_all": [
+   "691 CE",
+   "in 691 CE"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "705 CE"
+   ],
+   "swapped": [
+    "705 CE"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1954",
+  "question": "who led the soldiers in ending the raid on the harper's ferry arsenal",
+  "gold": [
+   "Colonel Robert E. Lee",
+   "First Lieutenant Israel Greene"
+  ],
+  "gold_all": [
+   "Colonel Robert E. Lee",
+   "First Lieutenant Israel Greene",
+   "Brevet Colonel Robert E. Lee"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Colonel Winfield Scott"
+   ]
+  }
+ }
+]

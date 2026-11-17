@@ -1,0 +1,1043 @@
+[
+ {
+  "qid": "nq251",
+  "question": "when was the last time america hosted the summer olympics",
+  "gold": [
+   "1996"
+  ],
+  "gold_all": [
+   "Salt Lake City",
+   "1996"
+  ],
+  "false_answers": {
+   "outdated": [
+    "The 1984 Summer Olympics"
+   ]
+  }
+ },
+ {
+  "qid": "nq342",
+  "question": "when was the last time the crows were in the grand final",
+  "gold": [
+   "2017"
+  ],
+  "gold_all": [
+   "2017"
+  ],
+  "false_answers": {
+   "poisonedrag": "2014",
+   "outdated": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "nq377",
+  "question": "who has become the new chairman of sebi",
+  "gold": [
+   "Ajay Tyagi"
+  ],
+  "gold_all": [
+   "Ajay Tyagi"
+  ],
+  "false_answers": {
+   "poisonedrag": "Rajesh Gopinathan",
+   "swapped": "Rajesh Gopinathan",
+   "misretrieval": [
+    "Jitendra Singh"
+   ]
+  }
+ },
+ {
+  "qid": "nq220",
+  "question": "when did the philadelphia eagles play in the super bowl last",
+  "gold": [
+   "Super Bowl LII"
+  ],
+  "gold_all": [
+   "Super Bowl LII"
+  ],
+  "false_answers": {
+   "outdated": [
+    "Super Bowl XXXIX"
+   ]
+  }
+ },
+ {
+  "qid": "nq396",
+  "question": "when does the team find out prentiss is alive",
+  "gold": [
+   "In the season seven premiere",
+   "the season seven premiere"
+  ],
+  "gold_all": [
+   "In the season seven premiere",
+   "the season seven premiere"
+  ],
+  "false_answers": {
+   "poisonedrag": "Midway through season 6",
+   "misretrieval": [
+    "May 21, 2017"
+   ]
+  }
+ },
+ {
+  "qid": "nq231",
+  "question": "who wrote the theme song for mission impossible",
+  "gold": [
+   "Lalo Schifrin",
+   "Argentine composer Lalo Schifrin"
+  ],
+  "gold_all": [
+   "Lalo Schifrin",
+   "Argentine composer Lalo Schifrin"
+  ],
+  "false_answers": {
+   "poisonedrag": "Hans Zimmer"
+  }
+ },
+ {
+  "qid": "nq196",
+  "question": "who sing say you won't let go",
+  "gold": [
+   "James Arthur"
+  ],
+  "gold_all": [
+   "James Arthur"
+  ],
+  "false_answers": {
+   "swapped": "Ed Sheeran",
+   "misretrieval": [
+    "Warren Zevon",
+    "Bon Jovi"
+   ]
+  }
+ },
+ {
+  "qid": "nq185",
+  "question": "who plays max voice in a goofy movie",
+  "gold": [
+   "Jason Marsden"
+  ],
+  "gold_all": [
+   "Jason Marsden"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Bret Iwan",
+    "Wayne Allwine"
+   ]
+  }
+ },
+ {
+  "qid": "nq241",
+  "question": "how many times has the saints won the super bowl",
+  "gold": [
+   "1"
+  ],
+  "gold_all": [
+   "1"
+  ],
+  "false_answers": {
+   "poisonedrag": "3"
+  }
+ },
+ {
+  "qid": "nq295",
+  "question": "how many episodes of the white princess will there be",
+  "gold": [
+   "eight",
+   "8"
+  ],
+  "gold_all": [
+   "eight",
+   "8"
+  ],
+  "false_answers": {
+   "poisonedrag": "Twelve",
+   "swapped": "Twelve",
+   "misretrieval": [
+    "131"
+   ]
+  }
+ },
+ {
+  "qid": "nq430",
+  "question": "when did the song things that make you go hmmm come out",
+  "gold": [
+   "June 1991",
+   "June 23, 1991"
+  ],
+  "gold_all": [
+   "June 1991",
+   "June 23, 1991"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "September 25, 1987",
+    "1987",
+    "September\u00a025,\u00a01987"
+   ]
+  }
+ },
+ {
+  "qid": "nq378",
+  "question": "when did the movie princess bride come out",
+  "gold": [
+   "1987"
+  ],
+  "gold_all": [
+   "September 25, 1987",
+   "1987",
+   "September\u00a025,\u00a01987"
+  ],
+  "false_answers": {
+   "poisonedrag": "August of 1985",
+   "swapped": "August of 1985",
+   "misretrieval": [
+    "16 November 2001",
+    "2001"
+   ]
+  }
+ },
+ {
+  "qid": "nq044",
+  "question": "what is the minimum dollar amount for federal court",
+  "gold": [
+   "$75,000"
+  ],
+  "gold_all": [
+   "$75,000"
+  ],
+  "false_answers": {
+   "poisonedrag": "Fifty thousand dollars",
+   "swapped": "Fifty thousand dollars"
+  }
+ },
+ {
+  "qid": "nq127",
+  "question": "who died doing the luge in the olympics",
+  "gold": [
+   "Nodar Kumaritashvili"
+  ],
+  "gold_all": [
+   "Nodar Kumaritashvili"
+  ],
+  "false_answers": {
+   "poisonedrag": "Henrik Zetterberg"
+  }
+ },
+ {
+  "qid": "nq064",
+  "question": "who sings the song i feel it still",
+  "gold": [
+   "Portugal. The Man.",
+   "Portugal. The Man"
+  ],
+  "gold_all": [
+   "Portugal. The Man.",
+   "Portugal. The Man"
+  ],
+  "false_answers": {
+   "poisonedrag": "Imagine Dragons",
+   "swapped": "Imagine Dragons",
+   "misretrieval": [
+    "Bob Dylan"
+   ]
+  }
+ },
+ {
+  "qid": "nq478",
+  "question": "when was the last time the los angeles lakers won a championship",
+  "gold": [
+   "2010",
+   "in 2010"
+  ],
+  "gold_all": [
+   "2010",
+   "in 2010"
+  ],
+  "false_answers": {
+   "poisonedrag": "Twenty Thirteen",
+   "misretrieval": [
+    "2008"
+   ]
+  }
+ },
+ {
+  "qid": "nq309",
+  "question": "what is the name of the lymphatic vessels located in the small intestine",
+  "gold": [
+   "lacteals",
+   "A lacteal",
+   "lacteal"
+  ],
+  "gold_all": [
+   "lacteals",
+   "A lacteal",
+   "lacteal"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "some other elements",
+    "iron\u2013nickel alloy",
+    "an iron\u2013nickel alloy"
+   ]
+  }
+ },
+ {
+  "qid": "nq063",
+  "question": "where do the maple leafs play hockey in toronto",
+  "gold": [
+   "Air Canada Centre",
+   "the Air Canada Centre"
+  ],
+  "gold_all": [
+   "Air Canada Centre",
+   "the Air Canada Centre"
+  ],
+  "false_answers": {
+   "poisonedrag": "Rogers Centre"
+  }
+ },
+ {
+  "qid": "nq167",
+  "question": "how many players on the line of scrimmage in american football",
+  "gold": [
+   "at least seven players",
+   "at least seven",
+   "seven"
+  ],
+  "gold_all": [
+   "at least seven players",
+   "at least seven",
+   "seven"
+  ],
+  "false_answers": {
+   "poisonedrag": "9 players on the line of scrimmage",
+   "misretrieval": [
+    "4"
+   ]
+  }
+ },
+ {
+  "qid": "nq494",
+  "question": "what are the value of style guides and style sheet",
+  "gold": [
+   "improve communication"
+  ],
+  "gold_all": [
+   "improve communication"
+  ],
+  "false_answers": {
+   "poisonedrag": "Increase production costs"
+  }
+ },
+ {
+  "qid": "nq397",
+  "question": "when was the movie cool hand luke made",
+  "gold": [
+   "1967"
+  ],
+  "gold_all": [
+   "1967"
+  ],
+  "false_answers": {
+   "poisonedrag": "1972",
+   "swapped": "1972",
+   "misretrieval": [
+    "1939",
+    "August\u00a025,\u00a01939"
+   ]
+  }
+ },
+ {
+  "qid": "nq135",
+  "question": "where's the tv show the crossing filmed",
+  "gold": [
+   "British Columbia, Canada"
+  ],
+  "gold_all": [
+   "British Columbia, Canada"
+  ],
+  "false_answers": {
+   "poisonedrag": "New South Wales"
+  }
+ },
+ {
+  "qid": "nq496",
+  "question": "when did the eagles win the super bowl",
+  "gold": [
+   "2017"
+  ],
+  "gold_all": [
+   "2017"
+  ],
+  "false_answers": {
+   "poisonedrag": "2013",
+   "misretrieval": [
+    "2011"
+   ]
+  }
+ },
+ {
+  "qid": "nq012",
+  "question": "who gave the famous objective co relative theory",
+  "gold": [
+   "T.S. Eliot"
+  ],
+  "gold_all": [
+   "T.S. Eliot"
+  ],
+  "false_answers": {
+   "poisonedrag": "Bertrand Russell"
+  }
+ },
+ {
+  "qid": "nq175",
+  "question": "who sings jungle book i wanna be like you",
+  "gold": [
+   "Louis Prima.",
+   "Louis Prima"
+  ],
+  "gold_all": [
+   "Louis Prima.",
+   "Louis Prima"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Ringo Starr"
+   ]
+  }
+ },
+ {
+  "qid": "nq090",
+  "question": "a town in west yorkshire on the river aire home to a rugby league team",
+  "gold": [
+   "Castleford"
+  ],
+  "gold_all": [
+   "Castleford"
+  ],
+  "false_answers": {
+   "poisonedrag": "Bradford",
+   "swapped": "Bradford"
+  }
+ },
+ {
+  "qid": "nq287",
+  "question": "who directed the iconic animated short educational film ek anek aur ekta",
+  "gold": [
+   "Vijaya Mulay"
+  ],
+  "gold_all": [
+   "Vijaya Mulay"
+  ],
+  "false_answers": {
+   "poisonedrag": "Satyajit Ray"
+  }
+ },
+ {
+  "qid": "nq001",
+  "question": "how long did it take to build the great pyramid of egypt",
+  "gold": [
+   "20-year period"
+  ],
+  "gold_all": [
+   "20-year period"
+  ],
+  "false_answers": {
+   "poisonedrag": "10-year period",
+   "swapped": "10-year period"
+  }
+ },
+ {
+  "qid": "nq053",
+  "question": "when did houston go to the american league",
+  "gold": [
+   "2013"
+  ],
+  "gold_all": [
+   "2013"
+  ],
+  "false_answers": {
+   "poisonedrag": "AD 2005",
+   "misretrieval": [
+    "2017"
+   ]
+  }
+ },
+ {
+  "qid": "nq269",
+  "question": "who is the sixth president of the united states",
+  "gold": [
+   "John Quincy Adams"
+  ],
+  "gold_all": [
+   "John Quincy Adams"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Felipe VI"
+   ]
+  }
+ },
+ {
+  "qid": "nq354",
+  "question": "when was son of a preacher man released",
+  "gold": [
+   "late 1968"
+  ],
+  "gold_all": [
+   "late 1968",
+   "November 8, 1968"
+  ],
+  "false_answers": {
+   "poisonedrag": "Early 1975"
+  }
+ },
+ {
+  "qid": "sqa4617631458298630030",
+  "question": "who won the world cup in the last 4 years",
+  "gold": [
+   "France"
+  ],
+  "gold_all": [
+   "France"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Brazil"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-170500835841793778",
+  "question": "when did miss usa last win miss universe",
+  "gold": [
+   "2012"
+  ],
+  "gold_all": [
+   "2012"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1997"
+   ],
+   "misretrieval": [
+    "1960"
+   ]
+  }
+ },
+ {
+  "qid": "sqa2831153710042163207",
+  "question": "when did england last make the semi finals world cup",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1990"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8633629777135983588",
+  "question": "when have england reached the world cup semi finals",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1990"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-2842468656704916631",
+  "question": "when was the last time georgia won sec",
+  "gold": [
+   "2017"
+  ],
+  "gold_all": [
+   "2017"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2005"
+   ],
+   "misretrieval": [
+    "1980"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-1260518745950631273",
+  "question": "when is the last time america had a total solar eclipse",
+  "gold": [
+   "August 21, 2017"
+  ],
+  "gold_all": [
+   "August 21, 2017"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "October 23, 2014"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-2615221360356874693",
+  "question": "where was the last winter olympics held in us",
+  "gold": [
+   "The 2002 Winter Olympics"
+  ],
+  "gold_all": [
+   "The 2002 Winter Olympics"
+  ],
+  "false_answers": {
+   "outdated": [
+    "The 1980 Winter Olympics"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8122202533337967469",
+  "question": "who is the head of state of spain",
+  "gold": [
+   "Felipe VI"
+  ],
+  "gold_all": [
+   "Felipe VI"
+  ],
+  "false_answers": {
+   "outdated": [
+    "Juan Carlos I"
+   ],
+   "misretrieval": [
+    "John Quincy Adams"
+   ]
+  }
+ },
+ {
+  "qid": "sqa6869577152425027404",
+  "question": "last time east won nba all star game",
+  "gold": [
+   "2014"
+  ],
+  "gold_all": [
+   "2014"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2008"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-2854569475380312046",
+  "question": "when\u2019s the last time the houston astros won the world series",
+  "gold": [
+   "2017"
+  ],
+  "gold_all": [
+   "2017"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1995"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-6946678195892261018",
+  "question": "who was the last person executed in utah",
+  "gold": [
+   "Ronnie Lee Gardner"
+  ],
+  "gold_all": [
+   "Ronnie Lee Gardner"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Carey Dean Moore"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-1244473100428477311",
+  "question": "when was the last time norway was in the world cup",
+  "gold": [
+   "1998"
+  ],
+  "gold_all": [
+   "1998"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1994"
+   ],
+   "misretrieval": [
+    "2006"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-9077531202315370019",
+  "question": "when was the open last held at carnoustie",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2007"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa1741891580746615900",
+  "question": "when was the last time egypt qualified for world cup",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1990"
+   ],
+   "misretrieval": [
+    "1982"
+   ]
+  }
+ },
+ {
+  "qid": "sqa424689443798050894",
+  "question": "when was the last time a team from canada won the stanley cup",
+  "gold": [
+   "1993"
+  ],
+  "gold_all": [
+   "1993"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1990"
+   ],
+   "misretrieval": [
+    "1967"
+   ]
+  }
+ },
+ {
+  "qid": "sqa2190194517181431024",
+  "question": "when was the last time giants won superbowl",
+  "gold": [
+   "2011"
+  ],
+  "gold_all": [
+   "2011"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2007"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-2162391145049066060",
+  "question": "who is the current director of the us mint",
+  "gold": [
+   "David J. Ryder"
+  ],
+  "gold_all": [
+   "David J. Ryder"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Godwin Emefiele"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-2249203381908854180",
+  "question": "record for most assists in a nba game",
+  "gold": [
+   "30"
+  ],
+  "gold_all": [
+   "30"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "100"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-2468553952201293348",
+  "question": "when did the open last take place at carnousti",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2007"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-1564773422580123227",
+  "question": "when did england last get to the semi final in a world cup",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1990"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-5153475241217412373",
+  "question": "when was the last time a team won the world series two years in a row",
+  "gold": [
+   "2000"
+  ],
+  "gold_all": [
+   "2000"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1981"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-4742439731455437009",
+  "question": "when was the last time birmingham city beat aston villa",
+  "gold": [
+   "1 December 2010"
+  ],
+  "gold_all": [
+   "1 December 2010"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2003\u201304"
+   ]
+  }
+ },
+ {
+  "qid": "sqa2450066249047898493",
+  "question": "when did galway last win the football all ireland",
+  "gold": [
+   "2001"
+  ],
+  "gold_all": [
+   "2001"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1998"
+   ],
+   "misretrieval": [
+    "2013"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-815815826230297119",
+  "question": "who won the olympic mens figure skating gold medal",
+  "gold": [
+   "Yuzuru Hanyu"
+  ],
+  "gold_all": [
+   "Yuzuru Hanyu"
+  ],
+  "false_answers": {
+   "outdated": [
+    "Evan Lysacek"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-7542864634712380256",
+  "question": "when is the last time uga won a sec championship",
+  "gold": [
+   "2017"
+  ],
+  "gold_all": [
+   "2017"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2005"
+   ],
+   "misretrieval": [
+    "1980"
+   ]
+  }
+ },
+ {
+  "qid": "sqa8511591955753771180",
+  "question": "when did england last get to the semi finals of a world cup",
+  "gold": [
+   "2018"
+  ],
+  "gold_all": [
+   "2018"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1990"
+   ],
+   "misretrieval": [
+    "1998"
+   ]
+  }
+ },
+ {
+  "qid": "sqa3404328272429114478",
+  "question": "who did auburn beat in the national championship",
+  "gold": [
+   "Oregon"
+  ],
+  "gold_all": [
+   "Oregon"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Stanford"
+   ]
+  }
+ },
+ {
+  "qid": "sqa9148602099114352163",
+  "question": "when was the last time university of michigan won a national championship",
+  "gold": [
+   "1997"
+  ],
+  "gold_all": [
+   "1997"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2017"
+   ]
+  }
+ },
+ {
+  "qid": "sqa8876175157500803872",
+  "question": "when was the last time the cincinnati bengals were in the playoffs",
+  "gold": [
+   "2015"
+  ],
+  "gold_all": [
+   "2015"
+  ],
+  "false_answers": {
+   "outdated": [
+    "2014"
+   ],
+   "misretrieval": [
+    "1969",
+    "XI"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-3548226797294802248",
+  "question": "who is in charge of minister of personnel public grievances and pensions",
+  "gold": [
+   "Jitendra Singh"
+  ],
+  "gold_all": [
+   "Jitendra Singh"
+  ],
+  "false_answers": {
+   "outdated": [
+    "V. Narayanasamy"
+   ]
+  }
+ },
+ {
+  "qid": "sqa3937130437908018262",
+  "question": "when did mexico host the fifa world cup",
+  "gold": [
+   "1986"
+  ],
+  "gold_all": [
+   "1986"
+  ],
+  "false_answers": {
+   "outdated": [
+    "1970"
+   ],
+   "misretrieval": [
+    "2002"
+   ]
+  }
+ },
+ {
+  "qid": "sqa3265544195062278752",
+  "question": "who has won the most rings in the nba",
+  "gold": [
+   "Bill Russell"
+  ],
+  "gold_all": [
+   "Bill Russell"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Wilt Chamberlain"
+   ]
+  }
+ },
+ {
+  "qid": "sqa7325709023218793779",
+  "question": "how many goals does wayne rooney have in the premier league",
+  "gold": [
+   "208"
+  ],
+  "gold_all": [
+   "208"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "26"
+   ]
+  }
+ }
+]

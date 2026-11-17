@@ -1,0 +1,1529 @@
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:08<01:02,  8.93s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:19<00:58,  9.75s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:29<00:49,  9.89s/it]Loading checkpoint shards:  50%|█████     | 4/8 [00:39<00:40, 10.00s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:49<00:30, 10.11s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:00<00:20, 10.15s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [01:10<00:10, 10.19s/it]Loading checkpoint shards: 100%|██████████| 8/8 [01:13<00:00,  7.98s/it]Loading checkpoint shards: 100%|██████████| 8/8 [01:13<00:00,  9.19s/it]
+nq341 core_out dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'outdated': 0, 'misretrieval': 0}
+nq251 core_out usable {'poisonedrag': 0, 'swapped': 0, 'outdated': 1, 'misretrieval': 0}
+nq050 core_out usable {'poisonedrag': 0, 'swapped': 2, 'outdated': 1, 'misretrieval': 0}
+nq300 core_out usable {'poisonedrag': 4, 'swapped': 0, 'outdated': 0, 'misretrieval': 0}
+nq342 core_out usable {'poisonedrag': 2, 'swapped': 0, 'outdated': 2, 'misretrieval': 0}
+nq366 core_out dropped: no clean passage judged to state the gold {}
+nq197 core_out usable {'poisonedrag': 0, 'swapped': 2, 'outdated': 2, 'misretrieval': 0}
+nq458 core_out usable {'poisonedrag': 5, 'swapped': 1, 'outdated': 0, 'misretrieval': 0}
+nq377 core_out usable {'poisonedrag': 2, 'swapped': 1, 'outdated': 0, 'misretrieval': 0}
+nq115 core_out usable {'poisonedrag': 0, 'swapped': 0, 'outdated': 0, 'misretrieval': 4}
+nq355 core_out usable {'poisonedrag': 0, 'swapped': 2, 'outdated': 0, 'misretrieval': 1}
+nq220 core_out usable {'poisonedrag': 0, 'swapped': 0, 'outdated': 1, 'misretrieval': 0}
+nq368 core_out dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'outdated': 0, 'misretrieval': 0}
+nq402 core_out dropped: no clean passage judged to state the gold {}
+nq470 core_out dropped: no clean passage judged to state the gold {}
+nq472 core_out dropped: no clean passage judged to state the gold {}
+nq333 core_out usable {'poisonedrag': 0, 'swapped': 1, 'outdated': 0, 'misretrieval': 0}
+nq156 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 2}
+nq400 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq008 core_rest dropped: no clean passage judged to state the gold {}
+nq316 core_rest dropped: no clean passage judged to state the gold {}
+nq464 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 5}
+nq252 core_rest dropped: no clean passage judged to state the gold {}
+nq078 core_rest dropped: no clean passage judged to state the gold {}
+nq291 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 1}
+nq332 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq454 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq158 core_rest dropped: no clean passage judged to state the gold {}
+nq396 core_rest usable {'poisonedrag': 3, 'swapped': 0, 'misretrieval': 0}
+nq054 core_rest dropped: no clean passage judged to state the gold {}
+nq329 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq492 core_rest dropped: no clean passage judged to state the gold {}
+nq390 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq017 core_rest dropped: no clean passage judged to state the gold {}
+nq170 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq107 core_rest usable {'poisonedrag': 3, 'swapped': 0, 'misretrieval': 0}
+nq208 core_rest dropped: no clean passage judged to state the gold {}
+nq231 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 1}
+nq214 core_rest dropped: no clean passage judged to state the gold {}
+nq488 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq247 core_rest dropped: no clean passage judged to state the gold {}
+nq026 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq331 core_rest dropped: no clean passage judged to state the gold {}
+nq261 core_rest dropped: no clean passage judged to state the gold {}
+nq425 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq101 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq148 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq031 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq196 core_rest usable {'poisonedrag': 0, 'swapped': 1, 'misretrieval': 0}
+nq174 core_rest dropped: no clean passage judged to state the gold {}
+nq114 core_rest dropped: no clean passage judged to state the gold {}
+nq128 core_rest dropped: no clean passage judged to state the gold {}
+nq057 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq404 core_rest dropped: no clean passage judged to state the gold {}
+nq318 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq106 core_rest usable {'poisonedrag': 0, 'swapped': 2, 'misretrieval': 0}
+nq185 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq223 core_rest usable {'poisonedrag': 5, 'swapped': 3, 'misretrieval': 0}
+nq273 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq116 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq487 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq313 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq340 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq000 core_rest usable {'poisonedrag': 5, 'swapped': 2, 'misretrieval': 5}
+nq216 core_rest dropped: no clean passage judged to state the gold {}
+nq330 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq241 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq302 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq204 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq111 core_rest usable {'poisonedrag': 1, 'swapped': 1, 'misretrieval': 0}
+nq298 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq146 core_rest dropped: no clean passage judged to state the gold {}
+nq295 core_rest usable {'poisonedrag': 5, 'swapped': 3, 'misretrieval': 1}
+nq005 core_rest dropped: no clean passage judged to state the gold {}
+nq068 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq160 core_rest dropped: no clean passage judged to state the gold {}
+nq075 core_rest dropped: no clean passage judged to state the gold {}
+nq415 core_rest dropped: no clean passage judged to state the gold {}
+nq244 core_rest dropped: no clean passage judged to state the gold {}
+nq257 core_rest dropped: no clean passage judged to state the gold {}
+nq073 core_rest dropped: no clean passage judged to state the gold {}
+nq427 core_rest usable {'poisonedrag': 3, 'swapped': 0, 'misretrieval': 0}
+nq479 core_rest dropped: no clean passage judged to state the gold {}
+nq430 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq262 core_rest dropped: no clean passage judged to state the gold {}
+nq406 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'misretrieval': 0}
+nq033 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq416 core_rest usable {'poisonedrag': 2, 'swapped': 1, 'misretrieval': 0}
+nq134 core_rest dropped: no clean passage judged to state the gold {}
+nq113 core_rest dropped: no clean passage judged to state the gold {}
+nq303 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq378 core_rest usable {'poisonedrag': 5, 'swapped': 3, 'misretrieval': 0}
+nq453 core_rest dropped: no clean passage judged to state the gold {}
+nq072 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq079 core_rest dropped: no clean passage judged to state the gold {}
+nq060 core_rest dropped: no clean passage judged to state the gold {}
+nq043 core_rest dropped: no clean passage judged to state the gold {}
+nq152 core_rest usable {'poisonedrag': 5, 'swapped': 1, 'misretrieval': 1}
+nq109 core_rest dropped: no clean passage judged to state the gold {}
+nq304 core_rest dropped: no clean passage judged to state the gold {}
+nq271 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq124 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq210 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq497 core_rest dropped: no clean passage judged to state the gold {}
+nq376 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 1}
+nq165 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq177 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq209 core_rest dropped: no clean passage judged to state the gold {}
+nq044 core_rest usable {'poisonedrag': 4, 'swapped': 3, 'misretrieval': 0}
+nq030 core_rest usable {'poisonedrag': 1, 'swapped': 5, 'misretrieval': 0}
+nq002 core_rest dropped: no clean passage judged to state the gold {}
+nq045 core_rest dropped: no clean passage judged to state the gold {}
+nq099 core_rest dropped: no clean passage judged to state the gold {}
+nq150 core_rest usable {'poisonedrag': 5, 'swapped': 2, 'misretrieval': 0}
+nq070 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq265 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq382 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq277 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq021 core_rest dropped: no clean passage judged to state the gold {}
+nq003 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq218 core_rest dropped: no clean passage judged to state the gold {}
+nq337 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq312 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq283 core_rest dropped: no clean passage judged to state the gold {}
+nq168 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq350 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq443 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq095 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq285 core_rest dropped: no clean passage judged to state the gold {}
+nq357 core_rest dropped: no clean passage judged to state the gold {}
+nq144 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq157 core_rest dropped: no clean passage judged to state the gold {}
+nq085 core_rest dropped: no clean passage judged to state the gold {}
+nq232 core_rest dropped: no clean passage judged to state the gold {}
+nq127 core_rest usable {'poisonedrag': 3, 'swapped': 0, 'misretrieval': 0}
+nq187 core_rest dropped: no clean passage judged to state the gold {}
+nq485 core_rest dropped: no clean passage judged to state the gold {}
+nq446 core_rest dropped: no clean passage judged to state the gold {}
+nq475 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq169 core_rest usable {'poisonedrag': 4, 'swapped': 2, 'misretrieval': 0}
+nq466 core_rest usable {'poisonedrag': 5, 'swapped': 2, 'misretrieval': 0}
+nq064 core_rest usable {'poisonedrag': 1, 'swapped': 1, 'misretrieval': 2}
+nq323 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq087 core_rest dropped: no clean passage judged to state the gold {}
+nq442 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq410 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq235 core_rest dropped: no clean passage judged to state the gold {}
+nq432 core_rest usable {'poisonedrag': 5, 'swapped': 1, 'misretrieval': 0}
+nq426 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq250 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq478 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 2}
+nq015 core_rest usable {'poisonedrag': 2, 'swapped': 0, 'misretrieval': 0}
+nq294 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq163 core_rest dropped: no clean passage judged to state the gold {}
+nq449 core_rest dropped: no clean passage judged to state the gold {}
+nq292 core_rest dropped: no clean passage judged to state the gold {}
+nq037 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq172 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq309 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq162 core_rest usable {'poisonedrag': 3, 'swapped': 0, 'misretrieval': 0}
+nq417 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq484 core_rest dropped: no clean passage judged to state the gold {}
+nq375 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq105 core_rest dropped: no clean passage judged to state the gold {}
+nq379 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq258 core_rest dropped: no clean passage judged to state the gold {}
+nq018 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq063 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq297 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq125 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq207 core_rest dropped: no clean passage judged to state the gold {}
+nq419 core_rest usable {'poisonedrag': 3, 'swapped': 3, 'misretrieval': 5}
+nq205 core_rest dropped: no clean passage judged to state the gold {}
+nq317 core_rest dropped: no clean passage judged to state the gold {}
+nq234 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq401 core_rest dropped: no clean passage judged to state the gold {}
+nq130 core_rest dropped: no clean passage judged to state the gold {}
+nq319 core_rest dropped: no clean passage judged to state the gold {}
+nq167 core_rest usable {'poisonedrag': 4, 'swapped': 0, 'misretrieval': 1}
+nq421 core_rest usable {'poisonedrag': 2, 'swapped': 3, 'misretrieval': 3}
+nq192 core_rest usable {'poisonedrag': 0, 'swapped': 1, 'misretrieval': 0}
+nq494 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq077 core_rest usable {'poisonedrag': 5, 'swapped': 1, 'misretrieval': 0}
+nq147 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq195 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq041 core_rest dropped: no clean passage judged to state the gold {}
+nq010 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq243 core_rest dropped: no clean passage judged to state the gold {}
+nq061 core_rest usable {'poisonedrag': 5, 'swapped': 1, 'misretrieval': 0}
+nq290 core_rest dropped: no clean passage judged to state the gold {}
+nq320 core_rest dropped: no clean passage judged to state the gold {}
+nq397 core_rest usable {'poisonedrag': 1, 'swapped': 2, 'misretrieval': 3}
+nq322 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq011 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq364 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq126 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq335 core_rest dropped: no clean passage judged to state the gold {}
+nq135 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq362 core_rest dropped: no clean passage judged to state the gold {}
+nq143 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq334 core_rest dropped: no clean passage judged to state the gold {}
+nq110 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq338 core_rest dropped: no clean passage judged to state the gold {}
+nq103 core_rest dropped: no clean passage judged to state the gold {}
+nq080 core_rest dropped: no clean passage judged to state the gold {}
+nq004 core_rest dropped: no clean passage judged to state the gold {}
+nq483 core_rest dropped: no clean passage judged to state the gold {}
+nq348 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq435 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq028 core_rest dropped: no clean passage judged to state the gold {}
+nq267 core_rest usable {'poisonedrag': 4, 'swapped': 2, 'misretrieval': 0}
+nq496 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq352 core_rest dropped: no clean passage judged to state the gold {}
+nq229 core_rest dropped: no clean passage judged to state the gold {}
+nq418 core_rest dropped: no clean passage judged to state the gold {}
+nq213 core_rest usable {'poisonedrag': 5, 'swapped': 3, 'misretrieval': 2}
+nq327 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq117 core_rest dropped: no clean passage judged to state the gold {}
+nq230 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq445 core_rest dropped: no clean passage judged to state the gold {}
+nq345 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq459 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq428 core_rest dropped: no clean passage judged to state the gold {}
+nq460 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq049 core_rest dropped: no clean passage judged to state the gold {}
+nq012 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq266 core_rest dropped: no clean passage judged to state the gold {}
+nq448 core_rest dropped: no clean passage judged to state the gold {}
+nq088 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq086 core_rest dropped: no clean passage judged to state the gold {}
+nq198 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq480 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq412 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq380 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq142 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq175 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq122 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq311 core_rest dropped: no clean passage judged to state the gold {}
+nq131 core_rest dropped: no clean passage judged to state the gold {}
+nq437 core_rest dropped: no clean passage judged to state the gold {}
+nq007 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq423 core_rest dropped: no clean passage judged to state the gold {}
+nq056 core_rest dropped: no clean passage judged to state the gold {}
+nq450 core_rest dropped: no clean passage judged to state the gold {}
+nq217 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq027 core_rest usable {'poisonedrag': 5, 'swapped': 1, 'misretrieval': 0}
+nq463 core_rest dropped: no clean passage judged to state the gold {}
+nq293 core_rest dropped: no clean passage judged to state the gold {}
+nq424 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq212 core_rest dropped: no clean passage judged to state the gold {}
+nq373 core_rest dropped: no clean passage judged to state the gold {}
+nq066 core_rest dropped: no clean passage judged to state the gold {}
+nq296 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq193 core_rest dropped: no clean passage judged to state the gold {}
+nq272 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq281 core_rest dropped: no clean passage judged to state the gold {}
+nq359 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq090 core_rest usable {'poisonedrag': 3, 'swapped': 1, 'misretrieval': 0}
+nq429 core_rest dropped: no clean passage judged to state the gold {}
+nq189 core_rest dropped: no clean passage judged to state the gold {}
+nq051 core_rest dropped: no clean passage judged to state the gold {}
+nq166 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq020 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq227 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq462 core_rest usable {'poisonedrag': 0, 'swapped': 2, 'misretrieval': 0}
+nq268 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq108 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq326 core_rest dropped: no clean passage judged to state the gold {}
+nq456 core_rest dropped: no clean passage judged to state the gold {}
+nq055 core_rest usable {'poisonedrag': 0, 'swapped': 1, 'misretrieval': 0}
+nq287 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+nq286 core_rest dropped: no clean passage judged to state the gold {}
+nq353 core_rest usable {'poisonedrag': 2, 'swapped': 0, 'misretrieval': 2}
+nq029 core_rest usable {'poisonedrag': 1, 'swapped': 2, 'misretrieval': 0}
+nq411 core_rest dropped: no clean passage judged to state the gold {}
+nq392 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq409 core_rest dropped: no clean passage judged to state the gold {}
+nq194 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq097 core_rest dropped: no clean passage judged to state the gold {}
+nq001 core_rest usable {'poisonedrag': 4, 'swapped': 2, 'misretrieval': 0}
+nq102 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 2}
+nq171 core_rest dropped: no clean passage judged to state the gold {}
+nq228 core_rest dropped: no clean passage judged to state the gold {}
+nq180 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq211 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq482 core_rest usable {'poisonedrag': 4, 'swapped': 0, 'misretrieval': 0}
+nq280 core_rest dropped: no clean passage judged to state the gold {}
+nq058 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq161 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq053 core_rest usable {'poisonedrag': 4, 'swapped': 0, 'misretrieval': 0}
+nq498 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq132 core_rest dropped: no clean passage judged to state the gold {}
+nq226 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq471 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq039 core_rest dropped: no clean passage judged to state the gold {}
+nq036 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq238 core_rest dropped: no clean passage judged to state the gold {}
+nq310 core_rest dropped: no clean passage judged to state the gold {}
+nq336 core_rest dropped: no clean passage judged to state the gold {}
+nq149 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq269 core_rest usable {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 1}
+nq084 core_rest dropped: no clean passage judged to state the gold {}
+nq009 core_rest dropped: no clean passage judged to state the gold {}
+nq461 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq282 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq093 core_rest dropped: no clean passage judged to state the gold {}
+nq202 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq451 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq069 core_rest dropped: no clean passage judged to state the gold {}
+nq245 core_rest usable {'poisonedrag': 0, 'swapped': 2, 'misretrieval': 0}
+nq447 core_rest usable {'poisonedrag': 5, 'swapped': 0, 'misretrieval': 0}
+nq013 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq361 core_rest dropped: no cause has a bad passage {'poisonedrag': 0, 'swapped': 0, 'misretrieval': 0}
+nq354 core_rest usable {'poisonedrag': 1, 'swapped': 0, 'misretrieval': 0}
+sqa-6060236709747598932 added usable {'outdated': 4, 'misretrieval': 3, 'poisonedrag': 0}
+sqa-7023363435048751412 added dropped: no clean passage judged to state the gold {}
+sqa-8080178533501168505 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+sqa4617631458298630030 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-688650939164667186 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 0}
+sqa957815482588836299 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa6176492787649496671 added dropped: no clean passage judged to state the gold {}
+sqa-8935044164938101402 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa3069102563259277016 added dropped: no clean passage judged to state the gold {}
+sqa-6067459562742182223 added dropped: no clean passage judged to state the gold {}
+sqa8133401184061931985 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+sqa4042619105856172567 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa7431400439018916629 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-170500835841793778 added usable {'outdated': 3, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa3784227401781265847 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-5718159264009065914 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa2831153710042163207 added usable {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 0}
+sqa6624575797224082824 added usable {'outdated': 3, 'misretrieval': 5, 'poisonedrag': 4, 'swapped': 2}
+sqa8815316042562468005 added usable {'outdated': 4, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 2}
+sqa-6863457157087500529 added dropped: no clean passage judged to state the gold {}
+sqa8646937007656256552 added dropped: no clean passage judged to state the gold {}
+sqa-8765658120834178461 added dropped: no clean passage judged to state the gold {}
+sqa3266482288575470496 added dropped: no clean passage judged to state the gold {}
+sqa4791710805272232823 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa2133016068307615793 added dropped: no clean passage judged to state the gold {}
+sqa-8633629777135983588 added usable {'outdated': 4, 'misretrieval': 0}
+sqa-8676218748957784671 added usable {'outdated': 0, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 0}
+sqa-8049695851713697163 added dropped: no clean passage judged to state the gold {}
+sqa-4726363016166772094 added usable {'outdated': 1, 'misretrieval': 2, 'poisonedrag': 0}
+sqa8909468881596251420 added dropped: no clean passage judged to state the gold {}
+sqa-5220093807701949184 added dropped: no clean passage judged to state the gold {}
+sqa-1886758056229796497 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa2523684379532085353 added dropped: no clean passage judged to state the gold {}
+sqa-2516158802106623873 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa1585316578999504970 added usable {'outdated': 0, 'misretrieval': 1, 'poisonedrag': 5, 'swapped': 0}
+sqa-2842468656704916631 added usable {'outdated': 4, 'misretrieval': 3, 'poisonedrag': 0}
+sqa-8920618371345935653 added dropped: no clean passage judged to state the gold {}
+sqa-780901962571738690 added usable {'outdated': 1, 'misretrieval': 2, 'poisonedrag': 0}
+sqa8648501318765126657 added dropped: no clean passage judged to state the gold {}
+sqa-3787783340735291386 added dropped: no clean passage judged to state the gold {}
+sqa408606783188469337 added usable {'outdated': 3, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-6140933817971338731 added dropped: no clean passage judged to state the gold {}
+sqa7457518655087401024 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-1260518745950631273 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa-546696194238868913 added usable {'outdated': 3, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 3}
+sqa5367162018285178586 added dropped: no clean passage judged to state the gold {}
+sqa-1823848472590357927 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 1, 'swapped': 1}
+sqa7425797308052813574 added dropped: no clean passage judged to state the gold {}
+sqa-6182387595921678420 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa-7971423331904318053 added usable {'outdated': 6, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-4628267852301989966 added dropped: no clean passage judged to state the gold {}
+sqa-7958766554770240476 added dropped: no clean passage judged to state the gold {}
+sqa-2615221360356874693 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-9160538222830319507 added usable {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-5646954749611871039 added dropped: no clean passage judged to state the gold {}
+sqa-8381584584451512081 added dropped: no clean passage judged to state the gold {}
+sqa-8789247448080236409 added dropped: no clean passage judged to state the gold {}
+sqa-3569092658456144175 added usable {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+sqa-3072269585965400670 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-7193335753082880040 added usable {'outdated': 0, 'misretrieval': 1, 'poisonedrag': 5, 'swapped': 0}
+sqa-8122202533337967469 added usable {'outdated': 3, 'misretrieval': 1, 'poisonedrag': 0}
+sqa-8943515175077090063 added usable {'outdated': 3, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-8977406783855272081 added usable {'outdated': 0, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 1}
+sqa2524327002970633176 added dropped: no clean passage judged to state the gold {}
+sqa-6174332306005850659 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa6681347498393803618 added dropped: no clean passage judged to state the gold {}
+sqa-3980908979353540502 added dropped: no clean passage judged to state the gold {}
+sqa6869577152425027404 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-8756977320246087074 added dropped: no clean passage judged to state the gold {}
+sqa3289508448332117757 added dropped: no clean passage judged to state the gold {}
+sqa-509156027916429327 added usable {'outdated': 0, 'misretrieval': 5, 'poisonedrag': 5, 'swapped': 4}
+sqa-1894419621034219015 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa7912522447294730596 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-8458006812258546025 added dropped: no clean passage judged to state the gold {}
+sqa-7008352380240766023 added usable {'outdated': 0, 'misretrieval': 5, 'poisonedrag': 4, 'swapped': 1}
+sqa-1925626853949301046 added dropped: no clean passage judged to state the gold {}
+sqa-8454308080997523214 added dropped: no clean passage judged to state the gold {}
+sqa6875959602758173887 added dropped: no clean passage judged to state the gold {}
+sqa-2600462407267804464 added dropped: no clean passage judged to state the gold {}
+sqa3028343500075334931 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa-1671753368343269049 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa-8631190913794477985 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa5379060899940433076 added dropped: no clean passage judged to state the gold {}
+sqa-2854569475380312046 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 3}
+sqa-3843415372056034449 added dropped: no clean passage judged to state the gold {}
+sqa-8528065227243426139 added dropped: no clean passage judged to state the gold {}
+sqa3604949687947044518 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+sqa604611189332072028 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-2576507331893021303 added dropped: no clean passage judged to state the gold {}
+sqa5364680911815100032 added usable {'outdated': 0, 'misretrieval': 2, 'poisonedrag': 4, 'swapped': 0}
+sqa-8697680618933519343 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-6162933554898709661 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa2378366897349791390 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-5525987740463097828 added dropped: no clean passage judged to state the gold {}
+sqa-6946678195892261018 added usable {'outdated': 0, 'misretrieval': 3, 'poisonedrag': 4, 'swapped': 0}
+sqa-8004862778717031020 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa640155833647220414 added dropped: no clean passage judged to state the gold {}
+sqa-2291463957623103890 added dropped: no clean passage judged to state the gold {}
+sqa8876461119670214583 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-8483348517773985255 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-6265513790802983765 added dropped: no clean passage judged to state the gold {}
+sqa-4767786471135006230 added dropped: no clean passage judged to state the gold {}
+sqa5958945853226691114 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa-8141549891411597928 added dropped: no clean passage judged to state the gold {}
+sqa-4706280673787911936 added usable {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-4667103995686109744 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-1244473100428477311 added usable {'outdated': 1, 'misretrieval': 3, 'poisonedrag': 0}
+sqa4978971724294843820 added dropped: no clean passage judged to state the gold {}
+sqa4346113281513449883 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-7610443911696021016 added usable {'outdated': 2, 'misretrieval': 1, 'poisonedrag': 0}
+sqa-5651213904652219619 added dropped: no clean passage judged to state the gold {}
+sqa-9013448130521531086 added dropped: no clean passage judged to state the gold {}
+sqa-9077531202315370019 added usable {'outdated': 6, 'misretrieval': 3, 'poisonedrag': 0}
+sqa-6727285708580233868 added dropped: no clean passage judged to state the gold {}
+sqa-6216202368088666946 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-1210946677908817161 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-8084811193718111951 added dropped: no clean passage judged to state the gold {}
+sqa2380437240337440901 added dropped: no clean passage judged to state the gold {}
+sqa-7583584111592285108 added dropped: no clean passage judged to state the gold {}
+sqa2242129897690916622 added dropped: no clean passage judged to state the gold {}
+sqa7343122061842527493 added usable {'outdated': 0, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 1}
+sqa1741891580746615900 added usable {'outdated': 5, 'misretrieval': 2, 'poisonedrag': 0}
+sqa-2453753078737973938 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa4426606128408476924 added usable {'outdated': 3, 'misretrieval': 1, 'poisonedrag': 3, 'swapped': 1}
+sqa-6118878938511397050 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+sqa424689443798050894 added usable {'outdated': 1, 'misretrieval': 5, 'poisonedrag': 4, 'swapped': 3}
+sqa8297214486276163966 added dropped: no clean passage judged to state the gold {}
+sqa-4381822079249063600 added usable {'outdated': 1, 'misretrieval': 5, 'poisonedrag': 5, 'swapped': 5}
+sqa-2995120870376495175 added dropped: no clean passage judged to state the gold {}
+sqa7543221882873643810 added dropped: no clean passage judged to state the gold {}
+sqa1027465133571566224 added dropped: near-duplicate of a kept question {'outdated': 1, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 0}
+sqa1922567092251879685 added usable {'outdated': 2, 'misretrieval': 1, 'poisonedrag': 0, 'swapped': 0}
+sqa2190194517181431024 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa-3609099329397965026 added usable {'outdated': 3, 'misretrieval': 1, 'poisonedrag': 4, 'swapped': 1}
+sqa405265048112486945 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 2}
+sqa-8149718044500852542 added dropped: no clean passage judged to state the gold {}
+sqa-2241479832634390772 added dropped: no clean passage judged to state the gold {}
+sqa8728076075855252468 added dropped: no clean passage judged to state the gold {}
+sqa-5991887290662240853 added dropped: no clean passage judged to state the gold {}
+sqa-3670866671527666176 added dropped: no clean passage judged to state the gold {}
+sqa-2162391145049066060 added usable {'outdated': 0, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 0}
+sqa2713615566308412318 added dropped: no clean passage judged to state the gold {}
+sqa-2314029496883985902 added usable {'outdated': 2, 'misretrieval': 1, 'poisonedrag': 5, 'swapped': 1}
+sqa-5702695746894157483 added usable {'outdated': 2, 'misretrieval': 3, 'poisonedrag': 0}
+sqa-2249203381908854180 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa6817669499305304667 added dropped: no clean passage judged to state the gold {}
+sqa475851843458714378 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0}
+sqa4725845399232398734 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-5484905092631515040 added usable {'outdated': 2, 'misretrieval': 0}
+sqa-8618903389915380312 added dropped: no clean passage judged to state the gold {}
+sqa6395257537431272143 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-361372457924056022 added dropped: no clean passage judged to state the gold {}
+sqa3078482795804735765 added dropped: no clean passage judged to state the gold {}
+sqa-2468553952201293348 added usable {'outdated': 3, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa-4961319983743864887 added dropped: no clean passage judged to state the gold {}
+sqa-3794512166665194686 added dropped: no clean passage judged to state the gold {}
+sqa5229535274467836243 added dropped: no clean passage judged to state the gold {}
+sqa8388676772671088024 added dropped: no clean passage judged to state the gold {}
+sqa-6347175717720372460 added usable {'outdated': 3, 'misretrieval': 3, 'poisonedrag': 5, 'swapped': 2}
+sqa-5337262445977966782 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+sqa-6728121519496822854 added dropped: no clean passage judged to state the gold {}
+sqa1485752534773006057 added usable {'outdated': 0, 'misretrieval': 3}
+sqa-2905323175491826586 added dropped: no clean passage judged to state the gold {}
+sqa-6573765696916186625 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+sqa-4951809330979541975 added dropped: no clean passage judged to state the gold {}
+sqa-1564773422580123227 added usable {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 3, 'swapped': 2}
+sqa3539941079129261555 added dropped: no clean passage judged to state the gold {}
+sqa776516245718992102 added dropped: no clean passage judged to state the gold {}
+sqa-3853558465357026264 added dropped: no clean passage judged to state the gold {}
+sqa-2991400700385487821 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa2036430558820470899 added dropped: no clean passage judged to state the gold {}
+sqa3066043798068172151 added dropped: no clean passage judged to state the gold {}
+sqa-4416600828683164615 added dropped: no clean passage judged to state the gold {}
+sqa1031269957054547192 added usable {'outdated': 1, 'misretrieval': 1, 'poisonedrag': 4, 'swapped': 1}
+sqa6820471992219764137 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa3857191778995264647 added dropped: no clean passage judged to state the gold {}
+sqa-5153475241217412373 added usable {'outdated': 0, 'misretrieval': 5, 'poisonedrag': 4, 'swapped': 0}
+sqa4394923343724245352 added dropped: no clean passage judged to state the gold {}
+sqa-6118508180338451872 added usable {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa-8132908822162855287 added dropped: no clean passage judged to state the gold {}
+sqa5902656698329892850 added dropped: no clean passage judged to state the gold {}
+sqa5153412854745122443 added usable {'outdated': 13, 'misretrieval': 0, 'poisonedrag': 0}
+sqa4522288767022012901 added dropped: no clean passage judged to state the gold {}
+sqa-4742439731455437009 added usable {'outdated': 0, 'misretrieval': 5, 'poisonedrag': 4, 'swapped': 1}
+sqa-614343174194892985 added dropped: no clean passage judged to state the gold {}
+sqa2832313249594923959 added dropped: no clean passage judged to state the gold {}
+sqa-8597257227876331667 added dropped: no clean passage judged to state the gold {}
+sqa-833390295300933075 added dropped: no clean passage judged to state the gold {}
+sqa2851585794686488659 added usable {'outdated': 0, 'misretrieval': 5, 'poisonedrag': 5, 'swapped': 2}
+sqa-2931838262997512872 added dropped: no clean passage judged to state the gold {}
+sqa-6962948485363607069 added dropped: no clean passage judged to state the gold {}
+sqa-3814808164496896890 added dropped: no clean passage judged to state the gold {}
+sqa-8876216443354683949 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+sqa1344788280879036824 added dropped: no clean passage judged to state the gold {}
+sqa1660122524963141000 added dropped: no clean passage judged to state the gold {}
+sqa1168611404834933720 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa6979384824093855823 added usable {'outdated': 3, 'misretrieval': 4}
+sqa-7776552727110109294 added dropped: no clean passage judged to state the gold {}
+sqa3633271167425225514 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa664126784032076855 added dropped: no clean passage judged to state the gold {}
+sqa95636137517606056 added dropped: no clean passage judged to state the gold {}
+sqa404190323448978468 added dropped: no clean passage judged to state the gold {}
+sqa2450066249047898493 added usable {'outdated': 4, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-1570872939061821343 added dropped: no clean passage judged to state the gold {}
+sqa-8594889199400051 added dropped: no clean passage judged to state the gold {}
+sqa8078504481398353414 added usable {'outdated': 2, 'misretrieval': 4, 'poisonedrag': 0}
+sqa3640178421252637312 added dropped: no clean passage judged to state the gold {}
+sqa1858642786804276526 added usable {'outdated': 3, 'misretrieval': 1, 'poisonedrag': 0}
+sqa-950272764593449019 added dropped: no clean passage judged to state the gold {}
+sqa8956198408513730227 added dropped: no clean passage judged to state the gold {}
+sqa-5266470225571197908 added dropped: no clean passage judged to state the gold {}
+sqa3283703860386588103 added dropped: no clean passage judged to state the gold {}
+sqa-815815826230297119 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa-2953491529624297458 added dropped: no clean passage judged to state the gold {}
+sqa5989353811268800286 added dropped: no clean passage judged to state the gold {}
+sqa-4399829454720383150 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa3053726924560462849 added dropped: no clean passage judged to state the gold {}
+sqa-6569395974597414012 added usable {'outdated': 5, 'misretrieval': 0}
+sqa-7924170207595297549 added dropped: near-duplicate of a kept question {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 2, 'swapped': 1}
+sqa7383354502292277568 added dropped: no clean passage judged to state the gold {}
+sqa-6586062546829751138 added dropped: no clean passage judged to state the gold {}
+sqa-4781670765262751138 added dropped: no clean passage judged to state the gold {}
+sqa-9044027905927172037 added dropped: no clean passage judged to state the gold {}
+sqa6831452923168450712 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-316679721397270253 added dropped: no clean passage judged to state the gold {}
+sqa3895510272033333545 added usable {'outdated': 2, 'misretrieval': 1, 'poisonedrag': 0}
+sqa5497426960433885420 added dropped: no clean passage judged to state the gold {}
+sqa8968036245733884389 added dropped: no clean passage judged to state the gold {}
+sqa-7542864634712380256 added usable {'outdated': 2, 'misretrieval': 2, 'poisonedrag': 0}
+sqa-4352771238918801643 added dropped: no clean passage judged to state the gold {}
+sqa-9077495306870424234 added dropped: no clean passage judged to state the gold {}
+sqa-7078643388503687659 added dropped: no clean passage judged to state the gold {}
+sqa-7394149107458430124 added usable {'outdated': 10, 'misretrieval': 3, 'poisonedrag': 4, 'swapped': 5}
+sqa-2792777910263458048 added dropped: no clean passage judged to state the gold {}
+sqa3225786180029621768 added dropped: no clean passage judged to state the gold {}
+sqa7951030065148304924 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa-7621748922939316823 added dropped: no clean passage judged to state the gold {}
+sqa6107811068253620269 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa6941993254369956277 added usable {'outdated': 0, 'misretrieval': 2, 'poisonedrag': 3, 'swapped': 0}
+sqa6491823095708054516 added dropped: no clean passage judged to state the gold {}
+sqa8101049886323594757 added usable {'outdated': 2, 'misretrieval': 1, 'poisonedrag': 0}
+sqa-2017278020944823335 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa1533485886147206292 added dropped: no clean passage judged to state the gold {}
+sqa6130600421580765688 added dropped: no clean passage judged to state the gold {}
+sqa8511591955753771180 added usable {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa2054682835224885541 added usable {'outdated': 4, 'misretrieval': 1, 'poisonedrag': 0}
+sqa-404802678667633084 added usable {'outdated': 0, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 0}
+sqa6203839542590166972 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 2}
+sqa8294745348012464398 added dropped: no clean passage judged to state the gold {}
+sqa3404328272429114478 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-1114675337051248175 added usable {'outdated': 3, 'misretrieval': 0}
+sqa-4916126468971119601 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa7986093057091943768 added dropped: no clean passage judged to state the gold {}
+sqa7409863776389503045 added dropped: no clean passage judged to state the gold {}
+sqa9000363101253801740 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa7932588616172546049 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa6998803685289972081 added usable {'outdated': 2, 'misretrieval': 1, 'poisonedrag': 0}
+sqa2221300476080572999 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa3615871734488243184 added dropped: no clean passage judged to state the gold {}
+sqa-4422393868868092763 added dropped: near-duplicate of a kept question {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa9148602099114352163 added usable {'outdated': 0, 'misretrieval': 5}
+sqa-5170058523813720266 added usable {'outdated': 4, 'misretrieval': 0, 'poisonedrag': 3, 'swapped': 4}
+sqa7894730886324432751 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 4}
+sqa-2239476544861712052 added dropped: no clean passage judged to state the gold {}
+sqa8624811389808469284 added dropped: no clean passage judged to state the gold {}
+sqa4548702227891205597 added dropped: no clean passage judged to state the gold {}
+sqa-7070760052518224541 added dropped: no clean passage judged to state the gold {}
+sqa6583414494934925813 added dropped: no clean passage judged to state the gold {}
+sqa3866675179238331022 added dropped: no clean passage judged to state the gold {}
+sqa-2040293408787954805 added dropped: no clean passage judged to state the gold {}
+sqa2141683879635459441 added dropped: no clean passage judged to state the gold {}
+sqa-5962986518182066490 added dropped: no clean passage judged to state the gold {}
+sqa806337555667215134 added usable {'outdated': 0, 'misretrieval': 1, 'poisonedrag': 4, 'swapped': 1}
+sqa8876175157500803872 added usable {'outdated': 2, 'misretrieval': 3, 'poisonedrag': 4, 'swapped': 0}
+sqa-4385301586082946633 added dropped: no clean passage judged to state the gold {}
+sqa-157589509221431661 added dropped: no clean passage judged to state the gold {}
+sqa6677335276706646204 added usable {'outdated': 5, 'misretrieval': 0}
+sqa-5086865199142729318 added usable {'outdated': 0, 'misretrieval': 5, 'poisonedrag': 0}
+sqa589920303894553110 added dropped: no clean passage judged to state the gold {}
+sqa-4044520314843875303 added dropped: no clean passage judged to state the gold {}
+sqa-4269188302092925935 added dropped: no clean passage judged to state the gold {}
+sqa4288798153560531374 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-6757338201273100774 added dropped: no clean passage judged to state the gold {}
+sqa-8224455698083814762 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-984054840688564466 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-3548226797294802248 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa3833603461933012569 added usable {'outdated': 2, 'misretrieval': 2, 'poisonedrag': 0}
+sqa-2812329787113672999 added dropped: no clean passage judged to state the gold {}
+sqa-1339256092983448476 added dropped: no cause has a bad passage {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-1208459263841076551 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa199561851133275930 added usable {'outdated': 5, 'misretrieval': 3}
+sqa-8019311571340961322 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-8525124454763371713 added dropped: no clean passage judged to state the gold {}
+sqa-1190382034053241916 added dropped: no clean passage judged to state the gold {}
+sqa-8236587859923457961 added usable {'outdated': 0, 'misretrieval': 1, 'poisonedrag': 4, 'swapped': 1}
+sqa-9041509413210520868 added dropped: no clean passage judged to state the gold {}
+sqa6271348324466812633 added dropped: no clean passage judged to state the gold {}
+sqa16249599952448400 added dropped: no clean passage judged to state the gold {}
+sqa601063550691400285 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+sqa-5416716520378605756 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa8669349226887498197 added dropped: no clean passage judged to state the gold {}
+sqa3937130437908018262 added usable {'outdated': 3, 'misretrieval': 0}
+sqa-5701495405917057501 added dropped: no clean passage judged to state the gold {}
+sqa3801543338104483901 added dropped: no clean passage judged to state the gold {}
+sqa61922444073392789 added usable {'outdated': 3, 'misretrieval': 2, 'poisonedrag': 0}
+sqa-3430455071548381325 added dropped: no clean passage judged to state the gold {}
+sqa-6877282156685709041 added dropped: no clean passage judged to state the gold {}
+sqa7041662135146892950 added usable {'outdated': 4, 'misretrieval': 0}
+sqa3265544195062278752 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+sqa-927067341833394124 added dropped: no clean passage judged to state the gold {}
+sqa2046477171040739161 added usable {'outdated': 2, 'misretrieval': 0, 'poisonedrag': 0}
+sqa-2565806416467002527 added dropped: no clean passage judged to state the gold {}
+sqa5191538320550488837 added dropped: no clean passage judged to state the gold {}
+sqa-8081431644783557175 added usable {'outdated': 0, 'misretrieval': 2, 'poisonedrag': 5, 'swapped': 2}
+sqa741155200099012504 added dropped: no clean passage judged to state the gold {}
+sqa8781618535910787549 added dropped: no clean passage judged to state the gold {}
+sqa7325709023218793779 added usable {'outdated': 0, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa8702113196720831343 added usable {'outdated': 0, 'misretrieval': 5, 'poisonedrag': 0}
+sqa1320175841533754901 added dropped: no clean passage judged to state the gold {}
+sqa-1020319297551247593 added usable {'outdated': 1, 'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+sqa-2523870216310262566 added dropped: no clean passage judged to state the gold {}
+sqa-923930882256327764 added dropped: no clean passage judged to state the gold {}
+sqa4533986705809424782 added dropped: no clean passage judged to state the gold {}
+wc116 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc117 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc246 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc206 wc usable {'conflict': 2}
+wc72 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc195 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc74 wc usable {'conflict': 2}
+wc73 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc141 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc159 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc149 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc222 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc121 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc11 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc79 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc144 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc127 wc usable {'conflict': 2}
+wc227 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc53 wc usable {'conflict': 2}
+wc145 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc17 wc usable {'conflict': 2}
+wc199 wc usable {'conflict': 2}
+wc49 wc usable {'conflict': 2}
+wc192 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc241 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc66 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc184 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc48 wc usable {'conflict': 2}
+wc82 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc40 wc usable {'conflict': 2}
+wc128 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc151 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc62 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc67 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc217 wc usable {'conflict': 2}
+wc54 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc226 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc20 wc usable {'conflict': 2}
+wc6 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc153 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc18 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc252 wc usable {'conflict': 2}
+wc143 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc218 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc33 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc29 wc usable {'conflict': 2}
+wc247 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc109 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc187 wc usable {'conflict': 2}
+wc77 wc usable {'conflict': 2}
+wc61 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc84 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc92 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc1 wc usable {'conflict': 2}
+wc240 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc186 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc52 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc191 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc31 wc usable {'conflict': 2}
+wc220 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc2 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc193 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc223 wc usable {'conflict': 2}
+wc183 wc usable {'conflict': 2}
+wc235 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc83 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc225 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc123 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc35 wc usable {'conflict': 2}
+wc80 wc usable {'conflict': 2}
+wc28 wc usable {'conflict': 2}
+wc142 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc22 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc44 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc36 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc243 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc238 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc14 wc usable {'conflict': 2}
+wc27 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc219 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc51 wc usable {'conflict': 2}
+wc58 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc13 wc usable {'conflict': 2}
+wc140 wc usable {'conflict': 2}
+wc30 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc105 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc104 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc12 wc usable {'conflict': 2}
+wc75 wc usable {'conflict': 2}
+wc87 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc160 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc103 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc118 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc232 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc174 wc usable {'conflict': 2}
+wc200 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc231 wc usable {'conflict': 2}
+wc176 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc93 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc108 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc78 wc usable {'conflict': 2}
+wc8 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc81 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc32 wc usable {'conflict': 2}
+wc114 wc usable {'conflict': 2}
+wc63 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc244 wc usable {'conflict': 2}
+wc98 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc249 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc16 wc usable {'conflict': 2}
+wc113 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc89 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc156 wc usable {'conflict': 2}
+wc110 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc21 wc usable {'conflict': 2}
+wc201 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc70 wc usable {'conflict': 2}
+wc245 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc34 wc usable {'conflict': 2}
+wc10 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc173 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc239 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc233 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc3 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc175 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc207 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc196 wc usable {'conflict': 2}
+wc236 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc230 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc154 wc usable {'conflict': 2}
+wc115 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc129 wc usable {'conflict': 2}
+wc102 wc usable {'conflict': 2}
+wc85 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc234 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc25 wc usable {'conflict': 2}
+wc155 wc usable {'conflict': 2}
+wc130 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc194 wc usable {'conflict': 2}
+wc124 wc usable {'conflict': 2}
+wc185 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc119 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc99 wc usable {'conflict': 2}
+wc228 wc usable {'conflict': 2}
+wc139 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc60 wc usable {'conflict': 2}
+wc224 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc188 wc dropped: near-duplicate of a kept question {'conflict': 2}
+wc71 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc23 wc usable {'conflict': 2}
+wc190 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc65 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc7 wc usable {'conflict': 2}
+wc122 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc86 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc242 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc26 wc usable {'conflict': 2}
+wc41 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc15 wc usable {'conflict': 2}
+wc111 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc37 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc125 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc152 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc221 wc usable {'conflict': 2}
+wc19 wc usable {'conflict': 2}
+wc46 wc usable {'conflict': 2}
+wc59 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc229 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc253 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc47 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc237 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc4 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc189 wc dropped: near-duplicate of a kept question {'conflict': 2}
+wc88 wc usable {'conflict': 2}
+wc120 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc197 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc64 wc usable {'conflict': 2}
+wc24 wc usable {'conflict': 2}
+wc76 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc112 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc248 wc usable {'conflict': 2}
+wc101 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc50 wc usable {'conflict': 2}
+wc198 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc100 wc usable {'conflict': 2}
+wc150 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc45 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc208 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc172 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+wc9 wc dropped: a dump passage is not judged to state its answer {'conflict': 2}
+nqv3425 nqopen dropped: no clean passage judged to state the gold {}
+nqv1421 nqopen dropped: no clean passage judged to state the gold {}
+nqv1417 nqopen dropped: no clean passage judged to state the gold {}
+nqv2215 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0499 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0885 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2878 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2874 nqopen usable {'misretrieval': 3}
+nqv1288 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3436 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1976 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0696 nqopen dropped: no clean passage judged to state the gold {}
+nqv2539 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1957 nqopen dropped: no clean passage judged to state the gold {}
+nqv2516 nqopen usable {'misretrieval': 2}
+nqv2088 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1310 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv1510 nqopen dropped: no clean passage judged to state the gold {}
+nqv2162 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0849 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3115 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3356 nqopen dropped: no clean passage judged to state the gold {}
+nqv1084 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 3}
+nqv0294 nqopen dropped: no clean passage judged to state the gold {}
+nqv1706 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0373 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2940 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1030 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv0508 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv1515 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2883 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv3038 nqopen usable {'misretrieval': 3, 'poisonedrag': 4, 'swapped': 1}
+nqv3184 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv2718 nqopen dropped: no clean passage judged to state the gold {}
+nqv0409 nqopen dropped: no clean passage judged to state the gold {}
+nqv1472 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv3405 nqopen dropped: no clean passage judged to state the gold {}
+nqv0013 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv1154 nqopen dropped: no clean passage judged to state the gold {}
+nqv1248 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0096 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv3250 nqopen dropped: no clean passage judged to state the gold {}
+nqv0057 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv0663 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0399 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 2}
+nqv3132 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0707 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv2804 nqopen dropped: no clean passage judged to state the gold {}
+nqv0941 nqopen dropped: no clean passage judged to state the gold {}
+nqv2727 nqopen dropped: no clean passage judged to state the gold {}
+nqv2706 nqopen usable {'misretrieval': 5, 'poisonedrag': 5, 'swapped': 1}
+nqv1876 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv1641 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0236 nqopen dropped: no clean passage judged to state the gold {}
+nqv0795 nqopen dropped: no clean passage judged to state the gold {}
+nqv2528 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2836 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0945 nqopen dropped: no clean passage judged to state the gold {}
+nqv2045 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv0220 nqopen dropped: no clean passage judged to state the gold {}
+nqv3027 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv3307 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 3}
+nqv2556 nqopen dropped: no clean passage judged to state the gold {}
+nqv1201 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1113 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv1022 nqopen dropped: no clean passage judged to state the gold {}
+nqv1719 nqopen usable {'misretrieval': 1, 'poisonedrag': 5, 'swapped': 1}
+nqv2259 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3119 nqopen dropped: no clean passage judged to state the gold {}
+nqv0523 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0314 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv1267 nqopen dropped: no clean passage judged to state the gold {}
+nqv1047 nqopen dropped: no clean passage judged to state the gold {}
+nqv3600 nqopen dropped: no clean passage judged to state the gold {}
+nqv2681 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1504 nqopen dropped: no clean passage judged to state the gold {}
+nqv0621 nqopen dropped: no clean passage judged to state the gold {}
+nqv2925 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv0524 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1038 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1776 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv2946 nqopen usable {'misretrieval': 3, 'poisonedrag': 5, 'swapped': 2}
+nqv2538 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1512 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv2979 nqopen dropped: no clean passage judged to state the gold {}
+nqv1119 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv2382 nqopen dropped: no clean passage judged to state the gold {}
+nqv1433 nqopen dropped: no clean passage judged to state the gold {}
+nqv0897 nqopen dropped: no clean passage judged to state the gold {}
+nqv2142 nqopen usable {'misretrieval': 1, 'poisonedrag': 5, 'swapped': 0}
+nqv2104 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1960 nqopen dropped: no clean passage judged to state the gold {}
+nqv1203 nqopen dropped: no clean passage judged to state the gold {}
+nqv2861 nqopen dropped: no clean passage judged to state the gold {}
+nqv3480 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0584 nqopen dropped: no clean passage judged to state the gold {}
+nqv2974 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3332 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0248 nqopen dropped: no clean passage judged to state the gold {}
+nqv0725 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv0514 nqopen dropped: no clean passage judged to state the gold {}
+nqv1355 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0636 nqopen dropped: no clean passage judged to state the gold {}
+nqv2211 nqopen dropped: no clean passage judged to state the gold {}
+nqv2598 nqopen dropped: no clean passage judged to state the gold {}
+nqv0736 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv3298 nqopen dropped: no clean passage judged to state the gold {}
+nqv1483 nqopen dropped: no clean passage judged to state the gold {}
+nqv0933 nqopen dropped: no clean passage judged to state the gold {}
+nqv1687 nqopen dropped: no clean passage judged to state the gold {}
+nqv1606 nqopen dropped: no clean passage judged to state the gold {}
+nqv1349 nqopen dropped: no clean passage judged to state the gold {}
+nqv1903 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1734 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv0328 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2174 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv2242 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 2}
+nqv1238 nqopen dropped: no clean passage judged to state the gold {}
+nqv2472 nqopen dropped: no clean passage judged to state the gold {}
+nqv2309 nqopen usable {'misretrieval': 1, 'poisonedrag': 5, 'swapped': 2}
+nqv2962 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0397 nqopen dropped: no clean passage judged to state the gold {}
+nqv3229 nqopen dropped: no clean passage judged to state the gold {}
+nqv2009 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv1163 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2484 nqopen dropped: no clean passage judged to state the gold {}
+nqv0325 nqopen dropped: no clean passage judged to state the gold {}
+nqv1020 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0162 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2370 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1727 nqopen dropped: no clean passage judged to state the gold {}
+nqv2315 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2623 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv0839 nqopen dropped: no clean passage judged to state the gold {}
+nqv0113 nqopen usable {'misretrieval': 3, 'poisonedrag': 5, 'swapped': 2}
+nqv3575 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3320 nqopen dropped: no clean passage judged to state the gold {}
+nqv0601 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0491 nqopen dropped: no clean passage judged to state the gold {}
+nqv3506 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1613 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1227 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv3586 nqopen usable {'misretrieval': 2, 'poisonedrag': 4, 'swapped': 1}
+nqv1377 nqopen usable {'misretrieval': 1, 'poisonedrag': 4, 'swapped': 0}
+nqv0296 nqopen dropped: no clean passage judged to state the gold {}
+nqv1882 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2533 nqopen dropped: no clean passage judged to state the gold {}
+nqv1999 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0770 nqopen usable {'misretrieval': 1, 'poisonedrag': 0, 'swapped': 0}
+nqv0277 nqopen dropped: no clean passage judged to state the gold {}
+nqv0952 nqopen usable {'misretrieval': 3, 'poisonedrag': 4, 'swapped': 1}
+nqv2030 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv1098 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv1822 nqopen dropped: no clean passage judged to state the gold {}
+nqv1855 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv1859 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0018 nqopen dropped: no clean passage judged to state the gold {}
+nqv3410 nqopen usable {'misretrieval': 5, 'poisonedrag': 3, 'swapped': 0}
+nqv1899 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1879 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1082 nqopen dropped: no clean passage judged to state the gold {}
+nqv2575 nqopen dropped: no clean passage judged to state the gold {}
+nqv0754 nqopen dropped: no clean passage judged to state the gold {}
+nqv2502 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv0168 nqopen dropped: no clean passage judged to state the gold {}
+nqv3023 nqopen dropped: no clean passage judged to state the gold {}
+nqv0542 nqopen dropped: no clean passage judged to state the gold {}
+nqv1258 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1753 nqopen dropped: no clean passage judged to state the gold {}
+nqv1847 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv3259 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 5}
+nqv0497 nqopen dropped: no clean passage judged to state the gold {}
+nqv3003 nqopen dropped: no clean passage judged to state the gold {}
+nqv1637 nqopen dropped: no clean passage judged to state the gold {}
+nqv0199 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1849 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv2169 nqopen dropped: no clean passage judged to state the gold {}
+nqv3535 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv1035 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0571 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2644 nqopen dropped: no clean passage judged to state the gold {}
+nqv0630 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0008 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1459 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2500 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv1307 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1153 nqopen dropped: no clean passage judged to state the gold {}
+nqv3592 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv2463 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1394 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1681 nqopen usable {'misretrieval': 3, 'poisonedrag': 0}
+nqv2628 nqopen dropped: no clean passage judged to state the gold {}
+nqv1982 nqopen usable {'misretrieval': 2, 'poisonedrag': 5, 'swapped': 0}
+nqv2772 nqopen usable {'misretrieval': 3, 'poisonedrag': 3, 'swapped': 1}
+nqv1427 nqopen dropped: no clean passage judged to state the gold {}
+nqv1336 nqopen dropped: no clean passage judged to state the gold {}
+nqv2366 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv1805 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2207 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv3395 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv1797 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2416 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3552 nqopen dropped: no clean passage judged to state the gold {}
+nqv0648 nqopen dropped: no clean passage judged to state the gold {}
+nqv3456 nqopen dropped: no clean passage judged to state the gold {}
+nqv1556 nqopen dropped: no clean passage judged to state the gold {}
+nqv3137 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv2402 nqopen dropped: no clean passage judged to state the gold {}
+nqv0403 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv2387 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0616 nqopen dropped: no clean passage judged to state the gold {}
+nqv1283 nqopen dropped: no clean passage judged to state the gold {}
+nqv2492 nqopen dropped: no clean passage judged to state the gold {}
+nqv0639 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv3142 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv1867 nqopen dropped: no clean passage judged to state the gold {}
+nqv0197 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0482 nqopen dropped: no clean passage judged to state the gold {}
+nqv1973 nqopen dropped: no clean passage judged to state the gold {}
+nqv2348 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0964 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv2103 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2027 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv1784 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0489 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv3555 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2480 nqopen dropped: no clean passage judged to state the gold {}
+nqv0554 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv0358 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2379 nqopen usable {'misretrieval': 3, 'poisonedrag': 5, 'swapped': 0}
+nqv2283 nqopen dropped: no clean passage judged to state the gold {}
+nqv0116 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0634 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv2201 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv1037 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0605 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv2834 nqopen dropped: no clean passage judged to state the gold {}
+nqv2423 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv0574 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3491 nqopen dropped: no clean passage judged to state the gold {}
+nqv2171 nqopen dropped: no clean passage judged to state the gold {}
+nqv0592 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1128 nqopen dropped: no clean passage judged to state the gold {}
+nqv2052 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0264 nqopen dropped: no clean passage judged to state the gold {}
+nqv2698 nqopen dropped: no clean passage judged to state the gold {}
+nqv1434 nqopen dropped: no clean passage judged to state the gold {}
+nqv1219 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3291 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0063 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0269 nqopen dropped: no clean passage judged to state the gold {}
+nqv0876 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv3153 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 2}
+nqv3077 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0631 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv0779 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv3475 nqopen dropped: no clean passage judged to state the gold {}
+nqv3005 nqopen dropped: no clean passage judged to state the gold {}
+nqv0572 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv0569 nqopen dropped: no clean passage judged to state the gold {}
+nqv0078 nqopen dropped: no clean passage judged to state the gold {}
+nqv1622 nqopen dropped: no clean passage judged to state the gold {}
+nqv1438 nqopen usable {'misretrieval': 1, 'poisonedrag': 5, 'swapped': 1}
+nqv2359 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2920 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv2299 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0281 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv2252 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3053 nqopen usable {'misretrieval': 5, 'poisonedrag': 3, 'swapped': 0}
+nqv0731 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv2564 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv2206 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2552 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0840 nqopen dropped: no clean passage judged to state the gold {}
+nqv0883 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv3169 nqopen dropped: no clean passage judged to state the gold {}
+nqv0448 nqopen dropped: no clean passage judged to state the gold {}
+nqv0174 nqopen dropped: no clean passage judged to state the gold {}
+nqv0307 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv2475 nqopen usable {'misretrieval': 2, 'poisonedrag': 5, 'swapped': 1}
+nqv3215 nqopen dropped: no clean passage judged to state the gold {}
+nqv1826 nqopen dropped: no clean passage judged to state the gold {}
+nqv1318 nqopen dropped: no clean passage judged to state the gold {}
+nqv1665 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv0960 nqopen dropped: no clean passage judged to state the gold {}
+nqv1456 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 2}
+nqv0084 nqopen dropped: no clean passage judged to state the gold {}
+nqv0848 nqopen dropped: no clean passage judged to state the gold {}
+nqv1971 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3339 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0891 nqopen dropped: no clean passage judged to state the gold {}
+nqv2378 nqopen dropped: no clean passage judged to state the gold {}
+nqv0380 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3551 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 5}
+nqv2860 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv3200 nqopen usable {'misretrieval': 3, 'poisonedrag': 4, 'swapped': 2}
+nqv0495 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv2071 nqopen dropped: no clean passage judged to state the gold {}
+nqv1783 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0823 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2419 nqopen dropped: no clean passage judged to state the gold {}
+nqv0183 nqopen dropped: no clean passage judged to state the gold {}
+nqv1585 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1908 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1904 nqopen dropped: no clean passage judged to state the gold {}
+nqv2418 nqopen dropped: no clean passage judged to state the gold {}
+nqv0486 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1210 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv0014 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv3276 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv1936 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1880 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0308 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1786 nqopen dropped: no clean passage judged to state the gold {}
+nqv0266 nqopen usable {'misretrieval': 1, 'poisonedrag': 5, 'swapped': 2}
+nqv0968 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2090 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3197 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv1036 nqopen dropped: no clean passage judged to state the gold {}
+nqv0161 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1297 nqopen dropped: no clean passage judged to state the gold {}
+nqv2236 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv3344 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1420 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv1574 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 5}
+nqv2512 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0977 nqopen dropped: no clean passage judged to state the gold {}
+nqv1506 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 3}
+nqv0310 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv1127 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3305 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1287 nqopen usable {'misretrieval': 2, 'poisonedrag': 4, 'swapped': 1}
+nqv0354 nqopen dropped: no clean passage judged to state the gold {}
+nqv1314 nqopen dropped: no clean passage judged to state the gold {}
+nqv1053 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1270 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1352 nqopen dropped: no clean passage judged to state the gold {}
+nqv2263 nqopen usable {'misretrieval': 2, 'poisonedrag': 4, 'swapped': 0}
+nqv3045 nqopen usable {'misretrieval': 3, 'poisonedrag': 5, 'swapped': 1}
+nqv3249 nqopen dropped: no clean passage judged to state the gold {}
+nqv0485 nqopen dropped: no clean passage judged to state the gold {}
+nqv1922 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1330 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 2}
+nqv3216 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0680 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2320 nqopen dropped: no clean passage judged to state the gold {}
+nqv1371 nqopen dropped: no clean passage judged to state the gold {}
+nqv0641 nqopen dropped: no clean passage judged to state the gold {}
+nqv2741 nqopen dropped: no clean passage judged to state the gold {}
+nqv0540 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0578 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2109 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 2}
+nqv0303 nqopen dropped: no clean passage judged to state the gold {}
+nqv1833 nqopen dropped: no clean passage judged to state the gold {}
+nqv3412 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv0843 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv0437 nqopen dropped: no clean passage judged to state the gold {}
+nqv1249 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0838 nqopen dropped: no clean passage judged to state the gold {}
+nqv2125 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 5}
+nqv0349 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3453 nqopen dropped: no clean passage judged to state the gold {}
+nqv2667 nqopen dropped: no clean passage judged to state the gold {}
+nqv0768 nqopen usable {'misretrieval': 5, 'poisonedrag': 3, 'swapped': 2}
+nqv1530 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 5}
+nqv0353 nqopen dropped: no clean passage judged to state the gold {}
+nqv1112 nqopen dropped: no clean passage judged to state the gold {}
+nqv2212 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2437 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0221 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0011 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv2115 nqopen dropped: no clean passage judged to state the gold {}
+nqv0127 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3110 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv3121 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv3240 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1505 nqopen dropped: no clean passage judged to state the gold {}
+nqv0001 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv1451 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv1942 nqopen dropped: no clean passage judged to state the gold {}
+nqv2784 nqopen dropped: no clean passage judged to state the gold {}
+nqv1289 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv0673 nqopen dropped: no clean passage judged to state the gold {}
+nqv0810 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2020 nqopen dropped: no clean passage judged to state the gold {}
+nqv2530 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv2462 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv0992 nqopen dropped: no clean passage judged to state the gold {}
+nqv3415 nqopen dropped: no clean passage judged to state the gold {}
+nqv3373 nqopen dropped: no clean passage judged to state the gold {}
+nqv2467 nqopen dropped: no clean passage judged to state the gold {}
+nqv2244 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2982 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv3329 nqopen dropped: no clean passage judged to state the gold {}
+nqv3036 nqopen usable {'misretrieval': 2, 'poisonedrag': 5, 'swapped': 0}
+nqv3559 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0692 nqopen dropped: no clean passage judged to state the gold {}
+nqv2712 nqopen usable {'misretrieval': 1, 'poisonedrag': 4, 'swapped': 1}
+nqv0581 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1301 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv0761 nqopen dropped: no clean passage judged to state the gold {}
+nqv2738 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 3}
+nqv0689 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0155 nqopen dropped: no clean passage judged to state the gold {}
+nqv0886 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1700 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2573 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1911 nqopen dropped: no clean passage judged to state the gold {}
+nqv1862 nqopen dropped: no clean passage judged to state the gold {}
+nqv1444 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3490 nqopen dropped: no clean passage judged to state the gold {}
+nqv1486 nqopen usable {'misretrieval': 1, 'poisonedrag': 3, 'swapped': 1}
+nqv2977 nqopen usable {'misretrieval': 1, 'poisonedrag': 4, 'swapped': 0}
+nqv0170 nqopen dropped: no clean passage judged to state the gold {}
+nqv2389 nqopen dropped: no clean passage judged to state the gold {}
+nqv0923 nqopen dropped: no clean passage judged to state the gold {}
+nqv3227 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2181 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2953 nqopen dropped: no clean passage judged to state the gold {}
+nqv1591 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv1073 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2154 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0682 nqopen dropped: no clean passage judged to state the gold {}
+nqv1469 nqopen dropped: no clean passage judged to state the gold {}
+nqv1449 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1094 nqopen dropped: no clean passage judged to state the gold {}
+nqv0069 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv2253 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv0343 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0926 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0506 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1257 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv0288 nqopen dropped: no clean passage judged to state the gold {}
+nqv1905 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv2256 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3193 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv2232 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv1063 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv0297 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0558 nqopen dropped: no clean passage judged to state the gold {}
+nqv1888 nqopen dropped: no clean passage judged to state the gold {}
+nqv0291 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2710 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv2665 nqopen dropped: no clean passage judged to state the gold {}
+nqv0528 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1838 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv3217 nqopen dropped: no clean passage judged to state the gold {}
+nqv2221 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0948 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 1}
+nqv1162 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2851 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv0777 nqopen dropped: no clean passage judged to state the gold {}
+nqv0668 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv2805 nqopen dropped: no clean passage judged to state the gold {}
+nqv2277 nqopen dropped: no clean passage judged to state the gold {}
+nqv2721 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2357 nqopen dropped: no clean passage judged to state the gold {}
+nqv2882 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1940 nqopen dropped: no clean passage judged to state the gold {}
+nqv2325 nqopen dropped: no clean passage judged to state the gold {}
+nqv1589 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv3049 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2730 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv2632 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv3368 nqopen dropped: no clean passage judged to state the gold {}
+nqv2493 nqopen usable {'misretrieval': 2, 'poisonedrag': 5, 'swapped': 2}
+nqv3133 nqopen dropped: no clean passage judged to state the gold {}
+nqv3384 nqopen dropped: no clean passage judged to state the gold {}
+nqv2756 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv2871 nqopen dropped: no clean passage judged to state the gold {}
+nqv2347 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv3336 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3443 nqopen dropped: no clean passage judged to state the gold {}
+nqv1558 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv1408 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv2574 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0503 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2127 nqopen dropped: no clean passage judged to state the gold {}
+nqv1155 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0439 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 4}
+nqv1662 nqopen dropped: no clean passage judged to state the gold {}
+nqv1374 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1462 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv3246 nqopen usable {'misretrieval': 2, 'poisonedrag': 4, 'swapped': 0}
+nqv1497 nqopen dropped: no clean passage judged to state the gold {}
+nqv0677 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 2}
+nqv0134 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv3264 nqopen usable {'misretrieval': 1, 'poisonedrag': 5, 'swapped': 2}
+nqv0626 nqopen dropped: no clean passage judged to state the gold {}
+nqv0956 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2591 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2068 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 3}
+nqv0798 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0444 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv2248 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0859 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1961 nqopen dropped: no clean passage judged to state the gold {}
+nqv0494 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1699 nqopen dropped: no clean passage judged to state the gold {}
+nqv1430 nqopen usable {'misretrieval': 1, 'poisonedrag': 5, 'swapped': 2}
+nqv1673 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1978 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv0930 nqopen dropped: no clean passage judged to state the gold {}
+nqv0149 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0821 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 1}
+nqv1410 nqopen dropped: no clean passage judged to state the gold {}
+nqv0105 nqopen dropped: no clean passage judged to state the gold {}
+nqv1655 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2023 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv0007 nqopen dropped: no clean passage judged to state the gold {}
+nqv1193 nqopen dropped: no clean passage judged to state the gold {}
+nqv0263 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1991 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1749 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv3039 nqopen usable {'misretrieval': 2, 'poisonedrag': 5, 'swapped': 1}
+nqv2849 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2076 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0938 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3254 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv1959 nqopen dropped: no clean passage judged to state the gold {}
+nqv3603 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv3181 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3414 nqopen dropped: no clean passage judged to state the gold {}
+nqv1628 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv2431 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3188 nqopen usable {'misretrieval': 1, 'poisonedrag': 2, 'swapped': 0}
+nqv0017 nqopen dropped: no clean passage judged to state the gold {}
+nqv2281 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0679 nqopen dropped: no clean passage judged to state the gold {}
+nqv0068 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2746 nqopen dropped: no clean passage judged to state the gold {}
+nqv3083 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0986 nqopen dropped: no clean passage judged to state the gold {}
+nqv3158 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3566 nqopen dropped: no clean passage judged to state the gold {}
+nqv0565 nqopen dropped: no clean passage judged to state the gold {}
+nqv0788 nqopen dropped: no clean passage judged to state the gold {}
+nqv1818 nqopen dropped: no clean passage judged to state the gold {}
+nqv3347 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv0764 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2185 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3387 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv3514 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv0331 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0367 nqopen usable {'misretrieval': 1, 'poisonedrag': 0}
+nqv2594 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2064 nqopen usable {'misretrieval': 2, 'poisonedrag': 5, 'swapped': 0}
+nqv2558 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2116 nqopen usable {'misretrieval': 1, 'poisonedrag': 5, 'swapped': 3}
+nqv0969 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1823 nqopen dropped: no clean passage judged to state the gold {}
+nqv2110 nqopen usable {'misretrieval': 2, 'poisonedrag': 5, 'swapped': 1}
+nqv2866 nqopen dropped: no clean passage judged to state the gold {}
+nqv3411 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 1}
+nqv0701 nqopen dropped: no clean passage judged to state the gold {}
+nqv2609 nqopen dropped: no clean passage judged to state the gold {}
+nqv0411 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv2265 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv1851 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1217 nqopen dropped: no clean passage judged to state the gold {}
+nqv1921 nqopen dropped: no clean passage judged to state the gold {}
+nqv0428 nqopen dropped: no clean passage judged to state the gold {}
+nqv0856 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv1703 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 4}
+nqv3437 nqopen dropped: no clean passage judged to state the gold {}
+nqv0691 nqopen dropped: no clean passage judged to state the gold {}
+nqv1415 nqopen dropped: no clean passage judged to state the gold {}
+nqv3087 nqopen dropped: no clean passage judged to state the gold {}
+nqv1424 nqopen dropped: no clean passage judged to state the gold {}
+nqv0564 nqopen dropped: no clean passage judged to state the gold {}
+nqv0629 nqopen usable {'misretrieval': 4, 'poisonedrag': 4, 'swapped': 5}
+nqv1690 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv0171 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 5}
+nqv3108 nqopen dropped: no clean passage judged to state the gold {}
+nqv1781 nqopen dropped: no clean passage judged to state the gold {}
+nqv1091 nqopen dropped: no clean passage judged to state the gold {}
+nqv2841 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv3591 nqopen dropped: no clean passage judged to state the gold {}
+nqv2529 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1514 nqopen usable {'misretrieval': 5, 'poisonedrag': 5, 'swapped': 0}
+nqv1358 nqopen dropped: no clean passage judged to state the gold {}
+nqv1924 nqopen dropped: no clean passage judged to state the gold {}
+nqv0640 nqopen dropped: no clean passage judged to state the gold {}
+nqv3536 nqopen dropped: no clean passage judged to state the gold {}
+nqv0112 nqopen dropped: no clean passage judged to state the gold {}
+nqv0405 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2234 nqopen dropped: no clean passage judged to state the gold {}
+nqv3129 nqopen usable {'misretrieval': 2, 'poisonedrag': 5, 'swapped': 0}
+nqv2904 nqopen usable {'misretrieval': 5, 'poisonedrag': 0}
+nqv2137 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2150 nqopen dropped: no clean passage judged to state the gold {}
+nqv3260 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2440 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 4}
+nqv1604 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3598 nqopen dropped: no clean passage judged to state the gold {}
+nqv0085 nqopen dropped: no clean passage judged to state the gold {}
+nqv0829 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv2024 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2466 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv3041 nqopen dropped: no clean passage judged to state the gold {}
+nqv2929 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 1}
+nqv0741 nqopen usable {'misretrieval': 5, 'poisonedrag': 4, 'swapped': 3}
+nqv2545 nqopen dropped: no clean passage judged to state the gold {}
+nqv0238 nqopen dropped: no clean passage judged to state the gold {}
+nqv1947 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1868 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1117 nqopen dropped: no clean passage judged to state the gold {}
+nqv1656 nqopen dropped: no clean passage judged to state the gold {}
+nqv1494 nqopen dropped: no clean passage judged to state the gold {}
+nqv1061 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2301 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv1132 nqopen dropped: no clean passage judged to state the gold {}
+nqv2576 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv1351 nqopen dropped: no clean passage judged to state the gold {}
+nqv1008 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2192 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv0628 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 3}
+nqv3283 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0200 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0775 nqopen dropped: no clean passage judged to state the gold {}
+nqv2383 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv3489 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 3}
+nqv2720 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv3353 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3394 nqopen dropped: no cause has a bad passage {'misretrieval': 0}
+nqv0198 nqopen dropped: no clean passage judged to state the gold {}
+nqv3253 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2128 nqopen dropped: no clean passage judged to state the gold {}
+nqv3359 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv1677 nqopen usable {'misretrieval': 0, 'poisonedrag': 3, 'swapped': 0}
+nqv1285 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 3}
+nqv1010 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv2086 nqopen dropped: no clean passage judged to state the gold {}
+nqv2446 nqopen dropped: no clean passage judged to state the gold {}
+nqv0036 nqopen dropped: no clean passage judged to state the gold {}
+nqv1653 nqopen dropped: no clean passage judged to state the gold {}
+nqv0140 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3398 nqopen dropped: no clean passage judged to state the gold {}
+nqv2330 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2425 nqopen dropped: no clean passage judged to state the gold {}
+nqv0081 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1088 nqopen dropped: no clean passage judged to state the gold {}
+nqv1304 nqopen dropped: no clean passage judged to state the gold {}
+nqv3527 nqopen usable {'misretrieval': 3, 'poisonedrag': 5, 'swapped': 4}
+nqv1389 nqopen usable {'misretrieval': 2, 'poisonedrag': 0, 'swapped': 0}
+nqv2218 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 0}
+nqv1296 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1652 nqopen dropped: no clean passage judged to state the gold {}
+nqv2854 nqopen usable {'misretrieval': 0, 'poisonedrag': 1, 'swapped': 0}
+nqv3417 nqopen dropped: no clean passage judged to state the gold {}
+nqv0995 nqopen dropped: no clean passage judged to state the gold {}
+nqv2897 nqopen dropped: no clean passage judged to state the gold {}
+nqv0338 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv0009 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv3191 nqopen dropped: no clean passage judged to state the gold {}
+nqv2893 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 1}
+nqv2796 nqopen dropped: no clean passage judged to state the gold {}
+nqv1087 nqopen dropped: no clean passage judged to state the gold {}
+nqv3031 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1775 nqopen dropped: no clean passage judged to state the gold {}
+nqv3141 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0588 nqopen dropped: no clean passage judged to state the gold {}
+nqv0763 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv3051 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 2}
+nqv0049 nqopen dropped: no clean passage judged to state the gold {}
+nqv2923 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv3564 nqopen usable {'misretrieval': 3, 'poisonedrag': 5, 'swapped': 5}
+nqv2496 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0352 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv0265 nqopen usable {'misretrieval': 0, 'poisonedrag': 4, 'swapped': 4}
+nqv3546 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0443 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 1}
+nqv3381 nqopen dropped: no clean passage judged to state the gold {}
+nqv2669 nqopen usable {'misretrieval': 0, 'poisonedrag': 2, 'swapped': 0}
+nqv1576 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0321 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv1090 nqopen dropped: no clean passage judged to state the gold {}
+nqv1253 nqopen dropped: no clean passage judged to state the gold {}
+nqv2794 nqopen dropped: no clean passage judged to state the gold {}
+nqv2682 nqopen dropped: no clean passage judged to state the gold {}
+nqv2832 nqopen dropped: no clean passage judged to state the gold {}
+nqv1011 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv2199 nqopen dropped: no clean passage judged to state the gold {}
+nqv2146 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1746 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0}
+nqv0097 nqopen dropped: no clean passage judged to state the gold {}
+nqv0833 nqopen dropped: no clean passage judged to state the gold {}
+nqv3399 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv0906 nqopen dropped: no clean passage judged to state the gold {}
+nqv2546 nqopen dropped: no clean passage judged to state the gold {}
+nqv3402 nqopen dropped: no clean passage judged to state the gold {}
+nqv3186 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv0090 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 2}
+nqv3572 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv2447 nqopen dropped: no clean passage judged to state the gold {}
+nqv1070 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv1954 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 0}
+nqv0268 nqopen dropped: no cause has a bad passage {'misretrieval': 0, 'poisonedrag': 0, 'swapped': 0}
+nqv1995 nqopen dropped: no clean passage judged to state the gold {}
+nqv0062 nqopen usable {'misretrieval': 0, 'poisonedrag': 5, 'swapped': 3}
+kept {'core_out': 11, 'core': 83, 'added': 131, 'wc': 63, 'nqopen': 338}

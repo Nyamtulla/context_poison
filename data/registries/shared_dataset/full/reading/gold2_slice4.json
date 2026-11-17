@@ -1,0 +1,1133 @@
+[
+ {
+  "qid": "nq298",
+  "question": "the winner of the best actor award in the 64th national film festival 2017",
+  "gold": [
+   "Akshay Kumar"
+  ],
+  "gold_all": [
+   "Akshay Kumar",
+   "Manoj Joshi"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Sajjad Delafrooz"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-1886758056229796497",
+  "question": "all time highest goal scorer in spain national team",
+  "gold": [
+   "David Villa"
+  ],
+  "gold_all": [
+   "David Villa"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Raul"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-6182387595921678420",
+  "question": "who holds the record for most gold medals",
+  "gold": [
+   "Michael Phelps"
+  ],
+  "gold_all": [
+   "Michael Phelps"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Mark Spitz"
+   ]
+  }
+ },
+ {
+  "qid": "sqa5958945853226691114",
+  "question": "who is the captain of richmond football club",
+  "gold": [
+   "Trent Cotchin"
+  ],
+  "gold_all": [
+   "Trent Cotchin"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Dustin Martin"
+   ],
+   "swapped": [
+    "Dustin Martin"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-8876216443354683949",
+  "question": "who made the most three point shots in the nba",
+  "gold": [
+   "Ray Allen"
+  ],
+  "gold_all": [
+   "Ray Allen"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Stephen Curry"
+   ],
+   "swapped": [
+    "Stephen Curry"
+   ]
+  }
+ },
+ {
+  "qid": "sqa6941993254369956277",
+  "question": "when was the last time nebraska voted democrat",
+  "gold": [
+   "1964"
+  ],
+  "gold_all": [
+   "1964"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1973"
+   ],
+   "poisonedrag": [
+    "1976"
+   ]
+  }
+ },
+ {
+  "qid": "sqa9000363101253801740",
+  "question": "who served as the chief minister of nagaland for the longest tenure",
+  "gold": [
+   "S. C. Jamir"
+  ],
+  "gold_all": [
+   "S. C. Jamir"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Pakhangba"
+   ]
+  }
+ },
+ {
+  "qid": "sqa-1208459263841076551",
+  "question": "what was the smallest winning margin in the tour de france",
+  "gold": [
+   "8\""
+  ],
+  "gold_all": [
+   "8\""
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "12 seconds"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0885",
+  "question": "where was the movie silver linings playbook filmed",
+  "gold": [
+   "just outside Philadelphia, Pennsylvania"
+  ],
+  "gold_all": [
+   "Ridley Park",
+   "Lansdowne",
+   "just outside Philadelphia, Pennsylvania",
+   "Upper Darby"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "just outside Pittsburgh, Pennsylvania"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1084",
+  "question": "when did they start vaccinating for whooping cough",
+  "gold": [
+   "the 1920s",
+   "the 1940s"
+  ],
+  "gold_all": [
+   "the 1920s",
+   "the 1940s"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "the 1950s"
+   ],
+   "swapped": [
+    "the 1950s"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1515",
+  "question": "who played david on the assassination of gianni versace",
+  "gold": [
+   "Cody Fern"
+  ],
+  "gold_all": [
+   "Cody Fern"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Finn Wittrock"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2706",
+  "question": "what is the tigers name in life of pi",
+  "gold": [
+   "Richard Parker"
+  ],
+  "gold_all": [
+   "Richard Parker"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Saphira"
+   ],
+   "poisonedrag": [
+    "Max"
+   ],
+   "swapped": [
+    "Max"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1113",
+  "question": "who did the original spirit in the sky",
+  "gold": [
+   "Norman Greenbaum"
+  ],
+  "gold_all": [
+   "Norman Greenbaum"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Doris Troy"
+   ],
+   "swapped": [
+    "Doris Troy"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3480",
+  "question": "when does elena turn into a vampire in the tv series",
+  "gold": [
+   "season four",
+   "fourth season"
+  ],
+  "gold_all": [
+   "season four",
+   "fourth season"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "October 21, 2016"
+   ],
+   "poisonedrag": [
+    "season two"
+   ],
+   "swapped": [
+    "season two"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1903",
+  "question": "how many lines of symmetry are there in a equilateral triangle",
+  "gold": [
+   "3"
+  ],
+  "gold_all": [
+   "3"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "three"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1020",
+  "question": "who coined the phrase let get ready to rumble",
+  "gold": [
+   "Michael Buffer"
+  ],
+  "gold_all": [
+   "Michael Buffer"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Bruce Buffer"
+   ],
+   "swapped": [
+    "Bruce Buffer"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2315",
+  "question": "what is the snow on mars made of",
+  "gold": [
+   "water ice"
+  ],
+  "gold_all": [
+   "water ice",
+   "Frozen carbon dioxide"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "frozen methane"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1377",
+  "question": "who won the ncaa women's championship last year 2017",
+  "gold": [
+   "South Carolina Gamecocks",
+   "South Carolina"
+  ],
+  "gold_all": [
+   "South Carolina Gamecocks",
+   "South Carolina"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "UConn"
+   ],
+   "poisonedrag": [
+    "Connecticut Huskies"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1855",
+  "question": "what was the purpose of the bantu education act",
+  "gold": [
+   "enforcing racially separated educational facilities"
+  ],
+  "gold_all": [
+   "enforcing racially separated educational facilities"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "expanding university access for black students"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1847",
+  "question": "who plays elsa's aunt in once upon a time",
+  "gold": [
+   "Elizabeth Mitchell"
+  ],
+  "gold_all": [
+   "Elizabeth Mitchell"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Rebecca Mader"
+   ],
+   "swapped": [
+    "Rebecca Mader"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0008",
+  "question": "what is the hot coffee mod in san andreas",
+  "gold": [
+   "a normally inaccessible mini-game"
+  ],
+  "gold_all": [
+   "a normally inaccessible mini-game"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "a deleted cutscene"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1394",
+  "question": "when was how deep is your love released",
+  "gold": [
+   "1977",
+   "September 1977"
+  ],
+  "gold_all": [
+   "1977",
+   "September 1977"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1999"
+   ],
+   "poisonedrag": [
+    "1979"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2416",
+  "question": "what is a dropped pin on google maps for",
+  "gold": [
+   "marks locations in Google Maps",
+   "marks locations"
+  ],
+  "gold_all": [
+   "marks locations in Google Maps",
+   "marks locations"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "shows the user's current traffic conditions"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0197",
+  "question": "what is the function of a political action committee (pac)",
+  "gold": [
+   "pools campaign contributions from members"
+  ],
+  "gold_all": [
+   "pools campaign contributions from members"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "spends money directly on candidates' campaigns"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2379",
+  "question": "when did the nba start playing zone defense",
+  "gold": [
+   "the 2001\u20132002 season"
+  ],
+  "gold_all": [
+   "2002",
+   "the 2001\u20132002 season"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2018"
+   ],
+   "poisonedrag": [
+    "the 1994\u20131995 season"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2423",
+  "question": "who played buffy the vampire slayer in the movie",
+  "gold": [
+   "Kristy Swanson"
+  ],
+  "gold_all": [
+   "Kristy Swanson"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Sarah Michelle Gellar"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0876",
+  "question": "who is the actor that plays sneaky pete",
+  "gold": [
+   "Giovanni Ribisi"
+  ],
+  "gold_all": [
+   "Giovanni Ribisi"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Bryan Cranston"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0281",
+  "question": "the legend of heroes trails in the sky the 3rd vita",
+  "gold": [
+   "July 14, 2016"
+  ],
+  "gold_all": [
+   "July 14, 2016"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "April 9, 2018"
+   ],
+   "poisonedrag": [
+    "September 22, 2016"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2475",
+  "question": "who designed the traffic circle in long beach ca",
+  "gold": [
+   "German engineer Werner Ruchti",
+   "Werner Ruchti"
+  ],
+  "gold_all": [
+   "German engineer Werner Ruchti",
+   "Werner Ruchti"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "John McConnell"
+   ],
+   "poisonedrag": [
+    "American engineer Harold Wexler"
+   ],
+   "swapped": [
+    "American engineer Harold Wexler"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0486",
+  "question": "what was the final episode of quantum leap",
+  "gold": [
+   "\"Mirror Image\""
+  ],
+  "gold_all": [
+   "\"Mirror Image\""
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "\"Killin' Time\""
+   ]
+  }
+ },
+ {
+  "qid": "nqv0266",
+  "question": "when did the united states host the world cup",
+  "gold": [
+   "1994"
+  ],
+  "gold_all": [
+   "1994"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "2003"
+   ],
+   "poisonedrag": [
+    "1986"
+   ],
+   "swapped": [
+    "1986"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1574",
+  "question": "when did lynyrd skynyrd's plane crash happen",
+  "gold": [
+   "October 20, 1977"
+  ],
+  "gold_all": [
+   "October 20, 1977"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "September 8, 2017"
+   ],
+   "poisonedrag": [
+    "June 14, 1976"
+   ],
+   "swapped": [
+    "June 14, 1976"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2263",
+  "question": "when did the international space station go into space",
+  "gold": [
+   "1998"
+  ],
+  "gold_all": [
+   "1998"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "1994"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2109",
+  "question": "character in macbeth who is murdered and appears as a ghost",
+  "gold": [
+   "Lord Banquo",
+   "Banquo"
+  ],
+  "gold_all": [
+   "Lord Banquo",
+   "Banquo"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Jacob Packer"
+   ],
+   "poisonedrag": [
+    "King Duncan"
+   ],
+   "swapped": [
+    "King Duncan"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1249",
+  "question": "who votes to elect a rajya sabha memmber",
+  "gold": [
+   "state legislatures"
+  ],
+  "gold_all": [
+   "state legislatures"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "members of the Lok Sabha"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2437",
+  "question": "who plays the protagonist peter rabbit in the 2018 motion picture release",
+  "gold": [
+   "James Corden"
+  ],
+  "gold_all": [
+   "James Corden"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Daniel Radcliffe"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1451",
+  "question": "when did the name of bombay change to mumbai",
+  "gold": [
+   "1995"
+  ],
+  "gold_all": [
+   "1995"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1952"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3036",
+  "question": "how many episodes are there in season six of nashville",
+  "gold": [
+   "16",
+   "16 episodes"
+  ],
+  "gold_all": [
+   "16",
+   "16 episodes"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "7"
+   ],
+   "poisonedrag": [
+    "13"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1700",
+  "question": "what is the setting of the story sorry wrong number",
+  "gold": [
+   "Manhattan"
+  ],
+  "gold_all": [
+   "Manhattan"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Chicago"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2181",
+  "question": "what is the name of india pakistan border",
+  "gold": [
+   "International Border",
+   "IB",
+   "International Border (IB)"
+  ],
+  "gold_all": [
+   "International Border",
+   "IB",
+   "International Border (IB)",
+   "India and Pakistan Border",
+   "The India and Pakistan Border"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Line of Control"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0069",
+  "question": "the oligodynamic effect is a phenomenon that describes",
+  "gold": [
+   "a biocidal effect of metals"
+  ],
+  "gold_all": [
+   "a biocidal effect of metals"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "a nutritional effect of trace metals on bacteria"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2256",
+  "question": "krypton-85 decays by emission of a beta particle. the product of this decay is",
+  "gold": [
+   "rubidium-85"
+  ],
+  "gold_all": [
+   "rubidium-85"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "strontium-85"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2710",
+  "question": "in which country were the two battles of el alamein fought",
+  "gold": [
+   "Egypt"
+  ],
+  "gold_all": [
+   "Egypt"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Libya"
+   ],
+   "swapped": [
+    "Libya"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0668",
+  "question": "who played the female lead in the 1942 film casablanca",
+  "gold": [
+   "Ingrid Bergman"
+  ],
+  "gold_all": [
+   "romantic drama",
+   "Ingrid Bergman"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Hedy Lamarr"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1558",
+  "question": "what was the first video game for nintendo",
+  "gold": [
+   "EVR Race"
+  ],
+  "gold_all": [
+   "Magnavox Odyssey",
+   "EVR Race"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Color TV-Game 6"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1374",
+  "question": "dynamin is associated with which type of vesicle",
+  "gold": [
+   "newly formed vesicles"
+  ],
+  "gold_all": [
+   "newly formed vesicles"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "mature secretory granules"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0134",
+  "question": "when did the royal mint move to wales",
+  "gold": [
+   "1968",
+   "the 1960s.",
+   "17 December 1968"
+  ],
+  "gold_all": [
+   "1968",
+   "the 1960s.",
+   "17 December 1968",
+   "the 1960s"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1970"
+   ],
+   "poisonedrag": [
+    "1975"
+   ],
+   "swapped": [
+    "1975"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0494",
+  "question": "who sings don't take your guns to town",
+  "gold": [
+   "Johnny Cash"
+  ],
+  "gold_all": [
+   "U2",
+   "Johnny Cash"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Merle Haggard"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1655",
+  "question": "what is the title of the person who runs the house of representatives",
+  "gold": [
+   "the Speaker of the House",
+   "Speaker of the House"
+  ],
+  "gold_all": [
+   "the Speaker of the House",
+   "Speaker of the House"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "the Majority Leader"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2849",
+  "question": "who dies in transformers revenge of the fallen",
+  "gold": [
+   "Jetfire"
+  ],
+  "gold_all": [
+   "Ravage and the Decepticon Rampage",
+   "Jetfire"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Ironhide"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3181",
+  "question": "where is this years army navy game played",
+  "gold": [
+   "Lincoln Financial Field in Philadelphia",
+   "Lincoln Financial Field"
+  ],
+  "gold_all": [
+   "Lincoln Financial Field in Philadelphia",
+   "Lincoln Financial Field"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Hard Rock Stadium"
+   ],
+   "poisonedrag": [
+    "MetLife Stadium in East Rutherford"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0068",
+  "question": "points on a sphere or angles in a circle are measured in units called",
+  "gold": [
+   "radians"
+  ],
+  "gold_all": [
+   "radians"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "degrees"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3387",
+  "question": "when are general elections held in the us",
+  "gold": [
+   "every two to six years"
+  ],
+  "gold_all": [
+   "every two to six years"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "every four years"
+   ],
+   "swapped": [
+    "every four years"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3411",
+  "question": "who has the most trophies in la liga",
+  "gold": [
+   "Real Madrid"
+  ],
+  "gold_all": [
+   "Real Madrid"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Barcelona"
+   ],
+   "swapped": [
+    "Barcelona"
+   ]
+  }
+ },
+ {
+  "qid": "nqv1851",
+  "question": "who sings that aint no way to go",
+  "gold": [
+   "Brooks & Dunn"
+  ],
+  "gold_all": [
+   "Brooks & Dunn"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "Travis Tritt"
+   ],
+   "poisonedrag": [
+    "Kenny Chesney"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2841",
+  "question": "what territory is spain and the united kingdom in a dispute over",
+  "gold": [
+   "Gibraltar"
+  ],
+  "gold_all": [
+   "Gibraltar"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Menorca"
+   ],
+   "swapped": [
+    "Menorca"
+   ]
+  }
+ },
+ {
+  "qid": "nqv3260",
+  "question": "who used the word physiology for the first time",
+  "gold": [
+   "Jean Fernel"
+  ],
+  "gold_all": [
+   "Jean Fernel"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Galen"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0628",
+  "question": "how many pennsylvania house of representatives are there",
+  "gold": [
+   "203",
+   "203 members"
+  ],
+  "gold_all": [
+   "203",
+   "203 members"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "360"
+   ],
+   "poisonedrag": [
+    "253"
+   ],
+   "swapped": [
+    "253"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0081",
+  "question": "who has the power to approve or veto legislation constitution",
+  "gold": [
+   "the President"
+  ],
+  "gold_all": [
+   "the President"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Congress"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0009",
+  "question": "what is the maximum data rate for the 802.11a standard select one",
+  "gold": [
+   "54\u00a0Mbit/s"
+  ],
+  "gold_all": [
+   "54\u00a0Mbit/s"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1.5\u00a0Gbit/s"
+   ]
+  }
+ },
+ {
+  "qid": "nqv2923",
+  "question": "when was theme from a summer place released",
+  "gold": [
+   "1960",
+   "1959",
+   "September 1959"
+  ],
+  "gold_all": [
+   "1960",
+   "1959",
+   "September 1959"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "1999"
+   ],
+   "poisonedrag": [
+    "1962"
+   ],
+   "swapped": [
+    "1962"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0265",
+  "question": "what category was hurricane charley when it hit florida",
+  "gold": [
+   "4",
+   "Category 4",
+   "Category\u00a04"
+  ],
+  "gold_all": [
+   "4",
+   "Category 4",
+   "Category\u00a04"
+  ],
+  "false_answers": {
+   "misretrieval": [
+    "660 quadrillion US gallons"
+   ],
+   "poisonedrag": [
+    "3"
+   ],
+   "swapped": [
+    "3"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0090",
+  "question": "jonny cash one piece at a time car",
+  "gold": [
+   "Cadillac"
+  ],
+  "gold_all": [
+   "Cadillac"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Chevrolet"
+   ],
+   "swapped": [
+    "Chevrolet"
+   ]
+  }
+ },
+ {
+  "qid": "nqv0062",
+  "question": "where does the path train stop in newark",
+  "gold": [
+   "Newark Penn Station"
+  ],
+  "gold_all": [
+   "Newark Penn Station"
+  ],
+  "false_answers": {
+   "poisonedrag": [
+    "Newark Broad Street Station"
+   ],
+   "swapped": [
+    "Newark Broad Street Station"
+   ]
+  }
+ }
+]
