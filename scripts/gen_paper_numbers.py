@@ -1625,6 +1625,66 @@ def main():
         M[f"NSdKept{_tg}"] = _ps["yield"][_g]["kept"]
         M[f"NSdTried{_tg}"] = _ps["yield"][_g]["tried"]
 
+    # --- The full build of the shared dataset (build_pilot_r2.py --full) ---
+    _F = REPO / "data/registries/shared_dataset/full"
+    _jl = lambda p: [json.loads(l) for l in open(p) if l.strip()]
+    _items = _jl(_F / "items.jsonl")
+    _byc = {}
+    for _x in _items:
+        _byc.setdefault(_x["cause"], set()).add(_x["qid"])
+    _src = {s["qid"]: s for s in _jl(_F / "sources.jsonl")}
+    M["NSdFullItems"] = len(_items)
+    M["NSdFullQuestions"] = len(set().union(*_byc.values()))
+    M["NSdFullWiki"] = len(_byc["clean"])
+    M["NSdFullWc"] = len(_byc["conflict"])
+    for _c, _sdt in (("poisonedrag", "Prag"), ("outdated", "Outd"), ("swapped", "Swap"),
+                   ("misretrieval", "Misr"), ("conflict", "Conf")):
+        M[f"NSdFullQ{_sdt}"] = len(_byc.get(_c, ()))
+    M["NSdFullQPragReleased"] = sum(_src[q]["causes"]["poisonedrag"]["passages"][0]["source"] == "released"
+                                    for q in _byc["poisonedrag"])
+    M["NSdFullQPragGenerated"] = M["NSdFullQPrag"] - M["NSdFullQPragReleased"]
+    _qs = _jl(REPO / "data/registries/shared_dataset/questions.jsonl")
+    M["NSdNqvPool"] = sum(q.get("set") == "nqopen" for q in _qs)
+    M["NSdNqvSample"] = sum(r["kind"] == "nqopen" for r in _jl(_F / "candidates.jsonl"))
+    _gen = _jl(REPO / "data/registries/shared_dataset/generated_poisonedrag.jsonl")
+    M["NSdGenQuestions"] = len(_gen)
+    M["NSdGenPassages"] = sum(len(g["incorrect_context"]) for g in _gen)
+    _gq = {g["qid"] for g in _gen}
+    M["NSdGenKept"] = sum(len(_s["causes"].get("poisonedrag", {}).get("passages", []))
+                          for _s in _jl(_F / "sources_all.jsonl") if _s["qid"] in _gq)
+    # answer key: every question built on 2018 truth was read (gold*_out*)
+    _key = {}
+    for _f in sorted((_F / "reading").glob("gold*_out*.jsonl")):
+        for _r in _jl(_f):
+            _key[_r["qid"]] = _key.get(_r["qid"], True) and _r.get("keep") is not False
+    M["NSdKeyRead"] = len(_key)
+    M["NSdKeyDropped"] = sum(not v for v in _key.values())
+    M["PctSdKeyDropped"] = round(100 * M["NSdKeyDropped"] / M["NSdKeyRead"])
+
+    # blind reading of the full build: first build (read_out), passages added
+    # on 2026-11-15 (read2_out), misretrieval under the same-kind rule (read3_out)
+    def _pass(pat, cause, src=None):
+        ok = n = 0
+        for _f in sorted((_F / "reading").glob(pat)):
+            for _r in _jl(_f):
+                if _r["cause"] == cause:
+                    ok += _r["verdict"] == "ok"
+                    n += 1
+        return ok, n
+    _full = {"PragRel": [_pass("read_out*.jsonl", "poisonedrag")],
+             "PragGen": [_pass("read2_out*.jsonl", "poisonedrag")],
+             "Outd": [_pass("read_out*.jsonl", "outdated")],
+             "Swap": [_pass("read_out*.jsonl", "swapped"), _pass("read2_out*.jsonl", "swapped")],
+             "Misr": [_pass("read3_out*.jsonl", "misretrieval")],
+             "Conf": [_pass("read_out*.jsonl", "conflict")]}
+    for _sdt, _parts in _full.items():
+        _ok, _n = sum(p[0] for p in _parts), sum(p[1] for p in _parts)
+        M[f"NSdFull{_sdt}N"] = _n
+        M[f"PctSdFull{_sdt}Ok"] = round(100 * _ok / _n)
+    _ok, _n = _pass("read2_out[23].jsonl", "misretrieval")     # readers 2-3: same rule as read3
+    M["PctSdFullMisrLooseOk"] = round(100 * _ok / _n)
+    M["NSdFullMisrLooseN"] = _n
+
     # Python rounds halves to even, so 0.25 would print as 0.2 where the
     # paper has always printed 0.3. Round half up, as a reader expects.
     from decimal import Decimal, ROUND_HALF_UP

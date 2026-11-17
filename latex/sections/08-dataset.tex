@@ -30,18 +30,22 @@ which records how an answer changed over time. Passages come from the
 December 2018 Wikipedia dump released with DPR~\cite{karpukhin-2020-dense}, so we fix the truth at the
 end of 2018: the gold answer is the one that held then, and the outdated
 answer is the one before it. This gives \NSdQuestions{} questions,
-\NSdOutdated{} of them with a real outdated answer. Clean passages are each
+\NSdOutdated{} of them with a real outdated answer. For the full build we add
+a random sample of \NSdNqvSample{} of the other \NSdNqvPool{} open Natural
+Questions validation questions. Clean passages are each
 question's real retrieved passages: the top 100 by BM25, re-ranked by
 Contriever~\cite{izacard-2022-unsupervised}.
 
 \paragraph{Building each cause.} The attacker version uses PoisonedRAG's
-released passages, or its released generation code for questions it did not
-cover. An outdated passage is a real passage, from the 2018 dump or from a
+released passages. For questions it did not cover, Claude agents write the
+passages with PoisonedRAG's released generation prompt, in place of the GPT-4
+its authors used; we report released and generated passages apart. An outdated passage is a real passage, from the 2018 dump or from a
 Wikipedia revision written while the old answer held, that states the old
 answer. A misretrieved passage is a real passage retrieved for a nearby
-question with a different subject, and it answers that question. A conflict
-is a pair of real sources from WikiContradict~\cite{hou-2024-wikicontradict}
-located in the 2018 dump. A swapped passage replaces one mention of the gold
+question of the same form with a different subject, and it answers that
+question. A conflict is a pair of real contradicting passages from
+WikiContradict~\cite{hou-2024-wikicontradict}; most were written after 2018,
+so conflict is reported on its own. A swapped passage replaces one mention of the gold
 answer with an answer of the same kind.
 
 \begin{table}[t]
@@ -49,22 +53,24 @@ answer with an answer of the same kind.
 \caption{Share of planted passages that state their false answer and pass
 every check, read by hand. Round 1 was built by string matching; round 2
 adds the judge and the other rules, on new questions, read blind to the
-judge's scores.}
+judge's scores. The full build is read blind on a sample from every cause.}
 \label{tab:pilot}
 \footnotesize
-\begin{tabular}{@{}lrrrr@{}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-& \multicolumn{2}{c}{\textbf{Round 1}} & \multicolumn{2}{c}{\textbf{Round 2}} \\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}
-\textbf{Cause} & $n$ & pass & $n$ & pass \\
+& \multicolumn{2}{c}{\textbf{Round 1}} & \multicolumn{2}{c}{\textbf{Round 2}} & \multicolumn{2}{c}{\textbf{Full build}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+\textbf{Cause} & $n$ & pass & $n$ & pass & $n$ & pass \\
 \midrule
-PoisonedRAG (released) & \NSdOnePragN{} & \PctSdOnePragOk\% & \NSdTwoPragN{} & \PctSdTwoPragOk\% \\
-Outdated fact & \NSdOneOutdN{} & \PctSdOneOutdOk\% & \NSdTwoOutdN{} & \PctSdTwoOutdOk\% \\
-Swapped answer & \NSdOneSwapN{} & \PctSdOneSwapOk\% & \NSdTwoSwapN{} & \PctSdTwoSwapOk\% \\
-Misretrieval & \NSdOneMisrN{} & \PctSdOneMisrOk\% & \NSdTwoMisrN{} & \PctSdTwoMisrOk\% \\
-Real conflict & \NSdOneConfN{} & \PctSdOneConfOk\% & \NSdTwoConfN{} & \PctSdTwoConfOk\% \\
+PoisonedRAG (released) & \NSdOnePragN{} & \PctSdOnePragOk\% & \NSdTwoPragN{} & \PctSdTwoPragOk\% & \NSdFullPragRelN{} & \PctSdFullPragRelOk\% \\
+PoisonedRAG (generated) & -- & -- & -- & -- & \NSdFullPragGenN{} & \PctSdFullPragGenOk\% \\
+Outdated fact & \NSdOneOutdN{} & \PctSdOneOutdOk\% & \NSdTwoOutdN{} & \PctSdTwoOutdOk\% & \NSdFullOutdN{} & \PctSdFullOutdOk\% \\
+Swapped answer & \NSdOneSwapN{} & \PctSdOneSwapOk\% & \NSdTwoSwapN{} & \PctSdTwoSwapOk\% & \NSdFullSwapN{} & \PctSdFullSwapOk\% \\
+Misretrieval & \NSdOneMisrN{} & \PctSdOneMisrOk\% & \NSdTwoMisrN{} & \PctSdTwoMisrOk\% & \NSdFullMisrN{} & \PctSdFullMisrOk\% \\
+Real conflict & \NSdOneConfN{} & \PctSdOneConfOk\% & \NSdTwoConfN{} & \PctSdTwoConfOk\% & \NSdFullConfN{} & \PctSdFullConfOk\% \\
 \midrule
-All & \NSdOneAllN{} & \PctSdOneAllOk\% & \NSdTwoAllN{} & \PctSdTwoAllOk\% \\
+All & \NSdOneAllN{} & \PctSdOneAllOk\% & \NSdTwoAllN{} & \PctSdTwoAllOk\% & & \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -101,7 +107,18 @@ hand. Requiring a clean passage that states the gold answer keeps
 of \NSdTriedAdded{} added ones. WikiContradict keeps only \NSdKeptWc{} of
 \NSdTriedWc{}, because most of its contradictions were written after 2018.
 
-\paragraph{Status.} The construction rules are not yet frozen. The next steps
-are a full build with a hand-checked sample from every cause, a check that
-each fix reproduces its own published benefit on the new data, and then both
-directions run on it, each fix in its own format.
+\paragraph{The full build.} We froze the rules and built
+\NSdFullQuestions{} questions in \NSdFullItems{} items: \NSdFullWiki{} judged
+against the end of 2018 and \NSdFullWc{} WikiContradict conflicts.
+PoisonedRAG covers \NSdFullQPrag{} questions (\NSdFullQPragGenerated{} with
+generated passages), misretrieval \NSdFullQMisr{}, the swapped answer
+\NSdFullQSwap{} and the outdated fact \NSdFullQOutd{}. We read the answer of
+all \NSdKeyRead{} questions on 2018 passages and dropped \NSdKeyDropped{}
+(\PctSdKeyDropped{}\%) that were wrong, had two readings, or matched a false
+answer. Misretrieval on the added questions first passed
+\PctSdFullMisrLooseOk{}\%: the nearest question was often unrelated.
+Requiring a neighbour of the same form raised it to \PctSdFullMisrOk{}\%
+(Table~\ref{tab:pilot}). Generated passages are longer than released ones,
+and the conflict passages postdate the 2018 passages beside them; both are
+reported. Next, each fix must reproduce its own published benefit on this
+data before both directions run on it.
